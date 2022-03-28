@@ -8,10 +8,15 @@
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "prepare": "husky install",
+    "prettier:fix": "prettier --write",
+    "prettier:check": "prettier --check"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
+    "@commitlint/cli": "^16.2.3",
+    "@commitlint/config-conventional": "^16.2.1",
     "@storybook/addon-actions": "^6.5.0-alpha.51",
     "@storybook/addon-essentials": "^6.5.0-alpha.51",
     "@storybook/addon-interactions": "^6.5.0-alpha.51",
@@ -40,7 +45,9 @@
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-storybook": "^0.5.7",
     "eslint-plugin-testing-library": "^5.1.0",
+    "husky": "^7.0.0",
     "jest": "^27.5.1",
+    "lint-staged": ">=10",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
     "tailwindcss": "^3.0.23",
@@ -51,5 +58,16 @@
     "clsx": "^1.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "npm run prettier:fix",
+      "eslint --fix",
+      "jest --bail --findRelatedTests"
+    ],
+    "*.stories.{ts,tsx}": [
+      "npm run prettier:fix",
+      "eslint --fix"
+    ]
   }
 }
