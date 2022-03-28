@@ -19,7 +19,7 @@ export interface LogoProps {
   width: number;
 }
 
-export const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
+const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   let logo: ReactNode;
 
   const getWhiteLogomarkWhiteType = (
@@ -784,3 +784,5 @@ export const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
 
   return <div className={cn("my-auto", styleName)}>{logo}</div>;
 };
+
+export default Logo;
