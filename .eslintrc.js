@@ -53,6 +53,10 @@ module.exports = {
     // eslint-plugin-testing-library
     "plugin:testing-library/react",
   ],
+  rules: {
+    // https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
+    "react/react-in-jsx-scope": "off",
+  },
   overrides: [
     {
       // For performance run jest/recommended on test files, not regular code
@@ -72,6 +76,14 @@ module.exports = {
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-object-literal-type-assertion": "off",
         "@typescript-eslint/no-empty-function": "off",
+      },
+    },
+    {
+      files: ["**/*.{ts,tsx}"],
+      rules: {
+        // Disable React.FC missing in props validation error (react/prop-types)
+        "react/prop-types": "off",
+        "react/require-default-props": "off",
       },
     },
     {
