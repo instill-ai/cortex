@@ -28,7 +28,9 @@ const InputLabel: FC<InputLabelProps> = ({
     <label
       className={cn(
         "absolute transform instill-text-body origin-top-left left-0 top-0 text-instillGray50",
-        activate ? "translate-x-3 translate-y-1" : "translate-x-3 translate-y-2"
+        activate
+          ? "translate-x-5 translate-y-1.5"
+          : "translate-x-5 translate-y-5"
       )}
       htmlFor={htmlFor}
     >
