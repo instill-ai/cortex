@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-export const useRenderCounter = () => {
+export const useRenderCounter = (componentName: string) => {
   const counts = useRef(0);
   counts.current += 1;
 
@@ -13,6 +13,7 @@ export const useRenderCounter = () => {
         borderRadius: "4px",
       }}
     >
+      {componentName}
       {counts.current}
     </div>
   );
