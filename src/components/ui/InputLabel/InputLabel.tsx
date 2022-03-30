@@ -18,13 +18,14 @@ export interface InputLabelProps {
 const InputLabel: FC<InputLabelProps> = memo(
   ({ htmlFor, required, focus, answered, children }) => {
     const activate = focus ? true : answered ? true : false;
+
     return (
       <label
         className={cn(
-          "absolute transform instill-text-body origin-top-left left-0 top-0 text-instillGray50",
+          "absolute transform-gpu instill-text-body origin-top-left left-0 top-0 text-instillGray50",
           activate
-            ? "translate-x-5 translate-y-1.5"
-            : "translate-x-5 translate-y-5"
+            ? "top-1/2 translate-x-5 -translate-y-full"
+            : "top-1/2 translate-x-5 -translate-y-1/2"
         )}
         htmlFor={htmlFor}
       >
