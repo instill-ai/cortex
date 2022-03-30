@@ -6,3 +6,6 @@ This is Instill's design system(WIP).
 - When it comes to using component, you only need to decide two things
   - Action 
   - Style
+
+## Rules
+- We won't export any of xxBase component, they will only be interior usage.
