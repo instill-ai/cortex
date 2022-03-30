@@ -3,10 +3,16 @@ import cn from "clsx";
 import InputLabel from "../../InputLabel";
 
 export interface TextFieldBaseProps {
+  /** Input field's id */
   id: string;
 
+  /** Input on change handler */
   onChangeInput: (inputValue: string) => void;
+
+  /** Whether the field is necessary or not */
   required: boolean;
+
+  /** Whether the input is valid or not */
   valid: boolean;
 
   /** TextField labelName */
@@ -30,7 +36,7 @@ export interface TextFieldBaseProps {
    */
   inputHeight: string;
 
-  /**  */
+  /** Specific whether browser should help user auto complete the input or not */
   autoComplete: string;
 }
 
