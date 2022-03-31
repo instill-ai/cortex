@@ -7,7 +7,19 @@ export default {
   component: TextFieldBase,
 } as ComponentMeta<typeof TextFieldBase>;
 
-export const Playground: ComponentStory<typeof TextFieldBase> = () => {
+const Template: ComponentStory<typeof TextFieldBase> = (args) => (
+  <TextFieldBase {...args} />
+);
+
+export const Playground: ComponentStory<typeof TextFieldBase> = Template.bind(
+  {}
+);
+
+Playground.args = {
+  labelName: "Playground",
+};
+
+export const Default: ComponentStory<typeof TextFieldBase> = () => {
   const [text, setText] = useState<string>("");
 
   const onChangeInput = (inputValue: string) => {
@@ -21,7 +33,7 @@ export const Playground: ComponentStory<typeof TextFieldBase> = () => {
       id="text-field-playground"
       labelName="playground"
       required={true}
-      inputHeight={"h-[100px]"}
+      inputHeight={"h-[70px]"}
       inputWidth={"w-full"}
       focusHighlight={false}
       autoComplete="off"
@@ -29,6 +41,7 @@ export const Playground: ComponentStory<typeof TextFieldBase> = () => {
       fontStyle="font-normal text-base leading-[28px]"
       disabled={false}
       placeholder="hello"
+      readOnly={false}
     />
   );
 };
