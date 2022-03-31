@@ -21,6 +21,11 @@ export interface TextFieldBaseProps {
    */
   placeholder: string;
 
+  /**
+   * Whether The value is editable or not.
+   */
+  readOnly: boolean;
+
   /** TailwindCSS format
    * - Input and Label's font size, line height and font weight
    */
@@ -82,6 +87,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   disabled,
   type,
   placeholder,
+  readOnly,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -120,6 +126,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         disabled={disabled}
         required={required}
         placeholder={focus ? placeholder : null}
+        readOnly={readOnly}
         autoComplete={autoComplete}
         onChange={(event) => {
           const inputValue = event.target.value;
