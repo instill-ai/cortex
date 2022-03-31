@@ -17,7 +17,13 @@ export interface InputLabelProps {
 
 const InputLabel: FC<InputLabelProps> = memo(
   ({ htmlFor, required, focus, answered, children }) => {
-    const activate = focus ? true : answered ? true : false;
+    let activate: boolean;
+
+    if (focus) {
+      activate = true;
+    } else {
+      activate = answered ? true : false;
+    }
 
     return (
       <label
