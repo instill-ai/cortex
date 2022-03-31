@@ -10,15 +10,16 @@ const BasicTextField: FC<BasicTextField> = (props) => {
   return (
     <TextFieldBase
       id={props.id}
-      onChangeInput={props.onChangeInput}
+      disabled={props.disabled}
+      type={props.type}
       required={props.required}
+      onChangeInput={props.onChangeInput}
       valid={props.valid}
       labelName={props.labelName}
       autoComplete={props.autoComplete}
       inputHeight="h-[70px]"
       inputWidth="w-full"
       focusHighlight={false}
-      type={props.type}
       fontStyle="font-normal text-base leading-[28px]"
     />
   );

@@ -11,6 +11,11 @@ export interface TextFieldBaseProps {
    */
   type: string;
 
+  /**
+   * Whether the form control is disabled
+   */
+  disabled: boolean;
+
   /** TailwindCSS format
    * - Input and Label's font size, line height and font weight
    */
@@ -69,6 +74,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   inputHeight,
   autoComplete,
   focusHighlight,
+  disabled,
   type,
 }) => {
   const [focus, setFocus] = useState(false);
@@ -105,6 +111,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         )}
         id={id}
         type={type}
+        disabled={disabled}
         required={required}
         autoComplete={autoComplete}
         onChange={(event) => {

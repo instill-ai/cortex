@@ -27,6 +27,7 @@ export const Playground: ComponentStory<typeof TextFieldBase> = () => {
       autoComplete="off"
       type="text"
       fontStyle="font-normal text-base leading-[28px]"
+      disabled={false}
     />
   );
 };

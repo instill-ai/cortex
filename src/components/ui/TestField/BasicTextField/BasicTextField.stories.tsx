@@ -23,6 +23,7 @@ export const Playground: ComponentStory<typeof BasicTextField> = () => {
       required={true}
       autoComplete="off"
       type="text"
+      disabled={false}
     />
   );
 };
