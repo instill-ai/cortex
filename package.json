@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
+    "build-storybook": "build-storybook -s public -c .storybook -o out",
     "prepare": "husky install",
     "prettier:fix": "prettier --write",
     "prettier:check": "prettier --check"
