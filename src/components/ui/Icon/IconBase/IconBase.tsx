@@ -18,6 +18,11 @@ export interface IconBaseProps {
    * - e.g. text-gray-300
    */
   color: string;
+
+  /** TailwindCSS format - The position of icon.
+   * - Please use margin auto to control the position of icon
+   */
+  position: string;
 }
 
 const IconBase: FC<IconBaseProps> = ({
@@ -26,12 +31,13 @@ const IconBase: FC<IconBaseProps> = ({
   width,
   height,
   color,
+  position,
 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
-      className={cn("fill-current", width, height, color)}
+      className={cn("flex fill-current", width, height, color, position)}
     >
       {children}
     </svg>

@@ -10,6 +10,7 @@ const EyeSlashIcon: FC<EyeSlashIconProps> = (props) => {
       width={props.width}
       height={props.height}
       color={props.color}
+      position={props.position}
     >
       <path
         fillRule="evenodd"

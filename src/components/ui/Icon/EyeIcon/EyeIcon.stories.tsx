@@ -17,4 +17,5 @@ Default.args = {
   width: "w-4",
   height: "h-4",
   color: "text-instillGray50",
+  position: "my-auto",
 };
