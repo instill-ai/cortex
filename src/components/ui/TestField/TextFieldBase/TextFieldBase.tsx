@@ -1,6 +1,8 @@
 import { FC, useRef, useState } from "react";
 import cn from "clsx";
 import InputLabel from "../../InputLabel";
+import EyeSlashIcon from "../../Icon/EyeSlashIcon";
+import EyeIcon from "../../Icon/EyeIcon";
 
 export interface TextFieldBaseProps {
   /** Input field's id */
@@ -63,6 +65,9 @@ export interface TextFieldBaseProps {
 
   /** Specific whether browser should help user auto complete the input or not */
   autoComplete: string;
+
+  /** Whether enable protected text toggle or not */
+  enableProtectedToggle: boolean;
 }
 
 /**
@@ -88,9 +93,11 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   type,
   placeholder,
   readOnly,
+  enableProtectedToggle,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
+  const [expose, setExpose] = useState(false);
 
   const widthStyle = inputWidth ?? "w-full";
   const heightStyle = inputHeight ?? "h-[70px]";
@@ -122,7 +129,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             : "instill-input-no-highlight"
         )}
         id={id}
-        type={type}
+        type={expose ? "text" : type}
         disabled={disabled}
         required={required}
         placeholder={focus ? placeholder : null}
@@ -140,6 +147,27 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
       />
+      {enableProtectedToggle ? (
+        <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
+          <button className="my-auto" onClick={() => setExpose(!expose)}>
+            {expose ? (
+              <EyeSlashIcon
+                width="w-4"
+                height="h-4"
+                color="text-instillGray50"
+                position="my-auto"
+              />
+            ) : (
+              <EyeIcon
+                width="w-4"
+                height="h-4"
+                color="text-instillGray50"
+                position="my-auto"
+              />
+            )}
+          </button>
+        </div>
+      ) : null}
     </div>
   );
 };

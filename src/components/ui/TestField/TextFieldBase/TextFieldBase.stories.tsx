@@ -42,6 +42,7 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       disabled={false}
       placeholder="hello"
       readOnly={false}
+      enableProtectedToggle={false}
     />
   );
 };
