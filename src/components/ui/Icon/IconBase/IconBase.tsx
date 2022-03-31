@@ -13,7 +13,10 @@ export interface IconBaseProps {
   /** TailwindCSS format - The height of icon. */
   height: string;
 
-  /** TailwindCSS format - The color of icon. */
+  /** TailwindCSS format - The color of icon.
+   * - Please use text color to modify icon's color
+   * - e.g. text-gray-300
+   */
   color: string;
 }
 
