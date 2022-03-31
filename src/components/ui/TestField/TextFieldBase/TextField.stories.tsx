@@ -25,6 +25,8 @@ export const Playground: ComponentStory<typeof TextFieldBase> = () => {
       inputWidth={"w-full"}
       focusHighlight={false}
       autoComplete="off"
+      type="text"
+      fontStyle="font-normal text-base leading-[28px]"
     />
   );
 };

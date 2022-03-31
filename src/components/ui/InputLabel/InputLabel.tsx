@@ -5,6 +5,11 @@ export interface InputLabelProps {
   /** Input field id */
   htmlFor: string;
 
+  /** TailwindCSS format
+   * - Label's font size, line height and font weight
+   */
+  fontStyle: string;
+
   /** Whether the input is required or not */
   required: boolean;
 
@@ -16,7 +21,7 @@ export interface InputLabelProps {
 }
 
 const InputLabel: FC<InputLabelProps> = memo(
-  ({ htmlFor, required, focus, answered, children }) => {
+  ({ htmlFor, required, focus, answered, children, fontStyle }) => {
     let activate: boolean;
 
     if (focus) {
@@ -28,10 +33,11 @@ const InputLabel: FC<InputLabelProps> = memo(
     return (
       <label
         className={cn(
-          "absolute transform-gpu instill-text-body origin-top-left left-0 top-0 text-instillGray50",
+          "absolute font-sans transform-gpu origin-top-left left-0 top-0 text-instillGray50",
           activate
             ? "top-1/2 translate-x-5 -translate-y-full"
-            : "top-1/2 translate-x-5 -translate-y-1/2"
+            : "top-1/2 translate-x-5 -translate-y-1/2",
+          fontStyle
         )}
         htmlFor={htmlFor}
       >

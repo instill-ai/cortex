@@ -3,7 +3,7 @@ import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
 export type BasicTextField = Omit<
   TextFieldBaseProps,
-  "inputHeight" | "inputWidth" | "focusHighlight"
+  "inputHeight" | "inputWidth" | "focusHighlight" | "fontStyle"
 >;
 
 const BasicTextField: FC<BasicTextField> = (props) => {
@@ -18,6 +18,8 @@ const BasicTextField: FC<BasicTextField> = (props) => {
       inputHeight="h-[70px]"
       inputWidth="w-full"
       focusHighlight={false}
+      type={props.type}
+      fontStyle="font-normal text-base leading-[28px]"
     />
   );
 };

@@ -6,6 +6,16 @@ export interface TextFieldBaseProps {
   /** Input field's id */
   id: string;
 
+  /** Text field's type
+   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+   */
+  type: string;
+
+  /** TailwindCSS format
+   * - Input and Label's font size, line height and font weight
+   */
+  fontStyle: string;
+
   /** Input on change handler */
   onChangeInput: (inputValue: string) => void;
 
@@ -40,16 +50,26 @@ export interface TextFieldBaseProps {
   autoComplete: string;
 }
 
+/**
+ * TextFieldBase
+ *
+ * ### How it implement inset lable transfor
+ * - Use top-1/2 + (-terraform-1/2) to make label fix at the center of input box
+ * - Use top-1/2 + (-terraform-full) to move label up a little bit
+ */
+
 const TextFieldBase: FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
   required,
   valid,
   labelName,
+  fontStyle,
   inputWidth,
   inputHeight,
   autoComplete,
   focusHighlight,
+  type,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -69,6 +89,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         focus={focus}
         required={required}
         htmlFor={id}
+        fontStyle={fontStyle}
       >
         {labelName}
       </InputLabel>
@@ -77,12 +98,13 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
           "pt-6 ring-0 pl-5",
           heightStyle,
           widthStyle,
+          fontStyle,
           focusHighlight
             ? "instill-input-highlight"
             : "instill-input-no-highlight"
         )}
         id={id}
-        type="text"
+        type={type}
         required={required}
         autoComplete={autoComplete}
         onChange={(event) => {
