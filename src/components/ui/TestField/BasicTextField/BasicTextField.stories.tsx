@@ -24,6 +24,7 @@ export const Playground: ComponentStory<typeof BasicTextField> = () => {
       autoComplete="off"
       type="text"
       disabled={false}
+      placeholder="hello!"
     />
   );
 };

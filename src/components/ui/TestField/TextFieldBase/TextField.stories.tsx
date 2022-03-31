@@ -28,6 +28,7 @@ export const Playground: ComponentStory<typeof TextFieldBase> = () => {
       type="text"
       fontStyle="font-normal text-base leading-[28px]"
       disabled={false}
+      placeholder="hello"
     />
   );
 };

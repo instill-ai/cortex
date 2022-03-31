@@ -16,6 +16,11 @@ export interface TextFieldBaseProps {
    */
   disabled: boolean;
 
+  /**
+   * Text that appears in the form control when it has no value set
+   */
+  placeholder: string;
+
   /** TailwindCSS format
    * - Input and Label's font size, line height and font weight
    */
@@ -76,6 +81,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   focusHighlight,
   disabled,
   type,
+  placeholder,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -101,7 +107,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
       </InputLabel>
       <input
         className={cn(
-          "pt-6 ring-0 pl-5",
+          "pt-6 ring-0 pl-5 placeholder:text-instillGray30",
           heightStyle,
           widthStyle,
           fontStyle,
@@ -113,6 +119,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         type={type}
         disabled={disabled}
         required={required}
+        placeholder={focus ? placeholder : null}
         autoComplete={autoComplete}
         onChange={(event) => {
           const inputValue = event.target.value;
