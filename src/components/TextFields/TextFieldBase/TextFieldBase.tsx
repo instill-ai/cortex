@@ -37,9 +37,29 @@ export interface TextFieldBaseProps {
   readOnly: boolean;
 
   /** TailwindCSS format
-   * - Input's font size, line height and font weight
+   * - Input's font size
    */
-  fontStyle: string;
+  fontSize: string;
+
+  /** TailwindCSS format
+   * - Input's font line height
+   */
+  lineHeight: string;
+
+  /** TailwindCSS format
+   * - Input's font weight
+   */
+  fontWeight: string;
+
+  /** TailwindCSS format
+   * - Input's text color
+   */
+  textColor: string;
+
+  /** TailwindCSS format
+   * - Input's text color
+   */
+  bgColor: string;
 
   /** Input on change handler */
   onChangeInput: (inputValue: string) => void;
@@ -84,7 +104,10 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   required,
   valid,
   labelName,
-  fontStyle,
+  fontSize,
+  lineHeight,
+  fontWeight,
+  bgColor,
   inputWidth,
   inputHeight,
   autoComplete,
@@ -125,7 +148,10 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
           "pt-6 ring-0 pl-5 placeholder:text-instillGray30",
           heightStyle,
           widthStyle,
-          fontStyle,
+          fontSize,
+          lineHeight,
+          fontWeight,
+          bgColor,
           focusHighlight
             ? "instill-input-highlight"
             : "instill-input-no-highlight"

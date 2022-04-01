@@ -5,10 +5,14 @@ export type ProtectedBasicTextFieldProps = Omit<
   TextFieldBaseProps,
   | "enableProtectedToggle"
   | "type"
-  | "fontStyle"
   | "inputHeight"
   | "inputWidth"
   | "focusHighlight"
+  | "fontSize"
+  | "lineHeight"
+  | "fontWeight"
+  | "bgColor"
+  | "textColor"
 >;
 
 const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
@@ -26,7 +30,11 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       focusHighlight={false}
       enableProtectedToggle={true}
       type="password"
-      fontStyle="font-normal text-base leading-[28px]"
+      fontSize="text-base"
+      lineHeight="leading-[28px]"
+      fontWeight="font-normal"
+      bgColor="bg-white"
+      textColor="text-instillGray95"
       inputHeight="h-[70px]"
       inputWidth="w-full"
     />
