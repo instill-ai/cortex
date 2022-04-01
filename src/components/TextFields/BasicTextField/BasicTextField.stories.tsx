@@ -7,7 +7,19 @@ export default {
   component: BasicTextField,
 } as ComponentMeta<typeof BasicTextField>;
 
-export const Playground: ComponentStory<typeof BasicTextField> = () => {
+const Template: ComponentStory<typeof BasicTextField> = (args) => (
+  <BasicTextField {...args} />
+);
+
+export const Playground: ComponentStory<typeof BasicTextField> = Template.bind(
+  {}
+);
+
+Playground.args = {
+  labelName: "Playground",
+};
+
+export const Default: ComponentStory<typeof BasicTextField> = () => {
   const [text, setText] = useState<string>("");
 
   const onChangeInput = (inputValue: string) => {
