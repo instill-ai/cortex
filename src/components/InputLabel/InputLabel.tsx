@@ -20,12 +20,14 @@ export interface InputLabelProps {
   answered: boolean;
 
   /** TailwindCSS format
-   * - activate mean whether the input is being focused or the input field was answered
+   * - Activate mean whether the input is being focused or the input field was answered
+   * - Don't need to specific translate-x-, it's fixed value
    */
   activateStyle: string;
 
   /** TailwindCSS format
-   * - activate mean whether the input is being focused or the input field was answered
+   * - Activate mean whether the input is being focused or the input field was answered
+   * - Don't need to specific translate-x-, it's fixed value
    */
   deActivateStyle: string;
 }
