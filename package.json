@@ -7,6 +7,8 @@
   "private": false,
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
+    "lint:time": "TIMING=1 eslint . --ext .ts,.tsx,.js,.jsx --cache",
+    "lint:debug": "eslint . --ext .ts,.tsx,.js,.jsx --cache --debug",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook -o out",
     "prepare": "husky install",
