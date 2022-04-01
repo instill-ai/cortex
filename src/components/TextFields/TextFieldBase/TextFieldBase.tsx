@@ -8,8 +8,8 @@ import EyeIcon from "../../Icons/EyeIcon";
  * TextFieldBase
  *
  * ### How it implement inset lable transfor
- * - Use top-1/2 + (-terraform-1/2) to make label fix at the center of input box
- * - Use top-1/2 + (-terraform-full) to move label up a little bit
+ * - Use top-1/2 + (-translate-y-1/2) to make label fix at the center of input box
+ * - Use top-1/2 + (-translate-y-full) to move label up a little bit
  */
 
 export interface TextFieldBaseProps {
@@ -115,6 +115,8 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         required={required}
         htmlFor={id}
         fontStyle={fontStyle}
+        activateStyle="top-1/2 -translate-y-full"
+        deActivateStyle="top-1/2 -translate-y-1/2"
       >
         {labelName}
       </InputLabel>

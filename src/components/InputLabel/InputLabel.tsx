@@ -18,10 +18,29 @@ export interface InputLabelProps {
 
   /** Whether the input is answered or not */
   answered: boolean;
+
+  /** TailwindCSS format
+   * - activate mean whether the input is being focused or the input field was answered
+   */
+  activateStyle: string;
+
+  /** TailwindCSS format
+   * - activate mean whether the input is being focused or the input field was answered
+   */
+  deActivateStyle: string;
 }
 
 const InputLabel: FC<InputLabelProps> = memo(
-  ({ htmlFor, required, focus, answered, children, fontStyle }) => {
+  ({
+    htmlFor,
+    required,
+    focus,
+    answered,
+    children,
+    fontStyle,
+    activateStyle,
+    deActivateStyle,
+  }) => {
     let activate: boolean;
 
     if (focus) {
@@ -33,10 +52,8 @@ const InputLabel: FC<InputLabelProps> = memo(
     return (
       <label
         className={cn(
-          "absolute font-sans transform-gpu origin-top-left left-0 top-0 text-instillGray50",
-          activate
-            ? "top-1/2 translate-x-5 -translate-y-full"
-            : "top-1/2 translate-x-5 -translate-y-1/2",
+          "absolute font-sans transform-gpu origin-top-left left-0 text-instillGray50 translate-x-5",
+          activate ? activateStyle : deActivateStyle,
           fontStyle
         )}
         htmlFor={htmlFor}
