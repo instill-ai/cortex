@@ -3,7 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import TextFieldBase from "./TextFieldBase";
 
 export default {
-  title: "Components/Ui/Input/TextFieldBase",
+  title: "Components/Base/Input/TextFieldBase",
   component: TextFieldBase,
 } as ComponentMeta<typeof TextFieldBase>;
 

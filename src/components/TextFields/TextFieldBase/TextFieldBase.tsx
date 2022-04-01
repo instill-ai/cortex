@@ -4,6 +4,14 @@ import InputLabel from "../../InputLabel";
 import EyeSlashIcon from "../../Icons/EyeSlashIcon";
 import EyeIcon from "../../Icons/EyeIcon";
 
+/**
+ * TextFieldBase
+ *
+ * ### How it implement inset lable transfor
+ * - Use top-1/2 + (-terraform-1/2) to make label fix at the center of input box
+ * - Use top-1/2 + (-terraform-full) to move label up a little bit
+ */
+
 export interface TextFieldBaseProps {
   /** Input field's id */
   id: string;
@@ -69,14 +77,6 @@ export interface TextFieldBaseProps {
   /** Whether enable protected text toggle or not */
   enableProtectedToggle: boolean;
 }
-
-/**
- * TextFieldBase
- *
- * ### How it implement inset lable transfor
- * - Use top-1/2 + (-terraform-1/2) to make label fix at the center of input box
- * - Use top-1/2 + (-terraform-full) to move label up a little bit
- */
 
 const TextFieldBase: FC<TextFieldBaseProps> = ({
   onChangeInput,
