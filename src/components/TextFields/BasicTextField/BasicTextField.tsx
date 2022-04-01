@@ -1,12 +1,12 @@
 import { FC } from "react";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
-export type BasicTextField = Omit<
+export type BasicTextFieldProps = Omit<
   TextFieldBaseProps,
   "inputHeight" | "inputWidth" | "focusHighlight" | "fontStyle"
 >;
 
-const BasicTextField: FC<BasicTextField> = (props) => {
+const BasicTextField: FC<BasicTextFieldProps> = (props) => {
   return (
     <TextFieldBase
       id={props.id}
