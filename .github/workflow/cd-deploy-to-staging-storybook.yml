@@ -109,9 +109,10 @@ jobs:
             vercel-org-id: ${{ steps.secrets.outputs.VERCEL_ORG_ID }}
             vercel-project-id: ${{ steps.secrets.outputs.DESIGN_SYSTEM_STORYBOOK_ID}}
             scope: ${{ steps.secrets.outputs.VERCEL_ORG_ID }}
-            vercel-args: '--prod'
             github-comment: true
-
+            alias-domains: |
+              ui.instill-inc.tech
+            
         - name: update deployment status
           uses: bobheadxi/deployments@v0.4.3
           if: always()
