@@ -107,6 +107,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   fontSize,
   lineHeight,
   fontWeight,
+  textColor,
   bgColor,
   inputWidth,
   inputHeight,
@@ -154,7 +155,12 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
           bgColor,
           focusHighlight
             ? "instill-input-highlight"
-            : "instill-input-no-highlight"
+            : "instill-input-no-highlight",
+          disabled
+            ? "text-instillGray50"
+            : readOnly
+            ? "text-instillGray50"
+            : textColor
         )}
         id={id}
         type={expose ? "text" : type}
