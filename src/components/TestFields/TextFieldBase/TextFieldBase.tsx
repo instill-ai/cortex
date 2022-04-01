@@ -1,8 +1,8 @@
 import { FC, useRef, useState } from "react";
 import cn from "clsx";
 import InputLabel from "../../InputLabel";
-import EyeSlashIcon from "../../../Icons/EyeSlashIcon";
-import EyeIcon from "../../../Icons/EyeIcon";
+import EyeSlashIcon from "../../Icons/EyeSlashIcon";
+import EyeIcon from "../../Icons/EyeIcon";
 
 export interface TextFieldBaseProps {
   /** Input field's id */

@@ -23,6 +23,7 @@ const BasicTextField: FC<BasicTextField> = (props) => {
       fontStyle="font-normal text-base leading-[28px]"
       placeholder={props.placeholder}
       readOnly={props.readOnly}
+      enableProtectedToggle={false}
     />
   );
 };
