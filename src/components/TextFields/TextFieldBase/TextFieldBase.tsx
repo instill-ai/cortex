@@ -37,7 +37,7 @@ export interface TextFieldBaseProps {
   readOnly: boolean;
 
   /** TailwindCSS format
-   * - Input and Label's font size, line height and font weight
+   * - Input's font size, line height and font weight
    */
   fontStyle: string;
 
@@ -114,8 +114,8 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         focus={focus}
         required={required}
         htmlFor={id}
-        fontStyle={fontStyle}
-        activateStyle="top-1/2 -translate-y-full"
+        fontStyle="font-normal text-sm leading-[18.2px]"
+        activateStyle="top-1/2 -translate-y-[120%]"
         deActivateStyle="top-1/2 -translate-y-1/2"
       >
         {labelName}
