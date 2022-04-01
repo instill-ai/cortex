@@ -26,6 +26,7 @@ export const Playground: ComponentStory<typeof BasicTextField> = () => {
       disabled={false}
       placeholder="hello!"
       readOnly={false}
+      enableProtectedToggle={false}
     />
   );
 };
