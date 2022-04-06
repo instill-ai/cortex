@@ -25,9 +25,7 @@ export const Default: ComponentStory<typeof ToggleFieldBase> = () => {
     <ToggleFieldBase
       id="toggle-field-base-playground"
       disabled={false}
-      disabledBgColor=""
       readOnly={false}
-      readOnlyBgColor=""
       bgColor=""
       onChangeInput={onChangeInput}
       required={true}
