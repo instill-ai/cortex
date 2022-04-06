@@ -15,6 +15,8 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "textColor"
   | "disabledBgColor"
   | "readOnlyBgColor"
+  | "inputLabelType"
+  | "borderRadius"
 >;
 
 const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
@@ -41,6 +43,8 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       inputWidth="w-full"
       disabledBgColor="disabled:bg-white"
       readOnlyBgColor="bg-white"
+      inputLabelType="inset"
+      borderRadius="rounded"
     />
   );
 };
