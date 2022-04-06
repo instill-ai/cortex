@@ -49,6 +49,8 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       placeholder="hello"
       readOnly={false}
       enableProtectedToggle={false}
+      inputLabelType="inset"
+      borderRadius="rounded"
     />
   );
 };

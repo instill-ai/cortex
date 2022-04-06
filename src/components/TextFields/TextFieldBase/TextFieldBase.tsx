@@ -45,6 +45,8 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   placeholder,
   readOnly,
   enableProtectedToggle,
+  inputLabelType,
+  borderRadius,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -56,8 +58,9 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   return (
     <div
       className={cn(
-        "flex relative border border-instillGray15 rounded-[1px]",
-        widthStyle
+        "flex flex-col gap-y-2.5 relative",
+        widthStyle,
+        borderRadius
       )}
     >
       <InputLabel
@@ -68,68 +71,72 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         fontStyle="font-normal text-sm leading-[18.2px]"
         activateStyle="top-1/2 -translate-y-[120%]"
         deActivateStyle="top-1/2 -translate-y-1/2"
+        type={inputLabelType}
       >
         {labelName}
       </InputLabel>
-      <input
-        className={cn(
-          "pt-6 ring-0 pl-5 placeholder:text-instillGray30",
-          heightStyle,
-          widthStyle,
-          fontSize,
-          lineHeight,
-          fontWeight,
-          readOnly ? readOnlyBgColor : bgColor,
-          disabledBgColor,
-          focusHighlight
-            ? "instill-input-highlight"
-            : "instill-input-no-highlight",
-          disabled
-            ? "text-instillGray50"
-            : readOnly
-            ? "text-instillGray50"
-            : textColor
-        )}
-        id={id}
-        type={expose ? "text" : type}
-        disabled={disabled}
-        required={required}
-        placeholder={focus ? placeholder : null}
-        readOnly={readOnly}
-        autoComplete={autoComplete}
-        onChange={(event) => {
-          const inputValue = event.target.value;
-          onChangeInput(event.target.value);
-          if (!inputValue) {
-            setAnswered(false);
-            return;
-          }
-          setAnswered(true);
-        }}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-      />
-      {enableProtectedToggle ? (
-        <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
-          <button className="my-auto" onClick={() => setExpose(!expose)}>
-            {expose ? (
-              <EyeSlashIcon
-                width="w-4"
-                height="h-4"
-                color="text-instillGray50"
-                position="my-auto"
-              />
-            ) : (
-              <EyeIcon
-                width="w-4"
-                height="h-4"
-                color="text-instillGray50"
-                position="my-auto"
-              />
-            )}
-          </button>
-        </div>
-      ) : null}
+      <div className="flex relative">
+        <input
+          className={cn(
+            "pt-6 ring-0 pl-5 placeholder:text-instillGray30",
+            heightStyle,
+            widthStyle,
+            fontSize,
+            lineHeight,
+            fontWeight,
+            readOnly ? readOnlyBgColor : bgColor,
+            disabledBgColor,
+            focusHighlight
+              ? "instill-input-highlight"
+              : "instill-input-no-highlight border border-instillGray15",
+            disabled
+              ? "text-instillGray50"
+              : readOnly
+              ? "text-instillGray50"
+              : textColor,
+            borderRadius
+          )}
+          id={id}
+          type={expose ? "text" : type}
+          disabled={disabled}
+          required={required}
+          placeholder={focus ? placeholder : null}
+          readOnly={readOnly}
+          autoComplete={autoComplete}
+          onChange={(event) => {
+            const inputValue = event.target.value;
+            onChangeInput(event.target.value);
+            if (!inputValue) {
+              setAnswered(false);
+              return;
+            }
+            setAnswered(true);
+          }}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+        />
+        {enableProtectedToggle ? (
+          <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
+            <button className="my-auto" onClick={() => setExpose(!expose)}>
+              {expose ? (
+                <EyeSlashIcon
+                  width="w-4"
+                  height="h-4"
+                  color="text-instillGray50"
+                  position="my-auto"
+                />
+              ) : (
+                <EyeIcon
+                  width="w-4"
+                  height="h-4"
+                  color="text-instillGray50"
+                  position="my-auto"
+                />
+              )}
+            </button>
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 };
