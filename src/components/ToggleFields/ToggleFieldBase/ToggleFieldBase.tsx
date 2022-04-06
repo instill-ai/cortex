@@ -16,9 +16,22 @@ export type ToggleFieldBaseProps = Omit<
   | "autoComplete"
   | "disabledBgColor"
   | "readOnlyBgColor"
->;
+  | "inputLabelType"
+  | "bgColor"
+> & {
+  /** TailwindCSS format - Toggle center's dot color
+   * - Please use background-color, e.g. bg-blqck
+   */
+  dotColor: string;
+
+  /** TailwindCSS format - Toggle center's dot color when checked
+   * - Please use tailwindCSS peer-checked: persudo class, e.g. peer-checked:bg-black
+   */
+  checkedDotColor: string;
+};
 
 const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
+  borderRadius,
   id,
   disabled,
   readOnly,
@@ -26,11 +39,17 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
   required,
   onChangeInput,
   labelName,
+  dotColor,
+  checkedDotColor,
 }) => {
   const [answered, setAnswered] = useState(false);
   return (
     <label
-      className={cn("flex flex-col cursor-pointer gap-y-2.5", focusHighlight)}
+      className={cn(
+        "flex flex-col cursor-pointer gap-y-2.5",
+        focusHighlight,
+        borderRadius
+      )}
       htmlFor={id}
     >
       <InputLabel
@@ -70,8 +89,9 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
         />
         <div
           className={cn(
-            disabled ? "" : readOnly ? "" : "peer-checked:bg-instillBlue30",
-            "absolute left-[5px] top-[5px] bg-instillGray30 w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]"
+            disabled ? "" : readOnly ? "" : checkedDotColor,
+            dotColor,
+            "absolute left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]"
           )}
         />
       </div>
