@@ -33,6 +33,10 @@
     @apply border border-instillGray70 focus:outline-none focus:ring-0 focus:ring-white focus:border-instillBlue;
   }
 
+  .instill-input-highlight:focus {
+    box-shadow: 0px 0px 0px 3px rgba(64, 168, 245, 0.2);
+  }
+
   .instill-input-no-highlight {
     @apply focus:outline-none focus:ring-0 focus:ring-opacity-0;
   }
