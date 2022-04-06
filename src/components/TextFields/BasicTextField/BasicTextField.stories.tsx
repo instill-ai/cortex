@@ -16,7 +16,7 @@ export const Playground: ComponentStory<typeof BasicTextField> = Template.bind(
 );
 
 Playground.args = {
-  labelName: "Playground",
+  labelName: "basic-text-field-playground",
 };
 
 export const Default: ComponentStory<typeof BasicTextField> = () => {
@@ -30,15 +30,14 @@ export const Default: ComponentStory<typeof BasicTextField> = () => {
     <BasicTextField
       valid={text ? true : false}
       onChangeInput={onChangeInput}
-      id="text-field-playground"
-      labelName="playground"
+      id="basic-text-field-playground"
+      labelName="basic-text-field-playground"
       required={true}
       autoComplete="off"
       type="text"
       disabled={false}
       placeholder="hello!"
       readOnly={false}
-      enableProtectedToggle={false}
     />
   );
 };

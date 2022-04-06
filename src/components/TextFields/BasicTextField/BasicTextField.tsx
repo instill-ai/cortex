@@ -11,6 +11,9 @@ export type BasicTextFieldProps = Omit<
   | "fontWeight"
   | "bgColor"
   | "textColor"
+  | "disabledBgColor"
+  | "readOnlyBgColor"
+  | "enableProtectedToggle"
 >;
 
 const BasicTextField: FC<BasicTextFieldProps> = (props) => {
@@ -24,6 +27,8 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       valid={props.valid}
       labelName={props.labelName}
       autoComplete={props.autoComplete}
+      placeholder={props.placeholder}
+      readOnly={props.readOnly}
       inputHeight="h-[70px]"
       inputWidth="w-full"
       focusHighlight={false}
@@ -32,9 +37,9 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       fontWeight="font-normal"
       bgColor="bg-white"
       textColor="text-instillGray95"
-      placeholder={props.placeholder}
-      readOnly={props.readOnly}
       enableProtectedToggle={false}
+      readOnlyBgColor="bg-white"
+      disabledBgColor="disabled:bg-white"
     />
   );
 };

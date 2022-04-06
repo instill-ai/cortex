@@ -15,7 +15,7 @@ export const Playground: ComponentStory<typeof ProtectedBasicTextField> =
   Template.bind({});
 
 Playground.args = {
-  labelName: "protected-basic-textfield-playground",
+  labelName: "basic-protected-textfield-playground",
 };
 
 export const Default: ComponentStory<typeof ProtectedBasicTextField> = () => {
