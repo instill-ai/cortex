@@ -58,7 +58,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   return (
     <div
       className={cn(
-        "flex relative border border-instillGray15",
+        "flex flex-col gap-y-2.5 relative",
         widthStyle,
         borderRadius
       )}
@@ -90,7 +90,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           borderRadius,
           focusHighlight
             ? "instill-input-highlight"
-            : "instill-input-no-highlight"
+            : "instill-input-no-highlight border border-instillGray15"
         )}
         id={id}
         disabled={disabled}
