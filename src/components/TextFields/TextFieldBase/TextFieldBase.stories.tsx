@@ -42,6 +42,8 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       lineHeight="leading-[28px]"
       fontWeight="font-normal"
       bgColor="bg-white"
+      disabledBgColor="disabled:bg-white"
+      readOnlyBgColor="bg-white"
       textColor="text-instillGray95"
       disabled={false}
       placeholder="hello"

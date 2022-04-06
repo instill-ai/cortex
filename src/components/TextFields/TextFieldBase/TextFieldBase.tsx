@@ -26,6 +26,12 @@ export interface TextFieldBaseProps {
    */
   disabled: boolean;
 
+  /** TailwindCSS formatƒ
+   * Background color when input is disabled
+   * - Please add persudo class disabled:
+   */
+  disabledBgColor: string;
+
   /**
    * Text that appears in the form control when it has no value set
    */
@@ -35,6 +41,11 @@ export interface TextFieldBaseProps {
    * Whether The value is editable or not.
    */
   readOnly: boolean;
+
+  /** TailwindCSS format
+   * Background color when input is readOnly
+   */
+  readOnlyBgColor: string;
 
   /** TailwindCSS format
    * - Input's font size
@@ -109,6 +120,8 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   fontWeight,
   textColor,
   bgColor,
+  disabledBgColor,
+  readOnlyBgColor,
   inputWidth,
   inputHeight,
   autoComplete,
@@ -152,7 +165,8 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
           fontSize,
           lineHeight,
           fontWeight,
-          bgColor,
+          readOnly ? readOnlyBgColor : bgColor,
+          disabledBgColor,
           focusHighlight
             ? "instill-input-highlight"
             : "instill-input-no-highlight",
