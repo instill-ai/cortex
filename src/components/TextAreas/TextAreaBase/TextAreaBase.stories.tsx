@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import TextAreaBase from "./TextAreaBase";
 
@@ -35,13 +35,21 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       required={true}
       inputHeight={"h-[140px]"}
       inputWidth={"w-full"}
-      focusHighlight={false}
+      focusHighlight={true}
       autoComplete="off"
-      fontStyle="font-normal text-base leading-[28px]"
+      fontSize="text-base"
+      fontWeight="font-normal"
+      lineHeight="leading-[28px]"
       disabled={false}
       placeholder="hello"
       readOnly={false}
       resize="both"
+      inputLabelType="inset"
+      disabledBgColor="bg-white"
+      readOnlyBgColor="bg-white"
+      textColor="text-instillGray95"
+      bgColor="bg-white"
+      borderRadius="rounded"
     />
   );
 };

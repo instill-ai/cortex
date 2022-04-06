@@ -4,7 +4,7 @@ import InputLabel from "../../InputLabel";
 import { BasicInputFieldAttributes } from "../../../types/general";
 
 export interface TextAreaBaseProps extends BasicInputFieldAttributes {
-  /** Control how  textarea can be resized*/
+  /** Control how textarea can be resized*/
   resize: "both" | "none" | "x" | "y";
 }
 
@@ -29,6 +29,8 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   readOnly,
   readOnlyBgColor,
   resize,
+  inputLabelType,
+  borderRadius,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -56,8 +58,9 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   return (
     <div
       className={cn(
-        "flex relative border border-instillGray15 rounded-[1px]",
-        widthStyle
+        "flex relative border border-instillGray15",
+        widthStyle,
+        borderRadius
       )}
     >
       <InputLabel
@@ -68,12 +71,13 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
         fontStyle="font-normal text-sm leading-[18.2px]"
         activateStyle="top-0 translate-y-3"
         deActivateStyle="top-0 translate-y-[26px]"
+        type={inputLabelType}
       >
         {labelName}
       </InputLabel>
       <textarea
         className={cn(
-          "mt-[34px] px-5 pb-5 ring-0 pl-5 placeholder:text-instillGray30 min-h-[140px]",
+          "pt-[34px] px-5 pb-5 ring-0 pl-5 placeholder:text-instillGray30 min-h-[140px]",
           heightStyle,
           widthStyle,
           fontSize,
@@ -83,6 +87,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           resizeStyle,
           readOnly ? readOnlyBgColor : bgColor,
           disabledBgColor,
+          borderRadius,
           focusHighlight
             ? "instill-input-highlight"
             : "instill-input-no-highlight"
