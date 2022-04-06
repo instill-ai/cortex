@@ -14,6 +14,8 @@ export type BasicTextFieldProps = Omit<
   | "disabledBgColor"
   | "readOnlyBgColor"
   | "enableProtectedToggle"
+  | "borderRadius"
+  | "inputLabelType"
 >;
 
 const BasicTextField: FC<BasicTextFieldProps> = (props) => {
@@ -40,6 +42,8 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       enableProtectedToggle={false}
       readOnlyBgColor="bg-white"
       disabledBgColor="disabled:bg-white"
+      borderRadius="rounded"
+      inputLabelType="inset"
     />
   );
 };
