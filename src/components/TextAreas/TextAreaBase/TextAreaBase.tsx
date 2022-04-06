@@ -82,6 +82,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           textColor,
           resizeStyle,
           readOnly ? readOnlyBgColor : bgColor,
+          disabledBgColor,
           focusHighlight
             ? "instill-input-highlight"
             : "instill-input-no-highlight"
