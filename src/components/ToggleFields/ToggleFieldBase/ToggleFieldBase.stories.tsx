@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { ToggleFieldBase } from "./ToggleFieldBase";
+import ToggleFieldBase from "./ToggleFieldBase";
 
 export default {
   title: "Components/Base/Input/ToggleFieldBase",

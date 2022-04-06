@@ -3,20 +3,20 @@ import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import InputLabel from "../../InputLabel";
 
-export type ToggleButtonBaseProps = Omit<
-    BasicInputFieldAttributes,
-    | "valid"
-    | "placeholder"
-    | "fontSize"
-    | "lineHeight"
-    | "fontWeight"
-    | "textColor"
-    | "inputWidth"
-    | "inputHeight"
-    | "autoComplete"
-  >
+export type ToggleFieldBaseProps = Omit<
+  BasicInputFieldAttributes,
+  | "valid"
+  | "placeholder"
+  | "fontSize"
+  | "lineHeight"
+  | "fontWeight"
+  | "textColor"
+  | "inputWidth"
+  | "inputHeight"
+  | "autoComplete"
+>;
 
-export const ToggleFieldBase: FC<ToggleButtonBaseProps> = ({
+const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
   id,
   disabled,
   disabledBgColor,
@@ -67,3 +67,5 @@ export const ToggleFieldBase: FC<ToggleButtonBaseProps> = ({
     </label>
   );
 };
+
+export default ToggleFieldBase;
