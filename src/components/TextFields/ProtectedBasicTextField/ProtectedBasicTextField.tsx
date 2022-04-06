@@ -13,6 +13,8 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "fontWeight"
   | "bgColor"
   | "textColor"
+  | "disabledBgColor"
+  | "readOnlyBgColor"
 >;
 
 const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
@@ -37,6 +39,8 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       textColor="text-instillGray95"
       inputHeight="h-[70px]"
       inputWidth="w-full"
+      disabledBgColor="disabled:bg-white"
+      readOnlyBgColor="bg-white"
     />
   );
 };

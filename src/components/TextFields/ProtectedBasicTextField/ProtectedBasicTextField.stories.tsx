@@ -7,9 +7,18 @@ export default {
   component: ProtectedBasicTextField,
 } as ComponentMeta<typeof ProtectedBasicTextField>;
 
-export const Playground: ComponentStory<
-  typeof ProtectedBasicTextField
-> = () => {
+const Template: ComponentStory<typeof ProtectedBasicTextField> = (args) => (
+  <ProtectedBasicTextField {...args} />
+);
+
+export const Playground: ComponentStory<typeof ProtectedBasicTextField> =
+  Template.bind({});
+
+Playground.args = {
+  labelName: "protected-basic-textfield-playground",
+};
+
+export const Default: ComponentStory<typeof ProtectedBasicTextField> = () => {
   const [text, setText] = useState<string>("");
 
   const onChangeInput = (inputValue: string) => {
