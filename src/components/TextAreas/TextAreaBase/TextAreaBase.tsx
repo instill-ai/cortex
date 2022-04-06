@@ -1,72 +1,9 @@
 import { FC, useState } from "react";
 import cn from "clsx";
 import InputLabel from "../../InputLabel";
+import { BasicInputFieldAttributes } from "../../../types/general";
 
-/**
- * TextAreaBase
- *
- * ### How it implement inset lable transfor
- * - Use top-1/2 + (-terraform-1/2) to make label fix at the center of input box
- * - Use top-1/2 + (-terraform-full) to move label up a little bit
- */
-
-export interface TextAreaBaseProps {
-  /** Input field's id */
-  id: string;
-
-  /**
-   * Whether the form control is disabled
-   */
-  disabled: boolean;
-
-  /**
-   * Text that appears in the form control when it has no value set
-   */
-  placeholder: string;
-
-  /**
-   * Whether The value is editable or not.
-   */
-  readOnly: boolean;
-
-  /** TailwindCSS format
-   * - Input's font size, line height and font weight
-   */
-  fontStyle: string;
-
-  /** Input on change handler */
-  onChangeInput: (inputValue: string) => void;
-
-  /** Whether the field is necessary or not */
-  required: boolean;
-
-  /** Whether the input is valid or not */
-  valid: boolean;
-
-  /** TextField labelName */
-  labelName: string;
-
-  /** TailwindCSS format
-   * - Default is w-full, please make sure this component's parent has defined width
-   * - if you are not sure about the defined number, please use abitrary number like w-[number-unit] w-[20px].
-   */
-  inputWidth: string;
-
-  /** focusHighlight
-   * - enable: border highlight with intstill blue30
-   * - disable: remove default input border highlight, the border will remain initial color and width
-   */
-  focusHighlight: boolean;
-
-  /** TailwindCSS format
-   * - Default is h-[70px]
-   * - if you are not sure about the defined number, please use abitrary number like w-[number-unit] w-[20px].
-   */
-  inputHeight: string;
-
-  /** Specific whether browser should help user auto complete the input or not */
-  autoComplete: string;
-
+export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   /** Control how  textarea can be resized*/
   resize: "both" | "none" | "x" | "y";
 }
@@ -77,14 +14,20 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   required,
   valid,
   labelName,
-  fontStyle,
+  fontSize,
+  textColor,
+  fontWeight,
+  lineHeight,
+  bgColor,
   inputWidth,
   inputHeight,
   autoComplete,
   focusHighlight,
   disabled,
+  disabledBgColor,
   placeholder,
   readOnly,
+  readOnlyBgColor,
   resize,
 }) => {
   const [focus, setFocus] = useState(false);
@@ -133,8 +76,12 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           "mt-[34px] px-5 pb-5 ring-0 pl-5 placeholder:text-instillGray30 min-h-[140px]",
           heightStyle,
           widthStyle,
-          fontStyle,
+          fontSize,
+          fontWeight,
+          lineHeight,
+          textColor,
           resizeStyle,
+          readOnly ? readOnlyBgColor : bgColor,
           focusHighlight
             ? "instill-input-highlight"
             : "instill-input-no-highlight"
