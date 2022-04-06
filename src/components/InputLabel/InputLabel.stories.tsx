@@ -21,6 +21,7 @@ export const Default: ComponentStory<typeof InputLabel> = () => (
     htmlFor="default"
     answered={false}
     required={false}
+    type="inset"
   >
     Default label
   </InputLabel>
@@ -33,6 +34,7 @@ export const Required: ComponentStory<typeof InputLabel> = () => (
     htmlFor="default"
     answered={false}
     required={true}
+    type="inset"
   >
     Required label
   </InputLabel>
@@ -45,6 +47,7 @@ export const Answered: ComponentStory<typeof InputLabel> = () => (
     htmlFor="default"
     answered={true}
     required={false}
+    type="inset"
   >
     Answered label
   </InputLabel>
@@ -57,6 +60,7 @@ export const Focused: ComponentStory<typeof InputLabel> = () => (
     htmlFor="default"
     answered={false}
     required={false}
+    type="inset"
   >
     Focused label
   </InputLabel>
@@ -71,6 +75,7 @@ export const All: ComponentStory<typeof InputLabel> = () => (
         htmlFor="default"
         answered={false}
         required={false}
+        type="inset"
       >
         Default label
       </InputLabel>
@@ -83,6 +88,7 @@ export const All: ComponentStory<typeof InputLabel> = () => (
         htmlFor="default"
         answered={false}
         required={true}
+        type="inset"
       >
         Required label
       </InputLabel>
@@ -94,6 +100,7 @@ export const All: ComponentStory<typeof InputLabel> = () => (
         htmlFor="default"
         answered={true}
         required={false}
+        type="inset"
       >
         Answered label
       </InputLabel>
@@ -105,6 +112,7 @@ export const All: ComponentStory<typeof InputLabel> = () => (
         htmlFor="default"
         answered={false}
         required={false}
+        type="inset"
       >
         Focused label
       </InputLabel>

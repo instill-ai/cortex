@@ -2,6 +2,12 @@ import { FC, memo } from "react";
 import cn from "clsx";
 
 export interface InputLabelProps {
+  /** InputLabel's type
+   * - normal: input label has normal position layout and doesn't have any animation
+   * - inset: input label has absolution position layout, put into the input field and have float up animation with specific activate, deActivate style
+   */
+  type: "normal" | "inset" | "hide";
+
   /** Input field id */
   htmlFor: string;
 
@@ -14,7 +20,7 @@ export interface InputLabelProps {
   required: boolean;
 
   /** Whether the input is focused or not */
-  focus: boolean;
+  focus?: boolean;
 
   /** Whether the input is answered or not */
   answered: boolean;
@@ -23,13 +29,13 @@ export interface InputLabelProps {
    * - Activate mean whether the input is being focused or the input field was answered
    * - Don't need to specific translate-x-, it's fixed value
    */
-  activateStyle: string;
+  activateStyle?: string;
 
   /** TailwindCSS format
    * - Activate mean whether the input is being focused or the input field was answered
    * - Don't need to specific translate-x-, it's fixed value
    */
-  deActivateStyle: string;
+  deActivateStyle?: string;
 }
 
 const InputLabel: FC<InputLabelProps> = memo(
@@ -42,8 +48,9 @@ const InputLabel: FC<InputLabelProps> = memo(
     fontStyle,
     activateStyle,
     deActivateStyle,
+    type,
   }) => {
-    let activate: boolean;
+    let activate = false;
 
     if (focus) {
       activate = true;
@@ -54,9 +61,13 @@ const InputLabel: FC<InputLabelProps> = memo(
     return (
       <label
         className={cn(
-          "absolute font-sans transform-gpu origin-top-left left-0 text-instillGray50 translate-x-5",
-          activate ? activateStyle : deActivateStyle,
-          fontStyle
+          "font-sans text-instillGray50 z-10",
+          type === "inset" ? (activate ? activateStyle : deActivateStyle) : "",
+          fontStyle,
+          {
+            "absolute translate-x-5 transform-gpu origin-top-left left-0":
+              type === "inset",
+          }
         )}
         htmlFor={htmlFor}
       >
