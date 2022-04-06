@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2.3.3
 
       - name: Install dependencies
-        run: npm ci
+        run: rm -rf node_modules && yarn install --frozen-lockfile
 
       - name: Cache build
         uses: actions/cache@v2
@@ -44,7 +44,7 @@ jobs:
           key: ${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
   testUnit:
     runs-on: ubuntu-latest
@@ -63,8 +63,8 @@ jobs:
           key: ${{ github.sha }}-${{ github.run_number }}-${{ github.run_attempt }}
 
       - name: Run unit test
-        run: npm run test
-        
+        run: yarn test
+
   deployToStorybook:
     if: ${{ !contains(github.ref, 'release') }}
     runs-on: ubuntu-latest
@@ -91,7 +91,7 @@ jobs:
 
       - name: Checkout
         uses: actions/checkout@v2.3.3
-          
+
       - name: start deployment
         uses: bobheadxi/deployments@v0.4.3
         id: deployment
@@ -99,8 +99,8 @@ jobs:
           step: start
           token: ${{ steps.secrets.outputs.GITHUB_TOKEN }}
           env: preview
-          
-      - name: Deploy storybook to vercel 
+
+      - name: Deploy storybook to vercel
         id: deployStorybookToVercel
         uses: amondnet/vercel-action@v20
         with:
@@ -112,7 +112,7 @@ jobs:
           github-comment: true
           alias-domains: |
             ui.instill-inc.tech
-            
+
       - name: update deployment status
         uses: bobheadxi/deployments@v0.4.3
         if: always()
