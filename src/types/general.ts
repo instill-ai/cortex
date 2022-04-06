@@ -56,6 +56,9 @@ export interface BasicInputFieldAttributes {
    */
   bgColor: string;
 
+  /** TailwindCSS format - The border radius of the input */
+  borderRadius: string;
+
   /** Input on change handler */
   onChangeInput: (inputValue: string) => void;
 
