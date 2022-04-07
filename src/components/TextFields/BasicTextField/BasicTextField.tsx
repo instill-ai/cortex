@@ -42,7 +42,7 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       enableProtectedToggle={false}
       readOnlyBgColor="bg-white"
       disabledBgColor="disabled:bg-white"
-      borderRadius="rounded"
+      borderRadius="rounded-[1px]"
       inputLabelType="inset"
     />
   );

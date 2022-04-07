@@ -44,7 +44,7 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       disabledBgColor="disabled:bg-white"
       readOnlyBgColor="bg-white"
       inputLabelType="inset"
-      borderRadius="rounded"
+      borderRadius="rounded-[1px]"
     />
   );
 };
