@@ -67,7 +67,8 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
               ? "border border-instillGray15"
               : focusHighlight
               ? "instill-input-highlight checked:border-instillBlue30"
-              : "instill-input-no-highlight border border-instillGray15 checked:border-instillBlue30"
+              : "instill-input-no-highlight border border-instillGray15 checked:border-instillBlue30",
+            borderRadius
           )}
           type="checkbox"
           role="switch"
@@ -82,9 +83,10 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
         />
         <div
           className={cn(
+            "absolute cursor-pointer left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]",
             disabled ? "" : readOnly ? "" : checkedDotColor,
             dotColor,
-            "absolute cursor-pointer left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]"
+            borderRadius
           )}
         />
       </label>
