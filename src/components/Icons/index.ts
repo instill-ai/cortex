@@ -10,6 +10,8 @@ import GrpcIcon from "./GrpcIcon";
 import type { GrpcIconProps } from "./GrpcIcon";
 import SnowflakeIcon from "./SnowflakeIcon";
 import type { SnowflakeIconProps } from "./SnowflakeIcon";
+import MongoDbIcon from "./MongoDbIcon";
+import type { MongoDbIconProps } from "./MongoDbIcon";
 
 export {
   EyeIcon,
@@ -24,4 +26,6 @@ export {
   GrpcIconProps,
   SnowflakeIcon,
   SnowflakeIconProps,
+  MongoDbIcon,
+  MongoDbIconProps,
 };
