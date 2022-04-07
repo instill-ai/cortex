@@ -17,7 +17,7 @@ export interface IconBaseProps {
    * - Please use text color to modify icon's color
    * - e.g. text-gray-300
    */
-  color: string;
+  color?: string;
 
   /** TailwindCSS format - The position of icon.
    * - Please use margin auto to control the position of icon
