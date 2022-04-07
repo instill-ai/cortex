@@ -44,14 +44,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
 }) => {
   const [answered, setAnswered] = useState(false);
   return (
-    <label
-      className={cn(
-        "flex flex-col cursor-pointer gap-y-2.5",
-        focusHighlight,
-        borderRadius
-      )}
-      htmlFor={id}
-    >
+    <div className={cn("flex flex-col gap-y-2.5")}>
       <InputLabel
         type="normal"
         answered={answered}
@@ -63,7 +56,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
       >
         {labelName}
       </InputLabel>
-      <div className="flex flex-col relative">
+      <label htmlFor={id} className="flex relative w-[90px] h-10">
         <input
           id={id}
           className={cn(
@@ -91,11 +84,11 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
           className={cn(
             disabled ? "" : readOnly ? "" : checkedDotColor,
             dotColor,
-            "absolute left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]"
+            "absolute cursor-pointer left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]"
           )}
         />
-      </div>
-    </label>
+      </label>
+    </div>
   );
 };
 
