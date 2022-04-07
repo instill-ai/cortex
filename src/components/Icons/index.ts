@@ -6,6 +6,8 @@ import IdIcon from "./IdIcon/IdIcon";
 import type { IdIconProps } from "./IdIcon";
 import HttpIcon from "./HttpIcon";
 import type { HttpIconProps } from "./HttpIcon";
+import GrpcIcon from "./GrpcIcon";
+import type { GrpcIconProps } from "./GrpcIcon";
 
 export {
   EyeIcon,
@@ -16,4 +18,6 @@ export {
   IdIconProps,
   HttpIcon,
   HttpIconProps,
+  GrpcIcon,
+  GrpcIconProps,
 };
