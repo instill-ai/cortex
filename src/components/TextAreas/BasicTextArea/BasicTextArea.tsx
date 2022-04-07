@@ -13,6 +13,8 @@ export type BasicTextAreaProps = Omit<
   | "readOnlyBgColor"
   | "disabledBgColor"
   | "bgColor"
+  | "borderRadius"
+  | "inputLabelType"
 >;
 export const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
   return (
@@ -29,7 +31,7 @@ export const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
       resize={props.resize}
       inputHeight="h-[140px]"
       inputWidth="w-full"
-      focusHighlight={false}
+      focusHighlight={true}
       fontSize="text-base"
       fontWeight="font-normal"
       lineHeight="leading-[28px]"
@@ -37,6 +39,8 @@ export const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
       readOnlyBgColor="bg-white"
       disabledBgColor="bg-white"
       bgColor="bg-white"
+      borderRadius="rounded"
+      inputLabelType="inset"
     />
   );
 };
