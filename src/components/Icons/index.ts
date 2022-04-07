@@ -8,6 +8,8 @@ import HttpIcon from "./HttpIcon";
 import type { HttpIconProps } from "./HttpIcon";
 import GrpcIcon from "./GrpcIcon";
 import type { GrpcIconProps } from "./GrpcIcon";
+import SnowflakeIcon from "./SnowflakeIcon";
+import type { SnowflakeIconProps } from "./SnowflakeIcon";
 
 export {
   EyeIcon,
@@ -20,4 +22,6 @@ export {
   HttpIconProps,
   GrpcIcon,
   GrpcIconProps,
+  SnowflakeIcon,
+  SnowflakeIconProps,
 };
