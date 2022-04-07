@@ -73,7 +73,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
               : readOnly
               ? "border border-instillGray15"
               : focusHighlight
-              ? "instill-input-highlight"
+              ? "instill-input-highlight checked:border-instillBlue30"
               : "instill-input-no-highlight border border-instillGray15 checked:border-instillBlue30"
           )}
           type="checkbox"
