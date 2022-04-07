@@ -4,6 +4,8 @@ import EyeSlashIcon from "./EyeSlashIcon";
 import type { EyeSlashIconProps } from "./EyeSlashIcon";
 import IdIcon from "./IdIcon/IdIcon";
 import type { IdIconProps } from "./IdIcon";
+import HttpIcon from "./HttpIcon";
+import type { HttpIconProps } from "./HttpIcon";
 
 export {
   EyeIcon,
@@ -12,4 +14,6 @@ export {
   EyeSlashIconProps,
   IdIcon,
   IdIconProps,
+  HttpIcon,
+  HttpIconProps,
 };
