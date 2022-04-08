@@ -18,6 +18,8 @@ import ClientIcon from "./ClientIcon";
 import type { ClientIconProps } from "./ClientIcon";
 import ModelIcon from "./ModelIcon";
 import type { ModelIconProps } from "./ModelIcon";
+import BarChartIcon from "./BarChartIcon";
+import type { BarChartIconProps } from "./BarChartIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -60,4 +62,6 @@ export {
   ClientIconProps,
   ModelIcon,
   ModelIconProps,
+  BarChartIcon,
+  BarChartIconProps,
 };
