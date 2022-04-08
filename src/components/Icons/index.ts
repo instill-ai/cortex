@@ -16,6 +16,8 @@ import CopyIcon from "./CopyIcon";
 import type { CopyIconProps } from "./CopyIcon";
 import ClientIcon from "./ClientIcon";
 import type { ClientIconProps } from "./ClientIcon";
+import ModelIcon from "./ModelIcon";
+import type { ModelIconProps } from "./ModelIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -56,4 +58,6 @@ export {
   CopyIconProps,
   ClientIcon,
   ClientIconProps,
+  ModelIcon,
+  ModelIconProps,
 };
