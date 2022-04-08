@@ -14,6 +14,8 @@ import MongoDbIcon from "./MongoDbIcon";
 import type { MongoDbIconProps } from "./MongoDbIcon";
 import CopyIcon from "./CopyIcon";
 import type { CopyIconProps } from "./CopyIcon";
+import ClientIcon from "./ClientIcon";
+import type { ClientIconProps } from "./ClientIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -52,4 +54,6 @@ export {
   ArrowLeftIconProps,
   CopyIcon,
   CopyIconProps,
+  ClientIcon,
+  ClientIconProps,
 };
