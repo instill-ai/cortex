@@ -14,8 +14,15 @@
     "prepare": "husky install",
     "prettier:fix": "prettier --write",
     "prettier:check": "prettier --check",
-    "test:coverage": "jest --collectCoverage"
+    "test:coverage": "jest --collectCoverage",
+    "build": "rollup -c"
   },
+  "main": "build/cjs/index.js",
+  "module": "build/esm/index.js",
+  "files": [
+    "build"
+  ],
+  "types": "build/index.d.ts",
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
