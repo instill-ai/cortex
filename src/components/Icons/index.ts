@@ -22,8 +22,10 @@ import BarChartIcon from "./BarChartIcon";
 import type { BarChartIconProps } from "./BarChartIcon";
 import VisualDataOperatorIcon from "./VisualDataOperatorIcon";
 import type { VisualDataOperatorIconProps } from "./VisualDataOperatorIcon";
-import DataSourceIcon from "./DataSourceIcon/DataSourceIcon";
-import type { DataSourceIconProps } from "./DataSourceIcon/DataSourceIcon";
+import DataDestinationIcon from "./DataDestinationIcon";
+import type { DataDestinationIconProps } from "./DataDestinationIcon";
+import DataSourceIcon from "./DataSourceIcon";
+import type { DataSourceIconProps } from "./DataSourceIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -72,4 +74,6 @@ export {
   VisualDataOperatorIconProps,
   DataSourceIcon,
   DataSourceIconProps,
+  DataDestinationIcon,
+  DataDestinationIconProps,
 };
