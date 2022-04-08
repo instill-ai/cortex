@@ -20,6 +20,8 @@ import ModelIcon from "./ModelIcon";
 import type { ModelIconProps } from "./ModelIcon";
 import BarChartIcon from "./BarChartIcon";
 import type { BarChartIconProps } from "./BarChartIcon";
+import VisualDataOperatorIcon from "./VisualDataOperatorIcon";
+import type { VisualDataOperatorIconProps } from "./VisualDataOperatorIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -64,4 +66,6 @@ export {
   ModelIconProps,
   BarChartIcon,
   BarChartIconProps,
+  VisualDataOperatorIcon,
+  VisualDataOperatorIconProps,
 };
