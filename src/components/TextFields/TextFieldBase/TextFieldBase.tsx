@@ -18,9 +18,10 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
 /**
  * TextFieldBase
  *
- * ### How it implement inset lable transfor
+ * ### How we implement inset lable transfor
  * - Use top-1/2 + (-translate-y-1/2) to make label fix at the center of input box
  * - Use top-1/2 + (-translate-y-full) to move label up a little bit
+ * - If you want to change the InputLabel size, you have to change the input's paddingTop
  */
 
 const TextFieldBase: FC<TextFieldBaseProps> = ({
@@ -50,7 +51,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
-  const [expose, setExpose] = useState(false);
+  const [showSecret, setShowSecret] = useState(false);
 
   const widthStyle = inputWidth ?? "w-full";
   const heightStyle = inputHeight ?? "h-[70px]";
@@ -97,7 +98,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             borderRadius
           )}
           id={id}
-          type={expose ? "text" : type}
+          type={showSecret ? "text" : type}
           disabled={disabled}
           required={required}
           placeholder={focus ? placeholder : null}
@@ -117,8 +118,11 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         />
         {enableProtectedToggle ? (
           <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
-            <button className="my-auto" onClick={() => setExpose(!expose)}>
-              {expose ? (
+            <button
+              className="my-auto"
+              onClick={() => setShowSecret(!showSecret)}
+            >
+              {showSecret ? (
                 <EyeSlashIcon
                   width="w-4"
                   height="h-4"
