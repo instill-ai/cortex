@@ -12,6 +12,8 @@ import SnowflakeIcon from "./SnowflakeIcon";
 import type { SnowflakeIconProps } from "./SnowflakeIcon";
 import MongoDbIcon from "./MongoDbIcon";
 import type { MongoDbIconProps } from "./MongoDbIcon";
+import CopyIcon from "./CopyIcon";
+import type { CopyIconProps } from "./CopyIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -48,4 +50,6 @@ export {
   ArrowRightIconProps,
   ArrowLeftIcon,
   ArrowLeftIconProps,
+  CopyIcon,
+  CopyIconProps,
 };
