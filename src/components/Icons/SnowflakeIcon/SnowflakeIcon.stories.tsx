@@ -11,9 +11,11 @@ const Template: ComponentStory<typeof SnowflakeIcon> = (args) => (
   <SnowflakeIcon {...args} />
 );
 
-export const Default: ComponentStory<typeof SnowflakeIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof SnowflakeIcon> = Template.bind(
+  {}
+);
 
-Default.args = {
+Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
   position: "my-auto",

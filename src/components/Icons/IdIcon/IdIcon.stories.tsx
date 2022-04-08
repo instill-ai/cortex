@@ -9,11 +9,11 @@ export default {
 
 const Template: ComponentStory<typeof IdIcon> = (args) => <IdIcon {...args} />;
 
-export const Default: ComponentStory<typeof IdIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof IdIcon> = Template.bind({});
 
-Default.args = {
-  width: "w-5",
-  height: "h-5",
+Playground.args = {
+  width: "w-[30px]",
+  height: "h-[30px]",
   color: "text-instillGray50",
   position: "my-auto",
 };

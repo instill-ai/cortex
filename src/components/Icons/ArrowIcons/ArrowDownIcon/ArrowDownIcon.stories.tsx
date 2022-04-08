@@ -11,9 +11,11 @@ const Template: ComponentStory<typeof ArrowDownIcon> = (args) => (
   <ArrowDownIcon {...args} />
 );
 
-export const Default: ComponentStory<typeof ArrowDownIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof ArrowDownIcon> = Template.bind(
+  {}
+);
 
-Default.args = {
+Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
   color: "text-instillGray50",

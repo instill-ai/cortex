@@ -11,11 +11,13 @@ const Template: ComponentStory<typeof EyeSlashIcon> = (args) => (
   <EyeSlashIcon {...args} />
 );
 
-export const Default: ComponentStory<typeof EyeSlashIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof EyeSlashIcon> = Template.bind(
+  {}
+);
 
-Default.args = {
-  width: "w-4",
-  height: "h-4",
+Playground.args = {
+  width: "w-[30px]",
+  height: "h-[30px]",
   color: "text-instillGray50",
   position: "my-auto",
 };

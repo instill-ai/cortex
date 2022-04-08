@@ -11,9 +11,9 @@ const Template: ComponentStory<typeof MongoDbIcon> = (args) => (
   <MongoDbIcon {...args} />
 );
 
-export const Default: ComponentStory<typeof MongoDbIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof MongoDbIcon> = Template.bind({});
 
-Default.args = {
+Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
   position: "my-auto",

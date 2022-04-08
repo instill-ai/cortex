@@ -11,11 +11,11 @@ const Template: ComponentStory<typeof GrpcIcon> = (args) => (
   <GrpcIcon {...args} />
 );
 
-export const Default: ComponentStory<typeof GrpcIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof GrpcIcon> = Template.bind({});
 
-Default.args = {
-  width: "w-5",
-  height: "h-5",
+Playground.args = {
+  width: "w-[30px]",
+  height: "h-[30px]",
   color: "text-instillGray50",
   position: "my-auto",
 };

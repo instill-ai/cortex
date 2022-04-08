@@ -11,9 +11,11 @@ const Template: ComponentStory<typeof ArrowIconBase> = (args) => (
   <ArrowIconBase {...args} />
 );
 
-export const Default: ComponentStory<typeof ArrowIconBase> = Template.bind({});
+export const Playground: ComponentStory<typeof ArrowIconBase> = Template.bind(
+  {}
+);
 
-Default.args = {
+Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
   color: "text-instillGray50",
