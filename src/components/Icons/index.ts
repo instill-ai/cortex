@@ -12,6 +12,18 @@ import SnowflakeIcon from "./SnowflakeIcon";
 import type { SnowflakeIconProps } from "./SnowflakeIcon";
 import MongoDbIcon from "./MongoDbIcon";
 import type { MongoDbIconProps } from "./MongoDbIcon";
+import {
+  ArrowUpIcon,
+  ArrowDownIcon,
+  ArrowLeftIcon,
+  ArrowRightIcon,
+} from "./ArrowIcons";
+import type {
+  ArrowUpIconProps,
+  ArrowDownIconProps,
+  ArrowRightIconProps,
+  ArrowLeftIconProps,
+} from "./ArrowIcons";
 
 export {
   EyeIcon,
@@ -28,4 +40,12 @@ export {
   SnowflakeIconProps,
   MongoDbIcon,
   MongoDbIconProps,
+  ArrowUpIcon,
+  ArrowUpIconProps,
+  ArrowDownIcon,
+  ArrowDownIconProps,
+  ArrowRightIcon,
+  ArrowRightIconProps,
+  ArrowLeftIcon,
+  ArrowLeftIconProps,
 };
