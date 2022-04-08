@@ -60,7 +60,7 @@ export interface BasicInputFieldAttributes {
   borderRadius: string;
 
   /** Input on change handler */
-  onChangeInput: (inputValue: string) => void;
+  onChangeInput: (inputValue: any) => void;
 
   /** Whether the field is necessary or not */
   required: boolean;
