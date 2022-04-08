@@ -18,6 +18,12 @@ Normally, a design-system won't restrict which css framework you use, they expos
 
 ## Rules
 
+### Testing
+
+- Every base level component need to have related test suite
+
+### Import and Export
+
 - We won't export any of xxBase component, they will only be used inside design-system repo.
 - Every compnent should be export and use like below
 
