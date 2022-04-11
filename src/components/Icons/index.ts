@@ -38,6 +38,8 @@ import GearIcon from "./GearIcon";
 import type { GearIconProps } from "./GearIcon";
 import ResourceIcon from "./ResourceIcon";
 import type { ResourceIconProps } from "./ResourceIcon";
+import XIcon from "./XIcon";
+import type { XIconProps } from "./XIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -100,4 +102,6 @@ export {
   GearIconProps,
   ResourceIcon,
   ResourceIconProps,
+  XIcon,
+  XIconProps,
 };
