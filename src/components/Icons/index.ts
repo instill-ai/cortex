@@ -30,6 +30,8 @@ import FolderPlusIcon from "./FolderPlusIcon";
 import type { FolderPlusIconProps } from "./FolderPlusIcon";
 import FolderInUseIcon from "./FolderInUseIcon";
 import type { FolderInUseIconProps } from "./FolderInUseIcon";
+import DocIcon from "./DocIcon";
+import type { DocIconProps } from "./DocIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -84,4 +86,6 @@ export {
   FolderPlusIconProps,
   FolderInUseIcon,
   FolderInUseIconProps,
+  DocIcon,
+  DocIconProps,
 };
