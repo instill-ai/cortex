@@ -36,6 +36,8 @@ import SquarePlusIcon from "./SquarePlusIcon";
 import type { SquarePlusIconProps } from "./SquarePlusIcon";
 import GearIcon from "./GearIcon";
 import type { GearIconProps } from "./GearIcon";
+import ResourceIcon from "./ResourceIcon";
+import type { ResourceIconProps } from "./ResourceIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -96,4 +98,6 @@ export {
   SquarePlusIconProps,
   GearIcon,
   GearIconProps,
+  ResourceIcon,
+  ResourceIconProps,
 };
