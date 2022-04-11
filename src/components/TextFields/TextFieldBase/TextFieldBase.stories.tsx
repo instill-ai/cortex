@@ -38,13 +38,13 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       focusHighlight={false}
       autoComplete="off"
       type="text"
-      fontSize="text-base"
-      lineHeight="leading-[28px]"
-      fontWeight="font-normal"
+      inputFontSize="text-base"
+      inputLineHeight="leading-[28px]"
+      inputFontWeight="font-normal"
+      inputTextColor="text-instillGray95"
       bgColor="bg-white"
       disabledBgColor="disabled:bg-white"
       readOnlyBgColor="bg-white"
-      textColor="text-instillGray95"
       disabled={false}
       placeholder="hello"
       readOnly={false}
