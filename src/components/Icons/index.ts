@@ -40,6 +40,8 @@ import ResourceIcon from "./ResourceIcon";
 import type { ResourceIconProps } from "./ResourceIcon";
 import XIcon from "./XIcon";
 import type { XIconProps } from "./XIcon";
+import CheckIcon from "./CheckIcon";
+import type { CheckIconProps } from "./CheckIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -104,4 +106,6 @@ export {
   ResourceIconProps,
   XIcon,
   XIconProps,
+  CheckIcon,
+  CheckIconProps,
 };
