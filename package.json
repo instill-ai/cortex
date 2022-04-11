@@ -15,14 +15,19 @@
     "prettier:fix": "prettier --write",
     "prettier:check": "prettier --check",
     "test:coverage": "jest --collectCoverage",
-    "build": "rollup -c"
+    "ts-types": "tsc --emitDeclarationOnly --outDir build",
+    "build": "rimraf build && node ./esbuild.js && yarn ts-types"
   },
-  "main": "build/cjs/index.js",
-  "module": "build/esm/index.js",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "require": "./build/index.js"
+    }
+  },
+  "typings": "./build/index.d.ts",
   "files": [
     "build"
   ],
-  "types": "build/index.d.ts",
   "devDependencies": {
     "@babel/core": "^7.17.8",
     "@babel/preset-env": "^7.16.11",
@@ -55,6 +60,8 @@
     "autoprefixer": "^10.4.4",
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
+    "esbuild": "^0.14.34",
+    "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.12.0",
     "eslint-import-resolver-typescript": "^2.7.0",
     "eslint-plugin-import": "^2.25.4",
@@ -69,10 +76,6 @@
     "lint-staged": ">=10",
     "postcss": "^8.4.12",
     "prettier": "^2.6.1",
-    "rollup": "^2.70.1",
-    "rollup-plugin-dts": "^4.2.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-typescript2": "^0.31.2",
     "tailwindcss": "^3.0.23",
     "typescript": "^4.6.3",
     "webpack": "^5.70.0"
