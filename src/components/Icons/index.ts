@@ -26,6 +26,8 @@ import DataDestinationIcon from "./DataDestinationIcon";
 import type { DataDestinationIconProps } from "./DataDestinationIcon";
 import DataSourceIcon from "./DataSourceIcon";
 import type { DataSourceIconProps } from "./DataSourceIcon";
+import FolderPlusIcon from "./FolderPlusIcon";
+import type { FolderPlusIconProps } from "./FolderPlusIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -76,4 +78,6 @@ export {
   DataSourceIconProps,
   DataDestinationIcon,
   DataDestinationIconProps,
+  FolderPlusIcon,
+  FolderPlusIconProps,
 };
