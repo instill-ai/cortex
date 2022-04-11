@@ -49,7 +49,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
         type="normal"
         answered={answered}
         required={required}
-        htmlFor={id}
+        htmlFor={`${id}-label`}
         fontStyle="font-normal text-sm leading-[18.2px]"
         activateStyle="top-0 translate-y-3"
         deActivateStyle="top-0 translate-y-[26px]"
@@ -59,6 +59,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
       <label htmlFor={id} className="flex relative w-[90px] h-10">
         <input
           id={id}
+          aria-label={`${id}-label`}
           className={cn(
             "peer appearance-none cursor-pointer w-[90px] h-10 border border-intstillGrey15",
             disabled
