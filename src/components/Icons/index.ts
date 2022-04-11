@@ -34,6 +34,8 @@ import DocIcon from "./DocIcon";
 import type { DocIconProps } from "./DocIcon";
 import SquarePlusIcon from "./SquarePlusIcon";
 import type { SquarePlusIconProps } from "./SquarePlusIcon";
+import GearIcon from "./GearIcon";
+import type { GearIconProps } from "./GearIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -92,4 +94,6 @@ export {
   DocIconProps,
   SquarePlusIcon,
   SquarePlusIconProps,
+  GearIcon,
+  GearIconProps,
 };
