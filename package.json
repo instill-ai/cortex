@@ -1,8 +1,15 @@
 {
-  "name": "design-system",
+  "name": "@instill-ai/design-system",
   "version": "0.0.1",
   "description": "Instill AI's design system",
   "repository": "https://github.com/instill-ai/design-system.git",
+  "bugs": "https://github.com/instill-ai/design-system/issues",
+  "keywords": [
+    "instill-ai",
+    "design-system",
+    "ui",
+    "react"
+  ],
   "license": "Apache-2.0",
   "private": false,
   "scripts": {
