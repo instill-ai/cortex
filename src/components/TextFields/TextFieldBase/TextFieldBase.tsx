@@ -30,10 +30,10 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   required,
   valid,
   labelName,
-  fontSize,
-  lineHeight,
-  fontWeight,
-  textColor,
+  inputFontSize,
+  inputFontWeight,
+  inputLineHeight,
+  inputTextColor,
   bgColor,
   disabledBgColor,
   readOnlyBgColor,
@@ -82,9 +82,9 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             "pt-6 ring-0 pl-5 placeholder:text-instillGray30",
             heightStyle,
             widthStyle,
-            fontSize,
-            lineHeight,
-            fontWeight,
+            inputFontSize,
+            inputLineHeight,
+            inputFontWeight,
             readOnly ? readOnlyBgColor : bgColor,
             disabledBgColor,
             focusHighlight
@@ -94,7 +94,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
               ? "text-instillGray50"
               : readOnly
               ? "text-instillGray50"
-              : textColor,
+              : inputTextColor,
             borderRadius
           )}
           id={id}
