@@ -34,22 +34,22 @@ export interface BasicInputFieldAttributes {
   /** TailwindCSS format
    * - Input's font size
    */
-  fontSize: string;
+  inputFontSize: string;
 
   /** TailwindCSS format
    * - Input's font line height
    */
-  lineHeight: string;
+  inputLineHeight: string;
 
   /** TailwindCSS format
    * - Input's font weight
    */
-  fontWeight: string;
+  inputFontWeight: string;
 
   /** TailwindCSS format
    * - Input's text color
    */
-  textColor: string;
+  inputTextColor: string;
 
   /** TailwindCSS format
    * - Input's background color
