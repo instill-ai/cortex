@@ -8,7 +8,19 @@ export default {
 } as ComponentMeta<typeof UploadFileFieldBase>;
 
 const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
-  <UploadFileFieldBase {...args} />
+  <UploadFileFieldBase
+    uploadButtonText="Upload"
+    uploadButtonBgColor="bg-instillGray50"
+    uploadButtonTextColor="text-instillGray05"
+    labelName="playground"
+    borderRadiusBottomLeft="rounded-bl-[1px]"
+    borderRadiusBottomRight="rounded-br-[1px]"
+    borderRadiusTopLeft="rounded-tl-[1px]"
+    borderRadiusTopRight="rounded-tr-[1px]"
+    inputHeight="h-[70px]"
+    inputWidth="w-full"
+    {...args}
+  />
 );
 export const Playground: ComponentStory<typeof UploadFileFieldBase> =
   Template.bind({});

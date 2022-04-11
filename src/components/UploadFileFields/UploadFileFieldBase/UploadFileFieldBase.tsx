@@ -82,11 +82,12 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
       >
         <div
           className={cn(
-            "mr-auto pl-5 pt-7",
+            "mr-auto pl-5",
             inputFontSize,
             inputLineHeight,
             inputFontWeight,
-            inputTextColor
+            inputTextColor,
+            inputLabelType === "inset" ? "pt-7" : "my-auto"
           )}
         >
           {file ? file.split("\\").slice(-1)[0] : ""}
