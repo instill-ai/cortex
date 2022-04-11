@@ -37,9 +37,10 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       inputWidth={"w-full"}
       focusHighlight={true}
       autoComplete="off"
-      fontSize="text-base"
-      fontWeight="font-normal"
-      lineHeight="leading-[28px]"
+      inputFontSize="text-base"
+      inputFontWeight="font-normal"
+      inputLineHeight="leading-[28px]"
+      inputTextColor="text-instillGray95"
       disabled={false}
       placeholder="hello"
       readOnly={false}
@@ -47,7 +48,6 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       inputLabelType="inset"
       disabledBgColor="bg-white"
       readOnlyBgColor="bg-white"
-      textColor="text-instillGray95"
       bgColor="bg-white"
       borderRadius="rounded"
     />
