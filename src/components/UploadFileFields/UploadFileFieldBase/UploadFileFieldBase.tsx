@@ -87,7 +87,7 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
             inputLineHeight,
             inputFontWeight,
             inputTextColor,
-            inputLabelType === "inset" ? "pt-7" : "my-auto"
+            inputLabelType === "inset" ? "pt-[30px]" : "my-auto"
           )}
         >
           {file ? file.split("\\").slice(-1)[0] : ""}

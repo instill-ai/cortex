@@ -21,7 +21,7 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
  * ### How we implement inset lable transfor
  * - Use top-1/2 + (-translate-y-1/2) to make label fix at the center of input box
  * - Use top-1/2 + (-translate-y-full) to move label up a little bit
- * - If you want to change the InputLabel size, you have to change the input's paddingTop
+ * - If you want to change the InputLabel size, you have to change the input's paddingTop and Input paddingTop
  */
 
 const TextFieldBase: FC<TextFieldBaseProps> = ({
