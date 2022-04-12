@@ -54,6 +54,8 @@ import BigQueryIcon from "./BigQueryIcon";
 import type { BigQueryIconProps } from "./BigQueryIcon";
 import MySqlIcon from "./MySqlIcon";
 import type { MySqlIconProps } from "./MySqlIcon";
+import SalesforceIcon from "./SalesforceIcon";
+import type { SalesforceIconProps } from "./SalesforceIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -132,4 +134,6 @@ export {
   BigQueryIconProps,
   MySqlIcon,
   MySqlIconProps,
+  SalesforceIcon,
+  SalesforceIconProps,
 };
