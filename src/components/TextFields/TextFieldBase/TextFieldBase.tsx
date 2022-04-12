@@ -109,7 +109,11 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             readOnlyInputBorderStyle,
             readOnlyInputBorderWidth,
             readOnlyInputTextColor,
-            focusHighlight
+            disabled
+              ? "instill-input-no-highlight border border-instillGray15"
+              : readOnly
+              ? "instill-input-no-highlight border border-instillGray15"
+              : focusHighlight
               ? "instill-input-highlight"
               : "instill-input-no-highlight border border-instillGray15",
             disabled
