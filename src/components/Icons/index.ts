@@ -64,6 +64,8 @@ import FacebookIcon from "./FacebookIcon";
 import type { FacebookIconProps } from "./FacebookIcon";
 import GoogleSheetIcon from "./GoogleSheetIcon";
 import type { GoogleSheetIconProps } from "./GoogleSheetIcon";
+import AwsRdsIcon from "./AwsRdsIcon";
+import type { AwsRdsIconProps } from "./AwsRdsIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -152,4 +154,6 @@ export {
   FacebookIconProps,
   GoogleSheetIcon,
   GoogleSheetIconProps,
+  AwsRdsIcon,
+  AwsRdsIconProps,
 };
