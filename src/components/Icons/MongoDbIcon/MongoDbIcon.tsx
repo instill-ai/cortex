@@ -1,7 +1,10 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type MongoDbIconProps = Omit<IconBaseProps, "viewBox" | "color">;
+export type MongoDbIconProps = Omit<
+  IconBaseProps,
+  "viewBox" | "color" | "fill"
+>;
 
 const MongoDbIcon: FC<MongoDbIconProps> = (props) => {
   return (

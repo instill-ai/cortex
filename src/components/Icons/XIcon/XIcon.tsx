@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type XIconProps = Omit<IconBaseProps, "viewBox">;
+export type XIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const XIcon: FC<XIconProps> = (props) => {
   return (

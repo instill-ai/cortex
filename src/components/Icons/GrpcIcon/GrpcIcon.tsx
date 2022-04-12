@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type GrpcIconProps = Omit<IconBaseProps, "viewBox">;
+export type GrpcIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const GrpcIcon: FC<GrpcIconProps> = (props) => {
   return (

@@ -1,7 +1,10 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type VisualDataOperatorIconProps = Omit<IconBaseProps, "viewBox">;
+export type VisualDataOperatorIconProps = Omit<
+  IconBaseProps,
+  "viewBox" | "fill"
+>;
 
 const VisualDataOperatorIcon: FC<VisualDataOperatorIconProps> = (props) => {
   return (

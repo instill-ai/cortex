@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type PipelineIconProps = Omit<IconBaseProps, "viewBox">;
+export type PipelineIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const PipelineIcon: FC<PipelineIconProps> = (props) => {
   return (

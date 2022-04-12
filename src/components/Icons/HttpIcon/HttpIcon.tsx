@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type HttpIconProps = Omit<IconBaseProps, "viewBox">;
+export type HttpIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const HttpIcon: FC<HttpIconProps> = (props) => {
   return (

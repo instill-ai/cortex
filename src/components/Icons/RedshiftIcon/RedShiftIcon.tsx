@@ -1,7 +1,10 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type RedShiftIconProps = Omit<IconBaseProps, "viewBox" | "color">;
+export type RedShiftIconProps = Omit<
+  IconBaseProps,
+  "viewBox" | "color" | "fill"
+>;
 
 const RedShiftIcon: FC<RedShiftIconProps> = (props) => {
   return (

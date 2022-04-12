@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type GearIconProps = Omit<IconBaseProps, "viewBox">;
+export type GearIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const GearIcon: FC<GearIconProps> = (props) => {
   return (

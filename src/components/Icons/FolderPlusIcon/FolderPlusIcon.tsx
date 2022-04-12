@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type FolderPlusIconProps = Omit<IconBaseProps, "viewBox">;
+export type FolderPlusIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const FolderPlusIcon: FC<FolderPlusIconProps> = (props) => {
   return (

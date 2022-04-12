@@ -1,7 +1,7 @@
 import { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type EyeOnIconProps = Omit<IconBaseProps, "viewBox">;
+export type EyeOnIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const EyeOnIcon: FC<EyeOnIconProps> = (props) => {
   return (
