@@ -6,7 +6,7 @@ export type HttpIconProps = Omit<IconBaseProps, "viewBox">;
 const HttpIcon: FC<HttpIconProps> = (props) => {
   return (
     <IconBase
-      viewBox="0 0 20 20"
+      viewBox="0 0 30 30"
       width={props.width}
       height={props.height}
       color={props.color}
@@ -15,7 +15,7 @@ const HttpIcon: FC<HttpIconProps> = (props) => {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M10.5 3H12.5L8 17H6L10.5 3ZM5 6H3V8H5V6ZM5 12H3V14H5V12ZM16.5 3H14.5L10 17H12L16.5 3Z"
+        d="M15.6667 6.44444H18.1111L12.6111 23.5556H10.1667L15.6667 6.44444ZM8.94444 10.1111H6.5V12.5556H8.94444V10.1111ZM8.94444 17.4444H6.5V19.8889H8.94444V17.4444ZM23 6.44444H20.5556L15.0556 23.5556H17.5L23 6.44444Z"
       />
     </IconBase>
   );
