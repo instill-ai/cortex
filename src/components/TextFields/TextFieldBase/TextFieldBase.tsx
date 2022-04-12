@@ -1,8 +1,8 @@
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import cn from "clsx";
 import InputLabel from "../../InputLabel";
-import EyeSlashIcon from "../../Icons/EyeSlashIcon";
-import EyeIcon from "../../Icons/EyeIcon";
+import EyeOffIcon from "../../Icons/EyeOffIcon";
+import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputFieldAttributes } from "../../../types/general";
 
 export interface TextFieldBaseProps extends BasicInputFieldAttributes {
@@ -123,14 +123,14 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
               onClick={() => setShowSecret(!showSecret)}
             >
               {showSecret ? (
-                <EyeSlashIcon
+                <EyeOffIcon
                   width="w-4"
                   height="h-4"
                   color="text-instillGray50"
                   position="my-auto"
                 />
               ) : (
-                <EyeIcon
+                <EyeOnIcon
                   width="w-4"
                   height="h-4"
                   color="text-instillGray50"
