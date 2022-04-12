@@ -6,7 +6,7 @@ export type GrpcIconProps = Omit<IconBaseProps, "viewBox">;
 const GrpcIcon: FC<GrpcIconProps> = (props) => {
   return (
     <IconBase
-      viewBox="0 0 20 20"
+      viewBox="0 0 30 30"
       width={props.width}
       height={props.height}
       color={props.color}
@@ -15,7 +15,7 @@ const GrpcIcon: FC<GrpcIconProps> = (props) => {
       <path
         fillRule="evenodd"
         clipRule="evenodd"
-        d="M2 9.5L7.5 4L8.91421 5.41421L5.12132 9.20711H15.0858L11.2929 5.41421L12.7071 4L18.2071 9.5V10.9142L12.7071 16.4142L11.2929 15L15.0858 11.2071H5.12132L8.91421 15L7.5 16.4142L2 10.9142V9.5Z"
+        d="M5.36354 14.5L12.0804 7.78313L13.4946 9.19734L8.70611 13.9859H21.501L16.7125 9.19734L18.1267 7.78313L24.8436 14.5V15.9142L18.1267 22.6311L16.7125 21.2169L21.501 16.4284H8.70611L13.4946 21.2169L12.0804 22.6311L5.36354 15.9142V14.5Z"
       />
     </IconBase>
   );
