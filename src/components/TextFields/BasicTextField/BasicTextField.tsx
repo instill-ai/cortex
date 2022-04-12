@@ -11,11 +11,21 @@ export type BasicTextFieldProps = Omit<
   | "inputFontWeight"
   | "inputTextColor"
   | "bgColor"
-  | "disabledBgColor"
-  | "readOnlyBgColor"
   | "enableProtectedToggle"
   | "borderRadius"
   | "inputLabelType"
+  | "disabledCursor"
+  | "disabledInputBgColor"
+  | "disabledInputBorderColor"
+  | "disabledInputBorderStyle"
+  | "disabledInputBorderWidth"
+  | "disabledInputTextColor"
+  | "readOnlyCursor"
+  | "readOnlyInputBgColor"
+  | "readOnlyInputBorderColor"
+  | "readOnlyInputBorderStyle"
+  | "readOnlyInputBorderWidth"
+  | "readOnlyInputTextColor"
 >;
 
 const BasicTextField: FC<BasicTextFieldProps> = (props) => {
@@ -40,10 +50,20 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       inputTextColor="text-instillGray95"
       bgColor="bg-white"
       enableProtectedToggle={false}
-      readOnlyBgColor="bg-white"
-      disabledBgColor="disabled:bg-white"
       borderRadius="rounded-[1px]"
       inputLabelType="inset"
+      disabledCursor="disabled:cursor-not-allowed"
+      disabledInputBgColor="disabled:bg-white"
+      disabledInputBorderColor="disabled:border-instillGray20"
+      disabledInputBorderStyle="disabled:border-dashed"
+      disabledInputBorderWidth="disabled:border"
+      disabledInputTextColor="disabled:text-instillGray50"
+      readOnlyCursor="read-only:cursor-auto"
+      readOnlyInputBgColor="read-only:bg-white"
+      readOnlyInputBorderColor="read-only:border-instillGray20"
+      readOnlyInputBorderStyle="read-only:border-solid"
+      readOnlyInputBorderWidth="read-only:border"
+      readOnlyInputTextColor="read-only:text-instillGray95"
     />
   );
 };

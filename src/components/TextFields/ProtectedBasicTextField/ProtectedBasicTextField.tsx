@@ -13,8 +13,6 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "inputFontWeight"
   | "bgColor"
   | "inputTextColor"
-  | "disabledBgColor"
-  | "readOnlyBgColor"
   | "inputLabelType"
   | "borderRadius"
   | "disabledCursor"
