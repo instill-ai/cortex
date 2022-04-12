@@ -28,7 +28,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
   required,
-  valid,
+  error,
   labelName,
   inputFontSize,
   inputFontWeight,

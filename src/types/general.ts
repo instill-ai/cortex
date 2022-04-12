@@ -13,8 +13,8 @@ export interface BasicInputFieldAttributes {
    */
   disabledBgColor: string;
 
-  /** Whether the input is valid or not */
-  valid: boolean;
+  /** Whether the input has error or not */
+  error: boolean;
 
   /**
    * Text that appears in the form control when it has no value set

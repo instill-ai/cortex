@@ -12,7 +12,6 @@ export interface AutoCompleteWithIconOption {
 
 export type AutoCompleteWithIconProps = Omit<
   BasicInputFieldAttributes,
-  | "valid"
   | "placeholder"
   | "inputFontSize"
   | "inputLineHeight"

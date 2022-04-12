@@ -5,7 +5,6 @@ import InputLabel from "../../InputLabel";
 
 export type UploadFileFieldBaseProps = Omit<
   BasicInputFieldAttributes,
-  | "valid"
   | "autoComplete"
   | "disabledBgColor"
   | "readOnlyBgColor"
@@ -65,6 +64,7 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
   inputLineHeight,
   inputTextColor,
   onChangeInput,
+  error,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [file, setFile] = useState<string>("");

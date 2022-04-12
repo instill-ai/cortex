@@ -28,7 +28,7 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
 
   return (
     <TextFieldBase
-      valid={text ? true : false}
+      error={false}
       onChangeInput={onChangeInput}
       id="text-field-playground"
       labelName="playground"

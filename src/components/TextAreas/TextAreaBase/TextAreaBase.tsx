@@ -12,7 +12,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   onChangeInput,
   id,
   required,
-  valid,
+  error,
   labelName,
   inputFontSize,
   inputTextColor,

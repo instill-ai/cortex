@@ -26,7 +26,7 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       disabled={props.disabled}
       required={props.required}
       onChangeInput={props.onChangeInput}
-      valid={props.valid}
+      error={props.error}
       labelName={props.labelName}
       autoComplete={props.autoComplete}
       placeholder={props.placeholder}

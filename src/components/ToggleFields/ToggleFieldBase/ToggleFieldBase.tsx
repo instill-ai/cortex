@@ -5,7 +5,7 @@ import InputLabel from "../../InputLabel";
 
 export type ToggleFieldBaseProps = Omit<
   BasicInputFieldAttributes,
-  | "valid"
+  | "error"
   | "placeholder"
   | "inputFontSize"
   | "inputLineHeight"

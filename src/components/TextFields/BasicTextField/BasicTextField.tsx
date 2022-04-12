@@ -26,7 +26,7 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       type={props.type}
       required={props.required}
       onChangeInput={props.onChangeInput}
-      valid={props.valid}
+      error={props.error}
       labelName={props.labelName}
       autoComplete={props.autoComplete}
       placeholder={props.placeholder}

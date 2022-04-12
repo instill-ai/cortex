@@ -28,7 +28,7 @@ export const Default: ComponentStory<typeof BasicTextField> = () => {
 
   return (
     <BasicTextField
-      valid={text ? true : false}
+      error={false}
       onChangeInput={onChangeInput}
       id="basic-text-field-playground"
       labelName="basic-text-field-playground"
