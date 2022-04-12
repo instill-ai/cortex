@@ -60,6 +60,8 @@ import ShopifyIcon from "./ShopifyIcon";
 import type { ShopifyIconProps } from "./ShopifyIcon";
 import SlackIcon from "./SlackIcon";
 import type { SlackIconProps } from "./SlackIcon";
+import FacebookIcon from "./FacebookIcon";
+import type { FacebookIconProps } from "./FacebookIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -144,4 +146,6 @@ export {
   ShopifyIconProps,
   SlackIcon,
   SlackIconProps,
+  FacebookIcon,
+  FacebookIconProps,
 };
