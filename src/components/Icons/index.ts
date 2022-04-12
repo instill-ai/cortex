@@ -42,6 +42,8 @@ import XIcon from "./XIcon";
 import type { XIconProps } from "./XIcon";
 import CheckIcon from "./CheckIcon";
 import type { CheckIconProps } from "./CheckIcon";
+import DoubleArrowIcon from "./DoubleArrowIcon";
+import type { DoubleArrowIconProps } from "./DoubleArrowIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -108,4 +110,6 @@ export {
   XIconProps,
   CheckIcon,
   CheckIconProps,
+  DoubleArrowIcon,
+  DoubleArrowIconProps,
 };
