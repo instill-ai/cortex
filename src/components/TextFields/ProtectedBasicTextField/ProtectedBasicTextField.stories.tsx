@@ -27,7 +27,7 @@ export const Default: ComponentStory<typeof ProtectedBasicTextField> = () => {
 
   return (
     <ProtectedBasicTextField
-      error={false}
+      error={null}
       onChangeInput={onChangeInput}
       id="text-field-playground"
       labelName="playground"

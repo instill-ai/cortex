@@ -17,6 +17,18 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "readOnlyBgColor"
   | "inputLabelType"
   | "borderRadius"
+  | "disabledCursor"
+  | "disabledInputBgColor"
+  | "disabledInputBorderColor"
+  | "disabledInputBorderStyle"
+  | "disabledInputBorderWidth"
+  | "disabledInputTextColor"
+  | "readOnlyCursor"
+  | "readOnlyInputBgColor"
+  | "readOnlyInputBorderColor"
+  | "readOnlyInputBorderStyle"
+  | "readOnlyInputBorderWidth"
+  | "readOnlyInputTextColor"
 >;
 
 const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
@@ -41,10 +53,20 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       inputTextColor="text-instillGray95"
       inputHeight="h-[70px]"
       inputWidth="w-full"
-      disabledBgColor="disabled:bg-white"
-      readOnlyBgColor="bg-white"
       inputLabelType="inset"
       borderRadius="rounded-[1px]"
+      disabledCursor="disabled:cursor-not-allowed"
+      disabledInputBgColor="disabled:bg-white"
+      disabledInputBorderColor="disabled:border-instillGray20"
+      disabledInputBorderStyle="disabled:border-dashed"
+      disabledInputBorderWidth="disabled:border"
+      disabledInputTextColor="disabled:text-instillGray50"
+      readOnlyCursor="read-only:cursor-auto"
+      readOnlyInputBgColor="read-only:bg-white"
+      readOnlyInputBorderColor="read-only:border-instillGray20"
+      readOnlyInputBorderStyle="read-only:border-solid"
+      readOnlyInputBorderWidth="read-only:border"
+      readOnlyInputTextColor="read-only:text-instillGray95"
     />
   );
 };
