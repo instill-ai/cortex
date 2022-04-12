@@ -15,22 +15,34 @@ export type UploadFileFieldBaseProps = Omit<
   /** Text display on upload button */
   uploadButtonText: string;
 
-  /** */
+  /** TailwindCSS format
+   * - e.g. bg-instillGray50
+   */
   uploadButtonBgColor: string;
 
-  /** */
+  /** TailwindCSS format
+   * - e.g. text-instillGray05
+   */
   uploadButtonTextColor: string;
 
-  /** */
+  /** TailwindCSS format
+   * - e.g. rounded-tr-[1px]
+   */
   borderRadiusTopRight: string;
 
-  /** */
+  /** TailwindCSS format
+   * - e.g. rounded-br-[1px]
+   */
   borderRadiusBottomRight: string;
 
-  /** */
+  /** TailwindCSS format
+   * - e.g. rounded-tl-[1px]
+   */
   borderRadiusTopLeft: string;
 
-  /** */
+  /** TailwindCSS format
+   * - e.g. rounded-bl-[1px]
+   */
   borderRadiusBottomLeft: string;
 };
 
@@ -52,6 +64,7 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
   inputFontWeight,
   inputLineHeight,
   inputTextColor,
+  onChangeInput,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [file, setFile] = useState<string>("");
@@ -103,12 +116,19 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
           type="file"
           onChange={(event) => {
             const inputValue = event.target.value;
+            const inputFile = event.target.files[0] || null;
+
             if (!inputValue) {
               setAnswered(false);
               return;
             }
+
             setAnswered(true);
             setFile(inputValue);
+
+            if (inputFile) {
+              onChangeInput(inputFile);
+            }
           }}
         />
         <div
