@@ -58,6 +58,8 @@ import SalesforceIcon from "./SalesforceIcon";
 import type { SalesforceIconProps } from "./SalesforceIcon";
 import ShopifyIcon from "./ShopifyIcon";
 import type { ShopifyIconProps } from "./ShopifyIcon";
+import SlackIcon from "./SlackIcon";
+import type { SlackIconProps } from "./SlackIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -140,4 +142,6 @@ export {
   SalesforceIconProps,
   ShopifyIcon,
   ShopifyIconProps,
+  SlackIcon,
+  SlackIconProps,
 };
