@@ -1,7 +1,7 @@
 import EyeOnIcon from "./EyeOnIcon";
 import type { EyeOnIconProps } from "./EyeOnIcon";
-import EyeSlashIcon from "./EyeSlashIcon";
-import type { EyeSlashIconProps } from "./EyeSlashIcon";
+import EyeOffIcon from "./EyeOffIcon";
+import type { EyeOffIconProps } from "./EyeOffIcon";
 import IdIcon from "./IdIcon/IdIcon";
 import type { IdIconProps } from "./IdIcon";
 import HttpIcon from "./HttpIcon";
@@ -62,8 +62,8 @@ import type {
 export {
   EyeOnIcon,
   EyeOnIconProps,
-  EyeSlashIcon,
-  EyeSlashIconProps,
+  EyeOffIcon,
+  EyeOffIconProps,
   IdIcon,
   IdIconProps,
   HttpIcon,
