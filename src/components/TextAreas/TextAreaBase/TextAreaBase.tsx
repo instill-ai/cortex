@@ -24,10 +24,20 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   autoComplete,
   focusHighlight,
   disabled,
-  disabledBgColor,
-  placeholder,
+  disabledCursor,
+  disabledInputBgColor,
+  disabledInputBorderColor,
+  disabledInputBorderStyle,
+  disabledInputBorderWidth,
+  disabledInputTextColor,
   readOnly,
-  readOnlyBgColor,
+  readOnlyCursor,
+  readOnlyInputBgColor,
+  readOnlyInputBorderColor,
+  readOnlyInputBorderStyle,
+  readOnlyInputBorderWidth,
+  readOnlyInputTextColor,
+  placeholder,
   resize,
   inputLabelType,
   borderRadius,
@@ -64,7 +74,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
       )}
     >
       <InputLabel
-        answered={answered}
+        answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
         htmlFor={id}
@@ -77,20 +87,40 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
       </InputLabel>
       <textarea
         className={cn(
-          "pt-[34px] px-5 pb-5 ring-0 pl-5 placeholder:text-instillGray30 min-h-[140px]",
+          "px-5 pb-5 pl-5 placeholder:text-instillGray30 min-h-[140px]",
+          inputLabelType === "inset" ? "pt-[34px]" : "pt-5",
           heightStyle,
           widthStyle,
           inputFontSize,
           inputFontWeight,
           inputLineHeight,
-          inputTextColor,
           resizeStyle,
-          readOnly ? readOnlyBgColor : bgColor,
-          disabledBgColor,
+          bgColor,
+          disabledCursor,
+          disabledInputBgColor,
+          disabledInputBorderColor,
+          disabledInputBorderStyle,
+          disabledInputBorderWidth,
+          disabledInputTextColor,
+          readOnlyCursor,
+          readOnlyInputBgColor,
+          readOnlyInputBorderColor,
+          readOnlyInputBorderStyle,
+          readOnlyInputBorderWidth,
+          readOnlyInputTextColor,
           borderRadius,
-          focusHighlight
+          disabled
+            ? "instill-input-no-highlight border border-instillGray15"
+            : readOnly
+            ? "instill-input-no-highlight border border-instillGray15"
+            : focusHighlight
             ? "instill-input-highlight"
-            : "instill-input-no-highlight border border-instillGray15"
+            : "instill-input-no-highlight border border-instillGray15",
+          disabled
+            ? "text-instillGray50"
+            : readOnly
+            ? "text-instillGray50"
+            : inputTextColor
         )}
         id={id}
         disabled={disabled}

@@ -16,7 +16,37 @@ export const Playground: ComponentStory<typeof TextAreaBase> = Template.bind(
 );
 
 Playground.args = {
-  labelName: "Playground",
+  error: null,
+  id: "text-field-playground",
+  labelName: "playground",
+  required: true,
+  inputHeight: "h-[140px]",
+  inputWidth: "w-full",
+  focusHighlight: true,
+  autoComplete: "off",
+  inputFontSize: "text-base",
+  inputFontWeight: "font-normal",
+  inputLineHeight: "leading-[28px]",
+  inputTextColor: "text-instillGray95",
+  disabled: false,
+  placeholder: "hello",
+  readOnly: false,
+  resize: "both",
+  inputLabelType: "inset",
+  bgColor: "bg-white",
+  borderRadius: "rounded",
+  disabledCursor: "disabled:cursor-not-allowed",
+  disabledInputBgColor: "disabled:bg-white",
+  disabledInputBorderColor: "disabled:border-instillGray20",
+  disabledInputBorderStyle: "disabled:border-dashed",
+  disabledInputBorderWidth: "disabled:border",
+  disabledInputTextColor: "disabled:text-instillGray50",
+  readOnlyCursor: "read-only:cursor-auto",
+  readOnlyInputBgColor: "read-only:bg-white",
+  readOnlyInputBorderColor: "read-only:border-instillGray20",
+  readOnlyInputBorderStyle: "read-only:border-solid",
+  readOnlyInputBorderWidth: "read-only:border",
+  readOnlyInputTextColor: "read-only:text-instillGray95",
 };
 
 export const Default: ComponentStory<typeof TextAreaBase> = () => {
@@ -28,7 +58,7 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
 
   return (
     <TextAreaBase
-      error={false}
+      error={null}
       onChangeInput={onChangeInput}
       id="text-field-playground"
       labelName="playground"
@@ -46,10 +76,20 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       readOnly={false}
       resize="both"
       inputLabelType="inset"
-      disabledBgColor="bg-white"
-      readOnlyBgColor="bg-white"
       bgColor="bg-white"
       borderRadius="rounded"
+      disabledCursor="disabled:cursor-not-allowed"
+      disabledInputBgColor="disabled:bg-white"
+      disabledInputBorderColor="disabled:border-instillGray20"
+      disabledInputBorderStyle="disabled:border-dashed"
+      disabledInputBorderWidth="disabled:border"
+      disabledInputTextColor="disabled:text-instillGray50"
+      readOnlyCursor="read-only:cursor-auto"
+      readOnlyInputBgColor="read-only:bg-white"
+      readOnlyInputBorderColor="read-only:border-instillGray20"
+      readOnlyInputBorderStyle="read-only:border-solid"
+      readOnlyInputBorderWidth="read-only:border"
+      readOnlyInputTextColor="read-only:text-instillGray95"
     />
   );
 };
