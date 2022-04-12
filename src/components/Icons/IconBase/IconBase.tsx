@@ -26,6 +26,11 @@ export interface IconBaseProps {
 
   /** TailwindCSS format - The rotation of icon */
   rotate?: string;
+
+  /** Svg fill attribute
+   * - If present, IconBase won't have fill-current class
+   */
+  fill?: string;
 }
 
 const IconBase: FC<IconBaseProps> = ({
@@ -36,19 +41,22 @@ const IconBase: FC<IconBaseProps> = ({
   color,
   position,
   rotate,
+  fill,
 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
       className={cn(
-        "flex fill-current",
+        "flex",
+        fill ? "" : "fill-current",
         width,
         height,
         color,
         position,
         rotate
       )}
+      fill={fill}
     >
       {children}
     </svg>
