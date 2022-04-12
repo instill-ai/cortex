@@ -52,6 +52,8 @@ import PostgreSqlIcon from "./PostgreSqlIcon";
 import type { PostgreSqlIconProps } from "./PostgreSqlIcon";
 import BigQueryIcon from "./BigQueryIcon";
 import type { BigQueryIconProps } from "./BigQueryIcon";
+import MySqlIcon from "./MySqlIcon";
+import type { MySqlIconProps } from "./MySqlIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -128,4 +130,6 @@ export {
   PostgreSqlIconProps,
   BigQueryIcon,
   BigQueryIconProps,
+  MySqlIcon,
+  MySqlIconProps,
 };
