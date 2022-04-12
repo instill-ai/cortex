@@ -46,6 +46,8 @@ import DoubleArrowIcon from "./DoubleArrowIcon";
 import type { DoubleArrowIconProps } from "./DoubleArrowIcon";
 import PipelineIcon from "./PipelineIcon";
 import type { PipelineIconProps } from "./PipelineIcon";
+import RedshiftIcon from "./RedshiftIcon";
+import type { RedShiftIconProps } from "./RedshiftIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -116,4 +118,6 @@ export {
   DoubleArrowIconProps,
   PipelineIcon,
   PipelineIconProps,
+  RedshiftIcon,
+  RedShiftIconProps,
 };
