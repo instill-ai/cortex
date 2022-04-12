@@ -48,6 +48,8 @@ import PipelineIcon from "./PipelineIcon";
 import type { PipelineIconProps } from "./PipelineIcon";
 import RedshiftIcon from "./RedshiftIcon";
 import type { RedShiftIconProps } from "./RedshiftIcon";
+import PostgreSqlIcon from "./PostgreSqlIcon";
+import type { PostgreSqlIconProps } from "./PostgreSqlIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -120,4 +122,6 @@ export {
   PipelineIconProps,
   RedshiftIcon,
   RedShiftIconProps,
+  PostgreSqlIcon,
+  PostgreSqlIconProps,
 };
