@@ -9,7 +9,7 @@ export type MongoDbIconProps = Omit<
 const MongoDbIcon: FC<MongoDbIconProps> = (props) => {
   return (
     <IconBase
-      viewBox="0 0 100 100"
+      viewBox="0 0 30 30"
       width={props.width}
       height={props.height}
       position={props.position}
