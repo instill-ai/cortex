@@ -56,6 +56,8 @@ import MySqlIcon from "./MySqlIcon";
 import type { MySqlIconProps } from "./MySqlIcon";
 import SalesforceIcon from "./SalesforceIcon";
 import type { SalesforceIconProps } from "./SalesforceIcon";
+import ShopifyIcon from "./ShopifyIcon";
+import type { ShopifyIconProps } from "./ShopifyIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -136,4 +138,6 @@ export {
   MySqlIconProps,
   SalesforceIcon,
   SalesforceIconProps,
+  ShopifyIcon,
+  ShopifyIconProps,
 };
