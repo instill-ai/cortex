@@ -62,6 +62,8 @@ import SlackIcon from "./SlackIcon";
 import type { SlackIconProps } from "./SlackIcon";
 import FacebookIcon from "./FacebookIcon";
 import type { FacebookIconProps } from "./FacebookIcon";
+import GoogleSheetIcon from "./GoogleSheetIcon";
+import type { GoogleSheetIconProps } from "./GoogleSheetIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -148,4 +150,6 @@ export {
   SlackIconProps,
   FacebookIcon,
   FacebookIconProps,
+  GoogleSheetIcon,
+  GoogleSheetIconProps,
 };
