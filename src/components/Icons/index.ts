@@ -50,6 +50,8 @@ import RedshiftIcon from "./RedshiftIcon";
 import type { RedShiftIconProps } from "./RedshiftIcon";
 import PostgreSqlIcon from "./PostgreSqlIcon";
 import type { PostgreSqlIconProps } from "./PostgreSqlIcon";
+import BigQueryIcon from "./BigQueryIcon";
+import type { BigQueryIconProps } from "./BigQueryIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -124,4 +126,6 @@ export {
   RedShiftIconProps,
   PostgreSqlIcon,
   PostgreSqlIconProps,
+  BigQueryIcon,
+  BigQueryIconProps,
 };
