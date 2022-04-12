@@ -16,7 +16,38 @@ export const Playground: ComponentStory<typeof TextFieldBase> = Template.bind(
 );
 
 Playground.args = {
-  labelName: "Playground",
+  error: null,
+  id: "text-field-playground",
+  labelName: "playground",
+  required: true,
+  inputHeight: "h-[70px]",
+  inputWidth: "w-full",
+  focusHighlight: false,
+  autoComplete: "off",
+  type: "text",
+  inputFontSize: "text-base",
+  inputLineHeight: "leading-[28px]",
+  inputFontWeight: "font-normal",
+  inputTextColor: "text-instillGray95",
+  bgColor: "bg-white",
+  disabledCursor: "disabled:cursor-not-allowed",
+  disabledInputBgColor: "disabled:bg-white",
+  disabledInputBorderColor: "disabled:border-instillGray20",
+  disabledInputBorderStyle: "disabled:border-dashed",
+  disabledInputBorderWidth: "disabled:border",
+  disabledInputTextColor: "disabled:text-instillGray50",
+  readOnlyCursor: "read-only:cursor-auto",
+  readOnlyInputBgColor: "read-only:bg-white",
+  readOnlyInputBorderColor: "read-only:border-instillGray20",
+  readOnlyInputBorderStyle: "read-only:border-solid",
+  readOnlyInputBorderWidth: "read-only:border",
+  readOnlyInputTextColor: "read-only:text-instillGray95",
+  disabled: false,
+  placeholder: "hello",
+  readOnly: false,
+  enableProtectedToggle: false,
+  inputLabelType: "inset",
+  borderRadius: "rounded",
 };
 
 export const Default: ComponentStory<typeof TextFieldBase> = () => {
@@ -28,7 +59,7 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
 
   return (
     <TextFieldBase
-      error={false}
+      error={null}
       onChangeInput={onChangeInput}
       id="text-field-playground"
       labelName="playground"
@@ -43,8 +74,18 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       inputFontWeight="font-normal"
       inputTextColor="text-instillGray95"
       bgColor="bg-white"
-      disabledBgColor="disabled:bg-white"
-      readOnlyBgColor="bg-white"
+      disabledCursor="disabled:cursor-not-allowed"
+      disabledInputBgColor="disabled:bg-white"
+      disabledInputBorderColor="disabled:border-instillGray20"
+      disabledInputBorderStyle="disabled:border-dashed"
+      disabledInputBorderWidth="disabled:border"
+      disabledInputTextColor="disabled:text-instillGray50"
+      readOnlyCursor="read-only:cursor-auto"
+      readOnlyInputBgColor="read-only:bg-white"
+      readOnlyInputBorderColor="read-only:border-instillGray20"
+      readOnlyInputBorderStyle="read-only:border-solid"
+      readOnlyInputBorderWidth="read-only:border"
+      readOnlyInputTextColor="read-only:text-instillGray95"
       disabled={false}
       placeholder="hello"
       readOnly={false}

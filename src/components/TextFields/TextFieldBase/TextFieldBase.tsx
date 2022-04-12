@@ -35,16 +35,26 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   inputLineHeight,
   inputTextColor,
   bgColor,
-  disabledBgColor,
-  readOnlyBgColor,
+  disabled,
+  disabledInputBgColor,
+  disabledInputBorderStyle,
+  disabledInputBorderColor,
+  disabledInputBorderWidth,
+  disabledInputTextColor,
+  disabledCursor,
+  readOnly,
+  readOnlyInputBgColor,
+  readOnlyInputBorderColor,
+  readOnlyInputBorderStyle,
+  readOnlyInputBorderWidth,
+  readOnlyInputTextColor,
+  readOnlyCursor,
   inputWidth,
   inputHeight,
   autoComplete,
   focusHighlight,
-  disabled,
   type,
   placeholder,
-  readOnly,
   enableProtectedToggle,
   inputLabelType,
   borderRadius,
@@ -65,7 +75,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
       )}
     >
       <InputLabel
-        answered={answered}
+        answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
         htmlFor={id}
@@ -79,14 +89,26 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
       <div className="flex relative">
         <input
           className={cn(
-            "pt-6 ring-0 pl-5 placeholder:text-instillGray30",
+            "ring-0 pl-5 placeholder:text-instillGray30",
+            inputLabelType === "inset" ? "pt-6" : "",
             heightStyle,
             widthStyle,
             inputFontSize,
             inputLineHeight,
             inputFontWeight,
-            readOnly ? readOnlyBgColor : bgColor,
-            disabledBgColor,
+            bgColor,
+            disabledCursor,
+            disabledInputBgColor,
+            disabledInputBorderColor,
+            disabledInputBorderStyle,
+            disabledInputBorderWidth,
+            disabledInputTextColor,
+            readOnlyCursor,
+            readOnlyInputBgColor,
+            readOnlyInputBorderColor,
+            readOnlyInputBorderStyle,
+            readOnlyInputBorderWidth,
+            readOnlyInputTextColor,
             focusHighlight
               ? "instill-input-highlight"
               : "instill-input-no-highlight border border-instillGray15",
@@ -101,7 +123,9 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
           type={showSecret ? "text" : type}
           disabled={disabled}
           required={required}
-          placeholder={focus ? placeholder : null}
+          placeholder={
+            disabled ? null : readOnly ? null : focus ? placeholder : null
+          }
           readOnly={readOnly}
           autoComplete={autoComplete}
           onChange={(event) => {
