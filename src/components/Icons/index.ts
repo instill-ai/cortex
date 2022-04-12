@@ -44,6 +44,8 @@ import CheckIcon from "./CheckIcon";
 import type { CheckIconProps } from "./CheckIcon";
 import DoubleArrowIcon from "./DoubleArrowIcon";
 import type { DoubleArrowIconProps } from "./DoubleArrowIcon";
+import PipelineIcon from "./PipelineIcon";
+import type { PipelineIconProps } from "./PipelineIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -112,4 +114,6 @@ export {
   CheckIconProps,
   DoubleArrowIcon,
   DoubleArrowIconProps,
+  PipelineIcon,
+  PipelineIconProps,
 };
