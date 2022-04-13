@@ -9,16 +9,30 @@ export default {
 
 const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
   <UploadFileFieldBase
+    id="upload-file-field-base-playground"
+    disabled={false}
+    readOnly={false}
+    required={true}
+    labelName="upload-file-field-base-playground"
+    focusHighlight={true}
+    inputWidth="w-full"
+    inputHeight="h-[70px]"
+    inputFontSize="text-base"
+    inputTextColor="text-instillGray95"
+    inputFontWeight="font-normal"
+    inputLineHeight="leading-[28px]"
+    placeholder="playground"
+    inputLabelType="inset"
     uploadButtonText="Upload"
     uploadButtonBgColor="bg-instillGray50"
     uploadButtonTextColor="text-instillGray05"
-    labelName="playground"
-    borderRadiusBottomLeft="rounded-bl-[1px]"
-    borderRadiusBottomRight="rounded-br-[1px]"
-    borderRadiusTopLeft="rounded-tl-[1px]"
-    borderRadiusTopRight="rounded-tr-[1px]"
-    inputHeight="h-[70px]"
-    inputWidth="w-full"
+    inputBorderRadiusBottomLeft="rounded-bl-[1px]"
+    inputBorderRadiusBottomRight="rounded-br-[1px]"
+    inputBorderRadiusTopLeft="rounded-tl-[1px]"
+    inputBorderRadiusTopRight="rounded-tr-[1px]"
+    inputBorderColor="border-instillGray20"
+    inputBorderStyle="border-solid"
+    inputBorderWidth="border"
     {...args}
   />
 );
@@ -26,7 +40,7 @@ export const Playground: ComponentStory<typeof UploadFileFieldBase> =
   Template.bind({});
 
 export const Default: ComponentStory<typeof UploadFileFieldBase> = () => {
-  const [file, setFile] = useState<string>("");
+  const [_, setFile] = useState<string>("");
 
   const onChangeInput = (inputValue: string) => {
     setFile(inputValue);
@@ -34,6 +48,7 @@ export const Default: ComponentStory<typeof UploadFileFieldBase> = () => {
 
   return (
     <UploadFileFieldBase
+      error={null}
       id="upload-file-field-base-playground"
       disabled={false}
       readOnly={false}
@@ -52,10 +67,13 @@ export const Default: ComponentStory<typeof UploadFileFieldBase> = () => {
       uploadButtonText="Upload"
       uploadButtonBgColor="bg-instillGray50"
       uploadButtonTextColor="text-instillGray05"
-      borderRadiusBottomLeft="rounded-bl-[1px]"
-      borderRadiusBottomRight="rounded-br-[1px]"
-      borderRadiusTopLeft="rounded-tl-[1px]"
-      borderRadiusTopRight="rounded-tr-[1px]"
+      inputBorderRadiusBottomLeft="rounded-bl-[1px]"
+      inputBorderRadiusBottomRight="rounded-br-[1px]"
+      inputBorderRadiusTopLeft="rounded-tl-[1px]"
+      inputBorderRadiusTopRight="rounded-tr-[1px]"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
     />
   );
 };

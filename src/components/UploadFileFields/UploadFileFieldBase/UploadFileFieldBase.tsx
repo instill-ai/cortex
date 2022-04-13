@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
 import InputLabel from "../../InputLabel";
+import { DocIcon } from "../../Icons";
 
 export type UploadFileFieldBaseProps = Omit<
   BasicInputFieldAttributes,
@@ -9,7 +10,19 @@ export type UploadFileFieldBaseProps = Omit<
   | "disabledBgColor"
   | "readOnlyBgColor"
   | "bgColor"
-  | "borderRadius"
+  | "inputBorderRadius"
+  | "disabledInputBgColor"
+  | "disabledInputBorderColor"
+  | "disabledInputBorderStyle"
+  | "disabledInputBorderWidth"
+  | "disabledInputTextColor"
+  | "readOnlyInputBgColor"
+  | "readOnlyInputBorderColor"
+  | "readOnlyInputBorderStyle"
+  | "readOnlyInputBorderWidth"
+  | "readOnlyInputTextColor"
+  | "disabledCursor"
+  | "readOnlyCursor"
 > & {
   /** Text display on upload button */
   uploadButtonText: string;
@@ -24,25 +37,25 @@ export type UploadFileFieldBaseProps = Omit<
    */
   uploadButtonTextColor: string;
 
-  /** TailwindCSS format
+  /** TailwindCSS format - Input's top right border radius
    * - e.g. rounded-tr-[1px]
    */
-  borderRadiusTopRight: string;
+  inputBorderRadiusTopRight: string;
 
-  /** TailwindCSS format
+  /** TailwindCSS format - Input's bottom right border radius
    * - e.g. rounded-br-[1px]
    */
-  borderRadiusBottomRight: string;
+  inputBorderRadiusBottomRight: string;
 
-  /** TailwindCSS format
+  /** TailwindCSS format - Input's top left border radius
    * - e.g. rounded-tl-[1px]
    */
-  borderRadiusTopLeft: string;
+  inputBorderRadiusTopLeft: string;
 
-  /** TailwindCSS format
+  /** TailwindCSS format - Input's bottom left border radius
    * - e.g. rounded-bl-[1px]
    */
-  borderRadiusBottomLeft: string;
+  inputBorderRadiusBottomLeft: string;
 };
 
 const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
@@ -55,16 +68,22 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
   uploadButtonText,
   uploadButtonBgColor,
   uploadButtonTextColor,
-  borderRadiusTopRight,
-  borderRadiusBottomRight,
-  borderRadiusTopLeft,
-  borderRadiusBottomLeft,
+  inputBorderRadiusTopRight,
+  inputBorderRadiusBottomRight,
+  inputBorderRadiusTopLeft,
+  inputBorderRadiusBottomLeft,
   inputFontSize,
   inputFontWeight,
   inputLineHeight,
   inputTextColor,
   onChangeInput,
+  disabled,
+  readOnly,
+  inputBorderColor,
+  inputBorderStyle,
+  inputBorderWidth,
   error,
+  focusHighlight,
 }) => {
   const [answered, setAnswered] = useState(false);
   const [file, setFile] = useState<string>("");
@@ -83,37 +102,88 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
       </InputLabel>
       <label
         className={cn(
-          "flex flex-row border border-instillGray15 p-0 cursor-pointer",
+          "flex flex-row border border-instillGray15 p-0 cursor-pointer relative",
           inputWidth,
           inputHeight,
-          borderRadiusBottomLeft,
-          borderRadiusBottomRight,
-          borderRadiusTopLeft,
-          borderRadiusTopRight
+          inputBorderRadiusBottomLeft,
+          inputBorderRadiusBottomRight,
+          inputBorderRadiusTopLeft,
+          inputBorderRadiusTopRight,
+          disabled
+            ? "instill-input-no-highlight border border-instillGray20 border-dashed"
+            : readOnly
+            ? "instill-input-no-highlight border border-instillGray20 border-solid"
+            : focusHighlight
+            ? cn(
+                inputBorderWidth,
+                inputBorderColor,
+                inputBorderStyle,
+                "instill-input-highlight"
+              )
+            : cn(
+                inputBorderColor,
+                inputBorderStyle,
+                inputBorderWidth,
+                "instill-input-no-highlight"
+              )
         )}
         htmlFor={id}
       >
         <div
           className={cn(
-            "mr-auto pl-5",
-            inputFontSize,
-            inputLineHeight,
-            inputFontWeight,
-            inputTextColor,
-            inputLabelType === "inset" ? "pt-[30px]" : "my-auto"
+            "flex flex-row mr-auto pl-5",
+            inputLabelType === "inset" ? "pt-6" : "my-auto"
           )}
         >
-          {file ? file.split("\\").slice(-1)[0] : ""}
+          {file ? (
+            <div className="flex gap-x-[5px]">
+              <DocIcon
+                width="w-5"
+                height="h-5"
+                position="my-auto"
+                color={
+                  disabled
+                    ? "text-instillGray50"
+                    : readOnly
+                    ? "text-instillGray50"
+                    : inputTextColor
+                }
+              />
+
+              <p
+                className={cn(
+                  inputFontSize,
+                  inputLineHeight,
+                  inputFontWeight,
+                  disabled
+                    ? "text-instillGray50"
+                    : readOnly
+                    ? "text-instillGray50"
+                    : inputTextColor,
+                  "my-auto"
+                )}
+              >
+                {file.split("\\").slice(-1)[0]}
+              </p>
+            </div>
+          ) : null}
         </div>
         <input
           className={cn(
-            "opacity-0 overflow-hidden absolute z-10 cursor-pointer",
+            "opacity-0 overflow-hidden absolute z-10",
             inputHeight,
-            inputWidth
+            inputWidth,
+            disabled
+              ? "cursor-not-allowed"
+              : readOnly
+              ? "cursor-auto"
+              : "cursor-pointer"
           )}
           aria-label={`${id}-label`}
           id={id}
           type="file"
+          disabled={disabled}
+          readOnly={readOnly}
           onChange={(event) => {
             const inputValue = event.target.value;
             const inputFile = event.target.files[0] || null;
@@ -130,16 +200,38 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
               onChangeInput(inputFile);
             }
           }}
+          onClick={(event) => {
+            if (readOnly) {
+              event.preventDefault();
+              event.stopPropagation();
+              return false;
+            }
+          }}
         />
         <div
           className={cn(
-            "flex bg-instillGray50 h-full ml-auto px-5 group-hover:bg-instillGray30",
-            answered ? "absolute top-0 right-0 z-10" : "",
+            "flex h-full ml-auto px-5",
+            answered ? "absolute bottom-0 right-0 z-20" : "",
             uploadButtonBgColor,
             uploadButtonTextColor,
-            borderRadiusTopRight,
-            borderRadiusBottomRight
+            inputBorderRadiusTopRight,
+            inputBorderRadiusBottomRight,
+            disabled
+              ? "bg-instillGray20 cursor-not-allowed"
+              : readOnly
+              ? "bg-instillGray20 cursor-auto"
+              : "bg-instillGray50 group-hover:bg-instillGray30 cursor-pointer"
           )}
+          onClick={(event) => {
+            if (readOnly || disabled) return;
+
+            if (answered) {
+              event.preventDefault();
+              setFile(null);
+              setAnswered(false);
+              onChangeInput(null);
+            }
+          }}
         >
           <span className="m-auto">
             {answered ? "Delete" : uploadButtonText}
