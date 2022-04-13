@@ -129,8 +129,17 @@ export interface BasicInputFieldAttributes {
    */
   bgColor: string;
 
+  /** TailwindCSS format - The border color of the input */
+  inputBorderColor: string;
+
+  /** TailwindCSS formt - The border style of the input */
+  inputBorderStyle: string;
+
+  /** TailwindCSS formt - The border width of the input */
+  inputBorderWidth: string;
+
   /** TailwindCSS format - The border radius of the input */
-  borderRadius: string;
+  inputBorderRadius: string;
 
   /** Input on change handler */
   onChangeInput: (inputValue: any) => void;
