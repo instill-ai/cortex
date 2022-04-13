@@ -47,7 +47,10 @@ Playground.args = {
   readOnly: false,
   enableProtectedToggle: false,
   inputLabelType: "inset",
-  borderRadius: "rounded",
+  inputBorderRadius: "rounded-[1px]",
+  inputBorderColor: "border-instillGray20",
+  inputBorderStyle: "border-dashed",
+  inputBorderWidth: "border-4",
 };
 
 export const Default: ComponentStory<typeof TextFieldBase> = () => {
@@ -64,9 +67,9 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       id="text-field-playground"
       labelName="playground"
       required={true}
-      inputHeight={"h-[70px]"}
-      inputWidth={"w-full"}
-      focusHighlight={false}
+      inputHeight="h-[70px]"
+      inputWidth="w-full"
+      focusHighlight={true}
       autoComplete="off"
       type="text"
       inputFontSize="text-base"
@@ -91,7 +94,10 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       readOnly={false}
       enableProtectedToggle={false}
       inputLabelType="inset"
-      borderRadius="rounded"
+      inputBorderRadius="rounded-[1px]"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
     />
   );
 };

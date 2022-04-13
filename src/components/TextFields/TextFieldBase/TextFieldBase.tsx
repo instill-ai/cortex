@@ -57,7 +57,10 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   placeholder,
   enableProtectedToggle,
   inputLabelType,
-  borderRadius,
+  inputBorderRadius,
+  inputBorderColor,
+  inputBorderStyle,
+  inputBorderWidth,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -67,13 +70,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   const heightStyle = inputHeight ?? "h-[70px]";
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-y-2.5 relative",
-        widthStyle,
-        borderRadius
-      )}
-    >
+    <div className={cn("flex flex-col gap-y-2.5 relative", widthStyle)}>
       <InputLabel
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
@@ -97,31 +94,46 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             inputLineHeight,
             inputFontWeight,
             bgColor,
-            disabledCursor,
-            disabledInputBgColor,
-            disabledInputBorderColor,
-            disabledInputBorderStyle,
-            disabledInputBorderWidth,
-            disabledInputTextColor,
-            readOnlyCursor,
-            readOnlyInputBgColor,
-            readOnlyInputBorderColor,
-            readOnlyInputBorderStyle,
-            readOnlyInputBorderWidth,
-            readOnlyInputTextColor,
             disabled
-              ? "instill-input-no-highlight border border-instillGray15"
+              ? cn(
+                  disabledCursor,
+                  disabledInputBgColor,
+                  disabledInputBorderColor,
+                  disabledInputBorderStyle,
+                  disabledInputBorderWidth,
+                  disabledInputTextColor,
+                  "instill-input-no-highlight"
+                )
               : readOnly
-              ? "instill-input-no-highlight border border-instillGray15"
+              ? cn(
+                  readOnlyCursor,
+                  readOnlyInputBgColor,
+                  readOnlyInputBorderColor,
+                  readOnlyInputBorderStyle,
+                  readOnlyInputBorderWidth,
+                  readOnlyInputTextColor,
+                  "instill-input-no-highlight"
+                )
               : focusHighlight
-              ? "instill-input-highlight"
-              : "instill-input-no-highlight border border-instillGray15",
+              ? cn(
+                  inputBorderWidth,
+                  inputBorderColor,
+                  inputBorderStyle,
+                  "instill-input-highlight"
+                )
+              : cn(
+                  inputBorderColor,
+                  inputBorderStyle,
+                  inputBorderWidth,
+                  "instill-input-no-highlight"
+                ),
+
             disabled
               ? "text-instillGray50"
               : readOnly
               ? "text-instillGray50"
               : inputTextColor,
-            borderRadius
+            inputBorderRadius
           )}
           id={id}
           type={showSecret ? "text" : type}
