@@ -12,7 +12,10 @@ export type BasicTextFieldProps = Omit<
   | "inputTextColor"
   | "bgColor"
   | "enableProtectedToggle"
-  | "borderRadius"
+  | "inputBorderRadius"
+  | "inputBorderColor"
+  | "inputBorderStyle"
+  | "inputBorderWidth"
   | "inputLabelType"
   | "disabledCursor"
   | "disabledInputBgColor"
@@ -43,14 +46,17 @@ const BasicTextField: FC<BasicTextFieldProps> = (props) => {
       readOnly={props.readOnly}
       inputHeight="h-[70px]"
       inputWidth="w-full"
-      focusHighlight={false}
+      focusHighlight={true}
       inputFontSize="text-base"
       inputLineHeight="leading-[28px]"
       inputFontWeight="font-normal"
       inputTextColor="text-instillGray95"
       bgColor="bg-white"
       enableProtectedToggle={false}
-      borderRadius="rounded-[1px]"
+      inputBorderRadius="rounded-[1px]"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
       inputLabelType="inset"
       disabledCursor="disabled:cursor-not-allowed"
       disabledInputBgColor="disabled:bg-white"
