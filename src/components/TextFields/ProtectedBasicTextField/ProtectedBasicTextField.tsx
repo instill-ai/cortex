@@ -14,7 +14,10 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "bgColor"
   | "inputTextColor"
   | "inputLabelType"
-  | "borderRadius"
+  | "inputBorderRadius"
+  | "inputBorderColor"
+  | "inputBorderStyle"
+  | "inputBorderWidth"
   | "disabledCursor"
   | "disabledInputBgColor"
   | "disabledInputBorderColor"
@@ -41,7 +44,7 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       autoComplete={props.autoComplete}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
-      focusHighlight={false}
+      focusHighlight={true}
       enableProtectedToggle={true}
       type="password"
       inputFontSize="text-base"
@@ -52,7 +55,10 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       inputHeight="h-[70px]"
       inputWidth="w-full"
       inputLabelType="inset"
-      borderRadius="rounded-[1px]"
+      inputBorderRadius="rounded-[1px]"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
       disabledCursor="disabled:cursor-not-allowed"
       disabledInputBgColor="disabled:bg-white"
       disabledInputBorderColor="disabled:border-instillGray20"
