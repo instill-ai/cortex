@@ -23,6 +23,7 @@ export const Default: ComponentStory<typeof BasicToggleField> = () => {
   return (
     <BasicToggleField
       id="basic-toggle-field"
+      defaultChecked={false}
       disabled={false}
       readOnly={false}
       onChangeInput={onChangeInput}
