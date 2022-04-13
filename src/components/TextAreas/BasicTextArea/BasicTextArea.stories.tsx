@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { BasicTextArea } from "./BasicTextArea";
+import BasicTextArea from "./BasicTextArea";
 
 export default {
   title: "Components/Ui/Input/BasicTextArea",
