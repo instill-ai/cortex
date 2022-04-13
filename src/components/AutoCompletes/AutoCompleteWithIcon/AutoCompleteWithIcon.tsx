@@ -1,7 +1,8 @@
-import Select, { StylesConfig } from "react-select";
-import { FC, ReactNode, useEffect, useState } from "react";
+import Select, { ClearIndicatorProps, StylesConfig } from "react-select";
+import { CSSProperties, FC, ReactNode, useEffect, useState } from "react";
 import InputLabel from "../../InputLabel";
 import { BasicInputFieldAttributes } from "../../../types/general";
+import { XIcon } from "../../Icons";
 
 export interface AutoCompleteWithIconOption {
   label: string;
@@ -25,6 +26,18 @@ export type AutoCompleteWithIconProps = Omit<
   | "bgColor"
   | "borderRadius"
   | "focusHighlight"
+  | "disabledCursor"
+  | "disabledInputBgColor"
+  | "disabledInputBorderColor"
+  | "disabledInputBorderStyle"
+  | "disabledInputBorderWidth"
+  | "disabledInputTextColor"
+  | "readOnlyCursor"
+  | "readOnlyInputBgColor"
+  | "readOnlyInputBorderColor"
+  | "readOnlyInputBorderStyle"
+  | "readOnlyInputBorderWidth"
+  | "readOnlyInputTextColor"
 > & {
   /**
    * Options
@@ -41,21 +54,21 @@ export type AutoCompleteWithIconProps = Omit<
    */
   defaultValue: AutoCompleteWithIconOption;
 
-  /**
-   * Whether the autocomplete is disabled or not
-   */
-  disabled: boolean;
+  /** Whether the autocomplete is clearalbe */
+  isClearable: boolean;
 };
 
-export const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
+const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   defaultValue,
   options,
-  disabled,
   inputLabelType,
   labelName,
   required,
   id,
   onChangeInput,
+  disabled,
+  readOnly,
+  isClearable,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -85,7 +98,13 @@ export const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
       borderRadius: "1px",
       borderWidth: "1px",
       height: "70px",
-      borderColor: state.isFocused ? "#40A8F5" : "#E4E4E4",
+      borderStyle: state.isDisabled ? "dashed" : "solid",
+      backgroundColor: "#ffffff",
+      borderColor: state.isDisabled
+        ? "#E4E4E4"
+        : state.isFocused
+        ? "#40A8F5"
+        : "#E4E4E4",
       boxShadow: state.isFocused
         ? "0px 0px 0px 3px rgba(64, 168, 245, 0.2)"
         : "none",
@@ -116,7 +135,7 @@ export const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   return (
     <div className="flex flex-col gap-y-2.5 relative">
       <InputLabel
-        answered={answered}
+        answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
         htmlFor={id}
@@ -129,17 +148,50 @@ export const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
       </InputLabel>
       <Select
         id={id}
+        isSearchable={!readOnly}
+        menuIsOpen={readOnly ? false : undefined}
         onFocus={() => setFocus(true)}
         onBlur={() => setFocus(false)}
         onChange={(event) => {
           onChangeInput(event);
+
+          if (event) {
+            setAnswered(true);
+          } else {
+            setAnswered(false);
+          }
         }}
         isDisabled={disabled}
         defaultValue={defaultValue}
         options={options}
         components={{
           IndicatorSeparator: () => null,
+          ClearIndicator: (props: ClearIndicatorProps) => {
+            const {
+              getStyles,
+              innerProps: { ref, ...restInnerProps },
+            } = props;
+
+            return (
+              <div
+                {...restInnerProps}
+                ref={ref}
+                style={getStyles("clearIndicator", props) as CSSProperties}
+              >
+                <div style={{ padding: "0px 5px" }}>
+                  <XIcon
+                    position="m-auto"
+                    width="w-5"
+                    height="g-5"
+                    color="text-instillGray50"
+                  />
+                </div>
+              </div>
+            );
+          },
         }}
+        isClearable={isClearable}
+        placeholder={focus ? "Search..." : null}
         formatOptionLabel={(option: AutoCompleteWithIconOption) => {
           return (
             <div className="flex flex-row gap-x-3 px-[15px]">
@@ -158,3 +210,5 @@ export const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
     </div>
   );
 };
+
+export default AutoCompleteWithIcon;
