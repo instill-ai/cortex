@@ -36,6 +36,12 @@ export interface InputLabelProps {
    * - Don't need to specific translate-x-, it's fixed value
    */
   deActivateStyle?: string;
+
+  /** Handle input label focus event */
+  onFocusHandler: (event) => void;
+
+  /** Handle input label blud event */
+  onBlurHandler: (event) => void;
 }
 
 const InputLabel: FC<InputLabelProps> = memo(
@@ -48,6 +54,8 @@ const InputLabel: FC<InputLabelProps> = memo(
     fontStyle,
     activateStyle,
     deActivateStyle,
+    onFocusHandler,
+    onBlurHandler,
     type,
   }) => {
     let activate = false;
@@ -70,6 +78,8 @@ const InputLabel: FC<InputLabelProps> = memo(
           }
         )}
         htmlFor={htmlFor}
+        onFocus={(event) => onFocusHandler(event)}
+        onBlur={(event) => onBlurHandler(event)}
       >
         {children}
         {required ? <span className="ml-1">*</span> : null}
