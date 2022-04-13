@@ -14,10 +14,10 @@ export const Playground: ComponentStory<typeof BasicToggleField> =
   Template.bind({});
 
 export const Default: ComponentStory<typeof BasicToggleField> = () => {
-  const [text, setText] = useState<string>("");
+  const [_, setChecked] = useState(false);
 
-  const onChangeInput = (inputValue: string) => {
-    setText(inputValue);
+  const onChangeInput = (inputValue: boolean) => {
+    setChecked(inputValue);
   };
 
   return (
