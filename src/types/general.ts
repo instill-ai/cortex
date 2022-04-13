@@ -2,19 +2,55 @@ export interface BasicInputFieldAttributes {
   /** Input field's id */
   id: string;
 
+  /** Whether the input has error or not */
+  error: string;
+
   /**
    * Whether the input is disabled
    */
   disabled: boolean;
 
-  /** TailwindCSS format
-   * Background color when input is disabled
-   * - Please add persudo class disabled, eg: disabled:bg-white
+  /** TailwindCSS format - Background color when input is disabled
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:bg-white
+   * - https://tailwindcss.com/docs/background-color
    */
-  disabledBgColor: string;
+  disabledInputBgColor: string;
 
-  /** Whether the input has error or not */
-  error: boolean;
+  /** TailwindCSS format - Border color when input is disabled
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:border-instillGray30
+   * - https://tailwindcss.com/docs/border-color
+   */
+  disabledInputBorderColor: string;
+
+  /** TailwindCSS format - Border width when input is disabled
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:border-2
+   * - https://tailwindcss.com/docs/border-width
+   */
+  disabledInputBorderWidth: string;
+
+  /** TailwindCSS format - Border style when input is disabled
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:border-dashed
+   * - https://tailwindcss.com/docs/border-style
+   */
+  disabledInputBorderStyle: string;
+
+  /** TailwindCSS format - Text color when input is disabled
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:text-instillGray50
+   * - https://tailwindcss.com/docs/text-color
+   */
+  disabledInputTextColor: string;
+
+  /** TailwindCSS format - Cursor when input is disabled
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:cursor-not-allowed
+   * - https://tailwindcss.com/docs/cursor
+   */
+  disabledCursor: string;
 
   /**
    * Text that appears in the form control when it has no value set
@@ -26,10 +62,47 @@ export interface BasicInputFieldAttributes {
    */
   readOnly: boolean;
 
-  /** TailwindCSS format
-   * Background color when input is readOnly
+  /** TailwindCSS format - Background color when input is read-only
+   * - Please add persudo class "read-only:"
+   * - e.g. read-only:bg-white
+   * - https://tailwindcss.com/docs/background-color
    */
-  readOnlyBgColor: string;
+  readOnlyInputBgColor: string;
+
+  /** TailwindCSS format - Border color when input is read-only
+   * - Please add persudo class "read-only:"
+   * - e.g. read-only:border-instillGray30
+   * - https://tailwindcss.com/docs/border-color
+   */
+  readOnlyInputBorderColor: string;
+
+  /** TailwindCSS format - Border width when input is read-only
+   * - Please add persudo class "read-only:"
+   * - e.g. read-only:border-2
+   * - https://tailwindcss.com/docs/border-width
+   */
+  readOnlyInputBorderWidth: string;
+
+  /** TailwindCSS format - Border style when input is read-only
+   * - Please add persudo class "read-only:"
+   * - e.g. read-only:border-dashed
+   * - https://tailwindcss.com/docs/border-style
+   */
+  readOnlyInputBorderStyle: string;
+
+  /** TailwindCSS format - Text color when input is read-only
+   * - Please add persudo class "read-only:"
+   * - e.g. read-only:text-instillGray50
+   * - https://tailwindcss.com/docs/text-color
+   */
+  readOnlyInputTextColor: string;
+
+  /** TailwindCSS format - Cursor when input is read-only
+   * - Please add persudo class "disabled:"
+   * - e.g. disabled:cursor-not-allowed
+   * - https://tailwindcss.com/docs/cursor
+   */
+  readOnlyCursor: string;
 
   /** TailwindCSS format
    * - Input's font size
