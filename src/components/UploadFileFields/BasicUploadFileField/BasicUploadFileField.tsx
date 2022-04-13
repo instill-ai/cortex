@@ -7,10 +7,10 @@ export type BasicUploadFileFieldProps = Omit<
   UploadFileFieldBaseProps,
   | "uploadButtonBgColor"
   | "uploadButtonTextColor"
-  | "borderRadiusBottomLeft"
-  | "borderRadiusBottomRight"
-  | "borderRadiusTopLeft"
-  | "borderRadiusTopRight"
+  | "inputBorderRadiusBottomLeft"
+  | "inputBorderRadiusBottomRight"
+  | "inputBorderRadiusTopLeft"
+  | "inputBorderRadiusTopRight"
   | "inputFontSize"
   | "inputFontWeight"
   | "inputLineHeight"
@@ -19,11 +19,15 @@ export type BasicUploadFileFieldProps = Omit<
   | "inputHeight"
   | "focusHighlight"
   | "inputLabelType"
+  | "inputBorderColor"
+  | "inputBorderStyle"
+  | "inputBorderWidth"
 >;
 
 const BasicUploadFileField: FC<BasicUploadFileFieldProps> = (props) => {
   return (
     <UploadFileFieldBase
+      error={props.error}
       id={props.id}
       disabled={props.disabled}
       readOnly={props.readOnly}
@@ -34,10 +38,10 @@ const BasicUploadFileField: FC<BasicUploadFileFieldProps> = (props) => {
       uploadButtonText={props.uploadButtonText}
       uploadButtonBgColor="bg-instillGray50"
       uploadButtonTextColor="text-instillGray05"
-      borderRadiusBottomLeft="rounded-bl-[1px]"
-      borderRadiusBottomRight="rounded-br-[1px]"
-      borderRadiusTopLeft="rounded-tl-[1px]"
-      borderRadiusTopRight="rounded-tr-[1px]"
+      inputBorderRadiusBottomLeft="rounded-bl-[1px]"
+      inputBorderRadiusBottomRight="rounded-br-[1px]"
+      inputBorderRadiusTopLeft="rounded-tl-[1px]"
+      inputBorderRadiusTopRight="rounded-tr-[1px]"
       inputFontSize="text-base"
       inputFontWeight="font-normal"
       inputLineHeight="leading-[28px]"
@@ -46,6 +50,9 @@ const BasicUploadFileField: FC<BasicUploadFileFieldProps> = (props) => {
       inputHeight="h-[70px]"
       focusHighlight={true}
       inputLabelType="inset"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
     />
   );
 };

@@ -3,21 +3,28 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import BasicUploadFileField from "./BasicUploadFileField";
 
 export default {
-  title: "Components/Base/Input/BasicUploadFileField",
+  title: "Components/Ui/Input/BasicUploadFileField",
   component: BasicUploadFileField,
 } as ComponentMeta<typeof BasicUploadFileField>;
 
 const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
-  <BasicUploadFileField {...args} />
+  <BasicUploadFileField
+    id="upload-file-field-base-playground"
+    disabled={false}
+    readOnly={false}
+    required={true}
+    labelName="upload-file-field-base-playground"
+    placeholder="Upload a file"
+    uploadButtonText="Upload"
+    {...args}
+  />
 );
 export const Playground: ComponentStory<typeof BasicUploadFileField> =
   Template.bind({});
 
 export const Default: ComponentStory<typeof BasicUploadFileField> = () => {
-  // const [file, setFile] = useState<string>("");
-
   const onChangeInput = (inputValue) => {
-    console.log(inputValue);
+    if (!inputValue) return;
 
     const reader = new FileReader();
 
@@ -39,6 +46,7 @@ export const Default: ComponentStory<typeof BasicUploadFileField> = () => {
       //encType="multipart/form-data"
     >
       <BasicUploadFileField
+        error={null}
         id="upload-file-field-base-playground"
         disabled={false}
         readOnly={false}
