@@ -26,7 +26,8 @@ export type BasicTextAreaProps = Omit<
   | "readOnlyInputBorderWidth"
   | "readOnlyInputTextColor"
 >;
-export const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
+
+const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
   return (
     <TextAreaBase
       id={props.id}
@@ -64,3 +65,5 @@ export const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
     />
   );
 };
+
+export default BasicTextArea;
