@@ -30,7 +30,7 @@
     @apply font-mono font-normal text-xs;
   }
   .instill-input-highlight {
-    @apply border border-instillGray15 focus:outline-none focus:ring-0 focus:ring-white focus:border-instillBlue;
+    @apply border border-instillGray15 focus:outline-none focus:ring-0 focus:ring-white focus:border-instillBlue50;
   }
 
   .instill-input-highlight:focus {
