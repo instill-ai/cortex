@@ -80,7 +80,10 @@ export type ToggleFieldBaseProps = Omit<
 };
 
 const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
-  borderRadius,
+  inputBorderRadius,
+  inputBorderColor,
+  inputBorderStyle,
+  inputBorderWidth,
   id,
   defaultChecked,
   disabled,
@@ -128,15 +131,8 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
           id={id}
           aria-label={`${id}-label`}
           className={cn(
-            "peer appearance-none w-[90px] h-10 border border-intstillGrey15",
-            disabled
-              ? "border border-instillGray15"
-              : readOnly
-              ? "border border-instillGray15"
-              : focusHighlight
-              ? "instill-input-highlight checked:border-instillBlue50"
-              : "instill-input-no-highlight border border-instillGray15 checked:border-instillBlue50",
-            borderRadius,
+            "peer appearance-none w-[90px] h-10",
+            inputBorderRadius,
             checkedInputBorderColor,
             disabled
               ? cn(
@@ -156,7 +152,23 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
                   readOnlyInputBorderWidth,
                   readOnlyCheckedInputBorderColor
                 )
-              : "cursor-pointer"
+              : focusHighlight
+              ? cn(
+                  inputBorderColor,
+                  inputBorderStyle,
+                  inputBorderWidth,
+                  checkedInputBorderColor,
+                  "instill-input-highlight",
+                  "cursor-pointer"
+                )
+              : cn(
+                  inputBorderColor,
+                  inputBorderStyle,
+                  inputBorderWidth,
+                  checkedInputBorderColor,
+                  "instill-input-no-highlight",
+                  "cursor-pointer"
+                )
           )}
           type="checkbox"
           role="switch"
@@ -195,7 +207,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
               ? cn(readOnlyDotColor, readOnlyCheckedDotColor, "cursor-auto")
               : cn(checkedDotColor, "cursor-pointer"),
             dotColor,
-            borderRadius
+            inputBorderRadius
           )}
         />
       </label>

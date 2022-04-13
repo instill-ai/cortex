@@ -26,7 +26,10 @@ Playground.args = {
   required: true,
   labelName: "toggle-field-base-playground",
   focusHighlight: true,
-  borderRadius: "",
+  inputBorderRadius: "",
+  inputBorderColor: "border-instillGray20",
+  inputBorderStyle: "border-solid",
+  inputBorderWidth: "border",
   dotColor: "bg-instillGray30",
   checkedInputBorderColor: "checked:border-instillBlue50",
   checkedDotColor: "peer-checked:bg-instillBlue50",
@@ -49,10 +52,9 @@ Playground.args = {
 };
 
 export const Default: ComponentStory<typeof ToggleFieldBase> = () => {
-  const [checked, setChecked] = useState(false);
+  const [_, setChecked] = useState(false);
 
   const onChangeInput = (inputValue: any) => {
-    console.log(inputValue);
     setChecked(inputValue);
   };
 
@@ -66,7 +68,10 @@ export const Default: ComponentStory<typeof ToggleFieldBase> = () => {
       required={true}
       labelName="toggle-field-base-playground"
       focusHighlight={true}
-      borderRadius=""
+      inputBorderRadius=""
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
       dotColor="bg-instillGray30"
       checkedInputBorderColor="checked:border-instillBlue50"
       checkedDotColor="peer-checked:bg-instillBlue50"
