@@ -1,4 +1,2 @@
-import ToggleFieldBase from "./ToggleFieldBase";
-import type { ToggleFieldBaseProps } from "./ToggleFieldBase";
-
-export { ToggleFieldBase as default, ToggleFieldBaseProps };
+export { default } from "./ToggleFieldBase";
+export * from "./ToggleFieldBase";

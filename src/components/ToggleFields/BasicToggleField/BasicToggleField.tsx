@@ -26,7 +26,7 @@ export type BasicToggleFieldProps = Omit<
   | "readOnlyDotColor"
 >;
 
-export const BasicToggleField: FC<BasicToggleFieldProps> = (props) => {
+const BasicToggleField: FC<BasicToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
       id={props.id}
@@ -60,3 +60,5 @@ export const BasicToggleField: FC<BasicToggleFieldProps> = (props) => {
     />
   );
 };
+
+export default BasicToggleField;

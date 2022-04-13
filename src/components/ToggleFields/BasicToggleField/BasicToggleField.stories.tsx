@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { BasicToggleField } from "./BasicToggleField";
+import BasicToggleField from "./BasicToggleField";
 
 export default {
   title: "Components/Ui/Input/BasicToggleField",
