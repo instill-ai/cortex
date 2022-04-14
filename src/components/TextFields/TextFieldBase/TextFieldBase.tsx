@@ -1,9 +1,9 @@
 import { FC, useState } from "react";
 import cn from "clsx";
-import InputLabel from "../../InputLabel";
 import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputFieldAttributes } from "../../../types/general";
+import { BasicInputLabel } from "../../InputLabels";
 
 export interface TextFieldBaseProps extends BasicInputFieldAttributes {
   /** Text field's type
@@ -71,18 +71,22 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
 
   return (
     <div className={cn("flex flex-col gap-y-2.5 relative", widthStyle)}>
-      <InputLabel
+      <BasicInputLabel
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
         htmlFor={id}
-        fontStyle="font-normal text-sm leading-[18.2px]"
-        activateStyle="top-1/2 -translate-y-[120%]"
-        deActivateStyle="top-1/2 -translate-y-1/2"
         type={inputLabelType}
+        onBlurHandler={(event) => {
+          console.log(event);
+          setFocus(false);
+        }}
+        onFocusHandler={(event) => {
+          setFocus(true);
+        }}
       >
         {labelName}
-      </InputLabel>
+      </BasicInputLabel>
       <div className="flex relative">
         <input
           className={cn(
