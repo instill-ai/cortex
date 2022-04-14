@@ -1,7 +1,7 @@
 import { FC, memo } from "react";
 import cn from "clsx";
 
-export interface InputLabelProps {
+export interface InputLabelBaseProps {
   /** InputLabel's type
    * - normal: input label has normal position layout and doesn't have any animation
    * - inset: input label has absolution position layout, put into the input field and have float up animation with specific activate, deActivate style
@@ -25,6 +25,16 @@ export interface InputLabelProps {
    * - e.g. text-base
    */
   labelFontSize: string;
+
+  /** TailwindCSS format - Label's font family
+   * - e.g. font-sans
+   */
+  labelFontFamily: string;
+
+  /** TailwindCSS format - Label's line height
+   * - e.g. leading-normal
+   */
+  labelLineHeight: string;
 
   /** Whether the input is required or not */
   required: boolean;
@@ -54,7 +64,7 @@ export interface InputLabelProps {
   onBlurHandler: (event) => void;
 }
 
-const InputLabel: FC<InputLabelProps> = memo(
+const InputLabelBase: FC<InputLabelBaseProps> = memo(
   ({
     htmlFor,
     required,
@@ -64,6 +74,7 @@ const InputLabel: FC<InputLabelProps> = memo(
     labelFontSize,
     labelFontWeight,
     labelTextColor,
+    labelFontFamily,
     activateStyle,
     deActivateStyle,
     onFocusHandler,
@@ -81,11 +92,12 @@ const InputLabel: FC<InputLabelProps> = memo(
     return (
       <label
         className={cn(
-          "font-sans text-instillGray50 z-10",
+          "z-10",
           type === "inset" ? (activate ? activateStyle : deActivateStyle) : "",
           labelFontSize,
           labelFontWeight,
           labelTextColor,
+          labelFontFamily,
           {
             "absolute translate-x-5 transform-gpu origin-top-left left-0":
               type === "inset",
@@ -102,6 +114,6 @@ const InputLabel: FC<InputLabelProps> = memo(
   }
 );
 
-export default InputLabel;
+export default InputLabelBase;
 
-InputLabel.displayName = "InputLabel";
+InputLabelBase.displayName = "InputLabelBase";
