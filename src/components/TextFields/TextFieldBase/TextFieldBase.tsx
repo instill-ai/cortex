@@ -55,6 +55,11 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   focusHighlight,
   type,
   placeholder,
+  placeholderFontFamily,
+  placeholderFontSize,
+  placeholderFontWeight,
+  placeholderLineHeight,
+  placeholderTextColor,
   enableProtectedToggle,
   inputLabelType,
   inputBorderRadius,
@@ -77,10 +82,10 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         required={required}
         htmlFor={id}
         type={inputLabelType}
-        onBlurHandler={(event) => {
+        onBlurHandler={() => {
           setFocus(false);
         }}
-        onFocusHandler={(event) => {
+        onFocusHandler={() => {
           setFocus(true);
         }}
       >
@@ -89,7 +94,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
       <div className="flex relative">
         <input
           className={cn(
-            "ring-0 pl-5 placeholder:text-instillGray30",
+            "pl-5",
             inputLabelType === "inset" ? "pt-6" : "",
             heightStyle,
             widthStyle,
@@ -97,6 +102,17 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             inputLineHeight,
             inputFontWeight,
             bgColor,
+            inputBorderRadius,
+            placeholderFontFamily,
+            placeholderFontSize,
+            placeholderFontWeight,
+            placeholderLineHeight,
+            placeholderTextColor,
+            disabled
+              ? "text-instillGray50"
+              : readOnly
+              ? "text-instillGray50"
+              : inputTextColor,
             disabled
               ? cn(
                   disabledCursor,
@@ -129,14 +145,7 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
                   inputBorderStyle,
                   inputBorderWidth,
                   "instill-input-no-highlight"
-                ),
-
-            disabled
-              ? "text-instillGray50"
-              : readOnly
-              ? "text-instillGray50"
-              : inputTextColor,
-            inputBorderRadius
+                )
           )}
           id={id}
           type={showSecret ? "text" : type}

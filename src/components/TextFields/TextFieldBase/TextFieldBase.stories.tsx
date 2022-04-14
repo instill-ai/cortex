@@ -50,7 +50,12 @@ Playground.args = {
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGray20",
   inputBorderStyle: "border-dashed",
-  inputBorderWidth: "border-4",
+  inputBorderWidth: "border",
+  placeholderFontFamily: "placeholder:font-sans",
+  placeholderFontSize: "placeholder:text-base",
+  placeholderFontWeight: "placeholder:font-normal",
+  placeholderLineHeight: "placeholder:leading-[28px]",
+  placeholderTextColor: "placeholder:text-instillGray95",
 };
 
 export const Default: ComponentStory<typeof TextFieldBase> = () => {
@@ -98,6 +103,11 @@ export const Default: ComponentStory<typeof TextFieldBase> = () => {
       inputBorderColor="border-instillGray20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
+      placeholderFontFamily="placeholder:font-sans"
+      placeholderFontSize="placeholder:text-base"
+      placeholderFontWeight="placeholder:font-normal"
+      placeholderLineHeight="placeholder:leading-[28px]"
+      placeholderTextColor="placeholder:text-instillGray95"
     />
   );
 };
