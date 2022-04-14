@@ -11,7 +11,10 @@ export type BasicTextAreaProps = Omit<
   | "inputLineHeight"
   | "inputTextColor"
   | "bgColor"
-  | "borderRadius"
+  | "inputBorderRadius"
+  | "inputBorderColor"
+  | "inputBorderStyle"
+  | "inputBorderWidth"
   | "inputLabelType"
   | "disabledCursor"
   | "disabledInputBgColor"
@@ -25,6 +28,11 @@ export type BasicTextAreaProps = Omit<
   | "readOnlyInputBorderStyle"
   | "readOnlyInputBorderWidth"
   | "readOnlyInputTextColor"
+  | "placeholderFontFamily"
+  | "placeholderFontSize"
+  | "placeholderFontWeight"
+  | "placeholderLineHeight"
+  | "placeholderTextColor"
 >;
 
 const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
@@ -48,7 +56,10 @@ const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
       inputLineHeight="leading-[28px]"
       inputTextColor="text-instillGray95"
       bgColor="bg-white"
-      borderRadius="rounded"
+      inputBorderRadius="rounded-[1px]"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
       inputLabelType="inset"
       disabledCursor="disabled:cursor-not-allowed"
       disabledInputBgColor="disabled:bg-white"
@@ -62,6 +73,11 @@ const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
       readOnlyInputBorderStyle="read-only:border-solid"
       readOnlyInputBorderWidth="read-only:border"
       readOnlyInputTextColor="read-only:text-instillGray95"
+      placeholderFontFamily="placeholder:font-sans"
+      placeholderFontSize="placeholder:text-base"
+      placeholderFontWeight="placeholder:font-normal"
+      placeholderLineHeight="placeholder:leading-[28px]"
+      placeholderTextColor="placeholder:text-instillGray95"
     />
   );
 };
