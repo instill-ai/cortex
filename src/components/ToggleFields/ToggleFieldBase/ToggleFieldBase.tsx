@@ -1,7 +1,8 @@
 import { FC, useState } from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
-import InputLabel from "../../InputLabel";
+import InputLabel from "../../InputLabels/InputLabelBase";
+import { BasicInputLabel } from "../../InputLabels";
 
 export type ToggleFieldBaseProps = Omit<
   BasicInputFieldAttributes,
@@ -115,17 +116,14 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
   const [answered, setAnswered] = useState(false);
   return (
     <div className={cn("flex flex-col gap-y-2.5")}>
-      <InputLabel
-        type="normal"
-        answered={answered}
+      <BasicInputLabel
+        answered={disabled ? true : readOnly ? true : answered}
         required={required}
-        htmlFor={`${id}-label`}
-        fontStyle="font-normal text-sm leading-[18.2px]"
-        activateStyle="top-0 translate-y-3"
-        deActivateStyle="top-0 translate-y-[26px]"
+        htmlFor={id}
+        type="normal"
       >
         {labelName}
-      </InputLabel>
+      </BasicInputLabel>
       <label htmlFor={id} className="flex relative w-[90px] h-10">
         <input
           id={id}
