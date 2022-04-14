@@ -30,6 +30,11 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "readOnlyInputBorderStyle"
   | "readOnlyInputBorderWidth"
   | "readOnlyInputTextColor"
+  | "placeholderFontFamily"
+  | "placeholderFontSize"
+  | "placeholderFontWeight"
+  | "placeholderLineHeight"
+  | "placeholderTextColor"
 >;
 
 const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
@@ -71,6 +76,11 @@ const ProtectedBasicTextField: FC<ProtectedBasicTextFieldProps> = (props) => {
       readOnlyInputBorderStyle="read-only:border-solid"
       readOnlyInputBorderWidth="read-only:border"
       readOnlyInputTextColor="read-only:text-instillGray95"
+      placeholderFontFamily="placeholder:font-sans"
+      placeholderFontSize="placeholder:text-base"
+      placeholderFontWeight="placeholder:font-normal"
+      placeholderLineHeight="placeholder:leading-[28px]"
+      placeholderTextColor="placeholder:text-instillGray95"
     />
   );
 };
