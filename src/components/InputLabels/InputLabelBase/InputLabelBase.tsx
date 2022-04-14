@@ -40,7 +40,7 @@ export interface InputLabelBaseProps {
   required: boolean;
 
   /** Whether the input is focused or not */
-  focus: boolean;
+  focus?: boolean;
 
   /** Whether the input is answered or not */
   answered: boolean;
@@ -58,10 +58,10 @@ export interface InputLabelBaseProps {
   deActivateStyle?: string;
 
   /** Handle input label focus event */
-  onFocusHandler: (event) => void;
+  onFocusHandler?: (event) => void;
 
   /** Handle input label blud event */
-  onBlurHandler: (event) => void;
+  onBlurHandler?: (event) => void;
 }
 
 const InputLabelBase: FC<InputLabelBaseProps> = memo(
