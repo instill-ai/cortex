@@ -1,8 +1,6 @@
 import { FC, useState } from "react";
 import cn from "clsx";
-import InputLabel from "../../InputLabels/InputLabelBase";
 import { BasicInputFieldAttributes } from "../../../types/general";
-import InputLabelBase from "../../InputLabels/InputLabelBase";
 import { TextAreaInputLabel } from "../../InputLabels";
 
 export interface TextAreaBaseProps extends BasicInputFieldAttributes {

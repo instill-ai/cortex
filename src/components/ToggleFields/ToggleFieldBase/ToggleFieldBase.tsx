@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
-import InputLabel from "../../InputLabels/InputLabelBase";
 import { BasicInputLabel } from "../../InputLabels";
 
 export type ToggleFieldBaseProps = Omit<

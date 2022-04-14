@@ -1,7 +1,6 @@
 import { FC, useState } from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
-import InputLabel from "../../InputLabels/InputLabelBase";
 import { DocIcon } from "../../Icons";
 import { BasicInputLabel } from "../../InputLabels";
 
