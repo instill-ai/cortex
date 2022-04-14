@@ -23,6 +23,11 @@ export type UploadFileFieldBaseProps = Omit<
   | "readOnlyInputTextColor"
   | "disabledCursor"
   | "readOnlyCursor"
+  | "placeholderFontFamily"
+  | "placeholderFontSize"
+  | "placeholderFontWeight"
+  | "placeholderLineHeight"
+  | "placeholderTextColor"
 > & {
   /** Text display on upload button */
   uploadButtonText: string;
