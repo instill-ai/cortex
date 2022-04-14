@@ -93,7 +93,6 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           inputFontSize,
           inputFontWeight,
           inputLineHeight,
-          resizeStyle,
           bgColor,
           disabledCursor,
           disabledInputBgColor,
@@ -118,6 +117,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
             : readOnly
             ? "text-instillGray50"
             : inputTextColor,
+          disabled ? "resize-none" : resizeStyle,
           disabled
             ? cn(
                 disabledCursor,
