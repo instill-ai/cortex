@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import AutoCompleteWithIcon, {
   AutoCompleteWithIconOption,
@@ -130,7 +129,7 @@ export const Default: ComponentStory<typeof AutoCompleteWithIcon> = () => {
     <AutoCompleteWithIcon
       error={null}
       defaultValue={options[0]}
-      disabled={false}
+      disabled={true}
       readOnly={false}
       required={false}
       onChangeInput={onChangeInput}

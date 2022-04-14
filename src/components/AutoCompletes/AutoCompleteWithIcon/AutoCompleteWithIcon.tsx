@@ -1,8 +1,8 @@
 import Select, { ClearIndicatorProps, StylesConfig } from "react-select";
 import { CSSProperties, FC, ReactNode, useEffect, useState } from "react";
-import InputLabel from "../../InputLabel";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
+import { BasicInputLabel } from "../../InputLabels";
 
 export interface AutoCompleteWithIconOption {
   label: string;
@@ -38,6 +38,10 @@ export type AutoCompleteWithIconProps = Omit<
   | "readOnlyInputBorderStyle"
   | "readOnlyInputBorderWidth"
   | "readOnlyInputTextColor"
+  | "inputBorderColor"
+  | "inputBorderRadius"
+  | "inputBorderStyle"
+  | "inputBorderWidth"
 > & {
   /**
    * Options
@@ -45,6 +49,23 @@ export type AutoCompleteWithIconProps = Omit<
    * - value: Option's store selected value
    * - startIcon: Icon you want to put in fron of label
    * - endIcon: Icon you want to put behind the label
+   * - e.g.
+   ```js
+   [
+      {
+          value: "grpc",
+          label: "gRPC",
+          startIcon: (
+            <GrpcIcon
+              color="text-instillGray95"
+              width="w-[30px]"
+              height="h-[30px]"
+              position="m-auto"
+            />
+          ),
+      },
+   ]
+   ```
    */
   options: AutoCompleteWithIconOption[];
 
@@ -95,6 +116,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
     }),
     control: (styles, state) => ({
       ...styles,
+      cursor: state.isDisabled ? "not-allowed" : readOnly ? "auto" : "pointer",
       borderRadius: "1px",
       borderWidth: "1px",
       height: "70px",
@@ -134,18 +156,21 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
 
   return (
     <div className="flex flex-col gap-y-2.5 relative">
-      <InputLabel
+      <BasicInputLabel
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
         htmlFor={id}
-        fontStyle="font-normal text-sm leading-[18.2px]"
-        activateStyle="top-1/2 -translate-y-[120%]"
-        deActivateStyle="top-1/2 -translate-y-1/2"
         type={inputLabelType}
+        onBlurHandler={() => {
+          setFocus(false);
+        }}
+        onFocusHandler={() => {
+          setFocus(true);
+        }}
       >
         {labelName}
-      </InputLabel>
+      </BasicInputLabel>
       <Select
         id={id}
         isSearchable={!readOnly}
