@@ -40,7 +40,7 @@ export interface InputLabelBaseProps {
   required: boolean;
 
   /** Whether the input is focused or not */
-  focus?: boolean;
+  focus: boolean;
 
   /** Whether the input is answered or not */
   answered: boolean;
