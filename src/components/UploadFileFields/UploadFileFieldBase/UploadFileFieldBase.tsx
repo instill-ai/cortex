@@ -1,8 +1,9 @@
 import { FC, useState } from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
-import InputLabel from "../../InputLabel";
+import InputLabel from "../../InputLabels/InputLabelBase";
 import { DocIcon } from "../../Icons";
+import { BasicInputLabel } from "../../InputLabels";
 
 export type UploadFileFieldBaseProps = Omit<
   BasicInputFieldAttributes,
@@ -89,17 +90,14 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
   const [file, setFile] = useState<string>("");
   return (
     <div className="relative flex flex-col gap-y-2.5 group">
-      <InputLabel
-        type={inputLabelType}
-        answered={answered}
+      <BasicInputLabel
+        answered={disabled ? true : readOnly ? true : answered}
         required={required}
-        htmlFor={`${id}-label`}
-        fontStyle="font-normal text-sm leading-[18.2px]"
-        activateStyle="top-0 translate-y-3"
-        deActivateStyle="top-0 translate-y-[26px]"
+        htmlFor={id}
+        type={inputLabelType}
       >
         {labelName}
-      </InputLabel>
+      </BasicInputLabel>
       <label
         className={cn(
           "flex flex-row border border-instillGray15 p-0 cursor-pointer relative",
