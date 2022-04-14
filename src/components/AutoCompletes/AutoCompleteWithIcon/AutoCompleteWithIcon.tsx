@@ -42,6 +42,11 @@ export type AutoCompleteWithIconProps = Omit<
   | "inputBorderRadius"
   | "inputBorderStyle"
   | "inputBorderWidth"
+  | "placeholderFontFamily"
+  | "placeholderFontSize"
+  | "placeholderFontWeight"
+  | "placeholderLineHeight"
+  | "placeholderTextColor"
 > & {
   /**
    * Options
@@ -133,6 +138,14 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
       ":hover": {
         borderColor: state.isFocused ? "#40A8F5" : "#E4E4E4",
       },
+    }),
+    placeholder: (styles) => ({
+      ...styles,
+      color: "#1A1A1A",
+      fontFamily: "sans-serif",
+      fontWeight: "normal",
+      lineHeight: "28px",
+      fontSize: "16px",
     }),
     menu: (styles) => ({
       ...styles,
