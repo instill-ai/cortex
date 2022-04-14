@@ -8,11 +8,14 @@ export type BasicInputLabelProps = Omit<
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
+  | "activateStyle"
+  | "deActivateStyle"
 >;
 
 const BasicInputLabel: FC<BasicInputLabelProps> = (props) => {
   return (
     <InputLabelBase
+      focus={props.focus}
       required={props.required}
       answered={props.answered}
       htmlFor={props.htmlFor}
@@ -24,6 +27,8 @@ const BasicInputLabel: FC<BasicInputLabelProps> = (props) => {
       labelTextColor="text-instillGray50"
       labelLineHeight="leading-[18.2px]"
       labelFontFamily="font-sans"
+      activateStyle="top-1/2 -translate-y-[120%]"
+      deActivateStyle="top-1/2 -translate-y-1/2"
     >
       {props.children}
     </InputLabelBase>
