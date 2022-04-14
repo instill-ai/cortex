@@ -2,6 +2,16 @@
 
 This is Instill's design system(WIP).
 
+- ToDo
+  - Implement textArea words counter
+  - Implement error style
+  - Solve accessibility issues
+  - Complete readme
+  - Think about memorize component
+  - Plan stroybook structure
+  - Don't use tailwind persudo class, input border style will only apply on container, not input itself
+  - InputLabel cursor
+
 ## Philosophy
 
 - Design system expose different style of component but all inhert a component base.
@@ -16,7 +26,13 @@ Normally, a design-system won't restrict which css framework you use, they expos
 1. TailwindCSS centric: We utilize TailwindCSS Just-In-Time feature to get rid of condition rendering style with specific props, which reduce the size of the component.
 2. We Modularize Base Component, every exposed component will inherit some sort of base component, we will limit the style to avoid some style confusion caused by TailwindCSS Just-In-Time feature.
 
+## Known issues
+
+- AutoCompleteWithIcon: Focus on input label can't make menu open
+
 ## Rules
+
+- One style one props
 
 ### Testing
 
