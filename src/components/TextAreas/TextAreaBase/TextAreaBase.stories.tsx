@@ -31,25 +31,24 @@ Playground.args = {
   disabled: false,
   placeholder: "hello",
   readOnly: false,
-  resize: "both",
   inputLabelType: "inset",
   bgColor: "bg-white",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGray20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-  disabledCursor: "disabled:cursor-not-allowed",
-  disabledInputBgColor: "disabled:bg-white",
-  disabledInputBorderColor: "disabled:border-instillGray20",
-  disabledInputBorderStyle: "disabled:border-dashed",
-  disabledInputBorderWidth: "disabled:border",
-  disabledInputTextColor: "disabled:text-instillGray50",
-  readOnlyCursor: "read-only:cursor-auto",
-  readOnlyInputBgColor: "read-only:bg-white",
-  readOnlyInputBorderColor: "read-only:border-instillGray20",
-  readOnlyInputBorderStyle: "read-only:border-solid",
-  readOnlyInputBorderWidth: "read-only:border",
-  readOnlyInputTextColor: "read-only:text-instillGray95",
+  disabledCursor: "cursor-not-allowed",
+  disabledInputBgColor: "bg-white",
+  disabledInputBorderColor: "border-instillGray20",
+  disabledInputBorderStyle: "border-dashed",
+  disabledInputBorderWidth: "border",
+  disabledInputTextColor: "text-instillGray50",
+  readOnlyCursor: "cursor-auto",
+  readOnlyInputBgColor: "bg-white",
+  readOnlyInputBorderColor: "border-instillGray20",
+  readOnlyInputBorderStyle: "border-solid",
+  readOnlyInputBorderWidth: "border",
+  readOnlyInputTextColor: "text-instillGray95",
   placeholderFontFamily: "placeholder:font-sans",
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
@@ -66,6 +65,7 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
 
   return (
     <TextAreaBase
+      value={text}
       error={null}
       onChangeInput={onChangeInput}
       id="text-field-playground"
@@ -82,30 +82,36 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       disabled={false}
       placeholder="hello"
       readOnly={false}
-      resize="both"
       inputLabelType="inset"
       bgColor="bg-white"
       inputBorderRadius="rounded-[1px]"
       inputBorderColor="border-instillGray20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
-      disabledCursor="disabled:cursor-not-allowed"
-      disabledInputBgColor="disabled:bg-white"
-      disabledInputBorderColor="disabled:border-instillGray20"
-      disabledInputBorderStyle="disabled:border-dashed"
-      disabledInputBorderWidth="disabled:border"
-      disabledInputTextColor="disabled:text-instillGray50"
-      readOnlyCursor="read-only:cursor-auto"
-      readOnlyInputBgColor="read-only:bg-white"
-      readOnlyInputBorderColor="read-only:border-instillGray20"
-      readOnlyInputBorderStyle="read-only:border-solid"
-      readOnlyInputBorderWidth="read-only:border"
-      readOnlyInputTextColor="read-only:text-instillGray95"
+      disabledCursor="cursor-not-allowed"
+      disabledInputBgColor="bg-white"
+      disabledInputBorderColor="border-instillGray20"
+      disabledInputBorderStyle="border-dashed"
+      disabledInputBorderWidth="border"
+      disabledInputTextColor="text-instillGray50"
+      readOnlyCursor="cursor-auto"
+      readOnlyInputBgColor="bg-white"
+      readOnlyInputBorderColor="border-instillGray20"
+      readOnlyInputBorderStyle="border-solid"
+      readOnlyInputBorderWidth="border"
+      readOnlyInputTextColor="text-instillGray95"
       placeholderFontFamily="placeholder:font-sans"
       placeholderFontSize="placeholder:text-base"
       placeholderFontWeight="placeholder:font-normal"
       placeholderLineHeight="placeholder:leading-[28px]"
       placeholderTextColor="placeholder:text-instillGray95"
+      enableCounter={true}
+      counterFontFamily="font-sans"
+      counterFontSize="text-xs"
+      counterFontWeight="font-normal"
+      counterLineHeight="leanding-[15.6px]"
+      counterTextColor="text-instillGray20"
+      counterWordLimit={256}
     />
   );
 };
