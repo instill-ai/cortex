@@ -1,7 +1,9 @@
 import { FC, useState } from "react";
 import cn from "clsx";
-import InputLabel from "../../InputLabel";
+import InputLabel from "../../InputLabels/InputLabelBase";
 import { BasicInputFieldAttributes } from "../../../types/general";
+import InputLabelBase from "../../InputLabels/InputLabelBase";
+import { TextAreaInputLabel } from "../../InputLabels";
 
 export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   /** Control how textarea can be resized*/
@@ -40,7 +42,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   placeholder,
   resize,
   inputLabelType,
-  borderRadius,
+  inputBorderRadius,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -66,25 +68,16 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   }
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-y-2.5 relative",
-        widthStyle,
-        borderRadius
-      )}
-    >
-      <InputLabel
+    <div className={cn("flex flex-col gap-y-2.5 relative", widthStyle)}>
+      <TextAreaInputLabel
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
         htmlFor={id}
-        fontStyle="font-normal text-sm leading-[18.2px]"
-        activateStyle="top-0 translate-y-3"
-        deActivateStyle="top-0 translate-y-[26px]"
         type={inputLabelType}
       >
         {labelName}
-      </InputLabel>
+      </TextAreaInputLabel>
       <textarea
         className={cn(
           "px-5 pb-5 pl-5 placeholder:text-instillGray30 min-h-[140px]",
@@ -108,7 +101,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           readOnlyInputBorderStyle,
           readOnlyInputBorderWidth,
           readOnlyInputTextColor,
-          borderRadius,
+          inputBorderRadius,
           disabled
             ? "instill-input-no-highlight border border-instillGray15"
             : readOnly
