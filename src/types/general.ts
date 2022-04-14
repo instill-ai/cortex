@@ -177,4 +177,39 @@ export interface BasicInputFieldAttributes {
    * - hide: Hide label
    */
   inputLabelType: "normal" | "inset" | "hide";
+
+  /** TailwindCSS format - Input placeholder's font size
+   * - Please add persudo class "placeholder:"
+   * - e.g. placeholder:text-base
+   * - https://tailwindcss.com/docs/font-size
+   */
+  placeholderFontSize: string;
+
+  /** TailwindCSS format - Input placeholder's text color
+   * - Please add persudo class "placeholder:"
+   * - e.g. placeholder:text-instillGray50
+   * - https://tailwindcss.com/docs/text-color
+   */
+  placeholderTextColor: string;
+
+  /** TailwindCSS format - Input placeholder's line height
+   * - Please add persudo class "placeholder:"
+   * - e.g. placeholder:leading-normal
+   * - https://tailwindcss.com/docs/line-height
+   */
+  placeholderLineHeight: string;
+
+  /** TailwindCSS format - Input placeholder's font family
+   * - Please add persudo class "placeholder:"
+   * - e.g. placeholder:font-sans
+   * - https://tailwindcss.com/docs/font-family
+   */
+  placeholderFontFamily: string;
+
+  /** TailwindCSS format - Input placeholder's font weight
+   * - Please add persudo class "placeholder:"
+   * - e.g. placeholder:font-normal
+   * - https://tailwindcss.com/docs/font-weight
+   */
+  placeholderFontWeight: string;
 }
