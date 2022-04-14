@@ -2,13 +2,13 @@ import { FC, memo } from "react";
 import cn from "clsx";
 
 export interface InputLabelBaseProps {
-  /** InputLabel's type
+  /** Input label's type
    * - normal: input label has normal position layout and doesn't have any animation
    * - inset: input label has absolution position layout, put into the input field and have float up animation with specific activate, deActivate style
    */
   type: "normal" | "inset" | "hide";
 
-  /** Input field id */
+  /** Input label associated input field's id */
   htmlFor: string;
 
   /** TailwindCSS format - Label's text color
@@ -90,26 +90,36 @@ const InputLabelBase: FC<InputLabelBaseProps> = memo(
     }
 
     return (
-      <label
-        className={cn(
-          "z-10",
-          type === "inset" ? (activate ? activateStyle : deActivateStyle) : "",
-          labelFontSize,
-          labelFontWeight,
-          labelTextColor,
-          labelFontFamily,
-          {
-            "absolute translate-x-5 transform-gpu origin-top-left left-0":
-              type === "inset",
-          }
+      <>
+        {type !== "hide" ? (
+          <label
+            className={cn(
+              "z-10",
+              type === "inset"
+                ? activate
+                  ? activateStyle
+                  : deActivateStyle
+                : "",
+              labelFontSize,
+              labelFontWeight,
+              labelTextColor,
+              labelFontFamily,
+              {
+                "absolute translate-x-5 transform-gpu origin-top-left left-0":
+                  type === "inset",
+              }
+            )}
+            htmlFor={htmlFor}
+            onFocus={(event) => onFocusHandler(event)}
+            onBlur={(event) => onBlurHandler(event)}
+          >
+            {children}
+            {required ? <span className="ml-1">*</span> : null}
+          </label>
+        ) : (
+          ""
         )}
-        htmlFor={htmlFor}
-        onFocus={(event) => onFocusHandler(event)}
-        onBlur={(event) => onBlurHandler(event)}
-      >
-        {children}
-        {required ? <span className="ml-1">*</span> : null}
-      </label>
+      </>
     );
   }
 );
