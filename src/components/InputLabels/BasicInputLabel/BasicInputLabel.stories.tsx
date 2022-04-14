@@ -15,19 +15,21 @@ export const Playground = Template.bind({});
 
 export const Default: ComponentStory<typeof BasicInputLabel> = () => {
   const [_, setFocus] = useState(false);
-  <BasicInputLabel
-    focus={false}
-    htmlFor="default"
-    answered={false}
-    required={false}
-    type="inset"
-    onBlurHandler={() => {
-      setFocus(false);
-    }}
-    onFocusHandler={() => {
-      setFocus(true);
-    }}
-  >
-    Default label
-  </BasicInputLabel>;
+  return (
+    <BasicInputLabel
+      focus={false}
+      htmlFor="default"
+      answered={false}
+      required={false}
+      type="inset"
+      onBlurHandler={() => {
+        setFocus(false);
+      }}
+      onFocusHandler={() => {
+        setFocus(true);
+      }}
+    >
+      Default label
+    </BasicInputLabel>
+  );
 };
