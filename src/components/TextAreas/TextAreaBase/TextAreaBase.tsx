@@ -43,6 +43,9 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   resize,
   inputLabelType,
   inputBorderRadius,
+  inputBorderColor,
+  inputBorderStyle,
+  inputBorderWidth,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -103,12 +106,38 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           readOnlyInputTextColor,
           inputBorderRadius,
           disabled
-            ? "instill-input-no-highlight border border-instillGray15"
+            ? cn(
+                disabledCursor,
+                disabledInputBgColor,
+                disabledInputBorderColor,
+                disabledInputBorderStyle,
+                disabledInputBorderWidth,
+                disabledInputTextColor,
+                "instill-input-no-highlight"
+              )
             : readOnly
-            ? "instill-input-no-highlight border border-instillGray15"
+            ? cn(
+                readOnlyCursor,
+                readOnlyInputBgColor,
+                readOnlyInputBorderColor,
+                readOnlyInputBorderStyle,
+                readOnlyInputBorderWidth,
+                readOnlyInputTextColor,
+                "instill-input-no-highlight"
+              )
             : focusHighlight
-            ? "instill-input-highlight"
-            : "instill-input-no-highlight border border-instillGray15",
+            ? cn(
+                inputBorderWidth,
+                inputBorderColor,
+                inputBorderStyle,
+                "instill-input-highlight"
+              )
+            : cn(
+                inputBorderColor,
+                inputBorderStyle,
+                inputBorderWidth,
+                "instill-input-no-highlight"
+              ),
           disabled
             ? "text-instillGray50"
             : readOnly

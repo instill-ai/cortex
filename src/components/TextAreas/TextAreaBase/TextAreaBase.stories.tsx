@@ -34,7 +34,10 @@ Playground.args = {
   resize: "both",
   inputLabelType: "inset",
   bgColor: "bg-white",
-  borderRadius: "rounded",
+  inputBorderRadius: "rounded-[1px]",
+  inputBorderColor: "border-instillGray20",
+  inputBorderStyle: "border-solid",
+  inputBorderWidth: "border",
   disabledCursor: "disabled:cursor-not-allowed",
   disabledInputBgColor: "disabled:bg-white",
   disabledInputBorderColor: "disabled:border-instillGray20",
@@ -77,7 +80,10 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       resize="both"
       inputLabelType="inset"
       bgColor="bg-white"
-      borderRadius="rounded"
+      inputBorderRadius="rounded-[1px]"
+      inputBorderColor="border-instillGray20"
+      inputBorderStyle="border-solid"
+      inputBorderWidth="border"
       disabledCursor="disabled:cursor-not-allowed"
       disabledInputBgColor="disabled:bg-white"
       disabledInputBorderColor="disabled:border-instillGray20"
