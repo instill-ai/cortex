@@ -18,6 +18,11 @@ export type ToggleFieldBaseProps = Omit<
   | "bgColor"
   | "disabledInputTextColor"
   | "readOnlyInputTextColor"
+  | "placeholderFontFamily"
+  | "placeholderFontSize"
+  | "placeholderFontWeight"
+  | "placeholderLineHeight"
+  | "placeholderTextColor"
 > & {
   /** The initial checked state of this toggle field */
   defaultChecked: boolean;
