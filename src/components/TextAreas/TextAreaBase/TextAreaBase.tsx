@@ -38,6 +38,11 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   readOnlyInputBorderWidth,
   readOnlyInputTextColor,
   placeholder,
+  placeholderFontFamily,
+  placeholderFontSize,
+  placeholderFontWeight,
+  placeholderLineHeight,
+  placeholderTextColor,
   resize,
   inputLabelType,
   inputBorderRadius,
@@ -81,7 +86,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
       </TextAreaInputLabel>
       <textarea
         className={cn(
-          "px-5 pb-5 pl-5 placeholder:text-instillGray30 min-h-[140px]",
+          "px-5 pb-5 pl-5 min-h-[140px]",
           inputLabelType === "inset" ? "pt-[34px]" : "pt-5",
           heightStyle,
           widthStyle,
@@ -103,6 +108,16 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
           readOnlyInputBorderWidth,
           readOnlyInputTextColor,
           inputBorderRadius,
+          placeholderFontFamily,
+          placeholderFontSize,
+          placeholderFontWeight,
+          placeholderLineHeight,
+          placeholderTextColor,
+          disabled
+            ? "text-instillGray50"
+            : readOnly
+            ? "text-instillGray50"
+            : inputTextColor,
           disabled
             ? cn(
                 disabledCursor,
@@ -135,12 +150,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
                 inputBorderStyle,
                 inputBorderWidth,
                 "instill-input-no-highlight"
-              ),
-          disabled
-            ? "text-instillGray50"
-            : readOnly
-            ? "text-instillGray50"
-            : inputTextColor
+              )
         )}
         id={id}
         disabled={disabled}

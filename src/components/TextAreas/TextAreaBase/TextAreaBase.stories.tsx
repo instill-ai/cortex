@@ -50,6 +50,11 @@ Playground.args = {
   readOnlyInputBorderStyle: "read-only:border-solid",
   readOnlyInputBorderWidth: "read-only:border",
   readOnlyInputTextColor: "read-only:text-instillGray95",
+  placeholderFontFamily: "placeholder:font-sans",
+  placeholderFontSize: "placeholder:text-base",
+  placeholderFontWeight: "placeholder:font-normal",
+  placeholderLineHeight: "placeholder:leading-[28px]",
+  placeholderTextColor: "placeholder:text-instillGray95",
 };
 
 export const Default: ComponentStory<typeof TextAreaBase> = () => {
@@ -96,6 +101,11 @@ export const Default: ComponentStory<typeof TextAreaBase> = () => {
       readOnlyInputBorderStyle="read-only:border-solid"
       readOnlyInputBorderWidth="read-only:border"
       readOnlyInputTextColor="read-only:text-instillGray95"
+      placeholderFontFamily="placeholder:font-sans"
+      placeholderFontSize="placeholder:text-base"
+      placeholderFontWeight="placeholder:font-normal"
+      placeholderLineHeight="placeholder:leading-[28px]"
+      placeholderTextColor="placeholder:text-instillGray95"
     />
   );
 };
