@@ -11,10 +11,20 @@ export interface InputLabelProps {
   /** Input field id */
   htmlFor: string;
 
-  /** TailwindCSS format
-   * - Label's font size, line height and font weight
+  /** TailwindCSS format - Label's text color
+   * - e.g. text-instillGray50
    */
-  fontStyle: string;
+  labelTextColor: string;
+
+  /** TailwindCSS format - Label's font weight
+   * - e.g. font-normal
+   */
+  labelFontWeight: string;
+
+  /** TailwindCSS format - Label's font size
+   * - e.g. text-base
+   */
+  labelFontSize: string;
 
   /** Whether the input is required or not */
   required: boolean;
@@ -51,7 +61,9 @@ const InputLabel: FC<InputLabelProps> = memo(
     focus,
     answered,
     children,
-    fontStyle,
+    labelFontSize,
+    labelFontWeight,
+    labelTextColor,
     activateStyle,
     deActivateStyle,
     onFocusHandler,
@@ -71,7 +83,9 @@ const InputLabel: FC<InputLabelProps> = memo(
         className={cn(
           "font-sans text-instillGray50 z-10",
           type === "inset" ? (activate ? activateStyle : deActivateStyle) : "",
-          fontStyle,
+          labelFontSize,
+          labelFontWeight,
+          labelTextColor,
           {
             "absolute translate-x-5 transform-gpu origin-top-left left-0":
               type === "inset",
