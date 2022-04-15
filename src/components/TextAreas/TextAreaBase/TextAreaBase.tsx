@@ -123,54 +123,45 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   //     break;
   // }
 
+  const getInputStyle = disabled
+    ? cn(
+        disabledCursor,
+        disabledInputBgColor,
+        disabledInputBorderColor,
+        disabledInputBorderStyle,
+        disabledInputBorderWidth,
+        disabledInputTextColor
+      )
+    : readOnly
+    ? cn(
+        readOnlyCursor,
+        readOnlyInputBgColor,
+        readOnlyInputBorderColor,
+        readOnlyInputBorderStyle,
+        readOnlyInputBorderWidth,
+        readOnlyInputTextColor
+      )
+    : focusHighlight
+    ? focus
+      ? cn(
+          inputBorderWidth,
+          inputBorderStyle,
+          "outline-none ring-0 ring-white border-instillBlue50 instill-input-focus-shadow cursor-text"
+        )
+      : cn(inputBorderColor, inputBorderStyle, inputBorderWidth, "cursor-text")
+    : cn(inputBorderColor, inputBorderStyle, inputBorderWidth, "cursor-text");
+
   return (
     <div
       onClick={() => {
         inputRef.current.focus();
       }}
       className={cn(
-        "px-5 pb-5 pl-5 flex flex-col gap-y-2.5 relative",
+        "flex flex-col gap-y-2.5 relative",
         widthStyle,
         bgColor,
         inputBorderRadius,
-        inputLabelType === "inset" ? "pt-[34px]" : "pt-5",
-        disabled
-          ? cn(
-              disabledCursor,
-              disabledInputBgColor,
-              disabledInputBorderColor,
-              disabledInputBorderStyle,
-              disabledInputBorderWidth,
-              disabledInputTextColor
-            )
-          : readOnly
-          ? cn(
-              readOnlyCursor,
-              readOnlyInputBgColor,
-              readOnlyInputBorderColor,
-              readOnlyInputBorderStyle,
-              readOnlyInputBorderWidth,
-              readOnlyInputTextColor
-            )
-          : focusHighlight
-          ? focus
-            ? cn(
-                inputBorderWidth,
-                inputBorderStyle,
-                "foutline-none ring-0 ring-white border-instillBlue50 instill-input-focus-shadow cursor-text"
-              )
-            : cn(
-                inputBorderColor,
-                inputBorderStyle,
-                inputBorderWidth,
-                "cursor-text"
-              )
-          : cn(
-              inputBorderColor,
-              inputBorderStyle,
-              inputBorderWidth,
-              "cursor-text"
-            )
+        inputLabelType === "inset" ? cn("pb-5 pt-[34px]", getInputStyle) : ""
       )}
     >
       <TextAreaInputLabel
@@ -191,7 +182,7 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
       <textarea
         ref={inputRef}
         className={cn(
-          "instill-input-no-highlight h-full resize-none",
+          "flex px-5 min-h-[100px] resize-none",
           inputWidth,
           inputFontSize,
           inputFontWeight,
@@ -206,7 +197,10 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
             ? cn(disabledCursor, "text-instillGray50")
             : readOnly
             ? cn(readOnlyCursor, "text-instillGray50")
-            : inputTextColor
+            : inputTextColor,
+          inputLabelType === "inset"
+            ? "instill-input-no-highlight"
+            : cn(getInputStyle, "pt-5")
         )}
         id={id}
         disabled={disabled}
