@@ -132,9 +132,9 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         <input
           className={cn(
             "pl-5",
-            inputLabelType !== "inset"
-              ? getInputStyle
-              : "pt-6 instill-input-no-highlight",
+            inputLabelType === "inset"
+              ? "pt-6 instill-input-no-highlight"
+              : getInputStyle,
             heightStyle,
             widthStyle,
             inputFontSize,
