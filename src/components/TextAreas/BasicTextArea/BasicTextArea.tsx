@@ -33,12 +33,20 @@ export type BasicTextAreaProps = Omit<
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
+  | "counterFontFamily"
+  | "counterFontSize"
+  | "counterFontWeight"
+  | "counterLineHeight"
+  | "counterTextColor"
 >;
 
 const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
   return (
     <TextAreaBase
       id={props.id}
+      value={props.value}
+      enableCounter={props.enableCounter}
+      counterWordLimit={props.counterWordLimit}
       disabled={props.disabled}
       required={props.required}
       onChangeInput={props.onChangeInput}
@@ -47,7 +55,11 @@ const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
       autoComplete={props.autoComplete}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
-      resize={props.resize}
+      counterFontFamily="font-sans"
+      counterFontSize="text-xs"
+      counterFontWeight="font-normal"
+      counterLineHeight="leanding-[15.6px]"
+      counterTextColor="text-instillGray20"
       inputHeight="h-[140px]"
       inputWidth="w-full"
       focusHighlight={true}

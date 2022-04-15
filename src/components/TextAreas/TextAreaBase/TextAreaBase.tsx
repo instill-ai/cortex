@@ -2,7 +2,6 @@ import { FC, useRef, useState } from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { TextAreaInputLabel } from "../../InputLabels";
-import { colors } from "react-select/dist/declarations/src/theme";
 
 export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   /** Textarea value */

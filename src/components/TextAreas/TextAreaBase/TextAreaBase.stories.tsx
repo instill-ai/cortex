@@ -54,6 +54,13 @@ Playground.args = {
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "placeholder:leading-[28px]",
   placeholderTextColor: "placeholder:text-instillGray95",
+  enableCounter: true,
+  counterFontFamily: "font-sans",
+  counterFontSize: "text-xs",
+  counterFontWeight: "font-normal",
+  counterLineHeight: "leanding-[15.6px]",
+  counterTextColor: "text-instillGray20",
+  counterWordLimit: 256,
 };
 
 export const Default: ComponentStory<typeof TextAreaBase> = () => {
