@@ -74,8 +74,45 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   const widthStyle = inputWidth ?? "w-full";
   const heightStyle = inputHeight ?? "h-[70px]";
 
+  const getInputStyle = disabled
+    ? cn(
+        disabledCursor,
+        disabledInputBgColor,
+        disabledInputBorderColor,
+        disabledInputBorderStyle,
+        disabledInputBorderWidth,
+        disabledInputTextColor,
+        "instill-input-no-highlight"
+      )
+    : readOnly
+    ? cn(
+        readOnlyCursor,
+        readOnlyInputBgColor,
+        readOnlyInputBorderColor,
+        readOnlyInputBorderStyle,
+        readOnlyInputBorderWidth,
+        readOnlyInputTextColor,
+        "instill-input-no-highlight"
+      )
+    : focusHighlight
+    ? focus
+      ? cn(
+          inputBorderWidth,
+          inputBorderStyle,
+          "outline-none ring-0 ring-white border-instillBlue50 instill-input-focus-shadow cursor-text"
+        )
+      : cn(inputBorderColor, inputBorderStyle, inputBorderWidth, "cursor-text")
+    : cn(inputBorderColor, inputBorderStyle, inputBorderWidth, "cursor-text");
+
   return (
-    <div className={cn("flex flex-col gap-y-2.5 relative", widthStyle)}>
+    <div
+      className={cn(
+        "flex flex-col gap-y-2.5 relative",
+        widthStyle,
+        inputBorderRadius,
+        inputLabelType === "inset" ? getInputStyle : ""
+      )}
+    >
       <BasicInputLabel
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
@@ -95,7 +132,9 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
         <input
           className={cn(
             "pl-5",
-            inputLabelType === "inset" ? "pt-6" : "",
+            inputLabelType !== "inset"
+              ? getInputStyle
+              : "pt-6 instill-input-no-highlight",
             heightStyle,
             widthStyle,
             inputFontSize,
@@ -109,43 +148,10 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             placeholderLineHeight,
             placeholderTextColor,
             disabled
-              ? "text-instillGray50"
+              ? cn(disabledCursor, "text-instillGray50")
               : readOnly
-              ? "text-instillGray50"
-              : inputTextColor,
-            disabled
-              ? cn(
-                  disabledCursor,
-                  disabledInputBgColor,
-                  disabledInputBorderColor,
-                  disabledInputBorderStyle,
-                  disabledInputBorderWidth,
-                  disabledInputTextColor,
-                  "instill-input-no-highlight"
-                )
-              : readOnly
-              ? cn(
-                  readOnlyCursor,
-                  readOnlyInputBgColor,
-                  readOnlyInputBorderColor,
-                  readOnlyInputBorderStyle,
-                  readOnlyInputBorderWidth,
-                  readOnlyInputTextColor,
-                  "instill-input-no-highlight"
-                )
-              : focusHighlight
-              ? cn(
-                  inputBorderWidth,
-                  inputBorderColor,
-                  inputBorderStyle,
-                  "instill-input-highlight"
-                )
-              : cn(
-                  inputBorderColor,
-                  inputBorderStyle,
-                  inputBorderWidth,
-                  "instill-input-no-highlight"
-                )
+              ? cn(readOnlyCursor, "text-instillGray50")
+              : inputTextColor
           )}
           id={id}
           type={showSecret ? "text" : type}

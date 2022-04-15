@@ -22,7 +22,7 @@ Playground.args = {
   required: true,
   inputHeight: "h-[70px]",
   inputWidth: "w-full",
-  focusHighlight: false,
+  focusHighlight: true,
   autoComplete: "off",
   type: "text",
   inputFontSize: "text-base",
@@ -30,18 +30,18 @@ Playground.args = {
   inputFontWeight: "font-normal",
   inputTextColor: "text-instillGray95",
   bgColor: "bg-white",
-  disabledCursor: "disabled:cursor-not-allowed",
-  disabledInputBgColor: "disabled:bg-white",
-  disabledInputBorderColor: "disabled:border-instillGray20",
-  disabledInputBorderStyle: "disabled:border-dashed",
-  disabledInputBorderWidth: "disabled:border",
-  disabledInputTextColor: "disabled:text-instillGray50",
-  readOnlyCursor: "read-only:cursor-auto",
-  readOnlyInputBgColor: "read-only:bg-white",
-  readOnlyInputBorderColor: "read-only:border-instillGray20",
-  readOnlyInputBorderStyle: "read-only:border-solid",
-  readOnlyInputBorderWidth: "read-only:border",
-  readOnlyInputTextColor: "read-only:text-instillGray95",
+  disabledCursor: "cursor-not-allowed",
+  disabledInputBgColor: "bg-white",
+  disabledInputBorderColor: "border-instillGray20",
+  disabledInputBorderStyle: "border-dashed",
+  disabledInputBorderWidth: "border",
+  disabledInputTextColor: "text-instillGray50",
+  readOnlyCursor: "cursor-auto",
+  readOnlyInputBgColor: "bg-white",
+  readOnlyInputBorderColor: "border-instillGray20",
+  readOnlyInputBorderStyle: "border-solid",
+  readOnlyInputBorderWidth: "border",
+  readOnlyInputTextColor: "text-instillGray95",
   disabled: false,
   placeholder: "hello",
   readOnly: false,
@@ -49,65 +49,11 @@ Playground.args = {
   inputLabelType: "inset",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGray20",
-  inputBorderStyle: "border-dashed",
+  inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
   placeholderFontFamily: "placeholder:font-sans",
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "placeholder:leading-[28px]",
   placeholderTextColor: "placeholder:text-instillGray95",
-};
-
-export const Default: ComponentStory<typeof TextFieldBase> = () => {
-  const [text, setText] = useState<string>("");
-
-  const onChangeInput = (inputValue: string) => {
-    setText(inputValue);
-  };
-
-  return (
-    <TextFieldBase
-      error={null}
-      onChangeInput={onChangeInput}
-      id="text-field-playground"
-      labelName="playground"
-      required={true}
-      inputHeight="h-[70px]"
-      inputWidth="w-full"
-      focusHighlight={true}
-      autoComplete="off"
-      type="text"
-      inputFontSize="text-base"
-      inputLineHeight="leading-[28px]"
-      inputFontWeight="font-normal"
-      inputTextColor="text-instillGray95"
-      bgColor="bg-white"
-      disabledCursor="disabled:cursor-not-allowed"
-      disabledInputBgColor="disabled:bg-white"
-      disabledInputBorderColor="disabled:border-instillGray20"
-      disabledInputBorderStyle="disabled:border-dashed"
-      disabledInputBorderWidth="disabled:border"
-      disabledInputTextColor="disabled:text-instillGray50"
-      readOnlyCursor="read-only:cursor-auto"
-      readOnlyInputBgColor="read-only:bg-white"
-      readOnlyInputBorderColor="read-only:border-instillGray20"
-      readOnlyInputBorderStyle="read-only:border-solid"
-      readOnlyInputBorderWidth="read-only:border"
-      readOnlyInputTextColor="read-only:text-instillGray95"
-      disabled={false}
-      placeholder="hello"
-      readOnly={false}
-      enableProtectedToggle={false}
-      inputLabelType="inset"
-      inputBorderRadius="rounded-[1px]"
-      inputBorderColor="border-instillGray20"
-      inputBorderStyle="border-solid"
-      inputBorderWidth="border"
-      placeholderFontFamily="placeholder:font-sans"
-      placeholderFontSize="placeholder:text-base"
-      placeholderFontWeight="placeholder:font-normal"
-      placeholderLineHeight="placeholder:leading-[28px]"
-      placeholderTextColor="placeholder:text-instillGray95"
-    />
-  );
 };
