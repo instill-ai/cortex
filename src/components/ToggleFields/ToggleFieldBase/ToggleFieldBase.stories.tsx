@@ -11,7 +11,7 @@ const Template: ComponentStory<typeof ToggleFieldBase> = (args) => (
   <ToggleFieldBase
     {...args}
     dotColor="bg-instillGray30"
-    checkedDotColor="peer-checked:bg-instillBlue50"
+    checkedDotColor="bg-instillBlue50"
   />
 );
 export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
@@ -31,24 +31,24 @@ Playground.args = {
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
   dotColor: "bg-instillGray30",
-  checkedInputBorderColor: "checked:border-instillBlue50",
-  checkedDotColor: "peer-checked:bg-instillBlue50",
-  disabledDotColor: "disabled:bg-instillGray20",
-  disabledCheckedDotColor: "disabled:peer-checked:bg-[#8DF5FF]",
-  disabledCursor: "disabled:cursor-not-allowed",
-  disabledInputBgColor: "disabled:bg-white",
-  disabledInputBorderColor: "disabled:border-instillGray20",
-  disabledInputBorderStyle: "disabled:border-dashed",
-  disabledInputBorderWidth: "disabled:border",
-  disabledCheckedInputBorderColor: "disabled:checked:border-instillGray20",
-  readOnlyCursor: "read-only:cursor-auto",
-  readOnlyInputBgColor: "read-only:bg-white",
-  readOnlyInputBorderColor: "read-only:border-instillGray20",
-  readOnlyInputBorderStyle: "read-only:border-solid",
-  readOnlyInputBorderWidth: "read-only:border",
-  readOnlyCheckedInputBorderColor: "read-only:checked:border-[#8DF5FF]",
-  readOnlyCheckedDotColor: "read-only:peer-checked:bg-[#8DF5FF]",
-  readOnlyDotColor: "read-only:bg-instillGray20",
+  checkedInputBorderColor: "border-instillBlue50",
+  checkedDotColor: "bg-instillBlue50",
+  disabledDotColor: "bg-instillGray20",
+  disabledCheckedDotColor: "bg-[#8DF5FF]",
+  disabledCursor: "cursor-not-allowed",
+  disabledInputBgColor: "bg-white",
+  disabledInputBorderColor: "border-instillGray20",
+  disabledInputBorderStyle: "border-dashed",
+  disabledInputBorderWidth: "border",
+  disabledCheckedInputBorderColor: "border-instillGray20",
+  readOnlyCursor: "cursor-auto",
+  readOnlyInputBgColor: "bg-white",
+  readOnlyInputBorderColor: "border-instillGray20",
+  readOnlyInputBorderStyle: "border-solid",
+  readOnlyInputBorderWidth: "border",
+  readOnlyCheckedInputBorderColor: "border-[#8DF5FF]",
+  readOnlyCheckedDotColor: "bg-[#8DF5FF]",
+  readOnlyDotColor: "bg-instillGray20",
 };
 
 export const Default: ComponentStory<typeof ToggleFieldBase> = () => {
@@ -73,23 +73,23 @@ export const Default: ComponentStory<typeof ToggleFieldBase> = () => {
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
       dotColor="bg-instillGray30"
-      checkedInputBorderColor="checked:border-instillBlue50"
-      checkedDotColor="peer-checked:bg-instillBlue50"
-      disabledDotColor="disabled:bg-instillGray20"
-      disabledCheckedDotColor="disabled:peer-checked:bg-[#8DF5FF]"
-      disabledCursor="disabled:cursor-not-allowed"
-      disabledInputBgColor="disabled:bg-white"
-      disabledInputBorderColor="disabled:border-instillGray20"
-      disabledInputBorderStyle="disabled:border-dashed"
-      disabledInputBorderWidth="disabled:border"
-      disabledCheckedInputBorderColor="disabled:checked:border-instillGray20"
-      readOnlyCursor="read-only:cursor-auto"
-      readOnlyInputBgColor="read-only:bg-white"
-      readOnlyInputBorderColor="read-only:border-instillGray20"
-      readOnlyInputBorderStyle="read-only:border-solid"
-      readOnlyInputBorderWidth="read-only:border"
-      readOnlyCheckedInputBorderColor="read-only:checked:border-[#8DF5FF]"
-      readOnlyCheckedDotColor="read-only:peer-checked:bg-[#8DF5FF]"
+      checkedInputBorderColor="border-instillBlue50"
+      checkedDotColor="bg-instillBlue50"
+      disabledDotColor="bg-instillGray20"
+      disabledCheckedDotColor="bg-[#8DF5FF]"
+      disabledCursor="cursor-not-allowed"
+      disabledInputBgColor="bg-white"
+      disabledInputBorderColor="border-instillGray20"
+      disabledInputBorderStyle="border-dashed"
+      disabledInputBorderWidth="border"
+      disabledCheckedInputBorderColor="border-instillGray20"
+      readOnlyCursor="cursor-auto"
+      readOnlyInputBgColor="bg-white"
+      readOnlyInputBorderColor="border-instillGray20"
+      readOnlyInputBorderStyle="border-solid"
+      readOnlyInputBorderWidth="border"
+      readOnlyCheckedInputBorderColor="border-[#8DF5FF]"
+      readOnlyCheckedDotColor="bg-[#8DF5FF]"
       readOnlyDotColor="readonly:bg-instillGray20"
     />
   );

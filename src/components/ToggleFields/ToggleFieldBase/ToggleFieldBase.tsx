@@ -118,12 +118,14 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
   readOnlyCheckedDotColor,
 }) => {
   const [answered, setAnswered] = useState(false);
+  const [focus, setFocus] = useState(false);
+  const [checked, setChecked] = useState(false);
   return (
-    <div className={cn("flex flex-col gap-y-2.5")}>
+    <div className="flex flex-col gap-y-2.5">
       <BasicInputLabel
         answered={disabled ? true : readOnly ? true : answered}
         required={required}
-        htmlFor={id}
+        htmlFor={`${id}-label`}
         type="normal"
       >
         {labelName}
@@ -135,7 +137,6 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
           className={cn(
             "peer appearance-none w-[90px] h-10",
             inputBorderRadius,
-            checkedInputBorderColor,
             disabled
               ? cn(
                   disabledCursor,
@@ -155,20 +156,22 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
                   readOnlyCheckedInputBorderColor
                 )
               : focusHighlight
-              ? cn(
-                  inputBorderColor,
-                  inputBorderStyle,
-                  inputBorderWidth,
-                  checkedInputBorderColor,
-                  "instill-input-highlight",
-                  "cursor-pointer"
-                )
+              ? focus
+                ? cn(
+                    inputBorderWidth,
+                    inputBorderStyle,
+                    "outline-none ring-0 ring-white border-instillBlue50 instill-input-focus-shadow cursor-pointer"
+                  )
+                : cn(
+                    inputBorderStyle,
+                    checked ? checkedInputBorderColor : inputBorderColor,
+                    inputBorderWidth,
+                    "cursor-pointer"
+                  )
               : cn(
                   inputBorderColor,
                   inputBorderStyle,
                   inputBorderWidth,
-                  checkedInputBorderColor,
-                  "instill-input-no-highlight",
                   "cursor-pointer"
                 )
           )}
@@ -182,6 +185,7 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
             }
 
             onChangeInput(event.target.checked);
+            setChecked(event.target.checked);
 
             if (!answered) {
               setAnswered(true);
@@ -193,6 +197,12 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
               event.preventDefault();
               return false;
             }
+          }}
+          onFocus={() => {
+            setFocus(true);
+          }}
+          onBlur={() => {
+            setFocus(false);
           }}
           defaultChecked={defaultChecked}
         />
