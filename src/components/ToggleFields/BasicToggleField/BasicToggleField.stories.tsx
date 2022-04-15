@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import BasicToggleField from "./BasicToggleField";
 
@@ -13,22 +12,11 @@ const Template: ComponentStory<typeof BasicToggleField> = (args) => (
 export const Playground: ComponentStory<typeof BasicToggleField> =
   Template.bind({});
 
-export const Default: ComponentStory<typeof BasicToggleField> = () => {
-  const [_, setChecked] = useState(false);
-
-  const onChangeInput = (inputValue: boolean) => {
-    setChecked(inputValue);
-  };
-
-  return (
-    <BasicToggleField
-      id="basic-toggle-field"
-      defaultChecked={false}
-      disabled={false}
-      readOnly={false}
-      onChangeInput={onChangeInput}
-      required={true}
-      labelName="basic-toggle-field"
-    />
-  );
+Playground.args = {
+  id: "basic-toggle-field",
+  defaultChecked: false,
+  disabled: false,
+  readOnly: false,
+  required: true,
+  labelName: "basic-toggle-field",
 };
