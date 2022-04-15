@@ -15,27 +15,12 @@ export const Playground: ComponentStory<typeof ProtectedBasicTextField> =
   Template.bind({});
 
 Playground.args = {
-  labelName: "basic-protected-textfield-playground",
-};
-
-export const Default: ComponentStory<typeof ProtectedBasicTextField> = () => {
-  const [text, setText] = useState<string>("");
-
-  const onChangeInput = (inputValue: string) => {
-    setText(inputValue);
-  };
-
-  return (
-    <ProtectedBasicTextField
-      error={null}
-      onChangeInput={onChangeInput}
-      id="text-field-playground"
-      labelName="playground"
-      required={true}
-      autoComplete="off"
-      disabled={false}
-      placeholder="hello!"
-      readOnly={false}
-    />
-  );
+  error: null,
+  id: "protected-text-field-playground",
+  labelName: "protected-text-field-playground",
+  required: true,
+  autoComplete: "off",
+  disabled: false,
+  placeholder: "hello!",
+  readOnly: false,
 };
