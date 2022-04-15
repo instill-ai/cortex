@@ -182,15 +182,15 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
             >
               {showSecret ? (
                 <EyeOffIcon
-                  width="w-4"
-                  height="h-4"
+                  width="w-6"
+                  height="h-6"
                   color="text-instillGray50"
                   position="my-auto"
                 />
               ) : (
                 <EyeOnIcon
-                  width="w-4"
-                  height="h-4"
+                  width="w-6"
+                  height="h-6"
                   color="text-instillGray50"
                   position="my-auto"
                 />
