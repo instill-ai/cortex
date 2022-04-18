@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type MySqlIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;

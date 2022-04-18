@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React, { FC } from "react";
 import ArrowIconBase, { ArrowIconBaseProps } from "../ArrowIconBase";
 
 export type ArrowDownIconProps = Omit<ArrowIconBaseProps, "viewBox" | "rotate">;
