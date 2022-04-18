@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
 export type BasicTextFieldProps = Omit<
@@ -36,7 +36,7 @@ export type BasicTextFieldProps = Omit<
   | "placeholderTextColor"
 >;
 
-const BasicTextField: FC<BasicTextFieldProps> = (props) => {
+const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
   return (
     <TextFieldBase
       id={props.id}

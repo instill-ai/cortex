@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import React from "react";
 import cn from "clsx";
 import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
@@ -24,7 +24,7 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
  * - If you want to change the InputLabel font size, you have to change the input's paddingTop and Input paddingTop
  */
 
-const TextFieldBase: FC<TextFieldBaseProps> = ({
+const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
   required,
@@ -67,9 +67,9 @@ const TextFieldBase: FC<TextFieldBaseProps> = ({
   inputBorderStyle,
   inputBorderWidth,
 }) => {
-  const [focus, setFocus] = useState(false);
-  const [answered, setAnswered] = useState(false);
-  const [showSecret, setShowSecret] = useState(false);
+  const [focus, setFocus] = React.useState(false);
+  const [answered, setAnswered] = React.useState(false);
+  const [showSecret, setShowSecret] = React.useState(false);
 
   const widthStyle = inputWidth ?? "w-full";
   const heightStyle = inputHeight ?? "h-[70px]";
