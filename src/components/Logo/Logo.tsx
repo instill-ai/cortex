@@ -1,4 +1,4 @@
-import React, { FC, ReactElement, ReactNode } from "react";
+import React from "react";
 import cn from "clsx";
 
 export interface LogoProps {
@@ -19,13 +19,13 @@ export interface LogoProps {
   width: number;
 }
 
-const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
-  let logo: ReactNode;
+const Logo: React.FC<LogoProps> = ({ styleName, type, width }) => {
+  let logo: React.ReactNode;
 
   const getWhiteLogomarkWhiteType = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 400 88"
@@ -98,7 +98,7 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   const getBlackLogomarkBlackType = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 195 42"
@@ -183,7 +183,7 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   const getWhiteLogomark = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 33 33"
@@ -204,7 +204,7 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   const getBlackLogomark = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 225 225"
@@ -224,7 +224,10 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
     );
   };
 
-  const getBlueLogomark = (width: number, styleName?: string): ReactElement => {
+  const getBlueLogomark = (
+    width: number,
+    styleName?: string
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 29 29"
@@ -320,7 +323,7 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   const getColourLogomark = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 202 202"
@@ -416,7 +419,7 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   const getColourLogomarkBlackType = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 1069 224"
@@ -561,7 +564,7 @@ const Logo: FC<LogoProps> = ({ styleName, type, width }) => {
   const getColourLogomarkWhiteType = (
     width: number,
     styleName?: string
-  ): ReactElement => {
+  ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 1069 225"
