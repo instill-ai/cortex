@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/design-system",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Instill AI's design system",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -25,10 +25,9 @@
     "ts-types": "tsc --emitDeclarationOnly --outDir build",
     "build": "rimraf build && node ./esbuild.js && yarn ts-types"
   },
-  "exports": {
-    ".": "./build/index.js"
-  },
-  "typings": "./build/index.d.ts",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "typings": "build/index.d.ts",
   "files": [
     "build"
   ],
