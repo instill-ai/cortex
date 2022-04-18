@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 
 export type BasicToggleFieldProps = Omit<
@@ -29,7 +29,7 @@ export type BasicToggleFieldProps = Omit<
   | "readOnlyDotColor"
 >;
 
-const BasicToggleField: FC<BasicToggleFieldProps> = (props) => {
+const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
       id={props.id}

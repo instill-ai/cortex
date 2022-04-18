@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ToggleFieldBase from "./ToggleFieldBase";
 
@@ -49,48 +48,4 @@ Playground.args = {
   readOnlyCheckedInputBorderColor: "border-[#8DF5FF]",
   readOnlyCheckedDotColor: "bg-[#8DF5FF]",
   readOnlyDotColor: "bg-instillGray20",
-};
-
-export const Default: ComponentStory<typeof ToggleFieldBase> = () => {
-  const [_, setChecked] = useState(false);
-
-  const onChangeInput = (inputValue: any) => {
-    setChecked(inputValue);
-  };
-
-  return (
-    <ToggleFieldBase
-      defaultChecked={true}
-      id="toggle-field-base-playground"
-      disabled={false}
-      readOnly={false}
-      onChangeInput={onChangeInput}
-      required={true}
-      labelName="toggle-field-base-playground"
-      focusHighlight={true}
-      inputBorderRadius=""
-      inputBorderColor="border-instillGray20"
-      inputBorderStyle="border-solid"
-      inputBorderWidth="border"
-      dotColor="bg-instillGray30"
-      checkedInputBorderColor="border-instillBlue50"
-      checkedDotColor="bg-instillBlue50"
-      disabledDotColor="bg-instillGray20"
-      disabledCheckedDotColor="bg-[#8DF5FF]"
-      disabledCursor="cursor-not-allowed"
-      disabledInputBgColor="bg-white"
-      disabledInputBorderColor="border-instillGray20"
-      disabledInputBorderStyle="border-dashed"
-      disabledInputBorderWidth="border"
-      disabledCheckedInputBorderColor="border-instillGray20"
-      readOnlyCursor="cursor-auto"
-      readOnlyInputBgColor="bg-white"
-      readOnlyInputBorderColor="border-instillGray20"
-      readOnlyInputBorderStyle="border-solid"
-      readOnlyInputBorderWidth="border"
-      readOnlyCheckedInputBorderColor="border-[#8DF5FF]"
-      readOnlyCheckedDotColor="bg-[#8DF5FF]"
-      readOnlyDotColor="readonly:bg-instillGray20"
-    />
-  );
 };

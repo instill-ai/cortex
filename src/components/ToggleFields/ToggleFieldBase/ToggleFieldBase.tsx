@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import React from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { BasicInputLabel } from "../../InputLabels";
@@ -84,7 +84,7 @@ export type ToggleFieldBaseProps = Omit<
   readOnlyCheckedInputBorderColor: string;
 };
 
-const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
+const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   inputBorderRadius,
   inputBorderColor,
   inputBorderStyle,
@@ -117,9 +117,9 @@ const ToggleFieldBase: FC<ToggleFieldBaseProps> = ({
   readOnlyCheckedInputBorderColor,
   readOnlyCheckedDotColor,
 }) => {
-  const [answered, setAnswered] = useState(false);
-  const [focus, setFocus] = useState(false);
-  const [checked, setChecked] = useState(false);
+  const [answered, setAnswered] = React.useState(false);
+  const [focus, setFocus] = React.useState(false);
+  const [checked, setChecked] = React.useState(false);
   return (
     <div className="flex flex-col gap-y-2.5">
       <BasicInputLabel
