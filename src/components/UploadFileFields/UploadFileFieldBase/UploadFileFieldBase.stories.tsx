@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import UploadFileFieldBase from "./UploadFileFieldBase";
 
@@ -38,42 +37,3 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
 );
 export const Playground: ComponentStory<typeof UploadFileFieldBase> =
   Template.bind({});
-
-export const Default: ComponentStory<typeof UploadFileFieldBase> = () => {
-  const [_, setFile] = useState<string>("");
-
-  const onChangeInput = (inputValue: string) => {
-    setFile(inputValue);
-  };
-
-  return (
-    <UploadFileFieldBase
-      error={null}
-      id="upload-file-field-base-playground"
-      disabled={false}
-      readOnly={false}
-      onChangeInput={onChangeInput}
-      required={true}
-      labelName="upload-file-field-base-playground"
-      focusHighlight={true}
-      inputWidth="w-full"
-      inputHeight="h-[70px]"
-      inputFontSize="text-base"
-      inputTextColor="text-instillGray95"
-      inputFontWeight="font-normal"
-      inputLineHeight="leading-[28px]"
-      placeholder="playground"
-      inputLabelType="inset"
-      uploadButtonText="Upload"
-      uploadButtonBgColor="bg-instillGray50"
-      uploadButtonTextColor="text-instillGray05"
-      inputBorderRadiusBottomLeft="rounded-bl-[1px]"
-      inputBorderRadiusBottomRight="rounded-br-[1px]"
-      inputBorderRadiusTopLeft="rounded-tl-[1px]"
-      inputBorderRadiusTopRight="rounded-tr-[1px]"
-      inputBorderColor="border-instillGray20"
-      inputBorderStyle="border-solid"
-      inputBorderWidth="border"
-    />
-  );
-};

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import UploadFileFieldBase, {
   UploadFileFieldBaseProps,
 } from "../UploadFileFieldBase/UploadFileFieldBase";
@@ -24,7 +24,7 @@ export type BasicUploadFileFieldProps = Omit<
   | "inputBorderWidth"
 >;
 
-const BasicUploadFileField: FC<BasicUploadFileFieldProps> = (props) => {
+const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
   return (
     <UploadFileFieldBase
       error={props.error}

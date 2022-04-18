@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import React from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
@@ -63,7 +63,7 @@ export type UploadFileFieldBaseProps = Omit<
   inputBorderRadiusBottomLeft: string;
 };
 
-const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
+const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   id,
   labelName,
   inputLabelType,
@@ -90,8 +90,8 @@ const UploadFileFieldBase: FC<UploadFileFieldBaseProps> = ({
   error,
   focusHighlight,
 }) => {
-  const [answered, setAnswered] = useState(false);
-  const [file, setFile] = useState<string>("");
+  const [answered, setAnswered] = React.useState(false);
+  const [file, setFile] = React.useState<string>("");
   return (
     <div className="relative flex flex-col gap-y-2.5 group">
       <BasicInputLabel
