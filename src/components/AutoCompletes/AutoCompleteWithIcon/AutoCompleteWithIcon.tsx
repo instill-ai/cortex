@@ -1,5 +1,11 @@
 import Select, { ClearIndicatorProps, StylesConfig } from "react-select";
-import { CSSProperties, FC, ReactNode, useEffect, useState } from "react";
+import React, {
+  CSSProperties,
+  FC,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import { BasicInputLabel } from "../../InputLabels";

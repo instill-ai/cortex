@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import InputLabelBase, { InputLabelBaseProps } from "../InputLabelBase";
 
 export type TextAreaInputLabelProps = Omit<
@@ -12,7 +12,7 @@ export type TextAreaInputLabelProps = Omit<
   | "deActivateStyle"
 >;
 
-const TextAreaInputLabel: FC<TextAreaInputLabelProps> = (props) => {
+const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
   return (
     <InputLabelBase
       focus={props.focus}

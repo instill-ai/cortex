@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import InputLabelBase, { InputLabelBaseProps } from "../InputLabelBase";
 
 export type BasicInputLabelProps = Omit<
@@ -12,7 +12,7 @@ export type BasicInputLabelProps = Omit<
   | "deActivateStyle"
 >;
 
-const BasicInputLabel: FC<BasicInputLabelProps> = (props) => {
+const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
   return (
     <InputLabelBase
       focus={props.focus}

@@ -1,4 +1,4 @@
-import { FC, memo } from "react";
+import React from "react";
 import cn from "clsx";
 
 export interface InputLabelBaseProps {
@@ -64,7 +64,7 @@ export interface InputLabelBaseProps {
   onBlurHandler?: (event) => void;
 }
 
-const InputLabelBase: FC<InputLabelBaseProps> = memo(
+const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
   ({
     htmlFor,
     required,
