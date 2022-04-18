@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import React from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { TextAreaInputLabel } from "../../InputLabels";
@@ -49,7 +49,7 @@ export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   counterLineHeight: string;
 }
 
-const TextAreaBase: FC<TextAreaBaseProps> = ({
+const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   id,
   value,
   onChangeInput,
@@ -99,9 +99,9 @@ const TextAreaBase: FC<TextAreaBaseProps> = ({
   counterLineHeight,
   counterTextColor,
 }) => {
-  const [focus, setFocus] = useState(false);
-  const [answered, setAnswered] = useState(false);
-  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const [focus, setFocus] = React.useState(false);
+  const [answered, setAnswered] = React.useState(false);
+  const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
   const widthStyle = inputWidth ?? "w-full";
   const heightStyle = inputHeight ?? "h-[70px]";

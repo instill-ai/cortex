@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
 
 export type BasicTextAreaProps = Omit<
@@ -40,7 +40,7 @@ export type BasicTextAreaProps = Omit<
   | "counterTextColor"
 >;
 
-const BasicTextArea: FC<BasicTextAreaProps> = (props) => {
+const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
   return (
     <TextAreaBase
       id={props.id}
