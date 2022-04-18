@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import ArrowIconBase, { ArrowIconBaseProps } from "../ArrowIconBase";
 
 export type ArrowLeftIconProps = Omit<ArrowIconBaseProps, "viewBox" | "rotate">;
 
-const ArrowLeftIcon: FC<ArrowLeftIconProps> = (props) => {
+const ArrowLeftIcon: React.FC<ArrowLeftIconProps> = (props) => {
   return (
     <ArrowIconBase
       width={props.width}
