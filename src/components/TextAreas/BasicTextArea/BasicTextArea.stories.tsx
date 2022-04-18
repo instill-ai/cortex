@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import BasicTextArea from "./BasicTextArea";
 
@@ -17,27 +16,12 @@ export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(
 
 Playground.args = {
   labelName: "Playground",
-};
-
-export const Default: ComponentStory<typeof BasicTextArea> = () => {
-  const [text, setText] = useState<string>("");
-
-  const onChangeInput = (inputValue: string) => {
-    setText(inputValue);
-  };
-
-  return (
-    <BasicTextArea
-      error={null}
-      onChangeInput={onChangeInput}
-      id="text-field-playground"
-      labelName="playground"
-      required={true}
-      autoComplete="off"
-      disabled={false}
-      placeholder="hello"
-      readOnly={false}
-      resize="both"
-    />
-  );
+  error: null,
+  value: null,
+  id: "text-field-playground",
+  required: true,
+  autoComplete: "off",
+  disabled: false,
+  placeholder: "hello",
+  readOnly: false,
 };
