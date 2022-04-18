@@ -1,15 +1,13 @@
 const esbuild = require("esbuild");
-
-// Automatically exclude all node_modules from the bundled version
-const { nodeExternalsPlugin } = require("esbuild-node-externals");
+const { peerDependencies } = require("./package.json");
 
 const sharedConfig = {
   entryPoints: ["./src/index.ts"],
   bundle: true,
-  minify: true,
+  minify: false,
   sourcemap: true,
   target: "esnext",
-  plugins: [nodeExternalsPlugin()],
+  external: Object.keys(peerDependencies),
 };
 
 esbuild
