@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type XIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const XIcon: FC<XIconProps> = (props) => {
+const XIcon: React.FC<XIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

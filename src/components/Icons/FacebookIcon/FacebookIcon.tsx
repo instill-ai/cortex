@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type FacebookIconProps = Omit<
@@ -6,7 +6,7 @@ export type FacebookIconProps = Omit<
   "viewBox" | "color" | "fill"
 >;
 
-const FacebookIcon: FC<FacebookIconProps> = (props) => {
+const FacebookIcon: React.FC<FacebookIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

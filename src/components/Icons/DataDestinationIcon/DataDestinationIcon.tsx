@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type DataDestinationIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const DataDestinationIcon: FC<DataDestinationIconProps> = (props) => {
+const DataDestinationIcon: React.FC<DataDestinationIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

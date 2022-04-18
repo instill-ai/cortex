@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type DataSourceIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const DataSourceIcon: FC<DataSourceIconProps> = (props) => {
+const DataSourceIcon: React.FC<DataSourceIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

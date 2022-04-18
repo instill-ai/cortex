@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import cn from "clsx";
 
 export interface IconBaseProps {
@@ -33,7 +33,7 @@ export interface IconBaseProps {
   fill?: string;
 }
 
-const IconBase: FC<IconBaseProps> = ({
+const IconBase: React.FC<IconBaseProps> = ({
   viewBox,
   children,
   width,

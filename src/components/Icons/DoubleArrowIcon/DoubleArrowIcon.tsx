@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type DoubleArrowIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const DoubleArrowIcon: FC<DoubleArrowIconProps> = (props) => {
+const DoubleArrowIcon: React.FC<DoubleArrowIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

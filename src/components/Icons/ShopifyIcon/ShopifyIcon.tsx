@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type ShopifyIconProps = Omit<
@@ -6,7 +6,7 @@ export type ShopifyIconProps = Omit<
   "viewBox" | "fill" | "color"
 >;
 
-const ShopifyIcon: FC<ShopifyIconProps> = (props) => {
+const ShopifyIcon: React.FC<ShopifyIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

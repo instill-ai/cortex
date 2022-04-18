@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type VisualDataOperatorIconProps = Omit<
@@ -6,7 +6,9 @@ export type VisualDataOperatorIconProps = Omit<
   "viewBox" | "fill"
 >;
 
-const VisualDataOperatorIcon: FC<VisualDataOperatorIconProps> = (props) => {
+const VisualDataOperatorIcon: React.FC<VisualDataOperatorIconProps> = (
+  props
+) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

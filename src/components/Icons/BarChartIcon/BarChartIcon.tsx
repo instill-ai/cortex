@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type BarChartIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const BarChartIcon: FC<BarChartIconProps> = (props) => {
+const BarChartIcon: React.FC<BarChartIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

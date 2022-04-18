@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type MySqlIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
 
-const MySqlIcon: FC<MySqlIconProps> = (props) => {
+const MySqlIcon: React.FC<MySqlIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type GoogleSheetIconProps = Omit<
@@ -6,7 +6,7 @@ export type GoogleSheetIconProps = Omit<
   "viewBox" | "color" | "fill"
 >;
 
-const GoogleSheetIcon: FC<GoogleSheetIconProps> = (props) => {
+const GoogleSheetIcon: React.FC<GoogleSheetIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

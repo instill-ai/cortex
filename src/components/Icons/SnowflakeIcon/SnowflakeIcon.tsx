@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type SnowflakeIconProps = Omit<
@@ -6,7 +6,7 @@ export type SnowflakeIconProps = Omit<
   "viewBox" | "color" | "fill"
 >;
 
-const SnowflakeIcon: FC<SnowflakeIconProps> = (props) => {
+const SnowflakeIcon: React.FC<SnowflakeIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

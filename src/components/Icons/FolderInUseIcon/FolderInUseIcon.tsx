@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type FolderInUseIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const FolderInUseIcon: FC<FolderInUseIconProps> = (props) => {
+const FolderInUseIcon: React.FC<FolderInUseIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

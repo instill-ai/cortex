@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type SlackIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
 
-const SlackIcon: FC<SlackIconProps> = (props) => {
+const SlackIcon: React.FC<SlackIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

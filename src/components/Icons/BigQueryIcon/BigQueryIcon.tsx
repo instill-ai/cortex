@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type BigQueryIconProps = Omit<
@@ -6,7 +6,7 @@ export type BigQueryIconProps = Omit<
   "viewBox" | "fill" | "color"
 >;
 
-const BigQueryIcon: FC<BigQueryIconProps> = (props) => {
+const BigQueryIcon: React.FC<BigQueryIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type PostgreSqlIconProps = Omit<
@@ -6,7 +6,7 @@ export type PostgreSqlIconProps = Omit<
   "viewBox" | "fill" | "color"
 >;
 
-const PostgreSqlIcon: FC<PostgreSqlIconProps> = (props) => {
+const PostgreSqlIcon: React.FC<PostgreSqlIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

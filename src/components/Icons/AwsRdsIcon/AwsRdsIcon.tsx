@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type AwsRdsIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
 
-const AwsRdsIcon: FC<AwsRdsIconProps> = (props) => {
+const AwsRdsIcon: React.FC<AwsRdsIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

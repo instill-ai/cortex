@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type ClientIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const ClientIcon: FC<ClientIconProps> = (props) => {
+const ClientIcon: React.FC<ClientIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"

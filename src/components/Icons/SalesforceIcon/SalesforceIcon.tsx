@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
 export type SalesforceIconProps = Omit<
@@ -6,7 +6,7 @@ export type SalesforceIconProps = Omit<
   "viewBox" | "fill" | "color"
 >;
 
-const SalesforceIcon: FC<SalesforceIconProps> = (props) => {
+const SalesforceIcon: React.FC<SalesforceIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"
