@@ -14,8 +14,8 @@ export interface IconBaseProps {
   height: string;
 
   /** TailwindCSS format - The color of icon.
-   * - Please use text color to modify icon's color
-   * - e.g. text-gray-300
+   * - Please use fill color to modify icon's color
+   * - e.g. fill-gray-300
    */
   color?: string;
 
@@ -47,15 +47,7 @@ const IconBase: React.FC<IconBaseProps> = ({
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
-      className={cn(
-        "flex",
-        fill ? "" : "fill-current",
-        width,
-        height,
-        color,
-        position,
-        rotate
-      )}
+      className={cn("flex", width, height, color, position, rotate)}
       fill={fill}
     >
       {children}
