@@ -15,7 +15,7 @@ This is a react design system builds on top of TailwindCSS with several principl
 # The problems we try to solve
 
 - Oversize comes from being over-designed:
-  - Traditionally, design systems will want to find a one size for all components that leads to over-desige. This may lead to a huge component with hundreds of if...else conditionally rendered style.
+  - Traditionally, design systems want to find a one size for all components that leads to over-desige. This may result in a huge component with hundreds of if...else conditionally rendered style.
 - Over abstraction
   - Some design systems will try to abstract every layer of element. At the first glance, this can fertilize re-usability and encapsulate the styles, but it will bring up a lot of abstraction and cause unncessary overhead for consumers.
   - They don't want to make the style as props but comes up with other naming convention which causes another layer of abstraction like type={},
