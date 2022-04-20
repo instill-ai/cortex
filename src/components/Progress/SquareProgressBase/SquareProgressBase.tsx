@@ -1,8 +1,8 @@
 import { FC } from "react";
 import cn from "clsx";
-import "./LoadingStatusBlockBase.css";
+import "./SquareProgressBase.css";
 
-export interface LoadingStatusBlockBaseProps {
+export interface SquareProgressBaseProps {
   /** TailwindCSS format - Loading status block's background color
    * - bg-instillGrey30
    */
@@ -21,7 +21,7 @@ export interface LoadingStatusBlockBaseProps {
   animationDuration: number;
 }
 
-const LoadingStatusBlockBase: FC<LoadingStatusBlockBaseProps> = ({
+const SquareProgressBase: FC<SquareProgressBaseProps> = ({
   bgColor,
   cubeColor,
   isError,
@@ -48,4 +48,4 @@ const LoadingStatusBlockBase: FC<LoadingStatusBlockBaseProps> = ({
   );
 };
 
-export default LoadingStatusBlockBase;
+export default SquareProgressBase;

@@ -1,5 +1,5 @@
 .loading-animation {
-  animation: loading-pan 6s step-start infinite;
+  animation: loading-pan step-start infinite;
   transition: none;
 }
 
