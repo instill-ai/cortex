@@ -19,7 +19,7 @@ This is a react design system builds on top of TailwindCSS with several principl
 - Over abstraction
   - Some design systems will try to abstract every layer of element. At the first glance, this can fertilize re-usability and encapsulate the styles, but it will bring up a lot of abstraction and cause unncessary overhead for consumers.
   - They don't want to make the style as props but comes up with other naming convention which causes another layer of abstraction like type={},
-  - In this [article](), the author have a suitable example, every one will get confused when they encounter the first example, which have lots of abstraction. But the second one is clear and much more readable. You can browse though the whole code and guess what the structure will look like including the style classnames.
+  - In this [article](), the author have a suitable example, In our perspective the first example is harder to read than the second one, it has too many layers of abstraction that is exactly what we want to avoid.
 
 ```js
 <Box padding={5} width="320px" border="sm">
