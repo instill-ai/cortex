@@ -16,6 +16,9 @@ export interface LoadingStatusBlockBaseProps {
 
   /** Whether it is error */
   isError: boolean;
+
+  /** Anumation duration */
+  animationDuration: number;
 }
 
 const LoadingStatusBlockBase: FC<LoadingStatusBlockBaseProps> = ({
@@ -23,6 +26,7 @@ const LoadingStatusBlockBase: FC<LoadingStatusBlockBaseProps> = ({
   cubeColor,
   isError,
   isLoading,
+  animationDuration,
 }) => {
   return (
     <div className={cn("w-[18px] h-[18px] relative", bgColor)}>
@@ -32,6 +36,13 @@ const LoadingStatusBlockBase: FC<LoadingStatusBlockBaseProps> = ({
           cubeColor,
           { "loading-animation": isError ? false : isLoading }
         )}
+        style={{
+          animationDuration: isError
+            ? ""
+            : isLoading
+            ? `${animationDuration}s`
+            : "",
+        }}
       />
     </div>
   );
