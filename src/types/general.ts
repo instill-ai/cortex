@@ -18,7 +18,7 @@ export interface BasicInputFieldAttributes {
   disabledInputBgColor: string;
 
   /** TailwindCSS format - Border color when input is disabled
-   * - e.g. border-instillGray30
+   * - e.g. border-instillGrey30
    * - https://tailwindcss.com/docs/border-color
    */
   disabledInputBorderColor: string;
@@ -64,7 +64,7 @@ export interface BasicInputFieldAttributes {
   readOnlyInputBgColor: string;
 
   /** TailwindCSS format - Border color when input is read-only
-   * - e.g. border-instillGray30
+   * - e.g. border-instillGrey30
    * - https://tailwindcss.com/docs/border-color
    */
   readOnlyInputBorderColor: string;

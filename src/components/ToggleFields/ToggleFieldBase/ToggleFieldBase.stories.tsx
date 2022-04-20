@@ -9,7 +9,7 @@ export default {
 const Template: ComponentStory<typeof ToggleFieldBase> = (args) => (
   <ToggleFieldBase
     {...args}
-    dotColor="bg-instillGray30"
+    dotColor="bg-instillGrey30"
     checkedDotColor="bg-instillBlue50"
   />
 );
@@ -29,7 +29,7 @@ Playground.args = {
   inputBorderColor: "border-instillGray20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-  dotColor: "bg-instillGray30",
+  dotColor: "bg-instillGrey30",
   checkedInputBorderColor: "border-instillBlue50",
   checkedDotColor: "bg-instillBlue50",
   disabledDotColor: "bg-instillGray20",

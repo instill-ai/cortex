@@ -222,7 +222,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               ? "bg-instillGray20 cursor-not-allowed"
               : readOnly
               ? "bg-instillGray20 cursor-auto"
-              : "bg-instillGrey50 group-hover:bg-instillGray30 cursor-pointer"
+              : "bg-instillGrey50 group-hover:bg-instillGrey30 cursor-pointer"
           )}
           onClick={(event) => {
             if (readOnly || disabled) return;
