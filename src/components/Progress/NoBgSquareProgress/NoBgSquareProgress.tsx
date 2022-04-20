@@ -5,7 +5,7 @@ import SquareProgressBase, {
 
 export type NoBgSquareProgressProps = Omit<
   SquareProgressBaseProps,
-  "bgColor" | "cubeColor"
+  "bgColor" | "cubeColor" | "animationDuration"
 >;
 
 const NoBgSquareProgress: FC<NoBgSquareProgressProps> = (props) => {
