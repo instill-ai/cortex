@@ -45,7 +45,7 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
       inputFontSize="text-base"
       inputFontWeight="font-normal"
       inputLineHeight="leading-[28px]"
-      inputTextColor="text-instillGray95"
+      inputTextColor="text-instillGrey95"
       inputWidth="w-full"
       inputHeight="h-[70px]"
       focusHighlight={true}

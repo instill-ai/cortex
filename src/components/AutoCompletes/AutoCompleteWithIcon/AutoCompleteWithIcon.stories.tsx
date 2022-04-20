@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof AutoCompleteWithIcon> = (args) => {
       label: "gRPC",
       startIcon: (
         <GrpcIcon
-          color="text-instillGray95"
+          color="text-instillGrey95"
           width="w-[30px]"
           height="h-[30px]"
           position="m-auto"
@@ -28,7 +28,7 @@ const Template: ComponentStory<typeof AutoCompleteWithIcon> = (args) => {
       label: "HTTP",
       startIcon: (
         <HttpIcon
-          color="text-instillGray95"
+          color="text-instillGrey95"
           width="w-[30px]"
           height="h-[30px]"
           position="m-auto"
@@ -90,7 +90,7 @@ export const Default: ComponentStory<typeof AutoCompleteWithIcon> = () => {
       label: "gRPC",
       startIcon: (
         <GrpcIcon
-          color="text-instillGray95"
+          color="text-instillGrey95"
           width="w-[30px]"
           height="h-[30px]"
           position="m-auto"
@@ -102,7 +102,7 @@ export const Default: ComponentStory<typeof AutoCompleteWithIcon> = () => {
       label: "HTTP",
       startIcon: (
         <HttpIcon
-          color="text-instillGray95"
+          color="text-instillGrey95"
           width="w-[30px]"
           height="h-[30px]"
           position="m-auto"

@@ -55,7 +55,7 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
       inputFontSize="text-base"
       inputLineHeight="leading-[28px]"
       inputFontWeight="font-normal"
-      inputTextColor="text-instillGray95"
+      inputTextColor="text-instillGrey95"
       bgColor="bg-white"
       enableProtectedToggle={false}
       inputBorderRadius="rounded-[1px]"
@@ -74,12 +74,12 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
       readOnlyInputBorderColor="border-instillGray20"
       readOnlyInputBorderStyle="border-solid"
       readOnlyInputBorderWidth="border"
-      readOnlyInputTextColor="text-instillGray95"
+      readOnlyInputTextColor="text-instillGrey95"
       placeholderFontFamily="placeholder:font-sans"
       placeholderFontSize="placeholder:text-base"
       placeholderFontWeight="placeholder:font-normal"
       placeholderLineHeight="placeholder:leading-[28px]"
-      placeholderTextColor="placeholder:text-instillGray95"
+      placeholderTextColor="placeholder:text-instillGrey95"
     />
   );
 };

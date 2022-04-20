@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
     inputWidth="w-full"
     inputHeight="h-[70px]"
     inputFontSize="text-base"
-    inputTextColor="text-instillGray95"
+    inputTextColor="text-instillGrey95"
     inputFontWeight="font-normal"
     inputLineHeight="leading-[28px]"
     placeholder="playground"

@@ -18,7 +18,7 @@ module.exports = {
         instill_yellow: "#FFDF3A",
         instill_light_blue: "#F4FBFF",
         instill_light_yellow: "#FFFCEB",
-        instillGray95: "#1A1A1A",
+        instillGrey95: "#1A1A1A",
         instillGray80: "#5c5c5c",
         instillGray70: "#8C8A8A",
         instillGray50: "#A5A5A5",

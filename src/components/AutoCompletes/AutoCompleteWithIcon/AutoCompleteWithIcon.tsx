@@ -68,7 +68,7 @@ export type AutoCompleteWithIconProps = Omit<
           label: "gRPC",
           startIcon: (
             <GrpcIcon
-              color="text-instillGray95"
+              color="text-instillGrey95"
               width="w-[30px]"
               height="h-[30px]"
               position="m-auto"

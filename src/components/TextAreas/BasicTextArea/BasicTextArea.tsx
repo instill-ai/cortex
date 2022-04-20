@@ -66,7 +66,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       inputFontSize="text-base"
       inputFontWeight="font-normal"
       inputLineHeight="leading-[28px]"
-      inputTextColor="text-instillGray95"
+      inputTextColor="text-instillGrey95"
       bgColor="bg-white"
       inputBorderRadius="rounded-[1px]"
       inputBorderColor="border-instillGray20"
@@ -84,12 +84,12 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       readOnlyInputBorderColor="border-instillGray20"
       readOnlyInputBorderStyle="border-solid"
       readOnlyInputBorderWidth="border"
-      readOnlyInputTextColor="text-instillGray95"
+      readOnlyInputTextColor="text-instillGrey95"
       placeholderFontFamily="placeholder:font-sans"
       placeholderFontSize="placeholder:text-base"
       placeholderFontWeight="placeholder:font-normal"
       placeholderLineHeight="placeholder:leading-[28px]"
-      placeholderTextColor="placeholder:text-instillGray95"
+      placeholderTextColor="placeholder:text-instillGrey95"
     />
   );
 };
