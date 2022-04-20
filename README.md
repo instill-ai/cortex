@@ -121,7 +121,7 @@ The design system team doesn't need to use a single component to face all the ne
 
 # Lesson learned
 
-- Don't rely on pseudo-class like `disabled:` or `read-only:`. you will pass disabled and read-only as a style prop, use them combine with simple style on the container(not the input itself)
+- Don't rely on pseudo-class like `disabled:` or `read-only:`. you should pass disabled and read-only style without these pseudo-class, use simple style and apply it on container instead of input itself.
   - Caveat: TextArea may have the resizing issue
   - Placeholders have to use placeholder: pseudo-class because there don't have another simple method to programmatically address placeholder style
 - Don't use some ambiguous story like playground and default, they almost have identical style props, but Default is a fixed style.
