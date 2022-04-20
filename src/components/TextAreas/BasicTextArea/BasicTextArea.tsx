@@ -78,7 +78,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       disabledInputBorderColor="border-instillGray20"
       disabledInputBorderStyle="border-dashed"
       disabledInputBorderWidth="border"
-      disabledInputTextColor="text-instillGray50"
+      disabledInputTextColor="text-instillGrey50"
       readOnlyCursor="cursor-auto"
       readOnlyInputBgColor="bg-white"
       readOnlyInputBorderColor="border-instillGray20"

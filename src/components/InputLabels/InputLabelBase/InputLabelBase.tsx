@@ -12,7 +12,7 @@ export interface InputLabelBaseProps {
   htmlFor: string;
 
   /** TailwindCSS format - Label's text color
-   * - e.g. text-instillGray50
+   * - e.g. text-instillGrey50
    */
   labelTextColor: string;
 

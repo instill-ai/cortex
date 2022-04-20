@@ -33,7 +33,7 @@ export type UploadFileFieldBaseProps = Omit<
   uploadButtonText: string;
 
   /** TailwindCSS format
-   * - e.g. bg-instillGray50
+   * - e.g. bg-instillGrey50
    */
   uploadButtonBgColor: string;
 
@@ -145,9 +145,9 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                 position="my-auto"
                 color={
                   disabled
-                    ? "text-instillGray50"
+                    ? "text-instillGrey50"
                     : readOnly
-                    ? "text-instillGray50"
+                    ? "text-instillGrey50"
                     : inputTextColor
                 }
               />
@@ -158,9 +158,9 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                   inputLineHeight,
                   inputFontWeight,
                   disabled
-                    ? "text-instillGray50"
+                    ? "text-instillGrey50"
                     : readOnly
-                    ? "text-instillGray50"
+                    ? "text-instillGrey50"
                     : inputTextColor,
                   "my-auto"
                 )}
@@ -222,7 +222,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               ? "bg-instillGray20 cursor-not-allowed"
               : readOnly
               ? "bg-instillGray20 cursor-auto"
-              : "bg-instillGray50 group-hover:bg-instillGray30 cursor-pointer"
+              : "bg-instillGrey50 group-hover:bg-instillGray30 cursor-pointer"
           )}
           onClick={(event) => {
             if (readOnly || disabled) return;

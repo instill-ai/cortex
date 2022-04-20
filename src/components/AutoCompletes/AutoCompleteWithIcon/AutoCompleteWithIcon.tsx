@@ -227,7 +227,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
                     position="m-auto"
                     width="w-5"
                     height="g-5"
-                    color="text-instillGray50"
+                    color="text-instillGrey50"
                   />
                 </div>
               </div>

@@ -15,6 +15,6 @@ export const Playground: ComponentStory<typeof ModelIcon> = Template.bind({});
 Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
-  color: "text-instillGray50",
+  color: "text-instillGrey50",
   position: "my-auto",
 };

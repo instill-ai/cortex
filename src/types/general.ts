@@ -36,7 +36,7 @@ export interface BasicInputFieldAttributes {
   disabledInputBorderStyle: string;
 
   /** TailwindCSS format - Text color when input is disabled
-   * - e.g. text-instillGray50
+   * - e.g. text-instillGrey50
    * - https://tailwindcss.com/docs/text-color
    */
   disabledInputTextColor: string;
@@ -82,7 +82,7 @@ export interface BasicInputFieldAttributes {
   readOnlyInputBorderStyle: string;
 
   /** TailwindCSS format - Text color when input is read-only
-   * - e.g. text-instillGray50
+   * - e.g. text-instillGrey50
    * - https://tailwindcss.com/docs/text-color
    */
   readOnlyInputTextColor: string;
@@ -176,7 +176,7 @@ export interface BasicInputFieldAttributes {
 
   /** TailwindCSS format - Input placeholder's text color
    * - Please add persudo class "placeholder:"
-   * - e.g. placeholder:text-instillGray50
+   * - e.g. placeholder:text-instillGrey50
    * - https://tailwindcss.com/docs/text-color
    */
   placeholderTextColor: string;

@@ -21,7 +21,7 @@ export const Default: ComponentStory<typeof InputLabelBase> = () => {
       labelFontFamily="font-sans"
       labelFontSize="text-base"
       labelFontWeight="font-normal"
-      labelTextColor="text-instillGray50"
+      labelTextColor="text-instillGrey50"
       labelLineHeight="leading-[28px]"
       focus={false}
       htmlFor="default"

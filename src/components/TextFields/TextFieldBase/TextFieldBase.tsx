@@ -148,9 +148,9 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             placeholderLineHeight,
             placeholderTextColor,
             disabled
-              ? cn(disabledCursor, "text-instillGray50")
+              ? cn(disabledCursor, "text-instillGrey50")
               : readOnly
-              ? cn(readOnlyCursor, "text-instillGray50")
+              ? cn(readOnlyCursor, "text-instillGrey50")
               : inputTextColor
           )}
           id={id}
@@ -184,14 +184,14 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
                 <EyeOffIcon
                   width="w-6"
                   height="h-6"
-                  color="text-instillGray50"
+                  color="text-instillGrey50"
                   position="my-auto"
                 />
               ) : (
                 <EyeOnIcon
                   width="w-6"
                   height="h-6"
-                  color="text-instillGray50"
+                  color="text-instillGrey50"
                   position="my-auto"
                 />
               )}

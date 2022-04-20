@@ -37,7 +37,7 @@ export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   counterFontWeight: string;
 
   /** TailwindCSS format - Text color of textarea's counter
-   * - e.g. text-instillGray50
+   * - e.g. text-instillGrey50
    * - https://tailwindcss.com/docs/text-color
    */
   counterTextColor: string;
@@ -194,9 +194,9 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           placeholderLineHeight,
           placeholderTextColor,
           disabled
-            ? cn(disabledCursor, "text-instillGray50")
+            ? cn(disabledCursor, "text-instillGrey50")
             : readOnly
-            ? cn(readOnlyCursor, "text-instillGray50")
+            ? cn(readOnlyCursor, "text-instillGrey50")
             : inputTextColor,
           inputLabelType === "inset"
             ? "instill-input-no-highlight"

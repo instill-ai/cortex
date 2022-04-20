@@ -23,7 +23,7 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
     placeholder="playground"
     inputLabelType="inset"
     uploadButtonText="Upload"
-    uploadButtonBgColor="bg-instillGray50"
+    uploadButtonBgColor="bg-instillGrey50"
     uploadButtonTextColor="text-instillGray05"
     inputBorderRadiusBottomLeft="rounded-bl-[1px]"
     inputBorderRadiusBottomRight="rounded-br-[1px]"

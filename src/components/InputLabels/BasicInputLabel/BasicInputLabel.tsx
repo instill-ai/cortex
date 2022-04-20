@@ -24,7 +24,7 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
       onFocusHandler={props.onFocusHandler}
       labelFontSize="text-sm"
       labelFontWeight="font-normal"
-      labelTextColor="text-instillGray50"
+      labelTextColor="text-instillGrey50"
       labelLineHeight="leading-[18.2px]"
       labelFontFamily="font-sans"
       activateStyle="top-1/2 -translate-y-[120%]"
