@@ -104,7 +104,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
       </BasicInputLabel>
       <label
         className={cn(
-          "flex flex-row border border-instillGray15 p-0 cursor-pointer relative",
+          "flex flex-row border border-instillGrey15 p-0 cursor-pointer relative",
           inputWidth,
           inputHeight,
           inputBorderRadiusBottomLeft,
