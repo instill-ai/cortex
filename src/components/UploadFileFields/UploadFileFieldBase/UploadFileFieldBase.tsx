@@ -38,7 +38,7 @@ export type UploadFileFieldBaseProps = Omit<
   uploadButtonBgColor: string;
 
   /** TailwindCSS format
-   * - e.g. text-instillGray05
+   * - e.g. text-instillGrey05
    */
   uploadButtonTextColor: string;
 

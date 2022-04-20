@@ -24,7 +24,7 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
     inputLabelType="inset"
     uploadButtonText="Upload"
     uploadButtonBgColor="bg-instillGrey50"
-    uploadButtonTextColor="text-instillGray05"
+    uploadButtonTextColor="text-instillGrey05"
     inputBorderRadiusBottomLeft="rounded-bl-[1px]"
     inputBorderRadiusBottomRight="rounded-br-[1px]"
     inputBorderRadiusTopLeft="rounded-tl-[1px]"

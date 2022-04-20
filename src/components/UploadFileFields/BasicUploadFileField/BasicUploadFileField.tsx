@@ -37,7 +37,7 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
       labelName={props.labelName}
       uploadButtonText={props.uploadButtonText}
       uploadButtonBgColor="bg-instillGrey50"
-      uploadButtonTextColor="text-instillGray05"
+      uploadButtonTextColor="text-instillGrey05"
       inputBorderRadiusBottomLeft="rounded-bl-[1px]"
       inputBorderRadiusBottomRight="rounded-br-[1px]"
       inputBorderRadiusTopLeft="rounded-tl-[1px]"
