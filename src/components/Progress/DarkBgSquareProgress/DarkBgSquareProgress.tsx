@@ -13,7 +13,7 @@ const DarkBgSquareProgress: FC<DarkBgSquareProgressProps> = (props) => {
     <SquareProgressBase
       isError={props.isError}
       isLoading={props.isLoading}
-      bgColor="bg-instillGray80"
+      bgColor="bg-instillGrey80"
       cubeColor="bg-instillBlue50"
       animationDuration={3}
     />
