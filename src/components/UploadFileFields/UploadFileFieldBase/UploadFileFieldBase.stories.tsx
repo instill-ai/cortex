@@ -29,7 +29,7 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
     inputBorderRadiusBottomRight="rounded-br-[1px]"
     inputBorderRadiusTopLeft="rounded-tl-[1px]"
     inputBorderRadiusTopRight="rounded-tr-[1px]"
-    inputBorderColor="border-instillGray20"
+    inputBorderColor="border-instillGrey20"
     inputBorderStyle="border-solid"
     inputBorderWidth="border"
     {...args}

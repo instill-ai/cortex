@@ -50,7 +50,7 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
       inputHeight="h-[70px]"
       focusHighlight={true}
       inputLabelType="inset"
-      inputBorderColor="border-instillGray20"
+      inputBorderColor="border-instillGrey20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
     />

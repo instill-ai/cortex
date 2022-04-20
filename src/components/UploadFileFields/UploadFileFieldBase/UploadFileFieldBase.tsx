@@ -112,9 +112,9 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
           inputBorderRadiusTopLeft,
           inputBorderRadiusTopRight,
           disabled
-            ? "instill-input-no-highlight border border-instillGray20 border-dashed"
+            ? "instill-input-no-highlight border border-instillGrey20 border-dashed"
             : readOnly
-            ? "instill-input-no-highlight border border-instillGray20 border-solid"
+            ? "instill-input-no-highlight border border-instillGrey20 border-solid"
             : focusHighlight
             ? cn(
                 inputBorderWidth,
@@ -219,9 +219,9 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             inputBorderRadiusTopRight,
             inputBorderRadiusBottomRight,
             disabled
-              ? "bg-instillGray20 cursor-not-allowed"
+              ? "bg-instillGrey20 cursor-not-allowed"
               : readOnly
-              ? "bg-instillGray20 cursor-auto"
+              ? "bg-instillGrey20 cursor-auto"
               : "bg-instillGrey50 group-hover:bg-instillGrey30 cursor-pointer"
           )}
           onClick={(event) => {
