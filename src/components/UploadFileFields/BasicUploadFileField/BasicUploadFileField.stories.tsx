@@ -8,15 +8,7 @@ export default {
 } as ComponentMeta<typeof BasicUploadFileField>;
 
 const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
-  <BasicUploadFileField
-    onChangeInput={() => undefined}
-    id="upload-file-field-base-playground"
-    label="upload-file-field-base-playground"
-    placeholder="Upload a file"
-    uploadButtonText="Upload"
-    description="this is a description about upload file field"
-    {...args}
-  />
+  <BasicUploadFileField {...args} />
 );
 export const Playground: ComponentStory<typeof BasicUploadFileField> =
   Template.bind({});
@@ -26,6 +18,12 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: true,
+  onChangeInput: () => undefined,
+  id: "upload-file-field-base-playground",
+  label: "upload-file-field-base-playground",
+  placeholder: "Upload a file",
+  uploadButtonText: "Upload",
+  description: "this is a description about upload file field",
 };
 
 export const DemoFileReader: ComponentStory<

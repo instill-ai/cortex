@@ -2,8 +2,8 @@ import React from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
-import { BasicInputDescription } from "../../InputDescriptions";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
+import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
 export type UploadFileFieldBaseProps = Omit<
   BasicInputFieldAttributes,
@@ -98,12 +98,17 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionFontFamily,
+  descriptionFontSize,
+  descriptionFontWeight,
+  descriptionLineHeight,
+  descriptionTextColor,
 }) => {
   const [answered, setAnswered] = React.useState(false);
   const [file, setFile] = React.useState<string>("");
   return (
     <div className="flex flex-col">
-      <div className="relative flex flex-col gap-y-2.5 group">
+      <div className="relative flex flex-col gap-y-2.5 group mb-2.5">
         <InputLabelBase
           answered={disabled ? true : readOnly ? true : answered}
           required={required}
@@ -257,7 +262,14 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
           </div>
         </label>
       </div>
-      <BasicInputDescription description={description} />
+      <InputDescriptionBase
+        description={description}
+        descriptionFontFamily={descriptionFontFamily}
+        descriptionFontSize={descriptionFontSize}
+        descriptionFontWeight={descriptionFontWeight}
+        descriptionLineHeight={descriptionLineHeight}
+        descriptionTextColor={descriptionTextColor}
+      />
     </div>
   );
 };
