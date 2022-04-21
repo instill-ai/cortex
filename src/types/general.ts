@@ -5,6 +5,12 @@ export interface BasicInputFieldAttributes {
   /** Whether the input has error or not */
   error: string;
 
+  /** Field's label Name */
+  label: string;
+
+  /** Field's description */
+  description: string;
+
   /**
    * Whether the input is disabled
    */
@@ -135,9 +141,6 @@ export interface BasicInputFieldAttributes {
 
   /** Whether the field is necessary or not */
   required: boolean;
-
-  /** Field's label Name */
-  label: string;
 
   /** TailwindCSS format
    * - Default is w-full, please make sure this component's parent has defined width
