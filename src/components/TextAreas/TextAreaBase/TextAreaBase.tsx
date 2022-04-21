@@ -2,6 +2,7 @@ import React from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
+import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
 export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   /** Textarea value */
@@ -54,6 +55,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   value,
   onChangeInput,
   required,
+  description,
   error,
   label,
   inputFontSize,
@@ -105,6 +107,11 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionFontFamily,
+  descriptionFontSize,
+  descriptionFontWeight,
+  descriptionLineHeight,
+  descriptionTextColor,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -156,94 +163,104 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
     : cn(inputBorderColor, inputBorderStyle, inputBorderWidth, "cursor-text");
 
   return (
-    <div
-      onClick={() => {
-        inputRef.current.focus();
-      }}
-      className={cn(
-        "flex flex-col gap-y-2.5 relative",
-        inputWidth,
-        bgColor,
-        inputBorderRadius,
-        inputLabelType === "inset" ? cn("pb-5 pt-[34px]", getInputStyle) : ""
-      )}
-    >
-      <InputLabelBase
-        label={label}
-        answered={disabled ? true : readOnly ? true : answered}
-        focus={focus}
-        required={required}
-        htmlFor={id}
-        type={inputLabelType}
-        onFocusHandler={() => {
-          setFocus(true);
+    <div className="flex flex-col">
+      <div
+        onClick={() => {
+          inputRef.current.focus();
         }}
-        onBlurHandler={() => {
-          setFocus(false);
-        }}
-        labelFontFamily={labelFontFamily}
-        labelFontSize={labelFontSize}
-        labelFontWeight={labelFontWeight}
-        labelLineHeight={labelLineHeight}
-        labelTextColor={labelTextColor}
-        labelActivateStyle={labelActivateStyle}
-        labelDeActivateStyle={labelDeActivateStyle}
-      />
-      <textarea
-        ref={inputRef}
         className={cn(
-          "flex px-5 min-h-[100px] resize-none",
+          "flex flex-col gap-y-2.5 relative mb-2.5",
           inputWidth,
-          inputHeight,
-          inputFontSize,
-          inputFontWeight,
-          inputLineHeight,
           bgColor,
-          placeholderFontFamily,
-          placeholderFontSize,
-          placeholderFontWeight,
-          placeholderLineHeight,
-          placeholderTextColor,
-          disabled
-            ? cn(disabledCursor, "text-instillGrey50")
-            : readOnly
-            ? cn(readOnlyCursor, "text-instillGrey50")
-            : inputTextColor,
-          inputLabelType === "inset"
-            ? "instill-input-no-highlight"
-            : cn(getInputStyle, "pt-5")
+          inputBorderRadius,
+          inputLabelType === "inset" ? cn("pb-5 pt-[34px]", getInputStyle) : ""
         )}
-        id={id}
-        disabled={disabled}
-        required={required}
-        placeholder={focus ? placeholder : null}
-        readOnly={readOnly}
-        autoComplete={autoComplete}
-        onChange={(event) => {
-          const inputValue = event.target.value;
-          onChangeInput(event.target.value);
-          if (!inputValue) {
-            setAnswered(false);
-            return;
-          }
-          setAnswered(true);
-        }}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-        value={value}
-      />
-      {enableCounter ? (
-        <div
+      >
+        <InputLabelBase
+          label={label}
+          answered={disabled ? true : readOnly ? true : answered}
+          focus={focus}
+          required={required}
+          htmlFor={id}
+          type={inputLabelType}
+          onFocusHandler={() => {
+            setFocus(true);
+          }}
+          onBlurHandler={() => {
+            setFocus(false);
+          }}
+          labelFontFamily={labelFontFamily}
+          labelFontSize={labelFontSize}
+          labelFontWeight={labelFontWeight}
+          labelLineHeight={labelLineHeight}
+          labelTextColor={labelTextColor}
+          labelActivateStyle={labelActivateStyle}
+          labelDeActivateStyle={labelDeActivateStyle}
+        />
+        <textarea
+          ref={inputRef}
           className={cn(
-            counterFontSize,
-            counterFontWeight,
-            counterFontFamily,
-            counterLineHeight,
-            counterTextColor,
-            "absolute right-4 bottom-2"
+            "flex px-5 min-h-[100px] resize-none",
+            inputWidth,
+            inputHeight,
+            inputFontSize,
+            inputFontWeight,
+            inputLineHeight,
+            bgColor,
+            placeholderFontFamily,
+            placeholderFontSize,
+            placeholderFontWeight,
+            placeholderLineHeight,
+            placeholderTextColor,
+            disabled
+              ? cn(disabledCursor, "text-instillGrey50")
+              : readOnly
+              ? cn(readOnlyCursor, "text-instillGrey50")
+              : inputTextColor,
+            inputLabelType === "inset"
+              ? "instill-input-no-highlight"
+              : cn(getInputStyle, "pt-5")
           )}
-        >{`${value ? value.length : 0}/${counterWordLimit}`}</div>
-      ) : null}
+          id={id}
+          disabled={disabled}
+          required={required}
+          placeholder={focus ? placeholder : null}
+          readOnly={readOnly}
+          autoComplete={autoComplete}
+          onChange={(event) => {
+            const inputValue = event.target.value;
+            onChangeInput(event.target.value);
+            if (!inputValue) {
+              setAnswered(false);
+              return;
+            }
+            setAnswered(true);
+          }}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          value={value}
+        />
+        {enableCounter ? (
+          <div
+            className={cn(
+              counterFontSize,
+              counterFontWeight,
+              counterFontFamily,
+              counterLineHeight,
+              counterTextColor,
+              "absolute right-4 bottom-2"
+            )}
+          >{`${value ? value.length : 0}/${counterWordLimit}`}</div>
+        ) : null}
+      </div>
+      <InputDescriptionBase
+        description={description}
+        descriptionFontFamily={descriptionFontFamily}
+        descriptionFontSize={descriptionFontSize}
+        descriptionFontWeight={descriptionFontWeight}
+        descriptionLineHeight={descriptionLineHeight}
+        descriptionTextColor={descriptionTextColor}
+      />
     </div>
   );
 };

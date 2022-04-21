@@ -17,6 +17,7 @@ export const Playground: ComponentStory<typeof TextAreaBase> = Template.bind(
 Playground.args = {
   error: null,
   id: "text-field-playground",
+  description: "this is a description for textarea base",
   label: "playground",
   required: true,
   inputHeight: "h-[140px]",
@@ -67,4 +68,9 @@ Playground.args = {
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-0 translate-y-3",
   labelDeActivateStyle: "top-0 translate-y-[26px]",
+  descriptionFontFamily: "font-mono",
+  descriptionFontSize: "text-xs",
+  descriptionLineHeight: "leading-[15.6px]",
+  descriptionFontWeight: "font-normal",
+  descriptionTextColor: "text-instillGrey50",
 };

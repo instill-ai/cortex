@@ -45,6 +45,11 @@ export type BasicTextAreaProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
+  | "descriptionFontFamily"
+  | "descriptionFontSize"
+  | "descriptionLineHeight"
+  | "descriptionFontWeight"
+  | "descriptionTextColor"
 >;
 
 const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
@@ -105,6 +110,11 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       labelFontFamily="font-sans"
       labelActivateStyle="top-0 translate-y-3"
       labelDeActivateStyle="top-0 translate-y-[26px]"
+      descriptionFontFamily="font-mono"
+      descriptionFontSize="text-xs"
+      descriptionLineHeight="leading-[15.6px]"
+      descriptionFontWeight="font-normal"
+      descriptionTextColor="text-instillGrey50"
     />
   );
 };
