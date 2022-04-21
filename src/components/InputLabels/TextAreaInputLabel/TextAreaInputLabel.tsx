@@ -15,6 +15,7 @@ export type TextAreaInputLabelProps = Omit<
 const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
   return (
     <InputLabelBase
+      label={props.label}
       focus={props.focus}
       required={props.required}
       answered={props.answered}
@@ -29,9 +30,7 @@ const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
       labelFontFamily="font-sans"
       activateStyle="top-0 translate-y-3"
       deActivateStyle="top-0 translate-y-[26px]"
-    >
-      {props.children}
-    </InputLabelBase>
+    />
   );
 };
 

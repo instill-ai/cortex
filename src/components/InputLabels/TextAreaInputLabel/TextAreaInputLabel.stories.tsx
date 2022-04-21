@@ -7,29 +7,29 @@ export default {
   component: TextAreaInputLabel,
 } as ComponentMeta<typeof TextAreaInputLabel>;
 
-const Template: ComponentStory<typeof TextAreaInputLabel> = (args) => (
-  <TextAreaInputLabel {...args}>Playground label</TextAreaInputLabel>
-);
-
-export const Playground = Template.bind({});
-
-export const Default: ComponentStory<typeof TextAreaInputLabel> = () => {
-  const [_, setFocus] = useState(false);
+const Template: ComponentStory<typeof TextAreaInputLabel> = (args) => {
+  const [focus, setFocus] = useState(false);
   return (
     <TextAreaInputLabel
-      focus={false}
-      htmlFor="default"
-      answered={false}
-      required={false}
-      type="inset"
+      {...args}
       onBlurHandler={() => {
         setFocus(false);
       }}
       onFocusHandler={() => {
         setFocus(true);
       }}
-    >
-      Default label
-    </TextAreaInputLabel>
+      focus={focus}
+      htmlFor="default"
+      answered={false}
+      required={false}
+    />
   );
+};
+
+export const Playground: ComponentStory<typeof TextAreaInputLabel> =
+  Template.bind({});
+
+Playground.args = {
+  type: "inset",
+  label: "text area lable",
 };
