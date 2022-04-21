@@ -16,7 +16,7 @@ export const Playground: ComponentStory<typeof ProtectedBasicTextField> =
 Playground.args = {
   error: null,
   id: "protected-text-field-playground",
-  labelName: "protected-text-field-playground",
+  label: "protected-text-field-playground",
   required: true,
   autoComplete: "off",
   disabled: false,

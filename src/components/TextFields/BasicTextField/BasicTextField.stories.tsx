@@ -15,9 +15,9 @@ export const Playground: ComponentStory<typeof BasicTextField> = Template.bind(
 );
 
 Playground.args = {
-  error: null,
   id: "basic-text-field-playground",
-  labelName: "basic-text-field-playground",
+  label: "basic-text-field-playground",
+  error: null,
   required: true,
   autoComplete: "off",
   type: "text",

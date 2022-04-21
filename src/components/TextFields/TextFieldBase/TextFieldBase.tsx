@@ -5,6 +5,13 @@ import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { BasicInputLabel } from "../../InputLabels";
 
+//  TextFieldBase
+//
+//  ### How we implement inset lable transfor
+//  - Use top-1/2 + (-translate-y-1/2) to make label fix at the center of input box
+//  - Use top-1/2 + (-translate-y-full) to move label up a little bit
+//  - If you want to change the InputLabel font size, you have to change the input's paddingTop and Input paddingTop
+
 export interface TextFieldBaseProps extends BasicInputFieldAttributes {
   /** Text field's type
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
@@ -15,21 +22,12 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
   enableProtectedToggle: boolean;
 }
 
-/**
- * TextFieldBase
- *
- * ### How we implement inset lable transfor
- * - Use top-1/2 + (-translate-y-1/2) to make label fix at the center of input box
- * - Use top-1/2 + (-translate-y-full) to move label up a little bit
- * - If you want to change the InputLabel font size, you have to change the input's paddingTop and Input paddingTop
- */
-
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
   required,
   error,
-  labelName,
+  label,
   inputFontSize,
   inputFontWeight,
   inputLineHeight,
@@ -71,9 +69,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   const [answered, setAnswered] = React.useState(false);
   const [showSecret, setShowSecret] = React.useState(false);
 
-  const widthStyle = inputWidth ?? "w-full";
-  const heightStyle = inputHeight ?? "h-[70px]";
-
   const getInputStyle = disabled
     ? cn(
         disabledCursor,
@@ -108,7 +103,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
     <div
       className={cn(
         "flex flex-col gap-y-2.5 relative",
-        widthStyle,
+        inputWidth,
         inputBorderRadius,
         inputLabelType === "inset" ? getInputStyle : ""
       )}
@@ -125,9 +120,8 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         onFocusHandler={() => {
           setFocus(true);
         }}
-      >
-        {labelName}
-      </BasicInputLabel>
+        label={label}
+      />
       <div className="flex relative">
         <input
           className={cn(
@@ -135,8 +129,8 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             inputLabelType === "inset"
               ? "pt-6 instill-input-no-highlight"
               : getInputStyle,
-            heightStyle,
-            widthStyle,
+            inputHeight,
+            inputWidth,
             inputFontSize,
             inputLineHeight,
             inputFontWeight,
