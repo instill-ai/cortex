@@ -6,9 +6,11 @@ export default {
   component: UploadFileFieldBase,
 } as ComponentMeta<typeof UploadFileFieldBase>;
 
-const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
+const Template: ComponentStory<typeof UploadFileFieldBase> = () => (
   <UploadFileFieldBase
     id="upload-file-field-base-playground"
+    error=""
+    onChangeInput={() => undefined}
     disabled={false}
     readOnly={false}
     required={true}
@@ -32,8 +34,16 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
     inputBorderColor="border-instillGrey20"
     inputBorderStyle="border-solid"
     inputBorderWidth="border"
-    {...args}
+    description="this is a description about upload file field"
+    labelFontSize="text-sm"
+    labelFontWeight="font-normal"
+    labelTextColor="text-instillGrey50"
+    labelLineHeight="leading-[18.2px]"
+    labelFontFamily="font-sans"
+    labelActivateStyle="top-1/2 -translate-y-[120%]"
+    labelDeActivateStyle="top-1/2 -translate-y-1/2"
   />
 );
+
 export const Playground: ComponentStory<typeof UploadFileFieldBase> =
   Template.bind({});

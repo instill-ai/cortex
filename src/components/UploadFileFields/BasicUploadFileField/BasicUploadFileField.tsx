@@ -22,6 +22,13 @@ export type BasicUploadFileFieldProps = Omit<
   | "inputBorderColor"
   | "inputBorderStyle"
   | "inputBorderWidth"
+  | "labelFontSize"
+  | "labelFontWeight"
+  | "labelTextColor"
+  | "labelLineHeight"
+  | "labelFontFamily"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
 >;
 
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
@@ -29,6 +36,7 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
     <UploadFileFieldBase
       error={props.error}
       id={props.id}
+      description={props.description}
       disabled={props.disabled}
       readOnly={props.readOnly}
       onChangeInput={props.onChangeInput}
@@ -53,6 +61,13 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
       inputBorderColor="border-instillGrey20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
+      labelFontSize="text-sm"
+      labelFontWeight="font-normal"
+      labelTextColor="text-instillGrey50"
+      labelLineHeight="leading-[18.2px]"
+      labelFontFamily="font-sans"
+      labelActivateStyle="top-1/2 -translate-y-[120%]"
+      labelDeActivateStyle="top-1/2 -translate-y-1/2"
     />
   );
 };

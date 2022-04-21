@@ -1,4 +1,4 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import BasicUploadFileField from "./BasicUploadFileField";
 
@@ -7,8 +7,10 @@ export default {
   component: BasicUploadFileField,
 } as ComponentMeta<typeof BasicUploadFileField>;
 
-const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
+const Template: ComponentStory<typeof BasicUploadFileField> = () => (
   <BasicUploadFileField
+    error=""
+    onChangeInput={() => undefined}
     disabled={false}
     readOnly={false}
     required={true}
@@ -16,7 +18,7 @@ const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
     label="upload-file-field-base-playground"
     placeholder="Upload a file"
     uploadButtonText="Upload"
-    {...args}
+    description="this is a description about upload file field"
   />
 );
 export const Playground: ComponentStory<typeof BasicUploadFileField> =
@@ -49,6 +51,7 @@ export const DemoFileReader: ComponentStory<
     >
       <BasicUploadFileField
         error={null}
+        description="this is a description about upload file field"
         disabled={false}
         readOnly={false}
         onChangeInput={onChangeInput}
