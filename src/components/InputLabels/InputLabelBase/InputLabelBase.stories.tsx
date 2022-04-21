@@ -7,31 +7,32 @@ export default {
   component: InputLabelBase,
 } as ComponentMeta<typeof InputLabelBase>;
 
-const Template: ComponentStory<typeof InputLabelBase> = (args) => (
-  <InputLabelBase {...args}>Playground label</InputLabelBase>
-);
-
-export const Playground = Template.bind({});
-
-export const Default: ComponentStory<typeof InputLabelBase> = () => {
+const Template: ComponentStory<typeof InputLabelBase> = (args) => {
   const [_, setFocus] = useState(false);
-
   return (
     <InputLabelBase
-      labelFontFamily="font-sans"
-      labelFontSize="text-base"
-      labelFontWeight="font-normal"
-      labelTextColor="text-instillGrey50"
-      labelLineHeight="leading-[28px]"
-      focus={false}
-      htmlFor="default"
-      answered={false}
-      required={false}
-      type="inset"
+      {...args}
       onBlurHandler={() => setFocus(false)}
       onFocusHandler={() => setFocus(true)}
     >
-      Default label
+      Playground label
     </InputLabelBase>
   );
+};
+
+export const Playground: ComponentStory<typeof InputLabelBase> = Template.bind(
+  {}
+);
+
+Playground.args = {
+  labelFontFamily: "font-sans",
+  labelFontSize: "text-base",
+  labelFontWeight: "font-normal",
+  labelTextColor: "text-instillGrey50",
+  labelLineHeight: "leading-[28px]",
+  focus: false,
+  htmlFor: "default",
+  answered: false,
+  required: false,
+  type: "inset",
 };
