@@ -29,11 +29,6 @@ export interface InputDescriptionBaseProps {
    * - e.g. font-normal
    */
   descriptionFontWeight: string;
-
-  /** TailwindCSS format - Description's margin top
-   * - e.g. mt-2
-   */
-  marginTop: string;
 }
 
 const InputDescriptionBase: FC<InputDescriptionBaseProps> = ({
@@ -43,7 +38,6 @@ const InputDescriptionBase: FC<InputDescriptionBaseProps> = ({
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
-  marginTop,
 }) => {
   return (
     <p
@@ -53,8 +47,7 @@ const InputDescriptionBase: FC<InputDescriptionBaseProps> = ({
         descriptionFontSize,
         descriptionFontWeight,
         descriptionLineHeight,
-        descriptionTextColor,
-        marginTop
+        descriptionTextColor
       )}
     >
       {description}

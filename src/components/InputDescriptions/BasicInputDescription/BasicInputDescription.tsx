@@ -10,7 +10,6 @@ export type BasicInputDescriptionProps = Omit<
   | "descriptionLineHeight"
   | "descriptionFontWeight"
   | "descriptionTextColor"
-  | "marginTop"
 >;
 
 const BasicInputDescription: FC<BasicInputDescriptionProps> = (props) => {
@@ -22,7 +21,6 @@ const BasicInputDescription: FC<BasicInputDescriptionProps> = (props) => {
       descriptionLineHeight="leading-[15.6px]"
       descriptionFontWeight="font-normal"
       descriptionTextColor="text-instillGrey50"
-      marginTop="mt-2.5"
     />
   );
 };

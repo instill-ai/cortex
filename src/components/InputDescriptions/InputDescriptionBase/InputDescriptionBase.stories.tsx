@@ -15,7 +15,6 @@ export const Playground: ComponentStory<typeof InputDescriptionBase> =
 
 Playground.args = {
   description: "this is description",
-  marginTop: "mt-2.5",
   descriptionFontFamily: "font-mono",
   descriptionFontSize: "text-xs",
   descriptionLineHeight: "leading-[15.6px]",
