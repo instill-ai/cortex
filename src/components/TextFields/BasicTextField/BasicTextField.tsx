@@ -34,12 +34,20 @@ export type BasicTextFieldProps = Omit<
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
+  | "labelFontSize"
+  | "labelFontWeight"
+  | "labelTextColor"
+  | "labelLineHeight"
+  | "labelFontFamily"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
 >;
 
 const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
   return (
     <TextFieldBase
       id={props.id}
+      description={props.description}
       disabled={props.disabled}
       type={props.type}
       required={props.required}
@@ -80,6 +88,13 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
       placeholderFontWeight="placeholder:font-normal"
       placeholderLineHeight="placeholder:leading-[28px]"
       placeholderTextColor="placeholder:text-instillGrey95"
+      labelFontSize="text-sm"
+      labelFontWeight="font-normal"
+      labelTextColor="text-instillGrey50"
+      labelLineHeight="leading-[18.2px]"
+      labelFontFamily="font-sans"
+      labelActivateStyle="top-1/2 -translate-y-[120%]"
+      labelDeActivateStyle="top-1/2 -translate-y-1/2"
     />
   );
 };

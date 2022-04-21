@@ -3,7 +3,7 @@ import cn from "clsx";
 import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputFieldAttributes } from "../../../types/general";
-import { BasicInputLabel } from "../../InputLabels";
+import InputLabelBase from "../../InputLabels/InputLabelBase";
 
 //  TextFieldBase
 //
@@ -64,6 +64,13 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   inputBorderColor,
   inputBorderStyle,
   inputBorderWidth,
+  labelFontFamily,
+  labelFontSize,
+  labelFontWeight,
+  labelLineHeight,
+  labelTextColor,
+  labelActivateStyle,
+  labelDeActivateStyle,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -108,7 +115,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         inputLabelType === "inset" ? getInputStyle : ""
       )}
     >
-      <BasicInputLabel
+      <InputLabelBase
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
@@ -121,6 +128,13 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
           setFocus(true);
         }}
         label={label}
+        labelFontFamily={labelFontFamily}
+        labelFontSize={labelFontSize}
+        labelFontWeight={labelFontWeight}
+        labelLineHeight={labelLineHeight}
+        labelTextColor={labelTextColor}
+        labelActivateStyle={labelActivateStyle}
+        labelDeActivateStyle={labelDeActivateStyle}
       />
       <div className="flex relative">
         <input
