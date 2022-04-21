@@ -27,6 +27,9 @@ import type { BasicToggleFieldProps } from "./ToggleFields";
 import { BasicUploadFileField } from "./UploadFileFields";
 import type { BasicUploadFileFieldProps } from "./UploadFileFields";
 
+import { BasicInputDescription } from "./InputDescriptions";
+import type { BasicInputDescriptionProps } from "./InputDescriptions";
+
 export {
   AutoCompleteWithIcon,
   AutoCompleteWithIconProps,
@@ -46,4 +49,6 @@ export {
   BasicToggleFieldProps,
   BasicUploadFileField,
   BasicUploadFileFieldProps,
+  BasicInputDescription,
+  BasicInputDescriptionProps,
 };
