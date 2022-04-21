@@ -51,7 +51,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       required={props.required}
       onChangeInput={props.onChangeInput}
       error={props.error}
-      labelName={props.labelName}
+      label={props.label}
       autoComplete={props.autoComplete}
       placeholder={props.placeholder}
       readOnly={props.readOnly}

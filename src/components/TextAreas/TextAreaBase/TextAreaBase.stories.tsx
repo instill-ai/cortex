@@ -17,7 +17,7 @@ export const Playground: ComponentStory<typeof TextAreaBase> = Template.bind(
 Playground.args = {
   error: null,
   id: "text-field-playground",
-  labelName: "playground",
+  label: "playground",
   required: true,
   inputHeight: "h-[140px]",
   inputWidth: "w-full",

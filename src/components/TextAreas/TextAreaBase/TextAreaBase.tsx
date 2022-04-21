@@ -55,7 +55,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   onChangeInput,
   required,
   error,
-  labelName,
+  label,
   inputFontSize,
   inputTextColor,
   inputFontWeight,
@@ -165,6 +165,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
       )}
     >
       <TextAreaInputLabel
+        label={label}
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
@@ -176,9 +177,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         onBlurHandler={() => {
           setFocus(false);
         }}
-      >
-        {labelName}
-      </TextAreaInputLabel>
+      />
       <textarea
         ref={inputRef}
         className={cn(
