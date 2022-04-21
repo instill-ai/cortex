@@ -94,7 +94,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   defaultValue,
   options,
   inputLabelType,
-  labelName,
+  label,
   required,
   id,
   onChangeInput,
@@ -176,6 +176,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   return (
     <div className="flex flex-col gap-y-2.5 relative">
       <BasicInputLabel
+        label={label}
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
         required={required}
@@ -187,9 +188,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
         onFocusHandler={() => {
           setFocus(true);
         }}
-      >
-        {labelName}
-      </BasicInputLabel>
+      />
       <Select
         id={id}
         isSearchable={!readOnly}

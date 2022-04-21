@@ -28,7 +28,7 @@ Playground.args = {
   autoComplete: "off",
   type: "text",
   inputHeight: "h-[70px]",
-  inputWidth: "w-[300px]",
+  inputWidth: "w-full",
   inputFontSize: "text-base",
   inputLineHeight: "leading-[28px]",
   inputFontWeight: "font-normal",

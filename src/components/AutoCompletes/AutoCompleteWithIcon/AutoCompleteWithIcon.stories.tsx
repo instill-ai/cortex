@@ -73,71 +73,8 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: false,
-  labelName: "autocomplete-with-icon",
+  label: "autocomplete-with-icon",
   inputLabelType: "inset",
   id: "autocomplete-with-icon",
   isClearable: true,
-};
-
-export const Default: ComponentStory<typeof AutoCompleteWithIcon> = () => {
-  const onChangeInput = (inputValue: string) => {
-    console.log(inputValue);
-  };
-
-  const options: AutoCompleteWithIconOption[] = [
-    {
-      value: "grpc",
-      label: "gRPC",
-      startIcon: (
-        <GrpcIcon
-          color="text-instillGrey95"
-          width="w-[30px]"
-          height="h-[30px]"
-          position="m-auto"
-        />
-      ),
-    },
-    {
-      value: "http",
-      label: "HTTP",
-      startIcon: (
-        <HttpIcon
-          color="text-instillGrey95"
-          width="w-[30px]"
-          height="h-[30px]"
-          position="m-auto"
-        />
-      ),
-    },
-    {
-      value: "snowflake",
-      label: "Snowflake",
-      startIcon: (
-        <SnowflakeIcon width="w-[30px]" height="h-[30px]" position="m-auto" />
-      ),
-    },
-    {
-      value: "mongodb",
-      label: "MongoDB",
-      startIcon: (
-        <MongoDbIcon width="w-[30px]" height="h-[30px]" position="m-auto" />
-      ),
-    },
-  ];
-
-  return (
-    <AutoCompleteWithIcon
-      error={null}
-      defaultValue={options[0]}
-      disabled={true}
-      readOnly={false}
-      required={false}
-      onChangeInput={onChangeInput}
-      labelName={"autocomplete-with-icon"}
-      options={options}
-      inputLabelType="inset"
-      id="autocomplete-with-icon"
-      isClearable={true}
-    />
-  );
 };
