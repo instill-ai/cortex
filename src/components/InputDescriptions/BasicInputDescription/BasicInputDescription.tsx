@@ -18,7 +18,7 @@ const BasicInputDescription: FC<BasicInputDescriptionProps> = (props) => {
     <InputDescriptionBase
       description={props.description}
       descriptionFontFamily="font-mono"
-      descriptionFontSize="text-sm"
+      descriptionFontSize="text-xs"
       descriptionLineHeight="leading-[15.6px]"
       descriptionFontWeight="font-normal"
       descriptionTextColor="text-instillGrey50"
