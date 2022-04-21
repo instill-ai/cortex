@@ -9,6 +9,7 @@ import React, {
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import { BasicInputLabel } from "../../InputLabels";
+import InputLabelBase from "../../InputLabels/InputLabelBase";
 
 export interface AutoCompleteWithIconOption {
   label: string;
@@ -101,6 +102,13 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   disabled,
   readOnly,
   isClearable,
+  labelFontFamily,
+  labelFontSize,
+  labelFontWeight,
+  labelLineHeight,
+  labelTextColor,
+  labelActivateStyle,
+  labelDeActivateStyle,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -175,7 +183,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
 
   return (
     <div className="flex flex-col gap-y-2.5 relative">
-      <BasicInputLabel
+      <InputLabelBase
         label={label}
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
@@ -188,6 +196,13 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
         onFocusHandler={() => {
           setFocus(true);
         }}
+        labelFontFamily={labelFontFamily}
+        labelFontSize={labelFontSize}
+        labelFontWeight={labelFontWeight}
+        labelLineHeight={labelLineHeight}
+        labelTextColor={labelTextColor}
+        labelActivateStyle={labelActivateStyle}
+        labelDeActivateStyle={labelDeActivateStyle}
       />
       <Select
         id={id}
