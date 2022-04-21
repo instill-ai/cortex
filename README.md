@@ -42,7 +42,7 @@ This is a react design system builds on top of TailwindCSS with several principl
       <Text size="sm">
         <Text size="sm" weight="bold">
           4.84
-        </Text>{" "}
+        </Text>
         (190)
       </Text>
     </Row>
@@ -98,14 +98,45 @@ We try to solve these problems with two principles
   - Every base component will expose as many styles as possible, it seldomly has pre-defined styles.
   - Every exposed style props can only have one style string, we don't accept something like styleName="font-base text-black", we will separate it as fontSize="font-base" and textColor="text-black".
 
-With the two-level component design, we make base-level components act as a single source of truth, every group of the component should only inherit the base-level component and we expose as many styles as possible for further customization. The base-level component will have limited condition rendering thanks to Tailwind CSS.
+```js
+// We won't do this
 
-The design system team doesn't need to use a single component to face all the needs, they can create the new exported-level components to achieve different corner cases. They can iterate at a relatively fast speed.
+const square = ({ styleName, children }) => {
+  return <div className={styleName}>{children}</div>;
+};
+
+// We will do this
+// cn is a aggregator, it will compose two string like "hi" "yo" to "hi yo"
+
+const square = ({ width, height, color, children }) => {
+  return <div className={cn(width, height, color)}>{children}</div>;
+};
+```
+
+## How we solve above problems with the three principles
+
+- Oversize comes from being over-designed:
+  - With the two-level component design, we make base-level components act as a single source of truth, every group of the component should only inherit the base-level component and we expose as many styles as possible for further customization. The base-level component will have limited condition rendering thanks to Tailwind CSS, it only needs to expose as many as style props as possible for further customization.
+- Over abstraction
+  - Because we don't need to encapsulate style within layer of components just to manage bunch of css files, we can avoid over abstraction.
+- Flexibility ends up with slow iteration:
+  - The design system team doesn't need to use a single component to face all the needs, they can create the new exported-level components to achieve different corner cases. They can iterate at a relatively fast speed.
 
 # Drawbacks & Known issues
 
 - Dynamic styles
   - Tailwind CSS fell short at calculated style, for example, if we have a width: 80px square and we want to put a dot at around 1/3 - 10px of its width, at the first glance you may think this is easy, we can just use Just-In-Time feature. But due to Tailwind CSS's prune nature, this won't work, at compile time Tailwind CSS can't recognize the dynamic style like that.
+
+```js
+const square = ({ width }) => {
+  return (
+    <div className={`w-[${width}px] relative`}>
+      <div className={`dot absolute left-[${width / 3 - 10}px]`} />
+    </div>
+  );
+};
+```
+
 - Hard to integrate with 3rd party tooling
   - This is the known issue if the design system wants to adapt to another component library such as react-select. They have to come up with a method to exchange styles across different CSS frameworks because we are using utility classes, these may cause much more issues than the traditional CSS approach.
 
