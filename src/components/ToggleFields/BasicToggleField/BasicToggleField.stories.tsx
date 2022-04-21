@@ -14,9 +14,9 @@ export const Playground: ComponentStory<typeof BasicToggleField> =
 
 Playground.args = {
   id: "basic-toggle-field",
+  label: "basic-toggle-field",
   defaultChecked: false,
   disabled: false,
   readOnly: false,
   required: true,
-  labelName: "basic-toggle-field",
 };

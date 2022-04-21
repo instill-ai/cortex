@@ -37,7 +37,7 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       readOnly={props.readOnly}
       onChangeInput={props.onChangeInput}
       required={props.required}
-      labelName={props.labelName}
+      label={props.label}
       defaultChecked={props.defaultChecked}
       focusHighlight={true}
       dotColor="bg-instillGrey30"

@@ -34,69 +34,61 @@ export type ToggleFieldBaseProps = Omit<
   dotColor: string;
 
   /** TailwindCSS format - Toggle center's dot color when checked
-   * - We have peer on input, please use tailwindCSS persudo class "peer-checked:"
-   * - e.g. peer-checked:bg-black
+   * - e.g. bg-black
    */
   checkedDotColor: string;
 
   /** TailwindCSS format - Toggle border color when checked
-   * - Please use tailwindCSS persudo class "checked:"
-   * - e.g. checked:border-black
+   * - e.g. border-black
    */
   checkedInputBorderColor: string;
 
   /** TailwindCSS format - Toggle input border color when checked and disabled
-   * - Please use tailwindCSS persudo class "disabled:checked:"
-   * - e.g. disabled:checked:border-black
+   * - e.g. border-black
    */
   disabledCheckedInputBorderColor: string;
 
   /** TailwindCSS format - Toggle center's dot color when disabled
-   * - Please use tailwindCSS persudo class "disabled:"
-   * - e.g. disabled:bg-black
+   * - e.g. bg-black
    */
   disabledDotColor: string;
 
   /** TailwindCSS format - Toggle center's dot color when checked and disabled
-   * - We have peer on input, please use tailwindCSS persudo class "disabled:peer-checked:"
-   * - e.g. disabled:peer-checked:bg-black
+   * - e.g. bg-black
    */
   disabledCheckedDotColor: string;
 
   /** TailwindCSS format - Toggle center's dot color when read-only
-   * - We have peer on input, please use tailwindCSS persudo class "read-only:"
-   * - e.g. read-only:bg-black
+   * - e.g. bg-black
    */
   readOnlyDotColor: string;
 
   /** TailwindCSS format - Toggle center's dot color when checked and read-only
-   * - We have peer on input, please use tailwindCSS persudo class "read-only:peer-checked:"
-   * - e.g. read-only:peer-checked:bg-black
+   * - e.g. bg-black
    */
 
   readOnlyCheckedDotColor: string;
 
   /** TailwindCSS format - Toggle input border color when checked and read-only
-   * - Please use tailwindCSS persudo class "read-only:checked:"
-   * - e.g. read-only:checked:border-black
+   * - e.g. border-black
    */
 
   readOnlyCheckedInputBorderColor: string;
 };
 
 const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
-  inputBorderRadius,
-  inputBorderColor,
-  inputBorderStyle,
-  inputBorderWidth,
   id,
+  label,
   defaultChecked,
   disabled,
   readOnly,
   focusHighlight,
   required,
   onChangeInput,
-  labelName,
+  inputBorderRadius,
+  inputBorderColor,
+  inputBorderStyle,
+  inputBorderWidth,
   dotColor,
   checkedDotColor,
   checkedInputBorderColor,
@@ -127,9 +119,8 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
         required={required}
         htmlFor={`${id}-label`}
         type="normal"
-      >
-        {labelName}
-      </BasicInputLabel>
+        label={label}
+      />
       <label htmlFor={id} className="flex relative w-[90px] h-10">
         <input
           id={id}

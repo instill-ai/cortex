@@ -7,11 +7,7 @@ export default {
 } as ComponentMeta<typeof ToggleFieldBase>;
 
 const Template: ComponentStory<typeof ToggleFieldBase> = (args) => (
-  <ToggleFieldBase
-    {...args}
-    dotColor="bg-instillGrey30"
-    checkedDotColor="bg-instillBlue50"
-  />
+  <ToggleFieldBase {...args} />
 );
 export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
   {}
@@ -23,7 +19,7 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: true,
-  labelName: "toggle-field-base-playground",
+  label: "toggle-field-base-playground",
   focusHighlight: true,
   inputBorderRadius: "",
   inputBorderColor: "border-instillGrey20",
