@@ -22,6 +22,7 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
       type={props.type}
       onBlurHandler={props.onBlurHandler}
       onFocusHandler={props.onFocusHandler}
+      label={props.label}
       labelFontSize="text-sm"
       labelFontWeight="font-normal"
       labelTextColor="text-instillGrey50"
@@ -29,9 +30,7 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
       labelFontFamily="font-sans"
       activateStyle="top-1/2 -translate-y-[120%]"
       deActivateStyle="top-1/2 -translate-y-1/2"
-    >
-      {props.children}
-    </InputLabelBase>
+    />
   );
 };
 

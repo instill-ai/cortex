@@ -8,6 +8,11 @@ export interface InputLabelBaseProps {
    */
   type: "normal" | "inset" | "hide";
 
+  /**
+   * Input label's text
+   */
+  label: string;
+
   /** Input label associated input field's id */
   htmlFor: string;
 
@@ -70,7 +75,7 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
     required,
     focus,
     answered,
-    children,
+    label,
     labelFontSize,
     labelFontWeight,
     labelTextColor,
@@ -94,7 +99,7 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
         {type !== "hide" ? (
           <label
             className={cn(
-              "z-10",
+              "z-10 flex",
               type === "inset"
                 ? activate
                   ? activateStyle
@@ -113,7 +118,7 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
             onFocus={(event) => onFocusHandler(event)}
             onBlur={(event) => onBlurHandler(event)}
           >
-            {children}
+            {label}
             {required ? <span className="ml-1">*</span> : null}
           </label>
         ) : (
