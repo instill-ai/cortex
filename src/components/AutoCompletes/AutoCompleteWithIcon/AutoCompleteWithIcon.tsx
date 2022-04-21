@@ -10,6 +10,7 @@ import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import { BasicInputLabel } from "../../InputLabels";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
+import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
 export interface AutoCompleteWithIconOption {
   label: string;
@@ -98,6 +99,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   label,
   required,
   id,
+  description,
   onChangeInput,
   disabled,
   readOnly,
@@ -109,6 +111,11 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionFontFamily,
+  descriptionFontSize,
+  descriptionFontWeight,
+  descriptionLineHeight,
+  descriptionTextColor,
 }) => {
   const [focus, setFocus] = useState(false);
   const [answered, setAnswered] = useState(false);
@@ -182,88 +189,98 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   };
 
   return (
-    <div className="flex flex-col gap-y-2.5 relative">
-      <InputLabelBase
-        label={label}
-        answered={disabled ? true : readOnly ? true : answered}
-        focus={focus}
-        required={required}
-        htmlFor={id}
-        type={inputLabelType}
-        onBlurHandler={() => {
-          setFocus(false);
-        }}
-        onFocusHandler={() => {
-          setFocus(true);
-        }}
-        labelFontFamily={labelFontFamily}
-        labelFontSize={labelFontSize}
-        labelFontWeight={labelFontWeight}
-        labelLineHeight={labelLineHeight}
-        labelTextColor={labelTextColor}
-        labelActivateStyle={labelActivateStyle}
-        labelDeActivateStyle={labelDeActivateStyle}
-      />
-      <Select
-        id={id}
-        isSearchable={!readOnly}
-        menuIsOpen={readOnly ? false : undefined}
-        onFocus={() => setFocus(true)}
-        onBlur={() => setFocus(false)}
-        onChange={(event) => {
-          onChangeInput(event);
+    <div className="flex flex-col">
+      <div className="flex flex-col gap-y-2.5 relative mb-2.5">
+        <InputLabelBase
+          label={label}
+          answered={disabled ? true : readOnly ? true : answered}
+          focus={focus}
+          required={required}
+          htmlFor={id}
+          type={inputLabelType}
+          onBlurHandler={() => {
+            setFocus(false);
+          }}
+          onFocusHandler={() => {
+            setFocus(true);
+          }}
+          labelFontFamily={labelFontFamily}
+          labelFontSize={labelFontSize}
+          labelFontWeight={labelFontWeight}
+          labelLineHeight={labelLineHeight}
+          labelTextColor={labelTextColor}
+          labelActivateStyle={labelActivateStyle}
+          labelDeActivateStyle={labelDeActivateStyle}
+        />
+        <Select
+          id={id}
+          isSearchable={!readOnly}
+          menuIsOpen={readOnly ? false : undefined}
+          onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
+          onChange={(event) => {
+            onChangeInput(event);
 
-          if (event) {
-            setAnswered(true);
-          } else {
-            setAnswered(false);
-          }
-        }}
-        isDisabled={disabled}
-        defaultValue={defaultValue}
-        options={options}
-        components={{
-          IndicatorSeparator: () => null,
-          ClearIndicator: (props: ClearIndicatorProps) => {
-            const {
-              getStyles,
-              innerProps: { ref, ...restInnerProps },
-            } = props;
+            if (event) {
+              setAnswered(true);
+            } else {
+              setAnswered(false);
+            }
+          }}
+          isDisabled={disabled}
+          defaultValue={defaultValue}
+          options={options}
+          components={{
+            IndicatorSeparator: () => null,
+            ClearIndicator: (props: ClearIndicatorProps) => {
+              const {
+                getStyles,
+                innerProps: { ref, ...restInnerProps },
+              } = props;
 
+              return (
+                <div
+                  {...restInnerProps}
+                  ref={ref}
+                  style={getStyles("clearIndicator", props) as CSSProperties}
+                >
+                  <div style={{ padding: "0px 5px" }}>
+                    <XIcon
+                      position="m-auto"
+                      width="w-5"
+                      height="g-5"
+                      color="text-instillGrey50"
+                    />
+                  </div>
+                </div>
+              );
+            },
+          }}
+          isClearable={isClearable}
+          placeholder={focus ? "Search..." : null}
+          formatOptionLabel={(option: AutoCompleteWithIconOption) => {
             return (
-              <div
-                {...restInnerProps}
-                ref={ref}
-                style={getStyles("clearIndicator", props) as CSSProperties}
-              >
-                <div style={{ padding: "0px 5px" }}>
-                  <XIcon
-                    position="m-auto"
-                    width="w-5"
-                    height="g-5"
-                    color="text-instillGrey50"
-                  />
+              <div className="flex flex-row gap-x-3 px-[15px]">
+                <div className="flex my-auto w-[30px] h-[30px]">
+                  {option.startIcon}
+                </div>
+                <div className="my-auto instill-text-body">{option.label}</div>
+                <div className="flex my-auto w-[30px] h-[30px]">
+                  {option.endIcon}
                 </div>
               </div>
             );
-          },
-        }}
-        isClearable={isClearable}
-        placeholder={focus ? "Search..." : null}
-        formatOptionLabel={(option: AutoCompleteWithIconOption) => {
-          return (
-            <div className="flex flex-row gap-x-3 px-[15px]">
-              <div className="flex my-auto w-[30px] h-[30px]">
-                {option.startIcon}
-              </div>
-              <div className="my-auto instill-text-body">{option.label}</div>
-              <div className="flex my-auto w-[30px] h-[30px]">
-                {option.endIcon}
-              </div>
-            </div>
-          );
-        }}
-        styles={customStyles}
+          }}
+          styles={customStyles}
+        />
+      </div>
+      <InputDescriptionBase
+        description={description}
+        descriptionFontFamily={descriptionFontFamily}
+        descriptionFontSize={descriptionFontSize}
+        descriptionFontWeight={descriptionFontWeight}
+        descriptionLineHeight={descriptionLineHeight}
+        descriptionTextColor={descriptionTextColor}
       />
     </div>
   );

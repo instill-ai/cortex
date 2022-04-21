@@ -74,6 +74,7 @@ Playground.args = {
   readOnly: false,
   required: false,
   isClearable: true,
+  description: "this is a description for auth complete with Icon",
   label: "autocomplete-with-icon",
   inputLabelType: "inset",
   id: "autocomplete-with-icon",
@@ -84,4 +85,9 @@ Playground.args = {
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
+  descriptionFontFamily: "font-mono",
+  descriptionFontSize: "text-xs",
+  descriptionLineHeight: "leading-[15.6px]",
+  descriptionFontWeight: "font-normal",
+  descriptionTextColor: "text-instillGrey50",
 };
