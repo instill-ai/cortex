@@ -17,6 +17,7 @@ export const Playground: ComponentStory<typeof TextFieldBase> = Template.bind(
 Playground.args = {
   error: null,
   id: "text-field-playground",
+  description: "this is a description for text field base",
   disabled: false,
   placeholder: "hello",
   readOnly: false,
@@ -62,4 +63,9 @@ Playground.args = {
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
+  descriptionFontFamily: "font-mono",
+  descriptionFontSize: "text-xs",
+  descriptionLineHeight: "leading-[15.6px]",
+  descriptionFontWeight: "font-normal",
+  descriptionTextColor: "text-instillGrey50",
 };

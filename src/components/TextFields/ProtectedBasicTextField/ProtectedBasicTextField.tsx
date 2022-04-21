@@ -42,6 +42,11 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
+  | "descriptionFontFamily"
+  | "descriptionFontSize"
+  | "descriptionLineHeight"
+  | "descriptionFontWeight"
+  | "descriptionTextColor"
 >;
 
 const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
@@ -98,6 +103,11 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
+      descriptionFontFamily="font-mono"
+      descriptionFontSize="text-xs"
+      descriptionLineHeight="leading-[15.6px]"
+      descriptionFontWeight="font-normal"
+      descriptionTextColor="text-instillGrey50"
     />
   );
 };

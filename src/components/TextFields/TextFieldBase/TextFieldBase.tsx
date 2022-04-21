@@ -4,6 +4,7 @@ import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
+import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
 //  TextFieldBase
 //
@@ -28,6 +29,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   required,
   error,
   label,
+  description,
   inputFontSize,
   inputFontWeight,
   inputLineHeight,
@@ -71,6 +73,11 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionFontFamily,
+  descriptionFontSize,
+  descriptionFontWeight,
+  descriptionLineHeight,
+  descriptionTextColor,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -107,106 +114,116 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
     : cn(inputBorderColor, inputBorderStyle, inputBorderWidth, "cursor-text");
 
   return (
-    <div
-      className={cn(
-        "flex flex-col gap-y-2.5 relative",
-        inputWidth,
-        inputBorderRadius,
-        inputLabelType === "inset" ? getInputStyle : ""
-      )}
-    >
-      <InputLabelBase
-        answered={disabled ? true : readOnly ? true : answered}
-        focus={focus}
-        required={required}
-        htmlFor={id}
-        type={inputLabelType}
-        onBlurHandler={() => {
-          setFocus(false);
-        }}
-        onFocusHandler={() => {
-          setFocus(true);
-        }}
-        label={label}
-        labelFontFamily={labelFontFamily}
-        labelFontSize={labelFontSize}
-        labelFontWeight={labelFontWeight}
-        labelLineHeight={labelLineHeight}
-        labelTextColor={labelTextColor}
-        labelActivateStyle={labelActivateStyle}
-        labelDeActivateStyle={labelDeActivateStyle}
-      />
-      <div className="flex relative">
-        <input
-          className={cn(
-            "pl-5",
-            inputLabelType === "inset"
-              ? "pt-6 instill-input-no-highlight"
-              : getInputStyle,
-            inputHeight,
-            inputWidth,
-            inputFontSize,
-            inputLineHeight,
-            inputFontWeight,
-            bgColor,
-            inputBorderRadius,
-            placeholderFontFamily,
-            placeholderFontSize,
-            placeholderFontWeight,
-            placeholderLineHeight,
-            placeholderTextColor,
-            disabled
-              ? cn(disabledCursor, "text-instillGrey50")
-              : readOnly
-              ? cn(readOnlyCursor, "text-instillGrey50")
-              : inputTextColor
-          )}
-          id={id}
-          type={showSecret ? "text" : type}
-          disabled={disabled}
+    <div className="flex flex-col">
+      <div
+        className={cn(
+          "flex flex-col gap-y-2.5 relative mb-2.5",
+          inputWidth,
+          inputBorderRadius,
+          inputLabelType === "inset" ? getInputStyle : ""
+        )}
+      >
+        <InputLabelBase
+          answered={disabled ? true : readOnly ? true : answered}
+          focus={focus}
           required={required}
-          placeholder={
-            disabled ? null : readOnly ? null : focus ? placeholder : null
-          }
-          readOnly={readOnly}
-          autoComplete={autoComplete}
-          onChange={(event) => {
-            const inputValue = event.target.value;
-            onChangeInput(event.target.value);
-            if (!inputValue) {
-              setAnswered(false);
-              return;
-            }
-            setAnswered(true);
+          htmlFor={id}
+          type={inputLabelType}
+          onBlurHandler={() => {
+            setFocus(false);
           }}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
+          onFocusHandler={() => {
+            setFocus(true);
+          }}
+          label={label}
+          labelFontFamily={labelFontFamily}
+          labelFontSize={labelFontSize}
+          labelFontWeight={labelFontWeight}
+          labelLineHeight={labelLineHeight}
+          labelTextColor={labelTextColor}
+          labelActivateStyle={labelActivateStyle}
+          labelDeActivateStyle={labelDeActivateStyle}
         />
-        {enableProtectedToggle ? (
-          <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
-            <button
-              className="my-auto"
-              onClick={() => setShowSecret(!showSecret)}
-            >
-              {showSecret ? (
-                <EyeOffIcon
-                  width="w-6"
-                  height="h-6"
-                  color="text-instillGrey50"
-                  position="my-auto"
-                />
-              ) : (
-                <EyeOnIcon
-                  width="w-6"
-                  height="h-6"
-                  color="text-instillGrey50"
-                  position="my-auto"
-                />
-              )}
-            </button>
-          </div>
-        ) : null}
+        <div className="flex relative">
+          <input
+            className={cn(
+              "pl-5",
+              inputLabelType === "inset"
+                ? "pt-6 instill-input-no-highlight"
+                : getInputStyle,
+              inputHeight,
+              inputWidth,
+              inputFontSize,
+              inputLineHeight,
+              inputFontWeight,
+              bgColor,
+              inputBorderRadius,
+              placeholderFontFamily,
+              placeholderFontSize,
+              placeholderFontWeight,
+              placeholderLineHeight,
+              placeholderTextColor,
+              disabled
+                ? cn(disabledCursor, "text-instillGrey50")
+                : readOnly
+                ? cn(readOnlyCursor, "text-instillGrey50")
+                : inputTextColor
+            )}
+            id={id}
+            type={showSecret ? "text" : type}
+            disabled={disabled}
+            required={required}
+            placeholder={
+              disabled ? null : readOnly ? null : focus ? placeholder : null
+            }
+            readOnly={readOnly}
+            autoComplete={autoComplete}
+            onChange={(event) => {
+              const inputValue = event.target.value;
+              onChangeInput(event.target.value);
+              if (!inputValue) {
+                setAnswered(false);
+                return;
+              }
+              setAnswered(true);
+            }}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+          />
+          {enableProtectedToggle ? (
+            <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
+              <button
+                className="my-auto"
+                onClick={() => setShowSecret(!showSecret)}
+              >
+                {showSecret ? (
+                  <EyeOffIcon
+                    width="w-6"
+                    height="h-6"
+                    color="text-instillGrey50"
+                    position="my-auto"
+                  />
+                ) : (
+                  <EyeOnIcon
+                    width="w-6"
+                    height="h-6"
+                    color="text-instillGrey50"
+                    position="my-auto"
+                  />
+                )}
+              </button>
+            </div>
+          ) : null}
+        </div>
       </div>
+      <InputDescriptionBase
+        description={description}
+        descriptionFontFamily={descriptionFontFamily}
+        descriptionFontSize={descriptionFontSize}
+        descriptionFontWeight={descriptionFontWeight}
+        descriptionLineHeight={descriptionLineHeight}
+        descriptionTextColor={descriptionTextColor}
+      />
     </div>
   );
 };

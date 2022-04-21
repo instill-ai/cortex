@@ -17,6 +17,7 @@ Playground.args = {
   error: null,
   id: "protected-text-field-playground",
   label: "protected-text-field-playground",
+  description: "this is a description for protected text field",
   required: true,
   autoComplete: "off",
   disabled: false,
