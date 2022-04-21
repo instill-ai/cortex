@@ -16,6 +16,21 @@ export interface InputLabelBaseProps {
   /** Input label associated input field's id */
   htmlFor: string;
 
+  /** Whether the input is required or not */
+  required: boolean;
+
+  /** Whether the input is focused or not */
+  focus?: boolean;
+
+  /** Whether the input is answered or not */
+  answered: boolean;
+
+  /** Handle input label focus event */
+  onFocusHandler?: (event) => void;
+
+  /** Handle input label blud event */
+  onBlurHandler?: (event) => void;
+
   /** TailwindCSS format - Label's text color
    * - e.g. text-instillGrey50
    */
@@ -41,15 +56,6 @@ export interface InputLabelBaseProps {
    */
   labelLineHeight: string;
 
-  /** Whether the input is required or not */
-  required: boolean;
-
-  /** Whether the input is focused or not */
-  focus?: boolean;
-
-  /** Whether the input is answered or not */
-  answered: boolean;
-
   /** TailwindCSS format
    * - Activate mean whether the input is being focused or the input field was answered
    * - Don't need to specific translate-x-, it's fixed value
@@ -61,12 +67,6 @@ export interface InputLabelBaseProps {
    * - Don't need to specific translate-x-, it's fixed value
    */
   labelDeActivateStyle?: string;
-
-  /** Handle input label focus event */
-  onFocusHandler?: (event) => void;
-
-  /** Handle input label blud event */
-  onBlurHandler?: (event) => void;
 }
 
 const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
