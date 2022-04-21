@@ -7,22 +7,26 @@ export default {
   component: BasicUploadFileField,
 } as ComponentMeta<typeof BasicUploadFileField>;
 
-const Template: ComponentStory<typeof BasicUploadFileField> = () => (
+const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
   <BasicUploadFileField
-    error=""
     onChangeInput={() => undefined}
-    disabled={false}
-    readOnly={false}
-    required={true}
     id="upload-file-field-base-playground"
     label="upload-file-field-base-playground"
     placeholder="Upload a file"
     uploadButtonText="Upload"
     description="this is a description about upload file field"
+    {...args}
   />
 );
 export const Playground: ComponentStory<typeof BasicUploadFileField> =
   Template.bind({});
+
+Playground.args = {
+  error: "",
+  disabled: false,
+  readOnly: false,
+  required: true,
+};
 
 export const DemoFileReader: ComponentStory<
   typeof BasicUploadFileField
