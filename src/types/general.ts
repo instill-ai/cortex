@@ -137,7 +137,7 @@ export interface BasicInputFieldAttributes {
   required: boolean;
 
   /** Field's label Name */
-  labelName: string;
+  label: string;
 
   /** TailwindCSS format
    * - Default is w-full, please make sure this component's parent has defined width
