@@ -116,10 +116,11 @@ const square = ({ width, height, color, children }) => {
 ## How we solve above problems with the three principles
 
 - Oversize comes from being over-designed:
-  - With the two-level component design, we make base-level components act as a single source of truth, every group of the component should only inherit the base-level component and we expose as many styles as possible for further customization. The base-level component will have limited condition rendering thanks to Tailwind CSS, it only needs to expose as many as style props as possible for further customization.
+  - The base-level component will have limited condition rendering thanks to Tailwind CSS, it only needs to expose as many as style props as possible for further customization.
 - Over abstraction
   - Because we don't need to encapsulate style within layer of components just to manage bunch of css files, we can avoid over abstraction.
 - Flexibility ends up with slow iteration:
+  - With the two-level component design, we make base-level components act as a single source of truth, every group of the component should only inherit the base-level component
   - The design system team doesn't need to use a single component to face all the needs, they can create the new exported-level components to achieve different corner cases. They can iterate at a relatively fast speed.
 
 # Drawbacks & Known issues
