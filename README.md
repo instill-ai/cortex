@@ -145,6 +145,55 @@ const square = ({ width }) => {
 
 - Don't use short-cut features of javascript, use a library like clsx or classnames
 - Include `import React from "react"` in every file use react(To avoid jsx-runtime specific function not compatible issue)
+- Everytime you create a new base-level component, you need to create a exported-level component inherit that base-level component to act as manual.
+
+# FQA
+
+- I need to input so many style props in a component, why not just gave me a component and a type prop
+
+# About storybook
+
+- Don't use `{...args}` in component, it will break type checking
+
+```js
+// Don't
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import UploadFileFieldBase from "./UploadFileFieldBase";
+
+export default {
+  title: "Components/Base/Input/UploadFileFieldBase",
+  component: UploadFileFieldBase,
+} as ComponentMeta<typeof UploadFileFieldBase>;
+
+const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
+  <UploadFileFieldBase
+    {...args}
+  />
+);
+
+export const Playground: ComponentStory<typeof UploadFileFieldBase> =
+  Template.bind({});
+
+// Do
+import { ComponentStory, ComponentMeta } from "@storybook/react";
+import UploadFileFieldBase from "./UploadFileFieldBase";
+
+export default {
+  title: "Components/Base/Input/UploadFileFieldBase",
+  component: UploadFileFieldBase,
+} as ComponentMeta<typeof UploadFileFieldBase>;
+
+const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
+  <UploadFileFieldBase
+    id="upload-file-field-base-playground"
+  />
+);
+
+export const Playground: ComponentStory<typeof UploadFileFieldBase> =
+  Template.bind({});
+```
+
+- Prevent using `Playground.args = { id: "don't use this to input props"}`
 
 # Code quality
 
@@ -166,3 +215,6 @@ const square = ({ width }) => {
 - Solve accessibility issues
 - Think about memorize component
 - InputLabel cursor
+- pass input ref into label to get the width
+- If we bundle the design-system as package, we may re-bundle it again with duplicate style css, need to investigate this.
+- refactor inputlabel to not use children as labelname
