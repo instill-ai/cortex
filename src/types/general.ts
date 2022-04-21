@@ -204,4 +204,41 @@ export interface BasicInputFieldAttributes {
    * - https://tailwindcss.com/docs/font-weight
    */
   placeholderFontWeight: string;
+
+  /** TailwindCSS format - Label's text color
+   * - e.g. text-instillGrey50
+   */
+  labelTextColor: string;
+
+  /** TailwindCSS format - Label's font weight
+   * - e.g. font-normal
+   */
+  labelFontWeight: string;
+
+  /** TailwindCSS format - Label's font size
+   * - e.g. text-base
+   */
+  labelFontSize: string;
+
+  /** TailwindCSS format - Label's font family
+   * - e.g. font-sans
+   */
+  labelFontFamily: string;
+
+  /** TailwindCSS format - Label's line height
+   * - e.g. leading-normal
+   */
+  labelLineHeight: string;
+
+  /** TailwindCSS format
+   * - Activate mean whether the input is being focused or the input field was answered
+   * - Don't need to specific translate-x-, it's fixed value
+   */
+  labelActivateStyle?: string;
+
+  /** TailwindCSS format
+   * - Activate mean whether the input is being focused or the input field was answered
+   * - Don't need to specific translate-x-, it's fixed value
+   */
+  labelDeActivateStyle?: string;
 }
