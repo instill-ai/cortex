@@ -27,12 +27,20 @@ export type BasicToggleFieldProps = Omit<
   | "readOnlyCheckedInputBorderColor"
   | "readOnlyCheckedDotColor"
   | "readOnlyDotColor"
+  | "labelFontSize"
+  | "labelFontWeight"
+  | "labelTextColor"
+  | "labelLineHeight"
+  | "labelFontFamily"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
 >;
 
 const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
       id={props.id}
+      description={props.description}
       disabled={props.disabled}
       readOnly={props.readOnly}
       onChangeInput={props.onChangeInput}
@@ -41,14 +49,14 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       defaultChecked={props.defaultChecked}
       focusHighlight={true}
       dotColor="bg-instillGrey30"
-      checkedDotColor=":bg-instillBlue50"
+      checkedDotColor="bg-instillBlue50"
       inputBorderRadius=""
       inputBorderColor="border-instillGrey20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
       checkedInputBorderColor="border-instillBlue50"
       disabledDotColor="bg-instillGrey20"
-      disabledCheckedDotColor=":bg-[#8DF5FF]"
+      disabledCheckedDotColor="bg-[#8DF5FF]"
       disabledCursor="cursor-not-allowed"
       disabledInputBgColor="bg-white"
       disabledInputBorderColor="border-instillGrey20"
@@ -61,8 +69,15 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       readOnlyInputBorderStyle="border-solid"
       readOnlyInputBorderWidth="border"
       readOnlyCheckedInputBorderColor="border-[#8DF5FF]"
-      readOnlyCheckedDotColor=":bg-[#8DF5FF]"
+      readOnlyCheckedDotColor="bg-[#8DF5FF]"
       readOnlyDotColor="bg-instillGrey20"
+      labelFontSize="text-sm"
+      labelFontWeight="font-normal"
+      labelTextColor="text-instillGrey50"
+      labelLineHeight="leading-[18.2px]"
+      labelFontFamily="font-sans"
+      labelActivateStyle="top-1/2 -translate-y-[120%]"
+      labelDeActivateStyle="top-1/2 -translate-y-1/2"
     />
   );
 };

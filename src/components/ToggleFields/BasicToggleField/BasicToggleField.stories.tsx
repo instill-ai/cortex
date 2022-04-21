@@ -7,14 +7,18 @@ export default {
 } as ComponentMeta<typeof BasicToggleField>;
 
 const Template: ComponentStory<typeof BasicToggleField> = (args) => (
-  <BasicToggleField {...args} />
+  <BasicToggleField
+    id="basic-toggle-field"
+    onChangeInput={() => undefined}
+    description="this is a description for basic toggle field"
+    label="basic-toggle-field"
+    {...args}
+  />
 );
 export const Playground: ComponentStory<typeof BasicToggleField> =
   Template.bind({});
 
 Playground.args = {
-  id: "basic-toggle-field",
-  label: "basic-toggle-field",
   defaultChecked: false,
   disabled: false,
   readOnly: false,

@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
-import { BasicInputLabel } from "../../InputLabels";
+import InputLabelBase from "../../InputLabels/InputLabelBase";
 
 export type ToggleFieldBaseProps = Omit<
   BasicInputFieldAttributes,
@@ -108,18 +108,32 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   readOnlyDotColor,
   readOnlyCheckedInputBorderColor,
   readOnlyCheckedDotColor,
+  labelFontFamily,
+  labelFontSize,
+  labelFontWeight,
+  labelLineHeight,
+  labelTextColor,
+  labelActivateStyle,
+  labelDeActivateStyle,
 }) => {
   const [answered, setAnswered] = React.useState(false);
   const [focus, setFocus] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
   return (
     <div className="flex flex-col gap-y-2.5">
-      <BasicInputLabel
+      <InputLabelBase
         answered={disabled ? true : readOnly ? true : answered}
         required={required}
         htmlFor={`${id}-label`}
         type="normal"
         label={label}
+        labelFontFamily={labelFontFamily}
+        labelFontSize={labelFontSize}
+        labelFontWeight={labelFontWeight}
+        labelLineHeight={labelLineHeight}
+        labelTextColor={labelTextColor}
+        labelActivateStyle={labelActivateStyle}
+        labelDeActivateStyle={labelDeActivateStyle}
       />
       <label htmlFor={id} className="flex relative w-[90px] h-10">
         <input
@@ -132,19 +146,21 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
               ? cn(
                   disabledCursor,
                   disabledInputBgColor,
-                  disabledInputBorderColor,
                   disabledInputBorderStyle,
                   disabledInputBorderWidth,
-                  disabledCheckedInputBorderColor
+                  checked
+                    ? disabledCheckedInputBorderColor
+                    : disabledInputBorderColor
                 )
               : readOnly
               ? cn(
                   readOnlyCursor,
                   readOnlyInputBgColor,
-                  readOnlyInputBorderColor,
                   readOnlyInputBorderStyle,
                   readOnlyInputBorderWidth,
-                  readOnlyCheckedInputBorderColor
+                  checked
+                    ? readOnlyCheckedInputBorderColor
+                    : readOnlyInputBorderColor
                 )
               : focusHighlight
               ? focus
@@ -202,14 +218,16 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
             "absolute left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]",
             disabled
               ? cn(
-                  disabledDotColor,
-                  disabledCheckedDotColor,
+                  checked ? disabledCheckedDotColor : disabledDotColor,
                   "cursor-not-allowed"
                 )
               : readOnly
-              ? cn(readOnlyDotColor, readOnlyCheckedDotColor, "cursor-auto")
+              ? cn(
+                  checked ? readOnlyCheckedDotColor : readOnlyDotColor,
+                  "cursor-auto"
+                )
               : cn(checkedDotColor, "cursor-pointer"),
-            dotColor,
+            checked ? checkedDotColor : dotColor,
             inputBorderRadius
           )}
         />

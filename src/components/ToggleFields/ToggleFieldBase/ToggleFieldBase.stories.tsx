@@ -7,41 +7,52 @@ export default {
 } as ComponentMeta<typeof ToggleFieldBase>;
 
 const Template: ComponentStory<typeof ToggleFieldBase> = (args) => (
-  <ToggleFieldBase {...args} />
+  <ToggleFieldBase
+    id="toggle-field-base-playground"
+    description="this is a description for toggle field base"
+    onChangeInput={() => undefined}
+    label="toggle-field-base-playground"
+    inputBorderRadius=""
+    inputBorderColor="border-instillGrey20"
+    inputBorderStyle="border-solid"
+    inputBorderWidth="border"
+    dotColor="bg-instillGrey30"
+    checkedInputBorderColor="border-instillBlue50"
+    checkedDotColor="bg-instillBlue50"
+    disabledDotColor="bg-instillGrey20"
+    disabledCheckedDotColor="bg-[#8DF5FF]"
+    disabledCursor="cursor-not-allowed"
+    disabledInputBgColor="bg-white"
+    disabledInputBorderColor="border-instillGrey20"
+    disabledInputBorderStyle="border-dashed"
+    disabledInputBorderWidth="border"
+    disabledCheckedInputBorderColor="border-instillGrey20"
+    readOnlyCursor="cursor-auto"
+    readOnlyInputBgColor="bg-white"
+    readOnlyInputBorderColor="border-instillGrey20"
+    readOnlyInputBorderStyle="border-solid"
+    readOnlyInputBorderWidth="border"
+    readOnlyCheckedInputBorderColor="border-[#8DF5FF]"
+    readOnlyCheckedDotColor="bg-[#8DF5FF]"
+    readOnlyDotColor="bg-instillGrey20"
+    labelFontSize="text-sm"
+    labelFontWeight="font-normal"
+    labelTextColor="text-instillGrey50"
+    labelLineHeight="leading-[18.2px]"
+    labelFontFamily="font-sans"
+    labelActivateStyle="top-1/2 -translate-y-[120%]"
+    labelDeActivateStyle="top-1/2 -translate-y-1/2"
+    {...args}
+  />
 );
 export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
   {}
 );
 
 Playground.args = {
-  id: "toggle-field-base-playground",
   defaultChecked: false,
-  disabled: false,
+  disabled: true,
   readOnly: false,
   required: true,
-  label: "toggle-field-base-playground",
   focusHighlight: true,
-  inputBorderRadius: "",
-  inputBorderColor: "border-instillGrey20",
-  inputBorderStyle: "border-solid",
-  inputBorderWidth: "border",
-  dotColor: "bg-instillGrey30",
-  checkedInputBorderColor: "border-instillBlue50",
-  checkedDotColor: "bg-instillBlue50",
-  disabledDotColor: "bg-instillGrey20",
-  disabledCheckedDotColor: "bg-[#8DF5FF]",
-  disabledCursor: "cursor-not-allowed",
-  disabledInputBgColor: "bg-white",
-  disabledInputBorderColor: "border-instillGrey20",
-  disabledInputBorderStyle: "border-dashed",
-  disabledInputBorderWidth: "border",
-  disabledCheckedInputBorderColor: "border-instillGrey20",
-  readOnlyCursor: "cursor-auto",
-  readOnlyInputBgColor: "bg-white",
-  readOnlyInputBorderColor: "border-instillGrey20",
-  readOnlyInputBorderStyle: "border-solid",
-  readOnlyInputBorderWidth: "border",
-  readOnlyCheckedInputBorderColor: "border-[#8DF5FF]",
-  readOnlyCheckedDotColor: "bg-[#8DF5FF]",
-  readOnlyDotColor: "bg-instillGrey20",
 };
