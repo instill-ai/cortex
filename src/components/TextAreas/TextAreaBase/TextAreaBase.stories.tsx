@@ -60,4 +60,11 @@ Playground.args = {
   counterLineHeight: "leanding-[15.6px]",
   counterTextColor: "text-instillGrey20",
   counterWordLimit: 256,
+  labelFontSize: "text-sm",
+  labelFontWeight: "font-normal",
+  labelTextColor: "text-instillGrey50",
+  labelLineHeight: "leading-[18.2px]",
+  labelFontFamily: "font-sans",
+  labelActivateStyle: "top-0 translate-y-3",
+  labelDeActivateStyle: "top-0 translate-y-[26px]",
 };

@@ -38,12 +38,20 @@ export type BasicTextAreaProps = Omit<
   | "counterFontWeight"
   | "counterLineHeight"
   | "counterTextColor"
+  | "labelFontSize"
+  | "labelFontWeight"
+  | "labelTextColor"
+  | "labelLineHeight"
+  | "labelFontFamily"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
 >;
 
 const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
   return (
     <TextAreaBase
       id={props.id}
+      description={props.description}
       value={props.value}
       enableCounter={props.enableCounter}
       counterWordLimit={props.counterWordLimit}
@@ -90,6 +98,13 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       placeholderFontWeight="placeholder:font-normal"
       placeholderLineHeight="placeholder:leading-[28px]"
       placeholderTextColor="placeholder:text-instillGrey95"
+      labelFontSize="text-sm"
+      labelFontWeight="font-normal"
+      labelTextColor="text-instillGrey50"
+      labelLineHeight="leading-[18.2px]"
+      labelFontFamily="font-sans"
+      labelActivateStyle="top-0 translate-y-3"
+      labelDeActivateStyle="top-0 translate-y-[26px]"
     />
   );
 };

@@ -1,7 +1,7 @@
 import React from "react";
 import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
-import { TextAreaInputLabel } from "../../InputLabels";
+import InputLabelBase from "../../InputLabels/InputLabelBase";
 
 export interface TextAreaBaseProps extends BasicInputFieldAttributes {
   /** Textarea value */
@@ -98,13 +98,17 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   counterFontWeight,
   counterLineHeight,
   counterTextColor,
+  labelFontFamily,
+  labelFontSize,
+  labelFontWeight,
+  labelLineHeight,
+  labelTextColor,
+  labelActivateStyle,
+  labelDeActivateStyle,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
-
-  const widthStyle = inputWidth ?? "w-full";
-  const heightStyle = inputHeight ?? "h-[70px]";
 
   // let resizeStyle: string;
 
@@ -158,13 +162,13 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
       }}
       className={cn(
         "flex flex-col gap-y-2.5 relative",
-        widthStyle,
+        inputWidth,
         bgColor,
         inputBorderRadius,
         inputLabelType === "inset" ? cn("pb-5 pt-[34px]", getInputStyle) : ""
       )}
     >
-      <TextAreaInputLabel
+      <InputLabelBase
         label={label}
         answered={disabled ? true : readOnly ? true : answered}
         focus={focus}
@@ -177,12 +181,20 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         onBlurHandler={() => {
           setFocus(false);
         }}
+        labelFontFamily={labelFontFamily}
+        labelFontSize={labelFontSize}
+        labelFontWeight={labelFontWeight}
+        labelLineHeight={labelLineHeight}
+        labelTextColor={labelTextColor}
+        labelActivateStyle={labelActivateStyle}
+        labelDeActivateStyle={labelDeActivateStyle}
       />
       <textarea
         ref={inputRef}
         className={cn(
           "flex px-5 min-h-[100px] resize-none",
           inputWidth,
+          inputHeight,
           inputFontSize,
           inputFontWeight,
           inputLineHeight,
