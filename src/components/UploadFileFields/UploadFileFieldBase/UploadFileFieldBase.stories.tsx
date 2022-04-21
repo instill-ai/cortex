@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
     disabled={false}
     readOnly={false}
     required={true}
-    labelName="upload-file-field-base-playground"
+    label="upload-file-field-base-playground"
     focusHighlight={true}
     inputWidth="w-full"
     inputHeight="h-[70px]"

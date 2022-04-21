@@ -9,11 +9,11 @@ export default {
 
 const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
   <BasicUploadFileField
-    id="upload-file-field-base-playground"
     disabled={false}
     readOnly={false}
     required={true}
-    labelName="upload-file-field-base-playground"
+    id="upload-file-field-base-playground"
+    label="upload-file-field-base-playground"
     placeholder="Upload a file"
     uploadButtonText="Upload"
     {...args}
@@ -22,7 +22,9 @@ const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
 export const Playground: ComponentStory<typeof BasicUploadFileField> =
   Template.bind({});
 
-export const Default: ComponentStory<typeof BasicUploadFileField> = () => {
+export const DemoFileReader: ComponentStory<
+  typeof BasicUploadFileField
+> = () => {
   const onChangeInput = (inputValue) => {
     if (!inputValue) return;
 
@@ -47,12 +49,12 @@ export const Default: ComponentStory<typeof BasicUploadFileField> = () => {
     >
       <BasicUploadFileField
         error={null}
-        id="upload-file-field-base-playground"
         disabled={false}
         readOnly={false}
         onChangeInput={onChangeInput}
         required={true}
-        labelName="upload-file-field-base-playground"
+        id="upload-file-field-base-playground"
+        label="upload-file-field-base-playground"
         placeholder="Upload a file"
         uploadButtonText="Upload"
       />

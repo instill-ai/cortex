@@ -65,7 +65,7 @@ export type UploadFileFieldBaseProps = Omit<
 
 const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   id,
-  labelName,
+  label,
   inputLabelType,
   required,
   inputWidth,
@@ -99,9 +99,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
         required={required}
         htmlFor={id}
         type={inputLabelType}
-      >
-        {labelName}
-      </BasicInputLabel>
+        label={label}
+      />
       <label
         className={cn(
           "flex flex-row border border-instillGrey15 p-0 cursor-pointer relative",
