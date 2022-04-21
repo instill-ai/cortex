@@ -241,4 +241,29 @@ export interface BasicInputFieldAttributes {
    * - Don't need to specific translate-x-, it's fixed value
    */
   labelDeActivateStyle?: string;
+
+  /** TailwindCSS format - Description's font size
+   * - e.g. text-base
+   */
+  descriptionFontSize: string;
+
+  /** TailwindCSS format - Description's font family
+   * - e.g. font-sans
+   */
+  descriptionFontFamily: string;
+
+  /** TailwindCSS format - Description's text color
+   * - e.g. text-instillGrey50
+   */
+  descriptionTextColor: string;
+
+  /** TailwindCSS format - Description's line height
+   * - e.g. leading-normal
+   */
+  descriptionLineHeight: string;
+
+  /** TailwindCSS format - Description's font weight
+   * - e.g. font-normal
+   */
+  descriptionFontWeight: string;
 }
