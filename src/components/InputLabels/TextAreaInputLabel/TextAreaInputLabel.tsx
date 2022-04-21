@@ -8,8 +8,8 @@ export type TextAreaInputLabelProps = Omit<
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "activateStyle"
-  | "deActivateStyle"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
 >;
 
 const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
@@ -28,8 +28,8 @@ const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
       labelTextColor="text-instillGrey50"
       labelLineHeight="leading-[18.2px]"
       labelFontFamily="font-sans"
-      activateStyle="top-0 translate-y-3"
-      deActivateStyle="top-0 translate-y-[26px]"
+      labelActivateStyle="top-0 translate-y-3"
+      labelDeActivateStyle="top-0 translate-y-[26px]"
     />
   );
 };

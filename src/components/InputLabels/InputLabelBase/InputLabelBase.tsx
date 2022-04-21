@@ -54,13 +54,13 @@ export interface InputLabelBaseProps {
    * - Activate mean whether the input is being focused or the input field was answered
    * - Don't need to specific translate-x-, it's fixed value
    */
-  activateStyle?: string;
+  labelActivateStyle?: string;
 
   /** TailwindCSS format
    * - Activate mean whether the input is being focused or the input field was answered
    * - Don't need to specific translate-x-, it's fixed value
    */
-  deActivateStyle?: string;
+  labelDeActivateStyle?: string;
 
   /** Handle input label focus event */
   onFocusHandler?: (event) => void;
@@ -80,8 +80,8 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
     labelFontWeight,
     labelTextColor,
     labelFontFamily,
-    activateStyle,
-    deActivateStyle,
+    labelActivateStyle,
+    labelDeActivateStyle,
     onFocusHandler,
     onBlurHandler,
     type,
@@ -102,8 +102,8 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
               "z-10 flex",
               type === "inset"
                 ? activate
-                  ? activateStyle
-                  : deActivateStyle
+                  ? labelActivateStyle
+                  : labelDeActivateStyle
                 : "",
               labelFontSize,
               labelFontWeight,

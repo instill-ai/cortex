@@ -8,8 +8,8 @@ export type BasicInputLabelProps = Omit<
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "activateStyle"
-  | "deActivateStyle"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
 >;
 
 const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
@@ -28,8 +28,8 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
       labelTextColor="text-instillGrey50"
       labelLineHeight="leading-[18.2px]"
       labelFontFamily="font-sans"
-      activateStyle="top-1/2 -translate-y-[120%]"
-      deActivateStyle="top-1/2 -translate-y-1/2"
+      labelActivateStyle="top-1/2 -translate-y-[120%]"
+      labelDeActivateStyle="top-1/2 -translate-y-1/2"
     />
   );
 };
