@@ -7,6 +7,55 @@ export interface BasicInputFieldAttributes {
   /** Whether the input has error or not */
   error: string;
 
+  /** TailwindCSS format - Border color when input has error
+   * - e.g. bg-white
+   * - https://tailwindcss.com/docs/background-color
+   */
+  errorInputBorderColor: string;
+
+  /** TailwindCSS format - Border width when input has error
+   * - e.g. border-2
+   * - https://tailwindcss.com/docs/border-width
+   */
+  errorInputBorderWidth: string;
+
+  /** TailwindCSS format - Border style when input has error
+   * - e.g. border-dashed
+   * - https://tailwindcss.com/docs/border-style
+   */
+  errorInputBorderStyle: string;
+
+  /** TailwindCSS format - Text color when input has error
+   * - e.g. text-instillGrey50
+   * - https://tailwindcss.com/docs/text-color
+   */
+  errorInputTextColor: string;
+
+  /** TailwindCSS format - Label's text color when input has error
+   * - e.g. text-instillGrey50
+   */
+  errorLabelTextColor: string;
+
+  /** TailwindCSS format - Label's font weight when input has error
+   * - e.g. font-normal
+   */
+  errorLabelFontWeight: string;
+
+  /** TailwindCSS format - Label's font size when input has error
+   * - e.g. text-base
+   */
+  errorLabelFontSize: string;
+
+  /** TailwindCSS format - Label's font family when input has error
+   * - e.g. font-sans
+   */
+  errorLabelFontFamily: string;
+
+  /** TailwindCSS format - Label's line height when input has error
+   * - e.g. leading-normal
+   */
+  errorLabelLineHeight: string;
+
   /** Field's label Name */
   label: string;
 
