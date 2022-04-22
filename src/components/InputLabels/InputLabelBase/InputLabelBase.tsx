@@ -9,6 +9,11 @@ export interface InputLabelBaseProps {
   type: "normal" | "inset" | "hide";
 
   /**
+   * Input's error string
+   */
+  error: string;
+
+  /**
    * Input label's text
    */
   label: string;
@@ -24,6 +29,9 @@ export interface InputLabelBaseProps {
 
   /** Whether the input is answered or not */
   answered: boolean;
+
+  /** Input label's width, calculated  */
+  labelWidth: number;
 
   /** Handle input label focus event */
   onFocusHandler?: (event) => void;
@@ -56,6 +64,31 @@ export interface InputLabelBaseProps {
    */
   labelLineHeight: string;
 
+  /** TailwindCSS format - Label's text color when input has error
+   * - e.g. text-instillGrey50
+   */
+  errorLabelTextColor: string;
+
+  /** TailwindCSS format - Label's font weight when input has error
+   * - e.g. font-normal
+   */
+  errorLabelFontWeight: string;
+
+  /** TailwindCSS format - Label's font size when input has error
+   * - e.g. text-base
+   */
+  errorLabelFontSize: string;
+
+  /** TailwindCSS format - Label's font family when input has error
+   * - e.g. font-sans
+   */
+  errorLabelFontFamily: string;
+
+  /** TailwindCSS format - Label's line height when input has error
+   * - e.g. leading-normal
+   */
+  errorLabelLineHeight: string;
+
   /** TailwindCSS format
    * - Activate mean whether the input is being focused or the input field was answered
    * - Don't need to specific translate-x-, it's fixed value
@@ -69,23 +102,36 @@ export interface InputLabelBaseProps {
   labelDeActivateStyle?: string;
 }
 
-const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
-  ({
-    htmlFor,
-    required,
-    focus,
-    answered,
-    label,
-    labelFontSize,
-    labelFontWeight,
-    labelTextColor,
-    labelFontFamily,
-    labelActivateStyle,
-    labelDeActivateStyle,
-    onFocusHandler,
-    onBlurHandler,
-    type,
-  }) => {
+export type InputLabelBaseRef = HTMLLabelElement;
+
+const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
+  (
+    {
+      htmlFor,
+      required,
+      focus,
+      label,
+      answered,
+      labelFontSize,
+      labelFontWeight,
+      labelTextColor,
+      labelFontFamily,
+      labelLineHeight,
+      labelActivateStyle,
+      labelDeActivateStyle,
+      onFocusHandler,
+      onBlurHandler,
+      type,
+      error,
+      errorLabelFontFamily,
+      errorLabelFontSize,
+      errorLabelFontWeight,
+      errorLabelLineHeight,
+      errorLabelTextColor,
+      labelWidth,
+    },
+    ref
+  ) => {
     let activate = false;
 
     if (focus) {
@@ -98,17 +144,32 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
       <>
         {type !== "hide" ? (
           <label
+            ref={ref}
             className={cn(
-              "z-10 flex",
+              "z-10 flex flex-row",
               type === "inset"
-                ? activate
+                ? error
+                  ? "top-5"
+                  : activate
                   ? labelActivateStyle
                   : labelDeActivateStyle
-                : "",
-              labelFontSize,
-              labelFontWeight,
-              labelTextColor,
-              labelFontFamily,
+                : "w-full",
+              error
+                ? cn(
+                    errorLabelFontFamily,
+                    errorLabelFontSize,
+                    errorLabelFontWeight,
+                    errorLabelLineHeight,
+                    errorLabelTextColor
+                  )
+                : cn(
+                    labelFontSize,
+                    labelFontWeight,
+                    labelTextColor,
+                    labelFontFamily,
+                    labelLineHeight
+                  ),
+
               {
                 "absolute translate-x-5 transform-gpu origin-top-left left-0":
                   type === "inset",
@@ -117,9 +178,14 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
             htmlFor={htmlFor}
             onFocus={(event) => onFocusHandler(event)}
             onBlur={(event) => onBlurHandler(event)}
+            style={{
+              width:
+                type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",
+            }}
           >
-            {label}
-            {required ? <span className="ml-1">*</span> : null}
+            <p>{`${label} ${required ? "*" : ""} ${error ? "-" : ""} ${
+              error ? error : ""
+            }`}</p>
           </label>
         ) : (
           ""
@@ -129,6 +195,6 @@ const InputLabelBase: React.FC<InputLabelBaseProps> = React.memo(
   }
 );
 
-export default InputLabelBase;
+export default React.memo(InputLabelBase);
 
 InputLabelBase.displayName = "InputLabelBase";
