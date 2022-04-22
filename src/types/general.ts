@@ -62,14 +62,19 @@ export interface BasicInputFieldAttributes {
   /** Field's description */
   description: ReactNode;
 
+  /** TailwindCSS format - Background color of input
+   * - e.g. bg-white
+   * - https://tailwindcss.com/docs/background-color
+   */
+  inputBgColor: string;
+
   /**
    * Whether the input is disabled
    */
   disabled: boolean;
 
   /** TailwindCSS format - Background color when input is disabled
-   * - Please add persudo class "disabled:"
-   * - e.g. disabled:bg-white
+   * - e.g. bg-white
    * - https://tailwindcss.com/docs/background-color
    */
   disabledInputBgColor: string;
