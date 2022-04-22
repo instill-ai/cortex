@@ -7,6 +7,12 @@ export interface BasicInputFieldAttributes {
   /** Whether the input has error or not */
   error: string;
 
+  /** TailwindCSS format - Background color when input has error
+   * - e.g. bg-white
+   * - https://tailwindcss.com/docs/background-color
+   */
+  errorInputBgColor: string;
+
   /** TailwindCSS format - Border color when input has error
    * - e.g. bg-white
    * - https://tailwindcss.com/docs/background-color
