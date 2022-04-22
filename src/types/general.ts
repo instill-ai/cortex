@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface BasicInputFieldAttributes {
   /** Input field's id */
   id: string;
@@ -9,7 +11,7 @@ export interface BasicInputFieldAttributes {
   label: string;
 
   /** Field's description */
-  description: string;
+  description: ReactNode;
 
   /**
    * Whether the input is disabled
