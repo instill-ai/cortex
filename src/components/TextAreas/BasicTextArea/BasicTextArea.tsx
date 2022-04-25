@@ -11,6 +11,7 @@ export type BasicTextAreaProps = Omit<
   | "inputLineHeight"
   | "inputTextColor"
   | "bgColor"
+  | "inputBgColor"
   | "inputBorderRadius"
   | "inputBorderColor"
   | "inputBorderStyle"
@@ -50,6 +51,16 @@ export type BasicTextAreaProps = Omit<
   | "descriptionLineHeight"
   | "descriptionFontWeight"
   | "descriptionTextColor"
+  | "errorInputBgColor"
+  | "errorLabelFontFamily"
+  | "errorLabelFontSize"
+  | "errorLabelFontWeight"
+  | "errorLabelLineHeight"
+  | "errorLabelTextColor"
+  | "errorInputBorderColor"
+  | "errorInputBorderWidth"
+  | "errorInputBorderStyle"
+  | "errorInputTextColor"
 >;
 
 const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
@@ -68,6 +79,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       autoComplete={props.autoComplete}
       placeholder={props.placeholder}
       readOnly={props.readOnly}
+      inputBgColor="bg-white"
       counterFontFamily="font-sans"
       counterFontSize="text-xs"
       counterFontWeight="font-normal"
@@ -108,13 +120,21 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       labelTextColor="text-instillGrey50"
       labelLineHeight="leading-[18.2px]"
       labelFontFamily="font-sans"
-      labelActivateStyle="top-0 translate-y-3"
-      labelDeActivateStyle="top-0 translate-y-[26px]"
       descriptionFontFamily="font-mono"
       descriptionFontSize="text-xs"
       descriptionLineHeight="leading-[15.6px]"
       descriptionFontWeight="font-normal"
       descriptionTextColor="text-instillGrey50"
+      errorInputBgColor="bg-white"
+      errorLabelFontFamily="font-sans"
+      errorLabelFontSize="text-sm"
+      errorLabelFontWeight="font-normal"
+      errorLabelLineHeight="leading-[18.2px]"
+      errorLabelTextColor="text-instillRed"
+      errorInputBorderColor="border-instillRed"
+      errorInputBorderWidth="border"
+      errorInputBorderStyle="border-solid"
+      errorInputTextColor="text-instillRed"
     />
   );
 };

@@ -344,7 +344,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             }}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
-            value={value}
           />
           {enableCounter ? (
             <div

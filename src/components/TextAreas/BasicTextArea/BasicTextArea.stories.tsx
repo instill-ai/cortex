@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import BasicTextArea from "./BasicTextArea";
 
 export default {
@@ -6,9 +7,12 @@ export default {
   component: BasicTextArea,
 } as ComponentMeta<typeof BasicTextArea>;
 
-const Template: ComponentStory<typeof BasicTextArea> = (args) => (
-  <BasicTextArea {...args} />
-);
+const Template: ComponentStory<typeof BasicTextArea> = (args) => {
+  const [value, setValue] = useState<string>("");
+  return (
+    <BasicTextArea value={value} onChangeInput={(s) => setValue(s)} {...args} />
+  );
+};
 
 export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(
   {}
