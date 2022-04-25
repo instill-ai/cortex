@@ -8,9 +8,9 @@ import React, {
 } from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
-import { BasicInputLabel } from "../../InputLabels";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
+import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
 export interface AutoCompleteWithIconOption {
   label: string;
@@ -99,6 +99,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   label,
   required,
   id,
+  error,
   description,
   onChangeInput,
   disabled,
@@ -126,10 +127,75 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
     }
   }, [defaultValue]);
 
+  /**
+   * We use these ref to calculate the width and height of the container
+   * when there has very long error message which make label overflow.
+   * - When component is mount we calculate the label width
+   * - When error prop is changed we calculate the container height and compare it with original
+   *   container height, is former is greater, we adapt new container height
+   * - We use inputValuePaddingTop to control the position of the input value
+   */
+
+  const inputRef = React.useRef<any>(null);
+  const inputLabelRef = React.useRef<HTMLLabelElement>(null);
+  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
+  const [containerHeight, setContainerHeight] = React.useState<number>(null);
+  const [inputValuePaddingTop, setInputValuePaddingTop] =
+    React.useState<number>(null);
+
+  React.useEffect(() => {
+    if (!inputRef.current || inputLabelType !== "inset") {
+      return;
+    }
+
+    console.log("re-calculate label width", inputRef);
+
+    const mainContainerPosition = getElementPosition(inputRef.current);
+
+    const inputLabelPaddingWidth = 20;
+    const indicatorWidth = 20;
+
+    const inputLabelWidth =
+      mainContainerPosition.width - inputLabelPaddingWidth * 2 - indicatorWidth;
+
+    setInputLabelWidth(inputLabelWidth);
+  }, [inputRef, inputLabelType]);
+
+  React.useEffect(() => {
+    if (!error || !inputRef || !inputLabelRef || inputLabelType !== "inset") {
+      setContainerHeight(70);
+      setInputValuePaddingTop(24);
+      return;
+    }
+
+    const inputLabelPosition = getElementPosition(inputLabelRef.current);
+    const mainContainerPosition = getElementPosition(inputRef.current);
+
+    const inputLabelPaddingY = 20;
+    const gapBetweenLabelAndValue = 10;
+    const inputLineHeight = 28;
+
+    const containerHeight =
+      inputLabelPosition.height +
+      inputLabelPaddingY * 2 +
+      gapBetweenLabelAndValue +
+      inputLineHeight;
+
+    if (containerHeight > mainContainerPosition.height) {
+      setContainerHeight(containerHeight);
+      setInputValuePaddingTop(
+        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
+      );
+    } else {
+      setContainerHeight(70);
+      setInputValuePaddingTop(24);
+    }
+  }, [error, inputLabelRef, inputLabelType]);
+
   const customStyles: StylesConfig = {
     valueContainer: (styles) => ({
       ...styles,
-      paddingTop: "24px",
+      paddingTop: inputValuePaddingTop,
       paddingRight: "20px",
       paddingLeft: "20px",
     }),
@@ -145,7 +211,7 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
       cursor: state.isDisabled ? "not-allowed" : readOnly ? "auto" : "pointer",
       borderRadius: "1px",
       borderWidth: "1px",
-      height: "70px",
+      height: containerHeight,
       borderStyle: state.isDisabled ? "dashed" : "solid",
       backgroundColor: "#ffffff",
       borderColor: state.isDisabled
@@ -192,7 +258,9 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
     <div className="flex flex-col">
       <div className="flex flex-col gap-y-2.5 relative mb-2.5">
         <InputLabelBase
+          ref={inputLabelRef}
           label={label}
+          labelWidth={inputLabelWidth}
           answered={disabled ? true : readOnly ? true : answered}
           focus={focus}
           required={required}
@@ -211,68 +279,78 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
           labelTextColor={labelTextColor}
           labelActivateStyle={labelActivateStyle}
           labelDeActivateStyle={labelDeActivateStyle}
+          error={error}
+          errorLabelFontFamily="font-sans"
+          errorLabelFontSize="text-sm"
+          errorLabelFontWeight="font-normal"
+          errorLabelLineHeight="leading-[18.2px]"
+          errorLabelTextColor="text-instillRed"
         />
-        <Select
-          id={id}
-          isSearchable={!readOnly}
-          menuIsOpen={readOnly ? false : undefined}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          onChange={(event) => {
-            onChangeInput(event);
+        <div ref={inputRef}>
+          <Select
+            id={id}
+            isSearchable={!readOnly}
+            menuIsOpen={readOnly ? false : undefined}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            onChange={(event) => {
+              onChangeInput(event);
 
-            if (event) {
-              setAnswered(true);
-            } else {
-              setAnswered(false);
-            }
-          }}
-          isDisabled={disabled}
-          defaultValue={defaultValue}
-          options={options}
-          components={{
-            IndicatorSeparator: () => null,
-            ClearIndicator: (props: ClearIndicatorProps) => {
-              const {
-                getStyles,
-                innerProps: { ref, ...restInnerProps },
-              } = props;
+              if (event) {
+                setAnswered(true);
+              } else {
+                setAnswered(false);
+              }
+            }}
+            isDisabled={disabled}
+            defaultValue={defaultValue}
+            options={options}
+            components={{
+              IndicatorSeparator: () => null,
+              ClearIndicator: (props: ClearIndicatorProps) => {
+                const {
+                  getStyles,
+                  innerProps: { ref, ...restInnerProps },
+                } = props;
 
+                return (
+                  <div
+                    {...restInnerProps}
+                    ref={ref}
+                    style={getStyles("clearIndicator", props) as CSSProperties}
+                  >
+                    <div style={{ padding: "0px 5px" }}>
+                      <XIcon
+                        position="m-auto"
+                        width="w-5"
+                        height="g-5"
+                        color="text-instillGrey50"
+                      />
+                    </div>
+                  </div>
+                );
+              },
+            }}
+            isClearable={isClearable}
+            placeholder={focus ? "Search..." : null}
+            formatOptionLabel={(option: AutoCompleteWithIconOption) => {
               return (
-                <div
-                  {...restInnerProps}
-                  ref={ref}
-                  style={getStyles("clearIndicator", props) as CSSProperties}
-                >
-                  <div style={{ padding: "0px 5px" }}>
-                    <XIcon
-                      position="m-auto"
-                      width="w-5"
-                      height="g-5"
-                      color="text-instillGrey50"
-                    />
+                <div className="flex flex-row gap-x-3 px-[15px]">
+                  <div className="flex my-auto w-[30px] h-[30px]">
+                    {option.startIcon}
+                  </div>
+                  <div className="my-auto instill-text-body">
+                    {option.label}
+                  </div>
+                  <div className="flex my-auto w-[30px] h-[30px]">
+                    {option.endIcon}
                   </div>
                 </div>
               );
-            },
-          }}
-          isClearable={isClearable}
-          placeholder={focus ? "Search..." : null}
-          formatOptionLabel={(option: AutoCompleteWithIconOption) => {
-            return (
-              <div className="flex flex-row gap-x-3 px-[15px]">
-                <div className="flex my-auto w-[30px] h-[30px]">
-                  {option.startIcon}
-                </div>
-                <div className="my-auto instill-text-body">{option.label}</div>
-                <div className="flex my-auto w-[30px] h-[30px]">
-                  {option.endIcon}
-                </div>
-              </div>
-            );
-          }}
-          styles={customStyles}
-        />
+            }}
+            styles={customStyles}
+          />
+        </div>
       </div>
       <InputDescriptionBase
         description={description}

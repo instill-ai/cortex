@@ -68,7 +68,8 @@ export const Playground: ComponentStory<typeof AutoCompleteWithIcon> =
   Template.bind({});
 
 Playground.args = {
-  error: null,
+  error:
+    "You want to use the g (global) modifier to find all matches. Since the brackets are included in the match result you don't need to use a capturing group and I used negation instead to eliminate the amount of backtracking",
   defaultValue: null,
   disabled: false,
   readOnly: false,
