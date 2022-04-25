@@ -146,6 +146,7 @@ const square = ({ width }) => {
 - Don't use short-cut features of javascript, use a library like clsx or classnames
 - Include `import React from "react"` in every file use react(To avoid jsx-runtime specific function not compatible issue)
 - Everytime you create a new base-level component, you need to create a exported-level component inherit that base-level component to act as manual.
+- Use arbitrary number as many as possible when it comes to size related className like fontSize or lineHeight, due to we may use `getTailwindClassNumber()` to extract number from className, currently it not support with something like `text-sm`
 
 # FQA
 
@@ -153,47 +154,7 @@ const square = ({ width }) => {
 
 # About storybook
 
-- Don't use `{...args}` in component, it will break type checking
-
-```js
-// Don't
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import UploadFileFieldBase from "./UploadFileFieldBase";
-
-export default {
-  title: "Components/Base/Input/UploadFileFieldBase",
-  component: UploadFileFieldBase,
-} as ComponentMeta<typeof UploadFileFieldBase>;
-
-const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
-  <UploadFileFieldBase
-    {...args}
-  />
-);
-
-export const Playground: ComponentStory<typeof UploadFileFieldBase> =
-  Template.bind({});
-
-// Do
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import UploadFileFieldBase from "./UploadFileFieldBase";
-
-export default {
-  title: "Components/Base/Input/UploadFileFieldBase",
-  component: UploadFileFieldBase,
-} as ComponentMeta<typeof UploadFileFieldBase>;
-
-const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
-  <UploadFileFieldBase
-    id="upload-file-field-base-playground"
-  />
-);
-
-export const Playground: ComponentStory<typeof UploadFileFieldBase> =
-  Template.bind({});
-```
-
-- Prevent using `Playground.args = { id: "don't use this to input props"}`
+- Use `{...args}` to set props.
 
 # Code quality
 
