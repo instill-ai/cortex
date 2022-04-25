@@ -6,7 +6,6 @@ import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
 export type ToggleFieldBaseProps = Omit<
   BasicInputFieldAttributes,
-  | "error"
   | "placeholder"
   | "inputFontSize"
   | "inputLineHeight"
@@ -24,6 +23,11 @@ export type ToggleFieldBaseProps = Omit<
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
+  | "errorInputBgColor"
+  | "errorInputBorderColor"
+  | "errorInputBorderStyle"
+  | "errorInputBorderWidth"
+  | "errorInputTextColor"
 > & {
   /** The initial checked state of this toggle field */
   defaultChecked: boolean;
@@ -122,10 +126,17 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  error,
+  errorLabelFontFamily,
+  errorLabelFontSize,
+  errorLabelFontWeight,
+  errorLabelLineHeight,
+  errorLabelTextColor,
 }) => {
   const [answered, setAnswered] = React.useState(false);
   const [focus, setFocus] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-y-2.5 mb-2.5">
@@ -142,6 +153,13 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
           labelTextColor={labelTextColor}
           labelActivateStyle={labelActivateStyle}
           labelDeActivateStyle={labelDeActivateStyle}
+          error={error}
+          errorLabelFontFamily={errorLabelFontFamily}
+          errorLabelFontSize={errorLabelFontSize}
+          errorLabelFontWeight={errorLabelFontWeight}
+          errorLabelLineHeight={errorLabelLineHeight}
+          errorLabelTextColor={errorLabelTextColor}
+          labelWidth={null}
         />
         <label htmlFor={id} className="flex relative w-[90px] h-10">
           <input
