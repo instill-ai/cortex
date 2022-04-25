@@ -107,15 +107,15 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
    * - We use inputValuePaddingTop to control the position of the input value
    */
 
-  const mainContainerRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
 
   React.useEffect(() => {
-    if (!mainContainerRef.current || inputLabelType !== "inset") {
+    if (!inputRef.current || inputLabelType !== "inset") {
       return;
     }
 
-    const mainContainerPosition = getElementPosition(mainContainerRef.current);
+    const mainContainerPosition = getElementPosition(inputRef.current);
 
     const inputLabelPaddingWidth = 20;
 
@@ -125,22 +125,17 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
     console.log("re-calculate label width", inputLabelWidth);
 
     setInputLabelWidth(inputLabelWidth);
-  }, [mainContainerRef, inputLabelType]);
+  }, [inputRef, inputLabelType]);
 
   React.useEffect(() => {
-    if (
-      !error ||
-      !mainContainerRef ||
-      !inputLabelRef ||
-      inputLabelType !== "inset"
-    ) {
+    if (!error || !inputRef || !inputLabelRef || inputLabelType !== "inset") {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setInputValuePaddingTop(0);
       return;
     }
 
     const inputLabelPosition = getElementPosition(inputLabelRef.current);
-    const mainContainerPosition = getElementPosition(mainContainerRef.current);
+    const mainContainerPosition = getElementPosition(inputRef.current);
 
     const inputLabelPaddingY = 20;
     const gapBetweenLabelAndValue = 10;
@@ -248,7 +243,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
                 ? `${inputValuePaddingTop}px`
                 : "",
             }}
-            ref={mainContainerRef}
+            ref={inputRef}
             className={cn(
               "pl-5",
               inputLabelType === "inset"
