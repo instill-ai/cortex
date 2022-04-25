@@ -30,8 +30,10 @@ export interface InputLabelBaseProps {
   /** Whether the input is answered or not */
   answered: boolean;
 
-  /** Input label's width, calculated  */
-  labelWidth: number;
+  /** Input label's width, calculated
+   * - If the type is not inset, this field can be null and label will use w-full as default
+   */
+  labelWidth: number | null;
 
   /** Handle input label focus event */
   onFocusHandler?: (event) => void;
