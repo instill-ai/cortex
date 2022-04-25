@@ -14,6 +14,7 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "bgColor"
   | "inputTextColor"
   | "inputLabelType"
+  | "inputBgColor"
   | "inputBorderRadius"
   | "inputBorderColor"
   | "inputBorderStyle"
