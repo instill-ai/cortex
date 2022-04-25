@@ -47,6 +47,16 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "descriptionLineHeight"
   | "descriptionFontWeight"
   | "descriptionTextColor"
+  | "errorInputBgColor"
+  | "errorLabelFontFamily"
+  | "errorLabelFontSize"
+  | "errorLabelFontWeight"
+  | "errorLabelLineHeight"
+  | "errorLabelTextColor"
+  | "errorInputBorderColor"
+  | "errorInputBorderWidth"
+  | "errorInputBorderStyle"
+  | "errorInputTextColor"
 >;
 
 const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
@@ -67,6 +77,7 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       focusHighlight={true}
       enableProtectedToggle={true}
       type="password"
+      inputBgColor="bg-white"
       inputFontSize="text-base"
       inputLineHeight="leading-[28px]"
       inputFontWeight="font-normal"
@@ -108,6 +119,16 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       descriptionLineHeight="leading-[15.6px]"
       descriptionFontWeight="font-normal"
       descriptionTextColor="text-instillGrey50"
+      errorInputBgColor="bg-white"
+      errorLabelFontFamily="font-sans"
+      errorLabelFontSize="text-sm"
+      errorLabelFontWeight="font-normal"
+      errorLabelLineHeight="leading-[18.2px]"
+      errorLabelTextColor="text-instillRed"
+      errorInputBorderColor="border-instillRed"
+      errorInputBorderWidth="border"
+      errorInputBorderStyle="border-solid"
+      errorInputTextColor="text-instillRed"
     />
   );
 };
