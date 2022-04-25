@@ -95,6 +95,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   inputBorderColor,
   inputBorderStyle,
   inputBorderWidth,
+  inputBgColor,
   dotColor,
   checkedDotColor,
   checkedInputBorderColor,
@@ -161,7 +162,10 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
           errorLabelTextColor={errorLabelTextColor}
           labelWidth={null}
         />
-        <label htmlFor={id} className="flex relative w-[90px] h-10">
+        <label
+          htmlFor={id}
+          className={cn("flex relative w-[90px] h-10", inputBgColor)}
+        >
           <input
             id={id}
             aria-label={`${id}-label`}
