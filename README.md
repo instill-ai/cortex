@@ -172,10 +172,7 @@ const square = ({ width }) => {
 
 ## Todo
 
-- Implement error style
 - Solve accessibility issues
 - Think about memorize component
 - InputLabel cursor
-- pass input ref into label to get the width
 - If we bundle the design-system as package, we may re-bundle it again with duplicate style css, need to investigate this.
-- refactor inputlabel to not use children as labelname
