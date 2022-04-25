@@ -5,6 +5,7 @@ import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
+import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
 //  TextFieldBase
 //
@@ -28,6 +29,16 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   id,
   required,
   error,
+  errorInputBgColor,
+  errorInputBorderColor,
+  errorInputBorderStyle,
+  errorInputBorderWidth,
+  errorInputTextColor,
+  errorLabelFontFamily,
+  errorLabelFontSize,
+  errorLabelFontWeight,
+  errorLabelLineHeight,
+  errorLabelTextColor,
   label,
   description,
   inputFontSize,
@@ -82,8 +93,85 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
   const [showSecret, setShowSecret] = React.useState(false);
+  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
+  const [containerHeight, setContainerHeight] = React.useState<number>(null);
+  const [inputValuePaddingTop, setInputValuePaddingTop] =
+    React.useState<number>(null);
 
-  const getInputStyle = disabled
+  /**
+   * We use these ref to calculate the width and height of the container
+   * when there has very long error message which make label overflow.
+   * - When component is mount we calculate the label width
+   * - When error prop is changed we calculate the container height and compare it with original
+   *   container height, is former is greater, we adapt new container height
+   * - We use inputValuePaddingTop to control the position of the input value
+   */
+
+  const mainContainerRef = React.useRef<HTMLInputElement>(null);
+  const inputLabelRef = React.useRef<HTMLLabelElement>(null);
+
+  React.useEffect(() => {
+    if (!mainContainerRef.current || inputLabelType !== "inset") {
+      return;
+    }
+
+    const mainContainerPosition = getElementPosition(mainContainerRef.current);
+
+    const inputLabelPaddingWidth = 20;
+
+    const inputLabelWidth =
+      mainContainerPosition.width - inputLabelPaddingWidth * 2;
+
+    console.log("re-calculate label width", inputLabelWidth);
+
+    setInputLabelWidth(inputLabelWidth);
+  }, [mainContainerRef, inputLabelType]);
+
+  React.useEffect(() => {
+    if (
+      !error ||
+      !mainContainerRef ||
+      !inputLabelRef ||
+      inputLabelType !== "inset"
+    ) {
+      setContainerHeight(getTailwindClassNumber(inputHeight));
+      setInputValuePaddingTop(0);
+      return;
+    }
+
+    const inputLabelPosition = getElementPosition(inputLabelRef.current);
+    const mainContainerPosition = getElementPosition(mainContainerRef.current);
+
+    const inputLabelPaddingY = 20;
+    const gapBetweenLabelAndValue = 10;
+
+    const inputLabelHeight =
+      inputLabelPosition.height +
+      inputLabelPaddingY * 2 +
+      getTailwindClassNumber(inputLineHeight) +
+      gapBetweenLabelAndValue;
+
+    if (inputLabelHeight > mainContainerPosition.height) {
+      setContainerHeight(inputLabelHeight);
+      setInputValuePaddingTop(
+        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
+      );
+    } else {
+      setContainerHeight(getTailwindClassNumber(inputHeight));
+      setInputValuePaddingTop(0);
+    }
+  }, [error, inputLabelRef, inputLabelType]);
+
+  const getInputStyle = error
+    ? cn(
+        errorInputBgColor,
+        errorInputBorderColor,
+        errorInputBorderStyle,
+        errorInputBorderWidth,
+        errorInputTextColor,
+        "instill-input-no-highlight"
+      )
+    : disabled
     ? cn(
         disabledCursor,
         disabledInputBgColor,
@@ -124,6 +212,8 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         )}
       >
         <InputLabelBase
+          ref={inputLabelRef}
+          error={error}
           answered={disabled ? true : readOnly ? true : answered}
           focus={focus}
           required={required}
@@ -136,6 +226,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             setFocus(true);
           }}
           label={label}
+          labelWidth={inputLabelWidth}
           labelFontFamily={labelFontFamily}
           labelFontSize={labelFontSize}
           labelFontWeight={labelFontWeight}
@@ -143,9 +234,21 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
           labelTextColor={labelTextColor}
           labelActivateStyle={labelActivateStyle}
           labelDeActivateStyle={labelDeActivateStyle}
+          errorLabelFontFamily={errorLabelFontFamily}
+          errorLabelFontSize={errorLabelFontSize}
+          errorLabelFontWeight={errorLabelFontWeight}
+          errorLabelLineHeight={errorLabelLineHeight}
+          errorLabelTextColor={errorLabelTextColor}
         />
         <div className="flex relative">
           <input
+            style={{
+              height: containerHeight ? `${containerHeight}px` : "",
+              paddingTop: inputValuePaddingTop
+                ? `${inputValuePaddingTop}px`
+                : "",
+            }}
+            ref={mainContainerRef}
             className={cn(
               "pl-5",
               inputLabelType === "inset"
