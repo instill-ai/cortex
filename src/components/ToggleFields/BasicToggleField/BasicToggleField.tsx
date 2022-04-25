@@ -46,7 +46,7 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
     <ToggleFieldBase
       id={props.id}
       description={props.description}
-      disabled={props.disabled}
+      error={props.error}
       readOnly={props.readOnly}
       onChangeInput={props.onChangeInput}
       required={props.required}
@@ -55,11 +55,13 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       focusHighlight={true}
       dotColor="bg-instillGrey30"
       checkedDotColor="bg-instillBlue50"
+      inputBgColor="bg-white"
       inputBorderRadius=""
       inputBorderColor="border-instillGrey20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
       checkedInputBorderColor="border-instillBlue50"
+      disabled={props.disabled}
       disabledDotColor="bg-instillGrey20"
       disabledCheckedDotColor="bg-[#8DF5FF]"
       disabledCursor="cursor-not-allowed"
@@ -88,6 +90,11 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       descriptionLineHeight="leading-[15.6px]"
       descriptionFontWeight="font-normal"
       descriptionTextColor="text-instillGrey50"
+      errorLabelFontFamily="font-sans"
+      errorLabelFontSize="text-sm"
+      errorLabelFontWeight="font-normal"
+      errorLabelLineHeight="leading-[18.2px]"
+      errorLabelTextColor="text-instillRed"
     />
   );
 };

@@ -30,6 +30,7 @@ Playground.args = {
   labelActivateStyle: "",
   labelDeActivateStyle: "",
 
+  inputBgColor: "bg-white",
   inputBorderRadius: "",
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
