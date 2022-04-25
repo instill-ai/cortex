@@ -3,8 +3,12 @@ import cn from "clsx";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
+import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
-export interface TextAreaBaseProps extends BasicInputFieldAttributes {
+export type TextAreaBaseProps = Omit<
+  BasicInputFieldAttributes,
+  "labelActivateStyle" | "labelDeActivateStyle"
+> & {
   /** Textarea value */
   value: string;
 
@@ -48,7 +52,7 @@ export interface TextAreaBaseProps extends BasicInputFieldAttributes {
    * - https://tailwindcss.com/docs/line-height
    */
   counterLineHeight: string;
-}
+};
 
 const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   id,
@@ -105,17 +109,24 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   labelFontWeight,
   labelLineHeight,
   labelTextColor,
-  labelActivateStyle,
-  labelDeActivateStyle,
   descriptionFontFamily,
   descriptionFontSize,
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  errorInputBgColor,
+  errorInputBorderColor,
+  errorInputBorderStyle,
+  errorInputBorderWidth,
+  errorInputTextColor,
+  errorLabelFontFamily,
+  errorLabelFontSize,
+  errorLabelFontWeight,
+  errorLabelLineHeight,
+  errorLabelTextColor,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
-  const inputRef = React.useRef<HTMLTextAreaElement>(null);
 
   // let resizeStyle: string;
 
@@ -134,14 +145,88 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   //     break;
   // }
 
-  const getInputStyle = disabled
+  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
+  const [containerHeight, setContainerHeight] = React.useState<number>(null);
+  const [containerPaddingTop, setContainerPaddingTop] =
+    React.useState<number>(null);
+
+  /**
+   * We use these ref to calculate the width and height of the container
+   * - it calculate the container height no matter whether the error is present
+   * - inputLabel have fixed activate and deActivate style.
+   */
+
+  const inputRef = React.useRef<HTMLTextAreaElement>(null);
+  const inputLabelRef = React.useRef<HTMLLabelElement>(null);
+
+  React.useEffect(() => {
+    if (!inputRef.current || inputLabelType !== "inset") {
+      return;
+    }
+
+    const mainContainerPosition = getElementPosition(inputRef.current);
+
+    const inputLabelPaddingWidth = 20;
+
+    const inputLabelWidth =
+      mainContainerPosition.width - inputLabelPaddingWidth * 2;
+
+    console.log("re-calculate label width", inputLabelWidth);
+
+    setInputLabelWidth(inputLabelWidth);
+  }, [inputRef, inputLabelType]);
+
+  React.useEffect(() => {
+    if (!inputRef || !inputLabelRef) {
+      setContainerHeight(getTailwindClassNumber(inputHeight));
+      setContainerPaddingTop(0);
+      return;
+    }
+
+    const inputLabelPosition = getElementPosition(inputLabelRef.current);
+    const mainContainerPosition = getElementPosition(inputRef.current);
+
+    const inputLabelPaddingY = 20;
+    const gapBetweenLabelAndValue = 10;
+    const textAreaMarginBottom = 5; // Avoid textarea cover container border
+
+    const containerHeight =
+      inputLabelPosition.height +
+      (inputLabelType === "inset"
+        ? inputLabelPaddingY + textAreaMarginBottom
+        : 0) +
+      getTailwindClassNumber(inputHeight) +
+      gapBetweenLabelAndValue;
+
+    if (containerHeight > mainContainerPosition.height) {
+      setContainerHeight(containerHeight);
+      setContainerPaddingTop(
+        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
+      );
+    } else {
+      setContainerHeight(getTailwindClassNumber(inputHeight));
+      setContainerPaddingTop(0);
+    }
+  }, [error, inputLabelRef, inputLabelType]);
+
+  const getInputStyle = error
+    ? cn(
+        errorInputBgColor,
+        errorInputBorderColor,
+        errorInputBorderStyle,
+        errorInputBorderWidth,
+        errorInputTextColor,
+        "instill-input-no-highlight"
+      )
+    : disabled
     ? cn(
         disabledCursor,
         disabledInputBgColor,
         disabledInputBorderColor,
         disabledInputBorderStyle,
         disabledInputBorderWidth,
-        disabledInputTextColor
+        disabledInputTextColor,
+        "instill-input-no-highlight"
       )
     : readOnly
     ? cn(
@@ -150,7 +235,8 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         readOnlyInputBorderColor,
         readOnlyInputBorderStyle,
         readOnlyInputBorderWidth,
-        readOnlyInputTextColor
+        readOnlyInputTextColor,
+        "instill-input-no-highlight"
       )
     : focusHighlight
     ? focus
@@ -173,11 +259,25 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           inputWidth,
           bgColor,
           inputBorderRadius,
-          inputLabelType === "inset" ? cn("pb-5 pt-[34px]", getInputStyle) : ""
+          inputLabelType === "inset"
+            ? cn(containerPaddingTop ? "pb-5" : "pb-5 pt-[34px]", getInputStyle)
+            : ""
         )}
+        style={{
+          height: containerHeight ? `${containerHeight}px` : "",
+          paddingTop:
+            inputLabelType === "inset"
+              ? containerPaddingTop
+                ? `${containerPaddingTop}px`
+                : ""
+              : "",
+        }}
       >
         <InputLabelBase
+          ref={inputLabelRef}
           label={label}
+          labelWidth={inputLabelWidth}
+          error={error}
           answered={disabled ? true : readOnly ? true : answered}
           focus={focus}
           required={required}
@@ -194,64 +294,71 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           labelFontWeight={labelFontWeight}
           labelLineHeight={labelLineHeight}
           labelTextColor={labelTextColor}
-          labelActivateStyle={labelActivateStyle}
-          labelDeActivateStyle={labelDeActivateStyle}
+          labelActivateStyle="top-5"
+          labelDeActivateStyle="top-5"
+          errorLabelFontFamily={errorLabelFontFamily}
+          errorLabelFontSize={errorLabelFontSize}
+          errorLabelFontWeight={errorLabelFontWeight}
+          errorLabelLineHeight={errorLabelLineHeight}
+          errorLabelTextColor={errorLabelTextColor}
         />
-        <textarea
-          ref={inputRef}
-          className={cn(
-            "flex px-5 min-h-[100px] resize-none",
-            inputWidth,
-            inputHeight,
-            inputFontSize,
-            inputFontWeight,
-            inputLineHeight,
-            bgColor,
-            placeholderFontFamily,
-            placeholderFontSize,
-            placeholderFontWeight,
-            placeholderLineHeight,
-            placeholderTextColor,
-            disabled
-              ? cn(disabledCursor, "text-instillGrey50")
-              : readOnly
-              ? cn(readOnlyCursor, "text-instillGrey50")
-              : inputTextColor,
-            inputLabelType === "inset"
-              ? "instill-input-no-highlight"
-              : cn(getInputStyle, "pt-5")
-          )}
-          id={id}
-          disabled={disabled}
-          required={required}
-          placeholder={focus ? placeholder : null}
-          readOnly={readOnly}
-          autoComplete={autoComplete}
-          onChange={(event) => {
-            const inputValue = event.target.value;
-            onChangeInput(event.target.value);
-            if (!inputValue) {
-              setAnswered(false);
-              return;
-            }
-            setAnswered(true);
-          }}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          value={value}
-        />
-        {enableCounter ? (
-          <div
+        <div className="flex relative">
+          <textarea
+            ref={inputRef}
             className={cn(
-              counterFontSize,
-              counterFontWeight,
-              counterFontFamily,
-              counterLineHeight,
-              counterTextColor,
-              "absolute right-4 bottom-2"
+              "flex px-5 min-h-[100px] resize-none",
+              inputWidth,
+              inputHeight,
+              inputFontSize,
+              inputFontWeight,
+              inputLineHeight,
+              bgColor,
+              placeholderFontFamily,
+              placeholderFontSize,
+              placeholderFontWeight,
+              placeholderLineHeight,
+              placeholderTextColor,
+              disabled
+                ? cn(disabledCursor, "text-instillGrey50")
+                : readOnly
+                ? cn(readOnlyCursor, "text-instillGrey50")
+                : inputTextColor,
+              inputLabelType === "inset"
+                ? "instill-input-no-highlight"
+                : cn(getInputStyle, "pt-5")
             )}
-          >{`${value ? value.length : 0}/${counterWordLimit}`}</div>
-        ) : null}
+            id={id}
+            disabled={disabled}
+            required={required}
+            placeholder={focus ? placeholder : null}
+            readOnly={readOnly}
+            autoComplete={autoComplete}
+            onChange={(event) => {
+              const inputValue = event.target.value;
+              onChangeInput(event.target.value);
+              if (!inputValue) {
+                setAnswered(false);
+                return;
+              }
+              setAnswered(true);
+            }}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            value={value}
+          />
+          {enableCounter ? (
+            <div
+              className={cn(
+                counterFontSize,
+                counterFontWeight,
+                counterFontFamily,
+                counterLineHeight,
+                counterTextColor,
+                "absolute right-4 bottom-2"
+              )}
+            >{`${value ? value.length : 0}/${counterWordLimit}`}</div>
+          ) : null}
+        </div>
       </div>
       <InputDescriptionBase
         description={description}
