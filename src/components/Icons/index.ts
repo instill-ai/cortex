@@ -68,6 +68,8 @@ import AwsRdsIcon from "./AwsRdsIcon";
 import type { AwsRdsIconProps } from "./AwsRdsIcon";
 import StatusOnIcon from "./StatusOnIcon";
 import type { StatusOnIconProps } from "./StatusOnIcon";
+import StatusOffIcon from "./StatusOffIcon";
+import type { StatusOffIconProps } from "./StatusOffIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -160,4 +162,6 @@ export {
   AwsRdsIconProps,
   StatusOnIcon,
   StatusOnIconProps,
+  StatusOffIcon,
+  StatusOffIconProps,
 };
