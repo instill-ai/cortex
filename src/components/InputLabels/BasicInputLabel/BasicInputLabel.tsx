@@ -10,12 +10,19 @@ export type BasicInputLabelProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
+  | "errorLabelFontFamily"
+  | "errorLabelFontSize"
+  | "errorLabelFontWeight"
+  | "errorLabelLineHeight"
+  | "errorLabelTextColor"
 >;
 
 const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
   return (
     <InputLabelBase
       focus={props.focus}
+      error={props.error}
+      labelWidth={props.labelWidth}
       required={props.required}
       answered={props.answered}
       htmlFor={props.htmlFor}
@@ -30,6 +37,11 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
+      errorLabelFontFamily="font-sans"
+      errorLabelFontSize="text-sm"
+      errorLabelFontWeight="font-normal"
+      errorLabelLineHeight="leading-[18.2px]"
+      errorLabelTextColor="text-instillRed"
     />
   );
 };
