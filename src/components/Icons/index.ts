@@ -66,6 +66,8 @@ import GoogleSheetIcon from "./GoogleSheetIcon";
 import type { GoogleSheetIconProps } from "./GoogleSheetIcon";
 import AwsRdsIcon from "./AwsRdsIcon";
 import type { AwsRdsIconProps } from "./AwsRdsIcon";
+import StatusOnIcon from "./StatusOnIcon";
+import type { StatusOnIconProps } from "./StatusOnIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -156,4 +158,6 @@ export {
   GoogleSheetIconProps,
   AwsRdsIcon,
   AwsRdsIconProps,
+  StatusOnIcon,
+  StatusOnIconProps,
 };
