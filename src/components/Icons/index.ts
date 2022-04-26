@@ -70,6 +70,8 @@ import StatusOnIcon from "./StatusOnIcon";
 import type { StatusOnIconProps } from "./StatusOnIcon";
 import StatusOffIcon from "./StatusOffIcon";
 import type { StatusOffIconProps } from "./StatusOffIcon";
+import StatusErrorIcon from "./StatusErrorIcon";
+import type { StatusErrorIconProps } from "./StatusErrorIcon";
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -164,4 +166,6 @@ export {
   StatusOnIconProps,
   StatusOffIcon,
   StatusOffIconProps,
+  StatusErrorIcon,
+  StatusErrorIconProps,
 };
