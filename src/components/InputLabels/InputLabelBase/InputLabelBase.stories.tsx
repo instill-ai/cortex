@@ -14,9 +14,7 @@ const Template: ComponentStory<typeof InputLabelBase> = (args) => {
       {...args}
       onBlurHandler={() => setFocus(false)}
       onFocusHandler={() => setFocus(true)}
-    >
-      Playground label
-    </InputLabelBase>
+    />
   );
 };
 
@@ -35,4 +33,5 @@ Playground.args = {
   answered: false,
   required: false,
   type: "inset",
+  label: "Playground label",
 };
