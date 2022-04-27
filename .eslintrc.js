@@ -33,7 +33,7 @@ module.exports = {
     "plugin:@typescript-eslint/recommended",
 
     // eslint-plugin-import
-    "plugin:import/recommended",
+    //"plugin:import/recommended",
 
     // eslint-import-resolver-typescript
     "plugin:import/typescript",

@@ -27,3 +27,39 @@ export const getElementPosition = (element: HTMLElement): ElemeentPosition => {
     height: box.height,
   };
 };
+
+export const getTailwindClassNumber = (className: string): number => {
+  if (!hasNumber(className)) {
+    throw new Error(
+      "Tailwind css classNames don't have number, please try to use abitrary classname like w-[10px]"
+    );
+  }
+
+  if (/\[.*\]/g.test(className)) {
+    const matchString = className.match(/\[([^\][]*)]/g);
+
+    if (className.includes("px")) {
+      return parseInt(matchString[0].match(/\d+/g)[0]);
+    }
+
+    if (className.includes("rem")) {
+      return parseInt(matchString[0].match(/\d+/g)[0]) * 4;
+    }
+
+    throw new Error(
+      `getTailwindClassNumber now only support px and rem, input - ${className}`
+    );
+  }
+
+  if (className.includes("[") || className.includes("]")) {
+    throw new Error(
+      `Tailwind css classname is not complete, input - ${className}`
+    );
+  }
+
+  return parseInt(className.match(/\d+/g)[0]) * 4;
+};
+
+function hasNumber(s: string) {
+  return /\d/.test(s);
+}

@@ -15,6 +15,7 @@ build
 **/tsconfig.tsbuildinfo
 **/.eslintcache
 .cache/*
+.rollup.cache
 
 # misc
 .DS_Store
