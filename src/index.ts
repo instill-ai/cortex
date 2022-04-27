@@ -1,4 +1,4 @@
-import { getTailwindClassNumber } from "./utils";
+import { getTailwindClassNumber, getElementPosition } from "./utils";
 
-export { getTailwindClassNumber };
+export { getTailwindClassNumber, getElementPosition };
 export * from "./components";
