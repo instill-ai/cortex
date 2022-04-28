@@ -5,7 +5,7 @@ import AutoCompleteWithIconBase, {
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 
 export default {
-  title: "Components/Ui/Input/AutoCompleteWithIcon",
+  title: "Components/Ui/Base/AutoCompleteWithIconBase",
   component: AutoCompleteWithIconBase,
 } as ComponentMeta<typeof AutoCompleteWithIconBase>;
 
