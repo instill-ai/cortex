@@ -5,6 +5,21 @@ This is a react design system builds on top of TailwindCSS with several principl
 - Two-level component design: base-level components and exported-level components
 - One style one prop approach: The base component will expose style as props as much as possible, one prop will only have one style string
 
+# How to use
+
+1. Install: `yarn add @instill-ai/design-system`
+2. Add this package into your main project tailwind.config.js and make sure you have all the necessary style
+
+```js
+module.exports = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx}",
+    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@instill-ai/design-system/build/*.js",
+  ],
+};
+```
+
 # Why we choose the utility class approach.
 
 - The utility class is easy to write, it can deliver an application at a relatively quick pace.
