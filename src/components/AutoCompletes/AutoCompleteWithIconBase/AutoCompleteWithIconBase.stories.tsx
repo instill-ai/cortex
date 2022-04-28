@@ -1,15 +1,15 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import AutoCompleteWithIcon, {
+import AutoCompleteWithIconBase, {
   AutoCompleteWithIconOption,
-} from "./AutoCompleteWithIcon";
+} from "./AutoCompleteWithIconBase";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 
 export default {
   title: "Components/Ui/Input/AutoCompleteWithIcon",
-  component: AutoCompleteWithIcon,
-} as ComponentMeta<typeof AutoCompleteWithIcon>;
+  component: AutoCompleteWithIconBase,
+} as ComponentMeta<typeof AutoCompleteWithIconBase>;
 
-const Template: ComponentStory<typeof AutoCompleteWithIcon> = (args) => {
+const Template: ComponentStory<typeof AutoCompleteWithIconBase> = (args) => {
   const options: AutoCompleteWithIconOption[] = [
     {
       value: "grpc",
@@ -56,7 +56,7 @@ const Template: ComponentStory<typeof AutoCompleteWithIcon> = (args) => {
   };
 
   return (
-    <AutoCompleteWithIcon
+    <AutoCompleteWithIconBase
       {...args}
       onChangeInput={onChangeInputHandler}
       options={options}
@@ -64,7 +64,7 @@ const Template: ComponentStory<typeof AutoCompleteWithIcon> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof AutoCompleteWithIcon> =
+export const Playground: ComponentStory<typeof AutoCompleteWithIconBase> =
   Template.bind({});
 
 Playground.args = {

@@ -4,7 +4,7 @@ import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
-import { getElementPosition, getTailwindClassNumber } from "../../../utils";
+import { getElementPosition } from "../../../utils";
 
 export interface AutoCompleteWithIconOption {
   label: string;
@@ -13,7 +13,7 @@ export interface AutoCompleteWithIconOption {
   endIcon?: React.ReactNode;
 }
 
-export type AutoCompleteWithIconProps = Omit<
+export type AutoCompleteWithIconBaseProps = Omit<
   BasicInputFieldAttributes,
   | "placeholder"
   | "inputFontSize"
@@ -86,7 +86,7 @@ export type AutoCompleteWithIconProps = Omit<
   isClearable: boolean;
 };
 
-const AutoCompleteWithIcon: React.FC<AutoCompleteWithIconProps> = ({
+const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
   defaultValue,
   options,
   inputLabelType,
@@ -360,4 +360,4 @@ const AutoCompleteWithIcon: React.FC<AutoCompleteWithIconProps> = ({
   );
 };
 
-export default AutoCompleteWithIcon;
+export default AutoCompleteWithIconBase;

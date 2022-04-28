@@ -1,6 +1,5 @@
 // AutoCompletes
-import { AutoCompleteWithIcon } from "./AutoCompletes";
-import type { AutoCompleteWithIconProps } from "./AutoCompletes";
+export * from "./AutoCompletes";
 
 // Icons
 export * from "./Icons";
@@ -52,8 +51,6 @@ import { BasicUploadFileField } from "./UploadFileFields";
 import type { BasicUploadFileFieldProps } from "./UploadFileFields";
 
 export {
-  AutoCompleteWithIcon,
-  AutoCompleteWithIconProps,
   BasicInputLabel,
   BasicInputLabelProps,
   TextAreaInputLabel,

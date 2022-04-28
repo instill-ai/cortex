@@ -1,4 +1,11 @@
-import AutoCompleteWithIcon from "./AutoCompleteWithIcon";
-import type { AutoCompleteWithIconProps } from "./AutoCompleteWithIcon";
+import AutoCompleteWithIconBase from "./AutoCompleteWithIconBase";
+import type {
+  AutoCompleteWithIconBaseProps,
+  AutoCompleteWithIconOption,
+} from "./AutoCompleteWithIconBase";
 
-export { AutoCompleteWithIcon, AutoCompleteWithIconProps };
+export {
+  AutoCompleteWithIconBase,
+  AutoCompleteWithIconBaseProps,
+  AutoCompleteWithIconOption,
+};
