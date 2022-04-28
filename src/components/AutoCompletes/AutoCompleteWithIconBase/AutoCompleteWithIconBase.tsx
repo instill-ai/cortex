@@ -86,7 +86,7 @@ export type AutoCompleteWithIconBaseProps = Omit<
    * Default value of this autocomplete
    * - You have to put into the array with desired index like options[0]
    */
-  defaultValue: AutoCompleteWithIconOption;
+  defaultValue?: AutoCompleteWithIconOption;
 
   /** Whether the autocomplete is clearalbe */
   isClearable: boolean;
