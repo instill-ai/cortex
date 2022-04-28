@@ -1,9 +1,9 @@
-import { FC, ReactNode } from "react";
+import React from "react";
 import cn from "clsx";
 
 export interface InputDescriptionBaseProps {
   /** Description of the input */
-  description: ReactNode;
+  description: React.ReactNode;
 
   /** TailwindCSS format - Description's font size
    * - e.g. text-base
@@ -31,7 +31,7 @@ export interface InputDescriptionBaseProps {
   descriptionFontWeight: string;
 }
 
-const InputDescriptionBase: FC<InputDescriptionBaseProps> = ({
+const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = ({
   description,
   descriptionFontFamily,
   descriptionFontSize,

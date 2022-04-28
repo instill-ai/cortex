@@ -1,5 +1,5 @@
-import { FC } from "react";
+import React from "react";
 
-export const StoryGroup: FC = ({ children }) => {
+export const StoryGroup: React.FC = ({ children }) => {
   return <div className="flex flex-col">{children}</div>;
 };

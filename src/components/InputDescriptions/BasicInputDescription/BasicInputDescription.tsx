@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import InputDescriptionBase, {
   InputDescriptionBaseProps,
 } from "../InputDescriptionBase";
@@ -12,7 +12,7 @@ export type BasicInputDescriptionProps = Omit<
   | "descriptionTextColor"
 >;
 
-const BasicInputDescription: FC<BasicInputDescriptionProps> = (props) => {
+const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (props) => {
   return (
     <InputDescriptionBase
       description={props.description}

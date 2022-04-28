@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import SquareProgressBase, {
   SquareProgressBaseProps,
 } from "../SquareProgressBase";
@@ -8,7 +8,7 @@ export type WhiteBgSquareProgressProps = Omit<
   "bgColor" | "cubeColor" | "animationDuration"
 >;
 
-const WhiteBgSquareProgress: FC<WhiteBgSquareProgressProps> = (props) => {
+const WhiteBgSquareProgress: React.FC<WhiteBgSquareProgressProps> = (props) => {
   return (
     <SquareProgressBase
       isError={props.isError}

@@ -1,7 +1,7 @@
-import { useRef } from "react";
+import React from "react";
 
 export const useRenderCounter = (componentName: string) => {
-  const counts = useRef(0);
+  const counts = React.useRef(0);
   counts.current += 1;
 
   return (

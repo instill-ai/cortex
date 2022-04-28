@@ -1,11 +1,5 @@
 import Select, { ClearIndicatorProps, StylesConfig } from "react-select";
-import React, {
-  CSSProperties,
-  FC,
-  ReactNode,
-  useEffect,
-  useState,
-} from "react";
+import React from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -15,8 +9,8 @@ import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 export interface AutoCompleteWithIconOption {
   label: string;
   value: string | number;
-  startIcon?: ReactNode;
-  endIcon?: ReactNode;
+  startIcon?: React.ReactNode;
+  endIcon?: React.ReactNode;
 }
 
 export type AutoCompleteWithIconProps = Omit<
@@ -92,7 +86,7 @@ export type AutoCompleteWithIconProps = Omit<
   isClearable: boolean;
 };
 
-const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
+const AutoCompleteWithIcon: React.FC<AutoCompleteWithIconProps> = ({
   defaultValue,
   options,
   inputLabelType,
@@ -118,10 +112,10 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
   descriptionLineHeight,
   descriptionTextColor,
 }) => {
-  const [focus, setFocus] = useState(false);
-  const [answered, setAnswered] = useState(false);
+  const [focus, setFocus] = React.useState(false);
+  const [answered, setAnswered] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (defaultValue && !answered) {
       setAnswered(true);
     }
@@ -317,7 +311,9 @@ const AutoCompleteWithIcon: FC<AutoCompleteWithIconProps> = ({
                   <div
                     {...restInnerProps}
                     ref={ref}
-                    style={getStyles("clearIndicator", props) as CSSProperties}
+                    style={
+                      getStyles("clearIndicator", props) as React.CSSProperties
+                    }
                   >
                     <div style={{ padding: "0px 5px" }}>
                       <XIcon

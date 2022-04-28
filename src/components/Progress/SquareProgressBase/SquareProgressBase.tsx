@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import cn from "clsx";
 import "./SquareProgressBase.css";
 
@@ -21,7 +21,7 @@ export interface SquareProgressBaseProps {
   animationDuration: number;
 }
 
-const SquareProgressBase: FC<SquareProgressBaseProps> = ({
+const SquareProgressBase: React.FC<SquareProgressBaseProps> = ({
   bgColor,
   cubeColor,
   isError,
