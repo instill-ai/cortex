@@ -23,6 +23,7 @@ export type BasicAutoCompleteWithIconProps = Omit<
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
+  | "isClearable"
 >;
 
 const BasicAutoCompleteWithIcon: FC<BasicAutoCompleteWithIconProps> = (

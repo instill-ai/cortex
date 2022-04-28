@@ -73,7 +73,6 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: false,
-  isClearable: true,
   description: "this is a description for auth complete with Icon",
   label: "autocomplete-with-icon",
   id: "autocomplete-with-icon",
