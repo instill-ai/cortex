@@ -91,4 +91,9 @@ Playground.args = {
   descriptionLineHeight: "leading-[15.6px]",
   descriptionFontWeight: "font-normal",
   descriptionTextColor: "text-instillGrey50",
+  errorLabelFontFamily: "font-sans",
+  errorLabelFontSize: "text-sm",
+  errorLabelFontWeight: "font-normal",
+  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelTextColor: "text-instillRed",
 };

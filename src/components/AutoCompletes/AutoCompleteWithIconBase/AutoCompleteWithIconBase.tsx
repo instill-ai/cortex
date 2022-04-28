@@ -49,6 +49,11 @@ export type AutoCompleteWithIconBaseProps = Omit<
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
+  | "errorInputBgColor"
+  | "errorInputBorderColor"
+  | "errorInputBorderStyle"
+  | "errorInputBorderWidth"
+  | "errorInputTextColor"
 > & {
   /**
    * Options
@@ -111,6 +116,11 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  errorLabelFontFamily,
+  errorLabelFontSize,
+  errorLabelFontWeight,
+  errorLabelLineHeight,
+  errorLabelTextColor,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -208,7 +218,9 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
       height: containerHeight,
       borderStyle: state.isDisabled ? "dashed" : "solid",
       backgroundColor: "#ffffff",
-      borderColor: state.isDisabled
+      borderColor: error
+        ? "#FF5353"
+        : state.isDisabled
         ? "#E4E4E4"
         : state.isFocused
         ? "#40A8F5"
@@ -217,7 +229,11 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
         ? "0px 0px 0px 3px rgba(64, 168, 245, 0.2)"
         : "none",
       ":hover": {
-        borderColor: state.isFocused ? "#40A8F5" : "#E4E4E4",
+        borderColor: error
+          ? "#FF5353"
+          : state.isFocused
+          ? "#40A8F5"
+          : "#E4E4E4",
       },
     }),
     placeholder: (styles) => ({
@@ -274,11 +290,11 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
           labelActivateStyle={labelActivateStyle}
           labelDeActivateStyle={labelDeActivateStyle}
           error={error}
-          errorLabelFontFamily="font-sans"
-          errorLabelFontSize="text-sm"
-          errorLabelFontWeight="font-normal"
-          errorLabelLineHeight="leading-[18.2px]"
-          errorLabelTextColor="text-instillRed"
+          errorLabelFontFamily={errorLabelFontFamily}
+          errorLabelFontSize={errorLabelFontSize}
+          errorLabelFontWeight={errorLabelFontWeight}
+          errorLabelLineHeight={errorLabelLineHeight}
+          errorLabelTextColor={errorLabelTextColor}
         />
         <div ref={inputRef}>
           <Select
