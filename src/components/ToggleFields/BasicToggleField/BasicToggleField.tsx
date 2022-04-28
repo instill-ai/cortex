@@ -10,6 +10,7 @@ export type BasicToggleFieldProps = Omit<
   | "inputBorderColor"
   | "inputBorderStyle"
   | "inputBorderWidth"
+  | "inputBgColor"
   | "checkedInputBorderColor"
   | "disabledDotColor"
   | "disabledCheckedDotColor"
@@ -39,6 +40,11 @@ export type BasicToggleFieldProps = Omit<
   | "descriptionLineHeight"
   | "descriptionFontWeight"
   | "descriptionTextColor"
+  | "errorLabelFontFamily"
+  | "errorLabelFontSize"
+  | "errorLabelFontWeight"
+  | "errorLabelLineHeight"
+  | "errorLabelTextColor"
 >;
 
 const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {

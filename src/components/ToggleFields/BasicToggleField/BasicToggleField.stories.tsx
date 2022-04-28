@@ -8,11 +8,11 @@ export default {
 
 const Template: ComponentStory<typeof BasicToggleField> = (args) => (
   <BasicToggleField
+    {...args}
     id="basic-toggle-field"
     onChangeInput={() => undefined}
     description="this is a description for basic toggle field"
     label="basic-toggle-field"
-    {...args}
   />
 );
 export const Playground: ComponentStory<typeof BasicToggleField> =
