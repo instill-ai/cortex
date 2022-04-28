@@ -1,2 +1,4 @@
-export { default } from "./Logo";
-export * from "./Logo";
+import Logo from "./Logo";
+import type { LogoProps } from "./Logo";
+
+export { Logo, LogoProps };
