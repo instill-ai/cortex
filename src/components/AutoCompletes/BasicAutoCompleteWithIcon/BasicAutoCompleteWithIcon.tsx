@@ -34,7 +34,6 @@ const BasicAutoCompleteWithIcon: FC<BasicAutoCompleteWithIconProps> = (
       error={props.error}
       label={props.label}
       description={props.description}
-      inputBgColor={props.inputBgColor}
       disabled={props.disabled}
       readOnly={props.readOnly}
       required={props.required}

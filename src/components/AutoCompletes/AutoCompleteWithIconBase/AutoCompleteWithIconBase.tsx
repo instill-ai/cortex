@@ -22,6 +22,7 @@ export type AutoCompleteWithIconBaseProps = Omit<
   | "inputTextColor"
   | "inputWidth"
   | "inputHeight"
+  | "inputBgColor"
   | "autoComplete"
   | "disabledBgColor"
   | "readOnlyBgColor"
