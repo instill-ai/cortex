@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import AutoCompleteWithIconBase, {
   AutoCompleteWithIconBaseProps,
 } from "../AutoCompleteWithIconBase";
@@ -26,7 +26,7 @@ export type BasicAutoCompleteWithIconProps = Omit<
   | "isClearable"
 >;
 
-const BasicAutoCompleteWithIcon: FC<BasicAutoCompleteWithIconProps> = (
+const BasicAutoCompleteWithIcon: React.FC<BasicAutoCompleteWithIconProps> = (
   props
 ) => {
   return (
