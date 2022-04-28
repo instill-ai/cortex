@@ -221,7 +221,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
                 return;
               }
 
-              onChangeInput(event.target.checked);
+              onChangeInput(id, event.target.checked);
               setChecked(event.target.checked);
 
               if (!answered) {

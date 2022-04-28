@@ -57,9 +57,9 @@ const Template: ComponentStory<typeof AutoCompleteWithIcon> = (args) => {
 
   return (
     <AutoCompleteWithIcon
+      {...args}
       onChangeInput={onChangeInputHandler}
       options={options}
-      {...args}
     />
   );
 };

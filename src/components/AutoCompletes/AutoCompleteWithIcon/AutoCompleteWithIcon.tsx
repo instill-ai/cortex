@@ -288,7 +288,7 @@ const AutoCompleteWithIcon: React.FC<AutoCompleteWithIconProps> = ({
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             onChange={(event) => {
-              onChangeInput(event);
+              onChangeInput(id, event);
 
               if (event) {
                 setAnswered(true);

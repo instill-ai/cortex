@@ -350,7 +350,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               setFile(inputValue);
 
               if (inputFile) {
-                onChangeInput(inputFile);
+                onChangeInput(id, inputFile);
               }
             }}
             onClick={(event) => {
@@ -383,7 +383,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                 event.preventDefault();
                 setFile(null);
                 setAnswered(false);
-                onChangeInput(null);
+                onChangeInput(id, null);
               }
             }}
           >

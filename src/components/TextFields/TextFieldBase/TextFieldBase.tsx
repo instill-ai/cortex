@@ -278,7 +278,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             autoComplete={autoComplete}
             onChange={(event) => {
               const inputValue = event.target.value;
-              onChangeInput(event.target.value);
+              onChangeInput(id, event.target.value);
               if (!inputValue) {
                 setAnswered(false);
                 return;

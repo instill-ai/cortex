@@ -29,7 +29,7 @@ Playground.args = {
 export const DemoFileReader: ComponentStory<
   typeof BasicUploadFileField
 > = () => {
-  const onChangeInput = (inputValue) => {
+  const onChangeInput = (id: string, inputValue) => {
     if (!inputValue) return;
 
     const reader = new FileReader();

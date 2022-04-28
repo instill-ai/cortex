@@ -335,7 +335,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             autoComplete={autoComplete}
             onChange={(event) => {
               const inputValue = event.target.value;
-              onChangeInput(event.target.value);
+              onChangeInput(id, event.target.value);
               if (!inputValue) {
                 setAnswered(false);
                 return;
