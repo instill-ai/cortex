@@ -1,10 +1,8 @@
 import React from "react";
-import AutoCompleteWithIconBase, {
-  AutoCompleteWithIconBaseProps,
-} from "../AutoCompleteWithIconBase";
+import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
-export type BasicAutoCompleteWithIconProps = Omit<
-  AutoCompleteWithIconBaseProps,
+export type BasicSingleSelectProps = Omit<
+  SingleSelectBaseProps,
   | "inputLabelType"
   | "labelFontSize"
   | "labelFontWeight"
@@ -26,11 +24,9 @@ export type BasicAutoCompleteWithIconProps = Omit<
   | "isClearable"
 >;
 
-const BasicAutoCompleteWithIcon: React.FC<BasicAutoCompleteWithIconProps> = (
-  props
-) => {
+const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   return (
-    <AutoCompleteWithIconBase
+    <SingleSelectBase
       id={props.id}
       error={props.error}
       label={props.label}
@@ -64,4 +60,4 @@ const BasicAutoCompleteWithIcon: React.FC<BasicAutoCompleteWithIconProps> = (
   );
 };
 
-export default BasicAutoCompleteWithIcon;
+export default BasicSingleSelect;

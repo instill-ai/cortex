@@ -1,15 +1,15 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
-import { AutoCompleteWithIconOption } from "../AutoCompleteWithIconBase";
-import BasicAutoCompleteWithIcon from "./BasicAutoCompleteWithIcon";
+import { SingleSelectOption } from "../SingleSelectBase";
+import BasicSingleSelect from "./BasicSelectWithIcon";
 
 export default {
-  title: "Components/Ui/Input/BasicAutoCompleteWithIcon",
-  component: BasicAutoCompleteWithIcon,
-} as ComponentMeta<typeof BasicAutoCompleteWithIcon>;
+  title: "Components/Ui/Input/BasicSingleSelect",
+  component: BasicSingleSelect,
+} as ComponentMeta<typeof BasicSingleSelect>;
 
-const Template: ComponentStory<typeof BasicAutoCompleteWithIcon> = (args) => {
-  const options: AutoCompleteWithIconOption[] = [
+const Template: ComponentStory<typeof BasicSingleSelect> = (args) => {
+  const options: SingleSelectOption[] = [
     {
       value: "grpc",
       label: "gRPC",
@@ -55,7 +55,7 @@ const Template: ComponentStory<typeof BasicAutoCompleteWithIcon> = (args) => {
   };
 
   return (
-    <BasicAutoCompleteWithIcon
+    <BasicSingleSelect
       {...args}
       onChangeInput={onChangeInputHandler}
       options={options}
@@ -63,7 +63,7 @@ const Template: ComponentStory<typeof BasicAutoCompleteWithIcon> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof BasicAutoCompleteWithIcon> =
+export const Playground: ComponentStory<typeof BasicSingleSelect> =
   Template.bind({});
 
 Playground.args = {
