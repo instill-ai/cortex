@@ -1,6 +1,3 @@
-// AutoCompletes
-export * from "./AutoCompletes";
-
 // Icons
 export * from "./Icons";
 
@@ -15,6 +12,9 @@ export * from "./Logo";
 
 // Progress
 export * from "./Progress";
+
+// SingleSelects
+export * from "./SingleSelects";
 
 // TextAreas
 export * from "./TextAreas";
