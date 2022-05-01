@@ -88,6 +88,8 @@ import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
 import AsyncIcon from "./AsyncIcon";
 import type { AsyncIconProps } from "./AsyncIcon";
+import VersionIcon from "./VersionIcon";
+import type { VersionIconProps } from "./VersionIcon";
 
 export {
   EyeOnIcon,
@@ -176,4 +178,6 @@ export {
   SyncIconProps,
   AsyncIcon,
   AsyncIconProps,
+  VersionIcon,
+  VersionIconProps,
 };
