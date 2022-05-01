@@ -1,7 +1,7 @@
 import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type SyncIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
+export type SyncIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const SyncIcon: React.FC<SyncIconProps> = (props) => {
   return (
@@ -10,7 +10,7 @@ const SyncIcon: React.FC<SyncIconProps> = (props) => {
       width={props.width}
       height={props.height}
       position={props.position}
-      fill="none"
+      color={props.color}
     >
       <path
         fillRule="evenodd"

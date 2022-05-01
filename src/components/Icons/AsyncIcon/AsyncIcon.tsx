@@ -1,7 +1,7 @@
 import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type AsyncIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
+export type AsyncIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const AsyncIcon: React.FC<AsyncIconProps> = (props) => {
   return (
@@ -10,7 +10,7 @@ const AsyncIcon: React.FC<AsyncIconProps> = (props) => {
       width={props.width}
       height={props.height}
       position={props.position}
-      fill="none"
+      color={props.color}
     >
       <path
         fillRule="evenodd"

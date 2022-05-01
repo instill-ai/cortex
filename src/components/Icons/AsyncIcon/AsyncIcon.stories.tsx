@@ -16,4 +16,5 @@ Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
   position: "my-auto",
+  color: "fill-instillGrey50",
 };
