@@ -74,6 +74,8 @@ import StatusErrorIcon from "./StatusErrorIcon";
 import type { StatusErrorIconProps } from "./StatusErrorIcon";
 import ModelInstanceIcon from "./ModelInstanceIcon";
 import type { ModelInstanceIconProps } from "./ModelInstanceIcon";
+import RefreshIcon from "./RefreshIcon";
+import type { RefreshIconProps } from "./RefreshIcon";
 
 import {
   ArrowUpIcon,
@@ -189,4 +191,6 @@ export {
   LocalUploadIconProps,
   ModelInstanceIcon,
   ModelInstanceIconProps,
+  RefreshIcon,
+  RefreshIconProps,
 };
