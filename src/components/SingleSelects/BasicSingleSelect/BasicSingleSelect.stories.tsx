@@ -1,7 +1,7 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "../SingleSelectBase";
-import BasicSingleSelect from "./BasicSelectWithIcon";
+import BasicSingleSelect from "./BasicSingleSelect";
 
 export default {
   title: "Components/Ui/Input/BasicSingleSelect",
