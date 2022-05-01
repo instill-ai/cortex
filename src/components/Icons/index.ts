@@ -90,6 +90,8 @@ import AsyncIcon from "./AsyncIcon";
 import type { AsyncIconProps } from "./AsyncIcon";
 import VersionIcon from "./VersionIcon";
 import type { VersionIconProps } from "./VersionIcon";
+import LocalUploadIcon from "./LocalUploadIcon";
+import type { LocalUploadIconProps } from "./LocalUploadIcon";
 
 export {
   EyeOnIcon,
@@ -180,4 +182,6 @@ export {
   AsyncIconProps,
   VersionIcon,
   VersionIconProps,
+  LocalUploadIcon,
+  LocalUploadIconProps,
 };
