@@ -72,6 +72,9 @@ import StatusOffIcon from "./StatusOffIcon";
 import type { StatusOffIconProps } from "./StatusOffIcon";
 import StatusErrorIcon from "./StatusErrorIcon";
 import type { StatusErrorIconProps } from "./StatusErrorIcon";
+import ModelInstanceIcon from "./ModelInstanceIcon";
+import type { ModelInstanceIconProps } from "./ModelInstanceIcon";
+
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -184,4 +187,6 @@ export {
   VersionIconProps,
   LocalUploadIcon,
   LocalUploadIconProps,
+  ModelInstanceIcon,
+  ModelInstanceIconProps,
 };
