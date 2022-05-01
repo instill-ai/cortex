@@ -6,14 +6,14 @@ import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition } from "../../../utils";
 
-export interface AutoCompleteWithIconOption {
+export type SingleSelectOption = {
   label: string;
   value: string | number;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
-}
+};
 
-export type AutoCompleteWithIconBaseProps = Omit<
+export type SingleSelectBaseProps = Omit<
   BasicInputFieldAttributes,
   | "placeholder"
   | "inputFontSize"
@@ -80,19 +80,19 @@ export type AutoCompleteWithIconBaseProps = Omit<
    ]
    ```
    */
-  options: AutoCompleteWithIconOption[];
+  options: SingleSelectOption[];
 
   /**
    * Default value of this autocomplete
    * - You have to put into the array with desired index like options[0]
    */
-  defaultValue?: AutoCompleteWithIconOption;
+  defaultValue?: SingleSelectOption;
 
   /** Whether the autocomplete is clearalbe */
   isClearable: boolean;
 };
 
-const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
+const SelectBase: React.FC<SingleSelectBaseProps> = ({
   defaultValue,
   options,
   inputLabelType,
@@ -152,8 +152,6 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
     if (!inputRef.current || inputLabelType !== "inset") {
       return;
     }
-
-    console.log("re-calculate label width", inputRef);
 
     const mainContainerPosition = getElementPosition(inputRef.current);
 
@@ -346,7 +344,7 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
             }}
             isClearable={isClearable}
             placeholder={focus ? "Search..." : null}
-            formatOptionLabel={(option: AutoCompleteWithIconOption) => {
+            formatOptionLabel={(option: SingleSelectOption) => {
               return (
                 <div className="flex flex-row gap-x-3 px-[15px]">
                   <div className="flex my-auto w-[30px] h-[30px]">
@@ -377,4 +375,4 @@ const AutoCompleteWithIconBase: React.FC<AutoCompleteWithIconBaseProps> = ({
   );
 };
 
-export default AutoCompleteWithIconBase;
+export default SelectBase;
