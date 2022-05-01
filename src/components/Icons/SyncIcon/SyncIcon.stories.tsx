@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import SyncIcon from "./SyncIcon";
 
 export default {
-  title: "Components/Ui/Icon/AwsRdsIcon",
+  title: "Components/Ui/Icon/SyncIcon",
   component: SyncIcon,
 } as ComponentMeta<typeof SyncIcon>;
 

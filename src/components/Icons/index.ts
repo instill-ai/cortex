@@ -86,6 +86,8 @@ import type {
 } from "./ArrowIcons";
 import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
+import AsyncIcon from "./AsyncIcon";
+import type { AsyncIconProps } from "./AsyncIcon";
 
 export {
   EyeOnIcon,
@@ -172,4 +174,6 @@ export {
   StatusErrorIconProps,
   SyncIcon,
   SyncIconProps,
+  AsyncIcon,
+  AsyncIconProps,
 };
