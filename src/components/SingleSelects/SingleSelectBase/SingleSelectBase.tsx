@@ -56,6 +56,8 @@ export type SingleSelectBaseProps = Omit<
   | "errorInputBorderWidth"
   | "errorInputTextColor"
 > & {
+  /** Set this field to prevend SSR warning */
+  instanceId: string;
   /**
    * Options
    * - label: Option's displayed label name
@@ -99,6 +101,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   label,
   required,
   id,
+  instanceId,
   error,
   description,
   onChangeInput,
@@ -298,6 +301,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
         <div ref={inputRef}>
           <Select
             id={id}
+            instanceId={instanceId}
             isSearchable={!readOnly}
             menuIsOpen={readOnly ? false : undefined}
             onFocus={() => setFocus(true)}
