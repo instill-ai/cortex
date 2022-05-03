@@ -103,6 +103,8 @@ import GitBranchIcon from "./GitBranchIcon";
 import type { GitBranchIconProps } from "./GitBranchIcon";
 import GitTagIcon from "./GitTagIcon";
 import type { GitTagIconProps } from "./GitTagIcon";
+import GitCommitIcon from "./GitCommitIcon";
+import type { GitCommitIconProps } from "./GitCommitIcon";
 
 export {
   EyeOnIcon,
@@ -205,4 +207,6 @@ export {
   GitBranchIconProps,
   GitTagIcon,
   GitTagIconProps,
+  GitCommitIcon,
+  GitCommitIconProps,
 };
