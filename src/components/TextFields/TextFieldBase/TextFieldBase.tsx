@@ -211,15 +211,10 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
           error={error}
           answered={disabled ? true : readOnly ? true : answered}
           focus={focus}
+          setFocus={setFocus}
           required={required}
           htmlFor={id}
           type={inputLabelType}
-          onBlurHandler={() => {
-            setFocus(false);
-          }}
-          onFocusHandler={() => {
-            setFocus(true);
-          }}
           label={label}
           labelWidth={inputLabelWidth}
           labelFontFamily={labelFontFamily}
