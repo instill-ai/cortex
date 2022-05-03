@@ -283,12 +283,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           required={required}
           htmlFor={id}
           type={inputLabelType}
-          onFocusHandler={() => {
-            setFocus(true);
-          }}
-          onBlurHandler={() => {
-            setFocus(false);
-          }}
+          setFocus={setFocus}
           labelFontFamily={labelFontFamily}
           labelFontSize={labelFontSize}
           labelFontWeight={labelFontWeight}
