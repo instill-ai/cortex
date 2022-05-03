@@ -1,20 +1,20 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import GearIcon from "./GitHubIcon";
+import GitHubIcon from "./GitHubIcon";
 
 export default {
-  title: "Components/Ui/Icon/GearIcon",
-  component: GearIcon,
-} as ComponentMeta<typeof GearIcon>;
+  title: "Components/Ui/Icon/GitHubIcon",
+  component: GitHubIcon,
+} as ComponentMeta<typeof GitHubIcon>;
 
-const Template: ComponentStory<typeof GearIcon> = (args) => (
-  <GearIcon {...args} />
+const Template: ComponentStory<typeof GitHubIcon> = (args) => (
+  <GitHubIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof GearIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof GitHubIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
-  color: "text-instillGrey50",
+  color: "fill-instillGrey50",
   position: "my-auto",
 };
