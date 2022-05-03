@@ -97,6 +97,8 @@ import VersionIcon from "./VersionIcon";
 import type { VersionIconProps } from "./VersionIcon";
 import LocalUploadIcon from "./LocalUploadIcon";
 import type { LocalUploadIconProps } from "./LocalUploadIcon";
+import GitHubIcon from "./GitHubIcon";
+import type { GitHubIconProps } from "./GitHubIcon";
 
 export {
   EyeOnIcon,
@@ -193,4 +195,6 @@ export {
   ModelInstanceIconProps,
   RefreshIcon,
   RefreshIconProps,
+  GitHubIcon,
+  GitHubIconProps,
 };
