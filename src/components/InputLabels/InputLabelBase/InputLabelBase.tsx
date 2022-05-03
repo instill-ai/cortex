@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import cn from "clsx";
 
 export interface InputLabelBaseProps {
@@ -27,6 +27,8 @@ export interface InputLabelBaseProps {
   /** Whether the input is focused or not */
   focus?: boolean;
 
+  setFocus?: Dispatch<SetStateAction<boolean>>;
+
   /** Whether the input is answered or not */
   answered: boolean;
 
@@ -34,12 +36,6 @@ export interface InputLabelBaseProps {
    * - If the type is not inset, this field can be null and label will use w-full as default
    */
   labelWidth: number | null;
-
-  /** Handle input label focus event */
-  onFocusHandler?: (event) => void;
-
-  /** Handle input label blud event */
-  onBlurHandler?: (event) => void;
 
   /** TailwindCSS format - Label's text color
    * - e.g. text-instillGrey50
@@ -121,8 +117,7 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       labelLineHeight,
       labelActivateStyle,
       labelDeActivateStyle,
-      onFocusHandler,
-      onBlurHandler,
+      setFocus,
       type,
       error,
       errorLabelFontFamily,
@@ -178,8 +173,7 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
               }
             )}
             htmlFor={htmlFor}
-            onFocus={(event) => onFocusHandler(event)}
-            onBlur={(event) => onBlurHandler(event)}
+            onClick={() => setFocus(true)}
             style={{
               width:
                 type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",
