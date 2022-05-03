@@ -28,8 +28,7 @@ const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
       answered={props.answered}
       htmlFor={props.htmlFor}
       type={props.type}
-      onBlurHandler={props.onBlurHandler}
-      onFocusHandler={props.onFocusHandler}
+      setFocus={props.setFocus}
       labelFontSize="text-sm"
       labelFontWeight="font-normal"
       labelTextColor="text-instillGrey50"

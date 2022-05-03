@@ -12,12 +12,7 @@ const Template: ComponentStory<typeof TextAreaInputLabel> = (args) => {
   return (
     <TextAreaInputLabel
       {...args}
-      onBlurHandler={() => {
-        setFocus(false);
-      }}
-      onFocusHandler={() => {
-        setFocus(true);
-      }}
+      setFocus={setFocus}
       focus={focus}
       htmlFor="default"
       answered={false}
