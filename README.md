@@ -191,3 +191,4 @@ const square = ({ width }) => {
 - Think about memorize component
 - InputLabel cursor
 - If we bundle the design-system as package, we may re-bundle it again with duplicate style css, need to investigate this.
+- Adapt instill color into Select component

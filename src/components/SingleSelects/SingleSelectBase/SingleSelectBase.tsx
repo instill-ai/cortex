@@ -252,11 +252,13 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       marginTop: "0",
       paddingTop: "10px",
       paddingBottom: "10px",
+      backgroundColor: "#FFFFFF",
     }),
-    option: (styles) => ({
+    option: (styles, state) => ({
       ...styles,
+      // backgroundColor: state.isFocused ? "#40A8F5" : "#FFFFFF",
       ":hover": {
-        backgroundColor: "",
+        //backgroundColor: "#F4FBFF",
       },
     }),
     input: (styles) => ({
