@@ -69,6 +69,7 @@ Playground.args = {
   inputTextColor: "text-instillGrey95",
   inputFontWeight: "font-normal",
   inputLineHeight: "leading-[28px]",
+  inputBgColor: "bg-white",
   inputBorderRadiusBottomLeft: "rounded-bl-[1px]",
   inputBorderRadiusBottomRight: "rounded-br-[1px]",
   inputBorderRadiusTopLeft: "rounded-tl-[1px]",

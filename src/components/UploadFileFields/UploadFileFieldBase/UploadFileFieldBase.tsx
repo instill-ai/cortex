@@ -69,6 +69,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   inputBorderRadiusBottomRight,
   inputBorderRadiusTopLeft,
   inputBorderRadiusBottomLeft,
+  inputBgColor,
   inputFontSize,
   inputFontWeight,
   inputLineHeight,
@@ -265,12 +266,14 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                   inputBorderWidth,
                   inputBorderColor,
                   inputBorderStyle,
+                  inputBgColor,
                   "instill-input-highlight"
                 )
               : cn(
                   inputBorderColor,
                   inputBorderStyle,
                   inputBorderWidth,
+                  inputBgColor,
                   "instill-input-no-highlight"
                 )
           )}
