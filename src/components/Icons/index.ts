@@ -99,6 +99,8 @@ import LocalUploadIcon from "./LocalUploadIcon";
 import type { LocalUploadIconProps } from "./LocalUploadIcon";
 import GitHubIcon from "./GitHubIcon";
 import type { GitHubIconProps } from "./GitHubIcon";
+import GitBranchIcon from "./GitBranchIcon";
+import type { GitBranchIconProps } from "./GitBranchIcon";
 
 export {
   EyeOnIcon,
@@ -197,4 +199,6 @@ export {
   RefreshIconProps,
   GitHubIcon,
   GitHubIconProps,
+  GitBranchIcon,
+  GitBranchIconProps,
 };
