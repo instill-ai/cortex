@@ -144,12 +144,20 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
    * - We use inputValuePaddingTop to control the position of the input value
    */
 
-  const inputRef = React.useRef<any>(null);
+  // We create a wrapper on top of Select component to avoid error related to ref assignmemt
+  // inside of react-select
+  const inputRef = React.useRef<HTMLDivElement>(null);
+  const selectRef = React.useRef<any>(null);
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
   const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
   const [containerHeight, setContainerHeight] = React.useState<number>(null);
   const [inputValuePaddingTop, setInputValuePaddingTop] =
     React.useState<number>(null);
+
+  React.useEffect(() => {
+    if (!focus || !selectRef) return;
+    selectRef.current.focus();
+  }, [focus]);
 
   React.useEffect(() => {
     if (!inputRef.current || inputLabelType !== "inset") {
@@ -298,9 +306,11 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
         <div ref={inputRef}>
           <Select
             id={id}
+            ref={selectRef}
             instanceId={instanceId}
             isSearchable={!readOnly}
             menuIsOpen={readOnly ? false : undefined}
+            openMenuOnFocus={true}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             onChange={(event) => {

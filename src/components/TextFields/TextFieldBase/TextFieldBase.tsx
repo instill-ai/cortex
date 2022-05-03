@@ -111,6 +111,12 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
 
   React.useEffect(() => {
+    if (!focus || !inputRef) return;
+
+    inputRef.current.focus();
+  }, [focus]);
+
+  React.useEffect(() => {
     if (!inputRef.current || inputLabelType !== "inset") {
       return;
     }
