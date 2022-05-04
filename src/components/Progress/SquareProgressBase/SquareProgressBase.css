@@ -5,30 +5,30 @@
 
 @keyframes loading-pan {
   11% {
-    transform: translate3d(0px, 0px, 0px);
+    transform: translate(0%, 0%);
   }
   22% {
-    transform: translate3d(4px, 0px, 0px);
+    transform: translate(66%, 0%);
   }
   33% {
-    transform: translate3d(8px, 0px, 0px);
+    transform: translate(132%, 0%);
   }
   44% {
-    transform: translate3d(0px, 4px, 0px);
+    transform: translate(0%, 66%);
   }
   55% {
-    transform: translate3d(4px, 4px, 0px);
+    transform: translate(66%, 66%);
   }
   66% {
-    transform: translate3d(8px, 4px, 0px);
+    transform: translate(132%, 66%);
   }
   77% {
-    transform: translate3d(0px, 8px, 0px);
+    transform: translate(0%, 132%);
   }
   88% {
-    transform: translate3d(4px, 8px, 0px);
+    transform: translate(66%, 132%);
   }
   99% {
-    transform: translate3d(8px, 8px, 0px);
+    transform: translate(132%, 132%);
   }
 }

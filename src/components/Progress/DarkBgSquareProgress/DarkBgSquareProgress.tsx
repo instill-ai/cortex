@@ -11,8 +11,8 @@ export type DarkBgSquareProgressProps = Omit<
 const DarkBgSquareProgress: React.FC<DarkBgSquareProgressProps> = (props) => {
   return (
     <SquareProgressBase
-      isError={props.isError}
       isLoading={props.isLoading}
+      blockSize={props.blockSize}
       bgColor="bg-instillGrey80"
       cubeColor="bg-instillBlue50"
       animationDuration={3}
