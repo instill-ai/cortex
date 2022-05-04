@@ -13,6 +13,7 @@ const DarkBgSquareProgress: React.FC<DarkBgSquareProgressProps> = (props) => {
     <SquareProgressBase
       isLoading={props.isLoading}
       blockSize={props.blockSize}
+      position={props.position}
       bgColor="bg-instillGrey80"
       cubeColor="bg-instillBlue50"
       animationDuration={3}

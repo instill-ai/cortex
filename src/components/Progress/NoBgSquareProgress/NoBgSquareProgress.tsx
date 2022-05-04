@@ -12,10 +12,11 @@ const NoBgSquareProgress: React.FC<NoBgSquareProgressProps> = (props) => {
   return (
     <SquareProgressBase
       isLoading={props.isLoading}
+      position={props.position}
+      blockSize={props.blockSize}
       bgColor=""
       cubeColor="bg-instillBlue50"
       animationDuration={3}
-      blockSize={props.blockSize}
     />
   );
 };

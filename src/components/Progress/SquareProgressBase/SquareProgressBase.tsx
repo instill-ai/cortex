@@ -19,6 +19,11 @@ export interface SquareProgressBaseProps {
 
   /** The size of whole progress in pixel, the innerBlock and padding will depend on the number */
   blockSize: number;
+
+  /** The position of the progress
+   * - e.g. mb-auto
+   */
+  position?: string;
 }
 
 const SquareProgressBase: React.FC<SquareProgressBaseProps> = ({

@@ -13,6 +13,7 @@ const WhiteBgSquareProgress: React.FC<WhiteBgSquareProgressProps> = (props) => {
     <SquareProgressBase
       isLoading={props.isLoading}
       blockSize={props.blockSize}
+      position={props.position}
       bgColor="bg-white"
       cubeColor="bg-instillBlue50"
       animationDuration={3}
