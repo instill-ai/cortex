@@ -107,6 +107,8 @@ import GitCommitIcon from "./GitCommitIcon";
 import type { GitCommitIconProps } from "./GitCommitIcon";
 import PixelCrossIcon from "./PixelCrossIcon";
 import type { PixelCrossIconProps } from "./PixelCrossIcon";
+import PixelCheckIcon from "./PixelCheckIcon";
+import type { PixelCheckIconProps } from "./PixelCheckIcon";
 
 export {
   EyeOnIcon,
@@ -213,4 +215,6 @@ export {
   GitCommitIconProps,
   PixelCrossIcon,
   PixelCrossIconProps,
+  PixelCheckIcon,
+  PixelCheckIconProps,
 };
