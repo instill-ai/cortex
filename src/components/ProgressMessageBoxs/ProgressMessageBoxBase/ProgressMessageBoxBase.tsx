@@ -3,7 +3,7 @@ import { PixelCheckIcon, PixelCrossIcon } from "../../Icons";
 import NoBgSquareProgress from "../../Progress/NoBgSquareProgress";
 import cn from "clsx";
 
-export type PProgressMessageBoxBaseProps = {
+export type ProgressMessageBoxBaseProps = {
   status: "success" | "error" | "progressing";
 
   /** The width of the whole message box
@@ -66,7 +66,7 @@ export type PProgressMessageBoxBaseProps = {
   messageColumnBgColor: string;
 };
 
-const ProgressMessageBoxBase: FC<PProgressMessageBoxBaseProps> = ({
+const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
   status,
   children,
   width,
