@@ -17,5 +17,5 @@ export const Playground: ComponentStory<typeof BasicProgressMessageBox> =
 Playground.args = {
   status: "progressing",
   width: "w-[300px]",
-  IndicatorColumnBgColor: "bg-instillBlue10",
+  indicatorColumnBgColor: "bg-instillBlue10",
 };

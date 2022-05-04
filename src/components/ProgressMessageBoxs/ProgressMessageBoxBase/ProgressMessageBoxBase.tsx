@@ -50,7 +50,7 @@ export type ProgressMessageBoxBaseProps = {
   /** The position of the Icon
    * - e.g. mx-auto
    */
-  IconPosition: string;
+  iconPosition: string;
 
   /** The size of the Square progress */
   progressBlockSize: number;
@@ -58,17 +58,39 @@ export type ProgressMessageBoxBaseProps = {
   /** The background color of the column that contains the indicator like success icon or progress
    * - e.g. bg-instillGrey50
    */
-  IndicatorColumnBgColor: string;
+  indicatorColumnBgColor: string;
 
   /** The width of the column that contains the indicator like success icon or progress
    * - e.g. w-12
    */
-  IndicatorColumnWidth: string;
+  indicatorColumnWidth: string;
 
-  /** The background color under the message
+  /** The top left border radius of the column that contains the indicator like success icon or progress
+   * - e.g. rounded-tl-[1px]
+   */
+  indicatorColumnTopLeftBorderRadius: string;
+
+  /** The bottom left border radius of the column that contains the indicator like success icon or progress
+   * - e.g. rounded-bl-[1px]
+   */
+  indicatorColumnBottomLeftBorderRadius: string;
+
+  /** The background color of the column that contains the message
    * - e.g. bg-instillGrey50
    */
   messageColumnBgColor: string;
+
+  /** The bottom right border of the column that contains the message
+   * - e.g. rounded-br-[1px]
+   */
+  messageColumnBottomRightBorderRadius: string;
+
+  /** The top right border of the column that contains the message
+   * - e.g. rounded-tr-[1px]
+   */
+  messageColumnTopRightBorderRadius: string;
+
+  boxBorderRadius: string;
 };
 
 const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
@@ -82,10 +104,15 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
   successIconWidth,
   successIconHeight,
   progressBlockSize,
-  IconPosition,
-  IndicatorColumnBgColor,
-  IndicatorColumnWidth,
+  iconPosition,
+  indicatorColumnBgColor,
+  indicatorColumnWidth,
+  indicatorColumnBottomLeftBorderRadius,
+  indicatorColumnTopLeftBorderRadius,
   messageColumnBgColor,
+  messageColumnBottomRightBorderRadius,
+  messageColumnTopRightBorderRadius,
+  boxBorderRadius,
 }) => {
   const statusIcon = useMemo(() => {
     switch (status) {
@@ -103,7 +130,7 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
           <NoBgSquareProgress
             isLoading={status === "progressing" ? true : false}
             blockSize={progressBlockSize}
-            position={IconPosition}
+            position={iconPosition}
           />
         );
 
@@ -112,7 +139,7 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
           <PixelCheckIcon
             width={successIconWidth}
             height={successIconHeight}
-            position={IconPosition}
+            position={iconPosition}
             color={successIconColor}
           />
         );
@@ -120,17 +147,32 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
   }, [status]);
 
   return (
-    <div className={cn("flex flex-row min-h-[85px]", width)}>
+    <div
+      className={cn(
+        "flex flex-row min-h-[85px] instill-progress-message-box-shadow",
+        width,
+        boxBorderRadius
+      )}
+    >
       <div
         className={cn(
           "flex p-2.5",
-          IndicatorColumnWidth,
-          IndicatorColumnBgColor
+          indicatorColumnWidth,
+          indicatorColumnBgColor,
+          indicatorColumnBottomLeftBorderRadius,
+          indicatorColumnTopLeftBorderRadius
         )}
       >
         {statusIcon}
       </div>
-      <div className={cn("flex flex-1 p-2.5", messageColumnBgColor)}>
+      <div
+        className={cn(
+          "flex flex-1 p-2.5",
+          messageColumnBgColor,
+          messageColumnBottomRightBorderRadius,
+          messageColumnTopRightBorderRadius
+        )}
+      >
         <p className="instill-text-h3 text-instillGrey90 break-normal">
           {children}
         </p>
