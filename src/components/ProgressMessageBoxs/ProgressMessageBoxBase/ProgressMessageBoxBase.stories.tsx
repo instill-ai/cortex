@@ -26,5 +26,6 @@ Playground.args = {
   progressBlockSize: 28,
   IconPosition: "mx-auto mb-auto",
   IndicatorColumnBgColor: "bg-instillGrey50",
+  IndicatorColumnWidth: "w-12",
   messageColumnBgColor: "bg-white",
 };

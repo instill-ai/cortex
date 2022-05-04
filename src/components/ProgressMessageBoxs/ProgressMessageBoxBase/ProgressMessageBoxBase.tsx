@@ -55,10 +55,15 @@ export type ProgressMessageBoxBaseProps = {
   /** The size of the Square progress */
   progressBlockSize: number;
 
-  /** The background color under the indicator like success icon or progress
+  /** The background color of the column that contains the indicator like success icon or progress
    * - e.g. bg-instillGrey50
    */
   IndicatorColumnBgColor: string;
+
+  /** The width of the column that contains the indicator like success icon or progress
+   * - e.g. w-12
+   */
+  IndicatorColumnWidth: string;
 
   /** The background color under the message
    * - e.g. bg-instillGrey50
@@ -79,6 +84,7 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
   progressBlockSize,
   IconPosition,
   IndicatorColumnBgColor,
+  IndicatorColumnWidth,
   messageColumnBgColor,
 }) => {
   const statusIcon = useMemo(() => {
@@ -115,7 +121,13 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
 
   return (
     <div className={cn("flex flex-row min-h-[85px]", width)}>
-      <div className={cn("flex w-12 p-2.5", IndicatorColumnBgColor)}>
+      <div
+        className={cn(
+          "flex p-2.5",
+          IndicatorColumnWidth,
+          IndicatorColumnBgColor
+        )}
+      >
         {statusIcon}
       </div>
       <div className={cn("flex flex-1 p-2.5", messageColumnBgColor)}>
