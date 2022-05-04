@@ -7,14 +7,15 @@ export default {
 } as ComponentMeta<typeof ProgressMessageBoxBase>;
 
 const Template: ComponentStory<typeof ProgressMessageBoxBase> = (args) => (
-  <ProgressMessageBoxBase {...args} />
+  <ProgressMessageBoxBase {...args}>
+    Testing connection...
+  </ProgressMessageBoxBase>
 );
 export const Playground: ComponentStory<typeof ProgressMessageBoxBase> =
   Template.bind({});
 
 Playground.args = {
   status: "progressing",
-  message: "Testing connection",
   width: "w-[300px]",
   errorIconColor: "fill-instillRed",
   errorIconWidth: "w-7",

@@ -6,9 +6,6 @@ import cn from "clsx";
 export type PProgressMessageBoxBaseProps = {
   status: "success" | "error" | "progressing";
 
-  /** The message string */
-  message: string;
-
   /** The width of the whole message box
    * - e.g. w-120
    */
@@ -71,7 +68,7 @@ export type PProgressMessageBoxBaseProps = {
 
 const ProgressMessageBoxBase: FC<PProgressMessageBoxBaseProps> = ({
   status,
-  message,
+  children,
   width,
   errorIconColor,
   errorIconWidth,
@@ -123,7 +120,7 @@ const ProgressMessageBoxBase: FC<PProgressMessageBoxBaseProps> = ({
       </div>
       <div className={cn("flex flex-1 p-2.5", messageColumnBgColor)}>
         <p className="instill-text-h3 text-instillGrey90 break-normal">
-          {message}
+          {children}
         </p>
       </div>
     </div>
