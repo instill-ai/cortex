@@ -138,6 +138,12 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   const [focus, setFocus] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
 
+  React.useEffect(() => {
+    if (defaultChecked) {
+      setChecked(true);
+    }
+  }, [defaultChecked]);
+
   return (
     <div className="flex flex-col">
       <div className="flex flex-col gap-y-2.5 mb-2.5">
