@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import ProgressMessageBoxBase, {
   ProgressMessageBoxBaseProps,
 } from "../ProgressMessageBoxBase";
@@ -25,7 +25,9 @@ export type BasicProgressMessageBoxProps = Omit<
   | "errorindicatorColumnBgColor"
 >;
 
-const BasicProgressMessageBox: FC<BasicProgressMessageBoxProps> = (props) => {
+const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
+  props
+) => {
   return (
     <ProgressMessageBoxBase
       status={props.status}

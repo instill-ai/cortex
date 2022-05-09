@@ -1,4 +1,4 @@
-import { FC, useMemo } from "react";
+import React from "react";
 import { PixelCheckIcon, PixelCrossIcon } from "../../Icons";
 import NoBgSquareProgress from "../../Progress/NoBgSquareProgress";
 import cn from "clsx";
@@ -103,7 +103,7 @@ export type ProgressMessageBoxBaseProps = {
   boxBorderRadius: string;
 };
 
-const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
+const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
   status,
   children,
   width,
@@ -126,7 +126,7 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
   messageColumnTopRightBorderRadius,
   boxBorderRadius,
 }) => {
-  const statusIcon = useMemo(() => {
+  const statusIcon = React.useMemo(() => {
     switch (status) {
       case "error":
         return (
