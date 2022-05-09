@@ -25,7 +25,6 @@ Playground.args = {
   successIconHeight: "h-7",
   progressBlockSize: 28,
   iconPosition: "mx-auto mb-auto",
-  indicatorColumnBgColor: "bg-instillGrey50",
   indicatorColumnWidth: "w-12",
   indicatorColumnBottomLeftBorderRadius: "rounded-bl-[1px]",
   indicatorColumnTopLeftBorderRadius: "rounded-tl-[1px]",
