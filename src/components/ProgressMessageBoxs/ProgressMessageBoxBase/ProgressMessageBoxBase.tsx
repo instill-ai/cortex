@@ -55,10 +55,20 @@ export type ProgressMessageBoxBaseProps = {
   /** The size of the Square progress */
   progressBlockSize: number;
 
-  /** The background color of the column that contains the indicator like success icon or progress
+  /** Indicator background color when error processing
    * - e.g. bg-instillGrey50
    */
-  indicatorColumnBgColor: string;
+  processingIndicatorColumnBgColor: string;
+
+  /** Indicator background color when error occur
+   * - e.g. bg-instillGrey50
+   */
+  errorindicatorColumnBgColor: string;
+
+  /** Indicator background color when success
+   * - e.g. bg-instillGrey50
+   */
+  successIndicatorColumnBgColor: string;
 
   /** The width of the column that contains the indicator like success icon or progress
    * - e.g. w-12
@@ -105,7 +115,9 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
   successIconHeight,
   progressBlockSize,
   iconPosition,
-  indicatorColumnBgColor,
+  successIndicatorColumnBgColor,
+  processingIndicatorColumnBgColor,
+  errorindicatorColumnBgColor,
   indicatorColumnWidth,
   indicatorColumnBottomLeftBorderRadius,
   indicatorColumnTopLeftBorderRadius,
@@ -158,9 +170,13 @@ const ProgressMessageBoxBase: FC<ProgressMessageBoxBaseProps> = ({
         className={cn(
           "flex p-2.5",
           indicatorColumnWidth,
-          indicatorColumnBgColor,
           indicatorColumnBottomLeftBorderRadius,
-          indicatorColumnTopLeftBorderRadius
+          indicatorColumnTopLeftBorderRadius,
+          status === "error"
+            ? errorindicatorColumnBgColor
+            : status === "success"
+            ? successIndicatorColumnBgColor
+            : processingIndicatorColumnBgColor
         )}
       >
         {statusIcon}

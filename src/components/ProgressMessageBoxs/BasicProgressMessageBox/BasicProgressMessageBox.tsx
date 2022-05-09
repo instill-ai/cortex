@@ -20,6 +20,9 @@ export type BasicProgressMessageBoxProps = Omit<
   | "messageColumnTopRightBorderRadius"
   | "boxBorderRadius"
   | "progressBlockSize"
+  | "successIndicatorColumnBgColor"
+  | "processingIndicatorColumnBgColor"
+  | "errorindicatorColumnBgColor"
 >;
 
 const BasicProgressMessageBox: FC<BasicProgressMessageBoxProps> = (props) => {
@@ -27,7 +30,6 @@ const BasicProgressMessageBox: FC<BasicProgressMessageBoxProps> = (props) => {
     <ProgressMessageBoxBase
       status={props.status}
       width={props.width}
-      indicatorColumnBgColor={props.indicatorColumnBgColor}
       errorIconColor="fill-instillRed"
       errorIconWidth="w-7"
       errorIconHeight="h-7"
@@ -43,6 +45,9 @@ const BasicProgressMessageBox: FC<BasicProgressMessageBoxProps> = (props) => {
       messageColumnTopRightBorderRadius="rounded-tr-[1px]"
       boxBorderRadius="rounded-[1px]"
       progressBlockSize={28}
+      successIndicatorColumnBgColor="bg-instillGreen10"
+      processingIndicatorColumnBgColor="bg-instillBlue10"
+      errorindicatorColumnBgColor="bg-instillRed10"
     >
       {props.children}
     </ProgressMessageBoxBase>
