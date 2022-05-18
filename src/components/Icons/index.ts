@@ -121,6 +121,8 @@ import GoogleDriveIcon from "./GoogleDriveIcon";
 import type { GoogleDriveIconProps } from "./GoogleDriveIcon";
 import ImageClassificationIcon from "./ImageClassificationIcon";
 import type { ImageClassificationIconProps } from "./ImageClassificationIcon";
+import ObjectDetectionIcon from "./ObjectDetectionIcon";
+import type { ObjectDetectionIconProps } from "./ObjectDetectionIcon";
 
 export {
   EyeOnIcon,
@@ -241,4 +243,6 @@ export {
   GoogleDriveIconProps,
   ImageClassificationIcon,
   ImageClassificationIconProps,
+  ObjectDetectionIcon,
+  ObjectDetectionIconProps,
 };
