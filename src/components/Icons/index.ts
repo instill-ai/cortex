@@ -125,6 +125,8 @@ import ObjectDetectionIcon from "./ObjectDetectionIcon";
 import type { ObjectDetectionIconProps } from "./ObjectDetectionIcon";
 import KeypointDetectionIcon from "./KeypointDetectionIcon";
 import type { KeypointDetectionIconProps } from "./KeypointDetectionIcon";
+import InstanceSegmentationIcon from "./InstanceSegmentationIcon";
+import type { InstanceSegmentationIconProps } from "./InstanceSegmentationIcon";
 
 export {
   EyeOnIcon,
@@ -249,4 +251,6 @@ export {
   ObjectDetectionIconProps,
   KeypointDetectionIcon,
   KeypointDetectionIconProps,
+  InstanceSegmentationIcon,
+  InstanceSegmentationIconProps,
 };
