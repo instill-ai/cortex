@@ -1,12 +1,12 @@
 import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type MongoDbAtalasProps = Omit<
+export type MongoDbAtalasIconProps = Omit<
   IconBaseProps,
   "viewBox" | "fill" | "color"
 >;
 
-const MongoDbAtalas: React.FC<MongoDbAtalasProps> = (props) => {
+const MongoDbAtalasIcon: React.FC<MongoDbAtalasIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"
@@ -51,4 +51,4 @@ const MongoDbAtalas: React.FC<MongoDbAtalasProps> = (props) => {
   );
 };
 
-export default MongoDbAtalas;
+export default MongoDbAtalasIcon;

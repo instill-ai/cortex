@@ -115,8 +115,8 @@ import IotIcon from "./IotIcon";
 import type { IotIconProps } from "./IotIcon";
 import AwsS3Icon from "./AwsS3Icon";
 import type { AwsS3IconProps } from "./AwsS3Icon";
-import MongoDbAtalas from "./MongoDbAtalas";
-import type { MongoDbAtalasProps } from "./MongoDbAtalas";
+import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
+import type { MongoDbAtalasIconProps } from "./MongoDbAtalasIcon";
 
 export {
   EyeOnIcon,
@@ -231,6 +231,6 @@ export {
   IotIconProps,
   AwsS3Icon,
   AwsS3IconProps,
-  MongoDbAtalas,
-  MongoDbAtalasProps,
+  MongoDbAtalasIcon,
+  MongoDbAtalasIconProps,
 };
