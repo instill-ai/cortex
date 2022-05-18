@@ -127,6 +127,8 @@ import KeypointDetectionIcon from "./KeypointDetectionIcon";
 import type { KeypointDetectionIconProps } from "./KeypointDetectionIcon";
 import InstanceSegmentationIcon from "./InstanceSegmentationIcon";
 import type { InstanceSegmentationIconProps } from "./InstanceSegmentationIcon";
+import SemanticSegmentationIcon from "./SemanticSegmentationIcon";
+import type { SemanticSegmentationIconProps } from "./SemanticSegmentationIcon";
 
 export {
   EyeOnIcon,
@@ -253,4 +255,6 @@ export {
   KeypointDetectionIconProps,
   InstanceSegmentationIcon,
   InstanceSegmentationIconProps,
+  SemanticSegmentationIcon,
+  SemanticSegmentationIconProps,
 };
