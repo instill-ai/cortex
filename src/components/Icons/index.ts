@@ -119,6 +119,8 @@ import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
 import type { MongoDbAtalasIconProps } from "./MongoDbAtalasIcon";
 import GoogleDriveIcon from "./GoogleDriveIcon";
 import type { GoogleDriveIconProps } from "./GoogleDriveIcon";
+import ImageClassificationIcon from "./ImageClassificationIcon";
+import type { ImageClassificationIconProps } from "./ImageClassificationIcon";
 
 export {
   EyeOnIcon,
@@ -237,4 +239,6 @@ export {
   MongoDbAtalasIconProps,
   GoogleDriveIcon,
   GoogleDriveIconProps,
+  ImageClassificationIcon,
+  ImageClassificationIconProps,
 };
