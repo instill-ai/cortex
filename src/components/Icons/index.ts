@@ -109,6 +109,8 @@ import PixelCrossIcon from "./PixelCrossIcon";
 import type { PixelCrossIconProps } from "./PixelCrossIcon";
 import PixelCheckIcon from "./PixelCheckIcon";
 import type { PixelCheckIconProps } from "./PixelCheckIcon";
+import GcsIcon from "./GcsIcon ";
+import type { GcsIconProps } from "./GcsIcon ";
 
 export {
   EyeOnIcon,
@@ -217,4 +219,6 @@ export {
   PixelCrossIconProps,
   PixelCheckIcon,
   PixelCheckIconProps,
+  GcsIcon,
+  GcsIconProps,
 };
