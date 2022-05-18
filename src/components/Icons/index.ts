@@ -117,6 +117,8 @@ import AwsS3Icon from "./AwsS3Icon";
 import type { AwsS3IconProps } from "./AwsS3Icon";
 import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
 import type { MongoDbAtalasIconProps } from "./MongoDbAtalasIcon";
+import GoogleDriveIcon from "./GoogleDriveIcon";
+import type { GoogleDriveIconProps } from "./GoogleDriveIcon";
 
 export {
   EyeOnIcon,
@@ -233,4 +235,6 @@ export {
   AwsS3IconProps,
   MongoDbAtalasIcon,
   MongoDbAtalasIconProps,
+  GoogleDriveIcon,
+  GoogleDriveIconProps,
 };
