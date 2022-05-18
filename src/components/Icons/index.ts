@@ -129,6 +129,8 @@ import InstanceSegmentationIcon from "./InstanceSegmentationIcon";
 import type { InstanceSegmentationIconProps } from "./InstanceSegmentationIcon";
 import SemanticSegmentationIcon from "./SemanticSegmentationIcon";
 import type { SemanticSegmentationIconProps } from "./SemanticSegmentationIcon";
+import OpticalCharacterRecognitionIcon from "./OpticalCharacterRecognitionIcon";
+import type { OpticalCharacterRecognitionIconProps } from "./OpticalCharacterRecognitionIcon";
 
 export {
   EyeOnIcon,
@@ -257,4 +259,6 @@ export {
   InstanceSegmentationIconProps,
   SemanticSegmentationIcon,
   SemanticSegmentationIconProps,
+  OpticalCharacterRecognitionIcon,
+  OpticalCharacterRecognitionIconProps,
 };
