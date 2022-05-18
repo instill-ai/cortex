@@ -111,6 +111,8 @@ import PixelCheckIcon from "./PixelCheckIcon";
 import type { PixelCheckIconProps } from "./PixelCheckIcon";
 import GcsIcon from "./GcsIcon ";
 import type { GcsIconProps } from "./GcsIcon ";
+import IotIcon from "./IotIcon";
+import type { IotIconProps } from "./IotIcon";
 
 export {
   EyeOnIcon,
@@ -221,4 +223,6 @@ export {
   PixelCheckIconProps,
   GcsIcon,
   GcsIconProps,
+  IotIcon,
+  IotIconProps,
 };
