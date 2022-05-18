@@ -113,6 +113,8 @@ import GcsIcon from "./GcsIcon ";
 import type { GcsIconProps } from "./GcsIcon ";
 import IotIcon from "./IotIcon";
 import type { IotIconProps } from "./IotIcon";
+import AwsS3Icon from "./AwsS3Icon";
+import type { AwsS3IconProps } from "./AwsS3Icon";
 
 export {
   EyeOnIcon,
@@ -225,4 +227,6 @@ export {
   GcsIconProps,
   IotIcon,
   IotIconProps,
+  AwsS3Icon,
+  AwsS3IconProps,
 };
