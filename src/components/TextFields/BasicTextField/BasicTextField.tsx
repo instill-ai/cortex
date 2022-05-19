@@ -63,7 +63,7 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
   return (
     <TextFieldBase
       id={props.id}
-      defaultValue={props.defaultValue}
+      value={props.value}
       description={props.description}
       disabled={props.disabled}
       type={props.type}

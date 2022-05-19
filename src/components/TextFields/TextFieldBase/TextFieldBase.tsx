@@ -23,15 +23,14 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
   /** Whether enable protected text toggle or not */
   enableProtectedToggle: boolean;
 
-  /** Text field default value, please don't use it to pass value to value property of text field */
-  defaultValue?: string;
+  value?: string;
 }
 
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
   required,
-  defaultValue,
+  value,
   error,
   errorInputBgColor,
   errorInputBorderColor,
@@ -104,10 +103,10 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
 
   // If defaultValue is present, set focus
   React.useEffect(() => {
-    if (defaultValue) {
+    if (value) {
       setAnswered(true);
     }
-  }, [defaultValue]);
+  }, [value]);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -246,7 +245,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         />
         <div className="flex relative">
           <input
-            value={defaultValue}
+            value={value}
             style={{
               height: containerHeight ? `${containerHeight}px` : "",
               paddingTop: inputValuePaddingTop

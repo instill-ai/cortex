@@ -10,10 +10,7 @@ export type TextAreaBaseProps = Omit<
   "labelActivateStyle" | "labelDeActivateStyle"
 > & {
   /** Textarea value */
-  value: string;
-
-  /** Text area's default value */
-  defaultValue?: string;
+  value?: string;
 
   /** Control how textarea can be resized
    * This component currently not support resize
@@ -60,7 +57,6 @@ export type TextAreaBaseProps = Omit<
 const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   id,
   value,
-  defaultValue,
   onChangeInput,
   required,
   description,
@@ -309,7 +305,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           <textarea
             id={id}
             ref={inputRef}
-            defaultValue={containerPaddingTop ? defaultValue : ""}
+            value={value}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
               inputWidth,
