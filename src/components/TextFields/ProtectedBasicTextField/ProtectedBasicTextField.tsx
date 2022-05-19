@@ -66,6 +66,7 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
   return (
     <TextFieldBase
       id={props.id}
+      defaultValue={props.defaultValue}
       description={props.description}
       disabled={props.disabled}
       required={props.required}

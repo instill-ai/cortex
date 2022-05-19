@@ -22,12 +22,16 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
 
   /** Whether enable protected text toggle or not */
   enableProtectedToggle: boolean;
+
+  /** Text field default value, please don't use it to pass value to value property of text field */
+  defaultValue?: string;
 }
 
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
   required,
+  defaultValue,
   error,
   errorInputBgColor,
   errorInputBorderColor,
@@ -98,6 +102,13 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   const [inputValuePaddingTop, setInputValuePaddingTop] =
     React.useState<number>(null);
 
+  // If defaultValue is present, set focus
+  React.useEffect(() => {
+    if (defaultValue) {
+      setAnswered(true);
+    }
+  }, [defaultValue]);
+
   /**
    * We use these ref to calculate the width and height of the container
    * when there has very long error message which make label overflow.
@@ -127,9 +138,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
 
     const inputLabelWidth =
       mainContainerPosition.width - inputLabelPaddingWidth * 2;
-
-    console.log("re-calculate label width", inputLabelWidth);
-
     setInputLabelWidth(inputLabelWidth);
   }, [inputRef, inputLabelType]);
 
@@ -238,6 +246,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         />
         <div className="flex relative">
           <input
+            value={defaultValue}
             style={{
               height: containerHeight ? `${containerHeight}px` : "",
               paddingTop: inputValuePaddingTop
