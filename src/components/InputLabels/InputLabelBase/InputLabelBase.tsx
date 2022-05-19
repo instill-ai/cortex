@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from "react";
+import React from "react";
 import cn from "clsx";
 
 export interface InputLabelBaseProps {
@@ -27,7 +27,7 @@ export interface InputLabelBaseProps {
   /** Whether the input is focused or not */
   focus?: boolean;
 
-  setFocus?: Dispatch<SetStateAction<boolean>>;
+  setFocus?: React.Dispatch<React.SetStateAction<boolean>>;
 
   /** Whether the input is answered or not */
   answered: boolean;
@@ -129,13 +129,21 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
     },
     ref
   ) => {
-    let activate = false;
+    const [activate, setActivate] = React.useState(false);
 
-    if (focus) {
-      activate = true;
-    } else {
-      activate = answered ? true : false;
-    }
+    React.useEffect(() => {
+      if (focus) {
+        setActivate(true);
+        return;
+      }
+
+      if (answered) {
+        setActivate(true);
+        return;
+      }
+
+      setActivate(false);
+    }, [focus, answered]);
 
     return (
       <>
