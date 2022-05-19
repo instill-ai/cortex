@@ -67,6 +67,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
   return (
     <TextAreaBase
       id={props.id}
+      defaultValue={props.defaultValue}
       description={props.description}
       value={props.value}
       enableCounter={props.enableCounter}

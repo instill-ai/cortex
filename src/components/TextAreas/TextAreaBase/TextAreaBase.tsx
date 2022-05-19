@@ -12,6 +12,9 @@ export type TextAreaBaseProps = Omit<
   /** Textarea value */
   value: string;
 
+  /** Text area's default value */
+  defaultValue?: string;
+
   /** Control how textarea can be resized
    * This component currently not support resize
    */
@@ -57,6 +60,7 @@ export type TextAreaBaseProps = Omit<
 const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   id,
   value,
+  defaultValue,
   onChangeInput,
   required,
   description,
@@ -176,8 +180,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
 
     const inputLabelWidth =
       mainContainerPosition.width - inputLabelPaddingWidth * 2;
-
-    console.log("re-calculate label width", inputLabelWidth);
 
     setInputLabelWidth(inputLabelWidth);
   }, [inputRef, inputLabelType]);
@@ -305,7 +307,9 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         />
         <div className="flex relative">
           <textarea
+            id={id}
             ref={inputRef}
+            defaultValue={containerPaddingTop ? defaultValue : ""}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
               inputWidth,
@@ -328,7 +332,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
                 ? "instill-input-no-highlight"
                 : cn(getInputStyle, "pt-5")
             )}
-            id={id}
             disabled={disabled}
             required={required}
             placeholder={focus ? placeholder : null}

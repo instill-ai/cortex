@@ -17,6 +17,7 @@ export const Playground: ComponentStory<typeof TextAreaBase> = Template.bind(
 Playground.args = {
   error: null,
   id: "text-field-playground",
+  defaultValue: "default value text",
   description: "this is a description for textarea base",
   label: "playground",
   required: true,
