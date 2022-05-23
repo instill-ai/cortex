@@ -96,7 +96,7 @@ export type SingleSelectBaseProps = Omit<
   /** Determine select option dropdown direction */
   menuPlacement: Nullable<"top" | "bottom" | "auto">;
 
-  value: SingleSelectOption;
+  value: Nullable<SingleSelectOption>;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
