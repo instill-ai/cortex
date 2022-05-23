@@ -329,3 +329,5 @@ export interface BasicInputFieldAttributes {
    */
   descriptionFontWeight: string;
 }
+
+export type Nullable<T> = T | null;
