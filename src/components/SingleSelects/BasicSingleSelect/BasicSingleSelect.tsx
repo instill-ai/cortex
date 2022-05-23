@@ -37,7 +37,7 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
       readOnly={props.readOnly}
       required={props.required}
       onChangeInput={props.onChangeInput}
-      defaultValue={props.defaultValue}
+      value={props.value}
       options={props.options}
       isClearable={false}
       inputLabelType="inset"

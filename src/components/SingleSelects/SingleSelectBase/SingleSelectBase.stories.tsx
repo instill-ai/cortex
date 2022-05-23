@@ -1,10 +1,11 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import SingleSelectBase from ".";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "./SingleSelectBase";
 
 export default {
-  title: "Components/Ui/Base/SingleSelectBase",
+  title: "Components/Base/SingleSelectBase",
   component: SingleSelectBase,
 } as ComponentMeta<typeof SingleSelectBase>;
 
@@ -50,15 +51,19 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
     },
   ];
 
-  const onChangeInputHandler = (inputValue: any) => {
-    console.log(inputValue);
+  const onChangeInputHandler = (id: string, event: SingleSelectOption) => {
+    console.log(event);
+    setValue(event);
   };
+
+  const [value, setValue] = useState<SingleSelectOption | null>(null);
 
   return (
     <SingleSelectBase
       {...args}
       onChangeInput={onChangeInputHandler}
       options={options}
+      value={value}
     />
   );
 };
@@ -69,7 +74,6 @@ export const Playground: ComponentStory<typeof SingleSelectBase> =
 Playground.args = {
   error:
     "You want to use the g (global) modifier to find all matches. Since the brackets are included in the match result you don't need to use a capturing group and I used negation instead to eliminate the amount of backtracking",
-  defaultValue: null,
   disabled: false,
   readOnly: false,
   required: false,

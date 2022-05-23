@@ -194,3 +194,4 @@ const square = ({ width }) => {
 - Adapt instill color into Select component
 - Enable strict type checking
 - Force every component to use Nullable prop, instead of undefined
+- Decide whether to use controlled components or not

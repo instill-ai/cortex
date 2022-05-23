@@ -88,17 +88,19 @@ export type SingleSelectBaseProps = Omit<
    * Default value of this autocomplete
    * - You have to put into the array with desired index like options[0]
    */
-  defaultValue: Nullable<SingleSelectOption>;
+  // defaultValue: Nullable<SingleSelectOption>;
 
   /** Whether the autocomplete is clearalbe */
   isClearable: boolean;
 
   /** Determine select option dropdown direction */
   menuPlacement: Nullable<"top" | "bottom" | "auto">;
+
+  value: SingleSelectOption;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
-  defaultValue,
+  value,
   options,
   inputLabelType,
   label,
@@ -134,10 +136,10 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   const [answered, setAnswered] = React.useState(false);
 
   React.useEffect(() => {
-    if (defaultValue && !answered) {
+    if (value && !answered) {
       setAnswered(true);
     }
-  }, [defaultValue]);
+  }, [value]);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -334,7 +336,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
               }
             }}
             isDisabled={disabled}
-            defaultValue={defaultValue}
+            value={value}
             options={options}
             components={{
               IndicatorSeparator: () => null,
