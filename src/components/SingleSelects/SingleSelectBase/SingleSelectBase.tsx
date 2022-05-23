@@ -1,6 +1,6 @@
 import Select, { ClearIndicatorProps, StylesConfig } from "react-select";
 import React from "react";
-import { BasicInputFieldAttributes } from "../../../types/general";
+import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
@@ -88,10 +88,13 @@ export type SingleSelectBaseProps = Omit<
    * Default value of this autocomplete
    * - You have to put into the array with desired index like options[0]
    */
-  defaultValue?: SingleSelectOption;
+  defaultValue: Nullable<SingleSelectOption>;
 
   /** Whether the autocomplete is clearalbe */
   isClearable: boolean;
+
+  /** Determine select option dropdown direction */
+  menuPlacement: Nullable<"top" | "bottom" | "auto">;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
@@ -125,6 +128,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   errorLabelFontWeight,
   errorLabelLineHeight,
   errorLabelTextColor,
+  menuPlacement,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -149,10 +153,15 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   const inputRef = React.useRef<HTMLDivElement>(null);
   const selectRef = React.useRef<any>(null);
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
-  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
-  const [containerHeight, setContainerHeight] = React.useState<number>(null);
-  const [inputValuePaddingTop, setInputValuePaddingTop] =
-    React.useState<number>(null);
+  const [inputLabelWidth, setInputLabelWidth] = React.useState<number | null>(
+    null
+  );
+  const [containerHeight, setContainerHeight] = React.useState<number | null>(
+    null
+  );
+  const [inputValuePaddingTop, setInputValuePaddingTop] = React.useState<
+    number | null
+  >(null);
 
   React.useEffect(() => {
     if (!focus || !selectRef) return;
@@ -314,6 +323,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
             openMenuOnFocus={true}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
+            menuPlacement={menuPlacement ? menuPlacement : "auto"}
             onChange={(event) => {
               onChangeInput(id, event);
 
