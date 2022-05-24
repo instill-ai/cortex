@@ -32,10 +32,11 @@ const SquareProgressBase: React.FC<SquareProgressBaseProps> = ({
   isLoading,
   animationDuration,
   blockSize,
+  position,
 }) => {
   return (
     <div
-      className={cn("relative", bgColor)}
+      className={cn("relative", bgColor, position)}
       style={{ width: `${blockSize}px`, height: `${blockSize}px` }}
     >
       <div
