@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "clsx";
+import { Nullable } from "../../../types/general";
 
 export interface InputLabelBaseProps {
   /** Input label's type
@@ -11,7 +12,7 @@ export interface InputLabelBaseProps {
   /**
    * Input's error string
    */
-  error: string;
+  error: Nullable<string>;
 
   /**
    * Input label's text

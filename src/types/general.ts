@@ -5,7 +5,7 @@ export interface BasicInputFieldAttributes {
   id: string;
 
   /** Whether the input has error or not */
-  error: string;
+  error: Nullable<string>;
 
   /** TailwindCSS format - Background color when input has error
    * - e.g. bg-white
