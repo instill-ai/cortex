@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "clsx";
-import { BasicInputFieldAttributes } from "../../../types/general";
+import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition, getTailwindClassNumber } from "../../../utils";
@@ -10,7 +10,7 @@ export type TextAreaBaseProps = Omit<
   "labelActivateStyle" | "labelDeActivateStyle"
 > & {
   /** Textarea value */
-  value?: string;
+  value: Nullable<string>;
 
   /** Control how textarea can be resized
    * This component currently not support resize
@@ -145,10 +145,12 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   //     break;
   // }
 
-  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
-  const [containerHeight, setContainerHeight] = React.useState<number>(null);
+  const [inputLabelWidth, setInputLabelWidth] =
+    React.useState<Nullable<number>>(null);
+  const [containerHeight, setContainerHeight] =
+    React.useState<Nullable<number>>(null);
   const [containerPaddingTop, setContainerPaddingTop] =
-    React.useState<number>(null);
+    React.useState<Nullable<number>>(null);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -160,7 +162,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
 
   React.useEffect(() => {
-    if (!focus || !inputRef) return;
+    if (!focus || !inputRef || !inputRef.current) return;
 
     inputRef.current.focus();
   }, [focus]);
@@ -181,7 +183,12 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   }, [inputRef, inputLabelType]);
 
   React.useEffect(() => {
-    if (!inputRef || !inputLabelRef) {
+    if (
+      !inputRef ||
+      !inputLabelRef ||
+      !inputRef.current ||
+      !inputLabelRef.current
+    ) {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setContainerPaddingTop(0);
       return;
@@ -256,6 +263,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
     <div className="flex flex-col">
       <div
         onClick={() => {
+          if (!inputRef.current) return;
           inputRef.current.focus();
         }}
         className={cn(
@@ -305,7 +313,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           <textarea
             id={id}
             ref={inputRef}
-            value={value}
+            value={value ? value : undefined}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
               inputWidth,
@@ -330,7 +338,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             )}
             disabled={disabled}
             required={required}
-            placeholder={focus ? placeholder : null}
+            placeholder={focus ? placeholder : undefined}
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
