@@ -51,6 +51,25 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
     },
   ];
 
+  const optionsWithoutIcon: SingleSelectOption[] = [
+    {
+      value: "grpc",
+      label: "gRPC",
+    },
+    {
+      value: "http",
+      label: "HTTP",
+    },
+    {
+      value: "snowflake",
+      label: "Snowflake",
+    },
+    {
+      value: "mongodb",
+      label: "MongoDB",
+    },
+  ];
+
   const onChangeInputHandler = (id: string, event: SingleSelectOption) => {
     console.log(event);
     setValue(event);
@@ -62,7 +81,7 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
     <SingleSelectBase
       {...args}
       onChangeInput={onChangeInputHandler}
-      options={options}
+      options={optionsWithoutIcon}
       value={value}
     />
   );
@@ -72,14 +91,12 @@ export const Playground: ComponentStory<typeof SingleSelectBase> =
   Template.bind({});
 
 Playground.args = {
-  error:
-    "You want to use the g (global) modifier to find all matches. Since the brackets are included in the match result you don't need to use a capturing group and I used negation instead to eliminate the amount of backtracking",
   disabled: false,
   readOnly: false,
   required: false,
   isClearable: true,
   description: "this is a description for auth complete with Icon",
-  label: "autocomplete-with-icon",
+  label: null,
   inputLabelType: "inset",
   id: "autocomplete-with-icon",
   labelFontSize: "text-sm",

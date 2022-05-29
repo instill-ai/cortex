@@ -164,6 +164,9 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   const [inputValuePaddingTop, setInputValuePaddingTop] = React.useState<
     number | null
   >(null);
+  const [inputValuePaddingBottom, setInputValuePaddingBottom] = React.useState<
+    number | null
+  >(null);
 
   React.useEffect(() => {
     if (!focus || !selectRef) return;
@@ -187,6 +190,12 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   }, [inputRef, inputLabelType]);
 
   React.useEffect(() => {
+    if (!label) {
+      setInputValuePaddingTop(10);
+      setInputValuePaddingBottom(10);
+      return;
+    }
+
     if (!error || !inputRef || !inputLabelRef || inputLabelType !== "inset") {
       setContainerHeight(70);
       setInputValuePaddingTop(24);
@@ -223,6 +232,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       paddingTop: inputValuePaddingTop,
       paddingRight: "20px",
       paddingLeft: "20px",
+      paddingBottom: inputValuePaddingBottom,
     }),
     singleValue: (styles) => ({
       ...styles,
@@ -371,15 +381,19 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
             formatOptionLabel={(option: SingleSelectOption) => {
               return (
                 <div className="flex flex-row gap-x-3 px-[15px]">
-                  <div className="flex my-auto w-[30px] h-[30px]">
-                    {option.startIcon}
-                  </div>
+                  {option.startIcon ? (
+                    <div className="flex my-auto w-[30px] h-[30px]">
+                      {option.startIcon}
+                    </div>
+                  ) : null}
                   <div className="my-auto instill-text-body">
                     {option.label}
                   </div>
-                  <div className="flex my-auto w-[30px] h-[30px]">
-                    {option.endIcon}
-                  </div>
+                  {option.endIcon ? (
+                    <div className="flex my-auto w-[30px] h-[30px]">
+                      {option.endIcon}
+                    </div>
+                  ) : null}
                 </div>
               );
             }}
