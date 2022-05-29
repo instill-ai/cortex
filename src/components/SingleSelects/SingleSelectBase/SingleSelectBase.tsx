@@ -165,6 +165,10 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
     number | null
   >(null);
 
+  const [inputValuePaddingBottom, setInputValuePaddingBottom] = React.useState<
+    number | null
+  >(null);
+
   React.useEffect(() => {
     if (!focus || !selectRef) return;
     selectRef.current.focus();
@@ -187,6 +191,12 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   }, [inputRef, inputLabelType]);
 
   React.useEffect(() => {
+    if (!label) {
+      setInputValuePaddingTop(10);
+      setInputValuePaddingBottom(10);
+      return;
+    }
+
     if (!error || !inputRef || !inputLabelRef || inputLabelType !== "inset") {
       setContainerHeight(70);
       setInputValuePaddingTop(24);
@@ -215,7 +225,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       setContainerHeight(70);
       setInputValuePaddingTop(24);
     }
-  }, [error, inputLabelRef, inputLabelType]);
+  }, [error, inputLabelRef, inputLabelType, label]);
 
   const customStyles: StylesConfig = {
     valueContainer: (styles) => ({
