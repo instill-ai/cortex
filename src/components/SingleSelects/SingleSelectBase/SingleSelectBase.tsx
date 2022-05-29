@@ -200,6 +200,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
     if (!error || !inputRef || !inputLabelRef || inputLabelType !== "inset") {
       setContainerHeight(70);
       setInputValuePaddingTop(24);
+      setInputValuePaddingBottom(0);
       return;
     }
 
@@ -221,9 +222,11 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       setInputValuePaddingTop(
         inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
       );
+      setInputValuePaddingBottom(0);
     } else {
       setContainerHeight(70);
       setInputValuePaddingTop(24);
+      setInputValuePaddingBottom(0);
     }
   }, [error, inputLabelRef, inputLabelType, label]);
 
@@ -233,6 +236,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       paddingTop: inputValuePaddingTop,
       paddingRight: "20px",
       paddingLeft: "20px",
+      paddingBottom: inputValuePaddingBottom,
     }),
     singleValue: (styles) => ({
       ...styles,
