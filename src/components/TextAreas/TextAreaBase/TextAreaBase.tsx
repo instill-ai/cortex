@@ -187,7 +187,8 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
       !inputRef ||
       !inputLabelRef ||
       !inputRef.current ||
-      !inputLabelRef.current
+      !inputLabelRef.current ||
+      !label
     ) {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setContainerPaddingTop(0);
