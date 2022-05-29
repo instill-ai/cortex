@@ -149,7 +149,8 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
       !inputLabelRef.current ||
       !inputRef.current ||
       !inputLabelRef ||
-      inputLabelType !== "inset"
+      inputLabelType !== "inset" ||
+      !label
     ) {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setInputValuePaddingTop(0);
@@ -265,7 +266,9 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             className={cn(
               "pl-5",
               inputLabelType === "inset"
-                ? "pt-6 instill-input-no-highlight"
+                ? label
+                  ? "pt-6 instill-input-no-highlight"
+                  : "instill-input-no-highlight"
                 : getInputStyle,
               inputHeight,
               inputWidth,
