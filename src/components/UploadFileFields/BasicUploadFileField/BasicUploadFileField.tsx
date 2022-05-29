@@ -8,6 +8,8 @@ export type BasicUploadFileFieldProps = Omit<
   | "UploadFileFieldBaseProps"
   | "uploadButtonBgColor"
   | "uploadButtonTextColor"
+  | "uploadButtonHoverBgColor"
+  | "uploadButtonHoverTextColor"
   | "inputBorderRadiusBottomLeft"
   | "inputBorderRadiusBottomRight"
   | "inputBorderRadiusTopLeft"
@@ -73,6 +75,8 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
       uploadButtonText={props.uploadButtonText}
       uploadButtonBgColor="bg-instillGrey50"
       uploadButtonTextColor="text-instillGrey05"
+      uploadButtonHoverBgColor="group-hover:bg-instillBlue50"
+      uploadButtonHoverTextColor="group-hover:text-instillGrey05"
       inputBorderRadiusBottomLeft="rounded-bl-[1px]"
       inputBorderRadiusBottomRight="rounded-br-[1px]"
       inputBorderRadiusTopLeft="rounded-tl-[1px]"
