@@ -63,7 +63,7 @@ export interface BasicInputFieldAttributes {
   errorLabelLineHeight: string;
 
   /** Field's label Name */
-  label: string;
+  label: Nullable<string>;
 
   /** Field's description */
   description: ReactNode;
