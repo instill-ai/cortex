@@ -17,7 +17,7 @@ export interface InputLabelBaseProps {
   /**
    * Input label's text
    */
-  label: string;
+  label: Nullable<string>;
 
   /** Input label associated input field's id */
   htmlFor: string;
@@ -36,7 +36,7 @@ export interface InputLabelBaseProps {
   /** Input label's width, calculated
    * - If the type is not inset, this field can be null and label will use w-full as default
    */
-  labelWidth: number | null;
+  labelWidth: Nullable<number>;
 
   /** TailwindCSS format - Label's text color
    * - e.g. text-instillGrey50
@@ -145,6 +145,8 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
 
       setActivate(false);
     }, [focus, answered]);
+
+    if (!label) return null;
 
     return (
       <>
