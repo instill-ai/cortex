@@ -223,10 +223,11 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
     <div className="flex flex-col">
       <div
         className={cn(
-          "flex flex-col gap-y-2.5 relative mb-2.5",
+          "flex flex-col gap-y-2.5 relative",
           inputWidth,
           inputBorderRadius,
-          inputLabelType === "inset" ? getInputStyle : ""
+          inputLabelType === "inset" ? getInputStyle : "",
+          { "mb-2.5": description }
         )}
       >
         <InputLabelBase

@@ -217,7 +217,11 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
 
   return (
     <div className="flex flex-col">
-      <div className="relative flex flex-col gap-y-2.5 group mb-2.5">
+      <div
+        className={cn("relative flex flex-col gap-y-2.5 group", {
+          "mb-2.5": description,
+        })}
+      >
         <InputLabelBase
           ref={inputLabelRef}
           answered={disabled ? true : readOnly ? true : answered}

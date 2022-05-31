@@ -268,13 +268,14 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           inputRef.current.focus();
         }}
         className={cn(
-          "flex flex-col gap-y-2.5 relative mb-2.5",
+          "flex flex-col gap-y-2.5 relative",
           inputWidth,
           bgColor,
           inputBorderRadius,
           inputLabelType === "inset"
             ? cn(containerPaddingTop ? "pb-5" : "pb-5 pt-[34px]", getInputStyle)
-            : ""
+            : "",
+          { "mb-2.5": description }
         )}
         style={{
           height: containerHeight ? `${containerHeight}px` : "",

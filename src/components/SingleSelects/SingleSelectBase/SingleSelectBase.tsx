@@ -5,6 +5,7 @@ import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition } from "../../../utils";
+import cn from "clsx";
 
 export type SingleSelectOption = {
   label: string;
@@ -304,7 +305,11 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
 
   return (
     <div className="flex flex-col">
-      <div className="flex flex-col gap-y-2.5 relative mb-2.5">
+      <div
+        className={cn("flex flex-col gap-y-2.5 relative", {
+          "mb-2.5": description,
+        })}
+      >
         <InputLabelBase
           ref={inputLabelRef}
           label={label}
