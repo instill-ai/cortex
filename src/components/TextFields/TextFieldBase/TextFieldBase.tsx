@@ -255,7 +255,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         />
         <div className="flex relative">
           <input
-            value={value}
+            value={value ? value : ""}
             style={{
               height: containerHeight ? `${containerHeight}px` : "",
               paddingTop: inputValuePaddingTop

@@ -314,7 +314,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           <textarea
             id={id}
             ref={inputRef}
-            value={value}
+            value={value ? value : ""}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
               inputWidth,
