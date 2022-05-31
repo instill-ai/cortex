@@ -255,7 +255,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         />
         <div className="flex relative">
           <input
-            value={value ? value : undefined}
+            value={value}
             style={{
               height: containerHeight ? `${containerHeight}px` : "",
               paddingTop: inputValuePaddingTop
@@ -293,13 +293,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             disabled={disabled}
             required={required}
             placeholder={
-              disabled
-                ? undefined
-                : readOnly
-                ? undefined
-                : focus
-                ? placeholder
-                : undefined
+              disabled ? null : readOnly ? null : focus ? placeholder : null
             }
             readOnly={readOnly}
             autoComplete={autoComplete}

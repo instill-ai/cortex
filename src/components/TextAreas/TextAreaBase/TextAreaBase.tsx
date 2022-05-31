@@ -314,7 +314,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           <textarea
             id={id}
             ref={inputRef}
-            value={value ? value : undefined}
+            value={value}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
               inputWidth,
@@ -339,7 +339,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             )}
             disabled={disabled}
             required={required}
-            placeholder={focus ? placeholder : undefined}
+            placeholder={focus ? placeholder : null}
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
