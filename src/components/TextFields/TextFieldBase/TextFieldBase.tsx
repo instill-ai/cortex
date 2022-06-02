@@ -233,7 +233,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         <InputLabelBase
           ref={inputLabelRef}
           error={error}
-          answered={disabled ? true : readOnly ? true : answered}
+          answered={answered}
           focus={focus}
           setFocus={setFocus}
           required={required}

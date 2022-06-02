@@ -224,7 +224,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
       >
         <InputLabelBase
           ref={inputLabelRef}
-          answered={disabled ? true : readOnly ? true : answered}
+          answered={answered}
           required={required}
           htmlFor={id}
           type={inputLabelType}

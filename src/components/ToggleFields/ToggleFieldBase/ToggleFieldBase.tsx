@@ -148,7 +148,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
     <div className="flex flex-col">
       <div className={cn("flex flex-col gap-y-2.5", { "mb-2.5": description })}>
         <InputLabelBase
-          answered={disabled ? true : readOnly ? true : answered}
+          answered={answered}
           required={required}
           htmlFor={`${id}-label`}
           type="normal"
