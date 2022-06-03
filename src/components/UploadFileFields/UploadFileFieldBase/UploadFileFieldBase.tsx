@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
@@ -215,6 +215,24 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
     }
   }, [error, inputLabelRef, inputValueRef, inputLabelType]);
 
+  const handleInputOnClick = (event: MouseEvent<HTMLInputElement>) => {
+    if (readOnly) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  const handleButtonOnClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (readOnly || disabled) return;
+
+    if (answered) {
+      event.preventDefault();
+      setFile(null);
+      setAnswered(false);
+      onChangeInput(id, null);
+    }
+  };
+
   return (
     <div className="flex flex-col">
       <div
@@ -294,7 +312,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                   "instill-input-no-highlight"
                 )
           )}
-          htmlFor={id}
+          htmlFor={`file-inpue-${id}`}
         >
           <div
             className={cn(
@@ -353,7 +371,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               inputWidth
             )}
             aria-label={`${id}-label`}
-            id={id}
+            id={`file-inpue-${id}`}
             type="file"
             disabled={disabled}
             readOnly={readOnly}
@@ -373,13 +391,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                 onChangeInput(id, inputFile);
               }
             }}
-            onClick={(event) => {
-              if (readOnly) {
-                event.preventDefault();
-                event.stopPropagation();
-                return false;
-              }
-            }}
+            onClick={(event) => handleInputOnClick(event)}
           />
           <div
             ref={uploadButtonRef}
@@ -400,16 +412,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                     uploadButtonHoverTextColor
                   )
             )}
-            onClick={(event) => {
-              if (readOnly || disabled) return;
-
-              if (answered) {
-                event.preventDefault();
-                setFile(null);
-                setAnswered(false);
-                onChangeInput(id, null);
-              }
-            }}
+            onClick={(event) => handleButtonOnClick(event)}
           >
             <span className="m-auto">
               {answered ? "Delete" : uploadButtonText}
