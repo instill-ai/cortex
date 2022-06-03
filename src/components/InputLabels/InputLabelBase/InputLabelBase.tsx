@@ -184,7 +184,11 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
               }
             )}
             htmlFor={htmlFor}
-            onClick={() => setFocus(true)}
+            onClick={() => {
+              if (setFocus) {
+                setFocus(true);
+              }
+            }}
             style={{
               width:
                 type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",
