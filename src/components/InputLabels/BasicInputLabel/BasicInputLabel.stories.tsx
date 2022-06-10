@@ -11,17 +11,12 @@ const Template: ComponentStory<typeof BasicInputLabel> = (args) => {
   const [focus, setFocus] = useState(false);
   return (
     <BasicInputLabel
+      {...args}
       focus={focus}
       htmlFor="default"
       answered={false}
       required={false}
-      onBlurHandler={() => {
-        setFocus(false);
-      }}
-      onFocusHandler={() => {
-        setFocus(true);
-      }}
-      {...args}
+      setFocus={setFocus}
     />
   );
 };

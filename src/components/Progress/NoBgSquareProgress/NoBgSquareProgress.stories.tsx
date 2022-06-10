@@ -7,9 +7,11 @@ export default {
 } as ComponentMeta<typeof NoBgSquareProgress>;
 
 const Template: ComponentStory<typeof NoBgSquareProgress> = (args) => (
-  <NoBgSquareProgress {...args} />
+  <NoBgSquareProgress {...args} blockSize={48} />
 );
 export const Playground: ComponentStory<typeof NoBgSquareProgress> =
   Template.bind({});
 
-Playground.args = {};
+Playground.args = {
+  isLoading: true,
+};

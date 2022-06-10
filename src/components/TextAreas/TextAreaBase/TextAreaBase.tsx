@@ -1,6 +1,6 @@
 import React from "react";
 import cn from "clsx";
-import { BasicInputFieldAttributes } from "../../../types/general";
+import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition, getTailwindClassNumber } from "../../../utils";
@@ -10,7 +10,7 @@ export type TextAreaBaseProps = Omit<
   "labelActivateStyle" | "labelDeActivateStyle"
 > & {
   /** Textarea value */
-  value: string;
+  value: Nullable<string>;
 
   /** Control how textarea can be resized
    * This component currently not support resize
@@ -145,10 +145,12 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   //     break;
   // }
 
-  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
-  const [containerHeight, setContainerHeight] = React.useState<number>(null);
+  const [inputLabelWidth, setInputLabelWidth] =
+    React.useState<Nullable<number>>(null);
+  const [containerHeight, setContainerHeight] =
+    React.useState<Nullable<number>>(null);
   const [containerPaddingTop, setContainerPaddingTop] =
-    React.useState<number>(null);
+    React.useState<Nullable<number>>(null);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -158,6 +160,12 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
 
   const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
+
+  React.useEffect(() => {
+    if (!focus || !inputRef || !inputRef.current) return;
+
+    inputRef.current.focus();
+  }, [focus]);
 
   React.useEffect(() => {
     if (!inputRef.current || inputLabelType !== "inset") {
@@ -171,13 +179,17 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
     const inputLabelWidth =
       mainContainerPosition.width - inputLabelPaddingWidth * 2;
 
-    console.log("re-calculate label width", inputLabelWidth);
-
     setInputLabelWidth(inputLabelWidth);
   }, [inputRef, inputLabelType]);
 
   React.useEffect(() => {
-    if (!inputRef || !inputLabelRef) {
+    if (
+      !inputRef ||
+      !inputLabelRef ||
+      !inputRef.current ||
+      !inputLabelRef.current ||
+      !label
+    ) {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setContainerPaddingTop(0);
       return;
@@ -252,16 +264,18 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
     <div className="flex flex-col">
       <div
         onClick={() => {
+          if (!inputRef.current) return;
           inputRef.current.focus();
         }}
         className={cn(
-          "flex flex-col gap-y-2.5 relative mb-2.5",
+          "flex flex-col gap-y-2.5 relative",
           inputWidth,
           bgColor,
           inputBorderRadius,
           inputLabelType === "inset"
             ? cn(containerPaddingTop ? "pb-5" : "pb-5 pt-[34px]", getInputStyle)
-            : ""
+            : "",
+          { "mb-2.5": description }
         )}
         style={{
           height: containerHeight ? `${containerHeight}px` : "",
@@ -278,17 +292,12 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
           label={label}
           labelWidth={inputLabelWidth}
           error={error}
-          answered={disabled ? true : readOnly ? true : answered}
+          answered={answered}
           focus={focus}
           required={required}
           htmlFor={id}
           type={inputLabelType}
-          onFocusHandler={() => {
-            setFocus(true);
-          }}
-          onBlurHandler={() => {
-            setFocus(false);
-          }}
+          setFocus={setFocus}
           labelFontFamily={labelFontFamily}
           labelFontSize={labelFontSize}
           labelFontWeight={labelFontWeight}
@@ -304,7 +313,9 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         />
         <div className="flex relative">
           <textarea
+            id={id}
             ref={inputRef}
+            value={value ? value : ""}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
               inputWidth,
@@ -327,7 +338,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
                 ? "instill-input-no-highlight"
                 : cn(getInputStyle, "pt-5")
             )}
-            id={id}
             disabled={disabled}
             required={required}
             placeholder={focus ? placeholder : null}

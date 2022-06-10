@@ -191,3 +191,8 @@ const square = ({ width }) => {
 - Think about memorize component
 - InputLabel cursor
 - If we bundle the design-system as package, we may re-bundle it again with duplicate style css, need to investigate this.
+- Adapt instill color into Select component
+- Enable strict type checking
+- Force every component to use Nullable prop, instead of undefined
+- Decide whether to use controlled components or not
+- Solve upload field cursor not correctly display

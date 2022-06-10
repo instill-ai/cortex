@@ -11,8 +11,9 @@ export type WhiteBgSquareProgressProps = Omit<
 const WhiteBgSquareProgress: React.FC<WhiteBgSquareProgressProps> = (props) => {
   return (
     <SquareProgressBase
-      isError={props.isError}
       isLoading={props.isLoading}
+      blockSize={props.blockSize}
+      position={props.position}
       bgColor="bg-white"
       cubeColor="bg-instillBlue50"
       animationDuration={3}

@@ -14,34 +14,41 @@ export interface SquareProgressBaseProps {
   /** Whether it is at loading status */
   isLoading: boolean;
 
-  /** Whether it is error */
-  isError: boolean;
-
   /** Anumation duration */
   animationDuration: number;
+
+  /** The size of whole progress in pixel, the innerBlock and padding will depend on the number */
+  blockSize: number;
+
+  /** The position of the progress
+   * - e.g. mb-auto
+   */
+  position?: string;
 }
 
 const SquareProgressBase: React.FC<SquareProgressBaseProps> = ({
   bgColor,
   cubeColor,
-  isError,
   isLoading,
   animationDuration,
+  blockSize,
+  position,
 }) => {
   return (
-    <div className={cn("w-[18px] h-[18px] relative", bgColor)}>
+    <div
+      className={cn("relative", bgColor, position)}
+      style={{ width: `${blockSize}px`, height: `${blockSize}px` }}
+    >
       <div
-        className={cn(
-          "block w-1.5 h-1.5 absolute top-0.5 left-0.5",
-          cubeColor,
-          { "loading-animation": isError ? false : isLoading }
-        )}
+        className={cn("block absolute", cubeColor, {
+          "loading-animation": isLoading,
+        })}
         style={{
-          animationDuration: isError
-            ? ""
-            : isLoading
-            ? `${animationDuration}s`
-            : "",
+          top: `${blockSize / 9}px`,
+          left: `${blockSize / 9}px`,
+          width: `${blockSize / 3}px`,
+          height: `${blockSize / 3}px`,
+          animationDuration: isLoading ? `${animationDuration}s` : "",
         }}
       />
     </div>

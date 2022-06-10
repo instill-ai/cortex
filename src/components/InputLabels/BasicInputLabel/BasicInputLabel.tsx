@@ -27,8 +27,7 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
       answered={props.answered}
       htmlFor={props.htmlFor}
       type={props.type}
-      onBlurHandler={props.onBlurHandler}
-      onFocusHandler={props.onFocusHandler}
+      setFocus={props.setFocus}
       label={props.label}
       labelFontSize="text-sm"
       labelFontWeight="font-normal"

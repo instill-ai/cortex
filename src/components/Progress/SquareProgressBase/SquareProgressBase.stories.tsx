@@ -11,9 +11,13 @@ const Template: ComponentStory<typeof SquareProgressBase> = (args) => (
     {...args}
     bgColor="bg-white"
     cubeColor="bg-instillBlue50"
+    blockSize={36}
   />
 );
 export const Playground: ComponentStory<typeof SquareProgressBase> =
   Template.bind({});
 
-Playground.args = {};
+Playground.args = {
+  isLoading: true,
+  animationDuration: 3,
+};

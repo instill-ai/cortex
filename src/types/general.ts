@@ -5,7 +5,7 @@ export interface BasicInputFieldAttributes {
   id: string;
 
   /** Whether the input has error or not */
-  error: string;
+  error: Nullable<string>;
 
   /** TailwindCSS format - Background color when input has error
    * - e.g. bg-white
@@ -63,7 +63,7 @@ export interface BasicInputFieldAttributes {
   errorLabelLineHeight: string;
 
   /** Field's label Name */
-  label: string;
+  label: Nullable<string>;
 
   /** Field's description */
   description: ReactNode;
@@ -329,3 +329,5 @@ export interface BasicInputFieldAttributes {
    */
   descriptionFontWeight: string;
 }
+
+export type Nullable<T> = T | null;

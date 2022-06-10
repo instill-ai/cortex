@@ -23,7 +23,7 @@ Playground.args = {
   readOnly: false,
   enableProtectedToggle: false,
   inputLabelType: "inset",
-  label: "playground",
+  label: null,
   required: true,
   focusHighlight: true,
   autoComplete: "off",

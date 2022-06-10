@@ -72,6 +72,11 @@ import StatusOffIcon from "./StatusOffIcon";
 import type { StatusOffIconProps } from "./StatusOffIcon";
 import StatusErrorIcon from "./StatusErrorIcon";
 import type { StatusErrorIconProps } from "./StatusErrorIcon";
+import ModelInstanceIcon from "./ModelInstanceIcon";
+import type { ModelInstanceIconProps } from "./ModelInstanceIcon";
+import RefreshIcon from "./RefreshIcon";
+import type { RefreshIconProps } from "./RefreshIcon";
+
 import {
   ArrowUpIcon,
   ArrowDownIcon,
@@ -84,6 +89,48 @@ import type {
   ArrowRightIconProps,
   ArrowLeftIconProps,
 } from "./ArrowIcons";
+import SyncIcon from "./SyncIcon";
+import type { SyncIconProps } from "./SyncIcon";
+import AsyncIcon from "./AsyncIcon";
+import type { AsyncIconProps } from "./AsyncIcon";
+import VersionIcon from "./VersionIcon";
+import type { VersionIconProps } from "./VersionIcon";
+import LocalUploadIcon from "./LocalUploadIcon";
+import type { LocalUploadIconProps } from "./LocalUploadIcon";
+import GitHubIcon from "./GitHubIcon";
+import type { GitHubIconProps } from "./GitHubIcon";
+import GitBranchIcon from "./GitBranchIcon";
+import type { GitBranchIconProps } from "./GitBranchIcon";
+import GitTagIcon from "./GitTagIcon";
+import type { GitTagIconProps } from "./GitTagIcon";
+import GitCommitIcon from "./GitCommitIcon";
+import type { GitCommitIconProps } from "./GitCommitIcon";
+import PixelCrossIcon from "./PixelCrossIcon";
+import type { PixelCrossIconProps } from "./PixelCrossIcon";
+import PixelCheckIcon from "./PixelCheckIcon";
+import type { PixelCheckIconProps } from "./PixelCheckIcon";
+import GcsIcon from "./GcsIcon ";
+import type { GcsIconProps } from "./GcsIcon ";
+import IotIcon from "./IotIcon";
+import type { IotIconProps } from "./IotIcon";
+import AwsS3Icon from "./AwsS3Icon";
+import type { AwsS3IconProps } from "./AwsS3Icon";
+import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
+import type { MongoDbAtalasIconProps } from "./MongoDbAtalasIcon";
+import GoogleDriveIcon from "./GoogleDriveIcon";
+import type { GoogleDriveIconProps } from "./GoogleDriveIcon";
+import ImageClassificationIcon from "./ImageClassificationIcon";
+import type { ImageClassificationIconProps } from "./ImageClassificationIcon";
+import ObjectDetectionIcon from "./ObjectDetectionIcon";
+import type { ObjectDetectionIconProps } from "./ObjectDetectionIcon";
+import KeypointDetectionIcon from "./KeypointDetectionIcon";
+import type { KeypointDetectionIconProps } from "./KeypointDetectionIcon";
+import InstanceSegmentationIcon from "./InstanceSegmentationIcon";
+import type { InstanceSegmentationIconProps } from "./InstanceSegmentationIcon";
+import SemanticSegmentationIcon from "./SemanticSegmentationIcon";
+import type { SemanticSegmentationIconProps } from "./SemanticSegmentationIcon";
+import OpticalCharacterRecognitionIcon from "./OpticalCharacterRecognitionIcon";
+import type { OpticalCharacterRecognitionIconProps } from "./OpticalCharacterRecognitionIcon";
 
 export {
   EyeOnIcon,
@@ -168,4 +215,50 @@ export {
   StatusOffIconProps,
   StatusErrorIcon,
   StatusErrorIconProps,
+  SyncIcon,
+  SyncIconProps,
+  AsyncIcon,
+  AsyncIconProps,
+  VersionIcon,
+  VersionIconProps,
+  LocalUploadIcon,
+  LocalUploadIconProps,
+  ModelInstanceIcon,
+  ModelInstanceIconProps,
+  RefreshIcon,
+  RefreshIconProps,
+  GitHubIcon,
+  GitHubIconProps,
+  GitBranchIcon,
+  GitBranchIconProps,
+  GitTagIcon,
+  GitTagIconProps,
+  GitCommitIcon,
+  GitCommitIconProps,
+  PixelCrossIcon,
+  PixelCrossIconProps,
+  PixelCheckIcon,
+  PixelCheckIconProps,
+  GcsIcon,
+  GcsIconProps,
+  IotIcon,
+  IotIconProps,
+  AwsS3Icon,
+  AwsS3IconProps,
+  MongoDbAtalasIcon,
+  MongoDbAtalasIconProps,
+  GoogleDriveIcon,
+  GoogleDriveIconProps,
+  ImageClassificationIcon,
+  ImageClassificationIconProps,
+  ObjectDetectionIcon,
+  ObjectDetectionIconProps,
+  KeypointDetectionIcon,
+  KeypointDetectionIconProps,
+  InstanceSegmentationIcon,
+  InstanceSegmentationIconProps,
+  SemanticSegmentationIcon,
+  SemanticSegmentationIconProps,
+  OpticalCharacterRecognitionIcon,
+  OpticalCharacterRecognitionIconProps,
 };

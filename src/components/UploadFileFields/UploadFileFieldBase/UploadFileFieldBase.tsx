@@ -1,4 +1,4 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import { BasicInputFieldAttributes } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
@@ -28,9 +28,21 @@ export type UploadFileFieldBaseProps = Omit<
   uploadButtonBgColor: string;
 
   /** TailwindCSS format
+   * - use group-hover utility
+   * - e.g. group-hover:bg-instillGrey50
+   */
+  uploadButtonHoverBgColor: string;
+
+  /** TailwindCSS format
    * - e.g. text-instillGrey05
    */
   uploadButtonTextColor: string;
+
+  /** TailwindCSS format
+   * - use group-hover utility
+   * - e.g. group-hover:text-instillGrey50
+   */
+  uploadButtonHoverTextColor: string;
 
   /** TailwindCSS format - Input's top right border radius
    * - e.g. rounded-tr-[1px]
@@ -65,10 +77,13 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   uploadButtonText,
   uploadButtonBgColor,
   uploadButtonTextColor,
+  uploadButtonHoverBgColor,
+  uploadButtonHoverTextColor,
   inputBorderRadiusTopRight,
   inputBorderRadiusBottomRight,
   inputBorderRadiusTopLeft,
   inputBorderRadiusBottomLeft,
+  inputBgColor,
   inputFontSize,
   inputFontWeight,
   inputLineHeight,
@@ -148,7 +163,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
     if (
       !mainContainerRef.current ||
       !uploadButtonRef.current ||
-      inputLabelType !== "inset"
+      inputLabelType !== "inset" ||
+      !label
     ) {
       return;
     }
@@ -162,8 +178,6 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
       mainContainerPosition.width -
       uploadButtonPosition.width -
       inputLabelPaddingWidth * 2;
-
-    console.log("re-calculate label width", inputLabelWidth);
 
     setInputLabelWidth(inputLabelWidth);
   }, [mainContainerRef, uploadButtonRef, inputLabelType]);
@@ -201,12 +215,34 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
     }
   }, [error, inputLabelRef, inputValueRef, inputLabelType]);
 
+  const handleInputOnClick = (event: MouseEvent<HTMLInputElement>) => {
+    if (readOnly) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
+  const handleButtonOnClick = (event: MouseEvent<HTMLDivElement>) => {
+    if (readOnly || disabled) return;
+
+    if (answered) {
+      event.preventDefault();
+      setFile(null);
+      setAnswered(false);
+      onChangeInput(id, null);
+    }
+  };
+
   return (
     <div className="flex flex-col">
-      <div className="relative flex flex-col gap-y-2.5 group mb-2.5">
+      <div
+        className={cn("relative flex flex-col gap-y-2.5 group", {
+          "mb-2.5": description,
+        })}
+      >
         <InputLabelBase
           ref={inputLabelRef}
-          answered={disabled ? true : readOnly ? true : answered}
+          answered={answered}
           required={required}
           htmlFor={id}
           type={inputLabelType}
@@ -230,7 +266,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
           ref={mainContainerRef}
           style={{ height: containerHeight ? `${containerHeight}px` : "" }}
           className={cn(
-            "flex flex-row p-0 cursor-pointer relative",
+            "flex flex-row p-0 relative",
             inputWidth,
             inputHeight,
             inputBorderRadiusBottomLeft,
@@ -265,22 +301,29 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                   inputBorderWidth,
                   inputBorderColor,
                   inputBorderStyle,
+                  inputBgColor,
                   "instill-input-highlight"
                 )
               : cn(
                   inputBorderColor,
                   inputBorderStyle,
                   inputBorderWidth,
+                  inputBgColor,
                   "instill-input-no-highlight"
                 )
           )}
-          htmlFor={id}
+          htmlFor={`file-inpue-${id}`}
         >
           <div
             className={cn(
               "flex mr-auto pl-5",
               inputLabelType === "inset"
-                ? cn("pt-8", containerHeight ? "absolute bottom-5" : "mb-auto")
+                ? label
+                  ? cn(
+                      "pt-8",
+                      containerHeight ? "absolute bottom-5" : "mb-auto"
+                    )
+                  : "my-auto"
                 : "my-auto"
             )}
           >
@@ -323,17 +366,12 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
           </div>
           <input
             className={cn(
-              "opacity-0 overflow-hidden absolute z-10",
+              "opacity-0 overflow-hidden absolute",
               inputHeight,
-              inputWidth,
-              disabled
-                ? "cursor-not-allowed"
-                : readOnly
-                ? "cursor-auto"
-                : "cursor-pointer"
+              inputWidth
             )}
             aria-label={`${id}-label`}
-            id={id}
+            id={`file-inpue-${id}`}
             type="file"
             disabled={disabled}
             readOnly={readOnly}
@@ -353,39 +391,28 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                 onChangeInput(id, inputFile);
               }
             }}
-            onClick={(event) => {
-              if (readOnly) {
-                event.preventDefault();
-                event.stopPropagation();
-                return false;
-              }
-            }}
+            onClick={(event) => handleInputOnClick(event)}
           />
           <div
             ref={uploadButtonRef}
             className={cn(
               "flex h-full ml-auto px-5",
               answered ? "absolute bottom-0 right-0 z-20" : "",
-              uploadButtonBgColor,
-              uploadButtonTextColor,
+
               inputBorderRadiusTopRight,
               inputBorderRadiusBottomRight,
               disabled
-                ? "bg-instillGrey20 cursor-not-allowed"
+                ? "bg-instillGrey20 text-white"
                 : readOnly
-                ? "bg-instillGrey20 cursor-auto"
-                : "bg-instillGrey50 group-hover:bg-instillGrey30 cursor-pointer"
+                ? "bg-instillGrey20 text-white"
+                : cn(
+                    uploadButtonBgColor,
+                    uploadButtonTextColor,
+                    uploadButtonHoverBgColor,
+                    uploadButtonHoverTextColor
+                  )
             )}
-            onClick={(event) => {
-              if (readOnly || disabled) return;
-
-              if (answered) {
-                event.preventDefault();
-                setFile(null);
-                setAnswered(false);
-                onChangeInput(id, null);
-              }
-            }}
+            onClick={(event) => handleButtonOnClick(event)}
           >
             <span className="m-auto">
               {answered ? "Delete" : uploadButtonText}

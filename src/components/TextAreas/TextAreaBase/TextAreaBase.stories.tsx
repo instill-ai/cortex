@@ -18,7 +18,7 @@ Playground.args = {
   error: null,
   id: "text-field-playground",
   description: "this is a description for textarea base",
-  label: "playground",
+  label: null,
   required: true,
   inputHeight: "h-[140px]",
   inputWidth: "w-full",

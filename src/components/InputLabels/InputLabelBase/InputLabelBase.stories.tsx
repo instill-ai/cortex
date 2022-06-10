@@ -9,13 +9,7 @@ export default {
 
 const Template: ComponentStory<typeof InputLabelBase> = (args) => {
   const [_, setFocus] = useState(false);
-  return (
-    <InputLabelBase
-      {...args}
-      onBlurHandler={() => setFocus(false)}
-      onFocusHandler={() => setFocus(true)}
-    />
-  );
+  return <InputLabelBase {...args} setFocus={setFocus} />;
 };
 
 export const Playground: ComponentStory<typeof InputLabelBase> = Template.bind(

@@ -7,9 +7,11 @@ export default {
 } as ComponentMeta<typeof WhiteBgSquareProgress>;
 
 const Template: ComponentStory<typeof WhiteBgSquareProgress> = (args) => (
-  <WhiteBgSquareProgress {...args} />
+  <WhiteBgSquareProgress {...args} blockSize={48} />
 );
 export const Playground: ComponentStory<typeof WhiteBgSquareProgress> =
   Template.bind({});
 
-Playground.args = {};
+Playground.args = {
+  isLoading: true,
+};

@@ -11,8 +11,9 @@ export type NoBgSquareProgressProps = Omit<
 const NoBgSquareProgress: React.FC<NoBgSquareProgressProps> = (props) => {
   return (
     <SquareProgressBase
-      isError={props.isError}
       isLoading={props.isLoading}
+      position={props.position}
+      blockSize={props.blockSize}
       bgColor=""
       cubeColor="bg-instillBlue50"
       animationDuration={3}

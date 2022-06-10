@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "clsx";
+import { Nullable } from "../../../types/general";
 
 export interface InputLabelBaseProps {
   /** Input label's type
@@ -11,12 +12,12 @@ export interface InputLabelBaseProps {
   /**
    * Input's error string
    */
-  error: string;
+  error: Nullable<string>;
 
   /**
    * Input label's text
    */
-  label: string;
+  label: Nullable<string>;
 
   /** Input label associated input field's id */
   htmlFor: string;
@@ -27,19 +28,15 @@ export interface InputLabelBaseProps {
   /** Whether the input is focused or not */
   focus?: boolean;
 
+  setFocus?: React.Dispatch<React.SetStateAction<boolean>>;
+
   /** Whether the input is answered or not */
   answered: boolean;
 
   /** Input label's width, calculated
    * - If the type is not inset, this field can be null and label will use w-full as default
    */
-  labelWidth: number | null;
-
-  /** Handle input label focus event */
-  onFocusHandler?: (event) => void;
-
-  /** Handle input label blud event */
-  onBlurHandler?: (event) => void;
+  labelWidth: Nullable<number>;
 
   /** TailwindCSS format - Label's text color
    * - e.g. text-instillGrey50
@@ -121,8 +118,7 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       labelLineHeight,
       labelActivateStyle,
       labelDeActivateStyle,
-      onFocusHandler,
-      onBlurHandler,
+      setFocus,
       type,
       error,
       errorLabelFontFamily,
@@ -134,13 +130,23 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
     },
     ref
   ) => {
-    let activate = false;
+    const [activate, setActivate] = React.useState(false);
 
-    if (focus) {
-      activate = true;
-    } else {
-      activate = answered ? true : false;
-    }
+    React.useEffect(() => {
+      if (focus) {
+        setActivate(true);
+        return;
+      }
+
+      if (answered) {
+        setActivate(true);
+        return;
+      }
+
+      setActivate(false);
+    }, [focus, answered]);
+
+    if (!label) return null;
 
     return (
       <>
@@ -178,8 +184,11 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
               }
             )}
             htmlFor={htmlFor}
-            onFocus={(event) => onFocusHandler(event)}
-            onBlur={(event) => onBlurHandler(event)}
+            onClick={() => {
+              if (setFocus) {
+                setFocus(true);
+              }
+            }}
             style={{
               width:
                 type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",

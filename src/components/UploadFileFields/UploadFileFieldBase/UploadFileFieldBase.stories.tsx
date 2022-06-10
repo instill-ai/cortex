@@ -21,7 +21,7 @@ Playground.args = {
   inputLabelType: "inset",
   placeholder: "playground",
 
-  label: "upload-file-field-base-playground",
+  label: null,
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey50",
@@ -69,6 +69,7 @@ Playground.args = {
   inputTextColor: "text-instillGrey95",
   inputFontWeight: "font-normal",
   inputLineHeight: "leading-[28px]",
+  inputBgColor: "bg-white",
   inputBorderRadiusBottomLeft: "rounded-bl-[1px]",
   inputBorderRadiusBottomRight: "rounded-br-[1px]",
   inputBorderRadiusTopLeft: "rounded-tl-[1px]",
@@ -80,4 +81,6 @@ Playground.args = {
   uploadButtonText: "Upload",
   uploadButtonBgColor: "bg-instillBlue10",
   uploadButtonTextColor: "text-instillBlue50",
+  uploadButtonHoverBgColor: "group-hover:bg-instillBlue50",
+  uploadButtonHoverTextColor: "group-hover:text-instillGrey05",
 };
