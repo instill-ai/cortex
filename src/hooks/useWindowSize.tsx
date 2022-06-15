@@ -1,23 +1,47 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { Nullable } from "../types/general";
 
-// Solution from https://stackoverflow.com/questions/62846043/react-js-useeffect-with-window-resize-event-listener-not-working
+export type WindowSize = {
+  width: number;
+  height: number;
+};
 
-export const useWindowSize = () => {
-  const [windowSize, setWindowSize] = React.useState({
-    width: null,
-    height: null,
-  });
+const getWindowSize = (): { width: number; height: number } => {
+  const width =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.body.clientWidth;
 
-  React.useEffect(() => {
-    function handleResize() {
-      setWindowSize({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+  const height =
+    window.innerHeight ||
+    document.documentElement.clientHeight ||
+    document.body.clientHeight;
+
+  return {
+    width,
+    height,
+  };
+};
+
+const useWindowSize = (): Nullable<WindowSize> => {
+  const [windowSize, setWindowSize] = useState<Nullable<WindowSize>>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
     }
+
+    setWindowSize(getWindowSize());
+    const handleResize = () => {
+      setWindowSize(getWindowSize());
+    };
+
     window.addEventListener("resize", handleResize);
-    handleResize();
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [getWindowSize]);
+
   return windowSize;
 };
+
+export default useWindowSize;
