@@ -294,7 +294,13 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             disabled={disabled}
             required={required}
             placeholder={
-              disabled ? null : readOnly ? null : focus ? placeholder : null
+              disabled
+                ? undefined
+                : readOnly
+                ? undefined
+                : focus
+                ? placeholder
+                : undefined
             }
             readOnly={readOnly}
             autoComplete={autoComplete}
