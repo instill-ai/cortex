@@ -1,4 +1,8 @@
-import Select, { ClearIndicatorProps, StylesConfig } from "react-select";
+import ReactSelect, {
+  ClearIndicatorProps,
+  OnChangeValue,
+  StylesConfig,
+} from "react-select";
 import React from "react";
 import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
@@ -198,7 +202,14 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       return;
     }
 
-    if (!error || !inputRef || !inputLabelRef || inputLabelType !== "inset") {
+    if (
+      !error ||
+      !inputRef ||
+      !inputRef.current ||
+      !inputLabelRef ||
+      !inputLabelRef.current ||
+      inputLabelType !== "inset"
+    ) {
       setContainerHeight(70);
       setInputValuePaddingTop(24);
       setInputValuePaddingBottom(0);
@@ -231,13 +242,13 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
     }
   }, [error, inputLabelRef, inputLabelType, label]);
 
-  const customStyles: StylesConfig = {
+  const customStyles: StylesConfig<SingleSelectOption> = {
     valueContainer: (styles) => ({
       ...styles,
-      paddingTop: inputValuePaddingTop,
+      paddingTop: inputValuePaddingTop ? inputValuePaddingTop : "",
       paddingRight: "20px",
       paddingLeft: "20px",
-      paddingBottom: inputValuePaddingBottom,
+      paddingBottom: inputValuePaddingBottom ? inputValuePaddingBottom : "",
     }),
     singleValue: (styles) => ({
       ...styles,
@@ -251,7 +262,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       cursor: state.isDisabled ? "not-allowed" : readOnly ? "auto" : "pointer",
       borderRadius: "1px",
       borderWidth: "1px",
-      height: containerHeight,
+      height: containerHeight ? containerHeight : "",
       borderStyle: state.isDisabled ? "dashed" : "solid",
       backgroundColor: "#ffffff",
       borderColor: error
@@ -335,31 +346,28 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
           errorLabelTextColor={errorLabelTextColor}
         />
         <div ref={inputRef}>
-          <Select
+          <ReactSelect
             id={id}
             ref={selectRef}
             instanceId={instanceId}
-            isSearchable={!readOnly}
-            menuIsOpen={readOnly ? false : undefined}
             openMenuOnFocus={true}
             onFocus={() => setFocus(true)}
             onBlur={() => setFocus(false)}
             menuPlacement={menuPlacement ? menuPlacement : "auto"}
-            onChange={(event) => {
-              onChangeInput(id, event);
+            options={options}
+            onChange={(selectedOption) => {
+              onChangeInput(id, selectedOption);
 
-              if (event) {
+              if (selectedOption) {
                 setAnswered(true);
               } else {
                 setAnswered(false);
               }
             }}
             isDisabled={disabled}
-            value={value}
-            options={options}
             components={{
               IndicatorSeparator: () => null,
-              ClearIndicator: (props: ClearIndicatorProps) => {
+              ClearIndicator: (props) => {
                 const {
                   getStyles,
                   innerProps: { ref, ...restInnerProps },

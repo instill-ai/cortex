@@ -340,7 +340,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             )}
             disabled={disabled}
             required={required}
-            placeholder={focus ? placeholder : null}
+            placeholder={focus ? placeholder : undefined}
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {

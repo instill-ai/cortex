@@ -7,11 +7,11 @@ export default {
 } as ComponentMeta<typeof BasicTextArea>;
 
 const Template: ComponentStory<typeof BasicTextArea> = (args) => {
-  const onChnageInput = (id: string, inputValue) => {
+  const onChnageInput = (id: string, inputValue: string) => {
     console.log(id, inputValue);
   };
 
-  return <BasicTextArea onChangeInput={onChnageInput} {...args} />;
+  return <BasicTextArea {...args} onChangeInput={onChnageInput} />;
 };
 
 export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(

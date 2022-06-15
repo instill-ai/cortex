@@ -1,5 +1,5 @@
 import React, { MouseEvent } from "react";
-import { BasicInputFieldAttributes } from "../../../types/general";
+import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -129,9 +129,11 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   readOnlyInputTextColor,
 }) => {
   const [answered, setAnswered] = React.useState(false);
-  const [file, setFile] = React.useState<string>("");
-  const [inputLabelWidth, setInputLabelWidth] = React.useState<number>(null);
-  const [containerHeight, setContainerHeight] = React.useState<number>(null);
+  const [file, setFile] = React.useState<Nullable<string>>(null);
+  const [inputLabelWidth, setInputLabelWidth] =
+    React.useState<Nullable<number>>(null);
+  const [containerHeight, setContainerHeight] =
+    React.useState<Nullable<number>>(null);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -186,7 +188,9 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
     if (
       !error ||
       !mainContainerRef ||
+      !mainContainerRef.current ||
       !inputLabelRef ||
+      !inputLabelRef.current ||
       !inputValueRef ||
       !inputValueRef.current ||
       inputLabelType !== "inset"
@@ -377,7 +381,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             readOnly={readOnly}
             onChange={(event) => {
               const inputValue = event.target.value;
-              const inputFile = event.target.files[0] || null;
+              const inputFileList = event.target.files || null;
 
               if (!inputValue) {
                 setAnswered(false);
@@ -387,8 +391,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               setAnswered(true);
               setFile(inputValue);
 
-              if (inputFile) {
-                onChangeInput(id, inputFile);
+              if (inputFileList) {
+                onChangeInput(id, inputFileList[0]);
               }
             }}
             onClick={(event) => handleInputOnClick(event)}

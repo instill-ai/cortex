@@ -1,3 +1,5 @@
+import { Nullable } from "../types/general";
+
 export type ElemeentPosition = {
   x: number;
   y: number;
@@ -38,12 +40,22 @@ export const getTailwindClassNumber = (className: string): number => {
   if (/\[.*\]/g.test(className)) {
     const matchString = className.match(/\[([^\][]*)]/g);
 
+    if (!matchString || !matchString[0]) {
+      throw new Error(`Wrong tailwind classname syntax - ${className}`);
+    }
+
+    const target = matchString[0].match(/\d+/g);
+
+    if (!target || !target[0]) {
+      throw new Error(`Wrong tailwind classname syntax - ${className}`);
+    }
+
     if (className.includes("px")) {
-      return parseInt(matchString[0].match(/\d+/g)[0]);
+      return parseInt(target[0]);
     }
 
     if (className.includes("rem")) {
-      return parseInt(matchString[0].match(/\d+/g)[0]) * 4;
+      return parseInt(target[0]) * 4;
     }
 
     throw new Error(
@@ -57,7 +69,13 @@ export const getTailwindClassNumber = (className: string): number => {
     );
   }
 
-  return parseInt(className.match(/\d+/g)[0]) * 4;
+  const matchIntString = className.match(/\d+/g);
+
+  if (!matchIntString || !matchIntString[0]) {
+    throw new Error(`Wrong tailwind classname syntax - ${className}`);
+  }
+
+  return parseInt(matchIntString[0]) * 4;
 };
 
 function hasNumber(s: string) {
