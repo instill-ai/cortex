@@ -15,7 +15,8 @@
     "declaration": true,
     "sourceMap": true,
     "outDir": "build",
-    "emitDeclarationOnly": true // Don't generate js file, we use rollup to do that
+    "emitDeclarationOnly": true, // Don't generate js file, we use rollup to do that
+    "strict": true
   },
   "include": ["**/*.ts", "**/*.tsx"]
 }
