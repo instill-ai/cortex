@@ -1,4 +1,4 @@
-import React, { MouseEvent } from "react";
+import React, { MouseEvent, useState } from "react";
 import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
@@ -231,11 +231,18 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
 
     if (answered) {
       event.preventDefault();
-      setFile(null);
+      setFile("");
+      setFileInputKey(Math.random().toString(36));
       setAnswered(false);
       onChangeInput(id, null);
     }
   };
+
+  const [fileInputKey, setFileInputKey] = useState<string>("");
+
+  React.useEffect(() => {
+    setFileInputKey(Math.random().toString(36));
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -369,6 +376,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             ) : null}
           </div>
           <input
+            key={fileInputKey}
             className={cn(
               "opacity-0 overflow-hidden absolute",
               inputHeight,
@@ -382,6 +390,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             onChange={(event) => {
               const inputValue = event.target.value;
               const inputFileList = event.target.files || null;
+
+              console.log(event);
 
               if (!inputValue) {
                 setAnswered(false);
