@@ -135,6 +135,8 @@ import SemanticSegmentationIcon from "./SemanticSegmentationIcon";
 import type { SemanticSegmentationIconProps } from "./SemanticSegmentationIcon";
 import OpticalCharacterRecognitionIcon from "./OpticalCharacterRecognitionIcon";
 import type { OpticalCharacterRecognitionIconProps } from "./OpticalCharacterRecognitionIcon";
+import ArtiVcIcon from "./ArtiVcIcon";
+import type { ArtiVcIconProps } from "./ArtiVcIcon";
 
 export type {
   EyeOnIconProps,
@@ -203,6 +205,7 @@ export type {
   OpticalCharacterRecognitionIconProps,
   CollapseLeftIconProps,
   CollapseRightIconProps,
+  ArtiVcIconProps,
 };
 
 export {
@@ -272,4 +275,5 @@ export {
   OpticalCharacterRecognitionIcon,
   CollapseLeftIcon,
   CollapseRightIcon,
+  ArtiVcIcon,
 };
