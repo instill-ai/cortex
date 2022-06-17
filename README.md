@@ -20,6 +20,25 @@ module.exports = {
 };
 ```
 
+# How to contribute
+
+### Install typescript intelligence
+
+- We heavily rely on typescript at this moment, before you make any contribution please install typescript intelligence.
+
+### You should write component unit-test for every base-level component
+
+- We haven't embodied this approach
+
+### You should check the export structure.
+
+- We want to abstrct away the file structure, so every component should be exported to its outer folder. 
+  - If it is components, you should check whether it had already been exported to `@instill-ai/design-system/components` before you move on to the next step
+
+### Build before publish
+
+- You should use `yarn build` script to build the latest version of design-system and change the version of it, then you could publish the package. In the future, after the official 0.1.0 release we will adapt ci for this task.
+
 # Why we choose the utility class approach.
 
 - The utility class is easy to write, it can deliver an application at a relatively quick pace.
