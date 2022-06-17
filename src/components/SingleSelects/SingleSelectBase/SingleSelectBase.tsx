@@ -348,6 +348,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
         <div ref={inputRef}>
           <ReactSelect
             id={id}
+            value={value}
             ref={selectRef}
             instanceId={instanceId}
             openMenuOnFocus={true}
