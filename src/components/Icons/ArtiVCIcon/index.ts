@@ -1,2 +1,2 @@
-export { default } from "./ArtiVCIcon";
-export * from "./ArtiVCIcon";
+export { default } from "./ArtiVcIcon";
+export * from "./ArtiVcIcon";

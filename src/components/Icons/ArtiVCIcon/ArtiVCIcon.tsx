@@ -1,9 +1,9 @@
 import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type ArtiVCIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
+export type ArtiVcIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
-const ArtiVCIcon: React.FC<ArtiVCIconProps> = (props) => {
+const ArtiVcIcon: React.FC<ArtiVcIconProps> = (props) => {
   return (
     <IconBase
       viewBox="0 0 30 30"
@@ -12,10 +12,7 @@ const ArtiVCIcon: React.FC<ArtiVCIconProps> = (props) => {
       color={props.color}
       position={props.position}
     >
-      <path
-        d="M8.3736 12.1562H1V18.5825H8.3736V12.1562Z"
-        fill="#25A476"
-      />
+      <path d="M8.3736 12.1562H1V18.5825H8.3736V12.1562Z" fill="#25A476" />
       <path
         d="M4.68778 14.2847C6.72394 14.2847 8.37458 13.3255 8.37458 12.1423C8.37458 10.9592 6.72394 10 4.68778 10C2.65161 10 1.00098 10.9592 1.00098 12.1423C1.00098 13.3255 2.65161 14.2847 4.68778 14.2847Z"
         fill="#25A476"
@@ -52,4 +49,4 @@ const ArtiVCIcon: React.FC<ArtiVCIconProps> = (props) => {
   );
 };
 
-export default ArtiVCIcon;
+export default ArtiVcIcon;

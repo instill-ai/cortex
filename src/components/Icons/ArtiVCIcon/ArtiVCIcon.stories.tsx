@@ -1,16 +1,16 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import ArtiVCIcon from "./ArtiVCIcon";
+import ArtiVcIcon from "./ArtiVcIcon";
 
 export default {
-  title: "Components/Ui/Icon/ArtiVCIcon",
-  component: ArtiVCIcon,
-} as ComponentMeta<typeof ArtiVCIcon>;
+  title: "Components/Ui/Icon/ArtiVcIcon",
+  component: ArtiVcIcon,
+} as ComponentMeta<typeof ArtiVcIcon>;
 
-const Template: ComponentStory<typeof ArtiVCIcon> = (args) => (
-  <ArtiVCIcon {...args} />
+const Template: ComponentStory<typeof ArtiVcIcon> = (args) => (
+  <ArtiVcIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ArtiVCIcon> = Template.bind({});
+export const Playground: ComponentStory<typeof ArtiVcIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
