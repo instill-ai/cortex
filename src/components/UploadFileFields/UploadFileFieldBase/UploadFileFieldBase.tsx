@@ -275,6 +275,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
         />
         <label
           ref={mainContainerRef}
+          htmlFor={id}
           style={{ height: containerHeight ? `${containerHeight}px` : "" }}
           className={cn(
             "flex flex-row p-0 relative",
@@ -323,7 +324,6 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
                   "instill-input-no-highlight"
                 )
           )}
-          htmlFor={`file-inpue-${id}`}
         >
           <div
             className={cn(
@@ -383,15 +383,13 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               inputWidth
             )}
             aria-label={`${id}-label`}
-            id={`file-inpue-${id}`}
+            id={id}
             type="file"
             disabled={disabled}
             readOnly={readOnly}
             onChange={(event) => {
               const inputValue = event.target.value;
               const inputFileList = event.target.files || null;
-
-              console.log(event);
 
               if (!inputValue) {
                 setAnswered(false);
