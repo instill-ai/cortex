@@ -331,3 +331,22 @@ export interface BasicInputFieldAttributes {
 }
 
 export type Nullable<T> = T | null;
+
+export type State =
+  | PipelineState
+  | ConnectorState
+  | ModelState
+  | "STATE_LOADING";
+
+export type PipelineState =
+  | "STATE_UNSPECIFIED"
+  | "STATE_ACTIVE"
+  | "STATE_INACTIVE"
+  | "STATE_ERROR";
+
+export type ConnectorState =
+  | "STATE_CONNECTED"
+  | "STATE_DISCONNECTED"
+  | "STATE_ERROR";
+
+export type ModelState = "STATE_ONLINE" | "STATE_OFFLINE" | "STATE_ERROR";
