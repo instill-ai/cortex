@@ -1,6 +1,10 @@
 import React from "react";
 import cn from "clsx";
-import { BasicInputFieldAttributes } from "../../../types/general";
+import {
+  BasicInputFieldAttributes,
+  Nullable,
+  State,
+} from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
@@ -79,10 +83,32 @@ export type ToggleFieldBaseProps = Omit<
    */
 
   readOnlyCheckedInputBorderColor: string;
+
+  value: boolean;
+
+  /** TailwindCSS format - Toggle input border color when focus
+   * - e.g. border-black
+   */
+
+  inputFocusBorderColor: string;
+
+  /** TailwindCSS utility string - setup this custom style at instill plugin and use it
+   * - e.g. instill-input-shadow
+   * - When shadow string is not null, input field will show the shadow, if you want to display
+   *   shadow only when user focus on the input, please use inputFocusShadow
+   */
+  inputShadow: Nullable<string>;
+
+  /** TailwindCSS utility string - setup this custom style at instill plugin and use it
+   * - e.g. instill-input-focus-shadow
+   * - Show the shadow when user focus on input
+   */
+  inputFocusShadow: string;
 };
 
 const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   id,
+  value,
   label,
   description,
   defaultChecked,
@@ -96,6 +122,9 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   inputBorderStyle,
   inputBorderWidth,
   inputBgColor,
+  inputShadow,
+  inputFocusBorderColor,
+  inputFocusShadow,
   dotColor,
   checkedDotColor,
   checkedInputBorderColor,
@@ -136,13 +165,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
 }) => {
   const [answered, setAnswered] = React.useState(false);
   const [focus, setFocus] = React.useState(false);
-  const [checked, setChecked] = React.useState(false);
-
-  React.useEffect(() => {
-    if (defaultChecked) {
-      setChecked(true);
-    }
-  }, [defaultChecked]);
 
   return (
     <div className="flex flex-col">
@@ -178,13 +200,19 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
             className={cn(
               "peer appearance-none w-[90px] h-10",
               inputBorderRadius,
+              inputShadow,
+              disabled
+                ? "cursor-not-allowed"
+                : readOnly
+                ? "cursor-not-allowed"
+                : "cursor-pointer",
               disabled
                 ? cn(
                     disabledCursor,
                     disabledInputBgColor,
                     disabledInputBorderStyle,
                     disabledInputBorderWidth,
-                    checked
+                    value
                       ? disabledCheckedInputBorderColor
                       : disabledInputBorderColor
                   )
@@ -194,7 +222,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
                     readOnlyInputBgColor,
                     readOnlyInputBorderStyle,
                     readOnlyInputBorderWidth,
-                    checked
+                    value
                       ? readOnlyCheckedInputBorderColor
                       : readOnlyInputBorderColor
                   )
@@ -203,21 +231,17 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
                   ? cn(
                       inputBorderWidth,
                       inputBorderStyle,
-                      "outline-none ring-0 ring-white border-instillBlue50 instill-input-focus-shadow cursor-pointer"
+                      inputFocusBorderColor,
+                      inputFocusShadow
                     )
                   : cn(
                       inputBorderStyle,
-                      checked ? checkedInputBorderColor : inputBorderColor,
-                      inputBorderWidth,
-                      "cursor-pointer"
+                      value ? checkedInputBorderColor : inputBorderColor,
+                      inputBorderWidth
                     )
-                : cn(
-                    inputBorderColor,
-                    inputBorderStyle,
-                    inputBorderWidth,
-                    "cursor-pointer"
-                  )
+                : cn(inputBorderColor, inputBorderStyle, inputBorderWidth)
             )}
+            checked={value}
             type="checkbox"
             role="switch"
             disabled={disabled}
@@ -228,7 +252,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
               }
 
               onChangeInput(id, event.target.checked);
-              setChecked(event.target.checked);
 
               if (!answered) {
                 setAnswered(true);
@@ -254,16 +277,16 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
               "absolute left-[5px] top-[5px] w-[30px] h-[30px] origin-top-left transition peer-checked:translate-x-[50px]",
               disabled
                 ? cn(
-                    checked ? disabledCheckedDotColor : disabledDotColor,
+                    value ? disabledCheckedDotColor : disabledDotColor,
                     "cursor-not-allowed"
                   )
                 : readOnly
                 ? cn(
-                    checked ? readOnlyCheckedDotColor : readOnlyDotColor,
+                    value ? readOnlyCheckedDotColor : readOnlyDotColor,
                     "cursor-auto"
                   )
                 : cn(checkedDotColor, "cursor-pointer"),
-              checked ? checkedDotColor : dotColor,
+              value ? checkedDotColor : dotColor,
               inputBorderRadius
             )}
           />

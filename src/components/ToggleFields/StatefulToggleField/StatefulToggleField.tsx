@@ -1,7 +1,8 @@
 import React from "react";
+import { Nullable, State } from "../../../types/general";
 import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 
-export type BasicToggleFieldProps = Omit<
+export type StatefulToggleFieldProps = Omit<
   ToggleFieldBaseProps,
   | "focusHighlight"
   | "dotColor"
@@ -45,9 +46,14 @@ export type BasicToggleFieldProps = Omit<
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
->;
+  | "inputShadow"
+  | "inputFocusBorderColor"
+  | "inputFocusShadow"
+> & {
+  state: Nullable<State>;
+};
 
-const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
+const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
       id={props.id}
@@ -64,12 +70,22 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       checkedDotColor="bg-instillBlue50"
       inputBgColor="bg-white"
       inputBorderRadius=""
-      inputBorderColor="border-instillGrey20"
+      inputBorderColor={
+        props.state === "STATE_LOADING"
+          ? "border-lemonYellow50"
+          : "border-instillGrey20"
+      }
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
-      inputShadow={null}
-      inputFocusBorderColor="border-instillBlue50"
-      inputFocusShadow="instill-input-focus-shadow"
+      inputFocusBorderColor={
+        props.state === "STATE_LOADING" ? "" : "border-instillBlue50"
+      }
+      inputFocusShadow={
+        props.state === "STATE_LOADING" ? "" : "instill-input-focus-shadow"
+      }
+      inputShadow={
+        props.state === "STATE_LOADING" ? "instill-toggle-loading-shadow" : null
+      }
       checkedInputBorderColor="border-instillBlue50"
       disabled={props.disabled}
       disabledDotColor="bg-instillGrey20"
@@ -109,4 +125,4 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
   );
 };
 
-export default BasicToggleField;
+export default StatefulToggleField;
