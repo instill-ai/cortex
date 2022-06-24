@@ -64,6 +64,7 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
     <TextFieldBase
       id={props.id}
       value={props.value}
+      additionalMessageOnLabel={props.additionalMessageOnLabel}
       description={props.description}
       disabled={props.disabled}
       type={props.type}

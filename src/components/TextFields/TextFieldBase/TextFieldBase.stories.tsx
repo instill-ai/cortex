@@ -18,6 +18,7 @@ Playground.args = {
   error: null,
   id: "text-field-playground",
   description: "this is a description for text field base",
+  additionalMessageOnLabel: null,
   disabled: false,
   placeholder: "hello",
   readOnly: false,

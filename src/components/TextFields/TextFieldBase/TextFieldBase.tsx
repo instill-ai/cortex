@@ -29,6 +29,7 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   onChangeInput,
   id,
+  additionalMessageOnLabel,
   required,
   value,
   error,
@@ -233,6 +234,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         <InputLabelBase
           ref={inputLabelRef}
           error={error}
+          message={additionalMessageOnLabel}
           answered={answered}
           focus={focus}
           setFocus={setFocus}
