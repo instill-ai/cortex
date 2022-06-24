@@ -58,6 +58,11 @@ const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
     <ToggleFieldBase
       id={props.id}
       value={props.value}
+      additionalMessageOnLabel={
+        props.state === "STATE_LOADING"
+          ? "Loading..."
+          : props.additionalMessageOnLabel
+      }
       description={props.description}
       error={props.error}
       readOnly={props.readOnly}
