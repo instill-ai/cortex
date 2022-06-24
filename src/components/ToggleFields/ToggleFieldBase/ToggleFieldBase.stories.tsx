@@ -32,6 +32,7 @@ Playground.args = {
   description: "this is a description for toggle field base",
 
   label: "toggle-field-base-playground",
+  additionalMessageOnLabel: null,
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey50",

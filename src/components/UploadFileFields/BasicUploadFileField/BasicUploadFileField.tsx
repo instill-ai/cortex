@@ -65,13 +65,14 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
     <UploadFileFieldBase
       error={props.error}
       id={props.id}
+      label={props.label}
+      additionalMessageOnLabel={props.additionalMessageOnLabel}
       description={props.description}
       disabled={props.disabled}
       readOnly={props.readOnly}
       onChangeInput={props.onChangeInput}
       required={props.required}
       placeholder={props.placeholder}
-      label={props.label}
       uploadButtonText={props.uploadButtonText}
       uploadButtonBgColor="bg-instillGrey50"
       uploadButtonTextColor="text-instillGrey05"

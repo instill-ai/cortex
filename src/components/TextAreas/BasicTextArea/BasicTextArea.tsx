@@ -69,6 +69,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       id={props.id}
       description={props.description}
       value={props.value}
+      additionalMessageOnLabel={props.additionalMessageOnLabel}
       enableCounter={props.enableCounter}
       counterWordLimit={props.counterWordLimit}
       disabled={props.disabled}

@@ -28,4 +28,5 @@ Playground.args = {
   required: false,
   type: "inset",
   label: "Playground label",
+  message: null,
 };

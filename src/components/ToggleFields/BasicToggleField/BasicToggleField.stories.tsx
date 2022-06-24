@@ -23,4 +23,5 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: true,
+  additionalMessageOnLabel: null,
 };

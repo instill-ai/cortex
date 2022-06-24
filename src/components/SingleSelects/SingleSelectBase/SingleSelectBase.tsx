@@ -107,6 +107,7 @@ export type SingleSelectBaseProps = Omit<
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
   value,
   options,
+  additionalMessageOnLabel,
   inputLabelType,
   label,
   required,
@@ -324,6 +325,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
         <InputLabelBase
           ref={inputLabelRef}
           label={label}
+          message={additionalMessageOnLabel}
           labelWidth={inputLabelWidth}
           answered={answered}
           focus={focus}

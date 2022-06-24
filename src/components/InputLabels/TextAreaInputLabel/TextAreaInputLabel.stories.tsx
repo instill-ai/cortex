@@ -27,4 +27,5 @@ export const Playground: ComponentStory<typeof TextAreaInputLabel> =
 Playground.args = {
   type: "inset",
   label: "text area lable",
+  message: null,
 };

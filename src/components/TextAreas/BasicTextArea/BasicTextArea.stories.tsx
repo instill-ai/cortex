@@ -20,6 +20,7 @@ export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(
 
 Playground.args = {
   label: "Playground",
+  additionalMessageOnLabel: null,
   description: "this is a description for basic textarea",
   error: null,
   value: null,

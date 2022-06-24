@@ -69,6 +69,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   id,
   label,
   error,
+  additionalMessageOnLabel,
   inputLabelType,
   description,
   required,
@@ -253,6 +254,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
       >
         <InputLabelBase
           ref={inputLabelRef}
+          message={additionalMessageOnLabel}
           answered={answered}
           required={required}
           htmlFor={id}

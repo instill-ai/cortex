@@ -53,6 +53,7 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       id={props.id}
       value={props.value}
       description={props.description}
+      additionalMessageOnLabel={props.additionalMessageOnLabel}
       error={props.error}
       readOnly={props.readOnly}
       onChangeInput={props.onChangeInput}

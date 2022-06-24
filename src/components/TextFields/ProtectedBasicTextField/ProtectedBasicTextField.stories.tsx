@@ -23,4 +23,5 @@ Playground.args = {
   disabled: false,
   placeholder: "hello!",
   readOnly: false,
+  additionalMessageOnLabel: null,
 };

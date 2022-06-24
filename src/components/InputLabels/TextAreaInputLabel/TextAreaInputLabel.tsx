@@ -22,6 +22,7 @@ const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
     <InputLabelBase
       label={props.label}
       error={props.error}
+      message={props.message}
       labelWidth={props.labelWidth}
       focus={props.focus}
       required={props.required}

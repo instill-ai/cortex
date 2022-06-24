@@ -28,4 +28,5 @@ export const Playground: ComponentStory<typeof BasicInputLabel> = Template.bind(
 Playground.args = {
   label: "basic input label",
   type: "normal",
+  message: null,
 };

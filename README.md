@@ -32,7 +32,7 @@ module.exports = {
 
 ### You should check the export structure.
 
-- We want to abstrct away the file structure, so every component should be exported to its outer folder. 
+- We want to abstrct away the file structure, so every component should be exported to its outer folder.
   - If it is components, you should check whether it had already been exported to `@instill-ai/design-system/components` before you move on to the next step
 
 ### Build before publish
@@ -203,6 +203,7 @@ const square = ({ width }) => {
 - Don't use some ambiguous story like playground and default, they almost have identical style props, but Default is a fixed style.
   - Only have playground story, make default style available and users can modify as their wishes
   - Caveat: playground is using `Template.bind()` to construct story, its console.log is different from regular console.log
+- You may want to remove the whole args props in storybook to make the type check cleaner, but in this way user can't directly change the props' value on storybook UI
 
 ## Todo
 

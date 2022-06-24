@@ -7,6 +7,13 @@ export interface BasicInputFieldAttributes {
   /** Whether the input has error or not */
   error: Nullable<string>;
 
+  /**
+   * The additional message will display on the label
+   * - e.g. {label} - {message}
+   */
+
+  additionalMessageOnLabel: Nullable<string>;
+
   /** TailwindCSS format - Background color when input has error
    * - e.g. bg-white
    * - https://tailwindcss.com/docs/background-color
