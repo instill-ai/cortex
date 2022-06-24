@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import ToggleFieldBase from "./ToggleFieldBase";
 
 export default {
@@ -6,9 +7,18 @@ export default {
   component: ToggleFieldBase,
 } as ComponentMeta<typeof ToggleFieldBase>;
 
-const Template: ComponentStory<typeof ToggleFieldBase> = (args) => (
-  <ToggleFieldBase {...args} />
-);
+const Template: ComponentStory<typeof ToggleFieldBase> = (args) => {
+  const [checked, setChecked] = useState(false);
+  return (
+    <ToggleFieldBase
+      {...args}
+      value={checked}
+      onChangeInput={(_, value) => {
+        setChecked(value);
+      }}
+    />
+  );
+};
 export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
   {}
 );
@@ -35,6 +45,9 @@ Playground.args = {
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
+  inputFocusBorderColor: "border-instillBlue50",
+  inputFocusShadow: "instill-input-focus-shadow",
+  inputShadow: null,
 
   dotColor: "bg-instillGrey30",
   checkedInputBorderColor: "border-instillBlue50",
