@@ -95,6 +95,7 @@ Playground.args = {
   readOnly: false,
   required: false,
   isClearable: true,
+  additionalMessageOnLabel: null,
   description: "this is a description for auth complete with Icon",
   label: null,
   inputLabelType: "inset",

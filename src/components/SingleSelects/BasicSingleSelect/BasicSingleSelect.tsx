@@ -29,6 +29,7 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     <SingleSelectBase
       id={props.id}
       menuPlacement={props.menuPlacement}
+      additionalMessageOnLabel={props.additionalMessageOnLabel}
       instanceId={props.instanceId}
       error={props.error}
       label={props.label}

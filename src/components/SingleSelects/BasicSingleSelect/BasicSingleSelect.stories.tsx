@@ -72,5 +72,6 @@ Playground.args = {
   required: false,
   description: "this is a description for auth complete with Icon",
   label: "autocomplete-with-icon",
+  additionalMessageOnLabel: null,
   id: "autocomplete-with-icon",
 };
