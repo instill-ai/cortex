@@ -51,6 +51,7 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
       id={props.id}
+      value={props.value}
       description={props.description}
       error={props.error}
       readOnly={props.readOnly}
@@ -66,6 +67,9 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       inputBorderColor="border-instillGrey20"
       inputBorderStyle="border-solid"
       inputBorderWidth="border"
+      inputShadow={null}
+      inputFocusBorderColor="border-instillBlue50"
+      inputFocusShadow="instill-input-focus-shadow"
       checkedInputBorderColor="border-instillBlue50"
       disabled={props.disabled}
       disabledDotColor="bg-instillGrey20"
