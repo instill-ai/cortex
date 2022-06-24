@@ -53,6 +53,7 @@ export const DemoFileReader: ComponentStory<
     >
       <BasicUploadFileField
         error={null}
+        additionalMessageOnLabel={null}
         description="this is a description about upload file field"
         disabled={false}
         readOnly={false}

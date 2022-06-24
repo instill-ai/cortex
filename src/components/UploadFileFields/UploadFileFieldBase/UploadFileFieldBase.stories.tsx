@@ -21,7 +21,8 @@ Playground.args = {
   inputLabelType: "inset",
   placeholder: "playground",
 
-  label: null,
+  label: "playground",
+  additionalMessageOnLabel: null,
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey50",
