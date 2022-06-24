@@ -22,6 +22,7 @@ const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
     <InputLabelBase
       focus={props.focus}
       error={props.error}
+      message={props.message}
       labelWidth={props.labelWidth}
       required={props.required}
       answered={props.answered}
