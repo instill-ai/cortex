@@ -15,6 +15,11 @@ export interface InputLabelBaseProps {
   error: Nullable<string>;
 
   /**
+   * Input's additional message
+   */
+  message: Nullable<string>;
+
+  /**
    * Input label's text
    */
   label: Nullable<string>;
@@ -121,6 +126,7 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       setFocus,
       type,
       error,
+      message,
       errorLabelFontFamily,
       errorLabelFontSize,
       errorLabelFontWeight,
@@ -194,9 +200,9 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
                 type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",
             }}
           >
-            <p>{`${label} ${required ? "*" : ""} ${error ? "-" : ""} ${
-              error ? error : ""
-            }`}</p>
+            <p>{`${label} ${required ? "*" : ""} ${
+              error ? "-" : message ? "-" : ""
+            } ${error ? error : message ? message : ""}`}</p>
           </label>
         ) : (
           ""
