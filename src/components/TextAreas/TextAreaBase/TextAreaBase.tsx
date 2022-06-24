@@ -59,6 +59,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   value,
   onChangeInput,
   required,
+  additionalMessageOnLabel,
   description,
   error,
   label,
@@ -290,6 +291,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         <InputLabelBase
           ref={inputLabelRef}
           label={label}
+          message={additionalMessageOnLabel}
           labelWidth={inputLabelWidth}
           error={error}
           answered={answered}
