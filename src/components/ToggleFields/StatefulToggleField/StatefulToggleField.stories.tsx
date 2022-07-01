@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { State } from "../../../types/general";
 import StatefulToggleField from "./StatefulToggleField";
 
@@ -38,7 +38,6 @@ export const Playground: ComponentStory<typeof StatefulToggleField> =
   Template.bind({});
 
 Playground.args = {
-  defaultChecked: false,
   disabled: false,
   readOnly: false,
   required: true,
