@@ -62,7 +62,6 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       onChangeInput={props.onChangeInput}
       required={props.required}
       label={props.label}
-      defaultChecked={props.defaultChecked}
       focusHighlight={true}
       dotColor="bg-instillGrey30"
       checkedDotColor="bg-instillBlue50"

@@ -24,7 +24,6 @@ export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
 );
 
 Playground.args = {
-  defaultChecked: false,
   required: true,
   focusHighlight: true,
   onChangeInput: () => undefined,

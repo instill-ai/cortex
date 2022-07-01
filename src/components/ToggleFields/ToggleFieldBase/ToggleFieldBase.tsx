@@ -33,9 +33,6 @@ export type ToggleFieldBaseProps = Omit<
   | "errorInputBorderWidth"
   | "errorInputTextColor"
 > & {
-  /** The initial checked state of this toggle field */
-  defaultChecked: boolean;
-
   /** TailwindCSS format - Toggle center's dot color
    * - Please use background-color, e.g. bg-blqck
    */
@@ -112,7 +109,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   label,
   additionalMessageOnLabel,
   description,
-  defaultChecked,
   disabled,
   readOnly,
   focusHighlight,
@@ -272,7 +268,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
             onBlur={() => {
               setFocus(false);
             }}
-            defaultChecked={defaultChecked}
           />
           <div
             className={cn(

@@ -19,7 +19,6 @@ export const Playground: ComponentStory<typeof BasicToggleField> =
   Template.bind({});
 
 Playground.args = {
-  defaultChecked: false,
   disabled: false,
   readOnly: false,
   required: true,
