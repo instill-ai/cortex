@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  basicInputDescriptionConfig,
+  BasicInputDescriptionOmitProps,
+} from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
 export type BasicTextFieldProps = Omit<
@@ -42,11 +46,6 @@ export type BasicTextFieldProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
-  | "descriptionFontFamily"
-  | "descriptionFontSize"
-  | "descriptionLineHeight"
-  | "descriptionFontWeight"
-  | "descriptionTextColor"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -57,6 +56,7 @@ export type BasicTextFieldProps = Omit<
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
   | "errorInputTextColor"
+  | BasicInputDescriptionOmitProps
 >;
 
 const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
@@ -114,11 +114,6 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
       errorInputBgColor="bg-white"
       errorLabelFontFamily="font-sans"
       errorLabelFontSize="text-sm"
@@ -129,6 +124,7 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
       errorInputBorderWidth="border"
       errorInputBorderStyle="border-solid"
       errorInputTextColor="text-instillRed"
+      {...basicInputDescriptionConfig}
     />
   );
 };

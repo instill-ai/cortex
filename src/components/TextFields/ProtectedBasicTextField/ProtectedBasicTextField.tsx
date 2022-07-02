@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  basicInputDescriptionConfig,
+  BasicInputDescriptionOmitProps,
+} from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
 export type ProtectedBasicTextFieldProps = Omit<
@@ -43,11 +47,6 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
-  | "descriptionFontFamily"
-  | "descriptionFontSize"
-  | "descriptionLineHeight"
-  | "descriptionFontWeight"
-  | "descriptionTextColor"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -58,6 +57,8 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
   | "errorInputTextColor"
+  | "autoComplete"
+  | BasicInputDescriptionOmitProps
 >;
 
 const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
@@ -74,7 +75,7 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       onChangeInput={props.onChangeInput}
       error={props.error}
       label={props.label}
-      autoComplete={props.autoComplete}
+      autoComplete="off"
       placeholder={props.placeholder}
       readOnly={props.readOnly}
       focusHighlight={true}
@@ -117,11 +118,6 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
       errorInputBgColor="bg-white"
       errorLabelFontFamily="font-sans"
       errorLabelFontSize="text-sm"
@@ -132,6 +128,7 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       errorInputBorderWidth="border"
       errorInputBorderStyle="border-solid"
       errorInputTextColor="text-instillRed"
+      {...basicInputDescriptionConfig}
     />
   );
 };
