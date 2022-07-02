@@ -14,7 +14,7 @@ const allowedAttributes = {
   a: [...sanitizeHtml.defaults.allowedAttributes["a"], "rel"],
 };
 
-export type TextWithHtmlBaseProps = {
+export type TextWithHtmlProps = {
   text: string;
   fontFamily: string;
   fontSize: string;
@@ -23,7 +23,7 @@ export type TextWithHtmlBaseProps = {
   textColor: string;
 };
 
-const TextWithHtmlBase: FC<TextWithHtmlBaseProps> = ({
+const TextWithHtml: FC<TextWithHtmlProps> = ({
   text,
   fontFamily,
   fontSize,
@@ -51,4 +51,4 @@ const TextWithHtmlBase: FC<TextWithHtmlBaseProps> = ({
   );
 };
 
-export default TextWithHtmlBase;
+export default TextWithHtml;
