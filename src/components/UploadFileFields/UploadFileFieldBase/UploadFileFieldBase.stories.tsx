@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import UploadFileFieldBase from "./UploadFileFieldBase";
 
 export default {
@@ -58,11 +59,7 @@ Playground.args = {
   readOnlyInputTextColor: "text-instillGrey50",
 
   description: "this is a description about upload file field",
-  descriptionFontFamily: "font-mono",
-  descriptionFontSize: "text-xs",
-  descriptionLineHeight: "leading-[15.6px]",
-  descriptionFontWeight: "font-normal",
-  descriptionTextColor: "text-instillGrey50",
+  ...basicInputDescriptionConfig,
 
   inputWidth: "w-full",
   inputHeight: "h-[70px]",
