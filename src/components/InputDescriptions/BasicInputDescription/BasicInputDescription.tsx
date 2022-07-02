@@ -5,6 +5,10 @@ import InputDescriptionBase, {
 
 export type BasicInputDescriptionProps = Omit<
   InputDescriptionBaseProps,
+  BasicInputDescriptionOmitProps
+>;
+
+export type BasicInputDescriptionOmitProps =
   | "descriptionFontFamily"
   | "descriptionFontSize"
   | "descriptionLineHeight"
@@ -12,8 +16,7 @@ export type BasicInputDescriptionProps = Omit<
   | "descriptionTextColor"
   | "descriptionLinkTextColor"
   | "descriptionLinkTextDecoration"
-  | "descriptionWidth"
->;
+  | "descriptionWidth";
 
 export const basicInputDescriptionConfig: Omit<
   InputDescriptionBaseProps,
