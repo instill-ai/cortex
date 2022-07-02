@@ -73,7 +73,7 @@ export interface BasicInputFieldAttributes {
   label: Nullable<string>;
 
   /** Field's description */
-  description: ReactNode;
+  description: string;
 
   /** TailwindCSS format - Background color of input
    * - e.g. bg-white
