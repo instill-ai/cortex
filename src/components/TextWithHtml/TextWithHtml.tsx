@@ -21,6 +21,7 @@ export type TextWithHtmlProps = {
   fontWeight: string;
   lineHeight: string;
   textColor: string;
+  width: string;
 };
 
 const TextWithHtml: FC<TextWithHtmlProps> = ({
@@ -30,6 +31,7 @@ const TextWithHtml: FC<TextWithHtmlProps> = ({
   fontWeight,
   lineHeight,
   textColor,
+  width,
 }) => {
   if (!text) return null;
 
@@ -45,7 +47,14 @@ const TextWithHtml: FC<TextWithHtmlProps> = ({
 
   return (
     <span
-      className={cn(fontFamily, fontSize, fontWeight, lineHeight, textColor)}
+      className={cn(
+        width,
+        fontFamily,
+        fontSize,
+        fontWeight,
+        lineHeight,
+        textColor
+      )}
       dangerouslySetInnerHTML={{ __html: sanitizedHtmlText }}
     />
   );
