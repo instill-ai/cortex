@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import sanitizeHtml from "sanitize-html";
 import cn from "clsx";
 
@@ -30,7 +30,7 @@ export type TextWithHtmlProps = {
   linkTextDecoration: string;
 };
 
-const TextWithHtml: FC<TextWithHtmlProps> = ({
+const TextWithHtml: React.FC<TextWithHtmlProps> = ({
   text,
   fontFamily,
   fontSize,
