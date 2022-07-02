@@ -148,11 +148,14 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionWidth,
   descriptionFontFamily,
   descriptionFontSize,
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  descriptionLinkTextColor,
+  descriptionLinkTextDecoration,
   error,
   errorLabelFontFamily,
   errorLabelFontSize,
@@ -291,11 +294,14 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
       </div>
       <InputDescriptionBase
         description={description}
+        descriptionWidth={descriptionWidth}
         descriptionFontFamily={descriptionFontFamily}
         descriptionFontSize={descriptionFontSize}
         descriptionFontWeight={descriptionFontWeight}
         descriptionLineHeight={descriptionLineHeight}
         descriptionTextColor={descriptionTextColor}
+        descriptionLinkTextColor={descriptionLinkTextColor}
+        descriptionLinkTextDecoration={descriptionLinkTextDecoration}
       />
     </div>
   );
