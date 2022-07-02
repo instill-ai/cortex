@@ -1,5 +1,6 @@
 import { FC } from "react";
 import sanitizeHtml from "sanitize-html";
+import cn from "clsx";
 
 /**
  * This component will allow some default attribute plus "a" and "rel"
@@ -13,11 +14,23 @@ const allowedAttributes = {
   a: [...sanitizeHtml.defaults.allowedAttributes["a"], "rel"],
 };
 
-export type TextWithHtmlProps = {
+export type TextWithHtmlBaseProps = {
   text: string;
+  fontFamily: string;
+  fontSize: string;
+  fontWeight: string;
+  lineHeight: string;
+  textColor: string;
 };
 
-const TextWithHtml: FC<TextWithHtmlProps> = ({ text }) => {
+const TextWithHtmlBase: FC<TextWithHtmlBaseProps> = ({
+  text,
+  fontFamily,
+  fontSize,
+  fontWeight,
+  lineHeight,
+  textColor,
+}) => {
   if (!text) return null;
 
   const sanitizedHtmlText = sanitizeHtml(text, {
@@ -30,7 +43,12 @@ const TextWithHtml: FC<TextWithHtmlProps> = ({ text }) => {
     },
   });
 
-  return <span dangerouslySetInnerHTML={{ __html: sanitizedHtmlText }} />;
+  return (
+    <span
+      className={cn(fontFamily, fontSize, fontWeight, lineHeight, textColor)}
+      dangerouslySetInnerHTML={{ __html: sanitizedHtmlText }}
+    />
+  );
 };
 
-export default TextWithHtml;
+export default TextWithHtmlBase;
