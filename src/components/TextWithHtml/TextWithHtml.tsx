@@ -11,17 +11,23 @@ import cn from "clsx";
 
 const allowedAttributes = {
   ...sanitizeHtml.defaults.allowedAttributes,
-  a: [...sanitizeHtml.defaults.allowedAttributes["a"], "rel"],
+  a: [...sanitizeHtml.defaults.allowedAttributes["a"], "rel", "class"],
 };
 
 export type TextWithHtmlProps = {
   text: string;
+  width: string;
   fontFamily: string;
   fontSize: string;
   fontWeight: string;
   lineHeight: string;
   textColor: string;
-  width: string;
+  linkFontFamily: string;
+  linkFontSize: string;
+  linkFontWeight: string;
+  linkLineHeight: string;
+  linkTextColor: string;
+  linkTextDecoration: string;
 };
 
 const TextWithHtml: FC<TextWithHtmlProps> = ({
@@ -32,6 +38,12 @@ const TextWithHtml: FC<TextWithHtmlProps> = ({
   lineHeight,
   textColor,
   width,
+  linkFontFamily,
+  linkFontSize,
+  linkFontWeight,
+  linkLineHeight,
+  linkTextColor,
+  linkTextDecoration,
 }) => {
   if (!text) return null;
 
@@ -41,6 +53,14 @@ const TextWithHtml: FC<TextWithHtmlProps> = ({
       a: sanitizeHtml.simpleTransform("a", {
         target: "_blank",
         rel: "noopener noreferrer",
+        class: cn(
+          linkFontFamily,
+          linkFontSize,
+          linkFontWeight,
+          linkLineHeight,
+          linkTextColor,
+          linkTextDecoration
+        ),
       }),
     },
   });
