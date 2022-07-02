@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  basicInputDescriptionConfig,
+  BasicInputDescriptionOmitProps,
+} from "../../InputDescriptions";
 import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 
 export type BasicToggleFieldProps = Omit<
@@ -38,16 +42,12 @@ export type BasicToggleFieldProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
-  | "descriptionFontFamily"
-  | "descriptionFontSize"
-  | "descriptionLineHeight"
-  | "descriptionFontWeight"
-  | "descriptionTextColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
+  | BasicInputDescriptionOmitProps
 >;
 
 const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
@@ -98,16 +98,12 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
       errorLabelFontFamily="font-sans"
       errorLabelFontSize="text-sm"
       errorLabelFontWeight="font-normal"
       errorLabelLineHeight="leading-[18.2px]"
       errorLabelTextColor="text-instillRed"
+      {...basicInputDescriptionConfig}
     />
   );
 };

@@ -23,7 +23,8 @@ Playground.args = {
   label: "upload-file-field-base-playground",
   placeholder: "Upload a file",
   uploadButtonText: "Upload",
-  description: "this is a description about upload file field",
+  description:
+    "this is a description about upload file field  <a href='#'>setup guide</a>",
 };
 
 export const DemoFileReader: ComponentStory<
@@ -54,7 +55,7 @@ export const DemoFileReader: ComponentStory<
       <BasicUploadFileField
         error={null}
         additionalMessageOnLabel={null}
-        description="this is a description about upload file field"
+        description="this is a description about upload file field  <a href='#'>setup guide</a>"
         disabled={false}
         readOnly={false}
         onChangeInput={onChangeInput}

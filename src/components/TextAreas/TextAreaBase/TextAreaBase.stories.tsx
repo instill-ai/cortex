@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import TextAreaBase from "./TextAreaBase";
 
 export default {
@@ -67,11 +68,6 @@ Playground.args = {
   labelTextColor: "text-instillGrey50",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
-  descriptionFontFamily: "font-mono",
-  descriptionFontSize: "text-xs",
-  descriptionLineHeight: "leading-[15.6px]",
-  descriptionFontWeight: "font-normal",
-  descriptionTextColor: "text-instillGrey50",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-sm",
@@ -82,4 +78,5 @@ Playground.args = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
+  ...basicInputDescriptionConfig,
 };

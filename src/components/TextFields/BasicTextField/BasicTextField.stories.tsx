@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import BasicTextField from "./BasicTextField";
 
 export default {
@@ -6,24 +7,35 @@ export default {
   component: BasicTextField,
 } as ComponentMeta<typeof BasicTextField>;
 
-const Template: ComponentStory<typeof BasicTextField> = (args) => (
-  <BasicTextField {...args} />
-);
+const Template: ComponentStory<typeof BasicTextField> = (args) => {
+  const [value, setValue] = useState("");
+
+  const onChnageInput = (id: string, inputValue: string) => {
+    setValue(inputValue);
+  };
+
+  return (
+    <BasicTextField
+      {...args}
+      id="text-field-playground"
+      label="text-field-playground"
+      additionalMessageOnLabel={null}
+      description="this is a description for text field <a href='#'>setup guide</a>"
+      placeholder="hello!"
+      value={value}
+      onChangeInput={onChnageInput}
+      error={null}
+    />
+  );
+};
 
 export const Playground: ComponentStory<typeof BasicTextField> = Template.bind(
   {}
 );
 
 Playground.args = {
-  id: "basic-text-field-playground",
-  label: "basic-text-field-playground",
-  description: "this is a description for basic text field",
-  error: null,
   required: true,
-  autoComplete: "off",
-  type: "text",
   disabled: false,
-  placeholder: "hello!",
   readOnly: false,
-  additionalMessageOnLabel: null,
+  autoComplete: "off",
 };

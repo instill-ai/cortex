@@ -205,6 +205,10 @@ const square = ({ width }) => {
   - Caveat: playground is using `Template.bind()` to construct story, its console.log is different from regular console.log
 - You may want to remove the whole args props in storybook to make the type check cleaner, but in this way user can't directly change the props' value on storybook UI
 
+## About the design of the base and e exported level
+
+- We will always digest as many props at base level as possible, take SingleSelectBase as example, when use InputDescription component, we didn't use BasicInputDescription but InputDescriptionBase to make SingleSelectBase as flexible as possible, but here comes another problem, we need to store the same config for BasicInputDescription at BasicInputDescription and BasicSingleSelece. To solve this problem, we will export a set of BasicInputDescriptionConfig to let other component use the config and reduce the maintance overhead.
+
 ## Todo
 
 - Solve accessibility issues

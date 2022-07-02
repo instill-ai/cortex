@@ -88,11 +88,14 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionWidth,
   descriptionFontFamily,
   descriptionFontSize,
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  descriptionLinkTextColor,
+  descriptionLinkTextDecoration,
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -346,11 +349,14 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
       </div>
       <InputDescriptionBase
         description={description}
+        descriptionWidth={descriptionWidth}
         descriptionFontFamily={descriptionFontFamily}
         descriptionFontSize={descriptionFontSize}
         descriptionFontWeight={descriptionFontWeight}
         descriptionLineHeight={descriptionLineHeight}
         descriptionTextColor={descriptionTextColor}
+        descriptionLinkTextColor={descriptionLinkTextColor}
+        descriptionLinkTextDecoration={descriptionLinkTextDecoration}
       />
     </div>
   );

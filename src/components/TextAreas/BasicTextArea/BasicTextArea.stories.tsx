@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import BasicTextArea from "./BasicTextArea";
 
 export default {
@@ -7,11 +8,28 @@ export default {
 } as ComponentMeta<typeof BasicTextArea>;
 
 const Template: ComponentStory<typeof BasicTextArea> = (args) => {
+  const [value, setValue] = useState("");
+
   const onChnageInput = (id: string, inputValue: string) => {
-    console.log(id, inputValue);
+    setValue(inputValue);
   };
 
-  return <BasicTextArea {...args} onChangeInput={onChnageInput} />;
+  return (
+    <BasicTextArea
+      {...args}
+      id="text-field-playground"
+      label="Playground"
+      additionalMessageOnLabel={null}
+      placeholder="hello"
+      description="this is a description for basic textarea <a href='#'>setup guide</a>"
+      autoComplete="off"
+      onChangeInput={onChnageInput}
+      enableCounter={false}
+      counterWordLimit={0}
+      value={value}
+      error={null}
+    />
+  );
 };
 
 export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(
@@ -19,15 +37,7 @@ export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(
 );
 
 Playground.args = {
-  label: "Playground",
-  additionalMessageOnLabel: null,
-  description: "this is a description for basic textarea",
-  error: null,
-  value: null,
-  id: "text-field-playground",
   required: true,
-  autoComplete: "off",
   disabled: false,
-  placeholder: "hello",
   readOnly: false,
 };

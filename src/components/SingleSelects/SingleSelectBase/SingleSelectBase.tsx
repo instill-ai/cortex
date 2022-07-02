@@ -1,15 +1,12 @@
-import ReactSelect, {
-  ClearIndicatorProps,
-  OnChangeValue,
-  StylesConfig,
-} from "react-select";
+import ReactSelect, { StylesConfig } from "react-select";
 import React from "react";
+import cn from "clsx";
+
 import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition } from "../../../utils";
-import cn from "clsx";
 
 export type SingleSelectOption = {
   label: string;
@@ -126,11 +123,14 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   labelTextColor,
   labelActivateStyle,
   labelDeActivateStyle,
+  descriptionWidth,
   descriptionFontFamily,
   descriptionFontSize,
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  descriptionLinkTextColor,
+  descriptionLinkTextDecoration,
   errorLabelFontFamily,
   errorLabelFontSize,
   errorLabelFontWeight,
@@ -423,11 +423,14 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
       </div>
       <InputDescriptionBase
         description={description}
+        descriptionWidth={descriptionWidth}
         descriptionFontFamily={descriptionFontFamily}
         descriptionFontSize={descriptionFontSize}
         descriptionFontWeight={descriptionFontWeight}
         descriptionLineHeight={descriptionLineHeight}
         descriptionTextColor={descriptionTextColor}
+        descriptionLinkTextColor={descriptionLinkTextColor}
+        descriptionLinkTextDecoration={descriptionLinkTextDecoration}
       />
     </div>
   );

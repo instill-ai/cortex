@@ -1,5 +1,9 @@
 import React from "react";
 import { Nullable, State } from "../../../types/general";
+import {
+  basicInputDescriptionConfig,
+  BasicInputDescriptionOmitProps,
+} from "../../InputDescriptions";
 import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 
 export type StatefulToggleFieldProps = Omit<
@@ -39,11 +43,6 @@ export type StatefulToggleFieldProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
-  | "descriptionFontFamily"
-  | "descriptionFontSize"
-  | "descriptionLineHeight"
-  | "descriptionFontWeight"
-  | "descriptionTextColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
@@ -52,6 +51,7 @@ export type StatefulToggleFieldProps = Omit<
   | "inputShadow"
   | "inputFocusBorderColor"
   | "inputFocusShadow"
+  | BasicInputDescriptionOmitProps
 > & {
   state: Nullable<State>;
 };
@@ -118,16 +118,12 @@ const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
       errorLabelFontFamily="font-sans"
       errorLabelFontSize="text-sm"
       errorLabelFontWeight="font-normal"
       errorLabelLineHeight="leading-[18.2px]"
       errorLabelTextColor="text-instillRed"
+      {...basicInputDescriptionConfig}
     />
   );
 };

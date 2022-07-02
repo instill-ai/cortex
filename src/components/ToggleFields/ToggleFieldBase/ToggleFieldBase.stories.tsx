@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
+import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import ToggleFieldBase from "./ToggleFieldBase";
 
 export default {
@@ -73,16 +74,12 @@ Playground.args = {
   readOnlyCheckedDotColor: "bg-[#8DF5FF]",
   readOnlyDotColor: "bg-instillGrey20",
 
-  descriptionFontFamily: "font-mono",
-  descriptionFontSize: "text-xs",
-  descriptionLineHeight: "leading-[15.6px]",
-  descriptionFontWeight: "font-normal",
-  descriptionTextColor: "text-instillGrey50",
-
   error: "",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-sm",
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
+
+  ...basicInputDescriptionConfig,
 };

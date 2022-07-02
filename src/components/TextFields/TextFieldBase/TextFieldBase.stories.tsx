@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import TextFieldBase from "./TextFieldBase";
 
 export default {
@@ -64,11 +65,6 @@ Playground.args = {
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
-  descriptionFontFamily: "font-mono",
-  descriptionFontSize: "text-xs",
-  descriptionLineHeight: "leading-[15.6px]",
-  descriptionFontWeight: "font-normal",
-  descriptionTextColor: "text-instillGrey50",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-sm",
@@ -79,4 +75,5 @@ Playground.args = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
+  ...basicInputDescriptionConfig,
 };

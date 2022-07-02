@@ -20,4 +20,7 @@ Playground.args = {
   descriptionLineHeight: "leading-[15.6px]",
   descriptionFontWeight: "font-normal",
   descriptionTextColor: "text-instillGrey50",
+  descriptionWidth: "w-full",
+  descriptionLinkTextColor: "text-instillBlue50",
+  descriptionLinkTextDecoration: "underline",
 };

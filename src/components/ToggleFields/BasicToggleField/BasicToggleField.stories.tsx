@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import BasicToggleField from "./BasicToggleField";
 
 export default {
@@ -6,15 +7,24 @@ export default {
   component: BasicToggleField,
 } as ComponentMeta<typeof BasicToggleField>;
 
-const Template: ComponentStory<typeof BasicToggleField> = (args) => (
-  <BasicToggleField
-    {...args}
-    id="basic-toggle-field"
-    onChangeInput={() => undefined}
-    description="this is a description for basic toggle field"
-    label="basic-toggle-field"
-  />
-);
+const Template: ComponentStory<typeof BasicToggleField> = (args) => {
+  const [checked, setChecked] = useState(false);
+
+  const onChangeInput = (_: string, value: boolean) => setChecked(value);
+
+  return (
+    <BasicToggleField
+      {...args}
+      id="basic-toggle-field"
+      onChangeInput={onChangeInput}
+      description="this is a description for basic toggle field <a href='#'>setup guide</a>"
+      label="basic-toggle-field"
+      additionalMessageOnLabel={null}
+      value={checked}
+      error={null}
+    />
+  );
+};
 export const Playground: ComponentStory<typeof BasicToggleField> =
   Template.bind({});
 
