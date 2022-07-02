@@ -7,12 +7,8 @@ export default {
 } as ComponentMeta<typeof BasicInputDescription>;
 
 const Template: ComponentStory<typeof BasicInputDescription> = (args) => (
-  <BasicInputDescription {...args} />
+  <BasicInputDescription description="this is description <a href='#'>setup guide</a>" />
 );
 
 export const Playground: ComponentStory<typeof BasicInputDescription> =
   Template.bind({});
-
-Playground.args = {
-  description: "this is description",
-};
