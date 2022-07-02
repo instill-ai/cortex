@@ -1,6 +1,9 @@
 import BasicInputDescription from "./BasicInputDescription";
 import { basicInputDescriptionConfig } from "./BasicInputDescription";
-import type { BasicInputDescriptionProps } from "./BasicInputDescription";
+import type {
+  BasicInputDescriptionProps,
+  BasicInputDescriptionOmitProps,
+} from "./BasicInputDescription";
 
 export { BasicInputDescription, basicInputDescriptionConfig };
-export type { BasicInputDescriptionProps };
+export type { BasicInputDescriptionProps, BasicInputDescriptionOmitProps };
