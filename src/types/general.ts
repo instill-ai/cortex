@@ -335,6 +335,24 @@ export interface BasicInputFieldAttributes {
    * - e.g. font-normal
    */
   descriptionFontWeight: string;
+
+  /**
+   * TailwindCSS format - Description can have html <a> tag, this imply the color of the <a>
+   * - e.g. text-blue
+   */
+  descriptionLinkTextColor: string;
+
+  /**
+   * TailwindCSS format - Description can have html <a> tag, this imply the text decoration of the <a>
+   * - e.g. underline
+   */
+  descriptionLinkTextDecoration: string;
+
+  /**
+   * TailwindCSS format - Description's width
+   * - e.g. w-full
+   */
+  descriptionWidth: string;
 }
 
 export type Nullable<T> = T | null;
