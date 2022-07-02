@@ -110,11 +110,14 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   labelFontWeight,
   labelLineHeight,
   labelTextColor,
+  descriptionWidth,
   descriptionFontFamily,
   descriptionFontSize,
   descriptionFontWeight,
   descriptionLineHeight,
   descriptionTextColor,
+  descriptionLinkTextColor,
+  descriptionLinkTextDecoration,
   errorInputBgColor,
   errorInputBorderColor,
   errorInputBorderStyle,
@@ -373,11 +376,14 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
       </div>
       <InputDescriptionBase
         description={description}
+        descriptionWidth={descriptionWidth}
         descriptionFontFamily={descriptionFontFamily}
         descriptionFontSize={descriptionFontSize}
         descriptionFontWeight={descriptionFontWeight}
         descriptionLineHeight={descriptionLineHeight}
         descriptionTextColor={descriptionTextColor}
+        descriptionLinkTextColor={descriptionLinkTextColor}
+        descriptionLinkTextDecoration={descriptionLinkTextDecoration}
       />
     </div>
   );

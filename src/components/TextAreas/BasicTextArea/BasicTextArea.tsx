@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  basicInputDescriptionConfig,
+  BasicInputDescriptionOmitProps,
+} from "../../InputDescriptions";
 import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
 
 export type BasicTextAreaProps = Omit<
@@ -46,11 +50,6 @@ export type BasicTextAreaProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
-  | "descriptionFontFamily"
-  | "descriptionFontSize"
-  | "descriptionLineHeight"
-  | "descriptionFontWeight"
-  | "descriptionTextColor"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -61,6 +60,7 @@ export type BasicTextAreaProps = Omit<
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
   | "errorInputTextColor"
+  | BasicInputDescriptionOmitProps
 >;
 
 const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
@@ -121,11 +121,6 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       labelTextColor="text-instillGrey50"
       labelLineHeight="leading-[18.2px]"
       labelFontFamily="font-sans"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
       errorInputBgColor="bg-white"
       errorLabelFontFamily="font-sans"
       errorLabelFontSize="text-sm"
@@ -136,6 +131,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       errorInputBorderWidth="border"
       errorInputBorderStyle="border-solid"
       errorInputTextColor="text-instillRed"
+      {...basicInputDescriptionConfig}
     />
   );
 };
