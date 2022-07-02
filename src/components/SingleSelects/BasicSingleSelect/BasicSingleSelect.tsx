@@ -1,4 +1,8 @@
 import React from "react";
+import {
+  basicInputDescriptionConfig,
+  BasicInputDescriptionOmitProps,
+} from "../../InputDescriptions";
 import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
 export type BasicSingleSelectProps = Omit<
@@ -11,17 +15,13 @@ export type BasicSingleSelectProps = Omit<
   | "labelFontFamily"
   | "labelActivateStyle"
   | "labelDeActivateStyle"
-  | "descriptionFontFamily"
-  | "descriptionFontSize"
-  | "descriptionLineHeight"
-  | "descriptionFontWeight"
-  | "descriptionTextColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
   | "isClearable"
+  | BasicInputDescriptionOmitProps
 >;
 
 const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
@@ -49,16 +49,12 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
       labelFontFamily="font-sans"
       labelActivateStyle="top-1/2 -translate-y-[120%]"
       labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
       errorLabelFontFamily="font-sans"
       errorLabelFontSize="text-sm"
       errorLabelFontWeight="font-normal"
       errorLabelLineHeight="leading-[18.2px]"
       errorLabelTextColor="text-instillRed"
+      {...basicInputDescriptionConfig}
     />
   );
 };

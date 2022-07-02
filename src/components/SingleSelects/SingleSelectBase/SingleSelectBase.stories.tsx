@@ -3,6 +3,7 @@ import { useState } from "react";
 import SingleSelectBase from ".";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "./SingleSelectBase";
+import { basicInputDescriptionConfig } from "../../InputDescriptions";
 
 export default {
   title: "Components/Base/SingleSelectBase",
@@ -107,14 +108,10 @@ Playground.args = {
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
-  descriptionFontFamily: "font-mono",
-  descriptionFontSize: "text-xs",
-  descriptionLineHeight: "leading-[15.6px]",
-  descriptionFontWeight: "font-normal",
-  descriptionTextColor: "text-instillGrey50",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-sm",
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
+  ...basicInputDescriptionConfig,
 };

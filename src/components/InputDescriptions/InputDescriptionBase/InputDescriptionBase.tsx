@@ -1,5 +1,4 @@
 import React from "react";
-import cn from "clsx";
 import TextWithHtml from "../../TextWithHtml";
 
 export interface InputDescriptionBaseProps {
