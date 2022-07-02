@@ -30,3 +30,9 @@ export * from "./ToggleFields";
 
 // UploadFileFields
 export * from "./UploadFileFields";
+
+import TextWithHtml from "./TextWithHtml";
+import type { TextWithHtmlProps } from "./TextWithHtml";
+
+export { TextWithHtml };
+export type { TextWithHtmlProps };
