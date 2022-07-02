@@ -15,18 +15,25 @@ export type BasicInputDescriptionProps = Omit<
   | "descriptionWidth"
 >;
 
+export const basicInputDescriptionConfig: Omit<
+  InputDescriptionBaseProps,
+  "description"
+> = {
+  descriptionWidth: "w-full",
+  descriptionFontFamily: "font-mono",
+  descriptionFontSize: "text-xs",
+  descriptionLineHeight: "leading-[15.6px]",
+  descriptionFontWeight: "font-normal",
+  descriptionTextColor: "text-instillGrey50",
+  descriptionLinkTextColor: "text-instillBlue50",
+  descriptionLinkTextDecoration: "underline",
+};
+
 const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (props) => {
   return (
     <InputDescriptionBase
       description={props.description}
-      descriptionWidth="w-full"
-      descriptionFontFamily="font-mono"
-      descriptionFontSize="text-xs"
-      descriptionLineHeight="leading-[15.6px]"
-      descriptionFontWeight="font-normal"
-      descriptionTextColor="text-instillGrey50"
-      descriptionLinkTextColor="text-instillBlue50"
-      descriptionLinkTextDecoration="underline"
+      {...basicInputDescriptionConfig}
     />
   );
 };
