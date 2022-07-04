@@ -4,6 +4,7 @@ import SingleSelectBase from ".";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "./SingleSelectBase";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
+import { Nullable } from "../../../types/general";
 
 export default {
   title: "Components/Base/SingleSelectBase",
@@ -71,9 +72,11 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
     },
   ];
 
-  const onChangeInputHandler = (id: string, event: SingleSelectOption) => {
-    console.log(event);
-    setValue(event);
+  const onChangeInputHandler = (
+    id: string,
+    option: Nullable<SingleSelectOption>
+  ) => {
+    setValue(option);
   };
 
   const [value, setValue] = useState<SingleSelectOption | null>(null);
