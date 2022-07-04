@@ -220,3 +220,4 @@ const square = ({ width }) => {
 - Force every component to use Nullable prop, instead of undefined
 - Decide whether to use controlled components or not
 - Solve upload field cursor not correctly display
+- Extract onChangeInput type from BasicInputFieldAttributes to individual component

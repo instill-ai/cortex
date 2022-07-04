@@ -1,4 +1,4 @@
-import ReactSelect, { StylesConfig } from "react-select";
+import ReactSelect, { SingleValue, StylesConfig } from "react-select";
 import React from "react";
 import cn from "clsx";
 
@@ -57,6 +57,7 @@ export type SingleSelectBaseProps = Omit<
   | "errorInputBorderStyle"
   | "errorInputBorderWidth"
   | "errorInputTextColor"
+  | "onChangeInput"
 > & {
   /** Set this field to prevend SSR warning */
   instanceId: string;
@@ -99,6 +100,8 @@ export type SingleSelectBaseProps = Omit<
   menuPlacement: Nullable<"top" | "bottom" | "auto">;
 
   value: Nullable<SingleSelectOption>;
+
+  onChangeInput: (id: string, option: Nullable<SingleSelectOption>) => void;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
@@ -359,7 +362,10 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
             menuPlacement={menuPlacement ? menuPlacement : "auto"}
             options={options}
             onChange={(selectedOption) => {
-              onChangeInput(id, selectedOption);
+              onChangeInput(
+                id,
+                selectedOption as SingleValue<SingleSelectOption>
+              );
 
               if (selectedOption) {
                 setAnswered(true);
