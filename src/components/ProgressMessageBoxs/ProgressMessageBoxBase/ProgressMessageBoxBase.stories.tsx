@@ -7,9 +7,7 @@ export default {
 } as ComponentMeta<typeof ProgressMessageBoxBase>;
 
 const Template: ComponentStory<typeof ProgressMessageBoxBase> = (args) => (
-  <ProgressMessageBoxBase {...args}>
-    Testing connection...
-  </ProgressMessageBoxBase>
+  <ProgressMessageBoxBase {...args} />
 );
 export const Playground: ComponentStory<typeof ProgressMessageBoxBase> =
   Template.bind({});
@@ -32,4 +30,5 @@ Playground.args = {
   messageColumnBottomRightBorderRadius: "rounded-br-[1px]",
   messageColumnTopRightBorderRadius: "rounded-tr-[1px]",
   boxBorderRadius: "rounded-[1px]",
+  message: "Testing connection...",
 };
