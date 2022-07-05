@@ -7,6 +7,15 @@ import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
 export type BasicSingleSelectProps = Omit<
   SingleSelectBaseProps,
+  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
+>;
+
+export type BasicSingleSelectConfig = Pick<
+  SingleSelectBaseProps,
+  BasicSingleSelectOmitKeys
+>;
+
+export type BasicSingleSelectOmitKeys =
   | "inputLabelType"
   | "labelFontSize"
   | "labelFontWeight"
@@ -20,9 +29,24 @@ export type BasicSingleSelectProps = Omit<
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
-  | "isClearable"
-  | BasicInputDescriptionOmitProps
->;
+  | "isClearable";
+
+export const basicSingleSelectConfig: BasicSingleSelectConfig = {
+  inputLabelType: "inset",
+  labelFontSize: "text-sm",
+  labelFontWeight: "font-normal",
+  labelTextColor: "text-instillGrey50",
+  labelLineHeight: "leading-[18.2px]",
+  labelFontFamily: "font-sans",
+  labelActivateStyle: "top-1/2 -translate-y-[120%]",
+  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
+  errorLabelFontFamily: "font-sans",
+  errorLabelFontSize: "text-sm",
+  errorLabelFontWeight: "font-normal",
+  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelTextColor: "text-instillRed",
+  isClearable: false,
+};
 
 const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   return (
@@ -40,21 +64,8 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
       onChangeInput={props.onChangeInput}
       value={props.value}
       options={props.options}
-      isClearable={false}
-      inputLabelType="inset"
-      labelFontSize="text-sm"
-      labelFontWeight="font-normal"
-      labelTextColor="text-instillGrey50"
-      labelLineHeight="leading-[18.2px]"
-      labelFontFamily="font-sans"
-      labelActivateStyle="top-1/2 -translate-y-[120%]"
-      labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      errorLabelFontFamily="font-sans"
-      errorLabelFontSize="text-sm"
-      errorLabelFontWeight="font-normal"
-      errorLabelLineHeight="leading-[18.2px]"
-      errorLabelTextColor="text-instillRed"
       {...basicInputDescriptionConfig}
+      {...basicSingleSelectConfig}
     />
   );
 };
