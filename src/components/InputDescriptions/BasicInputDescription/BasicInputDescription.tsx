@@ -8,6 +8,11 @@ export type BasicInputDescriptionProps = Omit<
   BasicInputDescriptionOmitProps
 >;
 
+export type BasicInputDescriptionConfig = Pick<
+  InputDescriptionBaseProps,
+  BasicInputDescriptionOmitProps
+>;
+
 export type BasicInputDescriptionOmitProps =
   | "descriptionFontFamily"
   | "descriptionFontSize"
@@ -18,10 +23,7 @@ export type BasicInputDescriptionOmitProps =
   | "descriptionLinkTextDecoration"
   | "descriptionWidth";
 
-export const basicInputDescriptionConfig: Omit<
-  InputDescriptionBaseProps,
-  "description"
-> = {
+export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
   descriptionWidth: "w-full",
   descriptionFontFamily: "font-mono",
   descriptionFontSize: "text-xs",
