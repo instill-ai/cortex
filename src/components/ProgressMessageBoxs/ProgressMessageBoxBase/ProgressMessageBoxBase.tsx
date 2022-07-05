@@ -2,9 +2,15 @@ import React from "react";
 import { PixelCheckIcon, PixelCrossIcon } from "../../Icons";
 import NoBgSquareProgress from "../../Progress/NoBgSquareProgress";
 import cn from "clsx";
+import { Nullable } from "../../../types/general";
 
 export type ProgressMessageBoxBaseProps = {
   status: "success" | "error" | "progressing";
+
+  /**
+   *  ProgressMessageBox will return null if the children is null or undefinded
+   */
+  message: Nullable<string>;
 
   /** The width of the whole message box
    * - e.g. w-120
@@ -105,7 +111,6 @@ export type ProgressMessageBoxBaseProps = {
 
 const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
   status,
-  children,
   width,
   errorIconColor,
   errorIconWidth,
@@ -125,8 +130,11 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
   messageColumnBottomRightBorderRadius,
   messageColumnTopRightBorderRadius,
   boxBorderRadius,
+  message,
 }) => {
   const statusIcon = React.useMemo(() => {
+    if (!message) return null;
+
     switch (status) {
       case "error":
         return (
@@ -190,7 +198,7 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
         )}
       >
         <p className="instill-text-h3 text-instillGrey90 break-normal">
-          {children}
+          {message}
         </p>
       </div>
     </div>

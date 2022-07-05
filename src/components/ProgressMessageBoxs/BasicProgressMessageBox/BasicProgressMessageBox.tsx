@@ -31,6 +31,7 @@ const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
   return (
     <ProgressMessageBoxBase
       status={props.status}
+      message={props.message}
       width={props.width}
       errorIconColor="fill-instillRed"
       errorIconWidth="w-7"
@@ -50,9 +51,7 @@ const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
       successIndicatorColumnBgColor="bg-instillGreen10"
       processingIndicatorColumnBgColor="bg-instillBlue10"
       errorindicatorColumnBgColor="bg-instillRed10"
-    >
-      {props.children}
-    </ProgressMessageBoxBase>
+    />
   );
 };
 
