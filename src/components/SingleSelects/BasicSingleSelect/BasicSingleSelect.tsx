@@ -10,6 +10,11 @@ export type BasicSingleSelectProps = Omit<
   BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
 >;
 
+export type BasicSingleSelectConfig = Pick<
+  SingleSelectBaseProps,
+  BasicSingleSelectOmitKeys
+>;
+
 export type BasicSingleSelectOmitKeys =
   | "inputLabelType"
   | "labelFontSize"
@@ -26,10 +31,7 @@ export type BasicSingleSelectOmitKeys =
   | "errorLabelTextColor"
   | "isClearable";
 
-export const basicSingleSelectConfig: Pick<
-  SingleSelectBaseProps,
-  BasicSingleSelectOmitKeys
-> = {
+export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   inputLabelType: "inset",
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
