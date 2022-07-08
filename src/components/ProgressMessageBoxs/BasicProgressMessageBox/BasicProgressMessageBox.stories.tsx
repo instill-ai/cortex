@@ -16,4 +16,5 @@ Playground.args = {
   status: "progressing",
   width: "w-[300px]",
   message: "Testing connection...",
+  description: "Please wait...",
 };

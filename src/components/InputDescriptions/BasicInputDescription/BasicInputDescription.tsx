@@ -3,16 +3,6 @@ import InputDescriptionBase, {
   InputDescriptionBaseProps,
 } from "../InputDescriptionBase";
 
-export type BasicInputDescriptionProps = Omit<
-  InputDescriptionBaseProps,
-  BasicInputDescriptionOmitProps
->;
-
-export type BasicInputDescriptionConfig = Pick<
-  InputDescriptionBaseProps,
-  BasicInputDescriptionOmitProps
->;
-
 export type BasicInputDescriptionOmitProps =
   | "descriptionFontFamily"
   | "descriptionFontSize"
@@ -22,6 +12,16 @@ export type BasicInputDescriptionOmitProps =
   | "descriptionLinkTextColor"
   | "descriptionLinkTextDecoration"
   | "descriptionWidth";
+
+export type BasicInputDescriptionProps = Omit<
+  InputDescriptionBaseProps,
+  BasicInputDescriptionOmitProps
+>;
+
+export type BasicInputDescriptionConfig = Pick<
+  InputDescriptionBaseProps,
+  BasicInputDescriptionOmitProps
+>;
 
 export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
   descriptionWidth: "w-full",
