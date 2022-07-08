@@ -203,15 +203,15 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
           >
             {statusIcon}
           </div>
-          <div className="flex flex-row flex-1 pl-[15px] pr-2.5 py-2.5">
-            <div
-              className={cn(
-                "flex flex-col flex-1 gap-y-[5px]",
-                messageColumnBgColor,
-                messageColumnBottomRightBorderRadius,
-                messageColumnTopRightBorderRadius
-              )}
-            >
+          <div
+            className={cn(
+              "flex flex-row flex-1 pl-[15px] pr-2.5 py-2.5",
+              messageColumnBgColor,
+              messageColumnBottomRightBorderRadius,
+              messageColumnTopRightBorderRadius
+            )}
+          >
+            <div className="flex flex-col flex-1 gap-y-[5px]">
               <h3 className="text-instill-h3 text-instillGrey90 break-normal">
                 {message}
               </h3>
