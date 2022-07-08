@@ -1,22 +1,27 @@
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import { PixelCheckIcon, PixelCrossIcon, XIcon } from "../../Icons";
 import NoBgSquareProgress from "../../Progress/NoBgSquareProgress";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
-export type ProgressMessageBoxBaseProps = {
+export type ProgressMessageBoxState = {
   status: "success" | "error" | "progressing";
-
   /**
    *  ProgressMessageBox's message
    */
-  message: string;
-
+  message: Nullable<string>;
   /**
    * ProgressMessageBox's description
    */
   description: Nullable<string>;
 
+  /**
+   * Show message box or not
+   */
+  activate: boolean;
+};
+
+export type ProgressMessageBoxBaseProps = {
   /** The width of the whole message box
    * - e.g. w-120
    */
@@ -117,10 +122,15 @@ export type ProgressMessageBoxBaseProps = {
    * Whether the message box can be closed or not
    */
   closable: boolean;
+
+  state: ProgressMessageBoxState;
+
+  setState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
 };
 
 const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
-  status,
+  state,
+  setState,
   width,
   errorIconColor,
   errorIconWidth,
@@ -140,14 +150,10 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
   messageColumnBottomRightBorderRadius,
   messageColumnTopRightBorderRadius,
   boxBorderRadius,
-  message,
   closable,
-  description,
 }) => {
-  const [closeBox, setCloseBox] = useState(false);
-
   const statusIcon = React.useMemo(() => {
-    switch (status) {
+    switch (state.status) {
       case "error":
         return (
           <PixelCrossIcon
@@ -160,7 +166,7 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
       case "progressing":
         return (
           <NoBgSquareProgress
-            isLoading={status === "progressing" ? true : false}
+            isLoading={true}
             blockSize={progressBlockSize}
             position={iconPosition}
           />
@@ -176,11 +182,11 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
           />
         );
     }
-  }, [status]);
+  }, [state.status]);
 
   return (
     <>
-      {closeBox ? null : (
+      {state.activate ? (
         <div
           className={cn(
             "flex flex-row min-h-[85px] instill-progress-message-box-shadow",
@@ -213,15 +219,20 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
           >
             <div className="flex flex-col flex-1 gap-y-[5px]">
               <h3 className="text-instill-h3 text-instillGrey90 break-normal">
-                {message}
+                {state.message}
               </h3>
               <p className="text-instillGrey70 text-instill-small">
-                {description}
+                {state.description}
               </p>
             </div>
             {closable ? (
               <button
-                onClick={() => setCloseBox(true)}
+                onClick={() =>
+                  setState((prev) => ({
+                    ...prev,
+                    activate: false,
+                  }))
+                }
                 className="flex mb-auto"
               >
                 <XIcon
@@ -234,7 +245,7 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
             ) : null}
           </div>
         </div>
-      )}
+      ) : null}
     </>
   );
 };

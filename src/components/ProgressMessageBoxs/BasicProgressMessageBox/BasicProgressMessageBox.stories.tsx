@@ -1,4 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
+import { ProgressMessageBoxState } from "../ProgressMessageBoxBase";
 import BasicProgressMessageBox from "./BasicProgressMessageBox";
 
 export default {
@@ -6,15 +8,39 @@ export default {
   component: BasicProgressMessageBox,
 } as ComponentMeta<typeof BasicProgressMessageBox>;
 
-const Template: ComponentStory<typeof BasicProgressMessageBox> = (args) => (
-  <BasicProgressMessageBox {...args} />
-);
+const Template: ComponentStory<typeof BasicProgressMessageBox> = (args) => {
+  const [messageBoxState, setMessageBoxState] =
+    useState<ProgressMessageBoxState>({
+      activate: true,
+      message: "hi",
+      description: "please wait",
+      status: "progressing",
+    });
+  return (
+    <>
+      <button
+        className="mb-10"
+        onClick={() =>
+          setMessageBoxState((prev) => ({
+            ...prev,
+            activate: true,
+          }))
+        }
+      >
+        Activate message box
+      </button>
+      <BasicProgressMessageBox
+        {...args}
+        state={messageBoxState}
+        setState={setMessageBoxState}
+      />
+    </>
+  );
+};
 export const Playground: ComponentStory<typeof BasicProgressMessageBox> =
   Template.bind({});
 
 Playground.args = {
-  status: "progressing",
   width: "w-[300px]",
-  message: "Testing connection...",
-  description: "Please wait...",
+  closable: true,
 };

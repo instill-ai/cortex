@@ -59,9 +59,8 @@ const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
 ) => {
   return (
     <ProgressMessageBoxBase
-      status={props.status}
-      message={props.message}
-      description={props.description}
+      state={props.state}
+      setState={props.setState}
       closable={props.closable}
       width={props.width}
       {...basicProgressMessageBoxConfig}
