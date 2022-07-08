@@ -5,7 +5,7 @@ import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
 export type ProgressMessageBoxState = {
-  status: "success" | "error" | "progressing";
+  status: Nullable<"success" | "error" | "progressing">;
   /**
    *  ProgressMessageBox's message
    */
@@ -181,6 +181,8 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
             color={successIconColor}
           />
         );
+      default:
+        return null;
     }
   }, [state.status]);
 
