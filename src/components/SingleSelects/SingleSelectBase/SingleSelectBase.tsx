@@ -394,7 +394,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
                       <XIcon
                         position="m-auto"
                         width="w-5"
-                        height="g-5"
+                        height="h-5"
                         color="text-instillGrey50"
                       />
                     </div>
@@ -408,17 +408,13 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
               return (
                 <div className="flex flex-row gap-x-3 px-[15px]">
                   {option.startIcon ? (
-                    <div className="flex my-auto w-[30px] h-[30px]">
-                      {option.startIcon}
-                    </div>
+                    <div className="flex my-auto">{option.startIcon}</div>
                   ) : null}
                   <div className="my-auto instill-text-body">
                     {option.label}
                   </div>
                   {option.endIcon ? (
-                    <div className="flex my-auto w-[30px] h-[30px]">
-                      {option.endIcon}
-                    </div>
+                    <div className="flex my-auto">{option.endIcon}</div>
                   ) : null}
                 </div>
               );
