@@ -3,8 +3,7 @@ import ProgressMessageBoxBase, {
   ProgressMessageBoxBaseProps,
 } from "../ProgressMessageBoxBase";
 
-export type BasicProgressMessageBoxProps = Omit<
-  ProgressMessageBoxBaseProps,
+export type BasicProgressMessageBoxOmitProps =
   | "errorIconColor"
   | "errorIconWidth"
   | "errorIconHeight"
@@ -22,8 +21,38 @@ export type BasicProgressMessageBoxProps = Omit<
   | "progressBlockSize"
   | "successIndicatorColumnBgColor"
   | "processingIndicatorColumnBgColor"
-  | "errorindicatorColumnBgColor"
+  | "errorindicatorColumnBgColor";
+
+export type BasicProgressMessageBoxProps = Omit<
+  ProgressMessageBoxBaseProps,
+  BasicProgressMessageBoxOmitProps
 >;
+
+export type BasicProgressMessageBoxConfig = Pick<
+  ProgressMessageBoxBaseProps,
+  BasicProgressMessageBoxOmitProps
+>;
+
+export const basicProgressMessageBoxConfig: BasicProgressMessageBoxConfig = {
+  errorIconColor: "fill-instillRed",
+  errorIconWidth: "w-7",
+  errorIconHeight: "h-7",
+  successIconColor: "fill-instillGreen",
+  successIconWidth: "w-7",
+  successIconHeight: "h-7",
+  iconPosition: "mx-auto mb-auto",
+  indicatorColumnWidth: "w-12",
+  indicatorColumnBottomLeftBorderRadius: "rounded-bl-[1px]",
+  indicatorColumnTopLeftBorderRadius: "rounded-tl-[1px]",
+  messageColumnBgColor: "bg-white",
+  messageColumnBottomRightBorderRadius: "rounded-br-[1px]",
+  messageColumnTopRightBorderRadius: "rounded-tr-[1px]",
+  boxBorderRadius: "rounded-[1px]",
+  progressBlockSize: 28,
+  successIndicatorColumnBgColor: "bg-instillGreen10",
+  processingIndicatorColumnBgColor: "bg-instillBlue10",
+  errorindicatorColumnBgColor: "bg-instillRed10",
+};
 
 const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
   props
@@ -32,25 +61,10 @@ const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
     <ProgressMessageBoxBase
       status={props.status}
       message={props.message}
+      description={props.description}
+      closable={props.closable}
       width={props.width}
-      errorIconColor="fill-instillRed"
-      errorIconWidth="w-7"
-      errorIconHeight="h-7"
-      successIconColor="fill-instillGreen"
-      successIconWidth="w-7"
-      successIconHeight="h-7"
-      iconPosition="mx-auto mb-auto"
-      indicatorColumnWidth="w-12"
-      indicatorColumnBottomLeftBorderRadius="rounded-bl-[1px]"
-      indicatorColumnTopLeftBorderRadius="rounded-tl-[1px]"
-      messageColumnBgColor="bg-white"
-      messageColumnBottomRightBorderRadius="rounded-br-[1px]"
-      messageColumnTopRightBorderRadius="rounded-tr-[1px]"
-      boxBorderRadius="rounded-[1px]"
-      progressBlockSize={28}
-      successIndicatorColumnBgColor="bg-instillGreen10"
-      processingIndicatorColumnBgColor="bg-instillBlue10"
-      errorindicatorColumnBgColor="bg-instillRed10"
+      {...basicProgressMessageBoxConfig}
     />
   );
 };
