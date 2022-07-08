@@ -1,5 +1,5 @@
-import React from "react";
-import { PixelCheckIcon, PixelCrossIcon } from "../../Icons";
+import React, { useState } from "react";
+import { PixelCheckIcon, PixelCrossIcon, XIcon } from "../../Icons";
 import NoBgSquareProgress from "../../Progress/NoBgSquareProgress";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
@@ -8,9 +8,14 @@ export type ProgressMessageBoxBaseProps = {
   status: "success" | "error" | "progressing";
 
   /**
-   *  ProgressMessageBox will return null if the children is null or undefinded
+   *  ProgressMessageBox's message
    */
-  message: Nullable<string>;
+  message: string;
+
+  /**
+   * ProgressMessageBox's description
+   */
+  description: Nullable<string>;
 
   /** The width of the whole message box
    * - e.g. w-120
@@ -107,6 +112,11 @@ export type ProgressMessageBoxBaseProps = {
   messageColumnTopRightBorderRadius: string;
 
   boxBorderRadius: string;
+
+  /**
+   * Whether the message box can be closed or not
+   */
+  closable: boolean;
 };
 
 const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
@@ -131,10 +141,12 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
   messageColumnTopRightBorderRadius,
   boxBorderRadius,
   message,
+  closable,
+  description,
 }) => {
-  const statusIcon = React.useMemo(() => {
-    if (!message) return null;
+  const [closeBox, setCloseBox] = useState(false);
 
+  const statusIcon = React.useMemo(() => {
     switch (status) {
       case "error":
         return (
@@ -167,41 +179,63 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
   }, [status]);
 
   return (
-    <div
-      className={cn(
-        "flex flex-row min-h-[85px] instill-progress-message-box-shadow",
-        width,
-        boxBorderRadius
+    <>
+      {closeBox ? null : (
+        <div
+          className={cn(
+            "flex flex-row min-h-[85px] instill-progress-message-box-shadow",
+            width,
+            boxBorderRadius
+          )}
+        >
+          <div
+            className={cn(
+              "flex p-2.5",
+              indicatorColumnWidth,
+              indicatorColumnBottomLeftBorderRadius,
+              indicatorColumnTopLeftBorderRadius,
+              status === "error"
+                ? errorindicatorColumnBgColor
+                : status === "success"
+                ? successIndicatorColumnBgColor
+                : processingIndicatorColumnBgColor
+            )}
+          >
+            {statusIcon}
+          </div>
+          <div className="flex flex-row flex-1 pl-[15px] pr-2.5 py-2.5">
+            <div
+              className={cn(
+                "flex flex-col flex-1 gap-y-[5px]",
+                messageColumnBgColor,
+                messageColumnBottomRightBorderRadius,
+                messageColumnTopRightBorderRadius
+              )}
+            >
+              <h3 className="text-instill-h3 text-instillGrey90 break-normal">
+                {message}
+              </h3>
+              <p className="text-instillGrey70 text-instill-small">
+                {description}
+              </p>
+            </div>
+            {closable ? (
+              <button
+                onClick={() => setCloseBox(true)}
+                className="flex mb-auto"
+              >
+                <XIcon
+                  position="m-auto"
+                  color="fill-instillGrey30"
+                  width="w-4"
+                  height="h-4"
+                />
+              </button>
+            ) : null}
+          </div>
+        </div>
       )}
-    >
-      <div
-        className={cn(
-          "flex p-2.5",
-          indicatorColumnWidth,
-          indicatorColumnBottomLeftBorderRadius,
-          indicatorColumnTopLeftBorderRadius,
-          status === "error"
-            ? errorindicatorColumnBgColor
-            : status === "success"
-            ? successIndicatorColumnBgColor
-            : processingIndicatorColumnBgColor
-        )}
-      >
-        {statusIcon}
-      </div>
-      <div
-        className={cn(
-          "flex flex-1 p-2.5",
-          messageColumnBgColor,
-          messageColumnBottomRightBorderRadius,
-          messageColumnTopRightBorderRadius
-        )}
-      >
-        <p className="instill-text-h3 text-instillGrey90 break-normal">
-          {message}
-        </p>
-      </div>
-    </div>
+    </>
   );
 };
 
