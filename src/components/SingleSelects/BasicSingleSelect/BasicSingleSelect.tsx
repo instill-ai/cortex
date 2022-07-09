@@ -5,9 +5,26 @@ import {
 } from "../../InputDescriptions";
 import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
-export type BasicSingleSelectProps = Omit<
+export type FullBasicSingleSelectProps = Omit<
   SingleSelectBaseProps,
   BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
+>;
+
+export type BasicSingleSelectRequiredKeys =
+  | "id"
+  | "instanceId"
+  | "label"
+  | "value"
+  | "options"
+  | "onChangeInput";
+
+export type BasicSingleSelectRequiredProps = Pick<
+  FullBasicSingleSelectProps,
+  BasicSingleSelectRequiredKeys
+>;
+
+export type BasicSingleSelectOptionalProps = Partial<
+  Omit<FullBasicSingleSelectProps, BasicSingleSelectRequiredKeys>
 >;
 
 export type BasicSingleSelectConfig = Pick<
@@ -48,22 +65,24 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   isClearable: false,
 };
 
-const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
+const BasicSingleSelect: React.FC<
+  BasicSingleSelectRequiredProps & BasicSingleSelectOptionalProps
+> = (props) => {
   return (
     <SingleSelectBase
       id={props.id}
-      menuPlacement={props.menuPlacement}
-      additionalMessageOnLabel={props.additionalMessageOnLabel}
       instanceId={props.instanceId}
-      error={props.error}
-      label={props.label}
-      description={props.description}
-      disabled={props.disabled}
-      readOnly={props.readOnly}
-      required={props.required}
       onChangeInput={props.onChangeInput}
       value={props.value}
       options={props.options}
+      label={props.label}
+      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
+      menuPlacement={props.menuPlacement ?? "auto"}
+      description={props.description ?? ""}
+      error={props.error ?? null}
+      disabled={props.disabled ?? false}
+      readOnly={props.readOnly ?? false}
+      required={props.required ?? false}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}
     />

@@ -208,7 +208,10 @@ export interface BasicInputFieldAttributes {
   /** Input on change handler */
   onChangeInput: (id: string, inputValue: any) => void;
 
-  /** Whether the field is necessary or not */
+  /**
+   * Whether the field is necessary or not
+   * @default false
+   * */
   required: boolean;
 
   /** TailwindCSS format
