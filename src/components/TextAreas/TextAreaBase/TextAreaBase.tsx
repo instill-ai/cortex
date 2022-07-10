@@ -17,10 +17,15 @@ export type TextAreaBaseProps = Omit<
    */
   // resize: "both" | "none" | "x" | "y";
 
-  /** Enable textarea words counter */
+  /**
+   * Enable textarea words counter
+   * @default false
+   */
   enableCounter: boolean;
 
-  /** Textarea counter's words limit */
+  /**
+   * Textarea counter's words limit
+   */
   counterWordLimit: number;
 
   /** TailwindCSS format - Font size of textarea's counter
