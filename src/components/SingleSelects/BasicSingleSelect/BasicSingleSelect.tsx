@@ -5,11 +5,6 @@ import {
 } from "../../InputDescriptions";
 import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
-export type FullBasicSingleSelectProps = Omit<
-  SingleSelectBaseProps,
-  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
->;
-
 export type BasicSingleSelectRequiredKeys =
   | "id"
   | "instanceId"
@@ -17,6 +12,26 @@ export type BasicSingleSelectRequiredKeys =
   | "value"
   | "options"
   | "onChangeInput";
+
+export type BasicSingleSelectOmitKeys =
+  | "inputLabelType"
+  | "labelFontSize"
+  | "labelFontWeight"
+  | "labelTextColor"
+  | "labelLineHeight"
+  | "labelFontFamily"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
+  | "errorLabelFontFamily"
+  | "errorLabelFontSize"
+  | "errorLabelFontWeight"
+  | "errorLabelLineHeight"
+  | "errorLabelTextColor";
+
+export type FullBasicSingleSelectProps = Omit<
+  SingleSelectBaseProps,
+  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
+>;
 
 export type BasicSingleSelectRequiredProps = Pick<
   FullBasicSingleSelectProps,
@@ -32,22 +47,6 @@ export type BasicSingleSelectConfig = Pick<
   BasicSingleSelectOmitKeys
 >;
 
-export type BasicSingleSelectOmitKeys =
-  | "inputLabelType"
-  | "labelFontSize"
-  | "labelFontWeight"
-  | "labelTextColor"
-  | "labelLineHeight"
-  | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
-  | "errorLabelFontFamily"
-  | "errorLabelFontSize"
-  | "errorLabelFontWeight"
-  | "errorLabelLineHeight"
-  | "errorLabelTextColor"
-  | "isClearable";
-
 export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   inputLabelType: "inset",
   labelFontSize: "text-sm",
@@ -62,7 +61,6 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
-  isClearable: false,
 };
 
 const BasicSingleSelect: React.FC<
@@ -83,6 +81,7 @@ const BasicSingleSelect: React.FC<
       disabled={props.disabled ?? false}
       readOnly={props.readOnly ?? false}
       required={props.required ?? false}
+      isClearable={props.isClearable ?? false}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}
     />

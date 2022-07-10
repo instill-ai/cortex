@@ -83,6 +83,7 @@ export interface BasicInputFieldAttributes {
 
   /**
    * Whether the input is disabled
+   * @default false
    */
   disabled: boolean;
 
@@ -129,6 +130,7 @@ export interface BasicInputFieldAttributes {
 
   /**
    * Whether The value is editable or not.
+   * @default false
    */
   readOnly: boolean;
 
