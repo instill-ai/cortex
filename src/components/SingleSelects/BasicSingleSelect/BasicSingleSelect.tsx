@@ -1,7 +1,7 @@
 import React from "react";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
@@ -30,7 +30,7 @@ export type BasicSingleSelectOmitKeys =
 
 export type FullBasicSingleSelectProps = Omit<
   SingleSelectBaseProps,
-  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
+  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitKeys
 >;
 
 export type BasicSingleSelectRequiredProps = Pick<

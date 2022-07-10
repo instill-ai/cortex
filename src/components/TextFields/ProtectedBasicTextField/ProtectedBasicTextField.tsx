@@ -1,7 +1,7 @@
 import React from "react";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
@@ -58,7 +58,7 @@ export type ProtectedBasicTextFieldProps = Omit<
   | "errorInputBorderStyle"
   | "errorInputTextColor"
   | "autoComplete"
-  | BasicInputDescriptionOmitProps
+  | BasicInputDescriptionOmitKeys
 >;
 
 const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (

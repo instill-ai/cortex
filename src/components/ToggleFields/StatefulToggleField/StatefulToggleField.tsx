@@ -2,7 +2,7 @@ import React from "react";
 import { Nullable, State } from "../../../types/general";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 
@@ -51,7 +51,7 @@ export type StatefulToggleFieldProps = Omit<
   | "inputShadow"
   | "inputFocusBorderColor"
   | "inputFocusShadow"
-  | BasicInputDescriptionOmitProps
+  | BasicInputDescriptionOmitKeys
 > & {
   state: Nullable<State>;
 };

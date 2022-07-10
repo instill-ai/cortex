@@ -3,7 +3,7 @@ import InputDescriptionBase, {
   InputDescriptionBaseProps,
 } from "../InputDescriptionBase";
 
-export type BasicInputDescriptionOmitProps =
+export type BasicInputDescriptionOmitKeys =
   | "descriptionFontFamily"
   | "descriptionFontSize"
   | "descriptionLineHeight"
@@ -15,12 +15,12 @@ export type BasicInputDescriptionOmitProps =
 
 export type BasicInputDescriptionProps = Omit<
   InputDescriptionBaseProps,
-  BasicInputDescriptionOmitProps
+  BasicInputDescriptionOmitKeys
 >;
 
 export type BasicInputDescriptionConfig = Pick<
   InputDescriptionBaseProps,
-  BasicInputDescriptionOmitProps
+  BasicInputDescriptionOmitKeys
 >;
 
 export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {

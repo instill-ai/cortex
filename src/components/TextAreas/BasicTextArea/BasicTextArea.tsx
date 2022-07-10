@@ -1,7 +1,7 @@
 import React from "react";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
 
@@ -125,7 +125,7 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
 
 export type FullBasicTextAreaProps = Omit<
   TextAreaBaseProps,
-  BasicInputDescriptionOmitProps | BasicTextAreaOmitKeys
+  BasicInputDescriptionOmitKeys | BasicTextAreaOmitKeys
 >;
 
 export type BasicTextAreaRequiredProps = Pick<
