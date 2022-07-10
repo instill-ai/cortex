@@ -139,6 +139,8 @@ import OpticalCharacterRecognitionIcon from "./OpticalCharacterRecognitionIcon";
 import type { OpticalCharacterRecognitionIconProps } from "./OpticalCharacterRecognitionIcon";
 import ArtiVcIcon from "./ArtiVcIcon";
 import type { ArtiVcIconProps } from "./ArtiVcIcon";
+import HuggingFaceIcon from "./HuggingFaceIcon";
+import type { HuggingFaceIconProps } from "./HuggingFaceIcon";
 
 export type {
   EyeOnIconProps,
@@ -209,6 +211,7 @@ export type {
   CollapseLeftIconProps,
   CollapseRightIconProps,
   ArtiVcIconProps,
+  HuggingFaceIconProps,
 };
 
 export {
@@ -280,4 +283,5 @@ export {
   CollapseLeftIcon,
   CollapseRightIcon,
   ArtiVcIcon,
+  HuggingFaceIcon,
 };
