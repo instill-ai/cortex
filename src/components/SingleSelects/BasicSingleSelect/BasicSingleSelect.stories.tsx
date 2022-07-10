@@ -62,11 +62,7 @@ const Template: ComponentStory<typeof BasicSingleSelect> = (args) => {
       instanceId="autocomplete-with-icon"
       onChangeInput={onChangeInputHandler}
       options={options}
-      additionalMessageOnLabel={null}
-      error={null}
-      description="this is a description for auth complete with Icon <a href='#'>setup guide</a>"
       label="autocomplete-with-icon"
-      menuPlacement="auto"
     />
   );
 };

@@ -83,6 +83,7 @@ export interface BasicInputFieldAttributes {
 
   /**
    * Whether the input is disabled
+   * @default false
    */
   disabled: boolean;
 
@@ -129,6 +130,7 @@ export interface BasicInputFieldAttributes {
 
   /**
    * Whether The value is editable or not.
+   * @default false
    */
   readOnly: boolean;
 
@@ -208,7 +210,10 @@ export interface BasicInputFieldAttributes {
   /** Input on change handler */
   onChangeInput: (id: string, inputValue: any) => void;
 
-  /** Whether the field is necessary or not */
+  /**
+   * Whether the field is necessary or not
+   * @default false
+   * */
   required: boolean;
 
   /** TailwindCSS format

@@ -2,7 +2,8 @@
 export * from "./Icons";
 
 // InputDescriptions
-export * from "./InputDescriptions";
+import { BasicInputDescription } from "./InputDescriptions";
+import type { BasicInputDescriptionProps } from "./InputDescriptions";
 
 // InputLabels
 export * from "./InputLabels";
@@ -17,7 +18,8 @@ export * from "./Progress";
 export * from "./ProgressMessageBoxs";
 
 // SingleSelects
-export * from "./SingleSelects";
+import { BasicSingleSelect } from "./SingleSelects";
+import type { BasicSingleSelectProps } from "./SingleSelects";
 
 // TextAreas
 export * from "./TextAreas";
@@ -34,5 +36,9 @@ export * from "./UploadFileFields";
 import TextWithHtml from "./TextWithHtml/TextWithHtml";
 import type { TextWithHtmlProps } from "./TextWithHtml/TextWithHtml";
 
-export { TextWithHtml };
-export type { TextWithHtmlProps };
+export { TextWithHtml, BasicSingleSelect, BasicInputDescription };
+export type {
+  TextWithHtmlProps,
+  BasicSingleSelectProps,
+  BasicInputDescriptionProps,
+};

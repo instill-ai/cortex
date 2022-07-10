@@ -93,10 +93,16 @@ export type SingleSelectBaseProps = Omit<
    */
   // defaultValue: Nullable<SingleSelectOption>;
 
-  /** Whether the autocomplete is clearalbe */
+  /**
+   * Whether the autocomplete is clearalbe
+   * @default false
+   */
   isClearable: boolean;
 
-  /** Determine select option dropdown direction */
+  /**
+   * Determine select option dropdown direction
+   * @default "auto"
+   */
   menuPlacement: Nullable<"top" | "bottom" | "auto">;
 
   value: Nullable<SingleSelectOption>;

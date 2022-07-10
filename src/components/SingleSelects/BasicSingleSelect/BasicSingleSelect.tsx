@@ -5,15 +5,13 @@ import {
 } from "../../InputDescriptions";
 import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
-export type BasicSingleSelectProps = Omit<
-  SingleSelectBaseProps,
-  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
->;
-
-export type BasicSingleSelectConfig = Pick<
-  SingleSelectBaseProps,
-  BasicSingleSelectOmitKeys
->;
+export type BasicSingleSelectRequiredKeys =
+  | "id"
+  | "instanceId"
+  | "label"
+  | "value"
+  | "options"
+  | "onChangeInput";
 
 export type BasicSingleSelectOmitKeys =
   | "inputLabelType"
@@ -28,8 +26,26 @@ export type BasicSingleSelectOmitKeys =
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
-  | "errorLabelTextColor"
-  | "isClearable";
+  | "errorLabelTextColor";
+
+export type FullBasicSingleSelectProps = Omit<
+  SingleSelectBaseProps,
+  BasicSingleSelectOmitKeys | BasicInputDescriptionOmitProps
+>;
+
+export type BasicSingleSelectRequiredProps = Pick<
+  FullBasicSingleSelectProps,
+  BasicSingleSelectRequiredKeys
+>;
+
+export type BasicSingleSelectOptionalProps = Partial<
+  Omit<FullBasicSingleSelectProps, BasicSingleSelectRequiredKeys>
+>;
+
+export type BasicSingleSelectConfig = Pick<
+  SingleSelectBaseProps,
+  BasicSingleSelectOmitKeys
+>;
 
 export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   inputLabelType: "inset",
@@ -45,25 +61,28 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
-  isClearable: false,
 };
+
+export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
+  BasicSingleSelectOptionalProps;
 
 const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   return (
     <SingleSelectBase
       id={props.id}
-      menuPlacement={props.menuPlacement}
-      additionalMessageOnLabel={props.additionalMessageOnLabel}
       instanceId={props.instanceId}
-      error={props.error}
-      label={props.label}
-      description={props.description}
-      disabled={props.disabled}
-      readOnly={props.readOnly}
-      required={props.required}
       onChangeInput={props.onChangeInput}
       value={props.value}
       options={props.options}
+      label={props.label}
+      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
+      menuPlacement={props.menuPlacement ?? "auto"}
+      description={props.description ?? ""}
+      error={props.error ?? null}
+      disabled={props.disabled ?? false}
+      readOnly={props.readOnly ?? false}
+      required={props.required ?? false}
+      isClearable={props.isClearable ?? false}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}
     />
