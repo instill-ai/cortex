@@ -63,9 +63,10 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   errorLabelTextColor: "text-instillRed",
 };
 
-const BasicSingleSelect: React.FC<
-  BasicSingleSelectRequiredProps & BasicSingleSelectOptionalProps
-> = (props) => {
+export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
+  BasicSingleSelectOptionalProps;
+
+const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   return (
     <SingleSelectBase
       id={props.id}
