@@ -1,4 +1,10 @@
 import BasicTextArea from "./BasicTextArea";
-import type { BasicTextAreaProps } from "./BasicTextArea";
+import { basicTextAreaConfig } from "./BasicTextArea";
+import type {
+  BasicTextAreaProps,
+  BasicTextAreaConfig,
+  BasicTextAreaOmitKeys,
+} from "./BasicTextArea";
 
-export { BasicTextArea, BasicTextAreaProps };
+export { BasicTextArea, basicTextAreaConfig };
+export type { BasicTextAreaProps, BasicTextAreaConfig, BasicTextAreaOmitKeys };

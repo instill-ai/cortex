@@ -19,10 +19,14 @@ export * from "./ProgressMessageBoxs";
 
 // SingleSelects
 import { BasicSingleSelect } from "./SingleSelects";
-import type { BasicSingleSelectProps } from "./SingleSelects";
+import type {
+  BasicSingleSelectProps,
+  SingleSelectOption,
+} from "./SingleSelects";
 
 // TextAreas
-export * from "./TextAreas";
+import { BasicTextArea } from "./TextAreas";
+import type { BasicTextAreaProps } from "./TextAreas";
 
 // TextFields
 export * from "./TextFields";
@@ -36,9 +40,16 @@ export * from "./UploadFileFields";
 import TextWithHtml from "./TextWithHtml/TextWithHtml";
 import type { TextWithHtmlProps } from "./TextWithHtml/TextWithHtml";
 
-export { TextWithHtml, BasicSingleSelect, BasicInputDescription };
+export {
+  TextWithHtml,
+  BasicSingleSelect,
+  BasicInputDescription,
+  BasicTextArea,
+};
 export type {
   TextWithHtmlProps,
   BasicSingleSelectProps,
+  SingleSelectOption,
   BasicInputDescriptionProps,
+  BasicTextAreaProps,
 };

@@ -19,15 +19,11 @@ const Template: ComponentStory<typeof BasicTextArea> = (args) => {
       {...args}
       id="text-field-playground"
       label="Playground"
-      additionalMessageOnLabel={null}
       placeholder="hello"
       description="this is a description for basic textarea <a href='#'>setup guide</a>"
       autoComplete="off"
       onChangeInput={onChnageInput}
-      enableCounter={false}
-      counterWordLimit={0}
       value={value}
-      error={null}
     />
   );
 };

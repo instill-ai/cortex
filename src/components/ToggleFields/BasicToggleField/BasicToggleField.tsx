@@ -1,7 +1,7 @@
 import React from "react";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 
@@ -47,7 +47,7 @@ export type BasicToggleFieldProps = Omit<
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
-  | BasicInputDescriptionOmitProps
+  | BasicInputDescriptionOmitKeys
 >;
 
 const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {

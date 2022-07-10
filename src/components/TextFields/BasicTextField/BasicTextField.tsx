@@ -1,7 +1,7 @@
 import React from "react";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
@@ -56,7 +56,7 @@ export type BasicTextFieldProps = Omit<
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
   | "errorInputTextColor"
-  | BasicInputDescriptionOmitProps
+  | BasicInputDescriptionOmitKeys
 >;
 
 const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {

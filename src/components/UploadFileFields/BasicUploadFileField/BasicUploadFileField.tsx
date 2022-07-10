@@ -1,7 +1,7 @@
 import React from "react";
 import {
   basicInputDescriptionConfig,
-  BasicInputDescriptionOmitProps,
+  BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
 import UploadFileFieldBase, {
   UploadFileFieldBaseProps,
@@ -57,7 +57,7 @@ export type BasicUploadFileFieldProps = Omit<
   | "readOnlyInputBorderStyle"
   | "readOnlyInputBorderWidth"
   | "readOnlyInputTextColor"
-  | BasicInputDescriptionOmitProps
+  | BasicInputDescriptionOmitKeys
 >;
 
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
