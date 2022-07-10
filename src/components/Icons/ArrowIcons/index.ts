@@ -6,14 +6,21 @@ import ArrowUpIcon from "./ArrowUpIcon";
 import type { ArrowUpIconProps } from "./ArrowUpIcon";
 import ArrowDownIcon from "./ArrowDownIcon";
 import type { ArrowDownIconProps } from "./ArrowDownIcon";
+import RotatableArrowIcon from "./RotatableArrowIcon";
+import type { RotatableArrowIconProps } from "./RotatableArrowIcon";
 
 export {
   ArrowRightIcon,
-  ArrowRightIconProps,
   ArrowLeftIcon,
-  ArrowLeftIconProps,
   ArrowUpIcon,
-  ArrowUpIconProps,
   ArrowDownIcon,
+  RotatableArrowIcon,
+};
+
+export type {
+  ArrowRightIconProps,
+  ArrowLeftIconProps,
+  ArrowUpIconProps,
   ArrowDownIconProps,
+  RotatableArrowIconProps,
 };

@@ -86,12 +86,14 @@ import {
   ArrowDownIcon,
   ArrowLeftIcon,
   ArrowRightIcon,
+  RotatableArrowIcon,
 } from "./ArrowIcons";
 import type {
   ArrowUpIconProps,
   ArrowDownIconProps,
   ArrowRightIconProps,
   ArrowLeftIconProps,
+  RotatableArrowIconProps,
 } from "./ArrowIcons";
 import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
@@ -150,6 +152,7 @@ export type {
   ArrowDownIconProps,
   ArrowRightIconProps,
   ArrowLeftIconProps,
+  RotatableArrowIconProps,
   CopyIconProps,
   ClientIconProps,
   ModelIconProps,
@@ -220,6 +223,7 @@ export {
   ArrowDownIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
+  RotatableArrowIcon,
   CopyIcon,
   ClientIcon,
   ModelIcon,
