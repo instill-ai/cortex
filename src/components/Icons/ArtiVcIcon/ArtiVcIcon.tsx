@@ -1,7 +1,7 @@
 import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type ArtiVcIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
+export type ArtiVcIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
 
 const ArtiVcIcon: React.FC<ArtiVcIconProps> = (props) => {
   return (
@@ -9,7 +9,6 @@ const ArtiVcIcon: React.FC<ArtiVcIconProps> = (props) => {
       viewBox="0 0 30 30"
       width={props.width}
       height={props.height}
-      color={props.color}
       position={props.position}
     >
       <path d="M8.3736 12.1562H1V18.5825H8.3736V12.1562Z" fill="#25A476" />
