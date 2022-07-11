@@ -202,9 +202,9 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
               indicatorColumnWidth,
               indicatorColumnBottomLeftBorderRadius,
               indicatorColumnTopLeftBorderRadius,
-              status === "error"
+              state.status === "error"
                 ? errorindicatorColumnBgColor
-                : status === "success"
+                : state.status === "success"
                 ? successIndicatorColumnBgColor
                 : processingIndicatorColumnBgColor
             )}
