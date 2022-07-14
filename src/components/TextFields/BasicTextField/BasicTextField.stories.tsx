@@ -19,12 +19,9 @@ const Template: ComponentStory<typeof BasicTextField> = (args) => {
       {...args}
       id="text-field-playground"
       label="text-field-playground"
-      additionalMessageOnLabel={null}
       description="this is a description for text field <a href='#'>setup guide</a>"
-      placeholder="hello!"
       value={value}
       onChangeInput={onChnageInput}
-      error={null}
     />
   );
 };
