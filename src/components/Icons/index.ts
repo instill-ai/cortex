@@ -141,6 +141,10 @@ import ArtiVcIcon from "./ArtiVcIcon";
 import type { ArtiVcIconProps } from "./ArtiVcIcon";
 import HuggingFaceIcon from "./HuggingFaceIcon";
 import type { HuggingFaceIconProps } from "./HuggingFaceIcon";
+import DiscordIcon from "./DiscordIcon";
+import type { DiscordIconProps } from "./DiscordIcon";
+import MediumIcon from "./MediumIcon";
+import type { MediumIconProps } from "./MediumIcon";
 
 export type {
   EyeOnIconProps,
@@ -212,6 +216,8 @@ export type {
   CollapseRightIconProps,
   ArtiVcIconProps,
   HuggingFaceIconProps,
+  DiscordIconProps,
+  MediumIconProps,
 };
 
 export {
@@ -284,4 +290,6 @@ export {
   CollapseRightIcon,
   ArtiVcIcon,
   HuggingFaceIcon,
+  DiscordIcon,
+  MediumIcon,
 };
