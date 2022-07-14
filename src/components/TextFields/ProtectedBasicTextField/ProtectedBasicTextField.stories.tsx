@@ -20,10 +20,8 @@ const Template: ComponentStory<typeof ProtectedBasicTextField> = (args) => {
       id="protected-text-field-playground"
       label="protected-text-field-playground"
       description="this is a description for protected text field <a href='#'>setup guide</a>"
-      placeholder="hello!"
       value={value}
       onChangeInput={onChnageInput}
-      error={null}
     />
   );
 };
