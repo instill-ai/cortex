@@ -26,7 +26,6 @@ const Template: ComponentStory<typeof StatefulToggleField> = (args) => {
       value={checked}
       description="this is a description for basic toggle field <a href='#'>setup guide</a>"
       label="basic-toggle-field"
-      additionalMessageOnLabel={null}
       error={
         state === "STATE_ERROR" ? "There is an error. Please try again." : null
       }
