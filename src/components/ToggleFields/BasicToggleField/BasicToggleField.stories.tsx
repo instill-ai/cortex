@@ -19,9 +19,7 @@ const Template: ComponentStory<typeof BasicToggleField> = (args) => {
       onChangeInput={onChangeInput}
       description="this is a description for basic toggle field <a href='#'>setup guide</a>"
       label="basic-toggle-field"
-      additionalMessageOnLabel={null}
       value={checked}
-      error={null}
     />
   );
 };
