@@ -53,11 +53,7 @@ export const DemoFileReader: ComponentStory<
       //encType="multipart/form-data"
     >
       <BasicUploadFileField
-        error={null}
-        additionalMessageOnLabel={null}
         description="this is a description about upload file field  <a href='#'>setup guide</a>"
-        disabled={false}
-        readOnly={false}
         onChangeInput={onChangeInput}
         required={true}
         id="upload-file-field-base-playground"
