@@ -4,17 +4,17 @@ import {
   constructPixelBaseBlock,
   constructPixelBlockOutline,
   generateTwoLayerRandomPixelMetric,
+  pixelGeneratorInfo,
 } from "../../utils/pixel";
-import { initGeneratorInfo } from "../../pixel/DiagramGenerator";
 
 const PixelBaseBlock: FC = () => {
   const id = "pixel-base-block";
 
   useEffect(() => {
-    const { ctx } = prepareCanvas(id, initGeneratorInfo);
+    const { ctx } = prepareCanvas(id, pixelGeneratorInfo);
     const metric = generateTwoLayerRandomPixelMetric();
-    constructPixelBaseBlock(metric, ctx, initGeneratorInfo, 10, 10);
-    constructPixelBlockOutline(ctx, initGeneratorInfo, 10, 10);
+    constructPixelBaseBlock(metric, ctx, pixelGeneratorInfo, 10, 10);
+    constructPixelBlockOutline(ctx, pixelGeneratorInfo, 10, 10);
   }, []);
 
   return (

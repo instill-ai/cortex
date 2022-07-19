@@ -1,6 +1,8 @@
-import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { initGeneratorInfo } from "../../utils/pixel";
-import PixelDiagramGenerator from "./PixelDiagramGenerator";
+import { ComponentMeta } from "@storybook/react";
+import { pixelGeneratorInfo } from "../../utils/pixel";
+import PixelDiagramGenerator, {
+  PixelDiagramGeneratorProps,
+} from "./PixelDiagramGenerator";
 
 export default {
   title: "Components/Generators/Pixel/PixelDiagramGenerator",
@@ -38,16 +40,6 @@ export default {
       defaultValue: 10,
       control: { type: "range", min: 1, max: 50, step: 1 },
     },
-    // rowCount: {
-    //   control: {
-    //     type: "number",
-    //   },
-    // },
-    // columnCount: {
-    //   control: {
-    //     type: "number",
-    //   },
-    // },
     canvasPadding: {
       defaultValue: 20,
       control: { type: "range", min: 8, max: 52, step: 4 },
@@ -64,20 +56,31 @@ export default {
   },
 } as ComponentMeta<typeof PixelDiagramGenerator>;
 
-const Template: ComponentStory<typeof PixelDiagramGenerator> = (args) => {
+const Template = ({
+  blockSize,
+  blockBaseColor,
+  baseStrokeColor,
+  baseStrokeWidth,
+  canvasPadding,
+  metricType,
+}: PixelDiagramGeneratorProps["generatorInfo"]) => {
   return (
     <PixelDiagramGenerator
-      {...args}
       generatorInfo={{
-        ...args.generatorInfo,
-        rowCount: initGeneratorInfo.rowCount,
-        columnCount: initGeneratorInfo.columnCount,
-        colorArray: initGeneratorInfo.colorArray,
-        blockTypeCount: initGeneratorInfo.blockTypeCount,
+        blockSize,
+        blockBaseColor,
+        baseStrokeColor,
+        baseStrokeWidth,
+        canvasPadding,
+        metricType,
+        downloadWhenGenerate: pixelGeneratorInfo.downloadWhenGenerate,
+        rowCount: pixelGeneratorInfo.rowCount,
+        columnCount: pixelGeneratorInfo.columnCount,
+        colorArray: pixelGeneratorInfo.colorArray,
+        blockTypeCount: pixelGeneratorInfo.blockTypeCount,
       }}
     />
   );
 };
 
-export const Playground: ComponentStory<typeof PixelDiagramGenerator> =
-  Template.bind({});
+export const Playground = Template.bind({});

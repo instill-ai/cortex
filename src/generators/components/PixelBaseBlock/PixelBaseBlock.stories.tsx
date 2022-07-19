@@ -2,7 +2,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import PixelBaseBlock from "./PixelBaseBlock";
 
 export default {
-  title: "Components/Generator/Pixel/PixelBaseBlock",
+  title: "Components/Generators/Pixel/PixelBaseBlock",
   component: PixelBaseBlock,
 } as ComponentMeta<typeof PixelBaseBlock>;
 

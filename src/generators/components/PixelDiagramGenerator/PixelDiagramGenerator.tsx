@@ -3,7 +3,7 @@ import { PixelGeneratorInfo } from "../../types/generator";
 import { prepareCanvas } from "../../utils/common";
 import {
   constructOptimizePixelDiagram,
-  initGeneratorInfo,
+  pixelGeneratorInfo,
 } from "../../utils/pixel";
 
 export type PixelDiagramGeneratorProps = {
@@ -11,7 +11,7 @@ export type PixelDiagramGeneratorProps = {
 };
 
 const PixelDiagramGenerator: FC<PixelDiagramGeneratorProps> = ({
-  generatorInfo = initGeneratorInfo,
+  generatorInfo = pixelGeneratorInfo,
 }) => {
   const [state, updateState] = useState(0);
   const id = "pixel-block-diagram-generator";
