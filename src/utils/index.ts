@@ -1,5 +1,3 @@
-import { Nullable } from "../types/general";
-
 export type ElemeentPosition = {
   x: number;
   y: number;
