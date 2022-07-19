@@ -49,9 +49,6 @@ module.exports = {
 
     // eslint-plugin-storybook
     "plugin:storybook/recommended",
-
-    // eslint-plugin-testing-library
-    "plugin:testing-library/react",
   ],
   rules: {
     // https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html#eslint
@@ -61,7 +58,7 @@ module.exports = {
     {
       // For performance run jest/recommended on test files, not regular code
       files: ["**/?(*.)+(test).{js,jsx,ts,tsx}"],
-      extends: ["plugin:jest/recommended"],
+      extends: ["plugin:jest/recommended", "plugin:testing-library/react"],
       rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-object-literal-type-assertion": "off",
