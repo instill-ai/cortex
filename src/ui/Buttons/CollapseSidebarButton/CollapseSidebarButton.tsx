@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import { CollapseLeftIcon, CollapseRightIcon } from "../../Icons";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
@@ -65,7 +65,7 @@ export type CollapseSidebarButtonOptionalProps = Partial<
 export type CollapseSidebarButtonProps = CollapseSidebarButtonRequiredProps &
   CollapseSidebarButtonOptionalProps;
 
-const CollapseSidebarButton: FC<CollapseSidebarButtonProps> = (props) => {
+const CollapseSidebarButton: React.FC<CollapseSidebarButtonProps> = (props) => {
   return (
     <ButtonBase
       onClickHandler={props.onClickHandler}
