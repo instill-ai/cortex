@@ -104,11 +104,15 @@ export type ButtonBaseProps = {
 
   /**
    * The icon present at the start of the button
+   * - If the icon need to change color when hover, please use group-hover state
+   *   - e.g. group-hover:fill-instillBlue50
    */
   startIcon: Nullable<React.ReactElement>;
 
   /**
    * The icon present at the end of the button
+   * - If the icon need to change color when hover, please use group-hover state
+   *   - e.g. group-hover:fill-instillBlue50
    */
   endIcon: Nullable<React.ReactElement>;
 
