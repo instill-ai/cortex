@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { DiscordIcon, MediumIcon } from "../../Icons";
 import OutlineButton from "./OutlineButton";
 
 export default {
@@ -9,10 +10,44 @@ export default {
 const Template: ComponentStory<typeof OutlineButton> = (args) => (
   <OutlineButton {...args}>Button</OutlineButton>
 );
+
 export const Playground: ComponentStory<typeof OutlineButton> = Template.bind(
   {}
 );
 
 Playground.args = {
   variant: "primary",
+};
+
+export const DiscordButton: ComponentStory<typeof OutlineButton> =
+  Template.bind({});
+
+DiscordButton.args = {
+  variant: "primary",
+  itemGapX: "gap-x-3",
+  startIcon: (
+    <DiscordIcon
+      width="w-5"
+      height="h-5"
+      color="fill-instillBlue50 group-hover:fill-instillBlue10"
+      position="my-auto"
+    />
+  ),
+};
+
+export const MediumButton: ComponentStory<typeof OutlineButton> = Template.bind(
+  {}
+);
+
+MediumButton.args = {
+  variant: "primary",
+  itemGapX: "gap-x-3",
+  endIcon: (
+    <MediumIcon
+      width="w-5"
+      height="h-5"
+      color="fill-instillBlue50 group-hover:fill-instillBlue10"
+      position="my-auto"
+    />
+  ),
 };
