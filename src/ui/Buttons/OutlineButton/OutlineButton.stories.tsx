@@ -16,14 +16,14 @@ export const Playground: ComponentStory<typeof OutlineButton> = Template.bind(
 );
 
 Playground.args = {
-  variant: "primary",
+  color: "primary",
 };
 
 export const DiscordButton: ComponentStory<typeof OutlineButton> =
   Template.bind({});
 
 DiscordButton.args = {
-  variant: "primary",
+  color: "primary",
   itemGapX: "gap-x-3",
   startIcon: (
     <DiscordIcon
@@ -40,7 +40,7 @@ export const MediumButton: ComponentStory<typeof OutlineButton> = Template.bind(
 );
 
 MediumButton.args = {
-  variant: "primary",
+  color: "primary",
   itemGapX: "gap-x-3",
   endIcon: (
     <MediumIcon
