@@ -1,8 +1,8 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx}",
-    "./src/components/**/*.{js,ts,jsx,tsx}",
+    "./src/generators/**/*.{js,ts,jsx,tsx}",
+    "./src/ui/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -19,6 +19,7 @@ module.exports = {
         instill_light_blue: "#F4FBFF",
         instill_light_yellow: "#FFFCEB",
         instillGrey95: "#1A1A1A",
+        instillGrey90: "#2B2B2B",
         instillGrey80: "#5c5c5c",
         instillGrey70: "#8C8A8A",
         instillGrey50: "#A5A5A5",
@@ -28,6 +29,7 @@ module.exports = {
         instillGrey05: "#F6F6F6",
         instillBlue: "#0000FF",
         instillBlue85: "#002050",
+        instillBlue80: "#0268B5",
         instillBlue70: "#003381",
         instillBlue50: "#40A8F5",
         instillBlue10: "#F4FBFF",
