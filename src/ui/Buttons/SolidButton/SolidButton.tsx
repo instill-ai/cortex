@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
-export type SolidButtonRequiredKeys = "type" | "variant";
+export type SolidButtonRequiredKeys = "type" | "color";
 
 export type SolidButtonOmitKeys =
   | "borderSize"
@@ -22,7 +22,7 @@ export type FullSolidButtonProps = Omit<
   ButtonBaseProps,
   SolidButtonOmitKeys
 > & {
-  variant: "primary";
+  color: "primary";
 };
 
 export type SolidButtonRequiredProps = Pick<
@@ -40,7 +40,7 @@ export type SolidButtonProps = SolidButtonRequiredProps &
 const SolidButton: React.FC<SolidButtonProps> = (props) => {
   let buttonStyle = {} as SolidButtonConfig;
 
-  switch (props.variant) {
+  switch (props.color) {
     case "primary": {
       buttonStyle = {
         borderSize: null,
@@ -75,7 +75,7 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
     // }
     default: {
       throw new Error(
-        `Button variant ${props.variant} not support, SolidButton only support variant=primary`
+        `Button variant ${props.color} not support, SolidButton only support variant=primary`
       );
     }
   }
