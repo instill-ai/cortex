@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
-export type OutlineButtonRequiredKeys = "type" | "variant";
+export type OutlineButtonRequiredKeys = "type" | "color";
 
 export type OutlineButtonOmitKeys =
   | "borderSize"
@@ -22,7 +22,7 @@ export type FullOutlineButtonProps = Omit<
   ButtonBaseProps,
   OutlineButtonOmitKeys
 > & {
-  variant: "primary" | "secondary" | "danger";
+  color: "primary" | "secondary" | "danger";
 };
 
 export type OutlineButtonRequiredProps = Pick<
@@ -40,7 +40,7 @@ export type OutlineButtonProps = OutlineButtonRequiredProps &
 const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
   let buttonStyle = {} as OutlineButtonConfig;
 
-  switch (props.variant) {
+  switch (props.color) {
     case "primary": {
       buttonStyle = {
         borderSize: "border-[1px]",
@@ -48,9 +48,9 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         hoveredBorderColor: "hover:border-instillBlue50",
         disabledBorderColor: "border-instillGrey30",
         borderRadius: "rounded-[1px]",
-        bgColor: "bg-white",
+        bgColor: null,
         hoveredBgColor: "hover:bg-instillBlue50",
-        disabledBgColor: "bg-white",
+        disabledBgColor: null,
         textColor: "text-instillBlue50",
         hoveredTextColor: "hover:text-instillBlue10",
         disabledTextColor: "text-instillGrey30",
@@ -64,9 +64,9 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         hoveredBorderColor: "hover:border-instillGrey50",
         disabledBorderColor: "border-instillGrey30",
         borderRadius: "rounded-[1px]",
-        bgColor: "bg-white",
+        bgColor: null,
         hoveredBgColor: "hover:bg-instillGrey50",
-        disabledBgColor: "bg-white",
+        disabledBgColor: null,
         textColor: "text-instillGrey50",
         hoveredTextColor: "hover:text-instillGrey05",
         disabledTextColor: "text-instillGrey30",
@@ -80,9 +80,9 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         hoveredBorderColor: "hover:border-instillRed",
         disabledBorderColor: "border-instillGrey30",
         borderRadius: "rounded-[1px]",
-        bgColor: "bg-white",
+        bgColor: null,
         hoveredBgColor: "hover:bg-instillRed",
-        disabledBgColor: "bg-white",
+        disabledBgColor: null,
         textColor: "text-instillRed",
         hoveredTextColor: "hover:text-instillRed10",
         disabledTextColor: "text-instillGrey30",
@@ -91,7 +91,7 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
     }
     default: {
       throw new Error(
-        `Button variant ${props.variant} not support, OutlineButton only support variant=primary`
+        `Button variant ${props.color} not support, OutlineButton only support variant=primary`
       );
     }
   }

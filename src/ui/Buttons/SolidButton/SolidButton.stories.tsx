@@ -12,5 +12,5 @@ const Template: ComponentStory<typeof SolidButton> = (args) => (
 export const Playground: ComponentStory<typeof SolidButton> = Template.bind({});
 
 Playground.args = {
-  variant: "primary",
+  color: "primary",
 };

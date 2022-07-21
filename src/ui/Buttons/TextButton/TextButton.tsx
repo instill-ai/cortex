@@ -1,9 +1,9 @@
 import React from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
-export type SolidButtonRequiredKeys = "type" | "color";
+export type TextButtonRequiredKeys = "type" | "color";
 
-export type SolidButtonOmitKeys =
+export type TextButtonOmitKeys =
   | "borderSize"
   | "borderColor"
   | "hoveredBorderColor"
@@ -16,29 +16,25 @@ export type SolidButtonOmitKeys =
   | "disabledTextColor"
   | "borderRadius";
 
-export type SolidButtonConfig = Pick<ButtonBaseProps, SolidButtonOmitKeys>;
+export type TextButtonConfig = Pick<ButtonBaseProps, TextButtonOmitKeys>;
 
-export type FullSolidButtonProps = Omit<
-  ButtonBaseProps,
-  SolidButtonOmitKeys
-> & {
+export type FullTextButtonProps = Omit<ButtonBaseProps, TextButtonOmitKeys> & {
   color: "primary";
 };
 
-export type SolidButtonRequiredProps = Pick<
-  FullSolidButtonProps,
-  SolidButtonRequiredKeys
+export type TextButtonRequiredProps = Pick<
+  FullTextButtonProps,
+  TextButtonRequiredKeys
 >;
 
-export type SolidButtonOptionalProps = Partial<
-  Omit<FullSolidButtonProps, SolidButtonRequiredKeys>
+export type TextButtonOptionalProps = Partial<
+  Omit<FullTextButtonProps, TextButtonRequiredKeys>
 >;
 
-export type SolidButtonProps = SolidButtonRequiredProps &
-  SolidButtonOptionalProps;
+export type TextButtonProps = TextButtonRequiredProps & TextButtonOptionalProps;
 
-const SolidButton: React.FC<SolidButtonProps> = (props) => {
-  let buttonStyle = {} as SolidButtonConfig;
+const TextButton: React.FC<TextButtonProps> = (props) => {
+  let buttonStyle = {} as TextButtonConfig;
 
   switch (props.color) {
     case "primary": {
@@ -47,12 +43,12 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
         borderColor: null,
         hoveredBorderColor: null,
         disabledBorderColor: null,
-        borderRadius: "rounded-[1px]",
-        bgColor: "bg-instillBlue50",
-        hoveredBgColor: "hover:bg-instillBlue80",
-        textColor: "text-instillGrey05",
-        hoveredTextColor: "hover:text-instillBlue10",
-        disabledBgColor: "bg-instillGrey15",
+        borderRadius: null,
+        bgColor: null,
+        hoveredBgColor: null,
+        textColor: "text-instillBlue50",
+        hoveredTextColor: "hover:text-instillBlue80",
+        disabledBgColor: null,
         disabledTextColor: "text-instillGrey50",
       };
       break;
@@ -75,7 +71,7 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
     // }
     default: {
       throw new Error(
-        `Button variant ${props.color} not support, SolidButton only support variant=primary`
+        `Button variant ${props.color} not support, TextButton only support variant=primary`
       );
     }
   }
@@ -99,4 +95,4 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
   );
 };
 
-export default SolidButton;
+export default TextButton;
