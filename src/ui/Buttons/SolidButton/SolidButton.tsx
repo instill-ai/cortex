@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
 export type SolidButtonRequiredKeys = "type" | "variant";
@@ -37,7 +37,7 @@ export type SolidButtonOptionalProps = Partial<
 export type SolidButtonProps = SolidButtonRequiredProps &
   SolidButtonOptionalProps;
 
-const SolidButton: FC<SolidButtonProps> = (props) => {
+const SolidButton: React.FC<SolidButtonProps> = (props) => {
   let buttonStyle = {} as SolidButtonConfig;
 
   switch (props.variant) {

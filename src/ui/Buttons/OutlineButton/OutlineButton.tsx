@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
 export type OutlineButtonRequiredKeys = "type" | "variant";
@@ -37,7 +37,7 @@ export type OutlineButtonOptionalProps = Partial<
 export type OutlineButtonProps = OutlineButtonRequiredProps &
   OutlineButtonOptionalProps;
 
-const OutlineButton: FC<OutlineButtonProps> = (props) => {
+const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
   let buttonStyle = {} as OutlineButtonConfig;
 
   switch (props.variant) {
