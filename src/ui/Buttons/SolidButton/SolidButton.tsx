@@ -1,7 +1,7 @@
 import { FC } from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
-export type SolidButtonRequiredKeys = "type";
+export type SolidButtonRequiredKeys = "type" | "variant";
 
 export type SolidButtonOmitKeys =
   | "borderSize"
@@ -18,7 +18,12 @@ export type SolidButtonOmitKeys =
 
 export type SolidButtonConfig = Pick<ButtonBaseProps, SolidButtonOmitKeys>;
 
-export type FullSolidButtonProps = Omit<ButtonBaseProps, SolidButtonOmitKeys>;
+export type FullSolidButtonProps = Omit<
+  ButtonBaseProps,
+  SolidButtonOmitKeys
+> & {
+  variant: "primary";
+};
 
 export type SolidButtonRequiredProps = Pick<
   FullSolidButtonProps,
@@ -30,9 +35,7 @@ export type SolidButtonOptionalProps = Partial<
 >;
 
 export type SolidButtonProps = SolidButtonRequiredProps &
-  SolidButtonOptionalProps & {
-    variant: "primary";
-  };
+  SolidButtonOptionalProps;
 
 const SolidButton: FC<SolidButtonProps> = (props) => {
   let buttonStyle = {} as SolidButtonConfig;

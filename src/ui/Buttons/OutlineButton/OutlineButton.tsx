@@ -1,7 +1,7 @@
 import { FC } from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
-export type OutlineButtonRequiredKeys = "type";
+export type OutlineButtonRequiredKeys = "type" | "variant";
 
 export type OutlineButtonOmitKeys =
   | "borderSize"
@@ -21,7 +21,9 @@ export type OutlineButtonConfig = Pick<ButtonBaseProps, OutlineButtonOmitKeys>;
 export type FullOutlineButtonProps = Omit<
   ButtonBaseProps,
   OutlineButtonOmitKeys
->;
+> & {
+  variant: "primary" | "secondary" | "danger";
+};
 
 export type OutlineButtonRequiredProps = Pick<
   FullOutlineButtonProps,
@@ -33,9 +35,7 @@ export type OutlineButtonOptionalProps = Partial<
 >;
 
 export type OutlineButtonProps = OutlineButtonRequiredProps &
-  OutlineButtonOptionalProps & {
-    variant: "primary" | "secondary" | "danger";
-  };
+  OutlineButtonOptionalProps;
 
 const OutlineButton: FC<OutlineButtonProps> = (props) => {
   let buttonStyle = {} as OutlineButtonConfig;
