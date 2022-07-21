@@ -154,7 +154,12 @@ const ButtonBase: React.FC<ButtonBaseProps> = ({
         "group rounded-[1px] flex flex-row",
         startIcon ? itemGapX : endIcon ? itemGapX : "",
         disabled
-          ? cn(disabledBgColor, disabledTextColor, disabledBorderColor)
+          ? cn(
+              disabledBgColor,
+              disabledTextColor,
+              disabledBorderColor,
+              "cursor-not-allowed"
+            )
           : cn(
               bgColor,
               hoveredBgColor,
