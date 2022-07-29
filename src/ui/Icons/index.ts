@@ -153,6 +153,8 @@ import PinIcon from "./PinIcon";
 import type { PinIconProps } from "./PinIcon";
 import TwitterIcon from "./TwitterIcon";
 import type { TwitterIconProps } from "./TwitterIcon";
+import ToolboxIcon from "./ToolboxIcon";
+import type { ToolboxIconProps } from "./ToolboxIcon";
 
 export type {
   EyeOnIconProps,
@@ -230,6 +232,7 @@ export type {
   LinkedInIconProps,
   PinIconProps,
   TwitterIconProps,
+  ToolboxIconProps,
 };
 
 export {
@@ -308,4 +311,5 @@ export {
   LinkedInIcon,
   PinIcon,
   TwitterIcon,
+  ToolboxIcon,
 };
