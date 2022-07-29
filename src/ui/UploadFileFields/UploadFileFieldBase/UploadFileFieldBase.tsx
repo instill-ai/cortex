@@ -63,6 +63,12 @@ export type UploadFileFieldBaseProps = Omit<
    * - e.g. rounded-bl-[1px]
    */
   inputBorderRadiusBottomLeft: string;
+
+  onChangeInput: (
+    id: string,
+    inputValue: any,
+    event: Nullable<React.ChangeEvent<HTMLInputElement>>
+  ) => void;
 };
 
 const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
@@ -238,7 +244,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
       setFile("");
       setFileInputKey(Math.random().toString(36));
       setAnswered(false);
-      onChangeInput(id, null);
+      onChangeInput(id, null, null);
     }
   };
 
@@ -405,7 +411,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
               setFile(inputValue);
 
               if (inputFileList) {
-                onChangeInput(id, inputFileList[0]);
+                onChangeInput(id, inputFileList[0], event);
               }
             }}
             onClick={(event) => handleInputOnClick(event)}
