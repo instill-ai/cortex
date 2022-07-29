@@ -15,6 +15,6 @@ export const Playground: ComponentStory<typeof CheckIcon> = Template.bind({});
 Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
-  color: "text-instillGrey50",
+  color: "fill-instillGrey50",
   position: "my-auto",
 };

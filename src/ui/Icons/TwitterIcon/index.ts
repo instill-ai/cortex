@@ -1,2 +1,2 @@
-export { default } from "./GearIcon";
-export * from "./GearIcon";
+export { default } from "./TwitterIcon";
+export * from "./TwitterIcon";

@@ -1,2 +1,2 @@
-export { default } from "./HttpIcon";
-export * from "./HttpIcon";
+export { default } from "./ToolboxIcon";
+export * from "./ToolboxIcon";
