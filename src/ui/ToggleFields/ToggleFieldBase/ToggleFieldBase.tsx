@@ -1,10 +1,6 @@
 import React from "react";
 import cn from "clsx";
-import {
-  BasicInputFieldAttributes,
-  Nullable,
-  State,
-} from "../../../types/general";
+import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
@@ -101,6 +97,12 @@ export type ToggleFieldBaseProps = Omit<
    * - Show the shadow when user focus on input
    */
   inputFocusShadow: string;
+
+  onChangeInput: (
+    id: string,
+    inputValue: boolean,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
 };
 
 const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
@@ -252,7 +254,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
                 return;
               }
 
-              onChangeInput(id, event.target.checked);
+              onChangeInput(id, event.target.checked, event);
 
               if (!answered) {
                 setAnswered(true);
