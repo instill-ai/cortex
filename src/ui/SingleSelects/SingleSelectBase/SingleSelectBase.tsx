@@ -1,4 +1,8 @@
-import ReactSelect, { SingleValue, StylesConfig } from "react-select";
+import ReactSelect, {
+  ActionMeta,
+  SingleValue,
+  StylesConfig,
+} from "react-select";
 import React from "react";
 import cn from "clsx";
 
@@ -107,7 +111,14 @@ export type SingleSelectBaseProps = Omit<
 
   value: Nullable<SingleSelectOption>;
 
-  onChangeInput: (id: string, option: Nullable<SingleSelectOption>) => void;
+  /**
+   * The design system use actionMeta to provide additional info about the selection behavior. You could access these info inside the onChnageInput.
+   */
+  onChangeInput: (
+    id: string,
+    option: Nullable<SingleSelectOption>,
+    meta?: ActionMeta<SingleSelectOption>
+  ) => void;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
@@ -367,10 +378,11 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
             onBlur={() => setFocus(false)}
             menuPlacement={menuPlacement ? menuPlacement : "auto"}
             options={options}
-            onChange={(selectedOption) => {
+            onChange={(selectedOption, meta) => {
               onChangeInput(
                 id,
-                selectedOption as SingleValue<SingleSelectOption>
+                selectedOption as SingleValue<SingleSelectOption>,
+                meta
               );
 
               if (selectedOption) {
