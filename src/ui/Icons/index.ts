@@ -145,6 +145,16 @@ import DiscordIcon from "./DiscordIcon";
 import type { DiscordIconProps } from "./DiscordIcon";
 import MediumIcon from "./MediumIcon";
 import type { MediumIconProps } from "./MediumIcon";
+import CrossIcon from "./CrossIcon";
+import type { CrossIconProps } from "./CrossIcon";
+import LinkedInIcon from "./LinkedInIcon";
+import type { LinkedInIconProps } from "./LinkedInIcon";
+import PinIcon from "./PinIcon";
+import type { PinIconProps } from "./PinIcon";
+import TwitterIcon from "./TwitterIcon";
+import type { TwitterIconProps } from "./TwitterIcon";
+import ToolboxIcon from "./ToolboxIcon";
+import type { ToolboxIconProps } from "./ToolboxIcon";
 
 export type {
   EyeOnIconProps,
@@ -218,6 +228,11 @@ export type {
   HuggingFaceIconProps,
   DiscordIconProps,
   MediumIconProps,
+  CrossIconProps,
+  LinkedInIconProps,
+  PinIconProps,
+  TwitterIconProps,
+  ToolboxIconProps,
 };
 
 export {
@@ -292,4 +307,9 @@ export {
   HuggingFaceIcon,
   DiscordIcon,
   MediumIcon,
+  CrossIcon,
+  LinkedInIcon,
+  PinIcon,
+  TwitterIcon,
+  ToolboxIcon,
 };
