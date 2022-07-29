@@ -7,7 +7,7 @@ import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
 export type TextAreaBaseProps = Omit<
   BasicInputFieldAttributes,
-  "labelActivateStyle" | "labelDeActivateStyle"
+  "labelActivateStyle" | "labelDeActivateStyle" | "onChangeInput"
 > & {
   /** Textarea value */
   value: Nullable<string>;
@@ -57,6 +57,12 @@ export type TextAreaBaseProps = Omit<
    * - https://tailwindcss.com/docs/line-height
    */
   counterLineHeight: string;
+
+  onChangeInput: (
+    id: string,
+    inputValue: string,
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ) => void;
 };
 
 const TextAreaBase: React.FC<TextAreaBaseProps> = ({
@@ -355,7 +361,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             autoComplete={autoComplete}
             onChange={(event) => {
               const inputValue = event.target.value;
-              onChangeInput(id, event.target.value);
+              onChangeInput(id, event.target.value, event);
               if (!inputValue) {
                 setAnswered(false);
                 return;
