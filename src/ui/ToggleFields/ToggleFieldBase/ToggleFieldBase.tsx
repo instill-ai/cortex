@@ -1,11 +1,11 @@
 import React from "react";
 import cn from "clsx";
-import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
+import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
 export type ToggleFieldBaseProps = Omit<
-  BasicInputFieldAttributes,
+  BasicInputProps,
   | "placeholder"
   | "inputFontSize"
   | "inputLineHeight"

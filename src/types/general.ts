@@ -1,4 +1,4 @@
-export type BasicInputFieldAttributes = {
+export type BasicInputProps = {
   /** Input field's id */
   id: string;
 

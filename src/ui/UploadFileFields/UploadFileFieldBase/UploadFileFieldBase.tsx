@@ -1,5 +1,5 @@
 import React, { MouseEvent, useState } from "react";
-import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
+import { BasicInputProps, Nullable } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -7,7 +7,7 @@ import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition } from "../../../utils";
 
 export type UploadFileFieldBaseProps = Omit<
-  BasicInputFieldAttributes,
+  BasicInputProps,
   | "autoComplete"
   | "bgColor"
   | "inputBorderRadius"

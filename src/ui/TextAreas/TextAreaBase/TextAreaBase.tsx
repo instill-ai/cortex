@@ -1,12 +1,12 @@
 import React from "react";
 import cn from "clsx";
-import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
+import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
 export type TextAreaBaseProps = Omit<
-  BasicInputFieldAttributes,
+  BasicInputProps,
   "labelActivateStyle" | "labelDeActivateStyle" | "onChangeInput"
 > & {
   /** Textarea value */

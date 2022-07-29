@@ -6,7 +6,7 @@ import ReactSelect, {
 import React from "react";
 import cn from "clsx";
 
-import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
+import { BasicInputProps, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
@@ -20,7 +20,7 @@ export type SingleSelectOption = {
 };
 
 export type SingleSelectBaseProps = Omit<
-  BasicInputFieldAttributes,
+  BasicInputProps,
   | "placeholder"
   | "inputFontSize"
   | "inputLineHeight"
