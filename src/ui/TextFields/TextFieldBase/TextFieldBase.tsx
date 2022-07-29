@@ -2,7 +2,7 @@ import React from "react";
 import cn from "clsx";
 import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
-import { BasicInputFieldAttributes, Nullable } from "../../../types/general";
+import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 import { getElementPosition, getTailwindClassNumber } from "../../../utils";
@@ -14,7 +14,7 @@ import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 //  - Use top-1/2 + (-translate-y-full) to move label up a little bit
 //  - If you want to change the InputLabel font size, you have to change the input's paddingTop and Input paddingTop
 
-export interface TextFieldBaseProps extends BasicInputFieldAttributes {
+export type TextFieldBaseProps = BasicInputProps & {
   /** Text field's type
    * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
    */
@@ -24,7 +24,13 @@ export interface TextFieldBaseProps extends BasicInputFieldAttributes {
   enableProtectedToggle: boolean;
 
   value: Nullable<string>;
-}
+
+  onChangeInput: (
+    id: string,
+    inputValue: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+};
 
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   onChangeInput,
@@ -311,7 +317,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             autoComplete={autoComplete}
             onChange={(event) => {
               const inputValue = event.target.value;
-              onChangeInput(id, event.target.value);
+              onChangeInput(id, event.target.value, event);
               if (!inputValue) {
                 setAnswered(false);
                 return;
