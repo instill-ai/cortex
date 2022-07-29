@@ -1,2 +1,2 @@
-export { default } from "./CheckIcon";
-export * from "./CheckIcon";
+export { default } from "./LinkedInIcon";
+export * from "./LinkedInIcon";
