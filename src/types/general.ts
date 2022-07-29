@@ -1,6 +1,4 @@
-import { ReactNode } from "react";
-
-export interface BasicInputFieldAttributes {
+export type BasicInputFieldAttributes = {
   /** Input field's id */
   id: string;
 
@@ -207,9 +205,6 @@ export interface BasicInputFieldAttributes {
   /** TailwindCSS format - The border radius of the input */
   inputBorderRadius: string;
 
-  /** Input on change handler */
-  onChangeInput: (id: string, inputValue: any) => void;
-
   /**
    * Whether the field is necessary or not
    * @default false
@@ -358,7 +353,7 @@ export interface BasicInputFieldAttributes {
    * - e.g. w-full
    */
   descriptionWidth: string;
-}
+};
 
 export type Nullable<T> = T | null;
 
