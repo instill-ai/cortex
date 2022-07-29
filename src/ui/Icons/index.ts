@@ -151,6 +151,8 @@ import LinkedInIcon from "./LinkedInIcon";
 import type { LinkedInIconProps } from "./LinkedInIcon";
 import PinIcon from "./PinIcon";
 import type { PinIconProps } from "./PinIcon";
+import TwitterIcon from "./TwitterIcon";
+import type { TwitterIconProps } from "./TwitterIcon";
 
 export type {
   EyeOnIconProps,
@@ -227,6 +229,7 @@ export type {
   CrossIconProps,
   LinkedInIconProps,
   PinIconProps,
+  TwitterIconProps,
 };
 
 export {
@@ -304,4 +307,5 @@ export {
   CrossIcon,
   LinkedInIcon,
   PinIcon,
+  TwitterIcon,
 };
