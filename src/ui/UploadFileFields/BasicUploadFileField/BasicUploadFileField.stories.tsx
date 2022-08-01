@@ -1,4 +1,4 @@
-import React, { FormEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import BasicUploadFileField from "./BasicUploadFileField";
 
@@ -18,7 +18,7 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: true,
-  onChangeInput: () => undefined,
+  onChange: () => undefined,
   id: "upload-file-field-base-playground",
   label: "upload-file-field-base-playground",
   placeholder: "Upload a file",
@@ -30,16 +30,20 @@ Playground.args = {
 export const DemoFileReader: ComponentStory<
   typeof BasicUploadFileField
 > = () => {
-  const onChangeInput = (id: string, inputValue: File) => {
-    if (!inputValue) return;
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (!event.target.value) return;
 
     const reader = new FileReader();
 
-    reader.readAsDataURL(inputValue);
+    const inputFileList = event.target.files;
 
-    reader.onloadend = () => {
-      console.log(reader.result);
-    };
+    if (inputFileList) {
+      reader.readAsDataURL(inputFileList[0]);
+
+      reader.onloadend = () => {
+        console.log(reader.result);
+      };
+    }
   };
 
   const onSubmitHandler = (event: FormEvent) => {
@@ -54,7 +58,7 @@ export const DemoFileReader: ComponentStory<
     >
       <BasicUploadFileField
         description="this is a description about upload file field  <a href='#'>setup guide</a>"
-        onChangeInput={onChangeInput}
+        onChange={onChange}
         required={true}
         id="upload-file-field-base-playground"
         label="upload-file-field-base-playground"

@@ -9,7 +9,7 @@ import UploadFileFieldBase, {
 
 export type BasicUploadFileFieldRequiredKeys =
   | "id"
-  | "onChangeInput"
+  | "onChange"
   | "label"
   | "uploadButtonText";
 
@@ -139,7 +139,7 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
     <UploadFileFieldBase
       id={props.id}
       label={props.label}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       uploadButtonText={props.uploadButtonText}
       additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
       error={props.error ?? null}
