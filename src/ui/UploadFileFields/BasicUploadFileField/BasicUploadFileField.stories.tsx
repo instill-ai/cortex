@@ -52,10 +52,7 @@ export const DemoFileReader: ComponentStory<
   };
 
   return (
-    <form
-      onSubmit={(event) => onSubmitHandler(event)}
-      //encType="multipart/form-data"
-    >
+    <form onSubmit={(event) => onSubmitHandler(event)}>
       <BasicUploadFileField
         description="this is a description about upload file field  <a href='#'>setup guide</a>"
         onChange={onChange}

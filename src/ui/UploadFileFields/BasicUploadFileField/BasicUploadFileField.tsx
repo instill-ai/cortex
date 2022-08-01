@@ -137,6 +137,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
   return (
     <UploadFileFieldBase
+      {...props}
       id={props.id}
       label={props.label}
       onChange={props.onChange}
