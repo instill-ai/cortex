@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import BasicTextArea from "./BasicTextArea";
 
 export default {
@@ -10,8 +10,8 @@ export default {
 const Template: ComponentStory<typeof BasicTextArea> = (args) => {
   const [value, setValue] = useState("");
 
-  const onChnageInput = (id: string, inputValue: string) => {
-    setValue(inputValue);
+  const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    setValue(event.target.value);
   };
 
   return (
@@ -22,7 +22,7 @@ const Template: ComponentStory<typeof BasicTextArea> = (args) => {
       placeholder="hello"
       description="this is a description for basic textarea <a href='#'>setup guide</a>"
       autoComplete="off"
-      onChangeInput={onChnageInput}
+      onChange={onChange}
       value={value}
     />
   );
