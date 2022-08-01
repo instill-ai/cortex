@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import BasicTextField from "./BasicTextField";
 
 export default {
@@ -10,8 +10,8 @@ export default {
 const Template: ComponentStory<typeof BasicTextField> = (args) => {
   const [value, setValue] = useState("");
 
-  const onChnageInput = (id: string, inputValue: string) => {
-    setValue(inputValue);
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
   };
 
   return (
@@ -21,7 +21,7 @@ const Template: ComponentStory<typeof BasicTextField> = (args) => {
       label="text-field-playground"
       description="this is a description for text field <a href='#'>setup guide</a>"
       value={value}
-      onChangeInput={onChnageInput}
+      onChange={onChange}
     />
   );
 };

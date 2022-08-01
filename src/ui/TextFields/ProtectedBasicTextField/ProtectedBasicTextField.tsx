@@ -8,7 +8,7 @@ import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 export type ProtectedBasicTextFieldRequiredKeys =
   | "id"
   | "value"
-  | "onChangeInput"
+  | "onChange"
   | "label";
 
 export type ProtectedBasicTextFieldOmitKeys =
@@ -148,7 +148,7 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       id={props.id}
       value={props.value}
       label={props.label}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
       description={props.description ?? ""}
       disabled={props.disabled ?? false}

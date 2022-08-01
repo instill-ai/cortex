@@ -14,26 +14,23 @@ import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 //  - Use top-1/2 + (-translate-y-full) to move label up a little bit
 //  - If you want to change the InputLabel font size, you have to change the input's paddingTop and Input paddingTop
 
-export type TextFieldBaseProps = BasicInputProps & {
-  /** Text field's type
-   * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
-   */
-  type: string;
+export type TextFieldBaseProps = BasicInputProps &
+  Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
+    /** Text field's type
+     * @link https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input
+     */
+    type: string;
 
-  /** Whether enable protected text toggle or not */
-  enableProtectedToggle: boolean;
+    /** Whether enable protected text toggle or not */
+    enableProtectedToggle: boolean;
 
-  value: Nullable<string>;
+    value: Nullable<string>;
 
-  onChangeInput: (
-    id: string,
-    inputValue: string,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
-};
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  };
 
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
-  onChangeInput,
+  onChange,
   id,
   additionalMessageOnLabel,
   required,
@@ -102,6 +99,9 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
   descriptionTextColor,
   descriptionLinkTextColor,
   descriptionLinkTextDecoration,
+  onFocus,
+  onBlur,
+  ...props
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -267,6 +267,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
         />
         <div className="flex relative">
           <input
+            {...props}
             value={value ? value : ""}
             style={{
               height: containerHeight ? `${containerHeight}px` : "",
@@ -316,16 +317,21 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
-              const inputValue = event.target.value;
-              onChangeInput(id, event.target.value, event);
-              if (!inputValue) {
+              onChange(event);
+              if (!event.target.value) {
                 setAnswered(false);
                 return;
               }
               setAnswered(true);
             }}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={(e) => {
+              if (onFocus) onFocus(e);
+              setFocus(true);
+            }}
+            onBlur={(e) => {
+              if (onBlur) onBlur(e);
+              setFocus(false);
+            }}
           />
           {enableProtectedToggle ? (
             <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
