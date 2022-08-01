@@ -26,7 +26,7 @@ export type TextFieldBaseProps = BasicInputProps &
 
     value: Nullable<string>;
 
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
 const TextFieldBase: React.FC<TextFieldBaseProps> = ({
@@ -317,7 +317,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = ({
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
-              onChange(event);
+              if (onChange) onChange(event);
               if (!event.target.value) {
                 setAnswered(false);
                 return;

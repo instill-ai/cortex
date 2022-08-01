@@ -32,7 +32,7 @@ export type ToggleFieldBaseProps = Omit<
   Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
     value: boolean;
 
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
     /** TailwindCSS format - Toggle center's dot color
      * - Please use background-color, e.g. bg-black
@@ -252,15 +252,9 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
             disabled={disabled}
             readOnly={readOnly}
             onChange={(event) => {
-              if (readOnly) {
-                return;
-              }
-
-              onChange(event);
-
-              if (!answered) {
-                setAnswered(true);
-              }
+              if (readOnly) return;
+              if (onChange) onChange(event);
+              if (!answered) setAnswered(true);
             }}
             onClick={(event) => {
               if (onClick) onClick(event);
