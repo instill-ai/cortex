@@ -20,7 +20,7 @@ export type UploadFileFieldBaseProps = Omit<
   | "placeholderTextColor"
 > &
   Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
-    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
     /** Text display on upload button */
     uploadButtonText: string;
@@ -403,9 +403,9 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             disabled={disabled}
             readOnly={readOnly}
             onChange={(event) => {
-              onChange(event);
-              const inputValue = event.target.value;
+              if (onChange) onChange(event);
 
+              const inputValue = event.target.value;
               if (!inputValue) {
                 setAnswered(false);
                 return;

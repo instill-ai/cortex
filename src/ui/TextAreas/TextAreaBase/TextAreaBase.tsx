@@ -13,7 +13,7 @@ export type TextAreaBaseProps = Omit<
     /** Textarea value */
     value: Nullable<string>;
 
-    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+    onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 
     /** Control how textarea can be resized
      * This component currently not support resize
@@ -361,7 +361,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
-              onChange(event);
+              if (onChange) onChange(event);
               if (!event.target.value) {
                 setAnswered(false);
                 return;
