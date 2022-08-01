@@ -9,7 +9,7 @@ import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 export type StatefulToggleFieldRequiredKeys =
   | "id"
   | "value"
-  | "onChangeInput"
+  | "onChange"
   | "label";
 
 export type StatefulToggleFieldOmitKeys =
@@ -116,7 +116,7 @@ const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
     <ToggleFieldBase
       id={props.id}
       value={props.value}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       label={props.label}
       additionalMessageOnLabel={
         props.state === "STATE_LOADING"

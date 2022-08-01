@@ -329,6 +329,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         />
         <div className="flex relative">
           <textarea
+            {...props}
             id={id}
             ref={inputRef}
             value={value ? value : ""}

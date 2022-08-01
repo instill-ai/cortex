@@ -8,7 +8,7 @@ import ToggleFieldBase, { ToggleFieldBaseProps } from "../ToggleFieldBase";
 export type BasicToggleFieldRequiredKeys =
   | "id"
   | "value"
-  | "onChangeInput"
+  | "onChange"
   | "label";
 
 export type BasicToggleFieldOmitKeys =
@@ -124,7 +124,7 @@ const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
       id={props.id}
       value={props.value}
       label={props.label}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       description={props.description ?? ""}
       additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
       error={props.error ?? null}
