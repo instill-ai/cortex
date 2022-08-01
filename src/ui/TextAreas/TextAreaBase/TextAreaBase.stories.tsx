@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof TextAreaBase>;
 
 const Template: ComponentStory<typeof TextAreaBase> = (args) => (
-  <TextAreaBase {...args} />
+  <TextAreaBase onFocus={() => console.log("hihihi")} {...args} />
 );
 
 export const Playground: ComponentStory<typeof TextAreaBase> = Template.bind(

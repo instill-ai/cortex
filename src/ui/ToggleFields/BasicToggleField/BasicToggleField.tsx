@@ -121,6 +121,7 @@ export const basicToggleFieldConfig: BasicToggleFieldConfig = {
 const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
+      {...props}
       id={props.id}
       value={props.value}
       label={props.label}

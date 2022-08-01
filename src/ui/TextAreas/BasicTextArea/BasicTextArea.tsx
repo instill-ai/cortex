@@ -139,6 +139,7 @@ export type BasicTextAreaProps = BasicTextAreaRequiredProps &
 const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
   return (
     <TextAreaBase
+      {...props}
       id={props.id}
       label={props.label}
       onChange={props.onChange}
