@@ -11,7 +11,7 @@ export type BasicSingleSelectRequiredKeys =
   | "label"
   | "value"
   | "options"
-  | "onChangeInput";
+  | "onChange";
 
 export type BasicSingleSelectOmitKeys =
   | "inputLabelType"
@@ -71,7 +71,7 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     <SingleSelectBase
       id={props.id}
       instanceId={props.instanceId}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       value={props.value}
       options={props.options}
       label={props.label}

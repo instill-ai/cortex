@@ -28,82 +28,79 @@ export type ToggleFieldBaseProps = Omit<
   | "errorInputBorderStyle"
   | "errorInputBorderWidth"
   | "errorInputTextColor"
-> & {
-  /** TailwindCSS format - Toggle center's dot color
-   * - Please use background-color, e.g. bg-blqck
-   */
+> &
+  Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
+    value: boolean;
 
-  dotColor: string;
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-  /** TailwindCSS format - Toggle center's dot color when checked
-   * - e.g. bg-black
-   */
-  checkedDotColor: string;
+    /** TailwindCSS format - Toggle center's dot color
+     * - Please use background-color, e.g. bg-black
+     */
 
-  /** TailwindCSS format - Toggle border color when checked
-   * - e.g. border-black
-   */
-  checkedInputBorderColor: string;
+    dotColor: string;
 
-  /** TailwindCSS format - Toggle input border color when checked and disabled
-   * - e.g. border-black
-   */
-  disabledCheckedInputBorderColor: string;
+    /** TailwindCSS format - Toggle center's dot color when checked
+     * - e.g. bg-black
+     */
+    checkedDotColor: string;
 
-  /** TailwindCSS format - Toggle center's dot color when disabled
-   * - e.g. bg-black
-   */
-  disabledDotColor: string;
+    /** TailwindCSS format - Toggle border color when checked
+     * - e.g. border-black
+     */
+    checkedInputBorderColor: string;
 
-  /** TailwindCSS format - Toggle center's dot color when checked and disabled
-   * - e.g. bg-black
-   */
-  disabledCheckedDotColor: string;
+    /** TailwindCSS format - Toggle input border color when checked and disabled
+     * - e.g. border-black
+     */
+    disabledCheckedInputBorderColor: string;
 
-  /** TailwindCSS format - Toggle center's dot color when read-only
-   * - e.g. bg-black
-   */
-  readOnlyDotColor: string;
+    /** TailwindCSS format - Toggle center's dot color when disabled
+     * - e.g. bg-black
+     */
+    disabledDotColor: string;
 
-  /** TailwindCSS format - Toggle center's dot color when checked and read-only
-   * - e.g. bg-black
-   */
+    /** TailwindCSS format - Toggle center's dot color when checked and disabled
+     * - e.g. bg-black
+     */
+    disabledCheckedDotColor: string;
 
-  readOnlyCheckedDotColor: string;
+    /** TailwindCSS format - Toggle center's dot color when read-only
+     * - e.g. bg-black
+     */
+    readOnlyDotColor: string;
 
-  /** TailwindCSS format - Toggle input border color when checked and read-only
-   * - e.g. border-black
-   */
+    /** TailwindCSS format - Toggle center's dot color when checked and read-only
+     * - e.g. bg-black
+     */
 
-  readOnlyCheckedInputBorderColor: string;
+    readOnlyCheckedDotColor: string;
 
-  value: boolean;
+    /** TailwindCSS format - Toggle input border color when checked and read-only
+     * - e.g. border-black
+     */
 
-  /** TailwindCSS format - Toggle input border color when focus
-   * - e.g. border-black
-   */
+    readOnlyCheckedInputBorderColor: string;
 
-  inputFocusBorderColor: string;
+    /** TailwindCSS format - Toggle input border color when focus
+     * - e.g. border-black
+     */
 
-  /** TailwindCSS utility string - setup this custom style at instill plugin and use it
-   * - e.g. instill-input-shadow
-   * - When shadow string is not null, input field will show the shadow, if you want to display
-   *   shadow only when user focus on the input, please use inputFocusShadow
-   */
-  inputShadow: Nullable<string>;
+    inputFocusBorderColor: string;
 
-  /** TailwindCSS utility string - setup this custom style at instill plugin and use it
-   * - e.g. instill-input-focus-shadow
-   * - Show the shadow when user focus on input
-   */
-  inputFocusShadow: string;
+    /** TailwindCSS utility string - setup this custom style at instill plugin and use it
+     * - e.g. instill-input-shadow
+     * - When shadow string is not null, input field will show the shadow, if you want to display
+     *   shadow only when user focus on the input, please use inputFocusShadow
+     */
+    inputShadow: Nullable<string>;
 
-  onChangeInput: (
-    id: string,
-    inputValue: boolean,
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => void;
-};
+    /** TailwindCSS utility string - setup this custom style at instill plugin and use it
+     * - e.g. instill-input-focus-shadow
+     * - Show the shadow when user focus on input
+     */
+    inputFocusShadow: string;
+  };
 
 const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   id,
@@ -115,7 +112,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   readOnly,
   focusHighlight,
   required,
-  onChangeInput,
+  onChange,
   inputBorderRadius,
   inputBorderColor,
   inputBorderStyle,
@@ -164,6 +161,10 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
   errorLabelFontWeight,
   errorLabelLineHeight,
   errorLabelTextColor,
+  onFocus,
+  onBlur,
+  onClick,
+  ...props
 }) => {
   const [answered, setAnswered] = React.useState(false);
   const [focus, setFocus] = React.useState(false);
@@ -198,6 +199,7 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
           className={cn("flex relative w-[90px] h-10", inputBgColor)}
         >
           <input
+            {...props}
             id={id}
             aria-label={`${id}-label`}
             className={cn(
@@ -254,23 +256,26 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = ({
                 return;
               }
 
-              onChangeInput(id, event.target.checked, event);
+              onChange(event);
 
               if (!answered) {
                 setAnswered(true);
               }
             }}
             onClick={(event) => {
+              if (onClick) onClick(event);
               if (readOnly) {
                 event.stopPropagation();
                 event.preventDefault();
                 return false;
               }
             }}
-            onFocus={() => {
+            onFocus={(event) => {
+              if (onFocus) onFocus(event);
               setFocus(true);
             }}
-            onBlur={() => {
+            onBlur={(event) => {
+              if (onBlur) onBlur(event);
               setFocus(false);
             }}
           />

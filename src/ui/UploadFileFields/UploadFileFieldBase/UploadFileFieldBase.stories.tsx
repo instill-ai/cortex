@@ -18,7 +18,7 @@ Playground.args = {
   required: true,
   focusHighlight: true,
   id: "upload-file-field-base-playground",
-  onChangeInput: () => undefined,
+  onChange: () => undefined,
   inputLabelType: "inset",
   placeholder: "playground",
 

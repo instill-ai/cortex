@@ -1,5 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import BasicToggleField from "./BasicToggleField";
 
 export default {
@@ -10,13 +10,14 @@ export default {
 const Template: ComponentStory<typeof BasicToggleField> = (args) => {
   const [checked, setChecked] = useState(false);
 
-  const onChangeInput = (_: string, value: boolean) => setChecked(value);
+  const onChange = (event: ChangeEvent<HTMLInputElement>) =>
+    setChecked(event.target.checked);
 
   return (
     <BasicToggleField
       {...args}
       id="basic-toggle-field"
-      onChangeInput={onChangeInput}
+      onChange={onChange}
       description="this is a description for basic toggle field <a href='#'>setup guide</a>"
       label="basic-toggle-field"
       value={checked}

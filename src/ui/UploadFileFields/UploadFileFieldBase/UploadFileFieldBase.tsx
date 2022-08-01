@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from "react";
+import React from "react";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
@@ -18,58 +18,55 @@ export type UploadFileFieldBaseProps = Omit<
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
-> & {
-  /** Text display on upload button */
-  uploadButtonText: string;
+> &
+  Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
+    onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 
-  /** TailwindCSS format
-   * - e.g. bg-instillGrey50
-   */
-  uploadButtonBgColor: string;
+    /** Text display on upload button */
+    uploadButtonText: string;
 
-  /** TailwindCSS format
-   * - use group-hover utility
-   * - e.g. group-hover:bg-instillGrey50
-   */
-  uploadButtonHoverBgColor: string;
+    /** TailwindCSS format
+     * - e.g. bg-instillGrey50
+     */
+    uploadButtonBgColor: string;
 
-  /** TailwindCSS format
-   * - e.g. text-instillGrey05
-   */
-  uploadButtonTextColor: string;
+    /** TailwindCSS format
+     * - use group-hover utility
+     * - e.g. group-hover:bg-instillGrey50
+     */
+    uploadButtonHoverBgColor: string;
 
-  /** TailwindCSS format
-   * - use group-hover utility
-   * - e.g. group-hover:text-instillGrey50
-   */
-  uploadButtonHoverTextColor: string;
+    /** TailwindCSS format
+     * - e.g. text-instillGrey05
+     */
+    uploadButtonTextColor: string;
 
-  /** TailwindCSS format - Input's top right border radius
-   * - e.g. rounded-tr-[1px]
-   */
-  inputBorderRadiusTopRight: string;
+    /** TailwindCSS format
+     * - use group-hover utility
+     * - e.g. group-hover:text-instillGrey50
+     */
+    uploadButtonHoverTextColor: string;
 
-  /** TailwindCSS format - Input's bottom right border radius
-   * - e.g. rounded-br-[1px]
-   */
-  inputBorderRadiusBottomRight: string;
+    /** TailwindCSS format - Input's top right border radius
+     * - e.g. rounded-tr-[1px]
+     */
+    inputBorderRadiusTopRight: string;
 
-  /** TailwindCSS format - Input's top left border radius
-   * - e.g. rounded-tl-[1px]
-   */
-  inputBorderRadiusTopLeft: string;
+    /** TailwindCSS format - Input's bottom right border radius
+     * - e.g. rounded-br-[1px]
+     */
+    inputBorderRadiusBottomRight: string;
 
-  /** TailwindCSS format - Input's bottom left border radius
-   * - e.g. rounded-bl-[1px]
-   */
-  inputBorderRadiusBottomLeft: string;
+    /** TailwindCSS format - Input's top left border radius
+     * - e.g. rounded-tl-[1px]
+     */
+    inputBorderRadiusTopLeft: string;
 
-  onChangeInput: (
-    id: string,
-    inputValue: any,
-    event: Nullable<React.ChangeEvent<HTMLInputElement>>
-  ) => void;
-};
+    /** TailwindCSS format - Input's bottom left border radius
+     * - e.g. rounded-bl-[1px]
+     */
+    inputBorderRadiusBottomLeft: string;
+  };
 
 const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   id,
@@ -95,7 +92,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   inputFontWeight,
   inputLineHeight,
   inputTextColor,
-  onChangeInput,
+  onChange,
   disabled,
   readOnly,
   inputBorderColor,
@@ -137,6 +134,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
   readOnlyInputBorderStyle,
   readOnlyInputBorderWidth,
   readOnlyInputTextColor,
+  onClick,
+  ...props
 }) => {
   const [answered, setAnswered] = React.useState(false);
   const [file, setFile] = React.useState<Nullable<string>>(null);
@@ -144,6 +143,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
     React.useState<Nullable<number>>(null);
   const [containerHeight, setContainerHeight] =
     React.useState<Nullable<number>>(null);
+  const inputRef = React.useRef<HTMLInputElement>(null);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -229,14 +229,14 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
     }
   }, [error, inputLabelRef, inputValueRef, inputLabelType]);
 
-  const handleInputOnClick = (event: MouseEvent<HTMLInputElement>) => {
+  const handleInputOnClick = (event: React.MouseEvent<HTMLInputElement>) => {
     if (readOnly) {
       event.preventDefault();
       event.stopPropagation();
     }
   };
 
-  const handleButtonOnClick = (event: MouseEvent<HTMLDivElement>) => {
+  const handleButtonOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (readOnly || disabled) return;
 
     if (answered) {
@@ -244,11 +244,13 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
       setFile("");
       setFileInputKey(Math.random().toString(36));
       setAnswered(false);
-      onChangeInput(id, null, null);
+      if (inputRef.current) {
+        inputRef.current.value = "";
+      }
     }
   };
 
-  const [fileInputKey, setFileInputKey] = useState<string>("");
+  const [fileInputKey, setFileInputKey] = React.useState<string>("");
 
   React.useEffect(() => {
     setFileInputKey(Math.random().toString(36));
@@ -387,6 +389,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             ) : null}
           </div>
           <input
+            {...props}
+            ref={inputRef}
             key={fileInputKey}
             className={cn(
               "opacity-0 overflow-hidden absolute",
@@ -399,8 +403,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
             disabled={disabled}
             readOnly={readOnly}
             onChange={(event) => {
+              onChange(event);
               const inputValue = event.target.value;
-              const inputFileList = event.target.files || null;
 
               if (!inputValue) {
                 setAnswered(false);
@@ -409,12 +413,11 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = ({
 
               setAnswered(true);
               setFile(inputValue);
-
-              if (inputFileList) {
-                onChangeInput(id, inputFileList[0], event);
-              }
             }}
-            onClick={(event) => handleInputOnClick(event)}
+            onClick={(event) => {
+              if (onClick) onClick(event);
+              handleInputOnClick(event);
+            }}
           />
           <div
             ref={uploadButtonRef}

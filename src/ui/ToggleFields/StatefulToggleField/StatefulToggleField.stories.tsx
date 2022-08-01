@@ -9,21 +9,19 @@ export default {
 } as ComponentMeta<typeof StatefulToggleField>;
 
 const Template: ComponentStory<typeof StatefulToggleField> = (args) => {
-  const [checked, setChecked] = useState(false);
   const [state, setState] = useState<State>("STATE_UNSPECIFIED");
 
   return (
     <StatefulToggleField
       {...args}
       id="basic-toggle-field"
-      onChangeInput={(_, value) => {
+      onChange={() => {
         setState("STATE_LOADING");
         setTimeout(() => {
           setState("STATE_ACTIVE");
-          setChecked(value);
-        }, 3000);
+        }, 1000);
       }}
-      value={checked}
+      value={state === "STATE_ACTIVE" ? true : false}
       description="this is a description for basic toggle field <a href='#'>setup guide</a>"
       label="basic-toggle-field"
       error={

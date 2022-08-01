@@ -5,11 +5,7 @@ import {
 } from "../../InputDescriptions";
 import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
 
-export type BasicTextAreaRequiredKeys =
-  | "id"
-  | "value"
-  | "onChangeInput"
-  | "label";
+export type BasicTextAreaRequiredKeys = "id" | "value" | "onChange" | "label";
 
 export type BasicTextAreaOmitKeys =
   | "inputHeight"
@@ -145,7 +141,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
     <TextAreaBase
       id={props.id}
       label={props.label}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       value={props.value}
       description={props.description ?? ""}
       additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}

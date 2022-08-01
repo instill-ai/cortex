@@ -79,12 +79,6 @@ export type BasicInputProps = {
    */
   inputBgColor: string;
 
-  /**
-   * Whether the input is disabled
-   * @default false
-   */
-  disabled: boolean;
-
   /** TailwindCSS format - Background color when input is disabled
    * - e.g. bg-white
    * - https://tailwindcss.com/docs/background-color
@@ -120,17 +114,6 @@ export type BasicInputProps = {
    * - https://tailwindcss.com/docs/cursor
    */
   disabledCursor: string;
-
-  /**
-   * Text that appears in the form control when it has no value set
-   */
-  placeholder: string;
-
-  /**
-   * Whether The value is editable or not.
-   * @default false
-   */
-  readOnly: boolean;
 
   /** TailwindCSS format - Background color when input is read-only
    * - e.g. bg-white
@@ -205,12 +188,6 @@ export type BasicInputProps = {
   /** TailwindCSS format - The border radius of the input */
   inputBorderRadius: string;
 
-  /**
-   * Whether the field is necessary or not
-   * @default false
-   * */
-  required: boolean;
-
   /** TailwindCSS format
    * - Default is w-full, please make sure this component's parent has defined width
    * - if you are not sure about the defined number, please use abitrary number like w-[number-unit] w-[20px].
@@ -228,9 +205,6 @@ export type BasicInputProps = {
    * - if you are not sure about the defined number, please use abitrary number like w-[number-unit] w-[20px].
    */
   inputHeight: string;
-
-  /** Specific whether browser should help user auto complete the input or not */
-  autoComplete: string;
 
   /** They type of input label
    * - normal: Act as normal positioned title
@@ -370,8 +344,13 @@ export type PipelineState =
   | "STATE_ERROR";
 
 export type ConnectorState =
+  | "STATE_UNSPECIFIED"
   | "STATE_CONNECTED"
   | "STATE_DISCONNECTED"
   | "STATE_ERROR";
 
-export type ModelState = "STATE_ONLINE" | "STATE_OFFLINE" | "STATE_ERROR";
+export type ModelState =
+  | "STATE_ONLINE"
+  | "STATE_OFFLINE"
+  | "STATE_ERROR"
+  | "STATE_UNSPECIFIED";

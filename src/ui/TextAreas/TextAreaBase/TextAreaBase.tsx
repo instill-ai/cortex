@@ -7,68 +7,65 @@ import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
 export type TextAreaBaseProps = Omit<
   BasicInputProps,
-  "labelActivateStyle" | "labelDeActivateStyle" | "onChangeInput"
-> & {
-  /** Textarea value */
-  value: Nullable<string>;
+  "labelActivateStyle" | "labelDeActivateStyle"
+> &
+  Omit<JSX.IntrinsicElements["textarea"], "onChange" | "value"> & {
+    /** Textarea value */
+    value: Nullable<string>;
 
-  /** Control how textarea can be resized
-   * This component currently not support resize
-   */
-  // resize: "both" | "none" | "x" | "y";
+    onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
 
-  /**
-   * Enable textarea words counter
-   * @default false
-   */
-  enableCounter: boolean;
+    /** Control how textarea can be resized
+     * This component currently not support resize
+     */
+    // resize: "both" | "none" | "x" | "y";
 
-  /**
-   * Textarea counter's words limit
-   */
-  counterWordLimit: number;
+    /**
+     * Enable textarea words counter
+     * @default false
+     */
+    enableCounter: boolean;
 
-  /** TailwindCSS format - Font size of textarea's counter
-   * - e.g. text-base
-   * - https://tailwindcss.com/docs/font-size
-   */
-  counterFontSize: string;
+    /**
+     * Textarea counter's words limit
+     */
+    counterWordLimit: number;
 
-  /** TailwindCSS format - Font family of textarea's counter
-   * - e.g. font-sans
-   * - https://tailwindcss.com/docs/font-family
-   */
-  counterFontFamily: string;
+    /** TailwindCSS format - Font size of textarea's counter
+     * - e.g. text-base
+     * - https://tailwindcss.com/docs/font-size
+     */
+    counterFontSize: string;
 
-  /** TailwindCSS format - Font weight of textarea's counter
-   * - e.g. font-normal
-   * - https://tailwindcss.com/docs/font-weight
-   */
-  counterFontWeight: string;
+    /** TailwindCSS format - Font family of textarea's counter
+     * - e.g. font-sans
+     * - https://tailwindcss.com/docs/font-family
+     */
+    counterFontFamily: string;
 
-  /** TailwindCSS format - Text color of textarea's counter
-   * - e.g. text-instillGrey50
-   * - https://tailwindcss.com/docs/text-color
-   */
-  counterTextColor: string;
+    /** TailwindCSS format - Font weight of textarea's counter
+     * - e.g. font-normal
+     * - https://tailwindcss.com/docs/font-weight
+     */
+    counterFontWeight: string;
 
-  /** TailwindCSS format - Line height of textarea's counter
-   * - e.g. leading-normal
-   * - https://tailwindcss.com/docs/line-height
-   */
-  counterLineHeight: string;
+    /** TailwindCSS format - Text color of textarea's counter
+     * - e.g. text-instillGrey50
+     * - https://tailwindcss.com/docs/text-color
+     */
+    counterTextColor: string;
 
-  onChangeInput: (
-    id: string,
-    inputValue: string,
-    event: React.ChangeEvent<HTMLTextAreaElement>
-  ) => void;
-};
+    /** TailwindCSS format - Line height of textarea's counter
+     * - e.g. leading-normal
+     * - https://tailwindcss.com/docs/line-height
+     */
+    counterLineHeight: string;
+  };
 
 const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   id,
   value,
-  onChangeInput,
+  onChange,
   required,
   additionalMessageOnLabel,
   description,
@@ -139,6 +136,9 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
   errorLabelFontWeight,
   errorLabelLineHeight,
   errorLabelTextColor,
+  onFocus,
+  onBlur,
+  ...props
 }) => {
   const [focus, setFocus] = React.useState(false);
   const [answered, setAnswered] = React.useState(false);
@@ -329,6 +329,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
         />
         <div className="flex relative">
           <textarea
+            {...props}
             id={id}
             ref={inputRef}
             value={value ? value : ""}
@@ -360,16 +361,21 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = ({
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
-              const inputValue = event.target.value;
-              onChangeInput(id, event.target.value, event);
-              if (!inputValue) {
+              onChange(event);
+              if (!event.target.value) {
                 setAnswered(false);
                 return;
               }
               setAnswered(true);
             }}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={(event) => {
+              if (onFocus) onFocus(event);
+              setFocus(true);
+            }}
+            onBlur={(event) => {
+              if (onBlur) onBlur(event);
+              setFocus(false);
+            }}
           />
           {enableCounter ? (
             <div

@@ -14,8 +14,8 @@ const Template: ComponentStory<typeof ToggleFieldBase> = (args) => {
     <ToggleFieldBase
       {...args}
       value={checked}
-      onChangeInput={(_, value) => {
-        setChecked(value);
+      onChange={(event) => {
+        setChecked(event.target.checked);
       }}
     />
   );
@@ -27,7 +27,6 @@ export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
 Playground.args = {
   required: true,
   focusHighlight: true,
-  onChangeInput: () => undefined,
   id: "toggle-field-base-playground",
   description: "this is a description for toggle field base",
 

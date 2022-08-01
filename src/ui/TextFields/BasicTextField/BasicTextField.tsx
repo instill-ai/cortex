@@ -5,11 +5,7 @@ import {
 } from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
-export type BasicTextFieldRequiredKeys =
-  | "id"
-  | "value"
-  | "onChangeInput"
-  | "label";
+export type BasicTextFieldRequiredKeys = "id" | "value" | "onChange" | "label";
 
 export type BasicTextFieldOmitKeys =
   | "inputHeight"
@@ -141,7 +137,7 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
     <TextFieldBase
       id={props.id}
       value={props.value}
-      onChangeInput={props.onChangeInput}
+      onChange={props.onChange}
       label={props.label}
       additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
       description={props.description ?? ""}
