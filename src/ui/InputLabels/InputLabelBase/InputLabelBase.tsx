@@ -2,7 +2,7 @@ import React from "react";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
-export interface InputLabelBaseProps {
+export type InputLabelBaseProps = {
   /** Input label's type
    * - normal: input label has normal position layout and doesn't have any animation
    * - inset: input label has absolution position layout, put into the input field and have float up animation with specific activate, deActivate style
@@ -28,12 +28,12 @@ export interface InputLabelBaseProps {
   htmlFor: string;
 
   /** Whether the input is required or not */
-  required: boolean;
+  required?: boolean | undefined;
 
   /** Whether the input is focused or not */
-  focus?: boolean;
+  focus?: boolean | undefined;
 
-  setFocus?: React.Dispatch<React.SetStateAction<boolean>>;
+  setFocus?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
 
   /** Whether the input is answered or not */
   answered: boolean;
@@ -104,7 +104,7 @@ export interface InputLabelBaseProps {
    * - Don't need to specific translate-x-, it's fixed value
    */
   labelDeActivateStyle?: string;
-}
+};
 
 export type InputLabelBaseRef = HTMLLabelElement;
 
