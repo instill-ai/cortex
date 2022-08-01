@@ -114,6 +114,7 @@ export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
 const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
   return (
     <ToggleFieldBase
+      {...props}
       id={props.id}
       value={props.value}
       onChange={props.onChange}
