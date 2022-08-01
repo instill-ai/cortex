@@ -135,6 +135,7 @@ export type BasicTextFieldProps = BasicTextFieldRequiredProps &
 const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
   return (
     <TextFieldBase
+      {...props}
       id={props.id}
       value={props.value}
       onChange={props.onChange}

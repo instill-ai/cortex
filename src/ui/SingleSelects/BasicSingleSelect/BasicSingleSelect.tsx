@@ -69,6 +69,7 @@ export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
 const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   return (
     <SingleSelectBase
+      {...props}
       id={props.id}
       instanceId={props.instanceId}
       onChange={props.onChange}
