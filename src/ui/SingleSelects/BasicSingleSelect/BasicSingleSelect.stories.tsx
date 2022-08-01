@@ -1,5 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { useState } from "react";
+import { ActionMeta } from "react-select";
+import { Nullable } from "../../../types/general";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "../SingleSelectBase";
 import BasicSingleSelect from "./BasicSingleSelect";
@@ -51,8 +52,11 @@ const Template: ComponentStory<typeof BasicSingleSelect> = (args) => {
     },
   ];
 
-  const onChangeInputHandler = (inputValue: any) => {
-    console.log(inputValue);
+  const onChange = (
+    option: Nullable<SingleSelectOption>,
+    meta: ActionMeta<SingleSelectOption>
+  ) => {
+    console.log(option, meta);
   };
 
   return (
@@ -60,7 +64,7 @@ const Template: ComponentStory<typeof BasicSingleSelect> = (args) => {
       {...args}
       id="autocomplete-with-icon"
       instanceId="autocomplete-with-icon"
-      onChangeInput={onChangeInputHandler}
+      onChange={onChange}
       options={options}
       label="autocomplete-with-icon"
     />

@@ -73,10 +73,7 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
     },
   ];
 
-  const onChangeInputHandler = (
-    id: string,
-    option: Nullable<SingleSelectOption>
-  ) => {
+  const onChange = (option: Nullable<SingleSelectOption>) => {
     setValue(option);
   };
 
@@ -85,7 +82,7 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
   return (
     <SingleSelectBase
       {...args}
-      onChangeInput={onChangeInputHandler}
+      onChange={onChange}
       options={optionsWithoutIcon}
       value={value}
     />

@@ -112,13 +112,17 @@ export type SingleSelectBaseProps = Omit<
   value: Nullable<SingleSelectOption>;
 
   /**
-   * The design system use actionMeta to provide additional info about the selection behavior. You could access these info inside the onChnageInput.
+   * The design system use actionMeta to provide additional info about the selection behavior.
+   * You could access these info inside the onChnage.
    */
-  onChangeInput: (
-    id: string,
+  onChange: (
     option: Nullable<SingleSelectOption>,
-    meta?: ActionMeta<SingleSelectOption>
+    meta: ActionMeta<SingleSelectOption>
   ) => void;
+
+  required?: boolean | undefined;
+  disabled?: boolean | undefined;
+  readOnly?: boolean | undefined;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = ({
@@ -132,7 +136,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
   instanceId,
   error,
   description,
-  onChangeInput,
+  onChange,
   disabled,
   readOnly,
   isClearable,
@@ -379,11 +383,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = ({
             menuPlacement={menuPlacement ? menuPlacement : "auto"}
             options={options}
             onChange={(selectedOption, meta) => {
-              onChangeInput(
-                id,
-                selectedOption as SingleValue<SingleSelectOption>,
-                meta
-              );
+              onChange(selectedOption as SingleValue<SingleSelectOption>, meta);
 
               if (selectedOption) {
                 setAnswered(true);
