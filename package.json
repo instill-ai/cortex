@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/design-system",
-  "version": "0.0.104",
+  "version": "0.0.105",
   "description": "Instill AI's design system",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -23,7 +23,7 @@
     "prettier:check": "prettier --check",
     "test:coverage": "jest --collectCoverage",
     "ts-types": "tsc --emitDeclarationOnly --outDir build",
-    "build": "rimraf build && node ./esbuild.js && yarn ts-types",
+    "build": "pnpm rimraf build && node ./esbuild.js && pnpm ts-types",
     "test": "jest"
   },
   "main": "build/index.cjs.js",
@@ -59,7 +59,9 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.4.1",
+    "@types/react": "^18.0.17",
     "@types/sanitize-html": "^2.6.2",
+    "@types/testing-library__jest-dom": "^5.14.5",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
     "autoprefixer": "^10.4.4",
@@ -85,6 +87,9 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-select": "^5.3.2",
+    "require-from-string": "^2.0.2",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.77.2",
     "tailwindcss": "^3.0.23",
     "typescript": "^4.6.3",
     "webpack": "^5.70.0"
@@ -97,12 +102,12 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "yarn prettier:fix",
+      "pnpm prettier:fix",
       "eslint --cache --fix",
       "jest --bail --findRelatedTests"
     ],
     "*.stories.{ts,tsx}": [
-      "yarn prettier:fix",
+      "pnpm prettier:fix",
       "eslint --cache --fix"
     ]
   },
