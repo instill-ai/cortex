@@ -1,11 +1,11 @@
-export type ElemeentPosition = {
+export type ElementPosition = {
   x: number;
   y: number;
   width: number;
   height: number;
 };
 
-export const getElementPosition = (element: HTMLElement): ElemeentPosition => {
+export const getElementPosition = (element: HTMLElement): ElementPosition => {
   const box = element.getBoundingClientRect();
 
   const body = document.body;
