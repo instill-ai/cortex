@@ -122,9 +122,11 @@ export type ButtonBaseProps = {
    * - e.g. gap-x-2
    */
   itemGapX: Nullable<string>;
+
+  children?: React.ReactNode;
 };
 
-const ButtonBase: React.FC<ButtonBaseProps> = ({
+const ButtonBase = ({
   bgColor,
   hoveredBgColor,
   disabled,
@@ -147,7 +149,7 @@ const ButtonBase: React.FC<ButtonBaseProps> = ({
   startIcon,
   endIcon,
   itemGapX,
-}) => {
+}: ButtonBaseProps) => {
   return (
     <button
       disabled={disabled}

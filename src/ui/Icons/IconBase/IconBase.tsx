@@ -31,9 +31,11 @@ export interface IconBaseProps {
    * - If present, IconBase won't have fill-current class
    */
   fill?: string;
+
+  children?: React.ReactNode;
 }
 
-const IconBase: React.FC<IconBaseProps> = ({
+const IconBase = ({
   viewBox,
   children,
   width,
@@ -42,7 +44,7 @@ const IconBase: React.FC<IconBaseProps> = ({
   position,
   rotate,
   fill,
-}) => {
+}: IconBaseProps) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
