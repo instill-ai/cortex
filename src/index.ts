@@ -1,8 +1,12 @@
 import { getTailwindClassNumber, getElementPosition } from "./utils";
+import useWindowSize from "./hooks/useWindowSize";
+import type { ElementPosition } from "./utils";
+import type { WindowSize } from "./hooks/useWindowSize";
 
-export { getTailwindClassNumber, getElementPosition };
+import { ActionMeta } from "react-select";
+
+export { getTailwindClassNumber, getElementPosition, useWindowSize };
 export * from "./ui";
 export * from "./generators";
 
-import { ActionMeta } from "react-select";
-export type { ActionMeta };
+export type { ActionMeta, ElementPosition, WindowSize };
