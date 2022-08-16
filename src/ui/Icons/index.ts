@@ -157,6 +157,8 @@ import TwitterIcon from "./TwitterIcon";
 import type { TwitterIconProps } from "./TwitterIcon";
 import ToolboxIcon from "./ToolboxIcon";
 import type { ToolboxIconProps } from "./ToolboxIcon";
+import ToggleIcon from "./ToggleIcon";
+import type { ToggleIconProps } from "./ToggleIcon";
 
 export type {
   EyeOnIconProps,
@@ -236,6 +238,7 @@ export type {
   TwitterIconProps,
   ToolboxIconProps,
   PenIconProps,
+  ToggleIconProps,
 };
 
 export {
@@ -316,4 +319,5 @@ export {
   TwitterIcon,
   ToolboxIcon,
   PenIcon,
+  ToggleIcon,
 };
