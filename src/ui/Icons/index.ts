@@ -149,6 +149,8 @@ import CrossIcon from "./CrossIcon";
 import type { CrossIconProps } from "./CrossIcon";
 import LinkedInIcon from "./LinkedInIcon";
 import type { LinkedInIconProps } from "./LinkedInIcon";
+import PenIcon from "./PenIcon";
+import type { PenIconProps } from "./PenIcon";
 import PinIcon from "./PinIcon";
 import type { PinIconProps } from "./PinIcon";
 import TwitterIcon from "./TwitterIcon";
@@ -233,6 +235,7 @@ export type {
   PinIconProps,
   TwitterIconProps,
   ToolboxIconProps,
+  PenIconProps,
 };
 
 export {
@@ -312,4 +315,5 @@ export {
   PinIcon,
   TwitterIcon,
   ToolboxIcon,
+  PenIcon,
 };
