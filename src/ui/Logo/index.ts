@@ -4,4 +4,4 @@ import VdpLogo from "./VdpLogo";
 import type { VdpLogoProps } from "./VdpLogo";
 
 export { Logo, VdpLogo };
-export type { LogoProps };
+export type { LogoProps, VdpLogoProps };
