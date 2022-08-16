@@ -14,6 +14,8 @@ export type BasicUploadFileFieldRequiredKeys =
   | "uploadButtonText";
 
 export type BasicUploadFileFieldOmitKeys =
+  | "uploadButtonFontSize"
+  | "uploadButtonFontWeight"
   | "uploadButtonBgColor"
   | "uploadButtonTextColor"
   | "uploadButtonHoverBgColor"
@@ -85,8 +87,10 @@ export type BasicUploadFileFieldProps = BasicUploadFileFieldOptionalProps &
   BasicUploadFileFieldRequiredProps;
 
 export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
-  uploadButtonBgColor: "bg-instillGrey50",
-  uploadButtonTextColor: "text-instillGrey05",
+  uploadButtonFontSize: "text-sm",
+  uploadButtonFontWeight: "font-normal",
+  uploadButtonBgColor: "bg-instillBlue10",
+  uploadButtonTextColor: "text-instillBlue50",
   uploadButtonHoverBgColor: "group-hover:bg-instillBlue50",
   uploadButtonHoverTextColor: "group-hover:text-instillGrey05",
   inputBorderRadiusBottomLeft: "rounded-bl-[1px]",

@@ -149,12 +149,16 @@ import CrossIcon from "./CrossIcon";
 import type { CrossIconProps } from "./CrossIcon";
 import LinkedInIcon from "./LinkedInIcon";
 import type { LinkedInIconProps } from "./LinkedInIcon";
+import PenIcon from "./PenIcon";
+import type { PenIconProps } from "./PenIcon";
 import PinIcon from "./PinIcon";
 import type { PinIconProps } from "./PinIcon";
 import TwitterIcon from "./TwitterIcon";
 import type { TwitterIconProps } from "./TwitterIcon";
 import ToolboxIcon from "./ToolboxIcon";
 import type { ToolboxIconProps } from "./ToolboxIcon";
+import ToggleIcon from "./ToggleIcon";
+import type { ToggleIconProps } from "./ToggleIcon";
 
 export type {
   EyeOnIconProps,
@@ -233,6 +237,8 @@ export type {
   PinIconProps,
   TwitterIconProps,
   ToolboxIconProps,
+  PenIconProps,
+  ToggleIconProps,
 };
 
 export {
@@ -312,4 +318,6 @@ export {
   PinIcon,
   TwitterIcon,
   ToolboxIcon,
+  PenIcon,
+  ToggleIcon,
 };

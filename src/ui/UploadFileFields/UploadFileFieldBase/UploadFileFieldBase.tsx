@@ -26,6 +26,16 @@ export type UploadFileFieldBaseProps = Omit<
     uploadButtonText: string;
 
     /** TailwindCSS format
+     * - e.g. text-sm
+     */
+    uploadButtonFontSize: string;
+
+    /** TailwindCSS format
+     * - e.g. font-medium
+     */
+    uploadButtonFontWeight: string;
+
+    /** TailwindCSS format
      * - e.g. bg-instillGrey50
      */
     uploadButtonBgColor: string;
@@ -80,6 +90,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
     inputWidth,
     inputHeight,
     uploadButtonText,
+    uploadButtonFontSize,
+    uploadButtonFontWeight,
     uploadButtonBgColor,
     uploadButtonTextColor,
     uploadButtonHoverBgColor,
@@ -426,9 +438,10 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
             className={cn(
               "flex h-full ml-auto px-5",
               answered ? "absolute bottom-0 right-0 z-20" : "",
-
               inputBorderRadiusTopRight,
               inputBorderRadiusBottomRight,
+              uploadButtonFontWeight,
+              uploadButtonFontSize,
               disabled
                 ? "bg-instillGrey20 text-white"
                 : readOnly
