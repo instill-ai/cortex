@@ -13,4 +13,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   type: "square",
+  width: 120,
 };

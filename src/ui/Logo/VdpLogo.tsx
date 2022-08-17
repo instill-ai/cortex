@@ -2,7 +2,7 @@ import cn from "clsx";
 
 export type VdpLogoProps = {
   type: "square" | "expand";
-  position: string;
+  position?: string;
   width: number;
 };
 
@@ -11,8 +11,6 @@ const VdpLogo = ({ type, width, position }: VdpLogoProps) => {
     case "square": {
       return (
         <svg
-          width="120"
-          height="120"
           viewBox="0 0 120 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -36,8 +34,6 @@ const VdpLogo = ({ type, width, position }: VdpLogoProps) => {
     default: {
       return (
         <svg
-          width="340"
-          height="120"
           viewBox="0 0 340 120"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
