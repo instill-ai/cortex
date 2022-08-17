@@ -341,6 +341,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
             <div className="absolute flex transform-gpu right-5 top-1/2 -translate-y-1/2">
               <button
                 className="my-auto"
+                type="button"
                 onClick={() => setShowSecret(!showSecret)}
               >
                 {showSecret ? (
