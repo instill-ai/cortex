@@ -22,7 +22,7 @@ export interface IconBaseProps {
   /** TailwindCSS format - The position of icon.
    * - Please use margin auto to control the position of icon
    */
-  position: string;
+  position?: string;
 
   /** TailwindCSS format - The rotation of icon */
   rotate?: string;
