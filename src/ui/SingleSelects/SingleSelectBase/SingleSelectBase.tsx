@@ -430,7 +430,10 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             placeholder={focus ? "Search..." : null}
             formatOptionLabel={(option: SingleSelectOption) => {
               return (
-                <div className="flex flex-row gap-x-3 px-[15px]">
+                <div
+                  data-testid={`${id}-selected-option`}
+                  className="flex flex-row gap-x-3 px-[15px]"
+                >
                   {option.startIcon ? (
                     <div className="flex my-auto">{option.startIcon}</div>
                   ) : null}
