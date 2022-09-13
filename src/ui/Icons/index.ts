@@ -22,6 +22,8 @@ import CollapseRightIcon from "./CollapseRightIcon";
 import type { CollapseRightIconProps } from "./CollapseRightIcon";
 import ModelIcon from "./ModelIcon";
 import type { ModelIconProps } from "./ModelIcon";
+import MinusIcon from "./MinusIcon";
+import type { MinusIconProps } from "./MinusIcon";
 import BarChartIcon from "./BarChartIcon";
 import type { BarChartIconProps } from "./BarChartIcon";
 import VisualDataOperatorIcon from "./VisualDataOperatorIcon";
@@ -54,6 +56,8 @@ import RedshiftIcon from "./RedshiftIcon";
 import type { RedShiftIconProps } from "./RedshiftIcon";
 import PostgreSqlIcon from "./PostgreSqlIcon";
 import type { PostgreSqlIconProps } from "./PostgreSqlIcon";
+import PlusIcon from "./PlusIcon";
+import type { PlusIconProps } from "./PlusIcon";
 import BigQueryIcon from "./BigQueryIcon";
 import type { BigQueryIconProps } from "./BigQueryIcon";
 import MySqlIcon from "./MySqlIcon";
@@ -219,6 +223,7 @@ export type {
   IotIconProps,
   AwsS3IconProps,
   MongoDbAtalasIconProps,
+  MinusIconProps,
   GoogleDriveIconProps,
   ImageClassificationIconProps,
   ObjectDetectionIconProps,
@@ -235,6 +240,7 @@ export type {
   CrossIconProps,
   LinkedInIconProps,
   PinIconProps,
+  PlusIconProps,
   TwitterIconProps,
   ToolboxIconProps,
   PenIconProps,
@@ -257,6 +263,7 @@ export {
   CopyIcon,
   ClientIcon,
   ModelIcon,
+  MinusIcon,
   BarChartIcon,
   VisualDataOperatorIcon,
   DataSourceIcon,
@@ -271,6 +278,7 @@ export {
   CheckIcon,
   DoubleArrowIcon,
   PipelineIcon,
+  PlusIcon,
   RedshiftIcon,
   PostgreSqlIcon,
   BigQueryIcon,
