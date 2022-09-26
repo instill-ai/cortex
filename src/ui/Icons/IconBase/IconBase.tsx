@@ -1,5 +1,6 @@
-import React, { CSSProperties } from "react";
+import React from "react";
 import cn from "clsx";
+import { Nullable } from "../../../types/general";
 
 export interface IconBaseProps {
   /** The viewbox of target icon
@@ -8,10 +9,10 @@ export interface IconBaseProps {
   viewBox: string;
 
   /** TailwindCSS format - The width of icon. */
-  width: string;
+  width?: string;
 
   /** TailwindCSS format - The height of icon. */
-  height: string;
+  height?: string;
 
   /** TailwindCSS format - The color of icon.
    * - Please use fill color to modify icon's color
@@ -54,9 +55,13 @@ const IconBase = ({
 }: IconBaseProps) => {
   if (style) {
     if (width) {
-      throw new Error("Should not use style props with utility class - width");
+      throw new Error(
+        "Should not use style props together with utility class - width"
+      );
     } else {
-      throw new Error("Should not use style props with utility class - height");
+      throw new Error(
+        "Should not use style props together with utility class - height"
+      );
     }
   }
   return (
