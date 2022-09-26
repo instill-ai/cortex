@@ -10,6 +10,7 @@ const ArtiVcIcon: React.FC<ArtiVcIconProps> = (props) => {
       width={props.width}
       height={props.height}
       position={props.position}
+      style={props.style}
     >
       <path d="M8.3736 12.1562H1V18.5825H8.3736V12.1562Z" fill="#25A476" />
       <path

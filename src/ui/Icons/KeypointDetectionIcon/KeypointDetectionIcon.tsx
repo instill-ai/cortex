@@ -14,6 +14,7 @@ const KeypointDetectionIcon: React.FC<KeypointDetectionIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
     >
       <path
         fillRule="evenodd"

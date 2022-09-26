@@ -20,3 +20,16 @@ Playground.args = {
   position: "my-auto",
   rotate: "rotate-45",
 };
+
+export const useStyle: ComponentStory<typeof RotatableArrowIcon> =
+  Template.bind({});
+
+useStyle.args = {
+  style: {
+    width: "30px",
+    height: "30px",
+  },
+  color: "fill-instillGrey50",
+  position: "my-auto",
+  rotate: "rotate-45",
+};

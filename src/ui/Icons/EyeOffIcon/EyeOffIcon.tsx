@@ -11,6 +11,7 @@ const EyeOffIcon: React.FC<EyeOffIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
     >
       <path
         fillRule="evenodd"

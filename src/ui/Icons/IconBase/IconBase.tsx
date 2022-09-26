@@ -1,5 +1,6 @@
 import React from "react";
 import cn from "clsx";
+import { Nullable } from "../../../types/general";
 
 export interface IconBaseProps {
   /** The viewbox of target icon
@@ -8,10 +9,10 @@ export interface IconBaseProps {
   viewBox: string;
 
   /** TailwindCSS format - The width of icon. */
-  width: string;
+  width?: string;
 
   /** TailwindCSS format - The height of icon. */
-  height: string;
+  height?: string;
 
   /** TailwindCSS format - The color of icon.
    * - Please use fill color to modify icon's color
@@ -33,6 +34,12 @@ export interface IconBaseProps {
   fill?: string;
 
   children?: React.ReactNode;
+
+  // Svg width and height for dynamic values
+  style?: {
+    width: string;
+    height: string;
+  };
 }
 
 const IconBase = ({
@@ -44,13 +51,26 @@ const IconBase = ({
   position,
   rotate,
   fill,
+  style,
 }: IconBaseProps) => {
+  if (style) {
+    if (width) {
+      throw new Error(
+        "Should not use style props together with utility class - width"
+      );
+    } else {
+      throw new Error(
+        "Should not use style props together with utility class - height"
+      );
+    }
+  }
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
       className={cn("flex", width, height, color, position, rotate)}
       fill={fill}
+      style={style}
     >
       {children}
     </svg>

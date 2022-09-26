@@ -13,6 +13,7 @@ const RedShiftIcon: React.FC<RedShiftIconProps> = (props) => {
       width={props.width}
       height={props.height}
       position={props.position}
+      style={props.style}
     >
       <path
         d="M14.8515 19.2797L21.0193 20.7721V9.19363L14.8515 10.6859V19.2797Z"

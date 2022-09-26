@@ -11,6 +11,7 @@ const PixelCheckIcon: React.FC<PixelCheckIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
     >
       <rect x="18.3333" y="11.6667" width="3.33333" height="3.33333" />
       <rect x="15" y="15" width="3.33333" height="3.33333" />
