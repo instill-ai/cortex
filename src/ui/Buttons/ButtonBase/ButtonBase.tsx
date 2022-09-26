@@ -117,11 +117,11 @@ export type ButtonBaseProps = {
   endIcon: Nullable<React.ReactElement>;
 
   /**
-   * TailwindCSS format - Gap between icon and text in the button
+   * TailwindCSS format - Space between icon and text in the button
    * - It will only apply when startIcon or endIcon is present
-   * - e.g. gap-x-2
+   * - e.g. space-x-2
    */
-  itemGapX: Nullable<string>;
+  itemSpaceX: Nullable<string>;
 
   children?: React.ReactNode;
 };
@@ -148,7 +148,7 @@ const ButtonBase = ({
   disabledBorderColor,
   startIcon,
   endIcon,
-  itemGapX,
+  itemSpaceX,
 }: ButtonBaseProps) => {
   return (
     <button
@@ -158,7 +158,7 @@ const ButtonBase = ({
       data-flag={dataFlag}
       className={cn(
         "group rounded-[1px] flex flex-row",
-        startIcon ? itemGapX : endIcon ? itemGapX : "",
+        startIcon ? itemSpaceX : endIcon ? itemSpaceX : "",
         disabled
           ? cn(
               disabledBgColor,
