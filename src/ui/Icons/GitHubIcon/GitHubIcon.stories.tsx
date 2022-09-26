@@ -7,18 +7,25 @@ export default {
 } as ComponentMeta<typeof GitHubIcon>;
 
 const Template: ComponentStory<typeof GitHubIcon> = (args) => (
-  <GitHubIcon
-    {...args}
-    style={{
-      width: "30px",
-      height: "30px",
-    }}
-  />
+  <GitHubIcon {...args} />
 );
 
 export const Playground: ComponentStory<typeof GitHubIcon> = Template.bind({});
 
 Playground.args = {
+  width: "w-[30px]",
+  height: "h-[30px]",
   color: "fill-instillGrey50",
   position: "my-auto",
+};
+
+export const withStyle: ComponentStory<typeof GitHubIcon> = Template.bind({});
+
+withStyle.args = {
+  color: "fill-instillGrey50",
+  position: "my-auto",
+  style: {
+    width: "30px",
+    height: "30px",
+  },
 };
