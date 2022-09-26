@@ -91,7 +91,8 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
       padding={props.padding ?? "px-5 py-2.5"}
       startIcon={props.startIcon ?? null}
       endIcon={props.endIcon ?? null}
-      itemSpaceX={props.itemSpaceX ?? null}
+      itemGapX={props.itemGapX ?? null}
+      textSize={props.textSize ?? "text-base"}
       {...buttonStyle}
     >
       {props.children}

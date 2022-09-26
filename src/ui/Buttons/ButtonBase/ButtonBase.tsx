@@ -39,6 +39,11 @@ export type ButtonBaseProps = {
    */
   textColor: Nullable<string>;
 
+  /** TailwindCSS format - The font size of the button
+   * - e.g. text-base
+   */
+  textSize: Nullable<string>;
+
   /** TailwindCSS format - The text color of the button when hovered
    * - Please use Tailwind hover state
    * - e.g. hover:text-blue-100
@@ -121,7 +126,7 @@ export type ButtonBaseProps = {
    * - It will only apply when startIcon or endIcon is present
    * - e.g. space-x-2
    */
-  itemSpaceX: Nullable<string>;
+  itemGapX: Nullable<string>;
 
   children?: React.ReactNode;
 };
@@ -133,6 +138,7 @@ const ButtonBase = ({
   disabledBgColor,
   disabledTextColor,
   textColor,
+  textSize,
   hoveredTextColor,
   onClickHandler,
   position,
@@ -148,7 +154,7 @@ const ButtonBase = ({
   disabledBorderColor,
   startIcon,
   endIcon,
-  itemSpaceX,
+  itemGapX,
 }: ButtonBaseProps) => {
   return (
     <button
@@ -158,7 +164,7 @@ const ButtonBase = ({
       data-flag={dataFlag}
       className={cn(
         "group rounded-[1px] flex flex-row",
-        startIcon ? itemSpaceX : endIcon ? itemSpaceX : "",
+        startIcon ? itemGapX : endIcon ? itemGapX : "",
         disabled
           ? cn(
               disabledBgColor,
@@ -177,6 +183,7 @@ const ButtonBase = ({
         position,
         padding,
         width,
+        textSize,
         borderSize,
         borderRadius
       )}

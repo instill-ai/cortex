@@ -20,8 +20,9 @@ export type CollapseSidebarButtonOmitKeys =
   | "borderRadius"
   | "startIcon"
   | "endIcon"
-  | "itemSpaceX"
-  | "type";
+  | "itemGapX"
+  | "type"
+  | "textSize";
 
 export type CollapseSidebarButtonConfig = Pick<
   ButtonBaseProps,
@@ -37,7 +38,7 @@ export const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
   hoveredBorderColor: null,
   startIcon: null,
   endIcon: null,
-  itemSpaceX: null,
+  itemGapX: null,
   bgColor: "bg-instillGrey90",
   borderRadius: null,
   hoveredBgColor: "hover:bg-instillGrey80",
@@ -46,6 +47,7 @@ export const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
   disabledBgColor: "bg-instillGrey90",
   disabledTextColor: null,
   padding: "p-[3px]",
+  textSize: null,
 };
 
 export type FullCollapseSidebarButtonProps = Omit<

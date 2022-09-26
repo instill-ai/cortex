@@ -84,10 +84,11 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
       position={props.position ?? null}
       dataFlag={props.dataFlag ?? null}
       width={props.width ?? null}
-      padding={props.padding ?? "px-5 py-2.5"}
       startIcon={props.startIcon ?? null}
       endIcon={props.endIcon ?? null}
-      itemSpaceX={props.itemSpaceX ?? null}
+      itemGapX={props.itemGapX ?? null}
+      padding={props.padding ?? "px-5 py-2.5"}
+      textSize={props.textSize ?? "text-base"}
       {...buttonStyle}
     >
       {props.children}
