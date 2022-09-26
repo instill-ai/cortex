@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import cn from "clsx";
 
 export interface IconBaseProps {
@@ -33,6 +33,12 @@ export interface IconBaseProps {
   fill?: string;
 
   children?: React.ReactNode;
+
+  // Svg width and height for dynamic values
+  style?: {
+    width: string;
+    height: string;
+  };
 }
 
 const IconBase = ({
@@ -44,6 +50,7 @@ const IconBase = ({
   position,
   rotate,
   fill,
+  style,
 }: IconBaseProps) => {
   return (
     <svg
@@ -51,6 +58,7 @@ const IconBase = ({
       viewBox={viewBox}
       className={cn("flex", width, height, color, position, rotate)}
       fill={fill}
+      style={style}
     >
       {children}
     </svg>

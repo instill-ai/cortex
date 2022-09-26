@@ -10,6 +10,7 @@ const ArrowDownIcon: React.FC<ArrowDownIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
       rotate="rotate-90"
     >
       <path

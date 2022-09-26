@@ -11,6 +11,7 @@ const RotatableArrowIcon: React.FC<RotatableArrowIconProps> = (props) => {
       color={props.color}
       position={props.position}
       rotate={props.rotate}
+      style={props.style}
     >
       <path
         fillRule="evenodd"

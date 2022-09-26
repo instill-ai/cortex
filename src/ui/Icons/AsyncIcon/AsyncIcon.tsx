@@ -11,6 +11,7 @@ const AsyncIcon: React.FC<AsyncIconProps> = (props) => {
       height={props.height}
       position={props.position}
       color={props.color}
+      style={props.style}
     >
       <path
         fillRule="evenodd"

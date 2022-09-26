@@ -13,6 +13,7 @@ const PostgreSqlIcon: React.FC<PostgreSqlIconProps> = (props) => {
       width={props.width}
       height={props.height}
       position={props.position}
+      style={props.style}
       fill="none"
     >
       <path

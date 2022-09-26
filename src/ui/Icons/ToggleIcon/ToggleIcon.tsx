@@ -11,6 +11,7 @@ const ToggleIcon: React.FC<ToggleIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
     >
       <path d="M15 22L8.0718 10L21.9282 10L15 22Z" />
     </IconBase>

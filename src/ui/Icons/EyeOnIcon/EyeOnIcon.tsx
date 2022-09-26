@@ -11,6 +11,7 @@ const EyeOnIcon: React.FC<EyeOnIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
     >
       <path
         fillRule="evenodd"

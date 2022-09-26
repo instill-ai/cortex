@@ -10,6 +10,7 @@ const AwsS3Icon: React.FC<AwsS3IconProps> = (props) => {
       width={props.width}
       height={props.height}
       position={props.position}
+      style={props.style}
       fill="none"
     >
       <g>

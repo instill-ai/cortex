@@ -13,6 +13,7 @@ const ArrowRightIcon: React.FC<ArrowRightIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
       rotate=""
     >
       <path

@@ -12,6 +12,7 @@ const EyeIcon: React.FC<ArrowIconBaseProps> = (props) => {
       color={props.color}
       position={props.position}
       rotate={props.rotate}
+      style={props.style}
     >
       <path
         fillRule="evenodd"

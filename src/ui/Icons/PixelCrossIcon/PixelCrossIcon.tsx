@@ -11,6 +11,7 @@ const PixelCrossIcon: React.FC<PixelCrossIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
     >
       <rect x="13.3333" y="13.3333" width="3.33333" height="3.33333" />
       <rect x="16.6667" y="10" width="3.33333" height="3.33333" />

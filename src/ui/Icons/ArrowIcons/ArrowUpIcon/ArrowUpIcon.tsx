@@ -10,6 +10,7 @@ const ArrowUpIcon: React.FC<ArrowUpIconProps> = (props) => {
       height={props.height}
       color={props.color}
       position={props.position}
+      style={props.style}
       rotate="rotate-[270deg]"
     >
       <path

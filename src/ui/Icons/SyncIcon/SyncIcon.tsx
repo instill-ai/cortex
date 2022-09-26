@@ -11,6 +11,7 @@ const SyncIcon: React.FC<SyncIconProps> = (props) => {
       height={props.height}
       position={props.position}
       color={props.color}
+      style={props.style}
     >
       <path
         fillRule="evenodd"
