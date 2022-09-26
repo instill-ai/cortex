@@ -20,7 +20,8 @@ export const withIcon: ComponentStory<typeof TextButton> = Template.bind({});
 
 withIcon.args = {
   color: "primary",
-  itemSpaceX: "space-x-5",
+  itemGapX: "gap-x-5",
+  textSize: "text-2xl",
   endIcon: (
     <ArrowRightIcon
       width="w-4"

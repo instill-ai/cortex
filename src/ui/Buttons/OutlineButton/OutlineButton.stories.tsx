@@ -24,7 +24,7 @@ export const DiscordButton: ComponentStory<typeof OutlineButton> =
 
 DiscordButton.args = {
   color: "primary",
-  itemSpaceX: "space-x-3",
+  itemGapX: "gap-x-3",
   startIcon: (
     <DiscordIcon
       width="w-5"
@@ -41,7 +41,7 @@ export const MediumButton: ComponentStory<typeof OutlineButton> = Template.bind(
 
 MediumButton.args = {
   color: "primary",
-  itemSpaceX: "space-x-3",
+  itemGapX: "gap-x-3",
   endIcon: (
     <MediumIcon
       width="w-5"
