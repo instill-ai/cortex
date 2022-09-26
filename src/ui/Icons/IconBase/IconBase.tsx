@@ -52,6 +52,13 @@ const IconBase = ({
   fill,
   style,
 }: IconBaseProps) => {
+  if (style) {
+    if (width) {
+      throw new Error("Should not use style props with utility class - width");
+    } else {
+      throw new Error("Should not use style props with utility class - height");
+    }
+  }
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
