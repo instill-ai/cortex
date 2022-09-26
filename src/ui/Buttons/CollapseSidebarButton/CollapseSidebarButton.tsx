@@ -20,7 +20,7 @@ export type CollapseSidebarButtonOmitKeys =
   | "borderRadius"
   | "startIcon"
   | "endIcon"
-  | "itemGapX"
+  | "itemSpaceX"
   | "type";
 
 export type CollapseSidebarButtonConfig = Pick<
@@ -37,7 +37,7 @@ export const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
   hoveredBorderColor: null,
   startIcon: null,
   endIcon: null,
-  itemGapX: null,
+  itemSpaceX: null,
   bgColor: "bg-instillGrey90",
   borderRadius: null,
   hoveredBgColor: "hover:bg-instillGrey80",
