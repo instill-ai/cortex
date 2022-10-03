@@ -9,8 +9,11 @@ export type TextButtonOmitKeys =
   | "hoveredBorderColor"
   | "disabledBorderColor"
   | "bgColor"
+  | "bgOpacity"
   | "disabledBgColor"
+  | "disabledBgOpacity"
   | "hoveredBgColor"
+  | "hoveredBgOpacity"
   | "textColor"
   | "hoveredTextColor"
   | "disabledTextColor"
@@ -50,6 +53,9 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
         hoveredTextColor: "hover:text-instillBlue80",
         disabledBgColor: null,
         disabledTextColor: "text-instillGrey50",
+        disabledBgOpacity: null,
+        hoveredBgOpacity: null,
+        bgOpacity: null,
       };
       break;
     }

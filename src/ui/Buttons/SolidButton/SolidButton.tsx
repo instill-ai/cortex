@@ -9,8 +9,11 @@ export type SolidButtonOmitKeys =
   | "hoveredBorderColor"
   | "disabledBorderColor"
   | "bgColor"
+  | "bgOpacity"
   | "disabledBgColor"
+  | "disabledBgOpacity"
   | "hoveredBgColor"
+  | "hoveredBgOpacity"
   | "textColor"
   | "hoveredTextColor"
   | "disabledTextColor"
@@ -22,7 +25,7 @@ export type FullSolidButtonProps = Omit<
   ButtonBaseProps,
   SolidButtonOmitKeys
 > & {
-  color: "primary";
+  color: "primary" | "primaryLight";
 };
 
 export type SolidButtonRequiredProps = Pick<
@@ -54,6 +57,28 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
         hoveredTextColor: "hover:text-instillBlue10",
         disabledBgColor: "bg-instillGrey15",
         disabledTextColor: "text-instillGrey50",
+        disabledBgOpacity: null,
+        hoveredBgOpacity: null,
+        bgOpacity: null,
+      };
+      break;
+    }
+    case "primaryLight": {
+      buttonStyle = {
+        borderSize: null,
+        borderColor: null,
+        hoveredBorderColor: null,
+        disabledBorderColor: null,
+        borderRadius: "rounded-[1px]",
+        bgColor: "bg-instillNeonBlue",
+        hoveredBgColor: "hover:bg-instillNeonBlue",
+        textColor: "text-instillNeonBlue",
+        hoveredTextColor: "hover:text-instillNeonBlue",
+        disabledBgColor: "bg-instillGrey15",
+        disabledTextColor: "text-instillGrey50",
+        disabledBgOpacity: null,
+        bgOpacity: "bg-opacity-10",
+        hoveredBgOpacity: "hover:bg-opacity-20",
       };
       break;
     }
