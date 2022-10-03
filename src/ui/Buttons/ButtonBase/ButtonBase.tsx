@@ -23,16 +23,32 @@ export type ButtonBaseProps = {
    */
   bgColor: Nullable<string>;
 
+  /** TailwindCSS format - The opacity of background color of the button
+   * - e.g. bg-opacity-50
+   */
+
+  bgOpacity: Nullable<string>;
+
   /** TailwindCSS format - The background color of the button when hovered
    * - Please use Tailwind hover state
    * - e.g. hover:bg-blue-100
    */
   hoveredBgColor: Nullable<string>;
 
+  /** TailwindCSS format - The opacity of background color of the button when hovered
+   * - e.g. hover:bg-opacity-50
+   */
+  hoveredBgOpacity: Nullable<string>;
+
   /** TailwindCSS format - The background color of the button when disabled
    * - e.g. bg-slate-100
    */
   disabledBgColor: Nullable<string>;
+
+  /** TailwindCSS format - The opacity of background color of the button when disabled
+   * - e.g. bg-opacity-50
+   */
+  disabledBgOpacity: Nullable<string>;
 
   /** TailwindCSS format - The text color of the button
    * - e.g. text-black
@@ -133,13 +149,18 @@ export type ButtonBaseProps = {
 
 const ButtonBase = ({
   bgColor,
-  hoveredBgColor,
+  bgOpacity,
   disabled,
   disabledBgColor,
+  disabledBgOpacity,
+  disabledBorderColor,
   disabledTextColor,
   textColor,
   textSize,
   hoveredTextColor,
+  hoveredBorderColor,
+  hoveredBgColor,
+  hoveredBgOpacity,
   onClickHandler,
   position,
   type,
@@ -150,8 +171,6 @@ const ButtonBase = ({
   borderSize,
   borderColor,
   borderRadius,
-  hoveredBorderColor,
-  disabledBorderColor,
   startIcon,
   endIcon,
   itemGapX,
@@ -168,13 +187,16 @@ const ButtonBase = ({
         disabled
           ? cn(
               disabledBgColor,
+              disabledBgOpacity,
               disabledTextColor,
               disabledBorderColor,
               "cursor-not-allowed"
             )
           : cn(
               bgColor,
+              bgOpacity,
               hoveredBgColor,
+              hoveredBgOpacity,
               textColor,
               hoveredTextColor,
               borderColor,

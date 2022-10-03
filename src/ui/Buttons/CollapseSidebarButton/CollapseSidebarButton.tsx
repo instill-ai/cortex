@@ -6,15 +6,18 @@ export type CollapseSidebarButtonRequiredKeys = "onClickHandler" | "isCollapse";
 
 export type CollapseSidebarButtonOmitKeys =
   | "bgColor"
+  | "bgOpacity"
   | "textColor"
   | "disabledBgColor"
+  | "disabledBgOpacity"
   | "disabledTextColor"
+  | "disabledBorderColor"
   | "padding"
   | "width"
   | "borderSize"
   | "borderColor"
-  | "disabledBorderColor"
   | "hoveredBgColor"
+  | "hoveredBgOpacity"
   | "hoveredTextColor"
   | "hoveredBorderColor"
   | "borderRadius"
@@ -48,6 +51,9 @@ export const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
   disabledTextColor: null,
   padding: "p-[3px]",
   textSize: null,
+  disabledBgOpacity: null,
+  hoveredBgOpacity: null,
+  bgOpacity: null,
 };
 
 export type FullCollapseSidebarButtonProps = Omit<
