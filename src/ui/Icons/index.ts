@@ -1,3 +1,5 @@
+import AirbyteIcon from "./AirbyteIcon";
+import type { AirbyteIconProps } from "./AirbyteIcon";
 import EyeOnIcon from "./EyeOnIcon";
 import type { EyeOnIconProps } from "./EyeOnIcon";
 import EyeOffIcon from "./EyeOffIcon";
@@ -56,8 +58,12 @@ import RedshiftIcon from "./RedshiftIcon";
 import type { RedShiftIconProps } from "./RedshiftIcon";
 import PostgreSqlIcon from "./PostgreSqlIcon";
 import type { PostgreSqlIconProps } from "./PostgreSqlIcon";
+import PythonIcon from "./PythonIcon";
+import type { PythonIconProps } from "./PythonIcon";
 import PlusIcon from "./PlusIcon";
 import type { PlusIconProps } from "./PlusIcon";
+import PyTorchIcon from "./PyTorchIcon";
+import type { PyTorchIconProps } from "./PyTorchIcon";
 import BigQueryIcon from "./BigQueryIcon";
 import type { BigQueryIconProps } from "./BigQueryIcon";
 import MySqlIcon from "./MySqlIcon";
@@ -101,6 +107,8 @@ import type {
 } from "./ArrowIcons";
 import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
+import TensorFlowIcon from "./TensorFlowIcon";
+import type { TensorFlowIconProps } from "./TensorFlowIcon";
 import AsyncIcon from "./AsyncIcon";
 import type { AsyncIconProps } from "./AsyncIcon";
 import VersionIcon from "./VersionIcon";
@@ -133,6 +141,8 @@ import ImageClassificationIcon from "./ImageClassificationIcon";
 import type { ImageClassificationIconProps } from "./ImageClassificationIcon";
 import ObjectDetectionIcon from "./ObjectDetectionIcon";
 import type { ObjectDetectionIconProps } from "./ObjectDetectionIcon";
+import OnnxIcon from "./OnnxIcon";
+import type { OnnxIconProps } from "./OnnxIcon";
 import KeypointDetectionIcon from "./KeypointDetectionIcon";
 import type { KeypointDetectionIconProps } from "./KeypointDetectionIcon";
 import InstanceSegmentationIcon from "./InstanceSegmentationIcon";
@@ -148,6 +158,8 @@ import type { HuggingFaceIconProps } from "./HuggingFaceIcon";
 import DiscordIcon from "./DiscordIcon";
 import type { DiscordIconProps } from "./DiscordIcon";
 import MediumIcon from "./MediumIcon";
+import MetabaseIcon from "./MetabaseIcon";
+import type { MetabaseIconProps } from "./MetabaseIcon";
 import type { MediumIconProps } from "./MediumIcon";
 import CrossIcon from "./CrossIcon";
 import type { CrossIconProps } from "./CrossIcon";
@@ -165,6 +177,7 @@ import ToggleIcon from "./ToggleIcon";
 import type { ToggleIconProps } from "./ToggleIcon";
 
 export type {
+  AirbyteIconProps,
   EyeOnIconProps,
   EyeOffIconProps,
   IdIconProps,
@@ -196,6 +209,7 @@ export type {
   PipelineIconProps,
   RedShiftIconProps,
   PostgreSqlIconProps,
+  PythonIconProps,
   BigQueryIconProps,
   MySqlIconProps,
   SalesforceIconProps,
@@ -208,6 +222,7 @@ export type {
   StatusOffIconProps,
   StatusErrorIconProps,
   SyncIconProps,
+  TensorFlowIconProps,
   AsyncIconProps,
   VersionIconProps,
   LocalUploadIconProps,
@@ -227,6 +242,7 @@ export type {
   GoogleDriveIconProps,
   ImageClassificationIconProps,
   ObjectDetectionIconProps,
+  OnnxIconProps,
   KeypointDetectionIconProps,
   InstanceSegmentationIconProps,
   SemanticSegmentationIconProps,
@@ -237,10 +253,12 @@ export type {
   HuggingFaceIconProps,
   DiscordIconProps,
   MediumIconProps,
+  MetabaseIconProps,
   CrossIconProps,
   LinkedInIconProps,
   PinIconProps,
   PlusIconProps,
+  PyTorchIconProps,
   TwitterIconProps,
   ToolboxIconProps,
   PenIconProps,
@@ -248,6 +266,7 @@ export type {
 };
 
 export {
+  AirbyteIcon,
   EyeOnIcon,
   EyeOffIcon,
   IdIcon,
@@ -281,6 +300,7 @@ export {
   PlusIcon,
   RedshiftIcon,
   PostgreSqlIcon,
+  PythonIcon,
   BigQueryIcon,
   MySqlIcon,
   SalesforceIcon,
@@ -293,6 +313,7 @@ export {
   StatusOffIcon,
   StatusErrorIcon,
   SyncIcon,
+  TensorFlowIcon,
   AsyncIcon,
   VersionIcon,
   LocalUploadIcon,
@@ -311,6 +332,7 @@ export {
   GoogleDriveIcon,
   ImageClassificationIcon,
   ObjectDetectionIcon,
+  OnnxIcon,
   KeypointDetectionIcon,
   InstanceSegmentationIcon,
   SemanticSegmentationIcon,
@@ -321,9 +343,11 @@ export {
   HuggingFaceIcon,
   DiscordIcon,
   MediumIcon,
+  MetabaseIcon,
   CrossIcon,
   LinkedInIcon,
   PinIcon,
+  PyTorchIcon,
   TwitterIcon,
   ToolboxIcon,
   PenIcon,
