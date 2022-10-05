@@ -150,6 +150,8 @@ import type { HuggingFaceIconProps } from "./HuggingFaceIcon";
 import DiscordIcon from "./DiscordIcon";
 import type { DiscordIconProps } from "./DiscordIcon";
 import MediumIcon from "./MediumIcon";
+import MetabaseIcon from "./MetabaseIcon";
+import type { MetabaseIconProps } from "./MetabaseIcon";
 import type { MediumIconProps } from "./MediumIcon";
 import CrossIcon from "./CrossIcon";
 import type { CrossIconProps } from "./CrossIcon";
@@ -240,6 +242,7 @@ export type {
   HuggingFaceIconProps,
   DiscordIconProps,
   MediumIconProps,
+  MetabaseIconProps,
   CrossIconProps,
   LinkedInIconProps,
   PinIconProps,
@@ -325,6 +328,7 @@ export {
   HuggingFaceIcon,
   DiscordIcon,
   MediumIcon,
+  MetabaseIcon,
   CrossIcon,
   LinkedInIcon,
   PinIcon,
