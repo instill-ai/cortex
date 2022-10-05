@@ -58,6 +58,8 @@ import RedshiftIcon from "./RedshiftIcon";
 import type { RedShiftIconProps } from "./RedshiftIcon";
 import PostgreSqlIcon from "./PostgreSqlIcon";
 import type { PostgreSqlIconProps } from "./PostgreSqlIcon";
+import PythonIcon from "./PythonIcon";
+import type { PythonIconProps } from "./PythonIcon";
 import PlusIcon from "./PlusIcon";
 import type { PlusIconProps } from "./PlusIcon";
 import BigQueryIcon from "./BigQueryIcon";
@@ -201,6 +203,7 @@ export type {
   PipelineIconProps,
   RedShiftIconProps,
   PostgreSqlIconProps,
+  PythonIconProps,
   BigQueryIconProps,
   MySqlIconProps,
   SalesforceIconProps,
@@ -288,6 +291,7 @@ export {
   PlusIcon,
   RedshiftIcon,
   PostgreSqlIcon,
+  PythonIcon,
   BigQueryIcon,
   MySqlIcon,
   SalesforceIcon,
