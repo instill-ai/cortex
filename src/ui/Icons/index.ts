@@ -1,3 +1,5 @@
+import AirbyteIcon from "./AirbyteIcon";
+import type { AirbyteIconProps } from "./AirbyteIcon";
 import EyeOnIcon from "./EyeOnIcon";
 import type { EyeOnIconProps } from "./EyeOnIcon";
 import EyeOffIcon from "./EyeOffIcon";
@@ -165,6 +167,7 @@ import ToggleIcon from "./ToggleIcon";
 import type { ToggleIconProps } from "./ToggleIcon";
 
 export type {
+  AirbyteIconProps,
   EyeOnIconProps,
   EyeOffIconProps,
   IdIconProps,
@@ -248,6 +251,7 @@ export type {
 };
 
 export {
+  AirbyteIcon,
   EyeOnIcon,
   EyeOffIcon,
   IdIcon,
