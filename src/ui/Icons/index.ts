@@ -62,6 +62,8 @@ import PythonIcon from "./PythonIcon";
 import type { PythonIconProps } from "./PythonIcon";
 import PlusIcon from "./PlusIcon";
 import type { PlusIconProps } from "./PlusIcon";
+import PyTorchIcon from "./PyTorchIcon";
+import type { PyTorchIconProps } from "./PyTorchIcon";
 import BigQueryIcon from "./BigQueryIcon";
 import type { BigQueryIconProps } from "./BigQueryIcon";
 import MySqlIcon from "./MySqlIcon";
@@ -256,6 +258,7 @@ export type {
   LinkedInIconProps,
   PinIconProps,
   PlusIconProps,
+  PyTorchIconProps,
   TwitterIconProps,
   ToolboxIconProps,
   PenIconProps,
@@ -344,6 +347,7 @@ export {
   CrossIcon,
   LinkedInIcon,
   PinIcon,
+  PyTorchIcon,
   TwitterIcon,
   ToolboxIcon,
   PenIcon,
