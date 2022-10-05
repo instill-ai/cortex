@@ -137,6 +137,8 @@ import ImageClassificationIcon from "./ImageClassificationIcon";
 import type { ImageClassificationIconProps } from "./ImageClassificationIcon";
 import ObjectDetectionIcon from "./ObjectDetectionIcon";
 import type { ObjectDetectionIconProps } from "./ObjectDetectionIcon";
+import OnnxIcon from "./OnnxIcon";
+import type { OnnxIconProps } from "./OnnxIcon";
 import KeypointDetectionIcon from "./KeypointDetectionIcon";
 import type { KeypointDetectionIconProps } from "./KeypointDetectionIcon";
 import InstanceSegmentationIcon from "./InstanceSegmentationIcon";
@@ -235,6 +237,7 @@ export type {
   GoogleDriveIconProps,
   ImageClassificationIconProps,
   ObjectDetectionIconProps,
+  OnnxIconProps,
   KeypointDetectionIconProps,
   InstanceSegmentationIconProps,
   SemanticSegmentationIconProps,
@@ -322,6 +325,7 @@ export {
   GoogleDriveIcon,
   ImageClassificationIcon,
   ObjectDetectionIcon,
+  OnnxIcon,
   KeypointDetectionIcon,
   InstanceSegmentationIcon,
   SemanticSegmentationIcon,
