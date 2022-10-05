@@ -105,6 +105,8 @@ import type {
 } from "./ArrowIcons";
 import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
+import TensorFlowIcon from "./TensorFlowIcon";
+import type { TensorFlowIconProps } from "./TensorFlowIcon";
 import AsyncIcon from "./AsyncIcon";
 import type { AsyncIconProps } from "./AsyncIcon";
 import VersionIcon from "./VersionIcon";
@@ -218,6 +220,7 @@ export type {
   StatusOffIconProps,
   StatusErrorIconProps,
   SyncIconProps,
+  TensorFlowIconProps,
   AsyncIconProps,
   VersionIconProps,
   LocalUploadIconProps,
@@ -307,6 +310,7 @@ export {
   StatusOffIcon,
   StatusErrorIcon,
   SyncIcon,
+  TensorFlowIcon,
   AsyncIcon,
   VersionIcon,
   LocalUploadIcon,
