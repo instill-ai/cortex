@@ -1,5 +1,7 @@
 import AirbyteIcon from "./AirbyteIcon";
 import type { AirbyteIconProps } from "./AirbyteIcon";
+import AsyncArrowsIcon from "./AsyncArrowsIcon";
+import type { AsyncArrowsIconProps } from "./AsyncArrowsIcon";
 import EyeOnIcon from "./EyeOnIcon";
 import type { EyeOnIconProps } from "./EyeOnIcon";
 import EyeOffIcon from "./EyeOffIcon";
@@ -178,6 +180,7 @@ import type { ToggleIconProps } from "./ToggleIcon";
 
 export type {
   AirbyteIconProps,
+  AsyncArrowsIconProps,
   EyeOnIconProps,
   EyeOffIconProps,
   IdIconProps,
@@ -267,6 +270,7 @@ export type {
 
 export {
   AirbyteIcon,
+  AsyncArrowsIcon,
   EyeOnIcon,
   EyeOffIcon,
   IdIcon,
