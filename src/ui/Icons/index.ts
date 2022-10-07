@@ -88,6 +88,8 @@ import StatusOffIcon from "./StatusOffIcon";
 import type { StatusOffIconProps } from "./StatusOffIcon";
 import StatusErrorIcon from "./StatusErrorIcon";
 import type { StatusErrorIconProps } from "./StatusErrorIcon";
+import SyncArrowsIcon from "./SyncArrowsIcon";
+import type { SyncArrowsIconProps } from "./SyncArrowsIcon";
 import ModelInstanceIcon from "./ModelInstanceIcon";
 import type { ModelInstanceIconProps } from "./ModelInstanceIcon";
 import RefreshIcon from "./RefreshIcon";
@@ -160,9 +162,9 @@ import type { HuggingFaceIconProps } from "./HuggingFaceIcon";
 import DiscordIcon from "./DiscordIcon";
 import type { DiscordIconProps } from "./DiscordIcon";
 import MediumIcon from "./MediumIcon";
+import type { MediumIconProps } from "./MediumIcon";
 import MetabaseIcon from "./MetabaseIcon";
 import type { MetabaseIconProps } from "./MetabaseIcon";
-import type { MediumIconProps } from "./MediumIcon";
 import CrossIcon from "./CrossIcon";
 import type { CrossIconProps } from "./CrossIcon";
 import LinkedInIcon from "./LinkedInIcon";
@@ -225,6 +227,7 @@ export type {
   StatusOffIconProps,
   StatusErrorIconProps,
   SyncIconProps,
+  SyncArrowsIconProps,
   TensorFlowIconProps,
   AsyncIconProps,
   VersionIconProps,
@@ -317,6 +320,7 @@ export {
   StatusOffIcon,
   StatusErrorIcon,
   SyncIcon,
+  SyncArrowsIcon,
   TensorFlowIcon,
   AsyncIcon,
   VersionIcon,
