@@ -8,15 +8,17 @@ export type AccordionBaseProps = {
   items: {
     header: string;
     content: Nullable<React.ReactNode>;
-    bgColor: string;
+    headerTextColor: string;
+    headerBgColor: string;
+    contentBgColor: string;
     icon: Nullable<React.ReactElement>;
   }[];
-  contentWidth: string;
   enableHeaderIcon: boolean;
+  contentWidth: Nullable<string>;
   initialOpenIndex: Nullable<number>;
-  itemIconPosition: Nullable<string>;
+  itemIconContainerPosition: Nullable<string>;
   itemGapY: Nullable<string>;
-} & AccordionItemHeaderStyleProps;
+} & Omit<AccordionItemHeaderStyleProps, "headerTextColor" | "headerBgColor">;
 
 const AccordionBase = (props: AccordionBaseProps) => {
   const {
@@ -24,7 +26,7 @@ const AccordionBase = (props: AccordionBaseProps) => {
     initialOpenIndex,
     items,
     enableHeaderIcon,
-    itemIconPosition,
+    itemIconContainerPosition,
     contentWidth,
     itemGapY,
     ...headerStyle
@@ -43,10 +45,12 @@ const AccordionBase = (props: AccordionBaseProps) => {
           type={type}
           contentWidth={contentWidth}
           itemIcon={item.icon}
-          itemIconPosition={itemIconPosition}
+          itemIconContainerPosition={itemIconContainerPosition}
           header={item.header}
           enableHeaderIcon={enableHeaderIcon}
-          bgColor={item.bgColor}
+          headerBgColor={item.headerBgColor}
+          headerTextColor={item.headerTextColor}
+          contentBgColor={item.contentBgColor}
           activeIndex={activeIndex}
           setActiveIndex={setActiveIndex}
           selfIndex={i}

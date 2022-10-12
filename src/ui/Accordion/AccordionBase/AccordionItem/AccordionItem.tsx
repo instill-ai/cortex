@@ -1,43 +1,42 @@
 import React from "react";
 import cn from "clsx";
 import { Nullable } from "../../../../types/general";
-import { MinusIcon, PlusIcon } from "../../../Icons";
 
 export type AccordionItemHeaderStyleProps = {
   /** TailwindCSS format - The font style of the accordion item's header
    * - e.g. bg-blue-100
    */
   headerFont: string;
+  headerBgColor: string;
   headerTextSize: string;
   headerTextColor: string;
   headerFontWeight: string;
-  headerIconWidth: string;
-  headerIconHeight: string;
-  headerIconColor: string;
-  headerIconPosition: string;
   headerPadding: Nullable<string>;
+  headerActiveIcon: React.ReactElement;
+  headerInActiveIcon: React.ReactElement;
 };
 
 export type AccordionItemProps = {
   type: "withIcon" | "basic";
   header: string;
   enableHeaderIcon: boolean;
-  bgColor: string;
+  contentBgColor: string;
   selfIndex: number;
   activeIndex: number;
-  contentWidth: string;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+  contentWidth: Nullable<string>;
   content: Nullable<React.ReactNode>;
   itemIcon: Nullable<React.ReactElement>;
-  itemIconPosition: Nullable<string>;
+  itemIconContainerPosition: Nullable<string>;
 } & AccordionItemHeaderStyleProps;
 
 const AccordionItem = (props: AccordionItemProps) => {
   const {
     type,
     itemIcon,
-    itemIconPosition,
-    bgColor,
+    itemIconContainerPosition,
+    headerBgColor,
+    contentBgColor,
     selfIndex,
     activeIndex,
     setActiveIndex,
@@ -49,36 +48,33 @@ const AccordionItem = (props: AccordionItemProps) => {
     headerFontWeight,
     headerTextColor,
     headerPadding,
-    headerIconWidth,
-    headerIconHeight,
-    headerIconColor,
-    headerIconPosition,
     contentWidth,
+    headerActiveIcon,
+    headerInActiveIcon,
   } = props;
-
-  const headerIconStyle = {
-    width: headerIconWidth,
-    height: headerIconHeight,
-    color: headerIconColor,
-    position: headerIconPosition,
-  };
 
   return (
     <div
       className={cn(
         "flex flex-col overflow-hidden",
-        bgColor,
         type === "withIcon" ? "relative" : ""
       )}
     >
       {type === "withIcon" ? (
-        <div className={cn("flex absolute z-0", itemIconPosition)}>
+        <div
+          onClick={() => setActiveIndex(selfIndex)}
+          className={cn("flex absolute", itemIconContainerPosition)}
+        >
           {itemIcon}
         </div>
       ) : null}
       <div
         onClick={() => setActiveIndex(selfIndex)}
-        className={cn("flex flex-row cursor-pointer z-10", headerPadding)}
+        className={cn(
+          "flex flex-row cursor-pointer",
+          headerPadding,
+          headerBgColor
+        )}
       >
         <div
           className={cn(
@@ -93,21 +89,19 @@ const AccordionItem = (props: AccordionItemProps) => {
         </div>
         {enableHeaderIcon ? (
           <>
-            {selfIndex === activeIndex ? (
-              <PlusIcon {...headerIconStyle} />
-            ) : (
-              <MinusIcon {...headerIconStyle} />
-            )}
+            {selfIndex === activeIndex ? headerActiveIcon : headerInActiveIcon}
           </>
         ) : null}
       </div>
-      <div
-        className={cn(
-          contentWidth,
-          selfIndex === activeIndex ? "flex" : "hidden"
-        )}
-      >
-        {content}
+      <div className={cn("w-full", contentBgColor)}>
+        <div
+          className={cn(
+            contentWidth,
+            selfIndex === activeIndex ? "flex" : "hidden"
+          )}
+        >
+          {content}
+        </div>
       </div>
     </div>
   );

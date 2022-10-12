@@ -2,8 +2,10 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import {
   DataDestinationIcon,
   DataSourceIcon,
+  MinusIcon,
   ModelIcon,
   PipelineIcon,
+  PlusIcon,
 } from "../../Icons";
 import AccordionBase from "./AccordionBase";
 
@@ -24,13 +26,20 @@ const iconStyle = {
   width: "w-[250px]",
   height: "h-[250px]",
   color: "fill-white opacity-60",
-  position: "m-auto",
+  position: "top-0 -right-20",
+};
+
+const headerIconStyle = {
+  width: "w-[30px]",
+  height: "h-[30px]",
+  color: "fill-white",
+  position: "my-auto",
 };
 
 Playground.args = {
   type: "withIcon",
-  itemIconPosition: "top-0 -right-20",
   contentWidth: "w-7/12",
+  itemIconContainerPosition: "top-0 -right-20",
   items: [
     {
       header: "Pipeline",
@@ -42,7 +51,9 @@ Playground.args = {
           </div>
         </div>
       ),
-      bgColor: "bg-[#23C4E7]",
+      headerBgColor: "bg-[#23C4E7]",
+      contentBgColor: "bg-[#23C4E7]",
+      headerTextColor: "text-white",
       icon: <PipelineIcon {...iconStyle} />,
     },
     {
@@ -55,7 +66,9 @@ Playground.args = {
           </div>
         </div>
       ),
-      bgColor: "bg-[#02D085]",
+      headerBgColor: "bg-[#02D085]",
+      contentBgColor: "bg-[#02D085]",
+      headerTextColor: "text-white",
       icon: <DataSourceIcon {...iconStyle} />,
     },
     {
@@ -68,7 +81,9 @@ Playground.args = {
           </div>
         </div>
       ),
-      bgColor: "bg-[#DEC800]",
+      headerBgColor: "bg-[#DEC800]",
+      contentBgColor: "bg-[#DEC800]",
+      headerTextColor: "text-white",
       icon: <ModelIcon {...iconStyle} />,
     },
     {
@@ -81,7 +96,9 @@ Playground.args = {
           </div>
         </div>
       ),
-      bgColor: "bg-[#FF8A00]",
+      headerBgColor: "bg-[#FF8A00]",
+      contentBgColor: "bg-[#FF8A00]",
+      headerTextColor: "text-white",
       icon: <DataDestinationIcon {...iconStyle} />,
     },
   ],
@@ -90,10 +107,7 @@ Playground.args = {
   headerFont: "font-sans",
   headerTextSize: "text-2xl",
   headerFontWeight: "font-medium",
-  headerTextColor: "text-white",
   headerPadding: "p-5",
-  headerIconWidth: "w-[30px]",
-  headerIconHeight: "h-[30px]",
-  headerIconColor: "fill-white",
-  headerIconPosition: "my-auto",
+  headerActiveIcon: <MinusIcon {...headerIconStyle} />,
+  headerInActiveIcon: <PlusIcon {...headerIconStyle} />,
 };

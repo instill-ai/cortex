@@ -1,6 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
-import { PipelineIcon } from "../../../Icons";
+import { MinusIcon, PipelineIcon, PlusIcon } from "../../../Icons";
 import AccordionItem from "./AccordionItem";
 
 export default {
@@ -23,19 +23,23 @@ export const Playground: ComponentStory<typeof AccordionItem> = Template.bind(
   {}
 );
 
+const headerIconStyle = {
+  width: "w-[30px]",
+  height: "h-[30px]",
+  color: "fill-white",
+  position: "my-auto",
+};
+
 Playground.args = {
-  type: "basic",
+  type: "withIcon",
   header: "Pipeline",
   enableHeaderIcon: true,
   headerFont: "font-sans",
   headerTextSize: "text-2xl",
   headerTextColor: "text-white",
   headerPadding: "p-5",
-  headerIconWidth: "w-[30px]",
-  headerIconHeight: "h-[30px]",
-  headerIconColor: "fill-white",
-  headerIconPosition: "my-auto",
-  bgColor: "bg-instillGrey90",
+  headerBgColor: "bg-instillGrey90",
+  contentBgColor: "bg-instillGrey70",
   content: (
     <div className="flex flex-col p-5">
       <div className="flex text-base text-instillGrey15">
@@ -49,8 +53,10 @@ Playground.args = {
       width="w-[250px]"
       height="h-[250px]"
       color="fill-white"
-      position="m-auto"
+      position="top-0 -right-20"
     />
   ),
-  itemIconPosition: "top-0 -right-20",
+  itemIconContainerPosition: "top-0 -right-20",
+  headerActiveIcon: <MinusIcon {...headerIconStyle} />,
+  headerInActiveIcon: <PlusIcon {...headerIconStyle} />,
 };
