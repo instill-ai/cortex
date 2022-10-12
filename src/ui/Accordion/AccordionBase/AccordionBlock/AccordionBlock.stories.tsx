@@ -1,4 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
+import { PipelineIcon } from "../../../Icons";
 import AccordionBlock from "./AccordionBlock";
 
 export default {
@@ -6,9 +8,16 @@ export default {
   component: AccordionBlock,
 } as ComponentMeta<typeof AccordionBlock>;
 
-const Template: ComponentStory<typeof AccordionBlock> = (args) => (
-  <AccordionBlock {...args} />
-);
+const Template: ComponentStory<typeof AccordionBlock> = (args) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  return (
+    <AccordionBlock
+      {...args}
+      activeIndex={activeIndex}
+      setActiveIndex={setActiveIndex}
+    />
+  );
+};
 
 export const Playground: ComponentStory<typeof AccordionBlock> = Template.bind(
   {}
@@ -34,4 +43,13 @@ Playground.args = {
       </div>
     </div>
   ),
+  blockIcon: (
+    <PipelineIcon
+      width="w-[250px]"
+      height="h-[250px]"
+      color="fill-white"
+      position="m-auto"
+    />
+  ),
+  blockIconPosition: "top-0 -right-20",
 };

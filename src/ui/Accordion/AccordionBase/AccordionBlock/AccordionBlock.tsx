@@ -7,6 +7,7 @@ export type AccordionBlockHeaderStyleProps = {
   headerFont: string;
   headerTextSize: string;
   headerTextColor: string;
+  headerFontWeight: string;
   headerPadding: Nullable<string>;
   headerIconWidth: string;
   headerIconHeight: string;
@@ -15,6 +16,7 @@ export type AccordionBlockHeaderStyleProps = {
 };
 
 export type AccordionBlockProps = {
+  type: "bigIcon" | "basic";
   header: string;
   enableHeaderIcon: boolean;
   bgColor: string;
@@ -22,10 +24,16 @@ export type AccordionBlockProps = {
   activeIndex: number;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   content: Nullable<React.ReactNode>;
+  blockIcon: Nullable<React.ReactElement>;
+  blockIconPosition: Nullable<string>;
+  contentWidth: string;
 } & AccordionBlockHeaderStyleProps;
 
 const AccordionBlock = (props: AccordionBlockProps) => {
   const {
+    type,
+    blockIcon,
+    blockIconPosition,
     bgColor,
     selfIndex,
     activeIndex,
@@ -35,12 +43,14 @@ const AccordionBlock = (props: AccordionBlockProps) => {
     enableHeaderIcon,
     headerFont,
     headerTextSize,
+    headerFontWeight,
     headerTextColor,
     headerPadding,
     headerIconWidth,
     headerIconHeight,
     headerIconColor,
     headerIconPosition,
+    contentWidth,
   } = props;
 
   const headerIconStyle = {
@@ -51,13 +61,30 @@ const AccordionBlock = (props: AccordionBlockProps) => {
   };
 
   return (
-    <div className={cn("flex flex-col", bgColor)}>
+    <div
+      className={cn(
+        "flex flex-col overflow-hidden",
+        bgColor,
+        type === "bigIcon" ? "relative" : ""
+      )}
+    >
+      {type === "bigIcon" ? (
+        <div className={cn("flex absolute z-0", blockIconPosition)}>
+          {blockIcon}
+        </div>
+      ) : null}
       <div
         onClick={() => setActiveIndex(selfIndex)}
-        className={cn("flex flex-row cursor-pointer", headerPadding)}
+        className={cn("flex flex-row cursor-pointer z-10", headerPadding)}
       >
         <div
-          className={cn("mr-auto", headerFont, headerTextSize, headerTextColor)}
+          className={cn(
+            "mr-auto",
+            headerFont,
+            headerTextSize,
+            headerTextColor,
+            headerFontWeight
+          )}
         >
           {header}
         </div>
@@ -71,7 +98,14 @@ const AccordionBlock = (props: AccordionBlockProps) => {
           </>
         ) : null}
       </div>
-      {content}
+      <div
+        className={cn(
+          contentWidth,
+          selfIndex === activeIndex ? "flex" : "hidden"
+        )}
+      >
+        {content}
+      </div>
     </div>
   );
 };

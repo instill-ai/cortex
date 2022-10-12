@@ -1,2 +1,2 @@
-export { default } from "./AccordionItem";
-export * from "./AccordionItem";
+export { default } from "./AccordionBlock";
+export * from "./AccordionBlock";
