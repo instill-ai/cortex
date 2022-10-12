@@ -1,26 +1,22 @@
 import React from "react";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
-import AccordionBlock, {
-  AccordionBlockHeaderStyleProps,
-} from "./AccordionBlock";
-
-export type AccrodionItem = {
-  header: string;
-  content: Nullable<React.ReactNode>;
-  bgColor: string;
-  icon: Nullable<React.ReactElement>;
-};
+import AccordionItem, { AccordionItemHeaderStyleProps } from "./AccordionItem";
 
 export type AccordionBaseProps = {
-  type: "bigIcon" | "basic";
-  items: AccrodionItem[];
+  type: "withIcon" | "basic";
+  items: {
+    header: string;
+    content: Nullable<React.ReactNode>;
+    bgColor: string;
+    icon: Nullable<React.ReactElement>;
+  }[];
   contentWidth: string;
   enableHeaderIcon: boolean;
   initialOpenIndex: Nullable<number>;
-  blockIconPosition: Nullable<string>;
+  itemIconPosition: Nullable<string>;
   itemGapY: Nullable<string>;
-} & AccordionBlockHeaderStyleProps;
+} & AccordionItemHeaderStyleProps;
 
 const AccordionBase = (props: AccordionBaseProps) => {
   const {
@@ -28,7 +24,7 @@ const AccordionBase = (props: AccordionBaseProps) => {
     initialOpenIndex,
     items,
     enableHeaderIcon,
-    blockIconPosition,
+    itemIconPosition,
     contentWidth,
     itemGapY,
     ...headerStyle
@@ -41,13 +37,13 @@ const AccordionBase = (props: AccordionBaseProps) => {
   return (
     <div className={cn("flex flex-col", itemGapY)}>
       {items.map((item, i) => (
-        <AccordionBlock
+        <AccordionItem
           {...headerStyle}
           key={item.header}
           type={type}
           contentWidth={contentWidth}
-          blockIcon={item.icon}
-          blockIconPosition={blockIconPosition}
+          itemIcon={item.icon}
+          itemIconPosition={itemIconPosition}
           header={item.header}
           enableHeaderIcon={enableHeaderIcon}
           bgColor={item.bgColor}

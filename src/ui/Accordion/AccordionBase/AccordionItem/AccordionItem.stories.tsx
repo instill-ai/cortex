@@ -1,17 +1,17 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import { PipelineIcon } from "../../../Icons";
-import AccordionBlock from "./AccordionBlock";
+import AccordionItem from "./AccordionItem";
 
 export default {
-  title: "Components/Base/AccordionBase/AccordionBlock",
-  component: AccordionBlock,
-} as ComponentMeta<typeof AccordionBlock>;
+  title: "Components/Base/AccordionBase/AccordionItem",
+  component: AccordionItem,
+} as ComponentMeta<typeof AccordionItem>;
 
-const Template: ComponentStory<typeof AccordionBlock> = (args) => {
+const Template: ComponentStory<typeof AccordionItem> = (args) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   return (
-    <AccordionBlock
+    <AccordionItem
       {...args}
       activeIndex={activeIndex}
       setActiveIndex={setActiveIndex}
@@ -19,11 +19,12 @@ const Template: ComponentStory<typeof AccordionBlock> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof AccordionBlock> = Template.bind(
+export const Playground: ComponentStory<typeof AccordionItem> = Template.bind(
   {}
 );
 
 Playground.args = {
+  type: "basic",
   header: "Pipeline",
   enableHeaderIcon: true,
   headerFont: "font-sans",
@@ -43,7 +44,7 @@ Playground.args = {
       </div>
     </div>
   ),
-  blockIcon: (
+  itemIcon: (
     <PipelineIcon
       width="w-[250px]"
       height="h-[250px]"
@@ -51,5 +52,5 @@ Playground.args = {
       position="m-auto"
     />
   ),
-  blockIconPosition: "top-0 -right-20",
+  itemIconPosition: "top-0 -right-20",
 };

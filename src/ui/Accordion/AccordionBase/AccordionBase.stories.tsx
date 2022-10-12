@@ -28,8 +28,8 @@ const iconStyle = {
 };
 
 Playground.args = {
-  type: "bigIcon",
-  blockIconPosition: "top-0 -right-20",
+  type: "withIcon",
+  itemIconPosition: "top-0 -right-20",
   contentWidth: "w-7/12",
   items: [
     {

@@ -3,37 +3,40 @@ import cn from "clsx";
 import { Nullable } from "../../../../types/general";
 import { MinusIcon, PlusIcon } from "../../../Icons";
 
-export type AccordionBlockHeaderStyleProps = {
+export type AccordionItemHeaderStyleProps = {
+  /** TailwindCSS format - The font style of the accordion item's header
+   * - e.g. bg-blue-100
+   */
   headerFont: string;
   headerTextSize: string;
   headerTextColor: string;
   headerFontWeight: string;
-  headerPadding: Nullable<string>;
   headerIconWidth: string;
   headerIconHeight: string;
   headerIconColor: string;
   headerIconPosition: string;
+  headerPadding: Nullable<string>;
 };
 
-export type AccordionBlockProps = {
-  type: "bigIcon" | "basic";
+export type AccordionItemProps = {
+  type: "withIcon" | "basic";
   header: string;
   enableHeaderIcon: boolean;
   bgColor: string;
   selfIndex: number;
   activeIndex: number;
+  contentWidth: string;
   setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
   content: Nullable<React.ReactNode>;
-  blockIcon: Nullable<React.ReactElement>;
-  blockIconPosition: Nullable<string>;
-  contentWidth: string;
-} & AccordionBlockHeaderStyleProps;
+  itemIcon: Nullable<React.ReactElement>;
+  itemIconPosition: Nullable<string>;
+} & AccordionItemHeaderStyleProps;
 
-const AccordionBlock = (props: AccordionBlockProps) => {
+const AccordionItem = (props: AccordionItemProps) => {
   const {
     type,
-    blockIcon,
-    blockIconPosition,
+    itemIcon,
+    itemIconPosition,
     bgColor,
     selfIndex,
     activeIndex,
@@ -65,12 +68,12 @@ const AccordionBlock = (props: AccordionBlockProps) => {
       className={cn(
         "flex flex-col overflow-hidden",
         bgColor,
-        type === "bigIcon" ? "relative" : ""
+        type === "withIcon" ? "relative" : ""
       )}
     >
-      {type === "bigIcon" ? (
-        <div className={cn("flex absolute z-0", blockIconPosition)}>
-          {blockIcon}
+      {type === "withIcon" ? (
+        <div className={cn("flex absolute z-0", itemIconPosition)}>
+          {itemIcon}
         </div>
       ) : null}
       <div
@@ -110,4 +113,4 @@ const AccordionBlock = (props: AccordionBlockProps) => {
   );
 };
 
-export default AccordionBlock;
+export default AccordionItem;
