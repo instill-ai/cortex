@@ -21,10 +21,10 @@ Playground.args = {
   rotate: "rotate-45",
 };
 
-export const useStyle: ComponentStory<typeof RotatableArrowIcon> =
+export const UseStyle: ComponentStory<typeof RotatableArrowIcon> =
   Template.bind({});
 
-useStyle.args = {
+UseStyle.args = {
   style: {
     width: "30px",
     height: "30px",

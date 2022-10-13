@@ -170,7 +170,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     if (value && !answered) {
       setAnswered(true);
     }
-  }, [value]);
+  }, [value, answered]);
 
   /**
    * We use these ref to calculate the width and height of the container
@@ -326,7 +326,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       backgroundColor: "#FFFFFF",
       zIndex: "30",
     }),
-    option: (styles, state) => ({
+    option: (styles) => ({
       ...styles,
       // backgroundColor: state.isFocused ? "#40A8F5" : "#FFFFFF",
       ":hover": {

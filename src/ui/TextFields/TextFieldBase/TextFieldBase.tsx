@@ -191,7 +191,14 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setInputValuePaddingTop(0);
     }
-  }, [error, inputLabelRef, inputLabelType]);
+  }, [
+    error,
+    inputLabelRef,
+    inputLabelType,
+    inputHeight,
+    inputLineHeight,
+    label,
+  ]);
 
   const getInputStyle = error
     ? cn(

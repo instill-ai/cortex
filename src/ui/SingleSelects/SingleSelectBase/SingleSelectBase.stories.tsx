@@ -1,7 +1,6 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { useState } from "react";
 import SingleSelectBase from ".";
-import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "./SingleSelectBase";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";
@@ -13,47 +12,6 @@ export default {
 } as ComponentMeta<typeof SingleSelectBase>;
 
 const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
-  const options: SingleSelectOption[] = [
-    {
-      value: "grpc",
-      label: "gRPC",
-      startIcon: (
-        <GrpcIcon
-          color="text-instillGrey95"
-          width="w-[30px]"
-          height="h-[30px]"
-          position="m-auto"
-        />
-      ),
-    },
-    {
-      value: "http",
-      label: "HTTP",
-      startIcon: (
-        <HttpIcon
-          color="text-instillGrey95"
-          width="w-[30px]"
-          height="h-[30px]"
-          position="m-auto"
-        />
-      ),
-    },
-    {
-      value: "snowflake",
-      label: "Snowflake",
-      startIcon: (
-        <SnowflakeIcon width="w-[30px]" height="h-[30px]" position="m-auto" />
-      ),
-    },
-    {
-      value: "mongodb",
-      label: "MongoDB",
-      startIcon: (
-        <MongoDbIcon width="w-[30px]" height="h-[30px]" position="m-auto" />
-      ),
-    },
-  ];
-
   const optionsWithoutIcon: SingleSelectOption[] = [
     {
       value: "grpc",

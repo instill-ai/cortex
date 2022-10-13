@@ -1,6 +1,5 @@
 import React from "react";
 import cn from "clsx";
-import { Nullable } from "../../../types/general";
 
 export interface IconBaseProps {
   /** The viewbox of target icon

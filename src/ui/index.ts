@@ -1,3 +1,6 @@
+// Accordions
+export * from "./Accordion";
+
 // Icons
 export * from "./Icons";
 

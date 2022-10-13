@@ -237,7 +237,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setContainerPaddingTop(0);
     }
-  }, [error, inputLabelRef, inputLabelType]);
+  }, [error, inputLabelRef, inputLabelType, inputHeight, label]);
 
   const getInputStyle = error
     ? cn(
