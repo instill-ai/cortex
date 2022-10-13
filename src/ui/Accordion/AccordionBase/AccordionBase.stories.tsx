@@ -10,7 +10,7 @@ import {
 import AccordionBase from "./AccordionBase";
 
 export default {
-  title: "Components/Base/AccordionBase",
+  title: "Components/Base/Accordion/AccordionBase",
   component: AccordionBase,
 } as ComponentMeta<typeof AccordionBase>;
 
@@ -36,10 +36,20 @@ const headerIconStyle = {
   position: "my-auto",
 };
 
+const commonHeaderStyle = {
+  headerFont: "font-sans",
+  headerFontWeight: "font-medium",
+  headerTextSize: "text-2xl",
+  headerPadding: "p-5",
+  headerActiveIcon: <MinusIcon {...headerIconStyle} />,
+  headerInActiveIcon: <PlusIcon {...headerIconStyle} />,
+  enableHeaderIcon: true,
+  bgIconPosition: "top-0 -right-20",
+  contentWidth: "w-7/12",
+};
+
 Playground.args = {
   type: "withIcon",
-  contentWidth: "w-7/12",
-  itemIconContainerPosition: "top-0 -right-20",
   items: [
     {
       header: "Pipeline",
@@ -54,7 +64,8 @@ Playground.args = {
       headerBgColor: "bg-[#23C4E7]",
       contentBgColor: "bg-[#23C4E7]",
       headerTextColor: "text-white",
-      icon: <PipelineIcon {...iconStyle} />,
+      bgIcon: <PipelineIcon {...iconStyle} />,
+      ...commonHeaderStyle,
     },
     {
       header: "Source",
@@ -69,7 +80,8 @@ Playground.args = {
       headerBgColor: "bg-[#02D085]",
       contentBgColor: "bg-[#02D085]",
       headerTextColor: "text-white",
-      icon: <DataSourceIcon {...iconStyle} />,
+      bgIcon: <DataSourceIcon {...iconStyle} />,
+      ...commonHeaderStyle,
     },
     {
       header: "Model",
@@ -84,7 +96,8 @@ Playground.args = {
       headerBgColor: "bg-[#DEC800]",
       contentBgColor: "bg-[#DEC800]",
       headerTextColor: "text-white",
-      icon: <ModelIcon {...iconStyle} />,
+      bgIcon: <ModelIcon {...iconStyle} />,
+      ...commonHeaderStyle,
     },
     {
       header: "Destination",
@@ -99,15 +112,9 @@ Playground.args = {
       headerBgColor: "bg-[#FF8A00]",
       contentBgColor: "bg-[#FF8A00]",
       headerTextColor: "text-white",
-      icon: <DataDestinationIcon {...iconStyle} />,
+      bgIcon: <DataDestinationIcon {...iconStyle} />,
+      ...commonHeaderStyle,
     },
   ],
-  initialOpenIndex: 0,
-  enableHeaderIcon: true,
-  headerFont: "font-sans",
-  headerTextSize: "text-2xl",
-  headerFontWeight: "font-medium",
-  headerPadding: "p-5",
-  headerActiveIcon: <MinusIcon {...headerIconStyle} />,
-  headerInActiveIcon: <PlusIcon {...headerIconStyle} />,
+  initialActiveIndex: 0,
 };
