@@ -1,0 +1,76 @@
+import { MinusIcon, PlusIcon } from "../../Icons";
+import AccordionBase, { AccordionBaseProps } from "../AccordionBase";
+
+type BgIconAccordionRequiredKeys =
+  | "initialActiveIndex"
+  | "enableHeaderIcon"
+  | "items"
+  | "bgIconPosition";
+
+type BgIconAccordionOmitKeys =
+  | "type"
+  | "headerFont"
+  | "headerFontWeight"
+  | "headerTextSize"
+  | "headerPadding"
+  | "headerActiveIcon"
+  | "headerInActiveIcon";
+
+type BgIconAccordionConfig = Pick<AccordionBaseProps, BgIconAccordionOmitKeys>;
+
+type FullBgIconAccordionProps = Omit<
+  AccordionBaseProps,
+  BgIconAccordionOmitKeys
+>;
+
+type BgIconAccordionRequiredProps = Pick<
+  FullBgIconAccordionProps,
+  BgIconAccordionRequiredKeys
+>;
+
+type BgIconAccordionOptionalProps = Partial<
+  Omit<FullBgIconAccordionProps, BgIconAccordionRequiredKeys>
+>;
+
+export type BgIconAccordionProps = BgIconAccordionRequiredProps &
+  BgIconAccordionOptionalProps;
+
+const BgIconAccordion = (props: BgIconAccordionProps) => {
+  const {
+    items,
+    itemGapY,
+    initialActiveIndex,
+    enableHeaderIcon,
+    bgIconPosition,
+  } = props;
+
+  const headerIconStyle = {
+    width: "w-[30px]",
+    height: "h-[30px]",
+    color: "fill-white",
+    position: "my-auto",
+  };
+
+  const config: BgIconAccordionConfig = {
+    type: "withIcon",
+    headerFont: "font-sans",
+    headerFontWeight: "font-medium",
+    headerTextSize: "text-2xl",
+    headerPadding: "p-5",
+    headerActiveIcon: <MinusIcon {...headerIconStyle} />,
+    headerInActiveIcon: <PlusIcon {...headerIconStyle} />,
+  };
+
+  return (
+    <AccordionBase
+      items={items}
+      initialActiveIndex={initialActiveIndex}
+      enableHeaderIcon={enableHeaderIcon}
+      bgIconPosition={bgIconPosition}
+      itemGapY={itemGapY ?? null}
+      {...config}
+    />
+  );
+};
+
+export default BgIconAccordion;

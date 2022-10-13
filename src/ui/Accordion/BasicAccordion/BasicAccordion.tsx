@@ -1,8 +1,5 @@
 import { MinusIcon, PlusIcon } from "../../Icons";
-import AccordionBase, {
-  AccordionBaseProps,
-  AccordionItem,
-} from "../AccordionBase";
+import AccordionBase, { AccordionBaseProps } from "../AccordionBase";
 
 type BasicAccordionRequiredKeys =
   | "initialActiveIndex"
