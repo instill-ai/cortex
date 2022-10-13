@@ -16,9 +16,9 @@ Playground.args = {
   color: "primary",
 };
 
-export const withIcon: ComponentStory<typeof TextButton> = Template.bind({});
+export const WithIcon: ComponentStory<typeof TextButton> = Template.bind({});
 
-withIcon.args = {
+WithIcon.args = {
   color: "primary",
   itemGapX: "gap-x-5",
   textSize: "text-2xl",

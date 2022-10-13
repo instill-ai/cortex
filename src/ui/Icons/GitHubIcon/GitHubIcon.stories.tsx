@@ -19,9 +19,9 @@ Playground.args = {
   position: "my-auto",
 };
 
-export const withStyle: ComponentStory<typeof GitHubIcon> = Template.bind({});
+export const WithStyle: ComponentStory<typeof GitHubIcon> = Template.bind({});
 
-withStyle.args = {
+WithStyle.args = {
   color: "fill-instillGrey50",
   position: "my-auto",
   style: {

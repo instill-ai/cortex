@@ -6,7 +6,7 @@ export default {
   component: BasicInputDescription,
 } as ComponentMeta<typeof BasicInputDescription>;
 
-const Template: ComponentStory<typeof BasicInputDescription> = (args) => (
+const Template: ComponentStory<typeof BasicInputDescription> = () => (
   <BasicInputDescription description="this is description <a href='#'>setup guide</a>" />
 );
 

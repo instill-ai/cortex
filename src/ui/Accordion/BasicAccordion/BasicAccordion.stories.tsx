@@ -14,13 +14,6 @@ export const Playground: ComponentStory<typeof BasicAccordion> = Template.bind(
   {}
 );
 
-const iconStyle = {
-  width: "w-[250px]",
-  height: "h-[250px]",
-  color: "fill-white opacity-60",
-  position: "top-0 -right-20",
-};
-
 Playground.args = {
   enableHeaderIcon: true,
   initialActiveIndex: 0,

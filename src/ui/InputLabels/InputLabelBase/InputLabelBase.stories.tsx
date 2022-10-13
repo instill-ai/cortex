@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof InputLabelBase>;
 
 const Template: ComponentStory<typeof InputLabelBase> = (args) => {
-  const [_, setFocus] = useState(false);
+  const [, setFocus] = useState(false);
   return <InputLabelBase {...args} setFocus={setFocus} />;
 };
 

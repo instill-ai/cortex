@@ -206,7 +206,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
       inputLabelPaddingWidth * 2;
 
     setInputLabelWidth(inputLabelWidth);
-  }, [mainContainerRef, uploadButtonRef, inputLabelType]);
+  }, [mainContainerRef, uploadButtonRef, inputLabelType, label]);
 
   React.useEffect(() => {
     if (

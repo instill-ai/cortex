@@ -16,7 +16,7 @@ export type ButtonBaseProps = {
   /**
    * The onClickHandler of the button
    */
-  onClickHandler: Nullable<() => any>;
+  onClickHandler: Nullable<() => void>;
 
   /** TailwindCSS format - The background color of the button
    * - e.g. bg-blue-100

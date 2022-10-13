@@ -184,7 +184,17 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
       default:
         return null;
     }
-  }, [state.status]);
+  }, [
+    state.status,
+    errorIconColor,
+    errorIconHeight,
+    errorIconWidth,
+    iconPosition,
+    progressBlockSize,
+    successIconColor,
+    successIconHeight,
+    successIconWidth,
+  ]);
 
   return (
     <>
