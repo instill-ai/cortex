@@ -2,13 +2,15 @@ import React from "react";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
+// Due to AccordionItem is a exposed level item, it can accept undefinded value.
+
 export type AccordionItem = {
   /**
    * The background icon that will be displayed on the accordion item at a
    * absolute position. Please use bgIconPosition to indicate the
    * position.
    */
-  bgIcon: Nullable<React.ReactElement>;
+  bgIcon?: React.ReactElement;
 
   /**
    * The text of header.
@@ -18,7 +20,7 @@ export type AccordionItem = {
   /**
    * The content of the accordion item.
    */
-  content: Nullable<React.ReactNode>;
+  content?: React.ReactNode;
 
   /** TailwindCSS format - The text color of the accordion item's header
    * - e.g. text-blue-500
