@@ -29,67 +29,67 @@ const iconStyle = {
 
 Playground.args = {
   enableHeaderIcon: true,
-  initialOpenIndex: 0,
+  initialActiveIndex: 0,
   items: [
     {
       header: "Pipeline",
       content: (
-        <div className="flex flex-col p-5">
-          <div className="flex text-base text-white">
-            An end-to-end workflow that automates a sequence of sub-components
-            to process visual data.
+        <div className="bg-[#23C4E7] w-full">
+          <div className="flex flex-col p-5 bg-[#23C4E7] w-full">
+            <div className="flex text-base text-white">
+              An end-to-end workflow that automates a sequence of sub-components
+              to process visual data.
+            </div>
           </div>
         </div>
       ),
       headerBgColor: "bg-[#23C4E7]",
-      contentBgColor: "bg-[#23C4E7]",
       headerTextColor: "text-white",
-      icon: <PipelineIcon {...iconStyle} />,
     },
     {
       header: "Source",
       content: (
-        <div className="flex flex-col p-5">
-          <div className="flex text-base text-white">
-            A data connector in charge of ingesting unstructured visual data
-            into a Pipeline.
+        <div className="bg-[#02D085] w-full">
+          <div className="flex flex-col p-5 w-full">
+            <div className="flex text-base text-white">
+              A data connector in charge of ingesting unstructured visual data
+              into a Pipeline.
+            </div>
           </div>
         </div>
       ),
       headerBgColor: "bg-[#02D085]",
-      contentBgColor: "bg-[#02D085]",
       headerTextColor: "text-white",
-      icon: <DataSourceIcon {...iconStyle} />,
     },
     {
       header: "Model",
       content: (
-        <div className="flex flex-col p-5">
-          <div className="flex text-base text-white">
-            An algorithm that runs on unstructured visual data to solve a
-            certain Computer Vision (CV) Task.
+        <div className="bg-[#DEC800] w-full">
+          <div className="flex flex-col p-5 bg-[#DEC800] w-full">
+            <div className="flex text-base text-white">
+              An algorithm that runs on unstructured visual data to solve a
+              certain Computer Vision (CV) Task.
+            </div>
           </div>
         </div>
       ),
       headerBgColor: "bg-[#DEC800]",
-      contentBgColor: "bg-[#DEC800]",
       headerTextColor: "text-white",
-      icon: <ModelIcon {...iconStyle} />,
     },
     {
       header: "Destination",
       content: (
-        <div className="flex flex-col p-5">
-          <div className="flex text-base text-white">
-            A data connector to load the standarised CV Task output from Model
-            to the destination.
+        <div className="bg-[#FF8A00] w-full">
+          <div className="flex flex-col p-5 bg-[#FF8A00] w-full">
+            <div className="flex text-base text-white">
+              A data connector to load the standarised CV Task output from Model
+              to the destination.
+            </div>
           </div>
         </div>
       ),
       headerBgColor: "bg-[#FF8A00]",
-      contentBgColor: "bg-[#FF8A00]",
       headerTextColor: "text-white",
-      icon: <DataDestinationIcon {...iconStyle} />,
     },
   ],
 };

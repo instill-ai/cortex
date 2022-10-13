@@ -1,37 +1,34 @@
 import { MinusIcon, PlusIcon } from "../../Icons";
-import AccordionBase, { AccordionBaseProps } from "../AccordionBase";
-import { AccordionItemHeaderStyleProps } from "../AccordionBase/AccordionItem";
+import AccordionBase, {
+  AccordionBaseProps,
+  AccordionItem,
+} from "../AccordionBase";
 
-export type BasicAccordionRequiredKeys =
-  | "items"
+type BasicAccordionRequiredKeys =
+  | "initialActiveIndex"
   | "enableHeaderIcon"
-  | "initialOpenIndex";
+  | "items";
 
-export type BasicAccordionOmitKeys =
+type BasicAccordionOmitKeys =
   | "type"
-  | "contentWidth"
-  | "itemIconContainerPosition"
-  | keyof Omit<
-      AccordionItemHeaderStyleProps,
-      "headerTextColor" | "headerBgColor"
-    >;
+  | "headerFont"
+  | "headerFontWeight"
+  | "headerTextSize"
+  | "headerPadding"
+  | "headerActiveIcon"
+  | "headerInActiveIcon"
+  | "bgIconPosition";
 
-export type BasicAccordionConfig = Pick<
-  AccordionBaseProps,
-  BasicAccordionOmitKeys
->;
+type BasicAccordionConfig = Pick<AccordionBaseProps, BasicAccordionOmitKeys>;
 
-export type FullBasicAccordionProps = Omit<
-  AccordionBaseProps,
-  BasicAccordionOmitKeys
->;
+type FullBasicAccordionProps = Omit<AccordionBaseProps, BasicAccordionOmitKeys>;
 
-export type BasicAccordionRequiredProps = Pick<
+type BasicAccordionRequiredProps = Pick<
   FullBasicAccordionProps,
   BasicAccordionRequiredKeys
 >;
 
-export type BasicAccordionOptionalProps = Partial<
+type BasicAccordionOptionalProps = Partial<
   Omit<FullBasicAccordionProps, BasicAccordionRequiredKeys>
 >;
 
@@ -39,6 +36,8 @@ export type BasicAccordionProps = BasicAccordionRequiredProps &
   BasicAccordionOptionalProps;
 
 const BasicAccordion = (props: BasicAccordionProps) => {
+  const { items, itemGapY, initialActiveIndex, enableHeaderIcon } = props;
+
   const headerIconStyle = {
     width: "w-[30px]",
     height: "h-[30px]",
@@ -48,22 +47,21 @@ const BasicAccordion = (props: BasicAccordionProps) => {
 
   const config: BasicAccordionConfig = {
     type: "basic",
-    contentWidth: null,
     headerFont: "font-sans",
     headerFontWeight: "font-medium",
     headerTextSize: "text-2xl",
     headerPadding: "p-5",
     headerActiveIcon: <MinusIcon {...headerIconStyle} />,
     headerInActiveIcon: <PlusIcon {...headerIconStyle} />,
-    itemIconContainerPosition: null,
+    bgIconPosition: null,
   };
 
   return (
     <AccordionBase
-      items={props.items}
-      enableHeaderIcon={props.enableHeaderIcon}
-      initialOpenIndex={props.initialOpenIndex}
-      itemGapY={props.itemGapY ?? null}
+      items={items}
+      initialActiveIndex={initialActiveIndex}
+      itemGapY={itemGapY ?? null}
+      enableHeaderIcon={enableHeaderIcon}
       {...config}
     />
   );
