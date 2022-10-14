@@ -42,8 +42,8 @@ Playground.args = {
     {
       header: "Pipeline",
       content: (
-        <div className="bg-[#23C4E7] w-full">
-          <div className="flex flex-col p-5 bg-[#23C4E7] w-7/12">
+        <div className="bg-[#285863] w-full">
+          <div className="flex flex-col p-5 w-7/12">
             <div className="flex text-base text-white">
               An end-to-end workflow that automates a sequence of sub-components
               to process visual data.
@@ -51,8 +51,8 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerActiveBgColor: "bg-[#23C4E7]",
-      headerInActiveBgColor: "bg-[#23C4E7]",
+      headerActiveBgColor: "bg-instillNeonBlue",
+      headerInActiveBgColor: "bg-[#2596AE]",
       headerActiveTextColor: "text-white",
       headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <PipelineIcon {...bgIconStyle} />,
@@ -60,7 +60,7 @@ Playground.args = {
     {
       header: "Source",
       content: (
-        <div className="bg-[#02D085] w-full">
+        <div className="bg-[#285863] w-full">
           <div className="flex flex-col p-5 w-7/12">
             <div className="flex text-base text-white">
               A data connector in charge of ingesting unstructured visual data
@@ -69,8 +69,8 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerActiveBgColor: "bg-[#02D085]",
-      headerInActiveBgColor: "bg-[#02D085]",
+      headerActiveBgColor: "bg-instillNeonBlue",
+      headerInActiveBgColor: "bg-[#2596AE]",
       headerActiveTextColor: "text-white",
       headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <DataSourceIcon {...bgIconStyle} />,
@@ -78,8 +78,8 @@ Playground.args = {
     {
       header: "Model",
       content: (
-        <div className="bg-[#DEC800] w-full">
-          <div className="flex flex-col p-5 bg-[#DEC800] w-7/12">
+        <div className="bg-[#285863] w-full">
+          <div className="flex flex-col p-5 w-7/12">
             <div className="flex text-base text-white">
               An algorithm that runs on unstructured visual data to solve a
               certain Computer Vision (CV) Task.
@@ -87,8 +87,8 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerActiveBgColor: "bg-[#DEC800]",
-      headerInActiveBgColor: "bg-[#DEC800]",
+      headerActiveBgColor: "bg-instillNeonBlue",
+      headerInActiveBgColor: "bg-[#2596AE]",
       headerActiveTextColor: "text-white",
       headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <ModelIcon {...bgIconStyle} />,
@@ -96,8 +96,8 @@ Playground.args = {
     {
       header: "Destination",
       content: (
-        <div className="bg-[#FF8A00] w-full">
-          <div className="flex flex-col p-5 bg-[#FF8A00] w-7/12">
+        <div className="bg-[#285863] w-full">
+          <div className="flex flex-col p-5 w-7/12">
             <div className="flex text-base text-white">
               A data connector to load the standarised CV Task output from Model
               to the destination.
@@ -105,8 +105,8 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerActiveBgColor: "bg-[#FF8A00]",
-      headerInActiveBgColor: "bg-[#FF8A00]",
+      headerActiveBgColor: "bg-instillNeonBlue",
+      headerInActiveBgColor: "bg-[#2596AE]",
       headerActiveTextColor: "text-white",
       headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <DataDestinationIcon {...bgIconStyle} />,
