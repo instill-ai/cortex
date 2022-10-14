@@ -30,8 +30,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#23C4E7]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#23C4E7]",
+      headerInActiveBgColor: "bg-[#23C4E7]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
     },
     {
       header: "Source",
@@ -45,8 +47,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#02D085]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#02D085]",
+      headerInActiveBgColor: "bg-[#02D085]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
     },
     {
       header: "Model",
@@ -60,8 +64,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#DEC800]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#DEC800]",
+      headerInActiveBgColor: "bg-[#DEC800]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
     },
     {
       header: "Destination",
@@ -75,8 +81,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#FF8A00]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#FF8A00]",
+      headerInActiveBgColor: "bg-[#FF8A00]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
     },
   ],
 };

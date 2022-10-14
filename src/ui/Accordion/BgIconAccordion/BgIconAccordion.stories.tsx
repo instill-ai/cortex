@@ -8,7 +8,7 @@ import {
 import BgIconAccordion from "./BgIconAccordion";
 
 export default {
-  title: "Components/BgIconAccordion",
+  title: "Components/Ui/Accordion/BgIconAccordion",
   component: BgIconAccordion,
 } as ComponentMeta<typeof BgIconAccordion>;
 
@@ -44,8 +44,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#23C4E7]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#23C4E7]",
+      headerInActiveBgColor: "bg-[#23C4E7]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <PipelineIcon {...bgIconStyle} />,
     },
     {
@@ -60,8 +62,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#02D085]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#02D085]",
+      headerInActiveBgColor: "bg-[#02D085]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <DataSourceIcon {...bgIconStyle} />,
     },
     {
@@ -76,8 +80,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#DEC800]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#DEC800]",
+      headerInActiveBgColor: "bg-[#DEC800]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <ModelIcon {...bgIconStyle} />,
     },
     {
@@ -92,8 +98,10 @@ Playground.args = {
           </div>
         </div>
       ),
-      headerBgColor: "bg-[#FF8A00]",
-      headerTextColor: "text-white",
+      headerActiveBgColor: "bg-[#FF8A00]",
+      headerInActiveBgColor: "bg-[#FF8A00]",
+      headerActiveTextColor: "text-white",
+      headerInActiveTextColor: "text-instillGrey30",
       bgIcon: <DataDestinationIcon {...bgIconStyle} />,
     },
   ],
