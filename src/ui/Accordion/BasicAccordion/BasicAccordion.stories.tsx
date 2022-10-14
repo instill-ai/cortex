@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import BasicAccordion from "./BasicAccordion";
 
 export default {
@@ -6,9 +7,16 @@ export default {
   component: BasicAccordion,
 } as ComponentMeta<typeof BasicAccordion>;
 
-const Template: ComponentStory<typeof BasicAccordion> = (args) => (
-  <BasicAccordion {...args} />
-);
+const Template: ComponentStory<typeof BasicAccordion> = (args) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  return (
+    <BasicAccordion
+      {...args}
+      activeIndex={activeIndex}
+      setActiveIndex={setActiveIndex}
+    />
+  );
+};
 
 export const Playground: ComponentStory<typeof BasicAccordion> = Template.bind(
   {}
@@ -16,7 +24,6 @@ export const Playground: ComponentStory<typeof BasicAccordion> = Template.bind(
 
 Playground.args = {
   enableHeaderIcon: true,
-  initialActiveIndex: 0,
   items: [
     {
       header: "Pipeline",

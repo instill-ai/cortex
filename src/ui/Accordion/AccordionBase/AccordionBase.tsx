@@ -56,9 +56,15 @@ export type AccordionBaseProps = {
   type: "withIcon" | "basic";
 
   /**
-   * The initial active accordion item's index.
+   * The active index of the accordion
    */
-  initialActiveIndex: Nullable<number>;
+  activeIndex: number;
+
+  /**
+   * React dispatch method to set the active index of the accordion
+   */
+
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 
   /**
    * The gap between each accordion items
@@ -116,17 +122,14 @@ export type AccordionBaseProps = {
 const AccordionBase = (props: AccordionBaseProps) => {
   const {
     type,
-    initialActiveIndex,
+    activeIndex,
+    setActiveIndex,
     items,
     itemGapY,
     bgIconPosition,
     enableHeaderIcon,
     ...headerStyle
   } = props;
-
-  const [activeIndex, setActiveIndex] = React.useState<number>(
-    initialActiveIndex ? initialActiveIndex : 0
-  );
 
   return (
     <div className={cn("flex flex-col", itemGapY)}>

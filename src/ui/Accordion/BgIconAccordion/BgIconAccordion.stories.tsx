@@ -1,4 +1,5 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { useState } from "react";
 import {
   DataDestinationIcon,
   DataSourceIcon,
@@ -12,9 +13,16 @@ export default {
   component: BgIconAccordion,
 } as ComponentMeta<typeof BgIconAccordion>;
 
-const Template: ComponentStory<typeof BgIconAccordion> = (args) => (
-  <BgIconAccordion {...args} />
-);
+const Template: ComponentStory<typeof BgIconAccordion> = (args) => {
+  const [activeIndex, setActiveIndex] = useState<number>(0);
+  return (
+    <BgIconAccordion
+      {...args}
+      activeIndex={activeIndex}
+      setActiveIndex={setActiveIndex}
+    />
+  );
+};
 
 export const Playground: ComponentStory<typeof BgIconAccordion> = Template.bind(
   {}
@@ -29,7 +37,6 @@ const bgIconStyle = {
 
 Playground.args = {
   enableHeaderIcon: true,
-  initialActiveIndex: 0,
   bgIconPosition: "top-0 -right-20",
   items: [
     {

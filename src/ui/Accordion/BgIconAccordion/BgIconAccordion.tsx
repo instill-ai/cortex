@@ -2,10 +2,11 @@ import { MinusIcon, PlusIcon } from "../../Icons";
 import AccordionBase, { AccordionBaseProps } from "../AccordionBase";
 
 type BgIconAccordionRequiredKeys =
-  | "initialActiveIndex"
   | "enableHeaderIcon"
   | "items"
-  | "bgIconPosition";
+  | "bgIconPosition"
+  | "activeIndex"
+  | "setActiveIndex";
 
 type BgIconAccordionOmitKeys =
   | "type"
@@ -39,7 +40,8 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
   const {
     items,
     itemGapY,
-    initialActiveIndex,
+    activeIndex,
+    setActiveIndex,
     enableHeaderIcon,
     bgIconPosition,
   } = props;
@@ -64,7 +66,8 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
   return (
     <AccordionBase
       items={items}
-      initialActiveIndex={initialActiveIndex}
+      activeIndex={activeIndex}
+      setActiveIndex={setActiveIndex}
       enableHeaderIcon={enableHeaderIcon}
       bgIconPosition={bgIconPosition}
       itemGapY={itemGapY ?? null}
