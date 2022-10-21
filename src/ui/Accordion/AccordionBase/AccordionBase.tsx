@@ -23,14 +23,28 @@ export type AccordionItem = {
   content?: React.ReactNode;
 
   /** TailwindCSS format - The text color of the accordion item's header
+   * when this item is in active state.
    * - e.g. text-blue-500
    */
-  headerTextColor: string;
+  headerActiveTextColor: string;
+
+  /** TailwindCSS format - The text color of the accordion item's header
+   * when this item is in inactive state.
+   * - e.g. text-blue-500
+   */
+  headerInActiveTextColor: string;
 
   /** TailwindCSS format - The background color of the accordion item's header
+   * when this item is in active state.
    * - e.g. bg-blue-500
    */
-  headerBgColor: string;
+  headerActiveBgColor: string;
+
+  /** TailwindCSS format - The background color of the accordion item's header
+   * when this item is in active state.
+   * - e.g. bg-blue-500
+   */
+  headerInActiveBgColor: string;
 };
 
 export type AccordionBaseProps = {
@@ -42,9 +56,15 @@ export type AccordionBaseProps = {
   type: "withIcon" | "basic";
 
   /**
-   * The initial active accordion item's index.
+   * The active index of the accordion
    */
-  initialActiveIndex: Nullable<number>;
+  activeIndex: number;
+
+  /**
+   * React dispatch method to set the active index of the accordion
+   */
+
+  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
 
   /**
    * The gap between each accordion items
@@ -102,17 +122,14 @@ export type AccordionBaseProps = {
 const AccordionBase = (props: AccordionBaseProps) => {
   const {
     type,
-    initialActiveIndex,
+    activeIndex,
+    setActiveIndex,
     items,
     itemGapY,
     bgIconPosition,
     enableHeaderIcon,
     ...headerStyle
   } = props;
-
-  const [activeIndex, setActiveIndex] = React.useState<number>(
-    initialActiveIndex ? initialActiveIndex : 0
-  );
 
   return (
     <div className={cn("flex flex-col", itemGapY)}>
@@ -137,16 +154,20 @@ const AccordionBase = (props: AccordionBaseProps) => {
             className={cn(
               "flex flex-row cursor-pointer",
               headerStyle.headerPadding,
-              e.headerBgColor
+              i === activeIndex
+                ? e.headerActiveBgColor
+                : e.headerInActiveBgColor
             )}
           >
             <div
               className={cn(
                 "mr-auto",
-                e.headerTextColor,
                 headerStyle.headerFont,
                 headerStyle.headerTextSize,
-                headerStyle.headerFontWeight
+                headerStyle.headerFontWeight,
+                i === activeIndex
+                  ? e.headerActiveTextColor
+                  : e.headerInActiveTextColor
               )}
             >
               {e.header}

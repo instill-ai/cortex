@@ -2,9 +2,10 @@ import { MinusIcon, PlusIcon } from "../../Icons";
 import AccordionBase, { AccordionBaseProps } from "../AccordionBase";
 
 type BasicAccordionRequiredKeys =
-  | "initialActiveIndex"
   | "enableHeaderIcon"
-  | "items";
+  | "items"
+  | "activeIndex"
+  | "setActiveIndex";
 
 type BasicAccordionOmitKeys =
   | "type"
@@ -33,7 +34,8 @@ export type BasicAccordionProps = BasicAccordionRequiredProps &
   BasicAccordionOptionalProps;
 
 const BasicAccordion = (props: BasicAccordionProps) => {
-  const { items, itemGapY, initialActiveIndex, enableHeaderIcon } = props;
+  const { items, itemGapY, activeIndex, setActiveIndex, enableHeaderIcon } =
+    props;
 
   const headerIconStyle = {
     width: "w-[30px]",
@@ -56,7 +58,8 @@ const BasicAccordion = (props: BasicAccordionProps) => {
   return (
     <AccordionBase
       items={items}
-      initialActiveIndex={initialActiveIndex}
+      activeIndex={activeIndex}
+      setActiveIndex={setActiveIndex}
       itemGapY={itemGapY ?? null}
       enableHeaderIcon={enableHeaderIcon}
       {...config}
