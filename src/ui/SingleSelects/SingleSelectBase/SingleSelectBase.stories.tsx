@@ -61,4 +61,10 @@ Playground.args = {
   id: "single-select-with-icon",
   ...basicSingleSelectConfig,
   ...basicInputDescriptionConfig,
+  onFocus: () => {
+    console.log("Focused");
+  },
+  onBlur: () => {
+    console.log("Blur");
+  },
 };
