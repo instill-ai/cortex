@@ -119,9 +119,20 @@ export type SingleSelectBaseProps = Omit<
     option: Nullable<SingleSelectOption>,
     meta: ActionMeta<SingleSelectOption>
   ) => void;
+
   required?: boolean | undefined;
   disabled?: boolean | undefined;
   readOnly?: boolean | undefined;
+
+  /**
+   * Event when select is focused
+   */
+  onFocus: Nullable<() => void>;
+
+  /**
+   * Event when select is blur
+   */
+  onBlur: Nullable<() => void>;
 };
 
 const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
@@ -137,6 +148,8 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     error,
     description,
     onChange,
+    onFocus,
+    onBlur,
     disabled,
     readOnly,
     isClearable,
@@ -378,9 +391,14 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             value={value}
             ref={selectRef}
             instanceId={instanceId}
-            openMenuOnFocus={true}
-            onFocus={() => setFocus(true)}
-            onBlur={() => setFocus(false)}
+            onFocus={() => {
+              if (onFocus) onFocus();
+              setFocus(true);
+            }}
+            onBlur={() => {
+              if (onBlur) onBlur();
+              setFocus(false);
+            }}
             menuPlacement={menuPlacement ? menuPlacement : "auto"}
             options={options}
             onChange={(selectedOption, meta) => {

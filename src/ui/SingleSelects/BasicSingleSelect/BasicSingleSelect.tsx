@@ -76,6 +76,8 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
       value={props.value}
       options={props.options}
       label={props.label}
+      onFocus={props.onFocus ?? null}
+      onBlur={props.onBlur ?? null}
       additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
       menuPlacement={props.menuPlacement ?? "auto"}
       description={props.description ?? ""}
