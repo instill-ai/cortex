@@ -5,7 +5,9 @@ export type ElementPosition = {
   height: number;
 };
 
-export const getElementPosition = (element: HTMLElement): ElementPosition => {
+export const getElementPosition = (
+  element: HTMLElement | Element
+): ElementPosition => {
   const box = element.getBoundingClientRect();
 
   const body = document.body;
