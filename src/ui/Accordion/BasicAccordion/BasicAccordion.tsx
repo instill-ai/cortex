@@ -31,7 +31,9 @@ type BasicAccordionOptionalProps = Partial<
 >;
 
 export type BasicAccordionProps = BasicAccordionRequiredProps &
-  BasicAccordionOptionalProps;
+  BasicAccordionOptionalProps & {
+    headerIconColor?: string;
+  };
 
 const BasicAccordion = (props: BasicAccordionProps) => {
   const {
@@ -41,12 +43,13 @@ const BasicAccordion = (props: BasicAccordionProps) => {
     activeIndex,
     setActiveIndex,
     enableHeaderIcon,
+    headerIconColor,
   } = props;
 
   const headerIconStyle = {
     width: "w-[30px]",
     height: "h-[30px]",
-    color: "fill-white",
+    color: headerIconColor ?? "fill-white",
     position: "my-auto",
   };
 
