@@ -34,7 +34,9 @@ type BgIconAccordionOptionalProps = Partial<
 >;
 
 export type BgIconAccordionProps = BgIconAccordionRequiredProps &
-  BgIconAccordionOptionalProps;
+  BgIconAccordionOptionalProps & {
+    headerIconColor?: string;
+  };
 
 const BgIconAccordion = (props: BgIconAccordionProps) => {
   const {
@@ -44,12 +46,14 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
     setActiveIndex,
     enableHeaderIcon,
     bgIconPosition,
+    headerIconColor,
+    width,
   } = props;
 
   const headerIconStyle = {
     width: "w-[30px]",
     height: "h-[30px]",
-    color: "fill-white",
+    color: headerIconColor ?? "fill-white",
     position: "my-auto",
   };
 
@@ -66,6 +70,7 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
   return (
     <AccordionBase
       items={items}
+      width={width ?? "w-full"}
       activeIndex={activeIndex}
       setActiveIndex={setActiveIndex}
       enableHeaderIcon={enableHeaderIcon}

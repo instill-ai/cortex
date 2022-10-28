@@ -31,16 +31,25 @@ type BasicAccordionOptionalProps = Partial<
 >;
 
 export type BasicAccordionProps = BasicAccordionRequiredProps &
-  BasicAccordionOptionalProps;
+  BasicAccordionOptionalProps & {
+    headerIconColor?: string;
+  };
 
 const BasicAccordion = (props: BasicAccordionProps) => {
-  const { items, itemGapY, activeIndex, setActiveIndex, enableHeaderIcon } =
-    props;
+  const {
+    items,
+    width,
+    itemGapY,
+    activeIndex,
+    setActiveIndex,
+    enableHeaderIcon,
+    headerIconColor,
+  } = props;
 
   const headerIconStyle = {
     width: "w-[30px]",
     height: "h-[30px]",
-    color: "fill-white",
+    color: headerIconColor ?? "fill-white",
     position: "my-auto",
   };
 
@@ -58,6 +67,7 @@ const BasicAccordion = (props: BasicAccordionProps) => {
   return (
     <AccordionBase
       items={items}
+      width={width ?? "w-full"}
       activeIndex={activeIndex}
       setActiveIndex={setActiveIndex}
       itemGapY={itemGapY ?? null}
