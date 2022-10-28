@@ -44,6 +44,7 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
     setActiveIndex,
     enableHeaderIcon,
     bgIconPosition,
+    width,
   } = props;
 
   const headerIconStyle = {
@@ -66,6 +67,7 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
   return (
     <AccordionBase
       items={items}
+      width={width ?? "w-full"}
       activeIndex={activeIndex}
       setActiveIndex={setActiveIndex}
       enableHeaderIcon={enableHeaderIcon}

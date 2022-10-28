@@ -56,6 +56,13 @@ export type AccordionBaseProps = {
   type: "withIcon" | "basic";
 
   /**
+   * The width of Accordion
+   * - default: w-full
+   */
+
+  width: string;
+
+  /**
    * The active index of the accordion
    */
   activeIndex: number;
@@ -128,11 +135,12 @@ const AccordionBase = (props: AccordionBaseProps) => {
     itemGapY,
     bgIconPosition,
     enableHeaderIcon,
+    width,
     ...headerStyle
   } = props;
 
   return (
-    <div className={cn("flex flex-col", itemGapY)}>
+    <div className={cn("flex flex-col", itemGapY, width)}>
       {items.map((e, i) => (
         <div
           key={e.header}

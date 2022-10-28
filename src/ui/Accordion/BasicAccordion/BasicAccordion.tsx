@@ -34,8 +34,14 @@ export type BasicAccordionProps = BasicAccordionRequiredProps &
   BasicAccordionOptionalProps;
 
 const BasicAccordion = (props: BasicAccordionProps) => {
-  const { items, itemGapY, activeIndex, setActiveIndex, enableHeaderIcon } =
-    props;
+  const {
+    items,
+    width,
+    itemGapY,
+    activeIndex,
+    setActiveIndex,
+    enableHeaderIcon,
+  } = props;
 
   const headerIconStyle = {
     width: "w-[30px]",
@@ -58,6 +64,7 @@ const BasicAccordion = (props: BasicAccordionProps) => {
   return (
     <AccordionBase
       items={items}
+      width={width ?? "w-full"}
       activeIndex={activeIndex}
       setActiveIndex={setActiveIndex}
       itemGapY={itemGapY ?? null}
