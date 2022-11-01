@@ -94,6 +94,8 @@ import ModelInstanceIcon from "./ModelInstanceIcon";
 import type { ModelInstanceIconProps } from "./ModelInstanceIcon";
 import RefreshIcon from "./RefreshIcon";
 import type { RefreshIconProps } from "./RefreshIcon";
+import MenuIcon from "./MenuIcon";
+import type { MenuIconProps } from "./MenuIcon";
 
 import {
   ArrowUpIcon,
@@ -269,6 +271,7 @@ export type {
   ToolboxIconProps,
   PenIconProps,
   ToggleIconProps,
+  MenuIconProps,
 };
 
 export {
@@ -360,4 +363,5 @@ export {
   ToolboxIcon,
   PenIcon,
   ToggleIcon,
+  MenuIcon,
 };
