@@ -17,7 +17,9 @@ export type OutlineButtonOmitKeys =
   | "textColor"
   | "hoveredTextColor"
   | "disabledTextColor"
-  | "borderRadius";
+  | "borderRadius"
+  | "shadow"
+  | "hoveredShadow";
 
 export type OutlineButtonConfig = Pick<ButtonBaseProps, OutlineButtonOmitKeys>;
 
@@ -60,6 +62,8 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
+        hoveredShadow: null,
       };
       break;
     }
@@ -79,6 +83,8 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
+        hoveredShadow: null,
       };
       break;
     }
@@ -98,6 +104,8 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
+        hoveredShadow: null,
       };
       break;
     }

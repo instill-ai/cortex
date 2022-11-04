@@ -118,6 +118,8 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
       endIcon={props.endIcon ?? null}
       itemGapX={props.itemGapX ?? null}
       textSize={props.textSize ?? "text-base"}
+      shadow={props.shadow ?? null}
+      hoveredShadow={props.hoveredShadow ?? null}
       {...buttonStyle}
     >
       {props.children}
