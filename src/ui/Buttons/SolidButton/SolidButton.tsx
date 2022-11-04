@@ -25,7 +25,7 @@ export type FullSolidButtonProps = Omit<
   ButtonBaseProps,
   SolidButtonOmitKeys
 > & {
-  color: "primary" | "primaryLight";
+  color: "primary" | "primaryLight" | "white";
 };
 
 export type SolidButtonRequiredProps = Pick<
@@ -82,6 +82,26 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
       };
       break;
     }
+    case "white": {
+      buttonStyle = {
+        borderSize: null,
+        borderColor: null,
+        hoveredBorderColor: null,
+        disabledBorderColor: null,
+        borderRadius: "rounded-[1px]",
+        bgColor: "bg-white",
+        hoveredBgColor: "hover:bg-white",
+        textColor: "text-instillGrey90",
+        hoveredTextColor: "hover:text-instillGrey90",
+        disabledBgColor: "bg-instillGrey15",
+        disabledTextColor: "text-instillGrey50",
+        disabledBgOpacity: null,
+        bgOpacity: "bg-opacity-90",
+        hoveredBgOpacity: "hover:bg-opacity-100",
+      };
+      break;
+    }
+
     // case "danger": {
     //   buttonStyle = {
     //     borderSize: null,
@@ -100,7 +120,7 @@ const SolidButton: React.FC<SolidButtonProps> = (props) => {
     // }
     default: {
       throw new Error(
-        `Button variant ${props.color} not support, SolidButton only support variant=primary`
+        `Button variant ${props.color} not support, SolidButton only support variant=primary | primaryLight`
       );
     }
   }
