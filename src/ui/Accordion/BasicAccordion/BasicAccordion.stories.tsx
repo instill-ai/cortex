@@ -8,7 +8,7 @@ export default {
 } as ComponentMeta<typeof BasicAccordion>;
 
 const Template: ComponentStory<typeof BasicAccordion> = (args) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number[]>([]);
   return (
     <BasicAccordion
       {...args}
@@ -24,6 +24,7 @@ export const Playground: ComponentStory<typeof BasicAccordion> = Template.bind(
 
 Playground.args = {
   enableHeaderIcon: true,
+  allowMultiItems: true,
   items: [
     {
       header: "Pipeline",

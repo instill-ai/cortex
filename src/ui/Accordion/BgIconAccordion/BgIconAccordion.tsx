@@ -6,7 +6,8 @@ type BgIconAccordionRequiredKeys =
   | "items"
   | "bgIconPosition"
   | "activeIndex"
-  | "setActiveIndex";
+  | "setActiveIndex"
+  | "allowMultiItems";
 
 type BgIconAccordionOmitKeys =
   | "type"
@@ -47,6 +48,7 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
     enableHeaderIcon,
     bgIconPosition,
     headerIconColor,
+    allowMultiItems,
     width,
   } = props;
 
@@ -76,6 +78,7 @@ const BgIconAccordion = (props: BgIconAccordionProps) => {
       enableHeaderIcon={enableHeaderIcon}
       bgIconPosition={bgIconPosition}
       itemGapY={itemGapY ?? null}
+      allowMultiItems={allowMultiItems}
       {...config}
     />
   );

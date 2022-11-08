@@ -14,7 +14,7 @@ export default {
 } as ComponentMeta<typeof BgIconAccordion>;
 
 const Template: ComponentStory<typeof BgIconAccordion> = (args) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number[]>([]);
   return (
     <BgIconAccordion
       {...args}
@@ -37,6 +37,7 @@ const bgIconStyle = {
 
 Playground.args = {
   enableHeaderIcon: true,
+  allowMultiItems: true,
   bgIconPosition: "top-0 -right-20",
   items: [
     {
