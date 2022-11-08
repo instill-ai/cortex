@@ -64,6 +64,7 @@ export type AccordionBaseProps = {
 
   /**
    * Allow Accordion to display multiple items at the same time
+   * - When the allowMultiItems is true, the accordion can have no item in open state.
    */
   allowMultiItems: boolean;
 
@@ -156,7 +157,7 @@ const AccordionBase = (props: AccordionBaseProps) => {
           }
         } else {
           if (prev.includes(index)) {
-            return [];
+            return prev;
           } else {
             return [index];
           }
