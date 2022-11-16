@@ -14,7 +14,6 @@ export type BasicSingleSelectRequiredKeys =
   | "onChange";
 
 export type BasicSingleSelectOmitKeys =
-  | "inputLabelType"
   | "labelFontSize"
   | "labelFontWeight"
   | "labelTextColor"
@@ -48,7 +47,6 @@ export type BasicSingleSelectConfig = Pick<
 >;
 
 export const basicSingleSelectConfig: BasicSingleSelectConfig = {
-  inputLabelType: "inset",
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey50",
@@ -71,6 +69,7 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     <SingleSelectBase
       {...props}
       id={props.id}
+      inputLabelType={props.inputLabelType ?? "inset"}
       instanceId={props.instanceId}
       onChange={props.onChange}
       value={props.value}

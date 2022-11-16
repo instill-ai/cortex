@@ -10,7 +10,7 @@ import { BasicInputProps, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
-import { getElementPosition } from "../../../utils";
+import { ElementPosition, getElementPosition } from "../../../utils";
 
 export type SingleSelectOption = {
   label: string;
@@ -196,9 +196,25 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
 
   // We create a wrapper on top of Select component to avoid error related to ref assignmemt
   // inside of react-select
-  const inputRef = React.useRef<HTMLDivElement>(null);
+
   const selectRef = React.useRef<any>(null);
-  const inputLabelRef = React.useRef<HTMLLabelElement>(null);
+
+  const [inputPosition, setInputPosition] =
+    React.useState<Nullable<ElementPosition>>(null);
+  const measureInputRef = React.useCallback((node) => {
+    if (node !== null) {
+      setInputPosition(getElementPosition(node));
+    }
+  }, []);
+
+  const [inputLabelPosition, setInputLabelPosition] =
+    React.useState<Nullable<ElementPosition>>(null);
+  const measureInputLabelRef = React.useCallback((node) => {
+    if (node !== null) {
+      setInputLabelPosition(getElementPosition(node));
+    }
+  }, []);
+
   const [inputLabelWidth, setInputLabelWidth] = React.useState<number | null>(
     null
   );
@@ -219,22 +235,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   }, [focus]);
 
   React.useEffect(() => {
-    if (!inputRef.current || inputLabelType !== "inset") {
-      return;
-    }
-
-    const mainContainerPosition = getElementPosition(inputRef.current);
-
-    const inputLabelPaddingWidth = 20;
-    const indicatorWidth = 20;
-
-    const inputLabelWidth =
-      mainContainerPosition.width - inputLabelPaddingWidth * 2 - indicatorWidth;
-
-    setInputLabelWidth(inputLabelWidth);
-  }, [inputRef, inputLabelType]);
-
-  React.useEffect(() => {
     if (!label) {
       setInputValuePaddingTop(10);
       setInputValuePaddingBottom(10);
@@ -243,10 +243,8 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
 
     if (
       !error ||
-      !inputRef ||
-      !inputRef.current ||
-      !inputLabelRef ||
-      !inputLabelRef.current ||
+      !inputLabelPosition ||
+      !inputPosition ||
       inputLabelType !== "inset"
     ) {
       setContainerHeight(70);
@@ -255,8 +253,13 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       return;
     }
 
-    const inputLabelPosition = getElementPosition(inputLabelRef.current);
-    const mainContainerPosition = getElementPosition(inputRef.current);
+    const inputLabelPaddingWidth = 20;
+    const indicatorWidth = 20;
+
+    const inputLabelWidth =
+      inputPosition.width - inputLabelPaddingWidth * 2 - indicatorWidth;
+
+    setInputLabelWidth(inputLabelWidth);
 
     const inputLabelPaddingY = 20;
     const gapBetweenLabelAndValue = 10;
@@ -268,7 +271,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       gapBetweenLabelAndValue +
       inputLineHeight;
 
-    if (containerHeight > mainContainerPosition.height) {
+    if (containerHeight > inputPosition.height) {
       setContainerHeight(containerHeight);
       setInputValuePaddingTop(
         inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
@@ -279,79 +282,91 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       setInputValuePaddingTop(24);
       setInputValuePaddingBottom(0);
     }
-  }, [error, inputLabelRef, inputLabelType, label]);
+  }, [error, inputPosition, inputLabelPosition, inputLabelType, label]);
 
-  const customStyles: StylesConfig<SingleSelectOption> = {
-    valueContainer: (styles) => ({
-      ...styles,
-      paddingTop: inputValuePaddingTop ? inputValuePaddingTop : "",
-      paddingRight: "20px",
-      paddingLeft: "20px",
-      paddingBottom: inputValuePaddingBottom ? inputValuePaddingBottom : "",
-    }),
-    singleValue: (styles) => ({
-      ...styles,
-      marginRight: "0px",
-      // Because the formatOptionLabel have px-[15px], which is not the correct padding inside
-      // the selected input, we have to give extra minus marginLeft
-      marginLeft: "-8px",
-    }),
-    control: (styles, state) => ({
-      ...styles,
-      cursor: state.isDisabled ? "not-allowed" : readOnly ? "auto" : "pointer",
-      borderRadius: "1px",
-      borderWidth: "1px",
-      height: containerHeight ? containerHeight : "",
-      borderStyle: state.isDisabled ? "dashed" : "solid",
-      backgroundColor: "#ffffff",
-      borderColor: error
-        ? "#FF5353"
-        : state.isDisabled
-        ? "#E4E4E4"
-        : state.isFocused
-        ? "#40A8F5"
-        : "#E4E4E4",
-      boxShadow: state.isFocused
-        ? "0px 0px 0px 3px rgba(64, 168, 245, 0.2)"
-        : "none",
-      ":hover": {
+  const customStyles: StylesConfig<SingleSelectOption> = React.useMemo(() => {
+    return {
+      valueContainer: (styles) => ({
+        ...styles,
+        paddingTop: inputValuePaddingTop ? inputValuePaddingTop : "",
+        paddingRight: "20px",
+        paddingLeft: "20px",
+        paddingBottom: inputValuePaddingBottom ? inputValuePaddingBottom : "",
+      }),
+      singleValue: (styles) => ({
+        ...styles,
+        marginRight: "0px",
+        // Because the formatOptionLabel have px-[15px], which is not the correct padding inside
+        // the selected input, we have to give extra minus marginLeft
+        marginLeft: "-8px",
+      }),
+      control: (styles, state) => ({
+        ...styles,
+        cursor: state.isDisabled
+          ? "not-allowed"
+          : readOnly
+          ? "auto"
+          : "pointer",
+        borderRadius: "1px",
+        borderWidth: "1px",
+        height: containerHeight ? containerHeight : "",
+        borderStyle: state.isDisabled ? "dashed" : "solid",
+        backgroundColor: "#ffffff",
         borderColor: error
           ? "#FF5353"
+          : state.isDisabled
+          ? "#E4E4E4"
           : state.isFocused
           ? "#40A8F5"
           : "#E4E4E4",
-      },
-    }),
-    placeholder: (styles) => ({
-      ...styles,
-      color: "#1A1A1A",
-      fontFamily: "sans-serif",
-      fontWeight: "normal",
-      lineHeight: "28px",
-      fontSize: "16px",
-    }),
-    menu: (styles) => ({
-      ...styles,
-      borderRadius: "1px",
-      marginTop: "0",
-      paddingTop: "10px",
-      paddingBottom: "10px",
-      backgroundColor: "#FFFFFF",
-      zIndex: "30",
-    }),
-    option: (styles) => ({
-      ...styles,
-      // backgroundColor: state.isFocused ? "#40A8F5" : "#FFFFFF",
-      ":hover": {
-        //backgroundColor: "#F4FBFF",
-      },
-    }),
-    input: (styles) => ({
-      ...styles,
-      marginRight: "0px",
-      marginLeft: "0px",
-    }),
-  };
+        boxShadow: state.isFocused
+          ? "0px 0px 0px 3px rgba(64, 168, 245, 0.2)"
+          : "none",
+        ":hover": {
+          borderColor: error
+            ? "#FF5353"
+            : state.isFocused
+            ? "#40A8F5"
+            : "#E4E4E4",
+        },
+      }),
+      placeholder: (styles) => ({
+        ...styles,
+        color: "#1A1A1A",
+        fontFamily: "sans-serif",
+        fontWeight: "normal",
+        lineHeight: "28px",
+        fontSize: "16px",
+      }),
+      menu: (styles) => ({
+        ...styles,
+        borderRadius: "1px",
+        marginTop: "0",
+        paddingTop: "10px",
+        paddingBottom: "10px",
+        backgroundColor: "#FFFFFF",
+        zIndex: "30",
+      }),
+      option: (styles) => ({
+        ...styles,
+        // backgroundColor: state.isFocused ? "#40A8F5" : "#FFFFFF",
+        ":hover": {
+          //backgroundColor: "#F4FBFF",
+        },
+      }),
+      input: (styles) => ({
+        ...styles,
+        marginRight: "0px",
+        marginLeft: "0px",
+      }),
+    };
+  }, [
+    inputValuePaddingTop,
+    inputValuePaddingBottom,
+    containerHeight,
+    error,
+    readOnly,
+  ]);
 
   return (
     <div className="flex flex-col">
@@ -361,7 +376,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
         })}
       >
         <InputLabelBase
-          ref={inputLabelRef}
+          ref={measureInputLabelRef}
           label={label}
           message={additionalMessageOnLabel}
           labelWidth={inputLabelWidth}
@@ -385,7 +400,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
         />
-        <div ref={inputRef}>
+        <div ref={measureInputRef}>
           <ReactSelect
             id={id}
             value={value}

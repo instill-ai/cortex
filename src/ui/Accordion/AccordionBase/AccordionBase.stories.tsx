@@ -16,7 +16,7 @@ export default {
 } as ComponentMeta<typeof AccordionBase>;
 
 const Template: ComponentStory<typeof AccordionBase> = (args) => {
-  const [activeIndex, setActiveIndex] = useState<number>(0);
+  const [activeIndex, setActiveIndex] = useState<number[]>([]);
   return (
     <AccordionBase
       {...args}
@@ -57,6 +57,7 @@ const commonHeaderStyle = {
 
 Playground.args = {
   type: "withIcon",
+  allowMultiItems: false,
   items: [
     {
       header: "Pipeline",

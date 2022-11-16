@@ -5,7 +5,8 @@ type BasicAccordionRequiredKeys =
   | "enableHeaderIcon"
   | "items"
   | "activeIndex"
-  | "setActiveIndex";
+  | "setActiveIndex"
+  | "allowMultiItems";
 
 type BasicAccordionOmitKeys =
   | "type"
@@ -44,6 +45,7 @@ const BasicAccordion = (props: BasicAccordionProps) => {
     setActiveIndex,
     enableHeaderIcon,
     headerIconColor,
+    allowMultiItems,
   } = props;
 
   const headerIconStyle = {
@@ -72,6 +74,7 @@ const BasicAccordion = (props: BasicAccordionProps) => {
       setActiveIndex={setActiveIndex}
       itemGapY={itemGapY ?? null}
       enableHeaderIcon={enableHeaderIcon}
+      allowMultiItems={allowMultiItems}
       {...config}
     />
   );

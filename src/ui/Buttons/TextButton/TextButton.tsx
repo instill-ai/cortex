@@ -17,7 +17,9 @@ export type TextButtonOmitKeys =
   | "textColor"
   | "hoveredTextColor"
   | "disabledTextColor"
-  | "borderRadius";
+  | "borderRadius"
+  | "shadow"
+  | "hoveredShadow";
 
 export type TextButtonConfig = Pick<ButtonBaseProps, TextButtonOmitKeys>;
 
@@ -56,6 +58,8 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
+        hoveredShadow: null,
       };
       break;
     }

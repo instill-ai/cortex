@@ -145,6 +145,18 @@ export type ButtonBaseProps = {
   itemGapX: Nullable<string>;
 
   children?: React.ReactNode;
+
+  /**
+   * TailwindCSS format - The shadow of the button
+   * - e.g. shadow-xl
+   */
+  shadow: Nullable<string>;
+
+  /**
+   * TailwindCSS format - The shadow of the button when hovered
+   * - e.g. hover:shadow-xl
+   */
+  hoveredShadow: Nullable<string>;
 };
 
 const ButtonBase = ({
@@ -174,6 +186,8 @@ const ButtonBase = ({
   startIcon,
   endIcon,
   itemGapX,
+  shadow,
+  hoveredShadow,
 }: ButtonBaseProps) => {
   return (
     <button
@@ -207,7 +221,9 @@ const ButtonBase = ({
         width,
         textSize,
         borderSize,
-        borderRadius
+        borderRadius,
+        shadow,
+        hoveredShadow
       )}
     >
       {startIcon}

@@ -67,4 +67,5 @@ Playground.args = {
   onBlur: () => {
     console.log("Blur");
   },
+  inputLabelType: "inset",
 };

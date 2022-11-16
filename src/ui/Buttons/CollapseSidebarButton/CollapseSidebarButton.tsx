@@ -25,7 +25,9 @@ export type CollapseSidebarButtonOmitKeys =
   | "endIcon"
   | "itemGapX"
   | "type"
-  | "textSize";
+  | "textSize"
+  | "shadow"
+  | "hoveredShadow";
 
 export type CollapseSidebarButtonConfig = Pick<
   ButtonBaseProps,
@@ -54,6 +56,8 @@ export const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
   disabledBgOpacity: null,
   hoveredBgOpacity: null,
   bgOpacity: null,
+  shadow: null,
+  hoveredShadow: null,
 };
 
 export type FullCollapseSidebarButtonProps = Omit<

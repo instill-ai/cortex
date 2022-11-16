@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
@@ -63,15 +63,21 @@ export type AccordionBaseProps = {
   width: string;
 
   /**
+   * Allow Accordion to display multiple items at the same time
+   * - When the allowMultiItems is true, the accordion can have no item in open state.
+   */
+  allowMultiItems: boolean;
+
+  /**
    * The active index of the accordion
    */
-  activeIndex: number;
+  activeIndex: number[];
 
   /**
    * React dispatch method to set the active index of the accordion
    */
 
-  setActiveIndex: React.Dispatch<React.SetStateAction<number>>;
+  setActiveIndex: React.Dispatch<React.SetStateAction<number[]>>;
 
   /**
    * The gap between each accordion items
@@ -136,8 +142,30 @@ const AccordionBase = (props: AccordionBaseProps) => {
     bgIconPosition,
     enableHeaderIcon,
     width,
+    allowMultiItems,
     ...headerStyle
   } = props;
+
+  const clickHandler = useCallback(
+    (index: number) => {
+      setActiveIndex((prev) => {
+        if (allowMultiItems) {
+          if (prev.includes(index)) {
+            return prev.filter((i) => i !== index);
+          } else {
+            return [...prev, index];
+          }
+        } else {
+          if (prev.includes(index)) {
+            return prev;
+          } else {
+            return [index];
+          }
+        }
+      });
+    },
+    [setActiveIndex]
+  );
 
   return (
     <div className={cn("flex flex-col", itemGapY, width)}>
@@ -151,18 +179,18 @@ const AccordionBase = (props: AccordionBaseProps) => {
         >
           {type === "withIcon" ? (
             <div
-              onClick={() => setActiveIndex(i)}
+              onClick={() => clickHandler(i)}
               className={cn("flex absolute cursor-pointer", bgIconPosition)}
             >
               {e.bgIcon}
             </div>
           ) : null}
           <div
-            onClick={() => setActiveIndex(i)}
+            onClick={() => clickHandler(i)}
             className={cn(
               "flex flex-row cursor-pointer",
               headerStyle.headerPadding,
-              i === activeIndex
+              activeIndex.includes(i)
                 ? e.headerActiveBgColor
                 : e.headerInActiveBgColor
             )}
@@ -173,7 +201,7 @@ const AccordionBase = (props: AccordionBaseProps) => {
                 headerStyle.headerFont,
                 headerStyle.headerTextSize,
                 headerStyle.headerFontWeight,
-                i === activeIndex
+                activeIndex.includes(i)
                   ? e.headerActiveTextColor
                   : e.headerInActiveTextColor
               )}
@@ -182,14 +210,14 @@ const AccordionBase = (props: AccordionBaseProps) => {
             </div>
             {enableHeaderIcon ? (
               <>
-                {i === activeIndex
+                {activeIndex.includes(i)
                   ? headerStyle.headerActiveIcon
                   : headerStyle.headerInActiveIcon}
               </>
             ) : null}
           </div>
           <div className="w-full">
-            <div className={i === activeIndex ? "flex" : "hidden"}>
+            <div className={activeIndex.includes(i) ? "flex" : "hidden"}>
               {e.content}
             </div>
           </div>

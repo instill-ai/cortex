@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 
-export type OutlineButtonRequiredKeys = "type" | "color";
+export type OutlineButtonRequiredKeys = "type" | "color" | "hoveredShadow";
 
 export type OutlineButtonOmitKeys =
   | "borderSize"
@@ -17,7 +17,8 @@ export type OutlineButtonOmitKeys =
   | "textColor"
   | "hoveredTextColor"
   | "disabledTextColor"
-  | "borderRadius";
+  | "borderRadius"
+  | "shadow";
 
 export type OutlineButtonConfig = Pick<ButtonBaseProps, OutlineButtonOmitKeys>;
 
@@ -25,7 +26,7 @@ export type FullOutlineButtonProps = Omit<
   ButtonBaseProps,
   OutlineButtonOmitKeys
 > & {
-  color: "primary" | "secondary" | "danger";
+  color: "primary" | "primaryLight" | "secondary" | "danger";
 };
 
 export type OutlineButtonRequiredProps = Pick<
@@ -60,6 +61,27 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
+      };
+      break;
+    }
+    case "primaryLight": {
+      buttonStyle = {
+        borderSize: "border-[1px]",
+        borderColor: "border-instillNeonBlue",
+        hoveredBorderColor: "hover:border-instillNeonBlue",
+        disabledBorderColor: "border-instillGrey30",
+        borderRadius: "rounded-[1px]",
+        bgColor: null,
+        hoveredBgColor: "hover:bg-instillNeonBlue",
+        disabledBgColor: null,
+        textColor: "text-instillNeonBlue",
+        hoveredTextColor: "hover:text-instillNeonBlue",
+        disabledTextColor: "text-instillGrey30",
+        disabledBgOpacity: null,
+        bgOpacity: null,
+        hoveredBgOpacity: "hover:bg-opacity-20",
+        shadow: null,
       };
       break;
     }
@@ -79,6 +101,7 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
       };
       break;
     }
@@ -98,6 +121,7 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
         disabledBgOpacity: null,
         hoveredBgOpacity: null,
         bgOpacity: null,
+        shadow: null,
       };
       break;
     }
@@ -121,6 +145,7 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
       endIcon={props.endIcon ?? null}
       itemGapX={props.itemGapX ?? null}
       textSize={props.textSize ?? "text-base"}
+      hoveredShadow={props.hoveredShadow}
       {...buttonStyle}
     >
       {props.children}
