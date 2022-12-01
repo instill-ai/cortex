@@ -181,6 +181,8 @@ import ToolboxIcon from "./ToolboxIcon";
 import type { ToolboxIconProps } from "./ToolboxIcon";
 import ToggleIcon from "./ToggleIcon";
 import type { ToggleIconProps } from "./ToggleIcon";
+import FilterIcon from "./FilterIcon";
+import type { FilterIconProps } from "./FilterIcon";
 
 export type {
   AirbyteIconProps,
@@ -272,6 +274,7 @@ export type {
   PenIconProps,
   ToggleIconProps,
   MenuIconProps,
+  FilterIconProps,
 };
 
 export {
@@ -364,4 +367,5 @@ export {
   PenIcon,
   ToggleIcon,
   MenuIcon,
+  FilterIcon,
 };
