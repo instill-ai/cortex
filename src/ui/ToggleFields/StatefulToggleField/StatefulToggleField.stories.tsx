@@ -28,6 +28,7 @@ const Template: ComponentStory<typeof StatefulToggleField> = (args) => {
         state === "STATE_ERROR" ? "There is an error. Please try again." : null
       }
       state={state}
+      loadingLabelText="Loading..."
     />
   );
 };

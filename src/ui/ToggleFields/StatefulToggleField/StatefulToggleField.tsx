@@ -70,7 +70,10 @@ export type StatefulToggleFieldOptionalProps = Partial<
 >;
 
 export type StatefulToggleFieldProps = StatefulToggleFieldRequiredProps &
-  StatefulToggleFieldOptionalProps & { state: Nullable<State> };
+  StatefulToggleFieldOptionalProps & {
+    state: Nullable<State>;
+    loadingLabelText: string;
+  };
 
 export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
   focusHighlight: true,
@@ -121,7 +124,7 @@ const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
       label={props.label}
       additionalMessageOnLabel={
         props.state === "STATE_LOADING"
-          ? "Loading..."
+          ? props.loadingLabelText
           : props.additionalMessageOnLabel ?? null
       }
       description={props.description ?? ""}
