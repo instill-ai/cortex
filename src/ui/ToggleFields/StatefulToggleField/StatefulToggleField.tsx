@@ -115,16 +115,17 @@ export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
 };
 
 const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
+  const { loadingLabelText, ...remaingProps } = props;
   return (
     <ToggleFieldBase
-      {...props}
+      {...remaingProps}
       id={props.id}
       value={props.value}
       onChange={props.onChange}
       label={props.label}
       additionalMessageOnLabel={
         props.state === "STATE_LOADING"
-          ? props.loadingLabelText
+          ? loadingLabelText
           : props.additionalMessageOnLabel ?? null
       }
       description={props.description ?? ""}
