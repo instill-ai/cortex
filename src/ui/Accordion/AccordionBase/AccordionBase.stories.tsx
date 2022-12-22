@@ -66,7 +66,7 @@ Playground.args = {
           <div className="flex flex-col p-5 bg-[#23C4E7] w-7/12">
             <div className="flex text-base text-white">
               An end-to-end workflow that automates a sequence of sub-components
-              to process visual data.
+              to process unstructured data.
             </div>
           </div>
         </div>
@@ -83,8 +83,8 @@ Playground.args = {
         <div className="bg-[#02D085] w-full">
           <div className="flex flex-col p-5 w-7/12">
             <div className="flex text-base text-white">
-              A data connector in charge of ingesting unstructured visual data
-              into a Pipeline.
+              A data connector in charge of ingesting unstructured data into a
+              Pipeline.
             </div>
           </div>
         </div>
@@ -101,8 +101,8 @@ Playground.args = {
         <div className="bg-[#DEC800] w-full">
           <div className="flex flex-col p-5 bg-[#DEC800] w-7/12">
             <div className="flex text-base text-white">
-              An algorithm that runs on unstructured visual data to solve a
-              certain Computer Vision (CV) Task.
+              An algorithm that runs on unstructured data to solve a specific AI
+              task.
             </div>
           </div>
         </div>
@@ -119,8 +119,8 @@ Playground.args = {
         <div className="bg-[#FF8A00] w-full">
           <div className="flex flex-col p-5 bg-[#FF8A00] w-7/12">
             <div className="flex text-base text-white">
-              A data connector to load the standarised CV Task output from Model
-              to the destination.
+              A data connector to load the standardised AI task output from
+              Model to the Destination.
             </div>
           </div>
         </div>
