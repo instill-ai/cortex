@@ -7,13 +7,14 @@ export type MetabaseIconProps = Omit<
 >;
 
 const MetabaseIcon: React.FC<MetabaseIconProps> = (props) => {
+  const { width, height, position, style } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      position={position}
+      style={style}
       fill="none"
     >
       <g>

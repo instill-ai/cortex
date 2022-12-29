@@ -49,17 +49,21 @@ export interface InputDescriptionBaseProps {
   descriptionLinkTextDecoration: string;
 }
 
-const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = ({
-  description,
-  descriptionWidth,
-  descriptionFontFamily,
-  descriptionFontSize,
-  descriptionFontWeight,
-  descriptionLineHeight,
-  descriptionTextColor,
-  descriptionLinkTextColor,
-  descriptionLinkTextDecoration,
-}) => {
+const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = (
+  props: InputDescriptionBaseProps
+) => {
+  const {
+    description,
+    descriptionWidth,
+    descriptionFontFamily,
+    descriptionFontSize,
+    descriptionFontWeight,
+    descriptionLineHeight,
+    descriptionTextColor,
+    descriptionLinkTextColor,
+    descriptionLinkTextDecoration,
+  } = props;
+
   return (
     <TextWithHtml
       text={description}

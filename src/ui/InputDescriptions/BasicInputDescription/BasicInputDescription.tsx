@@ -35,9 +35,10 @@ export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
 };
 
 const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (props) => {
+  const { description } = props;
   return (
     <InputDescriptionBase
-      description={props.description}
+      description={description}
       {...basicInputDescriptionConfig}
     />
   );

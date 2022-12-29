@@ -3,20 +3,36 @@ import SquareProgressBase, {
   SquareProgressBaseProps,
 } from "../SquareProgressBase";
 
+export type DarkBgSquareProgressOmitKeys =
+  | "bgColor"
+  | "cubeColor"
+  | "animationDuration";
+
 export type DarkBgSquareProgressProps = Omit<
   SquareProgressBaseProps,
-  "bgColor" | "cubeColor" | "animationDuration"
+  DarkBgSquareProgressOmitKeys
 >;
 
+export type DarkBgSquareProgressConfig = Pick<
+  SquareProgressBaseProps,
+  DarkBgSquareProgressOmitKeys
+>;
+
+export const darkBgSquareProgressConfig: DarkBgSquareProgressConfig = {
+  bgColor: "bg-instillGrey80",
+  cubeColor: "bg-instillBlue50",
+  animationDuration: 3,
+};
+
 const DarkBgSquareProgress: React.FC<DarkBgSquareProgressProps> = (props) => {
+  const { isLoading, position, blockSize } = props;
+
   return (
     <SquareProgressBase
-      isLoading={props.isLoading}
-      blockSize={props.blockSize}
-      position={props.position}
-      bgColor="bg-instillGrey80"
-      cubeColor="bg-instillBlue50"
-      animationDuration={3}
+      isLoading={isLoading}
+      blockSize={blockSize}
+      position={position}
+      {...darkBgSquareProgressConfig}
     />
   );
 };

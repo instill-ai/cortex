@@ -65,26 +65,45 @@ export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
   BasicSingleSelectOptionalProps;
 
 const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
+  const {
+    id,
+    inputLabelType,
+    instanceId,
+    onChange,
+    value,
+    options,
+    label,
+    onFocus,
+    onBlur,
+    additionalMessageOnLabel,
+    menuPlacement,
+    description,
+    error,
+    disabled,
+    readOnly,
+    required,
+    isClearable,
+  } = props;
+
   return (
     <SingleSelectBase
-      {...props}
-      id={props.id}
-      inputLabelType={props.inputLabelType ?? "inset"}
-      instanceId={props.instanceId}
-      onChange={props.onChange}
-      value={props.value}
-      options={props.options}
-      label={props.label}
-      onFocus={props.onFocus ?? null}
-      onBlur={props.onBlur ?? null}
-      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
-      menuPlacement={props.menuPlacement ?? "auto"}
-      description={props.description ?? ""}
-      error={props.error ?? null}
-      disabled={props.disabled ?? false}
-      readOnly={props.readOnly ?? false}
-      required={props.required ?? false}
-      isClearable={props.isClearable ?? false}
+      id={id}
+      inputLabelType={inputLabelType ?? "inset"}
+      instanceId={instanceId}
+      onChange={onChange}
+      value={value}
+      options={options}
+      label={label}
+      onFocus={onFocus ?? null}
+      onBlur={onBlur ?? null}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      menuPlacement={menuPlacement ?? "auto"}
+      description={description ?? ""}
+      error={error ?? null}
+      disabled={disabled ?? false}
+      readOnly={readOnly ?? false}
+      required={required ?? false}
+      isClearable={isClearable ?? false}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}
     />

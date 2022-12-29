@@ -115,37 +115,52 @@ export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
 };
 
 const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
-  const { loadingLabelText, ...remaingProps } = props;
+  const {
+    loadingLabelText,
+    id,
+    value,
+    onChange,
+    label,
+    state,
+    additionalMessageOnLabel,
+    description,
+    error,
+    readOnly,
+    required,
+    disabled,
+    ...passThrough
+  } = props;
+
   return (
     <ToggleFieldBase
-      {...remaingProps}
-      id={props.id}
-      value={props.value}
-      onChange={props.onChange}
-      label={props.label}
+      {...passThrough}
+      id={id}
+      value={value}
+      onChange={onChange}
+      label={label}
       additionalMessageOnLabel={
-        props.state === "STATE_LOADING"
+        state === "STATE_LOADING"
           ? loadingLabelText
-          : props.additionalMessageOnLabel ?? null
+          : additionalMessageOnLabel ?? null
       }
-      description={props.description ?? ""}
-      error={props.error ?? null}
-      readOnly={props.readOnly ?? false}
-      required={props.required ?? false}
-      disabled={props.disabled ?? false}
+      description={description ?? ""}
+      error={error ?? null}
+      readOnly={readOnly ?? false}
+      required={required ?? false}
+      disabled={disabled ?? false}
       inputBorderColor={
-        props.state === "STATE_LOADING"
+        state === "STATE_LOADING"
           ? "border-lemonYellow50"
           : "border-instillGrey20"
       }
       inputFocusBorderColor={
-        props.state === "STATE_LOADING" ? "" : "border-instillBlue50"
+        state === "STATE_LOADING" ? "" : "border-instillBlue50"
       }
       inputFocusShadow={
-        props.state === "STATE_LOADING" ? "" : "instill-input-focus-shadow"
+        state === "STATE_LOADING" ? "" : "instill-input-focus-shadow"
       }
       inputShadow={
-        props.state === "STATE_LOADING" ? "instill-toggle-loading-shadow" : null
+        state === "STATE_LOADING" ? "instill-toggle-loading-shadow" : null
       }
       {...statefulToggleFieldConfig}
       {...basicInputDescriptionConfig}

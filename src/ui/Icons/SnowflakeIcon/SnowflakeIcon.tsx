@@ -7,13 +7,14 @@ export type SnowflakeIconProps = Omit<
 >;
 
 const SnowflakeIcon: React.FC<SnowflakeIconProps> = (props) => {
+  const { width, height, position, style } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      position={position}
+      style={style}
       fill="none"
     >
       <path

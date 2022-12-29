@@ -159,36 +159,38 @@ export type ButtonBaseProps = {
   hoveredShadow: Nullable<string>;
 };
 
-const ButtonBase = ({
-  bgColor,
-  bgOpacity,
-  disabled,
-  disabledBgColor,
-  disabledBgOpacity,
-  disabledBorderColor,
-  disabledTextColor,
-  textColor,
-  textSize,
-  hoveredTextColor,
-  hoveredBorderColor,
-  hoveredBgColor,
-  hoveredBgOpacity,
-  onClickHandler,
-  position,
-  type,
-  dataFlag,
-  children,
-  padding,
-  width,
-  borderSize,
-  borderColor,
-  borderRadius,
-  startIcon,
-  endIcon,
-  itemGapX,
-  shadow,
-  hoveredShadow,
-}: ButtonBaseProps) => {
+const ButtonBase = (props: ButtonBaseProps) => {
+  const {
+    bgColor,
+    bgOpacity,
+    disabled,
+    disabledBgColor,
+    disabledBgOpacity,
+    disabledBorderColor,
+    disabledTextColor,
+    textColor,
+    textSize,
+    hoveredTextColor,
+    hoveredBorderColor,
+    hoveredBgColor,
+    hoveredBgOpacity,
+    onClickHandler,
+    position,
+    type,
+    dataFlag,
+    children,
+    padding,
+    width,
+    borderSize,
+    borderColor,
+    borderRadius,
+    startIcon,
+    endIcon,
+    itemGapX,
+    shadow,
+    hoveredShadow,
+  } = props;
+
   return (
     <button
       disabled={disabled}

@@ -34,32 +34,6 @@ export type CollapseSidebarButtonConfig = Pick<
   CollapseSidebarButtonOmitKeys
 >;
 
-export const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
-  type: "button",
-  width: null,
-  borderSize: null,
-  borderColor: null,
-  disabledBorderColor: null,
-  hoveredBorderColor: null,
-  startIcon: null,
-  endIcon: null,
-  itemGapX: null,
-  bgColor: "bg-instillGrey90",
-  borderRadius: null,
-  hoveredBgColor: "hover:bg-instillGrey80",
-  textColor: null,
-  hoveredTextColor: null,
-  disabledBgColor: "bg-instillGrey90",
-  disabledTextColor: null,
-  padding: "p-[3px]",
-  textSize: null,
-  disabledBgOpacity: null,
-  hoveredBgOpacity: null,
-  bgOpacity: null,
-  shadow: null,
-  hoveredShadow: null,
-};
-
 export type FullCollapseSidebarButtonProps = Omit<
   ButtonBaseProps,
   CollapseSidebarButtonOmitKeys
@@ -78,15 +52,43 @@ export type CollapseSidebarButtonProps = CollapseSidebarButtonRequiredProps &
   CollapseSidebarButtonOptionalProps;
 
 const CollapseSidebarButton: React.FC<CollapseSidebarButtonProps> = (props) => {
+  const { onClickHandler, disabled, position, dataFlag, isCollapse } = props;
+
+  const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {
+    type: "button",
+    width: null,
+    borderSize: null,
+    borderColor: null,
+    disabledBorderColor: null,
+    hoveredBorderColor: null,
+    startIcon: null,
+    endIcon: null,
+    itemGapX: null,
+    bgColor: "bg-instillGrey90",
+    borderRadius: null,
+    hoveredBgColor: "hover:bg-instillGrey80",
+    textColor: null,
+    hoveredTextColor: null,
+    disabledBgColor: "bg-instillGrey90",
+    disabledTextColor: null,
+    padding: "p-[3px]",
+    textSize: null,
+    disabledBgOpacity: null,
+    hoveredBgOpacity: null,
+    bgOpacity: null,
+    shadow: null,
+    hoveredShadow: null,
+  };
+
   return (
     <ButtonBase
-      onClickHandler={props.onClickHandler}
-      disabled={props.disabled ?? false}
-      position={props.position ?? null}
-      dataFlag={props.dataFlag ?? null}
+      onClickHandler={onClickHandler}
+      disabled={disabled ?? false}
+      position={position ?? null}
+      dataFlag={dataFlag ?? null}
       {...collapseSidebarButtonConfig}
     >
-      {props.isCollapse ? (
+      {isCollapse ? (
         <CollapseRightIcon
           width="w-[14px]"
           height="h-[14px]"

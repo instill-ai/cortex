@@ -4,14 +4,15 @@ import ArrowIconBase, { ArrowIconBaseProps } from "../ArrowIconBase";
 export type RotatableArrowIconProps = Omit<ArrowIconBaseProps, "viewBox">;
 
 const RotatableArrowIcon: React.FC<RotatableArrowIconProps> = (props) => {
+  const { width, height, position, style, color, rotate } = props;
   return (
     <ArrowIconBase
-      width={props.width}
-      height={props.height}
-      color={props.color}
-      position={props.position}
-      rotate={props.rotate}
-      style={props.style}
+      width={width}
+      height={height}
+      color={color}
+      position={position}
+      style={style}
+      rotate={rotate}
     >
       <path
         fillRule="evenodd"

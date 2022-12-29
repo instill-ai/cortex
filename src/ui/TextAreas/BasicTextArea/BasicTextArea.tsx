@@ -137,23 +137,41 @@ export type BasicTextAreaProps = BasicTextAreaRequiredProps &
   BasicTextAreaOptionalProps;
 
 const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
+  const {
+    id,
+    label,
+    onChange,
+    value,
+    description,
+    additionalMessageOnLabel,
+    enableCounter,
+    counterWordLimit,
+    disabled,
+    required,
+    readOnly,
+    error,
+    autoComplete,
+    placeholder,
+    ...passThrough
+  } = props;
+
   return (
     <TextAreaBase
-      {...props}
-      id={props.id}
-      label={props.label}
-      onChange={props.onChange}
-      value={props.value}
-      description={props.description ?? ""}
-      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
-      enableCounter={props.enableCounter ?? false}
-      counterWordLimit={props.counterWordLimit ?? 0}
-      disabled={props.disabled ?? false}
-      required={props.required ?? false}
-      readOnly={props.readOnly ?? false}
-      error={props.error ?? null}
-      autoComplete={props.autoComplete ?? "off"}
-      placeholder={props.placeholder ?? ""}
+      {...passThrough}
+      id={id}
+      label={label}
+      onChange={onChange}
+      value={value}
+      description={description ?? ""}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      enableCounter={enableCounter ?? false}
+      counterWordLimit={counterWordLimit ?? 0}
+      disabled={disabled ?? false}
+      required={required ?? false}
+      readOnly={readOnly ?? false}
+      error={error ?? null}
+      autoComplete={autoComplete ?? "off"}
+      placeholder={placeholder ?? ""}
       {...basicTextAreaConfig}
       {...basicInputDescriptionConfig}
     />

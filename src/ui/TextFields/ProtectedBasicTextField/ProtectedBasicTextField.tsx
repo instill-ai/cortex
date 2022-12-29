@@ -143,20 +143,35 @@ export type ProtectedBasicTextFieldProps =
 const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
   props
 ) => {
+  const {
+    id,
+    label,
+    onChange,
+    value,
+    description,
+    additionalMessageOnLabel,
+    disabled,
+    required,
+    readOnly,
+    error,
+    placeholder,
+    ...passThrough
+  } = props;
+
   return (
     <TextFieldBase
-      {...props}
-      id={props.id}
-      value={props.value}
-      label={props.label}
-      onChange={props.onChange}
-      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
-      description={props.description ?? ""}
-      disabled={props.disabled ?? false}
-      required={props.required ?? false}
-      error={props.error ?? null}
-      placeholder={props.placeholder ?? ""}
-      readOnly={props.readOnly ?? false}
+      {...passThrough}
+      id={id}
+      value={value}
+      label={label}
+      onChange={onChange}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      description={description ?? ""}
+      disabled={disabled ?? false}
+      required={required ?? false}
+      error={error ?? null}
+      placeholder={placeholder ?? ""}
+      readOnly={readOnly ?? false}
       {...protectedBasicTextFieldConfig}
       {...basicInputDescriptionConfig}
     />

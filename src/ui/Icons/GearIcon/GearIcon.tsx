@@ -4,14 +4,15 @@ import IconBase, { IconBaseProps } from "../IconBase";
 export type GearIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const GearIcon: React.FC<GearIconProps> = (props) => {
+  const { width, height, position, style, color } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      color={props.color}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      color={color}
+      position={position}
+      style={style}
     >
       <path
         fillRule="evenodd"

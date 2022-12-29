@@ -42,6 +42,22 @@ export type OutlineButtonProps = OutlineButtonRequiredProps &
   OutlineButtonOptionalProps;
 
 const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
+  const {
+    type,
+    disabled,
+    onClickHandler,
+    position,
+    dataFlag,
+    width,
+    padding,
+    startIcon,
+    endIcon,
+    itemGapX,
+    textSize,
+    hoveredShadow,
+    children,
+  } = props;
+
   let buttonStyle = {} as OutlineButtonConfig;
 
   switch (props.color) {
@@ -134,21 +150,21 @@ const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
 
   return (
     <ButtonBase
-      type={props.type}
-      disabled={props.disabled ?? false}
-      onClickHandler={props.onClickHandler ?? null}
-      position={props.position ?? null}
-      dataFlag={props.dataFlag ?? null}
-      width={props.width ?? null}
-      padding={props.padding ?? "px-5 py-2.5"}
-      startIcon={props.startIcon ?? null}
-      endIcon={props.endIcon ?? null}
-      itemGapX={props.itemGapX ?? null}
-      textSize={props.textSize ?? "text-base"}
-      hoveredShadow={props.hoveredShadow}
+      type={type}
+      disabled={disabled ?? false}
+      onClickHandler={onClickHandler ?? null}
+      position={position ?? null}
+      dataFlag={dataFlag ?? null}
+      width={width ?? null}
+      padding={padding ?? "px-5 py-2.5"}
+      startIcon={startIcon ?? null}
+      endIcon={endIcon ?? null}
+      itemGapX={itemGapX ?? null}
+      textSize={textSize ?? "text-base"}
+      hoveredShadow={hoveredShadow}
       {...buttonStyle}
     >
-      {props.children}
+      {children}
     </ButtonBase>
   );
 };

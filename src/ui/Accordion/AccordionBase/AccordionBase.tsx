@@ -164,7 +164,7 @@ const AccordionBase = (props: AccordionBaseProps) => {
         }
       });
     },
-    [setActiveIndex]
+    [setActiveIndex, allowMultiItems]
   );
 
   return (

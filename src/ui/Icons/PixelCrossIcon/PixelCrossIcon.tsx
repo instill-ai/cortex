@@ -4,14 +4,15 @@ import IconBase, { IconBaseProps } from "../IconBase";
 export type PixelCrossIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const PixelCrossIcon: React.FC<PixelCrossIconProps> = (props) => {
+  const { width, height, position, style, color } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      color={props.color}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      color={color}
+      position={position}
+      style={style}
     >
       <rect x="13.3333" y="13.3333" width="3.33333" height="3.33333" />
       <rect x="16.6667" y="10" width="3.33333" height="3.33333" />

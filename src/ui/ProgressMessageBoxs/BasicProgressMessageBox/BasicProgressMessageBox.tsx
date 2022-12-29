@@ -57,12 +57,14 @@ export const basicProgressMessageBoxConfig: BasicProgressMessageBoxConfig = {
 const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
   props
 ) => {
+  const { state, setState, closable, width } = props;
+
   return (
     <ProgressMessageBoxBase
-      state={props.state}
-      setState={props.setState}
-      closable={props.closable}
-      width={props.width}
+      state={state}
+      setState={setState}
+      closable={closable}
+      width={width}
       {...basicProgressMessageBoxConfig}
     />
   );

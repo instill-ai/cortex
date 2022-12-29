@@ -4,14 +4,15 @@ import IconBase, { IconBaseProps } from "../IconBase";
 export type SyncArrowsIconProps = Omit<IconBaseProps, "viewBox" | "fill">;
 
 const SyncArrowsIcon: React.FC<SyncArrowsIconProps> = (props) => {
+  const { width, height, position, style, color } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      position={props.position}
-      color={props.color}
-      style={props.style}
+      width={width}
+      height={height}
+      color={color}
+      position={position}
+      style={style}
     >
       <path
         fillRule="evenodd"

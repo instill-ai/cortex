@@ -133,22 +133,39 @@ export type BasicTextFieldProps = BasicTextFieldRequiredProps &
   BasicTextFieldOptionalProps;
 
 const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
+  const {
+    id,
+    label,
+    onChange,
+    value,
+    description,
+    additionalMessageOnLabel,
+    disabled,
+    required,
+    readOnly,
+    error,
+    autoComplete,
+    placeholder,
+    type,
+    ...passThrough
+  } = props;
+
   return (
     <TextFieldBase
-      {...props}
-      id={props.id}
-      value={props.value}
-      onChange={props.onChange}
-      label={props.label}
-      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
-      description={props.description ?? ""}
-      disabled={props.disabled ?? false}
-      type={props.type ?? "text"}
-      required={props.required ?? false}
-      error={props.error ?? null}
-      autoComplete={props.autoComplete ?? "off"}
-      placeholder={props.placeholder ?? ""}
-      readOnly={props.readOnly ?? false}
+      {...passThrough}
+      id={id}
+      value={value}
+      onChange={onChange}
+      label={label}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      description={description ?? ""}
+      disabled={disabled ?? false}
+      type={type ?? "text"}
+      required={required ?? false}
+      error={error ?? null}
+      autoComplete={autoComplete ?? "off"}
+      placeholder={placeholder ?? ""}
+      readOnly={readOnly ?? false}
       {...basicTextFieldConfig}
       {...basicInputDescriptionConfig}
     />
