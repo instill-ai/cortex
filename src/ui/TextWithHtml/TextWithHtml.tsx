@@ -30,21 +30,23 @@ export type TextWithHtmlProps = {
   linkTextDecoration: string;
 };
 
-const TextWithHtml: React.FC<TextWithHtmlProps> = ({
-  text,
-  fontFamily,
-  fontSize,
-  fontWeight,
-  lineHeight,
-  textColor,
-  width,
-  linkFontFamily,
-  linkFontSize,
-  linkFontWeight,
-  linkLineHeight,
-  linkTextColor,
-  linkTextDecoration,
-}) => {
+const TextWithHtml: React.FC<TextWithHtmlProps> = (props) => {
+  const {
+    text,
+    fontFamily,
+    fontSize,
+    fontWeight,
+    lineHeight,
+    textColor,
+    width,
+    linkFontFamily,
+    linkFontSize,
+    linkFontWeight,
+    linkLineHeight,
+    linkTextColor,
+    linkTextDecoration,
+  } = props;
+
   if (!text) return null;
 
   const sanitizedHtmlText = sanitizeHtml(text, {
