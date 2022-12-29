@@ -139,20 +139,35 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
 };
 
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
+  const {
+    id,
+    label,
+    onChange,
+    uploadButtonText,
+    additionalMessageOnLabel,
+    error,
+    description,
+    disabled,
+    readOnly,
+    required,
+    placeholder,
+    ...passThrough
+  } = props;
+
   return (
     <UploadFileFieldBase
-      {...props}
-      id={props.id}
-      label={props.label}
-      onChange={props.onChange}
-      uploadButtonText={props.uploadButtonText}
-      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
-      error={props.error ?? null}
-      description={props.description ?? ""}
-      disabled={props.disabled ?? false}
-      readOnly={props.readOnly ?? false}
-      required={props.required ?? false}
-      placeholder={props.placeholder ?? ""}
+      {...passThrough}
+      id={id}
+      label={label}
+      onChange={onChange}
+      uploadButtonText={uploadButtonText}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      error={error ?? null}
+      description={description ?? ""}
+      disabled={disabled ?? false}
+      readOnly={readOnly ?? false}
+      required={required ?? false}
+      placeholder={placeholder ?? ""}
       {...basicUploadFileFieldConfig}
       {...basicInputDescriptionConfig}
     />
