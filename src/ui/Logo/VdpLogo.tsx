@@ -6,7 +6,9 @@ export type VdpLogoProps = {
   width: number;
 };
 
-const VdpLogo = ({ type, width, position }: VdpLogoProps) => {
+const VdpLogo = (props: VdpLogoProps) => {
+  const { type, width, position } = props;
+
   switch (type) {
     case "square": {
       return (

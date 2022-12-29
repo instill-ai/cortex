@@ -1,25 +1,29 @@
 import React from "react";
 import cn from "clsx";
 
-export interface LogoProps {
-  styleName?: string;
-  type:
-    | "responsiveColourLogomarkWhiteType"
-    | "ColourLogomarkWhiteType"
-    | "responsiveColourLogomarkBlackType"
-    | "ColourLogomarkBlackType"
-    | "responsiveWhiteLogomarkWhiteType"
-    | "whiteLogomarkWhiteType"
-    | "responsiveBlackLogomarkBlackType"
-    | "blackLogomarkBlackType"
-    | "whiteLogomark"
-    | "blueLogomark"
-    | "colourLogomark"
-    | "blackLogomark";
-  width: number;
-}
+export type LogoColorType =
+  | "responsiveColourLogomarkWhiteType"
+  | "ColourLogomarkWhiteType"
+  | "responsiveColourLogomarkBlackType"
+  | "ColourLogomarkBlackType"
+  | "responsiveWhiteLogomarkWhiteType"
+  | "whiteLogomarkWhiteType"
+  | "responsiveBlackLogomarkBlackType"
+  | "blackLogomarkBlackType"
+  | "whiteLogomark"
+  | "blueLogomark"
+  | "colourLogomark"
+  | "blackLogomark";
 
-const Logo: React.FC<LogoProps> = ({ styleName, type, width }) => {
+export type LogoProps = {
+  styleName?: string;
+  type: LogoColorType;
+  width: number;
+};
+
+const Logo: React.FC<LogoProps> = (props) => {
+  const { styleName, type, width } = props;
+
   let logo: React.ReactNode;
 
   const getWhiteLogomarkWhiteType = (
