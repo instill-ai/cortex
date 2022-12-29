@@ -1,12 +1,13 @@
 import React from "react";
 import cn from "clsx";
 import "./SquareProgressBase.css";
+import { Nullable } from "../../../types/general";
 
 export interface SquareProgressBaseProps {
   /** TailwindCSS format - Loading status block's background color
    * - bg-instillGrey30
    */
-  bgColor: string;
+  bgColor: Nullable<string>;
 
   /** TailwindCSS format - Loading status cube's background color */
   cubeColor: string;
@@ -26,14 +27,16 @@ export interface SquareProgressBaseProps {
   position?: string;
 }
 
-const SquareProgressBase: React.FC<SquareProgressBaseProps> = ({
-  bgColor,
-  cubeColor,
-  isLoading,
-  animationDuration,
-  blockSize,
-  position,
-}) => {
+const SquareProgressBase: React.FC<SquareProgressBaseProps> = (props) => {
+  const {
+    bgColor,
+    cubeColor,
+    isLoading,
+    animationDuration,
+    blockSize,
+    position,
+  } = props;
+
   return (
     <div
       className={cn("relative", bgColor, position)}
