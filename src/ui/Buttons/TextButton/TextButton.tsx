@@ -39,6 +39,21 @@ export type TextButtonOptionalProps = Partial<
 export type TextButtonProps = TextButtonRequiredProps & TextButtonOptionalProps;
 
 const TextButton: React.FC<TextButtonProps> = (props) => {
+  const {
+    type,
+    disabled,
+    onClickHandler,
+    position,
+    dataFlag,
+    width,
+    padding,
+    startIcon,
+    endIcon,
+    itemGapX,
+    textSize,
+    children,
+  } = props;
+
   let buttonStyle = {} as TextButtonConfig;
 
   switch (props.color) {
@@ -88,20 +103,20 @@ const TextButton: React.FC<TextButtonProps> = (props) => {
 
   return (
     <ButtonBase
-      type={props.type}
-      disabled={props.disabled ?? false}
-      onClickHandler={props.onClickHandler ?? null}
-      position={props.position ?? null}
-      dataFlag={props.dataFlag ?? null}
-      width={props.width ?? null}
-      startIcon={props.startIcon ?? null}
-      endIcon={props.endIcon ?? null}
-      itemGapX={props.itemGapX ?? null}
-      padding={props.padding ?? "px-5 py-2.5"}
-      textSize={props.textSize ?? "text-base"}
+      type={type}
+      disabled={disabled ?? false}
+      onClickHandler={onClickHandler ?? null}
+      position={position ?? null}
+      dataFlag={dataFlag ?? null}
+      width={width ?? null}
+      startIcon={startIcon ?? null}
+      endIcon={endIcon ?? null}
+      itemGapX={itemGapX ?? null}
+      padding={padding ?? "px-5 py-2.5"}
+      textSize={textSize ?? "text-base"}
       {...buttonStyle}
     >
-      {props.children}
+      {children}
     </ButtonBase>
   );
 };
