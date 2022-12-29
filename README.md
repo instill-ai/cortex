@@ -205,9 +205,27 @@ const square = ({ width }) => {
   - Caveat: playground is using `Template.bind()` to construct story, its console.log is different from regular console.log
 - You may want to remove the whole args props in storybook to make the type check cleaner, but in this way user can't directly change the props' value on storybook UI
 
-## About the design of the base and e exported level
+## About the design of the base and exported level
 
 - We will always digest as many props at base level as possible, take SingleSelectBase as example, when use InputDescription component, we didn't use BasicInputDescription but InputDescriptionBase to make SingleSelectBase as flexible as possible, but here comes another problem, we need to store the same config for BasicInputDescription at BasicInputDescription and BasicSingleSelece. To solve this problem, we will export a set of BasicInputDescriptionConfig to let other component use the config and reduce the maintance overhead.
+
+## About the passThrough props
+
+Normally we don't accept passThrough props like below. The only exception will be input related field like textarea (BasicTextArea).
+
+> In the future, we will make it has explicit type.
+
+```tsx
+type FooProps = {
+  id: string
+}
+
+const Foo = (props: FooProps) => {
+  const {id, ...passThrough} = props
+
+  <input {...passThrough} id={id} />
+}
+```
 
 ## Todo
 
