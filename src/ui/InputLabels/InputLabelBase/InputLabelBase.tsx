@@ -109,8 +109,8 @@ export type InputLabelBaseProps = {
 export type InputLabelBaseRef = HTMLLabelElement;
 
 const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
-  (
-    {
+  (props, ref) => {
+    const {
       htmlFor,
       required,
       focus,
@@ -133,9 +133,8 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       errorLabelLineHeight,
       errorLabelTextColor,
       labelWidth,
-    },
-    ref
-  ) => {
+    } = props;
+
     const [activate, setActivate] = React.useState(false);
 
     React.useEffect(() => {

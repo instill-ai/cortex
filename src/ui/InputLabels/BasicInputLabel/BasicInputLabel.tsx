@@ -1,8 +1,7 @@
 import React from "react";
 import InputLabelBase, { InputLabelBaseProps } from "../InputLabelBase";
 
-export type BasicInputLabelProps = Omit<
-  InputLabelBaseProps,
+export type BasicInputLabelOmitKeys =
   | "labelFontSize"
   | "labelFontWeight"
   | "labelTextColor"
@@ -14,34 +13,60 @@ export type BasicInputLabelProps = Omit<
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
-  | "errorLabelTextColor"
+  | "errorLabelTextColor";
+
+export type BasicInputLabelProps = Omit<
+  InputLabelBaseProps,
+  BasicInputLabelOmitKeys
 >;
 
+export type BasicInputLabelConfig = Pick<
+  InputLabelBaseProps,
+  BasicInputLabelOmitKeys
+>;
+
+export const basicInputLabelConfig: BasicInputLabelConfig = {
+  labelFontSize: "text-sm",
+  labelFontWeight: "font-normal",
+  labelTextColor: "text-instillGrey50",
+  labelLineHeight: "leading-[18.2px]",
+  labelFontFamily: "font-sans",
+  labelActivateStyle: "top-1/2 -translate-y-[120%]",
+  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
+  errorLabelFontFamily: "font-sans",
+  errorLabelFontSize: "text-sm",
+  errorLabelFontWeight: "font-normal",
+  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelTextColor: "text-instillRed",
+};
+
 const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
+  const {
+    focus,
+    error,
+    message,
+    labelWidth,
+    required,
+    answered,
+    htmlFor,
+    type,
+    setFocus,
+    label,
+  } = props;
+
   return (
     <InputLabelBase
-      focus={props.focus}
-      error={props.error}
-      message={props.message}
-      labelWidth={props.labelWidth}
-      required={props.required}
-      answered={props.answered}
-      htmlFor={props.htmlFor}
-      type={props.type}
-      setFocus={props.setFocus}
-      label={props.label}
-      labelFontSize="text-sm"
-      labelFontWeight="font-normal"
-      labelTextColor="text-instillGrey50"
-      labelLineHeight="leading-[18.2px]"
-      labelFontFamily="font-sans"
-      labelActivateStyle="top-1/2 -translate-y-[120%]"
-      labelDeActivateStyle="top-1/2 -translate-y-1/2"
-      errorLabelFontFamily="font-sans"
-      errorLabelFontSize="text-sm"
-      errorLabelFontWeight="font-normal"
-      errorLabelLineHeight="leading-[18.2px]"
-      errorLabelTextColor="text-instillRed"
+      focus={focus}
+      error={error}
+      message={message}
+      labelWidth={labelWidth}
+      required={required}
+      answered={answered}
+      htmlFor={htmlFor}
+      type={type}
+      setFocus={setFocus}
+      label={label}
+      {...basicInputLabelConfig}
     />
   );
 };
