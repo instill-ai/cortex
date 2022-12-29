@@ -23,7 +23,7 @@ export type BasicInputDescriptionConfig = Pick<
   BasicInputDescriptionOmitKeys
 >;
 
-const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
+export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
   descriptionWidth: "w-full",
   descriptionFontFamily: "font-mono",
   descriptionFontSize: "text-xs",
