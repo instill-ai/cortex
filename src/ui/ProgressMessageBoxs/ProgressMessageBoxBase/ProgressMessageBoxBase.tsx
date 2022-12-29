@@ -128,30 +128,34 @@ export type ProgressMessageBoxBaseProps = {
   setState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
 };
 
-const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = ({
-  state,
-  setState,
-  width,
-  errorIconColor,
-  errorIconWidth,
-  errorIconHeight,
-  successIconColor,
-  successIconWidth,
-  successIconHeight,
-  progressBlockSize,
-  iconPosition,
-  successIndicatorColumnBgColor,
-  processingIndicatorColumnBgColor,
-  errorindicatorColumnBgColor,
-  indicatorColumnWidth,
-  indicatorColumnBottomLeftBorderRadius,
-  indicatorColumnTopLeftBorderRadius,
-  messageColumnBgColor,
-  messageColumnBottomRightBorderRadius,
-  messageColumnTopRightBorderRadius,
-  boxBorderRadius,
-  closable,
-}) => {
+const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = (
+  props
+) => {
+  const {
+    state,
+    setState,
+    width,
+    errorIconColor,
+    errorIconWidth,
+    errorIconHeight,
+    successIconColor,
+    successIconWidth,
+    successIconHeight,
+    progressBlockSize,
+    iconPosition,
+    successIndicatorColumnBgColor,
+    processingIndicatorColumnBgColor,
+    errorindicatorColumnBgColor,
+    indicatorColumnWidth,
+    indicatorColumnBottomLeftBorderRadius,
+    indicatorColumnTopLeftBorderRadius,
+    messageColumnBgColor,
+    messageColumnBottomRightBorderRadius,
+    messageColumnTopRightBorderRadius,
+    boxBorderRadius,
+    closable,
+  } = props;
+
   const statusIcon = React.useMemo(() => {
     switch (state.status) {
       case "error":
