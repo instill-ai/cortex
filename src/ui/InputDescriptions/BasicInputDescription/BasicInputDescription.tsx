@@ -23,7 +23,7 @@ export type BasicInputDescriptionConfig = Pick<
   BasicInputDescriptionOmitKeys
 >;
 
-export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
+const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
   descriptionWidth: "w-full",
   descriptionFontFamily: "font-mono",
   descriptionFontSize: "text-xs",
@@ -35,9 +35,10 @@ export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
 };
 
 const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (props) => {
+  const { description } = props;
   return (
     <InputDescriptionBase
-      description={props.description}
+      description={description}
       {...basicInputDescriptionConfig}
     />
   );
