@@ -119,19 +119,33 @@ export const basicToggleFieldConfig: BasicToggleFieldConfig = {
 };
 
 const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
+  const {
+    id,
+    value,
+    label,
+    onChange,
+    description,
+    additionalMessageOnLabel,
+    error,
+    readOnly,
+    required,
+    disabled,
+    ...passThrough
+  } = props;
+
   return (
     <ToggleFieldBase
-      {...props}
-      id={props.id}
-      value={props.value}
-      label={props.label}
-      onChange={props.onChange}
-      description={props.description ?? ""}
-      additionalMessageOnLabel={props.additionalMessageOnLabel ?? null}
-      error={props.error ?? null}
-      readOnly={props.readOnly ?? false}
-      required={props.required ?? false}
-      disabled={props.disabled ?? false}
+      {...passThrough}
+      id={id}
+      value={value}
+      label={label}
+      onChange={onChange}
+      description={description ?? ""}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      error={error ?? null}
+      readOnly={readOnly ?? false}
+      required={required ?? false}
+      disabled={disabled ?? false}
       {...basicToggleFieldConfig}
       {...basicInputDescriptionConfig}
     />
