@@ -4,13 +4,14 @@ import ArrowIconBase, { ArrowIconBaseProps } from "../ArrowIconBase";
 export type ArrowUpIconProps = Omit<ArrowIconBaseProps, "viewBox" | "rotate">;
 
 const ArrowUpIcon: React.FC<ArrowUpIconProps> = (props) => {
+  const { width, height, position, style, color } = props;
   return (
     <ArrowIconBase
-      width={props.width}
-      height={props.height}
-      color={props.color}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      color={color}
+      position={position}
+      style={style}
       rotate="rotate-[270deg]"
     >
       <path

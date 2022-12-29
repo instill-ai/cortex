@@ -7,13 +7,14 @@ export type RedShiftIconProps = Omit<
 >;
 
 const RedShiftIcon: React.FC<RedShiftIconProps> = (props) => {
+  const { width, height, position, style } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      position={position}
+      style={style}
     >
       <path
         d="M14.8515 19.2797L21.0193 20.7721V9.19363L14.8515 10.6859V19.2797Z"

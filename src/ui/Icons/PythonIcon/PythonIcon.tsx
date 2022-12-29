@@ -4,13 +4,14 @@ import IconBase, { IconBaseProps } from "../IconBase";
 export type PythonIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
 
 const PythonIcon: React.FC<PythonIconProps> = (props) => {
+  const { width, height, position, style } = props;
   return (
     <IconBase
       viewBox="0 0 30 30"
-      width={props.width}
-      height={props.height}
-      position={props.position}
-      style={props.style}
+      width={width}
+      height={height}
+      position={position}
+      style={style}
       fill="none"
     >
       <path
