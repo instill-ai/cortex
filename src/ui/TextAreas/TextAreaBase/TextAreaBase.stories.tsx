@@ -1,19 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import TextAreaBase from "./TextAreaBase";
 
-export default {
+const meta: Meta<typeof TextAreaBase> = {
   title: "Components/Base/Input/TextAreaBase",
   component: TextAreaBase,
-} as ComponentMeta<typeof TextAreaBase>;
+};
 
-const Template: ComponentStory<typeof TextAreaBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof TextAreaBase> = (args) => (
   <TextAreaBase onFocus={() => console.log("hihihi")} {...args} />
 );
 
-export const Playground: ComponentStory<typeof TextAreaBase> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof TextAreaBase> = Template.bind({});
 
 Playground.args = {
   error: null,

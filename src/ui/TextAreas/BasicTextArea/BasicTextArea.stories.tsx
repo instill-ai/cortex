@@ -1,13 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ChangeEvent, useState } from "react";
 import BasicTextArea from "./BasicTextArea";
 
-export default {
+const meta: Meta<typeof BasicTextArea> = {
   title: "Components/Ui/Input/BasicTextArea",
   component: BasicTextArea,
-} as ComponentMeta<typeof BasicTextArea>;
+};
 
-const Template: ComponentStory<typeof BasicTextArea> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BasicTextArea> = (args) => {
   const [value, setValue] = useState("");
 
   const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -28,9 +30,7 @@ const Template: ComponentStory<typeof BasicTextArea> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof BasicTextArea> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof BasicTextArea> = Template.bind({});
 
 Playground.args = {
   required: true,
