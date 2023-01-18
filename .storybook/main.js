@@ -15,11 +15,14 @@ module.exports = {
       },
     },
   ],
-  framework: "@storybook/react",
-  core: {
-    builder: "webpack5",
+  framework: {
+    name: "@storybook/react-webpack5",
+    options: {},
   },
   features: {
     previewMdx2: true,
+  },
+  docs: {
+    autodocs: true,
   },
 };
