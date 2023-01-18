@@ -1,14 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import ToggleFieldBase from "./ToggleFieldBase";
 
-export default {
+const meta: Meta<typeof ToggleFieldBase> = {
   title: "Components/Base/Input/ToggleFieldBase",
   component: ToggleFieldBase,
-} as ComponentMeta<typeof ToggleFieldBase>;
+};
 
-const Template: ComponentStory<typeof ToggleFieldBase> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof ToggleFieldBase> = (args) => {
   const [checked, setChecked] = useState(false);
   return (
     <ToggleFieldBase
@@ -20,9 +22,7 @@ const Template: ComponentStory<typeof ToggleFieldBase> = (args) => {
     />
   );
 };
-export const Playground: ComponentStory<typeof ToggleFieldBase> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof ToggleFieldBase> = Template.bind({});
 
 Playground.args = {
   required: true,

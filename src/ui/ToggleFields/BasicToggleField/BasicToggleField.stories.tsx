@@ -1,13 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ChangeEvent, useState } from "react";
 import BasicToggleField from "./BasicToggleField";
 
-export default {
+const meta: Meta<typeof BasicToggleField> = {
   title: "Components/Ui/Input/BasicToggleField",
   component: BasicToggleField,
-} as ComponentMeta<typeof BasicToggleField>;
+};
 
-const Template: ComponentStory<typeof BasicToggleField> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BasicToggleField> = (args) => {
   const [checked, setChecked] = useState(false);
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) =>
@@ -24,8 +26,7 @@ const Template: ComponentStory<typeof BasicToggleField> = (args) => {
     />
   );
 };
-export const Playground: ComponentStory<typeof BasicToggleField> =
-  Template.bind({});
+export const Playground: StoryFn<typeof BasicToggleField> = Template.bind({});
 
 Playground.args = {
   disabled: false,
