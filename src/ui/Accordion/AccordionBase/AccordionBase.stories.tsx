@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn, StoryObj } from "@storybook/react";
 import { useState } from "react";
 import {
   DataDestinationIcon,
@@ -10,12 +10,14 @@ import {
 } from "../../Icons";
 import AccordionBase from "./AccordionBase";
 
-export default {
+const meta: Meta<typeof AccordionBase> = {
   title: "Components/Base/Accordion/AccordionBase",
   component: AccordionBase,
-} as ComponentMeta<typeof AccordionBase>;
+};
 
-const Template: ComponentStory<typeof AccordionBase> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof AccordionBase> = (args) => {
   const [activeIndex, setActiveIndex] = useState<number[]>([]);
   return (
     <AccordionBase
@@ -26,9 +28,7 @@ const Template: ComponentStory<typeof AccordionBase> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof AccordionBase> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof AccordionBase> = Template.bind({});
 
 const iconStyle = {
   width: "w-[250px]",

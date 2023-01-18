@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import {
   DataDestinationIcon,
@@ -8,12 +8,14 @@ import {
 } from "../../Icons";
 import BgIconAccordion from "./BgIconAccordion";
 
-export default {
+const meta: Meta<typeof BgIconAccordion> = {
   title: "Components/Ui/Accordion/BgIconAccordion",
   component: BgIconAccordion,
-} as ComponentMeta<typeof BgIconAccordion>;
+};
 
-const Template: ComponentStory<typeof BgIconAccordion> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BgIconAccordion> = (args) => {
   const [activeIndex, setActiveIndex] = useState<number[]>([]);
   return (
     <BgIconAccordion
@@ -24,9 +26,7 @@ const Template: ComponentStory<typeof BgIconAccordion> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof BgIconAccordion> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof BgIconAccordion> = Template.bind({});
 
 const bgIconStyle = {
   width: "w-[250px]",
