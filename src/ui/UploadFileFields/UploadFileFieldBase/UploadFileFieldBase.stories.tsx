@@ -1,18 +1,21 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import UploadFileFieldBase from "./UploadFileFieldBase";
 
-export default {
+const meta: Meta<typeof UploadFileFieldBase> = {
   title: "Components/Base/Input/UploadFileFieldBase",
   component: UploadFileFieldBase,
-} as ComponentMeta<typeof UploadFileFieldBase>;
+};
 
-const Template: ComponentStory<typeof UploadFileFieldBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof UploadFileFieldBase> = (args) => (
   <UploadFileFieldBase {...args} />
 );
 
-export const Playground: ComponentStory<typeof UploadFileFieldBase> =
-  Template.bind({});
+export const Playground: StoryFn<typeof UploadFileFieldBase> = Template.bind(
+  {}
+);
 
 Playground.args = {
   required: true,
