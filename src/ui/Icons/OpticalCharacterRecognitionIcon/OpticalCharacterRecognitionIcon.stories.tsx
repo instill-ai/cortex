@@ -1,18 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import OpticalCharacterRecognitionIcon from "./OpticalCharacterRecognitionIcon";
 
-export default {
+const meta: Meta<typeof OpticalCharacterRecognitionIcon> = {
   title: "Components/Ui/Icon/OpticalCharacterRecognitionIcon",
   component: OpticalCharacterRecognitionIcon,
-} as ComponentMeta<typeof OpticalCharacterRecognitionIcon>;
+};
 
-const Template: ComponentStory<typeof OpticalCharacterRecognitionIcon> = (
-  args
-) => <OpticalCharacterRecognitionIcon {...args} />;
+export default meta;
 
-export const Playground: ComponentStory<
-  typeof OpticalCharacterRecognitionIcon
-> = Template.bind({});
+const Template: StoryFn<typeof OpticalCharacterRecognitionIcon> = (args) => (
+  <OpticalCharacterRecognitionIcon {...args} />
+);
+
+export const Playground: StoryFn<typeof OpticalCharacterRecognitionIcon> =
+  Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

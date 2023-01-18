@@ -1,17 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import KeypointDetectionIcon from "./KeypointDetectionIcon";
 
-export default {
+const meta: Meta<typeof KeypointDetectionIcon> = {
   title: "Components/Ui/Icon/KeypointDetectionIcon",
   component: KeypointDetectionIcon,
-} as ComponentMeta<typeof KeypointDetectionIcon>;
+};
 
-const Template: ComponentStory<typeof KeypointDetectionIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof KeypointDetectionIcon> = (args) => (
   <KeypointDetectionIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof KeypointDetectionIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof KeypointDetectionIcon> = Template.bind(
+  {}
+);
 
 Playground.args = {
   width: "w-[30px]",

@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SquarePlusIcon from "./SquarePlusIcon";
 
-export default {
+const meta: Meta<typeof SquarePlusIcon> = {
   title: "Components/Ui/Icon/SquarePlusIcon",
   component: SquarePlusIcon,
-} as ComponentMeta<typeof SquarePlusIcon>;
+};
 
-const Template: ComponentStory<typeof SquarePlusIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof SquarePlusIcon> = (args) => (
   <SquarePlusIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof SquarePlusIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof SquarePlusIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

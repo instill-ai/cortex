@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import LocalUploadIcon from "./LocalUploadIcon";
 
-export default {
+const meta: Meta<typeof LocalUploadIcon> = {
   title: "Components/Ui/Icon/LocalUploadIcon",
   component: LocalUploadIcon,
-} as ComponentMeta<typeof LocalUploadIcon>;
+};
 
-const Template: ComponentStory<typeof LocalUploadIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof LocalUploadIcon> = (args) => (
   <LocalUploadIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof LocalUploadIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof LocalUploadIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

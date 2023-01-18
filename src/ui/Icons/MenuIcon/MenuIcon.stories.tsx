@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import MenuIcon from "./MenuIcon";
 
-export default {
+const meta: Meta<typeof MenuIcon> = {
   title: "Components/Ui/Icon/MenuIcon",
   component: MenuIcon,
-} as ComponentMeta<typeof MenuIcon>;
+};
 
-const Template: ComponentStory<typeof MenuIcon> = (args) => (
-  <MenuIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof MenuIcon> = Template.bind({});
+const Template: StoryFn<typeof MenuIcon> = (args) => <MenuIcon {...args} />;
+
+export const Playground: StoryFn<typeof MenuIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

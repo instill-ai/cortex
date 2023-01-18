@@ -1,17 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CollapseRightIcon from "./CollapseRightIcon";
 
-export default {
+const meta: Meta<typeof CollapseRightIcon> = {
   title: "Components/Ui/Icon/CollapseRightIcon",
   component: CollapseRightIcon,
-} as ComponentMeta<typeof CollapseRightIcon>;
+};
 
-const Template: ComponentStory<typeof CollapseRightIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof CollapseRightIcon> = (args) => (
   <CollapseRightIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof CollapseRightIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof CollapseRightIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

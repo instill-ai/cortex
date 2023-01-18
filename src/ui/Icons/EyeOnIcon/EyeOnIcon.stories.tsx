@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import EyeOnIcon from "./EyeOnIcon";
 
-export default {
+const meta: Meta<typeof EyeOnIcon> = {
   title: "Components/Ui/Icon/EyeOnIcon",
   component: EyeOnIcon,
-} as ComponentMeta<typeof EyeOnIcon>;
+};
 
-const Template: ComponentStory<typeof EyeOnIcon> = (args) => (
-  <EyeOnIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof EyeOnIcon> = Template.bind({});
+const Template: StoryFn<typeof EyeOnIcon> = (args) => <EyeOnIcon {...args} />;
+
+export const Playground: StoryFn<typeof EyeOnIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

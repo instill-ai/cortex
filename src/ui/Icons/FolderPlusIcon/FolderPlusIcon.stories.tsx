@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import FolderPlusIcon from "./FolderPlusIcon";
 
-export default {
+const meta: Meta<typeof FolderPlusIcon> = {
   title: "Components/Ui/Icon/FolderPlusIcon",
   component: FolderPlusIcon,
-} as ComponentMeta<typeof FolderPlusIcon>;
+};
 
-const Template: ComponentStory<typeof FolderPlusIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof FolderPlusIcon> = (args) => (
   <FolderPlusIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof FolderPlusIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof FolderPlusIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

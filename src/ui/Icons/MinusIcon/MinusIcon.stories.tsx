@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import MinusIcon from "./MinusIcon";
 
-export default {
+const meta: Meta<typeof MinusIcon> = {
   title: "Components/Ui/Icon/MinusIcon",
   component: MinusIcon,
-} as ComponentMeta<typeof MinusIcon>;
+};
 
-const Template: ComponentStory<typeof MinusIcon> = (args) => (
-  <MinusIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof MinusIcon> = Template.bind({});
+const Template: StoryFn<typeof MinusIcon> = (args) => <MinusIcon {...args} />;
+
+export const Playground: StoryFn<typeof MinusIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

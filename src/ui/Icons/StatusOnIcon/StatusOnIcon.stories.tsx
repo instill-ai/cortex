@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import StatusOnIcon from "./StatusOnIcon";
 
-export default {
+const meta: Meta<typeof StatusOnIcon> = {
   title: "Components/Ui/Icon/StatusOnIcon",
   component: StatusOnIcon,
-} as ComponentMeta<typeof StatusOnIcon>;
+};
 
-const Template: ComponentStory<typeof StatusOnIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof StatusOnIcon> = (args) => (
   <StatusOnIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof StatusOnIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof StatusOnIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

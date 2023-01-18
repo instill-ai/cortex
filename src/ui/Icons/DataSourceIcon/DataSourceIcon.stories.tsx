@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import DataSourceIcon from "./DataSourceIcon";
 
-export default {
+const meta: Meta<typeof DataSourceIcon> = {
   title: "Components/Ui/Icon/DataSourceIcon",
   component: DataSourceIcon,
-} as ComponentMeta<typeof DataSourceIcon>;
+};
 
-const Template: ComponentStory<typeof DataSourceIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof DataSourceIcon> = (args) => (
   <DataSourceIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof DataSourceIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof DataSourceIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

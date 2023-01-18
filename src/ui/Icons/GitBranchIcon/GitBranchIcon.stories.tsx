@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GitBranchIcon from "./GitBranchIcon";
 
-export default {
+const meta: Meta<typeof GitBranchIcon> = {
   title: "Components/Ui/Icon/GitBranchIcon",
   component: GitBranchIcon,
-} as ComponentMeta<typeof GitBranchIcon>;
+};
 
-const Template: ComponentStory<typeof GitBranchIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof GitBranchIcon> = (args) => (
   <GitBranchIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof GitBranchIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof GitBranchIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

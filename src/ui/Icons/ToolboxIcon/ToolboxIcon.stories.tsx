@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ToolboxIcon from "./ToolboxIcon";
 
-export default {
+const meta: Meta<typeof ToolboxIcon> = {
   title: "Components/Ui/Icon/ToolboxIcon",
   component: ToolboxIcon,
-} as ComponentMeta<typeof ToolboxIcon>;
+};
 
-const Template: ComponentStory<typeof ToolboxIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ToolboxIcon> = (args) => (
   <ToolboxIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ToolboxIcon> = Template.bind({});
+export const Playground: StoryFn<typeof ToolboxIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

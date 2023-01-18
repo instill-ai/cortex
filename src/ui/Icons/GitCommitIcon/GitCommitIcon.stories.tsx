@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GitCommitIcon from "./GitCommitIcon";
 
-export default {
+const meta: Meta<typeof GitCommitIcon> = {
   title: "Components/Ui/Icon/GitCommitIcon",
   component: GitCommitIcon,
-} as ComponentMeta<typeof GitCommitIcon>;
+};
 
-const Template: ComponentStory<typeof GitCommitIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof GitCommitIcon> = (args) => (
   <GitCommitIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof GitCommitIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof GitCommitIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

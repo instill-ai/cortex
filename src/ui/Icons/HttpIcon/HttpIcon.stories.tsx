@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import HttpIcon from "./HttpIcon";
 
-export default {
+const meta: Meta<typeof HttpIcon> = {
   title: "Components/Ui/Icon/HttpIcon",
   component: HttpIcon,
-} as ComponentMeta<typeof HttpIcon>;
+};
 
-const Template: ComponentStory<typeof HttpIcon> = (args) => (
-  <HttpIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof HttpIcon> = Template.bind({});
+const Template: StoryFn<typeof HttpIcon> = (args) => <HttpIcon {...args} />;
+
+export const Playground: StoryFn<typeof HttpIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

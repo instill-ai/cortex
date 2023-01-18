@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PlusIcon from "./PlusIcon";
 
-export default {
+const meta: Meta<typeof PlusIcon> = {
   title: "Components/Ui/Icon/PlusIcon",
   component: PlusIcon,
-} as ComponentMeta<typeof PlusIcon>;
+};
 
-const Template: ComponentStory<typeof PlusIcon> = (args) => (
-  <PlusIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof PlusIcon> = Template.bind({});
+const Template: StoryFn<typeof PlusIcon> = (args) => <PlusIcon {...args} />;
+
+export const Playground: StoryFn<typeof PlusIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

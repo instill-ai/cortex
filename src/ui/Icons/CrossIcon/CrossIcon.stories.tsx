@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CrossIcon from "./CrossIcon";
 
-export default {
+const meta: Meta<typeof CrossIcon> = {
   title: "Components/Ui/Icon/CrossIcon",
   component: CrossIcon,
-} as ComponentMeta<typeof CrossIcon>;
+};
 
-const Template: ComponentStory<typeof CrossIcon> = (args) => (
-  <CrossIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof CrossIcon> = Template.bind({});
+const Template: StoryFn<typeof CrossIcon> = (args) => <CrossIcon {...args} />;
+
+export const Playground: StoryFn<typeof CrossIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

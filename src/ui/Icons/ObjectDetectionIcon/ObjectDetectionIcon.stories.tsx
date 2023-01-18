@@ -1,17 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ObjectDetectionIcon from "./ObjectDetectionIcon";
 
-export default {
+const meta: Meta<typeof ObjectDetectionIcon> = {
   title: "Components/Ui/Icon/ObjectDetectionIcon",
   component: ObjectDetectionIcon,
-} as ComponentMeta<typeof ObjectDetectionIcon>;
+};
 
-const Template: ComponentStory<typeof ObjectDetectionIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ObjectDetectionIcon> = (args) => (
   <ObjectDetectionIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ObjectDetectionIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof ObjectDetectionIcon> = Template.bind(
+  {}
+);
 
 Playground.args = {
   width: "w-[30px]",

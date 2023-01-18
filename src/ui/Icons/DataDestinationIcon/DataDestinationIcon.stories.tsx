@@ -1,17 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import DataDestinationIcon from "./DataDestinationIcon";
 
-export default {
+const meta: Meta<typeof DataDestinationIcon> = {
   title: "Components/Ui/Icon/DataDestinationIcon",
   component: DataDestinationIcon,
-} as ComponentMeta<typeof DataDestinationIcon>;
+};
 
-const Template: ComponentStory<typeof DataDestinationIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof DataDestinationIcon> = (args) => (
   <DataDestinationIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof DataDestinationIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof DataDestinationIcon> = Template.bind(
+  {}
+);
 
 Playground.args = {
   width: "w-[30px]",

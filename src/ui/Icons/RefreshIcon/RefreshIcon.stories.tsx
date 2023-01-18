@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import RefreshIcon from "./RefreshIcon";
 
-export default {
+const meta: Meta<typeof RefreshIcon> = {
   title: "Components/Ui/Icon/RefreshIcon",
   component: RefreshIcon,
-} as ComponentMeta<typeof RefreshIcon>;
+};
 
-const Template: ComponentStory<typeof RefreshIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof RefreshIcon> = (args) => (
   <RefreshIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof RefreshIcon> = Template.bind({});
+export const Playground: StoryFn<typeof RefreshIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

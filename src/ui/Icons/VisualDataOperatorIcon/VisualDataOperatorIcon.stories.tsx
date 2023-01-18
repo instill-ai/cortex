@@ -1,17 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import VisualDataOperatorIcon from "./VisualDataOperatorIcon";
 
-export default {
+const meta: Meta<typeof VisualDataOperatorIcon> = {
   title: "Components/Ui/Icon/VisualDataOperatorIcon",
   component: VisualDataOperatorIcon,
-} as ComponentMeta<typeof VisualDataOperatorIcon>;
+};
 
-const Template: ComponentStory<typeof VisualDataOperatorIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof VisualDataOperatorIcon> = (args) => (
   <VisualDataOperatorIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof VisualDataOperatorIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof VisualDataOperatorIcon> = Template.bind(
+  {}
+);
 
 Playground.args = {
   width: "w-[30px]",

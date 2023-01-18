@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PenIcon from "./PenIcon";
 
-export default {
+const meta: Meta<typeof PenIcon> = {
   title: "Components/Ui/Icon/PenIcon",
   component: PenIcon,
-} as ComponentMeta<typeof PenIcon>;
+};
 
-const Template: ComponentStory<typeof PenIcon> = (args) => (
-  <PenIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof PenIcon> = Template.bind({});
+const Template: StoryFn<typeof PenIcon> = (args) => <PenIcon {...args} />;
+
+export const Playground: StoryFn<typeof PenIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

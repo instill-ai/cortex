@@ -1,14 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import IdIcon from "./IdIcon";
 
-export default {
+const meta: Meta<typeof IdIcon> = {
   title: "Components/Ui/Icon/IdIcon",
   component: IdIcon,
-} as ComponentMeta<typeof IdIcon>;
+};
 
-const Template: ComponentStory<typeof IdIcon> = (args) => <IdIcon {...args} />;
+export default meta;
 
-export const Playground: ComponentStory<typeof IdIcon> = Template.bind({});
+const Template: StoryFn<typeof IdIcon> = (args) => <IdIcon {...args} />;
+
+export const Playground: StoryFn<typeof IdIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

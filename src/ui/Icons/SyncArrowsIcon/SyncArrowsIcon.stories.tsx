@@ -1,22 +1,22 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SyncArrowsIcon from "./SyncArrowsIcon";
 
-export default {
+const meta: Meta<typeof SyncArrowsIcon> = {
   title: "Components/Ui/Icon/SyncArrowsIcon",
   component: SyncArrowsIcon,
-} as ComponentMeta<typeof SyncArrowsIcon>;
+};
 
-const Template: ComponentStory<typeof SyncArrowsIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof SyncArrowsIcon> = (args) => (
   <SyncArrowsIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof SyncArrowsIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof SyncArrowsIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
-  position: "my-auto",
   color: "fill-instillGrey50",
+  position: "my-auto",
 };

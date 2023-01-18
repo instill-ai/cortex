@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GearIcon from "./GearIcon";
 
-export default {
+const meta: Meta<typeof GearIcon> = {
   title: "Components/Ui/Icon/GearIcon",
   component: GearIcon,
-} as ComponentMeta<typeof GearIcon>;
+};
 
-const Template: ComponentStory<typeof GearIcon> = (args) => (
-  <GearIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof GearIcon> = Template.bind({});
+const Template: StoryFn<typeof GearIcon> = (args) => <GearIcon {...args} />;
+
+export const Playground: StoryFn<typeof GearIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

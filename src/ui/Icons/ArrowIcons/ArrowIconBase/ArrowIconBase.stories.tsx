@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-import ArrowIconBase from ".";
+import { Meta, StoryFn } from "@storybook/react";
+import ArrowIconBase from "./ArrowIconBase";
 
-export default {
-  title: "Components/Base/Icon/ArrowIconBase",
+const meta: Meta<typeof ArrowIconBase> = {
+  title: "Components/Ui/Icon/ArrowIconBase",
   component: ArrowIconBase,
-} as ComponentMeta<typeof ArrowIconBase>;
+};
 
-const Template: ComponentStory<typeof ArrowIconBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ArrowIconBase> = (args) => (
   <ArrowIconBase {...args} />
 );
 
-export const Playground: ComponentStory<typeof ArrowIconBase> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof ArrowIconBase> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

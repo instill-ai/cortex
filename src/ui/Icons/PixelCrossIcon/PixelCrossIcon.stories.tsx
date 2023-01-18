@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PixelCrossIcon from "./PixelCrossIcon";
 
-export default {
+const meta: Meta<typeof PixelCrossIcon> = {
   title: "Components/Ui/Icon/PixelCrossIcon",
   component: PixelCrossIcon,
-} as ComponentMeta<typeof PixelCrossIcon>;
+};
 
-const Template: ComponentStory<typeof PixelCrossIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof PixelCrossIcon> = (args) => (
   <PixelCrossIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof PixelCrossIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof PixelCrossIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

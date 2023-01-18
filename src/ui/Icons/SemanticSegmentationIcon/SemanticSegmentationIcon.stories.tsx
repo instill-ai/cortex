@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SemanticSegmentationIcon from "./SemanticSegmentationIcon";
 
-export default {
+const meta: Meta<typeof SemanticSegmentationIcon> = {
   title: "Components/Ui/Icon/SemanticSegmentationIcon",
   component: SemanticSegmentationIcon,
-} as ComponentMeta<typeof SemanticSegmentationIcon>;
+};
 
-const Template: ComponentStory<typeof SemanticSegmentationIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof SemanticSegmentationIcon> = (args) => (
   <SemanticSegmentationIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof SemanticSegmentationIcon> =
+export const Playground: StoryFn<typeof SemanticSegmentationIcon> =
   Template.bind({});
 
 Playground.args = {

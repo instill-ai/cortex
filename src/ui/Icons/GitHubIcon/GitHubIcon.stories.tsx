@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GitHubIcon from "./GitHubIcon";
 
-export default {
+const meta: Meta<typeof GitHubIcon> = {
   title: "Components/Ui/Icon/GitHubIcon",
   component: GitHubIcon,
-} as ComponentMeta<typeof GitHubIcon>;
+};
 
-const Template: ComponentStory<typeof GitHubIcon> = (args) => (
-  <GitHubIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof GitHubIcon> = Template.bind({});
+const Template: StoryFn<typeof GitHubIcon> = (args) => <GitHubIcon {...args} />;
+
+export const Playground: StoryFn<typeof GitHubIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
@@ -19,7 +19,7 @@ Playground.args = {
   position: "my-auto",
 };
 
-export const WithStyle: ComponentStory<typeof GitHubIcon> = Template.bind({});
+export const WithStyle: StoryFn<typeof GitHubIcon> = Template.bind({});
 
 WithStyle.args = {
   color: "fill-instillGrey50",

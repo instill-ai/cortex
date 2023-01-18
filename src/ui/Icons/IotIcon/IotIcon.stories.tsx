@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import IotIcon from "./IotIcon";
 
-export default {
+const meta: Meta<typeof IotIcon> = {
   title: "Components/Ui/Icon/IotIcon",
   component: IotIcon,
-} as ComponentMeta<typeof IotIcon>;
+};
 
-const Template: ComponentStory<typeof IotIcon> = (args) => (
-  <IotIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof IotIcon> = Template.bind({});
+const Template: StoryFn<typeof IotIcon> = (args) => <IotIcon {...args} />;
+
+export const Playground: StoryFn<typeof IotIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

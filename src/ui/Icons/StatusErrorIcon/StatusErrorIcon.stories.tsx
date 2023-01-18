@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import StatusErrorIcon from "./StatusErrorIcon";
 
-export default {
+const meta: Meta<typeof StatusErrorIcon> = {
   title: "Components/Ui/Icon/StatusErrorIcon",
   component: StatusErrorIcon,
-} as ComponentMeta<typeof StatusErrorIcon>;
+};
 
-const Template: ComponentStory<typeof StatusErrorIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof StatusErrorIcon> = (args) => (
   <StatusErrorIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof StatusErrorIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof StatusErrorIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

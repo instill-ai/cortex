@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GitTagIcon from "./GitTagIcon";
 
-export default {
+const meta: Meta<typeof GitTagIcon> = {
   title: "Components/Ui/Icon/GitTagIcon",
   component: GitTagIcon,
-} as ComponentMeta<typeof GitTagIcon>;
+};
 
-const Template: ComponentStory<typeof GitTagIcon> = (args) => (
-  <GitTagIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof GitTagIcon> = Template.bind({});
+const Template: StoryFn<typeof GitTagIcon> = (args) => <GitTagIcon {...args} />;
+
+export const Playground: StoryFn<typeof GitTagIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

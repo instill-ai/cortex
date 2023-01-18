@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import BarChartIcon from "./BarChartIcon";
 
-export default {
+const meta: Meta<typeof BarChartIcon> = {
   title: "Components/Ui/Icon/BarChartIcon",
   component: BarChartIcon,
-} as ComponentMeta<typeof BarChartIcon>;
+};
 
-const Template: ComponentStory<typeof BarChartIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof BarChartIcon> = (args) => (
   <BarChartIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof BarChartIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof BarChartIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

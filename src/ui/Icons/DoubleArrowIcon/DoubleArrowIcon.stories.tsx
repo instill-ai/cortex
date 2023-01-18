@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import DoubleArrowIcon from "./DoubleArrowIcon";
 
-export default {
+const meta: Meta<typeof DoubleArrowIcon> = {
   title: "Components/Ui/Icon/DoubleArrowIcon",
   component: DoubleArrowIcon,
-} as ComponentMeta<typeof DoubleArrowIcon>;
+};
 
-const Template: ComponentStory<typeof DoubleArrowIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof DoubleArrowIcon> = (args) => (
   <DoubleArrowIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof DoubleArrowIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof DoubleArrowIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
