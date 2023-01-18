@@ -1,20 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import InputLabelBase from "./InputLabelBase";
 
-export default {
+const meta: Meta<typeof InputLabelBase> = {
   title: "Components/Base/Input/InputLabelBase",
   component: InputLabelBase,
-} as ComponentMeta<typeof InputLabelBase>;
+};
 
-const Template: ComponentStory<typeof InputLabelBase> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof InputLabelBase> = (args) => {
   const [, setFocus] = useState(false);
   return <InputLabelBase {...args} setFocus={setFocus} />;
 };
 
-export const Playground: ComponentStory<typeof InputLabelBase> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof InputLabelBase> = Template.bind({});
 
 Playground.args = {
   labelFontFamily: "font-sans",
