@@ -1,22 +1,24 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ArrowRightIcon } from "../../Icons";
 import TextButton from "./TextButton";
 
-export default {
+const meta: Meta<typeof TextButton> = {
   title: "Components/Ui/Button/TextButton",
   component: TextButton,
-} as ComponentMeta<typeof TextButton>;
+};
 
-const Template: ComponentStory<typeof TextButton> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof TextButton> = (args) => (
   <TextButton {...args}>Button</TextButton>
 );
-export const Playground: ComponentStory<typeof TextButton> = Template.bind({});
+export const Playground: StoryFn<typeof TextButton> = Template.bind({});
 
 Playground.args = {
   color: "primary",
 };
 
-export const WithIcon: ComponentStory<typeof TextButton> = Template.bind({});
+export const WithIcon: StoryFn<typeof TextButton> = Template.bind({});
 
 WithIcon.args = {
   color: "primary",

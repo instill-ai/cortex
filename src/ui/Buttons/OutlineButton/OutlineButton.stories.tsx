@@ -1,26 +1,25 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { DiscordIcon, MediumIcon } from "../../Icons";
 import OutlineButton from "./OutlineButton";
 
-export default {
+const meta: Meta<typeof OutlineButton> = {
   title: "Components/Ui/Button/OutlineButton",
   component: OutlineButton,
-} as ComponentMeta<typeof OutlineButton>;
+};
 
-const Template: ComponentStory<typeof OutlineButton> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof OutlineButton> = (args) => (
   <OutlineButton {...args}>Button</OutlineButton>
 );
 
-export const Playground: ComponentStory<typeof OutlineButton> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof OutlineButton> = Template.bind({});
 
 Playground.args = {
   color: "primary",
 };
 
-export const DiscordButton: ComponentStory<typeof OutlineButton> =
-  Template.bind({});
+export const DiscordButton: StoryFn<typeof OutlineButton> = Template.bind({});
 
 DiscordButton.args = {
   color: "primary",
@@ -35,9 +34,7 @@ DiscordButton.args = {
   ),
 };
 
-export const MediumButton: ComponentStory<typeof OutlineButton> = Template.bind(
-  {}
-);
+export const MediumButton: StoryFn<typeof OutlineButton> = Template.bind({});
 
 MediumButton.args = {
   color: "primary",
