@@ -1,16 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import WhiteBgSquareProgress from "./WhiteBgSquareProgress";
 
-export default {
+const meta: Meta<typeof WhiteBgSquareProgress> = {
   title: "Components/Ui/Common/WhiteBgSquareProgress",
   component: WhiteBgSquareProgress,
-} as ComponentMeta<typeof WhiteBgSquareProgress>;
+};
 
-const Template: ComponentStory<typeof WhiteBgSquareProgress> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof WhiteBgSquareProgress> = (args) => (
   <WhiteBgSquareProgress {...args} blockSize={48} />
 );
-export const Playground: ComponentStory<typeof WhiteBgSquareProgress> =
-  Template.bind({});
+export const Playground: StoryFn<typeof WhiteBgSquareProgress> = Template.bind(
+  {}
+);
 
 Playground.args = {
   isLoading: true,

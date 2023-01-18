@@ -1,16 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import DarkBgSquareProgress from "./DarkBgSquareProgress";
 
-export default {
+const meta: Meta<typeof DarkBgSquareProgress> = {
   title: "Components/Ui/Common/DarkBgSquareProgress",
   component: DarkBgSquareProgress,
-} as ComponentMeta<typeof DarkBgSquareProgress>;
+};
 
-const Template: ComponentStory<typeof DarkBgSquareProgress> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof DarkBgSquareProgress> = (args) => (
   <DarkBgSquareProgress {...args} blockSize={48} />
 );
-export const Playground: ComponentStory<typeof DarkBgSquareProgress> =
-  Template.bind({});
+export const Playground: StoryFn<typeof DarkBgSquareProgress> = Template.bind(
+  {}
+);
 
 Playground.args = {
   isLoading: true,
