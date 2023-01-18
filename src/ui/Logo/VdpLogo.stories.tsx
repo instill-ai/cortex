@@ -1,15 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import VdpLogo from "./VdpLogo";
-export default {
+
+const meta: Meta<typeof VdpLogo> = {
   title: "Components/Ui/VdpLogo",
   component: VdpLogo,
-} as ComponentMeta<typeof VdpLogo>;
+};
 
-const Template: ComponentStory<typeof VdpLogo> = (args) => (
-  <VdpLogo {...args} />
-);
+export default meta;
 
-export const Default = Template.bind({});
+const Template: StoryFn<typeof VdpLogo> = (args) => <VdpLogo {...args} />;
+
+export const Default: StoryFn<typeof VdpLogo> = Template.bind({});
 
 Default.args = {
   type: "square",
