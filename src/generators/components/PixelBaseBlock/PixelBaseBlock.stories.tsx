@@ -1,13 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PixelBaseBlock from "./PixelBaseBlock";
 
-export default {
+const meta: Meta<typeof PixelBaseBlock> = {
   title: "Components/Generators/Pixel/PixelBaseBlock",
   component: PixelBaseBlock,
-} as ComponentMeta<typeof PixelBaseBlock>;
+};
 
-const Template: ComponentStory<typeof PixelBaseBlock> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof PixelBaseBlock> = (args) => (
   <PixelBaseBlock {...args} />
 );
 
-export const Default = Template.bind({});
+export const Default: StoryFn<typeof PixelBaseBlock> = Template.bind({});
