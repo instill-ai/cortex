@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SnowflakeIcon from "./SnowflakeIcon";
 
-export default {
+const meta: Meta<typeof SnowflakeIcon> = {
   title: "Components/Ui/Icon/SnowflakeIcon",
   component: SnowflakeIcon,
-} as ComponentMeta<typeof SnowflakeIcon>;
+};
 
-const Template: ComponentStory<typeof SnowflakeIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof SnowflakeIcon> = (args) => (
   <SnowflakeIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof SnowflakeIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof SnowflakeIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

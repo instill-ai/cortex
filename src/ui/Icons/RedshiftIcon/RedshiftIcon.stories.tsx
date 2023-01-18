@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import RedShiftIcon from "./RedShiftIcon";
 
-export default {
+const meta: Meta<typeof RedShiftIcon> = {
   title: "Components/Ui/Icon/RedShiftIcon",
   component: RedShiftIcon,
-} as ComponentMeta<typeof RedShiftIcon>;
+};
 
-const Template: ComponentStory<typeof RedShiftIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof RedShiftIcon> = (args) => (
   <RedShiftIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof RedShiftIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof RedShiftIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

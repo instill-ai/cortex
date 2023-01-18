@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GcsIcon from "./GcsIcon";
 
-export default {
+const meta: Meta<typeof GcsIcon> = {
   title: "Components/Ui/Icon/GcsIcon",
   component: GcsIcon,
-} as ComponentMeta<typeof GcsIcon>;
+};
 
-const Template: ComponentStory<typeof GcsIcon> = (args) => (
-  <GcsIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof GcsIcon> = Template.bind({});
+const Template: StoryFn<typeof GcsIcon> = (args) => <GcsIcon {...args} />;
+
+export const Playground: StoryFn<typeof GcsIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

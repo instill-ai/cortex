@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import MySqlIcon from "./MySqlIcon";
 
-export default {
+const meta: Meta<typeof MySqlIcon> = {
   title: "Components/Ui/Icon/MySqlIcon",
   component: MySqlIcon,
-} as ComponentMeta<typeof MySqlIcon>;
+};
 
-const Template: ComponentStory<typeof MySqlIcon> = (args) => (
-  <MySqlIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof MySqlIcon> = Template.bind({});
+const Template: StoryFn<typeof MySqlIcon> = (args) => <MySqlIcon {...args} />;
+
+export const Playground: StoryFn<typeof MySqlIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

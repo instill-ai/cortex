@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SalesforceIcon from "./SalesforceIcon";
 
-export default {
+const meta: Meta<typeof SalesforceIcon> = {
   title: "Components/Ui/Icon/SalesforceIcon",
   component: SalesforceIcon,
-} as ComponentMeta<typeof SalesforceIcon>;
+};
 
-const Template: ComponentStory<typeof SalesforceIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof SalesforceIcon> = (args) => (
   <SalesforceIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof SalesforceIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof SalesforceIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

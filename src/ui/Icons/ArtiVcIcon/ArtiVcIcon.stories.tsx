@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ArtiVcIcon from "./ArtiVcIcon";
 
-export default {
+const meta: Meta<typeof ArtiVcIcon> = {
   title: "Components/Ui/Icon/ArtiVcIcon",
   component: ArtiVcIcon,
-} as ComponentMeta<typeof ArtiVcIcon>;
+};
 
-const Template: ComponentStory<typeof ArtiVcIcon> = (args) => (
-  <ArtiVcIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof ArtiVcIcon> = Template.bind({});
+const Template: StoryFn<typeof ArtiVcIcon> = (args) => <ArtiVcIcon {...args} />;
+
+export const Playground: StoryFn<typeof ArtiVcIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

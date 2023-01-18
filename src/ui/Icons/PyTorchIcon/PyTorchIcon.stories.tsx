@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PyTorchIcon from "./PyTorchIcon";
 
-export default {
+const meta: Meta<typeof PyTorchIcon> = {
   title: "Components/Ui/Icon/PyTorchIcon",
   component: PyTorchIcon,
-} as ComponentMeta<typeof PyTorchIcon>;
+};
 
-const Template: ComponentStory<typeof PyTorchIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof PyTorchIcon> = (args) => (
   <PyTorchIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof PyTorchIcon> = Template.bind({});
+export const Playground: StoryFn<typeof PyTorchIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

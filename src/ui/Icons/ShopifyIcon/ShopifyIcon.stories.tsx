@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ShopifyIcon from "./ShopifyIcon";
 
-export default {
+const meta: Meta<typeof ShopifyIcon> = {
   title: "Components/Ui/Icon/ShopifyIcon",
   component: ShopifyIcon,
-} as ComponentMeta<typeof ShopifyIcon>;
+};
 
-const Template: ComponentStory<typeof ShopifyIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ShopifyIcon> = (args) => (
   <ShopifyIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ShopifyIcon> = Template.bind({});
+export const Playground: StoryFn<typeof ShopifyIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

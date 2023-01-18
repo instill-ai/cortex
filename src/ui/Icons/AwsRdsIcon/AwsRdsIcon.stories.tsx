@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import AwsRdsIcon from "./AwsRdsIcon";
 
-export default {
+const meta: Meta<typeof AwsRdsIcon> = {
   title: "Components/Ui/Icon/AwsRdsIcon",
   component: AwsRdsIcon,
-} as ComponentMeta<typeof AwsRdsIcon>;
+};
 
-const Template: ComponentStory<typeof AwsRdsIcon> = (args) => (
-  <AwsRdsIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof AwsRdsIcon> = Template.bind({});
+const Template: StoryFn<typeof AwsRdsIcon> = (args) => <AwsRdsIcon {...args} />;
+
+export const Playground: StoryFn<typeof AwsRdsIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import AwsS3Icon from "./AwsS3Icon";
 
-export default {
+const meta: Meta<typeof AwsS3Icon> = {
   title: "Components/Ui/Icon/AwsS3Icon",
   component: AwsS3Icon,
-} as ComponentMeta<typeof AwsS3Icon>;
+};
 
-const Template: ComponentStory<typeof AwsS3Icon> = (args) => (
-  <AwsS3Icon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof AwsS3Icon> = Template.bind({});
+const Template: StoryFn<typeof AwsS3Icon> = (args) => <AwsS3Icon {...args} />;
+
+export const Playground: StoryFn<typeof AwsS3Icon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
