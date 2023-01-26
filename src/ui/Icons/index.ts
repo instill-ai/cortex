@@ -115,6 +115,8 @@ import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
 import TensorFlowIcon from "./TensorFlowIcon";
 import type { TensorFlowIconProps } from "./TensorFlowIcon";
+import TextGenerationIcon from "./TextGenerationIcon";
+import type { TextGenerationIconProps } from "./TextGenerationIcon";
 import TextToImageIcon from "./TextToImageIcon";
 import type { TextToImageIconProps } from "./TextToImageIcon";
 import AsyncIcon from "./AsyncIcon";
@@ -278,6 +280,7 @@ export type {
   MenuIconProps,
   FilterIconProps,
   TextToImageIconProps,
+  TextGenerationIconProps,
 };
 
 export {
@@ -372,4 +375,5 @@ export {
   MenuIcon,
   FilterIcon,
   TextToImageIcon,
+  TextGenerationIcon,
 };
