@@ -115,6 +115,10 @@ import SyncIcon from "./SyncIcon";
 import type { SyncIconProps } from "./SyncIcon";
 import TensorFlowIcon from "./TensorFlowIcon";
 import type { TensorFlowIconProps } from "./TensorFlowIcon";
+import TextGenerationIcon from "./TextGenerationIcon";
+import type { TextGenerationIconProps } from "./TextGenerationIcon";
+import TextToImageIcon from "./TextToImageIcon";
+import type { TextToImageIconProps } from "./TextToImageIcon";
 import AsyncIcon from "./AsyncIcon";
 import type { AsyncIconProps } from "./AsyncIcon";
 import VersionIcon from "./VersionIcon";
@@ -137,6 +141,10 @@ import GcsIcon from "./GcsIcon ";
 import type { GcsIconProps } from "./GcsIcon ";
 import IotIcon from "./IotIcon";
 import type { IotIconProps } from "./IotIcon";
+import ImageToImageIcon from "./ImageToImageIcon";
+import type { ImageToImageIconProps } from "./ImageToImageIcon";
+import ImageToTextIcon from "./ImageToTextIcon";
+import type { ImageToTextIconProps } from "./ImageToTextIcon";
 import AwsS3Icon from "./AwsS3Icon";
 import type { AwsS3IconProps } from "./AwsS3Icon";
 import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
@@ -251,10 +259,12 @@ export type {
   MinusIconProps,
   GoogleDriveIconProps,
   ImageClassificationIconProps,
+  ImageToTextIconProps,
   ObjectDetectionIconProps,
   OnnxIconProps,
   KeypointDetectionIconProps,
   InstanceSegmentationIconProps,
+  ImageToImageIconProps,
   SemanticSegmentationIconProps,
   OpticalCharacterRecognitionIconProps,
   CollapseLeftIconProps,
@@ -275,6 +285,8 @@ export type {
   ToggleIconProps,
   MenuIconProps,
   FilterIconProps,
+  TextToImageIconProps,
+  TextGenerationIconProps,
 };
 
 export {
@@ -349,6 +361,8 @@ export {
   OnnxIcon,
   KeypointDetectionIcon,
   InstanceSegmentationIcon,
+  ImageToImageIcon,
+  ImageToTextIcon,
   SemanticSegmentationIcon,
   OpticalCharacterRecognitionIcon,
   CollapseLeftIcon,
@@ -368,4 +382,6 @@ export {
   ToggleIcon,
   MenuIcon,
   FilterIcon,
+  TextToImageIcon,
+  TextGenerationIcon,
 };
