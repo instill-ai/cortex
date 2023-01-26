@@ -141,6 +141,8 @@ import GcsIcon from "./GcsIcon ";
 import type { GcsIconProps } from "./GcsIcon ";
 import IotIcon from "./IotIcon";
 import type { IotIconProps } from "./IotIcon";
+import ImageToImageIcon from "./ImageToImageIcon";
+import type { ImageToImageIconProps } from "./ImageToImageIcon";
 import AwsS3Icon from "./AwsS3Icon";
 import type { AwsS3IconProps } from "./AwsS3Icon";
 import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
@@ -259,6 +261,7 @@ export type {
   OnnxIconProps,
   KeypointDetectionIconProps,
   InstanceSegmentationIconProps,
+  ImageToImageIconProps,
   SemanticSegmentationIconProps,
   OpticalCharacterRecognitionIconProps,
   CollapseLeftIconProps,
@@ -355,6 +358,7 @@ export {
   OnnxIcon,
   KeypointDetectionIcon,
   InstanceSegmentationIcon,
+  ImageToImageIcon,
   SemanticSegmentationIcon,
   OpticalCharacterRecognitionIcon,
   CollapseLeftIcon,
