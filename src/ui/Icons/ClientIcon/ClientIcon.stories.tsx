@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ClientIcon from "./ClientIcon";
 
-export default {
+const meta: Meta<typeof ClientIcon> = {
   title: "Components/Ui/Icon/ClientIcon",
   component: ClientIcon,
-} as ComponentMeta<typeof ClientIcon>;
+};
 
-const Template: ComponentStory<typeof ClientIcon> = (args) => (
-  <ClientIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof ClientIcon> = Template.bind({});
+const Template: StoryFn<typeof ClientIcon> = (args) => <ClientIcon {...args} />;
+
+export const Playground: StoryFn<typeof ClientIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { ActionMeta } from "react-select";
 import { Nullable } from "../../../types/general";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "../SingleSelectBase";
 import BasicSingleSelect from "./BasicSingleSelect";
 
-export default {
+const meta: Meta<typeof BasicSingleSelect> = {
   title: "Components/Ui/Input/BasicSingleSelect",
   component: BasicSingleSelect,
-} as ComponentMeta<typeof BasicSingleSelect>;
+};
 
-const Template: ComponentStory<typeof BasicSingleSelect> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BasicSingleSelect> = (args) => {
   const options: SingleSelectOption[] = [
     {
       value: "grpc",
@@ -71,8 +73,7 @@ const Template: ComponentStory<typeof BasicSingleSelect> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof BasicSingleSelect> =
-  Template.bind({});
+export const Playground: StoryFn<typeof BasicSingleSelect> = Template.bind({});
 
 Playground.args = {
   disabled: false,

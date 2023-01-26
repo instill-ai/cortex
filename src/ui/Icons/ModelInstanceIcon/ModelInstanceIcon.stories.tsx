@@ -1,17 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ModelInstanceIcon from "./ModelInstanceIcon";
 
-export default {
+const meta: Meta<typeof ModelInstanceIcon> = {
   title: "Components/Ui/Icon/ModelInstanceIcon",
   component: ModelInstanceIcon,
-} as ComponentMeta<typeof ModelInstanceIcon>;
+};
 
-const Template: ComponentStory<typeof ModelInstanceIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ModelInstanceIcon> = (args) => (
   <ModelInstanceIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ModelInstanceIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof ModelInstanceIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

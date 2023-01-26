@@ -1,13 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import TextAreaInputLabel from "./TextAreaInputLabel";
 
-export default {
+const meta: Meta<typeof TextAreaInputLabel> = {
   title: "Components/Ui/Input/TextAreaInputLabel",
   component: TextAreaInputLabel,
-} as ComponentMeta<typeof TextAreaInputLabel>;
+};
 
-const Template: ComponentStory<typeof TextAreaInputLabel> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof TextAreaInputLabel> = (args) => {
   const [focus, setFocus] = useState(false);
   return (
     <TextAreaInputLabel
@@ -21,8 +23,7 @@ const Template: ComponentStory<typeof TextAreaInputLabel> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof TextAreaInputLabel> =
-  Template.bind({});
+export const Playground: StoryFn<typeof TextAreaInputLabel> = Template.bind({});
 
 Playground.args = {
   type: "inset",

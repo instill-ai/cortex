@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import MediumIcon from "./MediumIcon";
 
-export default {
+const meta: Meta<typeof MediumIcon> = {
   title: "Components/Ui/Icon/MediumIcon",
   component: MediumIcon,
-} as ComponentMeta<typeof MediumIcon>;
+};
 
-const Template: ComponentStory<typeof MediumIcon> = (args) => (
-  <MediumIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof MediumIcon> = Template.bind({});
+const Template: StoryFn<typeof MediumIcon> = (args) => <MediumIcon {...args} />;
+
+export const Playground: StoryFn<typeof MediumIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

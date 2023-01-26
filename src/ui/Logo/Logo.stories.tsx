@@ -1,11 +1,13 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import Logo from "./Logo";
 
-export default {
+const meta: Meta<typeof Logo> = {
   title: "Components/Ui/Logo",
   component: Logo,
-} as ComponentMeta<typeof Logo>;
+};
 
-const Template: ComponentStory<typeof Logo> = (args) => <Logo {...args} />;
+export default meta;
 
-export const Default = Template.bind({});
+const Template: StoryFn<typeof Logo> = (args) => <Logo {...args} />;
+
+export const Default: StoryFn<typeof Logo> = Template.bind({});

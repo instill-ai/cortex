@@ -1,13 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import BasicAccordion from "./BasicAccordion";
 
-export default {
+const meta: Meta<typeof BasicAccordion> = {
   title: "Components/Ui/Accordion/BasicAccordion",
   component: BasicAccordion,
-} as ComponentMeta<typeof BasicAccordion>;
+};
 
-const Template: ComponentStory<typeof BasicAccordion> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BasicAccordion> = (args) => {
   const [activeIndex, setActiveIndex] = useState<number[]>([]);
   return (
     <BasicAccordion
@@ -18,9 +20,7 @@ const Template: ComponentStory<typeof BasicAccordion> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof BasicAccordion> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof BasicAccordion> = Template.bind({});
 
 Playground.args = {
   enableHeaderIcon: true,

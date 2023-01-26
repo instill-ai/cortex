@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import LinkedInIcon from "./LinkedInIcon";
 
-export default {
+const meta: Meta<typeof LinkedInIcon> = {
   title: "Components/Ui/Icon/LinkedInIcon",
   component: LinkedInIcon,
-} as ComponentMeta<typeof LinkedInIcon>;
+};
 
-const Template: ComponentStory<typeof LinkedInIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof LinkedInIcon> = (args) => (
   <LinkedInIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof LinkedInIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof LinkedInIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

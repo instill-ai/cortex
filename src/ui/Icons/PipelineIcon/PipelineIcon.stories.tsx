@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PipelineIcon from "./PipelineIcon";
 
-export default {
+const meta: Meta<typeof PipelineIcon> = {
   title: "Components/Ui/Icon/PipelineIcon",
   component: PipelineIcon,
-} as ComponentMeta<typeof PipelineIcon>;
+};
 
-const Template: ComponentStory<typeof PipelineIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof PipelineIcon> = (args) => (
   <PipelineIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof PipelineIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof PipelineIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

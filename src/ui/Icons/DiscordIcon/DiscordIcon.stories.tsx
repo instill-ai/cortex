@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import DiscordIcon from "./DiscordIcon";
 
-export default {
+const meta: Meta<typeof DiscordIcon> = {
   title: "Components/Ui/Icon/DiscordIcon",
   component: DiscordIcon,
-} as ComponentMeta<typeof DiscordIcon>;
+};
 
-const Template: ComponentStory<typeof DiscordIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof DiscordIcon> = (args) => (
   <DiscordIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof DiscordIcon> = Template.bind({});
+export const Playground: StoryFn<typeof DiscordIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

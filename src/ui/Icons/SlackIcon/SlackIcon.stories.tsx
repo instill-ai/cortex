@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SlackIcon from "./SlackIcon";
 
-export default {
+const meta: Meta<typeof SlackIcon> = {
   title: "Components/Ui/Icon/SlackIcon",
   component: SlackIcon,
-} as ComponentMeta<typeof SlackIcon>;
+};
 
-const Template: ComponentStory<typeof SlackIcon> = (args) => (
-  <SlackIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof SlackIcon> = Template.bind({});
+const Template: StoryFn<typeof SlackIcon> = (args) => <SlackIcon {...args} />;
+
+export const Playground: StoryFn<typeof SlackIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

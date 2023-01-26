@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GoogleSheetIcon from "./GoogleSheetIcon";
 
-export default {
+const meta: Meta<typeof GoogleSheetIcon> = {
   title: "Components/Ui/Icon/GoogleSheetIcon",
   component: GoogleSheetIcon,
-} as ComponentMeta<typeof GoogleSheetIcon>;
+};
 
-const Template: ComponentStory<typeof GoogleSheetIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof GoogleSheetIcon> = (args) => (
   <GoogleSheetIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof GoogleSheetIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof GoogleSheetIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

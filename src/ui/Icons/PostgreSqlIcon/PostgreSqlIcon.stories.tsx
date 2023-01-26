@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PostgreSqlIcon from "./PostgreSqlIcon";
 
-export default {
+const meta: Meta<typeof PostgreSqlIcon> = {
   title: "Components/Ui/Icon/PostgreSqlIcon",
   component: PostgreSqlIcon,
-} as ComponentMeta<typeof PostgreSqlIcon>;
+};
 
-const Template: ComponentStory<typeof PostgreSqlIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof PostgreSqlIcon> = (args) => (
   <PostgreSqlIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof PostgreSqlIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof PostgreSqlIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

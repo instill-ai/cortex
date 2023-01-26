@@ -1,20 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SyncIcon from "./SyncIcon";
 
-export default {
+const meta: Meta<typeof SyncIcon> = {
   title: "Components/Ui/Icon/SyncIcon",
   component: SyncIcon,
-} as ComponentMeta<typeof SyncIcon>;
+};
 
-const Template: ComponentStory<typeof SyncIcon> = (args) => (
-  <SyncIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof SyncIcon> = Template.bind({});
+const Template: StoryFn<typeof SyncIcon> = (args) => <SyncIcon {...args} />;
+
+export const Playground: StoryFn<typeof SyncIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
-  position: "my-auto",
   color: "fill-instillGrey50",
+  position: "my-auto",
 };

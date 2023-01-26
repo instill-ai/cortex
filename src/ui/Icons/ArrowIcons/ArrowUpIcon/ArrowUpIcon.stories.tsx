@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ArrowUpIcon from "./ArrowUpIcon";
 
-export default {
+const meta: Meta<typeof ArrowUpIcon> = {
   title: "Components/Ui/Icon/ArrowUpIcon",
   component: ArrowUpIcon,
-} as ComponentMeta<typeof ArrowUpIcon>;
+};
 
-const Template: ComponentStory<typeof ArrowUpIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ArrowUpIcon> = (args) => (
   <ArrowUpIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ArrowUpIcon> = Template.bind({});
+export const Playground: StoryFn<typeof ArrowUpIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

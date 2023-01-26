@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ImageClassificationIcon from "./ImageClassificationIcon";
 
-export default {
+const meta: Meta<typeof ImageClassificationIcon> = {
   title: "Components/Ui/Icon/ImageClassificationIcon",
   component: ImageClassificationIcon,
-} as ComponentMeta<typeof ImageClassificationIcon>;
+};
 
-const Template: ComponentStory<typeof ImageClassificationIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ImageClassificationIcon> = (args) => (
   <ImageClassificationIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ImageClassificationIcon> =
+export const Playground: StoryFn<typeof ImageClassificationIcon> =
   Template.bind({});
 
 Playground.args = {

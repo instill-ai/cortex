@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import TwitterIcon from "./TwitterIcon";
 
-export default {
+const meta: Meta<typeof TwitterIcon> = {
   title: "Components/Ui/Icon/TwitterIcon",
   component: TwitterIcon,
-} as ComponentMeta<typeof TwitterIcon>;
+};
 
-const Template: ComponentStory<typeof TwitterIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof TwitterIcon> = (args) => (
   <TwitterIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof TwitterIcon> = Template.bind({});
+export const Playground: StoryFn<typeof TwitterIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

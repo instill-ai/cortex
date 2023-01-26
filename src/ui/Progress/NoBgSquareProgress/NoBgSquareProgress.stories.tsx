@@ -1,16 +1,17 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import NoBgSquareProgress from "./NoBgSquareProgress";
 
-export default {
+const meta: Meta<typeof NoBgSquareProgress> = {
   title: "Components/Ui/Common/NoBgSquareProgress",
   component: NoBgSquareProgress,
-} as ComponentMeta<typeof NoBgSquareProgress>;
+};
 
-const Template: ComponentStory<typeof NoBgSquareProgress> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof NoBgSquareProgress> = (args) => (
   <NoBgSquareProgress {...args} blockSize={48} />
 );
-export const Playground: ComponentStory<typeof NoBgSquareProgress> =
-  Template.bind({});
+export const Playground: StoryFn<typeof NoBgSquareProgress> = Template.bind({});
 
 Playground.args = {
   isLoading: true,

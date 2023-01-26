@@ -1,17 +1,20 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import InputDescriptionBase from "./InputDescriptionBase";
 
-export default {
-  title: "Components/Base/Input/InputDescriptionBase",
+const meta: Meta<typeof InputDescriptionBase> = {
+  title: "Components/Ui/Input/InputDescriptionBase",
   component: InputDescriptionBase,
-} as ComponentMeta<typeof InputDescriptionBase>;
+};
 
-const Template: ComponentStory<typeof InputDescriptionBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof InputDescriptionBase> = (args) => (
   <InputDescriptionBase {...args}>Playground label</InputDescriptionBase>
 );
 
-export const Playground: ComponentStory<typeof InputDescriptionBase> =
-  Template.bind({});
+export const Playground: StoryFn<typeof InputDescriptionBase> = Template.bind(
+  {}
+);
 
 Playground.args = {
   description: "this is description",

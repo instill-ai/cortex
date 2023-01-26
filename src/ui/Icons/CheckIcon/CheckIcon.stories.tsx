@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CheckIcon from "./CheckIcon";
 
-export default {
+const meta: Meta<typeof CheckIcon> = {
   title: "Components/Ui/Icon/CheckIcon",
   component: CheckIcon,
-} as ComponentMeta<typeof CheckIcon>;
+};
 
-const Template: ComponentStory<typeof CheckIcon> = (args) => (
-  <CheckIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof CheckIcon> = Template.bind({});
+const Template: StoryFn<typeof CheckIcon> = (args) => <CheckIcon {...args} />;
+
+export const Playground: StoryFn<typeof CheckIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import AirbyteIcon from "./AirbyteIcon";
 
-export default {
+const meta: Meta<typeof AirbyteIcon> = {
   title: "Components/Ui/Icon/AirbyteIcon",
   component: AirbyteIcon,
-} as ComponentMeta<typeof AirbyteIcon>;
+};
 
-const Template: ComponentStory<typeof AirbyteIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof AirbyteIcon> = (args) => (
   <AirbyteIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof AirbyteIcon> = Template.bind({});
+export const Playground: StoryFn<typeof AirbyteIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

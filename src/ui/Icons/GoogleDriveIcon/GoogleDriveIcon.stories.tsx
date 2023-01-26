@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import GoogleDriveIcon from "./GoogleDriveIcon";
 
-export default {
+const meta: Meta<typeof GoogleDriveIcon> = {
   title: "Components/Ui/Icon/GoogleDriveIcon",
   component: GoogleDriveIcon,
-} as ComponentMeta<typeof GoogleDriveIcon>;
+};
 
-const Template: ComponentStory<typeof GoogleDriveIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof GoogleDriveIcon> = (args) => (
   <GoogleDriveIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof GoogleDriveIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof GoogleDriveIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

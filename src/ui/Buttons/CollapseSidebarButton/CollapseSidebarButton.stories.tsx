@@ -1,16 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CollapseSidebarButton from "./CollapseSidebarButton";
 
-export default {
+const meta: Meta<typeof CollapseSidebarButton> = {
   title: "Components/Ui/Button/CollapseSidebarButton",
   component: CollapseSidebarButton,
-} as ComponentMeta<typeof CollapseSidebarButton>;
+};
 
-const Template: ComponentStory<typeof CollapseSidebarButton> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof CollapseSidebarButton> = (args) => (
   <CollapseSidebarButton {...args} />
 );
-export const Playground: ComponentStory<typeof CollapseSidebarButton> =
-  Template.bind({});
+export const Playground: StoryFn<typeof CollapseSidebarButton> = Template.bind(
+  {}
+);
 
 Playground.args = {
   isCollapse: false,

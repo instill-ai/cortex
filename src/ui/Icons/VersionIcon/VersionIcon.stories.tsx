@@ -1,16 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import VersionIcon from "./VersionIcon";
 
-export default {
+const meta: Meta<typeof VersionIcon> = {
   title: "Components/Ui/Icon/VersionIcon",
   component: VersionIcon,
-} as ComponentMeta<typeof VersionIcon>;
+};
 
-const Template: ComponentStory<typeof VersionIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof VersionIcon> = (args) => (
   <VersionIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof VersionIcon> = Template.bind({});
+export const Playground: StoryFn<typeof VersionIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

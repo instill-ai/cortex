@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import CopyIcon from "./CopyIcon";
 
-export default {
+const meta: Meta<typeof CopyIcon> = {
   title: "Components/Ui/Icon/CopyIcon",
   component: CopyIcon,
-} as ComponentMeta<typeof CopyIcon>;
+};
 
-const Template: ComponentStory<typeof CopyIcon> = (args) => (
-  <CopyIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof CopyIcon> = Template.bind({});
+const Template: StoryFn<typeof CopyIcon> = (args) => <CopyIcon {...args} />;
+
+export const Playground: StoryFn<typeof CopyIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

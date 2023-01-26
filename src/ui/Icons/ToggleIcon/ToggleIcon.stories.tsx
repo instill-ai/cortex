@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ToggleIcon from "./ToggleIcon";
 
-export default {
+const meta: Meta<typeof ToggleIcon> = {
   title: "Components/Ui/Icon/ToggleIcon",
   component: ToggleIcon,
-} as ComponentMeta<typeof ToggleIcon>;
+};
 
-const Template: ComponentStory<typeof ToggleIcon> = (args) => (
-  <ToggleIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof ToggleIcon> = Template.bind({});
+const Template: StoryFn<typeof ToggleIcon> = (args) => <ToggleIcon {...args} />;
+
+export const Playground: StoryFn<typeof ToggleIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

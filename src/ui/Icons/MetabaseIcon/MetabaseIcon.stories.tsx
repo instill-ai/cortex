@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import MetabaseIcon from "./MetabaseIcon";
 
-export default {
+const meta: Meta<typeof MetabaseIcon> = {
   title: "Components/Ui/Icon/MetabaseIcon",
   component: MetabaseIcon,
-} as ComponentMeta<typeof MetabaseIcon>;
+};
 
-const Template: ComponentStory<typeof MetabaseIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof MetabaseIcon> = (args) => (
   <MetabaseIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof MetabaseIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof MetabaseIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

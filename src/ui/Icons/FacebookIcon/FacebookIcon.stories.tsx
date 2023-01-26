@@ -1,22 +1,22 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import FacebookIcon from "./FacebookIcon";
 
-export default {
+const meta: Meta<typeof FacebookIcon> = {
   title: "Components/Ui/Icon/FacebookIcon",
   component: FacebookIcon,
-} as ComponentMeta<typeof FacebookIcon>;
+};
 
-const Template: ComponentStory<typeof FacebookIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof FacebookIcon> = (args) => (
   <FacebookIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof FacebookIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof FacebookIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
   height: "h-[30px]",
+  color: "fill-instillGrey50",
   position: "my-auto",
-  color: "fill-instillGrey70",
 };

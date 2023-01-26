@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import DocIcon from "./DocIcon";
 
-export default {
+const meta: Meta<typeof DocIcon> = {
   title: "Components/Ui/Icon/DocIcon",
   component: DocIcon,
-} as ComponentMeta<typeof DocIcon>;
+};
 
-const Template: ComponentStory<typeof DocIcon> = (args) => (
-  <DocIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof DocIcon> = Template.bind({});
+const Template: StoryFn<typeof DocIcon> = (args) => <DocIcon {...args} />;
+
+export const Playground: StoryFn<typeof DocIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

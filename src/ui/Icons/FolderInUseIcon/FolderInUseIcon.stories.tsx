@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import FolderInUseIcon from "./FolderInUseIcon";
 
-export default {
+const meta: Meta<typeof FolderInUseIcon> = {
   title: "Components/Ui/Icon/FolderInUseIcon",
   component: FolderInUseIcon,
-} as ComponentMeta<typeof FolderInUseIcon>;
+};
 
-const Template: ComponentStory<typeof FolderInUseIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof FolderInUseIcon> = (args) => (
   <FolderInUseIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof FolderInUseIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof FolderInUseIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

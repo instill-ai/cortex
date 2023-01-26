@@ -1,14 +1,17 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import BasicInputDescription from "./BasicInputDescription";
 
-export default {
+const meta: Meta<typeof BasicInputDescription> = {
   title: "Components/Ui/Input/BasicInputDescription",
   component: BasicInputDescription,
-} as ComponentMeta<typeof BasicInputDescription>;
+};
 
-const Template: ComponentStory<typeof BasicInputDescription> = () => (
+export default meta;
+
+const Template: StoryFn<typeof BasicInputDescription> = () => (
   <BasicInputDescription description="this is description <a href='#'>setup guide</a>" />
 );
 
-export const Playground: ComponentStory<typeof BasicInputDescription> =
-  Template.bind({});
+export const Playground: StoryFn<typeof BasicInputDescription> = Template.bind(
+  {}
+);

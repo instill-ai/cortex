@@ -1,12 +1,14 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import SquareProgressBase from "./SquareProgressBase";
 
-export default {
+const meta: Meta<typeof SquareProgressBase> = {
   title: "Components/Base/Common/SquareProgressBase",
   component: SquareProgressBase,
-} as ComponentMeta<typeof SquareProgressBase>;
+};
 
-const Template: ComponentStory<typeof SquareProgressBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof SquareProgressBase> = (args) => (
   <SquareProgressBase
     {...args}
     bgColor="bg-white"
@@ -14,8 +16,7 @@ const Template: ComponentStory<typeof SquareProgressBase> = (args) => (
     blockSize={36}
   />
 );
-export const Playground: ComponentStory<typeof SquareProgressBase> =
-  Template.bind({});
+export const Playground: StoryFn<typeof SquareProgressBase> = Template.bind({});
 
 Playground.args = {
   isLoading: true,

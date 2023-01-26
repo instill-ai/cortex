@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PythonIcon from "./PythonIcon";
 
-export default {
+const meta: Meta<typeof PythonIcon> = {
   title: "Components/Ui/Icon/PythonIcon",
   component: PythonIcon,
-} as ComponentMeta<typeof PythonIcon>;
+};
 
-const Template: ComponentStory<typeof PythonIcon> = (args) => (
-  <PythonIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof PythonIcon> = Template.bind({});
+const Template: StoryFn<typeof PythonIcon> = (args) => <PythonIcon {...args} />;
+
+export const Playground: StoryFn<typeof PythonIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import FilterIcon from "./FilterIcon";
 
-export default {
+const meta: Meta<typeof FilterIcon> = {
   title: "Components/Ui/Icon/FilterIcon",
   component: FilterIcon,
-} as ComponentMeta<typeof FilterIcon>;
+};
 
-const Template: ComponentStory<typeof FilterIcon> = (args) => (
-  <FilterIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof FilterIcon> = Template.bind({});
+const Template: StoryFn<typeof FilterIcon> = (args) => <FilterIcon {...args} />;
+
+export const Playground: StoryFn<typeof FilterIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

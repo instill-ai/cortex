@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ResourceIcon from "./ResourceIcon";
 
-export default {
+const meta: Meta<typeof ResourceIcon> = {
   title: "Components/Ui/Icon/ResourceIcon",
   component: ResourceIcon,
-} as ComponentMeta<typeof ResourceIcon>;
+};
 
-const Template: ComponentStory<typeof ResourceIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ResourceIcon> = (args) => (
   <ResourceIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof ResourceIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof ResourceIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

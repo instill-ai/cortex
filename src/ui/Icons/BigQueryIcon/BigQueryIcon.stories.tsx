@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import BigQueryIcon from "./BigQueryIcon";
 
-export default {
+const meta: Meta<typeof BigQueryIcon> = {
   title: "Components/Ui/Icon/BigQueryIcon",
   component: BigQueryIcon,
-} as ComponentMeta<typeof BigQueryIcon>;
+};
 
-const Template: ComponentStory<typeof BigQueryIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof BigQueryIcon> = (args) => (
   <BigQueryIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof BigQueryIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof BigQueryIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

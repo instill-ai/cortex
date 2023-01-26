@@ -1,15 +1,17 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ButtonBase from "./ButtonBase";
 
-export default {
+const meta: Meta<typeof ButtonBase> = {
   title: "Components/Base/Button/ButtonBase",
   component: ButtonBase,
-} as ComponentMeta<typeof ButtonBase>;
+};
 
-const Template: ComponentStory<typeof ButtonBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof ButtonBase> = (args) => (
   <ButtonBase {...args}>Button</ButtonBase>
 );
-export const Playground: ComponentStory<typeof ButtonBase> = Template.bind({});
+export const Playground: StoryFn<typeof ButtonBase> = Template.bind({});
 
 Playground.args = {
   bgColor: "bg-instillBlue50",

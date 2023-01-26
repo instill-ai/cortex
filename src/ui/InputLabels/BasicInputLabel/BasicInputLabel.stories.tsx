@@ -1,13 +1,15 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import BasicInputLabel from "./BasicInputLabel";
 
-export default {
+const meta: Meta<typeof BasicInputLabel> = {
   title: "Components/Ui/Input/BasicInputLabel",
   component: BasicInputLabel,
-} as ComponentMeta<typeof BasicInputLabel>;
+};
 
-const Template: ComponentStory<typeof BasicInputLabel> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BasicInputLabel> = (args) => {
   const [focus, setFocus] = useState(false);
   return (
     <BasicInputLabel
@@ -21,9 +23,7 @@ const Template: ComponentStory<typeof BasicInputLabel> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof BasicInputLabel> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof BasicInputLabel> = Template.bind({});
 
 Playground.args = {
   label: "basic input label",

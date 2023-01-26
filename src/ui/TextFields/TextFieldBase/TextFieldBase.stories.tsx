@@ -1,19 +1,19 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import TextFieldBase from "./TextFieldBase";
 
-export default {
+const meta: Meta<typeof TextFieldBase> = {
   title: "Components/Base/Input/TextFieldBase",
   component: TextFieldBase,
-} as ComponentMeta<typeof TextFieldBase>;
+};
 
-const Template: ComponentStory<typeof TextFieldBase> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof TextFieldBase> = (args) => (
   <TextFieldBase {...args} />
 );
 
-export const Playground: ComponentStory<typeof TextFieldBase> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof TextFieldBase> = Template.bind({});
 
 Playground.args = {
   error: null,

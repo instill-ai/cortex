@@ -1,14 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { ProgressMessageBoxState } from "../ProgressMessageBoxBase";
 import BasicProgressMessageBox from "./BasicProgressMessageBox";
 
-export default {
+const meta: Meta<typeof BasicProgressMessageBox> = {
   title: "Components/Ui/Common/BasicProgressMessageBox",
   component: BasicProgressMessageBox,
-} as ComponentMeta<typeof BasicProgressMessageBox>;
+};
 
-const Template: ComponentStory<typeof BasicProgressMessageBox> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof BasicProgressMessageBox> = (args) => {
   const [messageBoxState, setMessageBoxState] =
     useState<ProgressMessageBoxState>({
       activate: true,
@@ -37,7 +39,7 @@ const Template: ComponentStory<typeof BasicProgressMessageBox> = (args) => {
     </>
   );
 };
-export const Playground: ComponentStory<typeof BasicProgressMessageBox> =
+export const Playground: StoryFn<typeof BasicProgressMessageBox> =
   Template.bind({});
 
 Playground.args = {

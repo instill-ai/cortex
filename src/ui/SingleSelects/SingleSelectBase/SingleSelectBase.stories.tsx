@@ -1,4 +1,4 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import SingleSelectBase from ".";
 import { SingleSelectOption } from "./SingleSelectBase";
@@ -6,12 +6,14 @@ import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";
 import { basicSingleSelectConfig } from "../BasicSingleSelect";
 
-export default {
+const meta: Meta<typeof SingleSelectBase> = {
   title: "Components/Base/SingleSelectBase",
   component: SingleSelectBase,
-} as ComponentMeta<typeof SingleSelectBase>;
+};
 
-const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof SingleSelectBase> = (args) => {
   const optionsWithoutIcon: SingleSelectOption[] = [
     {
       value: "grpc",
@@ -47,8 +49,7 @@ const Template: ComponentStory<typeof SingleSelectBase> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof SingleSelectBase> =
-  Template.bind({});
+export const Playground: StoryFn<typeof SingleSelectBase> = Template.bind({});
 
 Playground.args = {
   disabled: false,

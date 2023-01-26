@@ -1,17 +1,20 @@
-import React, { ChangeEvent, FormEvent } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ChangeEvent, FormEvent } from "react";
+import { Meta, StoryFn } from "@storybook/react";
 import BasicUploadFileField from "./BasicUploadFileField";
 
-export default {
+const meta: Meta<typeof BasicUploadFileField> = {
   title: "Components/Ui/Input/BasicUploadFileField",
   component: BasicUploadFileField,
-} as ComponentMeta<typeof BasicUploadFileField>;
+};
 
-const Template: ComponentStory<typeof BasicUploadFileField> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof BasicUploadFileField> = (args) => (
   <BasicUploadFileField {...args} />
 );
-export const Playground: ComponentStory<typeof BasicUploadFileField> =
-  Template.bind({});
+export const Playground: StoryFn<typeof BasicUploadFileField> = Template.bind(
+  {}
+);
 
 Playground.args = {
   error: "",
@@ -27,9 +30,7 @@ Playground.args = {
     "this is a description about upload file field  <a href='#'>setup guide</a>",
 };
 
-export const DemoFileReader: ComponentStory<
-  typeof BasicUploadFileField
-> = () => {
+export const DemoFileReader: StoryFn<typeof BasicUploadFileField> = () => {
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (!event.target.value) return;
 

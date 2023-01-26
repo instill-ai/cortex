@@ -1,18 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import HuggingFaceIcon from "./HuggingFaceIcon";
 
-export default {
+const meta: Meta<typeof HuggingFaceIcon> = {
   title: "Components/Ui/Icon/HuggingFaceIcon",
   component: HuggingFaceIcon,
-} as ComponentMeta<typeof HuggingFaceIcon>;
+};
 
-const Template: ComponentStory<typeof HuggingFaceIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof HuggingFaceIcon> = (args) => (
   <HuggingFaceIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof HuggingFaceIcon> = Template.bind(
-  {}
-);
+export const Playground: StoryFn<typeof HuggingFaceIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

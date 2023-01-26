@@ -1,17 +1,18 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import RotatableArrowIcon from "./RotatableArrowIcon";
 
-export default {
+const meta: Meta<typeof RotatableArrowIcon> = {
   title: "Components/Ui/Icon/RotatableArrowIcon",
   component: RotatableArrowIcon,
-} as ComponentMeta<typeof RotatableArrowIcon>;
+};
 
-const Template: ComponentStory<typeof RotatableArrowIcon> = (args) => (
+export default meta;
+
+const Template: StoryFn<typeof RotatableArrowIcon> = (args) => (
   <RotatableArrowIcon {...args} />
 );
 
-export const Playground: ComponentStory<typeof RotatableArrowIcon> =
-  Template.bind({});
+export const Playground: StoryFn<typeof RotatableArrowIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",
@@ -21,8 +22,7 @@ Playground.args = {
   rotate: "rotate-45",
 };
 
-export const UseStyle: ComponentStory<typeof RotatableArrowIcon> =
-  Template.bind({});
+export const UseStyle: StoryFn<typeof RotatableArrowIcon> = Template.bind({});
 
 UseStyle.args = {
   style: {

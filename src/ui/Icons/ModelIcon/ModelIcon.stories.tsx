@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import ModelIcon from "./ModelIcon";
 
-export default {
+const meta: Meta<typeof ModelIcon> = {
   title: "Components/Ui/Icon/ModelIcon",
   component: ModelIcon,
-} as ComponentMeta<typeof ModelIcon>;
+};
 
-const Template: ComponentStory<typeof ModelIcon> = (args) => (
-  <ModelIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof ModelIcon> = Template.bind({});
+const Template: StoryFn<typeof ModelIcon> = (args) => <ModelIcon {...args} />;
+
+export const Playground: StoryFn<typeof ModelIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

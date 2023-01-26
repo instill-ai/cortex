@@ -1,16 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import PinIcon from "./PinIcon";
 
-export default {
+const meta: Meta<typeof PinIcon> = {
   title: "Components/Ui/Icon/PinIcon",
   component: PinIcon,
-} as ComponentMeta<typeof PinIcon>;
+};
 
-const Template: ComponentStory<typeof PinIcon> = (args) => (
-  <PinIcon {...args} />
-);
+export default meta;
 
-export const Playground: ComponentStory<typeof PinIcon> = Template.bind({});
+const Template: StoryFn<typeof PinIcon> = (args) => <PinIcon {...args} />;
+
+export const Playground: StoryFn<typeof PinIcon> = Template.bind({});
 
 Playground.args = {
   width: "w-[30px]",

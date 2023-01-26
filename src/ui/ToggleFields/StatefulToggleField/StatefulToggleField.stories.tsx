@@ -1,14 +1,16 @@
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
 import { State } from "../../../types/general";
 import StatefulToggleField from "./StatefulToggleField";
 
-export default {
+const meta: Meta<typeof StatefulToggleField> = {
   title: "Components/Ui/Input/StatefulToggleField",
   component: StatefulToggleField,
-} as ComponentMeta<typeof StatefulToggleField>;
+};
 
-const Template: ComponentStory<typeof StatefulToggleField> = (args) => {
+export default meta;
+
+const Template: StoryFn<typeof StatefulToggleField> = (args) => {
   const [state, setState] = useState<State>("STATE_UNSPECIFIED");
 
   return (
@@ -33,8 +35,9 @@ const Template: ComponentStory<typeof StatefulToggleField> = (args) => {
   );
 };
 
-export const Playground: ComponentStory<typeof StatefulToggleField> =
-  Template.bind({});
+export const Playground: StoryFn<typeof StatefulToggleField> = Template.bind(
+  {}
+);
 
 Playground.args = {
   disabled: false,
