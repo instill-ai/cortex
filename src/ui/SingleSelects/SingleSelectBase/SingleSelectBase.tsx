@@ -197,6 +197,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   // We create a wrapper on top of Select component to avoid error related to ref assignmemt
   // inside of react-select
 
+  /* eslint-disable @typescript-eslint/no-explicit-any */
   const selectRef = React.useRef<any>(null);
 
   const [inputPosition, setInputPosition] =
