@@ -354,3 +354,10 @@ export type ModelState =
   | "STATE_OFFLINE"
   | "STATE_ERROR"
   | "STATE_UNSPECIFIED";
+
+export type IconStyle = {
+  width: string;
+  height: string;
+  position?: string;
+  color?: string;
+};
