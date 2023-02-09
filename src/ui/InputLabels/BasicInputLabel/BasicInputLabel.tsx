@@ -13,7 +13,12 @@ export type BasicInputLabelOmitKeys =
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
-  | "errorLabelTextColor";
+  | "errorLabelTextColor"
+  | "messageFontFamily"
+  | "messageFontSize"
+  | "messageFontWeight"
+  | "messageLineHeight"
+  | "messageTextColor";
 
 export type BasicInputLabelProps = Omit<
   InputLabelBaseProps,
@@ -28,7 +33,7 @@ export type BasicInputLabelConfig = Pick<
 export const basicInputLabelConfig: BasicInputLabelConfig = {
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
-  labelTextColor: "text-instillGrey50",
+  labelTextColor: "text-instillGrey90",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
@@ -38,6 +43,11 @@ export const basicInputLabelConfig: BasicInputLabelConfig = {
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
+  messageFontSize: "text-xs",
+  messageTextColor: "text-instillGrey70",
+  messageFontFamily: "font-sans",
+  messageFontWeight: "font-normal",
+  messageLineHeight: "",
 };
 
 const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {

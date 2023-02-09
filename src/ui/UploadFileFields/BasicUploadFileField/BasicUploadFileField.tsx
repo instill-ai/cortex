@@ -62,7 +62,12 @@ export type BasicUploadFileFieldOmitKeys =
   | "readOnlyInputBorderColor"
   | "readOnlyInputBorderStyle"
   | "readOnlyInputBorderWidth"
-  | "readOnlyInputTextColor";
+  | "readOnlyInputTextColor"
+  | "messageFontFamily"
+  | "messageFontSize"
+  | "messageFontWeight"
+  | "messageLineHeight"
+  | "messageTextColor";
 
 export type FullBasicUploadFileFieldProps = Omit<
   UploadFileFieldBaseProps,
@@ -111,7 +116,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   inputBorderWidth: "border",
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
-  labelTextColor: "text-instillGrey50",
+  labelTextColor: "text-instillGrey90",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
@@ -136,6 +141,11 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   readOnlyInputBorderStyle: "border-solid",
   readOnlyInputBorderWidth: "border",
   readOnlyInputTextColor: "text-instillGrey50",
+  messageFontSize: "text-xs",
+  messageTextColor: "text-instillGrey70",
+  messageFontFamily: "font-sans",
+  messageFontWeight: "font-normal",
+  messageLineHeight: "",
 };
 
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {

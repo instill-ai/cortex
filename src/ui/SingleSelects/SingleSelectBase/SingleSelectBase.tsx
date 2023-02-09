@@ -140,6 +140,11 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     value,
     options,
     additionalMessageOnLabel,
+    messageFontFamily,
+    messageFontSize,
+    messageFontWeight,
+    messageLineHeight,
+    messageTextColor,
     inputLabelType,
     label,
     required,
@@ -400,6 +405,11 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           errorLabelFontWeight={errorLabelFontWeight}
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
+          messageFontFamily={messageFontFamily}
+          messageFontSize={messageFontSize}
+          messageFontWeight={messageFontWeight}
+          messageLineHeight={messageLineHeight}
+          messageTextColor={messageTextColor}
         />
         <div ref={measureInputRef}>
           <ReactSelect

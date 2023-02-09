@@ -34,6 +34,11 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
     onChange,
     id,
     additionalMessageOnLabel,
+    messageFontFamily,
+    messageFontSize,
+    messageFontWeight,
+    messageLineHeight,
+    messageTextColor,
     required,
     value,
     error,
@@ -274,6 +279,11 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
           errorLabelFontWeight={errorLabelFontWeight}
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
+          messageFontFamily={messageFontFamily}
+          messageFontSize={messageFontSize}
+          messageFontWeight={messageFontWeight}
+          messageLineHeight={messageLineHeight}
+          messageTextColor={messageTextColor}
         />
         <div className="flex relative">
           <input

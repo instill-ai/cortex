@@ -69,6 +69,11 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
     onChange,
     required,
     additionalMessageOnLabel,
+    messageFontFamily,
+    messageFontSize,
+    messageFontWeight,
+    messageLineHeight,
+    messageTextColor,
     description,
     error,
     label,
@@ -329,6 +334,11 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
           errorLabelFontWeight={errorLabelFontWeight}
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
+          messageFontFamily={messageFontFamily}
+          messageFontSize={messageFontSize}
+          messageFontWeight={messageFontWeight}
+          messageLineHeight={messageLineHeight}
+          messageTextColor={messageTextColor}
         />
         <div className="flex relative">
           <textarea

@@ -36,4 +36,5 @@ Playground.args = {
   required: true,
   disabled: false,
   readOnly: false,
+  additionalMessageOnLabel: "text label",
 };

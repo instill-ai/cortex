@@ -56,7 +56,12 @@ export type BasicTextFieldOmitKeys =
   | "errorInputBorderColor"
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
-  | "errorInputTextColor";
+  | "errorInputTextColor"
+  | "messageFontFamily"
+  | "messageFontSize"
+  | "messageFontWeight"
+  | "messageLineHeight"
+  | "messageTextColor";
 
 export type BasicTextFieldConfig = Pick<
   TextFieldBaseProps,
@@ -98,7 +103,7 @@ export const basicTextFieldConfig: BasicTextFieldConfig = {
   placeholderTextColor: "placeholder:text-instillGrey95",
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
-  labelTextColor: "text-instillGrey50",
+  labelTextColor: "text-instillGrey90",
   labelFontFamily: "font-sans",
   labelLineHeight: "leading-[18.2px]",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
@@ -113,6 +118,11 @@ export const basicTextFieldConfig: BasicTextFieldConfig = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
+  messageFontSize: "text-xs",
+  messageTextColor: "text-instillGrey70",
+  messageFontFamily: "font-sans",
+  messageFontWeight: "font-normal",
+  messageLineHeight: "",
 };
 
 export type FullBasicTextFieldProps = Omit<

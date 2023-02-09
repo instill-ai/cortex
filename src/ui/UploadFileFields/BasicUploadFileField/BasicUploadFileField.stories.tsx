@@ -28,6 +28,7 @@ Playground.args = {
   uploadButtonText: "Upload",
   description:
     "this is a description about upload file field  <a href='#'>setup guide</a>",
+  additionalMessageOnLabel: "text label",
 };
 
 export const DemoFileReader: StoryFn<typeof BasicUploadFileField> = () => {
