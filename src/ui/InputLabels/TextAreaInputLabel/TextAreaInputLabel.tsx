@@ -13,7 +13,12 @@ export type TextAreaInputLabelKeys =
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
-  | "errorLabelTextColor";
+  | "errorLabelTextColor"
+  | "messageFontFamily"
+  | "messageFontSize"
+  | "messageFontWeight"
+  | "messageLineHeight"
+  | "messageTextColor";
 
 export type TextAreaInputLabelProps = Omit<
   InputLabelBaseProps,
@@ -38,6 +43,11 @@ export const basicInputLabelConfig: TextAreaInputLabelConfig = {
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
+  messageFontSize: "text-xs",
+  messageTextColor: "text-instillGrey70",
+  messageFontFamily: "font-sans",
+  messageFontWeight: "font-normal",
+  messageLineHeight: "",
 };
 
 const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {

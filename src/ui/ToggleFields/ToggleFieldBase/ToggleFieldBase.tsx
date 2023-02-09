@@ -108,6 +108,11 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
     value,
     label,
     additionalMessageOnLabel,
+    messageFontFamily,
+    messageFontSize,
+    messageFontWeight,
+    messageLineHeight,
+    messageTextColor,
     description,
     disabled,
     readOnly,
@@ -177,6 +182,11 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
         <InputLabelBase
           answered={answered}
           message={additionalMessageOnLabel}
+          messageFontFamily={messageFontFamily}
+          messageFontSize={messageFontSize}
+          messageFontWeight={messageFontWeight}
+          messageLineHeight={messageLineHeight}
+          messageTextColor={messageTextColor}
           required={required}
           htmlFor={`${id}-label`}
           type="normal"

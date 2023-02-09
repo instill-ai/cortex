@@ -58,7 +58,12 @@ export type BasicTextAreaOmitKeys =
   | "errorInputBorderColor"
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
-  | "errorInputTextColor";
+  | "errorInputTextColor"
+  | "messageFontFamily"
+  | "messageFontSize"
+  | "messageFontWeight"
+  | "messageLineHeight"
+  | "messageTextColor";
 
 export type BasicTextAreaConfig = Pick<
   TextAreaBaseProps,
@@ -104,7 +109,7 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
   placeholderTextColor: "placeholder:text-instillGrey95",
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
-  labelTextColor: "text-instillGrey50",
+  labelTextColor: "text-instillGrey90",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
   errorInputBgColor: "bg-white",
@@ -117,6 +122,11 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
+  messageFontSize: "text-xs",
+  messageTextColor: "text-instillGrey70",
+  messageFontFamily: "font-sans",
+  messageFontWeight: "font-normal",
+  messageLineHeight: "",
 };
 
 export type FullBasicTextAreaProps = Omit<

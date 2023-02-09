@@ -84,6 +84,11 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
     label,
     error,
     additionalMessageOnLabel,
+    messageFontFamily,
+    messageFontSize,
+    messageFontWeight,
+    messageLineHeight,
+    messageTextColor,
     inputLabelType,
     description,
     required,
@@ -299,6 +304,11 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
           errorLabelFontWeight={errorLabelFontWeight}
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
+          messageFontFamily={messageFontFamily}
+          messageFontSize={messageFontSize}
+          messageFontWeight={messageFontWeight}
+          messageLineHeight={messageLineHeight}
+          messageTextColor={messageTextColor}
         />
         <label
           ref={mainContainerRef}

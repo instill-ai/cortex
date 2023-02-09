@@ -48,7 +48,12 @@ export type StatefulToggleFieldOmitKeys =
   | "errorLabelFontWeight"
   | "errorLabelLineHeight"
   | "errorLabelTextColor"
-  | "checkedInputBorderColor";
+  | "checkedInputBorderColor"
+  | "messageFontFamily"
+  | "messageFontSize"
+  | "messageFontWeight"
+  | "messageLineHeight"
+  | "messageTextColor";
 
 export type FullStatefulToggleFieldProps = Omit<
   ToggleFieldBaseProps,
@@ -101,7 +106,7 @@ export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
   readOnlyDotColor: "bg-instillGrey20",
   labelFontSize: "text-sm",
   labelFontWeight: "font-normal",
-  labelTextColor: "text-instillGrey50",
+  labelTextColor: "text-instillGrey90",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
@@ -112,6 +117,11 @@ export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
   errorLabelLineHeight: "leading-[18.2px]",
   errorLabelTextColor: "text-instillRed",
   checkedInputBorderColor: "border-instillBlue50",
+  messageFontSize: "text-xs",
+  messageTextColor: "text-instillGrey70",
+  messageFontFamily: "font-sans",
+  messageFontWeight: "font-normal",
+  messageLineHeight: "",
 };
 
 const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {

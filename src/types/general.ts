@@ -12,6 +12,31 @@ export type BasicInputProps = {
 
   additionalMessageOnLabel: Nullable<string>;
 
+  /** TailwindCSS format - Message's text color
+   * - e.g. text-instillGrey50
+   */
+  messageTextColor: string;
+
+  /** TailwindCSS format - Message's font weight
+   * - e.g. font-normal
+   */
+  messageFontWeight: string;
+
+  /** TailwindCSS format - Message's font size
+   * - e.g. text-base
+   */
+  messageFontSize: string;
+
+  /** TailwindCSS format - Message's font family
+   * - e.g. font-sans
+   */
+  messageFontFamily: string;
+
+  /** TailwindCSS format - Message's line height
+   * - e.g. leading-normal
+   */
+  messageLineHeight: string;
+
   /** TailwindCSS format - Background color when input has error
    * - e.g. bg-white
    * - https://tailwindcss.com/docs/background-color

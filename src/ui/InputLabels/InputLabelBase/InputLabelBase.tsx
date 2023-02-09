@@ -43,6 +43,31 @@ export type InputLabelBaseProps = {
    */
   labelWidth: Nullable<number>;
 
+  /** TailwindCSS format - Message's text color
+   * - e.g. text-instillGrey50
+   */
+  messageTextColor: string;
+
+  /** TailwindCSS format - Message's font weight
+   * - e.g. font-normal
+   */
+  messageFontWeight: string;
+
+  /** TailwindCSS format - Message's font size
+   * - e.g. text-base
+   */
+  messageFontSize: string;
+
+  /** TailwindCSS format - Message's font family
+   * - e.g. font-sans
+   */
+  messageFontFamily: string;
+
+  /** TailwindCSS format - Message's line height
+   * - e.g. leading-normal
+   */
+  messageLineHeight: string;
+
   /** TailwindCSS format - Label's text color
    * - e.g. text-instillGrey50
    */
@@ -127,6 +152,11 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       type,
       error,
       message,
+      messageFontFamily,
+      messageFontSize,
+      messageFontWeight,
+      messageLineHeight,
+      messageTextColor,
       errorLabelFontFamily,
       errorLabelFontSize,
       errorLabelFontWeight,
@@ -159,7 +189,7 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
           <label
             ref={ref}
             className={cn(
-              "z-10 flex flex-row",
+              "z-10 flex flex-row gap-x-2",
               type === "inset"
                 ? error
                   ? "top-5"
@@ -167,22 +197,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
                   ? labelActivateStyle
                   : labelDeActivateStyle
                 : "w-full",
-              error
-                ? cn(
-                    errorLabelFontFamily,
-                    errorLabelFontSize,
-                    errorLabelFontWeight,
-                    errorLabelLineHeight,
-                    errorLabelTextColor
-                  )
-                : cn(
-                    labelFontSize,
-                    labelFontWeight,
-                    labelTextColor,
-                    labelFontFamily,
-                    labelLineHeight
-                  ),
-
               {
                 "absolute translate-x-5 transform-gpu origin-top-left left-0":
                   type === "inset",
@@ -199,9 +213,37 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
                 type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",
             }}
           >
-            <p>{`${label} ${required ? "*" : ""} ${
-              error ? "-" : message ? "-" : ""
-            } ${error ? error : message ? message : ""}`}</p>
+            <p
+              className={
+                error
+                  ? cn(
+                      errorLabelFontFamily,
+                      errorLabelFontSize,
+                      errorLabelFontWeight,
+                      errorLabelLineHeight,
+                      errorLabelTextColor
+                    )
+                  : cn(
+                      labelFontSize,
+                      labelFontWeight,
+                      labelTextColor,
+                      labelFontFamily,
+                      labelLineHeight
+                    )
+              }
+            >{`${label} ${required ? "*" : ""}`}</p>
+            <p
+              className={cn(
+                "my-auto",
+                messageFontFamily,
+                messageLineHeight,
+                messageFontSize,
+                messageFontWeight,
+                error ? errorLabelTextColor : messageTextColor
+              )}
+            >
+              {error ? error : message}
+            </p>
           </label>
         ) : (
           ""
