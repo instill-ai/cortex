@@ -1,15 +1,15 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { ChangeEvent, useState } from "react";
-import BasicTextArea from "./BasicTextArea";
+import { InsetLabelTextArea } from "./InsetLabelTextArea";
 
-const meta: Meta<typeof BasicTextArea> = {
-  title: "Components/Ui/Input/BasicTextArea",
-  component: BasicTextArea,
+const meta: Meta<typeof InsetLabelTextArea> = {
+  title: "Components/Ui/Input/InsetLabelTextArea",
+  component: InsetLabelTextArea,
 };
 
 export default meta;
 
-const Template: StoryFn<typeof BasicTextArea> = (args) => {
+const Template: StoryFn<typeof InsetLabelTextArea> = (args) => {
   const [value, setValue] = useState("");
 
   const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
@@ -17,7 +17,7 @@ const Template: StoryFn<typeof BasicTextArea> = (args) => {
   };
 
   return (
-    <BasicTextArea
+    <InsetLabelTextArea
       {...args}
       id="text-field-playground"
       label="Playground"
@@ -30,7 +30,7 @@ const Template: StoryFn<typeof BasicTextArea> = (args) => {
   );
 };
 
-export const Playground: StoryFn<typeof BasicTextArea> = Template.bind({});
+export const Playground: StoryFn<typeof InsetLabelTextArea> = Template.bind({});
 
 Playground.args = {
   required: true,

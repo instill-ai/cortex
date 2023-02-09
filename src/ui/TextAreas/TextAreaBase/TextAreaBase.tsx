@@ -211,7 +211,8 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
       !inputLabelRef ||
       !inputRef.current ||
       !inputLabelRef.current ||
-      !label
+      !label ||
+      inputLabelType !== "inset"
     ) {
       setContainerHeight(getTailwindClassNumber(inputHeight));
       setContainerPaddingTop(0);

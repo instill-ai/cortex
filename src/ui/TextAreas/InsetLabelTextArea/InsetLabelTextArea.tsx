@@ -5,9 +5,13 @@ import {
 } from "../../InputDescriptions";
 import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
 
-export type BasicTextAreaRequiredKeys = "id" | "value" | "onChange" | "label";
+export type InsetLabelTextAreaRequiredKeys =
+  | "id"
+  | "value"
+  | "onChange"
+  | "label";
 
-export type BasicTextAreaOmitKeys =
+export type InsetLabelTextAreaOmitKeys =
   | "inputHeight"
   | "inputWidth"
   | "focusHighlight"
@@ -65,12 +69,12 @@ export type BasicTextAreaOmitKeys =
   | "messageLineHeight"
   | "messageTextColor";
 
-export type BasicTextAreaConfig = Pick<
+export type InsetLabelTextAreaConfig = Pick<
   TextAreaBaseProps,
-  BasicTextAreaOmitKeys
+  InsetLabelTextAreaOmitKeys
 >;
 
-export const basicTextAreaConfig: BasicTextAreaConfig = {
+export const insetLabelTextAreaConfig: InsetLabelTextAreaConfig = {
   inputBgColor: "bg-white",
   counterFontFamily: "font-sans",
   counterFontSize: "text-xs",
@@ -129,24 +133,26 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
   messageLineHeight: "",
 };
 
-export type FullBasicTextAreaProps = Omit<
+export type FullInsetLabelTextAreaProps = Omit<
   TextAreaBaseProps,
-  BasicInputDescriptionOmitKeys | BasicTextAreaOmitKeys
+  BasicInputDescriptionOmitKeys | InsetLabelTextAreaOmitKeys
 >;
 
-export type BasicTextAreaRequiredProps = Pick<
-  FullBasicTextAreaProps,
-  BasicTextAreaRequiredKeys
+export type InsetLabelTextAreaRequiredProps = Pick<
+  FullInsetLabelTextAreaProps,
+  InsetLabelTextAreaRequiredKeys
 >;
 
-export type BasicTextAreaOptionalProps = Partial<
-  Omit<FullBasicTextAreaProps, BasicTextAreaRequiredKeys>
+export type InsetLabelTextAreaOptionalProps = Partial<
+  Omit<FullInsetLabelTextAreaProps, InsetLabelTextAreaRequiredKeys>
 >;
 
-export type BasicTextAreaProps = BasicTextAreaRequiredProps &
-  BasicTextAreaOptionalProps;
+export type InsetLabelTextAreaProps = InsetLabelTextAreaRequiredProps &
+  InsetLabelTextAreaOptionalProps;
 
-const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
+export const InsetLabelTextArea: React.FC<InsetLabelTextAreaProps> = (
+  props
+) => {
   const {
     id,
     label,
@@ -182,10 +188,8 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
       error={error ?? null}
       autoComplete={autoComplete ?? "off"}
       placeholder={placeholder ?? ""}
-      {...basicTextAreaConfig}
+      {...insetLabelTextAreaConfig}
       {...basicInputDescriptionConfig}
     />
   );
 };
-
-export default BasicTextArea;

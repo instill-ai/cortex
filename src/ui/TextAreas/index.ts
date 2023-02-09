@@ -1,10 +1,19 @@
-import BasicTextArea from "./BasicTextArea";
-import { basicTextAreaConfig } from "./BasicTextArea";
-import type {
-  BasicTextAreaProps,
-  BasicTextAreaConfig,
-  BasicTextAreaOmitKeys,
-} from "./BasicTextArea";
+export {
+  insetLabelTextAreaConfig,
+  InsetLabelTextArea,
+} from "./InsetLabelTextArea";
+export type {
+  InsetLabelTextAreaProps,
+  InsetLabelTextAreaConfig,
+  InsetLabelTextAreaOmitKeys,
+} from "./InsetLabelTextArea";
 
-export { BasicTextArea, basicTextAreaConfig };
-export type { BasicTextAreaProps, BasicTextAreaConfig, BasicTextAreaOmitKeys };
+export {
+  NormalLabelTextArea,
+  normalLabelTextAreaConfig,
+} from "./NormalLabelTextArea";
+export type {
+  NormalLabelTextAreaProps,
+  NormalLabelTextAreaConfig,
+  NormalLabelTextAreaOmitKeys,
+} from "./NormalLabelTextArea";
