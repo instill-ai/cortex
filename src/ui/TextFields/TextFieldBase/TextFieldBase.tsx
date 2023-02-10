@@ -326,15 +326,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
             type={showSecret ? "text" : type}
             disabled={disabled}
             required={required}
-            placeholder={
-              disabled
-                ? undefined
-                : readOnly
-                ? undefined
-                : focus
-                ? placeholder
-                : undefined
-            }
+            placeholder={placeholder}
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {

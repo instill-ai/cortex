@@ -1,15 +1,15 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { ChangeEvent, useState } from "react";
-import { BasicProtectedTextField } from "./BasicProtectedTextField";
+import { ProtectedBasicTextField } from "./ProtectedBasicTextField";
 
-const meta: Meta<typeof BasicProtectedTextField> = {
-  title: "Components/Ui/Input/BasicProtectedTextField",
-  component: BasicProtectedTextField,
+const meta: Meta<typeof ProtectedBasicTextField> = {
+  title: "Components/Ui/Input/ProtectedBasicTextField",
+  component: ProtectedBasicTextField,
 };
 
 export default meta;
 
-const Template: StoryFn<typeof BasicProtectedTextField> = (args) => {
+const Template: StoryFn<typeof ProtectedBasicTextField> = (args) => {
   const [value, setValue] = useState("");
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -17,7 +17,7 @@ const Template: StoryFn<typeof BasicProtectedTextField> = (args) => {
   };
 
   return (
-    <BasicProtectedTextField
+    <ProtectedBasicTextField
       {...args}
       id="protected-text-field-playground"
       label="protected-text-field-playground"
@@ -28,12 +28,13 @@ const Template: StoryFn<typeof BasicProtectedTextField> = (args) => {
   );
 };
 
-export const Playground: StoryFn<typeof BasicProtectedTextField> =
+export const Playground: StoryFn<typeof ProtectedBasicTextField> =
   Template.bind({});
 
 Playground.args = {
   required: true,
   disabled: false,
   readOnly: false,
+  placeholder: "placeholder",
   additionalMessageOnLabel: "text label",
 };

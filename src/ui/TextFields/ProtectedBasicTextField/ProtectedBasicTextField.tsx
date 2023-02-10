@@ -5,13 +5,13 @@ import {
 } from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
-export type BasicProtectedTextFieldRequiredKeys =
+export type ProtectedBasicTextFieldRequiredKeys =
   | "id"
   | "value"
   | "onChange"
   | "label";
 
-export type BasicProtectedTextFieldOmitKeys =
+export type ProtectedBasicTextFieldOmitKeys =
   | "enableProtectedToggle"
   | "type"
   | "inputHeight"
@@ -68,18 +68,18 @@ export type BasicProtectedTextFieldOmitKeys =
   | "messageLineHeight"
   | "messageTextColor";
 
-export type BasicProtectedTextFieldConfig = Pick<
+export type ProtectedBasicTextFieldConfig = Pick<
   TextFieldBaseProps,
-  BasicProtectedTextFieldOmitKeys
+  ProtectedBasicTextFieldOmitKeys
 >;
 
-export const basicProtectedTextFieldConfig: BasicProtectedTextFieldConfig = {
+export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   focusHighlight: true,
   enableProtectedToggle: true,
   type: "password",
   inputBgColor: "bg-white",
   inputFontSize: "text-base",
-  inputLineHeight: "leading-[28px]",
+  inputLineHeight: "",
   inputFontWeight: "font-normal",
   bgColor: "bg-white",
   inputTextColor: "text-instillGrey95",
@@ -104,20 +104,20 @@ export const basicProtectedTextFieldConfig: BasicProtectedTextFieldConfig = {
   placeholderFontFamily: "placeholder:font-sans",
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
-  placeholderLineHeight: "placeholder:leading-[28px]",
-  placeholderTextColor: "placeholder:text-instillGrey95",
-  labelFontSize: "text-sm",
+  placeholderLineHeight: "",
+  placeholderTextColor: "placeholder:text-instillGrey80",
+  labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",
-  labelLineHeight: "leading-[18.2px]",
+  labelLineHeight: "",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
-  errorLabelFontSize: "text-sm",
+  errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
-  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelLineHeight: "",
   errorLabelTextColor: "text-instillRed",
   errorInputBorderColor: "border-instillRed",
   errorInputBorderWidth: "border",
@@ -131,24 +131,24 @@ export const basicProtectedTextFieldConfig: BasicProtectedTextFieldConfig = {
   messageLineHeight: "",
 };
 
-export type FullBasicProtectedTextFieldProps = Omit<
+export type FullProtectedBasicTextFieldProps = Omit<
   TextFieldBaseProps,
-  BasicInputDescriptionOmitKeys | BasicProtectedTextFieldOmitKeys
+  BasicInputDescriptionOmitKeys | ProtectedBasicTextFieldOmitKeys
 >;
 
-export type BasicProtectedTextFieldRequiredProps = Pick<
-  FullBasicProtectedTextFieldProps,
-  BasicProtectedTextFieldRequiredKeys
+export type ProtectedBasicTextFieldRequiredProps = Pick<
+  FullProtectedBasicTextFieldProps,
+  ProtectedBasicTextFieldRequiredKeys
 >;
 
-export type BasicProtectedTextFieldOptionalProps = Partial<
-  Omit<FullBasicProtectedTextFieldProps, BasicProtectedTextFieldRequiredKeys>
+export type ProtectedBasicTextFieldOptionalProps = Partial<
+  Omit<FullProtectedBasicTextFieldProps, ProtectedBasicTextFieldRequiredKeys>
 >;
 
-export type BasicProtectedTextFieldProps =
-  BasicProtectedTextFieldRequiredProps & BasicProtectedTextFieldOptionalProps;
+export type ProtectedBasicTextFieldProps =
+  ProtectedBasicTextFieldRequiredProps & ProtectedBasicTextFieldOptionalProps;
 
-export const BasicProtectedTextField: React.FC<BasicProtectedTextFieldProps> = (
+export const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
   props
 ) => {
   const {
@@ -182,7 +182,7 @@ export const BasicProtectedTextField: React.FC<BasicProtectedTextFieldProps> = (
       error={error ?? null}
       placeholder={placeholder ?? ""}
       readOnly={readOnly ?? false}
-      {...basicProtectedTextFieldConfig}
+      {...protectedBasicTextFieldConfig}
       {...basicInputDescriptionConfig}
     />
   );

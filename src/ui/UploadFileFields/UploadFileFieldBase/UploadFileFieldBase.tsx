@@ -13,11 +13,11 @@ export type UploadFileFieldBaseProps = Omit<
   | "inputBorderRadius"
   | "disabledCursor"
   | "readOnlyCursor"
-  | "placeholderFontFamily"
-  | "placeholderFontSize"
-  | "placeholderFontWeight"
-  | "placeholderLineHeight"
-  | "placeholderTextColor"
+  // | "placeholderFontFamily"
+  // | "placeholderFontSize"
+  // | "placeholderFontWeight"
+  // | "placeholderLineHeight"
+  // | "placeholderTextColor"
 > &
   Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -153,6 +153,12 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
     readOnlyInputBorderWidth,
     readOnlyInputTextColor,
     onClick,
+    placeholder,
+    placeholderFontFamily,
+    placeholderFontSize,
+    placeholderFontWeight,
+    placeholderLineHeight,
+    placeholderTextColor,
     ...passThrough
   } = props;
 
@@ -419,13 +425,19 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
             className={cn(
               "opacity-0 overflow-hidden absolute",
               inputHeight,
-              inputWidth
+              inputWidth,
+              placeholderFontFamily,
+              placeholderFontSize,
+              placeholderFontWeight,
+              placeholderLineHeight,
+              placeholderTextColor
             )}
             aria-label={`${id}-label`}
             id={id}
             type="file"
             disabled={disabled}
             readOnly={readOnly}
+            placeholder={placeholder}
             onChange={(event) => {
               if (onChange) onChange(event);
 

@@ -66,7 +66,12 @@ export type BasicUploadFileFieldOmitKeys =
   | "messageFontSize"
   | "messageFontWeight"
   | "messageLineHeight"
-  | "messageTextColor";
+  | "messageTextColor"
+  | "placeholderFontFamily"
+  | "placeholderFontSize"
+  | "placeholderFontWeight"
+  | "placeholderLineHeight"
+  | "placeholderTextColor";
 
 export type FullBasicUploadFileFieldProps = Omit<
   UploadFileFieldBaseProps,
@@ -104,7 +109,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   inputBgColor: "bg-white",
   inputFontSize: "text-base",
   inputFontWeight: "font-normal",
-  inputLineHeight: "leading-[28px]",
+  inputLineHeight: "",
   inputTextColor: "text-instillGrey95",
   inputWidth: "w-full",
   inputHeight: "h-[70px]",
@@ -112,17 +117,17 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-  labelFontSize: "text-sm",
+  labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",
-  labelLineHeight: "leading-[18.2px]",
+  labelLineHeight: "",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorLabelFontFamily: "font-sans",
-  errorLabelFontSize: "text-sm",
+  errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
-  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelLineHeight: "",
   errorLabelTextColor: "text-instillRed",
   errorInputBorderColor: "border-instillRed",
   errorInputBorderWidth: "border",
@@ -144,6 +149,11 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   messageFontFamily: "font-sans",
   messageFontWeight: "font-normal",
   messageLineHeight: "",
+  placeholderFontFamily: "placeholder:font-sans",
+  placeholderFontSize: "placeholder:text-base",
+  placeholderFontWeight: "placeholder:font-normal",
+  placeholderLineHeight: "",
+  placeholderTextColor: "placeholder:text-instillGrey80",
 };
 
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
