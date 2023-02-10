@@ -32,7 +32,6 @@ export type BasicUploadFileFieldOmitKeys =
   | "inputWidth"
   | "inputHeight"
   | "focusHighlight"
-  | "inputLabelType"
   | "inputBorderColor"
   | "inputBorderStyle"
   | "inputBorderWidth"
@@ -110,7 +109,6 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   inputWidth: "w-full",
   inputHeight: "h-[70px]",
   focusHighlight: true,
-  inputLabelType: "inset",
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
@@ -151,6 +149,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
   const {
     id,
+    inputLabelType,
     label,
     onChange,
     uploadButtonText,
@@ -168,6 +167,7 @@ const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
     <UploadFileFieldBase
       {...passThrough}
       id={id}
+      inputLabelType={inputLabelType || "normal"}
       label={label}
       onChange={onChange}
       uploadButtonText={uploadButtonText}

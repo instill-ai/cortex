@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { ChangeEvent, useState } from "react";
-import BasicTextField from "./BasicTextField";
+import { BasicTextField } from "./BasicTextField";
 
 const meta: Meta<typeof BasicTextField> = {
   title: "Components/Ui/Input/BasicTextField",

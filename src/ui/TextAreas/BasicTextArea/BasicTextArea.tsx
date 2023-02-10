@@ -21,7 +21,6 @@ export type BasicTextAreaOmitKeys =
   | "inputBorderColor"
   | "inputBorderStyle"
   | "inputBorderWidth"
-  | "inputLabelType"
   | "disabledCursor"
   | "disabledInputBgColor"
   | "disabledInputBorderColor"
@@ -89,7 +88,6 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-  inputLabelType: "inset",
   disabledCursor: "cursor-not-allowed",
   disabledInputBgColor: "bg-white",
   disabledInputBorderColor: "border-instillGrey20",
@@ -146,7 +144,7 @@ export type BasicTextAreaOptionalProps = Partial<
 export type BasicTextAreaProps = BasicTextAreaRequiredProps &
   BasicTextAreaOptionalProps;
 
-const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
+export const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
   const {
     id,
     label,
@@ -162,6 +160,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
     error,
     autoComplete,
     placeholder,
+    inputLabelType,
     ...passThrough
   } = props;
 
@@ -169,6 +168,7 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
     <TextAreaBase
       {...passThrough}
       id={id}
+      inputLabelType={inputLabelType || "normal"}
       label={label}
       onChange={onChange}
       value={value}
@@ -187,5 +187,3 @@ const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
     />
   );
 };
-
-export default BasicTextArea;

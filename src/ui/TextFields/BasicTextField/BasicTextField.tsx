@@ -22,7 +22,6 @@ export type BasicTextFieldOmitKeys =
   | "inputBorderColor"
   | "inputBorderStyle"
   | "inputBorderWidth"
-  | "inputLabelType"
   | "disabledCursor"
   | "disabledInputBgColor"
   | "disabledInputBorderColor"
@@ -83,7 +82,6 @@ export const basicTextFieldConfig: BasicTextFieldConfig = {
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-  inputLabelType: "inset",
   disabledCursor: "cursor-not-allowed",
   disabledInputBgColor: "bg-white",
   disabledInputBorderColor: "border-instillGrey20",
@@ -142,9 +140,10 @@ export type BasicTextFieldOptionalProps = Partial<
 export type BasicTextFieldProps = BasicTextFieldRequiredProps &
   BasicTextFieldOptionalProps;
 
-const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
+export const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
   const {
     id,
+    inputLabelType,
     label,
     onChange,
     value,
@@ -164,6 +163,7 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
     <TextFieldBase
       {...passThrough}
       id={id}
+      inputLabelType={inputLabelType || "normal"}
       value={value}
       onChange={onChange}
       label={label}
@@ -181,5 +181,3 @@ const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
     />
   );
 };
-
-export default BasicTextField;

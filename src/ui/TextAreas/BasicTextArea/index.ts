@@ -1,2 +1,2 @@
-export { default } from "./BasicTextArea";
-export * from "./BasicTextArea";
+export { BasicTextArea } from "./BasicTextArea";
+export type { BasicTextAreaProps } from "./BasicTextArea";

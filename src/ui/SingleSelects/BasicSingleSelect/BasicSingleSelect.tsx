@@ -74,10 +74,9 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
 export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
   BasicSingleSelectOptionalProps;
 
-const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
+export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   const {
     id,
-    inputLabelType,
     instanceId,
     onChange,
     value,
@@ -93,12 +92,13 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     readOnly,
     required,
     isClearable,
+    inputLabelType,
   } = props;
 
   return (
     <SingleSelectBase
       id={id}
-      inputLabelType={inputLabelType ?? "inset"}
+      inputLabelType={inputLabelType || "normal"}
       instanceId={instanceId}
       onChange={onChange}
       value={value}
@@ -119,5 +119,3 @@ const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     />
   );
 };
-
-export default BasicSingleSelect;

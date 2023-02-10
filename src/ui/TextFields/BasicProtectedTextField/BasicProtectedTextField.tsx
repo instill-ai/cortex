@@ -5,13 +5,13 @@ import {
 } from "../../InputDescriptions";
 import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
-export type ProtectedBasicTextFieldRequiredKeys =
+export type BasicProtectedTextFieldRequiredKeys =
   | "id"
   | "value"
   | "onChange"
   | "label";
 
-export type ProtectedBasicTextFieldOmitKeys =
+export type BasicProtectedTextFieldOmitKeys =
   | "enableProtectedToggle"
   | "type"
   | "inputHeight"
@@ -22,7 +22,6 @@ export type ProtectedBasicTextFieldOmitKeys =
   | "inputFontWeight"
   | "bgColor"
   | "inputTextColor"
-  | "inputLabelType"
   | "inputBgColor"
   | "inputBorderRadius"
   | "inputBorderColor"
@@ -69,12 +68,12 @@ export type ProtectedBasicTextFieldOmitKeys =
   | "messageLineHeight"
   | "messageTextColor";
 
-export type ProtectedBasicTextFieldConfig = Pick<
+export type BasicProtectedTextFieldConfig = Pick<
   TextFieldBaseProps,
-  ProtectedBasicTextFieldOmitKeys
+  BasicProtectedTextFieldOmitKeys
 >;
 
-export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
+export const basicProtectedTextFieldConfig: BasicProtectedTextFieldConfig = {
   focusHighlight: true,
   enableProtectedToggle: true,
   type: "password",
@@ -86,7 +85,6 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   inputTextColor: "text-instillGrey95",
   inputHeight: "h-[70px]",
   inputWidth: "w-full",
-  inputLabelType: "inset",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
@@ -133,28 +131,29 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   messageLineHeight: "",
 };
 
-export type FullProtectedBasicTextFieldProps = Omit<
+export type FullBasicProtectedTextFieldProps = Omit<
   TextFieldBaseProps,
-  BasicInputDescriptionOmitKeys | ProtectedBasicTextFieldOmitKeys
+  BasicInputDescriptionOmitKeys | BasicProtectedTextFieldOmitKeys
 >;
 
-export type ProtectedBasicTextFieldRequiredProps = Pick<
-  FullProtectedBasicTextFieldProps,
-  ProtectedBasicTextFieldRequiredKeys
+export type BasicProtectedTextFieldRequiredProps = Pick<
+  FullBasicProtectedTextFieldProps,
+  BasicProtectedTextFieldRequiredKeys
 >;
 
-export type ProtectedBasicTextFieldOptionalProps = Partial<
-  Omit<FullProtectedBasicTextFieldProps, ProtectedBasicTextFieldRequiredKeys>
+export type BasicProtectedTextFieldOptionalProps = Partial<
+  Omit<FullBasicProtectedTextFieldProps, BasicProtectedTextFieldRequiredKeys>
 >;
 
-export type ProtectedBasicTextFieldProps =
-  ProtectedBasicTextFieldRequiredProps & ProtectedBasicTextFieldOptionalProps;
+export type BasicProtectedTextFieldProps =
+  BasicProtectedTextFieldRequiredProps & BasicProtectedTextFieldOptionalProps;
 
-const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
+export const BasicProtectedTextField: React.FC<BasicProtectedTextFieldProps> = (
   props
 ) => {
   const {
     id,
+    inputLabelType,
     label,
     onChange,
     value,
@@ -172,6 +171,7 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
     <TextFieldBase
       {...passThrough}
       id={id}
+      inputLabelType={inputLabelType || "normal"}
       value={value}
       label={label}
       onChange={onChange}
@@ -182,10 +182,8 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
       error={error ?? null}
       placeholder={placeholder ?? ""}
       readOnly={readOnly ?? false}
-      {...protectedBasicTextFieldConfig}
+      {...basicProtectedTextFieldConfig}
       {...basicInputDescriptionConfig}
     />
   );
 };
-
-export default ProtectedBasicTextField;
