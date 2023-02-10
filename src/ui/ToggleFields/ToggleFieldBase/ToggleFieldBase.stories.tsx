@@ -32,10 +32,10 @@ Playground.args = {
 
   label: "toggle-field-base-playground",
   additionalMessageOnLabel: null,
-  labelFontSize: "text-sm",
+  labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey50",
-  labelLineHeight: "leading-[18.2px]",
+  labelLineHeight: "",
   labelFontFamily: "font-sans",
   labelActivateStyle: "",
   labelDeActivateStyle: "",
@@ -75,9 +75,9 @@ Playground.args = {
 
   error: "",
   errorLabelFontFamily: "font-sans",
-  errorLabelFontSize: "text-sm",
+  errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
-  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelLineHeight: "",
   errorLabelTextColor: "text-instillRed",
 
   ...basicInputDescriptionConfig,

@@ -36,4 +36,5 @@ Playground.args = {
   readOnly: false,
   autoComplete: "off",
   additionalMessageOnLabel: "text label",
+  placeholder: "placeholder",
 };

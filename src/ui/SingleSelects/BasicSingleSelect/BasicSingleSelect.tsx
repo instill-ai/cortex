@@ -52,17 +52,17 @@ export type BasicSingleSelectConfig = Pick<
 >;
 
 export const basicSingleSelectConfig: BasicSingleSelectConfig = {
-  labelFontSize: "text-sm",
+  labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",
-  labelLineHeight: "leading-[18.2px]",
+  labelLineHeight: "",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-1/2 -translate-y-[120%]",
   labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorLabelFontFamily: "font-sans",
-  errorLabelFontSize: "text-sm",
+  errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
-  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelLineHeight: "",
   errorLabelTextColor: "text-instillRed",
   messageFontSize: "text-xs",
   messageTextColor: "text-instillGrey70",

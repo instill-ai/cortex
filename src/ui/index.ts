@@ -32,10 +32,10 @@ export { BasicTextArea } from "./TextAreas";
 export type { BasicTextAreaProps } from "./TextAreas";
 
 // TextFields
-export { BasicTextField, BasicProtectedTextField } from "./TextFields";
+export { BasicTextField, ProtectedBasicTextField } from "./TextFields";
 export type {
   BasicTextFieldProps,
-  BasicProtectedTextFieldProps,
+  ProtectedBasicTextFieldProps,
 } from "./TextFields";
 
 // ToggleFields

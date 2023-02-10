@@ -31,17 +31,17 @@ export type TextAreaInputLabelConfig = Pick<
 >;
 
 export const basicInputLabelConfig: TextAreaInputLabelConfig = {
-  labelFontSize: "text-sm",
+  labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey50",
-  labelLineHeight: "leading-[18.2px]",
+  labelLineHeight: "",
   labelFontFamily: "font-sans",
   labelActivateStyle: "top-0 translate-y-3",
   labelDeActivateStyle: "top-0 translate-y-[26px]",
   errorLabelFontFamily: "font-sans",
-  errorLabelFontSize: "text-sm",
+  errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
-  errorLabelLineHeight: "leading-[18.2px]",
+  errorLabelLineHeight: "",
   errorLabelTextColor: "text-instillRed",
   messageFontSize: "text-xs",
   messageTextColor: "text-instillGrey70",
