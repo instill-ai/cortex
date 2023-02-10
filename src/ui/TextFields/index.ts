@@ -1,12 +1,4 @@
-import BasicTextField from "./BasicTextField";
-import ProtectedBasicTextField from "./ProtectedBasicTextField";
-
-import type { BasicTextFieldProps } from "./BasicTextField";
-import type { ProtectedBasicTextFieldProps } from "./ProtectedBasicTextField";
-
-export {
-  BasicTextField,
-  BasicTextFieldProps,
-  ProtectedBasicTextField,
-  ProtectedBasicTextFieldProps,
-};
+export { BasicTextField } from "./BasicTextField";
+export type { BasicTextFieldProps } from "./BasicTextField";
+export { BasicProtectedTextField } from "./BasicProtectedTextField";
+export type { BasicProtectedTextFieldProps } from "./BasicProtectedTextField";

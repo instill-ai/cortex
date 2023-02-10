@@ -3,29 +3,30 @@ import {
   basicInputDescriptionConfig,
   BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
-import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
+import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
 
-export type InsetLabelTextAreaRequiredKeys =
+export type BasicProtectedTextFieldRequiredKeys =
   | "id"
   | "value"
   | "onChange"
   | "label";
 
-export type InsetLabelTextAreaOmitKeys =
+export type BasicProtectedTextFieldOmitKeys =
+  | "enableProtectedToggle"
+  | "type"
   | "inputHeight"
   | "inputWidth"
   | "focusHighlight"
   | "inputFontSize"
-  | "inputFontWeight"
   | "inputLineHeight"
-  | "inputTextColor"
+  | "inputFontWeight"
   | "bgColor"
+  | "inputTextColor"
   | "inputBgColor"
   | "inputBorderRadius"
   | "inputBorderColor"
   | "inputBorderStyle"
   | "inputBorderWidth"
-  | "inputLabelType"
   | "disabledCursor"
   | "disabledInputBgColor"
   | "disabledInputBorderColor"
@@ -43,16 +44,13 @@ export type InsetLabelTextAreaOmitKeys =
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
-  | "counterFontFamily"
-  | "counterFontSize"
-  | "counterFontWeight"
-  | "counterLineHeight"
-  | "counterTextColor"
   | "labelFontSize"
   | "labelFontWeight"
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
+  | "labelActivateStyle"
+  | "labelDeActivateStyle"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -63,37 +61,34 @@ export type InsetLabelTextAreaOmitKeys =
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
   | "errorInputTextColor"
+  | "autoComplete"
   | "messageFontFamily"
   | "messageFontSize"
   | "messageFontWeight"
   | "messageLineHeight"
   | "messageTextColor";
 
-export type InsetLabelTextAreaConfig = Pick<
-  TextAreaBaseProps,
-  InsetLabelTextAreaOmitKeys
+export type BasicProtectedTextFieldConfig = Pick<
+  TextFieldBaseProps,
+  BasicProtectedTextFieldOmitKeys
 >;
 
-export const insetLabelTextAreaConfig: InsetLabelTextAreaConfig = {
-  inputBgColor: "bg-white",
-  counterFontFamily: "font-sans",
-  counterFontSize: "text-xs",
-  counterFontWeight: "font-normal",
-  counterLineHeight: "leanding-[15.6px]",
-  counterTextColor: "text-instillGrey20",
-  inputHeight: "h-[140px]",
-  inputWidth: "w-full",
+export const basicProtectedTextFieldConfig: BasicProtectedTextFieldConfig = {
   focusHighlight: true,
+  enableProtectedToggle: true,
+  type: "password",
+  inputBgColor: "bg-white",
   inputFontSize: "text-base",
-  inputFontWeight: "font-normal",
   inputLineHeight: "leading-[28px]",
-  inputTextColor: "text-instillGrey95",
+  inputFontWeight: "font-normal",
   bgColor: "bg-white",
+  inputTextColor: "text-instillGrey95",
+  inputHeight: "h-[70px]",
+  inputWidth: "w-full",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-  inputLabelType: "inset",
   disabledCursor: "cursor-not-allowed",
   disabledInputBgColor: "bg-white",
   disabledInputBorderColor: "border-instillGrey20",
@@ -116,6 +111,8 @@ export const insetLabelTextAreaConfig: InsetLabelTextAreaConfig = {
   labelTextColor: "text-instillGrey90",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
+  labelActivateStyle: "top-1/2 -translate-y-[120%]",
+  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-sm",
@@ -126,6 +123,7 @@ export const insetLabelTextAreaConfig: InsetLabelTextAreaConfig = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
+  autoComplete: "off",
   messageFontSize: "text-xs",
   messageTextColor: "text-instillGrey70",
   messageFontFamily: "font-sans",
@@ -133,62 +131,58 @@ export const insetLabelTextAreaConfig: InsetLabelTextAreaConfig = {
   messageLineHeight: "",
 };
 
-export type FullInsetLabelTextAreaProps = Omit<
-  TextAreaBaseProps,
-  BasicInputDescriptionOmitKeys | InsetLabelTextAreaOmitKeys
+export type FullBasicProtectedTextFieldProps = Omit<
+  TextFieldBaseProps,
+  BasicInputDescriptionOmitKeys | BasicProtectedTextFieldOmitKeys
 >;
 
-export type InsetLabelTextAreaRequiredProps = Pick<
-  FullInsetLabelTextAreaProps,
-  InsetLabelTextAreaRequiredKeys
+export type BasicProtectedTextFieldRequiredProps = Pick<
+  FullBasicProtectedTextFieldProps,
+  BasicProtectedTextFieldRequiredKeys
 >;
 
-export type InsetLabelTextAreaOptionalProps = Partial<
-  Omit<FullInsetLabelTextAreaProps, InsetLabelTextAreaRequiredKeys>
+export type BasicProtectedTextFieldOptionalProps = Partial<
+  Omit<FullBasicProtectedTextFieldProps, BasicProtectedTextFieldRequiredKeys>
 >;
 
-export type InsetLabelTextAreaProps = InsetLabelTextAreaRequiredProps &
-  InsetLabelTextAreaOptionalProps;
+export type BasicProtectedTextFieldProps =
+  BasicProtectedTextFieldRequiredProps & BasicProtectedTextFieldOptionalProps;
 
-export const InsetLabelTextArea: React.FC<InsetLabelTextAreaProps> = (
+export const BasicProtectedTextField: React.FC<BasicProtectedTextFieldProps> = (
   props
 ) => {
   const {
     id,
+    inputLabelType,
     label,
     onChange,
     value,
     description,
     additionalMessageOnLabel,
-    enableCounter,
-    counterWordLimit,
     disabled,
     required,
     readOnly,
     error,
-    autoComplete,
     placeholder,
     ...passThrough
   } = props;
 
   return (
-    <TextAreaBase
+    <TextFieldBase
       {...passThrough}
       id={id}
+      inputLabelType={inputLabelType || "normal"}
+      value={value}
       label={label}
       onChange={onChange}
-      value={value}
-      description={description ?? ""}
       additionalMessageOnLabel={additionalMessageOnLabel ?? null}
-      enableCounter={enableCounter ?? false}
-      counterWordLimit={counterWordLimit ?? 0}
+      description={description ?? ""}
       disabled={disabled ?? false}
       required={required ?? false}
-      readOnly={readOnly ?? false}
       error={error ?? null}
-      autoComplete={autoComplete ?? "off"}
       placeholder={placeholder ?? ""}
-      {...insetLabelTextAreaConfig}
+      readOnly={readOnly ?? false}
+      {...basicProtectedTextFieldConfig}
       {...basicInputDescriptionConfig}
     />
   );

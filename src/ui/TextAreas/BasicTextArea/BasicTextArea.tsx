@@ -3,26 +3,19 @@ import {
   basicInputDescriptionConfig,
   BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
-import TextFieldBase, { TextFieldBaseProps } from "../TextFieldBase";
+import TextAreaBase, { TextAreaBaseProps } from "../TextAreaBase/TextAreaBase";
 
-export type ProtectedBasicTextFieldRequiredKeys =
-  | "id"
-  | "value"
-  | "onChange"
-  | "label";
+export type BasicTextAreaRequiredKeys = "id" | "value" | "onChange" | "label";
 
-export type ProtectedBasicTextFieldOmitKeys =
-  | "enableProtectedToggle"
-  | "type"
+export type BasicTextAreaOmitKeys =
   | "inputHeight"
   | "inputWidth"
   | "focusHighlight"
   | "inputFontSize"
-  | "inputLineHeight"
   | "inputFontWeight"
-  | "bgColor"
+  | "inputLineHeight"
   | "inputTextColor"
-  | "inputLabelType"
+  | "bgColor"
   | "inputBgColor"
   | "inputBorderRadius"
   | "inputBorderColor"
@@ -45,13 +38,16 @@ export type ProtectedBasicTextFieldOmitKeys =
   | "placeholderFontWeight"
   | "placeholderLineHeight"
   | "placeholderTextColor"
+  | "counterFontFamily"
+  | "counterFontSize"
+  | "counterFontWeight"
+  | "counterLineHeight"
+  | "counterTextColor"
   | "labelFontSize"
   | "labelFontWeight"
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -62,31 +58,32 @@ export type ProtectedBasicTextFieldOmitKeys =
   | "errorInputBorderWidth"
   | "errorInputBorderStyle"
   | "errorInputTextColor"
-  | "autoComplete"
   | "messageFontFamily"
   | "messageFontSize"
   | "messageFontWeight"
   | "messageLineHeight"
   | "messageTextColor";
 
-export type ProtectedBasicTextFieldConfig = Pick<
-  TextFieldBaseProps,
-  ProtectedBasicTextFieldOmitKeys
+export type BasicTextAreaConfig = Pick<
+  TextAreaBaseProps,
+  BasicTextAreaOmitKeys
 >;
 
-export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
-  focusHighlight: true,
-  enableProtectedToggle: true,
-  type: "password",
+export const basicTextAreaConfig: BasicTextAreaConfig = {
   inputBgColor: "bg-white",
-  inputFontSize: "text-base",
-  inputLineHeight: "leading-[28px]",
-  inputFontWeight: "font-normal",
-  bgColor: "bg-white",
-  inputTextColor: "text-instillGrey95",
-  inputHeight: "h-[70px]",
+  counterFontFamily: "font-sans",
+  counterFontSize: "text-xs",
+  counterFontWeight: "font-normal",
+  counterLineHeight: "leanding-[15.6px]",
+  counterTextColor: "text-instillGrey20",
+  inputHeight: "h-[140px]",
   inputWidth: "w-full",
-  inputLabelType: "inset",
+  focusHighlight: true,
+  inputFontSize: "text-base",
+  inputFontWeight: "font-normal",
+  inputLineHeight: "leading-[28px]",
+  inputTextColor: "text-instillGrey95",
+  bgColor: "bg-white",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
@@ -113,8 +110,6 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   labelTextColor: "text-instillGrey90",
   labelLineHeight: "leading-[18.2px]",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-sm",
@@ -125,7 +120,6 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
-  autoComplete: "off",
   messageFontSize: "text-xs",
   messageTextColor: "text-instillGrey70",
   messageFontFamily: "font-sans",
@@ -133,26 +127,24 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   messageLineHeight: "",
 };
 
-export type FullProtectedBasicTextFieldProps = Omit<
-  TextFieldBaseProps,
-  BasicInputDescriptionOmitKeys | ProtectedBasicTextFieldOmitKeys
+export type FullBasicTextAreaProps = Omit<
+  TextAreaBaseProps,
+  BasicInputDescriptionOmitKeys | BasicTextAreaOmitKeys
 >;
 
-export type ProtectedBasicTextFieldRequiredProps = Pick<
-  FullProtectedBasicTextFieldProps,
-  ProtectedBasicTextFieldRequiredKeys
+export type BasicTextAreaRequiredProps = Pick<
+  FullBasicTextAreaProps,
+  BasicTextAreaRequiredKeys
 >;
 
-export type ProtectedBasicTextFieldOptionalProps = Partial<
-  Omit<FullProtectedBasicTextFieldProps, ProtectedBasicTextFieldRequiredKeys>
+export type BasicTextAreaOptionalProps = Partial<
+  Omit<FullBasicTextAreaProps, BasicTextAreaRequiredKeys>
 >;
 
-export type ProtectedBasicTextFieldProps =
-  ProtectedBasicTextFieldRequiredProps & ProtectedBasicTextFieldOptionalProps;
+export type BasicTextAreaProps = BasicTextAreaRequiredProps &
+  BasicTextAreaOptionalProps;
 
-const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
-  props
-) => {
+export const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
   const {
     id,
     label,
@@ -160,32 +152,38 @@ const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
     value,
     description,
     additionalMessageOnLabel,
+    enableCounter,
+    counterWordLimit,
     disabled,
     required,
     readOnly,
     error,
+    autoComplete,
     placeholder,
+    inputLabelType,
     ...passThrough
   } = props;
 
   return (
-    <TextFieldBase
+    <TextAreaBase
       {...passThrough}
       id={id}
-      value={value}
+      inputLabelType={inputLabelType || "normal"}
       label={label}
       onChange={onChange}
-      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      value={value}
       description={description ?? ""}
+      additionalMessageOnLabel={additionalMessageOnLabel ?? null}
+      enableCounter={enableCounter ?? false}
+      counterWordLimit={counterWordLimit ?? 0}
       disabled={disabled ?? false}
       required={required ?? false}
-      error={error ?? null}
-      placeholder={placeholder ?? ""}
       readOnly={readOnly ?? false}
-      {...protectedBasicTextFieldConfig}
+      error={error ?? null}
+      autoComplete={autoComplete ?? "off"}
+      placeholder={placeholder ?? ""}
+      {...basicTextAreaConfig}
       {...basicInputDescriptionConfig}
     />
   );
 };
-
-export default ProtectedBasicTextField;

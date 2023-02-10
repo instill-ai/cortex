@@ -1,2 +1,2 @@
-export { default } from "./BasicSingleSelect";
+export { BasicSingleSelect } from "./BasicSingleSelect";
 export * from "./BasicSingleSelect";

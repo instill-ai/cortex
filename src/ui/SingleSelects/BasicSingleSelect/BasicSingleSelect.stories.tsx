@@ -3,7 +3,7 @@ import { ActionMeta } from "react-select";
 import { Nullable } from "../../../types/general";
 import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
 import { SingleSelectOption } from "../SingleSelectBase";
-import BasicSingleSelect from "./BasicSingleSelect";
+import { BasicSingleSelect } from "./BasicSingleSelect";
 
 const meta: Meta<typeof BasicSingleSelect> = {
   title: "Components/Ui/Input/BasicSingleSelect",

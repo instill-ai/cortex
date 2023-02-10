@@ -21,18 +21,22 @@ export * from "./Progress";
 export * from "./ProgressMessageBoxs";
 
 // SingleSelects
-import { BasicSingleSelect } from "./SingleSelects";
-import type {
+export { BasicSingleSelect } from "./SingleSelects";
+export type {
   BasicSingleSelectProps,
   SingleSelectOption,
 } from "./SingleSelects";
 
 // TextAreas
-import { BasicTextArea } from "./TextAreas";
-import type { BasicTextAreaProps } from "./TextAreas";
+export { BasicTextArea } from "./TextAreas";
+export type { BasicTextAreaProps } from "./TextAreas";
 
 // TextFields
-export * from "./TextFields";
+export { BasicTextField, BasicProtectedTextField } from "./TextFields";
+export type {
+  BasicTextFieldProps,
+  BasicProtectedTextFieldProps,
+} from "./TextFields";
 
 // ToggleFields
 export * from "./ToggleFields";
@@ -46,16 +50,5 @@ export * from "./Buttons";
 import TextWithHtml from "./TextWithHtml/TextWithHtml";
 import type { TextWithHtmlProps } from "./TextWithHtml/TextWithHtml";
 
-export {
-  TextWithHtml,
-  BasicSingleSelect,
-  BasicInputDescription,
-  BasicTextArea,
-};
-export type {
-  TextWithHtmlProps,
-  BasicSingleSelectProps,
-  SingleSelectOption,
-  BasicInputDescriptionProps,
-  BasicTextAreaProps,
-};
+export { TextWithHtml, BasicInputDescription };
+export type { TextWithHtmlProps, BasicInputDescriptionProps };

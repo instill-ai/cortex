@@ -1,16 +1,11 @@
-import BasicSingleSelect from "./BasicSingleSelect";
-import { basicSingleSelectConfig } from "./BasicSingleSelect";
-import type {
+export {
+  BasicSingleSelect,
+  basicSingleSelectConfig,
+} from "./BasicSingleSelect";
+export type {
   BasicSingleSelectProps,
   BasicSingleSelectOmitKeys,
   BasicSingleSelectConfig,
 } from "./BasicSingleSelect";
-import type { SingleSelectOption } from "./SingleSelectBase";
 
-export { BasicSingleSelect, basicSingleSelectConfig };
-export {
-  BasicSingleSelectProps,
-  SingleSelectOption,
-  BasicSingleSelectOmitKeys,
-  BasicSingleSelectConfig,
-};
+export type { SingleSelectOption } from "./SingleSelectBase";
