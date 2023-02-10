@@ -302,7 +302,12 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
           { "mb-2.5": description }
         )}
         style={{
-          height: containerHeight ? `${containerHeight}px` : "",
+          height:
+            inputLabelType === "inset"
+              ? containerHeight
+                ? `${containerHeight}px`
+                : ""
+              : undefined,
           paddingTop:
             inputLabelType === "inset"
               ? containerPaddingTop
