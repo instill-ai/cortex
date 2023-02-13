@@ -83,7 +83,7 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
   inputFontWeight: "font-normal",
   inputLineHeight: "",
   inputTextColor: "text-instillGrey95",
-  bgColor: "bg-white",
+  bgColor: "",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
