@@ -326,7 +326,15 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
             type={showSecret ? "text" : type}
             disabled={disabled}
             required={required}
-            placeholder={placeholder}
+            // When in inset mode, we will only display placeholder when it is
+            // focused
+            placeholder={
+              inputLabelType === "inset"
+                ? focus
+                  ? placeholder
+                  : undefined
+                : placeholder
+            }
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
