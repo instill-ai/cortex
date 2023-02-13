@@ -294,11 +294,17 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
         className={cn(
           "flex flex-col gap-y-2.5 relative",
           inputWidth,
-          bgColor,
           inputBorderRadius,
+
+          // When in inset mode, the bg-color of this container need to have
+          // the same bg color as input.
           inputLabelType === "inset"
-            ? cn(containerPaddingTop ? "pb-5" : "pb-5 pt-[34px]", getInputStyle)
-            : "",
+            ? cn(
+                containerPaddingTop ? "pb-5" : "pb-5 pt-[34px]",
+                getInputStyle,
+                inputBgColor
+              )
+            : bgColor,
           { "mb-2.5": description }
         )}
         style={{
