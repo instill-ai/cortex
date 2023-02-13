@@ -386,3 +386,5 @@ export type IconStyle = {
   position?: string;
   color?: string;
 };
+
+export type IconStyleWithoutColor = Omit<IconStyle, "color">;
