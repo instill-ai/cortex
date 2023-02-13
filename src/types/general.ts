@@ -387,4 +387,6 @@ export type IconStyle = {
   color?: string;
 };
 
+export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
+
 export type IconStyleWithoutColor = Omit<IconStyle, "color">;
