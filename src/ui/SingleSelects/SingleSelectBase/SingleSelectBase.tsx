@@ -254,7 +254,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       inputLabelType !== "inset"
     ) {
       setContainerHeight(70);
-      setInputValuePaddingTop(24);
+      setInputValuePaddingTop(0);
       setInputValuePaddingBottom(0);
       return;
     }
