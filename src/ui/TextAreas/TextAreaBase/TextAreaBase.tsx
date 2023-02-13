@@ -360,7 +360,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
               inputFontSize,
               inputFontWeight,
               inputLineHeight,
-              bgColor,
               placeholderFontFamily,
               placeholderFontSize,
               placeholderFontWeight,
