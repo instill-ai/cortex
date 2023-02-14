@@ -292,6 +292,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
 
   const customStyles: StylesConfig<SingleSelectOption> = React.useMemo(() => {
     return {
+      menuPortal: (base) => ({ ...base, zIndex: 9999 }),
       valueContainer: (styles) => ({
         ...styles,
         paddingTop: inputValuePaddingTop ? inputValuePaddingTop : "",
