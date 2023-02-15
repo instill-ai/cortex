@@ -351,7 +351,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
         paddingTop: "10px",
         paddingBottom: "10px",
         backgroundColor: "#FFFFFF",
-        zIndex: "30",
+        zIndex: 9999,
       }),
       option: (styles) => ({
         ...styles,
