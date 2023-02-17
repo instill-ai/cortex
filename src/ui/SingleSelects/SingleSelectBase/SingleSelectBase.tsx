@@ -220,7 +220,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       setInputLabelPosition(getElementPosition(node));
     }
   }, []);
-
   const [inputLabelWidth, setInputLabelWidth] = React.useState<number | null>(
     null
   );
@@ -230,7 +229,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   const [inputValuePaddingTop, setInputValuePaddingTop] = React.useState<
     number | null
   >(null);
-
   const [inputValuePaddingBottom, setInputValuePaddingBottom] = React.useState<
     number | null
   >(null);
@@ -246,8 +244,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
       setInputValuePaddingBottom(10);
       return;
     }
-
-    console.log(inputLabelPosition, inputPosition);
 
     if (!inputLabelPosition || !inputPosition) {
       setContainerHeight(70);
@@ -271,26 +267,18 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
 
     setInputLabelWidth(inputLabelWidth);
 
-    const inputLabelPaddingY = 20;
-    const gapBetweenLabelAndValue = 10;
-    const inputLineHeight = 28;
+    const inputLabelPaddingY = 8;
+    const gapBetweenLabelAndValue = 16;
 
     const containerHeight =
       inputLabelPosition.height +
       inputLabelPaddingY * 2 +
       gapBetweenLabelAndValue +
-      inputLineHeight;
-
-    console.log(inputLabelPosition, inputPosition);
+      inputPosition.height;
 
     if (containerHeight > inputPosition.height) {
       setContainerHeight(containerHeight);
       setInputValuePaddingTop(
-        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
-      );
-
-      console.log(
-        "padding_top",
         inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
       );
       setInputValuePaddingBottom(0);
