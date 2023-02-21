@@ -7,7 +7,7 @@ export type InputLabelBaseProps = {
    * - normal: input label has normal position layout and doesn't have any animation
    * - inset: input label has absolution position layout, put into the input field and have float up animation with specific activate, deActivate style
    */
-  type: "normal" | "inset" | "hide";
+  type: "normal" | "hide";
 
   /**
    * Input's error string
@@ -37,11 +37,6 @@ export type InputLabelBaseProps = {
 
   /** Whether the input is answered or not */
   answered: boolean;
-
-  /** Input label's width, calculated
-   * - If the type is not inset, this field can be null and label will use w-full as default
-   */
-  labelWidth: Nullable<number>;
 
   /** TailwindCSS format - Message's text color
    * - e.g. text-instillGrey50
@@ -117,18 +112,6 @@ export type InputLabelBaseProps = {
    * - e.g. leading-normal
    */
   errorLabelLineHeight: string;
-
-  /** TailwindCSS format
-   * - Activate mean whether the input is being focused or the input field was answered
-   * - Don't need to specific translate-x-, it's fixed value
-   */
-  labelActivateStyle?: string;
-
-  /** TailwindCSS format
-   * - Activate mean whether the input is being focused or the input field was answered
-   * - Don't need to specific translate-x-, it's fixed value
-   */
-  labelDeActivateStyle?: string;
 };
 
 export type InputLabelBaseRef = HTMLLabelElement;
@@ -146,8 +129,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       labelTextColor,
       labelFontFamily,
       labelLineHeight,
-      labelActivateStyle,
-      labelDeActivateStyle,
       setFocus,
       type,
       error,
@@ -162,7 +143,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       errorLabelFontWeight,
       errorLabelLineHeight,
       errorLabelTextColor,
-      labelWidth,
     } = props;
 
     const [activate, setActivate] = React.useState(false);
@@ -188,29 +168,12 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
         {type !== "hide" ? (
           <label
             ref={ref}
-            className={cn(
-              "z-10 flex flex-row gap-x-2",
-              type === "inset"
-                ? error
-                  ? "top-5"
-                  : activate
-                  ? labelActivateStyle
-                  : labelDeActivateStyle
-                : "w-full",
-              {
-                "absolute translate-x-5 transform-gpu origin-top-left left-0":
-                  type === "inset",
-              }
-            )}
+            className="z-10 flex flex-row gap-x-2 w-full"
             htmlFor={htmlFor}
             onClick={() => {
               if (setFocus) {
                 setFocus(true);
               }
-            }}
-            style={{
-              width:
-                type === "inset" ? (labelWidth ? `${labelWidth}px` : "") : "",
             }}
           >
             <p

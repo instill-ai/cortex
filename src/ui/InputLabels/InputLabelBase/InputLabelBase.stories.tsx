@@ -31,7 +31,6 @@ Playground.args = {
   htmlFor: "default",
   answered: false,
   required: false,
-  type: "inset",
   label: "Playground label",
   message: null,
 };

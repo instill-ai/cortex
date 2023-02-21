@@ -26,7 +26,7 @@ const Template: StoryFn<typeof TextAreaInputLabel> = (args) => {
 export const Playground: StoryFn<typeof TextAreaInputLabel> = Template.bind({});
 
 Playground.args = {
-  type: "inset",
+  type: "normal",
   label: "text area lable",
   message: null,
 };
