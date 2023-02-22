@@ -30,11 +30,6 @@ export type InputLabelBaseProps = {
   /** Whether the input is required or not */
   required?: boolean | undefined;
 
-  /** Whether the input is focused or not */
-  focus?: boolean | undefined;
-
-  setFocus?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
-
   /** Whether the input is answered or not */
   answered: boolean;
 
@@ -121,7 +116,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
     const {
       htmlFor,
       required,
-      focus,
       label,
       answered,
       labelFontSize,
@@ -129,7 +123,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       labelTextColor,
       labelFontFamily,
       labelLineHeight,
-      setFocus,
       type,
       error,
       message,
@@ -145,24 +138,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       errorLabelTextColor,
     } = props;
 
-    const [activate, setActivate] = React.useState(false);
-
-    React.useEffect(() => {
-      if (focus) {
-        setActivate(true);
-        return;
-      }
-
-      if (answered) {
-        setActivate(true);
-        return;
-      }
-
-      setActivate(false);
-    }, [focus, answered]);
-
-    if (!label) return null;
-
     return (
       <>
         {type !== "hide" ? (
@@ -170,14 +145,10 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
             ref={ref}
             className="z-10 flex flex-row gap-x-2 w-full"
             htmlFor={htmlFor}
-            onClick={() => {
-              if (setFocus) {
-                setFocus(true);
-              }
-            }}
           >
             <p
-              className={
+              className={cn(
+                "flex-shrink-0",
                 error
                   ? cn(
                       errorLabelFontFamily,
@@ -193,7 +164,7 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
                       labelFontFamily,
                       labelLineHeight
                     )
-              }
+              )}
             >{`${label} ${required ? "*" : ""}`}</p>
             <p
               className={cn(

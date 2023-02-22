@@ -49,8 +49,6 @@ export type ProtectedBasicTextFieldOmitKeys =
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -83,7 +81,7 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   inputFontWeight: "font-normal",
   bgColor: "bg-white",
   inputTextColor: "text-instillGrey95",
-  inputHeight: "h-[70px]",
+  inputHeight: null,
   inputWidth: "w-full",
   inputBorderRadius: "rounded-[1px]",
   inputBorderColor: "border-instillGrey20",
@@ -105,14 +103,12 @@ export const protectedBasicTextFieldConfig: ProtectedBasicTextFieldConfig = {
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "",
-  placeholderTextColor: "placeholder:text-instillGrey80",
+  placeholderTextColor: "placeholder:text-instillGrey50",
   labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",
   labelLineHeight: "",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",

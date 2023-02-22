@@ -11,19 +11,33 @@ const meta: Meta<typeof StatefulToggleField> = {
 export default meta;
 
 const Template: StoryFn<typeof StatefulToggleField> = (args) => {
-  const [state, setState] = useState<State>("STATE_UNSPECIFIED");
+  const [state, setState] = useState<State>("STATE_INACTIVE");
+  const [check, setCheck] = useState(false);
 
   return (
     <StatefulToggleField
       {...args}
       id="basic-toggle-field"
       onChange={() => {
-        setState("STATE_LOADING");
-        setTimeout(() => {
-          setState("STATE_ACTIVE");
-        }, 1000);
+        if (state === "STATE_INACTIVE") {
+          setState("STATE_LOADING");
+          setTimeout(() => {
+            setCheck(true);
+            setState("STATE_ACTIVE");
+          }, 1000);
+          return;
+        }
+
+        if (state === "STATE_ACTIVE") {
+          setState("STATE_LOADING");
+          setTimeout(() => {
+            setCheck(false);
+            setState("STATE_INACTIVE");
+          }, 1000);
+          return;
+        }
       }}
-      value={state === "STATE_ACTIVE" ? true : false}
+      value={check}
       description="this is a description for basic toggle field <a href='#'>setup guide</a>"
       label="basic-toggle-field"
       error={

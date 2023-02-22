@@ -3,7 +3,6 @@ import cn from "clsx";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
-import { getElementPosition, getTailwindClassNumber } from "../../../utils";
 
 export type TextAreaBaseProps = Omit<
   BasicInputProps,
@@ -22,7 +21,6 @@ export type TextAreaBaseProps = Omit<
 
     /**
      * Enable textarea words counter
-     * @default false
      */
     enableCounter: boolean;
 
@@ -168,82 +166,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
   //     break;
   // }
 
-  const [inputLabelWidth, setInputLabelWidth] =
-    React.useState<Nullable<number>>(null);
-  const [containerHeight, setContainerHeight] =
-    React.useState<Nullable<number>>(null);
-  const [containerPaddingTop, setContainerPaddingTop] =
-    React.useState<Nullable<number>>(null);
-
-  /**
-   * We use these ref to calculate the width and height of the container
-   * - it calculate the container height no matter whether the error is present
-   * - inputLabel have fixed activate and deActivate style.
-   */
-
-  const inputRef = React.useRef<HTMLTextAreaElement>(null);
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
-
-  React.useEffect(() => {
-    if (!focus || !inputRef || !inputRef.current) return;
-
-    inputRef.current.focus();
-  }, [focus]);
-
-  React.useEffect(() => {
-    if (!inputRef.current || inputLabelType !== "inset") {
-      return;
-    }
-
-    const mainContainerPosition = getElementPosition(inputRef.current);
-
-    const inputLabelPaddingWidth = 20;
-
-    const inputLabelWidth =
-      mainContainerPosition.width - inputLabelPaddingWidth * 2;
-
-    setInputLabelWidth(inputLabelWidth);
-  }, [inputRef, inputLabelType]);
-
-  React.useEffect(() => {
-    if (
-      !inputRef ||
-      !inputLabelRef ||
-      !inputRef.current ||
-      !inputLabelRef.current ||
-      !label ||
-      inputLabelType !== "inset"
-    ) {
-      setContainerHeight(getTailwindClassNumber(inputHeight));
-      setContainerPaddingTop(0);
-      return;
-    }
-
-    const inputLabelPosition = getElementPosition(inputLabelRef.current);
-    const mainContainerPosition = getElementPosition(inputRef.current);
-
-    const inputLabelPaddingY = 20;
-    const gapBetweenLabelAndValue = 10;
-    const textAreaMarginBottom = 5; // Avoid textarea cover container border
-
-    const containerHeight =
-      inputLabelPosition.height +
-      (inputLabelType === "inset"
-        ? inputLabelPaddingY + textAreaMarginBottom
-        : 0) +
-      getTailwindClassNumber(inputHeight) +
-      gapBetweenLabelAndValue;
-
-    if (containerHeight > mainContainerPosition.height) {
-      setContainerHeight(containerHeight);
-      setContainerPaddingTop(
-        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
-      );
-    } else {
-      setContainerHeight(getTailwindClassNumber(inputHeight));
-      setContainerPaddingTop(0);
-    }
-  }, [error, inputLabelRef, inputLabelType, inputHeight, label]);
 
   const getInputStyle = error
     ? cn(
@@ -287,60 +210,28 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
   return (
     <div className="flex flex-col">
       <div
-        onClick={() => {
-          if (!inputRef.current) return;
-          inputRef.current.focus();
-        }}
         className={cn(
           "flex flex-col gap-y-2.5 relative",
           inputWidth,
           inputBorderRadius,
-
-          // When in inset mode, the bg-color of this container need to have
-          // the same bg color as input.
-          inputLabelType === "inset"
-            ? cn(
-                containerPaddingTop ? "pb-5" : "pb-5 pt-[34px]",
-                getInputStyle,
-                inputBgColor
-              )
-            : bgColor,
+          bgColor,
           { "mb-2.5": description }
         )}
-        style={{
-          height:
-            inputLabelType === "inset"
-              ? containerHeight
-                ? `${containerHeight}px`
-                : ""
-              : undefined,
-          paddingTop:
-            inputLabelType === "inset"
-              ? containerPaddingTop
-                ? `${containerPaddingTop}px`
-                : ""
-              : "",
-        }}
       >
         <InputLabelBase
           ref={inputLabelRef}
           label={label}
           message={additionalMessageOnLabel}
-          labelWidth={inputLabelWidth}
           error={error}
           answered={answered}
-          focus={focus}
           required={required}
           htmlFor={id}
           type={inputLabelType}
-          setFocus={setFocus}
           labelFontFamily={labelFontFamily}
           labelFontSize={labelFontSize}
           labelFontWeight={labelFontWeight}
           labelLineHeight={labelLineHeight}
           labelTextColor={labelTextColor}
-          labelActivateStyle="top-5"
-          labelDeActivateStyle="top-5"
           errorLabelFontFamily={errorLabelFontFamily}
           errorLabelFontSize={errorLabelFontSize}
           errorLabelFontWeight={errorLabelFontWeight}
@@ -356,7 +247,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
           <textarea
             {...passThrough}
             id={id}
-            ref={inputRef}
             value={value ? value : ""}
             className={cn(
               "flex px-5 min-h-[100px] resize-none",
@@ -376,9 +266,7 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
                 : readOnly
                 ? cn(readOnlyCursor, "text-instillGrey50")
                 : inputTextColor,
-              inputLabelType === "inset"
-                ? "instill-input-no-highlight"
-                : cn(getInputStyle, "pt-5")
+              cn(getInputStyle, "pt-5")
             )}
             disabled={disabled}
             required={required}

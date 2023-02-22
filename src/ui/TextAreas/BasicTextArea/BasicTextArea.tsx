@@ -104,7 +104,7 @@ export const basicTextAreaConfig: BasicTextAreaConfig = {
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "",
-  placeholderTextColor: "placeholder:text-instillGrey80",
+  placeholderTextColor: "placeholder:text-instillGrey50",
   labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",

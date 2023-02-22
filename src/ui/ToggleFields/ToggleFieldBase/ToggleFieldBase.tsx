@@ -151,8 +151,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
     labelFontWeight,
     labelLineHeight,
     labelTextColor,
-    labelActivateStyle,
-    labelDeActivateStyle,
     descriptionWidth,
     descriptionFontFamily,
     descriptionFontSize,
@@ -196,15 +194,12 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
           labelFontWeight={labelFontWeight}
           labelLineHeight={labelLineHeight}
           labelTextColor={labelTextColor}
-          labelActivateStyle={labelActivateStyle}
-          labelDeActivateStyle={labelDeActivateStyle}
           error={error}
           errorLabelFontFamily={errorLabelFontFamily}
           errorLabelFontSize={errorLabelFontSize}
           errorLabelFontWeight={errorLabelFontWeight}
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
-          labelWidth={null}
         />
         <label
           htmlFor={id}

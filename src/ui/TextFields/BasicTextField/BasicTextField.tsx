@@ -68,7 +68,7 @@ export type BasicTextFieldConfig = Pick<
 >;
 
 export const basicTextFieldConfig: BasicTextFieldConfig = {
-  inputHeight: "h-[70px]",
+  inputHeight: null,
   inputWidth: "w-full",
   focusHighlight: true,
   inputBgColor: "bg-white",
@@ -98,7 +98,7 @@ export const basicTextFieldConfig: BasicTextFieldConfig = {
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "",
-  placeholderTextColor: "placeholder:text-instillGrey80",
+  placeholderTextColor: "placeholder:text-instillGrey50",
   labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",

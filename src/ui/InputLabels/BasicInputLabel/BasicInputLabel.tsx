@@ -47,28 +47,16 @@ export const basicInputLabelConfig: BasicInputLabelConfig = {
 };
 
 const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
-  const {
-    focus,
-    error,
-    message,
-    required,
-    answered,
-    htmlFor,
-    type,
-    setFocus,
-    label,
-  } = props;
+  const { error, message, required, answered, htmlFor, type, label } = props;
 
   return (
     <InputLabelBase
-      focus={focus}
       error={error}
       message={message}
       required={required}
       answered={answered}
       htmlFor={htmlFor}
       type={type}
-      setFocus={setFocus}
       label={label}
       {...basicInputLabelConfig}
     />
