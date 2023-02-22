@@ -1,5 +1,4 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
 import BasicInputLabel from "./BasicInputLabel";
 
 const meta: Meta<typeof BasicInputLabel> = {
@@ -10,17 +9,7 @@ const meta: Meta<typeof BasicInputLabel> = {
 export default meta;
 
 const Template: StoryFn<typeof BasicInputLabel> = (args) => {
-  const [focus, setFocus] = useState(false);
-  return (
-    <BasicInputLabel
-      {...args}
-      focus={focus}
-      htmlFor="default"
-      answered={false}
-      required={false}
-      setFocus={setFocus}
-    />
-  );
+  return <BasicInputLabel {...args} htmlFor="default" required={false} />;
 };
 
 export const Playground: StoryFn<typeof BasicInputLabel> = Template.bind({});

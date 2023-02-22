@@ -47,29 +47,16 @@ export const basicInputLabelConfig: TextAreaInputLabelConfig = {
 };
 
 const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
-  const {
-    focus,
-    error,
-    message,
-    required,
-    answered,
-    htmlFor,
-    type,
-    setFocus,
-    label,
-  } = props;
+  const { error, message, required, htmlFor, type, label } = props;
 
   return (
     <InputLabelBase
       label={label}
       error={error}
       message={message}
-      focus={focus}
       required={required}
-      answered={answered}
       htmlFor={htmlFor}
       type={type}
-      setFocus={setFocus}
       {...basicInputLabelConfig}
     />
   );

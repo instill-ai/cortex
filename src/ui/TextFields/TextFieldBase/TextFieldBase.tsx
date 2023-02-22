@@ -88,8 +88,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
     labelFontWeight,
     labelLineHeight,
     labelTextColor,
-    labelActivateStyle,
-    labelDeActivateStyle,
     descriptionWidth,
     descriptionFontFamily,
     descriptionFontSize,
@@ -104,25 +102,7 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
   } = props;
 
   const [focus, setFocus] = React.useState(false);
-  const [answered, setAnswered] = React.useState(false);
   const [showSecret, setShowSecret] = React.useState(false);
-
-  // If defaultValue is present, set focus
-  React.useEffect(() => {
-    if (value) {
-      setAnswered(true);
-    }
-  }, [value]);
-
-  /**
-   * We use these ref to calculate the width and height of the container
-   * when there has very long error message which make label overflow.
-   * - When component is mount we calculate the label width
-   * - When error prop is changed we calculate the container height and compare it with original
-   *   container height, is former is greater, we adapt new container height
-   * - We use inputValuePaddingTop to control the position of the input value
-   */
-
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
 
   const getInputStyle = error
@@ -178,7 +158,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
           ref={inputLabelRef}
           error={error}
           message={additionalMessageOnLabel}
-          answered={answered}
           required={required}
           htmlFor={id}
           type={inputLabelType}
@@ -234,11 +213,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
             autoComplete={autoComplete}
             onChange={(event) => {
               if (onChange) onChange(event);
-              if (!event.target.value) {
-                setAnswered(false);
-                return;
-              }
-              setAnswered(true);
             }}
             onFocus={(e) => {
               if (onFocus) onFocus(e);

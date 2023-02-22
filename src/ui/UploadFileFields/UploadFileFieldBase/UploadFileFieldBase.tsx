@@ -4,7 +4,6 @@ import cn from "clsx";
 import { DocIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
-import { getElementPosition } from "../../../utils";
 
 export type UploadFileFieldBaseProps = Omit<
   BasicInputProps,
@@ -122,8 +121,6 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
     labelFontWeight,
     labelLineHeight,
     labelTextColor,
-    labelActivateStyle,
-    labelDeActivateStyle,
     descriptionWidth,
     descriptionFontFamily,
     descriptionFontSize,
@@ -202,7 +199,6 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
       >
         <InputLabelBase
           message={additionalMessageOnLabel}
-          answered={answered}
           required={required}
           htmlFor={id}
           type={inputLabelType}

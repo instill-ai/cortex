@@ -4,10 +4,7 @@ import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
 
-export type TextAreaBaseProps = Omit<
-  BasicInputProps,
-  "labelActivateStyle" | "labelDeActivateStyle"
-> &
+export type TextAreaBaseProps = BasicInputProps &
   Omit<JSX.IntrinsicElements["textarea"], "onChange" | "value"> & {
     /** Textarea value */
     value: Nullable<string>;
@@ -147,7 +144,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
   } = props;
 
   const [focus, setFocus] = React.useState(false);
-  const [answered, setAnswered] = React.useState(false);
 
   // let resizeStyle: string;
 
@@ -223,7 +219,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
           label={label}
           message={additionalMessageOnLabel}
           error={error}
-          answered={answered}
           required={required}
           htmlFor={id}
           type={inputLabelType}
@@ -275,11 +270,6 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
             autoComplete={autoComplete}
             onChange={(event) => {
               if (onChange) onChange(event);
-              if (!event.target.value) {
-                setAnswered(false);
-                return;
-              }
-              setAnswered(true);
             }}
             onFocus={(event) => {
               if (onFocus) onFocus(event);

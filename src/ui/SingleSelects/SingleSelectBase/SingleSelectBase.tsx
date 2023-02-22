@@ -179,13 +179,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   } = props;
 
   const [focus, setFocus] = React.useState(false);
-  const [answered, setAnswered] = React.useState(false);
-
-  React.useEffect(() => {
-    if (value && !answered) {
-      setAnswered(true);
-    }
-  }, [value, answered]);
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const selectRef = React.useRef<any>(null);
@@ -283,7 +276,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
         <InputLabelBase
           label={label}
           message={additionalMessageOnLabel}
-          answered={answered}
           required={required}
           htmlFor={id}
           type={inputLabelType}
@@ -326,12 +318,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                   selectedOption as SingleValue<SingleSelectOption>,
                   meta
                 );
-              }
-
-              if (selectedOption) {
-                setAnswered(true);
-              } else {
-                setAnswered(false);
               }
             }}
             isDisabled={disabled}

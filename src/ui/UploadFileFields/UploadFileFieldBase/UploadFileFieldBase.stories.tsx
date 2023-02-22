@@ -18,13 +18,12 @@ export const Playground: StoryFn<typeof UploadFileFieldBase> = Template.bind(
 );
 
 Playground.args = {
+  ...basicInputDescriptionConfig,
   required: true,
   focusHighlight: true,
   id: "upload-file-field-base-playground",
   onChange: () => undefined,
-  inputLabelType: "inset",
   placeholder: "playground",
-
   label: "playground",
   additionalMessageOnLabel: null,
   labelFontSize: "text-base",
@@ -32,9 +31,6 @@ Playground.args = {
   labelTextColor: "text-instillGrey50",
   labelLineHeight: "",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
-
   error: "",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
@@ -46,24 +42,19 @@ Playground.args = {
   errorInputBorderWidth: "border",
   errorInputBorderStyle: "border-solid",
   errorInputTextColor: "text-instillRed",
-
   disabled: false,
   disabledInputBgColor: "bg-white",
   disabledInputBorderColor: "border-instillGrey20",
   disabledInputBorderStyle: "border-dashed",
   disabledInputBorderWidth: "border",
   disabledInputTextColor: "text-instillGrey50",
-
   readOnly: false,
   readOnlyInputBgColor: "bg-white",
   readOnlyInputBorderColor: "border-instillGrey20",
   readOnlyInputBorderStyle: "border-solid",
   readOnlyInputBorderWidth: "border",
   readOnlyInputTextColor: "text-instillGrey50",
-
   description: "this is a description about upload file field",
-  ...basicInputDescriptionConfig,
-
   inputWidth: "w-full",
   inputHeight: "h-[70px]",
   inputFontSize: "text-base",
@@ -78,7 +69,6 @@ Playground.args = {
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
-
   uploadButtonText: "Upload",
   uploadButtonBgColor: "bg-instillBlue10",
   uploadButtonTextColor: "text-instillBlue50",

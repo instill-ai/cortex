@@ -44,8 +44,6 @@ export type BasicTextFieldOmitKeys =
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -104,8 +102,6 @@ export const basicTextFieldConfig: BasicTextFieldConfig = {
   labelTextColor: "text-instillGrey90",
   labelFontFamily: "font-sans",
   labelLineHeight: "",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",

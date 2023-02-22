@@ -30,9 +30,6 @@ export type InputLabelBaseProps = {
   /** Whether the input is required or not */
   required?: boolean | undefined;
 
-  /** Whether the input is answered or not */
-  answered: boolean;
-
   /** TailwindCSS format - Message's text color
    * - e.g. text-instillGrey50
    */
@@ -117,7 +114,6 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
       htmlFor,
       required,
       label,
-      answered,
       labelFontSize,
       labelFontWeight,
       labelTextColor,
