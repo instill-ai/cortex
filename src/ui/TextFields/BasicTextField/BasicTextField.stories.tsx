@@ -37,4 +37,6 @@ Playground.args = {
   autoComplete: "off",
   additionalMessageOnLabel: "text label",
   placeholder: "placeholder",
+  error:
+    "[webpack-dev-middleware] wait until bundle finished: /runtime~main.iframe.bundle.js[webpack-dev-middleware] wait until bundle finished: /runtime~main.iframe.bundle.js[webpack-dev-middleware] wait until bundle finished: /runtime~main.iframe.bundle.js[webpack-dev-middleware] wait until bundle finished: /runtime~main.iframe.bundle.js",
 };

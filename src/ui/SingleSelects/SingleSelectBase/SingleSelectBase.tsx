@@ -10,7 +10,6 @@ import { BasicInputProps, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
-import { ElementPosition, getElementPosition } from "../../../utils";
 
 export type SingleSelectOption = {
   label: string;
@@ -163,8 +162,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     labelFontWeight,
     labelLineHeight,
     labelTextColor,
-    labelActivateStyle,
-    labelDeActivateStyle,
     descriptionWidth,
     descriptionFontFamily,
     descriptionFontSize,
@@ -182,121 +179,23 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   } = props;
 
   const [focus, setFocus] = React.useState(false);
-  const [answered, setAnswered] = React.useState(false);
-
-  React.useEffect(() => {
-    if (value && !answered) {
-      setAnswered(true);
-    }
-  }, [value, answered]);
-
-  /**
-   * We use these ref to calculate the width and height of the container
-   * when there has very long error message which make label overflow.
-   * - When component is mount we calculate the label width
-   * - When error prop is changed we calculate the container height and compare it with original
-   *   container height, is former is greater, we adapt new container height
-   * - We use inputValuePaddingTop to control the position of the input value
-   */
-
-  // We create a wrapper on top of Select component to avoid error related to ref assignmemt
-  // inside of react-select
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const selectRef = React.useRef<any>(null);
-
-  const [inputPosition, setInputPosition] =
-    React.useState<Nullable<ElementPosition>>(null);
-  const measureInputRef = React.useCallback((node) => {
-    if (node !== null) {
-      setInputPosition(getElementPosition(node));
-    }
-  }, []);
-
-  const [inputLabelPosition, setInputLabelPosition] =
-    React.useState<Nullable<ElementPosition>>(null);
-  const measureInputLabelRef = React.useCallback((node) => {
-    if (node !== null) {
-      setInputLabelPosition(getElementPosition(node));
-    }
-  }, []);
-  const [inputLabelWidth, setInputLabelWidth] = React.useState<number | null>(
-    null
-  );
-  const [containerHeight, setContainerHeight] = React.useState<number | null>(
-    null
-  );
-  const [inputValuePaddingTop, setInputValuePaddingTop] = React.useState<
-    number | null
-  >(null);
-  const [inputValuePaddingBottom, setInputValuePaddingBottom] = React.useState<
-    number | null
-  >(null);
 
   React.useEffect(() => {
     if (!focus || !selectRef) return;
     selectRef.current.focus();
   }, [focus]);
 
-  React.useEffect(() => {
-    if (!label) {
-      setInputValuePaddingTop(10);
-      setInputValuePaddingBottom(10);
-      return;
-    }
-
-    if (!inputLabelPosition || !inputPosition) {
-      setContainerHeight(70);
-      setInputValuePaddingTop(0);
-      setInputValuePaddingBottom(0);
-      return;
-    }
-
-    if (inputLabelType !== "inset") {
-      setContainerHeight(70);
-      setInputValuePaddingTop(0);
-      setInputValuePaddingBottom(0);
-      return;
-    }
-
-    const inputLabelPaddingWidth = 20;
-    const indicatorWidth = 20;
-
-    const inputLabelWidth =
-      inputPosition.width - inputLabelPaddingWidth * 2 - indicatorWidth;
-
-    setInputLabelWidth(inputLabelWidth);
-
-    const inputLabelPaddingY = 8;
-    const gapBetweenLabelAndValue = 16;
-
-    const containerHeight =
-      inputLabelPosition.height +
-      inputLabelPaddingY * 2 +
-      gapBetweenLabelAndValue +
-      inputPosition.height;
-
-    if (containerHeight > inputPosition.height) {
-      setContainerHeight(containerHeight);
-      setInputValuePaddingTop(
-        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
-      );
-      setInputValuePaddingBottom(0);
-    } else {
-      setContainerHeight(70);
-      setInputValuePaddingTop(24);
-      setInputValuePaddingBottom(0);
-    }
-  }, [error, inputPosition, inputLabelPosition, inputLabelType, label]);
-
   const customStyles: StylesConfig<SingleSelectOption> = React.useMemo(() => {
     return {
       valueContainer: (styles) => ({
         ...styles,
-        paddingTop: inputValuePaddingTop ? inputValuePaddingTop : "",
+        paddingTop: "",
         paddingRight: "20px",
         paddingLeft: "20px",
-        paddingBottom: inputValuePaddingBottom ? inputValuePaddingBottom : "",
+        paddingBottom: "",
       }),
       singleValue: (styles) => ({
         ...styles,
@@ -314,7 +213,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           : "pointer",
         borderRadius: "1px",
         borderWidth: "1px",
-        height: containerHeight ? containerHeight : "",
+        height: 44,
         borderStyle: state.isDisabled ? "dashed" : "solid",
         backgroundColor: "#ffffff",
         borderColor: error
@@ -365,13 +264,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
         marginLeft: "0px",
       }),
     };
-  }, [
-    inputValuePaddingTop,
-    inputValuePaddingBottom,
-    containerHeight,
-    error,
-    readOnly,
-  ]);
+  }, [error, readOnly]);
 
   return (
     <div className="flex flex-col">
@@ -381,13 +274,8 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
         })}
       >
         <InputLabelBase
-          ref={measureInputLabelRef}
           label={label}
           message={additionalMessageOnLabel}
-          labelWidth={inputLabelWidth}
-          answered={answered}
-          focus={focus}
-          setFocus={setFocus}
           required={required}
           htmlFor={id}
           type={inputLabelType}
@@ -396,8 +284,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           labelFontWeight={labelFontWeight}
           labelLineHeight={labelLineHeight}
           labelTextColor={labelTextColor}
-          labelActivateStyle={labelActivateStyle}
-          labelDeActivateStyle={labelDeActivateStyle}
           error={error}
           errorLabelFontFamily={errorLabelFontFamily}
           errorLabelFontSize={errorLabelFontSize}
@@ -410,7 +296,7 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           messageLineHeight={messageLineHeight}
           messageTextColor={messageTextColor}
         />
-        <div ref={measureInputRef}>
+        <div>
           <ReactSelect
             id={id}
             value={value}
@@ -432,12 +318,6 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                   selectedOption as SingleValue<SingleSelectOption>,
                   meta
                 );
-              }
-
-              if (selectedOption) {
-                setAnswered(true);
-              } else {
-                setAnswered(false);
               }
             }}
             isDisabled={disabled}

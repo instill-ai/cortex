@@ -7,8 +7,6 @@ export type BasicInputLabelOmitKeys =
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
@@ -36,8 +34,6 @@ export const basicInputLabelConfig: BasicInputLabelConfig = {
   labelTextColor: "text-instillGrey90",
   labelLineHeight: "",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
@@ -51,30 +47,15 @@ export const basicInputLabelConfig: BasicInputLabelConfig = {
 };
 
 const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
-  const {
-    focus,
-    error,
-    message,
-    labelWidth,
-    required,
-    answered,
-    htmlFor,
-    type,
-    setFocus,
-    label,
-  } = props;
+  const { error, message, required, htmlFor, type, label } = props;
 
   return (
     <InputLabelBase
-      focus={focus}
       error={error}
       message={message}
-      labelWidth={labelWidth}
       required={required}
-      answered={answered}
       htmlFor={htmlFor}
       type={type}
-      setFocus={setFocus}
       label={label}
       {...basicInputLabelConfig}
     />

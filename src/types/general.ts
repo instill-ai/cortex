@@ -229,14 +229,13 @@ export type BasicInputProps = {
    * - Default is h-[70px]
    * - if you are not sure about the defined number, please use abitrary number like w-[number-unit] w-[20px].
    */
-  inputHeight: string;
+  inputHeight: Nullable<string>;
 
   /** They type of input label
    * - normal: Act as normal positioned title
-   * - inset: Stay inside input field, when input field get focused or answered, the label will be pushed upward.
    * - hide: Hide label
    */
-  inputLabelType: "normal" | "inset" | "hide";
+  inputLabelType: "normal" | "hide";
 
   /** TailwindCSS format - Input placeholder's font size
    * - Please add persudo class "placeholder:"
@@ -297,18 +296,6 @@ export type BasicInputProps = {
    * - e.g. leading-normal
    */
   labelLineHeight: string;
-
-  /** TailwindCSS format
-   * - Activate mean whether the input is being focused or the input field was answered
-   * - Don't need to specific translate-x-, it's fixed value
-   */
-  labelActivateStyle?: string;
-
-  /** TailwindCSS format
-   * - Activate mean whether the input is being focused or the input field was answered
-   * - Don't need to specific translate-x-, it's fixed value
-   */
-  labelDeActivateStyle?: string;
 
   /** TailwindCSS format - Description's font size
    * - e.g. text-base

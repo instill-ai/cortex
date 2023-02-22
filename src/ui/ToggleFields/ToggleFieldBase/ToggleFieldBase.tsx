@@ -151,8 +151,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
     labelFontWeight,
     labelLineHeight,
     labelTextColor,
-    labelActivateStyle,
-    labelDeActivateStyle,
     descriptionWidth,
     descriptionFontFamily,
     descriptionFontSize,
@@ -173,14 +171,12 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
     ...passThrough
   } = props;
 
-  const [answered, setAnswered] = React.useState(false);
   const [focus, setFocus] = React.useState(false);
 
   return (
     <div className="flex flex-col">
       <div className={cn("flex flex-col gap-y-2.5", { "mb-2.5": description })}>
         <InputLabelBase
-          answered={answered}
           message={additionalMessageOnLabel}
           messageFontFamily={messageFontFamily}
           messageFontSize={messageFontSize}
@@ -196,15 +192,12 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
           labelFontWeight={labelFontWeight}
           labelLineHeight={labelLineHeight}
           labelTextColor={labelTextColor}
-          labelActivateStyle={labelActivateStyle}
-          labelDeActivateStyle={labelDeActivateStyle}
           error={error}
           errorLabelFontFamily={errorLabelFontFamily}
           errorLabelFontSize={errorLabelFontSize}
           errorLabelFontWeight={errorLabelFontWeight}
           errorLabelLineHeight={errorLabelLineHeight}
           errorLabelTextColor={errorLabelTextColor}
-          labelWidth={null}
         />
         <label
           htmlFor={id}
@@ -266,7 +259,6 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
             onChange={(event) => {
               if (readOnly) return;
               if (onChange) onChange(event);
-              if (!answered) setAnswered(true);
             }}
             onClick={(event) => {
               if (onClick) onClick(event);

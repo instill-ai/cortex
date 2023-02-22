@@ -1,5 +1,4 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
 import InputLabelBase from "./InputLabelBase";
 
 const meta: Meta<typeof InputLabelBase> = {
@@ -10,8 +9,7 @@ const meta: Meta<typeof InputLabelBase> = {
 export default meta;
 
 const Template: StoryFn<typeof InputLabelBase> = (args) => {
-  const [, setFocus] = useState(false);
-  return <InputLabelBase {...args} setFocus={setFocus} />;
+  return <InputLabelBase {...args} />;
 };
 
 export const Playground: StoryFn<typeof InputLabelBase> = Template.bind({});
@@ -27,11 +25,8 @@ Playground.args = {
   messageFontFamily: "font-sans",
   messageFontWeight: "font-normal",
   messageLineHeight: "",
-  focus: false,
   htmlFor: "default",
-  answered: false,
   required: false,
-  type: "inset",
   label: "Playground label",
   message: null,
 };

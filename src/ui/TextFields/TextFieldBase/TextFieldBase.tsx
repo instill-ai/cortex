@@ -5,14 +5,6 @@ import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
-import { getElementPosition, getTailwindClassNumber } from "../../../utils";
-
-//  TextFieldBase
-//
-//  ### How we implement inset lable transfor
-//  - Use top-1/2 + (-translate-y-1/2) to make label fix at the center of input box
-//  - Use top-1/2 + (-translate-y-full) to move label up a little bit
-//  - If you want to change the InputLabel font size, you have to change the input's paddingTop and Input paddingTop
 
 export type TextFieldBaseProps = BasicInputProps &
   Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {
@@ -96,8 +88,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
     labelFontWeight,
     labelLineHeight,
     labelTextColor,
-    labelActivateStyle,
-    labelDeActivateStyle,
     descriptionWidth,
     descriptionFontFamily,
     descriptionFontSize,
@@ -112,98 +102,8 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
   } = props;
 
   const [focus, setFocus] = React.useState(false);
-  const [answered, setAnswered] = React.useState(false);
   const [showSecret, setShowSecret] = React.useState(false);
-  const [inputLabelWidth, setInputLabelWidth] =
-    React.useState<Nullable<number>>(null);
-  const [containerHeight, setContainerHeight] =
-    React.useState<Nullable<number>>(null);
-  const [inputValuePaddingTop, setInputValuePaddingTop] =
-    React.useState<Nullable<number>>(null);
-
-  // If defaultValue is present, set focus
-  React.useEffect(() => {
-    if (value) {
-      setAnswered(true);
-    }
-  }, [value]);
-
-  /**
-   * We use these ref to calculate the width and height of the container
-   * when there has very long error message which make label overflow.
-   * - When component is mount we calculate the label width
-   * - When error prop is changed we calculate the container height and compare it with original
-   *   container height, is former is greater, we adapt new container height
-   * - We use inputValuePaddingTop to control the position of the input value
-   */
-
-  const inputRef = React.useRef<HTMLInputElement>(null);
   const inputLabelRef = React.useRef<HTMLLabelElement>(null);
-
-  React.useEffect(() => {
-    if (!focus || !inputRef || !inputRef.current) return;
-
-    inputRef.current.focus();
-  }, [focus]);
-
-  React.useEffect(() => {
-    if (!inputRef.current || inputLabelType !== "inset") {
-      return;
-    }
-
-    const mainContainerPosition = getElementPosition(inputRef.current);
-
-    const inputLabelPaddingWidth = 20;
-
-    const inputLabelWidth =
-      mainContainerPosition.width - inputLabelPaddingWidth * 2;
-    setInputLabelWidth(inputLabelWidth);
-  }, [inputRef, inputLabelType]);
-
-  React.useEffect(() => {
-    if (
-      !error ||
-      !inputRef ||
-      !inputLabelRef.current ||
-      !inputRef.current ||
-      !inputLabelRef ||
-      inputLabelType !== "inset" ||
-      !label
-    ) {
-      setContainerHeight(getTailwindClassNumber(inputHeight));
-      setInputValuePaddingTop(0);
-      return;
-    }
-
-    const inputLabelPosition = getElementPosition(inputLabelRef.current);
-    const mainContainerPosition = getElementPosition(inputRef.current);
-
-    const inputLabelPaddingY = 20;
-    const gapBetweenLabelAndValue = 10;
-
-    const inputLabelHeight =
-      inputLabelPosition.height +
-      inputLabelPaddingY * 2 +
-      getTailwindClassNumber(inputLineHeight) +
-      gapBetweenLabelAndValue;
-
-    if (inputLabelHeight > mainContainerPosition.height) {
-      setContainerHeight(inputLabelHeight);
-      setInputValuePaddingTop(
-        inputLabelPosition.height + inputLabelPaddingY + gapBetweenLabelAndValue
-      );
-    } else {
-      setContainerHeight(getTailwindClassNumber(inputHeight));
-      setInputValuePaddingTop(0);
-    }
-  }, [
-    error,
-    inputLabelRef,
-    inputLabelType,
-    inputHeight,
-    inputLineHeight,
-    label,
-  ]);
 
   const getInputStyle = error
     ? cn(
@@ -251,7 +151,6 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
           "flex flex-col gap-y-2.5 relative",
           inputWidth,
           inputBorderRadius,
-          inputLabelType === "inset" ? getInputStyle : "",
           { "mb-2.5": description }
         )}
       >
@@ -259,21 +158,15 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
           ref={inputLabelRef}
           error={error}
           message={additionalMessageOnLabel}
-          answered={answered}
-          focus={focus}
-          setFocus={setFocus}
           required={required}
           htmlFor={id}
           type={inputLabelType}
           label={label}
-          labelWidth={inputLabelWidth}
           labelFontFamily={labelFontFamily}
           labelFontSize={labelFontSize}
           labelFontWeight={labelFontWeight}
           labelLineHeight={labelLineHeight}
           labelTextColor={labelTextColor}
-          labelActivateStyle={labelActivateStyle}
-          labelDeActivateStyle={labelDeActivateStyle}
           errorLabelFontFamily={errorLabelFontFamily}
           errorLabelFontSize={errorLabelFontSize}
           errorLabelFontWeight={errorLabelFontWeight}
@@ -289,22 +182,11 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
           <input
             {...passThrough}
             value={value ? value : ""}
-            style={{
-              height: containerHeight ? `${containerHeight}px` : "",
-              paddingTop: inputValuePaddingTop
-                ? `${inputValuePaddingTop}px`
-                : "",
-            }}
-            ref={inputRef}
             className={cn(
               "pl-5",
-              inputLabelType === "inset"
-                ? label
-                  ? "pt-6 instill-input-no-highlight"
-                  : "instill-input-no-highlight"
-                : getInputStyle,
+              getInputStyle,
               inputBgColor,
-              inputHeight,
+              inputHeight ? inputHeight : "py-2.5",
               inputWidth,
               inputFontSize,
               inputLineHeight,
@@ -326,24 +208,11 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
             type={showSecret ? "text" : type}
             disabled={disabled}
             required={required}
-            // When in inset mode, we will only display placeholder when it is
-            // focused
-            placeholder={
-              inputLabelType === "inset"
-                ? focus
-                  ? placeholder
-                  : undefined
-                : placeholder
-            }
+            placeholder={placeholder}
             readOnly={readOnly}
             autoComplete={autoComplete}
             onChange={(event) => {
               if (onChange) onChange(event);
-              if (!event.target.value) {
-                setAnswered(false);
-                return;
-              }
-              setAnswered(true);
             }}
             onFocus={(e) => {
               if (onFocus) onFocus(e);

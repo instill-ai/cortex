@@ -7,8 +7,6 @@ export type TextAreaInputLabelKeys =
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
@@ -36,8 +34,6 @@ export const basicInputLabelConfig: TextAreaInputLabelConfig = {
   labelTextColor: "text-instillGrey50",
   labelLineHeight: "",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "top-0 translate-y-3",
-  labelDeActivateStyle: "top-0 translate-y-[26px]",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
@@ -51,31 +47,16 @@ export const basicInputLabelConfig: TextAreaInputLabelConfig = {
 };
 
 const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
-  const {
-    focus,
-    error,
-    message,
-    labelWidth,
-    required,
-    answered,
-    htmlFor,
-    type,
-    setFocus,
-    label,
-  } = props;
+  const { error, message, required, htmlFor, type, label } = props;
 
   return (
     <InputLabelBase
       label={label}
       error={error}
       message={message}
-      labelWidth={labelWidth}
-      focus={focus}
       required={required}
-      answered={answered}
       htmlFor={htmlFor}
       type={type}
-      setFocus={setFocus}
       {...basicInputLabelConfig}
     />
   );

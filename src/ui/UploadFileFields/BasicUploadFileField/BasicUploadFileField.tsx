@@ -40,8 +40,6 @@ export type BasicUploadFileFieldOmitKeys =
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
   | "errorLabelFontWeight"
@@ -112,7 +110,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   inputLineHeight: "",
   inputTextColor: "text-instillGrey95",
   inputWidth: "w-full",
-  inputHeight: "h-[70px]",
+  inputHeight: "h-[44px]",
   focusHighlight: true,
   inputBorderColor: "border-instillGrey20",
   inputBorderStyle: "border-solid",
@@ -122,8 +120,6 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   labelTextColor: "text-instillGrey90",
   labelLineHeight: "",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
@@ -153,7 +149,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "",
-  placeholderTextColor: "placeholder:text-instillGrey80",
+  placeholderTextColor: "placeholder:text-instillGrey50",
 };
 
 const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {

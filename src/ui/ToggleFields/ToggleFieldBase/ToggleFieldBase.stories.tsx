@@ -25,11 +25,11 @@ const Template: StoryFn<typeof ToggleFieldBase> = (args) => {
 export const Playground: StoryFn<typeof ToggleFieldBase> = Template.bind({});
 
 Playground.args = {
+  ...basicInputDescriptionConfig,
   required: true,
   focusHighlight: true,
   id: "toggle-field-base-playground",
   description: "this is a description for toggle field base",
-
   label: "toggle-field-base-playground",
   additionalMessageOnLabel: null,
   labelFontSize: "text-base",
@@ -37,9 +37,6 @@ Playground.args = {
   labelTextColor: "text-instillGrey50",
   labelLineHeight: "",
   labelFontFamily: "font-sans",
-  labelActivateStyle: "",
-  labelDeActivateStyle: "",
-
   inputBgColor: "bg-white",
   inputBorderRadius: "",
   inputBorderColor: "border-instillGrey20",
@@ -48,11 +45,9 @@ Playground.args = {
   inputFocusBorderColor: "border-instillBlue50",
   inputFocusShadow: "instill-input-focus-shadow",
   inputShadow: null,
-
   dotColor: "bg-instillGrey30",
   checkedInputBorderColor: "border-instillBlue50",
   checkedDotColor: "bg-instillBlue50",
-
   disabled: true,
   disabledDotColor: "bg-instillGrey20",
   disabledCheckedDotColor: "bg-[#8DF5FF]",
@@ -62,7 +57,6 @@ Playground.args = {
   disabledInputBorderStyle: "border-dashed",
   disabledInputBorderWidth: "border",
   disabledCheckedInputBorderColor: "border-instillGrey20",
-
   readOnly: false,
   readOnlyCursor: "cursor-auto",
   readOnlyInputBgColor: "bg-white",
@@ -72,13 +66,10 @@ Playground.args = {
   readOnlyCheckedInputBorderColor: "border-[#8DF5FF]",
   readOnlyCheckedDotColor: "bg-[#8DF5FF]",
   readOnlyDotColor: "bg-instillGrey20",
-
   error: "",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",
   errorLabelFontWeight: "font-normal",
   errorLabelLineHeight: "",
   errorLabelTextColor: "text-instillRed",
-
-  ...basicInputDescriptionConfig,
 };

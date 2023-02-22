@@ -44,8 +44,6 @@ export type BasicTextFieldOmitKeys =
   | "labelTextColor"
   | "labelLineHeight"
   | "labelFontFamily"
-  | "labelActivateStyle"
-  | "labelDeActivateStyle"
   | "errorInputBgColor"
   | "errorLabelFontFamily"
   | "errorLabelFontSize"
@@ -68,7 +66,7 @@ export type BasicTextFieldConfig = Pick<
 >;
 
 export const basicTextFieldConfig: BasicTextFieldConfig = {
-  inputHeight: "h-[70px]",
+  inputHeight: null,
   inputWidth: "w-full",
   focusHighlight: true,
   inputBgColor: "bg-white",
@@ -98,14 +96,12 @@ export const basicTextFieldConfig: BasicTextFieldConfig = {
   placeholderFontSize: "placeholder:text-base",
   placeholderFontWeight: "placeholder:font-normal",
   placeholderLineHeight: "",
-  placeholderTextColor: "placeholder:text-instillGrey80",
+  placeholderTextColor: "placeholder:text-instillGrey50",
   labelFontSize: "text-base",
   labelFontWeight: "font-normal",
   labelTextColor: "text-instillGrey90",
   labelFontFamily: "font-sans",
   labelLineHeight: "",
-  labelActivateStyle: "top-1/2 -translate-y-[120%]",
-  labelDeActivateStyle: "top-1/2 -translate-y-1/2",
   errorInputBgColor: "bg-white",
   errorLabelFontFamily: "font-sans",
   errorLabelFontSize: "text-base",
