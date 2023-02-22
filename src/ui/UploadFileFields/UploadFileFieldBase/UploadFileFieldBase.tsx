@@ -223,7 +223,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
         <label
           htmlFor={id}
           className={cn(
-            "flex flex-row p-0 relative",
+            "flex flex-row p-0 relative cursor-pointer",
             inputWidth,
             inputHeight,
             inputBorderRadiusBottomLeft,
@@ -313,7 +313,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
             ref={inputRef}
             key={fileInputKey}
             className={cn(
-              "opacity-0 overflow-hidden absolute",
+              "opacity-0 overflow-hidden absolute cursor-pointer",
               inputHeight ? inputHeight : "py-2.5",
               inputWidth,
               placeholderFontFamily,
