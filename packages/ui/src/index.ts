@@ -7,7 +7,6 @@ import { IconStyle } from "./types/general";
 import { ActionMeta } from "react-select";
 
 export * from "./ui";
-export * from "./generators";
 export * from "./toolkits";
 export { getTailwindClassNumber, getElementPosition, useWindowSize };
 export type { ActionMeta, ElementPosition, WindowSize, IconStyle };
