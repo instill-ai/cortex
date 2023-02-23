@@ -1,5 +1,11 @@
 # @instill-ai/design-system
 
+## 0.1.1
+
+### Patch Changes
+
+- 0a84a34: Update the package.json config to make it public
+
 ## 0.1.0
 
 ### Minor Changes
