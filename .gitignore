@@ -21,6 +21,9 @@ build
 .DS_Store
 *.pem
 
+# turbo
+.turbo
+
 # debug
 npm-debug.log*
 yarn-debug.log*
