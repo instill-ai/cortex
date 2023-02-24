@@ -345,7 +345,8 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
               handleInputOnClick(event);
             }}
           />
-          <div
+          <button
+            type="button"
             className={cn(
               "flex h-full ml-auto px-5",
               answered ? "absolute bottom-0 right-0 z-20" : "",
@@ -369,7 +370,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
             <span className="m-auto">
               {answered ? "Delete" : uploadButtonText}
             </span>
-          </div>
+          </button>
         </label>
       </div>
       <InputDescriptionBase
