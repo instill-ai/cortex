@@ -4,6 +4,14 @@
 
 ### Patch Changes
 
+- d112a82: fix AccordionBase has non-interactive element with onClick handler issue, replease div element with button
+- d112a82: fix duplicated import and non-interactive element lint issue
+- d112a82: Adapt new eslint-config-cortex to simplify the workflow
+
+## 0.1.2
+
+### Patch Changes
+
 - d3bcb5b: fix AccordionBase has non-interactive element with onClick handler issue, replease div element with button
 - d3bcb5b: fix duplicated import and non-interactive element lint issue
 - d3bcb5b: Adapt new eslint-config-cortex to simplify the workflow
