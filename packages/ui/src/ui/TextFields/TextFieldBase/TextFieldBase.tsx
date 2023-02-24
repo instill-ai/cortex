@@ -4,7 +4,7 @@ import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
-import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
+import { InputDescriptionBase } from "../../InputDescriptions/InputDescriptionBase";
 
 export type TextFieldBaseProps = BasicInputProps &
   Omit<JSX.IntrinsicElements["input"], "onChange" | "value"> & {

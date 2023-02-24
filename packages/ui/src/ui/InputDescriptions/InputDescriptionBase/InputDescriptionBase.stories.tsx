@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import InputDescriptionBase from "./InputDescriptionBase";
+import { InputDescriptionBase } from "./InputDescriptionBase";
 
 const meta: Meta<typeof InputDescriptionBase> = {
   title: "Components/Ui/Input/InputDescriptionBase",
