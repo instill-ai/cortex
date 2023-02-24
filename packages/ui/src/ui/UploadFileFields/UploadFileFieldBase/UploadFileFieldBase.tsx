@@ -3,7 +3,7 @@ import { BasicInputProps, Nullable } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
-import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
+import { InputDescriptionBase } from "../../InputDescriptions/InputDescriptionBase";
 
 export type UploadFileFieldBaseProps = Omit<
   BasicInputProps,
@@ -170,7 +170,7 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
     }
   };
 
-  const handleButtonOnClick = (event: React.MouseEvent<HTMLDivElement>) => {
+  const handleButtonOnClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     if (readOnly || disabled) return;
 
     if (answered) {

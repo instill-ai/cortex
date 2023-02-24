@@ -9,7 +9,7 @@ import cn from "clsx";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
-import InputDescriptionBase from "../../InputDescriptions/InputDescriptionBase";
+import { InputDescriptionBase } from "../../InputDescriptions/InputDescriptionBase";
 
 export type SingleSelectOption = {
   label: string;

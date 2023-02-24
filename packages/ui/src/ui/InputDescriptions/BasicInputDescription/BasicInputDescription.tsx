@@ -1,5 +1,6 @@
 import React from "react";
-import InputDescriptionBase, {
+import {
+  InputDescriptionBase,
   InputDescriptionBaseProps,
 } from "../InputDescriptionBase";
 
@@ -34,7 +35,9 @@ export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
   descriptionLinkTextDecoration: "underline",
 };
 
-const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (props) => {
+export const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (
+  props
+) => {
   const { description } = props;
   return (
     <InputDescriptionBase
@@ -43,5 +46,3 @@ const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (props) => {
     />
   );
 };
-
-export default BasicInputDescription;

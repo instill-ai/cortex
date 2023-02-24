@@ -1,7 +1,7 @@
 import React from "react";
 import TextWithHtml from "../../TextWithHtml";
 
-export interface InputDescriptionBaseProps {
+export type InputDescriptionBaseProps = {
   /** Description of the input */
   description: string;
 
@@ -47,9 +47,9 @@ export interface InputDescriptionBaseProps {
    * - e.g. underline
    */
   descriptionLinkTextDecoration: string;
-}
+};
 
-const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = (
+export const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = (
   props: InputDescriptionBaseProps
 ) => {
   const {
@@ -82,5 +82,3 @@ const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = (
     />
   );
 };
-
-export default InputDescriptionBase;
