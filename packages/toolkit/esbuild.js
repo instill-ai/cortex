@@ -15,7 +15,7 @@ esbuild
   .build({
     ...sharedConfig,
     format: "esm",
-    outfile: "./build/index.esm.js",
+    outdir: "./build",
     target: ["esnext", "node12"],
   })
   .catch(() => process.exit(1));

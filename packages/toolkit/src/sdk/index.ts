@@ -3,3 +3,4 @@ export * from "./model";
 export * from "./connector";
 export * from "./mgmt";
 export * from "./helper";
+export * from "./types";
