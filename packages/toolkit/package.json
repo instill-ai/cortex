@@ -11,6 +11,7 @@
     "react"
   ],
   "scripts": {
+    "test": "node --loader tsx --test src/**/*.test.ts",
     "build": "pnpm rimraf build && node ./esbuild.js && pnpm ts-types",
     "ts-types": "tsc --emitDeclarationOnly --outDir build"
   },
@@ -29,6 +30,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
+    "tsx": "^3.12.3",
     "typescript": "^4.6.3"
   },
   "peerDependencies": {
