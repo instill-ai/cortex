@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## 0.1.3
+
+### Patch Changes
+
+- db21ee7: Fix eslint-config-cortex version
+- 1f43ad1: Update tsconfig with tsconfig base json file in the root
+
 ## 0.1.2
 
 ### Patch Changes
