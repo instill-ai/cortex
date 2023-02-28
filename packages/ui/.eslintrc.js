@@ -1,4 +1,4 @@
 module.exports = {
   root: true,
-  extends: ["cortex"],
+  extends: ["@instill-ai/eslint-config-cortex"],
 };
