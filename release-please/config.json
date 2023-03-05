@@ -1,0 +1,34 @@
+{
+  "packages": {
+    "./packages/ui": {
+      "release-type": "node",
+      "package-name": "@instill-ai/design-system",
+      "component": "@instill-ai/design-system", 
+      "draft": false,
+      "prerelease": true,
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": false,
+      "changelog-sections": [{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}, {"type":"docs","section":"Documentation","hidden":false}]
+    },
+    "./packages/eslint-config-cortex": {
+      "release-type": "node",
+      "package-name": "@instill-ai/eslint-config-cortex",
+      "component": "@instill-ai/eslint-config-cortex", 
+      "draft": false,
+      "prerelease": true,
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": false,
+      "changelog-sections": [{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}, {"type":"docs","section":"Documentation","hidden":false}]
+    },
+    "./packages/toolkit": {
+      "release-type": "node",
+      "package-name": "@instill-ai/toolkit",
+      "component": "@instill-ai/toolkit", 
+      "draft": false,
+      "prerelease": true,
+      "bump-minor-pre-major": true,
+      "bump-patch-for-minor-pre-major": false,
+      "changelog-sections": [{"type":"feat","section":"Features","hidden":false},{"type":"fix","section":"Bug Fixes","hidden":false},{"type":"chore","section":"Miscellaneous","hidden":false}, {"type":"docs","section":"Documentation","hidden":false}]
+    }
+  }
+}
