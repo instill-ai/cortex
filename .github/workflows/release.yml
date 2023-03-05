@@ -58,8 +58,27 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         run: rm -rf node_modules && pnpm i --frozen-lockfile
 
-      - name: Publish
+      - name: Build packages
         if: ${{ steps.release.outputs.releases_created }}
-        run: pnpm publish -r --no-git-checks
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPMTOKEN }}
+        run: pnpm ci-build-packages
+
+      - name: Publish design-system
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: "./packages/ui/package.json"
+
+      - name: Publish toolkit
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: "./packages/toolkit/package.json"
+
+      - name: Publish eslint-config-cortex
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_TOKEN }}
+          package: "./packages/eslint-config-cortex/package.json"
