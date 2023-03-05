@@ -21,6 +21,10 @@ jobs:
           config-file: release-please/config.json
           manifest-file: release-please/manifest.json
 
+      - name: Checkout
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: actions/checkout@v3
+
       - name: Setup Node.js 16.x
         if: ${{ steps.release.outputs.releases_created }}
         uses: actions/setup-node@v3
