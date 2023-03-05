@@ -66,19 +66,19 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPMTOKEN }}
           package: "./packages/ui/package.json"
 
       - name: Publish toolkit
         if: ${{ steps.release.outputs.releases_created }}
         uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPMTOKEN }}
           package: "./packages/toolkit/package.json"
 
       - name: Publish eslint-config-cortex
         if: ${{ steps.release.outputs.releases_created }}
         uses: JS-DevTools/npm-publish@v1
         with:
-          token: ${{ secrets.NPM_TOKEN }}
+          token: ${{ secrets.NPMTOKEN }}
           package: "./packages/eslint-config-cortex/package.json"
