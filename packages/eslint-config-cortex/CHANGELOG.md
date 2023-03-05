@@ -8,6 +8,25 @@
 * add the utility, sdk, type and airbytes type ([9ced48f](https://github.com/instill-ai/design-system/commit/9ced48fe9d7748206c0e1e591ca8f2ee0636856b))
 
 
+### Bug Fixes
+
+* fix build and publish steps ([#133](https://github.com/instill-ai/design-system/issues/133)) ([6497486](https://github.com/instill-ai/design-system/commit/6497486761bc16a2d381f7c49fe5acd20fade852))
+
+
+### Miscellaneous
+
+* release main ([#129](https://github.com/instill-ai/design-system/issues/129)) ([1e1be68](https://github.com/instill-ai/design-system/commit/1e1be684a4076d456cd500fe1ca0768026e2e915))
+* release main ([#132](https://github.com/instill-ai/design-system/issues/132)) ([626a977](https://github.com/instill-ai/design-system/commit/626a9779540b57afab7e29fb58604f2fc392a631))
+* rollback version and update release action ([#131](https://github.com/instill-ai/design-system/issues/131)) ([ba93866](https://github.com/instill-ai/design-system/commit/ba938660d0420443889f8625a6c32dfd4cc54ea5))
+
+## [0.2.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex@0.1.0...@instill-ai/eslint-config-cortex-v0.2.0) (2023-03-05)
+
+
+### Features
+
+* add the utility, sdk, type and airbytes type ([9ced48f](https://github.com/instill-ai/design-system/commit/9ced48fe9d7748206c0e1e591ca8f2ee0636856b))
+
+
 ### Miscellaneous
 
 * release main ([#129](https://github.com/instill-ai/design-system/issues/129)) ([1e1be68](https://github.com/instill-ai/design-system/commit/1e1be684a4076d456cd500fe1ca0768026e2e915))
