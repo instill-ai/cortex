@@ -41,7 +41,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:02:00"
     );
 
-    assert.strictEqual(result, "2 minute ago");
+    assert.strictEqual(result, "2 minutes ago");
   });
 
   test("should return an hour ago", () => {
@@ -65,7 +65,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T10:00:00"
     );
-    assert.strictEqual(result, "10 hour ago");
+    assert.strictEqual(result, "10 hours ago");
   });
 
   test("should return yesterday", () => {

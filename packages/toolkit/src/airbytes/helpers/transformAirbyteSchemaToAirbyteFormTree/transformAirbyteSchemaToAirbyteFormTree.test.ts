@@ -234,11 +234,8 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
     }
   );
 
-  console.log(formTree);
-
   const expected = {
     _type: "formGroup",
-    isRequired: true,
     hasOauth: undefined,
     jsonSchema: {
       type: "object",
@@ -247,14 +244,17 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
         start_date: { type: "string" },
         credentials: {
           type: "object",
-          description: "Credentials Condition Description",
           title: "Credentials Condition",
+          description: "Credentials Condition Description",
           order: 0,
           oneOf: [
             {
               title: "api key",
               required: ["api_key"],
-              properties: { api_key: { type: "string" } },
+              properties: {
+                api_key: { type: "string" },
+                type: { type: "string", const: "api", default: "api" },
+              },
             },
             {
               title: "oauth",
@@ -264,6 +264,7 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
                   type: "string",
                   examples: ["https://api.hubspot.com/"],
                 },
+                type: { type: "string", const: "oauth", default: "oauth" },
               },
             },
           ],
@@ -274,21 +275,25 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
     fieldKey: "key",
     properties: [
       {
+        title: "Credentials Condition",
+        description: "Credentials Condition Description",
+        order: 0,
         _type: "formCondition",
         path: "key.credentials",
-        description: "Credentials Condition Description",
-        title: "Credentials Condition",
-        order: 0,
         fieldKey: "credentials",
         conditions: {
           "api key": {
             title: "api key",
+            hasOauth: undefined,
             _type: "formGroup",
             jsonSchema: {
               title: "api key",
               required: ["api_key"],
+              properties: {
+                api_key: { type: "string" },
+                type: { type: "string", const: "api", default: "api" },
+              },
               type: "object",
-              properties: { api_key: { type: "string" } },
             },
             path: "key.credentials",
             fieldKey: "credentials",
@@ -302,22 +307,35 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
                 multiline: false,
                 type: "string",
               },
+              {
+                const: "api",
+                default: "api",
+                _type: "formItem",
+                path: "key.credentials.type",
+                fieldKey: "type",
+                isRequired: false,
+                isSecret: false,
+                multiline: false,
+                type: "string",
+              },
             ],
             isRequired: false,
           },
           oauth: {
             title: "oauth",
             _type: "formGroup",
+            hasOauth: undefined,
             jsonSchema: {
               title: "oauth",
               required: ["redirect_uri"],
-              type: "object",
               properties: {
                 redirect_uri: {
                   type: "string",
                   examples: ["https://api.hubspot.com/"],
                 },
+                type: { type: "string", const: "oauth", default: "oauth" },
               },
+              type: "object",
             },
             path: "key.credentials",
             fieldKey: "credentials",
@@ -328,6 +346,17 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
                 path: "key.credentials.redirect_uri",
                 fieldKey: "redirect_uri",
                 isRequired: true,
+                isSecret: false,
+                multiline: false,
+                type: "string",
+              },
+              {
+                const: "oauth",
+                default: "oauth",
+                _type: "formItem",
+                path: "key.credentials.type",
+                fieldKey: "type",
+                isRequired: false,
                 isSecret: false,
                 multiline: false,
                 type: "string",
@@ -348,6 +377,7 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
         type: "string",
       },
     ],
+    isRequired: true,
   };
 
   deepStrictEqual(formTree, expected);
