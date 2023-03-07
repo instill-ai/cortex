@@ -3,5 +3,6 @@
   "compilerOptions": {
     "outDir": "build"
   },
-  "include": ["**/*.ts", "**/*.tsx"]
+  "include": ["**/*.ts", "**/*.tsx"],
+  "exclude": ["./testRunner.ts"]
 }
