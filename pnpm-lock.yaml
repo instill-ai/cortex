@@ -46,7 +46,6 @@ importers:
 
   packages/toolkit:
     specifiers:
-      '@instill-ai/design-system': workspace:*
       '@instill-ai/eslint-config-cortex': workspace:*
       '@types/json-schema': ^7.0.11
       '@types/node': ^18.14.1
@@ -64,7 +63,6 @@ importers:
       zod: ^3.21.4
       zustand: ^4.3.6
     devDependencies:
-      '@instill-ai/design-system': link:../ui
       '@instill-ai/eslint-config-cortex': link:../eslint-config-cortex
       '@types/json-schema': 7.0.11
       '@types/node': 18.14.2
@@ -194,6 +192,31 @@ importers:
       tailwindcss: 3.2.7_postcss@8.4.21
       typescript: 4.9.5
       webpack: 5.75.0_esbuild@0.14.54
+
+  packages/view:
+    specifiers:
+      '@instill-ai/design-system': workspace:*
+      '@instill-ai/eslint-config-cortex': workspace:*
+      '@instill-ai/toolkit': workspace:*
+      '@types/react': ^17.0.39
+      '@types/react-dom': 17.0.11
+      esbuild: ^0.14.34
+      react: ^18.2.0
+      react-dom: ^18.2.0
+      rimraf: ^3.0.2
+      typescript: ^4.6.3
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    devDependencies:
+      '@instill-ai/design-system': link:../ui
+      '@instill-ai/eslint-config-cortex': link:../eslint-config-cortex
+      '@instill-ai/toolkit': link:../toolkit
+      '@types/react': 17.0.53
+      '@types/react-dom': 17.0.11
+      esbuild: 0.14.54
+      rimraf: 3.0.2
+      typescript: 4.9.5
 
 packages:
 
@@ -11792,7 +11815,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-    dev: true
 
   /react-element-to-jsx-string/15.0.0_biqbaboplfbrettd7655fr4n2y:
     resolution: {integrity: sha512-UDg4lXB6BzlobN60P8fHWVPX3Kyw8ORrTeBtClmIlGdkOOE+GYQSFvmEU5iLLpwp/6v42DINwNcwOhOLfQ//FQ==}
@@ -11882,7 +11904,6 @@ packages:
     engines: {node: '>=0.10.0'}
     dependencies:
       loose-envify: 1.4.0
-    dev: true
 
   /read-cache/1.0.0:
     resolution: {integrity: sha512-Owdv/Ft7IjOgm/i0xvNDZ1LrRANRfew4b2prF3OWMQLxLfu3bS8FVhCsrSCMK4lR56Y9ya+AThoTpDCTxCmpRA==}
@@ -12285,7 +12306,6 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
-    dev: true
 
   /schema-utils/2.7.1:
     resolution: {integrity: sha512-SHiNtMOUGWBQJwzISiVYKu82GiV4QYGePp3odlY1tuKO7gPtphAT5R/py0fA6xtbgLL/RvtJZnU9b8s0F1q0Xg==}
