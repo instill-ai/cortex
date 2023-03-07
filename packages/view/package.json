@@ -1,7 +1,7 @@
 {
-  "name": "@instill-ai/toolkit",
-  "version": "0.2.1",
-  "description": "Instill AI's frontend toolkit",
+  "name": "@instill-ai/view",
+  "version": "0.0.0",
+  "description": "Instill AI's frontend view package",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
   "keywords": [
@@ -11,7 +11,6 @@
     "react"
   ],
   "scripts": {
-    "test": "node --loader tsx ./testRunner.ts",
     "build": "pnpm rimraf build && node ./esbuild.js && pnpm ts-types",
     "ts-types": "tsc --emitDeclarationOnly --outDir build"
   },
@@ -21,32 +20,24 @@
   "module": "build/index.esm.js",
   "typings": "build/index.d.ts",
   "devDependencies": {
+    "@instill-ai/design-system": "workspace:*",
     "@instill-ai/eslint-config-cortex": "workspace:*",
-    "@types/json-schema": "^7.0.11",
-    "@types/node": "^18.14.1",
+    "@instill-ai/toolkit": "workspace:*",
     "@types/react": "^17.0.39",
     "@types/react-dom": "17.0.11",
-    "axios": "^1.3.4",
     "esbuild": "^0.14.34",
-    "fast-glob": "^3.2.12",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "rimraf": "^3.0.2",
-    "tsx": "^3.12.3",
-    "typescript": "^4.6.3",
-    "yup": "^0.32.11",
-    "zustand": "^4.3.6",
-    "zod": "^3.21.4"
+    "typescript": "^4.6.3"
   },
   "peerDependencies": {
-    "axios": "^1.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "yup": "^0.32.11",
-    "zustand": "^4.3.6",
-    "zod": "^3.21.4"
+    "@instill-ai/design-system": "workspace:*",
+    "@instill-ai/toolkit": "workspace:*"
   },
   "publishConfig": {
     "access": "public"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

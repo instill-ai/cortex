@@ -1,5 +1,13 @@
-import { dot } from "../../dot";
-import { Nullable } from "../../type";
+import type { Nullable } from "@instill-ai/toolkit";
+import {
+  dot,
+  getConditionFormPath,
+  AirbyteFormConditionItemWithUiFields,
+  AirbyteFormItem,
+  AirbyteFieldValues,
+  SelectedItemMap,
+  AirbyteFieldErrors,
+} from "@instill-ai/toolkit";
 import {
   BasicSingleSelect,
   SingleSelectOption,
@@ -13,14 +21,6 @@ import {
   useState,
   useEffect,
 } from "react";
-import { getConditionFormPath } from "../helpers";
-import {
-  AirbyteFormConditionItemWithUiFields,
-  AirbyteFormItem,
-  AirbyteFieldValues,
-  SelectedItemMap,
-  AirbyteFieldErrors,
-} from "../types";
 
 export type OneOfConditionSectionProps = {
   formTree: AirbyteFormConditionItemWithUiFields;

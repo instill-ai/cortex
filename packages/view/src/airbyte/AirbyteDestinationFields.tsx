@@ -4,9 +4,9 @@ import {
   AirbyteFieldValues,
   AirbyteFormTree,
   SelectedItemMap,
-} from "../types";
-import { useBuildAirbyteFields } from "../hooks";
-import { Nullable } from "../../type";
+} from "@instill-ai/toolkit";
+import type { Nullable } from "@instill-ai/toolkit";
+import { useBuildAirbyteFields } from ".";
 
 export type AirbyteDestinationFieldsProps = {
   fieldValues: Nullable<AirbyteFieldValues>;
