@@ -1,5 +1,14 @@
-import { dot } from "../../dot";
-import { Nullable } from "../../type";
+import { dot } from "@instill-ai/toolkit";
+import type {
+  Nullable,
+  AirbyteFormConditionItemWithUiFields,
+  AirbyteFieldErrors,
+  AirbyteFormGroupItem,
+  AirbyteFormItem,
+  AirbyteFormTree,
+  AirbyteFieldValues,
+  SelectedItemMap,
+} from "@instill-ai/toolkit";
 import {
   BasicSingleSelect,
   BasicTextArea,
@@ -8,16 +17,7 @@ import {
   ProtectedBasicTextField,
 } from "@instill-ai/design-system";
 import { Dispatch, ReactNode, SetStateAction, useMemo, Fragment } from "react";
-import { OneOfConditionSection } from "../components";
-import {
-  AirbyteFormConditionItemWithUiFields,
-  AirbyteFieldErrors,
-  AirbyteFormGroupItem,
-  AirbyteFormItem,
-  AirbyteFormTree,
-  AirbyteFieldValues,
-  SelectedItemMap,
-} from "../types";
+import { OneOfConditionSection } from ".";
 
 export const useBuildAirbyteFields = (
   formTree: Nullable<AirbyteFormTree>,
