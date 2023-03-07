@@ -50,10 +50,16 @@ import {
   createHuggingFaceModelMutation,
 } from "./mutations";
 
-import type { DeployModelResponse, UnDeployModelResponse } from "./actions";
+import type {
+  DeployModelResponse,
+  UnDeployModelResponse,
+  TestModelInstancePayload,
+  TestModelInstanceResponse,
+} from "./actions";
 import {
   deployModelInstanceAction,
   unDeployModelInstanceAction,
+  testModelInstance,
 } from "./actions";
 
 import { checkCreateModelOperationUntilDone } from "./helper";
@@ -84,6 +90,8 @@ export type {
   CreateHuggingFaceModelPayload,
   CreateHuggingFaceModelResponse,
   GetModelOperationResponse,
+  TestModelInstanceResponse,
+  TestModelInstancePayload,
 };
 
 export {
@@ -104,6 +112,7 @@ export {
   getModelInstanceReadme,
   createHuggingFaceModelMutation,
   checkCreateModelOperationUntilDone,
+  testModelInstance,
 };
 
 export type ModelHubPreset = {
