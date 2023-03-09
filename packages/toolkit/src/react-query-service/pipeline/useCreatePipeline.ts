@@ -19,13 +19,14 @@ export const useCreatePipeline = () => {
       accessToken: Nullable<string>;
     }) => {
       const res = await createPipelineMutation({ payload, accessToken });
-      return Promise.resolve(res);
+      return Promise.resolve({ newPipeline: res, accessToken });
     },
     {
-      onSuccess: async (newPipeline) => {
-        const recipe = await constructPipelineRecipeWithDefinition(
-          newPipeline.recipe
-        );
+      onSuccess: async ({ newPipeline, accessToken }) => {
+        const recipe = await constructPipelineRecipeWithDefinition({
+          rawRecipe: newPipeline.recipe,
+          accessToken,
+        });
 
         const pipeline: Pipeline = {
           ...newPipeline,

@@ -22,9 +22,10 @@ export const useUpdatePipeline = () => {
         accessToken,
       });
 
-      const recipe = await constructPipelineRecipeWithDefinition(
-        rawPipeline.recipe
-      );
+      const recipe = await constructPipelineRecipeWithDefinition({
+        rawRecipe: rawPipeline.recipe,
+        accessToken,
+      });
 
       const pipeline: Pipeline = {
         ...rawPipeline,

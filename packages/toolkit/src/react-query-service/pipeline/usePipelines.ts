@@ -22,9 +22,10 @@ export const usePipelines = ({
       const pipelines: Pipeline[] = [];
 
       for (const pipeline of pipelinesWithRawRecipe) {
-        const recipe = await constructPipelineRecipeWithDefinition(
-          pipeline.recipe
-        );
+        const recipe = await constructPipelineRecipeWithDefinition({
+          rawRecipe: pipeline.recipe,
+          accessToken,
+        });
         pipelines.push({ ...pipeline, recipe: recipe });
       }
 

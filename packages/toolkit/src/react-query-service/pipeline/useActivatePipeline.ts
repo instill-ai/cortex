@@ -17,9 +17,10 @@ export const useActivatePipeline = () => {
         pipelineName,
         accessToken,
       });
-      const recipe = await constructPipelineRecipeWithDefinition(
-        rawPipeline.recipe
-      );
+      const recipe = await constructPipelineRecipeWithDefinition({
+        rawRecipe: rawPipeline.recipe,
+        accessToken,
+      });
 
       const pipeline: Pipeline = {
         ...rawPipeline,
