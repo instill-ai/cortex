@@ -5,11 +5,15 @@ import { usePipelines } from "../../pipeline";
 import { Nullable } from "../../../type";
 import { useDestination } from "./useDestination";
 
-export const useDestinationWithPipelines = (
-  destinationName: Nullable<string>
-) => {
-  const pipelines = usePipelines(true);
-  const destination = useDestination(destinationName);
+export const useDestinationWithPipelines = ({
+  destinationName,
+  accessToken,
+}: {
+  destinationName: Nullable<string>;
+  accessToken: Nullable<string>;
+}) => {
+  const pipelines = usePipelines({ enable: true, accessToken });
+  const destination = useDestination({ destinationName, accessToken });
   return useQuery(
     ["destinations", destinationName, "with-pipelines"],
     async () => {

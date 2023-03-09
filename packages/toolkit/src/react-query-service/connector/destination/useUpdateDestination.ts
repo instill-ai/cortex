@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../../type";
 import {
   DestinationWithDefinition,
   getDestinationDefinitionQuery,
@@ -6,18 +7,24 @@ import {
   UpdateDestinationPayload,
 } from "../../../vdp-sdk";
 
-export const useUpdateDestination = () => {
+export const useUpdateDestination = ({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}) => {
   const queryClient = useQueryClient();
   return useMutation(
     async (payload: UpdateDestinationPayload) => {
-      const res = await updateDestinationMutation(payload);
+      const res = await updateDestinationMutation({ payload, accessToken });
       return Promise.resolve(res);
     },
     {
       onSuccess: async (newDestination) => {
-        const destinationDefinition = await getDestinationDefinitionQuery(
-          newDestination.destination_connector_definition
-        );
+        const destinationDefinition = await getDestinationDefinitionQuery({
+          destinationDefinitionName:
+            newDestination.destination_connector_definition,
+          accessToken,
+        });
 
         const newDestinationWithDefinition: DestinationWithDefinition = {
           ...newDestination,

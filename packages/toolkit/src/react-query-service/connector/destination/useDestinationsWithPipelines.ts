@@ -1,12 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
+import { Nullable } from "../../../type";
 
 import { DestinationWithPipelines } from "../../../vdp-sdk";
 import { usePipelines } from "../../pipeline";
 import { useDestinations } from "./useDestinations";
 
-export const useDestinationsWithPipelines = () => {
-  const destinations = useDestinations();
-  const pipelines = usePipelines(true);
+export const useDestinationsWithPipelines = ({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}) => {
+  const destinations = useDestinations({ accessToken });
+  const pipelines = usePipelines({ enable: true, accessToken });
   return useQuery(
     ["destinations", "with-pipelines"],
     async () => {
