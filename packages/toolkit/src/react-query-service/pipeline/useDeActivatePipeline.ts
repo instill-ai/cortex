@@ -1,12 +1,22 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import { deActivatePipelineMutation, Pipeline } from "../../vdp-sdk";
 import { constructPipelineRecipeWithDefinition } from "../helper";
 
 export const useDeActivatePipeline = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (pipelineName: string) => {
-      const rawPipeline = await deActivatePipelineMutation(pipelineName);
+    async ({
+      pipelineName,
+      accessToken,
+    }: {
+      pipelineName: string;
+      accessToken: Nullable<string>;
+    }) => {
+      const rawPipeline = await deActivatePipelineMutation({
+        pipelineName,
+        accessToken,
+      });
       const recipe = await constructPipelineRecipeWithDefinition(
         rawPipeline.recipe
       );

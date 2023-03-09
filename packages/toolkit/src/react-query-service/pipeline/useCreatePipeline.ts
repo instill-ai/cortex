@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   createPipelineMutation,
   CreatePipelinePayload,
@@ -10,8 +11,14 @@ export const useCreatePipeline = () => {
   const queryClient = useQueryClient();
 
   return useMutation(
-    async (payload: CreatePipelinePayload) => {
-      const res = await createPipelineMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: CreatePipelinePayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const res = await createPipelineMutation({ payload, accessToken });
       return Promise.resolve(res);
     },
     {

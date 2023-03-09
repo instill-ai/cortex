@@ -1,11 +1,18 @@
 import { deletePipelineMutation, Pipeline } from "../../vdp-sdk";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 
 export const useDeletePipeline = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (pipelineName: string) => {
-      await deletePipelineMutation(pipelineName);
+    async ({
+      pipelineName,
+      accessToken,
+    }: {
+      pipelineName: string;
+      accessToken: Nullable<string>;
+    }) => {
+      await deletePipelineMutation({ pipelineName, accessToken });
       return pipelineName;
     },
     {
