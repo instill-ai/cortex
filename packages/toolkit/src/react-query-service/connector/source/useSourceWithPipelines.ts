@@ -5,9 +5,15 @@ import { usePipelines } from "../../pipeline";
 import { Nullable } from "../../../type";
 import { useSource } from "./useSource";
 
-export const useSourceWithPipelines = (sourceName: Nullable<string>) => {
-  const pipelines = usePipelines(true);
-  const source = useSource(sourceName);
+export const useSourceWithPipelines = ({
+  sourceName,
+  accessToken,
+}: {
+  sourceName: Nullable<string>;
+  accessToken: Nullable<string>;
+}) => {
+  const pipelines = usePipelines({ enable: true, accessToken });
+  const source = useSource({ sourceName, accessToken });
   return useQuery(
     ["sources", sourceName, "with-pipelines"],
     async () => {

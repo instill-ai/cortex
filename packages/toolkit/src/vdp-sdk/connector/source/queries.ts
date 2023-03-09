@@ -15,12 +15,10 @@ export type ListSourceDefinitionsResponse = {
 };
 
 export const listSourceDefinitionsQuery = async ({
-  sourceName,
   pageSize,
   nextPageToken,
   accessToken,
 }: {
-  sourceName: string;
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
@@ -31,7 +29,9 @@ export const listSourceDefinitionsQuery = async ({
     const sourceDefinitions: ConnectorDefinition[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}?view=VIEW_FULL`,
+      `${env(
+        "NEXT_PUBLIC_API_VERSION"
+      )}/source-connector-definitions?view=VIEW_FULL`,
       pageSize,
       nextPageToken
     );
@@ -45,7 +45,6 @@ export const listSourceDefinitionsQuery = async ({
     if (data.next_page_token) {
       sourceDefinitions.push(
         ...(await listSourceDefinitionsQuery({
-          sourceName,
           pageSize,
           accessToken,
           nextPageToken: data.next_page_token,

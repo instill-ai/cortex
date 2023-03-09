@@ -6,7 +6,13 @@ import {
 } from "../../../vdp-sdk";
 import { Nullable } from "../../../type";
 
-export const useSource = (sourceName: Nullable<string>) => {
+export const useSource = ({
+  sourceName,
+  accessToken,
+}: {
+  sourceName: Nullable<string>;
+  accessToken: Nullable<string>;
+}) => {
   return useQuery(
     ["sources", sourceName],
     async () => {
@@ -14,10 +20,11 @@ export const useSource = (sourceName: Nullable<string>) => {
         return Promise.reject(new Error("invalid source id"));
       }
 
-      const source = await getSourceQuery(sourceName);
-      const sourceDefinition = await getSourceDefinitionQuery(
-        source.source_connector_definition
-      );
+      const source = await getSourceQuery({ sourceName, accessToken });
+      const sourceDefinition = await getSourceDefinitionQuery({
+        sourceDefinitionName: source.source_connector_definition,
+        accessToken,
+      });
       const sourceWithDefinition: SourceWithDefinition = {
         ...source,
         source_connector_definition: sourceDefinition,

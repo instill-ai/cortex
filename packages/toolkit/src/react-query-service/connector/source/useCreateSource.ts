@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../../type";
 import {
   createSourceMutation,
   CreateSourcePayload,
@@ -9,15 +10,22 @@ import {
 export const useCreateSource = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: CreateSourcePayload) => {
-      const res = await createSourceMutation(payload);
-      return Promise.resolve(res);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: CreateSourcePayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const res = await createSourceMutation({ payload, accessToken });
+      return Promise.resolve({ newSource: res, accessToken });
     },
     {
-      onSuccess: async (newSource) => {
-        const sourceDefinition = await getSourceDefinitionQuery(
-          newSource.source_connector_definition
-        );
+      onSuccess: async ({ newSource, accessToken }) => {
+        const sourceDefinition = await getSourceDefinitionQuery({
+          sourceDefinitionName: newSource.source_connector_definition,
+          accessToken,
+        });
 
         const newSourceWithDefinition: SourceWithDefinition = {
           ...newSource,
