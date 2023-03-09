@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   createArtivcModelMutation,
   CreateArtivcModelPayload,
@@ -7,8 +8,17 @@ import {
 export const useCreateArtivcModel = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: CreateArtivcModelPayload) => {
-      const operation = await createArtivcModelMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: CreateArtivcModelPayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const operation = await createArtivcModelMutation({
+        payload,
+        accessToken,
+      });
       return Promise.resolve({ operation });
     },
     {

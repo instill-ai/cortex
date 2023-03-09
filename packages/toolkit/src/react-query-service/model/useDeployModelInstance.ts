@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   deployModelInstanceAction,
   ModelInstance,
@@ -8,12 +9,24 @@ import {
 export const useDeployModelInstance = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (modelInstanceName: string) => {
+    async ({
+      modelInstanceName,
+      accessToken,
+    }: {
+      modelInstanceName: string;
+      accessToken: Nullable<string>;
+    }) => {
       try {
-        const operation = await deployModelInstanceAction(modelInstanceName);
+        const operation = await deployModelInstanceAction({
+          modelInstanceName,
+          accessToken,
+        });
 
         // Get the current model instance staus
-        const modelInstance = await getModelInstanceQuery(modelInstanceName);
+        const modelInstance = await getModelInstanceQuery({
+          modelInstanceName,
+          accessToken,
+        });
         return Promise.resolve({ modelInstance, operation });
       } catch (err) {
         return Promise.reject(err);

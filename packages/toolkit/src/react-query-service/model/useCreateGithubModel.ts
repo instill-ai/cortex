@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   createGithubModelMutation,
   CreateGithubModelPayload,
@@ -7,8 +8,17 @@ import {
 export const useCreateGithubModel = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: CreateGithubModelPayload) => {
-      const operation = await createGithubModelMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: CreateGithubModelPayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const operation = await createGithubModelMutation({
+        payload,
+        accessToken,
+      });
       return Promise.resolve({ operation });
     },
     {

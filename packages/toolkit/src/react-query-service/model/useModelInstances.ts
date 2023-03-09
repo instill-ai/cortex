@@ -2,7 +2,13 @@ import { useQuery } from "@tanstack/react-query";
 import { listModelInstancesQuery } from "../../vdp-sdk";
 import { Nullable } from "../../type";
 
-export const useModelInstances = (modelName: Nullable<string>) => {
+export const useModelInstances = ({
+  modelName,
+  accessToken,
+}: {
+  modelName: Nullable<string>;
+  accessToken: Nullable<string>;
+}) => {
   return useQuery(
     ["models", modelName, "modelInstances"],
     async () => {
@@ -10,7 +16,13 @@ export const useModelInstances = (modelName: Nullable<string>) => {
         return Promise.reject(new Error("Model name not provided"));
       }
 
-      const modelInstances = await listModelInstancesQuery(modelName);
+      const modelInstances = await listModelInstancesQuery({
+        modelName,
+        pageSize: 10,
+        nextPageToken: null,
+        accessToken,
+      });
+
       return Promise.resolve(modelInstances);
     },
     {

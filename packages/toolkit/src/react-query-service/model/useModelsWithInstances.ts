@@ -2,9 +2,14 @@ import { useQuery } from "@tanstack/react-query";
 import { listModelInstancesQuery, ModelWithInstance } from "../../vdp-sdk";
 import { determineModelState } from "../../utility";
 import { useModels } from "./useModels";
+import { Nullable } from "../../type";
 
-export const useModelsWithInstances = () => {
-  const models = useModels();
+export const useModelsWithInstances = ({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}) => {
+  const models = useModels({ accessToken });
   return useQuery(
     ["models", "with-instances"],
     async () => {
@@ -14,19 +19,13 @@ export const useModelsWithInstances = () => {
 
       const modelsWithInstances: ModelWithInstance[] = [];
 
-      // ###################################################################
-      // #                                                                 #
-      // # Prepare model state overview counts                             #
-      // #                                                                 #
-      // ###################################################################
-      //
-      // - Becasuse model itself doesn't have state, we have to conclude model
-      // state using model_instance state.
-      // - model_instance.error > model_instance.online > model_instance.offline
-      // - Model state will be error if there exist a error model_insance
-
       for (const model of models.data) {
-        const modelInstances = await listModelInstancesQuery(model.name);
+        const modelInstances = await listModelInstancesQuery({
+          modelName: model.name,
+          pageSize: 10,
+          nextPageToken: null,
+          accessToken,
+        });
         modelsWithInstances.push({
           ...model,
           instances: modelInstances,

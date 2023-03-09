@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   getModelInstanceQuery,
   ModelInstance,
@@ -8,11 +9,24 @@ import {
 export const useUnDeployModelInstance = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (modelInstanceName: string) => {
-      const operation = await unDeployModelInstanceAction(modelInstanceName);
+    async ({
+      modelInstanceName,
+      accessToken,
+    }: {
+      modelInstanceName: string;
+      accessToken: Nullable<string>;
+    }) => {
+      const operation = await unDeployModelInstanceAction({
+        modelInstanceName,
+        accessToken,
+      });
 
       // Get the current model instance staus
-      const modelInstance = await getModelInstanceQuery(modelInstanceName);
+      const modelInstance = await getModelInstanceQuery({
+        modelInstanceName,
+        accessToken,
+      });
+
       return Promise.resolve({ modelInstance, operation });
     },
     {
