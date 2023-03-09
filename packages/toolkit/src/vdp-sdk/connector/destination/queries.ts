@@ -1,4 +1,5 @@
 import { Nullable } from "../../../type";
+import { env } from "../../../utility";
 import { createInstillAxiosClient, getQueryString } from "../../helper";
 import { ConnectorDefinition } from "../types";
 import { Destination } from "./types";
@@ -18,13 +19,18 @@ export type ListDestinationDefinitionsPayload = {
   nextPageToken: Nullable<string>;
 };
 
-export const listDestinationDefinitionsQuery = async (
-  pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>
-): Promise<ConnectorDefinition[]> => {
+export const listDestinationDefinitionsQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<ConnectorDefinition[]> => {
   try {
-    const client = createInstillAxiosClient();
-    const definitions: ConnectorDefinition[] = [];
+    const client = createInstillAxiosClient(accessToken);
+    const destinationDefinitions: ConnectorDefinition[] = [];
     const queryString = getQueryString(
       `/destination-connector-definitions?view=VIEW_FULL`,
       pageSize,
@@ -35,18 +41,19 @@ export const listDestinationDefinitionsQuery = async (
       queryString
     );
 
-    definitions.push(...data.destination_connector_definitions);
+    destinationDefinitions.push(...data.destination_connector_definitions);
 
     if (data.next_page_token) {
-      definitions.push(
-        ...(await listDestinationDefinitionsQuery(
+      destinationDefinitions.push(
+        ...(await listDestinationDefinitionsQuery({
           pageSize,
-          data.next_page_token
-        ))
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
       );
     }
 
-    return Promise.resolve(definitions);
+    return Promise.resolve(destinationDefinitions);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -56,11 +63,15 @@ export type GetDestinationDefinitionResponse = {
   destination_connector_definition: ConnectorDefinition;
 };
 
-export const getDestinationDefinitionQuery = async (
-  destinationDefinitionName: string
-) => {
+export const getDestinationDefinitionQuery = async ({
+  destinationDefinitionName,
+  accessToken,
+}: {
+  destinationDefinitionName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetDestinationDefinitionResponse>(
       `/${destinationDefinitionName}?view=VIEW_FULL`
@@ -80,11 +91,15 @@ export type GetDestinationResponse = {
   destination_connector: Destination;
 };
 
-export const getDestinationQuery = async (
-  destinationName: string
-): Promise<Destination> => {
+export const getDestinationQuery = async ({
+  destinationName,
+  accessToken,
+}: {
+  destinationName: string;
+  accessToken: Nullable<string>;
+}): Promise<Destination> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetDestinationResponse>(
       `/${destinationName}?view=VIEW_FULL`
@@ -102,15 +117,40 @@ export type ListDestinationsResponse = {
   total_size: string;
 };
 
-export const listDestinationsQuery = async (): Promise<Destination[]> => {
+export const listDestinationsQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<Destination[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
+    const destinations: Destination[] = [];
 
-    const { data } = await client.get<ListDestinationsResponse>(
-      `/destination-connectors?view=VIEW_FULL`
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/destination-connectors?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
     );
 
-    return Promise.resolve(data.destination_connectors);
+    const { data } = await client.get<ListDestinationsResponse>(queryString);
+
+    destinations.push(...data.destination_connectors);
+
+    if (data.next_page_token) {
+      destinations.push(
+        ...(await listDestinationsQuery({
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
+      );
+    }
+
+    return Promise.resolve(destinations);
   } catch (err) {
     return Promise.reject(err);
   }

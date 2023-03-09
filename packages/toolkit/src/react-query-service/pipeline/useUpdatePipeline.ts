@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   Pipeline,
   updatePipelineMutation,
@@ -9,12 +10,22 @@ import { constructPipelineRecipeWithDefinition } from "../helper";
 export const useUpdatePipeline = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: UpdatePipelinePayload) => {
-      const rawPipeline = await updatePipelineMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: UpdatePipelinePayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const rawPipeline = await updatePipelineMutation({
+        payload,
+        accessToken,
+      });
 
-      const recipe = await constructPipelineRecipeWithDefinition(
-        rawPipeline.recipe
-      );
+      const recipe = await constructPipelineRecipeWithDefinition({
+        rawRecipe: rawPipeline.recipe,
+        accessToken,
+      });
 
       const pipeline: Pipeline = {
         ...rawPipeline,

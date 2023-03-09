@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   createHuggingFaceModelMutation,
   CreateHuggingFaceModelPayload,
@@ -7,8 +8,17 @@ import {
 export const useCreateHuggingFaceModel = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: CreateHuggingFaceModelPayload) => {
-      const operation = await createHuggingFaceModelMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: CreateHuggingFaceModelPayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const operation = await createHuggingFaceModelMutation({
+        payload,
+        accessToken,
+      });
       return Promise.resolve({ operation });
     },
     {

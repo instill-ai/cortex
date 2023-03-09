@@ -3,8 +3,14 @@ import { Pipeline } from "../../vdp-sdk";
 import { Nullable } from "../../type";
 import { usePipelines } from "./usePipelines";
 
-export const usePipelinesHaveTargetSource = (sourceId: Nullable<string>) => {
-  const pipelines = usePipelines(true);
+export const usePipelinesHaveTargetSource = ({
+  sourceId,
+  accessToken,
+}: {
+  sourceId: Nullable<string>;
+  accessToken: Nullable<string>;
+}) => {
+  const pipelines = usePipelines({ enable: true, accessToken });
   const queryClient = useQueryClient();
 
   return useQuery(

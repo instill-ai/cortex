@@ -1,4 +1,5 @@
 import { AirbyteFieldValues } from "../../../airbytes";
+import { Nullable } from "../../../type";
 import { createInstillAxiosClient } from "../../helper";
 import { Destination } from "./types";
 
@@ -16,11 +17,15 @@ export type CreateDestinationPayload = {
   };
 };
 
-export const createDestinationMutation = async (
-  payload: CreateDestinationPayload
-): Promise<Destination> => {
+export const createDestinationMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateDestinationPayload;
+  accessToken: Nullable<string>;
+}): Promise<Destination> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateDestinationResponse>(
       `/destination-connectors`,
@@ -32,9 +37,15 @@ export const createDestinationMutation = async (
   }
 };
 
-export const deleteDestinationMutation = async (destinationName: string) => {
+export const deleteDestinationMutation = async ({
+  destinationName,
+  accessToken,
+}: {
+  destinationName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`/${destinationName}`);
   } catch (err) {
@@ -55,11 +66,15 @@ export type UpdateDestinationPayload = {
   };
 };
 
-export const updateDestinationMutation = async (
-  payload: UpdateDestinationPayload
-) => {
+export const updateDestinationMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: UpdateDestinationPayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
     const { name, ...data } = payload;
 
     const res = await client.patch<UpdateDestinationResponse>(`/${name}`, data);

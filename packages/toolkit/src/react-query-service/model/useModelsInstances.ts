@@ -1,9 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import { listModelInstancesQuery } from "../../vdp-sdk";
 import { useModels } from "./useModels";
 
-export const useModelsInstances = (enable: boolean) => {
-  const models = useModels();
+export const useModelsInstances = ({
+  enable,
+  accessToken,
+}: {
+  enable: boolean;
+  accessToken: Nullable<string>;
+}) => {
+  const models = useModels({ accessToken });
   return useQuery(
     ["models", "all", "modelInstances"],
     async () => {
@@ -13,7 +20,12 @@ export const useModelsInstances = (enable: boolean) => {
       }
 
       for (const model of models.data) {
-        const instances = await listModelInstancesQuery(model.name);
+        const instances = await listModelInstancesQuery({
+          modelName: model.name,
+          pageSize: 10,
+          nextPageToken: null,
+          accessToken,
+        });
         modelInstances.push(...instances);
       }
 

@@ -1,3 +1,4 @@
+import { Nullable } from "../../type";
 import {
   getDestinationDefinitionQuery,
   getDestinationQuery,
@@ -9,22 +10,37 @@ import {
   RawPipelineRecipe,
 } from "../../vdp-sdk";
 
-export const constructPipelineRecipeWithDefinition = async (
-  rawRecipe: RawPipelineRecipe
-): Promise<PipelineRecipe> => {
+export const constructPipelineRecipeWithDefinition = async ({
+  accessToken,
+  rawRecipe,
+}: {
+  rawRecipe: RawPipelineRecipe;
+  accessToken: Nullable<string>;
+}): Promise<PipelineRecipe> => {
   try {
-    const source = await getSourceQuery(rawRecipe.source);
-    const sourceDefinition = await getSourceDefinitionQuery(
-      source.source_connector_definition
-    );
-    const destination = await getDestinationQuery(rawRecipe.destination);
-    const destinationDefinition = await getDestinationDefinitionQuery(
-      destination.destination_connector_definition
-    );
+    const source = await getSourceQuery({
+      sourceName: rawRecipe.source,
+      accessToken,
+    });
+    const sourceDefinition = await getSourceDefinitionQuery({
+      sourceDefinitionName: source.source_connector_definition,
+      accessToken,
+    });
+    const destination = await getDestinationQuery({
+      destinationName: rawRecipe.destination,
+      accessToken,
+    });
+    const destinationDefinition = await getDestinationDefinitionQuery({
+      destinationDefinitionName: destination.destination_connector_definition,
+      accessToken,
+    });
     const instances: ModelInstance[] = [];
 
     for (const modelInstanceName of rawRecipe.model_instances) {
-      const modelInstance = await getModelInstanceQuery(modelInstanceName);
+      const modelInstance = await getModelInstanceQuery({
+        modelInstanceName,
+        accessToken,
+      });
       instances.push(modelInstance);
     }
 

@@ -1,11 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import { Model, updateModelMutation, UpdateModelPayload } from "../../vdp-sdk";
 
 export const useUpdateModel = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: UpdateModelPayload) => {
-      const model = await updateModelMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: UpdateModelPayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const model = await updateModelMutation({ payload, accessToken });
       return Promise.resolve(model);
     },
     {

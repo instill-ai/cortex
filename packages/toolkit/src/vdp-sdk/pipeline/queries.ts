@@ -1,5 +1,6 @@
+import { Nullable } from "../../type";
 import { env } from "../../utility";
-import { createInstillAxiosClient } from "../helper";
+import { createInstillAxiosClient, getQueryString } from "../helper";
 import { PipelineWithRawRecipe } from "./types";
 
 export type ListPipelinesResponse = {
@@ -8,17 +9,40 @@ export type ListPipelinesResponse = {
   total_size: string;
 };
 
-export const listPipelinesQuery = async (): Promise<
-  PipelineWithRawRecipe[]
-> => {
+export const listPipelinesQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<PipelineWithRawRecipe[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
+    const pipelines: PipelineWithRawRecipe[] = [];
 
-    const { data } = await client.get<ListPipelinesResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/pipelines?view=VIEW_FULL`
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/pipelines?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
     );
 
-    return Promise.resolve(data.pipelines);
+    const { data } = await client.get<ListPipelinesResponse>(queryString);
+
+    pipelines.push(...data.pipelines);
+
+    if (data.next_page_token) {
+      pipelines.push(
+        ...(await listPipelinesQuery({
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
+      );
+    }
+
+    return Promise.resolve(pipelines);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -28,11 +52,15 @@ export type GetPipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const getPipelineQuery = async (
-  pipelineName: string
-): Promise<PipelineWithRawRecipe> => {
+export const getPipelineQuery = async ({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}): Promise<PipelineWithRawRecipe> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetPipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}?view=VIEW_FULL`

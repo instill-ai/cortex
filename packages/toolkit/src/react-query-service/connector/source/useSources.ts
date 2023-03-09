@@ -1,21 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
+import { Nullable } from "../../../type";
 import {
   getSourceDefinitionQuery,
   listSourcesQuery,
   SourceWithDefinition,
 } from "../../../vdp-sdk";
 
-export const useSources = () => {
+export const useSources = ({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}) => {
   return useQuery(
     ["sources"],
     async () => {
-      const sources = await listSourcesQuery();
+      const sources = await listSourcesQuery({
+        pageSize: 10,
+        nextPageToken: null,
+        accessToken,
+      });
       const sourcesWithDefinition: SourceWithDefinition[] = [];
 
       for (const source of sources) {
-        const sourceDefinition = await getSourceDefinitionQuery(
-          source.source_connector_definition
-        );
+        const sourceDefinition = await getSourceDefinitionQuery({
+          sourceDefinitionName: source.source_connector_definition,
+          accessToken,
+        });
         sourcesWithDefinition.push({
           ...source,
           source_connector_definition: sourceDefinition,

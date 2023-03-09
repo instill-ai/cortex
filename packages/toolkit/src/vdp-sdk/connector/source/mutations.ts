@@ -1,3 +1,4 @@
+import { Nullable } from "../../../type";
 import { env } from "../../../utility";
 import { createInstillAxiosClient } from "../../helper";
 import { Source } from "./types";
@@ -16,11 +17,15 @@ export type CreateSourcePayload = {
   };
 };
 
-export const createSourceMutation = async (
-  payload: CreateSourcePayload
-): Promise<Source> => {
+export const createSourceMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateSourcePayload;
+  accessToken: Nullable<string>;
+}): Promise<Source> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateSourceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors`,
@@ -32,9 +37,15 @@ export const createSourceMutation = async (
   }
 };
 
-export const deleteSourceMutation = async (sourceName: string) => {
+export const deleteSourceMutation = async ({
+  sourceName,
+  accessToken,
+}: {
+  sourceName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}`);
   } catch (err) {

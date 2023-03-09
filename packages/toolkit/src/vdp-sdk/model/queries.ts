@@ -1,5 +1,6 @@
+import { Nullable } from "../../type";
 import { env } from "../../utility";
-import { createInstillAxiosClient } from "../helper";
+import { createInstillAxiosClient, getQueryString } from "../helper";
 import { Operation } from "../types";
 import {
   Model,
@@ -16,9 +17,15 @@ export type GetModelDefinitionResponse = {
   model_definition: ModelDefinition;
 };
 
-export const getModelDefinitionQuery = async (modelDefinitionName: string) => {
+export const getModelDefinitionQuery = async ({
+  modelDefinitionName,
+  accessToken,
+}: {
+  modelDefinitionName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelDefinitionResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelDefinitionName}`
@@ -36,17 +43,43 @@ export type ListModelDefinitionsResponse = {
   total_size: string;
 };
 
-export const listModelDefinitionsQuery = async (): Promise<
-  ModelDefinition[]
-> => {
+export const listModelDefinitionsQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<ModelDefinition[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.get<ListModelDefinitionsResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/model-definitions`
+    const modelDefinitions: ModelDefinition[] = [];
+
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/model-definitions`,
+      pageSize,
+      nextPageToken
     );
 
-    return Promise.resolve(data.model_definitions);
+    const { data } = await client.get<ListModelDefinitionsResponse>(
+      queryString
+    );
+
+    modelDefinitions.push(...data.model_definitions);
+
+    if (data.next_page_token) {
+      modelDefinitions.push(
+        ...(await listModelDefinitionsQuery({
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
+      );
+    }
+
+    return Promise.resolve(modelDefinitions);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -60,9 +93,15 @@ export type GetModelResponse = {
   model: Model;
 };
 
-export const getModelQuery = async (modelName: string): Promise<Model> => {
+export const getModelQuery = async ({
+  modelName,
+  accessToken,
+}: {
+  modelName: string;
+  accessToken: Nullable<string>;
+}): Promise<Model> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}?view=VIEW_FULL`
@@ -79,15 +118,41 @@ export type ListModelsResponse = {
   total_size: string;
 };
 
-export const listModelsQuery = async (): Promise<Model[]> => {
+export const listModelsQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<Model[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.get<ListModelsResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/models?view=VIEW_FULL`
+    const models: Model[] = [];
+
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/models?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
     );
 
-    return Promise.resolve(data.models);
+    const { data } = await client.get<ListModelsResponse>(queryString);
+
+    models.push(...data.models);
+
+    if (data.next_page_token) {
+      models.push(
+        ...(await listModelsQuery({
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
+      );
+    }
+
+    return Promise.resolve(models);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -101,11 +166,15 @@ export type GetModelInstanceResponse = {
   instance: ModelInstance;
 };
 
-export const getModelInstanceQuery = async (
-  modelInstanceName: string
-): Promise<ModelInstance> => {
+export const getModelInstanceQuery = async ({
+  modelInstanceName,
+  accessToken,
+}: {
+  modelInstanceName: string;
+  accessToken: Nullable<string>;
+}): Promise<ModelInstance> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelInstanceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}?view=VIEW_FULL`
@@ -123,16 +192,43 @@ export type ListModelInstancesResponse = {
   total_size: string;
 };
 
-export const listModelInstancesQuery = async (
-  modelName: string
-): Promise<ModelInstance[]> => {
+export const listModelInstancesQuery = async ({
+  modelName,
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  modelName: string;
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<ModelInstance[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
+    const modelInstances: ModelInstance[] = [];
 
-    const { data } = await client.get<ListModelInstancesResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}/instances?view=VIEW_FULL`
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}/instances?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
     );
-    return Promise.resolve(data.instances);
+
+    const { data } = await client.get<ListModelInstancesResponse>(queryString);
+
+    modelInstances.push(...data.instances);
+
+    if (data.next_page_token) {
+      modelInstances.push(
+        ...(await listModelInstancesQuery({
+          modelName,
+          pageSize,
+          nextPageToken: data.next_page_token,
+          accessToken,
+        }))
+      );
+    }
+
+    return Promise.resolve(modelInstances);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -142,9 +238,15 @@ export type GetModelInstanceReadmeQuery = {
   readme: ModelInstanceReadme;
 };
 
-export const getModelInstanceReadme = async (modelInstanceName: string) => {
+export const getModelInstanceReadme = async ({
+  modelInstanceName,
+  accessToken,
+}: {
+  modelInstanceName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelInstanceReadmeQuery>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/readme`
@@ -163,11 +265,15 @@ export type GetModelOperationResponse = {
   operation: Operation;
 };
 
-export const getModelOperationQuery = async (
-  operationName: string
-): Promise<Operation> => {
+export const getModelOperationQuery = async ({
+  operationName,
+  accessToken,
+}: {
+  operationName: string;
+  accessToken: Nullable<string>;
+}): Promise<Operation> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelOperationResponse>(
       `${process.env.NEXT_PUBLIC_API_VERSION}/${operationName}`

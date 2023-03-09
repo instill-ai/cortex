@@ -16,11 +16,15 @@ export type CreatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const createPipelineMutation = async (
-  payload: CreatePipelinePayload
-): Promise<PipelineWithRawRecipe> => {
+export const createPipelineMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreatePipelinePayload;
+  accessToken: Nullable<string>;
+}): Promise<PipelineWithRawRecipe> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/pipelines`,
@@ -41,11 +45,15 @@ export type UpdatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const updatePipelineMutation = async (
-  payload: UpdatePipelinePayload
-) => {
+export const updatePipelineMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: UpdatePipelinePayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.patch<UpdatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${payload.name}`,
@@ -60,9 +68,15 @@ export const updatePipelineMutation = async (
   }
 };
 
-export const deletePipelineMutation = async (pipelineName: string) => {
+export const deletePipelineMutation = async ({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}`);
   } catch (err) {

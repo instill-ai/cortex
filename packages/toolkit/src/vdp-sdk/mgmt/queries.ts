@@ -1,3 +1,4 @@
+import { Nullable } from "../../type";
 import { env } from "../../utility";
 import { createInstillAxiosClient } from "../helper";
 import { User } from "./types";
@@ -6,9 +7,13 @@ export type GetUserResponse = {
   user: User;
 };
 
-export const getUserQuery = async (): Promise<User> => {
+export const getUserQuery = async ({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}): Promise<User> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetUserResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/user`

@@ -1,4 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../../type";
+import { env } from "../../../utility";
 import {
   DestinationWithDefinition,
   getDestinationDefinitionQuery,
@@ -9,15 +11,31 @@ import {
 export const useUpdateDestination = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: UpdateDestinationPayload) => {
-      const res = await updateDestinationMutation(payload);
-      return Promise.resolve(res);
+    async ({
+      accessToken,
+      payload,
+    }: {
+      accessToken: Nullable<string>;
+      payload: UpdateDestinationPayload;
+    }) => {
+      if (
+        env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") === "true" &&
+        !accessToken
+      ) {
+        throw new Error(
+          "You had set NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH=true but didn't provide necessary access token"
+        );
+      }
+      const res = await updateDestinationMutation({ payload, accessToken });
+      return Promise.resolve({ newDestination: res, accessToken });
     },
     {
-      onSuccess: async (newDestination) => {
-        const destinationDefinition = await getDestinationDefinitionQuery(
-          newDestination.destination_connector_definition
-        );
+      onSuccess: async ({ newDestination, accessToken }) => {
+        const destinationDefinition = await getDestinationDefinitionQuery({
+          destinationDefinitionName:
+            newDestination.destination_connector_definition,
+          accessToken,
+        });
 
         const newDestinationWithDefinition: DestinationWithDefinition = {
           ...newDestination,

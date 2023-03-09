@@ -1,11 +1,18 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../../type";
 import { deleteSourceMutation, SourceWithDefinition } from "../../../vdp-sdk";
 
 export const useDeleteSource = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (sourceName: string) => {
-      await deleteSourceMutation(sourceName);
+    async ({
+      sourceName,
+      accessToken,
+    }: {
+      sourceName: string;
+      accessToken: Nullable<string>;
+    }) => {
+      await deleteSourceMutation({ sourceName, accessToken });
       return sourceName;
     },
     {

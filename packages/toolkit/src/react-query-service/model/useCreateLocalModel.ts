@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Nullable } from "../../type";
 import {
   createLocalModelMutation,
   CreateLocalModelPayload,
@@ -7,8 +8,17 @@ import {
 export const useCreateLocalModel = () => {
   const queryClient = useQueryClient();
   return useMutation(
-    async (payload: CreateLocalModelPayload) => {
-      const operation = await createLocalModelMutation(payload);
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: CreateLocalModelPayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const operation = await createLocalModelMutation({
+        payload,
+        accessToken,
+      });
       return Promise.resolve({ operation });
     },
     {
