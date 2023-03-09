@@ -8,11 +8,11 @@ export type ListPipelinesResponse = {
   total_size: string;
 };
 
-export const listPipelinesQuery = async (): Promise<
-  PipelineWithRawRecipe[]
-> => {
+export const listPipelinesQuery = async (
+  authToken?: string
+): Promise<PipelineWithRawRecipe[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListPipelinesResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/pipelines?view=VIEW_FULL`
@@ -29,10 +29,11 @@ export type GetPipelineResponse = {
 };
 
 export const getPipelineQuery = async (
-  pipelineName: string
+  pipelineName: string,
+  authToken?: string
 ): Promise<PipelineWithRawRecipe> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetPipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}?view=VIEW_FULL`

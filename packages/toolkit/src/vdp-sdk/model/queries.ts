@@ -16,9 +16,12 @@ export type GetModelDefinitionResponse = {
   model_definition: ModelDefinition;
 };
 
-export const getModelDefinitionQuery = async (modelDefinitionName: string) => {
+export const getModelDefinitionQuery = async (
+  modelDefinitionName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetModelDefinitionResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelDefinitionName}`
@@ -36,11 +39,11 @@ export type ListModelDefinitionsResponse = {
   total_size: string;
 };
 
-export const listModelDefinitionsQuery = async (): Promise<
-  ModelDefinition[]
-> => {
+export const listModelDefinitionsQuery = async (
+  authToken?: string
+): Promise<ModelDefinition[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListModelDefinitionsResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/model-definitions`
@@ -60,9 +63,12 @@ export type GetModelResponse = {
   model: Model;
 };
 
-export const getModelQuery = async (modelName: string): Promise<Model> => {
+export const getModelQuery = async (
+  modelName: string,
+  authToken?: string
+): Promise<Model> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}?view=VIEW_FULL`
@@ -79,9 +85,9 @@ export type ListModelsResponse = {
   total_size: string;
 };
 
-export const listModelsQuery = async (): Promise<Model[]> => {
+export const listModelsQuery = async (authToken?: string): Promise<Model[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListModelsResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/models?view=VIEW_FULL`
@@ -102,10 +108,11 @@ export type GetModelInstanceResponse = {
 };
 
 export const getModelInstanceQuery = async (
-  modelInstanceName: string
+  modelInstanceName: string,
+  authToken?: string
 ): Promise<ModelInstance> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetModelInstanceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}?view=VIEW_FULL`
@@ -124,10 +131,11 @@ export type ListModelInstancesResponse = {
 };
 
 export const listModelInstancesQuery = async (
-  modelName: string
+  modelName: string,
+  authToken?: string
 ): Promise<ModelInstance[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListModelInstancesResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}/instances?view=VIEW_FULL`
@@ -142,9 +150,12 @@ export type GetModelInstanceReadmeQuery = {
   readme: ModelInstanceReadme;
 };
 
-export const getModelInstanceReadme = async (modelInstanceName: string) => {
+export const getModelInstanceReadme = async (
+  modelInstanceName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetModelInstanceReadmeQuery>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/readme`
@@ -164,10 +175,11 @@ export type GetModelOperationResponse = {
 };
 
 export const getModelOperationQuery = async (
-  operationName: string
+  operationName: string,
+  authToken?: string
 ): Promise<Operation> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetModelOperationResponse>(
       `${process.env.NEXT_PUBLIC_API_VERSION}/${operationName}`

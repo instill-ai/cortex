@@ -20,10 +20,11 @@ export type ListDestinationDefinitionsPayload = {
 
 export const listDestinationDefinitionsQuery = async (
   pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>
+  nextPageToken: Nullable<string>,
+  authToken?: string
 ): Promise<ConnectorDefinition[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
     const definitions: ConnectorDefinition[] = [];
     const queryString = getQueryString(
       `/destination-connector-definitions?view=VIEW_FULL`,
@@ -57,10 +58,11 @@ export type GetDestinationDefinitionResponse = {
 };
 
 export const getDestinationDefinitionQuery = async (
-  destinationDefinitionName: string
+  destinationDefinitionName: string,
+  authToken?: string
 ) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetDestinationDefinitionResponse>(
       `/${destinationDefinitionName}?view=VIEW_FULL`
@@ -81,10 +83,11 @@ export type GetDestinationResponse = {
 };
 
 export const getDestinationQuery = async (
-  destinationName: string
+  destinationName: string,
+  authToken?: string
 ): Promise<Destination> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetDestinationResponse>(
       `/${destinationName}?view=VIEW_FULL`
@@ -102,9 +105,11 @@ export type ListDestinationsResponse = {
   total_size: string;
 };
 
-export const listDestinationsQuery = async (): Promise<Destination[]> => {
+export const listDestinationsQuery = async (
+  authToken?: string
+): Promise<Destination[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListDestinationsResponse>(
       `/destination-connectors?view=VIEW_FULL`

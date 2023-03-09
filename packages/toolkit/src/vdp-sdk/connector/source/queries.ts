@@ -13,11 +13,11 @@ export type ListSourceDefinitionsResponse = {
   total_size: string;
 };
 
-export const listSourceDefinitionsQuery = async (): Promise<
-  ConnectorDefinition[]
-> => {
+export const listSourceDefinitionsQuery = async (
+  authToken?: string
+): Promise<ConnectorDefinition[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListSourceDefinitionsResponse>(
       `${env(
@@ -35,10 +35,11 @@ export type GetSourceDefinitionResponse = {
 };
 
 export const getSourceDefinitionQuery = async (
-  sourceDefinitionName: string
+  sourceDefinitionName: string,
+  authToken?: string
 ): Promise<ConnectorDefinition> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetSourceDefinitionResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${sourceDefinitionName}`
@@ -58,9 +59,12 @@ export type GetSourceResponse = {
   source_connector: Source;
 };
 
-export const getSourceQuery = async (sourceName: string): Promise<Source> => {
+export const getSourceQuery = async (
+  sourceName: string,
+  authToken?: string
+): Promise<Source> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetSourceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}?view=VIEW_FULL`
@@ -78,9 +82,11 @@ export type ListSourcesResponse = {
   total_size: string;
 };
 
-export const listSourcesQuery = async (): Promise<Source[]> => {
+export const listSourcesQuery = async (
+  authToken?: string
+): Promise<Source[]> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<ListSourcesResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors?view=VIEW_FULL`

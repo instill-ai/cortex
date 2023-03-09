@@ -17,10 +17,11 @@ export type CreateDestinationPayload = {
 };
 
 export const createDestinationMutation = async (
-  payload: CreateDestinationPayload
+  payload: CreateDestinationPayload,
+  authToken?: string
 ): Promise<Destination> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.post<CreateDestinationResponse>(
       `/destination-connectors`,
@@ -32,9 +33,12 @@ export const createDestinationMutation = async (
   }
 };
 
-export const deleteDestinationMutation = async (destinationName: string) => {
+export const deleteDestinationMutation = async (
+  destinationName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     await client.delete(`/${destinationName}`);
   } catch (err) {
@@ -56,10 +60,11 @@ export type UpdateDestinationPayload = {
 };
 
 export const updateDestinationMutation = async (
-  payload: UpdateDestinationPayload
+  payload: UpdateDestinationPayload,
+  authToken?: string
 ) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
     const { name, ...data } = payload;
 
     const res = await client.patch<UpdateDestinationResponse>(`/${name}`, data);

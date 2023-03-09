@@ -7,10 +7,11 @@ export type UpdateUserResponse = {
 };
 
 export const updateLocalUserMutation = async (
-  payload: Partial<User>
+  payload: Partial<User>,
+  authToken?: string
 ): Promise<User> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.patch(
       `${env("NEXT_PUBLIC_API_VERSION")}/user`,

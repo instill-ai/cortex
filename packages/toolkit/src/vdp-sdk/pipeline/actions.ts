@@ -6,9 +6,12 @@ export type ActivatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const activatePipelineMutation = async (pipelineName: string) => {
+export const activatePipelineMutation = async (
+  pipelineName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.post<ActivatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}/activate`
@@ -23,9 +26,12 @@ export type DeActivatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const deActivatePipelineMutation = async (pipelineName: string) => {
+export const deActivatePipelineMutation = async (
+  pipelineName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.post<DeActivatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}/deactivate`

@@ -17,10 +17,11 @@ export type CreateSourcePayload = {
 };
 
 export const createSourceMutation = async (
-  payload: CreateSourcePayload
+  payload: CreateSourcePayload,
+  authToken?: string
 ): Promise<Source> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.post<CreateSourceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors`,
@@ -32,9 +33,12 @@ export const createSourceMutation = async (
   }
 };
 
-export const deleteSourceMutation = async (sourceName: string) => {
+export const deleteSourceMutation = async (
+  sourceName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}`);
   } catch (err) {

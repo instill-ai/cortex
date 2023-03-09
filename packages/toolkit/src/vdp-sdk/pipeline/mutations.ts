@@ -17,10 +17,11 @@ export type CreatePipelineResponse = {
 };
 
 export const createPipelineMutation = async (
-  payload: CreatePipelinePayload
+  payload: CreatePipelinePayload,
+  authToken?: string
 ): Promise<PipelineWithRawRecipe> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.post<CreatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/pipelines`,
@@ -42,10 +43,11 @@ export type UpdatePipelineResponse = {
 };
 
 export const updatePipelineMutation = async (
-  payload: UpdatePipelinePayload
+  payload: UpdatePipelinePayload,
+  authToken?: string
 ) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.patch<UpdatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${payload.name}`,
@@ -60,9 +62,12 @@ export const updatePipelineMutation = async (
   }
 };
 
-export const deletePipelineMutation = async (pipelineName: string) => {
+export const deletePipelineMutation = async (
+  pipelineName: string,
+  authToken?: string
+) => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}`);
   } catch (err) {

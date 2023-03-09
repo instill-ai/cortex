@@ -6,9 +6,9 @@ export type GetUserResponse = {
   user: User;
 };
 
-export const getUserQuery = async (): Promise<User> => {
+export const getUserQuery = async (authToken?: string): Promise<User> => {
   try {
-    const client = createInstillAxiosClient();
+    const client = createInstillAxiosClient(authToken);
 
     const { data } = await client.get<GetUserResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/user`
