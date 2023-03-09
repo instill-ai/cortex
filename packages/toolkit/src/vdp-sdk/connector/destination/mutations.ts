@@ -1,4 +1,5 @@
 import { AirbyteFieldValues } from "../../../airbytes";
+import { Nullable } from "../../../type";
 import { createInstillAxiosClient } from "../../helper";
 import { Destination } from "./types";
 
@@ -18,10 +19,10 @@ export type CreateDestinationPayload = {
 
 export const createDestinationMutation = async (
   payload: CreateDestinationPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<Destination> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateDestinationResponse>(
       `/destination-connectors`,
@@ -35,10 +36,10 @@ export const createDestinationMutation = async (
 
 export const deleteDestinationMutation = async (
   destinationName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`/${destinationName}`);
   } catch (err) {
@@ -61,10 +62,10 @@ export type UpdateDestinationPayload = {
 
 export const updateDestinationMutation = async (
   payload: UpdateDestinationPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
     const { name, ...data } = payload;
 
     const res = await client.patch<UpdateDestinationResponse>(`/${name}`, data);

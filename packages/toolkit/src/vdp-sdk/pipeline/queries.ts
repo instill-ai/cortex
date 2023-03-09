@@ -1,5 +1,6 @@
+import { Nullable } from "../../type";
 import { env } from "../../utility";
-import { createInstillAxiosClient } from "../helper";
+import { createInstillAxiosClient, getQueryString } from "../helper";
 import { PipelineWithRawRecipe } from "./types";
 
 export type ListPipelinesResponse = {
@@ -9,16 +10,35 @@ export type ListPipelinesResponse = {
 };
 
 export const listPipelinesQuery = async (
-  authToken?: string
+  pageSize: Nullable<number>,
+  nextPageToken: Nullable<string>,
+  accessToken: Nullable<string>
 ): Promise<PipelineWithRawRecipe[]> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
+    const pipelines: PipelineWithRawRecipe[] = [];
 
-    const { data } = await client.get<ListPipelinesResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/pipelines?view=VIEW_FULL`
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/pipelines?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
     );
 
-    return Promise.resolve(data.pipelines);
+    const { data } = await client.get<ListPipelinesResponse>(queryString);
+
+    pipelines.push(...data.pipelines);
+
+    if (data.next_page_token) {
+      pipelines.push(
+        ...(await listPipelinesQuery(
+          pageSize,
+          data.next_page_token,
+          accessToken
+        ))
+      );
+    }
+
+    return Promise.resolve(pipelines);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -30,10 +50,10 @@ export type GetPipelineResponse = {
 
 export const getPipelineQuery = async (
   pipelineName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<PipelineWithRawRecipe> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetPipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}?view=VIEW_FULL`

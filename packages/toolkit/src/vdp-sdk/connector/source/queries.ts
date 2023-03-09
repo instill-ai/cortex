@@ -1,7 +1,8 @@
+import { Nullable } from "../../../type";
 import { env } from "../../../utility";
-import { createInstillAxiosClient } from "../../helper";
+import { createInstillAxiosClient, getQueryString } from "../../helper";
 import { ConnectorDefinition } from "../types";
-import { Source } from "./types";
+import { Source, SourceWithDefinition } from "./types";
 
 // ############################################################################
 // # Source definition                                                        #
@@ -14,17 +15,40 @@ export type ListSourceDefinitionsResponse = {
 };
 
 export const listSourceDefinitionsQuery = async (
-  authToken?: string
+  sourceName: string,
+  pageSize: Nullable<number>,
+  nextPageToken: Nullable<string>,
+  accessToken: Nullable<string>
 ): Promise<ConnectorDefinition[]> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
+
+    const sourceDefinitions: ConnectorDefinition[] = [];
+
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
+    );
 
     const { data } = await client.get<ListSourceDefinitionsResponse>(
-      `${env(
-        "NEXT_PUBLIC_API_VERSION"
-      )}/source-connector-definitions?view=VIEW_FULL`
+      queryString
     );
-    return Promise.resolve(data.source_connector_definitions);
+
+    sourceDefinitions.push(...data.source_connector_definitions);
+
+    if (data.next_page_token) {
+      sourceDefinitions.push(
+        ...(await listSourceDefinitionsQuery(
+          sourceName,
+          pageSize,
+          data.next_page_token,
+          accessToken
+        ))
+      );
+    }
+
+    return Promise.resolve(sourceDefinitions);
   } catch (err) {
     return Promise.reject(err);
   }
@@ -36,10 +60,10 @@ export type GetSourceDefinitionResponse = {
 
 export const getSourceDefinitionQuery = async (
   sourceDefinitionName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<ConnectorDefinition> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetSourceDefinitionResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${sourceDefinitionName}`
@@ -61,10 +85,10 @@ export type GetSourceResponse = {
 
 export const getSourceQuery = async (
   sourceName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<Source> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetSourceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}?view=VIEW_FULL`
@@ -83,16 +107,31 @@ export type ListSourcesResponse = {
 };
 
 export const listSourcesQuery = async (
-  authToken?: string
+  pageSize: Nullable<number>,
+  nextPageToken: Nullable<string>,
+  accessToken: Nullable<string>
 ): Promise<Source[]> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
+    const sources: Source[] = [];
 
-    const { data } = await client.get<ListSourcesResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors?view=VIEW_FULL`
+    const queryString = getQueryString(
+      `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken
     );
 
-    return Promise.resolve(data.source_connectors);
+    const { data } = await client.get<ListSourcesResponse>(queryString);
+
+    sources.push(...data.source_connectors);
+
+    if (data.next_page_token) {
+      sources.push(
+        ...(await listSourcesQuery(pageSize, data.next_page_token, accessToken))
+      );
+    }
+
+    return Promise.resolve(sources);
   } catch (err) {
     return Promise.reject(err);
   }

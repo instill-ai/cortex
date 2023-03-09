@@ -1,3 +1,4 @@
+import { Nullable } from "../../type";
 import { env } from "../../utility";
 import { createInstillAxiosClient } from "../helper";
 import { User } from "./types";
@@ -8,10 +9,10 @@ export type UpdateUserResponse = {
 
 export const updateLocalUserMutation = async (
   payload: Partial<User>,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<User> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.patch(
       `${env("NEXT_PUBLIC_API_VERSION")}/user`,

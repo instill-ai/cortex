@@ -1,3 +1,4 @@
+import { Nullable } from "../../type";
 import { env } from "../../utility";
 import { createInstillAxiosClient } from "../helper";
 import { PipelineWithRawRecipe } from "./types";
@@ -8,10 +9,10 @@ export type ActivatePipelineResponse = {
 
 export const activatePipelineMutation = async (
   pipelineName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<ActivatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}/activate`
@@ -28,10 +29,10 @@ export type DeActivatePipelineResponse = {
 
 export const deActivatePipelineMutation = async (
   pipelineName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<DeActivatePipelineResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}/deactivate`

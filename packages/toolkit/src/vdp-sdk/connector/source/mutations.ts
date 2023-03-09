@@ -1,3 +1,4 @@
+import { Nullable } from "../../../type";
 import { env } from "../../../utility";
 import { createInstillAxiosClient } from "../../helper";
 import { Source } from "./types";
@@ -18,10 +19,10 @@ export type CreateSourcePayload = {
 
 export const createSourceMutation = async (
   payload: CreateSourcePayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<Source> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateSourceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors`,
@@ -35,10 +36,10 @@ export const createSourceMutation = async (
 
 export const deleteSourceMutation = async (
   sourceName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}`);
   } catch (err) {

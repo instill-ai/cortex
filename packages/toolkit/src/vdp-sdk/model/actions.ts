@@ -1,6 +1,7 @@
 import { Operation } from "../types";
 import { env } from "../../utility";
 import { createInstillAxiosClient } from "../helper";
+import { Nullable } from "../../type";
 
 export type DeployModelResponse = {
   operation: Operation;
@@ -8,10 +9,10 @@ export type DeployModelResponse = {
 
 export const deployModelInstanceAction = async (
   modelInstanceName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<DeployModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/deploy`
@@ -28,10 +29,10 @@ export type UnDeployModelResponse = {
 
 export const unDeployModelInstanceAction = async (
   modelInstanceName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<UnDeployModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/undeploy`
@@ -58,13 +59,13 @@ export type TestModelInstanceResponse = {
 
 export const testModelInstance = async (
   payload: TestModelInstancePayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
     const formData = new FormData();
     formData.append("file", payload.content);
 
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<TestModelInstanceResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${

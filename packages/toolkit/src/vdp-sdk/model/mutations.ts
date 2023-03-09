@@ -21,10 +21,10 @@ export type CreateGithubModelResponse = {
 
 export const createGithubModelMutation = async (
   payload: CreateGithubModelPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateGithubModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/models`,
@@ -60,10 +60,10 @@ export type CreateLocalModelResponse = {
 
 export const createLocalModelMutation = async (
   payload: CreateLocalModelPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const formData = new FormData();
     formData.append("id", payload.id);
@@ -107,10 +107,10 @@ export type CreateArtivcModelResponse = {
 
 export const createArtivcModelMutation = async (
   payload: CreateArtivcModelPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateLocalModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/models`,
@@ -149,10 +149,10 @@ export type CreateHuggingFaceModelResponse = {
 
 export const createHuggingFaceModelMutation = async (
   payload: CreateHuggingFaceModelPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateLocalModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/models`,
@@ -181,10 +181,10 @@ export type UpdateModelResponse = {
 
 export const updateModelMutation = async (
   payload: UpdateModelPayload,
-  authToken?: string
+  accessToken: Nullable<string>
 ): Promise<Model> => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.patch<UpdateModelResponse>(
       `${env("NEXT_PUBLIC_API_VERSION")}/${payload.name}`,
@@ -198,10 +198,10 @@ export const updateModelMutation = async (
 
 export const deleteModelMutation = async (
   modelName: string,
-  authToken?: string
+  accessToken: Nullable<string>
 ) => {
   try {
-    const client = createInstillAxiosClient(authToken);
+    const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${modelName}`);
   } catch (err) {
