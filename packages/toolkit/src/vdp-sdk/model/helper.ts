@@ -1,21 +1,27 @@
 import { Nullable } from "../../type";
 import { getModelOperationQuery } from "./queries";
 
-export const checkCreateModelOperationUntilDone = async (
-  operationName: string,
-  accessToken: Nullable<string>
-) => {
+export const checkCreateModelOperationUntilDone = async ({
+  operationName,
+  accessToken,
+}: {
+  operationName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
-    const operation = await getModelOperationQuery(operationName, accessToken);
+    const operation = await getModelOperationQuery({
+      operationName,
+      accessToken,
+    });
     if (operation.done) {
       return Promise.resolve(true);
     } else {
       return new Promise((resolve) => {
         setTimeout(async () => {
-          const result = await checkCreateModelOperationUntilDone(
+          const result = await checkCreateModelOperationUntilDone({
             operationName,
-            accessToken
-          );
+            accessToken,
+          });
           resolve(result);
         }, 1500);
       });

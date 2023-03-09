@@ -7,10 +7,13 @@ export type DeployModelResponse = {
   operation: Operation;
 };
 
-export const deployModelInstanceAction = async (
-  modelInstanceName: string,
-  accessToken: Nullable<string>
-) => {
+export const deployModelInstanceAction = async ({
+  modelInstanceName,
+  accessToken,
+}: {
+  modelInstanceName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -27,10 +30,13 @@ export type UnDeployModelResponse = {
   operation: Operation;
 };
 
-export const unDeployModelInstanceAction = async (
-  modelInstanceName: string,
-  accessToken: Nullable<string>
-) => {
+export const unDeployModelInstanceAction = async ({
+  modelInstanceName,
+  accessToken,
+}: {
+  modelInstanceName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -57,10 +63,13 @@ export type TestModelInstanceResponse = {
   output: Record<string, TestModelInstanceResult[]>;
 };
 
-export const testModelInstance = async (
-  payload: TestModelInstancePayload,
-  accessToken: Nullable<string>
-) => {
+export const testModelInstance = async ({
+  payload,
+  accessToken,
+}: {
+  payload: TestModelInstancePayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const formData = new FormData();
     formData.append("file", payload.content);

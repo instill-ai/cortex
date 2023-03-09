@@ -17,10 +17,13 @@ export type CreateDestinationPayload = {
   };
 };
 
-export const createDestinationMutation = async (
-  payload: CreateDestinationPayload,
-  accessToken: Nullable<string>
-): Promise<Destination> => {
+export const createDestinationMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateDestinationPayload;
+  accessToken: Nullable<string>;
+}): Promise<Destination> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -34,10 +37,13 @@ export const createDestinationMutation = async (
   }
 };
 
-export const deleteDestinationMutation = async (
-  destinationName: string,
-  accessToken: Nullable<string>
-) => {
+export const deleteDestinationMutation = async ({
+  destinationName,
+  accessToken,
+}: {
+  destinationName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -60,10 +66,13 @@ export type UpdateDestinationPayload = {
   };
 };
 
-export const updateDestinationMutation = async (
-  payload: UpdateDestinationPayload,
-  accessToken: Nullable<string>
-) => {
+export const updateDestinationMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: UpdateDestinationPayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
     const { name, ...data } = payload;

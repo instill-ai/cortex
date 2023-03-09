@@ -17,10 +17,13 @@ export type CreateSourcePayload = {
   };
 };
 
-export const createSourceMutation = async (
-  payload: CreateSourcePayload,
-  accessToken: Nullable<string>
-): Promise<Source> => {
+export const createSourceMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateSourcePayload;
+  accessToken: Nullable<string>;
+}): Promise<Source> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -34,10 +37,13 @@ export const createSourceMutation = async (
   }
 };
 
-export const deleteSourceMutation = async (
-  sourceName: string,
-  accessToken: Nullable<string>
-) => {
+export const deleteSourceMutation = async ({
+  sourceName,
+  accessToken,
+}: {
+  sourceName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

@@ -17,10 +17,13 @@ export type GetModelDefinitionResponse = {
   model_definition: ModelDefinition;
 };
 
-export const getModelDefinitionQuery = async (
-  modelDefinitionName: string,
-  accessToken: Nullable<string>
-) => {
+export const getModelDefinitionQuery = async ({
+  modelDefinitionName,
+  accessToken,
+}: {
+  modelDefinitionName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -40,11 +43,15 @@ export type ListModelDefinitionsResponse = {
   total_size: string;
 };
 
-export const listModelDefinitionsQuery = async (
-  pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>,
-  accessToken: Nullable<string>
-): Promise<ModelDefinition[]> => {
+export const listModelDefinitionsQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<ModelDefinition[]> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -64,11 +71,11 @@ export const listModelDefinitionsQuery = async (
 
     if (data.next_page_token) {
       modelDefinitions.push(
-        ...(await listModelDefinitionsQuery(
+        ...(await listModelDefinitionsQuery({
           pageSize,
-          data.next_page_token,
-          accessToken
-        ))
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
       );
     }
 
@@ -86,10 +93,13 @@ export type GetModelResponse = {
   model: Model;
 };
 
-export const getModelQuery = async (
-  modelName: string,
-  accessToken: Nullable<string>
-): Promise<Model> => {
+export const getModelQuery = async ({
+  modelName,
+  accessToken,
+}: {
+  modelName: string;
+  accessToken: Nullable<string>;
+}): Promise<Model> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -108,11 +118,15 @@ export type ListModelsResponse = {
   total_size: string;
 };
 
-export const listModelsQuery = async (
-  pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>,
-  accessToken: Nullable<string>
-): Promise<Model[]> => {
+export const listModelsQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<Model[]> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -130,7 +144,11 @@ export const listModelsQuery = async (
 
     if (data.next_page_token) {
       models.push(
-        ...(await listModelsQuery(pageSize, data.next_page_token, accessToken))
+        ...(await listModelsQuery({
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
       );
     }
 
@@ -148,10 +166,13 @@ export type GetModelInstanceResponse = {
   instance: ModelInstance;
 };
 
-export const getModelInstanceQuery = async (
-  modelInstanceName: string,
-  accessToken: Nullable<string>
-): Promise<ModelInstance> => {
+export const getModelInstanceQuery = async ({
+  modelInstanceName,
+  accessToken,
+}: {
+  modelInstanceName: string;
+  accessToken: Nullable<string>;
+}): Promise<ModelInstance> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -171,12 +192,17 @@ export type ListModelInstancesResponse = {
   total_size: string;
 };
 
-export const listModelInstancesQuery = async (
-  modelName: string,
-  pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>,
-  accessToken: Nullable<string>
-): Promise<ModelInstance[]> => {
+export const listModelInstancesQuery = async ({
+  modelName,
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  modelName: string;
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<ModelInstance[]> => {
   try {
     const client = createInstillAxiosClient(accessToken);
     const modelInstances: ModelInstance[] = [];
@@ -193,12 +219,12 @@ export const listModelInstancesQuery = async (
 
     if (data.next_page_token) {
       modelInstances.push(
-        ...(await listModelInstancesQuery(
+        ...(await listModelInstancesQuery({
           modelName,
           pageSize,
-          data.next_page_token,
-          accessToken
-        ))
+          nextPageToken: data.next_page_token,
+          accessToken,
+        }))
       );
     }
 
@@ -212,10 +238,13 @@ export type GetModelInstanceReadmeQuery = {
   readme: ModelInstanceReadme;
 };
 
-export const getModelInstanceReadme = async (
-  modelInstanceName: string,
-  accessToken: Nullable<string>
-) => {
+export const getModelInstanceReadme = async ({
+  modelInstanceName,
+  accessToken,
+}: {
+  modelInstanceName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -236,10 +265,13 @@ export type GetModelOperationResponse = {
   operation: Operation;
 };
 
-export const getModelOperationQuery = async (
-  operationName: string,
-  accessToken: Nullable<string>
-): Promise<Operation> => {
+export const getModelOperationQuery = async ({
+  operationName,
+  accessToken,
+}: {
+  operationName: string;
+  accessToken: Nullable<string>;
+}): Promise<Operation> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

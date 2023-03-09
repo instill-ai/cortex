@@ -9,11 +9,15 @@ export type ListPipelinesResponse = {
   total_size: string;
 };
 
-export const listPipelinesQuery = async (
-  pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>,
-  accessToken: Nullable<string>
-): Promise<PipelineWithRawRecipe[]> => {
+export const listPipelinesQuery = async ({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}): Promise<PipelineWithRawRecipe[]> => {
   try {
     const client = createInstillAxiosClient(accessToken);
     const pipelines: PipelineWithRawRecipe[] = [];
@@ -30,11 +34,11 @@ export const listPipelinesQuery = async (
 
     if (data.next_page_token) {
       pipelines.push(
-        ...(await listPipelinesQuery(
+        ...(await listPipelinesQuery({
           pageSize,
-          data.next_page_token,
-          accessToken
-        ))
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
       );
     }
 
@@ -48,10 +52,13 @@ export type GetPipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const getPipelineQuery = async (
-  pipelineName: string,
-  accessToken: Nullable<string>
-): Promise<PipelineWithRawRecipe> => {
+export const getPipelineQuery = async ({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}): Promise<PipelineWithRawRecipe> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

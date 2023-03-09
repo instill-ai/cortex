@@ -7,10 +7,13 @@ export type UpdateUserResponse = {
   user: User;
 };
 
-export const updateLocalUserMutation = async (
-  payload: Partial<User>,
-  accessToken: Nullable<string>
-): Promise<User> => {
+export const updateLocalUserMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: Partial<User>;
+  accessToken: Nullable<string>;
+}): Promise<User> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

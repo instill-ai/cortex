@@ -19,10 +19,13 @@ export type CreateGithubModelResponse = {
   operation: Operation;
 };
 
-export const createGithubModelMutation = async (
-  payload: CreateGithubModelPayload,
-  accessToken: Nullable<string>
-) => {
+export const createGithubModelMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateGithubModelPayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -58,10 +61,13 @@ export type CreateLocalModelResponse = {
   operation: Operation;
 };
 
-export const createLocalModelMutation = async (
-  payload: CreateLocalModelPayload,
-  accessToken: Nullable<string>
-) => {
+export const createLocalModelMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateLocalModelPayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -105,10 +111,13 @@ export type CreateArtivcModelResponse = {
   operation: Operation;
 };
 
-export const createArtivcModelMutation = async (
-  payload: CreateArtivcModelPayload,
-  accessToken: Nullable<string>
-) => {
+export const createArtivcModelMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateArtivcModelPayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -147,10 +156,13 @@ export type CreateHuggingFaceModelResponse = {
   operation: Operation;
 };
 
-export const createHuggingFaceModelMutation = async (
-  payload: CreateHuggingFaceModelPayload,
-  accessToken: Nullable<string>
-) => {
+export const createHuggingFaceModelMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreateHuggingFaceModelPayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -179,10 +191,13 @@ export type UpdateModelResponse = {
   model: Model;
 };
 
-export const updateModelMutation = async (
-  payload: UpdateModelPayload,
-  accessToken: Nullable<string>
-): Promise<Model> => {
+export const updateModelMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: UpdateModelPayload;
+  accessToken: Nullable<string>;
+}): Promise<Model> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -196,10 +211,13 @@ export const updateModelMutation = async (
   }
 };
 
-export const deleteModelMutation = async (
-  modelName: string,
-  accessToken: Nullable<string>
-) => {
+export const deleteModelMutation = async ({
+  modelName,
+  accessToken,
+}: {
+  modelName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

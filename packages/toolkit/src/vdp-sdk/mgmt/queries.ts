@@ -7,9 +7,11 @@ export type GetUserResponse = {
   user: User;
 };
 
-export const getUserQuery = async (
-  accessToken: Nullable<string>
-): Promise<User> => {
+export const getUserQuery = async ({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}): Promise<User> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

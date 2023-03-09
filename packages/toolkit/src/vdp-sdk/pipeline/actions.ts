@@ -7,10 +7,13 @@ export type ActivatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const activatePipelineMutation = async (
-  pipelineName: string,
-  accessToken: Nullable<string>
-) => {
+export const activatePipelineMutation = async ({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -27,10 +30,13 @@ export type DeActivatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const deActivatePipelineMutation = async (
-  pipelineName: string,
-  accessToken: Nullable<string>
-) => {
+export const deActivatePipelineMutation = async ({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 

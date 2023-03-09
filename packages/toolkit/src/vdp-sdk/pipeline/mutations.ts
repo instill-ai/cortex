@@ -16,10 +16,13 @@ export type CreatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const createPipelineMutation = async (
-  payload: CreatePipelinePayload,
-  accessToken: Nullable<string>
-): Promise<PipelineWithRawRecipe> => {
+export const createPipelineMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: CreatePipelinePayload;
+  accessToken: Nullable<string>;
+}): Promise<PipelineWithRawRecipe> => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -42,10 +45,13 @@ export type UpdatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const updatePipelineMutation = async (
-  payload: UpdatePipelinePayload,
-  accessToken: Nullable<string>
-) => {
+export const updatePipelineMutation = async ({
+  payload,
+  accessToken,
+}: {
+  payload: UpdatePipelinePayload;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -62,10 +68,13 @@ export const updatePipelineMutation = async (
   }
 };
 
-export const deletePipelineMutation = async (
-  pipelineName: string,
-  accessToken: Nullable<string>
-) => {
+export const deletePipelineMutation = async ({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
