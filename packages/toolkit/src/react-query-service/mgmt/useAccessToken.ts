@@ -9,7 +9,7 @@ import {
 } from "../../type/apiRoute";
 import { env } from "../../utility";
 
-export const useAccessToken = (enable: boolean) => {
+export const useAccessToken = ({ enable }: { enable: boolean }) => {
   const queryClient = useQueryClient();
 
   let expiresAt: Nullable<number> = null;
