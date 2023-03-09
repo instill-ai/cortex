@@ -5,7 +5,7 @@ import {
   ModelWithInstance,
 } from "../../vdp-sdk";
 import { Nullable } from "../../type";
-import { determineModelState } from "../../utility";
+import { determineModelState, env } from "../../utility";
 
 export const useModelWithInstances = ({
   model,
@@ -23,7 +23,7 @@ export const useModelWithInstances = ({
 
       const modelInstances = await listModelInstancesQuery({
         modelName: model.name,
-        pageSize: 10,
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../../type";
+import { env } from "../../../utility";
 import {
   getSourceDefinitionQuery,
   listSourcesQuery,
@@ -15,7 +16,7 @@ export const useSources = ({
     ["sources"],
     async () => {
       const sources = await listSourcesQuery({
-        pageSize: 10,
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });

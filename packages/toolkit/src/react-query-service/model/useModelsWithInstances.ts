@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { listModelInstancesQuery, ModelWithInstance } from "../../vdp-sdk";
-import { determineModelState } from "../../utility";
+import { determineModelState, env } from "../../utility";
 import { useModels } from "./useModels";
 import { Nullable } from "../../type";
 
@@ -22,7 +22,7 @@ export const useModelsWithInstances = ({
       for (const model of models.data) {
         const modelInstances = await listModelInstancesQuery({
           modelName: model.name,
-          pageSize: 10,
+          pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
           nextPageToken: null,
           accessToken,
         });

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../type";
+import { env } from "../../utility";
 import { listModelDefinitionsQuery } from "../../vdp-sdk";
 
 export const useModelDefinitions = ({
@@ -11,7 +12,7 @@ export const useModelDefinitions = ({
     ["models", "definition"],
     async () => {
       const definitions = await listModelDefinitionsQuery({
-        pageSize: 10,
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });
