@@ -2,6 +2,7 @@ import { listPipelinesQuery, Pipeline } from "../../vdp-sdk";
 import { useQuery } from "@tanstack/react-query";
 import { constructPipelineRecipeWithDefinition } from "../helper";
 import { Nullable } from "../../type";
+import { env } from "../../utility";
 
 export const usePipelines = ({
   enable,
@@ -14,7 +15,7 @@ export const usePipelines = ({
     ["pipelines"],
     async () => {
       const pipelinesWithRawRecipe = await listPipelinesQuery({
-        pageSize: 50,
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });

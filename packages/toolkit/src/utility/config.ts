@@ -10,8 +10,26 @@ export const env = (key = "") => {
   if (isBrowser() && (window as any).__env) {
     return (window as any).__env[key] === "''"
       ? ""
-      : (window as any).__env[key];
+      : parseString((window as any).__env[key]);
   }
 
-  return process.env[key] === "''" ? "" : process.env[key];
+  return process.env[key] === "''"
+    ? ""
+    : parseString(process.env[key] as string);
+};
+
+const parseString = (value: string) => {
+  if (value === "true") {
+    return true;
+  }
+
+  if (value === "false") {
+    return false;
+  }
+
+  if (/^\d+$/.test(value)) {
+    return parseInt(value);
+  }
+
+  return value;
 };

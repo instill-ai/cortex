@@ -19,7 +19,7 @@ export const useDestinationDefinitions = ({
     ["destinations", "definition"],
     async () => {
       const destinationDefinition = await listDestinationDefinitionsQuery({
-        pageSize: 10,
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });

@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../../type";
+import { env } from "../../../utility";
 import {
   DestinationWithDefinition,
   getDestinationDefinitionQuery,
@@ -15,7 +16,7 @@ export const useDestinations = ({
     ["destinations"],
     async () => {
       const destinations = await listDestinationsQuery({
-        pageSize: null,
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });
