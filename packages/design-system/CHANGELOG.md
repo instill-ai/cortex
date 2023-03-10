@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.3.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.3.0...@instill-ai/design-system-v0.3.1) (2023-03-10)
+
+
+### Miscellaneous
+
+* rename subfolder from UI to design system ([#149](https://github.com/instill-ai/design-system/issues/149)) ([d0d5563](https://github.com/instill-ai/design-system/commit/d0d5563f09e2fe811a886462c7fc9cbf92701a83))
+
 ## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.2.0...@instill-ai/design-system-v0.3.0) (2023-03-10)
 
 
