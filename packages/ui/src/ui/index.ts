@@ -52,3 +52,5 @@ import type { TextWithHtmlProps } from "./TextWithHtml/TextWithHtml";
 
 export { TextWithHtml, BasicInputDescription };
 export type { TextWithHtmlProps, BasicInputDescriptionProps };
+
+export * from "./FormRoot";
