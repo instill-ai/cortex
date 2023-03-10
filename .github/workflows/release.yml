@@ -67,7 +67,7 @@ jobs:
         uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPMTOKEN }}
-          package: "./packages/ui/package.json"
+          package: "./packages/design-system/package.json"
 
       - name: Publish toolkit
         if: ${{ steps.release.outputs.releases_created }}
