@@ -2,19 +2,19 @@ import { Nullable } from "../types/general";
 import React from "react";
 import cn from "clsx";
 
-export type FormBaseProps = {
+export type FormRootProps = {
   marginBottom: Nullable<string>;
   formLess: boolean;
   width: Nullable<string>;
   children?: React.ReactNode;
 };
 
-export const FormBase = ({
+export const FormRoot = ({
   children,
   marginBottom,
   formLess,
   width,
-}: FormBaseProps) => {
+}: FormRootProps) => {
   const submitHandler = React.useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
