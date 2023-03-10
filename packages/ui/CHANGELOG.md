@@ -1,5 +1,18 @@
 # @instill-ai/design-system
 
+## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.2.0...@instill-ai/design-system-v0.3.0) (2023-03-10)
+
+
+### Features
+
+* add ConfigureProfileForm into view ([#148](https://github.com/instill-ai/design-system/issues/148)) ([792f841](https://github.com/instill-ai/design-system/commit/792f841529ca38ca5b4d59db2b5afa15db72e155))
+* add FormRoot ([#147](https://github.com/instill-ai/design-system/issues/147)) ([e7d84a0](https://github.com/instill-ai/design-system/commit/e7d84a03590b1fb3ca19985a4809c04c6efdd56b))
+
+
+### Bug Fixes
+
+* fix the additional space behind GcsIcon folder ([#141](https://github.com/instill-ai/design-system/issues/141)) ([0b3a0c9](https://github.com/instill-ai/design-system/commit/0b3a0c9c3f8ac834b480102298fd6d0883f21ae5))
+
 ## [0.2.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.1.0...@instill-ai/design-system-v0.2.0) (2023-03-05)
 
 
