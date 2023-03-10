@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/view",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "Instill AI's frontend view package",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",

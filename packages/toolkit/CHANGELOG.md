@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.2.1...@instill-ai/toolkit-v0.3.0) (2023-03-10)
+
+
+### Features
+
+* add airbyte lib and replace jest test runner with node ([#139](https://github.com/instill-ai/design-system/issues/139)) ([c6fbe21](https://github.com/instill-ai/design-system/commit/c6fbe2111798d9b5d1170ab7fae23d26d9631eb5))
+* add FormRoot ([#147](https://github.com/instill-ai/design-system/issues/147)) ([e7d84a0](https://github.com/instill-ai/design-system/commit/e7d84a03590b1fb3ca19985a4809c04c6efdd56b))
+* add react-query-service ([#144](https://github.com/instill-ai/design-system/issues/144)) ([61cd09a](https://github.com/instill-ai/design-system/commit/61cd09adb0b45ea3c81995545de3607380130ff8))
+* add stores ([#142](https://github.com/instill-ai/design-system/issues/142)) ([87e7e27](https://github.com/instill-ai/design-system/commit/87e7e27cfcefdfe58483739d4d487e6ea0e08408))
+* add view package ([#143](https://github.com/instill-ai/design-system/issues/143)) ([cbb8a1b](https://github.com/instill-ai/design-system/commit/cbb8a1bc90013e3ddca786d4ddac35582a30efd3))
+* expose page size config as env NEXT_PUBLIC_QUERY_PAGE_SIZE ([#146](https://github.com/instill-ai/design-system/issues/146)) ([5891277](https://github.com/instill-ai/design-system/commit/5891277c741e103915c70c93ced4c59b53ddc135))
+* update vdp-sdk and react-query-service to use token and refactor the aug style of them ([#145](https://github.com/instill-ai/design-system/issues/145)) ([768294a](https://github.com/instill-ai/design-system/commit/768294aac84558d07faac7d64fa0089de1844323))
+
 ## [0.2.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.2.0...@instill-ai/toolkit-v0.2.1) (2023-03-05)
 
 
