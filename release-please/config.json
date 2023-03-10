@@ -1,6 +1,6 @@
 {
   "packages": {
-    "packages/ui": {
+    "packages/design-system": {
       "release-type": "node",
       "package-name": "@instill-ai/design-system",
       "component": "@instill-ai/design-system", 
