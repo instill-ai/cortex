@@ -5,6 +5,7 @@ import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
 export const configurePipelineFormSchema = z.object({
+  canEdit: z.boolean(),
   pipelineDescription: z.nullable(z.string()),
 });
 
@@ -41,9 +42,11 @@ export const configurePipelineFormInitialState: ConfigurePipelineFormState = {
   formIsDirty: false,
   fields: {
     pipelineDescription: null,
+    canEdit: false,
   },
   errors: {
     pipelineDescription: null,
+    canEdit: null,
   },
 };
 
