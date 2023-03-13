@@ -22,7 +22,7 @@ export const ConfigureProfileForm = ({
 }: ConfigureProfileFormProps) => {
   return (
     <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
-      <div className="mb-6 flex flex-row p-10">
+      <div className="mb-6 flex flex-row py-10">
         <div className="h-16 w-16 rounded-full bg-instillGrey20">{}</div>
       </div>
       <div className="mb-8 flex flex-col gap-y-6">
