@@ -50,7 +50,7 @@ export type ConfigureProfileFormState = {
 
 export type ConfigureProfileFormAction = {
   setFormIsDirty: (isDirty: boolean) => void;
-  initConfigureProfileFormStore: () => void;
+  init: () => void;
   setFieldError: (
     fieldName: keyof ConfigureProfileFormState["error"],
     value: Nullable<string>
@@ -87,8 +87,7 @@ export const useConfigureProfileFormStore = create<
   immer(
     devtools((set) => ({
       ...configureProfileFormInitialState,
-      initConfigureProfileFormStore: () =>
-        set(configureProfileFormInitialState),
+      init: () => set(configureProfileFormInitialState),
       setFormIsDirty: (isDirty: boolean) =>
         set({
           formIsDirty: isDirty,
