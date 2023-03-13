@@ -1,85 +1,131 @@
-import { FormRoot } from "@instill-ai/design-system";
-import { Nullable, Pipeline, useMessageBoxStore } from "@instill-ai/toolkit";
-import { useCallback } from "react";
+import { useRouter } from "next/router";
+import { useCallback, useState } from "react";
+import {
+  BasicProgressMessageBox,
+  FormRoot,
+  ProgressMessageBoxState,
+} from "@instill-ai/design-system";
+import {
+  Nullable,
+  Pipeline,
+  sendAmplitudeData,
+  useAmplitudeCtx,
+  useDeletePipeline,
+  useModalStore,
+} from "@instill-ai/toolkit";
+
+import { DeleteResourceModal } from "../../DeleteResourceModal";
 import { ConfigurePipelineFormControl } from "./ConfigurePipelineFormControl";
-import { ConfigurePipelineMessageBox } from "./ConfigurePipelineMessageBox";
 import { PipelineDescriptionField } from "./PipelineDescriptionField";
 
 export type ConfigurePipelineFormProps = {
   pipeline: Nullable<Pipeline>;
   marginBottom: Nullable<string>;
   width: Nullable<string>;
+  accessToken: Nullable<string>;
 };
 
 export const ConfigurePipelineForm = ({
   marginBottom,
   width,
   pipeline,
+  accessToken,
 }: ConfigurePipelineFormProps) => {
-  const setMessageBoxState = useMessageBoxStore((state) => state.setStateValue);
+  const [messsageBoxState, setMessageBoxState] =
+    useState<ProgressMessageBoxState>({
+      activate: false,
+      status: null,
+      message: null,
+      description: null,
+    });
+  const closeModal = useModalStore((state) => state.closeModal);
+  const { amplitudeIsInit } = useAmplitudeCtx();
+  const deletePipeline = useDeletePipeline();
+  const router = useRouter();
 
   const handleDeletePipeline = useCallback(() => {
     if (!pipeline) return;
 
-    setMessageBoxState(() => ({
+    setMessageBoxState({
       activate: true,
       status: "progressing",
       description: null,
       message: "Deleting...",
-    }));
-
-    deletePipeline.mutate(pipeline.name, {
-      onSuccess: () => {
-        setMessageBoxState(() => ({
-          activate: true,
-          status: "success",
-          description: null,
-          message: "Succeed.",
-        }));
-        if (amplitudeIsInit) {
-          sendAmplitudeData("delete_pipeline", {
-            type: "critical_action",
-            process: "destination",
-          });
-        }
-        initResourceFormStore();
-        router.push("/pipelines");
-      },
-      onError: (error) => {
-        if (error instanceof Error) {
-          setMessageBoxState(() => ({
-            activate: true,
-            status: "error",
-            description: null,
-            message: error.message,
-          }));
-        } else {
-          setMessageBoxState(() => ({
-            activate: true,
-            status: "error",
-            description: null,
-            message: "Something went wrong when delete the pipeline",
-          }));
-        }
-      },
     });
+
+    deletePipeline.mutate(
+      { pipelineName: pipeline.name, accessToken },
+      {
+        onSuccess: () => {
+          setMessageBoxState({
+            activate: true,
+            status: "success",
+            description: null,
+            message: "Succeed.",
+          });
+          if (amplitudeIsInit) {
+            sendAmplitudeData("delete_pipeline", {
+              type: "critical_action",
+              process: "destination",
+            });
+          }
+          router.push("/pipelines");
+        },
+        onError: (error) => {
+          if (error instanceof Error) {
+            setMessageBoxState({
+              activate: true,
+              status: "error",
+              description: null,
+              message: error.message,
+            });
+          } else {
+            setMessageBoxState({
+              activate: true,
+              status: "error",
+              description: null,
+              message: "Something went wrong when delete the pipeline",
+            });
+          }
+        },
+      }
+    );
     closeModal();
   }, [
     pipeline,
     amplitudeIsInit,
     router,
     deletePipeline,
-    initResourceFormStore,
     closeModal,
+    accessToken,
+    setMessageBoxState,
   ]);
 
   return (
-    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
-      <div className="flex flex-col gap-y-10">
-        <PipelineDescriptionField />
-        <ConfigurePipelineFormControl pipeline={pipeline} />
-        <ConfigurePipelineMessageBox />
-      </div>
-    </FormRoot>
+    <>
+      <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
+        <div className="flex flex-col gap-y-10">
+          <PipelineDescriptionField />
+          <ConfigurePipelineFormControl
+            pipeline={pipeline}
+            setMessageBoxState={setMessageBoxState}
+          />
+          <div className="flex">
+            <BasicProgressMessageBox
+              state={messsageBoxState}
+              setActivate={(activate) =>
+                setMessageBoxState((prev) => ({ ...prev, activate }))
+              }
+              width="w-[25vw]"
+              closable={true}
+            />
+          </div>
+        </div>
+      </FormRoot>
+      <DeleteResourceModal
+        resource={pipeline}
+        handleDeleteResource={handleDeletePipeline}
+      />
+    </>
   );
 };

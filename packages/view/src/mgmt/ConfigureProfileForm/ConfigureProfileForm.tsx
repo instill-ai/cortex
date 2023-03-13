@@ -1,11 +1,10 @@
 import { Nullable } from "@instill-ai/toolkit";
-import { FormRoot } from "@instill-ai/design-system";
 import { FirstNameField } from "./FirstNameField";
 import { LastNameField } from "./LastNameField";
 import { OrgNameField } from "./OrgNameField";
 import { RoleField } from "./RoleField";
 import { UserNameField } from "./UserNameField";
-import { SingleSelectOption } from "@instill-ai/design-system";
+import { SingleSelectOption, FormRoot } from "@instill-ai/design-system";
 import { NewsletterSubscriptionField } from "./NewsletterSubscriptionField";
 import { ConfigureProfileControl } from "./ConfigureProfileControl";
 

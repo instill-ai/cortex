@@ -1,4 +1,8 @@
-import { OutlineButton, SolidButton } from "@instill-ai/design-system";
+import {
+  OutlineButton,
+  ProgressMessageBoxState,
+  SolidButton,
+} from "@instill-ai/design-system";
 import {
   Nullable,
   Pipeline,
@@ -8,7 +12,7 @@ import {
   useUpdatePipeline,
   type ConfigurePipelineFormStore,
 } from "@instill-ai/toolkit";
-import { useCallback } from "react";
+import { Dispatch, SetStateAction, useCallback } from "react";
 import { shallow } from "zustand/shallow";
 
 const selector = (state: ConfigurePipelineFormStore) => ({
@@ -19,10 +23,12 @@ const selector = (state: ConfigurePipelineFormStore) => ({
 
 export type ConfigurePipelineFormControlProps = {
   pipeline: Nullable<Pipeline>;
+  setMessageBoxState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
 };
 
 export const ConfigurePipelineFormControl = ({
   pipeline,
+  setMessageBoxState,
 }: ConfigurePipelineFormControlProps) => {
   const enable = useCreateUpdateDeleteResourceGuard();
   const { canEdit, pipelineDescription, setFieldValue } =
@@ -43,12 +49,12 @@ export const ConfigurePipelineFormControl = ({
       return;
     }
 
-    // setMessageBoxState(() => ({
-    //   activate: true,
-    //   status: "progressing",
-    //   description: null,
-    //   message: "Updating...",
-    // }));
+    setMessageBoxState({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Updating...",
+    });
 
     updatePipeline.mutate(
       {
@@ -61,33 +67,40 @@ export const ConfigurePipelineFormControl = ({
       {
         onSuccess: () => {
           setFieldValue("canEdit", false);
-          // setMessageBoxState(() => ({
-          //   activate: true,
-          //   status: "success",
-          //   description: null,
-          //   message: "Succeed.",
-          // }));
+          setMessageBoxState({
+            activate: true,
+            status: "success",
+            description: null,
+            message: "Succeed.",
+          });
         },
         onError: (error) => {
           if (error instanceof Error) {
-            // setMessageBoxState(() => ({
-            //   activate: true,
-            //   status: "error",
-            //   description: null,
-            //   message: error.message,
-            // }));
+            setMessageBoxState({
+              activate: true,
+              status: "error",
+              description: null,
+              message: error.message,
+            });
           } else {
-            // setMessageBoxState(() => ({
-            //   activate: true,
-            //   status: "error",
-            //   description: null,
-            //   message: "Something went wrong when update the pipeline",
-            // }));
+            setMessageBoxState({
+              activate: true,
+              status: "error",
+              description: null,
+              message: "Something went wrong when update the pipeline",
+            });
           }
         },
       }
     );
-  }, [canEdit, pipelineDescription, updatePipeline, pipeline]);
+  }, [
+    canEdit,
+    pipelineDescription,
+    updatePipeline,
+    pipeline,
+    setFieldValue,
+    setMessageBoxState,
+  ]);
 
   return (
     <div className="flex flex-row">
