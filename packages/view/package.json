@@ -33,6 +33,7 @@
   "dependencies": {
     "@instill-ai/design-system": "workspace:*",
     "@instill-ai/toolkit": "workspace:*",
+    "clsx": "^1.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.21.4",
@@ -41,6 +42,7 @@
   "peerDependencies": {
     "@instill-ai/design-system": "workspace:*",
     "@instill-ai/toolkit": "workspace:*",
+    "clsx": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "zod": "^3.21.0",

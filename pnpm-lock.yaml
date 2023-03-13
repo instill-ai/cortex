@@ -211,6 +211,7 @@ importers:
       '@instill-ai/toolkit': workspace:*
       '@types/react': ^17.0.39
       '@types/react-dom': 17.0.11
+      clsx: ^1.1.1
       esbuild: ^0.14.34
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -221,6 +222,7 @@ importers:
     dependencies:
       '@instill-ai/design-system': link:../design-system
       '@instill-ai/toolkit': link:../toolkit
+      clsx: 1.2.1
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       zod: 3.21.4
@@ -6408,7 +6410,6 @@ packages:
   /clsx/1.2.1:
     resolution: {integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==}
     engines: {node: '>=6'}
-    dev: true
 
   /co/4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
