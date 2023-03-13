@@ -19,6 +19,7 @@ const selector = (state: ConfigurePipelineFormStore) => ({
   setFieldValue: state.setFieldValue,
   canEdit: state.fields.canEdit,
   pipelineDescription: state.fields.pipelineDescription,
+  initConfigurePipelineFormStore: state.init,
 });
 
 export type ConfigurePipelineFormControlProps = {
@@ -31,8 +32,12 @@ export const ConfigurePipelineFormControl = ({
   setMessageBoxState,
 }: ConfigurePipelineFormControlProps) => {
   const enable = useCreateUpdateDeleteResourceGuard();
-  const { canEdit, pipelineDescription, setFieldValue } =
-    useConfigurePipelineFormStore(selector, shallow);
+  const {
+    canEdit,
+    pipelineDescription,
+    setFieldValue,
+    initConfigurePipelineFormStore,
+  } = useConfigurePipelineFormStore(selector, shallow);
   const openModal = useModalStore((state) => state.closeModal);
   const updatePipeline = useUpdatePipeline();
 
@@ -67,6 +72,7 @@ export const ConfigurePipelineFormControl = ({
       {
         onSuccess: () => {
           setFieldValue("canEdit", false);
+          initConfigurePipelineFormStore();
           setMessageBoxState({
             activate: true,
             status: "success",
@@ -100,6 +106,7 @@ export const ConfigurePipelineFormControl = ({
     pipeline,
     setFieldValue,
     setMessageBoxState,
+    initConfigurePipelineFormStore,
   ]);
 
   return (
