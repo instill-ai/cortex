@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.4.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.3.0...@instill-ai/toolkit-v0.4.0) (2023-03-10)
+
+
+### Features
+
+* add amplitude context and helper into toolkit ([#151](https://github.com/instill-ai/design-system/issues/151)) ([14544b1](https://github.com/instill-ai/design-system/commit/14544b187bf1dc7f47af785bef8f9f50de9ab2bf))
+* add configure pipeline store to toolkit ([#152](https://github.com/instill-ai/design-system/issues/152)) ([9d671a0](https://github.com/instill-ai/design-system/commit/9d671a0dd02a5e84761ec272521715c7920fa73a))
+
 ## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.2.1...@instill-ai/toolkit-v0.3.0) (2023-03-10)
 
 
