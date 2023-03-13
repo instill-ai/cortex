@@ -1,7 +1,5 @@
 ## cortex/toolkit
 
-
-
 ## Env
 
 When using this toolkit, you need to set up below environment variables
@@ -11,3 +9,4 @@ When using this toolkit, you need to set up below environment variables
 - NEXT_PUBLIC_VALIDATE_TOKEN_API_ROUTE (string)
 - NEXT_PUBLIC_REFRESH_TOKEN_API_ROUTE (string)
 - NEXT_PUBLIC_API_VERSION (string)
+- NEXT_PUBLIC_DISABLE_CREATE_UPDATE_DELETE_RESOURCE (boolean)
