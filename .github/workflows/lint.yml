@@ -40,8 +40,12 @@ jobs:
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
+
       - name: Install dependencies
         run: rm -rf node_modules && pnpm i --frozen-lockfile
+
+      - name: build packages
+        run: pnpm build
 
       - name: Run linter
         run: pnpm lint

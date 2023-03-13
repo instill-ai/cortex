@@ -45,5 +45,8 @@ jobs:
       - name: Install dependencies
         run: rm -rf node_modules && pnpm i --frozen-lockfile
 
+      - name: build packages
+        run: pnpm build
+
       - name: Run test
         run: pnpm test
