@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 
 export const messageBoxSchema = z.object({
-  status: z.nullable(z.enum(["success", "error", "processing"])),
+  status: z.nullable(z.enum(["success", "error", "progressing"])),
   message: z.nullable(z.string()),
   description: z.nullable(z.string()),
   activate: z.boolean(),
