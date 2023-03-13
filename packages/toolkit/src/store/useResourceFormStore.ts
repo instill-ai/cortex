@@ -179,6 +179,9 @@ export type CreateResourceFormAction = {
   setCreateNewResourceIsComplete: (isComplete: boolean) => void;
 };
 
+export type CreateResourceFormStore = CreateResourceFormState &
+  CreateResourceFormAction;
+
 const createResourceInitialState: CreateResourceFormState = {
   formIsDirty: false,
   createNewResourceIsComplete: false,
@@ -285,9 +288,7 @@ const createResourceInitialState: CreateResourceFormState = {
   },
 };
 
-export const useResourceFormStore = create<
-  CreateResourceFormState & CreateResourceFormAction
->()(
+export const useResourceFormStore = create<CreateResourceFormStore>()(
   immer(
     subscribeWithSelector(
       devtools((set) => ({
