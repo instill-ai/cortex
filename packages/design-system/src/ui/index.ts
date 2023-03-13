@@ -54,3 +54,4 @@ export { TextWithHtml, BasicInputDescription };
 export type { TextWithHtmlProps, BasicInputDescriptionProps };
 
 export * from "./FormRoot";
+export * from "./ModalRoot";
