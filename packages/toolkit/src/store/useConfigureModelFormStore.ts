@@ -13,14 +13,15 @@ export type ConfigureModelFormAction = {
   initConfigureModelFormStore: () => void;
 };
 
+export type ConfigureModelFormStore = ConfigureModelFormState &
+  ConfigureModelFormAction;
+
 export const configureModelFormInitialState: ConfigureModelFormState = {
   description: null,
   formIsDirty: false,
 };
 
-export const useConfigureModelFormStore = create<
-  ConfigureModelFormState & ConfigureModelFormAction
->()(
+export const useConfigureModelFormStore = create<ConfigureModelFormStore>()(
   devtools((set) => ({
     ...configureModelFormInitialState,
     initConfigureModelFormStore: () => set(configureModelFormInitialState),
