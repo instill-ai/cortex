@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.4.0...@instill-ai/toolkit-v0.4.1) (2023-03-13)
+
+
+### Miscellaneous
+
+* correct the name of useConfigurePipelineFormStore ([#154](https://github.com/instill-ai/design-system/issues/154)) ([99c90d1](https://github.com/instill-ai/design-system/commit/99c90d1f69f9969d50126da67790e6365cb0c90a))
+
 ## [0.4.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.3.0...@instill-ai/toolkit-v0.4.0) (2023-03-10)
 
 
