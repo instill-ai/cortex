@@ -36,7 +36,9 @@ const Template: StoryFn<typeof ProgressMessageBoxBase> = (args) => {
       <ProgressMessageBoxBase
         {...args}
         state={messageBoxState}
-        setState={setMessageBoxState}
+        setActivate={(activate) =>
+          setMessageBoxState((prev) => ({ ...prev, activate }))
+        }
       />
     </>
   );
