@@ -12,10 +12,7 @@ export const messageBoxSchema = z.object({
 export type MessageBoxState = z.infer<typeof messageBoxSchema>;
 
 export type MessageBoxAction = {
-  setStateValue: <T extends keyof MessageBoxState>(
-    stateName: T,
-    value: MessageBoxState[T]
-  ) => void;
+  setState: (state: Partial<MessageBoxState>) => void;
   init: () => void;
 };
 
@@ -32,10 +29,10 @@ export const useMessageBoxStore = create<MessageBoxStore>()(
   devtools((set) => ({
     ...messageBoxInitialState,
     init: () => set(messageBoxInitialState),
-    setStateValue: (stateName, value) =>
-      set((state) => ({
-        ...state,
-        [stateName]: value,
+    setState: (newState) =>
+      set((preState) => ({
+        ...preState,
+        ...newState,
       })),
   }))
 );
