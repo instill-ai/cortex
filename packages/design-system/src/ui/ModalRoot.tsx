@@ -4,7 +4,7 @@ import cn from "clsx";
 
 import { Nullable } from "../types/general";
 
-export type ModalBaseProps = {
+export type ModalRootProps = {
   modalBgColor: Nullable<string>;
   modalPadding: Nullable<string>;
   children?: ReactNode;
@@ -12,13 +12,13 @@ export type ModalBaseProps = {
   open: boolean;
 };
 
-export const ModalBase = ({
+export const ModalRoot = ({
   open,
   children,
   modalBgColor,
   modalPadding,
   dataTestId,
-}: ModalBaseProps) => {
+}: ModalRootProps) => {
   const el = useRef<HTMLDivElement>();
 
   useEffect(() => {
