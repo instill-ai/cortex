@@ -217,12 +217,14 @@ importers:
       rimraf: ^3.0.2
       typescript: ^4.6.3
       zod: ^3.21.4
+      zustand: ^4.3.6
     dependencies:
       '@instill-ai/design-system': link:../design-system
       '@instill-ai/toolkit': link:../toolkit
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       zod: 3.21.4
+      zustand: 4.3.6_react@18.2.0
     devDependencies:
       '@instill-ai/eslint-config-cortex': link:../eslint-config-cortex
       '@types/react': 17.0.53
