@@ -125,7 +125,7 @@ export type ProgressMessageBoxBaseProps = {
 
   state: ProgressMessageBoxState;
 
-  setState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
+  setActivate: (activate: boolean) => void;
 };
 
 const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = (
@@ -133,7 +133,7 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = (
 ) => {
   const {
     state,
-    setState,
+    setActivate,
     width,
     errorIconColor,
     errorIconWidth,
@@ -243,12 +243,7 @@ const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = (
             </div>
             {closable ? (
               <button
-                onClick={() =>
-                  setState((prev) => ({
-                    ...prev,
-                    activate: false,
-                  }))
-                }
+                onClick={() => setActivate(false)}
                 className="flex mb-auto"
               >
                 <XIcon
