@@ -18,7 +18,7 @@ export const ConfigurePipelineMessageBox = () => {
     <div className="flex">
       <BasicProgressMessageBox
         state={{ status, message, description, activate }}
-        setState={setMessageBoxState}
+        setActivate={(activate) => setStateValue("activate", activate)}
         width="w-[25vw]"
         closable={true}
       />
