@@ -8,6 +8,7 @@ export type ModalState = {
 export type ModalAction = {
   closeModal: () => void;
   openModal: () => void;
+  init: () => void;
 };
 
 export type ModalStore = ModalState & ModalAction;
@@ -19,6 +20,7 @@ export const modalInitialState: ModalState = {
 export const useModalStore = create<ModalStore>()(
   devtools((set) => ({
     ...modalInitialState,
+    init: () => set(() => modalInitialState),
     closeModal: () =>
       set(() => ({
         modalIsOpen: false,

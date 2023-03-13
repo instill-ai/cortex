@@ -10,7 +10,7 @@ export type ConfigureModelFormState = {
 export type ConfigureModelFormAction = {
   setDescription: (description: Nullable<string>) => void;
   setFormIsDirty: (isDirty: boolean) => void;
-  initConfigureModelFormStore: () => void;
+  init: () => void;
 };
 
 export type ConfigureModelFormStore = ConfigureModelFormState &
@@ -24,7 +24,7 @@ export const configureModelFormInitialState: ConfigureModelFormState = {
 export const useConfigureModelFormStore = create<ConfigureModelFormStore>()(
   devtools((set) => ({
     ...configureModelFormInitialState,
-    initConfigureModelFormStore: () => set(configureModelFormInitialState),
+    init: () => set(configureModelFormInitialState),
     setDescription: (description: Nullable<string>) =>
       set({
         description,

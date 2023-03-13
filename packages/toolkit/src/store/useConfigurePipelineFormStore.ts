@@ -24,7 +24,7 @@ export type ConfigurePipelineFormState = {
 
 export type ConfigurePipelineFormAction = {
   setFormIsDirty: (isDirty: boolean) => void;
-  initConfigurePipelineFormStore: () => void;
+  init: () => void;
   setFieldError: (
     fieldName: keyof ConfigurePipelineFormState["errors"],
     value: Nullable<string>
@@ -55,8 +55,7 @@ export const useConfigurePipelineFormStore =
     immer(
       devtools((set) => ({
         ...configurePipelineFormInitialState,
-        initConfigurePipelineFormStore: () =>
-          set(configurePipelineFormInitialState),
+        init: () => set(configurePipelineFormInitialState),
         setFormIsDirty: (isDirty: boolean) =>
           set({
             formIsDirty: isDirty,
