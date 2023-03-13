@@ -28,7 +28,7 @@ export const messageBoxInitialState: MessageBoxState = {
   activate: false,
 };
 
-export const useConfigureModelFormStore = create<MessageBoxStore>()(
+export const useMessageBoxStore = create<MessageBoxStore>()(
   devtools((set) => ({
     ...messageBoxInitialState,
     init: () => set(messageBoxInitialState),
