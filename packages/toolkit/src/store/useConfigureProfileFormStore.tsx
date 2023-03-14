@@ -9,7 +9,7 @@ import { validateResourceId } from "../utility";
 // Althought userName is nullable, we need to verify its existence before
 // submit it.
 
-export const profileFormSchema = z.object({
+export const profileFormFieldSchema = z.object({
   firstName: z.nullable(z.string()),
   lastName: z.nullable(z.string()),
   userName: z.nullable(z.string()),
@@ -18,8 +18,8 @@ export const profileFormSchema = z.object({
   newsletterSubscription: z.boolean(),
 });
 
-export const validateProfileFormSchema = (value: any) =>
-  profileFormSchema
+export const validateProfileFormFieldSchema = (value: any) =>
+  profileFormFieldSchema
     .superRefine((state, ctx) => {
       if (!state.userName) {
         ctx.addIssue({
@@ -40,30 +40,32 @@ export const validateProfileFormSchema = (value: any) =>
     })
     .parse(value);
 
-export type ProfileFormFields = z.infer<typeof profileFormSchema>;
+export type ProfileFormFields = z.infer<typeof profileFormFieldSchema>;
 
 export type ConfigureProfileFormState = {
   formIsDirty: boolean;
-  profile: ProfileFormFields;
-  error: Record<keyof ProfileFormFields, Nullable<string>>;
+  fields: ProfileFormFields;
+  errors: Record<keyof ProfileFormFields, Nullable<string>>;
 };
 
 export type ConfigureProfileFormAction = {
   setFormIsDirty: (isDirty: boolean) => void;
   init: () => void;
   setFieldError: (
-    fieldName: keyof ConfigureProfileFormState["error"],
+    fieldName: keyof ConfigureProfileFormState["errors"],
     value: Nullable<string>
   ) => void;
   setFieldValue: <T extends keyof ProfileFormFields>(
     fieldName: T,
     value: ProfileFormFields[T]
   ) => void;
+  setFieldsValue: (fields: ProfileFormFields) => void;
+  setErrorsValue: (errors: ConfigureProfileFormState["errors"]) => void;
 };
 
 export const configureProfileFormInitialState: ConfigureProfileFormState = {
   formIsDirty: false,
-  profile: {
+  fields: {
     firstName: null,
     lastName: null,
     userName: null,
@@ -71,7 +73,7 @@ export const configureProfileFormInitialState: ConfigureProfileFormState = {
     role: null,
     newsletterSubscription: true,
   },
-  error: {
+  errors: {
     firstName: null,
     lastName: null,
     userName: null,
@@ -94,11 +96,19 @@ export const useConfigureProfileFormStore = create<
         }),
       setFieldError: (fieldName, value) =>
         set((state) => {
-          state.error[fieldName] = value;
+          state.errors[fieldName] = value;
         }),
       setFieldValue: (fieldName, value) =>
         set((state) => {
-          state.profile[fieldName] = value;
+          state.fields[fieldName] = value;
+        }),
+      setFieldsValue: (fields) =>
+        set((state) => {
+          state.fields = fields;
+        }),
+      setErrorsValue: (errors) =>
+        set((state) => {
+          state.errors = errors;
         }),
     }))
   )
