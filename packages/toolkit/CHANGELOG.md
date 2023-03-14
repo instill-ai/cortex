@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.5.1...@instill-ai/toolkit-v0.6.0) (2023-03-14)
+
+
+### Features
+
+* make the export path of toolkit simple ([#174](https://github.com/instill-ai/design-system/issues/174)) ([bcf30a8](https://github.com/instill-ai/design-system/commit/bcf30a866cf3834175f8fbca0e54cf4feacbc5f7))
+
 ## [0.5.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.5.0...@instill-ai/toolkit-v0.5.1) (2023-03-14)
 
 
