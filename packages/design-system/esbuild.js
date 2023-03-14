@@ -11,6 +11,6 @@ esbuild
     external: Object.keys(peerDependencies),
     format: "esm",
     outfile: "./build/index.js",
-    target: ["esnext", "node12"],
+    target: ["esnext"],
   })
   .catch(() => process.exit(1));
