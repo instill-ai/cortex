@@ -160,6 +160,7 @@ importers:
   packages/toolkit:
     specifiers:
       '@amplitude/analytics-browser': ^1.9.1
+      '@instill-ai/design-system': workspace:*
       '@instill-ai/eslint-config-cortex': workspace:*
       '@tanstack/react-query': ^4.26.1
       '@types/json-schema': ^7.0.11
@@ -183,6 +184,7 @@ importers:
       zustand: ^4.3.6
     dependencies:
       '@amplitude/analytics-browser': 1.9.1
+      '@instill-ai/design-system': link:../design-system
       '@tanstack/react-query': 4.26.1_biqbaboplfbrettd7655fr4n2y
       axios: 1.3.4
       clsx: 1.2.1
