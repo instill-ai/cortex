@@ -17,20 +17,7 @@
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache"
   },
   "main": "./build/cjs/index.js",
-  "exports": {
-    ".": {
-      "import": "./build/esm/index.js",
-      "require": "./build/cjs/index.js"
-    },
-    "./lib": {
-      "import": "./build/esm/lib/index.js",
-      "require": "./build/cjs/lib/index.js"
-    },
-    "./view": {
-      "import": "./build/esm/view/index.js",
-      "require": "./build/cjs/view/index.js"
-    }
-  },
+  "module": "./build/esm/index.js",
   "files": [
     "build"
   ],
