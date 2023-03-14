@@ -2,7 +2,7 @@ const isBrowser = () => {
   return Boolean(typeof window !== "undefined");
 };
 
-/* eslint-disable no-explicit-any */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export const env = (key = ""): any => {
   if (!key.length) {
     throw new Error("No env key provided");

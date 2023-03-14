@@ -9,6 +9,7 @@ export const createSourceFormFieldsSchema = z.object({
   sourceDefinition: z.nullable(z.string()),
 });
 
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export const validateCreateSourceSchema = (value: any) =>
   createSourceFormFieldsSchema.parse(value);
 

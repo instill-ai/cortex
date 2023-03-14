@@ -18,6 +18,7 @@ export const configureProfileFormFieldSchema = z.object({
   newsletterSubscription: z.boolean(),
 });
 
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export const validateConfigureProfileFormFieldSchema = (value: any) =>
   configureProfileFormFieldSchema
     .superRefine((state, ctx) => {

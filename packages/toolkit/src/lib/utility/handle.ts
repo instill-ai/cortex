@@ -1,3 +1,4 @@
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 export const handle = async <T>(
   promise: Promise<T>,
   defaultError: any = "rejected"

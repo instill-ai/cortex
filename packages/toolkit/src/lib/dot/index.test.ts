@@ -67,7 +67,10 @@ describe("setter", () => {
     const obj = { x: "y", foo: { bar: "a" } };
     dot.setter(obj, "foo.bar", undefined);
     assert.strictEqual(obj, { x: "y", foo: { bar: "b" } });
-    assert.strictEqual(obj.foo.hasOwnProperty("bar"), false);
+    assert.strictEqual(
+      Object.prototype.hasOwnProperty.call(obj.foo, "bar"),
+      false
+    );
   });
 
   test("updates deep nested value", () => {
@@ -80,7 +83,10 @@ describe("setter", () => {
     const obj = { x: "y", twofoldly: { foo: { bar: "a" } } };
     dot.setter(obj, "twofoldly.foo.bar", undefined);
     assert.strictEqual(obj, { x: "y", twofoldly: { foo: {} } });
-    assert.strictEqual(obj.twofoldly.foo.hasOwnProperty("bar"), false);
+    assert.strictEqual(
+      Object.prototype.hasOwnProperty.call(obj.twofoldly.foo, "bar"),
+      false
+    );
   });
 
   test("sets new array", () => {

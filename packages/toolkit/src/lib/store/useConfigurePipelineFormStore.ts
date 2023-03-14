@@ -9,6 +9,7 @@ export const configurePipelineFormFieldSchema = z.object({
   pipelineDescription: z.nullable(z.string()),
 });
 
+/* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
 export const validateConfigurePipelineFormSchema = (value: any) =>
   configurePipelineFormFieldSchema.parse(value);
 

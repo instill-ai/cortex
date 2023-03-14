@@ -1,5 +1,7 @@
 import { AxiosError } from "axios";
 
+/* eslint-disable  @typescript-eslint/no-explicit-any */
+
 export const getInstillApiErrorMessage = (error: AxiosError<any, any>) => {
   if (!error.response) {
     return null;
