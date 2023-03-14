@@ -82,10 +82,3 @@ jobs:
         with:
           token: ${{ secrets.NPMTOKEN }}
           package: "./packages/eslint-config-cortex/package.json"
-
-      - name: Publish view
-        if: ${{ steps.release.outputs.releases_created }}
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPMTOKEN }}
-          package: "./packages/view/package.json"
