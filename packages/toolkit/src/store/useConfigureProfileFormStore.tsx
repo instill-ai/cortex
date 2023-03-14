@@ -63,6 +63,9 @@ export type ConfigureProfileFormAction = {
   setErrorsValue: (errors: ConfigureProfileFormState["errors"]) => void;
 };
 
+export type ConfigureProfileFormStore = ConfigureProfileFormState &
+  ConfigureProfileFormAction;
+
 export const configureProfileFormInitialState: ConfigureProfileFormState = {
   formIsDirty: false,
   fields: {
@@ -83,9 +86,7 @@ export const configureProfileFormInitialState: ConfigureProfileFormState = {
   },
 };
 
-export const useConfigureProfileFormStore = create<
-  ConfigureProfileFormState & ConfigureProfileFormAction
->()(
+export const useConfigureProfileFormStore = create<ConfigureProfileFormStore>()(
   immer(
     devtools((set) => ({
       ...configureProfileFormInitialState,
