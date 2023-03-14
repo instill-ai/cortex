@@ -46,7 +46,8 @@
     "react-dom": "^18.2.0",
     "yup": "^0.32.11",
     "zod": "^3.21.4",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.6",
+    "clsx": "^1.0.0"
   },
   "peerDependencies": {
     "@amplitude/analytics-browser": "^1.9.1",
@@ -58,6 +59,7 @@
     "react-dom": "^18.2.0",
     "yup": "^0.32.11",
     "zod": "^3.21.4",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.6",
+    "clsx": "^1.0.0"
   }
 }
