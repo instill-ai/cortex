@@ -16,8 +16,7 @@
     "ts-types": "tsc --emitDeclarationOnly",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache"
   },
-  "main": "build/index.cjs.js",
-  "module": "build/index.esm.js",
+  "module": "build/index.js",
   "typings": "build/index.d.ts",
   "files": [
     "build"
