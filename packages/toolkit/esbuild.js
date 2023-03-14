@@ -2,7 +2,7 @@ const esbuild = require("esbuild");
 const { peerDependencies } = require("./package.json");
 
 const sharedConfig = {
-  entryPoints: ["./src/index.ts"],
+  entryPoints: ["./src/lib/index.ts", "./src/view/index.ts", "./src/index.ts"],
   bundle: true,
   minify: true,
   sourcemap: true,
@@ -15,7 +15,7 @@ esbuild
   .build({
     ...sharedConfig,
     format: "esm",
-    outdir: "./build",
+    outdir: "./build/esm",
     target: ["esnext", "node12"],
   })
   .catch(() => process.exit(1));
@@ -24,7 +24,7 @@ esbuild
   .build({
     ...sharedConfig,
     format: "cjs",
-    outfile: "./build/index.cjs.js",
+    outdir: "./build/cjs",
     target: ["esnext", "node12"],
   })
   .catch(() => process.exit(1));

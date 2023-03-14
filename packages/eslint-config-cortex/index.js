@@ -4,7 +4,12 @@ module.exports = {
     es6: true,
     browser: true,
   },
-  ignorePatterns: ["**/node_modules", "**/dist", "**/build"],
+  ignorePatterns: [
+    "**/node_modules",
+    "**/dist",
+    "**/build",
+    "**/testRunner.ts",
+  ],
   parser: "@typescript-eslint/parser",
   settings: {
     react: {
@@ -29,8 +34,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:import/recommended",
-    "plugin:jest/recommended",
-    "plugin:jest-formatting/recommended",
+    "plugin:import/typescript",
     "plugin:testing-library/react",
     "plugin:storybook/recommended",
     "plugin:react/recommended",
@@ -59,8 +63,6 @@ module.exports = {
     "jsx-a11y/role-supports-aria-props": "warn",
     "react/jsx-no-target-blank": "off",
   },
-  ignorePatterns: ["**/node_modules", "**/dist", "**/build"],
-  //plugins: ['import', 'react', 'jsx-a11y'],
   overrides: [
     {
       // For performance run jest/recommended on test files, not regular code

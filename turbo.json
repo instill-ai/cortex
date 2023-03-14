@@ -12,5 +12,6 @@
       "cache": false
     },
     "test": {}
-  }
+  },
+  "globalEnv": ["NEXT_PUBLIC_API_VERSION"]
 }

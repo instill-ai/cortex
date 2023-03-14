@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "outDir": "build"
+    "outDir": "build/types"
   },
   "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["./testRunner.ts"]
