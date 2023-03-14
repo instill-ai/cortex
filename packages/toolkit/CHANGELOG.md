@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.6.0...@instill-ai/toolkit-v0.6.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* fix how we build our package ([#176](https://github.com/instill-ai/design-system/issues/176)) ([db02d16](https://github.com/instill-ai/design-system/commit/db02d1667c24824743d26b935c891ca87c2717b9))
+
 ## [0.6.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.5.1...@instill-ai/toolkit-v0.6.0) (2023-03-14)
 
 
