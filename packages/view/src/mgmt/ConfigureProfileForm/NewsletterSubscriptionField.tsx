@@ -1,13 +1,18 @@
-import { useConfigureProfileFormStore } from "@instill-ai/toolkit";
+import {
+  ConfigureProfileFormStore,
+  useConfigureProfileFormStore,
+} from "@instill-ai/toolkit";
 import { BasicToggleField } from "@instill-ai/design-system";
+import { shallow } from "zustand/shallow";
+
+const selector = (state: ConfigureProfileFormStore) => ({
+  newsletterSubscription: state.fields.newsletterSubscription,
+  setFieldValue: state.setFieldValue,
+});
 
 export const NewsletterSubscriptionField = () => {
-  const newsletterSubscription = useConfigureProfileFormStore(
-    (state) => state.profile.newsletterSubscription
-  );
-  const setFieldValue = useConfigureProfileFormStore(
-    (state) => state.setFieldValue
-  );
+  const { newsletterSubscription, setFieldValue } =
+    useConfigureProfileFormStore(selector, shallow);
 
   return (
     <div className="w-full">

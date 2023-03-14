@@ -1,17 +1,20 @@
 import { ChangeEvent } from "react";
-import { useConfigureProfileFormStore } from "@instill-ai/toolkit";
+import {
+  ConfigureProfileFormStore,
+  useConfigureProfileFormStore,
+} from "@instill-ai/toolkit";
 import { BasicTextField } from "@instill-ai/design-system";
+import { shallow } from "zustand/shallow";
+
+const selector = (state: ConfigureProfileFormStore) => ({
+  lastName: state.fields.lastName,
+  setFieldValue: state.setFieldValue,
+  lastNameError: state.errors.lastName,
+});
 
 export const LastNameField = () => {
-  const lastName = useConfigureProfileFormStore(
-    (state) => state.profile.lastName
-  );
-  const setFieldValue = useConfigureProfileFormStore(
-    (state) => state.setFieldValue
-  );
-  const lastNameError = useConfigureProfileFormStore(
-    (state) => state.error.lastName
-  );
+  const { lastName, setFieldValue, lastNameError } =
+    useConfigureProfileFormStore(selector, shallow);
 
   return (
     <div className="w-[287px]">

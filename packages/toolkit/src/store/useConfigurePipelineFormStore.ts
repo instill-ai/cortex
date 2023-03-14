@@ -4,16 +4,16 @@ import { create } from "zustand";
 import { devtools } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 
-export const configurePipelineFormSchema = z.object({
+export const configurePipelineFormFieldSchema = z.object({
   canEdit: z.boolean(),
   pipelineDescription: z.nullable(z.string()),
 });
 
 export const validateConfigurePipelineFormSchema = (value: any) =>
-  configurePipelineFormSchema.parse(value);
+  configurePipelineFormFieldSchema.parse(value);
 
 export type ConfigurePipelineFormFields = z.infer<
-  typeof configurePipelineFormSchema
+  typeof configurePipelineFormFieldSchema
 >;
 
 export type ConfigurePipelineFormState = {
@@ -33,6 +33,8 @@ export type ConfigurePipelineFormAction = {
     fieldName: T,
     value: ConfigurePipelineFormFields[T]
   ) => void;
+  setFieldsValue: (fields: ConfigurePipelineFormFields) => void;
+  setErrorsValue: (errors: ConfigurePipelineFormState["errors"]) => void;
 };
 
 export type ConfigurePipelineFormStore = ConfigurePipelineFormState &
@@ -67,6 +69,14 @@ export const useConfigurePipelineFormStore =
         setFieldValue: (fieldName, value) =>
           set((state) => {
             state.fields[fieldName] = value;
+          }),
+        setFieldsValue: (fields) =>
+          set((state) => {
+            state.fields = fields;
+          }),
+        setErrorsValue: (errors) =>
+          set((state) => {
+            state.errors = errors;
           }),
       }))
     )
