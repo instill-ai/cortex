@@ -1,16 +1,21 @@
 import { ChangeEvent } from "react";
-import { useConfigureProfileFormStore } from "@instill-ai/toolkit";
+import {
+  ConfigureProfileFormStore,
+  useConfigureProfileFormStore,
+} from "@instill-ai/toolkit";
 import { BasicTextField } from "@instill-ai/design-system";
+import { shallow } from "zustand/shallow";
+
+const selector = (state: ConfigureProfileFormStore) => ({
+  orgName: state.fields.orgName,
+  setFieldValue: state.setFieldValue,
+  orgNameError: state.errors.orgName,
+});
 
 export const OrgNameField = () => {
-  const orgName = useConfigureProfileFormStore(
-    (state) => state.profile.orgName
-  );
-  const setFieldValue = useConfigureProfileFormStore(
-    (state) => state.setFieldValue
-  );
-  const orgNameError = useConfigureProfileFormStore(
-    (state) => state.error.orgName
+  const { orgName, setFieldValue, orgNameError } = useConfigureProfileFormStore(
+    selector,
+    shallow
   );
 
   return (

@@ -1,23 +1,22 @@
 import { ChangeEvent } from "react";
 import {
+  ConfigureProfileFormStore,
   useConfigureProfileFormStore,
   validateResourceId,
 } from "@instill-ai/toolkit";
 import { BasicTextField } from "@instill-ai/design-system";
+import { shallow } from "zustand/shallow";
+
+const selector = (state: ConfigureProfileFormStore) => ({
+  userName: state.fields.userName,
+  userNameError: state.errors.userName,
+  setFieldValue: state.setFieldValue,
+  setFieldError: state.setFieldError,
+});
 
 export const UserNameField = () => {
-  const userName = useConfigureProfileFormStore(
-    (state) => state.profile.userName
-  );
-  const userNameError = useConfigureProfileFormStore(
-    (state) => state.error.userName
-  );
-  const setFieldValue = useConfigureProfileFormStore(
-    (state) => state.setFieldValue
-  );
-  const setFieldError = useConfigureProfileFormStore(
-    (state) => state.setFieldError
-  );
+  const { userName, userNameError, setFieldValue, setFieldError } =
+    useConfigureProfileFormStore(selector, shallow);
 
   return (
     <div className="w-[287px]">

@@ -1,20 +1,29 @@
 import { useMemo } from "react";
-import { useConfigureProfileFormStore } from "@instill-ai/toolkit";
+import {
+  ConfigureProfileFormStore,
+  useConfigureProfileFormStore,
+} from "@instill-ai/toolkit";
 import {
   BasicSingleSelect,
   SingleSelectOption,
 } from "@instill-ai/design-system";
+import { shallow } from "zustand/shallow";
 
 export type RoleFieldProps = {
   roles: SingleSelectOption[];
 };
 
+const selector = (state: ConfigureProfileFormStore) => ({
+  role: state.fields.role,
+  setFieldValue: state.setFieldValue,
+  roleError: state.errors.role,
+});
+
 export const RoleField = ({ roles }: RoleFieldProps) => {
-  const role = useConfigureProfileFormStore((state) => state.profile.role);
-  const setFieldValue = useConfigureProfileFormStore(
-    (state) => state.setFieldValue
+  const { role, setFieldValue, roleError } = useConfigureProfileFormStore(
+    selector,
+    shallow
   );
-  const roleError = useConfigureProfileFormStore((state) => state.error.role);
 
   const selectedRoleOption = useMemo(() => {
     return roles.find((e) => e.value === role) || null;

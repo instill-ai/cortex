@@ -1,25 +1,25 @@
 import {
   useConfigureProfileFormStore,
   ConfigureProfileFormState,
-  validateProfileFormSchema,
+  validateConfigureProfileFormFieldSchema,
 } from "@instill-ai/toolkit";
 import { OutlineButton, SolidButton } from "@instill-ai/design-system";
 import { z } from "zod";
 
 export const ConfigureProfileControl = () => {
-  const profile = useConfigureProfileFormStore((state) => state.profile);
+  const fields = useConfigureProfileFormStore((state) => state.fields);
   const setFieldError = useConfigureProfileFormStore(
     (state) => state.setFieldError
   );
 
   const handleSubmit = () => {
     try {
-      validateProfileFormSchema(profile);
+      validateConfigureProfileFormFieldSchema(fields);
     } catch (err) {
       if (err instanceof z.ZodError) {
         for (const issue of err.issues) {
           setFieldError(
-            issue.path.toString() as keyof ConfigureProfileFormState["error"],
+            issue.path.toString() as keyof ConfigureProfileFormState["errors"],
             issue.message
           );
         }
