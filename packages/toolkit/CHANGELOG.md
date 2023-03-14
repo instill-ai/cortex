@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.5.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.4.1...@instill-ai/toolkit-v0.5.0) (2023-03-14)
+
+
+### Features
+
+* add canEdit field into configurePipelineFormSchema ([#158](https://github.com/instill-ai/design-system/issues/158)) ([6127b25](https://github.com/instill-ai/design-system/commit/6127b253f66bf20b62a7853b6e39d1a360f5bb73))
+* add create source form store ([#170](https://github.com/instill-ai/design-system/issues/170)) ([ffaed7d](https://github.com/instill-ai/design-system/commit/ffaed7dad7336d5f455e1a9c4e807db5b2181969))
+* add hooks ([#156](https://github.com/instill-ai/design-system/issues/156)) ([4e8c3e4](https://github.com/instill-ai/design-system/commit/4e8c3e48422a843152f6027dc48fa1f9edc941a0))
+* add useConfigureModelFormStore ([#164](https://github.com/instill-ai/design-system/issues/164)) ([495d0a0](https://github.com/instill-ai/design-system/commit/495d0a001e5fb28078e8025473bc30c3ba40ec66))
+* export store type and update export path ([#160](https://github.com/instill-ai/design-system/issues/160)) ([9d134eb](https://github.com/instill-ai/design-system/commit/9d134eb5bb1231060f11cabe38cdf6a36ce64e3f))
+* merge view into toolkit ([#171](https://github.com/instill-ai/design-system/issues/171)) ([2d52b2b](https://github.com/instill-ai/design-system/commit/2d52b2b4c0cb07f14ddb93c918445ca7a7ecdce9))
+
+
+### Bug Fixes
+
+* fix hook export path ([#159](https://github.com/instill-ai/design-system/issues/159)) ([e2077c5](https://github.com/instill-ai/design-system/commit/e2077c59d38949d02fc577c1c02b1ded9c06ac4e))
+* fix messageBoxSchema status enum ([#166](https://github.com/instill-ai/design-system/issues/166)) ([d9b3f40](https://github.com/instill-ai/design-system/commit/d9b3f4074139560b2a43f31e77b3b7a5fa582d67))
+* fix useMessageBoxStore export path ([#165](https://github.com/instill-ai/design-system/issues/165)) ([f65a217](https://github.com/instill-ai/design-system/commit/f65a2177e297b9733d790cbeb53f753f4a460140))
+
 ## [0.4.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.4.0...@instill-ai/toolkit-v0.4.1) (2023-03-13)
 
 
