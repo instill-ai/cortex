@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.5.0...@instill-ai/toolkit-v0.5.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* fix packagejson files prop ([#172](https://github.com/instill-ai/design-system/issues/172)) ([5edbf8f](https://github.com/instill-ai/design-system/commit/5edbf8f44fbde1a65d6b010857eb7130600852dc))
+
 ## [0.5.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.4.1...@instill-ai/toolkit-v0.5.0) (2023-03-14)
 
 
