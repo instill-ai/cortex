@@ -16,12 +16,12 @@
     "ts-types": "tsc --emitDeclarationOnly",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache"
   },
-  "main": "./build/cjs/index.js",
-  "module": "./build/esm/index.js",
+  "main": "build/index.cjs.js",
+  "module": "build/index.esm.js",
+  "typings": "build/index.d.ts",
   "files": [
     "build"
   ],
-  "types": "./build/types/index.d.ts",
   "license": "Apache-2.0",
   "private": false,
   "devDependencies": {

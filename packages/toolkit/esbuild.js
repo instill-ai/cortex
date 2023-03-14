@@ -8,14 +8,13 @@ const sharedConfig = {
   sourcemap: true,
   target: "esnext",
   external: Object.keys(peerDependencies),
-  platform: "node",
 };
 
 esbuild
   .build({
     ...sharedConfig,
     format: "esm",
-    outdir: "./build/esm",
+    outfile: "./build/index.esm.js",
     target: ["esnext", "node12"],
   })
   .catch(() => process.exit(1));
@@ -24,7 +23,7 @@ esbuild
   .build({
     ...sharedConfig,
     format: "cjs",
-    outdir: "./build/cjs",
+    outfile: "./build/index.cjs.js",
     target: ["esnext", "node12"],
   })
   .catch(() => process.exit(1));
