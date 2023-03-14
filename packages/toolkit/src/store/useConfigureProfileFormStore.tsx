@@ -9,7 +9,7 @@ import { validateResourceId } from "../utility";
 // Althought userName is nullable, we need to verify its existence before
 // submit it.
 
-export const profileFormFieldSchema = z.object({
+export const configureProfileFormFieldSchema = z.object({
   firstName: z.nullable(z.string()),
   lastName: z.nullable(z.string()),
   userName: z.nullable(z.string()),
@@ -18,8 +18,8 @@ export const profileFormFieldSchema = z.object({
   newsletterSubscription: z.boolean(),
 });
 
-export const validateProfileFormFieldSchema = (value: any) =>
-  profileFormFieldSchema
+export const validateConfigureProfileFormFieldSchema = (value: any) =>
+  configureProfileFormFieldSchema
     .superRefine((state, ctx) => {
       if (!state.userName) {
         ctx.addIssue({
@@ -40,7 +40,7 @@ export const validateProfileFormFieldSchema = (value: any) =>
     })
     .parse(value);
 
-export type ProfileFormFields = z.infer<typeof profileFormFieldSchema>;
+export type ProfileFormFields = z.infer<typeof configureProfileFormFieldSchema>;
 
 export type ConfigureProfileFormState = {
   formIsDirty: boolean;
