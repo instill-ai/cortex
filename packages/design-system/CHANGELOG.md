@@ -1,5 +1,20 @@
 # @instill-ai/design-system
 
+## [0.4.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.3.1...@instill-ai/design-system-v0.4.0) (2023-03-14)
+
+
+### Features
+
+* add create source form store ([#170](https://github.com/instill-ai/design-system/issues/170)) ([ffaed7d](https://github.com/instill-ai/design-system/commit/ffaed7dad7336d5f455e1a9c4e807db5b2181969))
+* add ModalRoot into design-system ([#161](https://github.com/instill-ai/design-system/issues/161)) ([c5d4fa2](https://github.com/instill-ai/design-system/commit/c5d4fa27a4dde3359c5a68aa4cde8342877c2e78))
+* merge view into toolkit ([#171](https://github.com/instill-ai/design-system/issues/171)) ([2d52b2b](https://github.com/instill-ai/design-system/commit/2d52b2b4c0cb07f14ddb93c918445ca7a7ecdce9))
+* replace the props of ProgressMessageBoxBase from setState to setActivate ([#167](https://github.com/instill-ai/design-system/issues/167)) ([0baf90e](https://github.com/instill-ai/design-system/commit/0baf90e018652cb323ad19bce8b25719b599ad68))
+
+
+### Bug Fixes
+
+* fix modal root name ([#162](https://github.com/instill-ai/design-system/issues/162)) ([c0bcf3f](https://github.com/instill-ai/design-system/commit/c0bcf3ffd4482d4eebb19539d0d46a99bb8696b5))
+
 ## [0.3.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.3.0...@instill-ai/design-system-v0.3.1) (2023-03-10)
 
 

@@ -1,5 +1,12 @@
 # eslint-config-cortex
 
+## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.2.0...@instill-ai/eslint-config-cortex-v0.3.0) (2023-03-14)
+
+
+### Features
+
+* merge view into toolkit ([#171](https://github.com/instill-ai/design-system/issues/171)) ([2d52b2b](https://github.com/instill-ai/design-system/commit/2d52b2b4c0cb07f14ddb93c918445ca7a7ecdce9))
+
 ## [0.2.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex@0.1.0...@instill-ai/eslint-config-cortex-v0.2.0) (2023-03-05)
 
 
