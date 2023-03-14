@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.6.1...@instill-ai/toolkit-v0.7.0) (2023-03-14)
+
+
+### Features
+
+* only export ESM module ([#178](https://github.com/instill-ai/design-system/issues/178)) ([be39c37](https://github.com/instill-ai/design-system/commit/be39c37db03f36818c4ef83bd60110e04a10f721))
+
 ## [0.6.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.6.0...@instill-ai/toolkit-v0.6.1) (2023-03-14)
 
 

@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.5.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.4.0...@instill-ai/design-system-v0.5.0) (2023-03-14)
+
+
+### Features
+
+* only export ESM module ([#178](https://github.com/instill-ai/design-system/issues/178)) ([be39c37](https://github.com/instill-ai/design-system/commit/be39c37db03f36818c4ef83bd60110e04a10f721))
+
 ## [0.4.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.3.1...@instill-ai/design-system-v0.4.0) (2023-03-14)
 
 
