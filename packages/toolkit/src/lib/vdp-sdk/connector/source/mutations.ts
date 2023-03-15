@@ -28,7 +28,7 @@ export const createSourceMutation = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreateSourceResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors`,
+      "/source-connectors",
       payload
     );
     return Promise.resolve(data.source_connector);
@@ -47,7 +47,7 @@ export const deleteSourceMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}`);
+    await client.delete(`/${sourceName}`);
   } catch (err) {
     return Promise.reject(err);
   }

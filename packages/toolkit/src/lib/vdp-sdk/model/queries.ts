@@ -28,7 +28,7 @@ export const getModelDefinitionQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelDefinitionResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelDefinitionName}`
+      `/${modelDefinitionName}`
     );
 
     return Promise.resolve(data.model_definition);
@@ -58,7 +58,7 @@ export const listModelDefinitionsQuery = async ({
     const modelDefinitions: ModelDefinition[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/model-definitions`,
+      "/model-definitions",
       pageSize,
       nextPageToken
     );
@@ -104,7 +104,7 @@ export const getModelQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}?view=VIEW_FULL`
+      `/${modelName}?view=VIEW_FULL`
     );
     return Promise.resolve(data.model);
   } catch (err) {
@@ -133,7 +133,7 @@ export const listModelsQuery = async ({
     const models: Model[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/models?view=VIEW_FULL`,
+      "/models?view=VIEW_FULL",
       pageSize,
       nextPageToken
     );
@@ -177,7 +177,7 @@ export const getModelInstanceQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelInstanceResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}?view=VIEW_FULL`
+      `/${modelInstanceName}?view=VIEW_FULL`
     );
 
     return Promise.resolve(data.instance);
@@ -208,7 +208,7 @@ export const listModelInstancesQuery = async ({
     const modelInstances: ModelInstance[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelName}/instances?view=VIEW_FULL`,
+      `/${modelName}/instances?view=VIEW_FULL`,
       pageSize,
       nextPageToken
     );
@@ -249,7 +249,7 @@ export const getModelInstanceReadme = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelInstanceReadmeQuery>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/readme`
+      `/${modelInstanceName}/readme`
     );
     return Promise.resolve(data.readme);
   } catch (err) {
@@ -276,7 +276,7 @@ export const getModelOperationQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetModelOperationResponse>(
-      `${process.env.NEXT_PUBLIC_API_VERSION}/${operationName}`
+      `/${operationName}`
     );
     return Promise.resolve(data.operation);
   } catch (err) {

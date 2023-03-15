@@ -18,7 +18,7 @@ export const deployModelInstanceAction = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<DeployModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/deploy`
+      `/${modelInstanceName}/deploy`
     );
     return Promise.resolve(data.operation);
   } catch (err) {
@@ -41,7 +41,7 @@ export const unDeployModelInstanceAction = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<UnDeployModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${modelInstanceName}/undeploy`
+      `/${modelInstanceName}/undeploy`
     );
     return Promise.resolve(data.operation);
   } catch (err) {
@@ -77,9 +77,7 @@ export const testModelInstance = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<TestModelInstanceResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${
-        payload.modelInstanceName
-      }/test-multipart`,
+      `/${payload.modelInstanceName}/test-multipart`,
       formData,
       {
         headers: {

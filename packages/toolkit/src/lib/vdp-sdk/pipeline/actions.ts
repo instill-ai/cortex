@@ -18,7 +18,7 @@ export const activatePipelineMutation = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<ActivatePipelineResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}/activate`
+      `/${pipelineName}/activate`
     );
     return Promise.resolve(data.pipeline);
   } catch (err) {
@@ -41,7 +41,7 @@ export const deActivatePipelineMutation = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<DeActivatePipelineResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}/deactivate`
+      `/${pipelineName}/deactivate`
     );
     return Promise.resolve(data.pipeline);
   } catch (err) {

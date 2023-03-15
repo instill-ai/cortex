@@ -17,10 +17,7 @@ export const updateLocalUserMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.patch(
-      `${env("NEXT_PUBLIC_API_VERSION")}/user`,
-      payload
-    );
+    const { data } = await client.patch("/user", payload);
 
     return Promise.resolve(data.user);
   } catch (err) {

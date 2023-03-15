@@ -29,9 +29,7 @@ export const listSourceDefinitionsQuery = async ({
     const sourceDefinitions: ConnectorDefinition[] = [];
 
     const queryString = getQueryString(
-      `${env(
-        "NEXT_PUBLIC_API_VERSION"
-      )}/source-connector-definitions?view=VIEW_FULL`,
+      "/source-connector-definitions?view=VIEW_FULL",
       pageSize,
       nextPageToken
     );
@@ -73,7 +71,7 @@ export const getSourceDefinitionQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetSourceDefinitionResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${sourceDefinitionName}`
+      `/${sourceDefinitionName}`
     );
 
     return Promise.resolve(data.source_connector_definition);
@@ -101,7 +99,7 @@ export const getSourceQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetSourceResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${sourceName}?view=VIEW_FULL`
+      `/${sourceName}?view=VIEW_FULL`
     );
 
     return Promise.resolve(data.source_connector);
@@ -130,7 +128,7 @@ export const listSourcesQuery = async ({
     const sources: Source[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/source-connectors?view=VIEW_FULL`,
+      `/source-connectors?view=VIEW_FULL`,
       pageSize,
       nextPageToken
     );

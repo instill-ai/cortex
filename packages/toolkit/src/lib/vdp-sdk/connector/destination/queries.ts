@@ -131,7 +131,7 @@ export const listDestinationsQuery = async ({
     const destinations: Destination[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/destination-connectors?view=VIEW_FULL`,
+      `destination-connectors?view=VIEW_FULL`,
       pageSize,
       nextPageToken
     );

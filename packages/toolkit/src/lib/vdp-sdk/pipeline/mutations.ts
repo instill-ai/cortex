@@ -27,7 +27,7 @@ export const createPipelineMutation = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<CreatePipelineResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/pipelines`,
+      "/pipelines",
       payload
     );
     return Promise.resolve(data.pipeline);
@@ -56,7 +56,7 @@ export const updatePipelineMutation = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.patch<UpdatePipelineResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${payload.name}`,
+      `/${payload.name}`,
       {
         ...payload,
         description: payload.description ?? undefined,
@@ -78,7 +78,7 @@ export const deletePipelineMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}`);
+    await client.delete(`/${pipelineName}`);
   } catch (err) {
     return Promise.reject(err);
   }

@@ -29,17 +29,14 @@ export const createGithubModelMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.post<CreateGithubModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/models`,
-      {
-        id: payload.id,
-        model_definition: payload.model_definition,
-        description: payload.description ?? undefined,
-        configuration: {
-          repository: payload.configuration.repository,
-        },
-      }
-    );
+    const { data } = await client.post<CreateGithubModelResponse>("/models", {
+      id: payload.id,
+      model_definition: payload.model_definition,
+      description: payload.description ?? undefined,
+      configuration: {
+        repository: payload.configuration.repository,
+      },
+    });
     return Promise.resolve(data.operation);
   } catch (err) {
     return Promise.reject(err);
@@ -81,7 +78,7 @@ export const createLocalModelMutation = async ({
     }
 
     const { data } = await client.post<CreateLocalModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/models/multipart`,
+      "/models/multipart",
       formData,
       {
         headers: {
@@ -121,20 +118,17 @@ export const createArtivcModelMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.post<CreateLocalModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/models`,
-      {
-        id: payload.id,
-        model_definition: payload.model_definition,
-        description: payload.description ?? undefined,
-        configuration: {
-          url: payload.configuration.url,
-          credential: payload.configuration.credential
-            ? JSON.parse(payload.configuration.credential)
-            : undefined,
-        },
-      }
-    );
+    const { data } = await client.post<CreateLocalModelResponse>("/models", {
+      id: payload.id,
+      model_definition: payload.model_definition,
+      description: payload.description ?? undefined,
+      configuration: {
+        url: payload.configuration.url,
+        credential: payload.configuration.credential
+          ? JSON.parse(payload.configuration.credential)
+          : undefined,
+      },
+    });
     return Promise.resolve(data.operation);
   } catch (err) {
     return Promise.reject(err);
@@ -166,17 +160,14 @@ export const createHuggingFaceModelMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.post<CreateLocalModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/models`,
-      {
-        id: payload.id,
-        model_definition: payload.model_definition,
-        description: payload.description ?? undefined,
-        configuration: {
-          repo_id: payload.configuration.repo_id,
-        },
-      }
-    );
+    const { data } = await client.post<CreateLocalModelResponse>("/models", {
+      id: payload.id,
+      model_definition: payload.model_definition,
+      description: payload.description ?? undefined,
+      configuration: {
+        repo_id: payload.configuration.repo_id,
+      },
+    });
     return Promise.resolve(data.operation);
   } catch (err) {
     return Promise.reject(err);
@@ -202,7 +193,7 @@ export const updateModelMutation = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.patch<UpdateModelResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${payload.name}`,
+      `/${payload.name}`,
       payload
     );
     return Promise.resolve(data.model);
@@ -221,7 +212,7 @@ export const deleteModelMutation = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    await client.delete(`${env("NEXT_PUBLIC_API_VERSION")}/${modelName}`);
+    await client.delete(`/${modelName}`);
   } catch (err) {
     return Promise.reject(err);
   }

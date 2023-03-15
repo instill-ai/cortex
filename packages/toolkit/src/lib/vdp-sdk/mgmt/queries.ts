@@ -15,9 +15,7 @@ export const getUserQuery = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.get<GetUserResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/user`
-    );
+    const { data } = await client.get<GetUserResponse>("/user");
 
     return Promise.resolve(data.user);
   } catch (err) {

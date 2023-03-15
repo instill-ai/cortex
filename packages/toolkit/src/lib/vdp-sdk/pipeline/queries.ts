@@ -23,7 +23,7 @@ export const listPipelinesQuery = async ({
     const pipelines: PipelineWithRawRecipe[] = [];
 
     const queryString = getQueryString(
-      `${env("NEXT_PUBLIC_API_VERSION")}/pipelines?view=VIEW_FULL`,
+      `/pipelines?view=VIEW_FULL`,
       pageSize,
       nextPageToken
     );
@@ -63,7 +63,7 @@ export const getPipelineQuery = async ({
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.get<GetPipelineResponse>(
-      `${env("NEXT_PUBLIC_API_VERSION")}/${pipelineName}?view=VIEW_FULL`
+      `/${pipelineName}?view=VIEW_FULL`
     );
 
     return Promise.resolve(data.pipeline);
