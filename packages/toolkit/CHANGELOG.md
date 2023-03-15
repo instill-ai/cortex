@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.1...@instill-ai/toolkit-v0.9.2) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix duplicated env variable in query string ([0fb6280](https://github.com/instill-ai/design-system/commit/0fb6280aada5525a236ab7d42687d2f49c339b67))
+
 ## [0.9.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.0...@instill-ai/toolkit-v0.9.1) (2023-03-15)
 
 
