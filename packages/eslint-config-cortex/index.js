@@ -65,9 +65,9 @@ module.exports = {
   },
   overrides: [
     {
-      // For performance run jest/recommended on test files, not regular code
+      // For performance run vitest/recommended on test files, not regular code
       files: ["**/?(*.)+(test).{js,jsx,ts,tsx}"],
-      extends: ["plugin:jest/recommended", "plugin:testing-library/react"],
+      extends: ["plugin:testing-library/react", "plugin:vitest/recommended"],
       rules: {
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-object-literal-type-assertion": "off",

@@ -1,7 +1,6 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom";
 import Logo from "./Logo";
+import { describe, it, expect } from "vitest";
 
 describe("Logo", () => {
   it("should render responsive colour logomark with black type", () => {
