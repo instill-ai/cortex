@@ -113,7 +113,6 @@ describe("setter", () => {
     assert.strictEqual(obj, { x: "y", foo: { 0: "b" } });
   });
 
-  // /* eslint-disable  jest/no-commented-out-tests */
   // We are currently don't support bracket path
 
   // it("supports bracket path", () => {

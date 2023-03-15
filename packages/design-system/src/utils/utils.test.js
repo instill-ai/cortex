@@ -1,4 +1,5 @@
 import { getTailwindClassNumber } from "./index";
+import { test, expect } from "vitest";
 
 test("classname don's have number, should throw", () => {
   const fontSize = "text-sm";
