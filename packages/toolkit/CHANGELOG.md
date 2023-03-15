@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.8.0...@instill-ai/toolkit-v0.9.0) (2023-03-15)
+
+
+### Features
+
+* [ins-233] add useSendAmplitudeData into cortex ([#184](https://github.com/instill-ai/design-system/issues/184)) ([eb19d05](https://github.com/instill-ai/design-system/commit/eb19d05c51387c3c38fb417c4313cb8111c6dbbb))
+
 ## [0.8.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.7.0...@instill-ai/toolkit-v0.8.0) (2023-03-15)
 
 
