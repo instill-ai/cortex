@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.5.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.1...@instill-ai/design-system-v0.5.2) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix wrong label UI when its value is null ([#189](https://github.com/instill-ai/design-system/issues/189)) ([02dd9d1](https://github.com/instill-ai/design-system/commit/02dd9d17633e6a7715dbeb68da7e1cc6db915e02))
+
 ## [0.5.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.0...@instill-ai/design-system-v0.5.1) (2023-03-14)
 
 
