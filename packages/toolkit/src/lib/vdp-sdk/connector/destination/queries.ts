@@ -1,5 +1,4 @@
 import { Nullable } from "../../../type";
-import { env } from "../../../utility";
 import { createInstillAxiosClient, getQueryString } from "../../helper";
 import { ConnectorDefinition } from "../types";
 import { Destination } from "./types";
