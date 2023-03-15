@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.5.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.2...@instill-ai/design-system-v0.5.3) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix unnecessary gap when the label value is null ([#191](https://github.com/instill-ai/design-system/issues/191)) ([f102377](https://github.com/instill-ai/design-system/commit/f1023777fac68be638cd135c7d800902722081f4))
+
 ## [0.5.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.1...@instill-ai/design-system-v0.5.2) (2023-03-15)
 
 
