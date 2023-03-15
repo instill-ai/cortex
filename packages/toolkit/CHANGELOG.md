@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.0...@instill-ai/toolkit-v0.9.1) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix wrong export name of ChangeModelInstanceStateToggle ([#186](https://github.com/instill-ai/design-system/issues/186)) ([3cda4b3](https://github.com/instill-ai/design-system/commit/3cda4b366f300ef2bb95044b11dd9473cff94ed2))
+
 ## [0.9.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.8.0...@instill-ai/toolkit-v0.9.0) (2023-03-15)
 
 
