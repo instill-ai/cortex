@@ -142,26 +142,28 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
             className="z-10 flex flex-row gap-x-2 w-full"
             htmlFor={htmlFor}
           >
-            <p
-              className={cn(
-                "flex-shrink-0",
-                error
-                  ? cn(
-                      errorLabelFontFamily,
-                      errorLabelFontSize,
-                      errorLabelFontWeight,
-                      errorLabelLineHeight,
-                      errorLabelTextColor
-                    )
-                  : cn(
-                      labelFontSize,
-                      labelFontWeight,
-                      labelTextColor,
-                      labelFontFamily,
-                      labelLineHeight
-                    )
-              )}
-            >{`${label} ${required ? "*" : ""}`}</p>
+            {label ? (
+              <p
+                className={cn(
+                  "flex-shrink-0",
+                  error
+                    ? cn(
+                        errorLabelFontFamily,
+                        errorLabelFontSize,
+                        errorLabelFontWeight,
+                        errorLabelLineHeight,
+                        errorLabelTextColor
+                      )
+                    : cn(
+                        labelFontSize,
+                        labelFontWeight,
+                        labelTextColor,
+                        labelFontFamily,
+                        labelLineHeight
+                      )
+                )}
+              >{`${label} ${required ? "*" : ""}`}</p>
+            ) : null}
             <p
               className={cn(
                 "my-auto",
