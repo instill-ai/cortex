@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.10.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.3...@instill-ai/toolkit-v0.10.0) (2023-03-15)
+
+
+### Features
+
+* [INS-244] replace jest with vitest in design-system ([#197](https://github.com/instill-ai/design-system/issues/197)) ([8f47a47](https://github.com/instill-ai/design-system/commit/8f47a47b5ae71dd9d7409d70e3101a476812c6e0))
+
+
+### Bug Fixes
+
+* fix packagejson type declaration ([#195](https://github.com/instill-ai/design-system/issues/195)) ([a0f8cd8](https://github.com/instill-ai/design-system/commit/a0f8cd852f35a8fc121c17ca93bf04f265c4914b))
+
 ## [0.9.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.2...@instill-ai/toolkit-v0.9.3) (2023-03-15)
 
 

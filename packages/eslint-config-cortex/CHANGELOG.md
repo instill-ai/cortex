@@ -1,5 +1,12 @@
 # eslint-config-cortex
 
+## [0.4.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.3.0...@instill-ai/eslint-config-cortex-v0.4.0) (2023-03-15)
+
+
+### Features
+
+* [INS-244] replace jest with vitest in design-system ([#197](https://github.com/instill-ai/design-system/issues/197)) ([8f47a47](https://github.com/instill-ai/design-system/commit/8f47a47b5ae71dd9d7409d70e3101a476812c6e0))
+
 ## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.2.0...@instill-ai/eslint-config-cortex-v0.3.0) (2023-03-14)
 
 

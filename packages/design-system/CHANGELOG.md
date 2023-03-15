@@ -1,5 +1,18 @@
 # @instill-ai/design-system
 
+## [0.6.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.4...@instill-ai/design-system-v0.6.0) (2023-03-15)
+
+
+### Features
+
+* [INS-244] replace jest with vitest in design-system ([#197](https://github.com/instill-ai/design-system/issues/197)) ([8f47a47](https://github.com/instill-ai/design-system/commit/8f47a47b5ae71dd9d7409d70e3101a476812c6e0))
+
+
+### Bug Fixes
+
+* fix design-system tsconfig didn't exclude test related file ([#198](https://github.com/instill-ai/design-system/issues/198)) ([8652922](https://github.com/instill-ai/design-system/commit/8652922150a32d059a86fe184b01ed3ed5f5386d))
+* fix packagejson type declaration ([#195](https://github.com/instill-ai/design-system/issues/195)) ([a0f8cd8](https://github.com/instill-ai/design-system/commit/a0f8cd852f35a8fc121c17ca93bf04f265c4914b))
+
 ## [0.5.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.3...@instill-ai/design-system-v0.5.4) (2023-03-15)
 
 
