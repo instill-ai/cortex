@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.2...@instill-ai/toolkit-v0.9.3) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix package.json main field ([#193](https://github.com/instill-ai/design-system/issues/193)) ([deecba1](https://github.com/instill-ai/design-system/commit/deecba1fadad4fdb3c2bf8d6c28c9a7790e26ade))
+
 ## [0.9.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.1...@instill-ai/toolkit-v0.9.2) (2023-03-15)
 
 

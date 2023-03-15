@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.5.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.3...@instill-ai/design-system-v0.5.4) (2023-03-15)
+
+
+### Bug Fixes
+
+* fix package.json main field ([#193](https://github.com/instill-ai/design-system/issues/193)) ([deecba1](https://github.com/instill-ai/design-system/commit/deecba1fadad4fdb3c2bf8d6c28c9a7790e26ade))
+
 ## [0.5.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.2...@instill-ai/design-system-v0.5.3) (2023-03-15)
 
 
