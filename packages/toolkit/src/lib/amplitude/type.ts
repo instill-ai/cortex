@@ -1,7 +1,3 @@
-import { Nullable } from "./type";
-import { init, setUserId, track } from "@amplitude/analytics-browser";
-import { env } from "./utility";
-
 export type AmplitudeEventProperties = {
   type: "navigation" | "critical_action";
   process?: "source" | "destination" | "pipeline" | "model";
@@ -45,23 +41,3 @@ export type AmplitudeEvent =
   | "delete_source"
   | "update_source"
   | "use_existing_source";
-
-export const initAmplitude = (userId: Nullable<string>) => {
-  if (env("NEXT_PUBLIC_AMPLITUDE_KEY")) {
-    init(env("NEXT_PUBLIC_AMPLITUDE_KEY"), userId ? userId : undefined);
-  }
-};
-
-export const setAmplitudeUserId = (userId: string) => {
-  setUserId(userId);
-};
-
-export const sendAmplitudeData = (
-  eventType: AmplitudeEvent,
-  eventProperties: AmplitudeEventProperties
-) => {
-  track(eventType, {
-    ...eventProperties,
-    edition: env("NEXT_PUBLIC_CONSOLE_EDITION"),
-  });
-};
