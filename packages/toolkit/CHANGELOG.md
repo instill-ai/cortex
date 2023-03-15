@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.7.0...@instill-ai/toolkit-v0.8.0) (2023-03-15)
+
+
+### Features
+
+* [INS-232] add change pipeline & modelInstance toggle state button ([#182](https://github.com/instill-ai/design-system/issues/182)) ([5e6dfc8](https://github.com/instill-ai/design-system/commit/5e6dfc8272526c1be452f5ff9a41e2df6117354a))
+
 ## [0.7.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.6.1...@instill-ai/toolkit-v0.7.0) (2023-03-14)
 
 
