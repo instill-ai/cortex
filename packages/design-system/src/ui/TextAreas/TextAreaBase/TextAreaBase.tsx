@@ -207,37 +207,39 @@ const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
     <div className="flex flex-col">
       <div
         className={cn(
-          "flex flex-col gap-y-2.5 relative",
+          "flex flex-col relative",
           inputWidth,
           inputBorderRadius,
           bgColor,
           { "mb-2.5": description }
         )}
       >
-        <InputLabelBase
-          ref={inputLabelRef}
-          label={label}
-          message={additionalMessageOnLabel}
-          error={error}
-          required={required}
-          htmlFor={id}
-          type={inputLabelType}
-          labelFontFamily={labelFontFamily}
-          labelFontSize={labelFontSize}
-          labelFontWeight={labelFontWeight}
-          labelLineHeight={labelLineHeight}
-          labelTextColor={labelTextColor}
-          errorLabelFontFamily={errorLabelFontFamily}
-          errorLabelFontSize={errorLabelFontSize}
-          errorLabelFontWeight={errorLabelFontWeight}
-          errorLabelLineHeight={errorLabelLineHeight}
-          errorLabelTextColor={errorLabelTextColor}
-          messageFontFamily={messageFontFamily}
-          messageFontSize={messageFontSize}
-          messageFontWeight={messageFontWeight}
-          messageLineHeight={messageLineHeight}
-          messageTextColor={messageTextColor}
-        />
+        <div className={label ? "mb-2.5" : ""}>
+          <InputLabelBase
+            ref={inputLabelRef}
+            label={label}
+            message={additionalMessageOnLabel}
+            error={error}
+            required={required}
+            htmlFor={id}
+            type={inputLabelType}
+            labelFontFamily={labelFontFamily}
+            labelFontSize={labelFontSize}
+            labelFontWeight={labelFontWeight}
+            labelLineHeight={labelLineHeight}
+            labelTextColor={labelTextColor}
+            errorLabelFontFamily={errorLabelFontFamily}
+            errorLabelFontSize={errorLabelFontSize}
+            errorLabelFontWeight={errorLabelFontWeight}
+            errorLabelLineHeight={errorLabelLineHeight}
+            errorLabelTextColor={errorLabelTextColor}
+            messageFontFamily={messageFontFamily}
+            messageFontSize={messageFontSize}
+            messageFontWeight={messageFontWeight}
+            messageLineHeight={messageLineHeight}
+            messageTextColor={messageTextColor}
+          />
+        </div>
         <div className="flex relative">
           <textarea
             {...passThrough}

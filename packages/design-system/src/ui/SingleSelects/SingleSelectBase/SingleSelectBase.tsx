@@ -269,33 +269,35 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   return (
     <div className="flex flex-col">
       <div
-        className={cn("flex flex-col gap-y-2.5 relative", {
+        className={cn("flex flex-col relative", {
           "mb-2.5": description,
         })}
       >
-        <InputLabelBase
-          label={label}
-          message={additionalMessageOnLabel}
-          required={required}
-          htmlFor={id}
-          type={inputLabelType}
-          labelFontFamily={labelFontFamily}
-          labelFontSize={labelFontSize}
-          labelFontWeight={labelFontWeight}
-          labelLineHeight={labelLineHeight}
-          labelTextColor={labelTextColor}
-          error={error}
-          errorLabelFontFamily={errorLabelFontFamily}
-          errorLabelFontSize={errorLabelFontSize}
-          errorLabelFontWeight={errorLabelFontWeight}
-          errorLabelLineHeight={errorLabelLineHeight}
-          errorLabelTextColor={errorLabelTextColor}
-          messageFontFamily={messageFontFamily}
-          messageFontSize={messageFontSize}
-          messageFontWeight={messageFontWeight}
-          messageLineHeight={messageLineHeight}
-          messageTextColor={messageTextColor}
-        />
+        <div className={label ? "mb-2.5" : ""}>
+          <InputLabelBase
+            label={label}
+            message={additionalMessageOnLabel}
+            required={required}
+            htmlFor={id}
+            type={inputLabelType}
+            labelFontFamily={labelFontFamily}
+            labelFontSize={labelFontSize}
+            labelFontWeight={labelFontWeight}
+            labelLineHeight={labelLineHeight}
+            labelTextColor={labelTextColor}
+            error={error}
+            errorLabelFontFamily={errorLabelFontFamily}
+            errorLabelFontSize={errorLabelFontSize}
+            errorLabelFontWeight={errorLabelFontWeight}
+            errorLabelLineHeight={errorLabelLineHeight}
+            errorLabelTextColor={errorLabelTextColor}
+            messageFontFamily={messageFontFamily}
+            messageFontSize={messageFontSize}
+            messageFontWeight={messageFontWeight}
+            messageLineHeight={messageLineHeight}
+            messageTextColor={messageTextColor}
+          />
+        </div>
         <div>
           <ReactSelect
             id={id}

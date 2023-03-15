@@ -193,33 +193,35 @@ const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
   return (
     <div className="flex flex-col">
       <div
-        className={cn("relative flex flex-col gap-y-2.5 group", {
+        className={cn("relative flex flex-col group", {
           "mb-2.5": description,
         })}
       >
-        <InputLabelBase
-          message={additionalMessageOnLabel}
-          required={required}
-          htmlFor={id}
-          type={inputLabelType}
-          label={label}
-          error={error}
-          labelFontFamily={labelFontFamily}
-          labelFontSize={labelFontSize}
-          labelFontWeight={labelFontWeight}
-          labelLineHeight={labelLineHeight}
-          labelTextColor={labelTextColor}
-          errorLabelFontFamily={errorLabelFontFamily}
-          errorLabelFontSize={errorLabelFontSize}
-          errorLabelFontWeight={errorLabelFontWeight}
-          errorLabelLineHeight={errorLabelLineHeight}
-          errorLabelTextColor={errorLabelTextColor}
-          messageFontFamily={messageFontFamily}
-          messageFontSize={messageFontSize}
-          messageFontWeight={messageFontWeight}
-          messageLineHeight={messageLineHeight}
-          messageTextColor={messageTextColor}
-        />
+        <div className={label ? "mb-2.5" : ""}>
+          <InputLabelBase
+            message={additionalMessageOnLabel}
+            required={required}
+            htmlFor={id}
+            type={inputLabelType}
+            label={label}
+            error={error}
+            labelFontFamily={labelFontFamily}
+            labelFontSize={labelFontSize}
+            labelFontWeight={labelFontWeight}
+            labelLineHeight={labelLineHeight}
+            labelTextColor={labelTextColor}
+            errorLabelFontFamily={errorLabelFontFamily}
+            errorLabelFontSize={errorLabelFontSize}
+            errorLabelFontWeight={errorLabelFontWeight}
+            errorLabelLineHeight={errorLabelLineHeight}
+            errorLabelTextColor={errorLabelTextColor}
+            messageFontFamily={messageFontFamily}
+            messageFontSize={messageFontSize}
+            messageFontWeight={messageFontWeight}
+            messageLineHeight={messageLineHeight}
+            messageTextColor={messageTextColor}
+          />
+        </div>
         <label
           htmlFor={id}
           className={cn(
