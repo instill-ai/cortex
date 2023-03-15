@@ -1,5 +1,5 @@
-const esbuild = require("esbuild");
-const { peerDependencies } = require("./package.json");
+import esbuild from "esbuild";
+import packageJson from "./package.json" assert { type: "json" };
 
 esbuild
   .build({
@@ -8,7 +8,7 @@ esbuild
     minify: true,
     sourcemap: true,
     target: "esnext",
-    external: Object.keys(peerDependencies),
+    external: Object.keys(packageJson.peerDependencies),
     format: "esm",
     outfile: "./build/index.js",
   })

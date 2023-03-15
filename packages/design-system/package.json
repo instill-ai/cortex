@@ -25,6 +25,7 @@
     "build": "pnpm rimraf build && node ./esbuild.js && pnpm ts-types",
     "test": "jest"
   },
+  "type": "module",
   "main": "build/index.js",
   "module": "build/index.js",
   "typings": "build/index.d.ts",
