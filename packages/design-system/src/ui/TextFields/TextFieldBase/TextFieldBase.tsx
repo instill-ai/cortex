@@ -147,37 +147,36 @@ const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
   return (
     <div className="flex flex-col">
       <div
-        className={cn(
-          "flex flex-col gap-y-2.5 relative",
-          inputWidth,
-          inputBorderRadius,
-          { "mb-2.5": description }
-        )}
+        className={cn("flex flex-col relative", inputWidth, inputBorderRadius, {
+          "mb-2.5": description,
+        })}
       >
-        <InputLabelBase
-          ref={inputLabelRef}
-          error={error}
-          message={additionalMessageOnLabel}
-          required={required}
-          htmlFor={id}
-          type={inputLabelType}
-          label={label}
-          labelFontFamily={labelFontFamily}
-          labelFontSize={labelFontSize}
-          labelFontWeight={labelFontWeight}
-          labelLineHeight={labelLineHeight}
-          labelTextColor={labelTextColor}
-          errorLabelFontFamily={errorLabelFontFamily}
-          errorLabelFontSize={errorLabelFontSize}
-          errorLabelFontWeight={errorLabelFontWeight}
-          errorLabelLineHeight={errorLabelLineHeight}
-          errorLabelTextColor={errorLabelTextColor}
-          messageFontFamily={messageFontFamily}
-          messageFontSize={messageFontSize}
-          messageFontWeight={messageFontWeight}
-          messageLineHeight={messageLineHeight}
-          messageTextColor={messageTextColor}
-        />
+        <div className={label ? "mb-2.5" : ""}>
+          <InputLabelBase
+            ref={inputLabelRef}
+            error={error}
+            message={additionalMessageOnLabel}
+            required={required}
+            htmlFor={id}
+            type={inputLabelType}
+            label={label}
+            labelFontFamily={labelFontFamily}
+            labelFontSize={labelFontSize}
+            labelFontWeight={labelFontWeight}
+            labelLineHeight={labelLineHeight}
+            labelTextColor={labelTextColor}
+            errorLabelFontFamily={errorLabelFontFamily}
+            errorLabelFontSize={errorLabelFontSize}
+            errorLabelFontWeight={errorLabelFontWeight}
+            errorLabelLineHeight={errorLabelLineHeight}
+            errorLabelTextColor={errorLabelTextColor}
+            messageFontFamily={messageFontFamily}
+            messageFontSize={messageFontSize}
+            messageFontWeight={messageFontWeight}
+            messageLineHeight={messageLineHeight}
+            messageTextColor={messageTextColor}
+          />
+        </div>
         <div className="flex relative">
           <input
             {...passThrough}

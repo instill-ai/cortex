@@ -175,30 +175,32 @@ const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
 
   return (
     <div className="flex flex-col">
-      <div className={cn("flex flex-col gap-y-2.5", { "mb-2.5": description })}>
-        <InputLabelBase
-          message={additionalMessageOnLabel}
-          messageFontFamily={messageFontFamily}
-          messageFontSize={messageFontSize}
-          messageFontWeight={messageFontWeight}
-          messageLineHeight={messageLineHeight}
-          messageTextColor={messageTextColor}
-          required={required}
-          htmlFor={`${id}-label`}
-          type="normal"
-          label={label}
-          labelFontFamily={labelFontFamily}
-          labelFontSize={labelFontSize}
-          labelFontWeight={labelFontWeight}
-          labelLineHeight={labelLineHeight}
-          labelTextColor={labelTextColor}
-          error={error}
-          errorLabelFontFamily={errorLabelFontFamily}
-          errorLabelFontSize={errorLabelFontSize}
-          errorLabelFontWeight={errorLabelFontWeight}
-          errorLabelLineHeight={errorLabelLineHeight}
-          errorLabelTextColor={errorLabelTextColor}
-        />
+      <div className={cn("flex flex-col", { "mb-2.5": description })}>
+        <div className={label ? "mb-2.5" : ""}>
+          <InputLabelBase
+            message={additionalMessageOnLabel}
+            messageFontFamily={messageFontFamily}
+            messageFontSize={messageFontSize}
+            messageFontWeight={messageFontWeight}
+            messageLineHeight={messageLineHeight}
+            messageTextColor={messageTextColor}
+            required={required}
+            htmlFor={`${id}-label`}
+            type="normal"
+            label={label}
+            labelFontFamily={labelFontFamily}
+            labelFontSize={labelFontSize}
+            labelFontWeight={labelFontWeight}
+            labelLineHeight={labelLineHeight}
+            labelTextColor={labelTextColor}
+            error={error}
+            errorLabelFontFamily={errorLabelFontFamily}
+            errorLabelFontSize={errorLabelFontSize}
+            errorLabelFontWeight={errorLabelFontWeight}
+            errorLabelLineHeight={errorLabelLineHeight}
+            errorLabelTextColor={errorLabelTextColor}
+          />
+        </div>
         <label
           htmlFor={id}
           className={cn("flex relative w-[90px] h-10", inputBgColor)}
