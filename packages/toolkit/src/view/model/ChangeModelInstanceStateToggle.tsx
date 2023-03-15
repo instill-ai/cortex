@@ -85,7 +85,7 @@ export const ChangeResourceStateButton: FC<ChangeResourceStateButtonProps> = ({
         }
       );
     }
-  }, [switchOn, switchOff, modelInstance]);
+  }, [switchOn, switchOff, modelInstance, accessToken]);
 
   return (
     <div className={cn("flex flex-row", marginBottom)}>
