@@ -6,7 +6,7 @@ import { UseMutationResult } from "@tanstack/react-query";
 
 import { ModelInstance, Nullable, Operation } from "../../lib";
 
-export type ChangeResourceStateButtonProps = {
+export type ChangeModelInstanceStateToggleProps = {
   modelInstance: Nullable<ModelInstance>;
   switchOff: UseMutationResult<
     { modelInstance: ModelInstance; operation: Operation },
@@ -30,13 +30,9 @@ export type ChangeResourceStateButtonProps = {
   accessToken: Nullable<string>;
 };
 
-export const ChangeResourceStateButton: FC<ChangeResourceStateButtonProps> = ({
-  modelInstance,
-  switchOn,
-  switchOff,
-  marginBottom,
-  accessToken,
-}) => {
+export const ChangeModelInstanceStateToggle: FC<
+  ChangeModelInstanceStateToggleProps
+> = ({ modelInstance, switchOn, switchOff, marginBottom, accessToken }) => {
   const [error, setError] = useState<Nullable<string>>(null);
 
   useEffect(() => {
