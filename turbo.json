@@ -13,5 +13,5 @@
     },
     "test": {}
   },
-  "globalEnv": ["NEXT_PUBLIC_API_VERSION"]
+  "globalEnv": ["NEXT_PUBLIC_API_VERSION","NODE_ENV"]
 }

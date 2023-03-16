@@ -1,8 +1,8 @@
 import { ModelInstance, ModelState } from "../vdp-sdk";
 
-export const determineModelState = (
+export function determineModelState(
   modelInstances: ModelInstance[]
-): ModelState => {
+): ModelState {
   if (modelInstances.some((e) => e.state === "STATE_ERROR")) {
     return "STATE_ERROR";
   } else if (modelInstances.some((e) => e.state === "STATE_ONLINE")) {
@@ -10,4 +10,4 @@ export const determineModelState = (
   } else {
     return "STATE_OFFLINE";
   }
-};
+}
