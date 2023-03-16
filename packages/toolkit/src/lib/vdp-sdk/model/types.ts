@@ -80,3 +80,23 @@ export type ModelInstanceReadme = {
   content: string;
   encoding: string;
 };
+
+export type ModelInstanceTask =
+  | "TASK_CLASSIFICATION"
+  | "TASK_DETECTION"
+  | "TASK_KEYPOINT"
+  | "TASK_OCR"
+  | "TASK_INSTANCE_SEGMENTATION"
+  | "TASK_SEMANTIC_SEGMENTATION"
+  | "TASK_TEXT_GENERATION"
+  | "TASK_TEXT_TO_IMAGE"
+  | "TASK_IMAGE_TO_IMAGE"
+  | "TASK_IMAGE_TO_TEXT";
+
+export type ModelHubPreset = {
+  id: string;
+  description: string;
+  task: string;
+  model_definition: string;
+  configuration: Record<string, string>;
+};
