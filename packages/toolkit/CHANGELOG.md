@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.11.0...@instill-ai/toolkit-v0.11.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* fix useOnScreen export path ([#201](https://github.com/instill-ai/design-system/issues/201)) ([a54dc74](https://github.com/instill-ai/design-system/commit/a54dc74767f3531a58278148f900233a1525bdaa))
+
 ## [0.11.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.10.0...@instill-ai/toolkit-v0.11.0) (2023-03-16)
 
 
