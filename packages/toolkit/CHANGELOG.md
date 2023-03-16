@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.13.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.13.0...@instill-ai/toolkit-v0.13.1) (2023-03-16)
+
+
+### Bug Fixes
+
+* add ModelInstanceTask type definition into toolkit ([#209](https://github.com/instill-ai/design-system/issues/209)) ([91546f1](https://github.com/instill-ai/design-system/commit/91546f1e55c7e6973ae4f3ddf8f189fef29571f7))
+* fix nextjs peer ([#211](https://github.com/instill-ai/design-system/issues/211)) ([ba5b4fe](https://github.com/instill-ai/design-system/commit/ba5b4feda3dbafc6cf0266547958992716c5035e))
+
 ## [0.13.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.12.0...@instill-ai/toolkit-v0.13.0) (2023-03-16)
 
 
