@@ -1,5 +1,3 @@
-export type { User } from "./types";
-export type { UpdateUserResponse } from "./mutations";
-export { updateLocalUserMutation } from "./mutations";
-export type { GetUserResponse } from "./queries";
-export { getUserQuery } from "./queries";
+export * from "./mutations";
+export * from "./queries";
+export * from "./types";
