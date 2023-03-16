@@ -1,5 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { ConnectorState } from "./connector";
+import { ModelState } from "./model";
+import { PipelineState } from "./pipeline";
+
 export type ErrorDetails = {
   "@type": string;
   violations?: Violation[];
@@ -18,3 +22,5 @@ export type Operation = {
   metadata: any;
   done: boolean;
 };
+
+export type ResourceState = ModelState | PipelineState | ConnectorState;
