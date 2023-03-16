@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.12.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.11.1...@instill-ai/toolkit-v0.12.0) (2023-03-16)
+
+
+### Features
+
+* add cookie utility into toolkit ([#205](https://github.com/instill-ai/design-system/issues/205)) ([91fafc9](https://github.com/instill-ai/design-system/commit/91fafc97c2c0a3138a2b678e80a86d5c84c0d9ea))
+* add ResourceState into toolkit ([#203](https://github.com/instill-ai/design-system/issues/203)) ([d74a76f](https://github.com/instill-ai/design-system/commit/d74a76fd14d3e483322d812b28664b38b4a27028))
+
 ## [0.11.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.11.0...@instill-ai/toolkit-v0.11.1) (2023-03-16)
 
 
