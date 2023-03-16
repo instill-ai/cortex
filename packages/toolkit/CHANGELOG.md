@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.13.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.12.0...@instill-ai/toolkit-v0.13.0) (2023-03-16)
+
+
+### Features
+
+* add getCanvasTextWidth into toolkit ([#208](https://github.com/instill-ai/design-system/issues/208)) ([a3c1e43](https://github.com/instill-ai/design-system/commit/a3c1e4309207642c6e3a98bbd38dc127c3b4608d))
+
+
+### Bug Fixes
+
+* fix apiRoute type export path ([#206](https://github.com/instill-ai/design-system/issues/206)) ([911f161](https://github.com/instill-ai/design-system/commit/911f161b008239fa37634d054cc095c8430c7282))
+
 ## [0.12.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.11.1...@instill-ai/toolkit-v0.12.0) (2023-03-16)
 
 
