@@ -3,7 +3,7 @@ const isBrowser = () => {
 };
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
-export const env = (key = ""): any => {
+export function env(key = ""): any {
   if (!key.length) {
     throw new Error("No env key provided");
   }
@@ -17,7 +17,7 @@ export const env = (key = ""): any => {
   return process.env[key] === "''"
     ? ""
     : parseString(process.env[key] as string);
-};
+}
 
 const parseString = (value: string) => {
   if (value === "true") {

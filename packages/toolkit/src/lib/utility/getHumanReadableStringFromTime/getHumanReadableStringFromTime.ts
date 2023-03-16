@@ -1,10 +1,10 @@
 /**
  * Compare two given time and return comparison
  */
-export const getHumanReadableStringFromTime = (
+export function getHumanReadableStringFromTime(
   prevTime: string,
   nextTime: string | number
-) => {
+) {
   const prev = Date.parse(prevTime) / 1000;
 
   let next: number;
@@ -70,4 +70,4 @@ export const getHumanReadableStringFromTime = (
   }
 
   return new Date(prevTime).toDateString();
-};
+}
