@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.13.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.13.1...@instill-ai/toolkit-v0.13.2) (2023-03-16)
+
+
+### Bug Fixes
+
+* move next to devDeps ([#212](https://github.com/instill-ai/design-system/issues/212)) ([3e1b5be](https://github.com/instill-ai/design-system/commit/3e1b5be202620735da24f5ff82c67b548bba0b7e))
+
 ## [0.13.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.13.0...@instill-ai/toolkit-v0.13.1) (2023-03-16)
 
 
