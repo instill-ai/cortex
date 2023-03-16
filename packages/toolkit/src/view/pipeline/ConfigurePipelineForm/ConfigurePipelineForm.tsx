@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 import {
   BasicProgressMessageBox,
@@ -23,6 +22,7 @@ export type ConfigurePipelineFormProps = {
   marginBottom: Nullable<string>;
   width: Nullable<string>;
   accessToken: Nullable<string>;
+  onSuccessCallback: Nullable<() => void>;
 };
 
 export const ConfigurePipelineForm = ({
@@ -30,6 +30,7 @@ export const ConfigurePipelineForm = ({
   width,
   pipeline,
   accessToken,
+  onSuccessCallback,
 }: ConfigurePipelineFormProps) => {
   const [messsageBoxState, setMessageBoxState] =
     useState<ProgressMessageBoxState>({
@@ -41,7 +42,6 @@ export const ConfigurePipelineForm = ({
   const closeModal = useModalStore((state) => state.closeModal);
   const { amplitudeIsInit } = useAmplitudeCtx();
   const deletePipeline = useDeletePipeline();
-  const router = useRouter();
 
   const handleDeletePipeline = useCallback(() => {
     if (!pipeline) return;
@@ -69,7 +69,7 @@ export const ConfigurePipelineForm = ({
               process: "destination",
             });
           }
-          router.push("/pipelines");
+          if (onSuccessCallback) onSuccessCallback();
         },
         onError: (error) => {
           if (error instanceof Error) {
@@ -94,11 +94,11 @@ export const ConfigurePipelineForm = ({
   }, [
     pipeline,
     amplitudeIsInit,
-    router,
     deletePipeline,
     closeModal,
     accessToken,
     setMessageBoxState,
+    onSuccessCallback,
   ]);
 
   return (
