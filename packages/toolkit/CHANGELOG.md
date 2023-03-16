@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.11.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.10.0...@instill-ai/toolkit-v0.11.0) (2023-03-16)
+
+
+### Features
+
+* add useOnScreen hook ([#199](https://github.com/instill-ai/design-system/issues/199)) ([77e6d6d](https://github.com/instill-ai/design-system/commit/77e6d6d3033b36d0331caaf03bb98264663dce9b))
+
 ## [0.10.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.9.3...@instill-ai/toolkit-v0.10.0) (2023-03-15)
 
 
