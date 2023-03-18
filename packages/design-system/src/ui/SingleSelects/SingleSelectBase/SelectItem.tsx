@@ -15,7 +15,7 @@ export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
         value={value}
         {...props}
         ref={forwardedRef}
-        style={{ width: width ? `${width}px` : "auto" }}
+        style={{ width: width ? `${width}px` : undefined }}
       >
         <Select.ItemIndicator className="w-6 absolute top-1/2 -translate-y-1/2 right-5">
           <CheckIcon
