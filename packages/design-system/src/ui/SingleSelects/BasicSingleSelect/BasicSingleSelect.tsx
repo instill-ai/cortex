@@ -14,8 +14,7 @@ export type BasicSingleSelectRequiredKeys =
   | "label"
   | "value"
   | "options"
-  | "onChange"
-  | "width";
+  | "onChange";
 
 export type BasicSingleSelectOmitKeys =
   | "labelFontSize"
@@ -93,14 +92,12 @@ export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     required,
     isClearable,
     inputLabelType,
-    width,
     placeholder,
   } = props;
 
   return (
     <SingleSelectBase
       id={id}
-      width={width}
       inputLabelType={inputLabelType || "normal"}
       instanceId={instanceId}
       onChange={onChange}

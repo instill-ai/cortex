@@ -68,5 +68,4 @@ Playground.args = {
   onBlur: () => {
     console.log("Blur");
   },
-  width: "w-[400px]",
 };

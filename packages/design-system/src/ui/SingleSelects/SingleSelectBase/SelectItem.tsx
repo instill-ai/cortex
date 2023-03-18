@@ -3,20 +3,19 @@ import * as Select from "@radix-ui/react-select";
 import * as React from "react";
 import { CheckIcon } from "../../Icons";
 import { SingleSelectOption } from "./SingleSelectBase";
+import { Nullable } from "../../../types/general";
 
-export type SelectItemProps = SingleSelectOption & { width: string };
+export type SelectItemProps = SingleSelectOption & { width: Nullable<number> };
 
 export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
   ({ label, value, startIcon, endIcon, width, ...props }, forwardedRef) => {
     return (
       <Select.Item
-        className={cn(
-          "relative flex w-full flex-row data-[highlighted]:bg-instillGrey05 data-[highlighted]:ring-0 data-[highlighted]:border-0 data-[highlighted]:outline-none pl-5 pr-12 py-2",
-          width
-        )}
+        className="relative flex w-full flex-row data-[highlighted]:bg-instillGrey05 data-[highlighted]:ring-0 data-[highlighted]:border-0 data-[highlighted]:outline-none pl-5 pr-12 py-2"
         value={value}
         {...props}
         ref={forwardedRef}
+        style={{ width: width ? `${width}px` : undefined }}
       >
         <Select.ItemIndicator className="w-6 absolute top-1/2 -translate-y-1/2 right-5">
           <CheckIcon
@@ -39,3 +38,5 @@ export const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
     );
   }
 );
+
+SelectItem.displayName = "SelectItem";
