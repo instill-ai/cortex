@@ -3,7 +3,10 @@ import {
   basicInputDescriptionConfig,
   BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
-import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
+import {
+  SingleSelectBase,
+  type SingleSelectBaseProps,
+} from "../SingleSelectBase";
 
 export type BasicSingleSelectRequiredKeys =
   | "id"
@@ -11,7 +14,8 @@ export type BasicSingleSelectRequiredKeys =
   | "label"
   | "value"
   | "options"
-  | "onChange";
+  | "onChange"
+  | "width";
 
 export type BasicSingleSelectOmitKeys =
   | "labelFontSize"
@@ -89,11 +93,14 @@ export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     required,
     isClearable,
     inputLabelType,
+    width,
+    placeholder,
   } = props;
 
   return (
     <SingleSelectBase
       id={id}
+      width={width}
       inputLabelType={inputLabelType || "normal"}
       instanceId={instanceId}
       onChange={onChange}
@@ -110,6 +117,7 @@ export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
       readOnly={readOnly ?? false}
       required={required ?? false}
       isClearable={isClearable ?? false}
+      placeholder={placeholder || null}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}
     />

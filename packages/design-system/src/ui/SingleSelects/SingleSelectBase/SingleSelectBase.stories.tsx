@@ -1,13 +1,13 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
-import SingleSelectBase from ".";
+import { SingleSelectBase } from ".";
 import { SingleSelectOption } from "./SingleSelectBase";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";
 import { basicSingleSelectConfig } from "../BasicSingleSelect";
 
 const meta: Meta<typeof SingleSelectBase> = {
-  title: "Components/Base/SingleSelectBase",
+  title: "Components/Base/Input/SingleSelectBase",
   component: SingleSelectBase,
 };
 
@@ -17,7 +17,7 @@ const Template: StoryFn<typeof SingleSelectBase> = (args) => {
   const optionsWithoutIcon: SingleSelectOption[] = [
     {
       value: "grpc",
-      label: "gRPC",
+      label: "gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-",
     },
     {
       value: "http",
@@ -68,4 +68,5 @@ Playground.args = {
   onBlur: () => {
     console.log("Blur");
   },
+  width: "w-[400px]",
 };

@@ -1,9 +1,10 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { ActionMeta } from "react-select";
+import { useState } from "react";
+import { BasicSingleSelect } from ".";
+import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";
-import { GrpcIcon, HttpIcon, MongoDbIcon, SnowflakeIcon } from "../../Icons";
+import { basicSingleSelectConfig } from "../BasicSingleSelect";
 import { SingleSelectOption } from "../SingleSelectBase";
-import { BasicSingleSelect } from "./BasicSingleSelect";
 
 const meta: Meta<typeof BasicSingleSelect> = {
   title: "Components/Ui/Input/BasicSingleSelect",
@@ -13,62 +14,37 @@ const meta: Meta<typeof BasicSingleSelect> = {
 export default meta;
 
 const Template: StoryFn<typeof BasicSingleSelect> = (args) => {
-  const options: SingleSelectOption[] = [
+  const optionsWithoutIcon: SingleSelectOption[] = [
     {
       value: "grpc",
-      label: "gRPC",
-      startIcon: (
-        <GrpcIcon
-          color="text-instillGrey95"
-          width="w-[30px]"
-          height="h-[30px]"
-          position="m-auto"
-        />
-      ),
+      label: "gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-",
     },
     {
       value: "http",
       label: "HTTP",
-      startIcon: (
-        <HttpIcon
-          color="text-instillGrey95"
-          width="w-[30px]"
-          height="h-[30px]"
-          position="m-auto"
-        />
-      ),
     },
     {
       value: "snowflake",
       label: "Snowflake",
-      startIcon: (
-        <SnowflakeIcon width="w-[30px]" height="h-[30px]" position="m-auto" />
-      ),
     },
     {
       value: "mongodb",
       label: "MongoDB",
-      startIcon: (
-        <MongoDbIcon width="w-[30px]" height="h-[30px]" position="m-auto" />
-      ),
     },
   ];
 
-  const onChange = (
-    option: Nullable<SingleSelectOption>,
-    meta: ActionMeta<SingleSelectOption>
-  ) => {
-    console.log(option, meta);
+  const onChange = (option: Nullable<SingleSelectOption>) => {
+    setValue(option);
   };
+
+  const [value, setValue] = useState<SingleSelectOption | null>(null);
 
   return (
     <BasicSingleSelect
       {...args}
-      id="autocomplete-with-icon"
-      instanceId="autocomplete-with-icon"
       onChange={onChange}
-      options={options}
-      label="autocomplete-with-icon"
+      options={optionsWithoutIcon}
+      value={value}
     />
   );
 };
@@ -79,4 +55,18 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: false,
+  isClearable: true,
+  additionalMessageOnLabel: null,
+  description: "this is a description for auth complete with Icon",
+  label: "Single select playground",
+  id: "single-select-with-icon",
+  ...basicSingleSelectConfig,
+  ...basicInputDescriptionConfig,
+  onFocus: () => {
+    console.log("Focused");
+  },
+  onBlur: () => {
+    console.log("Blur");
+  },
+  width: "w-[400px]",
 };
