@@ -77,7 +77,6 @@
     "prettier": "^2.6.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-select": "^5.3.2",
     "require-from-string": "^2.0.2",
     "rimraf": "^3.0.2",
     "rollup": "^2.77.2",
@@ -91,10 +90,10 @@
   "peerDependencies": {
     "clsx": "^1.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-select": "^5.3.2"
+    "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "@radix-ui/react-select": "^1.2.1",
     "sanitize-html": "^2.7.0"
   },
   "engines": {

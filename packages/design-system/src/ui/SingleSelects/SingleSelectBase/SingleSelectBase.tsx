@@ -1,19 +1,15 @@
-import ReactSelect, {
-  ActionMeta,
-  SingleValue,
-  StylesConfig,
-} from "react-select";
 import React from "react";
 import cn from "clsx";
 
 import { BasicInputProps, Nullable } from "../../../types/general";
-import { XIcon } from "../../Icons";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
 import { InputDescriptionBase } from "../../InputDescriptions/InputDescriptionBase";
+import * as Select from "@radix-ui/react-select";
+import { SelectItem } from "./SelectItem";
 
 export type SingleSelectOption = {
   label: string;
-  value: string | number;
+  value: string;
   startIcon?: React.ReactNode;
   endIcon?: React.ReactNode;
 };
@@ -114,10 +110,7 @@ export type SingleSelectBaseProps = Omit<
    * The design system use actionMeta to provide additional info about the selection behavior.
    * You could access these info inside the onChnage.
    */
-  onChange?: (
-    option: Nullable<SingleSelectOption>,
-    meta: ActionMeta<SingleSelectOption>
-  ) => void;
+  onChange?: (option: Nullable<SingleSelectOption>) => void;
 
   required?: boolean | undefined;
   disabled?: boolean | undefined;
@@ -132,9 +125,12 @@ export type SingleSelectBaseProps = Omit<
    * Event when select is blur
    */
   onBlur: Nullable<() => void>;
+
+  width: string;
+  placeholder: Nullable<string>;
 };
 
-const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
+export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   const {
     value,
     options,
@@ -148,15 +144,9 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     label,
     required,
     id,
-    instanceId,
     error,
     description,
     onChange,
-    onFocus,
-    onBlur,
-    disabled,
-    readOnly,
-    isClearable,
     labelFontFamily,
     labelFontSize,
     labelFontWeight,
@@ -175,96 +165,18 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     errorLabelFontWeight,
     errorLabelLineHeight,
     errorLabelTextColor,
-    menuPlacement,
+    width,
+    placeholder,
   } = props;
 
   const [focus, setFocus] = React.useState(false);
 
   /* eslint-disable @typescript-eslint/no-explicit-any */
   const selectRef = React.useRef<any>(null);
-
   React.useEffect(() => {
     if (!focus || !selectRef) return;
     selectRef.current.focus();
   }, [focus]);
-
-  const customStyles: StylesConfig<SingleSelectOption> = React.useMemo(() => {
-    return {
-      valueContainer: (styles) => ({
-        ...styles,
-        paddingTop: "",
-        paddingRight: "20px",
-        paddingLeft: "20px",
-        paddingBottom: "",
-      }),
-      singleValue: (styles) => ({
-        ...styles,
-        marginRight: "0px",
-        // Because the formatOptionLabel have px-[15px], which is not the correct padding inside
-        // the selected input, we have to give extra minus marginLeft
-        marginLeft: "-8px",
-      }),
-      control: (styles, state) => ({
-        ...styles,
-        cursor: state.isDisabled
-          ? "not-allowed"
-          : readOnly
-          ? "auto"
-          : "pointer",
-        borderRadius: "1px",
-        borderWidth: "1px",
-        height: 44,
-        borderStyle: state.isDisabled ? "dashed" : "solid",
-        backgroundColor: "#ffffff",
-        borderColor: error
-          ? "#FF5353"
-          : state.isDisabled
-          ? "#E4E4E4"
-          : state.isFocused
-          ? "#40A8F5"
-          : "#E4E4E4",
-        boxShadow: state.isFocused
-          ? "0px 0px 0px 3px rgba(64, 168, 245, 0.2)"
-          : "none",
-        ":hover": {
-          borderColor: error
-            ? "#FF5353"
-            : state.isFocused
-            ? "#40A8F5"
-            : "#E4E4E4",
-        },
-      }),
-      placeholder: (styles) => ({
-        ...styles,
-        color: "#1A1A1A",
-        fontFamily: "sans-serif",
-        fontWeight: "normal",
-        lineHeight: "28px",
-        fontSize: "16px",
-      }),
-      menu: (styles) => ({
-        ...styles,
-        borderRadius: "1px",
-        marginTop: "0",
-        paddingTop: "10px",
-        paddingBottom: "10px",
-        backgroundColor: "#FFFFFF",
-        zIndex: 9999,
-      }),
-      option: (styles) => ({
-        ...styles,
-        // backgroundColor: state.isFocused ? "#40A8F5" : "#FFFFFF",
-        ":hover": {
-          //backgroundColor: "#F4FBFF",
-        },
-      }),
-      input: (styles) => ({
-        ...styles,
-        marginRight: "0px",
-        marginLeft: "0px",
-      }),
-    };
-  }, [error, readOnly]);
 
   return (
     <div className="flex flex-col">
@@ -298,81 +210,56 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             messageTextColor={messageTextColor}
           />
         </div>
-        <div>
-          <ReactSelect
-            id={id}
-            value={value}
-            ref={selectRef}
-            instanceId={instanceId}
-            onFocus={() => {
-              if (onFocus) onFocus();
-              setFocus(true);
+        <div className="w-full">
+          <Select.Root
+            value={value?.value}
+            onValueChange={(value) => {
+              const selectedOption =
+                options.find((option) => option.value === value) || null;
+              if (onChange) onChange(selectedOption);
             }}
-            onBlur={() => {
-              if (onBlur) onBlur();
-              setFocus(false);
-            }}
-            menuPlacement={menuPlacement ? menuPlacement : "auto"}
-            options={options}
-            onChange={(selectedOption, meta) => {
-              if (onChange) {
-                onChange(
-                  selectedOption as SingleValue<SingleSelectOption>,
-                  meta
-                );
-              }
-            }}
-            isDisabled={disabled}
-            components={{
-              IndicatorSeparator: () => null,
-              ClearIndicator: (props) => {
-                const {
-                  getStyles,
-                  innerProps: { ref, ...restInnerProps },
-                } = props;
-
-                return (
-                  <div
-                    {...restInnerProps}
-                    ref={ref}
-                    style={
-                      getStyles("clearIndicator", props) as React.CSSProperties
-                    }
-                  >
-                    <div style={{ padding: "0px 5px" }}>
-                      <XIcon
-                        position="m-auto"
-                        width="w-5"
-                        height="h-5"
-                        color="text-instillGrey50"
-                      />
-                    </div>
-                  </div>
-                );
-              },
-            }}
-            isClearable={isClearable}
-            placeholder={focus ? "Search..." : null}
-            formatOptionLabel={(option: SingleSelectOption) => {
-              return (
-                <div
-                  data-testid={`${id}-selected-option`}
-                  className="flex flex-row gap-x-3 px-[15px]"
+          >
+            <Select.Trigger
+              className={cn(
+                "w-full px-4 py-2 text-left border border-instillGrey70 flex flex-row focus:outline-instillGrey90 focus:outline",
+                width
+              )}
+              aria-label="Food"
+            >
+              <Select.Value placeholder={placeholder} />
+              <Select.Icon className="SelectIcon ml-auto">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
                 >
-                  {option.startIcon ? (
-                    <div className="flex my-auto">{option.startIcon}</div>
-                  ) : null}
-                  <div className="my-auto instill-text-body">
-                    {option.label}
-                  </div>
-                  {option.endIcon ? (
-                    <div className="flex my-auto">{option.endIcon}</div>
-                  ) : null}
-                </div>
-              );
-            }}
-            styles={customStyles}
-          />
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </Select.Icon>
+            </Select.Trigger>
+            <Select.Portal>
+              <Select.Content
+                className={cn(
+                  "w-full border border-instillGrey70 py-5 bg-white min-w-[inherit]",
+                  width
+                )}
+                position="popper"
+                sideOffset={12}
+              >
+                <Select.Viewport>
+                  {options.map((option) => (
+                    <SelectItem width={width} {...option} />
+                  ))}
+                </Select.Viewport>
+              </Select.Content>
+            </Select.Portal>
+          </Select.Root>
         </div>
       </div>
       <InputDescriptionBase
@@ -389,5 +276,3 @@ const SelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     </div>
   );
 };
-
-export default SelectBase;
