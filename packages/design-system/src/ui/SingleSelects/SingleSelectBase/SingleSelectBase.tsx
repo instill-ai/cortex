@@ -126,7 +126,6 @@ export type SingleSelectBaseProps = Omit<
    */
   onBlur: Nullable<() => void>;
 
-  width: string;
   placeholder: Nullable<string>;
 };
 
@@ -165,18 +164,11 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     errorLabelFontWeight,
     errorLabelLineHeight,
     errorLabelTextColor,
-    width,
     placeholder,
   } = props;
 
-  const [focus, setFocus] = React.useState(false);
-
-  /* eslint-disable @typescript-eslint/no-explicit-any */
-  const selectRef = React.useRef<any>(null);
-  React.useEffect(() => {
-    if (!focus || !selectRef) return;
-    selectRef.current.focus();
-  }, [focus]);
+  const [triggerWidth, setTriggerWidth] =
+    React.useState<Nullable<number>>(null);
 
   return (
     <div className="flex flex-col">
@@ -220,11 +212,11 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             }}
           >
             <Select.Trigger
-              className={cn(
-                "w-full px-4 py-2 text-left border border-instillGrey70 flex flex-row focus:outline-instillGrey90 focus:outline",
-                width
-              )}
+              className="w-full px-4 py-2 text-left border border-instillGrey70 flex flex-row focus:outline-instillGrey90 focus:outline"
               aria-label="Food"
+              ref={(node) => {
+                if (node) setTriggerWidth(node.offsetWidth);
+              }}
             >
               <Select.Value placeholder={placeholder} />
               <Select.Icon className="SelectIcon ml-auto">
@@ -245,16 +237,14 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             </Select.Trigger>
             <Select.Portal>
               <Select.Content
-                className={cn(
-                  "w-full border border-instillGrey70 py-5 bg-white min-w-[inherit]",
-                  width
-                )}
+                className="w-full border border-instillGrey70 py-5 bg-white min-w-[inherit]"
                 position="popper"
                 sideOffset={12}
+                style={{ width: triggerWidth ? triggerWidth : undefined }}
               >
                 <Select.Viewport>
                   {options.map((option) => (
-                    <SelectItem width={width} {...option} />
+                    <SelectItem width={triggerWidth} {...option} />
                   ))}
                 </Select.Viewport>
               </Select.Content>
