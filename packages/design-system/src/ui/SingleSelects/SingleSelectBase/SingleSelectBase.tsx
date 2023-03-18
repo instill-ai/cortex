@@ -244,7 +244,11 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
               >
                 <Select.Viewport>
                   {options.map((option) => (
-                    <SelectItem width={triggerWidth} {...option} />
+                    <SelectItem
+                      key={option.value}
+                      width={triggerWidth}
+                      {...option}
+                    />
                   ))}
                 </Select.Viewport>
               </Select.Content>
