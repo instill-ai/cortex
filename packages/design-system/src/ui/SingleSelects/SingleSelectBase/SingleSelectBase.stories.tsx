@@ -1,6 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { useState } from "react";
-import { SingleSelectBase } from ".";
+import SingleSelectBase from "./SingleSelectBase";
 import { SingleSelectOption } from "./SingleSelectBase";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";

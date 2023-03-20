@@ -3,10 +3,7 @@ import {
   basicInputDescriptionConfig,
   BasicInputDescriptionOmitKeys,
 } from "../../InputDescriptions";
-import {
-  SingleSelectBase,
-  type SingleSelectBaseProps,
-} from "../SingleSelectBase";
+import SingleSelectBase, { SingleSelectBaseProps } from "../SingleSelectBase";
 
 export type BasicSingleSelectRequiredKeys =
   | "id"

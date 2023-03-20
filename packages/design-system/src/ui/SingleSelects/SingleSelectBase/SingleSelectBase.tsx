@@ -92,7 +92,7 @@ export type SingleSelectBaseProps = Omit<
   placeholder: Nullable<string>;
 };
 
-export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
+const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
   const {
     value,
     options,
@@ -243,3 +243,5 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     </div>
   );
 };
+
+export default SingleSelectBase;
