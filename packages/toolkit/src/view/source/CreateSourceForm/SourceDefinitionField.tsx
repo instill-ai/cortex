@@ -33,13 +33,13 @@ export const SourceDefinitionField = ({
         (option) => option.value === sourceDefinition
       ) || null
     );
-  }, [sourceDefinition]);
+  }, [sourceDefinition, sourceDefinitionOptions]);
 
   const handleSourceDefinitionChange = useCallback(
     (option: Nullable<SingleSelectOption>) => {
       setFieldValue("sourceDefinition", option?.value || null);
     },
-    []
+    [setFieldValue]
   );
 
   return (
