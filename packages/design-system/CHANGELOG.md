@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.7.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.4...@instill-ai/design-system-v0.7.5) (2023-03-20)
+
+
+### Bug Fixes
+
+* export cjs file ([#227](https://github.com/instill-ai/design-system/issues/227)) ([f7c894f](https://github.com/instill-ai/design-system/commit/f7c894f092ed286f8e6b9ae0eadf449da86e112b))
+
 ## [0.7.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.3...@instill-ai/design-system-v0.7.4) (2023-03-20)
 
 

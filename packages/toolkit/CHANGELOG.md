@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.14.1...@instill-ai/toolkit-v0.14.2) (2023-03-20)
+
+
+### Bug Fixes
+
+* export cjs file ([#227](https://github.com/instill-ai/design-system/issues/227)) ([f7c894f](https://github.com/instill-ai/design-system/commit/f7c894f092ed286f8e6b9ae0eadf449da86e112b))
+
 ## [0.14.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.14.0...@instill-ai/toolkit-v0.14.1) (2023-03-20)
 
 
