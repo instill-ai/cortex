@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.13.2...@instill-ai/toolkit-v0.14.0) (2023-03-20)
+
+
+### Features
+
+* replace esbuild with tsup ([#217](https://github.com/instill-ai/design-system/issues/217)) ([36e41c8](https://github.com/instill-ai/design-system/commit/36e41c80c8e9d43b98f2238f2dd722a3fad677a3))
+
 ## [0.13.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.13.1...@instill-ai/toolkit-v0.13.2) (2023-03-16)
 
 

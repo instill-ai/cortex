@@ -1,5 +1,14 @@
 # @instill-ai/design-system
 
+## [0.7.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.6.0...@instill-ai/design-system-v0.7.0) (2023-03-20)
+
+
+### Features
+
+* make select take dynamic width ([#216](https://github.com/instill-ai/design-system/issues/216)) ([173d620](https://github.com/instill-ai/design-system/commit/173d6202a43fa6fee3b24920a08b01060e12d968))
+* replace esbuild with tsup ([#217](https://github.com/instill-ai/design-system/issues/217)) ([36e41c8](https://github.com/instill-ai/design-system/commit/36e41c80c8e9d43b98f2238f2dd722a3fad677a3))
+* replace react-select with radix-ui/react-select ([#214](https://github.com/instill-ai/design-system/issues/214)) ([e75c5d6](https://github.com/instill-ai/design-system/commit/e75c5d64447833161ec03533728a1f46fd86e29d))
+
 ## [0.6.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.5.4...@instill-ai/design-system-v0.6.0) (2023-03-15)
 
 
