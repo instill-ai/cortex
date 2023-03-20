@@ -1,6 +1,14 @@
 import React from "react";
 import cn from "clsx";
-import * as Select from "@radix-ui/react-select";
+import {
+  Select,
+  SelectTrigger,
+  SelectPortal,
+  SelectValue,
+  SelectIcon,
+  SelectContent,
+  SelectViewport,
+} from "@radix-ui/react-select";
 
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -170,7 +178,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           />
         </div>
         <div className="w-full">
-          <Select.Root
+          <Select
             value={value?.value}
             onValueChange={(value) => {
               const selectedOption =
@@ -178,7 +186,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
               if (onChange) onChange(selectedOption);
             }}
           >
-            <Select.Trigger
+            <SelectTrigger
               className={cn(
                 "w-full px-4 py-2 text-left flex flex-row focus:border-instillGrey50",
                 inputBorderColor,
@@ -191,8 +199,8 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 if (node) setTriggerWidth(node.offsetWidth);
               }}
             >
-              <Select.Value placeholder={placeholder} />
-              <Select.Icon className="SelectIcon ml-auto">
+              <SelectValue placeholder={placeholder} />
+              <SelectIcon className="SelectIcon ml-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -206,16 +214,16 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content
+              </SelectIcon>
+            </SelectTrigger>
+            <SelectPortal>
+              <SelectContent
                 className="w-full border border-instillGrey70 py-5 bg-white min-w-[inherit]"
                 position="popper"
                 sideOffset={12}
                 style={{ width: triggerWidth ? triggerWidth : undefined }}
               >
-                <Select.Viewport>
+                <SelectViewport>
                   {options.map((option) => (
                     <SelectItem
                       key={option.value}
@@ -223,10 +231,10 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                       {...option}
                     />
                   ))}
-                </Select.Viewport>
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
+                </SelectViewport>
+              </SelectContent>
+            </SelectPortal>
+          </Select>
         </div>
       </div>
       <InputDescriptionBase
