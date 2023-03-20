@@ -10,6 +10,7 @@ node_modules
 .next/
 out/
 build
+dist
 
 # Cache
 **/tsconfig.tsbuildinfo

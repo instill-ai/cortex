@@ -21,16 +21,16 @@
     "prettier:fix": "prettier --write",
     "prettier:check": "prettier --check",
     "test:coverage": "vitest --collectCoverage",
-    "ts-types": "tsc --emitDeclarationOnly --outDir build",
-    "build": "pnpm rimraf build && node ./esbuild.js && pnpm ts-types",
+    "ts-types": "tsc --emitDeclarationOnly",
+    "build": "pnpm rimraf dist && tsup src && pnpm ts-types",
     "test": "vitest --run"
   },
   "type": "module",
-  "main": "build/index.js",
-  "module": "build/index.js",
-  "typings": "build/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "files": [
-    "build"
+    "dist"
   ],
   "devDependencies": {
     "@babel/core": "^7.17.8",
@@ -82,6 +82,7 @@
     "rollup": "^2.77.2",
     "storybook": "^7.0.0-beta.29",
     "tailwindcss": "^3.0.23",
+    "tsup": "^6.7.0",
     "typescript": "^4.6.3",
     "vite": "^4.1.4",
     "vitest": "^0.29.2",
