@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.7.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.0...@instill-ai/design-system-v0.7.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* fix SingleSelectBase wrong prop name issue ([#219](https://github.com/instill-ai/design-system/issues/219)) ([ed0602a](https://github.com/instill-ai/design-system/commit/ed0602a81a3c4c32c78b7f861c20d2bbf4ce05c1))
+
 ## [0.7.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.6.0...@instill-ai/design-system-v0.7.0) (2023-03-20)
 
 
