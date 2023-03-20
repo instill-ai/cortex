@@ -22,7 +22,7 @@
     "prettier:check": "prettier --check",
     "test:coverage": "vitest --collectCoverage",
     "ts-types": "tsc --emitDeclarationOnly",
-    "build": "pnpm rimraf dist && tsup src && pnpm ts-types",
+    "build": "pnpm rimraf dist && node esbuild.js && pnpm ts-types",
     "test": "vitest --run",
     "dev": "tsup src --watch"
   },
@@ -68,7 +68,7 @@
     "autoprefixer": "^10.4.4",
     "babel-loader": "^8.2.4",
     "clsx": "^1.1.1",
-    "esbuild": "^0.14.34",
+    "esbuild": "^0.14.54",
     "esbuild-node-externals": "^1.4.1",
     "eslint": "^8.12.0",
     "husky": "^7.0.0",
