@@ -86,7 +86,7 @@ importers:
       autoprefixer: ^10.4.4
       babel-loader: ^8.2.4
       clsx: ^1.1.1
-      esbuild: ^0.14.34
+      esbuild: ^0.14.54
       esbuild-node-externals: ^1.4.1
       eslint: ^8.12.0
       husky: ^7.0.0

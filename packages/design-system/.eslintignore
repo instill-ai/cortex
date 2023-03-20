@@ -6,6 +6,7 @@ umd
 out
 node_modules
 tsup.config.ts
+esbuild.js
 
 # test
 setupTests.ts
