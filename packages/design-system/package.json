@@ -26,9 +26,8 @@
     "test": "vitest --run",
     "dev": "tsup src --watch"
   },
-  "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "typings": "./dist/index.d.ts",
   "files": [
     "dist"
