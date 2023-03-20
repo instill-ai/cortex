@@ -180,6 +180,7 @@ importers:
       eslint: ^8.35.0
       fast-glob: ^3.2.12
       fuse.js: ^6.6.2
+      immer: ^9.0.19
       next: ^13.2.4
       react: ^18.2.0
       react-dom: ^18.2.0
@@ -199,11 +200,12 @@ importers:
       clsx: 1.2.1
       cookie: 0.5.0
       fuse.js: 6.6.2
+      immer: 9.0.19
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
       yup: 0.32.11
       zod: 3.21.4
-      zustand: 4.3.6_react@18.2.0
+      zustand: 4.3.6_immer@9.0.19+react@18.2.0
     devDependencies:
       '@instill-ai/eslint-config-cortex': link:../eslint-config-cortex
       '@types/cookie': 0.5.1
@@ -9161,6 +9163,10 @@ packages:
     resolution: {integrity: sha512-MAb38BcSbH0eHNBxn7ql2NH/kX33OkB3lZ1BNdh7ENeRChHTYsTvWrMubiIAMNS2llXEEgZ1MUOBtXChP3kaFQ==}
     engines: {node: '>= 4'}
 
+  /immer/9.0.19:
+    resolution: {integrity: sha512-eY+Y0qcsB4TZKwgQzLaE/lqYMlKhv5J9dyd2RhhtGhNo2njPXDqU9XPfcNfa3MIDsdtZt5KlkIsirlo4dHsWdQ==}
+    dev: false
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -14198,7 +14204,7 @@ packages:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
 
-  /zustand/4.3.6_react@18.2.0:
+  /zustand/4.3.6_immer@9.0.19+react@18.2.0:
     resolution: {integrity: sha512-6J5zDxjxLE+yukC2XZWf/IyWVKnXT9b9HUv09VJ/bwGCpKNcaTqp7Ws28Xr8jnbvnZcdRaidztAPsXFBIqufiw==}
     engines: {node: '>=12.7.0'}
     peerDependencies:
@@ -14210,6 +14216,7 @@ packages:
       react:
         optional: true
     dependencies:
+      immer: 9.0.19
       react: 18.2.0
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
