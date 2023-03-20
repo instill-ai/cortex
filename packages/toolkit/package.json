@@ -16,9 +16,8 @@
     "ts-types": "tsc --emitDeclarationOnly",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache"
   },
-  "type": "module",
   "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "typings": "./dist/index.d.ts",
   "files": [
     "dist"
