@@ -1,10 +1,10 @@
 import { Root } from "@/components/Root";
-import { ConfigureProfileForm } from "@instill-ai/toolkit";
+import { ConfigureProfileForm, CreateSourceForm } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   return (
     <Root>
-      <ConfigureProfileForm
+      {/* <ConfigureProfileForm
         marginBottom={null}
         roles={[
           {
@@ -42,6 +42,12 @@ const IndexPage = () => {
           },
         ]}
         width="w-[600px]"
+      /> */}
+      <CreateSourceForm
+        marginBottom={null}
+        accessToken={null}
+        width="w-[600px]"
+        onSuccessfulComplete={null}
       />
     </Root>
   );
