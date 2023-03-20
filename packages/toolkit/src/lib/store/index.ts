@@ -1,4 +1,5 @@
 export * from "./useConfigureModelFormStore";
+export * from "./useConfigureSourceFormStore";
 export * from "./useConfigurePipelineFormStore";
 export * from "./useConfigureProfileFormStore";
 export * from "./useMessageBoxStore";
