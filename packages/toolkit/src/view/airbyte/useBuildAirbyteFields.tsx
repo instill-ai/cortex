@@ -208,7 +208,6 @@ export const pickComponent = (
       <BasicSingleSelect
         id={formTree.fieldKey}
         key={formTree.path}
-        instanceId={formTree.fieldKey}
         required={formTree.isRequired}
         description={formTree.description ?? ""}
         label={formTree.title ?? formTree.fieldKey ?? null}
@@ -235,7 +234,6 @@ export const pickComponent = (
           });
         }}
         readOnly={false}
-        menuPlacement="auto"
         additionalMessageOnLabel={null}
       />
     );

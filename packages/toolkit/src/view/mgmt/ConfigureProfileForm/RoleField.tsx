@@ -33,7 +33,6 @@ export const RoleField = ({ roles }: RoleFieldProps) => {
     <div className="w-[287px]">
       <BasicSingleSelect
         id="role"
-        instanceId="role"
         label="Role"
         additionalMessageOnLabel="(optional)"
         key="role"

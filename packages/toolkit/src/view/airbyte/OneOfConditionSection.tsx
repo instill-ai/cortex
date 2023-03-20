@@ -221,9 +221,7 @@ export const OneOfConditionSection: FC<OneOfConditionSectionProps> = ({
         <div className="flex-1">
           <BasicSingleSelect
             id={formTree.path}
-            instanceId={formTree.path}
             disabled={disableAll}
-            menuPlacement="auto"
             label={formTree.title ?? null}
             error={
               errors ? (conditionPath ? errors[conditionPath] : null) : null
