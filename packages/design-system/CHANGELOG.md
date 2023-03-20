@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.7.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.1...@instill-ai/design-system-v0.7.2) (2023-03-20)
+
+
+### Bug Fixes
+
+* experiment export path ([#221](https://github.com/instill-ai/design-system/issues/221)) ([7573637](https://github.com/instill-ai/design-system/commit/7573637416fd641b50f19d9f388c3e29241e9555))
+
 ## [0.7.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.0...@instill-ai/design-system-v0.7.1) (2023-03-20)
 
 
