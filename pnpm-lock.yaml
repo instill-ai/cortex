@@ -16,37 +16,9 @@ importers:
 
   apps/cortex-playground:
     specifiers:
-      '@types/node': ^18.14.1
-      '@types/react': ^17.0.39
-      '@types/react-dom': 17.0.11
-      autoprefixer: ^10.4.4
-      eslint: 8.36.0
-      eslint-config-next: 13.2.4
-      next: ^13.2.4
-      postcss: ^8.4.12
-      react: ^18.2.0
-      react-dom: ^18.2.0
-      tailwindcss: ^3.0.23
-      typescript: ^4.6.3
-    dependencies:
-      '@types/node': 18.15.3
-      '@types/react': 17.0.53
-      '@types/react-dom': 17.0.11
-      eslint: 8.36.0
-      eslint-config-next: 13.2.4_vgl77cfdswitgr47lm5swmv43m
-      next: 13.2.4_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      typescript: 4.9.5
-    devDependencies:
-      autoprefixer: 10.4.14_postcss@8.4.21
-      postcss: 8.4.21
-      tailwindcss: 3.2.7_postcss@8.4.21
-
-  apps/playground:
-    specifiers:
       '@instill-ai/design-system': workspace:*
       '@instill-ai/toolkit': workspace:*
+      '@radix-ui/react-select': ^1.2.1
       '@types/node': ^18.14.1
       '@types/react': ^17.0.39
       '@types/react-dom': 17.0.11
@@ -62,6 +34,7 @@ importers:
     dependencies:
       '@instill-ai/design-system': link:../../packages/design-system
       '@instill-ai/toolkit': link:../../packages/toolkit
+      '@radix-ui/react-select': 1.2.1_rji2cnntvinamdkduhjj7n4ma4
       next: 13.2.4_biqbaboplfbrettd7655fr4n2y
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
@@ -5025,6 +4998,7 @@ packages:
 
   /@types/node/18.15.3:
     resolution: {integrity: sha512-p6ua9zBxz5otCmbpb5D3U4B5Nanw6Pk3PPyX05xnxbB/fRv71N7CPmORg7uAD5P70T0xmx1pzAx/FUfa5X+3cw==}
+    dev: true
 
   /@types/normalize-package-data/2.4.1:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
@@ -5057,6 +5031,7 @@ packages:
     resolution: {integrity: sha512-f96K3k+24RaLGVu/Y2Ng3e1EbZ8/cVJvypZWd7cy0ofCBaf2lcM46xNhycMZ2xGwbBjRql7hOlZ+e2WlJ5MH3Q==}
     dependencies:
       '@types/react': 17.0.53
+    dev: true
 
   /@types/react-dom/18.0.11:
     resolution: {integrity: sha512-O38bPbI2CWtgw/OoQoY+BRelw7uysmXbWvw3nLWO21H1HSh+GOlqPuXshJfjmpNlKiiSDG9cc1JZAaMmVdcTlw==}
@@ -7812,6 +7787,7 @@ packages:
     transitivePeerDependencies:
       - eslint-import-resolver-webpack
       - supports-color
+    dev: true
 
   /eslint-config-prettier/8.7.0_eslint@8.36.0:
     resolution: {integrity: sha512-HHVXLSlVUhMSmyW4ZzEuvjpwqamgmlfkutD53cYXLikh4pt/modINRcCIApJ84czDxM4GZInwUrromsDdTImTA==}
