@@ -10,7 +10,6 @@ import {
 
 export type BasicSingleSelectRequiredKeys =
   | "id"
-  | "instanceId"
   | "label"
   | "value"
   | "options"
@@ -31,7 +30,11 @@ export type BasicSingleSelectOmitKeys =
   | "messageFontSize"
   | "messageFontWeight"
   | "messageLineHeight"
-  | "messageTextColor";
+  | "messageTextColor"
+  | "inputBorderColor"
+  | "inputBorderRadius"
+  | "inputBorderStyle"
+  | "inputBorderWidth";
 
 export type FullBasicSingleSelectProps = Omit<
   SingleSelectBaseProps,
@@ -68,6 +71,10 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   messageFontFamily: "font-sans",
   messageFontWeight: "font-normal",
   messageLineHeight: "",
+  inputBorderColor: "border-instillGrey20",
+  inputBorderRadius: "",
+  inputBorderStyle: "border-solid",
+  inputBorderWidth: "border",
 };
 
 export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
@@ -76,21 +83,16 @@ export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
 export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
   const {
     id,
-    instanceId,
     onChange,
     value,
     options,
     label,
-    onFocus,
-    onBlur,
     additionalMessageOnLabel,
-    menuPlacement,
     description,
     error,
     disabled,
     readOnly,
     required,
-    isClearable,
     inputLabelType,
     placeholder,
   } = props;
@@ -99,21 +101,16 @@ export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
     <SingleSelectBase
       id={id}
       inputLabelType={inputLabelType || "normal"}
-      instanceId={instanceId}
       onChange={onChange}
       value={value}
       options={options}
       label={label}
-      onFocus={onFocus ?? null}
-      onBlur={onBlur ?? null}
       additionalMessageOnLabel={additionalMessageOnLabel ?? null}
-      menuPlacement={menuPlacement ?? "auto"}
       description={description ?? ""}
       error={error ?? null}
       disabled={disabled ?? false}
       readOnly={readOnly ?? false}
       required={required ?? false}
-      isClearable={isClearable ?? false}
       placeholder={placeholder || null}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}

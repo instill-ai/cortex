@@ -55,17 +55,10 @@ Playground.args = {
   disabled: false,
   readOnly: false,
   required: false,
-  isClearable: true,
   additionalMessageOnLabel: null,
   description: "this is a description for auth complete with Icon",
   label: "Single select playground",
   id: "single-select-with-icon",
   ...basicSingleSelectConfig,
   ...basicInputDescriptionConfig,
-  onFocus: () => {
-    console.log("Focused");
-  },
-  onBlur: () => {
-    console.log("Blur");
-  },
 };
