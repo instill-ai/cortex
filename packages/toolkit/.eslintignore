@@ -7,9 +7,5 @@ out
 node_modules
 tsup.config.ts
 
-# test
-setupTests.ts
-vitest.config.ts
-
 # React
 **/storybook-static/**
