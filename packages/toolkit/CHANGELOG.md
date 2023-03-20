@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.14.2...@instill-ai/toolkit-v0.14.3) (2023-03-20)
+
+
+### Bug Fixes
+
+* fix authorization header issue ([#229](https://github.com/instill-ai/design-system/issues/229)) ([bb6b274](https://github.com/instill-ai/design-system/commit/bb6b274e9d2f533381e047706fd29b6657598dcd))
+
 ## [0.14.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.14.1...@instill-ai/toolkit-v0.14.2) (2023-03-20)
 
 
