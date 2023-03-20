@@ -1,14 +1,6 @@
 import React from "react";
 import cn from "clsx";
-import {
-  Select,
-  SelectTrigger,
-  SelectPortal,
-  SelectValue,
-  SelectIcon,
-  SelectContent,
-  SelectViewport,
-} from "@radix-ui/react-select";
+import * as Select from "@radix-ui/react-select";
 
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -98,6 +90,13 @@ export type SingleSelectBaseProps = Omit<
   disabled?: boolean | undefined;
   readOnly?: boolean | undefined;
   placeholder: Nullable<string>;
+
+  selectPopoverBorderStyle: string;
+  selectPopoverBorderWidth: string;
+  selectPopoverBorderColor: string;
+  selectPopoverBorderRadius: string;
+  selectPopoverBgColor: string;
+  selectPopoverPadding: string;
 };
 
 const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
@@ -140,6 +139,12 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     inputBorderStyle,
     inputBorderWidth,
     inputBorderRadius,
+    selectPopoverBgColor,
+    selectPopoverBorderColor,
+    selectPopoverBorderRadius,
+    selectPopoverBorderStyle,
+    selectPopoverBorderWidth,
+    selectPopoverPadding,
   } = props;
 
   const [triggerWidth, setTriggerWidth] =
@@ -178,7 +183,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
           />
         </div>
         <div className="w-full">
-          <Select
+          <Select.Root
             value={value?.value}
             onValueChange={(value) => {
               const selectedOption =
@@ -186,9 +191,9 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
               if (onChange) onChange(selectedOption);
             }}
           >
-            <SelectTrigger
+            <Select.Trigger
               className={cn(
-                "w-full px-4 py-2 text-left flex flex-row focus:border-instillGrey50",
+                "w-full px-4 py-2 text-left flex flex-row focus:border-instillGrey50 focus:instill-input-highlight focus:instill-input-focus-shadow",
                 inputBorderColor,
                 inputBorderRadius,
                 inputBorderStyle,
@@ -199,8 +204,8 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 if (node) setTriggerWidth(node.offsetWidth);
               }}
             >
-              <SelectValue placeholder={placeholder} />
-              <SelectIcon className="SelectIcon ml-auto">
+              <Select.Value placeholder={placeholder} />
+              <Select.Icon className="SelectIcon ml-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -214,16 +219,23 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 >
                   <polyline points="6 9 12 15 18 9"></polyline>
                 </svg>
-              </SelectIcon>
-            </SelectTrigger>
-            <SelectPortal>
-              <SelectContent
-                className="w-full border border-instillGrey70 py-5 bg-white min-w-[inherit]"
+              </Select.Icon>
+            </Select.Trigger>
+            <Select.Portal>
+              <Select.Content
+                className={cn(
+                  selectPopoverBgColor,
+                  selectPopoverBorderColor,
+                  selectPopoverBorderRadius,
+                  selectPopoverBorderStyle,
+                  selectPopoverBorderWidth,
+                  selectPopoverPadding
+                )}
                 position="popper"
-                sideOffset={12}
+                sideOffset={8}
                 style={{ width: triggerWidth ? triggerWidth : undefined }}
               >
-                <SelectViewport>
+                <Select.Viewport>
                   {options.map((option) => (
                     <SelectItem
                       key={option.value}
@@ -231,10 +243,10 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                       {...option}
                     />
                   ))}
-                </SelectViewport>
-              </SelectContent>
-            </SelectPortal>
-          </Select>
+                </Select.Viewport>
+              </Select.Content>
+            </Select.Portal>
+          </Select.Root>
         </div>
       </div>
       <InputDescriptionBase

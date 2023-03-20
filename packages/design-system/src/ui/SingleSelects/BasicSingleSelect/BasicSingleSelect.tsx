@@ -31,7 +31,13 @@ export type BasicSingleSelectOmitKeys =
   | "inputBorderColor"
   | "inputBorderRadius"
   | "inputBorderStyle"
-  | "inputBorderWidth";
+  | "inputBorderWidth"
+  | "selectPopoverBgColor"
+  | "selectPopoverBorderColor"
+  | "selectPopoverBorderRadius"
+  | "selectPopoverBorderStyle"
+  | "selectPopoverBorderWidth"
+  | "selectPopoverPadding";
 
 export type FullBasicSingleSelectProps = Omit<
   SingleSelectBaseProps,
@@ -72,6 +78,12 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   inputBorderRadius: "",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
+  selectPopoverBgColor: "bg-white",
+  selectPopoverBorderColor: "border-instillGrey20",
+  selectPopoverBorderRadius: "",
+  selectPopoverBorderStyle: "border-solid",
+  selectPopoverBorderWidth: "border",
+  selectPopoverPadding: "py-5",
 };
 
 export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
