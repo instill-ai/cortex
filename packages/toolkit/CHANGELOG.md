@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.14.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.14.0...@instill-ai/toolkit-v0.14.1) (2023-03-20)
+
+
+### Bug Fixes
+
+* fix SingleSelectBase wrong prop name issue ([#219](https://github.com/instill-ai/design-system/issues/219)) ([ed0602a](https://github.com/instill-ai/design-system/commit/ed0602a81a3c4c32c78b7f861c20d2bbf4ce05c1))
+
 ## [0.14.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.13.2...@instill-ai/toolkit-v0.14.0) (2023-03-20)
 
 
