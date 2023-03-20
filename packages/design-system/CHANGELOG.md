@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.7.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.2...@instill-ai/design-system-v0.7.3) (2023-03-20)
+
+
+### Bug Fixes
+
+* test esbuild ([#223](https://github.com/instill-ai/design-system/issues/223)) ([8e92280](https://github.com/instill-ai/design-system/commit/8e922800e6d29cd16dd572048c72daeb156d04e4))
+
 ## [0.7.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.1...@instill-ai/design-system-v0.7.2) (2023-03-20)
 
 
