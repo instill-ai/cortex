@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.7.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.3...@instill-ai/design-system-v0.7.4) (2023-03-20)
+
+
+### Bug Fixes
+
+* fix radix component import path ([#225](https://github.com/instill-ai/design-system/issues/225)) ([e16912b](https://github.com/instill-ai/design-system/commit/e16912b9d6ffd985cc5488639eb682b8242aee5b))
+
 ## [0.7.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.2...@instill-ai/design-system-v0.7.3) (2023-03-20)
 
 
