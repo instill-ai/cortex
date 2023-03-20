@@ -1,7 +1,7 @@
 import { Nullable } from "../type";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
+import produce from "immer";
 
 import { z } from "zod";
 import { validateResourceId } from "../utility";
@@ -88,30 +88,36 @@ export const configureProfileFormInitialState: ConfigureProfileFormState = {
 };
 
 export const useConfigureProfileFormStore = create<ConfigureProfileFormStore>()(
-  immer(
-    devtools((set) => ({
-      ...configureProfileFormInitialState,
-      init: () => set(configureProfileFormInitialState),
-      setFormIsDirty: (isDirty: boolean) =>
-        set({
-          formIsDirty: isDirty,
-        }),
-      setFieldError: (fieldName, value) =>
-        set((state) => {
+  devtools((set) => ({
+    ...configureProfileFormInitialState,
+    init: () => set(configureProfileFormInitialState),
+    setFormIsDirty: (isDirty: boolean) =>
+      set({
+        formIsDirty: isDirty,
+      }),
+    setFieldError: (fieldName, value) =>
+      set(
+        produce((state) => {
           state.errors[fieldName] = value;
-        }),
-      setFieldValue: (fieldName, value) =>
-        set((state) => {
+        })
+      ),
+    setFieldValue: (fieldName, value) =>
+      set(
+        produce((state) => {
           state.fields[fieldName] = value;
-        }),
-      setFieldsValue: (fields) =>
-        set((state) => {
+        })
+      ),
+    setFieldsValue: (fields) =>
+      set(
+        produce((state) => {
           state.fields = fields;
-        }),
-      setErrorsValue: (errors) =>
-        set((state) => {
+        })
+      ),
+    setErrorsValue: (errors) =>
+      set(
+        produce((state) => {
           state.errors = errors;
-        }),
-    }))
-  )
+        })
+      ),
+  }))
 );

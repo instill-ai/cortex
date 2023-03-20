@@ -2,7 +2,7 @@ import { Nullable } from "../type";
 import { z } from "zod";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
+import produce from "immer";
 
 export const configurePipelineFormFieldSchema = z.object({
   canEdit: z.boolean(),
@@ -55,30 +55,36 @@ export const configurePipelineFormInitialState: ConfigurePipelineFormState = {
 
 export const useConfigurePipelineFormStore =
   create<ConfigurePipelineFormStore>()(
-    immer(
-      devtools((set) => ({
-        ...configurePipelineFormInitialState,
-        init: () => set(configurePipelineFormInitialState),
-        setFormIsDirty: (isDirty: boolean) =>
-          set({
-            formIsDirty: isDirty,
-          }),
-        setFieldError: (fieldName, value) =>
-          set((state) => {
+    devtools((set) => ({
+      ...configurePipelineFormInitialState,
+      init: () => set(configurePipelineFormInitialState),
+      setFormIsDirty: (isDirty: boolean) =>
+        set({
+          formIsDirty: isDirty,
+        }),
+      setFieldError: (fieldName, value) =>
+        set(
+          produce((state) => {
             state.errors[fieldName] = value;
-          }),
-        setFieldValue: (fieldName, value) =>
-          set((state) => {
+          })
+        ),
+      setFieldValue: (fieldName, value) =>
+        set(
+          produce((state) => {
             state.fields[fieldName] = value;
-          }),
-        setFieldsValue: (fields) =>
-          set((state) => {
+          })
+        ),
+      setFieldsValue: (fields) =>
+        set(
+          produce((state) => {
             state.fields = fields;
-          }),
-        setErrorsValue: (errors) =>
-          set((state) => {
+          })
+        ),
+      setErrorsValue: (errors) =>
+        set(
+          produce((state) => {
             state.errors = errors;
-          }),
-      }))
-    )
+          })
+        ),
+    }))
   );

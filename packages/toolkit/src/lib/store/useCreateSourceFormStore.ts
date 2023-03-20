@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
+import produce from "immer";
 import { Nullable } from "../type";
 
 export const createSourceFormFieldsSchema = z.object({
@@ -54,30 +54,36 @@ export type CreateSourceFormStore = CreateSourceFormState &
   CreateSourceFormAction;
 
 export const useCreateSourceFormStore = create<CreateSourceFormStore>()(
-  immer(
-    devtools((set) => ({
-      ...createSourceFormInitialState,
-      init: () => set(createSourceFormInitialState),
-      setFormIsDirty: (isDirty: boolean) =>
-        set({
-          formIsDirty: isDirty,
-        }),
-      setFieldValue: (fieldName, value) =>
-        set((state) => {
+  devtools((set) => ({
+    ...createSourceFormInitialState,
+    init: () => set(createSourceFormInitialState),
+    setFormIsDirty: (isDirty: boolean) =>
+      set({
+        formIsDirty: isDirty,
+      }),
+    setFieldValue: (fieldName, value) =>
+      set(
+        produce((state) => {
           state.fields[fieldName] = value;
-        }),
-      setFieldError: (fieldName, value) =>
-        set((state) => {
+        })
+      ),
+    setFieldError: (fieldName, value) =>
+      set(
+        produce((state) => {
           state.errors[fieldName] = value;
-        }),
-      setFieldsValue: (fields) =>
-        set((state) => {
+        })
+      ),
+    setFieldsValue: (fields) =>
+      set(
+        produce((state) => {
           state.fields = fields;
-        }),
-      setErrorsValue: (errors) =>
-        set((state) => {
+        })
+      ),
+    setErrorsValue: (errors) =>
+      set(
+        produce((state) => {
           state.errors = errors;
-        }),
-    }))
-  )
+        })
+      ),
+  }))
 );
