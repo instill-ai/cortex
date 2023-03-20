@@ -5,6 +5,7 @@ module.exports = {
   content: [
     "./src/**/*.{js,ts,jsx,tsx}",
     "./node_modules/@instill-ai/design-system/dist/*.js",
+    "./node_modules/@instill-ai/toolkit/dist/*.js",
   ],
   theme: {
     extend: {

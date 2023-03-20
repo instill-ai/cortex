@@ -42,10 +42,6 @@ export type SingleSelectBaseProps = Omit<
   | "readOnlyInputBorderStyle"
   | "readOnlyInputBorderWidth"
   | "readOnlyInputTextColor"
-  | "inputBorderColor"
-  | "inputBorderRadius"
-  | "inputBorderStyle"
-  | "inputBorderWidth"
   | "placeholderFontFamily"
   | "placeholderFontSize"
   | "placeholderFontWeight"
@@ -58,8 +54,6 @@ export type SingleSelectBaseProps = Omit<
   | "errorInputTextColor"
   | "onChangeInput"
 > & {
-  /** Set this field to prevend SSR warning */
-  instanceId: string;
   /**
    * Options
    * - label: Option's displayed label name
@@ -85,25 +79,6 @@ export type SingleSelectBaseProps = Omit<
    ```
    */
   options: SingleSelectOption[];
-
-  /**
-   * Default value of this autocomplete
-   * - You have to put into the array with desired index like options[0]
-   */
-  // defaultValue: Nullable<SingleSelectOption>;
-
-  /**
-   * Whether the autocomplete is clearalbe
-   * @default false
-   */
-  isClearable: boolean;
-
-  /**
-   * Determine select option dropdown direction
-   * @default "auto"
-   */
-  menuPlacement: Nullable<"top" | "bottom" | "auto">;
-
   value: Nullable<SingleSelectOption>;
 
   /**
@@ -111,21 +86,9 @@ export type SingleSelectBaseProps = Omit<
    * You could access these info inside the onChnage.
    */
   onChange?: (option: Nullable<SingleSelectOption>) => void;
-
   required?: boolean | undefined;
   disabled?: boolean | undefined;
   readOnly?: boolean | undefined;
-
-  /**
-   * Event when select is focused
-   */
-  onFocus: Nullable<() => void>;
-
-  /**
-   * Event when select is blur
-   */
-  onBlur: Nullable<() => void>;
-
   placeholder: Nullable<string>;
 };
 
@@ -165,6 +128,10 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     errorLabelLineHeight,
     errorLabelTextColor,
     placeholder,
+    inputBorderColor,
+    inputBorderStyle,
+    inputBorderWidth,
+    inputBorderRadius,
   } = props;
 
   const [triggerWidth, setTriggerWidth] =
@@ -212,7 +179,13 @@ export const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             }}
           >
             <Select.Trigger
-              className="w-full px-4 py-2 text-left border border-instillGrey70 flex flex-row focus:outline-instillGrey90 focus:outline"
+              className={cn(
+                "w-full px-4 py-2 text-left flex flex-row focus:border-instillGrey50",
+                inputBorderColor,
+                inputBorderRadius,
+                inputBorderStyle,
+                inputBorderWidth
+              )}
               aria-label="Food"
               ref={(node) => {
                 if (node) setTriggerWidth(node.offsetWidth);
