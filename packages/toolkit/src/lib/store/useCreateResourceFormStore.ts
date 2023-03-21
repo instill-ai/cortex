@@ -47,7 +47,7 @@ export const createResourceFormFieldSchema = z.object({
       instanceTag: z.string().nullable(),
       description: z.string().nullable(),
       local: z.object({
-        file: z.instanceof(File).nullable(),
+        file: z.custom<File>((v) => v instanceof File).nullable(),
       }),
       github: z.object({
         repoUrl: z.string().nullable(),
