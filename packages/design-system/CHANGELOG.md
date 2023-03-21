@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.7.6](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.5...@instill-ai/design-system-v0.7.6) (2023-03-21)
+
+
+### Bug Fixes
+
+* fix single select focus style and export more props ([#231](https://github.com/instill-ai/design-system/issues/231)) ([c855a02](https://github.com/instill-ai/design-system/commit/c855a020d54685222eeefa81e6dbca7cdc6d7a2a))
+
 ## [0.7.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.4...@instill-ai/design-system-v0.7.5) (2023-03-20)
 
 
