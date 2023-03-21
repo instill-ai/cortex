@@ -6,8 +6,10 @@ import {
 import { shallow } from "zustand/shallow";
 
 import {
+  CreateResourceFormStore,
   CreateSourceFormStore,
   Nullable,
+  useCreateResourceFormStore,
   useCreateSourceFormStore,
 } from "../../../lib";
 
@@ -15,9 +17,9 @@ export type SourceDefinitionFieldProps = {
   sourceDefinitionOptions: SingleSelectOption[];
 };
 
-const selector = (state: CreateSourceFormStore) => ({
-  sourceDefinition: state.fields.sourceDefinition,
-  sourceDefinitionError: state.errors.sourceDefinition,
+const selector = (state: CreateResourceFormStore) => ({
+  sourceDefinition: state.fields.source.new.definition,
+  sourceDefinitionError: state.errors.source.new.definition,
   setFieldValue: state.setFieldValue,
 });
 
@@ -25,7 +27,7 @@ export const SourceDefinitionField = ({
   sourceDefinitionOptions,
 }: SourceDefinitionFieldProps) => {
   const { sourceDefinition, sourceDefinitionError, setFieldValue } =
-    useCreateSourceFormStore(selector, shallow);
+    useCreateResourceFormStore(selector, shallow);
 
   const selectedSourceDefinitionOption = useMemo(() => {
     return (
@@ -37,7 +39,7 @@ export const SourceDefinitionField = ({
 
   const handleSourceDefinitionChange = useCallback(
     (option: Nullable<SingleSelectOption>) => {
-      setFieldValue("sourceDefinition", option?.value || null);
+      setFieldValue("source.new.definition", option?.value || null);
     },
     [setFieldValue]
   );
