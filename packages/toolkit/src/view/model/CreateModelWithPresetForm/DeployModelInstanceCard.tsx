@@ -1,7 +1,7 @@
 import cn from "clsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import { shallow } from "zustand/shallow";
 import {
   BasicProgressMessageBox,
   getModelDefinitionToolkit,
@@ -18,12 +18,9 @@ import {
   getInstillApiErrorMessage,
   useCreateResourceFormStore,
   type Nullable,
-  CreateResourceFormState,
   CreateResourceFormStore,
 } from "../../../lib";
-
 import { CardBase } from "./CardBase";
-import { shallow } from "zustand/shallow";
 
 export type DeployModelInstanceCardProps = {
   onSuccessfulComplete: () => void;
@@ -32,7 +29,6 @@ export type DeployModelInstanceCardProps = {
 const selector = (state: CreateResourceFormStore) => ({
   modelId: state.fields.model.new.id,
   setCreateNewResourceIsComplete: state.setCreateNewResourceIsComplete,
-  modelInstanceTag: state.fields.model.new.instanceTag,
   setFieldValue: state.setFieldValue,
 });
 
@@ -43,12 +39,8 @@ export const DeployModelInstanceCard = ({
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const {
-    modelId,
-    modelInstanceTag,
-    setCreateNewResourceIsComplete,
-    setFieldValue,
-  } = useCreateResourceFormStore(selector, shallow);
+  const { modelId, setCreateNewResourceIsComplete, setFieldValue } =
+    useCreateResourceFormStore(selector, shallow);
 
   const modelName = modelId ? `models/${modelId}` : null;
   const [selectedModelInstanceTag, setSelectedModelInstanceTag] =

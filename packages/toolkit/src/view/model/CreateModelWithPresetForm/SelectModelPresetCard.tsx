@@ -1,5 +1,4 @@
 import { useCallback, useMemo, useState } from "react";
-import cn from "clsx";
 import {
   BasicSingleSelect,
   getModelDefinitionToolkit,
