@@ -1,10 +1,4 @@
 import { Root } from "@/components/Root";
-import {
-  env,
-  ConfigureProfileForm,
-  CreateModelWithPresetForm,
-  CreateSourceForm,
-} from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   return (
@@ -48,11 +42,7 @@ const IndexPage = () => {
         ]}
         width="w-[600px]"
       /> */}
-      <CreateModelWithPresetForm
-        width="w-[600px]"
-        marginBottom={null}
-        onSuccessfulComplete={() => {}}
-      />
+      {/* <CreatePipelineForm /> */}
     </Root>
   );
 };

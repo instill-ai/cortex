@@ -19,6 +19,7 @@ import {
 import { FormVerticalDivider } from "../../../FormVerticalDivider";
 import { UseExistingDestinationFlow } from "./UseExistingDestinationFlow";
 import { shallow } from "zustand/shallow";
+import { CreateDestinationForm } from "../../../destination";
 
 const selector = (state: CreateResourceFormStore) => ({
   pipelineMode: state.fields.pipeline.mode,
@@ -210,17 +211,15 @@ export const SetPipelineDestinationStep = () => {
         <div className="flex flex-1 flex-row">
           <UseExistingDestinationFlow />
           <FormVerticalDivider />
-          {/* <CreateDestinationForm
+          <CreateDestinationForm
             onSuccessfullyComplete={(id: string) => {
-              setNewDestinationId(id);
+              setFieldValue("destination.new.id", id);
               increasePipelineFormStep();
             }}
             title="Setup a new destination"
             formLess={true}
-            flex1={true}
-            padding="p-5"
             marginBottom={null}
-          /> */}
+          />
         </div>
       )}
     </>

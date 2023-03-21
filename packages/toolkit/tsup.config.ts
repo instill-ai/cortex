@@ -8,4 +8,7 @@ export default defineConfig({
   loader: {
     ".js": "jsx",
   },
+  esbuildOptions(options) {
+    options.external = ["react", "react-dom"];
+  },
 });
