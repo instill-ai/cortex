@@ -1,35 +1,34 @@
+import { useEffect, useState } from "react";
 import {
   FormRoot,
   SingleSelectOption,
   GrpcIcon,
   HttpIcon,
 } from "@instill-ai/design-system";
-import { useEffect, useState } from "react";
-import { Nullable, useSources } from "../../../lib";
+
+import { Nullable, SourceWithDefinition } from "../../../lib";
 import { CreateSourceControl } from "./CreateSourceControl";
 import { SourceDefinitionField } from "./SourceDefinitionField";
 
 export type CreateSourceFormProps = {
+  sources: Nullable<SourceWithDefinition[]>;
   marginBottom: Nullable<string>;
   width: string;
-  accessToken: Nullable<string>;
   onSuccessfulComplete: Nullable<() => void>;
 };
 
 export const CreateSourceForm = ({
+  sources,
   marginBottom,
   width,
-  accessToken,
   onSuccessfulComplete,
 }: CreateSourceFormProps) => {
-  const sources = useSources({ accessToken });
-
   const [sourceDefinitionOptions, setSourceDefinitionOptions] = useState<
     SingleSelectOption[]
   >([]);
 
   useEffect(() => {
-    if (!sources.isSuccess) return;
+    if (!sources) return;
 
     setSourceDefinitionOptions([
       {
@@ -57,7 +56,7 @@ export const CreateSourceForm = ({
         ),
       },
     ]);
-  }, [sources.isSuccess]);
+  }, [sources]);
 
   return (
     <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
@@ -66,7 +65,7 @@ export const CreateSourceForm = ({
           sourceDefinitionOptions={sourceDefinitionOptions}
         />
         <CreateSourceControl
-          sources={sources.isSuccess ? sources.data : null}
+          sources={sources}
           onSuccessfulComplete={onSuccessfulComplete}
         />
       </div>

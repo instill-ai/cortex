@@ -8,18 +8,18 @@ import {
 } from "@instill-ai/design-system";
 
 import {
-  CreateSourceFormStore,
-  CreateSourcePayload,
-  Nullable,
   sendAmplitudeData,
-  SourceWithDefinition,
   useAmplitudeCtx,
   useCreateSource,
-  useCreateSourceFormStore,
+  useCreateResourceFormStore,
+  type CreateResourceFormStore,
+  type CreateSourcePayload,
+  type Nullable,
+  type SourceWithDefinition,
 } from "../../../lib";
 
-const selector = (state: CreateSourceFormStore) => ({
-  sourceDefinition: state.fields.sourceDefinition,
+const selector = (state: CreateResourceFormStore) => ({
+  sourceDefinition: state.fields.source.new.definition,
   setFieldError: state.setFieldError,
 });
 
@@ -33,7 +33,7 @@ export const CreateSourceControl = ({
   onSuccessfulComplete,
 }: CreateSourceControlProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const { sourceDefinition, setFieldError } = useCreateSourceFormStore(
+  const { sourceDefinition, setFieldError } = useCreateResourceFormStore(
     selector,
     shallow
   );
@@ -52,13 +52,13 @@ export const CreateSourceControl = ({
     if (!sourceDefinition) return;
 
     if (!sourceDefinition) {
-      setFieldError("sourceDefinition", "Required");
+      setFieldError("source.new.definition", "Required");
       return;
     }
 
     if (sources?.find((e) => e.id === sourceDefinition)) {
       setFieldError(
-        "sourceDefinition",
+        "source.new.definition",
         "You could only create one http and one grpc source. Check the setup guide for more information."
       );
       return;
