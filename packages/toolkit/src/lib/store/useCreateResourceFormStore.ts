@@ -104,6 +104,8 @@ export type CreateResourceFormAction = {
   setFieldValue: (fieldPath: string, value: any) => void;
   setFieldsValue: (fields: CreateResourceFormFields) => void;
   setErrorsValue: (errors: CreateResourceFormState["errors"]) => void;
+  increasePipelineFormStep: () => void;
+  decreasePipelineFormStep: () => void;
 };
 
 const createResourceInitialState: CreateResourceFormState = {
@@ -237,8 +239,8 @@ export const useCreateResourceFormStore = create<CreateResourceFormStore>()(
     },
     setFieldError: (errorPath, value) =>
       set(
-        produce((state) => {
-          dot.setter(state.errors, errorPath, value);
+        produce((draft: CreateResourceFormStore) => {
+          dot.setter(draft.errors, errorPath, value);
         })
       ),
     setFieldValue: (fieldPath, value) =>
@@ -255,8 +257,20 @@ export const useCreateResourceFormStore = create<CreateResourceFormStore>()(
       ),
     setErrorsValue: (errors) =>
       set(
-        produce((state) => {
-          state.errors = errors;
+        produce((draft: CreateResourceFormStore) => {
+          draft.errors = errors;
+        })
+      ),
+    increasePipelineFormStep: () =>
+      set(
+        produce((draft: CreateResourceFormStore) => {
+          draft.pipelineFormStep = draft.pipelineFormStep + 1;
+        })
+      ),
+    decreasePipelineFormStep: () =>
+      set(
+        produce((draft: CreateResourceFormStore) => {
+          draft.pipelineFormStep = draft.pipelineFormStep - 1;
         })
       ),
   }))
