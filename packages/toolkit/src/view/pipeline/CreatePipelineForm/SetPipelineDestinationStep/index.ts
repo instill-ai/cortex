@@ -1,1 +1,1 @@
-export * from "./SetupPipelineDestinationStep";
+export * from "./SetPipelineDestinationStep";
