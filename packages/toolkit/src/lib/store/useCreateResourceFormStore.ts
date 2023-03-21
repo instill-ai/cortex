@@ -96,6 +96,8 @@ export type CreateResourceFormState = {
 
 export type CreateResourceFormAction = {
   setFormIsDirty: (isDirty: boolean) => void;
+  setCreateNewResourceIsComplete: (isComplete: boolean) => void;
+  setPipelineFormStep: (step: number) => void;
   init: () => void;
   // We may need to better type this
   setFieldError: (errorPath: string, value: any) => void;
@@ -224,6 +226,15 @@ export const useCreateResourceFormStore = create<CreateResourceFormStore>()(
       set({
         formIsDirty: isDirty,
       }),
+    setPipelineFormStep: (step: number) =>
+      set({
+        pipelineFormStep: step,
+      }),
+    setCreateNewResourceIsComplete(isComplete: boolean) {
+      set({
+        createNewResourceIsComplete: isComplete,
+      });
+    },
     setFieldError: (errorPath, value) =>
       set(
         produce((state) => {
