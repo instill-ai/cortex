@@ -1,5 +1,10 @@
 import { Root } from "@/components/Root";
-import { ConfigureProfileForm, CreateSourceForm } from "@instill-ai/toolkit";
+import {
+  env,
+  ConfigureProfileForm,
+  CreateModelWithPresetForm,
+  CreateSourceForm,
+} from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   return (
@@ -43,11 +48,10 @@ const IndexPage = () => {
         ]}
         width="w-[600px]"
       /> */}
-      <CreateSourceForm
-        marginBottom={null}
-        accessToken={null}
+      <CreateModelWithPresetForm
         width="w-[600px]"
-        onSuccessfulComplete={null}
+        marginBottom={null}
+        onSuccessfulComplete={() => {}}
       />
     </Root>
   );

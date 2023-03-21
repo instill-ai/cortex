@@ -6,11 +6,9 @@ import {
 import { shallow } from "zustand/shallow";
 
 import {
-  CreateResourceFormStore,
-  CreateSourceFormStore,
-  Nullable,
   useCreateResourceFormStore,
-  useCreateSourceFormStore,
+  type CreateResourceFormStore,
+  type Nullable,
 } from "../../../lib";
 
 export type SourceDefinitionFieldProps = {
