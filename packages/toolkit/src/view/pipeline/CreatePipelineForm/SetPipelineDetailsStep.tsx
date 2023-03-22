@@ -1,6 +1,5 @@
 import axios from "axios";
-import { ChangeEvent, FC, useMemo, useState } from "react";
-import { useRouter } from "next/router";
+import { ChangeEvent, useMemo, useState } from "react";
 import {
   BasicProgressMessageBox,
   BasicTextArea,
@@ -17,6 +16,7 @@ import {
   useCreateResourceFormStore,
   type CreatePipelinePayload,
   CreateResourceFormStore,
+  Nullable,
 } from "../../../lib";
 import { shallow } from "zustand/shallow";
 
@@ -52,8 +52,13 @@ const selector = (state: CreateResourceFormStore) => ({
   setCreateNewResourceIsComplete: state.setCreateNewResourceIsComplete,
 });
 
-export const SetPipelineDetailsStep: FC = () => {
-  const router = useRouter();
+export type SetPipelineDetailsStepProps = {
+  onSuccessfulCreatePipeline: Nullable<() => void>;
+};
+
+export const SetPipelineDetailsStep = ({
+  onSuccessfulCreatePipeline,
+}: SetPipelineDetailsStepProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -220,7 +225,7 @@ export const SetPipelineDetailsStep: FC = () => {
     });
 
   const handleSetupNewPipeline = () => {
-    if (!canSetupNewPipeline || !router.isReady || !pipelineId) {
+    if (!canSetupNewPipeline || !pipelineId) {
       return;
     }
 
@@ -296,7 +301,7 @@ export const SetPipelineDetailsStep: FC = () => {
               message: "Succeed.",
             }));
             setCreateNewResourceIsComplete(true);
-            router.push("/pipelines");
+            if (onSuccessfulCreatePipeline) onSuccessfulCreatePipeline();
             return;
           }
           updatePipeline.mutate(
@@ -316,7 +321,7 @@ export const SetPipelineDetailsStep: FC = () => {
                   });
                 }
                 setCreateNewResourceIsComplete(true);
-                router.push("/pipelines");
+                if (onSuccessfulCreatePipeline) onSuccessfulCreatePipeline();
               },
               onError: (error) => {
                 if (axios.isAxiosError(error)) {
@@ -389,7 +394,7 @@ export const SetPipelineDetailsStep: FC = () => {
           if (validateResourceId(value)) {
             setFieldError("pipeline.id", null);
           } else {
-            setFieldValue(
+            setFieldError(
               "pipeline.id",
               "Resource ID restricts to lowercase letters, numbers, and hyphen, with the first character a letter, the last a letter or a number, and a 63 character maximum."
             );

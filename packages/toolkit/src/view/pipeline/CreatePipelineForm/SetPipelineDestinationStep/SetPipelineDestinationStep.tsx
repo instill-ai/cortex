@@ -16,7 +16,7 @@ import {
   type CreateResourceFormStore,
 } from "../../../../lib";
 
-import { FormVerticalDivider } from "../../../FormVerticalDivider";
+import { FormVerticalDivider } from "../FormVerticalDivider";
 import { UseExistingDestinationFlow } from "./UseExistingDestinationFlow";
 import { shallow } from "zustand/shallow";
 import { CreateDestinationForm } from "../../../destination";
@@ -208,7 +208,7 @@ export const SetPipelineDestinationStep = () => {
           </SolidButton>
         </div>
       ) : (
-        <div className="flex flex-1 flex-row">
+        <div className="flex flex-1 flex-row items-stretch">
           <UseExistingDestinationFlow />
           <FormVerticalDivider />
           <CreateDestinationForm

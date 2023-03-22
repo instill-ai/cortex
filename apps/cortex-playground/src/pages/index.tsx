@@ -1,4 +1,5 @@
 import { Root } from "@/components/Root";
+import { CreatePipelineForm, FormVerticalDivider } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   return (
@@ -42,7 +43,10 @@ const IndexPage = () => {
         ]}
         width="w-[600px]"
       /> */}
-      {/* <CreatePipelineForm /> */}
+      <div className="w-[1200px] bg-instillGrey05">
+        <CreatePipelineForm onSuccessfulCreatePipeline={null} />
+        {/* <FormVerticalDivider /> */}
+      </div>
     </Root>
   );
 };

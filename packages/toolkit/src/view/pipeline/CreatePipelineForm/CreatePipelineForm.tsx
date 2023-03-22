@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 
-import { useCreateResourceFormStore } from "../../../lib";
+import { Nullable, useCreateResourceFormStore } from "../../../lib";
 import { CreatePipelineProgress } from "./CreatePipelineProgress";
 import { SetPipelineDetailsStep } from "./SetPipelineDetailsStep";
 import { SetPipelineDestinationStep } from "./SetPipelineDestinationStep";
@@ -15,7 +15,13 @@ import { SetPipelineModeStep } from "./SetPipelineModeStep";
 //  3: choose destination
 //  4: setup pipeline details
 
-export const CreatePipelineForm = () => {
+export type CreatePipelineFormProps = {
+  onSuccessfulCreatePipeline: Nullable<() => void>;
+};
+
+export const CreatePipelineForm = ({
+  onSuccessfulCreatePipeline,
+}: CreatePipelineFormProps) => {
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
   );
@@ -30,11 +36,15 @@ export const CreatePipelineForm = () => {
       case 3:
         return <SetPipelineDestinationStep />;
       case 4:
-        return <SetPipelineDetailsStep />;
+        return (
+          <SetPipelineDetailsStep
+            onSuccessfulCreatePipeline={onSuccessfulCreatePipeline}
+          />
+        );
       default:
         return null;
     }
-  }, [pipelineFormStep]);
+  }, [pipelineFormStep, onSuccessfulCreatePipeline]);
 
   return (
     <div className="flex flex-col">
