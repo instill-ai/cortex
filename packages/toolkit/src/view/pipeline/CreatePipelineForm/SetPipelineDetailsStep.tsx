@@ -345,7 +345,6 @@ export const SetPipelineDetailsStep = ({
         },
         onError: (error) => {
           if (axios.isAxiosError(error)) {
-            console.log(error.response?.data.message);
             setMessageBoxState(() => ({
               activate: true,
               status: "error",

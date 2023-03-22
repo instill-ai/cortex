@@ -19,6 +19,7 @@ const selector = (state: CreateResourceFormStore) => ({
   pipelineMode: state.fields.pipeline.mode,
   existingDestinationId: state.fields.destination.existing.id,
   existingDestinationIdError: state.errors.destination.existing.id,
+  setFieldValue: state.setFieldValue,
 });
 
 export const UseExistingDestinationFlow = () => {
@@ -28,8 +29,12 @@ export const UseExistingDestinationFlow = () => {
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const { pipelineMode, existingDestinationId, existingDestinationIdError } =
-    useCreateResourceFormStore(selector, shallow);
+  const {
+    pipelineMode,
+    existingDestinationId,
+    existingDestinationIdError,
+    setFieldValue,
+  } = useCreateResourceFormStore(selector, shallow);
 
   /* -------------------------------------------------------------------------
    * Get existing destinations and set up options
@@ -107,6 +112,14 @@ export const UseExistingDestinationFlow = () => {
 
   const handleUseExistingDestination = () => {
     if (!existingDestinationId || !destinations.isSuccess) return;
+
+    setFieldValue("destination.existing.id", existingDestinationId);
+    setFieldValue(
+      "destination.existing.definition",
+      `source-connector-definitions/${existingDestinationId}`
+    );
+    setFieldValue("destination.type", "existing");
+
     if (amplitudeIsInit) {
       sendAmplitudeData("use_existing_destination", {
         type: "critical_action",

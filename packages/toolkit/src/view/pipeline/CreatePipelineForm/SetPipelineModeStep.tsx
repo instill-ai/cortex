@@ -116,17 +116,11 @@ export const SetPipelineModeStep = () => {
     ]);
   }, []);
 
-  const selectedPipelineModeOption = useMemo(() => {
-    if (!pipelineModeOptions || !pipelineMode) return null;
+  const [selectedPipelineModeOption, setSelectedPipelineModeOption] =
+    useState<Nullable<SingleSelectOption>>(null);
 
-    return pipelineModeOptions.find((e) => e.value === pipelineMode) || null;
-  }, [pipelineMode, pipelineModeOptions]);
-
-  const selectedSyncSourceOption = useMemo(() => {
-    if (!existingSourceId || !syncSourceOptions) return null;
-
-    return syncSourceOptions.find((e) => e.value === existingSourceId) || null;
-  }, [existingSourceId, syncSourceOptions]);
+  const [selectedSyncSourceOption, setSelectedSyncSourceOption] =
+    useState<Nullable<SingleSelectOption>>(null);
 
   /* -------------------------------------------------------------------------
    * Create source if it is not presenting
@@ -137,18 +131,18 @@ export const SetPipelineModeStep = () => {
 
   const canGoNext = useMemo(() => {
     if (!pipelineMode) return false;
-    if (pipelineMode === "MODE_SYNC" && !existingSourceId) {
+    if (pipelineMode === "MODE_SYNC" && !selectedSyncSourceOption) {
       return false;
     }
 
     return true;
-  }, [pipelineMode, existingSourceId]);
+  }, [pipelineMode, selectedSyncSourceOption]);
 
   const handleGoNext = () => {
-    if (!sources.isSuccess || !existingSourceId) return;
+    if (!sources.isSuccess || !selectedSyncSourceOption?.value) return;
 
     const sourceIndex = sources.data.findIndex(
-      (e) => e.id === existingSourceId
+      (e) => e.id === selectedSyncSourceOption.value
     );
 
     if (sourceIndex !== -1) {
@@ -160,8 +154,9 @@ export const SetPipelineModeStep = () => {
       }
       setFieldValue(
         "source.existing.definition",
-        `source-connector-definitions/${existingSourceId}`
+        `source-connector-definitions/${selectedSyncSourceOption.value}`
       );
+      setFieldValue("source.existing.id", selectedSyncSourceOption.value);
       setFieldValue("source.type", "existing");
 
       // At the current design, we skip create source step
@@ -170,8 +165,8 @@ export const SetPipelineModeStep = () => {
     }
 
     const payload: CreateSourcePayload = {
-      id: existingSourceId,
-      source_connector_definition: `source-connector-definitions/${existingSourceId}`,
+      id: selectedSyncSourceOption.value,
+      source_connector_definition: `source-connector-definitions/${selectedSyncSourceOption.value}`,
       connector: {
         configuration: {},
       },
@@ -187,13 +182,15 @@ export const SetPipelineModeStep = () => {
               process: "pipeline",
             });
           }
+
           setFieldValue(
             "source.new.definition",
-            `source-connector-definitions/${existingSourceId}`
+            `source-connector-definitions/${selectedSyncSourceOption.value}`
           );
+          setFieldValue("source.new.id", selectedSyncSourceOption.value);
           setFieldValue("source.type", "new");
-          // At the current design, we skip create source step
 
+          // At the current design, we skip create source step
           //increasePipelineFormStep();
           setPipelineFormStep(2);
         },
@@ -220,6 +217,9 @@ export const SetPipelineModeStep = () => {
         error={pipelineModeError}
         required={true}
         disabled={true}
+        onChange={(option: Nullable<SingleSelectOption>) => {
+          setSelectedPipelineModeOption(option);
+        }}
       />
       <BasicSingleSelect
         id="existingSourceId"
@@ -235,10 +235,7 @@ export const SetPipelineModeStep = () => {
         options={syncSourceOptions}
         error={existingSourceIdError}
         onChange={(option: Nullable<SingleSelectOption>) => {
-          setFieldValue(
-            "source.existing.id",
-            option ? (option.value as string) : null
-          );
+          setSelectedSyncSourceOption(option);
         }}
         disabled={false}
         additionalMessageOnLabel={null}

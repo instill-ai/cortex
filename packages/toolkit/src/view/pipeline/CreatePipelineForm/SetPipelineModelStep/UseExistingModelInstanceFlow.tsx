@@ -55,26 +55,25 @@ export const NextUseExistingModeInstancelFlow = () => {
     accessToken: null,
   });
 
-  // useEffect(() => {
-  //   console.log("re-render-yo", modelInstances);
-  //   if (!modelInstances.isSuccess || !modelInstances.data) return;
+  useEffect(() => {
+    if (!modelInstances.isSuccess || !modelInstances.data) return;
 
-  //   const onlineModelInstances = modelInstances.data.filter(
-  //     (e) => e.state === "STATE_ONLINE"
-  //   );
+    const onlineModelInstances = modelInstances.data.filter(
+      (e) => e.state === "STATE_ONLINE"
+    );
 
-  //   setModelInstanceOptions(
-  //     onlineModelInstances.map((e) => {
-  //       const instanceNameList = e.name.split("/");
-  //       const modelId = instanceNameList[1];
+    setModelInstanceOptions(
+      onlineModelInstances.map((e) => {
+        const instanceNameList = e.name.split("/");
+        const modelId = instanceNameList[1];
 
-  //       return {
-  //         label: `${modelId}/${e.id}`,
-  //         value: e.name,
-  //       };
-  //     })
-  //   );
-  // }, [modelInstances.isSuccess, modelInstances.data]);
+        return {
+          label: `${modelId}/${e.id}`,
+          value: e.name,
+        };
+      })
+    );
+  }, [modelInstances.isSuccess, modelInstances.data]);
 
   /* -------------------------------------------------------------------------
    * Use existing model
@@ -88,45 +87,45 @@ export const NextUseExistingModeInstancelFlow = () => {
     return true;
   }, [existingModelInstanceTag, modelType]);
 
-  // const handleUseModel = useCallback(() => {
-  //   if (
-  //     !existingModelInstanceTag ||
-  //     !modelInstances.isSuccess ||
-  //     !modelInstances.data
-  //   ) {
-  //     return;
-  //   }
+  const handleUseModel = useCallback(() => {
+    if (
+      !existingModelInstanceTag ||
+      !modelInstances.isSuccess ||
+      !modelInstances.data
+    ) {
+      return;
+    }
 
-  //   const targetModelInstance = modelInstances.data.find(
-  //     (e) => e.name === (selectedModelInstanceOption?.value as string)
-  //   );
+    const targetModelInstance = modelInstances.data.find(
+      (e) => e.name === (selectedModelInstanceOption?.value as string)
+    );
 
-  //   if (!targetModelInstance) return;
+    if (!targetModelInstance) return;
 
-  //   const instanceNameList = targetModelInstance.name.split("/");
+    const instanceNameList = targetModelInstance.name.split("/");
 
-  //   setFieldValue("model.existing.id", instanceNameList[1]);
-  //   setFieldValue(
-  //     "model.existing.definition",
-  //     targetModelInstance.model_definition
-  //   );
-  //   increasePipelineFormStep();
+    setFieldValue("model.existing.id", instanceNameList[1]);
+    setFieldValue(
+      "model.existing.definition",
+      targetModelInstance.model_definition
+    );
+    increasePipelineFormStep();
 
-  //   if (amplitudeIsInit) {
-  //     sendAmplitudeData("use_existing_model_instance", {
-  //       type: "critical_action",
-  //       process: "pipeline",
-  //     });
-  //   }
-  // }, [
-  //   existingModelInstanceTag,
-  //   modelInstances.isSuccess,
-  //   modelInstances.data,
-  //   amplitudeIsInit,
-  //   increasePipelineFormStep,
-  //   selectedModelInstanceOption?.value,
-  //   setFieldValue,
-  // ]);
+    if (amplitudeIsInit) {
+      sendAmplitudeData("use_existing_model_instance", {
+        type: "critical_action",
+        process: "pipeline",
+      });
+    }
+  }, [
+    existingModelInstanceTag,
+    modelInstances.isSuccess,
+    modelInstances.data,
+    amplitudeIsInit,
+    increasePipelineFormStep,
+    selectedModelInstanceOption?.value,
+    setFieldValue,
+  ]);
 
   /* -------------------------------------------------------------------------
    * Render
@@ -155,7 +154,7 @@ export const NextUseExistingModeInstancelFlow = () => {
         type="button"
         color="primary"
         disabled={canUseExistingModel ? false : true}
-        onClickHandler={() => {}}
+        onClickHandler={handleUseModel}
       >
         Select
       </SolidButton>
