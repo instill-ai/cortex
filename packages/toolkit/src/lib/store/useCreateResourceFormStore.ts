@@ -165,7 +165,6 @@ const createResourceInitialState: CreateResourceFormState = {
       description: null,
     },
   },
-
   errors: {
     source: {
       new: {

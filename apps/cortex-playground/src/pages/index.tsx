@@ -1,10 +1,5 @@
 import { Root } from "@/components/Root";
-import {
-  env,
-  ConfigureProfileForm,
-  CreateModelWithPresetForm,
-  CreateSourceForm,
-} from "@instill-ai/toolkit";
+import { CreatePipelineForm, FormVerticalDivider } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   return (
@@ -48,11 +43,10 @@ const IndexPage = () => {
         ]}
         width="w-[600px]"
       /> */}
-      <CreateModelWithPresetForm
-        width="w-[600px]"
-        marginBottom={null}
-        onSuccessfulComplete={() => {}}
-      />
+      <div className="w-[1200px] bg-instillGrey05">
+        <CreatePipelineForm onSuccessfulCreatePipeline={null} />
+        {/* <FormVerticalDivider /> */}
+      </div>
     </Root>
   );
 };

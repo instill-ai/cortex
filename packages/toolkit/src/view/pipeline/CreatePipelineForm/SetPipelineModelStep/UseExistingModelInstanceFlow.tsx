@@ -51,7 +51,7 @@ export const NextUseExistingModeInstancelFlow = () => {
     useState<Nullable<SingleSelectOption>>(null);
 
   const modelInstances = useModelsInstances({
-    enable: modelType === "new" ? false : true,
+    enable: true,
     accessToken: null,
   });
 
