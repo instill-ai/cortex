@@ -5,9 +5,15 @@ export const getQueryString = (
   pageSize: Nullable<number>,
   nextPageToken: Nullable<string>
 ) => {
-  return pageSize
-    ? nextPageToken
-      ? baseUrl + `&page_size=${pageSize}` + `&page_token=${nextPageToken}`
-      : baseUrl + `&page_size=${pageSize}`
-    : baseUrl;
+  let queryString = baseUrl;
+
+  if (pageSize) {
+    queryString += `&page_size=${pageSize}`;
+  }
+
+  if (nextPageToken) {
+    queryString += `&page_token=${nextPageToken}`;
+  }
+
+  return queryString;
 };
