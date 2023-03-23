@@ -17,6 +17,7 @@ import {
   type CreatePipelinePayload,
   CreateResourceFormStore,
   Nullable,
+  getInstillApiErrorMessage,
 } from "../../../lib";
 import { shallow } from "zustand/shallow";
 
@@ -334,7 +335,7 @@ export const SetPipelineDetailsStep = ({
                   setMessageBoxState(() => ({
                     activate: true,
                     status: "error",
-                    description: error.response?.data.message,
+                    description: getInstillApiErrorMessage(error),
                     message: error.message,
                   }));
                 } else {
@@ -354,7 +355,7 @@ export const SetPipelineDetailsStep = ({
             setMessageBoxState(() => ({
               activate: true,
               status: "error",
-              description: error.response?.data.message,
+              description: getInstillApiErrorMessage(error),
               message: error.message,
             }));
           } else {

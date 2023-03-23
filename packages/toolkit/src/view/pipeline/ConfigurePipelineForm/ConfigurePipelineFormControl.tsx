@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Dispatch, SetStateAction, useCallback } from "react";
 import { shallow } from "zustand/shallow";
 import {
@@ -13,6 +14,7 @@ import {
   type Pipeline,
   type Nullable,
   type ConfigurePipelineFormStore,
+  getInstillApiErrorMessage,
 } from "../../../lib";
 
 const selector = (state: ConfigurePipelineFormStore) => ({
@@ -88,11 +90,11 @@ export const ConfigurePipelineFormControl = ({
           });
         },
         onError: (error) => {
-          if (error instanceof Error) {
+          if (axios.isAxiosError(error)) {
             setMessageBoxState({
               activate: true,
               status: "error",
-              description: null,
+              description: getInstillApiErrorMessage(error),
               message: error.message,
             });
           } else {

@@ -378,11 +378,7 @@ export const ConfigureDestinationForm = ({
             setMessageBoxState(() => ({
               activate: true,
               message: `${error.response?.status} - ${error.response?.data.message}`,
-              description: JSON.stringify(
-                error.response?.data.details,
-                null,
-                "\t"
-              ),
+              description: getInstillApiErrorMessage(error),
               status: "error",
             }));
           } else {

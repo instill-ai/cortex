@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useCallback, useState } from "react";
 import {
   BasicProgressMessageBox,
@@ -5,6 +6,7 @@ import {
   ProgressMessageBoxState,
 } from "@instill-ai/design-system";
 import {
+  getInstillApiErrorMessage,
   sendAmplitudeData,
   useAmplitudeCtx,
   useDeletePipeline,
@@ -74,11 +76,11 @@ export const ConfigurePipelineForm = ({
           if (onDelete) onDelete();
         },
         onError: (error) => {
-          if (error instanceof Error) {
+          if (axios.isAxiosError(error)) {
             setMessageBoxState({
               activate: true,
               status: "error",
-              description: null,
+              description: getInstillApiErrorMessage(error),
               message: error.message,
             });
           } else {

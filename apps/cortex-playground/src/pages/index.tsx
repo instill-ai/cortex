@@ -7,16 +7,26 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
-import { ConfigurePipelineForm, usePipeline } from "@instill-ai/toolkit";
+import {
+  ConfigurePipelineForm,
+  useModel,
+  usePipeline,
+} from "@instill-ai/toolkit";
 import {
   ConfigureDestinationForm,
   CreatePipelineForm,
+  ConfigureModelForm,
   useDestination,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   const destination = useDestination({
     destinationName: "destination-connectors/destination-http",
+    accessToken: null,
+  });
+
+  const model = useModel({
+    modelName: "models/fewfee",
     accessToken: null,
   });
 
@@ -124,7 +134,7 @@ const IndexPage = () => {
           value={options[0]}
           disabled={true}
         /> */}
-        {pipeline.isSuccess ? (
+        {/* {pipeline.isSuccess ? (
           <ConfigurePipelineForm
             pipeline={pipeline.data || null}
             marginBottom={null}
@@ -132,6 +142,14 @@ const IndexPage = () => {
             accessToken={null}
             onConfigure={null}
             onDelete={null}
+          />
+        ) : null} */}
+        {model.isSuccess ? (
+          <ConfigureModelForm
+            model={model.data}
+            onConfigure={null}
+            onDelete={null}
+            marginBottom={null}
           />
         ) : null}
       </div>
