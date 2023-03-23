@@ -5,24 +5,21 @@ import { SourceDefinitionField } from "./SourceDefinitionField";
 
 export type ConfigureSourceFormProps = {
   source: Nullable<SourceWithPipelines>;
-  onDeleteCallback: Nullable<() => void>;
+  onDelete: Nullable<() => void>;
   marginBottom: Nullable<string>;
   width: string;
 };
 
 export const ConfigureSourceForm = ({
   source,
-  onDeleteCallback,
+  onDelete,
   marginBottom,
   width,
 }: ConfigureSourceFormProps) => {
   <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
     <div className="flex flex-col gap-y-10">
       <SourceDefinitionField source={source} />
-      <ConfigureSourceControl
-        source={source}
-        onDeleteCallback={onDeleteCallback}
-      />
+      <ConfigureSourceControl source={source} onDelete={onDelete} />
     </div>
   </FormRoot>;
 };

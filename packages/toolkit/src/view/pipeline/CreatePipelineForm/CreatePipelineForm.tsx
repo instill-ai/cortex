@@ -16,12 +16,10 @@ import { SetPipelineModeStep } from "./SetPipelineModeStep";
 //  4: setup pipeline details
 
 export type CreatePipelineFormProps = {
-  onSuccessfulCreatePipeline: Nullable<() => void>;
+  onCreate: Nullable<() => void>;
 };
 
-export const CreatePipelineForm = ({
-  onSuccessfulCreatePipeline,
-}: CreatePipelineFormProps) => {
+export const CreatePipelineForm = ({ onCreate }: CreatePipelineFormProps) => {
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
   );
@@ -36,15 +34,11 @@ export const CreatePipelineForm = ({
       case 3:
         return <SetPipelineDestinationStep />;
       case 4:
-        return (
-          <SetPipelineDetailsStep
-            onSuccessfulCreatePipeline={onSuccessfulCreatePipeline}
-          />
-        );
+        return <SetPipelineDetailsStep onCreate={onCreate} />;
       default:
         return null;
     }
-  }, [pipelineFormStep, onSuccessfulCreatePipeline]);
+  }, [pipelineFormStep, onCreate]);
 
   return (
     <div className="flex flex-col">

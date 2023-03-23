@@ -25,11 +25,13 @@ const selector = (state: ConfigurePipelineFormStore) => ({
 export type ConfigurePipelineFormControlProps = {
   pipeline: Nullable<Pipeline>;
   setMessageBoxState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
+  onConfigure: Nullable<() => void>;
 };
 
 export const ConfigurePipelineFormControl = ({
   pipeline,
   setMessageBoxState,
+  onConfigure,
 }: ConfigurePipelineFormControlProps) => {
   const enable = useCreateUpdateDeleteResourceGuard();
   const {
@@ -73,6 +75,9 @@ export const ConfigurePipelineFormControl = ({
         onSuccess: () => {
           setFieldValue("canEdit", false);
           initConfigurePipelineFormStore();
+
+          if (onConfigure) onConfigure();
+
           setMessageBoxState({
             activate: true,
             status: "success",
@@ -107,6 +112,7 @@ export const ConfigurePipelineFormControl = ({
     setFieldValue,
     setMessageBoxState,
     initConfigurePipelineFormStore,
+    onConfigure,
   ]);
 
   return (

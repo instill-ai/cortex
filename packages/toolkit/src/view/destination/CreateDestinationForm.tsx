@@ -39,11 +39,13 @@ import { shallow } from "zustand/shallow";
 export type CreateDestinationFormProps = {
   title: Nullable<string>;
   marginBottom: Nullable<string>;
-  onSuccessfullyComplete: Nullable<(id: string) => void>;
+  onCreate: Nullable<(id: string) => void>;
+  initStoreOnCreate: boolean;
   formLess: boolean;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
+  init: state.init,
   formIsDirty: state.formIsDirty,
   pipelineMode: state.fields.pipeline.mode,
   setCreateNewResourceIsComplete: state.setCreateNewResourceIsComplete,
@@ -53,7 +55,8 @@ const selector = (state: CreateResourceFormStore) => ({
 export const CreateDestinationForm = ({
   title,
   marginBottom,
-  onSuccessfullyComplete,
+  onCreate,
+  initStoreOnCreate,
   formLess,
 }: CreateDestinationFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
@@ -66,6 +69,7 @@ export const CreateDestinationForm = ({
   // construct the form with airbyte way. We set our form state at the end.
 
   const {
+    init,
     formIsDirty,
     pipelineMode,
     setCreateNewResourceIsComplete,
@@ -387,8 +391,13 @@ export const CreateDestinationForm = ({
               process: "destination",
             });
           }
-          if (onSuccessfullyComplete) {
-            onSuccessfullyComplete(fieldValues.id as string);
+
+          if (initStoreOnCreate) {
+            init();
+          }
+
+          if (onCreate) {
+            onCreate(fieldValues.id as string);
             setCreateNewResourceIsComplete(true);
           }
         },
@@ -421,7 +430,7 @@ export const CreateDestinationForm = ({
     formYup,
     fieldValues,
     selectedDestinationDefinition,
-    onSuccessfullyComplete,
+    onCreate,
     setCreateNewResourceIsComplete,
   ]);
 
