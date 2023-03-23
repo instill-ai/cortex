@@ -97,6 +97,11 @@ export type SingleSelectBaseProps = Omit<
   selectPopoverBorderRadius: string;
   selectPopoverBgColor: string;
   selectPopoverPadding: string;
+
+  /**
+   * The gap between the icon and the text of the item
+   */
+  selectItemTextIconGap: string;
 };
 
 const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
@@ -145,10 +150,15 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     selectPopoverBorderStyle,
     selectPopoverBorderWidth,
     selectPopoverPadding,
+    selectItemTextIconGap,
   } = props;
 
   const [triggerWidth, setTriggerWidth] =
     React.useState<Nullable<number>>(null);
+
+  const selectedOption = React.useMemo(() => {
+    return options.find((option) => option.value === value?.value) || null;
+  }, [value]);
 
   return (
     <div className="flex flex-col">
@@ -204,7 +214,15 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 if (node) setTriggerWidth(node.offsetWidth);
               }}
             >
-              <Select.Value placeholder={placeholder} />
+              <Select.Value placeholder={placeholder}>
+                {selectedOption ? (
+                  <div className={cn("flex flex-row", selectItemTextIconGap)}>
+                    {selectedOption.startIcon ? selectedOption.startIcon : null}
+                    <p className="align-middle">{selectedOption.label}</p>
+                    {selectedOption.endIcon ? selectedOption.endIcon : null}
+                  </div>
+                ) : null}
+              </Select.Value>
               <Select.Icon className="SelectIcon ml-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +258,8 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                     <SelectItem
                       key={option.value}
                       width={triggerWidth}
-                      {...option}
+                      selectItemTextIconGap={selectItemTextIconGap}
+                      option={option}
                     />
                   ))}
                 </Select.Viewport>
