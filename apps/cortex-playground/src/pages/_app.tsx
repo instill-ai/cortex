@@ -5,7 +5,7 @@ import {
   QueryClientProvider,
 } from "@instill-ai/toolkit";
 import type { AppProps } from "next/app";
-import "@instill-ai/design-system/dist/index.css";
+import "@instill-ai/design-system/index.css";
 
 export const queryCache = new QueryCache();
 export const queryClient = new QueryClient({ queryCache });

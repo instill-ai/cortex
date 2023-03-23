@@ -5,6 +5,7 @@ import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";
 import { basicSingleSelectConfig } from "../BasicSingleSelect";
 import { SingleSelectOption } from "../SingleSelectBase";
+import { GrpcIcon } from "../../Icons";
 
 const meta: Meta<typeof BasicSingleSelect> = {
   title: "Components/Ui/Input/BasicSingleSelect",

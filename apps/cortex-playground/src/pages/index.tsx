@@ -1,5 +1,13 @@
 import { Root } from "@/components/Root";
 import {
+  BasicSingleSelect,
+  GrpcIcon,
+  HttpIcon,
+  MongoDbIcon,
+  SingleSelectOption,
+  SnowflakeIcon,
+} from "@instill-ai/design-system";
+import {
   ConfigureDestinationForm,
   CreatePipelineForm,
   useDestination,
@@ -10,6 +18,47 @@ const IndexPage = () => {
     destinationName: "destination-connectors/destination-http",
     accessToken: null,
   });
+
+  const options: SingleSelectOption[] = [
+    {
+      value: "grpc",
+      label: "gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-",
+      startIcon: (
+        <GrpcIcon
+          width="w-[30px]"
+          height="h-[30px]"
+          color="fill-black"
+          position="my-auto"
+        />
+      ),
+    },
+    {
+      value: "http",
+      label: "HTTP",
+      startIcon: (
+        <HttpIcon
+          width="w-[30px]"
+          height="h-[30px]"
+          color="fill-black"
+          position="my-auto"
+        />
+      ),
+    },
+    {
+      value: "snowflake",
+      label: "Snowflake",
+      startIcon: (
+        <SnowflakeIcon width="w-[30px]" height="h-[30px]" position="my-auto" />
+      ),
+    },
+    {
+      value: "mongodb",
+      label: "MongoDB",
+      startIcon: (
+        <MongoDbIcon width="w-[30px]" height="h-[30px]" position="my-auto" />
+      ),
+    },
+  ];
 
   return (
     <Root>
@@ -53,7 +102,7 @@ const IndexPage = () => {
         width="w-[600px]"
       /> */}
       <div className="w-[1200px] bg-instillGrey05">
-        {destination.isSuccess ? (
+        {/* {destination.isSuccess ? (
           <ConfigureDestinationForm
             width={null}
             onConfigure={null}
@@ -61,7 +110,13 @@ const IndexPage = () => {
             onDelete={null}
             destination={destination.data}
           />
-        ) : null}
+        ) : null} */}
+        <BasicSingleSelect
+          id="test"
+          label="select test"
+          options={options}
+          value={options[0]}
+        />
       </div>
     </Root>
   );

@@ -37,7 +37,8 @@ export type BasicSingleSelectOmitKeys =
   | "selectPopoverBorderRadius"
   | "selectPopoverBorderStyle"
   | "selectPopoverBorderWidth"
-  | "selectPopoverPadding";
+  | "selectPopoverPadding"
+  | "selectItemTextIconGap";
 
 export type FullBasicSingleSelectProps = Omit<
   SingleSelectBaseProps,
@@ -84,6 +85,7 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   selectPopoverBorderStyle: "border-solid",
   selectPopoverBorderWidth: "border",
   selectPopoverPadding: "py-5",
+  selectItemTextIconGap: "gap-x-2",
 };
 
 export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
