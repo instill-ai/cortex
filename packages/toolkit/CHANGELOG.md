@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.17.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.16.0...@instill-ai/toolkit-v0.17.0) (2023-03-23)
+
+
+### Features
+
+* [INS-297] add ConfigureModelForm into toolkit ([#246](https://github.com/instill-ai/design-system/issues/246)) ([468799c](https://github.com/instill-ai/design-system/commit/468799c4af31ae146549ef94b89785a90d6a26ed))
+* add PaginationListContainer ([#247](https://github.com/instill-ai/design-system/issues/247)) ([2766170](https://github.com/instill-ai/design-system/commit/276617040ea8a9436f408cfb12c4ca1899d41ee1))
+* update how we handle export ([#248](https://github.com/instill-ai/design-system/issues/248)) ([3b41d77](https://github.com/instill-ai/design-system/commit/3b41d7734e812721bda071dda8c0873e83c4a9e5))
+
+
+### Bug Fixes
+
+* fix missing props in the form ([#244](https://github.com/instill-ai/design-system/issues/244)) ([7d16f76](https://github.com/instill-ai/design-system/commit/7d16f765cfcc0c35346b0bfe2c17dbef74d180dc))
+
 ## [0.16.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.15.0...@instill-ai/toolkit-v0.16.0) (2023-03-23)
 
 
