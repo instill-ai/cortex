@@ -16,6 +16,7 @@ import {
   type CreateSourcePayload,
   type Nullable,
   type SourceWithDefinition,
+  getInstillApiErrorMessage,
 } from "../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -108,11 +109,7 @@ export const CreateSourceControl = ({
             setMessageBoxState(() => ({
               activate: true,
               status: "error",
-              description: JSON.stringify(
-                error.response?.data.details,
-                null,
-                "\t"
-              ),
+              description: getInstillApiErrorMessage(error),
               message: error.message,
             }));
           } else {

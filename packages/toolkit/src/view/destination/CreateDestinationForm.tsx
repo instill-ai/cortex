@@ -30,6 +30,7 @@ import {
   type AirbyteFieldErrors,
   type SelectedItemMap,
   CreateResourceFormStore,
+  getInstillApiErrorMessage,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
@@ -408,11 +409,7 @@ export const CreateDestinationForm = ({
             setMessageBoxState(() => ({
               activate: true,
               status: "error",
-              description: JSON.stringify(
-                error.response?.data.details,
-                null,
-                "\t"
-              ),
+              description: getInstillApiErrorMessage(error),
               message: error.message,
             }));
           } else {
