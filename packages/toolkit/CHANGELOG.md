@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.16.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.15.0...@instill-ai/toolkit-v0.16.0) (2023-03-23)
+
+
+### Features
+
+* [INS-275] refactor destination form and add into toolkit ([#240](https://github.com/instill-ai/design-system/issues/240)) ([3ca1753](https://github.com/instill-ai/design-system/commit/3ca175324cf038075dbad5cadedb3ff85897f6e2))
+* [INS-278] Refactor ConfigureDestinationForm and add it into `toolkit` ([#241](https://github.com/instill-ai/design-system/issues/241)) ([6c602cf](https://github.com/instill-ai/design-system/commit/6c602cffbad70963078ed76d22ee8f2129086b48))
+* add create model form into toolkit ([#238](https://github.com/instill-ai/design-system/issues/238)) ([5b02173](https://github.com/instill-ai/design-system/commit/5b02173f7b32a66335d38b73d88cb539f97ae30a))
+* add CreatePipelineForm into toolkit ([#239](https://github.com/instill-ai/design-system/issues/239)) ([dd0986d](https://github.com/instill-ai/design-system/commit/dd0986dda6afbc3b9d4987433151fc2c7bebc365))
+
+
+### Bug Fixes
+
+* fix Zod File type ([#236](https://github.com/instill-ai/design-system/issues/236)) ([9d5f7ad](https://github.com/instill-ai/design-system/commit/9d5f7add1380b0d0917cdf2155037488b8459f18))
+
 ## [0.15.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.14.3...@instill-ai/toolkit-v0.15.0) (2023-03-21)
 
 

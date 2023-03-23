@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.7.7](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.6...@instill-ai/design-system-v0.7.7) (2023-03-23)
+
+
+### Bug Fixes
+
+* [INS-276] fix select icon issue ([#242](https://github.com/instill-ai/design-system/issues/242)) ([d1f9c4f](https://github.com/instill-ai/design-system/commit/d1f9c4f065489d6f9339988547adff9a0dc0b70b))
+* [INS-277] fix select not disabled ([#243](https://github.com/instill-ai/design-system/issues/243)) ([d7510c7](https://github.com/instill-ai/design-system/commit/d7510c7696207b0885e994756e5c43c6c15c7b96))
+
 ## [0.7.6](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.5...@instill-ai/design-system-v0.7.6) (2023-03-21)
 
 
