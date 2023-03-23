@@ -97,7 +97,6 @@ export type SingleSelectBaseProps = Omit<
   selectPopoverBorderRadius: string;
   selectPopoverBgColor: string;
   selectPopoverPadding: string;
-
   /**
    * The gap between the icon and the text of the item
    */
@@ -116,8 +115,9 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     messageTextColor,
     inputLabelType,
     label,
-    required,
     id,
+    required,
+    disabled,
     error,
     description,
     onChange,
@@ -200,6 +200,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 options.find((option) => option.value === value) || null;
               if (onChange) onChange(selectedOption);
             }}
+            disabled={disabled || false}
           >
             <Select.Trigger
               className={cn(
@@ -207,7 +208,10 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 inputBorderColor,
                 inputBorderRadius,
                 inputBorderStyle,
-                inputBorderWidth
+                inputBorderWidth,
+                {
+                  "bg-instillGrey90 bg-opacity-5 cursor-not-allowed": disabled,
+                }
               )}
               aria-label="Food"
               ref={(node) => {
@@ -218,12 +222,14 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 {selectedOption ? (
                   <div className={cn("flex flex-row", selectItemTextIconGap)}>
                     {selectedOption.startIcon ? selectedOption.startIcon : null}
-                    <p className="align-middle">{selectedOption.label}</p>
+                    <p className={"align-middle pt-0.5"}>
+                      {selectedOption.label}
+                    </p>
                     {selectedOption.endIcon ? selectedOption.endIcon : null}
                   </div>
                 ) : null}
               </Select.Value>
-              <Select.Icon className="SelectIcon ml-auto">
+              <Select.Icon className="SelectIcon ml-auto my-auto">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
