@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.17.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.17.0...@instill-ai/toolkit-v0.17.1) (2023-03-23)
+
+
+### Bug Fixes
+
+* remove exports property in package.json ([#249](https://github.com/instill-ai/design-system/issues/249)) ([e4fac87](https://github.com/instill-ai/design-system/commit/e4fac870219783a0249fc430394755d5c840814b))
+
 ## [0.17.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.16.0...@instill-ai/toolkit-v0.17.0) (2023-03-23)
 
 
