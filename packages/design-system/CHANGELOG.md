@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.8.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.7...@instill-ai/design-system-v0.8.0) (2023-03-23)
+
+
+### Features
+
+* update how we handle export ([#248](https://github.com/instill-ai/design-system/issues/248)) ([3b41d77](https://github.com/instill-ai/design-system/commit/3b41d7734e812721bda071dda8c0873e83c4a9e5))
+
 ## [0.7.7](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.7.6...@instill-ai/design-system-v0.7.7) (2023-03-23)
 
 
