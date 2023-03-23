@@ -43,13 +43,12 @@ import { DeleteResourceModal } from "../DeleteResourceModal";
 export type ConfigureDestinationFormProps = {
   destination: DestinationWithDefinition;
   width: Nullable<string>;
-  onConfigure: Nullable<() => {}>;
+  onConfigure: Nullable<() => void>;
   initStoreOnConfigure: boolean;
-  onDelete: Nullable<() => {}>;
+  onDelete: Nullable<() => void>;
 };
 
 const formSelector = (state: CreateResourceFormStore) => ({
-  formIsDirty: state.formIsDirty,
   setFormIsDirty: state.setFormIsDirty,
   init: state.init,
 });
@@ -73,7 +72,7 @@ export const ConfigureDestinationForm = ({
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const { formIsDirty, init, setFormIsDirty } = useCreateResourceFormStore(
+  const { init, setFormIsDirty } = useCreateResourceFormStore(
     formSelector,
     shallow
   );
@@ -119,13 +118,7 @@ export const ConfigureDestinationForm = ({
         />
       ),
     };
-  }, [
-    destination.destination_connector_definition.id,
-    destination.destination_connector_definition.connector_definition
-      .docker_repository,
-    destination.destination_connector_definition.connector_definition.icon,
-    destination.destination_connector_definition.connector_definition.title,
-  ]);
+  }, [destination]);
 
   /* -------------------------------------------------------------------------
    * Create interior state for managing the form
@@ -337,6 +330,8 @@ export const ConfigureDestinationForm = ({
     destination.name,
     updateDestination,
     init,
+    initStoreOnConfigure,
+    onConfigure,
   ]);
 
   // ##########################################################################
@@ -405,8 +400,8 @@ export const ConfigureDestinationForm = ({
     deleteDestination,
     destination,
     router,
-    init,
     closeModal,
+    onDelete,
   ]);
 
   return (

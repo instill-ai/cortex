@@ -100,7 +100,7 @@ export const ConfigurePipelineForm = ({
     closeModal,
     accessToken,
     setMessageBoxState,
-    onConfigure,
+    onDelete,
   ]);
 
   return (

@@ -425,6 +425,8 @@ export const CreateDestinationForm = ({
       }
     );
   }, [
+    init,
+    initStoreOnCreate,
     amplitudeIsInit,
     createDestination,
     formYup,
