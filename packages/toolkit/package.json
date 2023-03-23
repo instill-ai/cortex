@@ -22,12 +22,6 @@
   "files": [
     "dist"
   ],
-  "exports": {
-    ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    }
-  },
   "license": "Apache-2.0",
   "private": false,
   "devDependencies": {
