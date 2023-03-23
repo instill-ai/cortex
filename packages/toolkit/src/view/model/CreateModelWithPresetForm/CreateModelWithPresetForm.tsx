@@ -16,6 +16,7 @@ export type CreateModelWithPresetFormProps = {
   initStoreOnCreate: boolean;
   width: string;
   marginBottom: Nullable<string>;
+  accessToken: Nullable<string>;
 };
 
 export const CreateModelWithPresetForm = ({
@@ -23,6 +24,7 @@ export const CreateModelWithPresetForm = ({
   initStoreOnCreate,
   marginBottom,
   width,
+  accessToken,
 }: CreateModelWithPresetFormProps) => {
   const newModelIsSet = useCreateResourceFormStore(
     (state) => state.fields.model.new.modelIsSet
@@ -43,6 +45,7 @@ export const CreateModelWithPresetForm = ({
           <DeployModelInstanceCard
             onCreate={onCreate}
             initStoreOnCreate={initStoreOnCreate}
+            accessToken={accessToken}
           />
         </>
       ) : (
@@ -52,6 +55,7 @@ export const CreateModelWithPresetForm = ({
             <InputModelBasicInfoCard marginBottom={null} />
             <CreateModelConfirmationModal
               setErrorMessageBoxState={setCreateModelMessageBoxState}
+              accessToken={accessToken}
             />
           </div>
           <div className="mt-auto">

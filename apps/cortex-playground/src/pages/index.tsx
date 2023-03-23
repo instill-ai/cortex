@@ -7,6 +7,7 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
+import { ConfigurePipelineForm, usePipeline } from "@instill-ai/toolkit";
 import {
   ConfigureDestinationForm,
   CreatePipelineForm,
@@ -60,6 +61,11 @@ const IndexPage = () => {
     },
   ];
 
+  const pipeline = usePipeline({
+    pipelineName: "pipelines/yoyomne",
+    accessToken: null,
+  });
+
   return (
     <Root>
       {/* <ConfigureProfileForm
@@ -111,13 +117,23 @@ const IndexPage = () => {
             destination={destination.data}
           />
         ) : null} */}
-        <BasicSingleSelect
+        {/* <BasicSingleSelect
           id="test"
           label="select test"
           options={options}
           value={options[0]}
           disabled={true}
-        />
+        /> */}
+        {pipeline.isSuccess ? (
+          <ConfigurePipelineForm
+            pipeline={pipeline.data || null}
+            marginBottom={null}
+            width={null}
+            accessToken={null}
+            onConfigure={null}
+            onDelete={null}
+          />
+        ) : null}
       </div>
     </Root>
   );

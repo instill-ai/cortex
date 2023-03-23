@@ -13,8 +13,10 @@ import { SourceDefinitionField } from "./SourceDefinitionField";
 export type CreateSourceFormProps = {
   sources: Nullable<SourceWithDefinition[]>;
   marginBottom: Nullable<string>;
-  width: string;
+  width: Nullable<string>;
   onCreate: Nullable<() => void>;
+  accessToken: Nullable<string>;
+  initStoreOnCreate: boolean;
 };
 
 export const CreateSourceForm = ({
@@ -22,6 +24,8 @@ export const CreateSourceForm = ({
   marginBottom,
   width,
   onCreate,
+  accessToken,
+  initStoreOnCreate,
 }: CreateSourceFormProps) => {
   const [sourceDefinitionOptions, setSourceDefinitionOptions] = useState<
     SingleSelectOption[]
@@ -64,7 +68,12 @@ export const CreateSourceForm = ({
         <SourceDefinitionField
           sourceDefinitionOptions={sourceDefinitionOptions}
         />
-        <CreateSourceControl sources={sources} onCreate={onCreate} />
+        <CreateSourceControl
+          sources={sources}
+          onCreate={onCreate}
+          accessToken={accessToken}
+          initStoreOnCreate={initStoreOnCreate}
+        />
       </div>
     </FormRoot>
   );

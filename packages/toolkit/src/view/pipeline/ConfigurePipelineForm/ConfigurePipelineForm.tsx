@@ -112,6 +112,7 @@ export const ConfigurePipelineForm = ({
             pipeline={pipeline}
             setMessageBoxState={setMessageBoxState}
             onConfigure={onConfigure}
+            accessToken={accessToken}
           />
           <div className="flex">
             <BasicProgressMessageBox

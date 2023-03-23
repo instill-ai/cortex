@@ -1,4 +1,4 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getPipelineQuery, Pipeline } from "../../vdp-sdk";
 import { Nullable } from "../../type";
 import { constructPipelineRecipeWithDefinition } from "../helper";
@@ -10,7 +10,6 @@ export const usePipeline = ({
   pipelineName: Nullable<string>;
   accessToken: Nullable<string>;
 }) => {
-  const queryClient = useQueryClient();
   return useQuery(
     ["pipelines", pipelineName],
     async () => {
@@ -33,9 +32,6 @@ export const usePipeline = ({
     },
     {
       enabled: pipelineName ? true : false,
-      initialData: queryClient
-        .getQueryData<Pipeline[]>(["pipelines"])
-        ?.find((e) => e.name === pipelineName),
       retry: 3,
     }
   );

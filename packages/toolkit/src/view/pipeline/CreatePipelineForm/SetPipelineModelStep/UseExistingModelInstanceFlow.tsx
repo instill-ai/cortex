@@ -22,7 +22,13 @@ const selector = (state: CreateResourceFormStore) => ({
   setFieldValue: state.setFieldValue,
 });
 
-export const NextUseExistingModeInstancelFlow = () => {
+export type UseExistingModeInstancelFlowProps = {
+  accessToken: Nullable<string>;
+};
+
+export const UseExistingModeInstancelFlow = ({
+  accessToken,
+}: UseExistingModeInstancelFlowProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -52,7 +58,7 @@ export const NextUseExistingModeInstancelFlow = () => {
 
   const modelInstances = useModelsInstances({
     enable: true,
-    accessToken: null,
+    accessToken,
   });
 
   useEffect(() => {

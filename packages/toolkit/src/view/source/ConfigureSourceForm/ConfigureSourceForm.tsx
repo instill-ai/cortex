@@ -7,7 +7,8 @@ export type ConfigureSourceFormProps = {
   source: Nullable<SourceWithPipelines>;
   onDelete: Nullable<() => void>;
   marginBottom: Nullable<string>;
-  width: string;
+  width: Nullable<string>;
+  accessToken: Nullable<string>;
 };
 
 export const ConfigureSourceForm = ({
@@ -15,11 +16,18 @@ export const ConfigureSourceForm = ({
   onDelete,
   marginBottom,
   width,
+  accessToken,
 }: ConfigureSourceFormProps) => {
-  <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
-    <div className="flex flex-col gap-y-10">
-      <SourceDefinitionField source={source} />
-      <ConfigureSourceControl source={source} onDelete={onDelete} />
-    </div>
-  </FormRoot>;
+  return (
+    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
+      <div className="flex flex-col gap-y-10">
+        <SourceDefinitionField source={source} />
+        <ConfigureSourceControl
+          source={source}
+          onDelete={onDelete}
+          accessToken={accessToken}
+        />
+      </div>
+    </FormRoot>
+  );
 };

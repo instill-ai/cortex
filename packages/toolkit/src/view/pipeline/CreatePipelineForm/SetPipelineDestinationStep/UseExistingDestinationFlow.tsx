@@ -13,6 +13,7 @@ import {
   sendAmplitudeData,
   useCreateResourceFormStore,
   CreateResourceFormStore,
+  Nullable,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -22,7 +23,13 @@ const selector = (state: CreateResourceFormStore) => ({
   setFieldValue: state.setFieldValue,
 });
 
-export const UseExistingDestinationFlow = () => {
+export type UseExistingDestinationFlowProps = {
+  accessToken: Nullable<string>;
+};
+
+export const UseExistingDestinationFlow = ({
+  accessToken,
+}: UseExistingDestinationFlowProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -43,7 +50,7 @@ export const UseExistingDestinationFlow = () => {
   const [destinationOptions, setDestinationOptions] = useState<
     SingleSelectOption[] | null
   >(null);
-  const destinations = useDestinations({ accessToken: null });
+  const destinations = useDestinations({ accessToken });
 
   useEffect(() => {
     if (!destinations.isSuccess || !destinations.data) return;
