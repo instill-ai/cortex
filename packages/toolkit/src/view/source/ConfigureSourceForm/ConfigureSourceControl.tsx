@@ -33,15 +33,17 @@ const modalSelector = (state: ModalStore) => ({
   openModal: state.openModal,
 });
 
-export type ConfigurePipelineControlProps = {
+export type ConfigureSourceControlProps = {
   source: Nullable<SourceWithPipelines>;
   onDelete: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
 export const ConfigureSourceControl = ({
   source,
   onDelete,
-}: ConfigurePipelineControlProps) => {
+  accessToken,
+}: ConfigureSourceControlProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   const enableGuard = useCreateUpdateDeleteResourceGuard();
   const { canEdit, setFieldValue } = useConfigureSourceFormStore(
@@ -88,7 +90,7 @@ export const ConfigureSourceControl = ({
     deleteSource.mutate(
       {
         sourceName: source.name,
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {

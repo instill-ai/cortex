@@ -46,6 +46,7 @@ export type ConfigureDestinationFormProps = {
   onConfigure: Nullable<() => void>;
   initStoreOnConfigure: boolean;
   onDelete: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
 const formSelector = (state: CreateResourceFormStore) => ({
@@ -64,6 +65,7 @@ export const ConfigureDestinationForm = ({
   onConfigure,
   initStoreOnConfigure,
   width,
+  accessToken,
 }: ConfigureDestinationFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   const router = useRouter();
@@ -269,7 +271,7 @@ export const ConfigureDestinationForm = ({
       }));
 
       updateDestination.mutate(
-        { payload, accessToken: null },
+        { payload, accessToken },
         {
           onSuccess: () => {
             setCanEdit(false);
@@ -351,7 +353,7 @@ export const ConfigureDestinationForm = ({
     }));
 
     deleteDestination.mutate(
-      { destinationName: destination.name, accessToken: null },
+      { destinationName: destination.name, accessToken },
       {
         onSuccess: () => {
           setMessageBoxState(() => ({

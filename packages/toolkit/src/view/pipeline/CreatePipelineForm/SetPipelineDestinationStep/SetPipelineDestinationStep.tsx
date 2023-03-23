@@ -14,6 +14,7 @@ import {
   useCreateResourceFormStore,
   type CreateDestinationPayload,
   type CreateResourceFormStore,
+  Nullable,
 } from "../../../../lib";
 
 import { FormVerticalDivider } from "../FormVerticalDivider";
@@ -31,7 +32,13 @@ const selector = (state: CreateResourceFormStore) => ({
   s: state.fields.source.type,
 });
 
-export const SetPipelineDestinationStep = () => {
+export type SetPipelineDestinationStepProps = {
+  accessToken: Nullable<string>;
+};
+
+export const SetPipelineDestinationStep = ({
+  accessToken,
+}: SetPipelineDestinationStepProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -114,7 +121,7 @@ export const SetPipelineDestinationStep = () => {
    * -----------------------------------------------------------------------*/
 
   const createDestination = useCreateDestination();
-  const destinations = useDestinations({ accessToken: null });
+  const destinations = useDestinations({ accessToken });
 
   const handleGoNext = () => {
     if (!destinations.isSuccess || !existingDestinationId) {
@@ -156,7 +163,7 @@ export const SetPipelineDestinationStep = () => {
       };
 
       createDestination.mutate(
-        { payload, accessToken: null },
+        { payload, accessToken },
         {
           onSuccess: () => {
             if (amplitudeIsInit) {
@@ -209,7 +216,7 @@ export const SetPipelineDestinationStep = () => {
         </div>
       ) : (
         <div className="flex flex-1 flex-row items-stretch">
-          <UseExistingDestinationFlow />
+          <UseExistingDestinationFlow accessToken={accessToken} />
           <FormVerticalDivider />
           <CreateDestinationForm
             onCreate={(id: string) => {
@@ -220,6 +227,7 @@ export const SetPipelineDestinationStep = () => {
             formLess={true}
             marginBottom={null}
             initStoreOnCreate={false}
+            accessToken={accessToken}
           />
         </div>
       )}

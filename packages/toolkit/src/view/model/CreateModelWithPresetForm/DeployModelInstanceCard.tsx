@@ -17,14 +17,15 @@ import {
   useModelWithInstances,
   getInstillApiErrorMessage,
   useCreateResourceFormStore,
+  type CreateResourceFormStore,
   type Nullable,
-  CreateResourceFormStore,
 } from "../../../lib";
 import { CardBase } from "./CardBase";
 
 export type DeployModelInstanceCardProps = {
   onCreate: Nullable<() => void>;
   initStoreOnCreate: boolean;
+  accessToken: Nullable<string>;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -37,6 +38,7 @@ const selector = (state: CreateResourceFormStore) => ({
 export const DeployModelInstanceCard = ({
   onCreate,
   initStoreOnCreate,
+  accessToken,
 }: DeployModelInstanceCardProps) => {
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -54,10 +56,10 @@ export const DeployModelInstanceCard = ({
    * Query model instances
    * -----------------------------------------------------------------------*/
 
-  const model = useModel({ modelName, accessToken: null });
+  const model = useModel({ modelName, accessToken });
   const modelInstances = useModelWithInstances({
     model: model.isSuccess ? model.data : null,
-    accessToken: null,
+    accessToken,
   });
 
   useEffect(() => {
@@ -89,7 +91,7 @@ export const DeployModelInstanceCard = ({
     deployModelInstance.mutate(
       {
         modelInstanceName: `models/${modelId}/instances/${selectedModelInstanceTag}`,
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {

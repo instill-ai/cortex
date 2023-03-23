@@ -26,12 +26,14 @@ export type ConfigurePipelineFormControlProps = {
   pipeline: Nullable<Pipeline>;
   setMessageBoxState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
   onConfigure: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
 export const ConfigurePipelineFormControl = ({
   pipeline,
   setMessageBoxState,
   onConfigure,
+  accessToken,
 }: ConfigurePipelineFormControlProps) => {
   const enable = useCreateUpdateDeleteResourceGuard();
   const {
@@ -40,7 +42,7 @@ export const ConfigurePipelineFormControl = ({
     setFieldValue,
     initConfigurePipelineFormStore,
   } = useConfigurePipelineFormStore(selector, shallow);
-  const openModal = useModalStore((state) => state.closeModal);
+  const openModal = useModalStore((state) => state.openModal);
   const updatePipeline = useUpdatePipeline();
 
   const handleSubmit = useCallback(() => {
@@ -69,7 +71,7 @@ export const ConfigurePipelineFormControl = ({
           name: pipeline.name,
           description: pipelineDescription ?? null,
         },
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {

@@ -55,10 +55,12 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type SetPipelineDetailsStepProps = {
   onCreate: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
 export const SetPipelineDetailsStep = ({
   onCreate,
+  accessToken,
 }: SetPipelineDetailsStepProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
@@ -292,7 +294,7 @@ export const SetPipelineDetailsStep = ({
     }));
 
     createPipeline.mutate(
-      { payload, accessToken: null },
+      { payload, accessToken },
       {
         onSuccess: async (res) => {
           if (!pipelineDescription) {
@@ -313,7 +315,7 @@ export const SetPipelineDetailsStep = ({
                 name: res.newPipeline.name,
                 description: pipelineDescription,
               },
-              accessToken: null,
+              accessToken,
             },
             {
               onSuccess: () => {

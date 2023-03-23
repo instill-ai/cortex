@@ -25,11 +25,13 @@ import {
   type CreateGithubModelPayload,
   type Model,
   type ModelInstance,
+  Nullable,
 } from "../../../lib";
 import { shallow } from "zustand/shallow";
 
-export type CreateModelConfirmationModal = {
+export type CreateModelConfirmationModalProps = {
   setErrorMessageBoxState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
+  accessToken: Nullable<string>;
 };
 
 const modalSelector = (state: ModalStore) => ({
@@ -49,7 +51,8 @@ const modelSelector = (state: CreateResourceFormStore) => ({
 
 export const CreateModelConfirmationModal = ({
   setErrorMessageBoxState,
-}: CreateModelConfirmationModal) => {
+  accessToken,
+}: CreateModelConfirmationModalProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   const queryClient = useQueryClient();
 
@@ -76,12 +79,12 @@ export const CreateModelConfirmationModal = ({
 
   const prepareNewModel = useCallback(
     async (modelName: string) => {
-      const model = await getModelQuery({ modelName, accessToken: null });
+      const model = await getModelQuery({ modelName, accessToken });
       const modelInstances = await listModelInstancesQuery({
         modelName,
         pageSize: 10,
-        accessToken: null,
         nextPageToken: null,
+        accessToken,
       });
 
       queryClient.setQueryData<Model>(["models", model.id], model);
@@ -131,13 +134,13 @@ export const CreateModelConfirmationModal = ({
       };
 
       createGithubModel.mutate(
-        { payload, accessToken: null },
+        { payload, accessToken },
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
             const operationIsDone = await checkCreateModelOperationUntilDone({
               operationName: operation.name,
-              accessToken: null,
+              accessToken,
             });
 
             if (operationIsDone) {
@@ -177,13 +180,13 @@ export const CreateModelConfirmationModal = ({
       };
 
       createHuggingFaceModel.mutate(
-        { payload, accessToken: null },
+        { payload, accessToken },
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
             const operationIsDone = await checkCreateModelOperationUntilDone({
               operationName: operation.name,
-              accessToken: null,
+              accessToken,
             });
 
             if (operationIsDone) {

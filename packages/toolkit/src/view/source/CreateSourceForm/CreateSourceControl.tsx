@@ -19,21 +19,26 @@ import {
 } from "../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
+  init: state.init,
   sourceDefinition: state.fields.source.new.definition,
   setFieldError: state.setFieldError,
 });
 
 export type CreateSourceControlProps = {
   sources: Nullable<SourceWithDefinition[]>;
+  initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
 export const CreateSourceControl = ({
   sources,
+  initStoreOnCreate,
   onCreate,
+  accessToken,
 }: CreateSourceControlProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const { sourceDefinition, setFieldError } = useCreateResourceFormStore(
+  const { init, sourceDefinition, setFieldError } = useCreateResourceFormStore(
     selector,
     shallow
   );
@@ -80,7 +85,7 @@ export const CreateSourceControl = ({
     }));
 
     createSource.mutate(
-      { payload, accessToken: null },
+      { payload, accessToken },
       {
         onSuccess: () => {
           setMessageBoxState(() => ({
@@ -95,6 +100,7 @@ export const CreateSourceControl = ({
               process: "source",
             });
           }
+          if (initStoreOnCreate) init();
           if (onCreate) onCreate();
         },
         onError: (error) => {

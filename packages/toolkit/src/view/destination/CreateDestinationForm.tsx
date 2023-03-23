@@ -42,6 +42,7 @@ export type CreateDestinationFormProps = {
   onCreate: Nullable<(id: string) => void>;
   initStoreOnCreate: boolean;
   formLess: boolean;
+  accessToken: Nullable<string>;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -58,6 +59,7 @@ export const CreateDestinationForm = ({
   onCreate,
   initStoreOnCreate,
   formLess,
+  accessToken,
 }: CreateDestinationFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
@@ -81,7 +83,7 @@ export const CreateDestinationForm = ({
    * -----------------------------------------------------------------------*/
 
   const destinationDefinitions = useDestinationDefinitions({
-    accessToken: null,
+    accessToken,
   });
 
   const destinationOptions = useMemo(() => {
@@ -375,7 +377,7 @@ export const CreateDestinationForm = ({
     }));
 
     createDestination.mutate(
-      { payload, accessToken: null },
+      { payload, accessToken },
       {
         onSuccess: () => {
           setMessageBoxState(() => ({

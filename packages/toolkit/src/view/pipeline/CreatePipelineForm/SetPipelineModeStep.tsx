@@ -29,7 +29,13 @@ const selector = (state: CreateResourceFormStore) => ({
   setPipelineFormStep: state.setPipelineFormStep,
 });
 
-export const SetPipelineModeStep = () => {
+export type SetPipelineModeStepProps = {
+  accessToken: Nullable<string>;
+};
+
+export const SetPipelineModeStep = ({
+  accessToken,
+}: SetPipelineModeStepProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -127,7 +133,7 @@ export const SetPipelineModeStep = () => {
    * -----------------------------------------------------------------------*/
 
   const createSource = useCreateSource();
-  const sources = useSources({ accessToken: null });
+  const sources = useSources({ accessToken });
 
   const canGoNext = useMemo(() => {
     if (!pipelineMode) return false;
@@ -173,7 +179,7 @@ export const SetPipelineModeStep = () => {
     };
 
     createSource.mutate(
-      { payload, accessToken: null },
+      { payload, accessToken },
       {
         onSuccess: () => {
           if (amplitudeIsInit) {

@@ -17,9 +17,13 @@ import { SetPipelineModeStep } from "./SetPipelineModeStep";
 
 export type CreatePipelineFormProps = {
   onCreate: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
-export const CreatePipelineForm = ({ onCreate }: CreatePipelineFormProps) => {
+export const CreatePipelineForm = ({
+  onCreate,
+  accessToken,
+}: CreatePipelineFormProps) => {
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
   );
@@ -28,13 +32,18 @@ export const CreatePipelineForm = ({ onCreate }: CreatePipelineFormProps) => {
     switch (pipelineFormStep) {
       case 0:
       case 1:
-        return <SetPipelineModeStep />;
+        return <SetPipelineModeStep accessToken={accessToken} />;
       case 2:
-        return <SetPipelineModelStep />;
+        return <SetPipelineModelStep accessToken={accessToken} />;
       case 3:
-        return <SetPipelineDestinationStep />;
+        return <SetPipelineDestinationStep accessToken={accessToken} />;
       case 4:
-        return <SetPipelineDetailsStep onCreate={onCreate} />;
+        return (
+          <SetPipelineDetailsStep
+            onCreate={onCreate}
+            accessToken={accessToken}
+          />
+        );
       default:
         return null;
     }
