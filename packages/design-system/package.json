@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/design-system",
-  "version": "0.7.6",
+  "version": "0.7.7",
   "description": "Instill AI's design system",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -41,7 +41,6 @@
       "import": "./dist/index.css",
       "require": "./dist/index.css"
     }
-    
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
