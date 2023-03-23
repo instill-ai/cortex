@@ -18,9 +18,10 @@ export const SetPipelineModelStep = () => {
       </div>
       <div className="flex w-2/3">
         <CreateModelWithPresetForm
-          onSuccessfulComplete={() => {
+          onCreate={() => {
             increasePipelineFormStep();
           }}
+          initStoreOnCreate={false}
           marginBottom={null}
           width="w-full"
         />

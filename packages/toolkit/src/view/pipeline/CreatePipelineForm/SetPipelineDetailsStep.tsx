@@ -21,6 +21,7 @@ import {
 import { shallow } from "zustand/shallow";
 
 const selector = (state: CreateResourceFormStore) => ({
+  init: state.init,
   pipelineId: state.fields.pipeline.id,
   pipelineIdError: state.errors.pipeline.id,
   pipelineMode: state.fields.pipeline.mode,
@@ -53,11 +54,11 @@ const selector = (state: CreateResourceFormStore) => ({
 });
 
 export type SetPipelineDetailsStepProps = {
-  onSuccessfulCreatePipeline: Nullable<() => void>;
+  onCreate: Nullable<() => void>;
 };
 
 export const SetPipelineDetailsStep = ({
-  onSuccessfulCreatePipeline,
+  onCreate,
 }: SetPipelineDetailsStepProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
@@ -66,6 +67,7 @@ export const SetPipelineDetailsStep = ({
    * -----------------------------------------------------------------------*/
 
   const {
+    init,
     pipelineId,
     pipelineIdError,
     pipelineMode,
@@ -301,7 +303,8 @@ export const SetPipelineDetailsStep = ({
               message: "Succeed.",
             }));
             setCreateNewResourceIsComplete(true);
-            if (onSuccessfulCreatePipeline) onSuccessfulCreatePipeline();
+            if (onCreate) onCreate();
+            init();
             return;
           }
           updatePipeline.mutate(
@@ -321,7 +324,8 @@ export const SetPipelineDetailsStep = ({
                   });
                 }
                 setCreateNewResourceIsComplete(true);
-                if (onSuccessfulCreatePipeline) onSuccessfulCreatePipeline();
+                if (onCreate) onCreate();
+                init();
               },
               onError: (error) => {
                 if (axios.isAxiosError(error)) {

@@ -22,7 +22,8 @@ export type ConfigurePipelineFormProps = {
   marginBottom: Nullable<string>;
   width: Nullable<string>;
   accessToken: Nullable<string>;
-  onSuccessCallback: Nullable<() => void>;
+  onConfigure: Nullable<() => void>;
+  onDelete: Nullable<() => void>;
 };
 
 export const ConfigurePipelineForm = ({
@@ -30,7 +31,8 @@ export const ConfigurePipelineForm = ({
   width,
   pipeline,
   accessToken,
-  onSuccessCallback,
+  onConfigure,
+  onDelete,
 }: ConfigurePipelineFormProps) => {
   const [messsageBoxState, setMessageBoxState] =
     useState<ProgressMessageBoxState>({
@@ -69,7 +71,7 @@ export const ConfigurePipelineForm = ({
               process: "destination",
             });
           }
-          if (onSuccessCallback) onSuccessCallback();
+          if (onDelete) onDelete();
         },
         onError: (error) => {
           if (error instanceof Error) {
@@ -98,7 +100,7 @@ export const ConfigurePipelineForm = ({
     closeModal,
     accessToken,
     setMessageBoxState,
-    onSuccessCallback,
+    onDelete,
   ]);
 
   return (
@@ -109,6 +111,7 @@ export const ConfigurePipelineForm = ({
           <ConfigurePipelineFormControl
             pipeline={pipeline}
             setMessageBoxState={setMessageBoxState}
+            onConfigure={onConfigure}
           />
           <div className="flex">
             <BasicProgressMessageBox

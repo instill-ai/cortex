@@ -1,7 +1,16 @@
 import { Root } from "@/components/Root";
-import { CreatePipelineForm, FormVerticalDivider } from "@instill-ai/toolkit";
+import {
+  ConfigureDestinationForm,
+  CreatePipelineForm,
+  useDestination,
+} from "@instill-ai/toolkit";
 
 const IndexPage = () => {
+  const destination = useDestination({
+    destinationName: "destination-connectors/destination-http",
+    accessToken: null,
+  });
+
   return (
     <Root>
       {/* <ConfigureProfileForm
@@ -44,8 +53,15 @@ const IndexPage = () => {
         width="w-[600px]"
       /> */}
       <div className="w-[1200px] bg-instillGrey05">
-        <CreatePipelineForm onSuccessfulCreatePipeline={null} />
-        {/* <FormVerticalDivider /> */}
+        {destination.isSuccess ? (
+          <ConfigureDestinationForm
+            width={null}
+            onConfigure={null}
+            initStoreOnConfigure={true}
+            onDelete={null}
+            destination={destination.data}
+          />
+        ) : null}
       </div>
     </Root>
   );

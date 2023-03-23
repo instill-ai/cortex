@@ -35,12 +35,12 @@ const modalSelector = (state: ModalStore) => ({
 
 export type ConfigurePipelineControlProps = {
   source: Nullable<SourceWithPipelines>;
-  onDeleteCallback: Nullable<() => void>;
+  onDelete: Nullable<() => void>;
 };
 
 export const ConfigureSourceControl = ({
   source,
-  onDeleteCallback,
+  onDelete,
 }: ConfigurePipelineControlProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   const enableGuard = useCreateUpdateDeleteResourceGuard();
@@ -105,7 +105,7 @@ export const ConfigureSourceControl = ({
               process: "source",
             });
           }
-          if (onDeleteCallback) onDeleteCallback();
+          if (onDelete) onDelete();
         },
         onError: (error) => {
           if (axios.isAxiosError(error)) {
@@ -127,7 +127,7 @@ export const ConfigureSourceControl = ({
       }
     );
     closeModal();
-  }, [source, amplitudeIsInit, deleteSource, closeModal, onDeleteCallback]);
+  }, [source, amplitudeIsInit, deleteSource, closeModal, onDelete]);
 
   /* -------------------------------------------------------------------------
    * Render

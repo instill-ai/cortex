@@ -12,15 +12,15 @@ import { InputModelBasicInfoCard } from "./InputModelBasicInfoCard";
 import { DeployModelInstanceCard } from "./DeployModelInstanceCard";
 
 export type CreateModelWithPresetFormProps = {
-  onSuccessfulComplete: () => void;
-  // If set to true, this form will use FormLessBase(wrapped by div instead of form)
-
+  onCreate: Nullable<() => void>;
+  initStoreOnCreate: boolean;
   width: string;
   marginBottom: Nullable<string>;
 };
 
 export const CreateModelWithPresetForm = ({
-  onSuccessfulComplete,
+  onCreate,
+  initStoreOnCreate,
   marginBottom,
   width,
 }: CreateModelWithPresetFormProps) => {
@@ -41,7 +41,8 @@ export const CreateModelWithPresetForm = ({
       {newModelIsSet ? (
         <>
           <DeployModelInstanceCard
-            onSuccessfulComplete={onSuccessfulComplete}
+            onCreate={onCreate}
+            initStoreOnCreate={initStoreOnCreate}
           />
         </>
       ) : (

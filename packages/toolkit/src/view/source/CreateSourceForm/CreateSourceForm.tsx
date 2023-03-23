@@ -14,14 +14,14 @@ export type CreateSourceFormProps = {
   sources: Nullable<SourceWithDefinition[]>;
   marginBottom: Nullable<string>;
   width: string;
-  onSuccessfulComplete: Nullable<() => void>;
+  onCreate: Nullable<() => void>;
 };
 
 export const CreateSourceForm = ({
   sources,
   marginBottom,
   width,
-  onSuccessfulComplete,
+  onCreate,
 }: CreateSourceFormProps) => {
   const [sourceDefinitionOptions, setSourceDefinitionOptions] = useState<
     SingleSelectOption[]
@@ -64,10 +64,7 @@ export const CreateSourceForm = ({
         <SourceDefinitionField
           sourceDefinitionOptions={sourceDefinitionOptions}
         />
-        <CreateSourceControl
-          sources={sources}
-          onSuccessfulComplete={onSuccessfulComplete}
-        />
+        <CreateSourceControl sources={sources} onCreate={onCreate} />
       </div>
     </FormRoot>
   );

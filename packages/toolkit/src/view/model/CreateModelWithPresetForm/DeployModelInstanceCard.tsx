@@ -23,23 +23,26 @@ import {
 import { CardBase } from "./CardBase";
 
 export type DeployModelInstanceCardProps = {
-  onSuccessfulComplete: () => void;
+  onCreate: Nullable<() => void>;
+  initStoreOnCreate: boolean;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
+  init: state.init,
   modelId: state.fields.model.new.id,
   setCreateNewResourceIsComplete: state.setCreateNewResourceIsComplete,
   setFieldValue: state.setFieldValue,
 });
 
 export const DeployModelInstanceCard = ({
-  onSuccessfulComplete,
+  onCreate,
+  initStoreOnCreate,
 }: DeployModelInstanceCardProps) => {
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const { modelId, setCreateNewResourceIsComplete, setFieldValue } =
+  const { init, modelId, setCreateNewResourceIsComplete, setFieldValue } =
     useCreateResourceFormStore(selector, shallow);
 
   const modelName = modelId ? `models/${modelId}` : null;
@@ -98,7 +101,8 @@ export const DeployModelInstanceCard = ({
           }));
           setFieldValue("model.new.instanceTag", selectedModelInstanceTag);
           setCreateNewResourceIsComplete(true);
-          onSuccessfulComplete();
+          if (initStoreOnCreate) init();
+          if (onCreate) onCreate();
         },
         onError: (error) => {
           setIsDeploying(false);
@@ -122,6 +126,10 @@ export const DeployModelInstanceCard = ({
       }
     );
   };
+
+  /* -------------------------------------------------------------------------
+   * Render
+   * -----------------------------------------------------------------------*/
 
   return (
     <div className="flex flex-col gap-y-6">

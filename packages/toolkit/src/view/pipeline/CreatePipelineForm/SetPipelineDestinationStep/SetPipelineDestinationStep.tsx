@@ -212,13 +212,14 @@ export const SetPipelineDestinationStep = () => {
           <UseExistingDestinationFlow />
           <FormVerticalDivider />
           <CreateDestinationForm
-            onSuccessfullyComplete={(id: string) => {
+            onCreate={(id: string) => {
               setFieldValue("destination.new.id", id);
               increasePipelineFormStep();
             }}
             title="Setup a new destination"
             formLess={true}
             marginBottom={null}
+            initStoreOnCreate={false}
           />
         </div>
       )}
