@@ -101,7 +101,7 @@ const IndexPage = () => {
         ]}
         width="w-[600px]"
       /> */}
-      <div className="w-[1200px] bg-instillGrey05">
+      <div className="w-[1200px]">
         {/* {destination.isSuccess ? (
           <ConfigureDestinationForm
             width={null}
@@ -116,6 +116,7 @@ const IndexPage = () => {
           label="select test"
           options={options}
           value={options[0]}
+          disabled={true}
         />
       </div>
     </Root>
