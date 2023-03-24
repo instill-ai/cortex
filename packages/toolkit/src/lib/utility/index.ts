@@ -6,3 +6,4 @@ export * from "./groupBy";
 export * from "./determineModelState";
 export * from "./cookie";
 export * from "./getCanvasTextWidth";
+export * from "./chunk";
