@@ -109,14 +109,14 @@ export const PipelinesTable = ({
                     >
                       <NameCell
                         name={pipeline.id}
-                        width=""
+                        width={null}
                         state={pipeline.state}
                         padding="py-2 pl-6"
                         link={`/pipelines/${pipeline.id}`}
                       />
                       <ModeCell width="" mode={pipeline.mode} padding="py-2" />
                       <ConnectionTypeCell
-                        width=""
+                        width={null}
                         connectorDefinition={
                           pipeline.recipe.source.source_connector_definition
                         }
@@ -125,11 +125,11 @@ export const PipelinesTable = ({
                       />
                       <ModelInstancesCell
                         modelCount={pipeline.recipe.models.length}
-                        width=""
+                        width={null}
                         padding="py-2"
                       />
                       <ConnectionTypeCell
-                        width=""
+                        width={null}
                         connectorDefinition={
                           pipeline.recipe.destination
                             .destination_connector_definition

@@ -100,7 +100,7 @@ export const DestinationsTable = ({
                   >
                     <NameCell
                       name={destination.id}
-                      width="w-[234px]"
+                      width={null}
                       state={destination.connector.state}
                       link={`/destinations/${destination.id}`}
                       padding="pl-6 py-2"
@@ -110,11 +110,11 @@ export const DestinationsTable = ({
                         destination.destination_connector_definition
                       }
                       connectorName={destination.id}
-                      width="w-[234px]"
+                      width={null}
                       padding="py-2"
                     />
                     <PipelinesCell
-                      width="w-80"
+                      width={null}
                       pipelineCount={destination.pipelines.length}
                       padding="py-2 pr-6"
                     />

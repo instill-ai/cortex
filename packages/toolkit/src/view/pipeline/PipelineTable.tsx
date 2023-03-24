@@ -59,7 +59,7 @@ export const PipelineTable = ({
       <tbody>
         <tr className="bg-white border border-instillGrey20">
           <ConnectionTypeCell
-            width=""
+            width={null}
             padding="py-2 pl-6"
             connectorDefinition={
               pipeline.recipe.source.source_connector_definition
@@ -68,11 +68,11 @@ export const PipelineTable = ({
           />
           <ModelsCell
             modelInstances={pipeline.recipe.models}
-            width=""
+            width={null}
             padding="py-2"
           />
           <ConnectionTypeCell
-            width=""
+            width={null}
             padding="py-2 pr-6"
             connectorDefinition={
               pipeline.recipe.destination.destination_connector_definition

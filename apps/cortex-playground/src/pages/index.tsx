@@ -7,6 +7,8 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
+import { PipelinesTable } from "@instill-ai/toolkit";
+import { usePipelines } from "@instill-ai/toolkit";
 import {
   DestinationsTable,
   useDestinationsWithPipelines,
@@ -20,10 +22,15 @@ import {
 
 const IndexPage = () => {
   // const destinations = useDestinationsWithPipelines({ accessToken: null });
-  const sources = useSourcesWithPipelines({ accessToken: null });
-  const modelsWithInstances = useModelsWithInstances({ accessToken: null });
-  const pipeline = usePipeline({
-    pipelineName: "pipelines/eee",
+  // const sources = useSourcesWithPipelines({ accessToken: null });
+  // const modelsWithInstances = useModelsWithInstances({ accessToken: null });
+  // const pipeline = usePipeline({
+  //   pipelineName: "pipelines/eee",
+  //   accessToken: null,
+  // });
+
+  const pipelines = usePipelines({
+    enable: true,
     accessToken: null,
   });
 
@@ -79,7 +86,7 @@ const IndexPage = () => {
           sources={sources.isSuccess ? sources.data : null}
           marginBottom={null}
         /> */}
-        <ModelsTable
+        {/* <ModelsTable
           models={
             modelsWithInstances.isSuccess ? modelsWithInstances.data : null
           }
@@ -87,6 +94,10 @@ const IndexPage = () => {
         />
         <PipelineTable
           pipeline={pipeline.isSuccess ? pipeline.data : null}
+          marginBottom={null}
+        /> */}
+        <PipelinesTable
+          pipelines={pipelines.isSuccess ? pipelines.data : null}
           marginBottom={null}
         />
       </div>
