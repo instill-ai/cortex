@@ -10,7 +10,7 @@ import {
 import {
   TablePlaceholderBase,
   type TablePlaceholderBaseProps,
-} from "../TablePlaceholderBase";
+} from "../../components";
 
 export type SourceTablePlaceholderProps = {
   marginBottom: TablePlaceholderBaseProps["marginBottom"];
