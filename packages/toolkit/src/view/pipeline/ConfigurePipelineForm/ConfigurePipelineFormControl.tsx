@@ -117,6 +117,7 @@ export const ConfigurePipelineFormControl = ({
     setMessageBoxState,
     initConfigurePipelineFormStore,
     onConfigure,
+    accessToken,
   ]);
 
   return (

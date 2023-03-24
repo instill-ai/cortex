@@ -109,7 +109,7 @@ export const CreateModelConfirmationModal = ({
       setFieldValue("model.new.modelIsSet", true);
       closeModal();
     },
-    [amplitudeIsInit, queryClient, closeModal, setFieldValue]
+    [amplitudeIsInit, queryClient, closeModal, setFieldValue, accessToken]
   );
 
   const createGithubModel = useCreateGithubModel();
@@ -227,6 +227,7 @@ export const CreateModelConfirmationModal = ({
     modelDefinition,
     closeModal,
     setErrorMessageBoxState,
+    accessToken,
   ]);
 
   return (

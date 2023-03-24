@@ -47,7 +47,7 @@ export const CreatePipelineForm = ({
       default:
         return null;
     }
-  }, [pipelineFormStep, onCreate]);
+  }, [pipelineFormStep, onCreate, accessToken]);
 
   return (
     <div className="flex flex-col">

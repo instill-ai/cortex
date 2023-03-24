@@ -1,5 +1,4 @@
 import { FC, useCallback, useState } from "react";
-import { useRouter } from "next/router";
 import axios from "axios";
 import {
   BasicProgressMessageBox,
@@ -37,7 +36,6 @@ export type ConfigureModelFormProps = {
 
 const formSelector = (state: ConfigureModelFormStore) => ({
   description: state.fields.description,
-  formIsDirty: state.formIsDirty,
   init: state.init,
   setFieldValue: state.setFieldValue,
   setFormIsDirty: state.setFormIsDirty,
@@ -55,13 +53,11 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
   onDelete,
 }) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const router = useRouter();
-
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const { description, formIsDirty, init, setFieldValue, setFormIsDirty } =
+  const { description, init, setFieldValue, setFormIsDirty } =
     useConfigureModelFormStore(formSelector, shallow);
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
@@ -162,8 +158,8 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
     updateModel,
     description,
     canEdit,
-    formIsDirty,
     init,
+    onConfigure,
   ]);
 
   /* -------------------------------------------------------------------------
@@ -229,7 +225,7 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
         },
       }
     );
-  }, [model, amplitudeIsInit, router, deleteModel, closeModal]);
+  }, [model, amplitudeIsInit, deleteModel, closeModal, onDelete]);
 
   /* -------------------------------------------------------------------------
    * Render

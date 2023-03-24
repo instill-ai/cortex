@@ -334,6 +334,7 @@ export const ConfigureDestinationForm = ({
     init,
     initStoreOnConfigure,
     onConfigure,
+    accessToken,
   ]);
 
   // ##########################################################################
@@ -400,6 +401,7 @@ export const ConfigureDestinationForm = ({
     router,
     closeModal,
     onDelete,
+    accessToken,
   ]);
 
   return (

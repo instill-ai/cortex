@@ -124,12 +124,15 @@ export const CreateSourceControl = ({
       }
     );
   }, [
+    init,
     amplitudeIsInit,
     createSource,
     sources,
     sourceDefinition,
     setFieldError,
     onCreate,
+    accessToken,
+    initStoreOnCreate,
   ]);
 
   return (
