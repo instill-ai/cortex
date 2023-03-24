@@ -1,4 +1,3 @@
-import { FC } from "react";
 import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
 import { groupBy, type ModelInstance, type ModelState } from "../lib";
@@ -8,7 +7,7 @@ export type ModelsCellProps = {
   width: string;
 };
 
-export const ModelsCell: FC<ModelsCellProps> = ({ width, modelInstances }) => {
+export const ModelsCell = ({ width, modelInstances }: ModelsCellProps) => {
   const groupByModel = groupBy(modelInstances, (i) => {
     const modelInstanceNameList = i.name.split("/");
     return modelInstanceNameList[1];

@@ -6,3 +6,4 @@ export * from "./StateIcon";
 export * from "./StateLabel";
 export * from "./NameCell";
 export * from "./ModelsCell";
+export * from "./ModelDefinitionCell";

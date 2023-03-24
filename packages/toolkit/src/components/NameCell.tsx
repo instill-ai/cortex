@@ -1,4 +1,3 @@
-import { FC } from "react";
 import cn from "clsx";
 import Link from "next/link";
 import type { ResourceState } from "../lib";
@@ -12,7 +11,7 @@ export type NameCellProps = {
   link: string;
 };
 
-export const NameCell: FC<NameCellProps> = ({ state, width, name, link }) => {
+export const NameCell = ({ state, width, name, link }: NameCellProps) => {
   return (
     <td>
       <div className={cn("flex flex-row gap-x-2.5", width)}>
