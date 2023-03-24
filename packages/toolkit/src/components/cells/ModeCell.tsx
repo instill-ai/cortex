@@ -1,14 +1,15 @@
 import cn from "clsx";
 import { FC, ReactElement } from "react";
 import { AsyncIcon, SyncIcon } from "@instill-ai/design-system";
-import { PipelineMode } from "../lib";
+import { PipelineMode } from "../../lib";
 
 export type ModeCellProps = {
   width: string;
   mode: PipelineMode;
+  padding: string;
 };
 
-export const ModeCell: FC<ModeCellProps> = ({ width, mode }) => {
+export const ModeCell: FC<ModeCellProps> = ({ width, mode, padding }) => {
   let modeIcon: ReactElement;
   const iconStyle = {
     width: "w-5",
@@ -32,7 +33,7 @@ export const ModeCell: FC<ModeCellProps> = ({ width, mode }) => {
 
   return (
     <td>
-      <div className={cn("mr-auto flex gap-x-[5px]", width)}>
+      <div className={cn("mr-auto flex gap-x-2", width, padding)}>
         {modeIcon}
         <p className="text-instillGrey90 text-instill-body">
           {mode === "MODE_ASYNC" ? "Async" : "Sync"}

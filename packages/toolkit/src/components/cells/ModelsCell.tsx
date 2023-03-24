@@ -1,13 +1,18 @@
 import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
-import { groupBy, type ModelInstance, type ModelState } from "../lib";
+import { groupBy, type ModelInstance, type ModelState } from "../../lib";
 
 export type ModelsCellProps = {
   modelInstances: ModelInstance[];
   width: string;
+  padding: string;
 };
 
-export const ModelsCell = ({ width, modelInstances }: ModelsCellProps) => {
+export const ModelsCell = ({
+  width,
+  modelInstances,
+  padding,
+}: ModelsCellProps) => {
   const groupByModel = groupBy(modelInstances, (i) => {
     const modelInstanceNameList = i.name.split("/");
     return modelInstanceNameList[1];
@@ -29,7 +34,7 @@ export const ModelsCell = ({ width, modelInstances }: ModelsCellProps) => {
 
   return (
     <td>
-      <div className={cn("flex flex-col gap-y-4", width)}>
+      <div className={cn("flex flex-col gap-y-4", width, padding)}>
         {Object.entries(groupByModel).map(([key, value]) => (
           <div key={key} className="flex flex-col gap-y-2">
             <div className="flex flex-row gap-x-1">
