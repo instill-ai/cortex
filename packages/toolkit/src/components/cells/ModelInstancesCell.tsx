@@ -1,8 +1,9 @@
 import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
+import { Nullable } from "../../lib";
 
 export type ModelInstancesCellProps = {
-  width: string;
+  width: Nullable<string>;
   modelCount: number;
   padding: string;
 };

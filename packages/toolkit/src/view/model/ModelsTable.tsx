@@ -87,18 +87,18 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
                     >
                       <NameCell
                         name={model.id}
-                        width=""
+                        width={null}
                         state="STATE_ONLINE"
                         padding="py-2 pl-6"
                         link={`/models/${model.id}`}
                       />
                       <ModelDefinitionCell
-                        width=""
+                        width={null}
                         modelDefinition={model.model_definition}
                         padding="py-2"
                       />
                       <ModelInstancesCell
-                        width=""
+                        width={null}
                         padding="py-2 pr-6"
                         modelCount={model.instances.length}
                       />

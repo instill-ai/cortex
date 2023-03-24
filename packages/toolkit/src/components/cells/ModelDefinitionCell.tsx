@@ -1,8 +1,9 @@
 import cn from "clsx";
 import { getModelDefinitionToolkit } from "@instill-ai/design-system";
+import { Nullable } from "../../lib";
 
 export type ModelDefinitionCellProps = {
-  width: string;
+  width: Nullable<string>;
   modelDefinition: string;
   padding: string;
 };

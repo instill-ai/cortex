@@ -1,10 +1,15 @@
 import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
-import { groupBy, type ModelInstance, type ModelState } from "../../lib";
+import {
+  groupBy,
+  Nullable,
+  type ModelInstance,
+  type ModelState,
+} from "../../lib";
 
 export type ModelsCellProps = {
   modelInstances: ModelInstance[];
-  width: string;
+  width: Nullable<string>;
   padding: string;
 };
 
