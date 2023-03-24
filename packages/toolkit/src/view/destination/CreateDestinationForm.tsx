@@ -433,6 +433,7 @@ export const CreateDestinationForm = ({
     selectedDestinationDefinition,
     onCreate,
     setCreateNewResourceIsComplete,
+    accessToken,
   ]);
 
   const updateFieldValues = useCallback(

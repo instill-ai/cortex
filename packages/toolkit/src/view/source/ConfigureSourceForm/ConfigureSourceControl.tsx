@@ -129,7 +129,14 @@ export const ConfigureSourceControl = ({
       }
     );
     closeModal();
-  }, [source, amplitudeIsInit, deleteSource, closeModal, onDelete]);
+  }, [
+    source,
+    amplitudeIsInit,
+    deleteSource,
+    closeModal,
+    onDelete,
+    accessToken,
+  ]);
 
   /* -------------------------------------------------------------------------
    * Render
