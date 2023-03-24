@@ -11,13 +11,11 @@ import type { Nullable, Pipeline } from "../../lib";
 
 export type PipelineTableProps = {
   pipeline: Nullable<Pipeline>;
-  isLoading: boolean;
   marginBottom: Nullable<string>;
 };
 
 export const PipelineTable = ({
   pipeline,
-  isLoading,
   marginBottom,
 }: PipelineTableProps) => {
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
@@ -47,16 +45,12 @@ export const PipelineTable = ({
     ];
   }, []);
 
-  if (isLoading) {
+  if (!pipeline) {
     return <TableLoadingProgress marginBottom={null} />;
   }
 
-  if (!pipeline) {
-    return null;
-  }
-
   return (
-    <table className={cn("table-auto border-collapse", marginBottom)}>
+    <table className={cn("w-full table-auto border-collapse", marginBottom)}>
       <TableHead
         bgColor="bg-instillGrey05"
         borderColor="border-instillGrey20"
