@@ -1,10 +1,10 @@
 import cn from "clsx";
 import { FC, ReactElement } from "react";
 import { AsyncIcon, SyncIcon } from "@instill-ai/design-system";
-import { PipelineMode } from "../../lib";
+import { Nullable, PipelineMode } from "../../lib";
 
 export type ModeCellProps = {
-  width: string;
+  width: Nullable<string>;
   mode: PipelineMode;
   padding: string;
 };

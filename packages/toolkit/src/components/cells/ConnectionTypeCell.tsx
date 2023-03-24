@@ -1,12 +1,12 @@
 import { DataDestinationIcon, DataSourceIcon } from "@instill-ai/design-system";
 import cn from "clsx";
-import { ConnectorDefinition } from "../../lib";
+import { ConnectorDefinition, Nullable } from "../../lib";
 import { ImageWithFallback } from "../ImageWithFallback";
 
 export type ConnectionTypeCellProps = {
   connectorName: string;
   connectorDefinition: ConnectorDefinition;
-  width: string;
+  width: Nullable<string>;
   padding: string;
 };
 

@@ -1,12 +1,12 @@
 import cn from "clsx";
 import Link from "next/link";
-import type { ResourceState } from "../../lib";
+import type { Nullable, ResourceState } from "../../lib";
 
 import { StateIcon } from "../StateIcon";
 
 export type NameCellProps = {
   state: ResourceState;
-  width: string;
+  width: Nullable<string>;
   name: string;
   link: string;
   padding: string;
