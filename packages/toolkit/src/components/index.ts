@@ -8,3 +8,4 @@ export * from "./NameCell";
 export * from "./ModelsCell";
 export * from "./ModelDefinitionCell";
 export * from "./ModeCell";
+export * from "./ConnectionTypeCell";
