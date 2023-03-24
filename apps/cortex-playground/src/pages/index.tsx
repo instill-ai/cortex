@@ -10,10 +10,14 @@ import {
 import {
   DestinationsTable,
   useDestinationsWithPipelines,
+  useSourcesWithPipelines,
+  SourcesTable,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
-  const destinations = useDestinationsWithPipelines({ accessToken: null });
+  // const destinations = useDestinationsWithPipelines({ accessToken: null });
+
+  const sources = useSourcesWithPipelines({ accessToken: null });
 
   const options: SingleSelectOption[] = [
     {
@@ -59,8 +63,12 @@ const IndexPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        <DestinationsTable
+        {/* <DestinationsTable
           destinations={destinations.isSuccess ? destinations.data : null}
+          marginBottom={null}
+        /> */}
+        <SourcesTable
+          sources={sources.isSuccess ? sources.data : null}
           marginBottom={null}
         />
       </div>

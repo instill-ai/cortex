@@ -96,7 +96,7 @@ export const DestinationsTable = ({
                 {searchedDestinationPages[currentPage].map((destination) => (
                   <tr
                     key={destination.name}
-                    className="bg-white border border-instillGrey20 px-6"
+                    className="bg-white border border-instillGrey20"
                   >
                     <NameCell
                       name={destination.id}
