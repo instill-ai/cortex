@@ -34,7 +34,7 @@ import {
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
-import { ImageWithFallback } from "../../view";
+import { ImageWithFallback } from "../../components";
 import { shallow } from "zustand/shallow";
 
 export type CreateDestinationFormProps = {

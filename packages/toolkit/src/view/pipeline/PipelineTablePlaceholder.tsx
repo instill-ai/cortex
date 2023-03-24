@@ -4,7 +4,7 @@ import { FC } from "react";
 import {
   TablePlaceholderBase,
   type TablePlaceholderBaseProps,
-} from "../TablePlaceholderBase";
+} from "../../components";
 
 export type PipelineTablePlaceholderProps = {
   marginBottom: TablePlaceholderBaseProps["marginBottom"];

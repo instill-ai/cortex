@@ -24,7 +24,7 @@ import {
   getInstillApiErrorMessage,
 } from "../../lib";
 
-import { DeleteResourceModal } from "../DeleteResourceModal";
+import { DeleteResourceModal } from "../../components";
 import { shallow } from "zustand/shallow";
 
 export type ConfigureModelFormProps = {
