@@ -1,6 +1,5 @@
 export * from "./airbytes";
 export * from "./amplitude";
-export * from "./context";
 export * from "./dot";
 export * from "./github";
 export * from "./hook";
