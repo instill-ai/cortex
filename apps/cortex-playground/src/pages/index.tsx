@@ -14,12 +14,18 @@ import {
   SourcesTable,
   useModelsWithInstances,
   ModelsTable,
+  usePipeline,
+  PipelineTable,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   // const destinations = useDestinationsWithPipelines({ accessToken: null });
   const sources = useSourcesWithPipelines({ accessToken: null });
   const modelsWithInstances = useModelsWithInstances({ accessToken: null });
+  const pipeline = usePipeline({
+    pipelineName: "pipelines/eee",
+    accessToken: null,
+  });
 
   const options: SingleSelectOption[] = [
     {
@@ -69,14 +75,18 @@ const IndexPage = () => {
           destinations={destinations.isSuccess ? destinations.data : null}
           marginBottom={null}
         /> */}
-        <SourcesTable
+        {/* <SourcesTable
           sources={sources.isSuccess ? sources.data : null}
           marginBottom={null}
-        />
+        /> */}
         <ModelsTable
           models={
             modelsWithInstances.isSuccess ? modelsWithInstances.data : null
           }
+          marginBottom={null}
+        />
+        <PipelineTable
+          pipeline={pipeline.isSuccess ? pipeline.data : null}
           marginBottom={null}
         />
       </div>
