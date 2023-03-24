@@ -15,7 +15,7 @@ import {
   type Pipeline,
 } from "../../../lib";
 
-import { DeleteResourceModal } from "../../DeleteResourceModal";
+import { DeleteResourceModal } from "../../../components";
 import { ConfigurePipelineFormControl } from "./ConfigurePipelineFormControl";
 import { PipelineDescriptionField } from "./PipelineDescriptionField";
 

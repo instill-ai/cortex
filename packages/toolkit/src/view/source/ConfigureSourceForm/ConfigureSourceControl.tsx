@@ -21,7 +21,7 @@ import {
   type ConfigureSourceFormStore,
 } from "../../../lib";
 
-import { DeleteResourceModal } from "../../DeleteResourceModal";
+import { DeleteResourceModal } from "../../../components";
 
 const selector = (state: ConfigureSourceFormStore) => ({
   canEdit: state.fields.canEdit,

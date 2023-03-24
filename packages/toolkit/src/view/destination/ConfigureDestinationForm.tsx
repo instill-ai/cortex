@@ -38,7 +38,7 @@ import {
 
 import { AirbyteDestinationFields } from "../airbyte";
 import { ImageWithFallback } from "../../components";
-import { DeleteResourceModal } from "../DeleteResourceModal";
+import { DeleteResourceModal } from "../../components";
 
 export type ConfigureDestinationFormProps = {
   destination: DestinationWithDefinition;
