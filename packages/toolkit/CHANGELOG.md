@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.18.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.17.1...@instill-ai/toolkit-v0.18.0) (2023-03-24)
+
+
+### Features
+
+* [INS-309] add table placeholders ([#254](https://github.com/instill-ai/design-system/issues/254)) ([0e00cd4](https://github.com/instill-ai/design-system/commit/0e00cd4419d1e63360d8d627ffd50485feb09067))
+* [INS-312] add ConfigureModelInstanceForm into toolkit ([#253](https://github.com/instill-ai/design-system/issues/253)) ([bcf70e5](https://github.com/instill-ai/design-system/commit/bcf70e56212f5fbba7fe61a8dd4bb7346c3813c5))
+* [INS-313] add destination table into toolkit ([#256](https://github.com/instill-ai/design-system/issues/256)) ([7051a56](https://github.com/instill-ai/design-system/commit/7051a56a386b53a6bba533ff6fdb4b111d28e60a))
+* [INS-314] add table cells into toolkit ([#255](https://github.com/instill-ai/design-system/issues/255)) ([06c6e86](https://github.com/instill-ai/design-system/commit/06c6e864d05a53c730f06e3a85494c217203ed9c))
+* [INS-315] add sources table into toolkit ([#257](https://github.com/instill-ai/design-system/issues/257)) ([7adc2e1](https://github.com/instill-ai/design-system/commit/7adc2e1ae932c9df75b6b7a3828e041994d70786))
+* add ModelsTable into toolkit ([#258](https://github.com/instill-ai/design-system/issues/258)) ([9c8f75d](https://github.com/instill-ai/design-system/commit/9c8f75ddfd20cbca01c20267a262bbe1c90c997b))
+* add pipeline table into toolkit ([#259](https://github.com/instill-ai/design-system/issues/259)) ([8827a4f](https://github.com/instill-ai/design-system/commit/8827a4f97ffe3932483ba67a9faed2b9c0eb7243))
+
+
+### Miscellaneous
+
+* refactor useSendAmplitudeData to include amplitude context ([#251](https://github.com/instill-ai/design-system/issues/251)) ([110e6b2](https://github.com/instill-ai/design-system/commit/110e6b21f66ead4b849359d4737f0db2419111c7))
+
 ## [0.17.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.17.0...@instill-ai/toolkit-v0.17.1) (2023-03-23)
 
 
