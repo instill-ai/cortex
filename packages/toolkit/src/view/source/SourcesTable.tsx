@@ -99,18 +99,18 @@ export const SourcesTable = ({ sources, marginBottom }: SourcesTableProps) => {
                         name={source.id}
                         width=""
                         state="STATE_ONLINE"
-                        padding="py-5 pl-6"
+                        padding="py-2 pl-6"
                         link={`/sources/${source.id}`}
                       />
                       <ConnectionTypeCell
                         connectorDefinition={source.source_connector_definition}
                         connectorName={source.id}
                         width=""
-                        padding="py-5"
+                        padding="py-2"
                       />
                       <PipelinesCell
                         width=""
-                        padding="py-5 pr-6"
+                        padding="py-2 pr-6"
                         pipelineCount={source.pipelines.length}
                       />
                     </tr>
