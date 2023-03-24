@@ -4,13 +4,18 @@ import { ModelInstanceIcon } from "@instill-ai/design-system";
 export type PipelinesCellProps = {
   width: string;
   pipelineCount: number;
+  padding: string;
 };
 
-export const PipelinesCell = ({ width, pipelineCount }: PipelinesCellProps) => {
+export const PipelinesCell = ({
+  width,
+  pipelineCount,
+  padding,
+}: PipelinesCellProps) => {
   return (
     <td>
-      <div className={cn("flex flex-col", width)}>
-        <div className="flex flex-row gap-x-[5px]">
+      <div className={cn("flex flex-col", width, padding)}>
+        <div className="flex flex-row gap-x-2">
           <ModelInstanceIcon width="w-5" height="h-5" position="my-auto" />
           <p className="my-auto text-instillGrey90 text-instill-body">
             {pipelineCount}

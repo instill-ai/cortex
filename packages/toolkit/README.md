@@ -10,6 +10,7 @@ When using this toolkit, you need to set up below environment variables
 - NEXT_PUBLIC_REFRESH_TOKEN_API_ROUTE (string)
 - NEXT_PUBLIC_API_VERSION (string)
 - NEXT_PUBLIC_DISABLE_CREATE_UPDATE_DELETE_RESOURCE (boolean)
+- NEXT_PUBLIC_LIST_PAGE_SIZE (number)
 
 ## About the flow of generating Airbyte connector's form
 

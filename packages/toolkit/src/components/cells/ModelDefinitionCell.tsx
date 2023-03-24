@@ -4,11 +4,13 @@ import { getModelDefinitionToolkit } from "@instill-ai/design-system";
 export type ModelDefinitionCellProps = {
   width: string;
   modelDefinition: string;
+  padding: string;
 };
 
 export const ModelDefinitionCell = ({
   modelDefinition,
   width,
+  padding,
 }: ModelDefinitionCellProps) => {
   const iconStyle = {
     width: "w-5",
@@ -21,7 +23,7 @@ export const ModelDefinitionCell = ({
 
   return (
     <td>
-      <div className={cn("flex flex-row gap-x-[5px]", width)}>
+      <div className={cn("flex flex-row gap-x-2", width, padding)}>
         {getIcon(iconStyle)}
         <p className="my-auto flex text-instillGrey90 text-instill-body">
           {title}

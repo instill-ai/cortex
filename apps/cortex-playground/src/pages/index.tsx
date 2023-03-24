@@ -8,27 +8,12 @@ import {
   SnowflakeIcon,
 } from "@instill-ai/design-system";
 import {
-  ConfigurePipelineForm,
-  useModel,
-  usePipeline,
-} from "@instill-ai/toolkit";
-import {
-  ConfigureDestinationForm,
-  CreatePipelineForm,
-  ConfigureModelForm,
-  useDestination,
+  DestinationsTable,
+  useDestinationsWithPipelines,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
-  const destination = useDestination({
-    destinationName: "destination-connectors/destination-http",
-    accessToken: null,
-  });
-
-  const model = useModel({
-    modelName: "models/fewfee",
-    accessToken: null,
-  });
+  const destinations = useDestinationsWithPipelines({ accessToken: null });
 
   const options: SingleSelectOption[] = [
     {
@@ -71,88 +56,22 @@ const IndexPage = () => {
     },
   ];
 
-  const pipeline = usePipeline({
-    pipelineName: "pipelines/yoyomne",
-    accessToken: null,
-  });
-
   return (
     <Root>
-      {/* <ConfigureProfileForm
-        marginBottom={null}
-        roles={[
-          {
-            label: "Manager (who makes decisions)",
-            value: "manager",
-          },
-          {
-            label:
-              "AI Researcher (who devises ML algorithms, trains and evaluates models)",
-            value: "ai-researcher",
-          },
-          {
-            label:
-              "AI Engineer (who prepares dataset and makes models delivered by AI Researchers production-ready)",
-            value: "ai-engineer",
-          },
-          {
-            label:
-              "Data Engineer (who builds data pipeline for data analytics or applications)",
-            value: "data-engineer",
-          },
-          {
-            label:
-              "Data Scientist (who analyses data for distilling business value)",
-            value: "data-scientist",
-          },
-          {
-            label:
-              "Analytics Engineer (who possesses skills of both Data Scientist and Data Engineer)",
-            value: "analytics-engineer",
-          },
-          {
-            label: "Hobbyist (I love AI!)",
-            value: "hobbyist",
-          },
-        ]}
-        width="w-[600px]"
-      /> */}
       <div className="w-[1200px]">
-        {/* {destination.isSuccess ? (
-          <ConfigureDestinationForm
-            width={null}
-            onConfigure={null}
-            initStoreOnConfigure={true}
-            onDelete={null}
-            destination={destination.data}
-          />
-        ) : null} */}
-        {/* <BasicSingleSelect
-          id="test"
-          label="select test"
-          options={options}
-          value={options[0]}
-          disabled={true}
-        /> */}
-        {/* {pipeline.isSuccess ? (
-          <ConfigurePipelineForm
-            pipeline={pipeline.data || null}
-            marginBottom={null}
-            width={null}
-            accessToken={null}
-            onConfigure={null}
-            onDelete={null}
-          />
-        ) : null} */}
-        {model.isSuccess ? (
-          <ConfigureModelForm
-            model={model.data}
-            onConfigure={null}
-            onDelete={null}
-            marginBottom={null}
-          />
-        ) : null}
+        <DestinationsTable
+          destinations={destinations.isSuccess ? destinations.data : null}
+          marginBottom={null}
+        />
       </div>
+
+      {/* <BasicSingleSelect
+        id="test"
+        label="select test"
+        options={options}
+        value={options[0]}
+        disabled={true}
+      /> */}
     </Root>
   );
 };
