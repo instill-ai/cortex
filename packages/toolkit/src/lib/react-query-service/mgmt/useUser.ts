@@ -1,9 +1,14 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../type";
 import { getUserQuery, User } from "../../vdp-sdk";
 
-export const useUser = ({ accessToken }: { accessToken: Nullable<string> }) => {
-  const queryClient = useQueryClient();
+export const useUser = ({
+  accessToken,
+  enable,
+}: {
+  accessToken: Nullable<string>;
+  enable: boolean;
+}) => {
   return useQuery<User>(
     ["user"],
     async () => {
@@ -11,8 +16,7 @@ export const useUser = ({ accessToken }: { accessToken: Nullable<string> }) => {
       return Promise.resolve(user);
     },
     {
-      enabled: true,
-      initialData: queryClient.getQueryData(["user"]),
+      enabled: enable,
       retry: 3,
     }
   );
