@@ -33,7 +33,7 @@ export const usePipelines = ({
       return pipelines;
     },
     {
-      enabled: enable ? true : false,
+      enabled: enable,
       retry: 3,
     }
   );
