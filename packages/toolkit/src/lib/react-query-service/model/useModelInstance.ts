@@ -5,10 +5,18 @@ import { useQuery } from "@tanstack/react-query";
 export const useModelInstance = ({
   modelInstanceName,
   accessToken,
+  enable,
 }: {
   modelInstanceName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
+  let enableQuery = false;
+
+  if (modelInstanceName && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     [
       "models",
@@ -29,7 +37,7 @@ export const useModelInstance = ({
       return Promise.resolve(modelInstances);
     },
     {
-      enabled: modelInstanceName ? true : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

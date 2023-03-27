@@ -10,10 +10,18 @@ import { determineModelState, env } from "../../utility";
 export const useModelWithInstances = ({
   model,
   accessToken,
+  enable,
 }: {
   model: Nullable<Model>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
+  let enableQuery = false;
+
+  if (model && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["models", "with-instances", model?.name],
     async () => {
@@ -36,6 +44,6 @@ export const useModelWithInstances = ({
 
       return Promise.resolve(modelWithInstances);
     },
-    { enabled: model ? true : false, retry: 3 }
+    { enabled: enableQuery, retry: 3 }
   );
 };

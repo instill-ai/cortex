@@ -6,10 +6,19 @@ import { Nullable } from "../../type";
 
 export const useModelsWithInstances = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
-  const models = useModels({ accessToken });
+  const models = useModels({ accessToken, enable });
+
+  let enableQuery = false;
+
+  if (models.isSuccess && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["models", "with-instances"],
     async () => {
@@ -36,7 +45,7 @@ export const useModelsWithInstances = ({
       return Promise.resolve(modelsWithInstances);
     },
     {
-      enabled: models.isSuccess ? true : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );
