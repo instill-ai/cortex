@@ -7,11 +7,20 @@ import { useSources } from "./useSources";
 
 export const useSourcesWithPipelines = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
-  const sources = useSources({ accessToken });
+  const sources = useSources({ accessToken, enable });
   const pipelines = usePipelines({ enable: true, accessToken });
+
+  let enableQuery = false;
+
+  if (sources.isSuccess && pipelines.isSuccess && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["sources", "with-pipelines"],
     async () => {
@@ -32,7 +41,7 @@ export const useSourcesWithPipelines = ({
       return newSources;
     },
     {
-      enabled: sources.isSuccess ? (pipelines.isSuccess ? true : false) : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

@@ -9,8 +9,10 @@ import {
 
 export const useSources = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
   return useQuery(
     ["sources"],
@@ -37,6 +39,7 @@ export const useSources = ({
     },
     {
       retry: 3,
+      enabled: enable,
     }
   );
 };
