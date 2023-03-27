@@ -56,10 +56,11 @@ export const DeployModelInstanceCard = ({
    * Query model instances
    * -----------------------------------------------------------------------*/
 
-  const model = useModel({ modelName, accessToken });
+  const model = useModel({ modelName, accessToken, enable: true });
   const modelInstances = useModelWithInstances({
     model: model.isSuccess ? model.data : null,
     accessToken,
+    enable: true,
   });
 
   useEffect(() => {
