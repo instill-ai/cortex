@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.20.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.19.0...@instill-ai/toolkit-v0.20.0) (2023-03-28)
+
+
+### Features
+
+* export necessary function from react-query ([#262](https://github.com/instill-ai/design-system/issues/262)) ([4932c33](https://github.com/instill-ai/design-system/commit/4932c330e999c1c91c41dfcaa66f9dc4b35d2e81))
+
 ## [0.19.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.18.0...@instill-ai/toolkit-v0.19.0) (2023-03-28)
 
 
