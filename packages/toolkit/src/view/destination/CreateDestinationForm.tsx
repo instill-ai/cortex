@@ -85,6 +85,7 @@ export const CreateDestinationForm = ({
 
   const destinationDefinitions = useDestinationDefinitions({
     accessToken,
+    enable: true,
   });
 
   const destinationOptions = useMemo(() => {

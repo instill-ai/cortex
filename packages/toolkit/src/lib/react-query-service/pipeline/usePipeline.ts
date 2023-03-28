@@ -6,10 +6,18 @@ import { constructPipelineRecipeWithDefinition } from "../helper";
 export const usePipeline = ({
   pipelineName,
   accessToken,
+  enable,
 }: {
   pipelineName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
+  let enableQuery = false;
+
+  if (pipelineName && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["pipelines", pipelineName],
     async () => {
@@ -31,7 +39,7 @@ export const usePipeline = ({
       return Promise.resolve(pipeline);
     },
     {
-      enabled: pipelineName ? true : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

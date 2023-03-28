@@ -5,8 +5,10 @@ import { listSourceDefinitionsQuery } from "../../../vdp-sdk";
 
 export const useSourceDefinitions = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
   return useQuery(
     ["sources", "definition"],
@@ -20,6 +22,7 @@ export const useSourceDefinitions = ({
     },
     {
       retry: 3,
+      enabled: enable,
     }
   );
 };

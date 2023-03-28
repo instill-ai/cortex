@@ -5,10 +5,18 @@ import { Nullable } from "../../type";
 export const useModelDefinition = ({
   modelDefinitionName,
   accessToken,
+  enable,
 }: {
   modelDefinitionName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
+  let enableQuery = false;
+
+  if (modelDefinitionName && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["models", "definition", modelDefinitionName],
     async () => {
@@ -23,6 +31,6 @@ export const useModelDefinition = ({
 
       return Promise.resolve(definition);
     },
-    { enabled: modelDefinitionName ? true : false, retry: 3 }
+    { enabled: enableQuery, retry: 3 }
   );
 };

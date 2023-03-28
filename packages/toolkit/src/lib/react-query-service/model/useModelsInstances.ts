@@ -11,7 +11,14 @@ export const useModelsInstances = ({
   enable: boolean;
   accessToken: Nullable<string>;
 }) => {
-  const models = useModels({ accessToken });
+  const models = useModels({ accessToken, enable });
+
+  let enableQuery = false;
+
+  if (enable && models.isSuccess) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["models", "all", "modelInstances"],
     async () => {
@@ -33,7 +40,7 @@ export const useModelsInstances = ({
       return Promise.resolve(modelInstances);
     },
     {
-      enabled: enable ? (models.isSuccess ? true : false) : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

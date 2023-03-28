@@ -5,8 +5,10 @@ import { listModelDefinitionsQuery } from "../../vdp-sdk";
 
 export const useModelDefinitions = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
   return useQuery(
     ["models", "definition"],
@@ -20,6 +22,7 @@ export const useModelDefinitions = ({
     },
     {
       retry: 3,
+      enabled: enable,
     }
   );
 };

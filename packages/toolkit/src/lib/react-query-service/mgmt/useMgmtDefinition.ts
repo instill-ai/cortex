@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { listRepoFileContent } from "../../github";
 
-export const useMgmtDefinition = () => {
+export const useMgmtDefinition = ({ enable }: { enable: boolean }) => {
   return useQuery(
     ["mgmt", "encoded-definition"],
     async (): Promise<string> => {
@@ -16,6 +16,7 @@ export const useMgmtDefinition = () => {
     },
     {
       retry: 3,
+      enabled: enable,
     }
   );
 };

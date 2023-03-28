@@ -7,11 +7,20 @@ import { useDestinations } from "./useDestinations";
 
 export const useDestinationsWithPipelines = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
-  const destinations = useDestinations({ accessToken });
-  const pipelines = usePipelines({ enable: true, accessToken });
+  const destinations = useDestinations({ accessToken, enable });
+  const pipelines = usePipelines({ enable: enable, accessToken });
+
+  let enableQuery = false;
+
+  if (destinations.isSuccess && pipelines.isSuccess && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["destinations", "with-pipelines"],
     async () => {
@@ -32,11 +41,7 @@ export const useDestinationsWithPipelines = ({
       return newDestinations;
     },
     {
-      enabled: destinations.isSuccess
-        ? pipelines.isSuccess
-          ? true
-          : false
-        : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

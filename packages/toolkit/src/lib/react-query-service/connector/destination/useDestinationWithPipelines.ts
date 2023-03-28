@@ -8,12 +8,26 @@ import { useDestination } from "./useDestination";
 export const useDestinationWithPipelines = ({
   destinationName,
   accessToken,
+  enable,
 }: {
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
-  const pipelines = usePipelines({ enable: true, accessToken });
-  const destination = useDestination({ destinationName, accessToken });
+  const pipelines = usePipelines({ enable, accessToken });
+  const destination = useDestination({ destinationName, accessToken, enable });
+
+  let enableQuery = false;
+
+  if (
+    destinationName &&
+    pipelines.isSuccess &&
+    destination.isSuccess &&
+    enable
+  ) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["destinations", destinationName, "with-pipelines"],
     async () => {
@@ -41,13 +55,7 @@ export const useDestinationWithPipelines = ({
       return Promise.resolve(destinationWithPipelines);
     },
     {
-      enabled: destinationName
-        ? destination.isSuccess
-          ? pipelines.isSuccess
-            ? true
-            : false
-          : false
-        : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

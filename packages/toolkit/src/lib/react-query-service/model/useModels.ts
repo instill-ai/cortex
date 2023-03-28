@@ -5,8 +5,10 @@ import { listModelsQuery } from "../../vdp-sdk";
 
 export const useModels = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
   return useQuery(
     ["models"],
@@ -20,6 +22,7 @@ export const useModels = ({
     },
     {
       retry: 3,
+      enabled: enable,
     }
   );
 };

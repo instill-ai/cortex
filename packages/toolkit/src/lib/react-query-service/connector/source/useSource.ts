@@ -9,10 +9,18 @@ import { Nullable } from "../../../type";
 export const useSource = ({
   sourceName,
   accessToken,
+  enable,
 }: {
   sourceName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
+  let enableQuery = false;
+
+  if (sourceName && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["sources", sourceName],
     async () => {
@@ -32,7 +40,7 @@ export const useSource = ({
       return Promise.resolve(sourceWithDefinition);
     },
     {
-      enabled: sourceName ? true : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

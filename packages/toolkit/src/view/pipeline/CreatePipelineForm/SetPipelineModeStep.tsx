@@ -133,7 +133,7 @@ export const SetPipelineModeStep = ({
    * -----------------------------------------------------------------------*/
 
   const createSource = useCreateSource();
-  const sources = useSources({ accessToken });
+  const sources = useSources({ accessToken, enable: true });
 
   const canGoNext = useMemo(() => {
     if (!pipelineMode) return false;

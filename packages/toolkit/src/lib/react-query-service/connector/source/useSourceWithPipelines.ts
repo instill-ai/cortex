@@ -8,12 +8,21 @@ import { useSource } from "./useSource";
 export const useSourceWithPipelines = ({
   sourceName,
   accessToken,
+  enable,
 }: {
   sourceName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
-  const pipelines = usePipelines({ enable: true, accessToken });
-  const source = useSource({ sourceName, accessToken });
+  const pipelines = usePipelines({ enable, accessToken });
+  const source = useSource({ sourceName, accessToken, enable });
+
+  let enableQuery = false;
+
+  if (sourceName && source.isSuccess && pipelines.isSuccess && enable) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["sources", sourceName, "with-pipelines"],
     async () => {
@@ -41,13 +50,7 @@ export const useSourceWithPipelines = ({
       return Promise.resolve(sourceWithPipelines);
     },
     {
-      enabled: sourceName
-        ? source.isSuccess
-          ? pipelines.isSuccess
-            ? true
-            : false
-          : false
-        : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

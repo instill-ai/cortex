@@ -9,8 +9,10 @@ import {
 
 export const useDestinations = ({
   accessToken,
+  enable,
 }: {
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
   return useQuery(
     ["destinations"],
@@ -40,6 +42,7 @@ export const useDestinations = ({
     },
     {
       retry: 3,
+      enabled: enable,
     }
   );
 };

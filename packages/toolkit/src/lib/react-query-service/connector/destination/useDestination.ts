@@ -10,14 +10,22 @@ import { env } from "../../../utility";
 export const useDestination = ({
   destinationName,
   accessToken,
+  enable,
 }: {
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
+  enable: boolean;
 }) => {
   if (env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") === "true" && !accessToken) {
     throw new Error(
       "You had set NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH=true but didn't provide necessary access token"
     );
+  }
+
+  let enableQuery = false;
+
+  if (enable && destinationName) {
+    enableQuery = true;
   }
 
   return useQuery(
@@ -45,7 +53,7 @@ export const useDestination = ({
       return Promise.resolve(destinationWithDefinition);
     },
     {
-      enabled: destinationName ? true : false,
+      enabled: enableQuery,
       retry: 3,
     }
   );

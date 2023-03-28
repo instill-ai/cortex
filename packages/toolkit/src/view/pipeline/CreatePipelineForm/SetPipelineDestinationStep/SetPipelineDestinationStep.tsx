@@ -121,7 +121,7 @@ export const SetPipelineDestinationStep = ({
    * -----------------------------------------------------------------------*/
 
   const createDestination = useCreateDestination();
-  const destinations = useDestinations({ accessToken });
+  const destinations = useDestinations({ accessToken, enable: true });
 
   const handleGoNext = () => {
     if (!destinations.isSuccess || !existingDestinationId) {
