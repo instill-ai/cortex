@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.19.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.18.0...@instill-ai/toolkit-v0.19.0) (2023-03-28)
+
+
+### Features
+
+* add enable flag in services ([#260](https://github.com/instill-ai/design-system/issues/260)) ([6ef4260](https://github.com/instill-ai/design-system/commit/6ef42605d741266053e20e7cddda1c80a7d7f747))
+
 ## [0.18.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.17.1...@instill-ai/toolkit-v0.18.0) (2023-03-24)
 
 
