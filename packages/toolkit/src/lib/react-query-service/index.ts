@@ -9,4 +9,8 @@ export {
   QueryCache,
   QueryClient,
   QueryClientProvider,
+  useQueries,
+  useQuery,
+  useQueryClient,
+  useMutation,
 } from "@tanstack/react-query";
