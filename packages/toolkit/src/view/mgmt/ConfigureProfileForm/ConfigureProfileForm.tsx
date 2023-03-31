@@ -13,10 +13,12 @@ export type ConfigureProfileFormProps = {
   marginBottom: Nullable<string>;
   roles: SingleSelectOption[];
   width: Nullable<string>;
+  onConfigure: Nullable<() => void>;
+  accessToken: Nullable<string>;
 };
 
 export const ConfigureProfileForm = (props: ConfigureProfileFormProps) => {
-  const { user, marginBottom, roles, width } = props;
+  const { user, marginBottom, roles, width, onConfigure, accessToken } = props;
 
   return (
     <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
@@ -33,7 +35,10 @@ export const ConfigureProfileForm = (props: ConfigureProfileFormProps) => {
         <RoleField roles={roles} user={user} />
         <NewsletterSubscriptionField user={user} />
       </div>
-      <ConfigureProfileControl />
+      <ConfigureProfileControl
+        onConfigure={onConfigure}
+        accessToken={accessToken}
+      />
     </FormRoot>
   );
 };
