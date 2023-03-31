@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.20.0...@instill-ai/toolkit-v0.21.0) (2023-03-31)
+
+
+### Features
+
+* digest user in configure profile form ([#264](https://github.com/instill-ai/design-system/issues/264)) ([8c1938f](https://github.com/instill-ai/design-system/commit/8c1938f20def9a75183d34f80578868168863654))
+
 ## [0.20.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.19.0...@instill-ai/toolkit-v0.20.0) (2023-03-28)
 
 
