@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.21.2...@instill-ai/toolkit-v0.21.3) (2023-03-31)
+
+
+### Bug Fixes
+
+* fix configure profile form ([#270](https://github.com/instill-ai/design-system/issues/270)) ([dd21760](https://github.com/instill-ai/design-system/commit/dd2176063f9ed32ee774ee4b9cd3c4dc23b801bc))
+
 ## [0.21.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.21.1...@instill-ai/toolkit-v0.21.2) (2023-03-31)
 
 
