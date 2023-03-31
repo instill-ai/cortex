@@ -14,7 +14,7 @@ export const getUserQuery = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.get<GetUserResponse>("/user");
+    const { data } = await client.get<GetUserResponse>("/users/me");
 
     return Promise.resolve(data.user);
   } catch (err) {
