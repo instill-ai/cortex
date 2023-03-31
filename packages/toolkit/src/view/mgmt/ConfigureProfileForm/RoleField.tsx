@@ -1,16 +1,19 @@
 import { useMemo } from "react";
 import {
-  useConfigureProfileFormStore,
-  type ConfigureProfileFormStore,
-} from "../../../lib";
-import {
   BasicSingleSelect,
   SingleSelectOption,
 } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
+import {
+  useConfigureProfileFormStore,
+  type Nullable,
+  type User,
+  type ConfigureProfileFormStore,
+} from "../../../lib";
 
 export type RoleFieldProps = {
   roles: SingleSelectOption[];
+  user: Nullable<User>;
 };
 
 const selector = (state: ConfigureProfileFormStore) => ({
@@ -19,7 +22,8 @@ const selector = (state: ConfigureProfileFormStore) => ({
   roleError: state.errors.role,
 });
 
-export const RoleField = ({ roles }: RoleFieldProps) => {
+export const RoleField = (props: RoleFieldProps) => {
+  const { roles, user } = props;
   const { role, setFieldValue, roleError } = useConfigureProfileFormStore(
     selector,
     shallow
@@ -28,6 +32,10 @@ export const RoleField = ({ roles }: RoleFieldProps) => {
   const selectedRoleOption = useMemo(() => {
     return roles.find((e) => e.value === role) || null;
   }, [roles, role]);
+
+  const currentRoleOption = useMemo(() => {
+    return roles.find((e) => e.value === user?.role) || null;
+  }, [roles, user]);
 
   return (
     <div className="w-[287px]">
@@ -38,7 +46,7 @@ export const RoleField = ({ roles }: RoleFieldProps) => {
         key="role"
         required={true}
         options={roles}
-        value={selectedRoleOption}
+        value={selectedRoleOption ? selectedRoleOption : currentRoleOption}
         error={roleError}
         onChange={(option) =>
           setFieldValue("role", option ? option.value.toString() : null)

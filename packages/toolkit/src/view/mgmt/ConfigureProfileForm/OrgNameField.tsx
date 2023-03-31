@@ -1,6 +1,8 @@
 import { ChangeEvent } from "react";
 import {
   useConfigureProfileFormStore,
+  type Nullable,
+  type User,
   type ConfigureProfileFormStore,
 } from "../../../lib";
 import { BasicTextField } from "@instill-ai/design-system";
@@ -12,7 +14,12 @@ const selector = (state: ConfigureProfileFormStore) => ({
   orgNameError: state.errors.orgName,
 });
 
-export const OrgNameField = () => {
+export type OrgNameFieldProps = {
+  user: Nullable<User>;
+};
+
+export const OrgNameField = (props: OrgNameFieldProps) => {
+  const { user } = props;
   const { orgName, setFieldValue, orgNameError } = useConfigureProfileFormStore(
     selector,
     shallow
@@ -26,7 +33,7 @@ export const OrgNameField = () => {
         additionalMessageOnLabel="Your company name"
         key="orgName"
         required={true}
-        value={orgName}
+        value={orgName ? orgName : user?.org_name || null}
         error={orgNameError}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setFieldValue("orgName", event.target.value.trim())

@@ -15,7 +15,7 @@ export const configureProfileFormFieldSchema = z.object({
   userName: z.nullable(z.string()),
   orgName: z.nullable(z.string()),
   role: z.nullable(z.string()),
-  newsletterSubscription: z.boolean(),
+  newsletterSubscription: z.nullable(z.boolean()),
 });
 
 /* eslint-disable-next-line  @typescript-eslint/no-explicit-any */
@@ -75,7 +75,7 @@ export const configureProfileFormInitialState: ConfigureProfileFormState = {
     userName: null,
     orgName: null,
     role: null,
-    newsletterSubscription: true,
+    newsletterSubscription: null,
   },
   errors: {
     firstName: null,

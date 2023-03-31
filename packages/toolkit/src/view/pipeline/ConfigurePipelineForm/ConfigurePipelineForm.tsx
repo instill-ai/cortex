@@ -109,7 +109,7 @@ export const ConfigurePipelineForm = ({
     <>
       <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
         <div className="flex flex-col gap-y-10">
-          <PipelineDescriptionField />
+          <PipelineDescriptionField pipeline={pipeline} />
           <ConfigurePipelineFormControl
             pipeline={pipeline}
             setMessageBoxState={setMessageBoxState}

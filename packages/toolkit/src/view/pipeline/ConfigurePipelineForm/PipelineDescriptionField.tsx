@@ -3,6 +3,8 @@ import { shallow } from "zustand/shallow";
 import { BasicTextArea } from "@instill-ai/design-system";
 import {
   useConfigurePipelineFormStore,
+  type Nullable,
+  type Pipeline,
   type ConfigurePipelineFormStore,
 } from "../../../lib";
 
@@ -13,7 +15,14 @@ const selector = (state: ConfigurePipelineFormStore) => ({
   setFieldValue: state.setFieldValue,
 });
 
-export const PipelineDescriptionField = () => {
+export type PipelineDescriptionFieldProps = {
+  pipeline: Nullable<Pipeline>;
+};
+
+export const PipelineDescriptionField = (
+  props: PipelineDescriptionFieldProps
+) => {
+  const { pipeline } = props;
   const {
     pipelineDescription,
     pipelineDescriptionError,
@@ -29,8 +38,12 @@ export const PipelineDescriptionField = () => {
       description="Fill with a short description."
       required={false}
       disabled={canEdit ? false : true}
-      error={pipelineDescription}
-      value={pipelineDescriptionError}
+      error={pipelineDescriptionError}
+      value={
+        pipelineDescription
+          ? pipelineDescription
+          : pipeline?.description || null
+      }
       onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
         setFieldValue("pipelineDescription", event.target.value);
       }}

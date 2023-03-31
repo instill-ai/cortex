@@ -31,12 +31,10 @@ export type ConfigurePipelineFormControlProps = {
   accessToken: Nullable<string>;
 };
 
-export const ConfigurePipelineFormControl = ({
-  pipeline,
-  setMessageBoxState,
-  onConfigure,
-  accessToken,
-}: ConfigurePipelineFormControlProps) => {
+export const ConfigurePipelineFormControl = (
+  props: ConfigurePipelineFormControlProps
+) => {
+  const { pipeline, setMessageBoxState, onConfigure, accessToken } = props;
   const enable = useCreateUpdateDeleteResourceGuard();
   const {
     canEdit,
