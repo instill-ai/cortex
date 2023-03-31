@@ -1,10 +1,12 @@
 import { ChangeEvent } from "react";
-import {
-  useConfigureProfileFormStore,
-  type ConfigureProfileFormStore,
-} from "../../../lib";
 import { BasicTextField } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
+import {
+  useConfigureProfileFormStore,
+  type Nullable,
+  type User,
+  type ConfigureProfileFormStore,
+} from "../../../lib";
 
 const selector = (state: ConfigureProfileFormStore) => ({
   firstName: state.fields.firstName,
@@ -12,7 +14,12 @@ const selector = (state: ConfigureProfileFormStore) => ({
   firstNameError: state.errors.firstName,
 });
 
-export const FirstNameField = () => {
+export type FirstNameFieldProps = {
+  user: Nullable<User>;
+};
+
+export const FirstNameField = (props: FirstNameFieldProps) => {
+  const { user } = props;
   const { firstName, setFieldValue, firstNameError } =
     useConfigureProfileFormStore(selector, shallow);
 
@@ -24,7 +31,7 @@ export const FirstNameField = () => {
         additionalMessageOnLabel="(optional)"
         key="firstName"
         required={true}
-        value={firstName}
+        value={firstName ? firstName : user?.first_name || null}
         error={firstNameError}
         onChange={(event: ChangeEvent<HTMLInputElement>) =>
           setFieldValue("firstName", event.target.value.trim())

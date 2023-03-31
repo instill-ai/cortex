@@ -1,10 +1,10 @@
+import { z } from "zod";
+import { OutlineButton, SolidButton } from "@instill-ai/design-system";
 import {
   useConfigureProfileFormStore,
   validateConfigureProfileFormFieldSchema,
   type ConfigureProfileFormState,
 } from "../../../lib";
-import { OutlineButton, SolidButton } from "@instill-ai/design-system";
-import { z } from "zod";
 
 export const ConfigureProfileControl = () => {
   const fields = useConfigureProfileFormStore((state) => state.fields);

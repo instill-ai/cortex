@@ -1,16 +1,25 @@
+import { shallow } from "zustand/shallow";
+import { BasicToggleField } from "@instill-ai/design-system";
 import {
   useConfigureProfileFormStore,
+  type Nullable,
+  type User,
   type ConfigureProfileFormStore,
 } from "../../../lib";
-import { BasicToggleField } from "@instill-ai/design-system";
-import { shallow } from "zustand/shallow";
 
 const selector = (state: ConfigureProfileFormStore) => ({
   newsletterSubscription: state.fields.newsletterSubscription,
   setFieldValue: state.setFieldValue,
 });
 
-export const NewsletterSubscriptionField = () => {
+export type NewsletterSubscriptionFieldProps = {
+  user: Nullable<User>;
+};
+
+export const NewsletterSubscriptionField = (
+  props: NewsletterSubscriptionFieldProps
+) => {
+  const { user } = props;
   const { newsletterSubscription, setFieldValue } =
     useConfigureProfileFormStore(selector, shallow);
 
@@ -19,7 +28,11 @@ export const NewsletterSubscriptionField = () => {
       <BasicToggleField
         id="newsletterSubscription"
         label="Newsletter subscription"
-        value={newsletterSubscription}
+        value={
+          newsletterSubscription
+            ? newsletterSubscription
+            : user?.newsletter_subscription || false
+        }
         required={true}
         description="Receive the latest news from Instill AI for open source updates, community highlights, blog posts, useful tutorials and more! You can unsubscribe any time."
         onChange={(event) =>

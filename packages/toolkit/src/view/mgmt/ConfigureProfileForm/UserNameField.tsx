@@ -1,11 +1,13 @@
 import { ChangeEvent } from "react";
+import { BasicTextField } from "@instill-ai/design-system";
+import { shallow } from "zustand/shallow";
 import {
   useConfigureProfileFormStore,
   validateResourceId,
+  type Nullable,
+  type User,
   type ConfigureProfileFormStore,
 } from "../../../lib";
-import { BasicTextField } from "@instill-ai/design-system";
-import { shallow } from "zustand/shallow";
 
 const selector = (state: ConfigureProfileFormStore) => ({
   userName: state.fields.userName,
@@ -14,7 +16,12 @@ const selector = (state: ConfigureProfileFormStore) => ({
   setFieldError: state.setFieldError,
 });
 
-export const UserNameField = () => {
+export type UserNameFieldProps = {
+  user: Nullable<User>;
+};
+
+export const UserNameField = (props: UserNameFieldProps) => {
+  const { user } = props;
   const { userName, userNameError, setFieldValue, setFieldError } =
     useConfigureProfileFormStore(selector, shallow);
 
@@ -26,7 +33,7 @@ export const UserNameField = () => {
         key="userName"
         additionalMessageOnLabel="This will be your unique identifier"
         required={true}
-        value={userName}
+        value={userName ? userName : user?.name || null}
         error={userNameError}
         onChange={(event: ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value.trim();
