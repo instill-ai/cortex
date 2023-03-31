@@ -94,7 +94,6 @@ const IndexPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        /*{" "}
         <ConfigureProfileForm
           user={user.isSuccess ? user.data : null}
           roles={options}
@@ -102,8 +101,7 @@ const IndexPage = () => {
           width={null}
           accessToken={null}
           onConfigure={null}
-        />{" "}
-        */
+        />
       </div>
     </Root>
   );

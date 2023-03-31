@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import * as React from "react";
 import { BasicTextField } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
 import {
@@ -25,6 +25,10 @@ export const UserNameField = (props: UserNameFieldProps) => {
   const { userName, userNameError, setFieldValue, setFieldError } =
     useConfigureProfileFormStore(selector, shallow);
 
+  React.useEffect(() => {
+    setFieldValue("userName", user?.name.split("/")[1] || null);
+  }, [user?.first_name]);
+
   return (
     <div className="w-[287px]">
       <BasicTextField
@@ -33,9 +37,9 @@ export const UserNameField = (props: UserNameFieldProps) => {
         key="userName"
         additionalMessageOnLabel="This will be your unique identifier"
         required={true}
-        value={userName ? userName : user?.name || null}
+        value={userName}
         error={userNameError}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           const value = event.target.value.trim();
           setFieldValue("userName", value);
           if (!validateResourceId(value)) {
