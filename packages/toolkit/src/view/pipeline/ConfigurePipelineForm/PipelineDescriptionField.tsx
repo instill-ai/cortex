@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import { BasicTextArea } from "@instill-ai/design-system";
 import {
@@ -30,6 +30,10 @@ export const PipelineDescriptionField = (
     setFieldValue,
   } = useConfigurePipelineFormStore(selector, shallow);
 
+  React.useEffect(() => {
+    setFieldValue("pipelineDescription", pipeline?.description || null);
+  }, [pipeline?.description]);
+
   return (
     <BasicTextArea
       id="pipelineDescription"
@@ -39,12 +43,8 @@ export const PipelineDescriptionField = (
       required={false}
       disabled={canEdit ? false : true}
       error={pipelineDescriptionError}
-      value={
-        pipelineDescription
-          ? pipelineDescription
-          : pipeline?.description || null
-      }
-      onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
+      value={pipelineDescription}
+      onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
         setFieldValue("pipelineDescription", event.target.value);
       }}
     />

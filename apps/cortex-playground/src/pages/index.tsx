@@ -7,7 +7,12 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
-import { PipelinesTable } from "@instill-ai/toolkit";
+import {
+  ConfigurePipelineForm,
+  ConfigureProfileForm,
+  PipelinesTable,
+  useUser,
+} from "@instill-ai/toolkit";
 import { usePipelines } from "@instill-ai/toolkit";
 import {
   DestinationsTable,
@@ -32,6 +37,12 @@ const IndexPage = () => {
   const pipelines = usePipelines({
     enable: true,
     accessToken: null,
+  });
+
+  const pipeline = usePipeline({
+    pipelineName: `pipelines/yoyomne`,
+    accessToken: null,
+    enable: true,
   });
 
   const options: SingleSelectOption[] = [
@@ -75,40 +86,23 @@ const IndexPage = () => {
     },
   ];
 
+  const user = useUser({
+    enable: true,
+    accessToken: null,
+  });
+
   return (
     <Root>
       <div className="w-[1200px]">
-        {/* <DestinationsTable
-          destinations={destinations.isSuccess ? destinations.data : null}
+        <ConfigureProfileForm
+          user={user.isSuccess ? user.data : null}
+          roles={options}
           marginBottom={null}
-        /> */}
-        {/* <SourcesTable
-          sources={sources.isSuccess ? sources.data : null}
-          marginBottom={null}
-        /> */}
-        {/* <ModelsTable
-          models={
-            modelsWithInstances.isSuccess ? modelsWithInstances.data : null
-          }
-          marginBottom={null}
-        />
-        <PipelineTable
-          pipeline={pipeline.isSuccess ? pipeline.data : null}
-          marginBottom={null}
-        /> */}
-        <PipelinesTable
-          pipelines={pipelines.isSuccess ? pipelines.data : null}
-          marginBottom={null}
+          width={null}
+          accessToken={null}
+          onConfigure={null}
         />
       </div>
-
-      {/* <BasicSingleSelect
-        id="test"
-        label="select test"
-        options={options}
-        value={options[0]}
-        disabled={true}
-      /> */}
     </Root>
   );
 };

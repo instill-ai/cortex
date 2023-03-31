@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import * as React from "react";
 import {
   BasicSingleSelect,
   SingleSelectOption,
@@ -29,13 +29,13 @@ export const RoleField = (props: RoleFieldProps) => {
     shallow
   );
 
-  const selectedRoleOption = useMemo(() => {
+  React.useEffect(() => {
+    setFieldValue("role", user?.role || null);
+  }, [user?.role]);
+
+  const selectedRoleOption = React.useMemo(() => {
     return roles.find((e) => e.value === role) || null;
   }, [roles, role]);
-
-  const currentRoleOption = useMemo(() => {
-    return roles.find((e) => e.value === user?.role) || null;
-  }, [roles, user]);
 
   return (
     <div className="w-[287px]">
@@ -44,9 +44,9 @@ export const RoleField = (props: RoleFieldProps) => {
         label="Role"
         additionalMessageOnLabel="(optional)"
         key="role"
-        required={true}
+        required={false}
         options={roles}
-        value={selectedRoleOption ? selectedRoleOption : currentRoleOption}
+        value={selectedRoleOption}
         error={roleError}
         onChange={(option) =>
           setFieldValue("role", option ? option.value.toString() : null)

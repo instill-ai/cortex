@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import * as React from "react";
 import { BasicTextField } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
 import {
@@ -23,6 +23,10 @@ export const FirstNameField = (props: FirstNameFieldProps) => {
   const { firstName, setFieldValue, firstNameError } =
     useConfigureProfileFormStore(selector, shallow);
 
+  React.useEffect(() => {
+    setFieldValue("firstName", user?.first_name || null);
+  }, [user?.first_name]);
+
   return (
     <div className="w-[287px]">
       <BasicTextField
@@ -30,10 +34,10 @@ export const FirstNameField = (props: FirstNameFieldProps) => {
         label="First Name"
         additionalMessageOnLabel="(optional)"
         key="firstName"
-        required={true}
-        value={firstName ? firstName : user?.first_name || null}
+        required={false}
+        value={firstName}
         error={firstNameError}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           setFieldValue("firstName", event.target.value.trim())
         }
       />

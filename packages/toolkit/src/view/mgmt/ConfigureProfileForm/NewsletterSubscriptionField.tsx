@@ -1,3 +1,4 @@
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import { BasicToggleField } from "@instill-ai/design-system";
 import {
@@ -23,16 +24,19 @@ export const NewsletterSubscriptionField = (
   const { newsletterSubscription, setFieldValue } =
     useConfigureProfileFormStore(selector, shallow);
 
+  React.useEffect(() => {
+    setFieldValue(
+      "newsletterSubscription",
+      user?.newsletter_subscription || null
+    );
+  }, [user?.newsletter_subscription]);
+
   return (
     <div className="w-full">
       <BasicToggleField
         id="newsletterSubscription"
         label="Newsletter subscription"
-        value={
-          newsletterSubscription
-            ? newsletterSubscription
-            : user?.newsletter_subscription || false
-        }
+        value={newsletterSubscription || false}
         required={true}
         description="Receive the latest news from Instill AI for open source updates, community highlights, blog posts, useful tutorials and more! You can unsubscribe any time."
         onChange={(event) =>

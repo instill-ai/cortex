@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import * as React from "react";
 import {
   useConfigureProfileFormStore,
   type Nullable,
@@ -25,6 +25,10 @@ export const OrgNameField = (props: OrgNameFieldProps) => {
     shallow
   );
 
+  React.useEffect(() => {
+    setFieldValue("orgName", user?.org_name || null);
+  }, [user?.org_name]);
+
   return (
     <div className="w-[287px]">
       <BasicTextField
@@ -32,10 +36,10 @@ export const OrgNameField = (props: OrgNameFieldProps) => {
         label="Organisation Name"
         additionalMessageOnLabel="Your company name"
         key="orgName"
-        required={true}
-        value={orgName ? orgName : user?.org_name || null}
+        required={false}
+        value={orgName}
         error={orgNameError}
-        onChange={(event: ChangeEvent<HTMLInputElement>) =>
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           setFieldValue("orgName", event.target.value.trim())
         }
       />
