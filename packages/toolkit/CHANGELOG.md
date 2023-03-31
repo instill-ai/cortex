@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.21.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.21.1...@instill-ai/toolkit-v0.21.2) (2023-03-31)
+
+
+### Bug Fixes
+
+* fix configure profile form padding ([#268](https://github.com/instill-ai/design-system/issues/268)) ([ac08538](https://github.com/instill-ai/design-system/commit/ac085382cb2fa890487e1c8adacabcdc74f3027a))
+
 ## [0.21.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.21.0...@instill-ai/toolkit-v0.21.1) (2023-03-31)
 
 
