@@ -8,11 +8,13 @@ import {
   TableLoadingProgress,
   PaginationListContainer,
   ModelTaskCell,
+  StateOverview,
 } from "../../components";
 import {
   useSearchedResources,
   env,
   chunk,
+  useStateOverviewCounts,
   type Model,
   type Nullable,
 } from "../../lib";
@@ -36,8 +38,20 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedModels]);
 
+  const stateOverviewCounts = useStateOverviewCounts(searchedModels);
+
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
     return [
+      {
+        key: "model-state-overview-head",
+        item: (
+          <StateOverview
+            errorCounts={stateOverviewCounts?.error || 0}
+            offlineCounts={stateOverviewCounts?.offline || 0}
+            onlineCounts={stateOverviewCounts?.online || 0}
+          />
+        ),
+      },
       {
         key: "model-name",
         item: <></>,
@@ -46,12 +60,8 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
         key: "model-source-head",
         item: "Model source",
       },
-      {
-        key: "model-instances-head",
-        item: "Instances",
-      },
     ];
-  }, []);
+  }, [stateOverviewCounts]);
 
   return (
     <PaginationListContainer
@@ -88,7 +98,7 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
                       <NameCell
                         name={model.id}
                         width={null}
-                        state="STATE_ONLINE"
+                        state={model.state}
                         padding="py-2 pl-6"
                         link={`/models/${model.id}`}
                       />

@@ -82,11 +82,12 @@ const IndexPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        <CreatePipelineForm
+        {/* <CreatePipelineForm
           onCreate={null}
           accessToken={null}
           syncModelOnly={true}
-        />
+        /> */}
+        <ModelsTable models={models.data || []} marginBottom={null} />
       </div>
     </Root>
   );
