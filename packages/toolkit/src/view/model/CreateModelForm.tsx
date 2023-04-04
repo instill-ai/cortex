@@ -662,7 +662,10 @@ export const CreateModelForm = ({
               readOnly={false}
               disabled={modelCreated ? true : false}
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setFieldValue("model.new.local.file", event.target.files)
+                setFieldValue(
+                  "model.new.local.file",
+                  event.target.files ? event.target.files[0] : null
+                )
               }
             />
           </>
