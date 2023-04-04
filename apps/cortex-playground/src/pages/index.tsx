@@ -10,6 +10,7 @@ import {
 import {
   ConfigurePipelineForm,
   ConfigureProfileForm,
+  CreateModelForm,
   CreateModelWithPresetForm,
   CreatePipelineForm,
   PipelinesTable,
@@ -87,7 +88,12 @@ const IndexPage = () => {
           accessToken={null}
           syncModelOnly={true}
         /> */}
-        <ModelsTable models={models.data || []} marginBottom={null} />
+        <CreateModelForm
+          onCreate={null}
+          accessToken={null}
+          initStoreOnCreate={true}
+          marginBottom={null}
+        />
       </div>
     </Root>
   );
