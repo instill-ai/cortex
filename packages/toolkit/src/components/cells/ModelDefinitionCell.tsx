@@ -20,14 +20,14 @@ export const ModelDefinitionCell = ({
     color: "fill-instillGrey90",
   };
 
-  const { title, getIcon } = getModelDefinitionToolkit(modelDefinition);
+  const { label, getIcon } = getModelDefinitionToolkit(modelDefinition);
 
   return (
     <td>
       <div className={cn("flex flex-row gap-x-2", width, padding)}>
         {getIcon(iconStyle)}
         <p className="my-auto flex text-instillGrey90 text-instill-body">
-          {title}
+          {label}
         </p>
       </div>
     </td>
