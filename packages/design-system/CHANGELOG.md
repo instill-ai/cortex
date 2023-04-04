@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.9.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.8.1...@instill-ai/design-system-v0.9.0) (2023-04-04)
+
+
+### Features
+
+* adapt model one layer design ([#272](https://github.com/instill-ai/design-system/issues/272)) ([12a7358](https://github.com/instill-ai/design-system/commit/12a7358bb183c705c675c9a68b7c690bb6a1fd18))
+
 ## [0.8.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.8.0...@instill-ai/design-system-v0.8.1) (2023-03-23)
 
 
