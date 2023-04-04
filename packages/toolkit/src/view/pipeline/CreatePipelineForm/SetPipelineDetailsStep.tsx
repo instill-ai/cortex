@@ -104,6 +104,33 @@ export const SetPipelineDetailsStep = ({
    * -----------------------------------------------------------------------*/
 
   const canSetupNewPipeline = useMemo(() => {
+    console.log({
+      pipelineId,
+      pipelineIdError,
+      pipelineMode,
+      pipelineDescription,
+      pipelineDescriptionError,
+      sourceType,
+      existingSourceId,
+      existingSourceDefinition,
+      newSourceId,
+      newSourceDefinition,
+      destinationType,
+      existingDestinationId,
+      existingDestinationDefinition,
+      newDestinationId,
+      newDestinationDefinition,
+      modelType,
+      existingModelId,
+      existingModelDefinition,
+      newModelId,
+      newModelDefinition,
+      newGithubModelRepoUrl,
+      newLocalModelFile,
+      newArtivcModelGcsBucketPath,
+      newHuggingFaceModelRepoUrl,
+    });
+
     const validator = {
       pipelineIsValid: false,
       sourceIsValid: false,
@@ -272,7 +299,7 @@ export const SetPipelineDetailsStep = ({
       id: pipelineId,
       recipe: {
         source: sourceName,
-        model_instances: [modelName],
+        models: [modelName],
         destination: destinationName,
       },
     };

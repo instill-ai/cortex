@@ -11,7 +11,9 @@ import {
   ConfigurePipelineForm,
   ConfigureProfileForm,
   CreateModelWithPresetForm,
+  CreatePipelineForm,
   PipelinesTable,
+  useModels,
   useUser,
 } from "@instill-ai/toolkit";
 import { usePipelines } from "@instill-ai/toolkit";
@@ -72,15 +74,18 @@ const IndexPage = () => {
     accessToken: null,
   });
 
+  const models = useModels({
+    accessToken: null,
+    enable: true,
+  });
+
   return (
     <Root>
       <div className="w-[1200px]">
-        <CreateModelWithPresetForm
-          accessToken={null}
+        <CreatePipelineForm
           onCreate={null}
-          initStoreOnCreate={true}
-          marginBottom={null}
-          width="w-full"
+          accessToken={null}
+          syncModelOnly={true}
         />
       </div>
     </Root>

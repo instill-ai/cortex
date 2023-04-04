@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { shallow } from "zustand/shallow";
 import {
   BasicSingleSelect,
   GrpcIcon,
@@ -14,22 +15,22 @@ import {
   useCreateResourceFormStore,
   type CreateDestinationPayload,
   type CreateResourceFormStore,
-  Nullable,
+  type Nullable,
 } from "../../../../lib";
 
 import { FormVerticalDivider } from "../FormVerticalDivider";
 import { UseExistingDestinationFlow } from "./UseExistingDestinationFlow";
-import { shallow } from "zustand/shallow";
 import { CreateDestinationForm } from "../../../destination";
 
 const selector = (state: CreateResourceFormStore) => ({
   pipelineMode: state.fields.pipeline.mode,
+  newSourceId: state.fields.source.new.id,
   existingSourceId: state.fields.source.existing.id,
   existingDestinationId: state.fields.destination.existing.id,
   existingDestinationIdError: state.errors.destination.existing.id,
   increasePipelineFormStep: state.increasePipelineFormStep,
   setFieldValue: state.setFieldValue,
-  s: state.fields.source.type,
+  sourceType: state.fields.source.type,
 });
 
 export type SetPipelineDestinationStepProps = {
@@ -47,9 +48,9 @@ export const SetPipelineDestinationStep = ({
 
   const {
     pipelineMode,
+    sourceType,
+    newSourceId,
     existingSourceId,
-    existingDestinationId,
-    existingDestinationIdError,
     increasePipelineFormStep,
     setFieldValue,
   } = useCreateResourceFormStore(selector, shallow);
@@ -62,8 +63,11 @@ export const SetPipelineDestinationStep = ({
     SingleSelectOption[]
   >([]);
 
+  const [selectedSyncDestinationOption, setSelectedSyncDestinationOption] =
+    useState<SingleSelectOption | null>(null);
+
   useEffect(() => {
-    setSyncDestinationOptions([
+    const syncDestinationOptions = [
       {
         label: "gRPC",
         value: "destination-grpc",
@@ -88,32 +92,24 @@ export const SetPipelineDestinationStep = ({
           />
         ),
       },
-    ]);
+    ];
+
+    setSyncDestinationOptions(syncDestinationOptions);
+
+    if (sourceType === "existing") {
+      setSelectedSyncDestinationOption(
+        syncDestinationOptions.find(
+          (e) => e.value === existingSourceId?.replace("source", "destination")
+        ) || null
+      );
+    } else {
+      setSelectedSyncDestinationOption(
+        syncDestinationOptions.find(
+          (e) => e.value === newSourceId?.replace("source", "destination")
+        ) || null
+      );
+    }
   }, []);
-
-  const selectedSyncDestinationOption = useMemo(() => {
-    if (syncDestinationOptions.length === 0 || !existingDestinationId) {
-      return null;
-    }
-
-    return (
-      syncDestinationOptions.find((e) => e.value === existingDestinationId) ||
-      null
-    );
-  }, [existingDestinationId, syncDestinationOptions]);
-
-  /* -------------------------------------------------------------------------
-   * Choose the default destination as same as source when the pipeline is
-   * in sync mode
-   * -----------------------------------------------------------------------*/
-
-  useEffect(() => {
-    if (pipelineMode !== "MODE_SYNC" || !existingSourceId) {
-      return;
-    }
-    const destinationId = existingSourceId.replace("source", "destination");
-    setFieldValue("destination.existing.id", destinationId);
-  }, [pipelineMode, existingSourceId, syncDestinationOptions, setFieldValue]);
 
   /* -------------------------------------------------------------------------
    * Create target destination.
@@ -124,18 +120,18 @@ export const SetPipelineDestinationStep = ({
   const destinations = useDestinations({ accessToken, enable: true });
 
   const handleGoNext = () => {
-    if (!destinations.isSuccess || !existingDestinationId) {
+    if (!destinations.isSuccess || !selectedSyncDestinationOption) {
       return;
     }
 
     if (pipelineMode === "MODE_SYNC") {
       const destinationIndex = destinations.data.findIndex(
-        (e) => e.id === existingDestinationId
+        (e) => e.id === selectedSyncDestinationOption.value
       );
 
       setFieldValue(
         "destination.existing.definition",
-        `destination-connector-definitions/${existingDestinationId}`
+        `destination-connector-definitions/${selectedSyncDestinationOption.value}`
       );
 
       if (destinationIndex !== -1) {
@@ -147,16 +143,20 @@ export const SetPipelineDestinationStep = ({
         }
         setFieldValue("destination.type", "existing");
         setFieldValue(
+          "destination.existing.id",
+          selectedSyncDestinationOption.value
+        );
+        setFieldValue(
           "destination.existing.definition",
-          `destination-connector-definitions/${existingDestinationId}`
+          `destination-connector-definitions/${selectedSyncDestinationOption.value}`
         );
         increasePipelineFormStep();
         return;
       }
 
       const payload: CreateDestinationPayload = {
-        id: existingDestinationId,
-        destination_connector_definition: `destination-connector-definitions/${existingDestinationId}`,
+        id: selectedSyncDestinationOption.value,
+        destination_connector_definition: `destination-connector-definitions/${selectedSyncDestinationOption.value}`,
         connector: {
           configuration: {},
         },
@@ -174,8 +174,12 @@ export const SetPipelineDestinationStep = ({
             }
             setFieldValue("destination.type", "new");
             setFieldValue(
+              "destination.new.id",
+              selectedSyncDestinationOption.value
+            );
+            setFieldValue(
               "destination.new.definition",
-              `destination-connector-definitions/${existingDestinationId}`
+              `destination-connector-definitions/${selectedSyncDestinationOption.value}`
             );
             increasePipelineFormStep();
           },
@@ -200,7 +204,7 @@ export const SetPipelineDestinationStep = ({
             }
             options={syncDestinationOptions}
             value={selectedSyncDestinationOption}
-            error={existingDestinationIdError}
+            error={null}
             disabled={true}
             required={true}
           />

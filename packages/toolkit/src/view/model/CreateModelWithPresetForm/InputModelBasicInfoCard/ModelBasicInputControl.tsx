@@ -20,6 +20,7 @@ import {
   useCreateGithubModel,
   useCreateHuggingFaceModel,
   useCreateResourceFormStore,
+  useDeployModel,
   useModalStore,
   validateResourceId,
 } from "../../../../lib";
@@ -101,6 +102,7 @@ export const ModelBasicInputControl = ({
 
   const createGithubModel = useCreateGithubModel();
   const createHuggingFaceModel = useCreateHuggingFaceModel();
+  const deployModel = useDeployModel();
 
   const handelCreateModel = useCallback(async () => {
     if (!modelId) {
@@ -138,6 +140,10 @@ export const ModelBasicInputControl = ({
 
             if (operationIsDone) {
               await prepareNewModel(`models/${modelId.trim()}`);
+              deployModel.mutate({
+                modelName: `models/${modelId.trim()}`,
+                accessToken,
+              });
             }
 
             setCreateModelMessageBoxState({

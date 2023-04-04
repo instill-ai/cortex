@@ -31,10 +31,12 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type SetPipelineModeStepProps = {
   accessToken: Nullable<string>;
+  syncModelOnly: boolean;
 };
 
 export const SetPipelineModeStep = ({
   accessToken,
+  syncModelOnly,
 }: SetPipelineModeStepProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
@@ -67,7 +69,7 @@ export const SetPipelineModeStep = ({
   // in the future
 
   useEffect(() => {
-    setPipelineModeOptions([
+    const pipelineModeOption = [
       {
         label: "Sync",
         value: "MODE_SYNC",
@@ -92,9 +94,11 @@ export const SetPipelineModeStep = ({
           />
         ),
       },
-    ]);
+    ];
 
-    setSyncSourceOptions([
+    setPipelineModeOptions(pipelineModeOption);
+
+    const syncSourceOption = [
       {
         label: "gRPC",
         value: "source-grpc",
@@ -119,8 +123,14 @@ export const SetPipelineModeStep = ({
           />
         ),
       },
-    ]);
-  }, []);
+    ];
+
+    setSyncSourceOptions(syncSourceOption);
+
+    if (syncModelOnly) {
+      setSelectedPipelineModeOption(pipelineModeOption[0]);
+    }
+  }, [syncModelOnly]);
 
   const [selectedPipelineModeOption, setSelectedPipelineModeOption] =
     useState<Nullable<SingleSelectOption>>(null);
@@ -189,6 +199,7 @@ export const SetPipelineModeStep = ({
             });
           }
 
+          setFieldValue("pipeline.mode", "MODE_SYNC");
           setFieldValue(
             "source.new.definition",
             `source-connector-definitions/${selectedSyncSourceOption.value}`
