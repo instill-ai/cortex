@@ -85,6 +85,7 @@ export const SelectModelPresetCard = ({
           "model.new.github.repoUrl",
           selectedModel.configuration.repository
         );
+        setFieldValue("model.new.github.tag", selectedModel.configuration.tag);
       } else if (
         selectedModel.model_definition === "model-definitions/huggingface"
       ) {

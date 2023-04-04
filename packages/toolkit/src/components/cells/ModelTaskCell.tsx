@@ -1,18 +1,18 @@
 import cn from "clsx";
-import { getModelDefinitionToolkit } from "@instill-ai/design-system";
+import { getModelInstanceTaskToolkit } from "@instill-ai/design-system";
 import { Nullable } from "../../lib";
 
-export type ModelDefinitionCellProps = {
+export type ModelTaskCellProps = {
   width: Nullable<string>;
-  modelDefinition: string;
+  modelTask: string;
   padding: string;
 };
 
-export const ModelDefinitionCell = ({
-  modelDefinition,
+export const ModelTaskCell = ({
+  modelTask,
   width,
   padding,
-}: ModelDefinitionCellProps) => {
+}: ModelTaskCellProps) => {
   const iconStyle = {
     width: "w-5",
     height: "h-5",
@@ -20,7 +20,7 @@ export const ModelDefinitionCell = ({
     color: "fill-instillGrey90",
   };
 
-  const { label, getIcon } = getModelDefinitionToolkit(modelDefinition);
+  const { label, getIcon } = getModelInstanceTaskToolkit(modelTask);
 
   return (
     <td>

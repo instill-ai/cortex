@@ -6,7 +6,7 @@ export type CreatePipelinePayload = {
   id: string;
   recipe: {
     source: string;
-    model_instances: string[];
+    models: string[];
     destination: string;
   };
 };

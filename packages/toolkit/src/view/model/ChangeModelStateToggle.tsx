@@ -4,12 +4,12 @@ import { StatefulToggleField } from "@instill-ai/design-system";
 import { FC, useState, useEffect, useCallback } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { ModelInstance, Nullable, Operation } from "../../lib";
+import { Model, Nullable, Operation } from "../../lib";
 
-export type ChangeModelInstanceStateToggleProps = {
-  modelInstance: Nullable<ModelInstance>;
+export type ChangeModelStateToggleProps = {
+  modelInstance: Nullable<Model>;
   switchOff: UseMutationResult<
-    { modelInstance: ModelInstance; operation: Operation },
+    { modelInstance: Model; operation: Operation },
     unknown,
     {
       modelInstanceName: string;
@@ -18,7 +18,7 @@ export type ChangeModelInstanceStateToggleProps = {
     unknown
   >;
   switchOn: UseMutationResult<
-    { modelInstance: ModelInstance; operation: Operation },
+    { modelInstance: Model; operation: Operation },
     unknown,
     {
       modelInstanceName: string;
@@ -30,9 +30,13 @@ export type ChangeModelInstanceStateToggleProps = {
   accessToken: Nullable<string>;
 };
 
-export const ChangeModelInstanceStateToggle: FC<
-  ChangeModelInstanceStateToggleProps
-> = ({ modelInstance, switchOn, switchOff, marginBottom, accessToken }) => {
+export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
+  modelInstance,
+  switchOn,
+  switchOff,
+  marginBottom,
+  accessToken,
+}) => {
   const [error, setError] = useState<Nullable<string>>(null);
 
   useEffect(() => {

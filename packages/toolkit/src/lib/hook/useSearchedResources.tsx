@@ -1,6 +1,6 @@
 import {
   DestinationWithPipelines,
-  ModelWithInstance,
+  Model,
   Pipeline,
   SourceWithPipelines,
 } from "../vdp-sdk";
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 
 type Resources =
   | DestinationWithPipelines
-  | ModelWithInstance
+  | Model
   | Pipeline
   | SourceWithPipelines;
 

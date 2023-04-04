@@ -1,5 +1,5 @@
 import { DestinationWithDefinition, SourceWithDefinition } from "../connector";
-import { ModelInstance } from "../model";
+import { Model } from "../model";
 
 export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
 
@@ -40,11 +40,11 @@ export type Pipeline = {
 export type RawPipelineRecipe = {
   source: string;
   destination: string;
-  model_instances: string;
+  models: string[];
 };
 
 export type PipelineRecipe = {
   source: SourceWithDefinition;
   destination: DestinationWithDefinition;
-  models: ModelInstance[];
+  models: Model[];
 };

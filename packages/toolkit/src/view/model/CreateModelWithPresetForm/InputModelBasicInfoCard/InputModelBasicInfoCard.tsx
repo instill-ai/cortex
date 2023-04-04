@@ -6,10 +6,16 @@ import { Nullable } from "../../../../lib";
 
 export type InputModelBasicInfoCardProps = {
   marginBottom: Nullable<string>;
+  accessToken: Nullable<string>;
+  onCreate: Nullable<() => void>;
+  initStoreOnCreate: boolean;
 };
 
 export const InputModelBasicInfoCard = ({
   marginBottom,
+  accessToken,
+  onCreate,
+  initStoreOnCreate,
 }: InputModelBasicInfoCardProps) => {
   return (
     <CardBase
@@ -19,7 +25,11 @@ export const InputModelBasicInfoCard = ({
       <div className="flex h-full w-full flex-col gap-y-6 p-6">
         <ModelIdField />
         <ModelDescriptionField />
-        <ModelBasicInputControl />
+        <ModelBasicInputControl
+          accessToken={accessToken}
+          onCreate={onCreate}
+          initStoreOnCreate={initStoreOnCreate}
+        />
       </div>
     </CardBase>
   );

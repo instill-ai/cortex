@@ -98,7 +98,6 @@ export const ConfigureDestinationForm = ({
   }, [destination]);
 
   const destinationDefinitionOption = useMemo(() => {
-    console.log(destination);
     return {
       label:
         destination.destination_connector_definition.connector_definition.title,

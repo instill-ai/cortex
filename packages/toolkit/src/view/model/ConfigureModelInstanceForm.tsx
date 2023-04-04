@@ -6,10 +6,10 @@ import {
   type ProgressMessageBoxState,
 } from "@instill-ai/design-system";
 
-import type { ModelInstance, Nullable } from "../../lib";
+import type { Model, Nullable } from "../../lib";
 
 export type ConfigureModelInstanceFormProps = {
-  modelInstance: ModelInstance;
+  modelInstance: Model;
   marginBottom: Nullable<string>;
 };
 

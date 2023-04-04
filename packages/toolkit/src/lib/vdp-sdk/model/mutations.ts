@@ -5,6 +5,7 @@ import { Model } from "./types";
 
 export type CreateGithubModelConfiguration = {
   repository: string;
+  tag: string;
 };
 
 export type CreateGithubModelPayload = {
@@ -34,6 +35,7 @@ export const createGithubModelMutation = async ({
       description: payload.description ?? undefined,
       configuration: {
         repository: payload.configuration.repository,
+        tag: payload.configuration.tag,
       },
     });
     return Promise.resolve(data.operation);
@@ -93,6 +95,7 @@ export const createLocalModelMutation = async ({
 
 export type ArtivcConfiguration = {
   url: string;
+  tag: string;
   credential: Nullable<string>;
 };
 
@@ -126,6 +129,7 @@ export const createArtivcModelMutation = async ({
         credential: payload.configuration.credential
           ? JSON.parse(payload.configuration.credential)
           : undefined,
+        tag: payload.configuration.tag,
       },
     });
     return Promise.resolve(data.operation);

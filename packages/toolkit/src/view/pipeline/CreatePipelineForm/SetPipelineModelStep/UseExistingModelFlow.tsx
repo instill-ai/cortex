@@ -5,7 +5,7 @@ import {
   SolidButton,
 } from "@instill-ai/design-system";
 import {
-  useModelsInstances,
+  useModels,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
@@ -16,105 +16,77 @@ import { shallow } from "zustand/shallow";
 
 const selector = (state: CreateResourceFormStore) => ({
   modelType: state.fields.model.type,
-  existingModelInstanceTag: state.fields.model.existing.instanceTag,
-  existingModelInstanceTagError: state.errors.model.existing.instanceTag,
   increasePipelineFormStep: state.increasePipelineFormStep,
   setFieldValue: state.setFieldValue,
 });
 
-export type UseExistingModeInstancelFlowProps = {
+export type UseExistingModelFlowProps = {
   accessToken: Nullable<string>;
 };
 
-export const UseExistingModeInstancelFlow = ({
+export const UseExistingModelFlow = ({
   accessToken,
-}: UseExistingModeInstancelFlowProps) => {
+}: UseExistingModelFlowProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const {
-    modelType,
-    existingModelInstanceTag,
-    existingModelInstanceTagError,
-    increasePipelineFormStep,
-    setFieldValue,
-  } = useCreateResourceFormStore(selector, shallow);
+  const { modelType, increasePipelineFormStep, setFieldValue } =
+    useCreateResourceFormStore(selector, shallow);
 
   /* -------------------------------------------------------------------------
    * Prepare existing online model instances.
    * -----------------------------------------------------------------------*/
 
-  const [modelInstanceOptions, setModelInstanceOptions] =
+  const [modelOptions, setModelOptions] =
     useState<Nullable<SingleSelectOption[]>>(null);
-
-  // We use state instead of calculated it from existinInstanceTag is because
-  // in the selectedModelInstanceOption.value we used full model name but in
-  // existinInstanceTag we store only modelInstanceTag
-  const [selectedModelInstanceOption, setSelectedModelInstanceOption] =
+  const [selectedModelOption, setSelectedModelOption] =
     useState<Nullable<SingleSelectOption>>(null);
 
-  const modelInstances = useModelsInstances({
+  const models = useModels({
     enable: true,
     accessToken,
   });
 
   useEffect(() => {
-    if (!modelInstances.isSuccess || !modelInstances.data) return;
+    if (!models.isSuccess || !models.data) return;
 
-    const onlineModelInstances = modelInstances.data.filter(
-      (e) => e.state === "STATE_ONLINE"
+    const onlineModels = models.data.filter((e) => e.state === "STATE_ONLINE");
+
+    setModelOptions(
+      onlineModels.map((e) => ({ label: e.name, value: e.name }))
     );
-
-    setModelInstanceOptions(
-      onlineModelInstances.map((e) => {
-        const instanceNameList = e.name.split("/");
-        const modelId = instanceNameList[1];
-
-        return {
-          label: `${modelId}/${e.id}`,
-          value: e.name,
-        };
-      })
-    );
-  }, [modelInstances.isSuccess, modelInstances.data]);
+  }, [models.isSuccess, models.data]);
 
   /* -------------------------------------------------------------------------
    * Use existing model
    * -----------------------------------------------------------------------*/
 
   const canUseExistingModel = useMemo(() => {
-    if (!existingModelInstanceTag || modelType === "new") {
+    if (modelType === "new") {
       return false;
     }
 
     return true;
-  }, [existingModelInstanceTag, modelType]);
+  }, [modelType]);
 
   const handleUseModel = useCallback(() => {
-    if (
-      !existingModelInstanceTag ||
-      !modelInstances.isSuccess ||
-      !modelInstances.data
-    ) {
+    if (!models.isSuccess || !models.data) {
       return;
     }
 
-    const targetModelInstance = modelInstances.data.find(
-      (e) => e.name === (selectedModelInstanceOption?.value as string)
+    const targetModel = models.data.find(
+      (e) => e.name === (selectedModelOption?.value as string)
     );
 
-    if (!targetModelInstance) return;
+    if (!targetModel) return;
 
-    const instanceNameList = targetModelInstance.name.split("/");
+    const instanceNameList = targetModel.name.split("/");
 
     setFieldValue("model.existing.id", instanceNameList[1]);
-    setFieldValue(
-      "model.existing.definition",
-      targetModelInstance.model_definition
-    );
+    setFieldValue("model.existing.definition", targetModel.model_definition);
     increasePipelineFormStep();
 
     if (amplitudeIsInit) {
@@ -124,12 +96,11 @@ export const UseExistingModeInstancelFlow = ({
       });
     }
   }, [
-    existingModelInstanceTag,
-    modelInstances.isSuccess,
-    modelInstances.data,
+    models.isSuccess,
+    models.data,
     amplitudeIsInit,
     increasePipelineFormStep,
-    selectedModelInstanceOption?.value,
+    selectedModelOption?.value,
     setFieldValue,
   ]);
 
@@ -140,17 +111,12 @@ export const UseExistingModeInstancelFlow = ({
   return (
     <div className="flex flex-1 flex-col gap-y-5 p-5">
       <BasicSingleSelect
-        id="existingModelInstanceTag"
+        id="existingModel"
         label="Online model instances"
-        options={modelInstanceOptions ? modelInstanceOptions : []}
-        value={selectedModelInstanceOption}
-        error={existingModelInstanceTagError}
+        options={modelOptions ? modelOptions : []}
+        value={selectedModelOption}
         onChange={(option: Nullable<SingleSelectOption>) => {
-          setSelectedModelInstanceOption(option);
-          if (option) {
-            const instanceNameList = (option.value as string).split("/");
-            setFieldValue("model.existing.instanceTag", instanceNameList[3]);
-          }
+          setSelectedModelOption(option);
         }}
         disabled={modelType === "new" ? true : false}
         required={true}

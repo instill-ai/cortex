@@ -10,7 +10,10 @@ import {
 import {
   ConfigurePipelineForm,
   ConfigureProfileForm,
+  CreateModelWithPresetForm,
+  CreatePipelineForm,
   PipelinesTable,
+  useModels,
   useUser,
 } from "@instill-ai/toolkit";
 import { usePipelines } from "@instill-ai/toolkit";
@@ -19,32 +22,12 @@ import {
   useDestinationsWithPipelines,
   useSourcesWithPipelines,
   SourcesTable,
-  useModelsWithInstances,
   ModelsTable,
   usePipeline,
   PipelineTable,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
-  // const destinations = useDestinationsWithPipelines({ accessToken: null });
-  // const sources = useSourcesWithPipelines({ accessToken: null });
-  // const modelsWithInstances = useModelsWithInstances({ accessToken: null });
-  // const pipeline = usePipeline({
-  //   pipelineName: "pipelines/eee",
-  //   accessToken: null,
-  // });
-
-  const pipelines = usePipelines({
-    enable: true,
-    accessToken: null,
-  });
-
-  const pipeline = usePipeline({
-    pipelineName: `pipelines/yoyomne`,
-    accessToken: null,
-    enable: true,
-  });
-
   const options: SingleSelectOption[] = [
     {
       value: "grpc",
@@ -91,17 +74,20 @@ const IndexPage = () => {
     accessToken: null,
   });
 
+  const models = useModels({
+    accessToken: null,
+    enable: true,
+  });
+
   return (
     <Root>
       <div className="w-[1200px]">
-        <ConfigureProfileForm
-          user={user.isSuccess ? user.data : null}
-          roles={options}
-          marginBottom={null}
-          width={null}
+        {/* <CreatePipelineForm
+          onCreate={null}
           accessToken={null}
-          onConfigure={null}
-        />
+          syncModelOnly={true}
+        /> */}
+        <ModelsTable models={models.data || []} marginBottom={null} />
       </div>
     </Root>
   );

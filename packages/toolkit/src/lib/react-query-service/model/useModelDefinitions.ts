@@ -11,7 +11,7 @@ export const useModelDefinitions = ({
   enable: boolean;
 }) => {
   return useQuery(
-    ["models", "definition"],
+    ["model-definitions"],
     async () => {
       const definitions = await listModelDefinitionsQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),

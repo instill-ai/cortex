@@ -9,7 +9,6 @@ import {
   useModalStore,
   type DestinationWithDefinition,
   type Model,
-  type ModelInstance,
   type Pipeline,
   type SourceWithDefinition,
   type Nullable,
@@ -18,11 +17,7 @@ import {
 
 export type DeleteResourceModalProps = {
   resource: Nullable<
-    | SourceWithDefinition
-    | DestinationWithDefinition
-    | Pipeline
-    | Model
-    | ModelInstance
+    SourceWithDefinition | DestinationWithDefinition | Pipeline | Model
   >;
   handleDeleteResource: () => void;
 };

@@ -18,11 +18,13 @@ import { SetPipelineModeStep } from "./SetPipelineModeStep";
 export type CreatePipelineFormProps = {
   onCreate: Nullable<() => void>;
   accessToken: Nullable<string>;
+  syncModelOnly: boolean;
 };
 
 export const CreatePipelineForm = ({
   onCreate,
   accessToken,
+  syncModelOnly,
 }: CreatePipelineFormProps) => {
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
@@ -32,7 +34,12 @@ export const CreatePipelineForm = ({
     switch (pipelineFormStep) {
       case 0:
       case 1:
-        return <SetPipelineModeStep accessToken={accessToken} />;
+        return (
+          <SetPipelineModeStep
+            syncModelOnly={syncModelOnly}
+            accessToken={accessToken}
+          />
+        );
       case 2:
         return <SetPipelineModelStep accessToken={accessToken} />;
       case 3:

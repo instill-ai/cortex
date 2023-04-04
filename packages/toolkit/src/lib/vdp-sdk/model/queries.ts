@@ -1,16 +1,11 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
 import { Operation } from "../types";
-import {
-  Model,
-  ModelDefinition,
-  ModelInstance,
-  ModelInstanceReadme,
-} from "./types";
+import { Model, ModelCard, ModelDefinition } from "./types";
 
-// ############################################################################
-// # Model Definition                                                         #
-// ############################################################################
+/* -------------------------------------------------------------------------
+ * Model Definition
+ * -----------------------------------------------------------------------*/
 
 export type GetModelDefinitionResponse = {
   model_definition: ModelDefinition;
@@ -84,9 +79,9 @@ export const listModelDefinitionsQuery = async ({
   }
 };
 
-// ############################################################################
-// # Model                                                                    #
-// ############################################################################
+/* -------------------------------------------------------------------------
+ * Model
+ * -----------------------------------------------------------------------*/
 
 export type GetModelResponse = {
   model: Model;
@@ -157,98 +152,22 @@ export const listModelsQuery = async ({
   }
 };
 
-// ############################################################################
-// # Model Instance                                                           #
-// ############################################################################
-
-export type GetModelInstanceResponse = {
-  instance: ModelInstance;
+export type GetModelCardQueryResponse = {
+  readme: ModelCard;
 };
 
-export const getModelInstanceQuery = async ({
-  modelInstanceName,
-  accessToken,
-}: {
-  modelInstanceName: string;
-  accessToken: Nullable<string>;
-}): Promise<ModelInstance> => {
-  try {
-    const client = createInstillAxiosClient(accessToken);
-
-    const { data } = await client.get<GetModelInstanceResponse>(
-      `/${modelInstanceName}?view=VIEW_FULL`
-    );
-
-    return Promise.resolve(data.instance);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-};
-
-export type ListModelInstancesResponse = {
-  instances: ModelInstance[];
-  next_page_token: string;
-  total_size: string;
-};
-
-export const listModelInstancesQuery = async ({
+export const getModelCardQuery = async ({
   modelName,
-  pageSize,
-  nextPageToken,
   accessToken,
 }: {
   modelName: string;
-  pageSize: Nullable<number>;
-  nextPageToken: Nullable<string>;
-  accessToken: Nullable<string>;
-}): Promise<ModelInstance[]> => {
-  try {
-    const client = createInstillAxiosClient(accessToken);
-    const modelInstances: ModelInstance[] = [];
-
-    const queryString = getQueryString(
-      `/${modelName}/instances?view=VIEW_FULL`,
-      pageSize,
-      nextPageToken
-    );
-
-    const { data } = await client.get<ListModelInstancesResponse>(queryString);
-
-    modelInstances.push(...data.instances);
-
-    if (data.next_page_token) {
-      modelInstances.push(
-        ...(await listModelInstancesQuery({
-          modelName,
-          pageSize,
-          nextPageToken: data.next_page_token,
-          accessToken,
-        }))
-      );
-    }
-
-    return Promise.resolve(modelInstances);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-};
-
-export type GetModelInstanceReadmeQuery = {
-  readme: ModelInstanceReadme;
-};
-
-export const getModelInstanceReadme = async ({
-  modelInstanceName,
-  accessToken,
-}: {
-  modelInstanceName: string;
   accessToken: Nullable<string>;
 }) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.get<GetModelInstanceReadmeQuery>(
-      `/${modelInstanceName}/readme`
+    const { data } = await client.get<GetModelCardQueryResponse>(
+      `/${modelName}/readme`
     );
     return Promise.resolve(data.readme);
   } catch (err) {
@@ -256,9 +175,9 @@ export const getModelInstanceReadme = async ({
   }
 };
 
-// ############################################################################
-// # Model Operation                                                          #
-// ############################################################################
+/* -------------------------------------------------------------------------
+ * Model Operation
+ * -----------------------------------------------------------------------*/
 
 export type GetModelOperationResponse = {
   operation: Operation;
