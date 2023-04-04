@@ -1,7 +1,6 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import * as yup from "yup";
 import axios from "axios";
-import { useRouter } from "next/router";
 import { shallow } from "zustand/shallow";
 import {
   FormRoot,
@@ -67,7 +66,6 @@ export const ConfigureDestinationForm = ({
   accessToken,
 }: ConfigureDestinationFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const router = useRouter();
 
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -370,7 +368,6 @@ export const ConfigureDestinationForm = ({
               process: "destination",
             });
           }
-          router.push("/destinations");
         },
         onError: (error) => {
           if (axios.isAxiosError(error)) {
@@ -396,7 +393,6 @@ export const ConfigureDestinationForm = ({
     amplitudeIsInit,
     deleteDestination,
     destination,
-    router,
     closeModal,
     onDelete,
     accessToken,

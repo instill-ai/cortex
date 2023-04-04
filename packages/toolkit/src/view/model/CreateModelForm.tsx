@@ -1,0 +1,758 @@
+import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { shallow } from "zustand/shallow";
+import {
+  BasicProgressMessageBox,
+  BasicSingleSelect,
+  BasicTextArea,
+  BasicTextField,
+  BasicUploadFileField,
+  FormRoot,
+  ProgressMessageBoxState,
+  SingleSelectOption,
+  SolidButton,
+  getModelDefinitionToolkit,
+} from "@instill-ai/design-system";
+
+import {
+  useCreateArtivcModel,
+  useCreateGithubModel,
+  useCreateHuggingFaceModel,
+  useCreateLocalModel,
+  useModelDefinitions,
+  getModelQuery,
+  validateResourceId,
+  checkCreateModelOperationUntilDone,
+  useAmplitudeCtx,
+  sendAmplitudeData,
+  useCreateResourceFormStore,
+  getInstillApiErrorMessage,
+  useDeployModel,
+  type CreateGithubModelPayload,
+  type CreateHuggingFaceModelPayload,
+  type CreateArtivcModelPayload,
+  type CreateLocalModelPayload,
+  type Model,
+  type Nullable,
+  type CreateResourceFormStore,
+} from "../../lib";
+import axios from "axios";
+
+export type CreateModelFormValue = {
+  id: Nullable<string>;
+  modelDefinition: Nullable<string>;
+  modelInstanceTag: Nullable<string>;
+  file: Nullable<File>;
+  repo: Nullable<string>;
+  description: Nullable<string>;
+  gcsBucketPath: Nullable<string>;
+  credentials: Nullable<string>;
+  huggingFaceRepo: Nullable<string>;
+};
+
+export type CreateModelFormProps = {
+  accessToken: Nullable<string>;
+  marginBottom: Nullable<string>;
+  initStoreOnCreate: boolean;
+  onCreate: Nullable<() => void>;
+};
+
+const selector = (state: CreateResourceFormStore) => ({
+  init: state.init,
+  setFieldError: state.setFieldError,
+  setFieldValue: state.setFieldValue,
+  modelId: state.fields.model.new.id,
+  modelIdError: state.errors.model.new.id,
+  modelDescription: state.fields.model.new.description,
+  modelDescriptionError: state.errors.model.new.description,
+  modelDefinition: state.fields.model.new.definition,
+  modelDefinitionError: state.errors.model.new.definition,
+  modelGithubRepoUrl: state.fields.model.new.github.repoUrl,
+  modelGithubRepoUrlError: state.errors.model.new.github.repoUrl,
+  modelGithubTag: state.fields.model.new.github.tag,
+  modelGithubTagError: state.errors.model.new.github.tag,
+  modelLocalFile: state.fields.model.new.local.file,
+  modelLocalFileError: state.errors.model.new.local.file,
+  modelArtivcGcsBucketPath: state.fields.model.new.artivc.gcsBucketPath,
+  modelArtivcGcsBucketPathError: state.errors.model.new.artivc.gcsBucketPath,
+  modelArtivcCredentials: state.fields.model.new.artivc.credentials,
+  modelArtivcCredentialsError: state.errors.model.new.artivc.credentials,
+  modelArtivcTag: state.fields.model.new.artivc.tag,
+  modelArtivcTagError: state.errors.model.new.artivc.tag,
+  modelHuggingFaceRepoUrl: state.fields.model.new.huggingFace.repoUrl,
+  modelHuggingFaceRepoUrlError: state.errors.model.new.huggingFace.repoUrl,
+});
+
+export const CreateModelForm = ({
+  accessToken,
+  marginBottom,
+  initStoreOnCreate,
+  onCreate,
+}: CreateModelFormProps) => {
+  /* -------------------------------------------------------------------------
+   * Initialize form state
+   * -----------------------------------------------------------------------*/
+
+  const { amplitudeIsInit } = useAmplitudeCtx();
+  const queryClient = useQueryClient();
+
+  const {
+    init,
+    setFieldError,
+    setFieldValue,
+    modelId,
+    modelIdError,
+    modelDescription,
+    modelDescriptionError,
+    modelDefinition,
+    modelDefinitionError,
+    modelGithubRepoUrl,
+    modelGithubRepoUrlError,
+    modelGithubTag,
+    modelGithubTagError,
+    modelLocalFile,
+    modelLocalFileError,
+    modelArtivcGcsBucketPath,
+    modelArtivcGcsBucketPathError,
+    modelArtivcCredentials,
+    modelArtivcCredentialsError,
+    modelArtivcTag,
+    modelArtivcTagError,
+    modelHuggingFaceRepoUrl,
+    modelHuggingFaceRepoUrlError,
+  } = useCreateResourceFormStore(selector, shallow);
+
+  /* -------------------------------------------------------------------------
+   * Initialize the model definition
+   * -----------------------------------------------------------------------*/
+
+  const modelDefinitions = useModelDefinitions({
+    accessToken,
+    enable: true,
+  });
+
+  const modelDefinitionOptions = useMemo(() => {
+    if (!modelDefinitions.isSuccess) return [];
+
+    return modelDefinitions.data.map((e) => {
+      const { getIcon } = getModelDefinitionToolkit(e.name);
+      return {
+        label: e.title,
+        value: e.name,
+        startIcon: getIcon({
+          width: "w-[30px]",
+          height: "h-[30px]",
+          color: "fill-instillGrey90",
+          position: "my-auto",
+        }),
+      };
+    });
+  }, [modelDefinitions.isSuccess, modelDefinitions.data]);
+
+  const [selectedModelDefinitionOption, setSelectedModelDefinitionOption] =
+    useState<Nullable<SingleSelectOption>>(null);
+
+  // #########################################################################
+  // # 2 - Create github/local/artivc/huggingface model                      #
+  // #########################################################################
+  const [modelCreated, setModelCreated] = useState(false);
+  const [newModel, setNewModel] = useState<Nullable<Model>>(null);
+
+  const [createModelMessageBoxState, setCreateModelMessageBoxState] =
+    useState<ProgressMessageBoxState>({
+      activate: false,
+      message: null,
+      description: null,
+      status: null,
+    });
+
+  const canCreateModel = useMemo(() => {
+    console.log({
+      modelCreated,
+      modelDefinition,
+      modelId,
+      modelGithubRepoUrl,
+      modelGithubTag,
+      modelLocalFile,
+      modelArtivcGcsBucketPath,
+      modelArtivcTag,
+      modelHuggingFaceRepoUrl,
+    });
+    if (!modelDefinition || modelCreated || !modelId) {
+      return false;
+    }
+
+    if (modelDefinition === "model-definitions/github") {
+      if (!modelGithubRepoUrl || !modelGithubTag) {
+        return false;
+      }
+      return true;
+    }
+
+    if (modelDefinition === "model-definitions/local") {
+      if (!modelLocalFile) {
+        return false;
+      }
+      return true;
+    }
+
+    if (modelDefinition === "model-definitions/artivc") {
+      if (!modelArtivcGcsBucketPath || !modelArtivcTag) {
+        return false;
+      }
+
+      return true;
+    }
+
+    if (!modelHuggingFaceRepoUrl) {
+      return false;
+    }
+
+    return true;
+  }, [
+    modelCreated,
+    modelDefinition,
+    modelId,
+    modelGithubRepoUrl,
+    modelGithubTag,
+    modelLocalFile,
+    modelArtivcGcsBucketPath,
+    modelArtivcTag,
+    modelHuggingFaceRepoUrl,
+  ]);
+
+  const createGithubModel = useCreateGithubModel();
+  const createLocalModel = useCreateLocalModel();
+  const createArtivcModel = useCreateArtivcModel();
+  const createHuggingFaceModel = useCreateHuggingFaceModel();
+
+  const prepareNewModel = useCallback(
+    async (modelName: string) => {
+      const model = await getModelQuery({ modelName, accessToken });
+      setModelCreated(true);
+      setNewModel(model);
+
+      queryClient.setQueryData<Model>(["models", model.name], model);
+      queryClient.setQueryData<Model[]>(["models"], (old) =>
+        old ? [...old, model] : [model]
+      );
+
+      setCreateModelMessageBoxState({
+        activate: true,
+        status: "success",
+        description: null,
+        message: "Succeed.",
+      });
+
+      if (amplitudeIsInit) {
+        sendAmplitudeData("create_github_model", {
+          type: "critical_action",
+          process: "model",
+        });
+      }
+    },
+    [amplitudeIsInit, sendAmplitudeData]
+  );
+
+  const deployModel = useDeployModel();
+  const handleDeployModel = useCallback(
+    async (modelName: string) => {
+      deployModel.mutate({ modelName, accessToken });
+    },
+    [deployModel, accessToken]
+  );
+
+  const handelCreateModel = useCallback(async () => {
+    if (!modelId) return;
+
+    // We don't validate the rest of the field if the ID is incorrect
+    if (!validateResourceId(modelId as string)) {
+      setFieldError(
+        "model.new.id",
+        "Resource ID restricts to lowercase letters, numbers, and hyphen, with the first character a letter, the last a letter or a number, and a 63 character maximum."
+      );
+      return;
+    } else if (modelId) {
+      setFieldError("model.new.id", null);
+    }
+
+    setCreateModelMessageBoxState(() => ({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Creating...",
+    }));
+
+    if (modelDefinition === "model-definitions/github") {
+      if (!modelGithubRepoUrl || !modelGithubTag) return;
+
+      const payload: CreateGithubModelPayload = {
+        id: modelId.trim(),
+        model_definition: "model-definitions/github",
+        description: modelDescription ?? null,
+        configuration: {
+          repository: modelGithubRepoUrl.trim(),
+          tag: modelGithubTag.trim(),
+        },
+      };
+
+      createGithubModel.mutate(
+        { payload, accessToken },
+        {
+          onSuccess: async ({ operation }) => {
+            if (!modelId) return;
+            const operationIsDone = await checkCreateModelOperationUntilDone({
+              operationName: operation.name,
+              accessToken,
+            });
+
+            if (operationIsDone) {
+              const modelName = `models/${modelId.trim()}`;
+              await prepareNewModel(modelName);
+              handleDeployModel(modelName);
+            }
+
+            if (initStoreOnCreate) {
+              init();
+            }
+
+            if (onCreate) {
+              onCreate();
+            }
+          },
+          onError: (error) => {
+            if (axios.isAxiosError(error)) {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: getInstillApiErrorMessage(error),
+                message: error.message,
+              }));
+            } else {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message: "Something went wrong when create the GitHub model",
+              }));
+            }
+          },
+        }
+      );
+    } else if (modelDefinition === "model-definitions/local") {
+      if (!modelId || !modelLocalFile) {
+        return;
+      }
+
+      const payload: CreateLocalModelPayload = {
+        id: modelId.trim(),
+        description: modelDescription ? modelDescription : "",
+        model_definition: "model-definitions/local",
+        configuration: {
+          content: modelLocalFile,
+        },
+      };
+
+      createLocalModel.mutate(
+        { payload, accessToken },
+        {
+          onSuccess: async ({ operation }) => {
+            if (!modelId) return;
+            const operationIsDone = await checkCreateModelOperationUntilDone({
+              operationName: operation.name,
+              accessToken,
+            });
+
+            if (operationIsDone) {
+              const modelName = `models/${modelId.trim()}`;
+              await prepareNewModel(modelName);
+              handleDeployModel(modelName);
+            }
+
+            if (initStoreOnCreate) {
+              init();
+            }
+
+            if (onCreate) {
+              onCreate();
+            }
+          },
+          onError: (error) => {
+            if (axios.isAxiosError(error)) {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: getInstillApiErrorMessage(error),
+                message: error.message,
+              }));
+            } else {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message: "Something went wrong when create the local model",
+              }));
+            }
+          },
+        }
+      );
+    } else if (modelDefinition === "model-definitions/artivc") {
+      if (!modelArtivcGcsBucketPath || !modelArtivcTag) return;
+
+      const payload: CreateArtivcModelPayload = {
+        id: modelId.trim(),
+        model_definition: "model-definitions/artivc",
+        description: modelDescription ?? null,
+        configuration: {
+          url: modelArtivcGcsBucketPath.trim(),
+          credential: modelArtivcCredentials
+            ? modelArtivcCredentials.trim()
+            : null,
+          tag: modelArtivcTag.trim(),
+        },
+      };
+
+      createArtivcModel.mutate(
+        { payload, accessToken },
+        {
+          onSuccess: async ({ operation }) => {
+            if (!modelId) return;
+            const operationIsDone = await checkCreateModelOperationUntilDone({
+              operationName: operation.name,
+              accessToken,
+            });
+
+            if (operationIsDone) {
+              const modelName = `models/${modelId.trim()}`;
+              await prepareNewModel(modelName);
+              handleDeployModel(modelName);
+            }
+
+            if (initStoreOnCreate) {
+              init();
+            }
+
+            if (onCreate) {
+              onCreate();
+            }
+          },
+          onError: (error) => {
+            if (axios.isAxiosError(error)) {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: getInstillApiErrorMessage(error),
+                message: error.message,
+              }));
+            } else {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message: "Something went wrong when create the ArtiVC model",
+              }));
+            }
+          },
+        }
+      );
+    } else {
+      if (!modelHuggingFaceRepoUrl) return;
+
+      const payload: CreateHuggingFaceModelPayload = {
+        id: modelId.trim(),
+        model_definition: "model-definitions/huggingface",
+        description: modelDescription ?? null,
+        configuration: {
+          repo_id: modelHuggingFaceRepoUrl.trim(),
+        },
+      };
+
+      createHuggingFaceModel.mutate(
+        { payload, accessToken },
+        {
+          onSuccess: async ({ operation }) => {
+            if (!modelId) return;
+            const operationIsDone = await checkCreateModelOperationUntilDone({
+              operationName: operation.name,
+              accessToken,
+            });
+
+            if (operationIsDone) {
+              const modelName = `models/${modelId.trim()}`;
+              await prepareNewModel(modelName);
+              handleDeployModel(modelName);
+            }
+
+            if (initStoreOnCreate) {
+              init();
+            }
+
+            if (onCreate) {
+              onCreate();
+            }
+          },
+          onError: (error) => {
+            if (axios.isAxiosError(error)) {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: getInstillApiErrorMessage(error),
+                message: error.message,
+              }));
+            } else {
+              setCreateModelMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message:
+                  "Something went wrong when create the HuggingFace model",
+              }));
+            }
+          },
+        }
+      );
+    }
+  }, [
+    amplitudeIsInit,
+    createArtivcModel,
+    createGithubModel,
+    createLocalModel,
+    createHuggingFaceModel,
+    modelArtivcCredentials,
+    modelArtivcGcsBucketPath,
+    modelArtivcTag,
+    modelDefinition,
+    modelDescription,
+    modelHuggingFaceRepoUrl,
+    modelId,
+    modelLocalFile,
+    modelGithubRepoUrl,
+    modelGithubTag,
+  ]);
+
+  const getModelSetupGuide = useCallback((modelDefinition: string) => {
+    switch (modelDefinition) {
+      case "model-definitions/github":
+        return "https://www.instill.tech/docs/import-models/github";
+      case "model-definitions/artivc":
+        return "https://www.instill.tech/docs/import-models/artivc";
+      case "model-definitions/local":
+        return "https://www.instill.tech/docs/import-models/local";
+      case "model-definitions/huggingface":
+        return "https://www.instill.tech/docs/import-models/huggingface";
+      default:
+        return "https://www.instill.tech/docs/import-models/overview";
+    }
+  }, []);
+
+  return (
+    <FormRoot marginBottom={marginBottom} formLess={false} width={null}>
+      <div className="flex flex-col gap-y-5 mb-10">
+        <BasicTextField
+          id="modelId"
+          label="ID"
+          key="id"
+          description="Pick a name to help you identify this resource. 
+                  The ID conforms to RFC-1034, which restricts to letters, 
+                  numbers, and hyphen, with the first character a letter, 
+                  the last a letter or a number, and a 63 character maximum."
+          required={true}
+          disabled={
+            modelDefinitions.isSuccess ? (modelCreated ? true : false) : false
+          }
+          value={modelId}
+          error={modelIdError}
+          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+            if (!event.target.value) {
+              setFieldValue("model.new.id", null);
+              setFieldError("model.new.id", null);
+              return;
+            }
+
+            const value = event.target.value.trim();
+
+            if (validateResourceId(value)) {
+              setFieldValue("model.new.id", value);
+              setFieldError("model.new.id", null);
+            } else {
+              setFieldValue("model.new.id", value);
+              setFieldError(
+                "model.new.id",
+                "Resource ID restricts to lowercase letters, numbers, and hyphen, with the first character a letter, the last a letter or a number, and a 63 character maximum."
+              );
+            }
+          }}
+        />
+        <BasicTextArea
+          id="description"
+          label="Description"
+          key="description"
+          description="Fill with a short description."
+          required={false}
+          disabled={
+            modelDefinitions.isSuccess ? (modelCreated ? true : false) : false
+          }
+          value={modelDescription}
+          error={modelDescriptionError}
+          enableCounter={true}
+          counterWordLimit={1023}
+          onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+            setFieldValue("model.new.description", event.target.value)
+          }
+        />
+        <BasicSingleSelect
+          id="modelDefinition"
+          key="modelDefinition"
+          label="Model source"
+          value={selectedModelDefinitionOption}
+          options={modelDefinitionOptions ? modelDefinitionOptions : []}
+          error={modelDefinitionError}
+          onChange={(option) => {
+            setFieldValue("model.new.definition", option?.value);
+            setSelectedModelDefinitionOption(option);
+          }}
+          disabled={
+            modelDefinitions.isSuccess ? (modelCreated ? true : false) : false
+          }
+          required={true}
+          description={`<a href="${getModelSetupGuide(
+            modelDefinition || ""
+          )}">Setup Guide</a>`}
+        />
+        {selectedModelDefinitionOption?.value === "model-definitions/github" ? (
+          <>
+            <BasicTextField
+              id="modelRepo"
+              label="GitHub repository"
+              description="The name of a public GitHub repository, e.g.
+                      `instill-ai/model-mobilenetv2`."
+              required={true}
+              value={modelGithubRepoUrl}
+              error={modelGithubRepoUrlError}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setFieldValue("model.new.github.repoUrl", event.target.value)
+              }
+              disabled={modelCreated ? true : false}
+            />
+            <BasicTextField
+              id="modelTag"
+              label="GitHub repository tag"
+              description="The tag of the public GitHub repository, e.g. `v1.0-cpu`."
+              required={true}
+              value={modelGithubTag}
+              error={modelGithubTagError}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setFieldValue("model.new.github.tag", event.target.value)
+              }
+              disabled={modelCreated ? true : false}
+            />
+          </>
+        ) : null}
+        {selectedModelDefinitionOption?.value === "model-definitions/local" ? (
+          <>
+            <BasicUploadFileField
+              id="file"
+              name="file"
+              label="Upload a file"
+              description="Create and upload a zip file that contains all the model files from your computer"
+              error={modelLocalFileError}
+              placeholder=""
+              uploadButtonText="Upload"
+              required={true}
+              readOnly={false}
+              disabled={modelCreated ? true : false}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setFieldValue("model.new.local.file", event.target.files)
+              }
+            />
+          </>
+        ) : null}
+        {selectedModelDefinitionOption?.value === "model-definitions/artivc" ? (
+          <>
+            <BasicTextField
+              id="gcsBucketPath"
+              label="GCS Bucket Path"
+              description="The bucket path string of Google Cloud Storage (GCS), e.g. `gs://mybucket/path/to/mymodel/`."
+              required={true}
+              value={modelArtivcGcsBucketPath}
+              error={modelArtivcGcsBucketPathError}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setFieldValue(
+                  "model.new.artivc.gcsBucketPath",
+                  event.target.value
+                )
+              }
+            />
+            <BasicTextField
+              id="artivcTag"
+              label="ArtiVC Tag"
+              description="The tag name of ArtiVC source commit, e.g. `v1.0-cpu`."
+              required={true}
+              value={modelArtivcTag}
+              error={modelArtivcTagError}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setFieldValue(
+                  "model.new.artivc.gcsBucketPath",
+                  event.target.value
+                )
+              }
+            />
+            <BasicTextArea
+              id="artivcCredentials"
+              label="Credentials JSON"
+              key="credentials"
+              description="If the GCS bucket path is private, please provide the Google Cloud Application Default credential or service account credential in its JSON format to get access to the model. See ArtiVC Google Cloud Storage setup guide."
+              value={modelArtivcCredentials}
+              error={modelArtivcCredentialsError}
+              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+                setFieldValue(
+                  "model.new.artivc.credentials",
+                  event.target.value
+                )
+              }
+            />
+          </>
+        ) : null}
+        {selectedModelDefinitionOption?.value ===
+        "model-definitions/huggingface" ? (
+          <>
+            <BasicTextField
+              id="huggingFaceRepo"
+              label="HuggingFace model ID"
+              description="The name of a public HuggingFace model ID, e.g. `google/vit-base-patch16-224`."
+              required={true}
+              value={modelHuggingFaceRepoUrl}
+              error={modelHuggingFaceRepoUrlError}
+              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+                setFieldValue(
+                  "model.new.huggingFace.repoUrl",
+                  event.target.value
+                )
+              }
+            />
+          </>
+        ) : null}
+      </div>
+      <div className="flex flex-row mb-10">
+        <BasicProgressMessageBox
+          state={createModelMessageBoxState}
+          setActivate={(activate) =>
+            setCreateModelMessageBoxState((prev) => ({ ...prev, activate }))
+          }
+          width="w-[25vw]"
+          closable={true}
+        />
+        <SolidButton
+          disabled={canCreateModel ? false : true}
+          onClickHandler={() => handelCreateModel()}
+          position="ml-auto my-auto"
+          type="button"
+          data-testid="set-up-model-button"
+          color="primary"
+        >
+          Set up
+        </SolidButton>
+      </div>
+    </FormRoot>
+  );
+};
