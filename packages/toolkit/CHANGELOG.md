@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.22.0...@instill-ai/toolkit-v0.23.0) (2023-04-04)
+
+
+### Features
+
+* [INS-400] add normal create model form ([#274](https://github.com/instill-ai/design-system/issues/274)) ([44d06de](https://github.com/instill-ai/design-system/commit/44d06de4dfe5276d759118f4bcace19473c1278f))
+
 ## [0.22.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.21.3...@instill-ai/toolkit-v0.22.0) (2023-04-04)
 
 
