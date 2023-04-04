@@ -2,12 +2,12 @@ import { Nullable } from "../../type";
 import {
   getDestinationDefinitionQuery,
   getDestinationQuery,
-  getModelInstanceQuery,
+  getModelQuery,
   getSourceDefinitionQuery,
   getSourceQuery,
-  ModelInstance,
-  PipelineRecipe,
-  RawPipelineRecipe,
+  type Model,
+  type PipelineRecipe,
+  type RawPipelineRecipe,
 } from "../../vdp-sdk";
 
 export const constructPipelineRecipeWithDefinition = async ({
@@ -34,14 +34,14 @@ export const constructPipelineRecipeWithDefinition = async ({
       destinationDefinitionName: destination.destination_connector_definition,
       accessToken,
     });
-    const instances: ModelInstance[] = [];
+    const models: Model[] = [];
 
-    for (const modelInstanceName of rawRecipe.model_instances) {
-      const modelInstance = await getModelInstanceQuery({
-        modelInstanceName,
+    for (const modelName of rawRecipe.models) {
+      const model = await getModelQuery({
+        modelName,
         accessToken,
       });
-      instances.push(modelInstance);
+      models.push(model);
     }
 
     const recipe: PipelineRecipe = {
@@ -50,7 +50,7 @@ export const constructPipelineRecipeWithDefinition = async ({
         ...destination,
         destination_connector_definition: destinationDefinition,
       },
-      models: instances,
+      models,
     };
 
     return Promise.resolve(recipe);

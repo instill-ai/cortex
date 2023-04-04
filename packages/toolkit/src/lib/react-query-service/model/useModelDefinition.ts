@@ -18,7 +18,7 @@ export const useModelDefinition = ({
   }
 
   return useQuery(
-    ["models", "definition", modelDefinitionName],
+    ["model-definitions", modelDefinitionName],
     async () => {
       if (!modelDefinitionName) {
         return Promise.reject(new Error("Model definition name not found"));

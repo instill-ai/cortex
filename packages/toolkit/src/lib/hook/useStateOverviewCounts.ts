@@ -1,8 +1,7 @@
 import {
   Destination,
   DestinationWithPipelines,
-  ModelInstance,
-  ModelWithInstance,
+  Model,
   Pipeline,
   Source,
   SourceWithPipelines,
@@ -14,10 +13,9 @@ type Item =
   | Pipeline
   | Source
   | Destination
-  | ModelInstance
   | DestinationWithPipelines
   | SourceWithPipelines
-  | ModelWithInstance;
+  | Model;
 
 export type StateOverviewCounts = {
   online: number;
@@ -93,22 +91,7 @@ export function useStateOverviewCounts(
       return;
     }
 
-    if (itemNameList[0] === "model" && itemNameList[2] !== "instances") {
-      for (const item of items as ModelWithInstance[]) {
-        if (item.state === "STATE_ONLINE") {
-          counts.online += 1;
-        } else if (
-          item.state === "STATE_OFFLINE" ||
-          item.state === "STATE_UNSPECIFIED"
-        ) {
-          counts.offline += 1;
-        } else {
-          counts.error += 1;
-        }
-      }
-    }
-
-    for (const item of items as ModelInstance[]) {
+    for (const item of items as Model[]) {
       if (item.state === "STATE_ONLINE") {
         counts.online += 1;
       } else if (

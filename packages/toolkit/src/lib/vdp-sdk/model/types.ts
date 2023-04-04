@@ -1,10 +1,15 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-// ###################################################################
-// #                                                                 #
-// # Model Definition                                                #
-// #                                                                 #
-// ###################################################################
+export type ModelReleaseStage =
+  | "RELEASE_STAGE_UNSPECIFIED"
+  | "RELEASE_STAGE_ALPHA"
+  | "RELEASE_STAGE_BETA"
+  | "RELEASE_STAGE_GENERALLY_AVAILABLE"
+  | "RELEASE_STAGE_CUSTOM";
+
+/* -------------------------------------------------------------------------
+ * Model Definition
+ * -----------------------------------------------------------------------*/
 
 export type ModelDefinition = {
   name: string;
@@ -13,17 +18,15 @@ export type ModelDefinition = {
   title: string;
   documentation_url: string;
   icon: string;
+  release_stage: ModelReleaseStage;
   model_spec: Record<string, any>;
-  model_instance_spec: Record<string, any>;
   create_time: string;
   update_time: string;
 };
 
-// ###################################################################
-// #                                                                 #
-// # Model                                                           #
-// #                                                                 #
-// ###################################################################
+/* -------------------------------------------------------------------------
+ * Model
+ * -----------------------------------------------------------------------*/
 
 export type Model = {
   name: string;
@@ -31,29 +34,15 @@ export type Model = {
   id: string;
   description: string;
   model_definition: string;
-  configuration: string;
+  configuration: {
+    [key: string]: any;
+  };
+  task: string;
+  state: ModelState;
   visibility: string;
-  user: string;
-  org: string;
   create_time: string;
   update_time: string;
 };
-
-// - Becasuse model itself doesn't have state, we have to conclude model
-// state using model_instance state.
-// - model_instance.error > model_instance.online > model_instance.offline
-// - Model state will be error if there exist a error model_insance
-
-export type ModelWithInstance = Model & {
-  instances: ModelInstance[];
-  state: ModelState;
-};
-
-// ###################################################################
-// #                                                                 #
-// # Model Instance                                                  #
-// #                                                                 #
-// ###################################################################
 
 export type ModelState =
   | "STATE_ONLINE"
@@ -61,19 +50,7 @@ export type ModelState =
   | "STATE_ERROR"
   | "STATE_UNSPECIFIED";
 
-export type ModelInstance = {
-  name: string;
-  uid: string;
-  id: string;
-  state: ModelState;
-  task: string;
-  model_definition: string;
-  configuration: Record<string, any>;
-  create_time: string;
-  update_time: string;
-};
-
-export type ModelInstanceReadme = {
+export type ModelCard = {
   name: string;
   size: number;
   type: string;
@@ -81,7 +58,7 @@ export type ModelInstanceReadme = {
   encoding: string;
 };
 
-export type ModelInstanceTask =
+export type ModelTask =
   | "TASK_CLASSIFICATION"
   | "TASK_DETECTION"
   | "TASK_KEYPOINT"

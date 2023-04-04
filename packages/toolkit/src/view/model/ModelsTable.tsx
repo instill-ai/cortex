@@ -2,24 +2,24 @@ import { useMemo, useState } from "react";
 
 import {
   NameCell,
-  ModelInstancesCell,
   TableHead,
   TableHeadItem,
   ModelDefinitionCell,
   TableLoadingProgress,
   PaginationListContainer,
+  ModelTaskCell,
 } from "../../components";
 import {
   useSearchedResources,
   env,
   chunk,
-  type ModelWithInstance,
+  type Model,
   type Nullable,
 } from "../../lib";
 import { ModelTablePlaceholder } from "./ModelTablePlaceholder";
 
 export type ModelsTableProps = {
-  models: Nullable<ModelWithInstance[]>;
+  models: Nullable<Model[]>;
   marginBottom: Nullable<string>;
 };
 
@@ -97,10 +97,10 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
                         modelDefinition={model.model_definition}
                         padding="py-2"
                       />
-                      <ModelInstancesCell
+                      <ModelTaskCell
                         width={null}
                         padding="py-2 pr-6"
-                        modelCount={model.instances.length}
+                        modelTask={model.task}
                       />
                     </tr>
                   ))

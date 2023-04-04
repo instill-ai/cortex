@@ -41,10 +41,8 @@ const selector = (state: CreateResourceFormStore) => ({
   modelType: state.fields.model.type,
   existingModelId: state.fields.model.existing.id,
   existingModelDefinition: state.fields.model.existing.definition,
-  existingModelInstanceTag: state.fields.model.existing.instanceTag,
   newModelId: state.fields.model.new.id,
   newModelDefinition: state.fields.model.new.definition,
-  newModelInstanceTag: state.fields.model.new.instanceTag,
   newGithubModelRepoUrl: state.fields.model.new.github.repoUrl,
   newLocalModelFile: state.fields.model.new.local.file,
   newArtivcModelGcsBucketPath: state.fields.model.new.artivc.gcsBucketPath,
@@ -89,10 +87,8 @@ export const SetPipelineDetailsStep = ({
     modelType,
     existingModelId,
     existingModelDefinition,
-    existingModelInstanceTag,
     newModelId,
     newModelDefinition,
-    newModelInstanceTag,
     newGithubModelRepoUrl,
     newLocalModelFile,
     newArtivcModelGcsBucketPath,
@@ -142,8 +138,7 @@ export const SetPipelineDetailsStep = ({
     if (
       newModelDefinition === "model-definitions/github" &&
       newModelId &&
-      newGithubModelRepoUrl &&
-      newModelInstanceTag
+      newGithubModelRepoUrl
     ) {
       validator.modelIsValid = true;
     }
@@ -152,8 +147,7 @@ export const SetPipelineDetailsStep = ({
     if (
       newModelDefinition === "model-definitions/local" &&
       newModelId &&
-      newLocalModelFile &&
-      newModelInstanceTag
+      newLocalModelFile
     ) {
       validator.modelIsValid = true;
     }
@@ -162,8 +156,7 @@ export const SetPipelineDetailsStep = ({
     if (
       newModelDefinition === "model-definitions/artivc" &&
       newModelId &&
-      newArtivcModelGcsBucketPath &&
-      newModelInstanceTag
+      newArtivcModelGcsBucketPath
     ) {
       validator.modelIsValid = true;
     }
@@ -172,8 +165,7 @@ export const SetPipelineDetailsStep = ({
     if (
       newModelDefinition === "model-definitions/huggingface" &&
       newModelId &&
-      newHuggingFaceModelRepoUrl &&
-      newModelInstanceTag
+      newHuggingFaceModelRepoUrl
     ) {
       validator.modelIsValid = true;
     }
@@ -205,7 +197,6 @@ export const SetPipelineDetailsStep = ({
     newDestinationDefinition,
     newModelId,
     newModelDefinition,
-    newModelInstanceTag,
     newLocalModelFile,
     newGithubModelRepoUrl,
     newArtivcModelGcsBucketPath,
@@ -253,19 +244,18 @@ export const SetPipelineDetailsStep = ({
       sourceName = `source-connectors/${existingSourceId}`;
     }
 
-    let modelInstanceTag: string;
+    let modelName: string;
 
     if (modelType === "new") {
-      if (!newModelId || !newModelInstanceTag) {
+      if (!newModelId) {
         return;
       }
-      modelInstanceTag = `models/${newModelId}/instances/${newModelInstanceTag}`;
+      modelName = `models/${newModelId}`;
     } else {
-      if (!existingModelId || !existingModelInstanceTag) {
+      if (!existingModelId) {
         return;
       }
-
-      modelInstanceTag = `models/${existingModelId}/instances/${existingModelInstanceTag}`;
+      modelName = `models/${existingModelId}`;
     }
 
     let destinationName: string;
@@ -282,7 +272,7 @@ export const SetPipelineDetailsStep = ({
       id: pipelineId,
       recipe: {
         source: sourceName,
-        model_instances: [modelInstanceTag],
+        model_instances: [modelName],
         destination: destinationName,
       },
     };

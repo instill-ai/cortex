@@ -1,24 +1,15 @@
 import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
-import {
-  groupBy,
-  Nullable,
-  type ModelInstance,
-  type ModelState,
-} from "../../lib";
+import { groupBy, Nullable, type Model, type ModelState } from "../../lib";
 
 export type ModelsCellProps = {
-  modelInstances: ModelInstance[];
+  models: Model[];
   width: Nullable<string>;
   padding: string;
 };
 
-export const ModelsCell = ({
-  width,
-  modelInstances,
-  padding,
-}: ModelsCellProps) => {
-  const groupByModel = groupBy(modelInstances, (i) => {
+export const ModelsCell = ({ width, models, padding }: ModelsCellProps) => {
+  const groupByModel = groupBy(models, (i) => {
     const modelInstanceNameList = i.name.split("/");
     return modelInstanceNameList[1];
   });

@@ -1,4 +1,4 @@
-export * from "./ChangeModelInstanceStateToggle";
+export * from "./ChangeModelStateToggle";
 export * from "./CreateModelWithPresetForm";
 export * from "./ConfigureModelForm";
 export * from "./ConfigureModelInstanceForm";

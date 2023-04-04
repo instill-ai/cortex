@@ -11,7 +11,6 @@ import {
 import {
   checkCreateModelOperationUntilDone,
   getModelQuery,
-  listModelInstancesQuery,
   getInstillApiErrorMessage,
   useCreateGithubModel,
   useCreateHuggingFaceModel,
@@ -24,8 +23,7 @@ import {
   type CreateHuggingFaceModelPayload,
   type CreateGithubModelPayload,
   type Model,
-  type ModelInstance,
-  Nullable,
+  type Nullable,
 } from "../../../lib";
 import { shallow } from "zustand/shallow";
 
@@ -44,6 +42,7 @@ const modelSelector = (state: CreateResourceFormStore) => ({
   modelDefinition: state.fields.model.new.definition,
   modelDescription: state.fields.model.new.description,
   githubModelRepoUrl: state.fields.model.new.github.repoUrl,
+  githubModelTag: state.fields.model.new.github.tag,
   huggingFaceModelRepoUrl: state.fields.model.new.huggingFace.repoUrl,
   setFieldValue: state.setFieldValue,
   t: state.fields.model.new.modelIsSet,
@@ -67,6 +66,7 @@ export const CreateModelConfirmationModal = ({
     modelDescription,
     modelDefinition,
     githubModelRepoUrl,
+    githubModelTag,
     huggingFaceModelRepoUrl,
     setFieldValue,
   } = useCreateResourceFormStore(modelSelector, shallow);
@@ -80,21 +80,9 @@ export const CreateModelConfirmationModal = ({
   const prepareNewModel = useCallback(
     async (modelName: string) => {
       const model = await getModelQuery({ modelName, accessToken });
-      const modelInstances = await listModelInstancesQuery({
-        modelName,
-        pageSize: 10,
-        nextPageToken: null,
-        accessToken,
-      });
-
       queryClient.setQueryData<Model>(["models", model.id], model);
       queryClient.setQueryData<Model[]>(["models"], (old) =>
         old ? [...old, model] : [model]
-      );
-
-      queryClient.setQueryData<ModelInstance[]>(
-        ["models", modelName, "modelInstances"],
-        modelInstances
       );
 
       setIsDeploying(false);
@@ -123,13 +111,14 @@ export const CreateModelConfirmationModal = ({
     setIsDeploying(true);
 
     if (modelDefinition === "model-definitions/github") {
-      if (!githubModelRepoUrl) return;
+      if (!githubModelRepoUrl || !githubModelTag) return;
       const payload: CreateGithubModelPayload = {
         id: modelId,
         model_definition: "model-definitions/github",
         description: modelDescription ?? null,
         configuration: {
           repository: githubModelRepoUrl,
+          tag: githubModelTag,
         },
       };
 

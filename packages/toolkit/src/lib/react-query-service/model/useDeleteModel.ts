@@ -17,12 +17,8 @@ export const useDeleteModel = () => {
     },
     {
       onSuccess: (modelName) => {
-        const modelId = modelName.split("/")[1];
-
-        queryClient.removeQueries(["models", modelId], { exact: true });
-
+        queryClient.removeQueries(["models", modelName], { exact: true });
         const models = queryClient.getQueryData<Model[]>(["models"]);
-
         if (models) {
           queryClient.setQueryData<Model[]>(
             ["models"],

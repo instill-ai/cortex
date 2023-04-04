@@ -1,37 +1,31 @@
-import { getModelInstanceReadme } from "../../vdp-sdk";
+import { getModelCardQuery } from "../../vdp-sdk";
 import { Nullable } from "../../type";
 import { useQuery } from "@tanstack/react-query";
 
-export const useModelInstanceReadme = ({
-  modelInstanceName,
+export const useModelCard = ({
+  modelName,
   accessToken,
   enable,
 }: {
-  modelInstanceName: Nullable<string>;
+  modelName: Nullable<string>;
   accessToken: Nullable<string>;
   enable: boolean;
 }) => {
   let enableQuery = false;
 
-  if (modelInstanceName && enable) {
+  if (modelName && enable) {
     enableQuery = true;
   }
 
   return useQuery(
-    [
-      "models",
-      modelInstanceName?.split("/")[1],
-      "modelInstances",
-      modelInstanceName,
-      "readme",
-    ],
+    ["models", modelName, "readme"],
     async () => {
-      if (!modelInstanceName) {
+      if (!modelName) {
         return Promise.reject(new Error("Model instance name not provided"));
       }
 
-      const modelInstanceReadme = await getModelInstanceReadme({
-        modelInstanceName,
+      const modelInstanceReadme = await getModelCardQuery({
+        modelName,
         accessToken,
       });
 

@@ -38,23 +38,23 @@ export const createResourceFormFieldSchema = z.object({
     type: z.union([z.literal("new"), z.literal("existing")]).nullable(),
     existing: z.object({
       id: z.string().nullable(),
-      instanceTag: z.string().nullable(),
       definition: z.string().nullable(),
     }),
     new: z.object({
       id: z.string().nullable(),
       definition: z.string().nullable(),
-      instanceTag: z.string().nullable(),
       description: z.string().nullable(),
       local: z.object({
         file: z.custom<File>((v) => v instanceof File).nullable(),
       }),
       github: z.object({
         repoUrl: z.string().nullable(),
+        tag: z.string().nullable(),
       }),
       artivc: z.object({
         gcsBucketPath: z.string().nullable(),
         credentials: z.string().nullable(),
+        tag: z.string().nullable(),
       }),
       huggingFace: z.object({
         repoUrl: z.string().nullable(),
@@ -140,15 +140,15 @@ const createResourceInitialState: CreateResourceFormState = {
       new: {
         id: null,
         definition: null,
-        instanceTag: null,
         description: null,
         local: {
           file: null,
         },
-        github: { repoUrl: null },
+        github: { repoUrl: null, tag: null },
         artivc: {
           gcsBucketPath: null,
           credentials: null,
+          tag: null,
         },
         huggingFace: { repoUrl: null },
         modelIsSet: false,
@@ -156,7 +156,6 @@ const createResourceInitialState: CreateResourceFormState = {
       existing: {
         id: null,
         definition: null,
-        instanceTag: null,
       },
     },
     pipeline: {
@@ -190,22 +189,21 @@ const createResourceInitialState: CreateResourceFormState = {
       new: {
         id: null,
         definition: null,
-        instanceTag: null,
         description: null,
         local: {
           file: null,
         },
-        github: { repoUrl: null },
+        github: { repoUrl: null, tag: null },
         artivc: {
           gcsBucketPath: null,
           credentials: null,
+          tag: null,
         },
         huggingFace: { repoUrl: null },
       },
       existing: {
         id: null,
         definition: null,
-        instanceTag: null,
       },
     },
     pipeline: {

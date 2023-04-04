@@ -12,14 +12,14 @@ export const getModelDefinitionToolkit = (modelDefinition: string) => {
     case "model-definitions/github": {
       return {
         getIcon: (iconStyle: IconStyle) => <GitHubIcon {...iconStyle} />,
-        title: "GitHub",
+        label: "GitHub",
       };
     }
 
     case "model-definitions/local": {
       return {
         getIcon: (iconStyle: IconStyle) => <LocalUploadIcon {...iconStyle} />,
-        title: "Local",
+        label: "Local",
       };
     }
 
@@ -28,7 +28,7 @@ export const getModelDefinitionToolkit = (modelDefinition: string) => {
         getIcon: (iconStyle: IconStyleWithoutColor) => (
           <ArtiVcIcon {...iconStyle} />
         ),
-        title: "ArtiVC",
+        label: "ArtiVC",
       };
     }
 
@@ -37,7 +37,7 @@ export const getModelDefinitionToolkit = (modelDefinition: string) => {
         getIcon: (iconStyle: IconStyleWithoutColor) => (
           <HuggingFaceIcon {...iconStyle} />
         ),
-        title: "Hugging Face",
+        label: "Hugging Face",
       };
     }
 
@@ -46,7 +46,7 @@ export const getModelDefinitionToolkit = (modelDefinition: string) => {
         getIcon: (iconStyle: IconStyle) => {
           return <div className={cn(iconStyle.width, iconStyle.height)} />;
         },
-        title: "",
+        label: "",
       };
     }
   }

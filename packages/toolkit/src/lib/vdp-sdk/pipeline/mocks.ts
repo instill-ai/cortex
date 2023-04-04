@@ -131,7 +131,7 @@ export const mockPipelines: Pipeline[] = [
       },
       models: [
         {
-          name: "models/github-pochun/instances/v1.0-cpu",
+          name: "models/github-pochun",
           uid: "bb484ced-72a1-462b-b956-6d150db886a1",
           id: "v1.0-cpu",
           state: "STATE_ONLINE",
@@ -140,6 +140,8 @@ export const mockPipelines: Pipeline[] = [
           configuration: {},
           create_time: "2022-05-25T02:13:19.266799Z",
           update_time: "2022-05-25T02:13:41.557573Z",
+          description: "mock model",
+          visibility: "VISIBILITY_UNSPECIFIED",
         },
         {
           name: "models/github-pochun/instances/v1.0-gpu",
@@ -151,6 +153,8 @@ export const mockPipelines: Pipeline[] = [
           configuration: {},
           create_time: "2022-05-25T02:13:19.266799Z",
           update_time: "2022-05-25T02:13:41.557573Z",
+          description: "mock model",
+          visibility: "VISIBILITY_UNSPECIFIED",
         },
       ],
     },

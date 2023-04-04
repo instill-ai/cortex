@@ -67,7 +67,7 @@ export const PipelineTable = ({
             connectorName={pipeline.recipe.source.id}
           />
           <ModelsCell
-            modelInstances={pipeline.recipe.models}
+            models={pipeline.recipe.models}
             width={null}
             padding="py-2"
           />

@@ -6,18 +6,18 @@ export type DeployModelResponse = {
   operation: Operation;
 };
 
-export const deployModelInstanceAction = async ({
-  modelInstanceName,
+export const deployModelAction = async ({
+  modelName,
   accessToken,
 }: {
-  modelInstanceName: string;
+  modelName: string;
   accessToken: Nullable<string>;
 }) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<DeployModelResponse>(
-      `/${modelInstanceName}/deploy`
+      `/${modelName}/deploy`
     );
     return Promise.resolve(data.operation);
   } catch (err) {
@@ -29,63 +29,20 @@ export type UnDeployModelResponse = {
   operation: Operation;
 };
 
-export const unDeployModelInstanceAction = async ({
-  modelInstanceName,
+export const unDeployModeleAction = async ({
+  modelName,
   accessToken,
 }: {
-  modelInstanceName: string;
+  modelName: string;
   accessToken: Nullable<string>;
 }) => {
   try {
     const client = createInstillAxiosClient(accessToken);
 
     const { data } = await client.post<UnDeployModelResponse>(
-      `/${modelInstanceName}/undeploy`
+      `/${modelName}/undeploy`
     );
     return Promise.resolve(data.operation);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-};
-
-export type TestModelInstancePayload = {
-  modelInstanceName: string;
-  content: File;
-};
-
-type TestModelInstanceResult = {
-  category: string;
-  score: number;
-};
-
-export type TestModelInstanceResponse = {
-  output: Record<string, TestModelInstanceResult[]>;
-};
-
-export const testModelInstance = async ({
-  payload,
-  accessToken,
-}: {
-  payload: TestModelInstancePayload;
-  accessToken: Nullable<string>;
-}) => {
-  try {
-    const formData = new FormData();
-    formData.append("file", payload.content);
-
-    const client = createInstillAxiosClient(accessToken);
-
-    const { data } = await client.post<TestModelInstanceResponse>(
-      `/${payload.modelInstanceName}/test-multipart`,
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    return Promise.resolve(data);
   } catch (err) {
     return Promise.reject(err);
   }
