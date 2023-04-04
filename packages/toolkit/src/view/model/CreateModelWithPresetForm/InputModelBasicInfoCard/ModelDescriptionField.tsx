@@ -3,8 +3,8 @@ import { shallow } from "zustand/shallow";
 import { BasicTextArea } from "@instill-ai/design-system";
 
 import {
-  CreateResourceFormStore,
   useCreateResourceFormStore,
+  type CreateResourceFormStore,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({

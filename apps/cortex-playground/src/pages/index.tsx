@@ -10,6 +10,7 @@ import {
 import {
   ConfigurePipelineForm,
   ConfigureProfileForm,
+  CreateModelWithPresetForm,
   PipelinesTable,
   useUser,
 } from "@instill-ai/toolkit";
@@ -19,32 +20,12 @@ import {
   useDestinationsWithPipelines,
   useSourcesWithPipelines,
   SourcesTable,
-  useModelsWithInstances,
   ModelsTable,
   usePipeline,
   PipelineTable,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
-  // const destinations = useDestinationsWithPipelines({ accessToken: null });
-  // const sources = useSourcesWithPipelines({ accessToken: null });
-  // const modelsWithInstances = useModelsWithInstances({ accessToken: null });
-  // const pipeline = usePipeline({
-  //   pipelineName: "pipelines/eee",
-  //   accessToken: null,
-  // });
-
-  const pipelines = usePipelines({
-    enable: true,
-    accessToken: null,
-  });
-
-  const pipeline = usePipeline({
-    pipelineName: `pipelines/yoyomne`,
-    accessToken: null,
-    enable: true,
-  });
-
   const options: SingleSelectOption[] = [
     {
       value: "grpc",
@@ -94,13 +75,12 @@ const IndexPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        <ConfigureProfileForm
-          user={user.isSuccess ? user.data : null}
-          roles={options}
-          marginBottom={null}
-          width={null}
+        <CreateModelWithPresetForm
           accessToken={null}
-          onConfigure={null}
+          onCreate={null}
+          initStoreOnCreate={true}
+          marginBottom={null}
+          width="w-full"
         />
       </div>
     </Root>

@@ -2,9 +2,9 @@ import { BasicTextField } from "@instill-ai/design-system";
 import { ChangeEvent } from "react";
 import { shallow } from "zustand/shallow";
 import {
-  CreateResourceFormStore,
   useCreateResourceFormStore,
   validateResourceId,
+  type CreateResourceFormStore,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({

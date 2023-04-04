@@ -41,6 +41,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-mobilenetv2",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -61,6 +62,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-yolov4-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -71,6 +73,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-yolov7-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -81,6 +84,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-keypoint-detection-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -91,6 +95,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-ocr-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -101,6 +106,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-instance-segmentation-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -111,6 +117,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-semantic-segmentation-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -121,6 +128,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-stable-diffusion-2-dvc",
+      tag: "v1.0-cpu",
     },
   },
   {
@@ -131,6 +139,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     model_definition: "model-definitions/github",
     configuration: {
       repository: "instill-ai/model-gpt2-dvc",
+      tag: "v1.0-cpu",
     },
   },
 ];
