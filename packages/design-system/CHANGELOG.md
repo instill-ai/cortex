@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.10.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.9.2...@instill-ai/design-system-v0.10.0) (2023-04-05)
+
+
+### Features
+
+* add data-testid for input label ([#284](https://github.com/instill-ai/design-system/issues/284)) ([8acd87d](https://github.com/instill-ai/design-system/commit/8acd87dc15eef38421e3cc2287acba3d4dacd0f3))
+
 ## [0.9.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.9.1...@instill-ai/design-system-v0.9.2) (2023-04-05)
 
 
