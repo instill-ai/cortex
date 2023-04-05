@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.1...@instill-ai/toolkit-v0.23.2) (2023-04-05)
+
+
+### Bug Fixes
+
+* fix ConfigureDestinationForm issue ([#280](https://github.com/instill-ai/design-system/issues/280)) ([d334af8](https://github.com/instill-ai/design-system/commit/d334af8018087024658ec7eb095c0b1d0ab84dcc))
+
 ## [0.23.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.0...@instill-ai/toolkit-v0.23.1) (2023-04-05)
 
 
