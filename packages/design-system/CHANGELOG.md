@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.9.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.9.0...@instill-ai/design-system-v0.9.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* fix select id ([#276](https://github.com/instill-ai/design-system/issues/276)) ([c345585](https://github.com/instill-ai/design-system/commit/c34558500966bb317b2a43a9ae4122dc91dce9fc))
+
 ## [0.9.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.8.1...@instill-ai/design-system-v0.9.0) (2023-04-04)
 
 
