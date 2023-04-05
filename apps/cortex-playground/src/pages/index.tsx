@@ -1,6 +1,5 @@
 import { Root } from "@/components/Root";
 import {
-  BasicSingleSelect,
   GrpcIcon,
   HttpIcon,
   MongoDbIcon,
@@ -8,24 +7,9 @@ import {
   SnowflakeIcon,
 } from "@instill-ai/design-system";
 import {
-  ConfigurePipelineForm,
-  ConfigureProfileForm,
-  CreateModelForm,
-  CreateModelWithPresetForm,
-  CreatePipelineForm,
-  PipelinesTable,
   useModels,
   useUser,
-} from "@instill-ai/toolkit";
-import { usePipelines } from "@instill-ai/toolkit";
-import {
-  DestinationsTable,
-  useDestinationsWithPipelines,
-  useSourcesWithPipelines,
-  SourcesTable,
-  ModelsTable,
-  usePipeline,
-  PipelineTable,
+  ModelConfigurationFields,
 } from "@instill-ai/toolkit";
 
 const IndexPage = () => {
@@ -88,10 +72,8 @@ const IndexPage = () => {
           accessToken={null}
           syncModelOnly={true}
         /> */}
-        <CreateModelForm
-          onCreate={null}
-          accessToken={null}
-          initStoreOnCreate={true}
+        <ModelConfigurationFields
+          model={models.data ? models.data[1] : null}
           marginBottom={null}
         />
       </div>
