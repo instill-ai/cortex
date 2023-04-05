@@ -173,6 +173,9 @@ const InputLabelBase = React.forwardRef<InputLabelBaseRef, InputLabelBaseProps>(
                 messageFontWeight,
                 error ? errorLabelTextColor : messageTextColor
               )}
+              data-testid={
+                error ? `${htmlFor}-label-error` : `${htmlFor}-label-message`
+              }
             >
               {error ? error : message}
             </p>
