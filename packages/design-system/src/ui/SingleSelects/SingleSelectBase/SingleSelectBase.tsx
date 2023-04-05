@@ -1,6 +1,7 @@
 import React from "react";
 import cn from "clsx";
 import * as Select from "@radix-ui/react-select";
+import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -101,6 +102,9 @@ export type SingleSelectBaseProps = Omit<
    * The gap between the icon and the text of the item
    */
   selectItemTextIconGap: string;
+
+  // When set to true, the select will be in debug mode, it will always show the popover
+  debug?: boolean;
 };
 
 const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
@@ -151,6 +155,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     selectPopoverBorderWidth,
     selectPopoverPadding,
     selectItemTextIconGap,
+    debug,
   } = props;
 
   const [triggerWidth, setTriggerWidth] =
@@ -201,6 +206,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
               if (onChange) onChange(selectedOption);
             }}
             disabled={disabled || false}
+            open={debug}
           >
             <Select.Trigger
               id={id}
@@ -260,16 +266,26 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 sideOffset={8}
                 style={{ width: triggerWidth ? triggerWidth : undefined }}
               >
-                <Select.Viewport>
-                  {options.map((option) => (
-                    <SelectItem
-                      key={option.value}
-                      width={triggerWidth}
-                      selectItemTextIconGap={selectItemTextIconGap}
-                      option={option}
-                    />
-                  ))}
-                </Select.Viewport>
+                <ScrollArea.Root className="w-full h-80">
+                  <Select.Viewport asChild>
+                    <ScrollArea.Viewport className="w-full h-full">
+                      {options.map((option) => (
+                        <SelectItem
+                          key={option.value}
+                          width={triggerWidth}
+                          selectItemTextIconGap={selectItemTextIconGap}
+                          option={option}
+                        />
+                      ))}
+                    </ScrollArea.Viewport>
+                  </Select.Viewport>
+                  <ScrollArea.Scrollbar
+                    className="w-2 py-0.5 px-0.5"
+                    orientation="vertical"
+                  >
+                    <ScrollArea.Thumb className="flex select-none touch-none bg-instillGrey70 rounded-sm" />
+                  </ScrollArea.Scrollbar>
+                </ScrollArea.Root>
               </Select.Content>
             </Select.Portal>
           </Select.Root>
