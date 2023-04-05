@@ -6,7 +6,11 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
-import { useModels, useUser } from "@instill-ai/toolkit";
+import {
+  useModels,
+  useUser,
+  ModelConfigurationFields,
+} from "@instill-ai/toolkit";
 
 const IndexPage = () => {
   const options: SingleSelectOption[] = [
@@ -68,10 +72,10 @@ const IndexPage = () => {
           accessToken={null}
           syncModelOnly={true}
         /> */}
-        {/* <ModelConfigurationFields
-          model={models.data ? models.data[0] : null}
+        <ModelConfigurationFields
+          model={models.data ? models.data[1] : null}
           marginBottom={null}
-        /> */}
+        />
       </div>
     </Root>
   );
