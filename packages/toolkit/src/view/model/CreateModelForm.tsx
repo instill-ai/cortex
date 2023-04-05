@@ -694,10 +694,7 @@ export const CreateModelForm = ({
               value={modelArtivcTag}
               error={modelArtivcTagError}
               onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setFieldValue(
-                  "model.new.artivc.gcsBucketPath",
-                  event.target.value
-                )
+                setFieldValue("model.new.artivc.tag", event.target.value)
               }
             />
             <BasicTextArea
