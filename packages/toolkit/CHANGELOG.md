@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.25.0...@instill-ai/toolkit-v0.25.1) (2023-04-05)
+
+
+### Miscellaneous
+
+* remove modelReadme ([#293](https://github.com/instill-ai/design-system/issues/293)) ([a06c48e](https://github.com/instill-ai/design-system/commit/a06c48e70b5a1f60a486aad99d89347104fb6326))
+
 ## [0.25.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.24.0...@instill-ai/toolkit-v0.25.0) (2023-04-05)
 
 
