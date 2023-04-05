@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.25.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.24.0...@instill-ai/toolkit-v0.25.0) (2023-04-05)
+
+
+### Features
+
+* add model card ([#291](https://github.com/instill-ai/design-system/issues/291)) ([eeaf84b](https://github.com/instill-ai/design-system/commit/eeaf84bc9a4b7dba16ce97fbed9bda0bc654babe))
+
 ## [0.24.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.3...@instill-ai/toolkit-v0.24.0) (2023-04-05)
 
 
