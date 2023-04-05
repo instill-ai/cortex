@@ -23,6 +23,7 @@ export const ModelConfigurationFields = ({
             required={true}
             value={model.configuration.repository}
             error={null}
+            disabled={true}
           />
           <BasicTextField
             id="model-github-tag"
@@ -31,6 +32,7 @@ export const ModelConfigurationFields = ({
             required={true}
             value={model.configuration.tag}
             error={null}
+            disabled={true}
           />
         </>
       ) : null}
@@ -44,6 +46,7 @@ export const ModelConfigurationFields = ({
             required={true}
             readOnly={false}
             value={model.configuration.content}
+            disabled={true}
           />
         </>
       ) : null}
@@ -56,6 +59,7 @@ export const ModelConfigurationFields = ({
             required={true}
             value={model.configuration.url}
             error={null}
+            disabled={true}
           />
           <BasicTextField
             id="model-artivc-tag"
@@ -64,6 +68,7 @@ export const ModelConfigurationFields = ({
             required={true}
             value={model.configuration.tag}
             error={null}
+            disabled={true}
           />
           <BasicTextArea
             id="model-artivc-credentials"
@@ -72,6 +77,7 @@ export const ModelConfigurationFields = ({
             description="If the GCS bucket path is private, please provide the Google Cloud Application Default credential or service account credential in its JSON format to get access to the model. See ArtiVC Google Cloud Storage setup guide."
             value={model.configuration.credentials}
             error={null}
+            disabled={true}
           />
         </>
       ) : null}
@@ -84,6 +90,7 @@ export const ModelConfigurationFields = ({
             required={true}
             value={model.configuration.repo_id}
             error={null}
+            disabled={true}
           />
         </>
       ) : null}
