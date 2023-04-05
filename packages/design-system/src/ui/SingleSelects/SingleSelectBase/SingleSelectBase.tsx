@@ -203,6 +203,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
             disabled={disabled || false}
           >
             <Select.Trigger
+              id={id}
               className={cn(
                 "w-full px-4 py-2 text-left flex flex-row focus:border-instillGrey50 focus:instill-input-highlight focus:instill-input-focus-shadow",
                 inputBorderColor,
