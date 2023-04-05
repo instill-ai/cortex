@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.9.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.9.1...@instill-ai/design-system-v0.9.2) (2023-04-05)
+
+
+### Bug Fixes
+
+* fix select scroll issue ([#282](https://github.com/instill-ai/design-system/issues/282)) ([6983172](https://github.com/instill-ai/design-system/commit/6983172f2d5c694c4e35d848e59598fd2658cbcc))
+
 ## [0.9.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.9.0...@instill-ai/design-system-v0.9.1) (2023-04-05)
 
 
