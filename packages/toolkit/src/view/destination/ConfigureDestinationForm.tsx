@@ -408,7 +408,7 @@ export const ConfigureDestinationForm = ({
             label="Destination type"
             disabled={true}
             value={destinationDefinitionOption}
-            options={[]}
+            options={[destinationDefinitionOption]}
             description={`<a href='${destination.destination_connector_definition.connector_definition.documentation_url}'>Setup Guide</a>`}
           />
           {!isSyncDestination ? (
