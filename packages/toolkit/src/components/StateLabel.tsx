@@ -10,8 +10,6 @@ export type StateLabelProps = {
   iconWidth: string;
   iconHeight: string;
   iconPosition: Nullable<string>;
-  paddingX: string;
-  paddingY: string;
 };
 
 export const StateLabel = ({
@@ -21,8 +19,6 @@ export const StateLabel = ({
   iconWidth,
   iconPosition,
   state,
-  paddingX,
-  paddingY,
 }: StateLabelProps) => {
   let stateLabelName: string;
   let textColor: string;
@@ -72,12 +68,7 @@ export const StateLabel = ({
 
   return (
     <div
-      className={cn(
-        "flex flex-row gap-x-2",
-        paddingX,
-        paddingY,
-        enableBgColor ? bgColor : ""
-      )}
+      className={cn("flex flex-row gap-x-2 p-1", enableBgColor ? bgColor : "")}
       data-testid="state-label"
     >
       {enableIcon ? (

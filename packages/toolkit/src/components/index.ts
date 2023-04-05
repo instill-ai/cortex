@@ -7,5 +7,5 @@ export * from "./StateLabel";
 export * from "./TableLoadingProgress";
 export * from "./StateOverview";
 export * from "./TableHead";
-
+export * from "./ModelTaskLabel";
 export * from "./cells";
