@@ -7,21 +7,21 @@ import { UseMutationResult } from "@tanstack/react-query";
 import { Model, Nullable, Operation } from "../../lib";
 
 export type ChangeModelStateToggleProps = {
-  modelInstance: Nullable<Model>;
+  model: Nullable<Model>;
   switchOff: UseMutationResult<
-    { modelInstance: Model; operation: Operation },
+    { modelName: string; operation: Operation },
     unknown,
     {
-      modelInstanceName: string;
+      modelName: string;
       accessToken: Nullable<string>;
     },
     unknown
   >;
   switchOn: UseMutationResult<
-    { modelInstance: Model; operation: Operation },
+    { modelName: string; operation: Operation },
     unknown,
     {
-      modelInstanceName: string;
+      modelName: string;
       accessToken: Nullable<string>;
     },
     unknown
@@ -31,7 +31,7 @@ export type ChangeModelStateToggleProps = {
 };
 
 export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
-  modelInstance,
+  model,
   switchOn,
   switchOff,
   marginBottom,
@@ -41,15 +41,15 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
 
   useEffect(() => {
     setError(null);
-  }, [modelInstance]);
+  }, [model]);
 
   const changeModelInstanceStateHandler = useCallback(() => {
-    if (!modelInstance || modelInstance.state === "STATE_UNSPECIFIED") return;
+    if (!model || model.state === "STATE_UNSPECIFIED") return;
 
-    if (modelInstance.state === "STATE_ONLINE") {
+    if (model.state === "STATE_ONLINE") {
       switchOff.mutate(
         {
-          modelInstanceName: modelInstance.name,
+          modelName: model.name,
           accessToken,
         },
         {
@@ -68,7 +68,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
     } else {
       switchOn.mutate(
         {
-          modelInstanceName: modelInstance.name,
+          modelName: model.name,
           accessToken,
         },
         {
@@ -85,22 +85,22 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
         }
       );
     }
-  }, [switchOn, switchOff, modelInstance, accessToken]);
+  }, [switchOn, switchOff, model, accessToken]);
 
   return (
     <div className={cn("flex flex-row", marginBottom)}>
       <StatefulToggleField
         id="model-state-toggle"
-        value={modelInstance?.state === "STATE_ONLINE" ? true : false}
+        value={model?.state === "STATE_ONLINE" ? true : false}
         onChange={changeModelInstanceStateHandler}
         label="State"
         error={error}
         state={
-          modelInstance?.state === "STATE_UNSPECIFIED"
+          model?.state === "STATE_UNSPECIFIED"
             ? "STATE_LOADING"
-            : modelInstance?.state || "STATE_UNSPECIFIED"
+            : model?.state || "STATE_UNSPECIFIED"
         }
-        disabled={modelInstance?.state === "STATE_UNSPECIFIED"}
+        disabled={model?.state === "STATE_UNSPECIFIED"}
         loadingLabelText="Model instance is in the long running operation, please refresh this page to get the new status"
       />
     </div>
