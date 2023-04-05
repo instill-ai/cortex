@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.24.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.3...@instill-ai/toolkit-v0.24.0) (2023-04-05)
+
+
+### Features
+
+* add model task label ([#288](https://github.com/instill-ai/design-system/issues/288)) ([8a3e050](https://github.com/instill-ai/design-system/commit/8a3e05091f90a67e3eecebded2ec25112d6bab13))
+* add ModelDefinitionLabel ([#290](https://github.com/instill-ai/design-system/issues/290)) ([8815abb](https://github.com/instill-ai/design-system/commit/8815abbb3bdd2b0f18e5a20ef22da572f0eccf91))
+
 ## [0.23.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.2...@instill-ai/toolkit-v0.23.3) (2023-04-05)
 
 
