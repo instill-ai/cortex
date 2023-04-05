@@ -236,7 +236,7 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
       <FormRoot marginBottom={marginBottom} formLess={false} width={null}>
         <div className="mb-10 flex flex-col">
           <BasicTextArea
-            id="description"
+            id="model-description"
             name="description"
             label="Description"
             description="Fill with a short description."

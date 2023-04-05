@@ -145,7 +145,7 @@ export const UseExistingDestinationFlow = ({
         Select an existing destination
       </h3>
       <BasicSingleSelect
-        id="existingDestinationId"
+        id="existing-destination-id"
         label="Destination type"
         options={destinationOptions ? destinationOptions : []}
         value={selectedDestinationOption}

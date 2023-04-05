@@ -197,7 +197,7 @@ export const SetPipelineDestinationStep = ({
       {pipelineMode === "MODE_SYNC" ? (
         <div className="flex flex-col gap-y-5">
           <BasicSingleSelect
-            id="existingDestinationId"
+            id="existing-destination-id"
             label="Destination type"
             description={
               "With the selection of Sync mode for the Pipeline, the destination will be the same as the source. <a href='https://www.instill.tech/docs/core-concepts/pipeline#sync-mode'>Learn more →</a>"

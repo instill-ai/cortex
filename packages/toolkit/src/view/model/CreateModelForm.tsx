@@ -549,7 +549,7 @@ export const CreateModelForm = ({
     <FormRoot marginBottom={marginBottom} formLess={false} width={null}>
       <div className="flex flex-col gap-y-5 mb-10">
         <BasicTextField
-          id="modelId"
+          id="model-id"
           label="ID"
           key="id"
           description="Pick a name to help you identify this resource. 
@@ -584,7 +584,7 @@ export const CreateModelForm = ({
           }}
         />
         <BasicTextArea
-          id="description"
+          id="model-description"
           label="Description"
           key="description"
           description="Fill with a short description."
@@ -601,7 +601,7 @@ export const CreateModelForm = ({
           }
         />
         <BasicSingleSelect
-          id="modelDefinition"
+          id="model-definition"
           key="modelDefinition"
           label="Model source"
           value={selectedModelDefinitionOption}
@@ -622,7 +622,7 @@ export const CreateModelForm = ({
         {selectedModelDefinitionOption?.value === "model-definitions/github" ? (
           <>
             <BasicTextField
-              id="modelRepo"
+              id="model-github-repo-url"
               label="GitHub repository"
               description="The name of a public GitHub repository, e.g.
                       `instill-ai/model-mobilenetv2`."
@@ -635,7 +635,7 @@ export const CreateModelForm = ({
               disabled={modelCreated ? true : false}
             />
             <BasicTextField
-              id="modelTag"
+              id="model-github-tag"
               label="GitHub repository tag"
               description="The tag of the public GitHub repository, e.g. `v1.0-cpu`."
               required={true}
@@ -651,7 +651,7 @@ export const CreateModelForm = ({
         {selectedModelDefinitionOption?.value === "model-definitions/local" ? (
           <>
             <BasicUploadFileField
-              id="file"
+              id="model-local-file"
               name="file"
               label="Upload a file"
               description="Create and upload a zip file that contains all the model files from your computer"
@@ -673,7 +673,7 @@ export const CreateModelForm = ({
         {selectedModelDefinitionOption?.value === "model-definitions/artivc" ? (
           <>
             <BasicTextField
-              id="gcsBucketPath"
+              id="model-artivc-gcs-bucket-path"
               label="GCS Bucket Path"
               description="The bucket path string of Google Cloud Storage (GCS), e.g. `gs://mybucket/path/to/mymodel/`."
               required={true}
@@ -687,7 +687,7 @@ export const CreateModelForm = ({
               }
             />
             <BasicTextField
-              id="artivcTag"
+              id="model-artivc-tag"
               label="ArtiVC Tag"
               description="The tag name of ArtiVC source commit, e.g. `v1.0-cpu`."
               required={true}
@@ -701,7 +701,7 @@ export const CreateModelForm = ({
               }
             />
             <BasicTextArea
-              id="artivcCredentials"
+              id="model-artivc-credentials"
               label="Credentials JSON"
               key="credentials"
               description="If the GCS bucket path is private, please provide the Google Cloud Application Default credential or service account credential in its JSON format to get access to the model. See ArtiVC Google Cloud Storage setup guide."
@@ -720,7 +720,7 @@ export const CreateModelForm = ({
         "model-definitions/huggingface" ? (
           <>
             <BasicTextField
-              id="huggingFaceRepo"
+              id="model-huggingface-repo-url"
               label="HuggingFace model ID"
               description="The name of a public HuggingFace model ID, e.g. `google/vit-base-patch16-224`."
               required={true}

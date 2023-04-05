@@ -36,7 +36,7 @@ export const PipelineDescriptionField = (
 
   return (
     <BasicTextArea
-      id="pipelineDescription"
+      id="pipeline-description"
       label="Description"
       key="pipelineDescription"
       description="Fill with a short description."

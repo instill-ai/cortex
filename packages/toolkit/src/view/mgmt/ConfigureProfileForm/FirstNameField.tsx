@@ -30,7 +30,7 @@ export const FirstNameField = (props: FirstNameFieldProps) => {
   return (
     <div className="w-[287px]">
       <BasicTextField
-        id="firstName"
+        id="profile-firstname"
         label="First Name"
         additionalMessageOnLabel="(optional)"
         key="firstName"

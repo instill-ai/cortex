@@ -32,7 +32,7 @@ export const UserNameField = (props: UserNameFieldProps) => {
   return (
     <div className="w-[287px]">
       <BasicTextField
-        id="userName"
+        id="profile-username"
         label="Username"
         key="userName"
         additionalMessageOnLabel="This will be your unique identifier"

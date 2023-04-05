@@ -459,7 +459,7 @@ export const CreateDestinationForm = ({
       <div className="mb-10 flex flex-col gap-y-5">
         {title ? <h3 className="text-black text-instill-h3">{title}</h3> : null}
         <BasicTextField
-          id="id"
+          id="destination-id"
           label="ID"
           key="id"
           description={
@@ -487,7 +487,7 @@ export const CreateDestinationForm = ({
           }
         />
         <BasicTextArea
-          id="description"
+          id="destination-description"
           label="Description"
           key="description"
           description="Fill with a short description."
@@ -503,7 +503,7 @@ export const CreateDestinationForm = ({
           }
         />
         <BasicSingleSelect
-          id="definition"
+          id="destination-definition"
           key="definition"
           label="Destination type"
           error={
