@@ -1,8 +1,8 @@
-import { getModelCardQuery } from "../../vdp-sdk";
+import { getModelReadmeQuery } from "../../vdp-sdk";
 import { Nullable } from "../../type";
 import { useQuery } from "@tanstack/react-query";
 
-export const useModelCard = ({
+export const useModelReadme = ({
   modelName,
   accessToken,
   enable,
@@ -24,7 +24,7 @@ export const useModelCard = ({
         return Promise.reject(new Error("Model instance name not provided"));
       }
 
-      const modelInstanceReadme = await getModelCardQuery({
+      const modelInstanceReadme = await getModelReadmeQuery({
         modelName,
         accessToken,
       });

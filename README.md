@@ -13,4 +13,4 @@ This is the repo that stores various functions/components, used across instill-a
 
 ## Notice
 
-- When digesting the toolkit ModelCard, you need to provide the stylesheet that starts from the markdown-body class
+- When digesting the toolkit ModelReadmeMarkdown, you need to provide the stylesheet that starts from the markdown-body class

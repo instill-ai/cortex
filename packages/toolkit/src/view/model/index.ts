@@ -4,4 +4,4 @@ export * from "./ConfigureModelForm";
 export * from "./ModelTablePlaceholder";
 export * from "./CreateModelForm";
 export * from "./ModelsTable";
-export * from "./ModelCard";
+export * from "./ModelReadmeMarkdown";

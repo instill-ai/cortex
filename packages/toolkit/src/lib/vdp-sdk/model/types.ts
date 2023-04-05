@@ -50,7 +50,7 @@ export type ModelState =
   | "STATE_ERROR"
   | "STATE_UNSPECIFIED";
 
-export type ModelCard = {
+export type ModelReadme = {
   name: string;
   size: number;
   type: string;

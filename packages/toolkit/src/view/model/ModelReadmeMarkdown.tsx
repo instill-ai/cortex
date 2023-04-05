@@ -5,17 +5,17 @@ import remarkFrontmatter from "remark-frontmatter";
 
 import { Nullable } from "../../lib";
 
-export type ModelCardProps = {
+export type ModelReadmeMarkdownProps = {
   markdown: Nullable<string>;
   marginBottom: string;
   isLoading: boolean;
 };
 
-export const ModelCard = ({
+export const ModelReadmeMarkdown = ({
   markdown,
   isLoading,
   marginBottom,
-}: ModelCardProps) => {
+}: ModelReadmeMarkdownProps) => {
   return (
     <div
       className={cn(
