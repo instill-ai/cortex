@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.0...@instill-ai/toolkit-v0.26.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* disable ModelConfigurationFields ([#297](https://github.com/instill-ai/design-system/issues/297)) ([8594be7](https://github.com/instill-ai/design-system/commit/8594be7d3d5989f0965741aeb755c07c874e0dd0))
+
 ## [0.26.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.25.1...@instill-ai/toolkit-v0.26.0) (2023-04-05)
 
 
