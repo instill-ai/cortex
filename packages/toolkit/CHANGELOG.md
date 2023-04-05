@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.25.1...@instill-ai/toolkit-v0.26.0) (2023-04-05)
+
+
+### Features
+
+* add model configuration fields ([#295](https://github.com/instill-ai/design-system/issues/295)) ([d8ad252](https://github.com/instill-ai/design-system/commit/d8ad252840d96b3d38d01577460cf729c76d0dcf))
+
 ## [0.25.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.25.0...@instill-ai/toolkit-v0.25.1) (2023-04-05)
 
 
