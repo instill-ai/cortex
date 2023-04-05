@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.2...@instill-ai/toolkit-v0.23.3) (2023-04-05)
+
+
+### Bug Fixes
+
+* fix ChangeModelStateToggle ([#286](https://github.com/instill-ai/design-system/issues/286)) ([bc47ea1](https://github.com/instill-ai/design-system/commit/bc47ea127161c610b59710bf09844ce88d7c04a3))
+
 ## [0.23.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.1...@instill-ai/toolkit-v0.23.2) (2023-04-05)
 
 
