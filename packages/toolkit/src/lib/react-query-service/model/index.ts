@@ -9,5 +9,5 @@ export * from "./useModels";
 export * from "./useUpdateModel";
 export * from "./useDeleteModel";
 export * from "./useUnDeployModel";
-export * from "./useModelCard";
+export * from "./useModelReadme";
 export * from "./useCreateHuggingFaceModel";

@@ -9,3 +9,8 @@ This is the repo that stores various functions/components, used across instill-a
   - sdk: Instill API Axios wrapper and typescript type related to the requests/responses of the API
   - hook: React hooks
   - type: General Typescript types that we are using
+
+
+## Notice
+
+- When digesting the toolkit ModelReadmeMarkdown, you need to provide the stylesheet that starts from the markdown-body class

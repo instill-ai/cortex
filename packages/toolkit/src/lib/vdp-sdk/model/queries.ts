@@ -1,7 +1,7 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
 import { Operation } from "../types";
-import { Model, ModelCard, ModelDefinition } from "./types";
+import { Model, ModelReadme, ModelDefinition } from "./types";
 
 /* -------------------------------------------------------------------------
  * Model Definition
@@ -152,11 +152,11 @@ export const listModelsQuery = async ({
   }
 };
 
-export type GetModelCardQueryResponse = {
-  readme: ModelCard;
+export type GetModelReadmeQueryResponse = {
+  readme: ModelReadme;
 };
 
-export const getModelCardQuery = async ({
+export const getModelReadmeQuery = async ({
   modelName,
   accessToken,
 }: {
@@ -166,7 +166,7 @@ export const getModelCardQuery = async ({
   try {
     const client = createInstillAxiosClient(accessToken);
 
-    const { data } = await client.get<GetModelCardQueryResponse>(
+    const { data } = await client.get<GetModelReadmeQueryResponse>(
       `/${modelName}/readme`
     );
     return Promise.resolve(data.readme);
