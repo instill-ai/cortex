@@ -403,7 +403,7 @@ export const ConfigureDestinationForm = ({
       <FormRoot marginBottom={null} formLess={false} width={width}>
         <div className="mb-8 flex flex-col gap-y-5">
           <BasicSingleSelect
-            id="definition"
+            id="destination-definition"
             key="definition"
             label="Destination type"
             disabled={true}
@@ -413,7 +413,7 @@ export const ConfigureDestinationForm = ({
           />
           {!isSyncDestination ? (
             <BasicTextArea
-              id="description"
+              id="destination-description"
               label="Description"
               key="description"
               description="Fill with a short description."

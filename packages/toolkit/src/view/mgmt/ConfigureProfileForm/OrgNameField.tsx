@@ -32,7 +32,7 @@ export const OrgNameField = (props: OrgNameFieldProps) => {
   return (
     <div className="w-[287px]">
       <BasicTextField
-        id="orgName"
+        id="profile-orgname"
         label="Organisation Name"
         additionalMessageOnLabel="Your company name"
         key="orgName"

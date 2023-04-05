@@ -34,7 +34,7 @@ export const NewsletterSubscriptionField = (
   return (
     <div className="w-full">
       <BasicToggleField
-        id="newsletterSubscription"
+        id="profile-newsletter-subscription"
         label="Newsletter subscription"
         value={newsletterSubscription || false}
         required={true}

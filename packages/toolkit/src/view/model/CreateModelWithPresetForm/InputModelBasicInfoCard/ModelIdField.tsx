@@ -20,7 +20,7 @@ export const ModelIdField = () => {
 
   return (
     <BasicTextField
-      id="modelId"
+      id="model-id"
       label="Model ID"
       key="id"
       description="Pick a name to help you identify this resource. 

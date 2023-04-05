@@ -19,7 +19,7 @@ export const ModelDescriptionField = () => {
 
   return (
     <BasicTextArea
-      id="description"
+      id="model-description"
       label="Description"
       key="description"
       description="Fill with a short description."

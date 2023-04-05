@@ -111,8 +111,8 @@ export const UseExistingModelFlow = ({
   return (
     <div className="flex flex-1 flex-col gap-y-5 p-5">
       <BasicSingleSelect
-        id="existingModel"
-        label="Online model instances"
+        id="existing-model"
+        label="Online models"
         options={modelOptions ? modelOptions : []}
         value={selectedModelOption}
         onChange={(option: Nullable<SingleSelectOption>) => {

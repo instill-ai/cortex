@@ -90,7 +90,7 @@ export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
   return (
     <div className={cn("flex flex-row", marginBottom)}>
       <StatefulToggleField
-        id="changePipelineStateToggle"
+        id="pipeline-state-toggle"
         value={pipeline?.state === "STATE_ACTIVE" ? true : false}
         onChange={changePipelineStateHandler}
         label="State"

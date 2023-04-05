@@ -90,7 +90,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
   return (
     <div className={cn("flex flex-row", marginBottom)}>
       <StatefulToggleField
-        id="pipelineStateToggleButton"
+        id="model-state-toggle"
         value={modelInstance?.state === "STATE_ONLINE" ? true : false}
         onChange={changeModelInstanceStateHandler}
         label="State"
