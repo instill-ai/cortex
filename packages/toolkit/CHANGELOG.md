@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.23.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.23.0...@instill-ai/toolkit-v0.23.1) (2023-04-05)
+
+
+### Bug Fixes
+
+* fix select id and refactor id of input in toolkit ([#278](https://github.com/instill-ai/design-system/issues/278)) ([63323b9](https://github.com/instill-ai/design-system/commit/63323b9db30d4777b1a97fcbce5387e6aed155dc))
+
 ## [0.23.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.22.0...@instill-ai/toolkit-v0.23.0) (2023-04-04)
 
 
