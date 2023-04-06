@@ -55,6 +55,7 @@ export type CreateModelFormProps = {
   marginBottom: Nullable<string>;
   initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
+  width: Nullable<string>;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -88,6 +89,7 @@ export const CreateModelForm = ({
   marginBottom,
   initStoreOnCreate,
   onCreate,
+  width,
 }: CreateModelFormProps) => {
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -152,11 +154,11 @@ export const CreateModelForm = ({
   const [selectedModelDefinitionOption, setSelectedModelDefinitionOption] =
     useState<Nullable<SingleSelectOption>>(null);
 
-  // #########################################################################
-  // # 2 - Create github/local/artivc/huggingface model                      #
-  // #########################################################################
+  /* -------------------------------------------------------------------------
+   * Create github/local/artivc/huggingface model
+   * -----------------------------------------------------------------------*/
+
   const [modelCreated, setModelCreated] = useState(false);
-  const [newModel, setNewModel] = useState<Nullable<Model>>(null);
 
   const [createModelMessageBoxState, setCreateModelMessageBoxState] =
     useState<ProgressMessageBoxState>({
@@ -167,17 +169,6 @@ export const CreateModelForm = ({
     });
 
   const canCreateModel = useMemo(() => {
-    console.log({
-      modelCreated,
-      modelDefinition,
-      modelId,
-      modelGithubRepoUrl,
-      modelGithubTag,
-      modelLocalFile,
-      modelArtivcGcsBucketPath,
-      modelArtivcTag,
-      modelHuggingFaceRepoUrl,
-    });
     if (!modelDefinition || modelCreated || !modelId) {
       return false;
     }
@@ -230,7 +221,6 @@ export const CreateModelForm = ({
     async (modelName: string) => {
       const model = await getModelQuery({ modelName, accessToken });
       setModelCreated(true);
-      setNewModel(model);
 
       queryClient.setQueryData<Model>(["models", model.name], model);
       queryClient.setQueryData<Model[]>(["models"], (old) =>
@@ -310,6 +300,7 @@ export const CreateModelForm = ({
               const modelName = `models/${modelId.trim()}`;
               await prepareNewModel(modelName);
               handleDeployModel(modelName);
+              setFieldValue("model.type", "new");
             }
 
             if (initStoreOnCreate) {
@@ -367,6 +358,7 @@ export const CreateModelForm = ({
               const modelName = `models/${modelId.trim()}`;
               await prepareNewModel(modelName);
               handleDeployModel(modelName);
+              setFieldValue("model.type", "new");
             }
 
             if (initStoreOnCreate) {
@@ -426,6 +418,7 @@ export const CreateModelForm = ({
               const modelName = `models/${modelId.trim()}`;
               await prepareNewModel(modelName);
               handleDeployModel(modelName);
+              setFieldValue("model.type", "new");
             }
 
             if (initStoreOnCreate) {
@@ -481,6 +474,7 @@ export const CreateModelForm = ({
               const modelName = `models/${modelId.trim()}`;
               await prepareNewModel(modelName);
               handleDeployModel(modelName);
+              setFieldValue("model.type", "new");
             }
 
             if (initStoreOnCreate) {
@@ -546,7 +540,7 @@ export const CreateModelForm = ({
   }, []);
 
   return (
-    <FormRoot marginBottom={marginBottom} formLess={false} width={null}>
+    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
       <div className="flex flex-col gap-y-5 mb-10">
         <BasicTextField
           id="model-id"

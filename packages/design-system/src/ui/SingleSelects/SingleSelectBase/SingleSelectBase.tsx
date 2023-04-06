@@ -268,7 +268,17 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
               >
                 <ScrollArea.Root className="w-full h-80">
                   <Select.Viewport asChild>
-                    <ScrollArea.Viewport className="w-full h-full">
+                    {/* 
+                      We do this to silent the warning from the ScrollArea component
+                      (Warning: Updating a style property during rerender (overflowY) 
+                      when a conflicting property is set (overflow) can lead to styling bugs.)
+
+                      https://github.com/radix-ui/primitives/issues/2059
+                    */}
+                    <ScrollArea.Viewport
+                      className="w-full h-full"
+                      style={{ overflowY: undefined }}
+                    >
                       {options.map((option) => (
                         <SelectItem
                           key={option.value}

@@ -19,12 +19,14 @@ export type CreatePipelineFormProps = {
   onCreate: Nullable<() => void>;
   accessToken: Nullable<string>;
   syncModelOnly: boolean;
+  withModelPreset: boolean;
 };
 
 export const CreatePipelineForm = ({
   onCreate,
   accessToken,
   syncModelOnly,
+  withModelPreset,
 }: CreatePipelineFormProps) => {
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
@@ -41,7 +43,12 @@ export const CreatePipelineForm = ({
           />
         );
       case 2:
-        return <SetPipelineModelStep accessToken={accessToken} />;
+        return (
+          <SetPipelineModelStep
+            withModelPreset={withModelPreset}
+            accessToken={accessToken}
+          />
+        );
       case 3:
         return <SetPipelineDestinationStep accessToken={accessToken} />;
       case 4:
