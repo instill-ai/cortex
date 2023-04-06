@@ -1,3 +1,4 @@
+import axios from "axios";
 import { ChangeEvent, useCallback, useMemo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { shallow } from "zustand/shallow";
@@ -36,7 +37,6 @@ import {
   type Nullable,
   type CreateResourceFormStore,
 } from "../../lib";
-import axios from "axios";
 
 export type CreateModelFormValue = {
   id: Nullable<string>;

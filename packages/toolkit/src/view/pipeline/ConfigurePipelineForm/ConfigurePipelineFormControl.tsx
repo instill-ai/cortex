@@ -8,7 +8,6 @@ import {
 } from "@instill-ai/design-system";
 import {
   useConfigurePipelineFormStore,
-  useCreateUpdateDeleteResourceGuard,
   useModalStore,
   useUpdatePipeline,
   getInstillApiErrorMessage,
@@ -28,20 +27,30 @@ export type ConfigurePipelineFormControlProps = {
   pipeline: Nullable<Pipeline>;
   setMessageBoxState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
   onConfigure: Nullable<() => void>;
+  disableConfigure: boolean;
   accessToken: Nullable<string>;
+  disableDelete: boolean;
 };
 
 export const ConfigurePipelineFormControl = (
   props: ConfigurePipelineFormControlProps
 ) => {
-  const { pipeline, setMessageBoxState, onConfigure, accessToken } = props;
-  const enable = useCreateUpdateDeleteResourceGuard();
+  const {
+    pipeline,
+    setMessageBoxState,
+    onConfigure,
+    accessToken,
+    disableConfigure,
+    disableDelete,
+  } = props;
+
   const {
     canEdit,
     pipelineDescription,
     setFieldValue,
     initConfigurePipelineFormStore,
   } = useConfigurePipelineFormStore(selector, shallow);
+
   const openModal = useModalStore((state) => state.openModal);
   const updatePipeline = useUpdatePipeline();
 
@@ -121,7 +130,7 @@ export const ConfigurePipelineFormControl = (
   return (
     <div className="flex flex-row">
       <OutlineButton
-        disabled={enable}
+        disabled={disableDelete ? true : false}
         onClickHandler={() => openModal()}
         position="mr-auto my-auto"
         type="button"
@@ -131,7 +140,7 @@ export const ConfigurePipelineFormControl = (
         Delete
       </OutlineButton>
       <SolidButton
-        disabled={false}
+        disabled={disableConfigure ? true : false}
         onClickHandler={() => handleSubmit()}
         position="ml-auto my-auto"
         type="button"
