@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
 import { shallow } from "zustand/shallow";
 import {
   BasicTextField,
@@ -105,6 +105,10 @@ export const DeleteResourceModal = ({
 
   const [confirmationCode, setConfirmationCode] =
     useState<Nullable<string>>(null);
+
+  useEffect(() => {
+    setConfirmationCode(null);
+  }, [open]);
 
   const handleCodeChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {

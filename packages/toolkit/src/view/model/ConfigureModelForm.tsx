@@ -179,6 +179,8 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
       status: "progressing",
     });
 
+    closeModal();
+
     deleteModel.mutate(
       {
         modelName: model.name,
@@ -198,8 +200,6 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
               process: "model",
             });
           }
-
-          closeModal();
 
           if (onDelete) {
             onDelete();
@@ -221,7 +221,6 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
               status: "error",
             });
           }
-          closeModal();
         },
       }
     );

@@ -25,14 +25,14 @@ import {
   useCreateUpdateDeleteResourceGuard,
   useModalStore,
   useCreateResourceFormStore,
+  getInstillApiErrorMessage,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
   type DestinationWithDefinition,
   type UpdateDestinationPayload,
   type Nullable,
   type CreateResourceFormStore,
-  ModalStore,
-  getInstillApiErrorMessage,
+  type ModalStore,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
@@ -349,6 +349,8 @@ export const ConfigureDestinationForm = ({
       message: "Deleting...",
     }));
 
+    closeModal();
+
     deleteDestination.mutate(
       { destinationName: destination.name, accessToken },
       {
@@ -388,7 +390,6 @@ export const ConfigureDestinationForm = ({
         },
       }
     );
-    closeModal();
   }, [
     amplitudeIsInit,
     deleteDestination,
