@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.27.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.6...@instill-ai/toolkit-v0.27.0) (2023-04-06)
+
+
+### Features
+
+* expose disableDelete and disableConfigure props ([#312](https://github.com/instill-ai/design-system/issues/312)) ([4d40711](https://github.com/instill-ai/design-system/commit/4d40711c402178bcb9069fdb6e2506abe2087513))
+
 ## [0.26.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.5...@instill-ai/toolkit-v0.26.6) (2023-04-06)
 
 
