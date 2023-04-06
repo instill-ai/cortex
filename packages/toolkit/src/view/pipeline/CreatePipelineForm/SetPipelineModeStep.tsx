@@ -232,6 +232,7 @@ export const SetPipelineModeStep = ({
         disabled={syncModelOnly ? true : false}
         onChange={(option: Nullable<SingleSelectOption>) => {
           setSelectedPipelineModeOption(option);
+          setFieldValue("pipeline.mode", option?.value);
         }}
       />
       <BasicSingleSelect

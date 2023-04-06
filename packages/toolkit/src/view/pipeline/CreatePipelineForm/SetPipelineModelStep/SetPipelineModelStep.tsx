@@ -1,5 +1,5 @@
 import { FormVerticalDivider } from "../FormVerticalDivider";
-import { UseExistingModelFlow } from "./UseExistingModelFlow";
+import { SelectExistingModelFlow } from "./SelectExistingModelFlow";
 import { CreateModelForm, CreateModelWithPresetForm } from "../../../model";
 import { useCreateResourceFormStore, type Nullable } from "../../../../lib";
 
@@ -19,7 +19,12 @@ export const SetPipelineModelStep = ({
   return (
     <div className="flex flex-1 flex-row h-full items-stretch">
       <div className="flex w-1/3">
-        <UseExistingModelFlow accessToken={accessToken} />
+        <SelectExistingModelFlow
+          onSelect={() => {
+            increasePipelineFormStep();
+          }}
+          accessToken={accessToken}
+        />
       </div>
       <div className="flex">
         <FormVerticalDivider />

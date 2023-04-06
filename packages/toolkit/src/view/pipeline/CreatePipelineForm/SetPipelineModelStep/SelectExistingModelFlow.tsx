@@ -16,25 +16,28 @@ import {
 
 const selector = (state: CreateResourceFormStore) => ({
   modelType: state.fields.model.type,
-  increasePipelineFormStep: state.increasePipelineFormStep,
   setFieldValue: state.setFieldValue,
 });
 
-export type UseExistingModelFlowProps = {
+export type SelectExistingModelFlowProps = {
   accessToken: Nullable<string>;
+  onSelect: () => void;
 };
 
-export const UseExistingModelFlow = ({
+export const SelectExistingModelFlow = ({
   accessToken,
-}: UseExistingModelFlowProps) => {
+  onSelect,
+}: SelectExistingModelFlowProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/
 
-  const { modelType, increasePipelineFormStep, setFieldValue } =
-    useCreateResourceFormStore(selector, shallow);
+  const { modelType, setFieldValue } = useCreateResourceFormStore(
+    selector,
+    shallow
+  );
 
   /* -------------------------------------------------------------------------
    * Prepare existing online model instances.
@@ -87,7 +90,7 @@ export const UseExistingModelFlow = ({
 
     setFieldValue("model.existing.id", instanceNameList[1]);
     setFieldValue("model.existing.definition", targetModel.model_definition);
-    increasePipelineFormStep();
+    onSelect();
 
     if (amplitudeIsInit) {
       sendAmplitudeData("use_existing_model_instance", {
@@ -99,7 +102,6 @@ export const UseExistingModelFlow = ({
     models.isSuccess,
     models.data,
     amplitudeIsInit,
-    increasePipelineFormStep,
     selectedModelOption?.value,
     setFieldValue,
   ]);
