@@ -5,11 +5,7 @@ export function useCreateUpdateDeleteResourceGuard() {
   const [enable, setEnable] = useState(false);
 
   useEffect(() => {
-    setEnable(
-      env("NEXT_PUBLIC_DISABLE_CREATE_UPDATE_DELETE_RESOURCE") === "true"
-        ? true
-        : false
-    );
+    setEnable(env("NEXT_PUBLIC_DISABLE_CREATE_UPDATE_DELETE_RESOURCE"));
   }, []);
 
   return enable;
