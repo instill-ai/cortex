@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.4...@instill-ai/toolkit-v0.26.5) (2023-04-06)
+
+
+### Bug Fixes
+
+* fix CreatePipelineForm async flow ([#305](https://github.com/instill-ai/design-system/issues/305)) ([2c5f490](https://github.com/instill-ai/design-system/commit/2c5f49085f4ca460e1c4953f14c12c980ebeab77))
+
 ## [0.26.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.3...@instill-ai/toolkit-v0.26.4) (2023-04-06)
 
 
