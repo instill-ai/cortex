@@ -27,7 +27,7 @@ export const OrgNameField = (props: OrgNameFieldProps) => {
 
   React.useEffect(() => {
     setFieldValue("orgName", user?.org_name || null);
-  }, [user?.org_name]);
+  }, [user?.org_name, setFieldValue]);
 
   return (
     <div className="w-[287px]">

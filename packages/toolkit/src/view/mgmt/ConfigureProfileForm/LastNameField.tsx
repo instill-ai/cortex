@@ -25,7 +25,7 @@ export const LastNameField = (props: LastNameFieldProps) => {
 
   React.useEffect(() => {
     setFieldValue("lastName", user?.last_name || null);
-  }, [user?.last_name]);
+  }, [user?.last_name, setFieldValue]);
 
   return (
     <div className="w-[287px]">

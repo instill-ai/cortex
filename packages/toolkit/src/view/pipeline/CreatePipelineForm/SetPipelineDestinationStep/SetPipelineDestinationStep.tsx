@@ -109,7 +109,7 @@ export const SetPipelineDestinationStep = ({
         ) || null
       );
     }
-  }, []);
+  }, [existingSourceId, newSourceId, sourceType]);
 
   /* -------------------------------------------------------------------------
    * Create target destination.

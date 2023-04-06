@@ -31,7 +31,7 @@ export const RoleField = (props: RoleFieldProps) => {
 
   React.useEffect(() => {
     setFieldValue("role", user?.role || null);
-  }, [user?.role]);
+  }, [user?.role, setFieldValue]);
 
   const selectedRoleOption = React.useMemo(() => {
     return roles.find((e) => e.value === role) || null;

@@ -29,7 +29,7 @@ export const NewsletterSubscriptionField = (
       "newsletterSubscription",
       user?.newsletter_subscription || null
     );
-  }, [user?.newsletter_subscription]);
+  }, [user?.newsletter_subscription, setFieldValue]);
 
   return (
     <div className="w-full">

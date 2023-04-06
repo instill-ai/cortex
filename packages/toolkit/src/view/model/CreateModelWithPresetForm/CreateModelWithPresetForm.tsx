@@ -1,10 +1,5 @@
-import { useState } from "react";
-import {
-  BasicProgressMessageBox,
-  FormRoot,
-  ProgressMessageBoxState,
-} from "@instill-ai/design-system";
-import { Nullable, useCreateResourceFormStore } from "../../../lib";
+import { FormRoot } from "@instill-ai/design-system";
+import type { Nullable } from "../../../lib";
 
 import { SelectModelPresetCard } from "./SelectModelPresetCard";
 import { InputModelBasicInfoCard } from "./InputModelBasicInfoCard";

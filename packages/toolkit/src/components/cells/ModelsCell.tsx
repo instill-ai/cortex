@@ -17,8 +17,8 @@ export const ModelsCell = ({ width, models, padding }: ModelsCellProps) => {
   return (
     <td>
       <div className={cn("flex flex-col gap-y-4", width, padding)}>
-        {Object.entries(groupByModel).map(([key, value]) => (
-          <div className="flex flex-row gap-x-1">
+        {Object.entries(groupByModel).map(([key]) => (
+          <div key={key} className="flex flex-row gap-x-1">
             <ModelInstanceIcon
               width="w-[30px]"
               height="h-[30px]"

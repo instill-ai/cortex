@@ -61,7 +61,7 @@ export const CreatePipelineForm = ({
       default:
         return null;
     }
-  }, [pipelineFormStep, onCreate, accessToken]);
+  }, [pipelineFormStep, onCreate, accessToken, syncModelOnly, withModelPreset]);
 
   return (
     <div className="flex flex-col">

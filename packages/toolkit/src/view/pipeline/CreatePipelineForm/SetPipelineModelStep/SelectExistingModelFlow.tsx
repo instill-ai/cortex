@@ -104,6 +104,7 @@ export const SelectExistingModelFlow = ({
     amplitudeIsInit,
     selectedModelOption?.value,
     setFieldValue,
+    onSelect,
   ]);
 
   /* -------------------------------------------------------------------------

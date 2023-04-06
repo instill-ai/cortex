@@ -241,7 +241,7 @@ export const CreateModelForm = ({
         });
       }
     },
-    [amplitudeIsInit, sendAmplitudeData]
+    [amplitudeIsInit, accessToken, queryClient]
   );
 
   const deployModel = useDeployModel();
@@ -507,7 +507,6 @@ export const CreateModelForm = ({
       );
     }
   }, [
-    amplitudeIsInit,
     createArtivcModel,
     createGithubModel,
     createLocalModel,
@@ -522,6 +521,14 @@ export const CreateModelForm = ({
     modelLocalFile,
     modelGithubRepoUrl,
     modelGithubTag,
+    accessToken,
+    handleDeployModel,
+    init,
+    initStoreOnCreate,
+    onCreate,
+    setFieldValue,
+    prepareNewModel,
+    setFieldError,
   ]);
 
   const getModelSetupGuide = useCallback((modelDefinition: string) => {
