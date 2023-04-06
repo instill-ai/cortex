@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.3...@instill-ai/toolkit-v0.26.4) (2023-04-06)
+
+
+### Bug Fixes
+
+* fix CreatePipelineForm's field id issue ([#303](https://github.com/instill-ai/design-system/issues/303)) ([f61a313](https://github.com/instill-ai/design-system/commit/f61a313c3794ab8e79ffcda35e43736bdbd60f1c))
+
 ## [0.26.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.2...@instill-ai/toolkit-v0.26.3) (2023-04-06)
 
 
