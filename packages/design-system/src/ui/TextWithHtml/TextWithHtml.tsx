@@ -1,5 +1,5 @@
-import React from "react";
-import sanitizeHtml from "sanitize-html";
+import * as React from "react";
+import * as sanitizeHtml from "sanitize-html";
 import cn from "clsx";
 
 /**
@@ -49,7 +49,7 @@ const TextWithHtml: React.FC<TextWithHtmlProps> = (props) => {
 
   if (!text) return null;
 
-  const sanitizedHtmlText = sanitizeHtml(text, {
+  const sanitizedHtmlText = sanitizeHtml.default(text, {
     allowedAttributes,
     transformTags: {
       a: sanitizeHtml.simpleTransform("a", {

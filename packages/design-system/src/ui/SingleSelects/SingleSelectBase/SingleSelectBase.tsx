@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import cn from "clsx";
 import * as Select from "@radix-ui/react-select";
 import * as ScrollArea from "@radix-ui/react-scroll-area";
@@ -24,7 +24,6 @@ export type SingleSelectBaseProps = Omit<
   | "inputTextColor"
   | "inputWidth"
   | "inputHeight"
-  | "inputBgColor"
   | "autoComplete"
   | "disabledBgColor"
   | "readOnlyBgColor"
@@ -148,6 +147,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
     inputBorderStyle,
     inputBorderWidth,
     inputBorderRadius,
+    inputBgColor,
     selectPopoverBgColor,
     selectPopoverBorderColor,
     selectPopoverBorderRadius,
@@ -163,7 +163,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
 
   const selectedOption = React.useMemo(() => {
     return options.find((option) => option.value === value?.value) || null;
-  }, [value]);
+  }, [value, options]);
 
   return (
     <div className="flex flex-col">
@@ -216,6 +216,7 @@ const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
                 inputBorderRadius,
                 inputBorderStyle,
                 inputBorderWidth,
+                inputBgColor,
                 {
                   "bg-instillGrey90 bg-opacity-5 cursor-not-allowed": disabled,
                 }

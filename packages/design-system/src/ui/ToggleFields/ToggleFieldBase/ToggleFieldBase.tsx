@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import cn from "clsx";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
