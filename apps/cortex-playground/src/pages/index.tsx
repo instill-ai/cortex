@@ -6,6 +6,7 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
+import { CreatePipelineForm } from "@instill-ai/toolkit";
 import {
   useModels,
   useUser,
@@ -72,9 +73,11 @@ const IndexPage = () => {
           accessToken={null}
           syncModelOnly={true}
         /> */}
-        <ModelConfigurationFields
-          model={models.data ? models.data[1] : null}
-          marginBottom={null}
+        <CreatePipelineForm
+          withModelPreset={false}
+          accessToken={null}
+          syncModelOnly={false}
+          onCreate={() => {}}
         />
       </div>
     </Root>
