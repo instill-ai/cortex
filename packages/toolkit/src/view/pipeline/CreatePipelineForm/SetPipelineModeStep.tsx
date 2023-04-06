@@ -68,6 +68,9 @@ export const SetPipelineModeStep = ({
   // We try to mimic that we will have to fetch these data through internet
   // in the future
 
+  const [selectedPipelineModeOption, setSelectedPipelineModeOption] =
+    useState<Nullable<SingleSelectOption>>(null);
+
   useEffect(() => {
     const pipelineModeOption = [
       {
@@ -124,16 +127,9 @@ export const SetPipelineModeStep = ({
         ),
       },
     ];
-
     setSyncSourceOptions(syncSourceOption);
-
-    if (syncModelOnly) {
-      setSelectedPipelineModeOption(pipelineModeOption[0]);
-    }
+    setSelectedPipelineModeOption(pipelineModeOption[0]);
   }, [syncModelOnly]);
-
-  const [selectedPipelineModeOption, setSelectedPipelineModeOption] =
-    useState<Nullable<SingleSelectOption>>(null);
 
   const [selectedSyncSourceOption, setSelectedSyncSourceOption] =
     useState<Nullable<SingleSelectOption>>(null);
@@ -233,7 +229,7 @@ export const SetPipelineModeStep = ({
         options={pipelineModeOptions}
         error={pipelineModeError}
         required={true}
-        disabled={true}
+        disabled={syncModelOnly ? true : false}
         onChange={(option: Nullable<SingleSelectOption>) => {
           setSelectedPipelineModeOption(option);
         }}
