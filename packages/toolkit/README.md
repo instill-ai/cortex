@@ -11,6 +11,8 @@ When using this toolkit, you need to set up below environment variables
 - NEXT_PUBLIC_API_VERSION (string)
 - NEXT_PUBLIC_DISABLE_CREATE_UPDATE_DELETE_RESOURCE (boolean)
 - NEXT_PUBLIC_LIST_PAGE_SIZE (number)
+- NEXT_PUBLIC_AMPLITUDE_KEY (string)
+- NEXT_PUBLIC_API_GATEWAY_BASE_URL (string)
 
 ## About the flow of generating Airbyte connector's form
 

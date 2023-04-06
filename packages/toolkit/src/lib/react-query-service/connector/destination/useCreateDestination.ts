@@ -19,10 +19,7 @@ export const useCreateDestination = () => {
       accessToken: Nullable<string>;
       payload: CreateDestinationPayload;
     }) => {
-      if (
-        env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") === "true" &&
-        !accessToken
-      ) {
+      if (env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") && !accessToken) {
         throw new Error(
           "You had set NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH=true but didn't provide necessary access token"
         );
