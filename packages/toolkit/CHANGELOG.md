@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.26.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.5...@instill-ai/toolkit-v0.26.6) (2023-04-06)
+
+
+### Bug Fixes
+
+* fix delete resource modal not close right after confirmation ([#308](https://github.com/instill-ai/design-system/issues/308)) ([9b11ec6](https://github.com/instill-ai/design-system/commit/9b11ec68e14830599a33eff429547f9488f80d31))
+* fix the width of setup destination step when create pipeline ([#310](https://github.com/instill-ai/design-system/issues/310)) ([1212067](https://github.com/instill-ai/design-system/commit/121206702d4797792e94bbdc3b39473070dad846))
+
 ## [0.26.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.4...@instill-ai/toolkit-v0.26.5) (2023-04-06)
 
 
