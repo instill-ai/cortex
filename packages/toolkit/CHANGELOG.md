@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.27.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.27.0...@instill-ai/toolkit-v0.27.1) (2023-04-06)
+
+
+### Bug Fixes
+
+* treat env config as boolean and int instead of string ([#314](https://github.com/instill-ai/design-system/issues/314)) ([47d0053](https://github.com/instill-ai/design-system/commit/47d0053393c454a47b25b1e3ef01c8d29a220cd6))
+
 ## [0.27.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.6...@instill-ai/toolkit-v0.27.0) (2023-04-06)
 
 
