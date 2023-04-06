@@ -57,7 +57,7 @@ export const DestinationsTable = ({
       },
       {
         key: "connector-type-head",
-        item: "Destination",
+        item: "Definition",
       },
       {
         key: "connector-pipelines-head",

@@ -54,7 +54,7 @@ export const SourcesTable = ({ sources, marginBottom }: SourcesTableProps) => {
       },
       {
         key: "connector-type-head",
-        item: "Source",
+        item: "Definition",
       },
       {
         key: "connector-pipelines-head",

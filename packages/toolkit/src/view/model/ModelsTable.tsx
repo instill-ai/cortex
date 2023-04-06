@@ -53,12 +53,12 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
         ),
       },
       {
-        key: "model-name",
-        item: <></>,
-      },
-      {
         key: "model-source-head",
         item: "Model source",
+      },
+      {
+        key: "model-task-head",
+        item: "Model task",
       },
     ];
   }, [stateOverviewCounts]);
