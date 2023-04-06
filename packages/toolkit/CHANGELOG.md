@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.26.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.2...@instill-ai/toolkit-v0.26.3) (2023-04-06)
+
+
+### Bug Fixes
+
+* fix create pipeline form not correctly set model.type issue ([#301](https://github.com/instill-ai/design-system/issues/301)) ([9f5a19c](https://github.com/instill-ai/design-system/commit/9f5a19c06d2259c425cef5ca136ea51863a886d2))
+
 ## [0.26.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.26.1...@instill-ai/toolkit-v0.26.2) (2023-04-06)
 
 
