@@ -1,7 +1,7 @@
 export const FormVerticalDivider = () => {
   return (
     <div className="relative flex mx-5 h-full w-6">
-      <p className="text-instill-h3 absolute top-5 z-10">OR</p>
+      <p className="text-instill-h3 absolute top-5 z-10 bg-instillGrey05">OR</p>
       <svg
         className="h-full"
         fill="none"

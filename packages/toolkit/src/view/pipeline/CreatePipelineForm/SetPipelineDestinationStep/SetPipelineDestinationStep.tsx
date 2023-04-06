@@ -220,29 +220,35 @@ export const SetPipelineDestinationStep = ({
         </div>
       ) : (
         <div className="flex flex-1 flex-row items-stretch">
-          <SelectExistingDestinationFlow
-            onSelect={() => {
-              increasePipelineFormStep();
-            }}
-            accessToken={accessToken}
-          />
-          <FormVerticalDivider />
-          <CreateDestinationForm
-            onCreate={(id: string) => {
-              setFieldValue("destination.new.id", id);
-              setFieldValue(
-                "destination.new.definition",
-                `destination-connector-definitions/${id}`
-              );
-              setFieldValue("destination.type", "new");
-              increasePipelineFormStep();
-            }}
-            title="Setup a new destination"
-            formLess={true}
-            marginBottom={null}
-            initStoreOnCreate={false}
-            accessToken={accessToken}
-          />
+          <div className="flex w-1/3">
+            <SelectExistingDestinationFlow
+              onSelect={() => {
+                increasePipelineFormStep();
+              }}
+              accessToken={accessToken}
+            />
+          </div>
+          <div className="flex">
+            <FormVerticalDivider />
+          </div>
+          <div className="flex w-2/3">
+            <CreateDestinationForm
+              onCreate={(id: string) => {
+                setFieldValue("destination.new.id", id);
+                setFieldValue(
+                  "destination.new.definition",
+                  `destination-connector-definitions/${id}`
+                );
+                setFieldValue("destination.type", "new");
+                increasePipelineFormStep();
+              }}
+              title="Setup a new destination"
+              formLess={true}
+              marginBottom={null}
+              initStoreOnCreate={false}
+              accessToken={accessToken}
+            />
+          </div>
         </div>
       )}
     </>
