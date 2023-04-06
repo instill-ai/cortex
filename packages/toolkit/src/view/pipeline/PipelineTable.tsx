@@ -36,7 +36,7 @@ export const PipelineTable = ({
       },
       {
         key: "pipeline-models",
-        item: getHeadItem("Model instances"),
+        item: getHeadItem("Models"),
       },
       {
         key: "pipeline-destination",
