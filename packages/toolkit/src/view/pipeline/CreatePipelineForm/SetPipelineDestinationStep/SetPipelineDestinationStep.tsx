@@ -19,7 +19,7 @@ import {
 } from "../../../../lib";
 
 import { FormVerticalDivider } from "../FormVerticalDivider";
-import { UseExistingDestinationFlow } from "./UseExistingDestinationFlow";
+import { SelectExistingDestinationFlow } from "./SelectExistingDestinationFlow";
 import { CreateDestinationForm } from "../../../destination";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -109,7 +109,7 @@ export const SetPipelineDestinationStep = ({
         ) || null
       );
     }
-  }, []);
+  }, [existingSourceId, newSourceId, sourceType]);
 
   /* -------------------------------------------------------------------------
    * Create target destination.
@@ -220,11 +220,21 @@ export const SetPipelineDestinationStep = ({
         </div>
       ) : (
         <div className="flex flex-1 flex-row items-stretch">
-          <UseExistingDestinationFlow accessToken={accessToken} />
+          <SelectExistingDestinationFlow
+            onSelect={() => {
+              increasePipelineFormStep();
+            }}
+            accessToken={accessToken}
+          />
           <FormVerticalDivider />
           <CreateDestinationForm
             onCreate={(id: string) => {
               setFieldValue("destination.new.id", id);
+              setFieldValue(
+                "destination.new.definition",
+                `destination-connector-definitions/${id}`
+              );
+              setFieldValue("destination.type", "new");
               increasePipelineFormStep();
             }}
             title="Setup a new destination"

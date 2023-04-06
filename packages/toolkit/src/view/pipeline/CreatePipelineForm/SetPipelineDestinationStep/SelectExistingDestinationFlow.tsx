@@ -12,8 +12,8 @@ import {
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
-  CreateResourceFormStore,
-  Nullable,
+  type CreateResourceFormStore,
+  type Nullable,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -23,13 +23,15 @@ const selector = (state: CreateResourceFormStore) => ({
   setFieldValue: state.setFieldValue,
 });
 
-export type UseExistingDestinationFlowProps = {
+export type SelectExistingDestinationFlowProps = {
   accessToken: Nullable<string>;
+  onSelect: () => void;
 };
 
-export const UseExistingDestinationFlow = ({
+export const SelectExistingDestinationFlow = ({
   accessToken,
-}: UseExistingDestinationFlowProps) => {
+  onSelect,
+}: SelectExistingDestinationFlowProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -97,13 +99,8 @@ export const UseExistingDestinationFlow = ({
     }
   }, [destinations.isSuccess, destinations.data, pipelineMode]);
 
-  const selectedDestinationOption = useMemo(() => {
-    if (!existingDestinationId || !destinationOptions) return null;
-
-    return (
-      destinationOptions.find((e) => e.value === existingDestinationId) || null
-    );
-  }, [existingDestinationId, destinationOptions]);
+  const [selectedDestinationOption, setSelectedDestinationOption] =
+    useState<Nullable<SingleSelectOption>>(null);
 
   /* -------------------------------------------------------------------------
    * Set up existing destinations
@@ -120,12 +117,12 @@ export const UseExistingDestinationFlow = ({
   const handleUseExistingDestination = () => {
     if (!existingDestinationId || !destinations.isSuccess) return;
 
-    setFieldValue("destination.existing.id", existingDestinationId);
     setFieldValue(
       "destination.existing.definition",
-      `source-connector-definitions/${existingDestinationId}`
+      `destination-connector-definitions/${existingDestinationId}`
     );
     setFieldValue("destination.type", "existing");
+    onSelect();
 
     if (amplitudeIsInit) {
       sendAmplitudeData("use_existing_destination", {
@@ -152,6 +149,10 @@ export const UseExistingDestinationFlow = ({
         error={existingDestinationIdError}
         required={true}
         disabled={false}
+        onChange={(option) => {
+          setFieldValue("destination.existing.id", option?.value);
+          setSelectedDestinationOption(option);
+        }}
       />
       <SolidButton
         position="ml-auto"

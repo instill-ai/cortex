@@ -32,7 +32,7 @@ export const PipelineDescriptionField = (
 
   React.useEffect(() => {
     setFieldValue("pipelineDescription", pipeline?.description || null);
-  }, [pipeline?.description]);
+  }, [pipeline?.description, setFieldValue]);
 
   return (
     <BasicTextArea

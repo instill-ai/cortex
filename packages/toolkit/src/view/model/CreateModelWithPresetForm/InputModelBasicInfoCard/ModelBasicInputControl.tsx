@@ -21,7 +21,6 @@ import {
   useCreateHuggingFaceModel,
   useCreateResourceFormStore,
   useDeployModel,
-  useModalStore,
   validateResourceId,
 } from "../../../../lib";
 import axios from "axios";
@@ -251,6 +250,11 @@ export const ModelBasicInputControl = ({
     huggingFaceModelRepoUrl,
     modelDefinition,
     accessToken,
+    init,
+    deployModel,
+    onCreate,
+    githubModelTag,
+    initStoreOnCreate,
   ]);
 
   return (

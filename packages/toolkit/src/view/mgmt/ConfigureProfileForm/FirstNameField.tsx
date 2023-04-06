@@ -25,7 +25,7 @@ export const FirstNameField = (props: FirstNameFieldProps) => {
 
   React.useEffect(() => {
     setFieldValue("firstName", user?.first_name || null);
-  }, [user?.first_name]);
+  }, [user?.first_name, setFieldValue]);
 
   return (
     <div className="w-[287px]">
