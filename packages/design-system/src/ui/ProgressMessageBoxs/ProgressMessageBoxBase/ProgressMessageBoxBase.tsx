@@ -1,7 +1,7 @@
-import React from "react";
+import cn from "clsx";
+import * as React from "react";
 import { PixelCheckIcon, PixelCrossIcon, XIcon } from "../../Icons";
 import NoBgSquareProgress from "../../Progress/NoBgSquareProgress";
-import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
 export type ProgressMessageBoxState = {

@@ -32,6 +32,7 @@ export type BasicSingleSelectOmitKeys =
   | "inputBorderRadius"
   | "inputBorderStyle"
   | "inputBorderWidth"
+  | "inputBgColor"
   | "selectPopoverBgColor"
   | "selectPopoverBorderColor"
   | "selectPopoverBorderRadius"
@@ -79,6 +80,7 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
   inputBorderRadius: "",
   inputBorderStyle: "border-solid",
   inputBorderWidth: "border",
+  inputBgColor: "bg-white",
   selectPopoverBgColor: "bg-white",
   selectPopoverBorderColor: "border-instillGrey20",
   selectPopoverBorderRadius: "",

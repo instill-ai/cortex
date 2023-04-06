@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { BasicInputProps, Nullable } from "../../../types/general";
 import cn from "clsx";
 import { DocIcon } from "../../Icons";

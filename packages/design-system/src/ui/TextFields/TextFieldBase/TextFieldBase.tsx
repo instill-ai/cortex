@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import cn from "clsx";
 import EyeOffIcon from "../../Icons/EyeOffIcon";
 import EyeOnIcon from "../../Icons/EyeOnIcon";
