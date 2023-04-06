@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.27.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.27.1...@instill-ai/toolkit-v0.27.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* expose secure props on setCookie ([#318](https://github.com/instill-ai/design-system/issues/318)) ([7339351](https://github.com/instill-ai/design-system/commit/73393511a3537af0267339d4474e34d750cfcd62))
+* fix wrong model/source/destination table head title ([#316](https://github.com/instill-ai/design-system/issues/316)) ([dbc973c](https://github.com/instill-ai/design-system/commit/dbc973c2740e6410600de5e8b624683ba9438683))
+
 ## [0.27.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.27.0...@instill-ai/toolkit-v0.27.1) (2023-04-06)
 
 
