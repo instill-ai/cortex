@@ -22,7 +22,6 @@ import {
   useUpdateDestination,
   useAmplitudeCtx,
   sendAmplitudeData,
-  useCreateUpdateDeleteResourceGuard,
   useModalStore,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
@@ -42,8 +41,10 @@ export type ConfigureDestinationFormProps = {
   destination: DestinationWithDefinition;
   width: Nullable<string>;
   onConfigure: Nullable<() => void>;
+  disableConfigure: boolean;
   initStoreOnConfigure: boolean;
   onDelete: Nullable<() => void>;
+  disableDelete: boolean;
   accessToken: Nullable<string>;
 };
 
@@ -64,6 +65,8 @@ export const ConfigureDestinationForm = ({
   initStoreOnConfigure,
   width,
   accessToken,
+  disableConfigure,
+  disableDelete,
 }: ConfigureDestinationFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
 
@@ -337,7 +340,6 @@ export const ConfigureDestinationForm = ({
   // # Handle delete destination                                              #
   // ##########################################################################
 
-  const enableGuard = useCreateUpdateDeleteResourceGuard();
   const deleteDestination = useDeleteDestination();
   const handleDeleteDestination = useCallback(() => {
     if (!destination) return;
@@ -445,7 +447,7 @@ export const ConfigureDestinationForm = ({
         </div>
         <div className="mb-10 flex flex-row">
           <OutlineButton
-            disabled={enableGuard}
+            disabled={disableDelete ? true : false}
             onClickHandler={() => openModal()}
             position="mr-auto my-auto"
             type="button"
@@ -457,7 +459,9 @@ export const ConfigureDestinationForm = ({
           <SolidButton
             type="button"
             color="primary"
-            disabled={isSyncDestination}
+            disabled={
+              disableConfigure ? true : isSyncDestination ? true : false
+            }
             position="ml-auto my-auto"
             onClickHandler={() => handleSubmit()}
           >

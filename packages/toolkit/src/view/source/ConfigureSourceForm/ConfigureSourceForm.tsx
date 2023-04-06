@@ -6,6 +6,8 @@ import { SourceDefinitionField } from "./SourceDefinitionField";
 export type ConfigureSourceFormProps = {
   source: Nullable<SourceWithPipelines>;
   onDelete: Nullable<() => void>;
+  disableDelete: boolean;
+  disableConfigure: boolean;
   marginBottom: Nullable<string>;
   width: Nullable<string>;
   accessToken: Nullable<string>;
@@ -14,6 +16,8 @@ export type ConfigureSourceFormProps = {
 export const ConfigureSourceForm = ({
   source,
   onDelete,
+  disableDelete,
+  disableConfigure,
   marginBottom,
   width,
   accessToken,
@@ -26,6 +30,8 @@ export const ConfigureSourceForm = ({
           source={source}
           onDelete={onDelete}
           accessToken={accessToken}
+          disableDelete={disableDelete}
+          disableConfigure={disableConfigure}
         />
       </div>
     </FormRoot>

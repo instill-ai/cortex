@@ -25,7 +25,9 @@ export type ConfigurePipelineFormProps = {
   width: Nullable<string>;
   accessToken: Nullable<string>;
   onConfigure: Nullable<() => void>;
+  disableConfigure: boolean;
   onDelete: Nullable<() => void>;
+  disableDelete: boolean;
 };
 
 export const ConfigurePipelineForm = ({
@@ -34,7 +36,9 @@ export const ConfigurePipelineForm = ({
   pipeline,
   accessToken,
   onConfigure,
+  disableConfigure,
   onDelete,
+  disableDelete,
 }: ConfigurePipelineFormProps) => {
   const [messsageBoxState, setMessageBoxState] =
     useState<ProgressMessageBoxState>({
@@ -116,6 +120,8 @@ export const ConfigurePipelineForm = ({
             setMessageBoxState={setMessageBoxState}
             onConfigure={onConfigure}
             accessToken={accessToken}
+            disableConfigure={disableConfigure}
+            disableDelete={disableDelete}
           />
           <div className="flex">
             <BasicProgressMessageBox

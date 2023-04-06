@@ -14,7 +14,6 @@ import {
   useUpdateModel,
   sendAmplitudeData,
   useAmplitudeCtx,
-  useCreateUpdateDeleteResourceGuard,
   useConfigureModelFormStore,
   useModalStore,
   getInstillApiErrorMessage,
@@ -31,7 +30,9 @@ export type ConfigureModelFormProps = {
   model: Nullable<Model>;
   marginBottom: Nullable<string>;
   onConfigure: Nullable<() => void>;
+  disableConfigure: boolean;
   onDelete: Nullable<() => void>;
+  disableDelete: boolean;
 };
 
 const formSelector = (state: ConfigureModelFormStore) => ({
@@ -50,7 +51,9 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
   model,
   marginBottom,
   onConfigure,
+  disableConfigure,
   onDelete,
+  disableDelete,
 }) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   /* -------------------------------------------------------------------------
@@ -166,9 +169,7 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
    * Handle delete model
    * -----------------------------------------------------------------------*/
 
-  const enableGuard = useCreateUpdateDeleteResourceGuard();
   const deleteModel = useDeleteModel();
-
   const handleDeleteModel = useCallback(() => {
     if (!model) return;
 
@@ -250,7 +251,7 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
         </div>
         <div className="mb-8 flex flex-row">
           <OutlineButton
-            disabled={enableGuard}
+            disabled={disableDelete ? true : false}
             onClickHandler={() => openModal()}
             position="mr-auto my-auto"
             type="button"
@@ -260,7 +261,7 @@ export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
             Delete
           </OutlineButton>
           <SolidButton
-            disabled={false}
+            disabled={disableConfigure ? true : false}
             onClickHandler={handleConfigureModel}
             position="ml-auto my-auto"
             type="button"

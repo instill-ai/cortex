@@ -9,7 +9,6 @@ import {
 } from "@instill-ai/design-system";
 import {
   useConfigureSourceFormStore,
-  useCreateUpdateDeleteResourceGuard,
   useModalStore,
   useDeleteSource,
   useAmplitudeCtx,
@@ -37,15 +36,18 @@ export type ConfigureSourceControlProps = {
   source: Nullable<SourceWithPipelines>;
   onDelete: Nullable<() => void>;
   accessToken: Nullable<string>;
+  disableDelete: boolean;
+  disableConfigure: boolean;
 };
 
 export const ConfigureSourceControl = ({
   source,
   onDelete,
   accessToken,
+  disableDelete,
+  disableConfigure,
 }: ConfigureSourceControlProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const enableGuard = useCreateUpdateDeleteResourceGuard();
   const { canEdit, setFieldValue } = useConfigureSourceFormStore(
     selector,
     shallow
@@ -147,7 +149,7 @@ export const ConfigureSourceControl = ({
     <div className="flex flex-col">
       <div className="mb-10 flex flex-row">
         <OutlineButton
-          disabled={enableGuard}
+          disabled={disableDelete ? true : false}
           onClickHandler={() => openModal()}
           position="mr-auto my-auto"
           type="button"
@@ -158,7 +160,7 @@ export const ConfigureSourceControl = ({
         </OutlineButton>
         <SolidButton
           type="submit"
-          disabled={true}
+          disabled={disableConfigure ? true : false}
           position="ml-auto my-auto"
           color="primary"
           onClickHandler={handleSubmit}
