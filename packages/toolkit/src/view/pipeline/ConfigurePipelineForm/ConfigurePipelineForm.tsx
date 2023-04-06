@@ -57,6 +57,8 @@ export const ConfigurePipelineForm = ({
       message: "Deleting...",
     });
 
+    closeModal();
+
     deletePipeline.mutate(
       { pipelineName: pipeline.name, accessToken },
       {
@@ -94,7 +96,6 @@ export const ConfigurePipelineForm = ({
         },
       }
     );
-    closeModal();
   }, [
     pipeline,
     amplitudeIsInit,

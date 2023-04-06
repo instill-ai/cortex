@@ -15,7 +15,7 @@ import {
   useAmplitudeCtx,
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  ModalStore,
+  type ModalStore,
   type Nullable,
   type SourceWithPipelines,
   type ConfigureSourceFormStore,
@@ -87,6 +87,8 @@ export const ConfigureSourceControl = ({
       message: "Deleting...",
     }));
 
+    closeModal();
+
     deleteSource.mutate(
       {
         sourceName: source.name,
@@ -128,7 +130,6 @@ export const ConfigureSourceControl = ({
         },
       }
     );
-    closeModal();
   }, [
     source,
     amplitudeIsInit,

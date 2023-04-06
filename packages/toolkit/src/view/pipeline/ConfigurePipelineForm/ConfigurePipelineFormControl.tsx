@@ -11,10 +11,10 @@ import {
   useCreateUpdateDeleteResourceGuard,
   useModalStore,
   useUpdatePipeline,
+  getInstillApiErrorMessage,
   type Pipeline,
   type Nullable,
   type ConfigurePipelineFormStore,
-  getInstillApiErrorMessage,
 } from "../../../lib";
 
 const selector = (state: ConfigurePipelineFormStore) => ({
