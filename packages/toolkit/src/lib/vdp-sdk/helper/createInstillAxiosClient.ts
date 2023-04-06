@@ -10,9 +10,10 @@ export const createInstillAxiosClient = (accessToken: Nullable<string>) => {
     : {};
 
   return axios.create({
-    baseURL: `${env("NEXT_PUBLIC_API_GATEWAY_BASE_URL")}/${env(
-      "NEXT_PUBLIC_API_VERSION"
-    )}`,
+    baseURL: `${
+      process.env.NEXT_SERVER_API_GATEWAY_BASE_URL ??
+      env("NEXT_PUBLIC_API_GATEWAY_BASE_URL")
+    }/${env("NEXT_PUBLIC_API_VERSION")}`,
     headers,
   });
 };
