@@ -14,10 +14,10 @@ import {
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
-  type CreatePipelinePayload,
   CreateResourceFormStore,
-  Nullable,
   getInstillApiErrorMessage,
+  type CreatePipelinePayload,
+  type Nullable,
 } from "../../../lib";
 import { shallow } from "zustand/shallow";
 
@@ -368,7 +368,7 @@ export const SetPipelineDetailsStep = ({
   return (
     <div className="mb-5 flex flex-col gap-y-5">
       <BasicTextField
-        id="pipelineId"
+        id="pipeline-id"
         label="ID"
         description={
           "Pick a name to help you identify this resource. The ID conforms to RFC-1034, " +
@@ -399,7 +399,7 @@ export const SetPipelineDetailsStep = ({
         required={true}
       />
       <BasicTextArea
-        id="pipelineDescription"
+        id="pipeline-description"
         label="Description"
         description="Fill with a short description."
         value={pipelineDescription}

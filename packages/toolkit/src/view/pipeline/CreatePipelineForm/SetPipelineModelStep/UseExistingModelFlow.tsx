@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { shallow } from "zustand/shallow";
 import {
   BasicSingleSelect,
   SingleSelectOption,
@@ -12,7 +13,6 @@ import {
   type CreateResourceFormStore,
   type Nullable,
 } from "../../../../lib";
-import { shallow } from "zustand/shallow";
 
 const selector = (state: CreateResourceFormStore) => ({
   modelType: state.fields.model.type,

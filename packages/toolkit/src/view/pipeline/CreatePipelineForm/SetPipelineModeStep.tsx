@@ -218,7 +218,7 @@ export const SetPipelineModeStep = ({
   return (
     <div className="mb-[60px] flex flex-col gap-y-5">
       <BasicSingleSelect
-        id="pipelineMode"
+        id="pipeline-mode"
         label="Pipeline mode"
         description={`<a href=${
           pipelineMode === "MODE_ASYNC"
@@ -235,7 +235,7 @@ export const SetPipelineModeStep = ({
         }}
       />
       <BasicSingleSelect
-        id="existingSourceId"
+        id="existing-source-id"
         label="Source type"
         description={`<a href=${
           existingSourceId === null
