@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.10.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.1...@instill-ai/design-system-v0.10.2) (2023-04-06)
+
+
+### Bug Fixes
+
+* fix SingleSelect bgColor ([#311](https://github.com/instill-ai/design-system/issues/311)) ([c409f80](https://github.com/instill-ai/design-system/commit/c409f80fa7c4d2dafc6148f901a670032fbf481d))
+
 ## [0.10.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.0...@instill-ai/design-system-v0.10.1) (2023-04-06)
 
 
