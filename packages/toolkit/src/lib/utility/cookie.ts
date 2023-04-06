@@ -11,6 +11,7 @@ export type SetCookiePayload = {
   domain: Nullable<string>;
   maxAge: number;
   httpOnly: boolean;
+  secure: boolean;
 };
 
 export function setCookie({
@@ -20,15 +21,16 @@ export function setCookie({
   domain,
   maxAge,
   httpOnly,
+  secure,
 }: SetCookiePayload) {
   const cookie = serialize(key, value, {
-    maxAge: maxAge,
     expires: new Date(Date.now() + maxAge * 1000),
-    httpOnly: httpOnly,
-    secure: process.env.NODE_ENV === "production" ? true : false,
     path: "/",
     sameSite: "lax",
     domain: domain ? domain : undefined,
+    maxAge,
+    httpOnly,
+    secure,
   });
 
   res.setHeader("Set-Cookie", cookie);
