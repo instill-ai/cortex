@@ -44,7 +44,10 @@ export const DestinationsTable = ({
     return chunk(searchedDestinations, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedDestinations]);
 
-  const stateOverviewCounts = useStateOverviewCounts(searchedDestinations);
+  const stateOverviewCounts = useStateOverviewCounts(
+    searchedDestinations,
+    destinationsWatchState
+  );
 
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
     return [

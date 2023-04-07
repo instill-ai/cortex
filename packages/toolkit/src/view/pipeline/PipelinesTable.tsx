@@ -45,7 +45,10 @@ export const PipelinesTable = ({
     return chunk(searchedPipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedPipelines]);
 
-  const stateOverviewCounts = useStateOverviewCounts(searchedPipelines);
+  const stateOverviewCounts = useStateOverviewCounts(
+    searchedPipelines,
+    pipelinesWatchState
+  );
 
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
     return [

@@ -1,10 +1,13 @@
 import {
+  ConnectorsWatchState,
   Destination,
   DestinationWithPipelines,
   Model,
-  Pipeline,
-  Source,
-  SourceWithPipelines,
+  type ModelsWatchState,
+  type Pipeline,
+  type PipelinesWatchState,
+  type Source,
+  type SourceWithPipelines,
 } from "../vdp-sdk";
 import { Nullable } from "../type";
 import { useEffect, useState } from "react";
@@ -24,13 +27,16 @@ export type StateOverviewCounts = {
 };
 
 export function useStateOverviewCounts(
-  items: Item[] | null
+  items: Item[] | null,
+  itemsWatchState: Nullable<
+    ConnectorsWatchState | ModelsWatchState | PipelinesWatchState
+  >
 ): Nullable<StateOverviewCounts> {
   const [stateOverviewCount, setStateOverviewCount] =
     useState<Nullable<StateOverviewCounts>>(null);
 
   useEffect(() => {
-    if (!items || !items[0]) return;
+    if (!items || !items[0] || !itemsWatchState) return;
 
     const counts: StateOverviewCounts = {
       online: 0,
@@ -42,11 +48,14 @@ export function useStateOverviewCounts(
 
     if (itemNameList[0] === "pipelines") {
       for (const item of items as Pipeline[]) {
-        if (item.state === "STATE_ACTIVE") {
+        const watchState = (itemsWatchState as PipelinesWatchState)[item.name]
+          .state;
+
+        if (watchState === "STATE_ACTIVE") {
           counts.online += 1;
         } else if (
-          item.state === "STATE_INACTIVE" ||
-          item.state === "STATE_UNSPECIFIED"
+          watchState === "STATE_INACTIVE" ||
+          watchState === "STATE_UNSPECIFIED"
         ) {
           counts.offline += 1;
         } else {
@@ -59,11 +68,13 @@ export function useStateOverviewCounts(
 
     if (itemNameList[0] === "source-connectors") {
       for (const item of items as Source[]) {
-        if (item.connector.state === "STATE_CONNECTED") {
+        const watchState = (itemsWatchState as ConnectorsWatchState)[item.name]
+          .state;
+        if (watchState === "STATE_CONNECTED") {
           counts.online += 1;
         } else if (
-          item.connector.state === "STATE_DISCONNECTED" ||
-          item.connector.state === "STATE_UNSPECIFIED"
+          watchState === "STATE_DISCONNECTED" ||
+          watchState === "STATE_UNSPECIFIED"
         ) {
           counts.offline += 1;
         } else {
@@ -76,11 +87,13 @@ export function useStateOverviewCounts(
 
     if (itemNameList[0] === "destination-connectors") {
       for (const item of items as Destination[]) {
-        if (item.connector.state === "STATE_CONNECTED") {
+        const watchState = (itemsWatchState as ConnectorsWatchState)[item.name]
+          .state;
+        if (watchState === "STATE_CONNECTED") {
           counts.online += 1;
         } else if (
-          item.connector.state === "STATE_DISCONNECTED" ||
-          item.connector.state === "STATE_UNSPECIFIED"
+          watchState === "STATE_DISCONNECTED" ||
+          watchState === "STATE_UNSPECIFIED"
         ) {
           counts.offline += 1;
         } else {
@@ -92,11 +105,12 @@ export function useStateOverviewCounts(
     }
 
     for (const item of items as Model[]) {
-      if (item.state === "STATE_ONLINE") {
+      const watchState = (itemsWatchState as ModelsWatchState)[item.name].state;
+      if (watchState === "STATE_ONLINE") {
         counts.online += 1;
       } else if (
-        item.state === "STATE_OFFLINE" ||
-        item.state === "STATE_UNSPECIFIED"
+        watchState === "STATE_OFFLINE" ||
+        watchState === "STATE_UNSPECIFIED"
       ) {
         counts.offline += 1;
       } else {
@@ -105,7 +119,7 @@ export function useStateOverviewCounts(
     }
 
     setStateOverviewCount(counts);
-  }, [items]);
+  }, [items, itemsWatchState]);
 
   return stateOverviewCount;
 }
