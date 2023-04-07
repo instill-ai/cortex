@@ -23,7 +23,7 @@ import {
   useModelDefinitions,
   getModelQuery,
   validateResourceId,
-  checkCreateModelOperationUntilDone,
+  checkCreateModelStateUntilOffline,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
@@ -289,10 +289,10 @@ export const CreateModelForm = ({
       createGithubModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async ({ operation }) => {
+          onSuccess: async () => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelOperationUntilDone({
-              operationName: operation.name,
+            const operationIsDone = await checkCreateModelStateUntilOffline({
+              modelName: `models/${modelId.trim()}`,
               accessToken,
             });
 
@@ -347,10 +347,10 @@ export const CreateModelForm = ({
       createLocalModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async ({ operation }) => {
+          onSuccess: async () => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelOperationUntilDone({
-              operationName: operation.name,
+            const operationIsDone = await checkCreateModelStateUntilOffline({
+              modelName: `models/${modelId.trim()}`,
               accessToken,
             });
 
@@ -409,8 +409,8 @@ export const CreateModelForm = ({
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelOperationUntilDone({
-              operationName: operation.name,
+            const operationIsDone = await checkCreateModelStateUntilOffline({
+              modelName: `models/${modelId.trim()}`,
               accessToken,
             });
 
@@ -465,8 +465,8 @@ export const CreateModelForm = ({
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelOperationUntilDone({
-              operationName: operation.name,
+            const operationIsDone = await checkCreateModelStateUntilOffline({
+              modelName: `models/${modelId.trim()}`,
               accessToken,
             });
 

@@ -12,7 +12,7 @@ import {
   CreateResourceFormStore,
   Model,
   Nullable,
-  checkCreateModelOperationUntilDone,
+  checkCreateModelStateUntilOffline,
   getInstillApiErrorMessage,
   getModelQuery,
   sendAmplitudeData,
@@ -132,8 +132,8 @@ export const ModelBasicInputControl = ({
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelOperationUntilDone({
-              operationName: operation.name,
+            const operationIsDone = await checkCreateModelStateUntilOffline({
+              modelName: `models/${modelId.trim()}`,
               accessToken,
             });
 
@@ -195,8 +195,8 @@ export const ModelBasicInputControl = ({
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelOperationUntilDone({
-              operationName: operation.name,
+            const operationIsDone = await checkCreateModelStateUntilOffline({
+              modelName: `models/${modelId.trim()}`,
               accessToken,
             });
 
