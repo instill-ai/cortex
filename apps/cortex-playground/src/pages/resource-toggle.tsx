@@ -20,54 +20,20 @@ import {
 } from "@instill-ai/toolkit";
 
 const ResourceTogglePage = () => {
-  const options: SingleSelectOption[] = [
-    {
-      value: "grpc",
-      label: "gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-",
-      startIcon: (
-        <GrpcIcon
-          width="w-[30px]"
-          height="h-[30px]"
-          color="fill-black"
-          position="my-auto"
-        />
-      ),
-    },
-    {
-      value: "http",
-      label: "HTTP",
-      startIcon: (
-        <HttpIcon
-          width="w-[30px]"
-          height="h-[30px]"
-          color="fill-black"
-          position="my-auto"
-        />
-      ),
-    },
-    {
-      value: "snowflake",
-      label: "Snowflake",
-      startIcon: (
-        <SnowflakeIcon width="w-[30px]" height="h-[30px]" position="my-auto" />
-      ),
-    },
-    {
-      value: "mongodb",
-      label: "MongoDB",
-      startIcon: (
-        <MongoDbIcon width="w-[30px]" height="h-[30px]" position="my-auto" />
-      ),
-    },
-  ];
+
+  // You should change the modelName and PipelineName to the name of your model and pipeline you 
+  // are testing with.
+
+  const modelName = "models/yoyoyeee";
+  const pipelineName = "pipelines/yoyo-async";
 
   const model = useModel({
-    modelName: "models/yoyoyeee",
+    modelName,
     accessToken: null,
     enable: true,
   });
   const modelWatchState = useWatchModel({
-    modelName: "models/yoyoyeee",
+    modelName,
     accessToken: null,
     enable: true,
   });
@@ -75,13 +41,13 @@ const ResourceTogglePage = () => {
   const unDeployModel = useUnDeployModel();
 
   const pipeline = usePipeline({
-    pipelineName: "pipelines/yoyo-async",
+    pipelineName,
     accessToken: null,
     enable: true,
   });
 
   const watchPipelineState = useWatchPipeline({
-    pipelineName: "pipelines/yoyo-async",
+    pipelineName:,
     accessToken: null,
     enable: true,
   });
