@@ -115,7 +115,9 @@ export const PipelinesTable = ({
                         width={null}
                         state={
                           pipelinesWatchState
-                            ? pipelinesWatchState[pipeline.name].state
+                            ? pipelinesWatchState[pipeline.name]
+                              ? pipelinesWatchState[pipeline.name].state
+                              : "STATE_UNSPECIFIED"
                             : "STATE_UNSPECIFIED"
                         }
                         padding="py-2 pl-6"
