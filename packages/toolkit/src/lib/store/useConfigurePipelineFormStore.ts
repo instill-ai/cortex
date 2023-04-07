@@ -64,26 +64,28 @@ export const useConfigurePipelineFormStore =
         }),
       setFieldError: (fieldName, value) =>
         set(
-          produce((state) => {
-            state.errors[fieldName] = value;
+          produce((draft: ConfigurePipelineFormStore) => {
+            draft.errors[fieldName] = value;
           })
         ),
       setFieldValue: (fieldName, value) =>
         set(
-          produce((state) => {
-            state.fields[fieldName] = value;
+          produce((draft: ConfigurePipelineFormStore) => {
+            draft.formIsDirty = true;
+            draft.fields[fieldName] = value;
           })
         ),
       setFieldsValue: (fields) =>
         set(
-          produce((state) => {
-            state.fields = fields;
+          produce((draft: ConfigurePipelineFormStore) => {
+            draft.formIsDirty = true;
+            draft.fields = fields;
           })
         ),
       setErrorsValue: (errors) =>
         set(
-          produce((state) => {
-            state.errors = errors;
+          produce((draft: ConfigurePipelineFormStore) => {
+            draft.errors = errors;
           })
         ),
     }))

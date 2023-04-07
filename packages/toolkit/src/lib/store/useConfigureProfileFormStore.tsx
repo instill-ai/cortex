@@ -97,26 +97,28 @@ export const useConfigureProfileFormStore = create<ConfigureProfileFormStore>()(
       }),
     setFieldError: (fieldName, value) =>
       set(
-        produce((state) => {
-          state.errors[fieldName] = value;
+        produce((draft: ConfigureProfileFormStore) => {
+          draft.errors[fieldName] = value;
         })
       ),
     setFieldValue: (fieldName, value) =>
       set(
-        produce((state) => {
-          state.fields[fieldName] = value;
+        produce((draft: ConfigureProfileFormStore) => {
+          draft.formIsDirty = true;
+          draft.fields[fieldName] = value;
         })
       ),
     setFieldsValue: (fields) =>
       set(
-        produce((state) => {
-          state.fields = fields;
+        produce((draft: ConfigureProfileFormStore) => {
+          draft.formIsDirty = true;
+          draft.fields = fields;
         })
       ),
     setErrorsValue: (errors) =>
       set(
-        produce((state) => {
-          state.errors = errors;
+        produce((draft: ConfigureProfileFormStore) => {
+          draft.errors = errors;
         })
       ),
   }))
