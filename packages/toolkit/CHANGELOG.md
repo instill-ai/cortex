@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.0...@instill-ai/toolkit-v0.28.1) (2023-04-07)
+
+
+### Bug Fixes
+
+* fix state overview ([#324](https://github.com/instill-ai/design-system/issues/324)) ([ad1a448](https://github.com/instill-ai/design-system/commit/ad1a4487b4b2f5802b6280712007bb495c3a0244))
+
 ## [0.28.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.27.3...@instill-ai/toolkit-v0.28.0) (2023-04-07)
 
 
