@@ -96,7 +96,7 @@ export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
         }
       );
     }
-  }, [switchOn, switchOff, pipeline, accessToken]);
+  }, [switchOn, switchOff, pipeline, accessToken, pipelineWatchState]);
 
   return (
     <div className={cn("flex flex-row", marginBottom)}>

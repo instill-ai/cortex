@@ -16,8 +16,8 @@ const ResourceTogglePage = () => {
   // You should change the modelName and PipelineName to the name of your model and pipeline you
   // are testing with.
 
-  const modelName = "models/yoyoyeee";
-  const pipelineName = "pipelines/yoyo-async";
+  const modelName = "models/yolo";
+  const pipelineName = "pipelines/yolo-async";
 
   const model = useModel({
     modelName,

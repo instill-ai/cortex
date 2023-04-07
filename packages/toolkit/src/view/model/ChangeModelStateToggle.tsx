@@ -93,7 +93,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
         }
       );
     }
-  }, [switchOn, switchOff, model, accessToken]);
+  }, [switchOn, switchOff, model, accessToken, modelWatchState]);
 
   return (
     <div className={cn("flex flex-row", marginBottom)}>
