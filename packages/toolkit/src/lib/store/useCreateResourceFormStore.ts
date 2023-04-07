@@ -247,12 +247,14 @@ export const useCreateResourceFormStore = create<CreateResourceFormStore>()(
     setFieldValue: (fieldPath, value) =>
       set(
         produce((draft: CreateResourceFormStore) => {
+          draft.formIsDirty = true;
           dot.setter(draft.fields, fieldPath, value);
         })
       ),
     setFieldsValue: (fields) =>
       set(
         produce((draft: CreateResourceFormStore) => {
+          draft.formIsDirty = true;
           draft.fields = fields;
         })
       ),
