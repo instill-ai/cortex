@@ -42,6 +42,8 @@ export const useDeActivatePipeline = () => {
 
           return [...old.filter((e) => e.id !== newPipeline.id), newPipeline];
         });
+        queryClient.invalidateQueries(["pipelines", "watch"]);
+        queryClient.invalidateQueries(["pipelines", newPipeline.name, "watch"]);
       },
     }
   );

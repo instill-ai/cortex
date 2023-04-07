@@ -55,6 +55,8 @@ export const useCreateDestination = () => {
                 ]
               : [newDestinationWithDefinition]
         );
+
+        queryClient.invalidateQueries(["destinations", "watch"]);
       },
     }
   );

@@ -31,6 +31,8 @@ export const useDeleteSource = () => {
             sources.filter((e) => e.name !== sourceName)
           );
         }
+
+        queryClient.invalidateQueries(["sources", "watch"]);
       },
     }
   );

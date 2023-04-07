@@ -14,9 +14,15 @@ When using this toolkit, you need to set up below environment variables
 - NEXT_PUBLIC_AMPLITUDE_KEY (string)
 - NEXT_PUBLIC_API_GATEWAY_BASE_URL (string)
 
+## About controller state
+
+- VDP backend is using etcd to control/record the true_state of the resource and the state query from the resource endpoint is just the user_desired_state.
+- But in the form, what we updated is the user_desired_state.
+- We are currently not combining these two states into a single object but separating them to make the code more readable.
+
 ## About the flow of generating Airbyte connector's form
 
-We are using Airbyte protocol for generating, maintain, create our connectors, frontend need to come up with a way that have backward compatability and onward support of any Airbyte connectors. Here is how we accomplishing it and the principle behind these implementation.
+We are using Airbyte protocol for generating, maintaining, create our connectors, frontend need to come up with a way that have backward compatability and onward support of any Airbyte connectors. Here is how we accomplishing it and the principle behind these implementation.
 
 ### Principles and implementation
 

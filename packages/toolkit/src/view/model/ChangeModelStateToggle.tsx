@@ -4,10 +4,11 @@ import { StatefulToggleField } from "@instill-ai/design-system";
 import { FC, useState, useEffect, useCallback } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { Model, Nullable, Operation } from "../../lib";
+import { Model, ModelState, Nullable, Operation } from "../../lib";
 
 export type ChangeModelStateToggleProps = {
   model: Nullable<Model>;
+  modelWatchState: Nullable<ModelState>;
   switchOff: UseMutationResult<
     { modelName: string; operation: Operation },
     unknown,
@@ -32,6 +33,7 @@ export type ChangeModelStateToggleProps = {
 
 export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
   model,
+  modelWatchState,
   switchOn,
   switchOff,
   marginBottom,
@@ -40,13 +42,19 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
   const [error, setError] = useState<Nullable<string>>(null);
 
   useEffect(() => {
-    setError(null);
-  }, [model]);
+    if (modelWatchState === "STATE_ERROR") {
+      setError("Something went wrong. Please try again.");
+    } else {
+      setError(null);
+    }
+  }, [modelWatchState]);
 
   const changeModelInstanceStateHandler = useCallback(() => {
-    if (!model || model.state === "STATE_UNSPECIFIED") return;
+    if (!model || !modelWatchState || modelWatchState === "STATE_UNSPECIFIED") {
+      return;
+    }
 
-    if (model.state === "STATE_ONLINE") {
+    if (modelWatchState === "STATE_ONLINE") {
       switchOff.mutate(
         {
           modelName: model.name,
@@ -85,23 +93,23 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
         }
       );
     }
-  }, [switchOn, switchOff, model, accessToken]);
+  }, [switchOn, switchOff, model, accessToken, modelWatchState]);
 
   return (
     <div className={cn("flex flex-row", marginBottom)}>
       <StatefulToggleField
         id="model-state-toggle"
-        value={model?.state === "STATE_ONLINE" ? true : false}
+        value={modelWatchState === "STATE_ONLINE" ? true : false}
         onChange={changeModelInstanceStateHandler}
         label="State"
         error={error}
         state={
-          model?.state === "STATE_UNSPECIFIED"
+          modelWatchState === "STATE_UNSPECIFIED"
             ? "STATE_LOADING"
-            : model?.state || "STATE_UNSPECIFIED"
+            : modelWatchState || "STATE_UNSPECIFIED"
         }
-        disabled={model?.state === "STATE_UNSPECIFIED"}
-        loadingLabelText="Model instance is in the long running operation, please refresh this page to get the new status"
+        disabled={modelWatchState === "STATE_UNSPECIFIED"}
+        loadingLabelText="Model is in the long running operation, please refresh this page to get the new status"
       />
     </div>
   );

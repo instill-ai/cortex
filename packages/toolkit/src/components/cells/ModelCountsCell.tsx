@@ -2,17 +2,17 @@ import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
 import { Nullable } from "../../lib";
 
-export type ModelInstancesCellProps = {
+export type ModelCountsCellProps = {
   width: Nullable<string>;
   modelCount: number;
   padding: string;
 };
 
-export const ModelInstancesCell = ({
+export const ModelCountsCell = ({
   width,
   modelCount,
   padding,
-}: ModelInstancesCellProps) => {
+}: ModelCountsCellProps) => {
   return (
     <td>
       <div className={cn("flex flex-col", width, padding)}>

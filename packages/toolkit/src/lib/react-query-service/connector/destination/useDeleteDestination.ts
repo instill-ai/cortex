@@ -42,6 +42,8 @@ export const useDeleteDestination = () => {
             destinations.filter((e) => e.name !== destinationName)
           );
         }
+
+        queryClient.invalidateQueries(["destinations", "watch"]);
       },
     }
   );

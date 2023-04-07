@@ -9,7 +9,7 @@ import {
   StateOverview,
   TableLoadingProgress,
   PaginationListContainer,
-  ModelInstancesCell,
+  ModelCountsCell,
 } from "../../components";
 import {
   chunk,
@@ -18,16 +18,19 @@ import {
   useStateOverviewCounts,
   type Nullable,
   type Pipeline,
+  type PipelinesWatchState,
 } from "../../lib";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
 
 export type PipelinesTableProps = {
   pipelines: Nullable<Pipeline[]>;
+  pipelinesWatchState: Nullable<PipelinesWatchState>;
   marginBottom: Nullable<string>;
 };
 
 export const PipelinesTable = ({
   pipelines,
+  pipelinesWatchState,
   marginBottom,
 }: PipelinesTableProps) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -110,7 +113,13 @@ export const PipelinesTable = ({
                       <NameCell
                         name={pipeline.id}
                         width={null}
-                        state={pipeline.state}
+                        state={
+                          pipelinesWatchState
+                            ? pipelinesWatchState[pipeline.name]
+                              ? pipelinesWatchState[pipeline.name].state
+                              : "STATE_UNSPECIFIED"
+                            : "STATE_UNSPECIFIED"
+                        }
                         padding="py-2 pl-6"
                         link={`/pipelines/${pipeline.id}`}
                       />
@@ -123,7 +132,7 @@ export const PipelinesTable = ({
                         connectorName={pipeline.recipe.source.id}
                         padding="py-2"
                       />
-                      <ModelInstancesCell
+                      <ModelCountsCell
                         modelCount={pipeline.recipe.models.length}
                         width={null}
                         padding="py-2"

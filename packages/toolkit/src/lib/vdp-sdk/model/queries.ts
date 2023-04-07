@@ -1,7 +1,12 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { Operation } from "../types";
-import { Model, ModelReadme, ModelDefinition } from "./types";
+import type { Operation } from "../types";
+import type {
+  Model,
+  ModelReadme,
+  ModelDefinition,
+  ModelWatchState,
+} from "./types";
 
 /* -------------------------------------------------------------------------
  * Model Definition
@@ -201,3 +206,23 @@ export const getModelOperationQuery = async ({
     return Promise.reject(err);
   }
 };
+
+/* -------------------------------------------------------------------------
+ * Watch Model State
+ * -----------------------------------------------------------------------*/
+
+export async function watchModel({
+  modelName,
+  accessToken,
+}: {
+  modelName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken);
+    const { data } = await client.get<ModelWatchState>(`/${modelName}/watch`);
+    return Promise.resolve(data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}

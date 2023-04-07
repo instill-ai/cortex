@@ -11,3 +11,5 @@ export * from "./useDeleteModel";
 export * from "./useUnDeployModel";
 export * from "./useModelReadme";
 export * from "./useCreateHuggingFaceModel";
+export * from "./useWatchModel";
+export * from "./useWatchModels";

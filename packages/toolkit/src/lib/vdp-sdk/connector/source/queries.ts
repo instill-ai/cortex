@@ -1,6 +1,6 @@
 import { Nullable } from "../../../type";
 import { createInstillAxiosClient, getQueryString } from "../../helper";
-import { ConnectorDefinition } from "../types";
+import { ConnectorDefinition, ConnectorWatchState } from "../types";
 import { Source } from "./types";
 
 // ############################################################################
@@ -151,3 +151,25 @@ export const listSourcesQuery = async ({
     return Promise.reject(err);
   }
 };
+
+/* -------------------------------------------------------------------------
+ * Watch Source State
+ * -----------------------------------------------------------------------*/
+
+export async function watchSource({
+  sourceName,
+  accessToken,
+}: {
+  sourceName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken);
+    const { data } = await client.get<ConnectorWatchState>(
+      `/${sourceName}/watch`
+    );
+    return Promise.resolve(data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}

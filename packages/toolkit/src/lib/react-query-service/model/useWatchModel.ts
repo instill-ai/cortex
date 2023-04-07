@@ -1,8 +1,8 @@
-import { getModelReadmeQuery } from "../../vdp-sdk";
-import { Nullable } from "../../type";
 import { useQuery } from "@tanstack/react-query";
+import { Nullable } from "../../type";
+import { watchModel } from "../../vdp-sdk";
 
-export const useModelReadme = ({
+export function useWatchModel({
   modelName,
   accessToken,
   enable,
@@ -10,7 +10,7 @@ export const useModelReadme = ({
   modelName: Nullable<string>;
   accessToken: Nullable<string>;
   enable: boolean;
-}) => {
+}) {
   let enableQuery = false;
 
   if (modelName && enable) {
@@ -18,22 +18,22 @@ export const useModelReadme = ({
   }
 
   return useQuery(
-    ["models", modelName, "readme"],
+    ["models", modelName, "watch"],
     async () => {
       if (!modelName) {
-        return Promise.reject(new Error("Model instance name not provided"));
+        return Promise.reject(new Error("Model name not provided"));
       }
 
-      const modelReadme = await getModelReadmeQuery({
+      const watch = await watchModel({
         modelName,
         accessToken,
       });
 
-      return Promise.resolve(window.atob(modelReadme.content));
+      return Promise.resolve(watch);
     },
     {
-      enabled: enableQuery,
       retry: 3,
+      enabled: enableQuery,
     }
   );
-};
+}

@@ -40,6 +40,8 @@ export const useCreateSource = () => {
         queryClient.setQueryData<SourceWithDefinition[]>(["sources"], (old) =>
           old ? [newSourceWithDefinition, ...old] : [newSourceWithDefinition]
         );
+
+        queryClient.invalidateQueries(["sources", "watch"]);
       },
     }
   );

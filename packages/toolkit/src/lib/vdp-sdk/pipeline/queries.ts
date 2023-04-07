@@ -1,6 +1,6 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { PipelineWithRawRecipe } from "./types";
+import { PipelineWithRawRecipe, PipelineWatchState } from "./types";
 
 export type ListPipelinesResponse = {
   pipelines: PipelineWithRawRecipe[];
@@ -70,3 +70,25 @@ export const getPipelineQuery = async ({
     return Promise.reject(err);
   }
 };
+
+/* -------------------------------------------------------------------------
+ * Watch Pipeline State
+ * -----------------------------------------------------------------------*/
+
+export async function watchPipeline({
+  pipelineName,
+  accessToken,
+}: {
+  pipelineName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken);
+    const { data } = await client.get<PipelineWatchState>(
+      `/${pipelineName}/watch`
+    );
+    return Promise.resolve(data);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}

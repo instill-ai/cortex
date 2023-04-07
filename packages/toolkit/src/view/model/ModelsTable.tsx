@@ -17,15 +17,21 @@ import {
   useStateOverviewCounts,
   type Model,
   type Nullable,
+  type ModelsWatchState,
 } from "../../lib";
 import { ModelTablePlaceholder } from "./ModelTablePlaceholder";
 
 export type ModelsTableProps = {
   models: Nullable<Model[]>;
+  modelsWatchState: Nullable<ModelsWatchState>;
   marginBottom: Nullable<string>;
 };
 
-export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
+export const ModelsTable = ({
+  models,
+  modelsWatchState,
+  marginBottom,
+}: ModelsTableProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
 
@@ -98,7 +104,13 @@ export const ModelsTable = ({ models, marginBottom }: ModelsTableProps) => {
                       <NameCell
                         name={model.id}
                         width={null}
-                        state={model.state}
+                        state={
+                          modelsWatchState
+                            ? modelsWatchState[model.name]
+                              ? modelsWatchState[model.name].state
+                              : "STATE_UNSPECIFIED"
+                            : "STATE_UNSPECIFIED"
+                        }
                         padding="py-2 pl-6"
                         link={`/models/${model.id}`}
                       />

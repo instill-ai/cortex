@@ -17,16 +17,19 @@ import {
   env,
   type DestinationWithPipelines,
   type Nullable,
+  type ConnectorsWatchState,
 } from "../../lib";
 import { DestinationTablePlaceholder } from "./DestinationTablePlaceholder";
 
 export type DestinationsTableProps = {
   destinations: Nullable<DestinationWithPipelines[]>;
+  destinationsWatchState: Nullable<ConnectorsWatchState>;
   marginBottom: Nullable<string>;
 };
 
 export const DestinationsTable = ({
   destinations,
+  destinationsWatchState,
   marginBottom,
 }: DestinationsTableProps) => {
   const [currentPage, setCurrentPage] = useState(0);
@@ -101,7 +104,13 @@ export const DestinationsTable = ({
                     <NameCell
                       name={destination.id}
                       width={null}
-                      state={destination.connector.state}
+                      state={
+                        destinationsWatchState
+                          ? destinationsWatchState[destination.name]
+                            ? destinationsWatchState[destination.name].state
+                            : "STATE_UNSPECIFIED"
+                          : "STATE_UNSPECIFIED"
+                      }
                       link={`/destinations/${destination.id}`}
                       padding="pl-6 py-2"
                     />
