@@ -212,7 +212,7 @@ export const getModelOperationQuery = async ({
  * Watch Model State
  * -----------------------------------------------------------------------*/
 
-export async function watchModelState({
+export async function watchModel({
   modelName,
   accessToken,
 }: {

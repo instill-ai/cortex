@@ -42,8 +42,12 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
   const [error, setError] = useState<Nullable<string>>(null);
 
   useEffect(() => {
-    setError(null);
-  }, [model]);
+    if (modelWatchState === "STATE_ERROR") {
+      setError("Something went wrong. Please try again.");
+    } else {
+      setError(null);
+    }
+  }, [modelWatchState]);
 
   const changeModelInstanceStateHandler = useCallback(() => {
     if (!model || !modelWatchState || modelWatchState === "STATE_UNSPECIFIED") {
@@ -105,7 +109,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
             : modelWatchState || "STATE_UNSPECIFIED"
         }
         disabled={modelWatchState === "STATE_UNSPECIFIED"}
-        loadingLabelText="Model instance is in the long running operation, please refresh this page to get the new status"
+        loadingLabelText="Model is in the long running operation, please refresh this page to get the new status"
       />
     </div>
   );

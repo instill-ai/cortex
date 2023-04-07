@@ -8,13 +8,18 @@ import {
 } from "@instill-ai/design-system";
 import {
   ChangeModelStateToggle,
+  ChangePipelineStateToggle,
+  useActivatePipeline,
+  useDeActivatePipeline,
   useDeployModel,
   useModel,
+  usePipeline,
   useUnDeployModel,
   useWatchModel,
+  useWatchPipeline,
 } from "@instill-ai/toolkit";
 
-const IndexPage = () => {
+const ResourceTogglePage = () => {
   const options: SingleSelectOption[] = [
     {
       value: "grpc",
@@ -69,6 +74,21 @@ const IndexPage = () => {
   const deployModel = useDeployModel();
   const unDeployModel = useUnDeployModel();
 
+  const pipeline = usePipeline({
+    pipelineName: "pipelines/yoyo-async",
+    accessToken: null,
+    enable: true,
+  });
+
+  const watchPipelineState = useWatchPipeline({
+    pipelineName: "pipelines/yoyo-async",
+    accessToken: null,
+    enable: true,
+  });
+
+  const activatePipeline = useActivatePipeline();
+  const deactivatePipeline = useDeActivatePipeline();
+
   return (
     <Root>
       <div className="w-[1200px]">
@@ -83,8 +103,20 @@ const IndexPage = () => {
           accessToken={null}
         />
       </div>
+      <div className="w-[1200px]">
+        <ChangePipelineStateToggle
+          pipeline={pipeline.data ? pipeline.data : null}
+          pipelineWatchState={
+            watchPipelineState.isSuccess ? watchPipelineState.data.state : null
+          }
+          switchOn={activatePipeline}
+          switchOff={deactivatePipeline}
+          marginBottom="mb-10"
+          accessToken={null}
+        />
+      </div>
     </Root>
   );
 };
 
-export default IndexPage;
+export default ResourceTogglePage;

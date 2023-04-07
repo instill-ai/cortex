@@ -1,31 +1,31 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../type";
-import { watchModel } from "../../vdp-sdk";
+import { watchPipeline } from "../../vdp-sdk";
 
-export function useWatchModel({
-  modelName,
+export function useWatchPipeline({
+  pipelineName,
   accessToken,
   enable,
 }: {
-  modelName: Nullable<string>;
+  pipelineName: Nullable<string>;
   accessToken: Nullable<string>;
   enable: boolean;
 }) {
   let enableQuery = false;
 
-  if (modelName && enable) {
+  if (pipelineName && enable) {
     enableQuery = true;
   }
 
   return useQuery(
-    ["models", modelName, "watch"],
+    ["pipelines", pipelineName, "watch"],
     async () => {
-      if (!modelName) {
-        return Promise.reject(new Error("Model name not provided"));
+      if (!pipelineName) {
+        return Promise.reject(new Error("Pipeline name not provided"));
       }
 
-      const watch = await watchModel({
-        modelName,
+      const watch = await watchPipeline({
+        pipelineName,
         accessToken,
       });
 

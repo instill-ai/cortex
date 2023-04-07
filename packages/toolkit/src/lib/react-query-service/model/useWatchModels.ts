@@ -1,10 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../type";
-import {
-  WatchModelState,
-  WatchModelsState,
-  watchModelState,
-} from "../../vdp-sdk";
+import { WatchModelsState, watchModel } from "../../vdp-sdk";
 
 export function useWatchModels({
   modelNames,
@@ -31,7 +27,7 @@ export function useWatchModels({
       let watches: WatchModelsState = {};
 
       for (const modelName of modelNames) {
-        const watch = await watchModelState({
+        const watch = await watchModel({
           modelName,
           accessToken,
         });

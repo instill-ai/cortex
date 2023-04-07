@@ -48,3 +48,10 @@ export type PipelineRecipe = {
   destination: DestinationWithDefinition;
   models: Model[];
 };
+
+export type WatchPipelineState = {
+  state: PipelineState;
+  progress: number;
+};
+
+export type WatchPipelinesState = Record<string, WatchPipelineState>;
