@@ -10,6 +10,7 @@ import {
   ChangeModelStateToggle,
   useDeployModel,
   useModel,
+  usePipeline,
   useUnDeployModel,
   useWatchModel,
 } from "@instill-ai/toolkit";

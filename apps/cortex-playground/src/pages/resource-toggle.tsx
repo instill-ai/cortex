@@ -62,12 +62,12 @@ const ResourceTogglePage = () => {
   ];
 
   const model = useModel({
-    modelName: "models/yoyo",
+    modelName: "models/yoyoyeee",
     accessToken: null,
     enable: true,
   });
   const modelWatchState = useWatchModel({
-    modelName: "models/yoyo",
+    modelName: "models/yoyoyeee",
     accessToken: null,
     enable: true,
   });

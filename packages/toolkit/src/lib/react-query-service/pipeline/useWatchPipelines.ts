@@ -21,7 +21,7 @@ export function useWatchPipelines({
     ["pipelines", "watch"],
     async () => {
       if (!pipelineNames || pipelineNames.length === 0) {
-        return Promise.reject(new Error("Pipeline name not provided"));
+        return Promise.reject(new Error("Pipeline names not provided"));
       }
 
       let watches: WatchPipelinesState = {};

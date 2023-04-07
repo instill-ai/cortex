@@ -55,3 +55,10 @@ export type ConnectorDefinition = {
     update_time: string;
   };
 };
+
+export type WatchConnectorState = {
+  state: ConnectorState;
+  progress: number;
+};
+
+export type WatchConnectorsState = Record<string, WatchConnectorState>;

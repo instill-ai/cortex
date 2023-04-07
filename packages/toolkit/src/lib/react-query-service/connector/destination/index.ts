@@ -1,8 +1,10 @@
-export { useCreateDestination } from "./useCreateDestination";
-export { useDeleteDestination } from "./useDeleteDestination";
-export { useDestination } from "./useDestination";
-export { useDestinationDefinitions } from "./useDestinationDefinitions";
-export { useDestinationWithPipelines } from "./useDestinationWithPipelines";
-export { useDestinations } from "./useDestinations";
-export { useDestinationsWithPipelines } from "./useDestinationsWithPipelines";
-export { useUpdateDestination } from "./useUpdateDestination";
+export * from "./useCreateDestination";
+export * from "./useDeleteDestination";
+export * from "./useDestination";
+export * from "./useDestinationDefinitions";
+export * from "./useDestinationWithPipelines";
+export * from "./useDestinations";
+export * from "./useDestinationsWithPipelines";
+export * from "./useUpdateDestination";
+export * from "./useWatchDestination";
+export * from "./useWatchDestinations";

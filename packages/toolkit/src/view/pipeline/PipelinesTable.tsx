@@ -9,7 +9,7 @@ import {
   StateOverview,
   TableLoadingProgress,
   PaginationListContainer,
-  ModelInstancesCell,
+  ModelCountsCell,
 } from "../../components";
 import {
   chunk,
@@ -123,7 +123,7 @@ export const PipelinesTable = ({
                         connectorName={pipeline.recipe.source.id}
                         padding="py-2"
                       />
-                      <ModelInstancesCell
+                      <ModelCountsCell
                         modelCount={pipeline.recipe.models.length}
                         width={null}
                         padding="py-2"

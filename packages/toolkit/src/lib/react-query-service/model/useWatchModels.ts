@@ -21,7 +21,7 @@ export function useWatchModels({
     ["models", "watch"],
     async () => {
       if (!modelNames || modelNames.length === 0) {
-        return Promise.reject(new Error("Model name not provided"));
+        return Promise.reject(new Error("Model names not provided"));
       }
 
       let watches: WatchModelsState = {};
