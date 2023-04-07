@@ -48,18 +48,20 @@ export function useStateOverviewCounts(
 
     if (itemNameList[0] === "pipelines") {
       for (const item of items as Pipeline[]) {
-        const watchState = (itemsWatchState as PipelinesWatchState)[item.name]
-          .state;
+        if ((itemsWatchState as PipelinesWatchState)[item.name]) {
+          const watchState = (itemsWatchState as PipelinesWatchState)[item.name]
+            .state;
 
-        if (watchState === "STATE_ACTIVE") {
-          counts.online += 1;
-        } else if (
-          watchState === "STATE_INACTIVE" ||
-          watchState === "STATE_UNSPECIFIED"
-        ) {
-          counts.offline += 1;
-        } else {
-          counts.error += 1;
+          if (watchState === "STATE_ACTIVE") {
+            counts.online += 1;
+          } else if (
+            watchState === "STATE_INACTIVE" ||
+            watchState === "STATE_UNSPECIFIED"
+          ) {
+            counts.offline += 1;
+          } else {
+            counts.error += 1;
+          }
         }
       }
       setStateOverviewCount(counts);
@@ -68,17 +70,20 @@ export function useStateOverviewCounts(
 
     if (itemNameList[0] === "source-connectors") {
       for (const item of items as Source[]) {
-        const watchState = (itemsWatchState as ConnectorsWatchState)[item.name]
-          .state;
-        if (watchState === "STATE_CONNECTED") {
-          counts.online += 1;
-        } else if (
-          watchState === "STATE_DISCONNECTED" ||
-          watchState === "STATE_UNSPECIFIED"
-        ) {
-          counts.offline += 1;
-        } else {
-          counts.error += 1;
+        if ((itemsWatchState as ConnectorsWatchState)[item.name]) {
+          const watchState = (itemsWatchState as ConnectorsWatchState)[
+            item.name
+          ].state;
+          if (watchState === "STATE_CONNECTED") {
+            counts.online += 1;
+          } else if (
+            watchState === "STATE_DISCONNECTED" ||
+            watchState === "STATE_UNSPECIFIED"
+          ) {
+            counts.offline += 1;
+          } else {
+            counts.error += 1;
+          }
         }
       }
       setStateOverviewCount(counts);
@@ -87,17 +92,20 @@ export function useStateOverviewCounts(
 
     if (itemNameList[0] === "destination-connectors") {
       for (const item of items as Destination[]) {
-        const watchState = (itemsWatchState as ConnectorsWatchState)[item.name]
-          .state;
-        if (watchState === "STATE_CONNECTED") {
-          counts.online += 1;
-        } else if (
-          watchState === "STATE_DISCONNECTED" ||
-          watchState === "STATE_UNSPECIFIED"
-        ) {
-          counts.offline += 1;
-        } else {
-          counts.error += 1;
+        if ((itemsWatchState as ConnectorsWatchState)[item.name]) {
+          const watchState = (itemsWatchState as ConnectorsWatchState)[
+            item.name
+          ].state;
+          if (watchState === "STATE_CONNECTED") {
+            counts.online += 1;
+          } else if (
+            watchState === "STATE_DISCONNECTED" ||
+            watchState === "STATE_UNSPECIFIED"
+          ) {
+            counts.offline += 1;
+          } else {
+            counts.error += 1;
+          }
         }
       }
       setStateOverviewCount(counts);
@@ -105,16 +113,19 @@ export function useStateOverviewCounts(
     }
 
     for (const item of items as Model[]) {
-      const watchState = (itemsWatchState as ModelsWatchState)[item.name].state;
-      if (watchState === "STATE_ONLINE") {
-        counts.online += 1;
-      } else if (
-        watchState === "STATE_OFFLINE" ||
-        watchState === "STATE_UNSPECIFIED"
-      ) {
-        counts.offline += 1;
-      } else {
-        counts.error += 1;
+      if ((itemsWatchState as ModelsWatchState)[item.name]) {
+        const watchState = (itemsWatchState as ModelsWatchState)[item.name]
+          .state;
+        if (watchState === "STATE_ONLINE") {
+          counts.online += 1;
+        } else if (
+          watchState === "STATE_OFFLINE" ||
+          watchState === "STATE_UNSPECIFIED"
+        ) {
+          counts.offline += 1;
+        } else {
+          counts.error += 1;
+        }
       }
     }
 
