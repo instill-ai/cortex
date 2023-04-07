@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.1...@instill-ai/toolkit-v0.28.2) (2023-04-07)
+
+
+### Bug Fixes
+
+* check controller state before deploy ([#326](https://github.com/instill-ai/design-system/issues/326)) ([7d9e655](https://github.com/instill-ai/design-system/commit/7d9e655057674f26b4ea05e5e0ce0bf992413d9c))
+
 ## [0.28.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.0...@instill-ai/toolkit-v0.28.1) (2023-04-07)
 
 
