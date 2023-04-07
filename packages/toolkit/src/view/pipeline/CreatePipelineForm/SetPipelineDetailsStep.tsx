@@ -104,27 +104,6 @@ export const SetPipelineDetailsStep = ({
    * -----------------------------------------------------------------------*/
 
   const canSetupNewPipeline = useMemo(() => {
-    console.log({
-      pipelineMode,
-      pipelineId,
-      existingSourceId,
-      existingSourceDefinition,
-      existingDestinationId,
-      existingDestinationDefinition,
-      newSourceId,
-      newSourceDefinition,
-      newDestinationId,
-      newDestinationDefinition,
-      newModelId,
-      newModelDefinition,
-      newLocalModelFile,
-      newGithubModelRepoUrl,
-      newArtivcModelGcsBucketPath,
-      newHuggingFaceModelRepoUrl,
-      existingModelId,
-      existingModelDefinition,
-    });
-
     const validator = {
       pipelineIsValid: false,
       sourceIsValid: false,

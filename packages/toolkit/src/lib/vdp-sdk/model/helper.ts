@@ -1,26 +1,27 @@
 import { Nullable } from "../../type";
-import { getModelOperationQuery } from "./queries";
+import { watchModel } from "./queries";
 import { ModelHubPreset } from "./types";
 
-export const checkCreateModelOperationUntilDone = async ({
-  operationName,
+export const checkCreateModelStateUntilOffline = async ({
+  modelName,
   accessToken,
 }: {
-  operationName: string;
+  modelName: string;
   accessToken: Nullable<string>;
 }) => {
   try {
-    const operation = await getModelOperationQuery({
-      operationName,
+    const watchModelState = await watchModel({
+      modelName,
       accessToken,
     });
-    if (operation.done) {
+
+    if (watchModelState.state === "STATE_OFFLINE") {
       return Promise.resolve(true);
     } else {
       return new Promise((resolve) => {
         setTimeout(async () => {
-          const result = await checkCreateModelOperationUntilDone({
-            operationName,
+          const result = await checkCreateModelStateUntilOffline({
+            modelName,
             accessToken,
           });
           resolve(result);
