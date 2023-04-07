@@ -1,7 +1,9 @@
-export { useSource } from "./useSource";
-export { useSources } from "./useSources";
-export { useSourceDefinitions } from "./useSourceDefinitions";
-export { useSourceWithPipelines } from "./useSourceWithPipelines";
-export { useSourcesWithPipelines } from "./useSourcesWithPipelines";
-export { useCreateSource } from "./useCreateSource";
-export { useDeleteSource } from "./useDeleteSource";
+export * from "./useSource";
+export * from "./useSources";
+export * from "./useSourceDefinitions";
+export * from "./useSourceWithPipelines";
+export * from "./useSourcesWithPipelines";
+export * from "./useCreateSource";
+export * from "./useDeleteSource";
+export * from "./useWatchSource";
+export * from "./useWatchSources";
