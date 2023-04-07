@@ -44,7 +44,10 @@ export const ModelsTable = ({
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedModels]);
 
-  const stateOverviewCounts = useStateOverviewCounts(searchedModels);
+  const stateOverviewCounts = useStateOverviewCounts(
+    searchedModels,
+    modelsWatchState
+  );
 
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
     return [

@@ -44,7 +44,10 @@ export const SourcesTable = ({
     return chunk(searchedSources, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedSources]);
 
-  const stateOverviewCounts = useStateOverviewCounts(searchedSources);
+  const stateOverviewCounts = useStateOverviewCounts(
+    searchedSources,
+    sourcesWatchState
+  );
 
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
     return [
