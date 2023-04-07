@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.2...@instill-ai/toolkit-v0.28.3) (2023-04-07)
+
+
+### Bug Fixes
+
+* fix useStateOverviewCount undefined issue ([#328](https://github.com/instill-ai/design-system/issues/328)) ([28fc264](https://github.com/instill-ai/design-system/commit/28fc264b07741c8b03b9b1acf6f8de7e70e2aac9))
+
 ## [0.28.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.1...@instill-ai/toolkit-v0.28.2) (2023-04-07)
 
 
