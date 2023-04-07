@@ -23,6 +23,8 @@ export const useUnDeployModel = () => {
       onSuccess: ({ modelName }) => {
         queryClient.invalidateQueries(["models", modelName]);
         queryClient.invalidateQueries(["models"]);
+        queryClient.invalidateQueries(["models", "watch"]);
+        queryClient.invalidateQueries(["models", modelName, "watch"]);
       },
     }
   );

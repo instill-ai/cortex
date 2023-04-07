@@ -6,7 +6,14 @@ import {
   SingleSelectOption,
   SnowflakeIcon,
 } from "@instill-ai/design-system";
-import { CreatePipelineForm } from "@instill-ai/toolkit";
+import {
+  ChangeModelStateToggle,
+  CreatePipelineForm,
+  useDeployModel,
+  useModel,
+  useUnDeployModel,
+  useWatchModel,
+} from "@instill-ai/toolkit";
 import {
   useModels,
   useUser,
@@ -55,29 +62,31 @@ const IndexPage = () => {
     },
   ];
 
-  const user = useUser({
-    enable: true,
-    accessToken: null,
-  });
-
-  const models = useModels({
+  const model = useModel({
+    modelName: "models/yoyo",
     accessToken: null,
     enable: true,
   });
+  const modelWatchState = useWatchModel({
+    modelName: "models/yoyo",
+    accessToken: null,
+    enable: true,
+  });
+  const deployModel = useDeployModel();
+  const unDeployModel = useUnDeployModel();
 
   return (
     <Root>
       <div className="w-[1200px]">
-        {/* <CreatePipelineForm
-          onCreate={null}
+        <ChangeModelStateToggle
+          model={model.data ? model.data : null}
+          modelWatchState={
+            modelWatchState.isSuccess ? modelWatchState.data.state : null
+          }
+          switchOn={deployModel}
+          switchOff={unDeployModel}
+          marginBottom="mb-10"
           accessToken={null}
-          syncModelOnly={true}
-        /> */}
-        <CreatePipelineForm
-          withModelPreset={false}
-          accessToken={null}
-          syncModelOnly={false}
-          onCreate={() => {}}
         />
       </div>
     </Root>

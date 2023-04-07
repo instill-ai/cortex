@@ -77,3 +77,10 @@ export type ModelHubPreset = {
   model_definition: string;
   configuration: Record<string, string>;
 };
+
+export type WatchModelState = {
+  state: ModelState;
+  progress: number;
+};
+
+export type WatchModelsState = Record<string, WatchModelState>;
