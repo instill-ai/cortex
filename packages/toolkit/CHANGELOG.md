@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.28.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.27.3...@instill-ai/toolkit-v0.28.0) (2023-04-07)
+
+
+### Features
+
+* adapt controller state ([#321](https://github.com/instill-ai/design-system/issues/321)) ([1ab3dc8](https://github.com/instill-ai/design-system/commit/1ab3dc8058c950b5b12de77ebab16b26f0178bf7))
+
+
+### Bug Fixes
+
+* force form store to be dirty once there has value changed ([#323](https://github.com/instill-ai/design-system/issues/323)) ([83f7807](https://github.com/instill-ai/design-system/commit/83f780748c8a42ae69ed7072e7cc2ad914648241))
+
 ## [0.27.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.27.2...@instill-ai/toolkit-v0.27.3) (2023-04-06)
 
 
