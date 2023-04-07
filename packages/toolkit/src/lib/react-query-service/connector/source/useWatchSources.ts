@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Nullable } from "../../../type";
-import { WatchConnectorsState, watchSource } from "../../../vdp-sdk";
+import type { Nullable } from "../../../type";
+import { watchSource, type ConnectorsWatchState } from "../../../vdp-sdk";
 
 export function useWatchSources({
   sourceNames,
@@ -24,7 +24,7 @@ export function useWatchSources({
         return Promise.reject(new Error("Source names not provided"));
       }
 
-      let watches: WatchConnectorsState = {};
+      let watches: ConnectorsWatchState = {};
 
       for (const sourceName of sourceNames) {
         const watch = await watchSource({

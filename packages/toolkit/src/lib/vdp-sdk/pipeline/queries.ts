@@ -1,6 +1,6 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { PipelineWithRawRecipe, WatchPipelineState } from "./types";
+import { PipelineWithRawRecipe, PipelineWatchState } from "./types";
 
 export type ListPipelinesResponse = {
   pipelines: PipelineWithRawRecipe[];
@@ -84,7 +84,7 @@ export async function watchPipeline({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken);
-    const { data } = await client.get<WatchPipelineState>(
+    const { data } = await client.get<PipelineWatchState>(
       `/${pipelineName}/watch`
     );
     return Promise.resolve(data);

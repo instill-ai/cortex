@@ -56,9 +56,9 @@ export type ConnectorDefinition = {
   };
 };
 
-export type WatchConnectorState = {
+export type ConnectorWatchState = {
   state: ConnectorState;
   progress: number;
 };
 
-export type WatchConnectorsState = Record<string, WatchConnectorState>;
+export type ConnectorsWatchState = Record<string, ConnectorWatchState>;

@@ -1,7 +1,7 @@
-import { Nullable } from "../../../type";
+import type { Nullable } from "../../../type";
 import { createInstillAxiosClient, getQueryString } from "../../helper";
-import { ConnectorDefinition, WatchConnectorState } from "../types";
-import { Destination } from "./types";
+import type { ConnectorDefinition, ConnectorWatchState } from "../types";
+import type { Destination } from "./types";
 
 // ############################################################################
 // # Destination definition                                                   #
@@ -168,7 +168,7 @@ export async function watchDestination({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken);
-    const { data } = await client.get<WatchConnectorState>(
+    const { data } = await client.get<ConnectorWatchState>(
       `/${destinationName}/watch`
     );
     return Promise.resolve(data);

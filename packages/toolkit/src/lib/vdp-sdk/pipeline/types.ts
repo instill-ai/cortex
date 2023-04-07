@@ -49,9 +49,9 @@ export type PipelineRecipe = {
   models: Model[];
 };
 
-export type WatchPipelineState = {
+export type PipelineWatchState = {
   state: PipelineState;
   progress: number;
 };
 
-export type WatchPipelinesState = Record<string, WatchPipelineState>;
+export type PipelinesWatchState = Record<string, PipelineWatchState>;

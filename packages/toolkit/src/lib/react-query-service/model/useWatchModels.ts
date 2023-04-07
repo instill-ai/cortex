@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../type";
-import { WatchModelsState, watchModel } from "../../vdp-sdk";
+import { watchModel, type ModelsWatchState } from "../../vdp-sdk";
 
 export function useWatchModels({
   modelNames,
@@ -24,7 +24,7 @@ export function useWatchModels({
         return Promise.reject(new Error("Model names not provided"));
       }
 
-      let watches: WatchModelsState = {};
+      let watches: ModelsWatchState = {};
 
       for (const modelName of modelNames) {
         const watch = await watchModel({

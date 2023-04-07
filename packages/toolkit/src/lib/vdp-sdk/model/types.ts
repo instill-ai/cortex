@@ -78,9 +78,9 @@ export type ModelHubPreset = {
   configuration: Record<string, string>;
 };
 
-export type WatchModelState = {
+export type ModelWatchState = {
   state: ModelState;
   progress: number;
 };
 
-export type WatchModelsState = Record<string, WatchModelState>;
+export type ModelsWatchState = Record<string, ModelWatchState>;

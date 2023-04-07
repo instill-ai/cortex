@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../type";
-import { watchPipeline, WatchPipelinesState } from "../../vdp-sdk";
+import { watchPipeline, type PipelinesWatchState } from "../../vdp-sdk";
 
 export function useWatchPipelines({
   pipelineNames,
@@ -24,7 +24,7 @@ export function useWatchPipelines({
         return Promise.reject(new Error("Pipeline names not provided"));
       }
 
-      let watches: WatchPipelinesState = {};
+      let watches: PipelinesWatchState = {};
 
       for (const pipelineName of pipelineNames) {
         const watch = await watchPipeline({

@@ -1,12 +1,11 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { Operation } from "../types";
-import {
+import type { Operation } from "../types";
+import type {
   Model,
   ModelReadme,
   ModelDefinition,
-  ModelState,
-  WatchModelState,
+  ModelWatchState,
 } from "./types";
 
 /* -------------------------------------------------------------------------
@@ -221,7 +220,7 @@ export async function watchModel({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken);
-    const { data } = await client.get<WatchModelState>(`/${modelName}/watch`);
+    const { data } = await client.get<ModelWatchState>(`/${modelName}/watch`);
     return Promise.resolve(data);
   } catch (err) {
     return Promise.reject(err);
