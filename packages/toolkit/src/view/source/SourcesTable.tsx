@@ -17,15 +17,21 @@ import {
   env,
   type SourceWithPipelines,
   type Nullable,
+  type ConnectorsWatchState,
 } from "../../lib";
 import { SourceTablePlaceholder } from "./SourceTablePlaceholder";
 
 export type SourcesTableProps = {
   sources: Nullable<SourceWithPipelines[]>;
+  sourcesWatchState: Nullable<ConnectorsWatchState>;
   marginBottom: Nullable<string>;
 };
 
-export const SourcesTable = ({ sources, marginBottom }: SourcesTableProps) => {
+export const SourcesTable = ({
+  sources,
+  sourcesWatchState,
+  marginBottom,
+}: SourcesTableProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
 
@@ -98,7 +104,13 @@ export const SourcesTable = ({ sources, marginBottom }: SourcesTableProps) => {
                       <NameCell
                         name={source.id}
                         width={null}
-                        state="STATE_ONLINE"
+                        state={
+                          sourcesWatchState
+                            ? sourcesWatchState[source.name]
+                              ? sourcesWatchState[source.name].state
+                              : "STATE_UNSPECIFIED"
+                            : "STATE_UNSPECIFIED"
+                        }
                         padding="py-2 pl-6"
                         link={`/sources/${source.id}`}
                       />

@@ -1,12 +1,5 @@
 import { Root } from "@/components/Root";
 import {
-  GrpcIcon,
-  HttpIcon,
-  MongoDbIcon,
-  SingleSelectOption,
-  SnowflakeIcon,
-} from "@instill-ai/design-system";
-import {
   ChangeModelStateToggle,
   ChangePipelineStateToggle,
   useActivatePipeline,
@@ -20,8 +13,7 @@ import {
 } from "@instill-ai/toolkit";
 
 const ResourceTogglePage = () => {
-
-  // You should change the modelName and PipelineName to the name of your model and pipeline you 
+  // You should change the modelName and PipelineName to the name of your model and pipeline you
   // are testing with.
 
   const modelName = "models/yoyoyeee";
@@ -47,7 +39,7 @@ const ResourceTogglePage = () => {
   });
 
   const watchPipelineState = useWatchPipeline({
-    pipelineName:,
+    pipelineName,
     accessToken: null,
     enable: true,
   });
