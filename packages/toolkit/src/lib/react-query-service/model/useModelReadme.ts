@@ -21,7 +21,7 @@ export const useModelReadme = ({
     ["models", modelName, "readme"],
     async () => {
       if (!modelName) {
-        return Promise.reject(new Error("Model instance name not provided"));
+        return Promise.reject(new Error("Modelname not provided"));
       }
 
       const modelReadme = await getModelReadmeQuery({
