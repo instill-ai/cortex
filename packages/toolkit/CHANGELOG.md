@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.3...@instill-ai/toolkit-v0.28.4) (2023-04-08)
+
+
+### Bug Fixes
+
+* fix PipelinesTable typo ([#330](https://github.com/instill-ai/design-system/issues/330)) ([38d3b31](https://github.com/instill-ai/design-system/commit/38d3b311477d55980ea03d5cbf5d15118743bf73))
+
 ## [0.28.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.2...@instill-ai/toolkit-v0.28.3) (2023-04-07)
 
 
