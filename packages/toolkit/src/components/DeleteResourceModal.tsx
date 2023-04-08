@@ -69,9 +69,9 @@ export const DeleteResourceModal = ({
 
       case "models": {
         if (resource.name.split("/")[2]) {
-          title = "Delete This Model Instance";
+          title = "Delete This Model";
           description =
-            "This action cannot be undone. This will permanently delete the model instance.";
+            "This action cannot be undone. This will permanently delete the model.";
           break;
         } else {
           title = "Delete This Model";
