@@ -1,7 +1,7 @@
 import cn from "clsx";
 import axios from "axios";
 import { StatefulToggleField } from "@instill-ai/design-system";
-import { FC, useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 
 import { Model, ModelState, Nullable, Operation } from "../../lib";
@@ -32,7 +32,7 @@ export type ChangeModelStateToggleProps = {
   disabled: boolean;
 };
 
-export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
+export const ChangeModelStateToggle = ({
   model,
   modelWatchState,
   switchOn,
@@ -40,7 +40,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
   marginBottom,
   accessToken,
   disabled,
-}) => {
+}: ChangeModelStateToggleProps) => {
   const [error, setError] = useState<Nullable<string>>(null);
 
   useEffect(() => {

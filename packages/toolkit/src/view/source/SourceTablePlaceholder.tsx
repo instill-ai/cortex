@@ -1,4 +1,3 @@
-import { FC } from "react";
 import {
   AwsS3Icon,
   GcsIcon,
@@ -17,10 +16,10 @@ export type SourceTablePlaceholderProps = {
   enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
 };
 
-export const SourceTablePlaceholder: FC<SourceTablePlaceholderProps> = ({
+export const SourceTablePlaceholder = ({
   marginBottom,
   enablePlaceholderCreateButton,
-}) => {
+}: SourceTablePlaceholderProps) => {
   const width = "w-[136px]";
   const height = "h-[136px]";
 

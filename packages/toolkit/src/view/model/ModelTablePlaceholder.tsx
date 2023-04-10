@@ -1,4 +1,3 @@
-import { FC } from "react";
 import {
   ImageClassificationIcon,
   InstanceSegmentationIcon,
@@ -18,10 +17,10 @@ export type ModelTablePlaceholderProps = {
   enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
 };
 
-export const ModelTablePlaceholder: FC<ModelTablePlaceholderProps> = ({
+export const ModelTablePlaceholder = ({
   marginBottom,
   enablePlaceholderCreateButton,
-}) => {
+}: ModelTablePlaceholderProps) => {
   const width = "w-[136px]";
   const height = "h-[136px]";
 

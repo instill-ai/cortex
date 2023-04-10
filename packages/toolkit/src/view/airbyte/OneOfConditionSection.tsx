@@ -4,7 +4,6 @@ import {
   useState,
   useEffect,
   type Dispatch,
-  type FC,
   type SetStateAction,
 } from "react";
 import {
@@ -33,7 +32,7 @@ export type OneOfConditionSectionProps = {
   setFormIsDirty: Dispatch<SetStateAction<boolean>>;
 };
 
-export const OneOfConditionSection: FC<OneOfConditionSectionProps> = ({
+export const OneOfConditionSection = ({
   formTree,
   errors,
   setValues,
@@ -42,7 +41,7 @@ export const OneOfConditionSection: FC<OneOfConditionSectionProps> = ({
   disableAll,
   formIsDirty,
   setFormIsDirty,
-}) => {
+}: OneOfConditionSectionProps) => {
   // ##########################################################################
   // # 1 - Initialize state                                                   #
   // ##########################################################################

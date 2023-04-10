@@ -1,6 +1,4 @@
 import cn from "clsx";
-import { FC } from "react";
-
 import {
   TablePlaceholderBase,
   type TablePlaceholderBaseProps,
@@ -11,10 +9,10 @@ export type PipelineTablePlaceholderProps = {
   enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
 };
 
-export const PipelineTablePlaceholder: FC<PipelineTablePlaceholderProps> = ({
+export const PipelineTablePlaceholder = ({
   marginBottom,
   enablePlaceholderCreateButton,
-}) => {
+}: PipelineTablePlaceholderProps) => {
   const width = "w-[136px]";
   const height = "h-[136px]";
   const color = "fill-instillGrey95";
