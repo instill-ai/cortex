@@ -29,6 +29,7 @@ export type ChangeModelStateToggleProps = {
   >;
   marginBottom?: string;
   accessToken: Nullable<string>;
+  disabled: boolean;
 };
 
 export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
@@ -38,6 +39,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
   switchOff,
   marginBottom,
   accessToken,
+  disabled,
 }) => {
   const [error, setError] = useState<Nullable<string>>(null);
 
@@ -108,7 +110,7 @@ export const ChangeModelStateToggle: FC<ChangeModelStateToggleProps> = ({
             ? "STATE_LOADING"
             : modelWatchState || "STATE_UNSPECIFIED"
         }
-        disabled={modelWatchState === "STATE_UNSPECIFIED"}
+        disabled={disabled ? true : modelWatchState === "STATE_UNSPECIFIED"}
         loadingLabelText="Model is in the long running operation, please refresh this page to get the new status"
       />
     </div>

@@ -29,6 +29,7 @@ export type ChangePipelineStateToggleProps = {
   >;
   marginBottom?: string;
   accessToken: Nullable<string>;
+  disabled: boolean;
 };
 
 export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
@@ -38,6 +39,7 @@ export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
   switchOff,
   marginBottom,
   accessToken,
+  disabled,
 }) => {
   const [error, setError] = useState<Nullable<string>>(null);
 
@@ -111,7 +113,7 @@ export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
             ? "STATE_LOADING"
             : pipelineWatchState || "STATE_UNSPECIFIED"
         }
-        disabled={pipelineWatchState === "STATE_UNSPECIFIED"}
+        disabled={disabled ? true : pipelineWatchState === "STATE_UNSPECIFIED"}
         loadingLabelText="Pipeline is in the long running operation, please refresh this page to get the new status"
       />
     </div>
