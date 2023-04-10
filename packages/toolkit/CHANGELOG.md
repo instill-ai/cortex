@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.4...@instill-ai/toolkit-v0.28.5) (2023-04-10)
+
+
+### Bug Fixes
+
+* add disabled props into toggle button ([#333](https://github.com/instill-ai/design-system/issues/333)) ([5f152f5](https://github.com/instill-ai/design-system/commit/5f152f56c3712dfa066f9686bc13d8b331c061cd))
+
 ## [0.28.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.3...@instill-ai/toolkit-v0.28.4) (2023-04-08)
 
 
