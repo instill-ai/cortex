@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.28.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.5...@instill-ai/toolkit-v0.28.6) (2023-04-11)
+
+
+### Bug Fixes
+
+* fix table column width ([#337](https://github.com/instill-ai/design-system/issues/337)) ([cc2f7a0](https://github.com/instill-ai/design-system/commit/cc2f7a089e45f49bab822db0867816e56e2ca9c2))
+
 ## [0.28.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.4...@instill-ai/toolkit-v0.28.5) (2023-04-10)
 
 
