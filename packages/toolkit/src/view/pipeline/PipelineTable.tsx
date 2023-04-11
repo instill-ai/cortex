@@ -33,14 +33,17 @@ export const PipelineTable = ({
       {
         key: "pipeline-source",
         item: getHeadItem("Source"),
+        width: "w-auto",
       },
       {
         key: "pipeline-models",
         item: getHeadItem("Models"),
+        width: "w-auto",
       },
       {
         key: "pipeline-destination",
         item: getHeadItem("Destination"),
+        width: "w-auto",
       },
     ];
   }, []);

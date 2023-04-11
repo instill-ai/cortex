@@ -60,14 +60,17 @@ export const DestinationsTable = ({
             onlineCounts={stateOverviewCounts?.online || 0}
           />
         ),
+        width: "w-auto",
       },
       {
         key: "connector-type-head",
         item: "Definition",
+        width: "w-[240px]",
       },
       {
         key: "connector-pipelines-head",
         item: "Pipelines",
+        width: "w-[240px]",
       },
     ];
   }, [stateOverviewCounts]);
@@ -91,7 +94,7 @@ export const DestinationsTable = ({
             marginBottom={null}
           />
         ) : (
-          <table className="table-auto border-collapse">
+          <table className="table-fixed border-collapse">
             <TableHead
               borderColor="border-instillGrey20"
               bgColor="bg-instillGrey05"
@@ -106,7 +109,7 @@ export const DestinationsTable = ({
                   >
                     <NameCell
                       name={destination.id}
-                      width={null}
+                      width="w-full"
                       state={
                         destinationsWatchState
                           ? destinationsWatchState[destination.name]
@@ -122,11 +125,11 @@ export const DestinationsTable = ({
                         destination.destination_connector_definition
                       }
                       connectorName={destination.id}
-                      width={null}
+                      width="w-full"
                       padding="py-2"
                     />
                     <PipelinesCell
-                      width={null}
+                      width="w-full"
                       pipelineCount={destination.pipelines.length}
                       padding="py-2 pr-6"
                     />
