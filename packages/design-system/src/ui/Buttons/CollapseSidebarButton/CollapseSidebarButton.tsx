@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { CollapseLeftIcon, CollapseRightIcon } from "../../Icons";
 import ButtonBase, { ButtonBaseProps } from "../ButtonBase";
 

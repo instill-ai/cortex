@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import * as React from "react";
 import { basicProgressMessageBoxConfig } from "../BasicProgressMessageBox";
 import ProgressMessageBoxBase, {
   ProgressMessageBoxState,
@@ -14,7 +14,7 @@ export default meta;
 
 const Template: StoryFn<typeof ProgressMessageBoxBase> = (args) => {
   const [messageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: true,
       message: "hi",
       description: "please wait",

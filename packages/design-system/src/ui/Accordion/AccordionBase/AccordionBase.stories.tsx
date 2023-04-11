@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import * as React from "react";
 import {
   DataDestinationIcon,
   DataSourceIcon,
@@ -18,7 +18,7 @@ const meta: Meta<typeof AccordionBase> = {
 export default meta;
 
 const Template: StoryFn<typeof AccordionBase> = (args) => {
-  const [activeIndex, setActiveIndex] = useState<number[]>([]);
+  const [activeIndex, setActiveIndex] = React.useState<number[]>([]);
   return (
     <AccordionBase
       {...args}

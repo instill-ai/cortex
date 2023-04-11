@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import * as React from "react";
 import { State } from "../../../types/general";
 import StatefulToggleField from "./StatefulToggleField";
 
@@ -11,8 +11,8 @@ const meta: Meta<typeof StatefulToggleField> = {
 export default meta;
 
 const Template: StoryFn<typeof StatefulToggleField> = (args) => {
-  const [state, setState] = useState<State>("STATE_INACTIVE");
-  const [check, setCheck] = useState(false);
+  const [state, setState] = React.useState<State>("STATE_INACTIVE");
+  const [check, setCheck] = React.useState(false);
 
   return (
     <StatefulToggleField

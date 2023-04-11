@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import * as React from "react";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import ToggleFieldBase from "./ToggleFieldBase";
 
@@ -11,7 +11,7 @@ const meta: Meta<typeof ToggleFieldBase> = {
 export default meta;
 
 const Template: StoryFn<typeof ToggleFieldBase> = (args) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = React.useState(false);
   return (
     <ToggleFieldBase
       {...args}

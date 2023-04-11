@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import * as React from "react";
 import cn from "clsx";
 import { Nullable } from "../../../types/general";
 
@@ -146,7 +146,7 @@ const AccordionBase = (props: AccordionBaseProps) => {
     ...headerStyle
   } = props;
 
-  const clickHandler = useCallback(
+  const clickHandler = React.useCallback(
     (index: number) => {
       setActiveIndex((prev) => {
         if (allowMultiItems) {

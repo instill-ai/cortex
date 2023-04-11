@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent } from "react";
+import * as React from "react";
 import { Meta, StoryFn } from "@storybook/react";
 import BasicUploadFileField from "./BasicUploadFileField";
 
@@ -32,7 +32,7 @@ Playground.args = {
 };
 
 export const DemoFileReader: StoryFn<typeof BasicUploadFileField> = () => {
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.value) return;
 
     const reader = new FileReader();
@@ -48,7 +48,7 @@ export const DemoFileReader: StoryFn<typeof BasicUploadFileField> = () => {
     }
   };
 
-  const onSubmitHandler = (event: FormEvent) => {
+  const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
     console.log(event);
   };

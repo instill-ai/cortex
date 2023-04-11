@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import TextWithHtml from "../../TextWithHtml";
 
 export type InputDescriptionBaseProps = {

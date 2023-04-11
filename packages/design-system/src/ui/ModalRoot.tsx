@@ -1,4 +1,4 @@
-import { useRef, useEffect, ReactNode } from "react";
+import * as React from "react";
 import { createPortal } from "react-dom";
 import cn from "clsx";
 
@@ -7,7 +7,7 @@ import { Nullable } from "../types/general";
 export type ModalRootProps = {
   modalBgColor: Nullable<string>;
   modalPadding: Nullable<string>;
-  children?: ReactNode;
+  children?: React.ReactNode;
   dataTestId?: string;
   open: boolean;
 };
@@ -19,9 +19,9 @@ export const ModalRoot = ({
   modalPadding,
   dataTestId,
 }: ModalRootProps) => {
-  const el = useRef<HTMLDivElement>();
+  const el = React.useRef<HTMLDivElement>();
 
-  useEffect(() => {
+  React.useEffect(() => {
     el.current = document.createElement("div");
     el.current.setAttribute("role", "dialog");
     el.current.setAttribute("aria-modal", "true");

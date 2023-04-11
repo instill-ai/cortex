@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { ChangeEvent, useState } from "react";
+import * as React from "react";
 import BasicToggleField from "./BasicToggleField";
 
 const meta: Meta<typeof BasicToggleField> = {
@@ -10,9 +10,9 @@ const meta: Meta<typeof BasicToggleField> = {
 export default meta;
 
 const Template: StoryFn<typeof BasicToggleField> = (args) => {
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = React.useState(false);
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) =>
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setChecked(event.target.checked);
 
   return (
