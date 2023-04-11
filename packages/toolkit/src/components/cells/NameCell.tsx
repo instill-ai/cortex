@@ -30,10 +30,8 @@ export const NameCell = ({
             position="m-auto"
           />
         </div>
-        <Link href={link}>
-          <h3 className="text-instill-h3 line-clamp-1 hover:underline">
-            {name}
-          </h3>
+        <Link className="w-4/5" href={link}>
+          <h3 className="text-instill-h3 hover:underline truncate">{name}</h3>
         </Link>
       </div>
     </td>

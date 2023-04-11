@@ -60,14 +60,17 @@ export const ModelsTable = ({
             onlineCounts={stateOverviewCounts?.online || 0}
           />
         ),
+        width: "w-auto",
       },
       {
         key: "model-source-head",
         item: "Model source",
+        width: "w-[240px]",
       },
       {
         key: "model-task-head",
         item: "Model task",
+        width: "w-[240px]",
       },
     ];
   }, [stateOverviewCounts]);
@@ -91,7 +94,7 @@ export const ModelsTable = ({
             marginBottom={null}
           />
         ) : (
-          <table className="table-auto border-collapse">
+          <table className="table-fixed border-collapse w-full">
             <TableHead
               borderColor="border-instillGrey20"
               bgColor="bg-instillGrey05"
@@ -114,7 +117,7 @@ export const ModelsTable = ({
                               : "STATE_UNSPECIFIED"
                             : "STATE_UNSPECIFIED"
                         }
-                        padding="py-2 pl-6"
+                        padding="py-2 px-6"
                         link={`/models/${model.id}`}
                       />
                       <ModelDefinitionCell

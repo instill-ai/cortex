@@ -61,22 +61,27 @@ export const PipelinesTable = ({
             onlineCounts={stateOverviewCounts?.online || 0}
           />
         ),
+        width: "w-auto",
       },
       {
         key: "pipeline-mode-head",
         item: "Mode",
+        width: "w-[160px]",
       },
       {
         key: "pipeline-source-head",
         item: "Source",
+        width: "w-[160px]",
       },
       {
         key: "pipeline-models-head",
         item: "Models",
+        width: "w-[160px]",
       },
       {
         key: "pipeline-destination-head",
         item: "Destination",
+        width: "w-[160px]",
       },
     ];
   }, [stateOverviewCounts]);

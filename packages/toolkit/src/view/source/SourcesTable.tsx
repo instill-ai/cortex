@@ -60,14 +60,17 @@ export const SourcesTable = ({
             onlineCounts={stateOverviewCounts?.online || 0}
           />
         ),
+        width: "w-auto",
       },
       {
         key: "connector-type-head",
         item: "Definition",
+        width: "w-[240px]",
       },
       {
         key: "connector-pipelines-head",
         item: "Pipelines",
+        width: "w-[240px]",
       },
     ];
   }, [stateOverviewCounts]);
