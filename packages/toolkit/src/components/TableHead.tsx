@@ -1,9 +1,10 @@
-import { ReactNode } from "react";
 import cn from "clsx";
+import { ReactNode } from "react";
 
 export type TableHeadItem = {
   key: string;
   item: string | ReactNode;
+  width: string;
 };
 
 export type TableHeadProps = {
@@ -28,7 +29,7 @@ export const TableHead = ({ items, bgColor, borderColor }: TableHeadProps) => {
 
           if (index === 0) {
             return (
-              <th className="py-1 pl-6" key={e.key}>
+              <th className={cn("py-1 pl-6", e.width)} key={e.key}>
                 {element}
               </th>
             );
@@ -36,14 +37,14 @@ export const TableHead = ({ items, bgColor, borderColor }: TableHeadProps) => {
 
           if (index === items.length - 1) {
             return (
-              <th className="py-1 pr-6" key={e.key}>
+              <th className={cn("py-1 pr-6", e.width)} key={e.key}>
                 {element}
               </th>
             );
           }
 
           return (
-            <th className="py-1" key={e.key}>
+            <th className={cn("py-1", e.width)} key={e.key}>
               {element}
             </th>
           );
