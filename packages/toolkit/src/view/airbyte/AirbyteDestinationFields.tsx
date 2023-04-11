@@ -1,4 +1,4 @@
-import { Dispatch, FC, Fragment, SetStateAction } from "react";
+import { Dispatch, Fragment, SetStateAction } from "react";
 import {
   AirbyteFieldErrors,
   AirbyteFieldValues,
@@ -20,7 +20,7 @@ export type AirbyteDestinationFieldsProps = {
   setFormIsDirty: Dispatch<SetStateAction<boolean>>;
 };
 
-export const AirbyteDestinationFields: FC<AirbyteDestinationFieldsProps> = ({
+export const AirbyteDestinationFields = ({
   fieldValues,
   setFieldValues,
   fieldErrors,
@@ -30,7 +30,7 @@ export const AirbyteDestinationFields: FC<AirbyteDestinationFieldsProps> = ({
   disableAll,
   formIsDirty,
   setFormIsDirty,
-}) => {
+}: AirbyteDestinationFieldsProps) => {
   const fields = useBuildAirbyteFields(
     destinationFormTree,
     disableAll,

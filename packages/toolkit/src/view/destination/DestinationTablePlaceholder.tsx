@@ -1,4 +1,3 @@
-import { FC } from "react";
 import {
   AwsRdsIcon,
   MongoDbIcon,
@@ -18,9 +17,10 @@ export type DestinationTablePlaceholderProps = {
   enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
 };
 
-export const DestinationTablePlaceholder: FC<
-  DestinationTablePlaceholderProps
-> = ({ marginBottom, enablePlaceholderCreateButton }) => {
+export const DestinationTablePlaceholder = ({
+  marginBottom,
+  enablePlaceholderCreateButton,
+}: DestinationTablePlaceholderProps) => {
   const width = "w-[136px]";
   const height = "h-[136px]";
 

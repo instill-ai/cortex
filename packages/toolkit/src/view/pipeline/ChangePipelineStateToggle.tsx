@@ -1,6 +1,6 @@
 import cn from "clsx";
 import axios from "axios";
-import { FC, useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { StatefulToggleField } from "@instill-ai/design-system";
 import { UseMutationResult } from "@tanstack/react-query";
 
@@ -32,7 +32,7 @@ export type ChangePipelineStateToggleProps = {
   disabled: boolean;
 };
 
-export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
+export const ChangePipelineStateToggle = ({
   pipeline,
   pipelineWatchState,
   switchOn,
@@ -40,7 +40,7 @@ export const ChangePipelineStateToggle: FC<ChangePipelineStateToggleProps> = ({
   marginBottom,
   accessToken,
   disabled,
-}) => {
+}: ChangePipelineStateToggleProps) => {
   const [error, setError] = useState<Nullable<string>>(null);
 
   useEffect(() => {

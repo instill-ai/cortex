@@ -1,4 +1,4 @@
-import { FC, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import axios from "axios";
 import {
   BasicProgressMessageBox,
@@ -47,14 +47,14 @@ const modalSelector = (state: ModalStore) => ({
   closeModal: state.closeModal,
 });
 
-export const ConfigureModelForm: FC<ConfigureModelFormProps> = ({
+export const ConfigureModelForm = ({
   model,
   marginBottom,
   onConfigure,
   disableConfigure,
   onDelete,
   disableDelete,
-}) => {
+}: ConfigureModelFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   /* -------------------------------------------------------------------------
    * Initialize form state
