@@ -33,6 +33,7 @@ export type ConfigureModelFormProps = {
   disableConfigure: boolean;
   onDelete: Nullable<() => void>;
   disableDelete: boolean;
+  accessToken: Nullable<string>;
 };
 
 const formSelector = (state: ConfigureModelFormStore) => ({
@@ -54,6 +55,7 @@ export const ConfigureModelForm = ({
   disableConfigure,
   onDelete,
   disableDelete,
+  accessToken,
 }: ConfigureModelFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   /* -------------------------------------------------------------------------
@@ -110,7 +112,7 @@ export const ConfigureModelForm = ({
           name: model.name,
           description: description || "",
         },
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {
@@ -185,7 +187,7 @@ export const ConfigureModelForm = ({
     deleteModel.mutate(
       {
         modelName: model.name,
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {
