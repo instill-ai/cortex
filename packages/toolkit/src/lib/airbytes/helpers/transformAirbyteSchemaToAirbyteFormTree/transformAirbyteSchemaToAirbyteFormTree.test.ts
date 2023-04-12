@@ -3,10 +3,9 @@
  * ref: https://github.com/airbytehq/airbyte/blob/29ce34f1cee4878a6e9368890d87820c0d379844/airbyte-webapp/src/core/jsonSchema/schemaToUiWidget.test.ts
  */
 
+import { test, expect } from "vitest";
 import { transformAirbyteSchemaToAirbyteFormTree } from "./transformAirbyteSchemaToAirbyteFormTree";
 import { AirbyteJsonSchemaDefinition } from "../../types";
-import { deepStrictEqual } from "node:assert/strict";
-import { test } from "node:test";
 
 test("should reformat jsonSchema to formTree representation", () => {
   const schema: AirbyteJsonSchemaDefinition = {
@@ -120,7 +119,7 @@ test("should reformat jsonSchema to formTree representation", () => {
     ],
   };
 
-  deepStrictEqual(formTree, expected);
+  expect(formTree).toStrictEqual(expected);
 });
 
 test("should reformat jsonSchema to formTree representation with parent schema", () => {
@@ -174,7 +173,7 @@ test("should reformat jsonSchema to formTree representation with parent schema",
     title: "Postgres Source Spec",
   };
 
-  deepStrictEqual(formTree, expected);
+  expect(formTree).toStrictEqual(expected);
 });
 
 test("should reformat jsonSchema to formTree representation when has oneOf", () => {
@@ -380,5 +379,5 @@ test("should reformat jsonSchema to formTree representation when has oneOf", () 
     isRequired: true,
   };
 
-  deepStrictEqual(formTree, expected);
+  expect(formTree).toStrictEqual(expected);
 });
