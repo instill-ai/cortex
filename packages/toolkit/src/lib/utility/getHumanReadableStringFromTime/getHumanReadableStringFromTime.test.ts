@@ -1,5 +1,4 @@
-import assert from "node:assert/strict";
-import { test, describe } from "node:test";
+import { test, expect, describe } from "vitest";
 import { getHumanReadableStringFromTime } from "./getHumanReadableStringFromTime";
 
 describe("test getTimeAgo", () => {
@@ -8,7 +7,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T00:00:01"
     );
-    assert.strictEqual(result, "a second ago");
+    expect(result).toBe("a second ago");
   });
 
   test("should return x seconds ago", () => {
@@ -16,7 +15,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T00:00:10"
     );
-    assert.strictEqual(result, "10 seconds ago");
+    expect(result).toBe("10 seconds ago");
   });
 
   test("should return 1 minute ago", () => {
@@ -24,15 +23,12 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T00:01:00"
     );
-
-    assert.strictEqual(result, "a minute ago");
-
+    expect(result).toBe("a minute ago");
     const result2 = getHumanReadableStringFromTime(
       "1995-12-01T00:00:00",
       "1995-12-01T00:01:01"
     );
-
-    assert.strictEqual(result2, "a minute ago");
+    expect(result2).toBe("a minute ago");
   });
 
   test("should return x minutes ago", () => {
@@ -40,8 +36,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T00:02:00"
     );
-
-    assert.strictEqual(result, "2 minutes ago");
+    expect(result).toBe("2 minutes ago");
   });
 
   test("should return an hour ago", () => {
@@ -49,15 +44,12 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T01:00:00"
     );
-
-    assert.strictEqual(result, "an hour ago");
-
+    expect(result).toBe("an hour ago");
     const result2 = getHumanReadableStringFromTime(
       "1995-12-01T00:00:00",
       "1995-12-01T01:01:00"
     );
-
-    assert.strictEqual(result2, "an hour ago");
+    expect(result2).toBe("an hour ago");
   });
 
   test("should return x hours ago", () => {
@@ -65,7 +57,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-01T10:00:00"
     );
-    assert.strictEqual(result, "10 hours ago");
+    expect(result).toBe("10 hours ago");
   });
 
   test("should return yesterday", () => {
@@ -73,13 +65,12 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-02T00:00:00"
     );
-    assert.strictEqual(result, "yesterday");
-
+    expect(result).toBe("yesterday");
     const result2 = getHumanReadableStringFromTime(
       "1995-12-01T00:00:00",
       "1995-12-02T00:02:00"
     );
-    assert.strictEqual(result2, "yesterday");
+    expect(result2).toBe("yesterday");
   });
 
   test("should return x days ago", () => {
@@ -87,7 +78,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1995-12-10T00:00:00"
     );
-    assert.strictEqual(result, "9 days ago");
+    expect(result).toBe("9 days ago");
   });
 
   test("should return 1 month ago", () => {
@@ -95,13 +86,12 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1996-01-01T00:00:00"
     );
-    assert.strictEqual(result, "last month");
-
+    expect(result).toBe("last month");
     const result2 = getHumanReadableStringFromTime(
       "1995-12-01T00:00:00",
       "1996-01-10T00:00:00"
     );
-    assert.strictEqual(result2, "last month");
+    expect(result2).toBe("last month");
   });
 
   test("should return x months ago", () => {
@@ -109,7 +99,7 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1996-03-01T00:00:00"
     );
-    assert.strictEqual(result, "3 months ago");
+    expect(result).toBe("3 months ago");
   });
 
   test("should return Date string", () => {
@@ -117,6 +107,6 @@ describe("test getTimeAgo", () => {
       "1995-12-01T00:00:00",
       "1997-03-01T00:00:00"
     );
-    assert.strictEqual(result, "Fri Dec 01 1995");
+    expect(result).toBe("Fri Dec 01 1995");
   });
 });

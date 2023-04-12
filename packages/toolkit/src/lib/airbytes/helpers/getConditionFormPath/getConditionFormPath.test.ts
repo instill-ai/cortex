@@ -1,7 +1,6 @@
+import { test, expect } from "vitest";
 import { getConditionFormPath } from "./getConditionFormPath";
 import { AirbyteFormConditionItem } from "../../types";
-import { strictEqual } from "node:assert/strict";
-import { test } from "node:test";
 
 test("should find path from a simple condition form", () => {
   const form: AirbyteFormConditionItem = {
@@ -51,7 +50,7 @@ test("should find path from a simple condition form", () => {
   };
 
   const path = getConditionFormPath(form);
-  strictEqual(path, "tunnel_method.tunnel_method");
+  expect(path).toStrictEqual("tunnel_method.tunnel_method");
 });
 
 test("find path when some of the const field is missing", () => {
@@ -160,5 +159,5 @@ test("find path when some of the const field is missing", () => {
   };
 
   const path = getConditionFormPath(form);
-  strictEqual(path, "tunnel_method.tunnel_method");
+  expect(path).toStrictEqual("tunnel_method.tunnel_method");
 });

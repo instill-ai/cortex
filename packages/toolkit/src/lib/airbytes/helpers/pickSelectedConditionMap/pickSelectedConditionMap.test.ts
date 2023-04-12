@@ -1,7 +1,6 @@
+import { test, expect } from "vitest";
 import { pickSelectedConditionMap } from "./pickSelectedConditionMap";
 import { AirbyteFormTree } from "../../types";
-import { deepStrictEqual } from "node:assert/strict";
-import { test } from "node:test";
 
 test("should find one selected condition map", () => {
   const formTree: AirbyteFormTree = {
@@ -1262,7 +1261,7 @@ test("should find one selected condition map", () => {
     initialValues
   );
 
-  deepStrictEqual(selectedConditionMap, {
+  expect(selectedConditionMap).toStrictEqual({
     loading_method: {
       selectedItem: "[Recommended] Internal Staging",
     },
@@ -2532,7 +2531,7 @@ test("should find multiple selected condition map", () => {
     initialValues
   );
 
-  deepStrictEqual(selectedConditionMap, {
+  expect(selectedConditionMap).toStrictEqual({
     loading_method: {
       selectedItem: "[Recommended] Internal Staging",
     },
