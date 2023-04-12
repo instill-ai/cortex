@@ -8,6 +8,7 @@ import {
   TableLoadingProgress,
   StateOverview,
   PaginationListContainer,
+  TableError,
 } from "../../components";
 import {
   useSearchedResources,
@@ -24,12 +25,14 @@ export type SourcesTableProps = {
   sources: Nullable<SourceWithPipelines[]>;
   sourcesWatchState: Nullable<ConnectorsWatchState>;
   marginBottom: Nullable<string>;
+  isError: boolean;
 };
 
 export const SourcesTable = ({
   sources,
   sourcesWatchState,
   marginBottom,
+  isError,
 }: SourcesTableProps) => {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
@@ -73,6 +76,24 @@ export const SourcesTable = ({
       },
     ];
   }, [stateOverviewCounts]);
+
+  if (isError) {
+    return (
+      <PaginationListContainer
+        title="Source"
+        description="These are the sources you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedPipelinePages.length}
+        displaySearchField={sources?.length !== 0 ? true : false}
+        marginBottom={marginBottom}
+      >
+        <TableError marginBottom={null} />
+      </PaginationListContainer>
+    );
+  }
 
   return (
     <PaginationListContainer

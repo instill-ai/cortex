@@ -9,6 +9,7 @@ import {
   TableLoadingProgress,
   PaginationListContainer,
   ModelCountsCell,
+  TableError,
 } from "../../components";
 import {
   chunk,
@@ -25,12 +26,14 @@ export type PipelinesTableProps = {
   pipelines: Nullable<Pipeline[]>;
   pipelinesWatchState: Nullable<PipelinesWatchState>;
   marginBottom: Nullable<string>;
+  isError: boolean;
 };
 
 export const PipelinesTable = ({
   pipelines,
   pipelinesWatchState,
   marginBottom,
+  isError,
 }: PipelinesTableProps) => {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
@@ -84,6 +87,24 @@ export const PipelinesTable = ({
       },
     ];
   }, [stateOverviewCounts]);
+
+  if (isError) {
+    return (
+      <PaginationListContainer
+        title="Pipeline"
+        description="These are the pipelines you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedPipelinePages.length}
+        displaySearchField={pipelines?.length !== 0 ? true : false}
+        marginBottom={marginBottom}
+      >
+        <TableError marginBottom={null} />
+      </PaginationListContainer>
+    );
+  }
 
   return (
     <PaginationListContainer

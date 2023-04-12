@@ -1,7 +1,6 @@
+import { test, expect } from "vitest";
 import { getFieldPaths } from "./getFieldPaths";
 import { AirbyteFormTree } from "../../types";
-import { deepStrictEqual } from "node:assert/strict";
-import { test } from "node:test";
 
 test("should get paths from single formItem", () => {
   const formTree: AirbyteFormTree = {
@@ -19,7 +18,7 @@ test("should get paths from single formItem", () => {
   };
 
   const paths = getFieldPaths(formTree, false);
-  deepStrictEqual(paths, ["tunnel_method.tunnel_method"]);
+  expect(paths).toStrictEqual(["tunnel_method.tunnel_method"]);
 });
 
 test("should get paths from single formGroup", () => {
@@ -55,7 +54,7 @@ test("should get paths from single formGroup", () => {
   };
 
   const paths = getFieldPaths(formTree, false);
-  deepStrictEqual(paths, ["key.host"]);
+  expect(paths).toStrictEqual(["key.host"]);
 });
 
 test("should get paths from multiple formGroups", () => {
@@ -123,7 +122,7 @@ test("should get paths from multiple formGroups", () => {
   ];
 
   const paths = getFieldPaths(formTrees, false);
-  deepStrictEqual(paths, ["foo.host", "bar.port"]);
+  expect(paths).toStrictEqual(["foo.host", "bar.port"]);
 });
 
 test("should get path from conditionForm and force paths to be unique", () => {
@@ -245,7 +244,7 @@ test("should get path from conditionForm and force paths to be unique", () => {
   };
 
   const paths = getFieldPaths(formTree, true);
-  deepStrictEqual(paths, [
+  expect(paths).toStrictEqual([
     "tunnel_method.tunnel_method",
     "tunnel_method.tunnel_host",
     "tunnel_method.ssh_key",
@@ -371,7 +370,7 @@ test("should get path from conditionForm and not forcing paths to be unique", ()
   };
 
   const paths = getFieldPaths(formTree, false);
-  deepStrictEqual(paths, [
+  expect(paths).toStrictEqual([
     "tunnel_method.tunnel_method",
     "tunnel_method.tunnel_method",
     "tunnel_method.tunnel_host",
