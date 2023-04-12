@@ -31,6 +31,7 @@ const DestinationsTablePage = () => {
               : null
           }
           marginBottom={null}
+          isError={destinations.isError}
         />
       </div>
     </Root>

@@ -59,6 +59,7 @@ const ResourceTogglePage = () => {
           switchOff={unDeployModel}
           marginBottom="mb-10"
           accessToken={null}
+          disabled={false}
         />
       </div>
       <div className="w-[1200px]">
@@ -71,6 +72,7 @@ const ResourceTogglePage = () => {
           switchOff={deactivatePipeline}
           marginBottom="mb-10"
           accessToken={null}
+          disabled={false}
         />
       </div>
     </Root>

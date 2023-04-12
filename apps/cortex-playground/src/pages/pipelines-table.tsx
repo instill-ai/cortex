@@ -22,11 +22,12 @@ const PipelinesTablePage = () => {
     <Root>
       <div className="w-[1200px]">
         <PipelinesTable
-          pipelines={pipelines.data ?? []}
+          pipelines={pipelines.data ?? null}
           pipelinesWatchState={
             pipelinesWatchState.isSuccess ? pipelinesWatchState.data : null
           }
           marginBottom={null}
+          isError={pipelines.isError}
         />
       </div>
     </Root>

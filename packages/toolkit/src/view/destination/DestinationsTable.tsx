@@ -8,6 +8,7 @@ import {
   PaginationListContainer,
   StateOverview,
   TableHead,
+  TableError,
   type TableHeadItem,
 } from "../../components";
 import {
@@ -25,12 +26,14 @@ export type DestinationsTableProps = {
   destinations: Nullable<DestinationWithPipelines[]>;
   destinationsWatchState: Nullable<ConnectorsWatchState>;
   marginBottom: Nullable<string>;
+  isError: boolean;
 };
 
 export const DestinationsTable = ({
   destinations,
   destinationsWatchState,
   marginBottom,
+  isError,
 }: DestinationsTableProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
@@ -74,6 +77,24 @@ export const DestinationsTable = ({
       },
     ];
   }, [stateOverviewCounts]);
+
+  if (isError) {
+    return (
+      <PaginationListContainer
+        title="Destination"
+        description="These are the destinations you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedDestinationPages.length}
+        displaySearchField={destinations?.length === 0 ? false : true}
+        marginBottom={marginBottom}
+      >
+        <TableError marginBottom={null} />
+      </PaginationListContainer>
+    );
+  }
 
   return (
     <PaginationListContainer
