@@ -9,6 +9,7 @@ import {
   PaginationListContainer,
   ModelTaskCell,
   StateOverview,
+  TableError,
 } from "../../components";
 import {
   useSearchedResources,
@@ -25,12 +26,14 @@ export type ModelsTableProps = {
   models: Nullable<Model[]>;
   modelsWatchState: Nullable<ModelsWatchState>;
   marginBottom: Nullable<string>;
+  isError: boolean;
 };
 
 export const ModelsTable = ({
   models,
   modelsWatchState,
   marginBottom,
+  isError,
 }: ModelsTableProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
@@ -74,6 +77,24 @@ export const ModelsTable = ({
       },
     ];
   }, [stateOverviewCounts]);
+
+  if (isError) {
+    return (
+      <PaginationListContainer
+        title="Model"
+        description="These are the models you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedModelPages.length}
+        displaySearchField={models?.length !== 0 ? true : false}
+        marginBottom={marginBottom}
+      >
+        <TableError marginBottom={null} />
+      </PaginationListContainer>
+    );
+  }
 
   return (
     <PaginationListContainer

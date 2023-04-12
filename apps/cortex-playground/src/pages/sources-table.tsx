@@ -1,9 +1,7 @@
 import { Root } from "@/components/Root";
 
 import {
-  useWatchDestinations,
   SourcesTable,
-  useDestinationsWithPipelines,
   useSourcesWithPipelines,
   useWatchSources,
 } from "@instill-ai/toolkit";
@@ -24,11 +22,12 @@ const SourcesTablePage = () => {
     <Root>
       <div className="w-[1200px]">
         <SourcesTable
-          sources={sources.data ?? []}
+          sources={sources.data ?? null}
           sourcesWatchState={
             sourcesWatchState.isSuccess ? sourcesWatchState.data : null
           }
           marginBottom={null}
+          isError={sources.isError}
         />
       </div>
     </Root>

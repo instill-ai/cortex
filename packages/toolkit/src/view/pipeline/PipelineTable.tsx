@@ -6,17 +6,20 @@ import {
   TableHead,
   ModelsCell,
   type TableHeadItem,
+  TableError,
 } from "../../components";
 import type { Nullable, Pipeline } from "../../lib";
 
 export type PipelineTableProps = {
   pipeline: Nullable<Pipeline>;
   marginBottom: Nullable<string>;
+  isError: boolean;
 };
 
 export const PipelineTable = ({
   pipeline,
   marginBottom,
+  isError,
 }: PipelineTableProps) => {
   const tableHeadItems = useMemo<TableHeadItem[]>(() => {
     const getHeadItem = (name: string) => {
@@ -50,6 +53,10 @@ export const PipelineTable = ({
 
   if (!pipeline) {
     return <TableLoadingProgress marginBottom={null} />;
+  }
+
+  if (isError) {
+    return <TableError marginBottom={null} />;
   }
 
   return (
