@@ -5,7 +5,7 @@ import {
   SourceWithPipelines,
 } from "../vdp-sdk";
 import { Nullable } from "../type";
-import { useEffect, useState } from "react";
+import * as React from "react";
 
 type Resources =
   | DestinationWithPipelines
@@ -20,9 +20,9 @@ export function useSearchedResources<T extends Resources>({
   resources: Nullable<T[]>;
   searchTerm: Nullable<string>;
 }) {
-  const [searchedResources, setSearchedResources] = useState<T[]>([]);
+  const [searchedResources, setSearchedResources] = React.useState<T[]>([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!resources) {
       return;
     }

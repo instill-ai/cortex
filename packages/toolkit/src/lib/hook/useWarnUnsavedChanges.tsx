@@ -1,5 +1,5 @@
 import { NextRouter } from "next/router";
-import { useCallback, useEffect } from "react";
+import * as React from "react";
 import { Nullable } from "../type";
 
 export type useWarnUnsavedChangesProps = {
@@ -15,7 +15,7 @@ export function useWarnUnsavedChanges({
   confirmation,
   callbackWhenLeave,
 }: useWarnUnsavedChangesProps) {
-  const onRouteChangeStart = useCallback(() => {
+  const onRouteChangeStart = React.useCallback(() => {
     if (haveUnsavedChanges) {
       if (window.confirm(confirmation)) {
         if (callbackWhenLeave) callbackWhenLeave();
@@ -25,7 +25,7 @@ export function useWarnUnsavedChanges({
     }
   }, [haveUnsavedChanges, confirmation, callbackWhenLeave]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     router.events.on("routeChangeStart", onRouteChangeStart);
 
     return () => {

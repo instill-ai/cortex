@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   BasicTextField,
@@ -33,7 +33,10 @@ export const DeleteResourceModal = ({
 }: DeleteResourceModalProps) => {
   const { closeModal, open } = useModalStore(selector, shallow);
 
-  const modalDetails = useMemo<{ title: string; description: string }>(() => {
+  const modalDetails = React.useMemo<{
+    title: string;
+    description: string;
+  }>(() => {
     if (!resource) {
       return {
         title: "",
@@ -104,20 +107,20 @@ export const DeleteResourceModal = ({
   // ###################################################################
 
   const [confirmationCode, setConfirmationCode] =
-    useState<Nullable<string>>(null);
+    React.useState<Nullable<string>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setConfirmationCode(null);
   }, [open]);
 
-  const handleCodeChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
+  const handleCodeChange = React.useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
       setConfirmationCode(event.target.value);
     },
     []
   );
 
-  const canDeleteResource = useMemo(() => {
+  const canDeleteResource = React.useMemo(() => {
     if (!resource || confirmationCode !== resource.id) return false;
     return true;
   }, [confirmationCode, resource]);

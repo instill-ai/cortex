@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import * as React from "react";
 import {
   BasicSingleSelect,
   getModelDefinitionToolkit,
@@ -32,9 +32,9 @@ export const SelectModelPresetCard = ({
    * -----------------------------------------------------------------------*/
 
   const [selectedModelPresetOption, setSelectedModelPresetOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
-  const selectedModel = useMemo(() => {
+  const selectedModel = React.useMemo(() => {
     if (!selectedModelPresetOption) return null;
     return (
       modelHubPresetsList.find(
@@ -43,17 +43,17 @@ export const SelectModelPresetCard = ({
     );
   }, [selectedModelPresetOption]);
 
-  const modelDefinitionToolkit = useMemo(() => {
+  const modelDefinitionToolkit = React.useMemo(() => {
     if (!selectedModel) return null;
     return getModelDefinitionToolkit(selectedModel.model_definition);
   }, [selectedModel]);
 
-  const modelInstanceTaskToolkit = useMemo(() => {
+  const modelInstanceTaskToolkit = React.useMemo(() => {
     if (!selectedModel) return null;
     return getModelInstanceTaskToolkit(selectedModel.task);
   }, [selectedModel]);
 
-  const modelPresetOptions: SingleSelectOption[] = useMemo(() => {
+  const modelPresetOptions: SingleSelectOption[] = React.useMemo(() => {
     return modelHubPresetsList.map((e) => ({
       label: e.id,
       value: e.id,
@@ -64,7 +64,7 @@ export const SelectModelPresetCard = ({
    * Handle preset change
    * -----------------------------------------------------------------------*/
 
-  const handlePresetChange = useCallback(
+  const handlePresetChange = React.useCallback(
     (option: Nullable<SingleSelectOption>) => {
       setSelectedModelPresetOption(option);
 

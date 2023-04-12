@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { useMemo } from "react";
+import * as React from "react";
 import {
   ConnectionTypeCell,
   TableLoadingProgress,
@@ -18,7 +18,7 @@ export const PipelineTable = ({
   pipeline,
   marginBottom,
 }: PipelineTableProps) => {
-  const tableHeadItems = useMemo<TableHeadItem[]>(() => {
+  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
     const getHeadItem = (name: string) => {
       return (
         <div className="flex flex-row gap-x-[15px]">

@@ -1,5 +1,4 @@
-import { useMemo, useState } from "react";
-
+import * as React from "react";
 import {
   ConnectionTypeCell,
   PipelinesCell,
@@ -32,15 +31,15 @@ export const DestinationsTable = ({
   destinationsWatchState,
   marginBottom,
 }: DestinationsTableProps) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
   const searchedDestinations = useSearchedResources({
     resources: destinations || null,
     searchTerm,
   });
 
-  const searchedDestinationPages = useMemo(() => {
+  const searchedDestinationPages = React.useMemo(() => {
     return chunk(searchedDestinations, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedDestinations]);
 
@@ -49,7 +48,7 @@ export const DestinationsTable = ({
     destinationsWatchState
   );
 
-  const tableHeadItems = useMemo<TableHeadItem[]>(() => {
+  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
     return [
       {
         key: "connector-state-overview-head",

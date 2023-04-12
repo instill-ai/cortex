@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangeEvent, useCallback, useMemo, useState } from "react";
+import * as React from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { shallow } from "zustand/shallow";
 import {
@@ -133,7 +133,7 @@ export const CreateModelForm = ({
     enable: true,
   });
 
-  const modelDefinitionOptions = useMemo(() => {
+  const modelDefinitionOptions = React.useMemo(() => {
     if (!modelDefinitions.isSuccess) return [];
 
     return modelDefinitions.data.map((e) => {
@@ -152,23 +152,23 @@ export const CreateModelForm = ({
   }, [modelDefinitions.isSuccess, modelDefinitions.data]);
 
   const [selectedModelDefinitionOption, setSelectedModelDefinitionOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
   /* -------------------------------------------------------------------------
    * Create github/local/artivc/huggingface model
    * -----------------------------------------------------------------------*/
 
-  const [modelCreated, setModelCreated] = useState(false);
+  const [modelCreated, setModelCreated] = React.useState(false);
 
   const [createModelMessageBoxState, setCreateModelMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
       status: null,
     });
 
-  const canCreateModel = useMemo(() => {
+  const canCreateModel = React.useMemo(() => {
     if (!modelDefinition || modelCreated || !modelId) {
       return false;
     }
@@ -217,7 +217,7 @@ export const CreateModelForm = ({
   const createArtivcModel = useCreateArtivcModel();
   const createHuggingFaceModel = useCreateHuggingFaceModel();
 
-  const prepareNewModel = useCallback(
+  const prepareNewModel = React.useCallback(
     async (modelName: string) => {
       const model = await getModelQuery({ modelName, accessToken });
       setModelCreated(true);
@@ -245,14 +245,14 @@ export const CreateModelForm = ({
   );
 
   const deployModel = useDeployModel();
-  const handleDeployModel = useCallback(
+  const handleDeployModel = React.useCallback(
     async (modelName: string) => {
       deployModel.mutate({ modelName, accessToken });
     },
     [deployModel, accessToken]
   );
 
-  const handelCreateModel = useCallback(async () => {
+  const handelCreateModel = React.useCallback(async () => {
     if (!modelId) return;
 
     // We don't validate the rest of the field if the ID is incorrect
@@ -531,7 +531,7 @@ export const CreateModelForm = ({
     setFieldError,
   ]);
 
-  const getModelSetupGuide = useCallback((modelDefinition: string) => {
+  const getModelSetupGuide = React.useCallback((modelDefinition: string) => {
     switch (modelDefinition) {
       case "model-definitions/github":
         return "https://www.instill.tech/docs/import-models/github";
@@ -563,7 +563,7 @@ export const CreateModelForm = ({
           }
           value={modelId}
           error={modelIdError}
-          onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             if (!event.target.value) {
               setFieldValue("model.new.id", null);
               setFieldError("model.new.id", null);
@@ -597,7 +597,7 @@ export const CreateModelForm = ({
           error={modelDescriptionError}
           enableCounter={true}
           counterWordLimit={1023}
-          onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
             setFieldValue("model.new.description", event.target.value)
           }
         />
@@ -630,7 +630,7 @@ export const CreateModelForm = ({
               required={true}
               value={modelGithubRepoUrl}
               error={modelGithubRepoUrlError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setFieldValue("model.new.github.repoUrl", event.target.value)
               }
               disabled={modelCreated ? true : false}
@@ -642,7 +642,7 @@ export const CreateModelForm = ({
               required={true}
               value={modelGithubTag}
               error={modelGithubTagError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setFieldValue("model.new.github.tag", event.target.value)
               }
               disabled={modelCreated ? true : false}
@@ -662,7 +662,7 @@ export const CreateModelForm = ({
               required={true}
               readOnly={false}
               disabled={modelCreated ? true : false}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setFieldValue(
                   "model.new.local.file",
                   event.target.files ? event.target.files[0] : null
@@ -680,7 +680,7 @@ export const CreateModelForm = ({
               required={true}
               value={modelArtivcGcsBucketPath}
               error={modelArtivcGcsBucketPathError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setFieldValue(
                   "model.new.artivc.gcsBucketPath",
                   event.target.value
@@ -694,7 +694,7 @@ export const CreateModelForm = ({
               required={true}
               value={modelArtivcTag}
               error={modelArtivcTagError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setFieldValue("model.new.artivc.tag", event.target.value)
               }
             />
@@ -705,7 +705,7 @@ export const CreateModelForm = ({
               description="If the GCS bucket path is private, please provide the Google Cloud Application Default credential or service account credential in its JSON format to get access to the model. See ArtiVC Google Cloud Storage setup guide."
               value={modelArtivcCredentials}
               error={modelArtivcCredentialsError}
-              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
                 setFieldValue(
                   "model.new.artivc.credentials",
                   event.target.value
@@ -724,7 +724,7 @@ export const CreateModelForm = ({
               required={true}
               value={modelHuggingFaceRepoUrl}
               error={modelHuggingFaceRepoUrlError}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setFieldValue(
                   "model.new.huggingFace.repoUrl",
                   event.target.value

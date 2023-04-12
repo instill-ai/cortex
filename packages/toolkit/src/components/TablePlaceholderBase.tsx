@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { Fragment, ReactElement } from "react";
+import * as React from "react";
 import { useRouter } from "next/router";
 import { SolidButton } from "@instill-ai/design-system";
 
@@ -8,7 +8,7 @@ import { Nullable } from "../lib";
 export type TablePlaceholderBaseProps = {
   placeholderItems: {
     id: string;
-    item: ReactElement;
+    item: React.ReactElement;
   }[];
   placeholderTitle: string;
   createButtonTitle: string;
@@ -38,7 +38,7 @@ export const TablePlaceholderBase = ({
     >
       <div className="grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-2 px-[27px] opacity-10">
         {placeholderItems.map((e) => (
-          <Fragment key={e.id}>{e.item}</Fragment>
+          <React.Fragment key={e.id}>{e.item}</React.Fragment>
         ))}
       </div>
       <div className="m-auto flex flex-col gap-y-5">

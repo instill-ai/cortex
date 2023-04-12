@@ -1,5 +1,4 @@
-import { useMemo, useState } from "react";
-
+import * as React from "react";
 import {
   ConnectionTypeCell,
   PipelinesCell,
@@ -32,15 +31,15 @@ export const SourcesTable = ({
   sourcesWatchState,
   marginBottom,
 }: SourcesTableProps) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
   const searchedSources = useSearchedResources({
     resources: sources || null,
     searchTerm,
   });
 
-  const searchedPipelinePages = useMemo(() => {
+  const searchedPipelinePages = React.useMemo(() => {
     return chunk(searchedSources, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedSources]);
 
@@ -49,7 +48,7 @@ export const SourcesTable = ({
     sourcesWatchState
   );
 
-  const tableHeadItems = useMemo<TableHeadItem[]>(() => {
+  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
     return [
       {
         key: "connector-state-overview-head",

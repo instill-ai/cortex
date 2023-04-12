@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangeEvent, useMemo, useState } from "react";
+import * as React from "react";
 import {
   BasicProgressMessageBox,
   BasicTextArea,
@@ -103,7 +103,7 @@ export const SetPipelineDetailsStep = ({
    * TOOD: Move this to zod superRefine
    * -----------------------------------------------------------------------*/
 
-  const canSetupNewPipeline = useMemo(() => {
+  const canSetupNewPipeline = React.useMemo(() => {
     const validator = {
       pipelineIsValid: false,
       sourceIsValid: false,
@@ -213,7 +213,7 @@ export const SetPipelineDetailsStep = ({
   const updatePipeline = useUpdatePipeline();
 
   const [messageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
@@ -377,7 +377,7 @@ export const SetPipelineDetailsStep = ({
         }
         value={pipelineId}
         error={pipelineIdError}
-        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           if (!event.target.value) {
             setFieldValue("pipeline.id", null);
             setFieldError("pipeline.id", null);
@@ -404,7 +404,7 @@ export const SetPipelineDetailsStep = ({
         description="Fill with a short description."
         value={pipelineDescription}
         error={pipelineDescriptionError}
-        onChange={(event: ChangeEvent<HTMLTextAreaElement>) => {
+        onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
           setFieldValue("pipeline.description", event.target.value);
         }}
       />

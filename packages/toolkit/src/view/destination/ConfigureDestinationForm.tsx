@@ -1,4 +1,4 @@
-import { ChangeEvent, useCallback, useEffect, useMemo, useState } from "react";
+import * as React from "react";
 import * as yup from "yup";
 import axios from "axios";
 import { shallow } from "zustand/shallow";
@@ -85,7 +85,7 @@ export const ConfigureDestinationForm = ({
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
 
-  const isSyncDestination = useMemo(() => {
+  const isSyncDestination = React.useMemo(() => {
     if (
       destination.destination_connector_definition.connector_definition
         .docker_repository === "instill-ai/destination-grpc" ||
@@ -98,7 +98,7 @@ export const ConfigureDestinationForm = ({
     return false;
   }, [destination]);
 
-  const destinationDefinitionOption = useMemo(() => {
+  const destinationDefinitionOption = React.useMemo(() => {
     return {
       label:
         destination.destination_connector_definition.connector_definition.title,
@@ -125,17 +125,17 @@ export const ConfigureDestinationForm = ({
    * Create interior state for managing the form
    * -----------------------------------------------------------------------*/
 
-  const [airbyteFormIsDirty, setAirbyteFormIsDirty] = useState(false);
+  const [airbyteFormIsDirty, setAirbyteFormIsDirty] = React.useState(false);
 
   // If the airbyte form is dirty we need to inform the parent.
-  useEffect(() => {
+  React.useEffect(() => {
     if (airbyteFormIsDirty) {
       setFormIsDirty(true);
     }
   }, [airbyteFormIsDirty, setFormIsDirty]);
 
   const [fieldErrors, setFieldErrors] =
-    useState<Nullable<AirbyteFieldErrors>>(null);
+    React.useState<Nullable<AirbyteFieldErrors>>(null);
 
   const destinationFormTree = useAirbyteFormTree(
     destination.destination_connector_definition
@@ -155,9 +155,9 @@ export const ConfigureDestinationForm = ({
     initialValues
   );
 
-  const [canEdit, setCanEdit] = useState(false);
+  const [canEdit, setCanEdit] = React.useState(false);
   const [messageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
@@ -171,7 +171,7 @@ export const ConfigureDestinationForm = ({
     null
   );
 
-  const formYup = useMemo(() => {
+  const formYup = React.useMemo(() => {
     if (!airbyteYup) return null;
 
     return yup.object({
@@ -179,7 +179,7 @@ export const ConfigureDestinationForm = ({
     });
   }, [airbyteYup]);
 
-  const updateFieldValues = useCallback(
+  const updateFieldValues = React.useCallback(
     (field: string, value: string) => {
       setAirbyteFormIsDirty(true);
       setFieldValues((prev) => {
@@ -198,7 +198,7 @@ export const ConfigureDestinationForm = ({
 
   const updateDestination = useUpdateDestination();
 
-  const handleSubmit = useCallback(async () => {
+  const handleSubmit = React.useCallback(async () => {
     if (
       destination.destination_connector_definition.connector_definition
         .docker_repository === "instill-ai/destination-grpc" ||
@@ -341,7 +341,7 @@ export const ConfigureDestinationForm = ({
   // ##########################################################################
 
   const deleteDestination = useDeleteDestination();
-  const handleDeleteDestination = useCallback(() => {
+  const handleDeleteDestination = React.useCallback(() => {
     if (!destination) return;
 
     setMessageBoxState(() => ({
@@ -427,7 +427,7 @@ export const ConfigureDestinationForm = ({
               value={
                 fieldValues ? (fieldValues.description as string) ?? null : null
               }
-              onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
                 updateFieldValues("description", event.target.value)
               }
               disabled={!canEdit}

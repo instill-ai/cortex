@@ -1,10 +1,10 @@
 import { env } from "../utility";
-import { useEffect, useState } from "react";
+import * as React from "react";
 
 export function useCreateUpdateDeleteResourceGuard() {
-  const [enable, setEnable] = useState(false);
+  const [enable, setEnable] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     setEnable(env("NEXT_PUBLIC_DISABLE_CREATE_UPDATE_DELETE_RESOURCE"));
   }, []);
 

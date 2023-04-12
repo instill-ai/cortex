@@ -1,5 +1,4 @@
-import { useMemo, useState } from "react";
-
+import * as React from "react";
 import {
   NameCell,
   TableHead,
@@ -32,15 +31,15 @@ export const ModelsTable = ({
   modelsWatchState,
   marginBottom,
 }: ModelsTableProps) => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const [searchTerm, setSearchTerm] = useState<Nullable<string>>(null);
+  const [currentPage, setCurrentPage] = React.useState(0);
+  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
   const searchedModels = useSearchedResources({
     resources: models || null,
     searchTerm,
   });
 
-  const searchedModelPages = useMemo(() => {
+  const searchedModelPages = React.useMemo(() => {
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedModels]);
 
@@ -49,7 +48,7 @@ export const ModelsTable = ({
     modelsWatchState
   );
 
-  const tableHeadItems = useMemo<TableHeadItem[]>(() => {
+  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
     return [
       {
         key: "model-state-overview-head",

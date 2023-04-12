@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import * as React from "react";
 
 import { Nullable, useCreateResourceFormStore } from "../../../lib";
 import { CreatePipelineProgress } from "./CreatePipelineProgress";
@@ -32,7 +32,7 @@ export const CreatePipelineForm = ({
     (state) => state.pipelineFormStep
   );
 
-  const step = useMemo(() => {
+  const step = React.useMemo(() => {
     switch (pipelineFormStep) {
       case 0:
       case 1:

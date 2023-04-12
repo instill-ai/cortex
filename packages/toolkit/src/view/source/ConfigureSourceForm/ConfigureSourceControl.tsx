@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useState } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   BasicProgressMessageBox,
@@ -57,7 +57,7 @@ export const ConfigureSourceControl = ({
    * Handle configure source
    * -----------------------------------------------------------------------*/
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = React.useCallback(() => {
     if (canEdit) {
       setFieldValue("canEdit", false);
     } else {
@@ -71,7 +71,7 @@ export const ConfigureSourceControl = ({
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
   const [messageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
@@ -79,7 +79,7 @@ export const ConfigureSourceControl = ({
     });
 
   const deleteSource = useDeleteSource();
-  const handleDeleteSource = useCallback(() => {
+  const handleDeleteSource = React.useCallback(() => {
     if (!source) return;
 
     setMessageBoxState(() => ({

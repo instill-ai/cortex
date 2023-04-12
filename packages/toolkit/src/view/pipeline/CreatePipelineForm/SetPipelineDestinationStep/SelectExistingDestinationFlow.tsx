@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import * as React from "react";
 import Image from "next/image";
 import { shallow } from "zustand/shallow";
 
@@ -49,12 +49,12 @@ export const SelectExistingDestinationFlow = ({
    * Get existing destinations and set up options
    * -----------------------------------------------------------------------*/
 
-  const [destinationOptions, setDestinationOptions] = useState<
+  const [destinationOptions, setDestinationOptions] = React.useState<
     SingleSelectOption[] | null
   >(null);
   const destinations = useDestinations({ accessToken, enable: true });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!destinations.isSuccess || !destinations.data) return;
 
     if (pipelineMode === "MODE_ASYNC") {
@@ -100,13 +100,13 @@ export const SelectExistingDestinationFlow = ({
   }, [destinations.isSuccess, destinations.data, pipelineMode]);
 
   const [selectedDestinationOption, setSelectedDestinationOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
   /* -------------------------------------------------------------------------
    * Set up existing destinations
    * -----------------------------------------------------------------------*/
 
-  const canUseExistingDestination = useMemo(() => {
+  const canUseExistingDestination = React.useMemo(() => {
     if (!existingDestinationId) {
       return false;
     }

@@ -1,9 +1,9 @@
 import { Nullable } from "../type";
-import { createContext, Dispatch, SetStateAction, useContext } from "react";
+import * as React from "react";
 
 type AmplitudeCtxValue = {
   amplitudeIsInit: boolean;
-  setAmplitudeIsInit: Nullable<Dispatch<SetStateAction<boolean>>>;
+  setAmplitudeIsInit: Nullable<React.Dispatch<React.SetStateAction<boolean>>>;
 };
 
 const defaultAmplitudeCtxValue: AmplitudeCtxValue = {
@@ -11,6 +11,6 @@ const defaultAmplitudeCtxValue: AmplitudeCtxValue = {
   setAmplitudeIsInit: null,
 };
 
-export const AmplitudeCtx = createContext(defaultAmplitudeCtxValue);
+export const AmplitudeCtx = React.createContext(defaultAmplitudeCtxValue);
 
-export const useAmplitudeCtx = () => useContext(AmplitudeCtx);
+export const useAmplitudeCtx = () => React.useContext(AmplitudeCtx);

@@ -1,12 +1,12 @@
 import { ConnectorDefinition } from "../../vdp-sdk";
 import { Nullable } from "../../type";
-import { useMemo } from "react";
+import * as React from "react";
 import { transformAirbyteSchemaToAirbyteFormTree } from "../helpers/transformAirbyteSchemaToAirbyteFormTree";
 
 export const useAirbyteFormTree = (
   definition: Nullable<ConnectorDefinition>
 ) => {
-  const formTree = useMemo(() => {
+  const formTree = React.useMemo(() => {
     if (!definition) {
       return null;
     }

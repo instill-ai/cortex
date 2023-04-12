@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import * as React from "react";
 import {
   StatusErrorIcon,
   StatusOffIcon,
@@ -19,7 +19,7 @@ export const StateIcon = ({
   height,
   position,
 }: StateIconProps) => {
-  let icon: ReactElement;
+  let icon: React.ReactElement;
 
   switch (state) {
     case "STATE_ERROR":

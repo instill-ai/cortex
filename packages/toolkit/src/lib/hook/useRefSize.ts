@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useRef, useState } from "react";
+import * as React from "react";
 import { Nullable } from "../type";
 
 export type RefSize = {
@@ -6,11 +6,13 @@ export type RefSize = {
   height: number;
 };
 
-export function useRefSize(ref: RefObject<HTMLElement>): Nullable<RefSize> {
-  const [refSize, setRefSize] = useState<Nullable<RefSize>>(null);
-  const observerRef = useRef<ResizeObserver | null>(null);
+export function useRefSize(
+  ref: React.RefObject<HTMLElement>
+): Nullable<RefSize> {
+  const [refSize, setRefSize] = React.useState<Nullable<RefSize>>(null);
+  const observerRef = React.useRef<ResizeObserver | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     observerRef.current = new ResizeObserver((entries) => {
       setRefSize({
         width: entries[0].contentRect.width,

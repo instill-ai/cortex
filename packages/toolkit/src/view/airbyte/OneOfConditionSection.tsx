@@ -1,11 +1,4 @@
-import {
-  useMemo,
-  useCallback,
-  useState,
-  useEffect,
-  type Dispatch,
-  type SetStateAction,
-} from "react";
+import * as React from "react";
 import {
   BasicSingleSelect,
   SingleSelectOption,
@@ -24,12 +17,14 @@ import {
 export type OneOfConditionSectionProps = {
   formTree: AirbyteFormConditionItemWithUiFields;
   errors: Nullable<AirbyteFieldErrors>;
-  setValues: Dispatch<SetStateAction<Nullable<AirbyteFieldValues>>>;
+  setValues: React.Dispatch<React.SetStateAction<Nullable<AirbyteFieldValues>>>;
   selectedConditionMap: Nullable<SelectedItemMap>;
-  setSelectedConditionMap: Dispatch<SetStateAction<Nullable<SelectedItemMap>>>;
+  setSelectedConditionMap: React.Dispatch<
+    React.SetStateAction<Nullable<SelectedItemMap>>
+  >;
   disableAll: boolean;
   formIsDirty: boolean;
-  setFormIsDirty: Dispatch<SetStateAction<boolean>>;
+  setFormIsDirty: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const OneOfConditionSection = ({
@@ -50,9 +45,9 @@ export const OneOfConditionSection = ({
   // the state of UI fields
 
   const [selectedConditionOption, setSelectedConditionOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
-  const conditionOptions: SingleSelectOption[] = useMemo(() => {
+  const conditionOptions: SingleSelectOption[] = React.useMemo(() => {
     // Sometimes the const field is missing, we need to find a workaround
     // TODO: Known issue: snowflake
 
@@ -71,14 +66,15 @@ export const OneOfConditionSection = ({
   // don't have proper const field We need to find the workaround. You can find
   // more information in the README.
 
-  const [conditionPath, setConditionPath] = useState<Nullable<string>>(null);
+  const [conditionPath, setConditionPath] =
+    React.useState<Nullable<string>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const conditionFormPath = getConditionFormPath(formTree);
     setConditionPath(conditionFormPath);
   }, [formTree]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // When create new destination, upon the initialize of the form, user haven't
     // chosen any condition, we have to choose default one. Be careful of the update,
     // make sure it won't cause infinite loop.
@@ -147,7 +143,7 @@ export const OneOfConditionSection = ({
     }
   }, [selectedConditionMap, formTree.path, conditionOptions, formIsDirty]);
 
-  const onConditionChange = useCallback(
+  const onConditionChange = React.useCallback(
     (option: Nullable<SingleSelectOption>) => {
       if (option) {
         const selectedCondition = formTree.conditions[option.label] ?? null;

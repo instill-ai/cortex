@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import * as React from "react";
 import { useAmplitudeCtx } from "./AmplitudeContext";
 import { sendAmplitudeData } from "./helper";
 import { AmplitudeEvent, AmplitudeEventProperties } from "./type";
@@ -9,7 +9,7 @@ export const useSendAmplitudeData = (
   routerIsReady: boolean
 ) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
-  useEffect(() => {
+  React.useEffect(() => {
     if (!amplitudeIsInit || !routerIsReady) return;
 
     sendAmplitudeData(event, properties);

@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import * as React from "react";
 import axios from "axios";
 import {
   BasicProgressMessageBox,
@@ -69,10 +69,10 @@ export const ConfigureModelForm = ({
    * Handle update model
    * -----------------------------------------------------------------------*/
 
-  const [canEdit, setCanEdit] = useState(false);
+  const [canEdit, setCanEdit] = React.useState(false);
 
   const [messageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
@@ -81,7 +81,7 @@ export const ConfigureModelForm = ({
 
   const updateModel = useUpdateModel();
 
-  const handleConfigureModel = useCallback(() => {
+  const handleConfigureModel = React.useCallback(() => {
     if (!canEdit) {
       setCanEdit(true);
       return;
@@ -170,7 +170,7 @@ export const ConfigureModelForm = ({
    * -----------------------------------------------------------------------*/
 
   const deleteModel = useDeleteModel();
-  const handleDeleteModel = useCallback(() => {
+  const handleDeleteModel = React.useCallback(() => {
     if (!model) return;
 
     setMessageBoxState({

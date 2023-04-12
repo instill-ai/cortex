@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { useEffect, useMemo, useRef } from "react";
+import * as React from "react";
 import { getElementPosition } from "@instill-ai/design-system";
 
 import { ProgressStep } from "./ProgressStep";
@@ -28,20 +28,20 @@ export const CreatePipelineProgress = ({
     (state) => state.pipelineFormStep
   );
 
-  const containerRef = useRef<HTMLDivElement>(null);
-  const firstStepCubeRef = useRef<HTMLDivElement>(null);
-  const secondStepCubeRef = useRef<HTMLDivElement>(null);
-  const thirdStepCubeRef = useRef<HTMLDivElement>(null);
-  const lastStepCubeRef = useRef<HTMLDivElement>(null);
-  const firstConnectionLineRef = useRef<HTMLDivElement>(null);
-  const secondConnectionLineRef = useRef<HTMLDivElement>(null);
-  const thirdConnectionLineRef = useRef<HTMLDivElement>(null);
+  const containerRef = React.useRef<HTMLDivElement>(null);
+  const firstStepCubeRef = React.useRef<HTMLDivElement>(null);
+  const secondStepCubeRef = React.useRef<HTMLDivElement>(null);
+  const thirdStepCubeRef = React.useRef<HTMLDivElement>(null);
+  const lastStepCubeRef = React.useRef<HTMLDivElement>(null);
+  const firstConnectionLineRef = React.useRef<HTMLDivElement>(null);
+  const secondConnectionLineRef = React.useRef<HTMLDivElement>(null);
+  const thirdConnectionLineRef = React.useRef<HTMLDivElement>(null);
 
   const contanierIsOnScreen = useOnScreen(containerRef);
 
   // Calculate the position and wdith of three connection line
 
-  const connectionLine = useMemo(() => {
+  const connectionLine = React.useMemo(() => {
     if (!contanierIsOnScreen) {
       return null;
     }
@@ -127,7 +127,7 @@ export const CreatePipelineProgress = ({
 
   // Update connection line's color according to current progression
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (pipelineFormStep >= 2) {
       firstConnectionLineRef.current?.classList.remove("border-instillGrey20");
       firstConnectionLineRef.current?.classList.add("border-instillBlue50");

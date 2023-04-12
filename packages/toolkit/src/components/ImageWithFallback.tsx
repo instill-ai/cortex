@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { ReactElement, useState } from "react";
+import * as React from "react";
 
 export type ImageWithFallbackProps = {
   src: string;
-  fallbackImg: ReactElement;
+  fallbackImg: React.ReactElement;
   alt: string;
   width: number;
   height: number;
@@ -16,7 +16,7 @@ export const ImageWithFallback = ({
   width,
   height,
 }: ImageWithFallbackProps) => {
-  const [error, setError] = useState(false);
+  const [error, setError] = React.useState(false);
   return error ? (
     fallbackImg
   ) : (

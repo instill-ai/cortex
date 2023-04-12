@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState, ChangeEvent } from "react";
+import * as React from "react";
 import * as yup from "yup";
 import Image from "next/image";
 import axios from "axios";
@@ -88,7 +88,7 @@ export const CreateDestinationForm = ({
     enable: true,
   });
 
-  const destinationOptions = useMemo(() => {
+  const destinationOptions = React.useMemo(() => {
     if (!destinationDefinitions.isSuccess) return [];
 
     if (pipelineMode === "MODE_ASYNC") {
@@ -142,16 +142,16 @@ export const CreateDestinationForm = ({
   ]);
 
   const [selectedDestinationDefinition, setSelectedDestinationDefinition] =
-    useState<Nullable<ConnectorDefinition>>(null);
+    React.useState<Nullable<ConnectorDefinition>>(null);
 
   const [selectedDestinationOption, setSelectedDestinationOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
   // Instill Ai provided connector HTTP and gRPC can only have default id
   // destination-http and destination-grpc. We need to make sure user have
   // proper instruction on this issue.
 
-  const canSetIdField = useMemo(() => {
+  const canSetIdField = React.useMemo(() => {
     if (!selectedDestinationDefinition) return true;
 
     if (
@@ -166,7 +166,7 @@ export const CreateDestinationForm = ({
     }
   }, [selectedDestinationDefinition]);
 
-  const defaultId = useMemo(() => {
+  const defaultId = React.useMemo(() => {
     if (!selectedDestinationDefinition) return null;
 
     if (
@@ -186,7 +186,7 @@ export const CreateDestinationForm = ({
     return null;
   }, [selectedDestinationDefinition]);
 
-  const getSetupGuide = useCallback(() => {
+  const getSetupGuide = React.useCallback(() => {
     if (selectedDestinationDefinition) {
       if (selectedDestinationDefinition.id === "destination-http") {
         return "https://www.instill.tech/docs/destination-connectors/http";
@@ -212,15 +212,15 @@ export const CreateDestinationForm = ({
   );
 
   const [fieldErrors, setFieldErrors] =
-    useState<Nullable<AirbyteFieldErrors>>(null);
+    React.useState<Nullable<AirbyteFieldErrors>>(null);
 
   const [selectedConditionMap, setSelectedConditionMap] =
-    useState<Nullable<SelectedItemMap>>(null);
+    React.useState<Nullable<SelectedItemMap>>(null);
 
-  const [airbuteFormIsDirty, setAirbyteFormIsDirty] = useState(false);
+  const [airbuteFormIsDirty, setAirbyteFormIsDirty] = React.useState(false);
 
   const [messageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
@@ -254,7 +254,7 @@ export const CreateDestinationForm = ({
    *
    */
 
-  const formYup = useMemo(() => {
+  const formYup = React.useMemo(() => {
     if (!airbyteYup) return null;
 
     return yup.object({
@@ -269,7 +269,7 @@ export const CreateDestinationForm = ({
    * Create the destination
    * -----------------------------------------------------------------------*/
 
-  const submitHandler = useCallback(async () => {
+  const submitHandler = React.useCallback(async () => {
     if (!fieldValues || !formYup) {
       return;
     }
@@ -437,7 +437,7 @@ export const CreateDestinationForm = ({
     accessToken,
   ]);
 
-  const updateFieldValues = useCallback(
+  const updateFieldValues = React.useCallback(
     (field: string, value: string) => {
       if (!formIsDirty) setFormIsDirty(true);
       setFieldValues((prev) => {
@@ -482,7 +482,7 @@ export const CreateDestinationForm = ({
               : defaultId
           }
           error={fieldErrors ? (fieldErrors.id as string) ?? null : null}
-          onChange={(event: ChangeEvent<HTMLInputElement>) =>
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
             updateFieldValues("id", event.target.value)
           }
         />
@@ -498,7 +498,7 @@ export const CreateDestinationForm = ({
           value={
             fieldValues ? (fieldValues.description as string) ?? null : null
           }
-          onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+          onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
             updateFieldValues("description", event.target.value)
           }
         />

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   BasicSingleSelect,
@@ -59,14 +59,14 @@ export const SetPipelineDestinationStep = ({
    * Initialize destination definition and options
    * -----------------------------------------------------------------------*/
 
-  const [syncDestinationOptions, setSyncDestinationOptions] = useState<
+  const [syncDestinationOptions, setSyncDestinationOptions] = React.useState<
     SingleSelectOption[]
   >([]);
 
   const [selectedSyncDestinationOption, setSelectedSyncDestinationOption] =
-    useState<SingleSelectOption | null>(null);
+    React.useState<SingleSelectOption | null>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const syncDestinationOptions = [
       {
         label: "gRPC",
