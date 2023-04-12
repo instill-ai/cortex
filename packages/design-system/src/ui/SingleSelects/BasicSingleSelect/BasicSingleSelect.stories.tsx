@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import * as React from "react";
 import { BasicSingleSelect, basicSingleSelectConfig } from ".";
 import { basicInputDescriptionConfig } from "../../InputDescriptions";
 import { Nullable } from "../../../types/general";
@@ -36,7 +36,7 @@ const Template: StoryFn<typeof BasicSingleSelect> = (args) => {
     setValue(option);
   };
 
-  const [value, setValue] = useState<SingleSelectOption | null>(null);
+  const [value, setValue] = React.useState<SingleSelectOption | null>(null);
 
   return (
     <BasicSingleSelect

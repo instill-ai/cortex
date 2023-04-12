@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { ChangeEvent, useState } from "react";
+import * as React from "react";
 import { BasicTextArea } from "./BasicTextArea";
 
 const meta: Meta<typeof BasicTextArea> = {
@@ -10,9 +10,9 @@ const meta: Meta<typeof BasicTextArea> = {
 export default meta;
 
 const Template: StoryFn<typeof BasicTextArea> = (args) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = React.useState("");
 
-  const onChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
   };
 

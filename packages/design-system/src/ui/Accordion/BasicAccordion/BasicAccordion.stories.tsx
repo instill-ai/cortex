@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { useState } from "react";
+import * as React from "react";
 import BasicAccordion from "./BasicAccordion";
 
 const meta: Meta<typeof BasicAccordion> = {
@@ -10,7 +10,7 @@ const meta: Meta<typeof BasicAccordion> = {
 export default meta;
 
 const Template: StoryFn<typeof BasicAccordion> = (args) => {
-  const [activeIndex, setActiveIndex] = useState<number[]>([]);
+  const [activeIndex, setActiveIndex] = React.useState<number[]>([]);
   return (
     <BasicAccordion
       {...args}

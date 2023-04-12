@@ -1,5 +1,5 @@
 import { Meta, StoryFn } from "@storybook/react";
-import { ChangeEvent, useState } from "react";
+import * as React from "react";
 import { ProtectedBasicTextField } from "./ProtectedBasicTextField";
 
 const meta: Meta<typeof ProtectedBasicTextField> = {
@@ -10,9 +10,9 @@ const meta: Meta<typeof ProtectedBasicTextField> = {
 export default meta;
 
 const Template: StoryFn<typeof ProtectedBasicTextField> = (args) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = React.useState("");
 
-  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value);
   };
 
