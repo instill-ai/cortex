@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
 import {
   FormRoot,
   SingleSelectOption,
@@ -27,11 +27,11 @@ export const CreateSourceForm = ({
   accessToken,
   initStoreOnCreate,
 }: CreateSourceFormProps) => {
-  const [sourceDefinitionOptions, setSourceDefinitionOptions] = useState<
+  const [sourceDefinitionOptions, setSourceDefinitionOptions] = React.useState<
     SingleSelectOption[]
   >([]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!sources) return;
 
     setSourceDefinitionOptions([

@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import * as React from "react";
 import {
   BasicSingleSelect,
   SingleSelectOption,
@@ -27,7 +27,7 @@ export const SourceDefinitionField = ({
   const { sourceDefinition, sourceDefinitionError, setFieldValue } =
     useCreateResourceFormStore(selector, shallow);
 
-  const selectedSourceDefinitionOption = useMemo(() => {
+  const selectedSourceDefinitionOption = React.useMemo(() => {
     return (
       sourceDefinitionOptions.find(
         (option) => option.value === sourceDefinition
@@ -35,7 +35,7 @@ export const SourceDefinitionField = ({
     );
   }, [sourceDefinition, sourceDefinitionOptions]);
 
-  const handleSourceDefinitionChange = useCallback(
+  const handleSourceDefinitionChange = React.useCallback(
     (option: Nullable<SingleSelectOption>) => {
       setFieldValue("source.new.definition", option?.value || null);
     },

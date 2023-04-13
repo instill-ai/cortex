@@ -1,5 +1,5 @@
 import { BasicTextField } from "@instill-ai/design-system";
-import { ChangeEvent } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   useCreateResourceFormStore,
@@ -31,7 +31,7 @@ export const ModelIdField = () => {
       disabled={false}
       value={modelId}
       error={modelIdError}
-      onChange={(event: ChangeEvent<HTMLInputElement>) => {
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.value) {
           setFieldValue("model.new.id", null);
           setFieldError("model.new.id", null);

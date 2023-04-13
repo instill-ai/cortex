@@ -1,6 +1,6 @@
 import cn from "clsx";
 import axios from "axios";
-import { useState, useEffect, useCallback } from "react";
+import * as React from "react";
 import { StatefulToggleField } from "@instill-ai/design-system";
 import { UseMutationResult } from "@tanstack/react-query";
 
@@ -41,9 +41,9 @@ export const ChangePipelineStateToggle = ({
   accessToken,
   disabled,
 }: ChangePipelineStateToggleProps) => {
-  const [error, setError] = useState<Nullable<string>>(null);
+  const [error, setError] = React.useState<Nullable<string>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (pipelineWatchState === "STATE_ERROR") {
       setError("Something went wrong. Please try again.");
     } else {
@@ -51,7 +51,7 @@ export const ChangePipelineStateToggle = ({
     }
   }, [pipelineWatchState]);
 
-  const changePipelineStateHandler = useCallback(() => {
+  const changePipelineStateHandler = React.useCallback(() => {
     if (
       !pipeline ||
       !pipelineWatchState ||

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import * as React from "react";
 import {
   BasicSingleSelect,
   GrpcIcon,
@@ -25,11 +25,11 @@ export const SourceDefinitionField = ({
 
   const canEdit = useConfigureSourceFormStore((state) => state.fields.canEdit);
   const [sourceDefinitionOptions, setSourceDefinitionOptions] =
-    useState<Nullable<SingleSelectOption[]>>(null);
+    React.useState<Nullable<SingleSelectOption[]>>(null);
   const [selectedSourceDefinitionOption, setSelectedSourceDefinitionOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!source) return;
 
     const options = [

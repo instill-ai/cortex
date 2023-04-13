@@ -3,19 +3,19 @@
  * https://stackoverflow.com/a/67826055
  */
 
-import { useEffect, useState, useRef, RefObject } from "react";
+import * as React from "react";
 
-export const useOnScreen = (ref: RefObject<HTMLElement>) => {
-  const observerRef = useRef<IntersectionObserver | null>(null);
-  const [isOnScreen, setIsOnScreen] = useState(false);
+export const useOnScreen = (ref: React.RefObject<HTMLElement>) => {
+  const observerRef = React.useRef<IntersectionObserver | null>(null);
+  const [isOnScreen, setIsOnScreen] = React.useState(false);
 
-  useEffect(() => {
+  React.useEffect(() => {
     observerRef.current = new IntersectionObserver(([entry]) =>
       setIsOnScreen(entry.isIntersecting)
     );
   }, []);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!ref.current || !observerRef.current) return;
     observerRef.current.observe(ref.current);
 

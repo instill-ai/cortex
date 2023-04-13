@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback, useState } from "react";
+import * as React from "react";
 import {
   BasicProgressMessageBox,
   FormRoot,
@@ -41,7 +41,7 @@ export const ConfigurePipelineForm = ({
   disableDelete,
 }: ConfigurePipelineFormProps) => {
   const [messsageBoxState, setMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       status: null,
       message: null,
@@ -51,7 +51,7 @@ export const ConfigurePipelineForm = ({
   const { amplitudeIsInit } = useAmplitudeCtx();
   const deletePipeline = useDeletePipeline();
 
-  const handleDeletePipeline = useCallback(() => {
+  const handleDeletePipeline = React.useCallback(() => {
     if (!pipeline) return;
 
     setMessageBoxState({

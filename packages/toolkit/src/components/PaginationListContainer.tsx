@@ -1,17 +1,17 @@
 import cn from "clsx";
-import { ChangeEvent, Dispatch, ReactNode, SetStateAction } from "react";
+import * as React from "react";
 import { BasicTextField, SolidButton } from "@instill-ai/design-system";
 import { Nullable } from "../lib";
 
 export type PaginationListContainerProps = {
   title: string;
   description: string;
-  children?: ReactNode;
+  children?: React.ReactNode;
   currentPage: number;
   totalPage: number;
-  setCurrentPage: Dispatch<SetStateAction<number>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   searchTerm: Nullable<string>;
-  setSearchTerm: Dispatch<SetStateAction<Nullable<string>>>;
+  setSearchTerm: React.Dispatch<React.SetStateAction<Nullable<string>>>;
   displaySearchField: boolean;
   marginBottom: Nullable<string>;
 };
@@ -42,7 +42,7 @@ export const PaginationListContainer = ({
               label={null}
               value={searchTerm}
               placeholder={`Search ${title.toLowerCase()}`}
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setSearchTerm(event.target.value.trim())
               }
             />

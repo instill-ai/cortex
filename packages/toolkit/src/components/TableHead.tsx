@@ -1,9 +1,8 @@
 import cn from "clsx";
-import { ReactNode } from "react";
 
 export type TableHeadItem = {
   key: string;
-  item: string | ReactNode;
+  item: string | React.ReactNode;
   width: string;
 };
 

@@ -1,4 +1,4 @@
-import { Dispatch, Fragment, SetStateAction } from "react";
+import * as React from "react";
 import {
   AirbyteFieldErrors,
   AirbyteFieldValues,
@@ -10,14 +10,18 @@ import { useBuildAirbyteFields } from ".";
 
 export type AirbyteDestinationFieldsProps = {
   fieldValues: Nullable<AirbyteFieldValues>;
-  setFieldValues: Dispatch<SetStateAction<Nullable<AirbyteFieldValues>>>;
+  setFieldValues: React.Dispatch<
+    React.SetStateAction<Nullable<AirbyteFieldValues>>
+  >;
   fieldErrors: Nullable<AirbyteFieldErrors>;
   destinationFormTree: Nullable<AirbyteFormTree>;
   selectedConditionMap: Nullable<SelectedItemMap>;
-  setSelectedConditionMap: Dispatch<SetStateAction<Nullable<SelectedItemMap>>>;
+  setSelectedConditionMap: React.Dispatch<
+    React.SetStateAction<Nullable<SelectedItemMap>>
+  >;
   disableAll: boolean;
   formIsDirty: boolean;
-  setFormIsDirty: Dispatch<SetStateAction<boolean>>;
+  setFormIsDirty: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export const AirbyteDestinationFields = ({
@@ -43,5 +47,5 @@ export const AirbyteDestinationFields = ({
     setFormIsDirty
   );
 
-  return <Fragment>{fields}</Fragment>;
+  return <React.Fragment>{fields}</React.Fragment>;
 };

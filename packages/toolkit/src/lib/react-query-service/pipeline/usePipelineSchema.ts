@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import * as React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { listRepoFileContent } from "../../github";
 
@@ -19,7 +19,7 @@ export const usePipelineSchema = () => {
 
   return {
     ...queryInfo,
-    data: useMemo(() => {
+    data: React.useMemo(() => {
       if (queryInfo.data) {
         return JSON.parse(window.atob(queryInfo.data));
       }

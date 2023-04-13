@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import * as React from "react";
 import {
   useCreateSource,
   useSources,
@@ -57,11 +57,11 @@ export const SetPipelineModeStep = ({
    * Initialize options
    * -----------------------------------------------------------------------*/
 
-  const [pipelineModeOptions, setPipelineModeOptions] = useState<
+  const [pipelineModeOptions, setPipelineModeOptions] = React.useState<
     SingleSelectOption[]
   >([]);
 
-  const [syncSourceOptions, setSyncSourceOptions] = useState<
+  const [syncSourceOptions, setSyncSourceOptions] = React.useState<
     SingleSelectOption[]
   >([]);
 
@@ -69,9 +69,9 @@ export const SetPipelineModeStep = ({
   // in the future
 
   const [selectedPipelineModeOption, setSelectedPipelineModeOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     const pipelineModeOption = [
       {
         label: "Sync",
@@ -132,7 +132,7 @@ export const SetPipelineModeStep = ({
   }, [syncModelOnly]);
 
   const [selectedSyncSourceOption, setSelectedSyncSourceOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
   /* -------------------------------------------------------------------------
    * Create source if it is not presenting
@@ -141,7 +141,7 @@ export const SetPipelineModeStep = ({
   const createSource = useCreateSource();
   const sources = useSources({ accessToken, enable: true });
 
-  const canGoNext = useMemo(() => {
+  const canGoNext = React.useMemo(() => {
     if (!pipelineMode) return false;
     if (pipelineMode === "MODE_SYNC" && !selectedSyncSourceOption) {
       return false;

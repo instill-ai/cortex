@@ -1,4 +1,4 @@
-import { Dispatch, ReactNode, SetStateAction, useMemo, Fragment } from "react";
+import * as React from "react";
 import {
   dot,
   type Nullable,
@@ -23,14 +23,16 @@ export const useBuildAirbyteFields = (
   formTree: Nullable<AirbyteFormTree>,
   disabledAll: boolean,
   values: Nullable<AirbyteFieldValues>,
-  setValues: Dispatch<SetStateAction<Nullable<AirbyteFieldValues>>>,
+  setValues: React.Dispatch<React.SetStateAction<Nullable<AirbyteFieldValues>>>,
   errors: Nullable<AirbyteFieldErrors>,
   selectedConditionMap: Nullable<SelectedItemMap>,
-  setSelectedConditionMap: Dispatch<SetStateAction<Nullable<SelectedItemMap>>>,
+  setSelectedConditionMap: React.Dispatch<
+    React.SetStateAction<Nullable<SelectedItemMap>>
+  >,
   formIsDirty: boolean,
-  setFormIsDirty: Dispatch<SetStateAction<boolean>>
+  setFormIsDirty: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
-  const fields = useMemo(() => {
+  const fields = React.useMemo(() => {
     if (!formTree) return <></>;
     return pickComponent(
       formTree,
@@ -62,16 +64,18 @@ export const pickComponent = (
   formTree: AirbyteFormTree,
   disabledAll: boolean,
   values: Nullable<AirbyteFieldValues>,
-  setValues: Dispatch<SetStateAction<Nullable<AirbyteFieldValues>>>,
+  setValues: React.Dispatch<React.SetStateAction<Nullable<AirbyteFieldValues>>>,
   errors: Nullable<AirbyteFieldErrors>,
   selectedConditionMap: Nullable<SelectedItemMap>,
-  setSelectedConditionMap: Dispatch<SetStateAction<Nullable<SelectedItemMap>>>,
+  setSelectedConditionMap: React.Dispatch<
+    React.SetStateAction<Nullable<SelectedItemMap>>
+  >,
   formIsDirty: boolean,
-  setFormIsDirty: Dispatch<SetStateAction<boolean>>
-): ReactNode => {
+  setFormIsDirty: React.Dispatch<React.SetStateAction<boolean>>
+): React.ReactNode => {
   if (formTree._type === "formGroup") {
     return (
-      <Fragment key={formTree.path}>
+      <React.Fragment key={formTree.path}>
         {formTree.properties.map((e) =>
           pickComponent(
             e,
@@ -85,7 +89,7 @@ export const pickComponent = (
             setFormIsDirty
           )
         )}
-      </Fragment>
+      </React.Fragment>
     );
   }
 

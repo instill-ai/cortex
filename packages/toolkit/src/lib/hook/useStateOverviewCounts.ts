@@ -10,7 +10,7 @@ import {
   type SourceWithPipelines,
 } from "../vdp-sdk";
 import { Nullable } from "../type";
-import { useEffect, useState } from "react";
+import * as React from "react";
 
 type Item =
   | Pipeline
@@ -33,9 +33,9 @@ export function useStateOverviewCounts(
   >
 ): Nullable<StateOverviewCounts> {
   const [stateOverviewCount, setStateOverviewCount] =
-    useState<Nullable<StateOverviewCounts>>(null);
+    React.useState<Nullable<StateOverviewCounts>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!items || !items[0] || !itemsWatchState) return;
 
     const counts: StateOverviewCounts = {

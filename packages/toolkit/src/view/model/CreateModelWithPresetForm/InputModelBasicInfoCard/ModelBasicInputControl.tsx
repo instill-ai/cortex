@@ -1,4 +1,4 @@
-import { useCallback, useState } from "react";
+import * as React from "react";
 import {
   BasicProgressMessageBox,
   SolidButton,
@@ -68,7 +68,7 @@ export const ModelBasicInputControl = ({
   } = useCreateResourceFormStore(selector, shallow);
 
   const [createModelMessageBoxState, setCreateModelMessageBoxState] =
-    useState<ProgressMessageBoxState>({
+    React.useState<ProgressMessageBoxState>({
       activate: false,
       message: null,
       description: null,
@@ -79,7 +79,7 @@ export const ModelBasicInputControl = ({
    * Handle create model
    * -----------------------------------------------------------------------*/
 
-  const prepareNewModel = useCallback(
+  const prepareNewModel = React.useCallback(
     async (modelName: string) => {
       const model = await getModelQuery({ modelName, accessToken });
       queryClient.setQueryData<Model>(["models", model.id], model);
@@ -103,7 +103,7 @@ export const ModelBasicInputControl = ({
   const createHuggingFaceModel = useCreateHuggingFaceModel();
   const deployModel = useDeployModel();
 
-  const handelCreateModel = useCallback(async () => {
+  const handelCreateModel = React.useCallback(async () => {
     if (!modelId) {
       return;
     }

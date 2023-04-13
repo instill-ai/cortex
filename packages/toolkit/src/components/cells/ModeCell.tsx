@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { ReactElement } from "react";
+import * as React from "react";
 import { AsyncIcon, SyncIcon } from "@instill-ai/design-system";
 import { Nullable, PipelineMode } from "../../lib";
 
@@ -10,7 +10,7 @@ export type ModeCellProps = {
 };
 
 export const ModeCell = ({ width, mode, padding }: ModeCellProps) => {
-  let modeIcon: ReactElement;
+  let modeIcon: React.ReactElement;
   const iconStyle = {
     width: "w-5",
     height: "h-5",

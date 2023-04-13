@@ -1,5 +1,5 @@
 import { Nullable } from "../type";
-import { useState, useEffect } from "react";
+import * as React from "react";
 
 export type WindowSize = {
   width: number;
@@ -7,7 +7,8 @@ export type WindowSize = {
 };
 
 export function useWindowSize(): Nullable<WindowSize> {
-  const [windowSize, setWindowSize] = useState<Nullable<WindowSize>>(null);
+  const [windowSize, setWindowSize] =
+    React.useState<Nullable<WindowSize>>(null);
 
   const getWindowSize = (): { width: number; height: number } => {
     const width =
@@ -26,7 +27,7 @@ export function useWindowSize(): Nullable<WindowSize> {
     };
   };
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (typeof window === "undefined") {
       return;
     }

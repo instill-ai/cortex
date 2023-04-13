@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import { BasicTextArea } from "@instill-ai/design-system";
 
@@ -29,7 +29,7 @@ export const ModelDescriptionField = () => {
       error={modelDescriptionError}
       enableCounter={true}
       counterWordLimit={1023}
-      onChange={(event: ChangeEvent<HTMLTextAreaElement>) =>
+      onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
         setFieldValue("model.new.description", event.target.value)
       }
     />

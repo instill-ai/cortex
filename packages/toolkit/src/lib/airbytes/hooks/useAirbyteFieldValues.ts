@@ -1,6 +1,6 @@
 import { dot } from "../../dot";
 import { Nullable } from "../../type";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import * as React from "react";
 import { AirbyteFieldValues, AirbyteFormTree } from "../types";
 
 export const useAirbyteFieldValues = (
@@ -8,9 +8,9 @@ export const useAirbyteFieldValues = (
   initialValue: Nullable<AirbyteFieldValues>
 ) => {
   const [fieldValues, setFieldValues] =
-    useState<Nullable<AirbyteFieldValues>>(initialValue);
+    React.useState<Nullable<AirbyteFieldValues>>(initialValue);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!formTree) return;
     if (initialValue) return;
     if (fieldValues && fieldValues.configuration) return;
@@ -23,7 +23,9 @@ export const useAirbyteFieldValues = (
 export const pickInitialValues = (
   formTree: AirbyteFormTree,
   fieldValues: Nullable<AirbyteFieldValues>,
-  setFieldValues: Dispatch<SetStateAction<Nullable<AirbyteFieldValues>>>
+  setFieldValues: React.Dispatch<
+    React.SetStateAction<Nullable<AirbyteFieldValues>>
+  >
 ) => {
   if (formTree._type === "formGroup") {
     formTree.properties.map((e) =>

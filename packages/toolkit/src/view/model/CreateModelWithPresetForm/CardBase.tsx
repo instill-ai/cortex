@@ -1,10 +1,10 @@
 import cn from "clsx";
-import { ReactNode } from "react";
+import * as React from "react";
 import type { Nullable } from "../../../lib";
 
 export type CardBaseProps = {
   title: Nullable<string>;
-  children?: ReactNode;
+  children?: React.ReactNode;
   marginBottom: Nullable<string>;
 };
 

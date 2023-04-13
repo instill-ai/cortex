@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   BasicSingleSelect,
@@ -44,16 +44,16 @@ export const SelectExistingModelFlow = ({
    * -----------------------------------------------------------------------*/
 
   const [modelOptions, setModelOptions] =
-    useState<Nullable<SingleSelectOption[]>>(null);
+    React.useState<Nullable<SingleSelectOption[]>>(null);
   const [selectedModelOption, setSelectedModelOption] =
-    useState<Nullable<SingleSelectOption>>(null);
+    React.useState<Nullable<SingleSelectOption>>(null);
 
   const models = useModels({
     enable: true,
     accessToken,
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!models.isSuccess || !models.data) return;
 
     const onlineModels = models.data.filter((e) => e.state === "STATE_ONLINE");
@@ -67,7 +67,7 @@ export const SelectExistingModelFlow = ({
    * Use existing model
    * -----------------------------------------------------------------------*/
 
-  const canUseExistingModel = useMemo(() => {
+  const canUseExistingModel = React.useMemo(() => {
     if (modelType === "new") {
       return false;
     }
@@ -75,7 +75,7 @@ export const SelectExistingModelFlow = ({
     return true;
   }, [modelType]);
 
-  const handleUseModel = useCallback(() => {
+  const handleUseModel = React.useCallback(() => {
     if (!models.isSuccess || !models.data) {
       return;
     }

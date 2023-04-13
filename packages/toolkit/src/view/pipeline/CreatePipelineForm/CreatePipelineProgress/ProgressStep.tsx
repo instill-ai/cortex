@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import * as React from "react";
 import cn from "clsx";
 
 export type ProgressStepProps = {
@@ -8,7 +8,7 @@ export type ProgressStepProps = {
   isPassed: boolean;
 };
 
-export const ProgressStep = forwardRef<HTMLDivElement, ProgressStepProps>(
+export const ProgressStep = React.forwardRef<HTMLDivElement, ProgressStepProps>(
   ({ stepNum, stepName, isCurrent, isPassed }, cubeRef) => {
     return (
       <div className="flex flex-col gap-y-3">

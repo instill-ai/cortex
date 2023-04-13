@@ -1,7 +1,7 @@
 import cn from "clsx";
 import axios from "axios";
 import { StatefulToggleField } from "@instill-ai/design-system";
-import { useState, useEffect, useCallback } from "react";
+import * as React from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 
 import { Model, ModelState, Nullable, Operation } from "../../lib";
@@ -41,9 +41,9 @@ export const ChangeModelStateToggle = ({
   accessToken,
   disabled,
 }: ChangeModelStateToggleProps) => {
-  const [error, setError] = useState<Nullable<string>>(null);
+  const [error, setError] = React.useState<Nullable<string>>(null);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (modelWatchState === "STATE_ERROR") {
       setError("Something went wrong. Please try again.");
     } else {
@@ -51,7 +51,7 @@ export const ChangeModelStateToggle = ({
     }
   }, [modelWatchState]);
 
-  const changeModelInstanceStateHandler = useCallback(() => {
+  const changeModelInstanceStateHandler = React.useCallback(() => {
     if (!model || !modelWatchState || modelWatchState === "STATE_UNSPECIFIED") {
       return;
     }

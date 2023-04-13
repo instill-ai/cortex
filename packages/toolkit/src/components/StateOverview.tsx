@@ -1,5 +1,4 @@
 import { Nullable } from "../lib";
-import { ReactNode } from "react";
 import { StateIcon } from "./StateIcon";
 
 export type StateOverviewProps = {
@@ -13,7 +12,7 @@ export const StateOverview = ({
   onlineCounts,
   offlineCounts,
 }: StateOverviewProps) => {
-  const getItem = (icon: ReactNode, counts: Nullable<number>) => {
+  const getItem = (icon: React.ReactNode, counts: Nullable<number>) => {
     return (
       <div className="flex flex-row gap-x-[5px] py-[3px] pl-[3px] pr-[10px]">
         {icon}

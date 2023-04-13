@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Dispatch, SetStateAction, useCallback } from "react";
+import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   OutlineButton,
@@ -25,7 +25,9 @@ const selector = (state: ConfigurePipelineFormStore) => ({
 
 export type ConfigurePipelineFormControlProps = {
   pipeline: Nullable<Pipeline>;
-  setMessageBoxState: Dispatch<SetStateAction<ProgressMessageBoxState>>;
+  setMessageBoxState: React.Dispatch<
+    React.SetStateAction<ProgressMessageBoxState>
+  >;
   onConfigure: Nullable<() => void>;
   disableConfigure: boolean;
   accessToken: Nullable<string>;
@@ -54,7 +56,7 @@ export const ConfigurePipelineFormControl = (
   const openModal = useModalStore((state) => state.openModal);
   const updatePipeline = useUpdatePipeline();
 
-  const handleSubmit = useCallback(() => {
+  const handleSubmit = React.useCallback(() => {
     if (!canEdit) {
       setFieldValue("canEdit", true);
       return;
