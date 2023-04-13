@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.10.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.2...@instill-ai/design-system-v0.10.3) (2023-04-13)
+
+
+### Miscellaneous
+
+* refactor how we import React in design-system ([#339](https://github.com/instill-ai/design-system/issues/339)) ([22ed6e0](https://github.com/instill-ai/design-system/commit/22ed6e0a4fa535724400034365686b11d2f90abb))
+
 ## [0.10.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.1...@instill-ai/design-system-v0.10.2) (2023-04-06)
 
 

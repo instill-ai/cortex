@@ -1,5 +1,23 @@
 # Changelog
 
+## [0.29.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.6...@instill-ai/toolkit-v0.29.0) (2023-04-13)
+
+
+### Features
+
+* [INS-362] add TableError component and adapt it in tables ([#340](https://github.com/instill-ai/design-system/issues/340)) ([7b49205](https://github.com/instill-ai/design-system/commit/7b49205c2297394317da9f7f146e9c8e2b7c3345))
+
+
+### Bug Fixes
+
+* fix ConfigureModelForm prop ([#344](https://github.com/instill-ai/design-system/issues/344)) ([dbe5f1f](https://github.com/instill-ai/design-system/commit/dbe5f1f90b37d0ac85eafb2c4e918297b9f2b8ed))
+
+
+### Miscellaneous
+
+* [INS-245] replace node native test runner with vitest ([#342](https://github.com/instill-ai/design-system/issues/342)) ([e020924](https://github.com/instill-ai/design-system/commit/e0209247ba0e4be3af24393b0ae167d01c03deff))
+* how we import React in cortex/toolkit ([#343](https://github.com/instill-ai/design-system/issues/343)) ([47173fe](https://github.com/instill-ai/design-system/commit/47173fec60e0f48643c3b34484aba91ed2eea43a))
+
 ## [0.28.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.5...@instill-ai/toolkit-v0.28.6) (2023-04-11)
 
 
