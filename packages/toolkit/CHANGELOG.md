@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.29.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.29.0...@instill-ai/toolkit-v0.29.1) (2023-04-13)
+
+
+### Bug Fixes
+
+* fix not exclude test file issue in the cortex/toolkit ([#345](https://github.com/instill-ai/design-system/issues/345)) ([36de549](https://github.com/instill-ai/design-system/commit/36de54958baf28c11b55a0530a20b18ab95d1ff1))
+
 ## [0.29.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.28.6...@instill-ai/toolkit-v0.29.0) (2023-04-13)
 
 
