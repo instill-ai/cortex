@@ -165,6 +165,7 @@ export const ConfigureModelForm = ({
     canEdit,
     init,
     onConfigure,
+    accessToken,
   ]);
 
   /* -------------------------------------------------------------------------
@@ -227,7 +228,7 @@ export const ConfigureModelForm = ({
         },
       }
     );
-  }, [model, amplitudeIsInit, deleteModel, closeModal, onDelete]);
+  }, [model, amplitudeIsInit, deleteModel, closeModal, onDelete, accessToken]);
 
   /* -------------------------------------------------------------------------
    * Render
