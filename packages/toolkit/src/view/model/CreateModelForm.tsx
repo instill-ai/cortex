@@ -407,7 +407,7 @@ export const CreateModelForm = ({
       createArtivcModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async ({ operation }) => {
+          onSuccess: async () => {
             if (!modelId) return;
             const operationIsDone = await checkCreateModelStateUntilOffline({
               modelName: `models/${modelId.trim()}`,
@@ -463,7 +463,7 @@ export const CreateModelForm = ({
       createHuggingFaceModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async ({ operation }) => {
+          onSuccess: async () => {
             if (!modelId) return;
             const operationIsDone = await checkCreateModelStateUntilOffline({
               modelName: `models/${modelId.trim()}`,
