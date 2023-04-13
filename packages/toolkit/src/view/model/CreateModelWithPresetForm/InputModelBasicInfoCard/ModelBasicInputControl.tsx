@@ -130,7 +130,7 @@ export const ModelBasicInputControl = ({
       createGithubModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async ({ operation }) => {
+          onSuccess: async () => {
             if (!modelId) return;
             const operationIsDone = await checkCreateModelStateUntilOffline({
               modelName: `models/${modelId.trim()}`,
@@ -193,7 +193,7 @@ export const ModelBasicInputControl = ({
       createHuggingFaceModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async ({ operation }) => {
+          onSuccess: async () => {
             if (!modelId) return;
             const operationIsDone = await checkCreateModelStateUntilOffline({
               modelName: `models/${modelId.trim()}`,
