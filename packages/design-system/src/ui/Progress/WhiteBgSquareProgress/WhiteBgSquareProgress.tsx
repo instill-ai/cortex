@@ -24,7 +24,7 @@ export const whiteBgSquareProgressConfig: WhiteBgSquareProgressConfig = {
   animationDuration: 3,
 };
 
-const WhiteBgSquareProgress: React.FC<WhiteBgSquareProgressProps> = (props) => {
+const WhiteBgSquareProgress = (props: WhiteBgSquareProgressProps) => {
   const { isLoading, position, blockSize } = props;
 
   return (

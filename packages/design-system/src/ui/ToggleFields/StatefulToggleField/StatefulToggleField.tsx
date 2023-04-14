@@ -120,7 +120,7 @@ export const statefulToggleFieldConfig: StatefulToggleFieldConfig = {
   messageLineHeight: "",
 };
 
-const StatefulToggleField: React.FC<StatefulToggleFieldProps> = (props) => {
+const StatefulToggleField = (props: StatefulToggleFieldProps) => {
   const {
     loadingLabelText,
     id,

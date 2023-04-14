@@ -24,7 +24,7 @@ export const darkBgSquareProgressConfig: DarkBgSquareProgressConfig = {
   animationDuration: 3,
 };
 
-const DarkBgSquareProgress: React.FC<DarkBgSquareProgressProps> = (props) => {
+const DarkBgSquareProgress = (props: DarkBgSquareProgressProps) => {
   const { isLoading, position, blockSize } = props;
 
   return (

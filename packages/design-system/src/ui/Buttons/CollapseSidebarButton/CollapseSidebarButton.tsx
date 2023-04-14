@@ -51,7 +51,7 @@ export type CollapseSidebarButtonOptionalProps = Partial<
 export type CollapseSidebarButtonProps = CollapseSidebarButtonRequiredProps &
   CollapseSidebarButtonOptionalProps;
 
-const CollapseSidebarButton: React.FC<CollapseSidebarButtonProps> = (props) => {
+const CollapseSidebarButton = (props: CollapseSidebarButtonProps) => {
   const { onClickHandler, disabled, position, dataFlag, isCollapse } = props;
 
   const collapseSidebarButtonConfig: CollapseSidebarButtonConfig = {

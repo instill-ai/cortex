@@ -46,7 +46,7 @@ export const basicInputLabelConfig: BasicInputLabelConfig = {
   messageLineHeight: "",
 };
 
-const BasicInputLabel: React.FC<BasicInputLabelProps> = (props) => {
+const BasicInputLabel = (props: BasicInputLabelProps) => {
   const { error, message, required, htmlFor, type, label } = props;
 
   return (

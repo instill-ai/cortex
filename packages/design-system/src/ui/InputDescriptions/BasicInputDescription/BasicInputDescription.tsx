@@ -35,9 +35,7 @@ export const basicInputDescriptionConfig: BasicInputDescriptionConfig = {
   descriptionLinkTextDecoration: "underline",
 };
 
-export const BasicInputDescription: React.FC<BasicInputDescriptionProps> = (
-  props
-) => {
+export const BasicInputDescription = (props: BasicInputDescriptionProps) => {
   const { description } = props;
   return (
     <InputDescriptionBase

@@ -57,7 +57,7 @@ export type TextAreaBaseProps = BasicInputProps &
     counterLineHeight: string;
   };
 
-const TextAreaBase: React.FC<TextAreaBaseProps> = (props) => {
+const TextAreaBase = (props: TextAreaBaseProps) => {
   const {
     id,
     value,

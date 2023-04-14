@@ -30,7 +30,7 @@ export type TextWithHtmlProps = {
   linkTextDecoration: string;
 };
 
-const TextWithHtml: React.FC<TextWithHtmlProps> = (props) => {
+const TextWithHtml = (props: TextWithHtmlProps) => {
   const {
     text,
     fontFamily,

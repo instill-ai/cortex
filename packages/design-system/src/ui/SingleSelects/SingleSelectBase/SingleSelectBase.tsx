@@ -106,7 +106,7 @@ export type SingleSelectBaseProps = Omit<
   debug?: boolean;
 };
 
-const SingleSelectBase: React.FC<SingleSelectBaseProps> = (props) => {
+const SingleSelectBase = (props: SingleSelectBaseProps) => {
   const {
     value,
     options,

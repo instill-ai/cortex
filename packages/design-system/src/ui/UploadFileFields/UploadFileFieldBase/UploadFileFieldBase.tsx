@@ -77,7 +77,7 @@ export type UploadFileFieldBaseProps = Omit<
     inputBorderRadiusBottomLeft: string;
   };
 
-const UploadFileFieldBase: React.FC<UploadFileFieldBaseProps> = (props) => {
+const UploadFileFieldBase = (props: UploadFileFieldBaseProps) => {
   const {
     id,
     label,

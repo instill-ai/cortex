@@ -152,7 +152,7 @@ export const basicUploadFileFieldConfig: BasicUploadFileFieldConfig = {
   placeholderTextColor: "placeholder:text-instillGrey50",
 };
 
-const BasicUploadFileField: React.FC<BasicUploadFileFieldProps> = (props) => {
+const BasicUploadFileField = (props: BasicUploadFileFieldProps) => {
   const {
     id,
     inputLabelType,

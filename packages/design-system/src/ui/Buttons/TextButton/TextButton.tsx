@@ -38,7 +38,7 @@ export type TextButtonOptionalProps = Partial<
 
 export type TextButtonProps = TextButtonRequiredProps & TextButtonOptionalProps;
 
-const TextButton: React.FC<TextButtonProps> = (props) => {
+const TextButton = (props: TextButtonProps) => {
   const {
     type,
     disabled,

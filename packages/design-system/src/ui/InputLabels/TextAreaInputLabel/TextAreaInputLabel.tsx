@@ -46,7 +46,7 @@ export const basicInputLabelConfig: TextAreaInputLabelConfig = {
   messageLineHeight: "",
 };
 
-const TextAreaInputLabel: React.FC<TextAreaInputLabelProps> = (props) => {
+const TextAreaInputLabel = (props: TextAreaInputLabelProps) => {
   const { error, message, required, htmlFor, type, label } = props;
 
   return (

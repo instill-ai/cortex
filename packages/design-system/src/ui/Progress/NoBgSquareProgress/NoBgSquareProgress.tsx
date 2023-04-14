@@ -24,7 +24,7 @@ export const noBgSquareProgressConfig: NoBgSquareProgressConfig = {
   animationDuration: 3,
 };
 
-const NoBgSquareProgress: React.FC<NoBgSquareProgressProps> = (props) => {
+const NoBgSquareProgress = (props: NoBgSquareProgressProps) => {
   const { isLoading, position, blockSize } = props;
 
   return (

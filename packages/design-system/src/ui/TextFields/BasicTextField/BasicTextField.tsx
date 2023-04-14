@@ -136,7 +136,7 @@ export type BasicTextFieldOptionalProps = Partial<
 export type BasicTextFieldProps = BasicTextFieldRequiredProps &
   BasicTextFieldOptionalProps;
 
-export const BasicTextField: React.FC<BasicTextFieldProps> = (props) => {
+export const BasicTextField = (props: BasicTextFieldProps) => {
   const {
     id,
     inputLabelType,
