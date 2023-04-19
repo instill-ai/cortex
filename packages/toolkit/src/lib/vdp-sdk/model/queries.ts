@@ -1,6 +1,5 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import type { Operation } from "../types";
 import type {
   Model,
   ModelReadme,
@@ -175,33 +174,6 @@ export const getModelReadmeQuery = async ({
       `/${modelName}/readme`
     );
     return Promise.resolve(data.readme);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-};
-
-/* -------------------------------------------------------------------------
- * Model Operation
- * -----------------------------------------------------------------------*/
-
-export type GetModelOperationResponse = {
-  operation: Operation;
-};
-
-export const getModelOperationQuery = async ({
-  operationName,
-  accessToken,
-}: {
-  operationName: string;
-  accessToken: Nullable<string>;
-}): Promise<Operation> => {
-  try {
-    const client = createInstillAxiosClient(accessToken);
-
-    const { data } = await client.get<GetModelOperationResponse>(
-      `/${operationName}`
-    );
-    return Promise.resolve(data.operation);
   } catch (err) {
     return Promise.reject(err);
   }

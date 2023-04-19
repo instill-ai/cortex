@@ -23,7 +23,6 @@ import {
   useModelDefinitions,
   getModelQuery,
   validateResourceId,
-  checkCreateModelStateUntilOffline,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
@@ -36,7 +35,9 @@ import {
   type Model,
   type Nullable,
   type CreateResourceFormStore,
+  watchModel,
 } from "../../lib";
+import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
 export type CreateModelFormValue = {
   id: Nullable<string>;
@@ -227,6 +228,9 @@ export const CreateModelForm = ({
         old ? [...old, model] : [model]
       );
 
+      setFieldValue("model.type", "new");
+      setFieldValue("model.new.modelIsSet", true);
+
       setCreateModelMessageBoxState({
         activate: true,
         status: "success",
@@ -241,16 +245,10 @@ export const CreateModelForm = ({
         });
       }
     },
-    [amplitudeIsInit, accessToken, queryClient]
+    [amplitudeIsInit, accessToken, queryClient, setFieldValue]
   );
 
   const deployModel = useDeployModel();
-  const handleDeployModel = React.useCallback(
-    async (modelName: string) => {
-      deployModel.mutate({ modelName, accessToken });
-    },
-    [deployModel, accessToken]
-  );
 
   const handelCreateModel = React.useCallback(async () => {
     if (!modelId) return;
@@ -289,26 +287,44 @@ export const CreateModelForm = ({
       createGithubModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async () => {
+          onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelStateUntilOffline({
-              modelName: `models/${modelId.trim()}`,
+            const operationIsDone = await checkUntilOperationIsDoen({
+              operationName: operation.name,
               accessToken,
             });
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
+              const modelState = await watchModel({ modelName, accessToken });
+
+              if (modelState.state === "STATE_ERROR") {
+                setCreateModelMessageBoxState(() => ({
+                  activate: true,
+                  status: "error",
+                  description: "Something went wrong when create the model",
+                  message: "Create Model Failed",
+                }));
+                return;
+              }
+
               await prepareNewModel(modelName);
-              handleDeployModel(modelName);
-              setFieldValue("model.type", "new");
-            }
+              deployModel.mutate({ modelName, accessToken });
 
-            if (initStoreOnCreate) {
-              init();
-            }
+              setCreateModelMessageBoxState({
+                activate: true,
+                status: "success",
+                description: null,
+                message: "Succeed.",
+              });
 
-            if (onCreate) {
-              onCreate();
+              if (initStoreOnCreate) {
+                init();
+              }
+
+              if (onCreate) {
+                onCreate();
+              }
             }
           },
           onError: (error) => {
@@ -347,26 +363,44 @@ export const CreateModelForm = ({
       createLocalModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async () => {
+          onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelStateUntilOffline({
-              modelName: `models/${modelId.trim()}`,
+            const operationIsDone = await checkUntilOperationIsDoen({
+              operationName: operation.name,
               accessToken,
             });
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
+              const modelState = await watchModel({ modelName, accessToken });
+
+              if (modelState.state === "STATE_ERROR") {
+                setCreateModelMessageBoxState(() => ({
+                  activate: true,
+                  status: "error",
+                  description: "Something went wrong when create the model",
+                  message: "Create Model Failed",
+                }));
+                return;
+              }
+
               await prepareNewModel(modelName);
-              handleDeployModel(modelName);
-              setFieldValue("model.type", "new");
-            }
+              deployModel.mutate({ modelName, accessToken });
 
-            if (initStoreOnCreate) {
-              init();
-            }
+              setCreateModelMessageBoxState({
+                activate: true,
+                status: "success",
+                description: null,
+                message: "Succeed.",
+              });
 
-            if (onCreate) {
-              onCreate();
+              if (initStoreOnCreate) {
+                init();
+              }
+
+              if (onCreate) {
+                onCreate();
+              }
             }
           },
           onError: (error) => {
@@ -407,26 +441,44 @@ export const CreateModelForm = ({
       createArtivcModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async () => {
+          onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelStateUntilOffline({
-              modelName: `models/${modelId.trim()}`,
+            const operationIsDone = await checkUntilOperationIsDoen({
+              operationName: operation.name,
               accessToken,
             });
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
+              const modelState = await watchModel({ modelName, accessToken });
+
+              if (modelState.state === "STATE_ERROR") {
+                setCreateModelMessageBoxState(() => ({
+                  activate: true,
+                  status: "error",
+                  description: "Something went wrong when create the model",
+                  message: "Create Model Failed",
+                }));
+                return;
+              }
+
               await prepareNewModel(modelName);
-              handleDeployModel(modelName);
-              setFieldValue("model.type", "new");
-            }
+              deployModel.mutate({ modelName, accessToken });
 
-            if (initStoreOnCreate) {
-              init();
-            }
+              setCreateModelMessageBoxState({
+                activate: true,
+                status: "success",
+                description: null,
+                message: "Succeed.",
+              });
 
-            if (onCreate) {
-              onCreate();
+              if (initStoreOnCreate) {
+                init();
+              }
+
+              if (onCreate) {
+                onCreate();
+              }
             }
           },
           onError: (error) => {
@@ -463,26 +515,44 @@ export const CreateModelForm = ({
       createHuggingFaceModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async () => {
+          onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelStateUntilOffline({
-              modelName: `models/${modelId.trim()}`,
+            const operationIsDone = await checkUntilOperationIsDoen({
+              operationName: operation.name,
               accessToken,
             });
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
+              const modelState = await watchModel({ modelName, accessToken });
+
+              if (modelState.state === "STATE_ERROR") {
+                setCreateModelMessageBoxState(() => ({
+                  activate: true,
+                  status: "error",
+                  description: "Something went wrong when create the model",
+                  message: "Create Model Failed",
+                }));
+                return;
+              }
+
               await prepareNewModel(modelName);
-              handleDeployModel(modelName);
-              setFieldValue("model.type", "new");
-            }
+              deployModel.mutate({ modelName, accessToken });
 
-            if (initStoreOnCreate) {
-              init();
-            }
+              setCreateModelMessageBoxState({
+                activate: true,
+                status: "success",
+                description: null,
+                message: "Succeed.",
+              });
 
-            if (onCreate) {
-              onCreate();
+              if (initStoreOnCreate) {
+                init();
+              }
+
+              if (onCreate) {
+                onCreate();
+              }
             }
           },
           onError: (error) => {
@@ -522,7 +592,6 @@ export const CreateModelForm = ({
     modelGithubRepoUrl,
     modelGithubTag,
     accessToken,
-    handleDeployModel,
     init,
     initStoreOnCreate,
     onCreate,

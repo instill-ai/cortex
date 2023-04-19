@@ -1,6 +1,6 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Operation } from "../types";
+import { Operation } from "../operation";
 import { Model } from "./types";
 
 export type CreateGithubModelConfiguration = {
