@@ -41,7 +41,7 @@ export type OutlineButtonOptionalProps = Partial<
 export type OutlineButtonProps = OutlineButtonRequiredProps &
   OutlineButtonOptionalProps;
 
-const OutlineButton: React.FC<OutlineButtonProps> = (props) => {
+const OutlineButton = (props: OutlineButtonProps) => {
   const {
     type,
     disabled,

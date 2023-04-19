@@ -144,8 +144,8 @@ export type ProtectedBasicTextFieldOptionalProps = Partial<
 export type ProtectedBasicTextFieldProps =
   ProtectedBasicTextFieldRequiredProps & ProtectedBasicTextFieldOptionalProps;
 
-export const ProtectedBasicTextField: React.FC<ProtectedBasicTextFieldProps> = (
-  props
+export const ProtectedBasicTextField = (
+  props: ProtectedBasicTextFieldProps
 ) => {
   const {
     id,

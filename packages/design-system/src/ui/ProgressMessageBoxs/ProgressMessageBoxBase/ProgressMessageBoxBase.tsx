@@ -128,9 +128,7 @@ export type ProgressMessageBoxBaseProps = {
   setActivate: (activate: boolean) => void;
 };
 
-const ProgressMessageBoxBase: React.FC<ProgressMessageBoxBaseProps> = (
-  props
-) => {
+const ProgressMessageBoxBase = (props: ProgressMessageBoxBaseProps) => {
   const {
     state,
     setActivate,

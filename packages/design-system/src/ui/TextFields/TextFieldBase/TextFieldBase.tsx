@@ -21,7 +21,7 @@ export type TextFieldBaseProps = BasicInputProps &
     onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   };
 
-const TextFieldBase: React.FC<TextFieldBaseProps> = (props) => {
+const TextFieldBase = (props: TextFieldBaseProps) => {
   const {
     onChange,
     id,

@@ -54,9 +54,7 @@ export const basicProgressMessageBoxConfig: BasicProgressMessageBoxConfig = {
   errorindicatorColumnBgColor: "bg-instillRed10",
 };
 
-const BasicProgressMessageBox: React.FC<BasicProgressMessageBoxProps> = (
-  props
-) => {
+const BasicProgressMessageBox = (props: BasicProgressMessageBoxProps) => {
   const { state, setActivate, closable, width } = props;
 
   return (

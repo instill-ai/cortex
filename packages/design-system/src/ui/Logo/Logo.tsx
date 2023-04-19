@@ -21,7 +21,7 @@ export type LogoProps = {
   width: number;
 };
 
-const Logo: React.FC<LogoProps> = (props) => {
+const Logo = (props: LogoProps) => {
   const { styleName, type, width } = props;
 
   let logo: React.ReactNode;

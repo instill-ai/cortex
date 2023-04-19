@@ -124,7 +124,7 @@ export const basicToggleFieldConfig: BasicToggleFieldConfig = {
   messageLineHeight: "",
 };
 
-const BasicToggleField: React.FC<BasicToggleFieldProps> = (props) => {
+const BasicToggleField = (props: BasicToggleFieldProps) => {
   const {
     id,
     value,

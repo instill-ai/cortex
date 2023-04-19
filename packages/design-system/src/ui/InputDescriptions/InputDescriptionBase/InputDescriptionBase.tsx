@@ -49,9 +49,7 @@ export type InputDescriptionBaseProps = {
   descriptionLinkTextDecoration: string;
 };
 
-export const InputDescriptionBase: React.FC<InputDescriptionBaseProps> = (
-  props: InputDescriptionBaseProps
-) => {
+export const InputDescriptionBase = (props: InputDescriptionBaseProps) => {
   const {
     description,
     descriptionWidth,

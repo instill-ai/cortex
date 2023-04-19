@@ -144,7 +144,7 @@ export type BasicTextAreaOptionalProps = Partial<
 export type BasicTextAreaProps = BasicTextAreaRequiredProps &
   BasicTextAreaOptionalProps;
 
-export const BasicTextArea: React.FC<BasicTextAreaProps> = (props) => {
+export const BasicTextArea = (props: BasicTextAreaProps) => {
   const {
     id,
     label,

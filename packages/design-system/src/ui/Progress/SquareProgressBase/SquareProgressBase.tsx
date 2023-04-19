@@ -27,7 +27,7 @@ export interface SquareProgressBaseProps {
   position?: string;
 }
 
-const SquareProgressBase: React.FC<SquareProgressBaseProps> = (props) => {
+const SquareProgressBase = (props: SquareProgressBaseProps) => {
   const {
     bgColor,
     cubeColor,

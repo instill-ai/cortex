@@ -93,7 +93,7 @@ export const basicSingleSelectConfig: BasicSingleSelectConfig = {
 export type BasicSingleSelectProps = BasicSingleSelectRequiredProps &
   BasicSingleSelectOptionalProps;
 
-export const BasicSingleSelect: React.FC<BasicSingleSelectProps> = (props) => {
+export const BasicSingleSelect = (props: BasicSingleSelectProps) => {
   const {
     id,
     onChange,

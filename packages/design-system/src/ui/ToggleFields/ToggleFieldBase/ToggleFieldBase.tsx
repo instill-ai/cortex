@@ -102,7 +102,7 @@ export type ToggleFieldBaseProps = Omit<
     inputFocusShadow: string;
   };
 
-const ToggleFieldBase: React.FC<ToggleFieldBaseProps> = (props) => {
+const ToggleFieldBase = (props: ToggleFieldBaseProps) => {
   const {
     id,
     value,

@@ -40,7 +40,7 @@ export type SolidButtonOptionalProps = Partial<
 export type SolidButtonProps = SolidButtonRequiredProps &
   SolidButtonOptionalProps;
 
-const SolidButton: React.FC<SolidButtonProps> = (props) => {
+const SolidButton = (props: SolidButtonProps) => {
   const {
     type,
     disabled,
