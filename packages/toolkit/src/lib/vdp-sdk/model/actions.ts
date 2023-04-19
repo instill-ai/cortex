@@ -1,4 +1,4 @@
-import { Operation } from "../types";
+import { Operation } from "../operation";
 import { createInstillAxiosClient } from "../helper";
 import { Nullable } from "../../type";
 

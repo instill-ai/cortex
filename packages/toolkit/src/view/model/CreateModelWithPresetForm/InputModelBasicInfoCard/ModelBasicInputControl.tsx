@@ -22,8 +22,10 @@ import {
   useCreateResourceFormStore,
   useDeployModel,
   validateResourceId,
+  watchModel,
 } from "../../../../lib";
 import axios from "axios";
+import { checkUntilOperationIsDoen } from "../../../../lib/vdp-sdk/operation";
 
 const selector = (state: CreateResourceFormStore) => ({
   modelId: state.fields.model.new.id,
@@ -130,34 +132,44 @@ export const ModelBasicInputControl = ({
       createGithubModel.mutate(
         { payload, accessToken },
         {
-          onSuccess: async () => {
+          onSuccess: async ({ operation }) => {
             if (!modelId) return;
-            const operationIsDone = await checkCreateModelStateUntilOffline({
-              modelName: `models/${modelId.trim()}`,
+            const operationIsDone = await checkUntilOperationIsDoen({
+              operationName: operation.name,
               accessToken,
             });
 
             if (operationIsDone) {
-              await prepareNewModel(`models/${modelId.trim()}`);
-              deployModel.mutate({
-                modelName: `models/${modelId.trim()}`,
-                accessToken,
+              const modelName = `models/${modelId.trim()}`;
+              const modelState = await watchModel({ modelName, accessToken });
+
+              if (modelState.state === "STATE_ERROR") {
+                setCreateModelMessageBoxState(() => ({
+                  activate: true,
+                  status: "error",
+                  description: "Something went wrong when create the model",
+                  message: "Create Model Failed",
+                }));
+                return;
+              }
+
+              await prepareNewModel(modelName);
+              deployModel.mutate({ modelName, accessToken });
+
+              setCreateModelMessageBoxState({
+                activate: true,
+                status: "success",
+                description: null,
+                message: "Succeed.",
               });
-            }
 
-            setCreateModelMessageBoxState({
-              activate: true,
-              status: "success",
-              description: null,
-              message: "Succeed.",
-            });
+              if (initStoreOnCreate) {
+                init();
+              }
 
-            if (initStoreOnCreate) {
-              init();
-            }
-
-            if (onCreate) {
-              onCreate();
+              if (onCreate) {
+                onCreate();
+              }
             }
           },
           onError: (error) => {
