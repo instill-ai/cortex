@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.10.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.3...@instill-ai/design-system-v0.10.4) (2023-04-19)
+
+
+### Miscellaneous
+
+* deprecate React.FC type in design system ([#347](https://github.com/instill-ai/design-system/issues/347)) ([03aede0](https://github.com/instill-ai/design-system/commit/03aede0d3d9a1420a32fe085271fc8bf0b09def5))
+
 ## [0.10.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.2...@instill-ai/design-system-v0.10.3) (2023-04-13)
 
 

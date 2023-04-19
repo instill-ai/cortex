@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.30.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.29.1...@instill-ai/toolkit-v0.30.0) (2023-04-19)
+
+
+### Features
+
+* alter the logic when we create model ([#349](https://github.com/instill-ai/design-system/issues/349)) ([a311946](https://github.com/instill-ai/design-system/commit/a31194628e58411b7258ac6f32f495c66ac914bd))
+
 ## [0.29.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.29.0...@instill-ai/toolkit-v0.29.1) (2023-04-13)
 
 
