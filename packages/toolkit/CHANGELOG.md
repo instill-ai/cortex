@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.31.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.30.0...@instill-ai/toolkit-v0.31.0) (2023-04-20)
+
+
+### Features
+
+* export Hydrate component ([#350](https://github.com/instill-ai/design-system/issues/350)) ([6652fc6](https://github.com/instill-ai/design-system/commit/6652fc6eaa7323e0d0f653d8c1111bd718c63303))
+
 ## [0.30.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.29.1...@instill-ai/toolkit-v0.30.0) (2023-04-19)
 
 
