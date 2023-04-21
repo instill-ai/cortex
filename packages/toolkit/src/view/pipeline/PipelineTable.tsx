@@ -2,11 +2,11 @@ import cn from "clsx";
 import * as React from "react";
 import {
   ConnectionTypeCell,
-  TableLoadingProgress,
   TableHead,
   ModelsCell,
-  type TableHeadItem,
   TableError,
+  SkeletonCell,
+  type TableHeadItem,
 } from "../../components";
 import type { Nullable, Pipeline } from "../../lib";
 
@@ -14,12 +14,14 @@ export type PipelineTableProps = {
   pipeline: Nullable<Pipeline>;
   marginBottom: Nullable<string>;
   isError: boolean;
+  isLoading: boolean;
 };
 
 export const PipelineTable = ({
   pipeline,
   marginBottom,
   isError,
+  isLoading,
 }: PipelineTableProps) => {
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
     const getHeadItem = (name: string) => {
@@ -51,9 +53,18 @@ export const PipelineTable = ({
     ];
   }, []);
 
-  if (!pipeline) {
-    return <TableLoadingProgress marginBottom={null} />;
-  }
+  // We delay the loading animation by 500ms to avoid a flickering effect
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    if (isLoading) return;
+    const timeout = setTimeout(() => {
+      setLoaded(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
 
   if (isError) {
     return <TableError marginBottom={null} />;
@@ -68,27 +79,37 @@ export const PipelineTable = ({
       />
       <tbody>
         <tr className="bg-white border border-instillGrey20">
-          <ConnectionTypeCell
-            width={null}
-            padding="py-2 pl-6"
-            connectorDefinition={
-              pipeline.recipe.source.source_connector_definition
-            }
-            connectorName={pipeline.recipe.source.id}
-          />
-          <ModelsCell
-            models={pipeline.recipe.models}
-            width={null}
-            padding="py-2"
-          />
-          <ConnectionTypeCell
-            width={null}
-            padding="py-2 pr-6"
-            connectorDefinition={
-              pipeline.recipe.destination.destination_connector_definition
-            }
-            connectorName={pipeline.recipe.destination.id}
-          />
+          {!pipeline || !loaded ? (
+            <>
+              <SkeletonCell width={null} padding="py-2 pl-6" />
+              <SkeletonCell width={null} padding="py-2" />
+              <SkeletonCell width={null} padding="py-2 pr-6" />
+            </>
+          ) : (
+            <>
+              <ConnectionTypeCell
+                width={null}
+                padding="py-2 pl-6"
+                connectorDefinition={
+                  pipeline.recipe.source.source_connector_definition
+                }
+                connectorName={pipeline.recipe.source.id}
+              />
+              <ModelsCell
+                models={pipeline.recipe.models}
+                width={null}
+                padding="py-2"
+              />
+              <ConnectionTypeCell
+                width={null}
+                padding="py-2 pr-6"
+                connectorDefinition={
+                  pipeline.recipe.destination.destination_connector_definition
+                }
+                connectorName={pipeline.recipe.destination.id}
+              />
+            </>
+          )}
         </tr>
       </tbody>
     </table>

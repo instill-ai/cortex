@@ -20,7 +20,7 @@ const PipelinesTablePage = () => {
 
   return (
     <Root>
-      <div className="w-[1200px]">
+      <div className="flex w-[1200px] h-[600px]">
         <PipelinesTable
           pipelines={pipelines.data ?? null}
           pipelinesWatchState={
@@ -28,6 +28,7 @@ const PipelinesTablePage = () => {
           }
           marginBottom={null}
           isError={pipelines.isError}
+          isLoading={pipelines.isLoading || pipelinesWatchState.isLoading}
         />
       </div>
     </Root>

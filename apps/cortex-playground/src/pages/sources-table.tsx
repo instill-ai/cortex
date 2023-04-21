@@ -20,7 +20,7 @@ const SourcesTablePage = () => {
 
   return (
     <Root>
-      <div className="w-[1200px]">
+      <div className="w-[1200px] h-[600px]">
         <SourcesTable
           sources={sources.data ?? null}
           sourcesWatchState={
@@ -28,6 +28,7 @@ const SourcesTablePage = () => {
           }
           marginBottom={null}
           isError={sources.isError}
+          isLoading={sources.isLoading || sourcesWatchState.isLoading}
         />
       </div>
     </Root>

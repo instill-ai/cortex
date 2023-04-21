@@ -6,3 +6,4 @@ export * from "./ModelsCell";
 export * from "./ModelTaskCell";
 export * from "./NameCell";
 export * from "./PipelinesCell";
+export * from "./SkeletonCell";
