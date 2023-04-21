@@ -16,3 +16,4 @@ export {
   Hydrate,
   dehydrate,
 } from "@tanstack/react-query";
+export type { DehydratedState } from "@tanstack/react-query";
