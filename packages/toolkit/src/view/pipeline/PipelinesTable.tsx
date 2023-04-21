@@ -41,6 +41,19 @@ export const PipelinesTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
+  // We delay the loading animation by 500ms to avoid a flickering effect
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    if (isLoading) return;
+    const timeout = setTimeout(() => {
+      setLoaded(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
+
   const searchedPipelines = useSearchedResources({
     resources: pipelines || null,
     searchTerm,
@@ -53,7 +66,7 @@ export const PipelinesTable = ({
   const stateOverviewCounts = useStateOverviewCounts(
     searchedPipelines,
     pipelinesWatchState,
-    isLoading
+    !loaded
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -92,19 +105,6 @@ export const PipelinesTable = ({
     ];
   }, [stateOverviewCounts]);
 
-  // We delay the loading animation by 500ms to avoid a flickering effect
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    if (isLoading) return;
-    const timeout = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   if (isError) {
     return (
       <PaginationListContainer
@@ -115,7 +115,7 @@ export const PipelinesTable = ({
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         totalPage={searchedPipelinePages.length}
-        displaySearchField={pipelines?.length !== 0 ? true : false}
+        disabledSearchField={true}
         marginBottom={marginBottom}
       >
         <TableError marginBottom={null} />
@@ -132,7 +132,7 @@ export const PipelinesTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={searchedPipelinePages.length}
-      displaySearchField={pipelines?.length !== 0 ? true : false}
+      disabledSearchField={true}
       marginBottom={marginBottom}
     >
       <PipelineTablePlaceholder
@@ -151,7 +151,7 @@ export const PipelinesTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={searchedPipelinePages.length}
-      displaySearchField={pipelines?.length !== 0 ? true : false}
+      disabledSearchField={loaded ? false : true}
       marginBottom={marginBottom}
     >
       <table className="table-auto border-collapse">
