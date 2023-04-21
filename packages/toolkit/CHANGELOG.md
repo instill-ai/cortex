@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.32.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.31.0...@instill-ai/toolkit-v0.32.0) (2023-04-21)
+
+
+### Features
+
+* export dehydrate ([#353](https://github.com/instill-ai/design-system/issues/353)) ([2ce4d06](https://github.com/instill-ai/design-system/commit/2ce4d068f159fda9d1b2811a3bea1daaec2e08ca))
+
 ## [0.31.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.30.0...@instill-ai/toolkit-v0.31.0) (2023-04-20)
 
 
