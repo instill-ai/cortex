@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.0...@instill-ai/toolkit-v0.33.1) (2023-04-21)
+
+
+### Bug Fixes
+
+* fix table loading flag ([#359](https://github.com/instill-ai/design-system/issues/359)) ([dcf9188](https://github.com/instill-ai/design-system/commit/dcf9188da09469c6b4c0590d7ab3ddfa0abaf9d2))
+
 ## [0.33.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.32.1...@instill-ai/toolkit-v0.33.0) (2023-04-21)
 
 
