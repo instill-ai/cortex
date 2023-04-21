@@ -39,6 +39,19 @@ export const ModelsTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
+  // We delay the loading animation by 500ms to avoid a flickering effect
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    if (isLoading) return;
+    const timeout = setTimeout(() => {
+      setLoaded(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
+
   const searchedModels = useSearchedResources({
     resources: models || null,
     searchTerm,
@@ -51,7 +64,7 @@ export const ModelsTable = ({
   const stateOverviewCounts = useStateOverviewCounts(
     searchedModels,
     modelsWatchState,
-    isLoading
+    !loaded
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -80,19 +93,6 @@ export const ModelsTable = ({
     ];
   }, [stateOverviewCounts]);
 
-  // We delay the loading animation by 500ms to avoid a flickering effect
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    if (isLoading) return;
-    const timeout = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   if (isError) {
     return (
       <PaginationListContainer
@@ -103,7 +103,7 @@ export const ModelsTable = ({
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         totalPage={searchedModelPages.length}
-        displaySearchField={models?.length !== 0 ? true : false}
+        disabledSearchField={true}
         marginBottom={marginBottom}
       >
         <TableError marginBottom={null} />
@@ -121,7 +121,7 @@ export const ModelsTable = ({
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         totalPage={searchedModelPages.length}
-        displaySearchField={models?.length !== 0 ? true : false}
+        disabledSearchField={true}
         marginBottom={marginBottom}
       >
         <ModelTablePlaceholder
@@ -141,7 +141,7 @@ export const ModelsTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={searchedModelPages.length}
-      displaySearchField={models?.length !== 0 ? true : false}
+      disabledSearchField={loaded ? false : true}
       marginBottom={marginBottom}
     >
       <table className="table-fixed border-collapse w-full">

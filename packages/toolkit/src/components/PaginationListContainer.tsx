@@ -12,7 +12,7 @@ export type PaginationListContainerProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   searchTerm: Nullable<string>;
   setSearchTerm: React.Dispatch<React.SetStateAction<Nullable<string>>>;
-  displaySearchField: boolean;
+  disabledSearchField: boolean;
   marginBottom?: string;
 };
 
@@ -25,7 +25,7 @@ export const PaginationListContainer = ({
   totalPage,
   searchTerm,
   setSearchTerm,
-  displaySearchField,
+  disabledSearchField,
   marginBottom,
 }: PaginationListContainerProps) => {
   return (
@@ -36,17 +36,16 @@ export const PaginationListContainer = ({
           <p>{description}</p>
         </div>
         <div className="ml-auto">
-          {displaySearchField ? (
-            <BasicTextField
-              id="searchTerm"
-              label={null}
-              value={searchTerm}
-              placeholder={`Search ${title.toLowerCase()}`}
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-                setSearchTerm(event.target.value.trim())
-              }
-            />
-          ) : null}
+          <BasicTextField
+            id="searchTerm"
+            label={null}
+            value={searchTerm}
+            placeholder={`Search ${title.toLowerCase()}`}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setSearchTerm(event.target.value.trim())
+            }
+            disabled={disabledSearchField}
+          />
         </div>
       </div>
       {children}
