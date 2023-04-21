@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.32.1...@instill-ai/toolkit-v0.33.0) (2023-04-21)
+
+
+### Features
+
+* add table loading placeholder ([#357](https://github.com/instill-ai/design-system/issues/357)) ([75b8f1f](https://github.com/instill-ai/design-system/commit/75b8f1f653b6cfb4dd096309b26a1afb2a7097ab))
+
 ## [0.32.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.32.0...@instill-ai/toolkit-v0.32.1) (2023-04-21)
 
 
