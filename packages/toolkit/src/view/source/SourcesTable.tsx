@@ -5,10 +5,10 @@ import {
   NameCell,
   TableHeadItem,
   TableHead,
-  TableLoadingProgress,
   StateOverview,
   PaginationListContainer,
   TableError,
+  SkeletonCell,
 } from "../../components";
 import {
   useSearchedResources,
@@ -24,8 +24,9 @@ import { SourceTablePlaceholder } from "./SourceTablePlaceholder";
 export type SourcesTableProps = {
   sources: Nullable<SourceWithPipelines[]>;
   sourcesWatchState: Nullable<ConnectorsWatchState>;
-  marginBottom: Nullable<string>;
   isError: boolean;
+  isLoading: boolean;
+  marginBottom?: string;
 };
 
 export const SourcesTable = ({
@@ -33,6 +34,7 @@ export const SourcesTable = ({
   sourcesWatchState,
   marginBottom,
   isError,
+  isLoading,
 }: SourcesTableProps) => {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
@@ -48,7 +50,8 @@ export const SourcesTable = ({
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchedSources,
-    sourcesWatchState
+    sourcesWatchState,
+    isLoading
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -77,6 +80,19 @@ export const SourcesTable = ({
     ];
   }, [stateOverviewCounts]);
 
+  // We delay the loading animation by 500ms to avoid a flickering effect
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    if (isLoading) return;
+    const timeout = setTimeout(() => {
+      setLoaded(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
+
   if (isError) {
     return (
       <PaginationListContainer
@@ -95,6 +111,27 @@ export const SourcesTable = ({
     );
   }
 
+  if (sources?.length === 0) {
+    return (
+      <PaginationListContainer
+        title="Source"
+        description="These are the sources you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedPipelinePages.length}
+        displaySearchField={sources?.length !== 0 ? true : false}
+        marginBottom={marginBottom}
+      >
+        <SourceTablePlaceholder
+          enablePlaceholderCreateButton={false}
+          marginBottom={null}
+        />
+      </PaginationListContainer>
+    );
+  }
+
   return (
     <PaginationListContainer
       title="Source"
@@ -107,59 +144,59 @@ export const SourcesTable = ({
       displaySearchField={sources?.length !== 0 ? true : false}
       marginBottom={marginBottom}
     >
-      {sources ? (
-        sources.length === 0 ? (
-          <SourceTablePlaceholder
-            enablePlaceholderCreateButton={false}
-            marginBottom={null}
-          />
-        ) : (
-          <table className="table-auto border-collapse">
-            <TableHead
-              borderColor="border-instillGrey20"
-              bgColor="bg-instillGrey05"
-              items={tableHeadItems}
-            />
-            <tbody>
-              {searchedPipelinePages[currentPage]
-                ? searchedPipelinePages[currentPage].map((source) => (
-                    <tr
-                      key={source.name}
-                      className="bg-white border border-instillGrey20"
-                    >
-                      <NameCell
-                        name={source.id}
-                        width={null}
-                        state={
-                          sourcesWatchState
-                            ? sourcesWatchState[source.name]
-                              ? sourcesWatchState[source.name].state
-                              : "STATE_UNSPECIFIED"
-                            : "STATE_UNSPECIFIED"
-                        }
-                        padding="py-2 pl-6"
-                        link={`/sources/${source.id}`}
-                      />
-                      <ConnectionTypeCell
-                        connectorDefinition={source.source_connector_definition}
-                        connectorName={source.id}
-                        width={null}
-                        padding="py-2"
-                      />
-                      <PipelinesCell
-                        width={null}
-                        padding="py-2 pr-6"
-                        pipelineCount={source.pipelines.length}
-                      />
-                    </tr>
-                  ))
-                : null}
-            </tbody>
-          </table>
-        )
-      ) : (
-        <TableLoadingProgress marginBottom={null} />
-      )}
+      <table className="table-auto border-collapse">
+        <TableHead
+          borderColor="border-instillGrey20"
+          bgColor="bg-instillGrey05"
+          items={tableHeadItems}
+        />
+        <tbody>
+          {!sources || !loaded
+            ? [0, 1, 2, 3, 4].map((e) => (
+                <tr
+                  key={`pipelines-table-skeleton-${e}`}
+                  className="bg-white border border-instillGrey20"
+                >
+                  <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
+                </tr>
+              ))
+            : searchedPipelinePages[currentPage]
+            ? searchedPipelinePages[currentPage].map((source) => (
+                <tr
+                  key={source.name}
+                  className="bg-white border border-instillGrey20"
+                >
+                  <NameCell
+                    name={source.id}
+                    width={null}
+                    state={
+                      sourcesWatchState
+                        ? sourcesWatchState[source.name]
+                          ? sourcesWatchState[source.name].state
+                          : "STATE_UNSPECIFIED"
+                        : "STATE_UNSPECIFIED"
+                    }
+                    padding="py-2 pl-6"
+                    link={`/sources/${source.id}`}
+                  />
+                  <ConnectionTypeCell
+                    connectorDefinition={source.source_connector_definition}
+                    connectorName={source.id}
+                    width={null}
+                    padding="py-2"
+                  />
+                  <PipelinesCell
+                    width={null}
+                    padding="py-2 pr-6"
+                    pipelineCount={source.pipelines.length}
+                  />
+                </tr>
+              ))
+            : null}
+        </tbody>
+      </table>
     </PaginationListContainer>
   );
 };

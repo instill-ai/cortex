@@ -30,7 +30,8 @@ export function useStateOverviewCounts(
   items: Item[] | null,
   itemsWatchState: Nullable<
     ConnectorsWatchState | ModelsWatchState | PipelinesWatchState
-  >
+  >,
+  isLoading: boolean
 ): Nullable<StateOverviewCounts> {
   const [stateOverviewCount, setStateOverviewCount] =
     React.useState<Nullable<StateOverviewCounts>>(null);
@@ -43,6 +44,10 @@ export function useStateOverviewCounts(
       offline: 0,
       error: 0,
     };
+
+    if (isLoading) {
+      return;
+    }
 
     const itemNameList = items[0].name.split("/");
 
@@ -130,7 +135,7 @@ export function useStateOverviewCounts(
     }
 
     setStateOverviewCount(counts);
-  }, [items, itemsWatchState]);
+  }, [items, itemsWatchState, isLoading]);
 
   return stateOverviewCount;
 }

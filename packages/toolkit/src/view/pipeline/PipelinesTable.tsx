@@ -10,6 +10,7 @@ import {
   PaginationListContainer,
   ModelCountsCell,
   TableError,
+  SkeletonCell,
 } from "../../components";
 import {
   chunk,
@@ -25,8 +26,9 @@ import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
 export type PipelinesTableProps = {
   pipelines: Nullable<Pipeline[]>;
   pipelinesWatchState: Nullable<PipelinesWatchState>;
-  marginBottom: Nullable<string>;
   isError: boolean;
+  isLoading: boolean;
+  marginBottom?: string;
 };
 
 export const PipelinesTable = ({
@@ -34,6 +36,7 @@ export const PipelinesTable = ({
   pipelinesWatchState,
   marginBottom,
   isError,
+  isLoading,
 }: PipelinesTableProps) => {
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
@@ -49,7 +52,8 @@ export const PipelinesTable = ({
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchedPipelines,
-    pipelinesWatchState
+    pipelinesWatchState,
+    isLoading
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -88,6 +92,19 @@ export const PipelinesTable = ({
     ];
   }, [stateOverviewCounts]);
 
+  // We delay the loading animation by 500ms to avoid a flickering effect
+  const [loaded, setLoaded] = React.useState(false);
+  React.useEffect(() => {
+    if (isLoading) return;
+    const timeout = setTimeout(() => {
+      setLoaded(true);
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [isLoading]);
+
   if (isError) {
     return (
       <PaginationListContainer
@@ -106,6 +123,25 @@ export const PipelinesTable = ({
     );
   }
 
+  if (pipelines?.length === 0) {
+    <PaginationListContainer
+      title="Pipeline"
+      description="These are the pipelines you can select"
+      currentPage={currentPage}
+      setCurrentPage={setCurrentPage}
+      searchTerm={searchTerm}
+      setSearchTerm={setSearchTerm}
+      totalPage={searchedPipelinePages.length}
+      displaySearchField={pipelines?.length !== 0 ? true : false}
+      marginBottom={marginBottom}
+    >
+      <PipelineTablePlaceholder
+        enablePlaceholderCreateButton={false}
+        marginBottom={null}
+      />
+    </PaginationListContainer>;
+  }
+
   return (
     <PaginationListContainer
       title="Pipeline"
@@ -118,71 +154,73 @@ export const PipelinesTable = ({
       displaySearchField={pipelines?.length !== 0 ? true : false}
       marginBottom={marginBottom}
     >
-      {pipelines ? (
-        pipelines.length === 0 ? (
-          <PipelineTablePlaceholder
-            enablePlaceholderCreateButton={false}
-            marginBottom={null}
-          />
-        ) : (
-          <table className="table-auto border-collapse">
-            <TableHead
-              borderColor="border-instillGrey20"
-              bgColor="bg-instillGrey05"
-              items={tableHeadItems}
-            />
-            <tbody>
-              {searchedPipelinePages[currentPage]
-                ? searchedPipelinePages[currentPage].map((pipeline) => (
-                    <tr
-                      key={pipeline.name}
-                      className="bg-white border border-instillGrey20"
-                    >
-                      <NameCell
-                        name={pipeline.id}
-                        width={null}
-                        state={
-                          pipelinesWatchState
-                            ? pipelinesWatchState[pipeline.name]
-                              ? pipelinesWatchState[pipeline.name].state
-                              : "STATE_UNSPECIFIED"
-                            : "STATE_UNSPECIFIED"
-                        }
-                        padding="py-2 pl-6"
-                        link={`/pipelines/${pipeline.id}`}
-                      />
-                      <ModeCell width="" mode={pipeline.mode} padding="py-2" />
-                      <ConnectionTypeCell
-                        width={null}
-                        connectorDefinition={
-                          pipeline.recipe.source.source_connector_definition
-                        }
-                        connectorName={pipeline.recipe.source.id}
-                        padding="py-2"
-                      />
-                      <ModelCountsCell
-                        modelCount={pipeline.recipe.models.length}
-                        width={null}
-                        padding="py-2"
-                      />
-                      <ConnectionTypeCell
-                        width={null}
-                        connectorDefinition={
-                          pipeline.recipe.destination
-                            .destination_connector_definition
-                        }
-                        connectorName={pipeline.recipe.destination.id}
-                        padding="py-2 pr-6"
-                      />
-                    </tr>
-                  ))
-                : null}
-            </tbody>
-          </table>
-        )
-      ) : (
-        <TableLoadingProgress marginBottom={null} />
-      )}
+      <table className="table-auto border-collapse">
+        <TableHead
+          borderColor="border-instillGrey20"
+          bgColor="bg-instillGrey05"
+          items={tableHeadItems}
+        />
+        <tbody>
+          {!pipelines || !loaded
+            ? [0, 1, 2, 3, 4].map((e) => (
+                <tr
+                  key={`pipelines-table-skeleton-${e}`}
+                  className="bg-white border border-instillGrey20"
+                >
+                  <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
+                </tr>
+              ))
+            : searchedPipelinePages[currentPage]
+            ? searchedPipelinePages[currentPage].map((pipeline) => (
+                <tr
+                  key={pipeline.name}
+                  className="bg-white border border-instillGrey20"
+                >
+                  <NameCell
+                    name={pipeline.id}
+                    width={null}
+                    state={
+                      pipelinesWatchState
+                        ? pipelinesWatchState[pipeline.name]
+                          ? pipelinesWatchState[pipeline.name].state
+                          : "STATE_UNSPECIFIED"
+                        : "STATE_UNSPECIFIED"
+                    }
+                    padding="py-2 pl-6"
+                    link={`/pipelines/${pipeline.id}`}
+                  />
+                  <ModeCell width="" mode={pipeline.mode} padding="py-2" />
+                  <ConnectionTypeCell
+                    width={null}
+                    connectorDefinition={
+                      pipeline.recipe.source.source_connector_definition
+                    }
+                    connectorName={pipeline.recipe.source.id}
+                    padding="py-2"
+                  />
+                  <ModelCountsCell
+                    modelCount={pipeline.recipe.models.length}
+                    width={null}
+                    padding="py-2"
+                  />
+                  <ConnectionTypeCell
+                    width={null}
+                    connectorDefinition={
+                      pipeline.recipe.destination
+                        .destination_connector_definition
+                    }
+                    connectorName={pipeline.recipe.destination.id}
+                    padding="py-2 pr-6"
+                  />
+                </tr>
+              ))
+            : null}
+        </tbody>
+      </table>
     </PaginationListContainer>
   );
 };

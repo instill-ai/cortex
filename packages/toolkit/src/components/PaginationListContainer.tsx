@@ -13,7 +13,7 @@ export type PaginationListContainerProps = {
   searchTerm: Nullable<string>;
   setSearchTerm: React.Dispatch<React.SetStateAction<Nullable<string>>>;
   displaySearchField: boolean;
-  marginBottom: Nullable<string>;
+  marginBottom?: string;
 };
 
 export const PaginationListContainer = ({
