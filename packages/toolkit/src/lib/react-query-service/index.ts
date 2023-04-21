@@ -14,4 +14,5 @@ export {
   useQueryClient,
   useMutation,
   Hydrate,
+  dehydrate,
 } from "@tanstack/react-query";
