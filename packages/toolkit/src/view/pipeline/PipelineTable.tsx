@@ -8,7 +8,7 @@ import {
   SkeletonCell,
   type TableHeadItem,
 } from "../../components";
-import type { Nullable, Pipeline } from "../../lib";
+import type { Pipeline } from "../../lib";
 
 export type PipelineTableProps = {
   pipeline: Pipeline;

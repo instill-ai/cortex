@@ -51,7 +51,7 @@ export const ModelsTable = ({
       return chunk(models, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
     }
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedModels]);
+  }, [searchedModels, models]);
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchTerm ? searchedModels : models,

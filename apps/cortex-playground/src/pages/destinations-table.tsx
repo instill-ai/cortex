@@ -17,7 +17,7 @@ const DestinationsTablePage = () => {
       ? destinations.data.map((p) => p.name)
       : [],
     accessToken: null,
-    enable: destinations.isSuccess,
+    enable: destinations.isSuccess && destinations.data.length > 0,
   });
 
   return (
@@ -29,7 +29,12 @@ const DestinationsTablePage = () => {
             destinationsWatchState.isSuccess ? destinationsWatchState.data : {}
           }
           isError={destinations.isError}
-          isLoading={destinations.isLoading || destinationsWatchState.isLoading}
+          isLoading={
+            destinations.isLoading ||
+            (destinations.isSuccess && destinations.data.length > 0)
+              ? destinationsWatchState.isLoading
+              : false
+          }
         />
       </div>
     </Root>

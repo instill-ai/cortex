@@ -15,7 +15,7 @@ const PipelinesTablePage = () => {
   const pipelinesWatchState = useWatchPipelines({
     pipelineNames: pipelines.isSuccess ? pipelines.data.map((p) => p.name) : [],
     accessToken: null,
-    enable: pipelines.isSuccess,
+    enable: pipelines.isSuccess && pipelines.data.length > 0,
   });
 
   return (
@@ -27,7 +27,12 @@ const PipelinesTablePage = () => {
             pipelinesWatchState.isSuccess ? pipelinesWatchState.data : {}
           }
           isError={pipelines.isError}
-          isLoading={pipelines.isLoading || pipelinesWatchState.isLoading}
+          isLoading={
+            pipelines.isLoading ||
+            (pipelines.isSuccess && pipelines.data.length > 0)
+              ? pipelinesWatchState.isLoading
+              : false
+          }
         />
       </div>
     </Root>

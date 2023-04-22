@@ -12,7 +12,7 @@ const ModelsTablePage = () => {
   const modelsWatchState = useWatchModels({
     modelNames: models.isSuccess ? models.data.map((p) => p.name) : [],
     accessToken: null,
-    enable: models.isSuccess,
+    enable: models.isSuccess && models.data.length > 0,
   });
 
   return (
@@ -24,7 +24,11 @@ const ModelsTablePage = () => {
             modelsWatchState.isSuccess ? modelsWatchState.data : {}
           }
           isError={models.isError}
-          isLoading={models.isLoading || modelsWatchState.isLoading}
+          isLoading={
+            models.isLoading || (models.isSuccess && models.data.length > 0)
+              ? modelsWatchState.isLoading
+              : false
+          }
         />
       </div>
     </Root>
