@@ -39,17 +39,22 @@ export const SourcesTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
+  // We will only use searched resource when user input search term
+
   const searchedSources = useSearchedResources({
-    resources: sources || null,
+    resources: sources,
     searchTerm,
   });
 
-  const searchedPipelinePages = React.useMemo(() => {
+  const sourcePages = React.useMemo(() => {
+    if (!searchTerm) {
+      return chunk(sources, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
+    }
     return chunk(searchedSources, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedSources]);
 
   const stateOverviewCounts = useStateOverviewCounts(
-    searchedSources,
+    searchTerm ? searchedSources : sources,
     sourcesWatchState,
     isLoading
   );
@@ -89,7 +94,7 @@ export const SourcesTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedPipelinePages.length}
+        totalPage={sourcePages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -98,7 +103,7 @@ export const SourcesTable = ({
     );
   }
 
-  if (sources.length === 0) {
+  if (sources.length === 0 && !isLoading) {
     return (
       <PaginationListContainer
         title="Source"
@@ -107,7 +112,7 @@ export const SourcesTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedPipelinePages.length}
+        totalPage={sourcePages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -127,7 +132,7 @@ export const SourcesTable = ({
       setCurrentPage={setCurrentPage}
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
-      totalPage={searchedPipelinePages.length}
+      totalPage={sourcePages.length}
       disabledSearchField={isLoading ? false : true}
       marginBottom={marginBottom}
     >
@@ -139,7 +144,7 @@ export const SourcesTable = ({
         />
         <tbody>
           {isLoading
-            ? [0, 1, 2, 3, 4].map((e) => (
+            ? [...Array(5).keys()].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}
                   className="bg-white border border-instillGrey20"
@@ -149,8 +154,8 @@ export const SourcesTable = ({
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
-            : searchedPipelinePages[currentPage]
-            ? searchedPipelinePages[currentPage].map((source) => (
+            : sourcePages[currentPage]
+            ? sourcePages[currentPage].map((source) => (
                 <tr
                   key={source.name}
                   className="bg-white border border-instillGrey20"

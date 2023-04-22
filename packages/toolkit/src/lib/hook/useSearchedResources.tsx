@@ -17,18 +17,13 @@ export function useSearchedResources<T extends Resources>({
   resources,
   searchTerm,
 }: {
-  resources: Nullable<T[]>;
+  resources: T[];
   searchTerm: Nullable<string>;
 }) {
   const [searchedResources, setSearchedResources] = React.useState<T[]>([]);
 
   React.useEffect(() => {
-    if (!resources) {
-      return;
-    }
-
     if (!searchTerm) {
-      setSearchedResources(resources);
       return;
     }
 

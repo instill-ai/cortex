@@ -22,11 +22,10 @@ const SourcesTablePage = () => {
     <Root>
       <div className="w-[1200px] h-[600px]">
         <SourcesTable
-          sources={sources.data ?? null}
+          sources={sources.isSuccess ? sources.data : []}
           sourcesWatchState={
-            sourcesWatchState.isSuccess ? sourcesWatchState.data : null
+            sourcesWatchState.isSuccess ? sourcesWatchState.data : {}
           }
-          marginBottom={null}
           isError={sources.isError}
           isLoading={sources.isLoading || sourcesWatchState.isLoading}
         />

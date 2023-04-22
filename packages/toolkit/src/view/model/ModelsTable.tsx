@@ -39,17 +39,22 @@ export const ModelsTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
+  // We will only use searched resource when user input search term
+
   const searchedModels = useSearchedResources({
-    resources: models || null,
+    resources: models,
     searchTerm,
   });
 
-  const searchedModelPages = React.useMemo(() => {
+  const modelPages = React.useMemo(() => {
+    if (!searchTerm) {
+      return chunk(models, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
+    }
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedModels]);
 
   const stateOverviewCounts = useStateOverviewCounts(
-    searchedModels,
+    searchTerm ? searchedModels : models,
     modelsWatchState,
     isLoading
   );
@@ -89,7 +94,7 @@ export const ModelsTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedModelPages.length}
+        totalPage={modelPages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -98,7 +103,7 @@ export const ModelsTable = ({
     );
   }
 
-  if (models.length === 0) {
+  if (models.length === 0 && !isLoading) {
     return (
       <PaginationListContainer
         title="Model"
@@ -107,7 +112,7 @@ export const ModelsTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedModelPages.length}
+        totalPage={modelPages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -127,7 +132,7 @@ export const ModelsTable = ({
       setCurrentPage={setCurrentPage}
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
-      totalPage={searchedModelPages.length}
+      totalPage={modelPages.length}
       disabledSearchField={isLoading ? true : false}
       marginBottom={marginBottom}
     >
@@ -139,7 +144,7 @@ export const ModelsTable = ({
         />
         <tbody>
           {isLoading
-            ? [0, 1, 2, 3, 4].map((e) => (
+            ? [...Array(5).keys()].map((e) => (
                 <tr
                   key={`models-table-skeleton-${e}`}
                   className="bg-white border border-instillGrey20"
@@ -149,8 +154,8 @@ export const ModelsTable = ({
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
-            : searchedModelPages[currentPage]
-            ? searchedModelPages[currentPage].map((model) => (
+            : modelPages[currentPage]
+            ? modelPages[currentPage].map((model) => (
                 <tr
                   key={model.name}
                   className="bg-white border border-instillGrey20"

@@ -24,14 +24,12 @@ const DestinationsTablePage = () => {
     <Root>
       <div className="w-[1200px]">
         <DestinationsTable
-          destinations={destinations.data ?? []}
+          destinations={destinations.isSuccess ? destinations.data : []}
           destinationsWatchState={
-            destinationsWatchState.isSuccess
-              ? destinationsWatchState.data
-              : null
+            destinationsWatchState.isSuccess ? destinationsWatchState.data : {}
           }
-          marginBottom={null}
           isError={destinations.isError}
+          isLoading={destinations.isLoading || destinationsWatchState.isLoading}
         />
       </div>
     </Root>

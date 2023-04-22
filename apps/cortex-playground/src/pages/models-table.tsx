@@ -19,12 +19,12 @@ const ModelsTablePage = () => {
     <Root>
       <div className="w-[1200px]">
         <ModelsTable
-          models={models.data ?? null}
+          models={models.isSuccess ? models.data : []}
           modelsWatchState={
-            modelsWatchState.isSuccess ? modelsWatchState.data : null
+            modelsWatchState.isSuccess ? modelsWatchState.data : {}
           }
-          marginBottom={null}
           isError={models.isError}
+          isLoading={models.isLoading || modelsWatchState.isLoading}
         />
       </div>
     </Root>

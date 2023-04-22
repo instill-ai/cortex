@@ -39,17 +39,22 @@ export const DestinationsTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
+  // We will only use searched resource when user input search term
+
   const searchedDestinations = useSearchedResources({
-    resources: destinations || null,
+    resources: destinations,
     searchTerm,
   });
 
-  const searchedDestinationPages = React.useMemo(() => {
+  const destinationPages = React.useMemo(() => {
+    if (!searchTerm) {
+      return chunk(destinations, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
+    }
     return chunk(searchedDestinations, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedDestinations]);
+  }, [searchedDestinations, searchTerm, destinations]);
 
   const stateOverviewCounts = useStateOverviewCounts(
-    searchedDestinations,
+    searchTerm ? searchedDestinations : destinations,
     destinationsWatchState,
     isLoading
   );
@@ -89,7 +94,7 @@ export const DestinationsTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedDestinationPages.length}
+        totalPage={destinationPages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -98,7 +103,7 @@ export const DestinationsTable = ({
     );
   }
 
-  if (destinations.length === 0) {
+  if (destinations.length === 0 && !isLoading) {
     return (
       <PaginationListContainer
         title="Destination"
@@ -107,7 +112,7 @@ export const DestinationsTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedDestinationPages.length}
+        totalPage={destinationPages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -127,7 +132,7 @@ export const DestinationsTable = ({
       setCurrentPage={setCurrentPage}
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
-      totalPage={searchedDestinationPages.length}
+      totalPage={destinationPages.length}
       disabledSearchField={isLoading ? true : false}
       marginBottom={marginBottom}
     >
@@ -139,7 +144,7 @@ export const DestinationsTable = ({
         />
         <tbody>
           {isLoading
-            ? [0, 1, 2, 3, 4].map((e) => (
+            ? [...Array(5).keys()].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}
                   className="bg-white border border-instillGrey20"
@@ -149,8 +154,8 @@ export const DestinationsTable = ({
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
-            : searchedDestinationPages.length !== 0
-            ? searchedDestinationPages[currentPage].map((destination) => (
+            : destinationPages[currentPage]
+            ? destinationPages[currentPage].map((destination) => (
                 <tr
                   key={destination.name}
                   className="bg-white border border-instillGrey20"

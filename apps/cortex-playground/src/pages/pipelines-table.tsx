@@ -24,10 +24,10 @@ const PipelinesTablePage = () => {
         <PipelinesTable
           pipelines={pipelines.isSuccess ? pipelines.data : []}
           pipelinesWatchState={
-            pipelinesWatchState.isSuccess ? pipelinesWatchState.data : null
+            pipelinesWatchState.isSuccess ? pipelinesWatchState.data : {}
           }
           isError={pipelines.isError}
-          isLoading={false}
+          isLoading={pipelines.isLoading || pipelinesWatchState.isLoading}
         />
       </div>
     </Root>
