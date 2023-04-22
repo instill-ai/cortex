@@ -40,19 +40,24 @@ export const PipelinesTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
+  // We will only use searched resource when user input search term
+
   const searchedPipelines = useSearchedResources({
-    resources: pipelines || null,
+    resources: pipelines,
     searchTerm,
   });
 
-  const searchedPipelinePages = React.useMemo(() => {
+  const pipelinePages = React.useMemo(() => {
+    if (!searchTerm) {
+      return chunk(pipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
+    }
     return chunk(searchedPipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
   }, [searchedPipelines]);
 
   const stateOverviewCounts = useStateOverviewCounts(
-    searchedPipelines,
+    searchTerm ? searchedPipelines : pipelines,
     pipelinesWatchState,
-    !isLoading
+    isLoading
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -100,7 +105,7 @@ export const PipelinesTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedPipelinePages.length}
+        totalPage={pipelinePages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -109,7 +114,7 @@ export const PipelinesTable = ({
     );
   }
 
-  if (pipelines.length === 0) {
+  if (pipelines.length === 0 && !isLoading) {
     return (
       <PaginationListContainer
         title="Pipeline"
@@ -118,7 +123,7 @@ export const PipelinesTable = ({
         setCurrentPage={setCurrentPage}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
-        totalPage={searchedPipelinePages.length}
+        totalPage={pipelinePages.length}
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
@@ -138,7 +143,7 @@ export const PipelinesTable = ({
       setCurrentPage={setCurrentPage}
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
-      totalPage={searchedPipelinePages.length}
+      totalPage={pipelinePages.length}
       disabledSearchField={isLoading ? true : false}
       marginBottom={marginBottom}
     >
@@ -150,7 +155,7 @@ export const PipelinesTable = ({
         />
         <tbody>
           {isLoading
-            ? [0, 1, 2, 3, 4].map((e) => (
+            ? [...Array(5).keys()].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}
                   className="bg-white border border-instillGrey20"
@@ -162,8 +167,8 @@ export const PipelinesTable = ({
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
-            : searchedPipelinePages[currentPage]
-            ? searchedPipelinePages[currentPage].map((pipeline) => (
+            : pipelinePages[currentPage]
+            ? pipelinePages[currentPage].map((pipeline) => (
                 <tr
                   key={pipeline.name}
                   className="bg-white border border-instillGrey20"
