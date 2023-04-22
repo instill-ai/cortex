@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.34.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.3...@instill-ai/toolkit-v0.34.0) (2023-04-22)
+
+
+### Features
+
+* expose react query devtool ([#366](https://github.com/instill-ai/design-system/issues/366)) ([525c219](https://github.com/instill-ai/design-system/commit/525c21954abce665784ebc0564eb3c05b21c3f30))
+
+
+### Bug Fixes
+
+* [INS-503] fix tables flash issue ([#368](https://github.com/instill-ai/design-system/issues/368)) ([3c8a6cf](https://github.com/instill-ai/design-system/commit/3c8a6cfd4a81e08aa004d5314731509b4d67f8c7))
+
 ## [0.33.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.2...@instill-ai/toolkit-v0.33.3) (2023-04-22)
 
 
