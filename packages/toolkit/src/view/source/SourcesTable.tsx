@@ -22,8 +22,8 @@ import {
 import { SourceTablePlaceholder } from "./SourceTablePlaceholder";
 
 export type SourcesTableProps = {
-  sources: Nullable<SourceWithPipelines[]>;
-  sourcesWatchState: Nullable<ConnectorsWatchState>;
+  sources: SourceWithPipelines[];
+  sourcesWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
   marginBottom?: string;
@@ -51,7 +51,7 @@ export const SourcesTable = ({
   const stateOverviewCounts = useStateOverviewCounts(
     searchedSources,
     sourcesWatchState,
-    !isLoading
+    isLoading
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -98,7 +98,7 @@ export const SourcesTable = ({
     );
   }
 
-  if (sources?.length === 0) {
+  if (sources.length === 0) {
     return (
       <PaginationListContainer
         title="Source"
@@ -138,7 +138,7 @@ export const SourcesTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!sources || isLoading
+          {isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}
