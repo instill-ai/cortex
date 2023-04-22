@@ -133,7 +133,7 @@ export const SourcesTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={sourcePages.length}
-      disabledSearchField={isLoading ? false : true}
+      disabledSearchField={isLoading ? true : false}
       marginBottom={marginBottom}
     >
       <table className="table-auto border-collapse">
