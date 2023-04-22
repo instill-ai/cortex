@@ -22,8 +22,8 @@ import {
 import { DestinationTablePlaceholder } from "./DestinationTablePlaceholder";
 
 export type DestinationsTableProps = {
-  destinations: Nullable<DestinationWithPipelines[]>;
-  destinationsWatchState: Nullable<ConnectorsWatchState>;
+  destinations: DestinationWithPipelines[];
+  destinationsWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
   marginBottom?: string;
@@ -98,7 +98,7 @@ export const DestinationsTable = ({
     );
   }
 
-  if (destinations?.length === 0) {
+  if (destinations.length === 0) {
     return (
       <PaginationListContainer
         title="Destination"
@@ -138,7 +138,7 @@ export const DestinationsTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!destinations || isLoading
+          {isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}

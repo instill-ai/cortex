@@ -22,8 +22,8 @@ import {
 import { ModelTablePlaceholder } from "./ModelTablePlaceholder";
 
 export type ModelsTableProps = {
-  models: Nullable<Model[]>;
-  modelsWatchState: Nullable<ModelsWatchState>;
+  models: Model[];
+  modelsWatchState: ModelsWatchState;
   isError: boolean;
   isLoading: boolean;
   marginBottom?: string;
@@ -98,7 +98,7 @@ export const ModelsTable = ({
     );
   }
 
-  if (models?.length === 0) {
+  if (models.length === 0) {
     return (
       <PaginationListContainer
         title="Model"
@@ -138,7 +138,7 @@ export const ModelsTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!models || isLoading
+          {isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`models-table-skeleton-${e}`}

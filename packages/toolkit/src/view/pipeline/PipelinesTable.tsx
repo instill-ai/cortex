@@ -6,7 +6,6 @@ import {
   TableHead,
   TableHeadItem,
   StateOverview,
-  TableLoadingProgress,
   PaginationListContainer,
   ModelCountsCell,
   TableError,
@@ -24,8 +23,8 @@ import {
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
 
 export type PipelinesTableProps = {
-  pipelines: Nullable<Pipeline[]>;
-  pipelinesWatchState: Nullable<PipelinesWatchState>;
+  pipelines: Pipeline[];
+  pipelinesWatchState: PipelinesWatchState;
   isError: boolean;
   isLoading: boolean;
   marginBottom?: string;
@@ -110,23 +109,25 @@ export const PipelinesTable = ({
     );
   }
 
-  if (pipelines?.length === 0) {
-    <PaginationListContainer
-      title="Pipeline"
-      description="These are the pipelines you can select"
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-      totalPage={searchedPipelinePages.length}
-      disabledSearchField={true}
-      marginBottom={marginBottom}
-    >
-      <PipelineTablePlaceholder
-        enablePlaceholderCreateButton={false}
-        marginBottom={null}
-      />
-    </PaginationListContainer>;
+  if (pipelines.length === 0) {
+    return (
+      <PaginationListContainer
+        title="Pipeline"
+        description="These are the pipelines you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedPipelinePages.length}
+        disabledSearchField={true}
+        marginBottom={marginBottom}
+      >
+        <PipelineTablePlaceholder
+          enablePlaceholderCreateButton={false}
+          marginBottom={null}
+        />
+      </PaginationListContainer>
+    );
   }
 
   return (
@@ -148,7 +149,7 @@ export const PipelinesTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!pipelines || isLoading
+          {isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}
@@ -171,10 +172,8 @@ export const PipelinesTable = ({
                     name={pipeline.id}
                     width={null}
                     state={
-                      pipelinesWatchState
-                        ? pipelinesWatchState[pipeline.name]
-                          ? pipelinesWatchState[pipeline.name].state
-                          : "STATE_UNSPECIFIED"
+                      pipelinesWatchState[pipeline.name]
+                        ? pipelinesWatchState[pipeline.name].state
                         : "STATE_UNSPECIFIED"
                     }
                     padding="py-2 pl-6"

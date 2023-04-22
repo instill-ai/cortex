@@ -11,10 +11,10 @@ import {
 import type { Nullable, Pipeline } from "../../lib";
 
 export type PipelineTableProps = {
-  pipeline: Nullable<Pipeline>;
-  marginBottom: Nullable<string>;
+  pipeline: Pipeline;
   isError: boolean;
   isLoading: boolean;
+  marginBottom?: string;
 };
 
 export const PipelineTable = ({
@@ -66,7 +66,7 @@ export const PipelineTable = ({
       />
       <tbody>
         <tr className="bg-white border border-instillGrey20">
-          {!pipeline || isLoading ? (
+          {isLoading ? (
             <>
               <SkeletonCell width={null} padding="py-2 pl-6" />
               <SkeletonCell width={null} padding="py-2" />
