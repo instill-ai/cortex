@@ -15,7 +15,7 @@ const SourcesTablePage = () => {
   const sourcesWatchState = useWatchSources({
     sourceNames: sources.isSuccess ? sources.data.map((p) => p.name) : [],
     accessToken: null,
-    enable: sources.isSuccess,
+    enable: sources.isSuccess && sources.data.length > 0,
   });
 
   return (
@@ -27,7 +27,11 @@ const SourcesTablePage = () => {
             sourcesWatchState.isSuccess ? sourcesWatchState.data : {}
           }
           isError={sources.isError}
-          isLoading={sources.isLoading || sourcesWatchState.isLoading}
+          isLoading={
+            sources.isLoading || (sources.isSuccess && sources.data.length > 0)
+              ? sourcesWatchState.isLoading
+              : false
+          }
         />
       </div>
     </Root>

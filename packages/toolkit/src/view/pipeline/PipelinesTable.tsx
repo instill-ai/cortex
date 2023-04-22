@@ -52,7 +52,7 @@ export const PipelinesTable = ({
       return chunk(pipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
     }
     return chunk(searchedPipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedPipelines]);
+  }, [searchedPipelines, pipelines]);
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchTerm ? searchedPipelines : pipelines,

@@ -51,7 +51,7 @@ export const SourcesTable = ({
       return chunk(sources, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
     }
     return chunk(searchedSources, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedSources]);
+  }, [searchedSources, sources]);
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchTerm ? searchedSources : sources,
