@@ -39,19 +39,6 @@ export const SourcesTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
-  // We delay the loading animation by 500ms to avoid a flickering effect
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    if (isLoading) return;
-    const timeout = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   const searchedSources = useSearchedResources({
     resources: sources || null,
     searchTerm,
@@ -64,7 +51,7 @@ export const SourcesTable = ({
   const stateOverviewCounts = useStateOverviewCounts(
     searchedSources,
     sourcesWatchState,
-    !loaded
+    !isLoading
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -141,7 +128,7 @@ export const SourcesTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={searchedPipelinePages.length}
-      disabledSearchField={loaded ? false : true}
+      disabledSearchField={isLoading ? false : true}
       marginBottom={marginBottom}
     >
       <table className="table-auto border-collapse">
@@ -151,7 +138,7 @@ export const SourcesTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!sources || !loaded
+          {!sources || isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}

@@ -39,19 +39,6 @@ export const DestinationsTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
-  // We delay the loading animation by 500ms to avoid a flickering effect
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    if (isLoading) return;
-    const timeout = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   const searchedDestinations = useSearchedResources({
     resources: destinations || null,
     searchTerm,
@@ -141,7 +128,7 @@ export const DestinationsTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={searchedDestinationPages.length}
-      disabledSearchField={loaded ? false : true}
+      disabledSearchField={isLoading ? true : false}
       marginBottom={marginBottom}
     >
       <table className="table-fixed border-collapse">
@@ -151,7 +138,7 @@ export const DestinationsTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!destinations || !loaded
+          {!destinations || isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`pipelines-table-skeleton-${e}`}
