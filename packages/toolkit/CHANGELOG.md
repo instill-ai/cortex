@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.2...@instill-ai/toolkit-v0.33.3) (2023-04-22)
+
+
+### Bug Fixes
+
+* make the input of table non-nullable ([#364](https://github.com/instill-ai/design-system/issues/364)) ([1b96608](https://github.com/instill-ai/design-system/commit/1b9660823f28bbd4319d2c12edee857792e6c986))
+
 ## [0.33.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.1...@instill-ai/toolkit-v0.33.2) (2023-04-22)
 
 
