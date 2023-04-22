@@ -53,19 +53,6 @@ export const PipelineTable = ({
     ];
   }, []);
 
-  // We delay the loading animation by 500ms to avoid a flickering effect
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    if (isLoading) return;
-    const timeout = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   if (isError) {
     return <TableError marginBottom={null} />;
   }
@@ -79,7 +66,7 @@ export const PipelineTable = ({
       />
       <tbody>
         <tr className="bg-white border border-instillGrey20">
-          {!pipeline || !loaded ? (
+          {!pipeline || isLoading ? (
             <>
               <SkeletonCell width={null} padding="py-2 pl-6" />
               <SkeletonCell width={null} padding="py-2" />

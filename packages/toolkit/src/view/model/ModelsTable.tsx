@@ -39,19 +39,6 @@ export const ModelsTable = ({
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
-  // We delay the loading animation by 500ms to avoid a flickering effect
-  const [loaded, setLoaded] = React.useState(false);
-  React.useEffect(() => {
-    if (isLoading) return;
-    const timeout = setTimeout(() => {
-      setLoaded(true);
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [isLoading]);
-
   const searchedModels = useSearchedResources({
     resources: models || null,
     searchTerm,
@@ -64,7 +51,7 @@ export const ModelsTable = ({
   const stateOverviewCounts = useStateOverviewCounts(
     searchedModels,
     modelsWatchState,
-    !loaded
+    isLoading
   );
 
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
@@ -141,7 +128,7 @@ export const ModelsTable = ({
       searchTerm={searchTerm}
       setSearchTerm={setSearchTerm}
       totalPage={searchedModelPages.length}
-      disabledSearchField={loaded ? false : true}
+      disabledSearchField={isLoading ? true : false}
       marginBottom={marginBottom}
     >
       <table className="table-fixed border-collapse w-full">
@@ -151,7 +138,7 @@ export const ModelsTable = ({
           items={tableHeadItems}
         />
         <tbody>
-          {!models || !loaded
+          {!models || isLoading
             ? [0, 1, 2, 3, 4].map((e) => (
                 <tr
                   key={`models-table-skeleton-${e}`}
