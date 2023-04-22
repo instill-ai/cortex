@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.34.1...@instill-ai/toolkit-v0.34.2) (2023-04-22)
+
+
+### Bug Fixes
+
+* fix SourcesTable search field is wrongly disabled ([#371](https://github.com/instill-ai/design-system/issues/371)) ([cb34d04](https://github.com/instill-ai/design-system/commit/cb34d0431c03bc1bfa1cbdc4056f9389154637fd))
+
 ## [0.34.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.34.0...@instill-ai/toolkit-v0.34.1) (2023-04-22)
 
 
