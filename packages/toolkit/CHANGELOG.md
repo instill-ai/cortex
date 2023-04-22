@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.33.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.1...@instill-ai/toolkit-v0.33.2) (2023-04-22)
+
+
+### Bug Fixes
+
+* rollback delayed loading inside the component ([#361](https://github.com/instill-ai/design-system/issues/361)) ([e02afd7](https://github.com/instill-ai/design-system/commit/e02afd750e6e8b5001695a579b6ac843f6f00f62))
+
 ## [0.33.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.0...@instill-ai/toolkit-v0.33.1) (2023-04-21)
 
 
