@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.34.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.34.0...@instill-ai/toolkit-v0.34.1) (2023-04-22)
+
+
+### Bug Fixes
+
+* fix table loading issue due to the wrong useEffect deps ([#369](https://github.com/instill-ai/design-system/issues/369)) ([a1da998](https://github.com/instill-ai/design-system/commit/a1da9984f7326d9f3f32dfbc75103432a968d6ce))
+
 ## [0.34.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.33.3...@instill-ai/toolkit-v0.34.0) (2023-04-22)
 
 
