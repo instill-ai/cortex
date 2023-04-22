@@ -111,22 +111,24 @@ export const PipelinesTable = ({
   }
 
   if (pipelines?.length === 0) {
-    <PaginationListContainer
-      title="Pipeline"
-      description="These are the pipelines you can select"
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-      totalPage={searchedPipelinePages.length}
-      disabledSearchField={true}
-      marginBottom={marginBottom}
-    >
-      <PipelineTablePlaceholder
-        enablePlaceholderCreateButton={false}
-        marginBottom={null}
-      />
-    </PaginationListContainer>;
+    return (
+      <PaginationListContainer
+        title="Pipeline"
+        description="These are the pipelines you can select"
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        totalPage={searchedPipelinePages.length}
+        disabledSearchField={true}
+        marginBottom={marginBottom}
+      >
+        <PipelineTablePlaceholder
+          enablePlaceholderCreateButton={false}
+          marginBottom={null}
+        />
+      </PaginationListContainer>
+    );
   }
 
   return (

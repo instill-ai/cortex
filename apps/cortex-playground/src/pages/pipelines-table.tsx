@@ -22,13 +22,12 @@ const PipelinesTablePage = () => {
     <Root>
       <div className="flex w-[1200px] h-[600px]">
         <PipelinesTable
-          pipelines={pipelines.data ?? null}
+          pipelines={pipelines.isSuccess ? pipelines.data : []}
           pipelinesWatchState={
             pipelinesWatchState.isSuccess ? pipelinesWatchState.data : null
           }
-          marginBottom={null}
           isError={pipelines.isError}
-          isLoading={pipelines.isLoading || pipelinesWatchState.isLoading}
+          isLoading={false}
         />
       </div>
     </Root>
