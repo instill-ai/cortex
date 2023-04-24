@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.37.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.37.0...@instill-ai/toolkit-v0.37.1) (2023-04-24)
+
+
+### Bug Fixes
+
+* fix version ([#381](https://github.com/instill-ai/design-system/issues/381)) ([45566b2](https://github.com/instill-ai/design-system/commit/45566b2512bfe6ec1ae04ae1d3869d6fd4ceac10))
+
 ## [0.37.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.36.0...@instill-ai/toolkit-v0.37.0) (2023-04-24)
 
 
