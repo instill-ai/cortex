@@ -4,24 +4,26 @@ import { LastNameField } from "./LastNameField";
 import { OrgNameField } from "./OrgNameField";
 import { RoleField } from "./RoleField";
 import { UserNameField } from "./UserNameField";
-import { SingleSelectOption, FormRoot } from "@instill-ai/design-system";
+import {
+  SingleSelectOption,
+  FormRoot,
+  FormRootProps,
+} from "@instill-ai/design-system";
 import { NewsletterSubscriptionField } from "./NewsletterSubscriptionField";
 import { ConfigureProfileControl } from "./ConfigureProfileControl";
 
 export type ConfigureProfileFormProps = {
   user: Nullable<User>;
-  marginBottom: Nullable<string>;
   roles: SingleSelectOption[];
-  width: Nullable<string>;
   onConfigure: Nullable<() => void>;
   accessToken: Nullable<string>;
-};
+} & Pick<FormRootProps, "marginBottom" | "width">;
 
 export const ConfigureProfileForm = (props: ConfigureProfileFormProps) => {
   const { user, marginBottom, roles, width, onConfigure, accessToken } = props;
 
   return (
-    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
+    <FormRoot marginBottom={marginBottom} width={width}>
       <div className="mb-6 flex flex-row">
         <div className="h-16 w-16 rounded-full bg-instillGrey20">{}</div>
       </div>

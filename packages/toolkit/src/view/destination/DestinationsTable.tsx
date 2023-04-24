@@ -9,6 +9,7 @@ import {
   TableError,
   SkeletonCell,
   type TableHeadItem,
+  PaginationListContainerProps,
 } from "../../components";
 import {
   useStateOverviewCounts,
@@ -26,16 +27,16 @@ export type DestinationsTableProps = {
   destinationsWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
-  marginBottom?: string;
-};
+} & Pick<PaginationListContainerProps, "marginBottom">;
 
-export const DestinationsTable = ({
-  destinations,
-  destinationsWatchState,
-  marginBottom,
-  isError,
-  isLoading,
-}: DestinationsTableProps) => {
+export const DestinationsTable = (props: DestinationsTableProps) => {
+  const {
+    destinations,
+    destinationsWatchState,
+    isError,
+    isLoading,
+    marginBottom,
+  } = props;
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
@@ -116,10 +117,7 @@ export const DestinationsTable = ({
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <DestinationTablePlaceholder
-          enablePlaceholderCreateButton={false}
-          marginBottom={null}
-        />
+        <DestinationTablePlaceholder enableCreateButton={false} />
       </PaginationListContainer>
     );
   }

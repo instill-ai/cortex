@@ -12,15 +12,15 @@ import {
   type TablePlaceholderBaseProps,
 } from "../../components";
 
-export type DestinationTablePlaceholderProps = {
-  marginBottom: TablePlaceholderBaseProps["marginBottom"];
-  enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
-};
+export type DestinationTablePlaceholderProps = Pick<
+  TablePlaceholderBaseProps,
+  "marginBottom" | "enableCreateButton"
+>;
 
-export const DestinationTablePlaceholder = ({
-  marginBottom,
-  enablePlaceholderCreateButton,
-}: DestinationTablePlaceholderProps) => {
+export const DestinationTablePlaceholder = (
+  props: DestinationTablePlaceholderProps
+) => {
+  const { marginBottom, enableCreateButton } = props;
   const width = "w-[136px]";
   const height = "h-[136px]";
 
@@ -58,7 +58,7 @@ export const DestinationTablePlaceholder = ({
       createButtonTitle="Set up your first destination"
       createButtonLink="/destinations/create"
       marginBottom={marginBottom}
-      enableCreateButton={enablePlaceholderCreateButton}
+      enableCreateButton={enableCreateButton}
     />
   );
 };

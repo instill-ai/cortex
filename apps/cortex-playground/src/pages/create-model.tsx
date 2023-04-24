@@ -1,16 +1,19 @@
 import { Root } from "@/components/Root";
-import { CreateModelForm } from "@instill-ai/toolkit";
+import {
+  CreateModelForm,
+  CreateModelWithPresetForm,
+} from "@instill-ai/toolkit";
 
 const CreateModelPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        <CreateModelForm
+        <CreateModelWithPresetForm
           onCreate={null}
           initStoreOnCreate={false}
           accessToken={null}
           marginBottom={null}
-          width={null}
+          disabledCreateModel={true}
         />
       </div>
     </Root>
