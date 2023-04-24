@@ -3,6 +3,7 @@ import * as React from "react";
 import {
   BasicProgressMessageBox,
   FormRoot,
+  FormRootProps,
   ProgressMessageBoxState,
 } from "@instill-ai/design-system";
 import {
@@ -16,30 +17,33 @@ import {
 } from "../../../lib";
 
 import { DeleteResourceModal } from "../../../components";
-import { ConfigurePipelineFormControl } from "./ConfigurePipelineFormControl";
+import {
+  ConfigurePipelineFormControl,
+  ConfigurePipelineFormControlProps,
+} from "./ConfigurePipelineFormControl";
 import { PipelineDescriptionField } from "./PipelineDescriptionField";
 
 export type ConfigurePipelineFormProps = {
   pipeline: Nullable<Pipeline>;
-  marginBottom: Nullable<string>;
-  width: Nullable<string>;
   accessToken: Nullable<string>;
-  onConfigure: Nullable<() => void>;
-  disableConfigure: boolean;
   onDelete: Nullable<() => void>;
-  disableDelete: boolean;
-};
+} & Pick<FormRootProps, "width" | "marginBottom"> &
+  Pick<
+    ConfigurePipelineFormControlProps,
+    "disabledConfigure" | "disabledDelete" | "onConfigure"
+  >;
 
-export const ConfigurePipelineForm = ({
-  marginBottom,
-  width,
-  pipeline,
-  accessToken,
-  onConfigure,
-  disableConfigure,
-  onDelete,
-  disableDelete,
-}: ConfigurePipelineFormProps) => {
+export const ConfigurePipelineForm = (props: ConfigurePipelineFormProps) => {
+  const {
+    pipeline,
+    accessToken,
+    onConfigure,
+    disabledConfigure,
+    onDelete,
+    disabledDelete,
+    width,
+    marginBottom,
+  } = props;
   const [messsageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
       activate: false,
@@ -120,8 +124,8 @@ export const ConfigurePipelineForm = ({
             setMessageBoxState={setMessageBoxState}
             onConfigure={onConfigure}
             accessToken={accessToken}
-            disableConfigure={disableConfigure}
-            disableDelete={disableDelete}
+            disabledConfigure={disabledConfigure}
+            disabledDelete={disabledDelete}
           />
           <div className="flex">
             <BasicProgressMessageBox

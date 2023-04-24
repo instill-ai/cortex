@@ -4,29 +4,30 @@ import {
   SingleSelectOption,
   GrpcIcon,
   HttpIcon,
+  FormRootProps,
 } from "@instill-ai/design-system";
 
-import { Nullable, SourceWithDefinition } from "../../../lib";
-import { CreateSourceControl } from "./CreateSourceControl";
+import {
+  CreateSourceControl,
+  CreateSourceControlProps,
+} from "./CreateSourceControl";
 import { SourceDefinitionField } from "./SourceDefinitionField";
 
-export type CreateSourceFormProps = {
-  sources: Nullable<SourceWithDefinition[]>;
-  marginBottom: Nullable<string>;
-  width: Nullable<string>;
-  onCreate: Nullable<() => void>;
-  accessToken: Nullable<string>;
-  initStoreOnCreate: boolean;
-};
+export type CreateSourceFormProps = Pick<
+  FormRootProps,
+  "marginBottom" | "width"
+> &
+  CreateSourceControlProps;
 
-export const CreateSourceForm = ({
-  sources,
-  marginBottom,
-  width,
-  onCreate,
-  accessToken,
-  initStoreOnCreate,
-}: CreateSourceFormProps) => {
+export const CreateSourceForm = (props: CreateSourceFormProps) => {
+  const {
+    sources,
+    marginBottom,
+    width,
+    onCreate,
+    accessToken,
+    initStoreOnCreate,
+  } = props;
   const [sourceDefinitionOptions, setSourceDefinitionOptions] = React.useState<
     SingleSelectOption[]
   >([]);
@@ -63,7 +64,7 @@ export const CreateSourceForm = ({
   }, [sources]);
 
   return (
-    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
+    <FormRoot marginBottom={marginBottom} width={width}>
       <div className="flex flex-col gap-y-6">
         <SourceDefinitionField
           sourceDefinitionOptions={sourceDefinitionOptions}

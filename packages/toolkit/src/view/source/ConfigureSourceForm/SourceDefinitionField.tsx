@@ -16,9 +16,8 @@ export type SourceDefinitionFieldProps = {
   source: Nullable<SourceWithPipelines>;
 };
 
-export const SourceDefinitionField = ({
-  source,
-}: SourceDefinitionFieldProps) => {
+export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
+  const { source } = props;
   /* -------------------------------------------------------------------------
    * Initialize state
    * -----------------------------------------------------------------------*/

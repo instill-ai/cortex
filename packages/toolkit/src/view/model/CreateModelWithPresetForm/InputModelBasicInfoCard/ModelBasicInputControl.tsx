@@ -45,11 +45,8 @@ type ModelBasicInputControlProps = {
   initStoreOnCreate: boolean;
 };
 
-export const ModelBasicInputControl = ({
-  accessToken,
-  onCreate,
-  initStoreOnCreate,
-}: ModelBasicInputControlProps) => {
+export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
+  const { accessToken, onCreate, initStoreOnCreate } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
   const queryClient = useQueryClient();
 

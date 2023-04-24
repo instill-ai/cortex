@@ -12,6 +12,7 @@ import {
   SingleSelectOption,
   SolidButton,
   FormRoot,
+  FormRootProps,
 } from "@instill-ai/design-system";
 import {
   validateResourceId,
@@ -23,14 +24,14 @@ import {
   useAirbyteFieldValues,
   sendAmplitudeData,
   useCreateResourceFormStore,
+  getInstillApiErrorMessage,
   type ConnectorDefinition,
   type CreateDestinationPayload,
   type Nullable,
   type AirbyteFieldValues,
   type AirbyteFieldErrors,
   type SelectedItemMap,
-  CreateResourceFormStore,
-  getInstillApiErrorMessage,
+  type CreateResourceFormStore,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
@@ -39,12 +40,10 @@ import { shallow } from "zustand/shallow";
 
 export type CreateDestinationFormProps = {
   title: Nullable<string>;
-  marginBottom: Nullable<string>;
   onCreate: Nullable<(id: string) => void>;
   initStoreOnCreate: boolean;
-  formLess: boolean;
   accessToken: Nullable<string>;
-};
+} & Pick<FormRootProps, "width" | "marginBottom" | "formLess">;
 
 const selector = (state: CreateResourceFormStore) => ({
   init: state.init,
@@ -54,14 +53,16 @@ const selector = (state: CreateResourceFormStore) => ({
   setFormIsDirty: state.setFormIsDirty,
 });
 
-export const CreateDestinationForm = ({
-  title,
-  marginBottom,
-  onCreate,
-  initStoreOnCreate,
-  formLess,
-  accessToken,
-}: CreateDestinationFormProps) => {
+export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
+  const {
+    title,
+    onCreate,
+    initStoreOnCreate,
+    accessToken,
+    marginBottom,
+    formLess,
+    width,
+  } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -455,7 +456,7 @@ export const CreateDestinationForm = ({
    * -----------------------------------------------------------------------*/
 
   return (
-    <FormRoot formLess={formLess} marginBottom={marginBottom} width={null}>
+    <FormRoot formLess={formLess} marginBottom={marginBottom} width={width}>
       <div className="mb-10 flex flex-col gap-y-5">
         {title ? <h3 className="text-black text-instill-h3">{title}</h3> : null}
         <BasicTextField

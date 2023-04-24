@@ -3,8 +3,6 @@ import * as React from "react";
 import { useRouter } from "next/router";
 import { SolidButton } from "@instill-ai/design-system";
 
-import { Nullable } from "../lib";
-
 export type TablePlaceholderBaseProps = {
   placeholderItems: {
     id: string;
@@ -13,8 +11,12 @@ export type TablePlaceholderBaseProps = {
   placeholderTitle: string;
   createButtonTitle: string;
   createButtonLink: string;
-  marginBottom: Nullable<string>;
   enableCreateButton: boolean;
+
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
 };
 
 export const TablePlaceholderBase = ({

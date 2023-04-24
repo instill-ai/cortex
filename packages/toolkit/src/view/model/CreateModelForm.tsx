@@ -1,3 +1,4 @@
+import cn from "clsx";
 import axios from "axios";
 import * as React from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -28,6 +29,7 @@ import {
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   useDeployModel,
+  watchModel,
   type CreateGithubModelPayload,
   type CreateHuggingFaceModelPayload,
   type CreateArtivcModelPayload,
@@ -35,28 +37,16 @@ import {
   type Model,
   type Nullable,
   type CreateResourceFormStore,
-  watchModel,
 } from "../../lib";
 import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
-export type CreateModelFormValue = {
-  id: Nullable<string>;
-  modelDefinition: Nullable<string>;
-  modelInstanceTag: Nullable<string>;
-  file: Nullable<File>;
-  repo: Nullable<string>;
-  description: Nullable<string>;
-  gcsBucketPath: Nullable<string>;
-  credentials: Nullable<string>;
-  huggingFaceRepo: Nullable<string>;
-};
-
 export type CreateModelFormProps = {
   accessToken: Nullable<string>;
-  marginBottom: Nullable<string>;
   initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
-  width: Nullable<string>;
+  disabledCreateModel?: boolean;
+  width?: string;
+  marginBottom?: string;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -85,13 +75,16 @@ const selector = (state: CreateResourceFormStore) => ({
   modelHuggingFaceRepoUrlError: state.errors.model.new.huggingFace.repoUrl,
 });
 
-export const CreateModelForm = ({
-  accessToken,
-  marginBottom,
-  initStoreOnCreate,
-  onCreate,
-  width,
-}: CreateModelFormProps) => {
+export const CreateModelForm = (props: CreateModelFormProps) => {
+  const {
+    accessToken,
+    marginBottom,
+    initStoreOnCreate,
+    onCreate,
+    width,
+    disabledCreateModel,
+  } = props;
+
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/
@@ -577,6 +570,7 @@ export const CreateModelForm = ({
       );
     }
   }, [
+    deployModel,
     createArtivcModel,
     createGithubModel,
     createLocalModel,
@@ -595,7 +589,6 @@ export const CreateModelForm = ({
     init,
     initStoreOnCreate,
     onCreate,
-    setFieldValue,
     prepareNewModel,
     setFieldError,
   ]);
@@ -615,8 +608,19 @@ export const CreateModelForm = ({
     }
   }, []);
 
+  if (disabledCreateModel) {
+    return (
+      <div className={cn("flex-1 h-full", width || "w-full")}>
+        <p className="font-normal text-sm font-sans m-auto w-2/3 text-center">
+          Model creation is currently disabled, Please use our pre-deployed
+          models
+        </p>
+      </div>
+    );
+  }
+
   return (
-    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
+    <FormRoot marginBottom={marginBottom} width={width}>
       <div className="flex flex-col gap-y-5 mb-10">
         <BasicTextField
           id="model-id"

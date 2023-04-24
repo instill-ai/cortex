@@ -12,15 +12,14 @@ import {
   type TablePlaceholderBaseProps,
 } from "../../components";
 
-export type ModelTablePlaceholderProps = {
-  marginBottom: TablePlaceholderBaseProps["marginBottom"];
-  enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
-};
+export type ModelTablePlaceholderProps = Pick<
+  TablePlaceholderBaseProps,
+  "enableCreateButton" | "marginBottom"
+>;
 
-export const ModelTablePlaceholder = ({
-  marginBottom,
-  enablePlaceholderCreateButton,
-}: ModelTablePlaceholderProps) => {
+export const ModelTablePlaceholder = (props: ModelTablePlaceholderProps) => {
+  const { marginBottom, enableCreateButton } = props;
+
   const width = "w-[136px]";
   const height = "h-[136px]";
 
@@ -90,7 +89,7 @@ export const ModelTablePlaceholder = ({
       createButtonTitle="Set up your first model"
       createButtonLink="/models/create"
       marginBottom={marginBottom}
-      enableCreateButton={enablePlaceholderCreateButton}
+      enableCreateButton={enableCreateButton}
     />
   );
 };

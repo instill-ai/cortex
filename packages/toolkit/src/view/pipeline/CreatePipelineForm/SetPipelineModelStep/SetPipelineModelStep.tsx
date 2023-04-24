@@ -8,10 +8,8 @@ export type SetPipelineModelStepProps = {
   withModelPreset: boolean;
 };
 
-export const SetPipelineModelStep = ({
-  accessToken,
-  withModelPreset,
-}: SetPipelineModelStepProps) => {
+export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
+  const { accessToken, withModelPreset } = props;
   const increasePipelineFormStep = useCreateResourceFormStore(
     (state) => state.increasePipelineFormStep
   );
@@ -36,8 +34,6 @@ export const SetPipelineModelStep = ({
               increasePipelineFormStep();
             }}
             initStoreOnCreate={false}
-            marginBottom={null}
-            width="w-full"
             accessToken={accessToken}
           />
         ) : (
@@ -46,8 +42,6 @@ export const SetPipelineModelStep = ({
               increasePipelineFormStep();
             }}
             initStoreOnCreate={false}
-            width="w-full"
-            marginBottom={null}
             accessToken={accessToken}
           />
         )}

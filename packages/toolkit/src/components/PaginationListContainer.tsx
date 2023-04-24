@@ -13,6 +13,10 @@ export type PaginationListContainerProps = {
   searchTerm: Nullable<string>;
   setSearchTerm: React.Dispatch<React.SetStateAction<Nullable<string>>>;
   disabledSearchField: boolean;
+
+  /**
+   * - Default is undefined
+   */
   marginBottom?: string;
 };
 

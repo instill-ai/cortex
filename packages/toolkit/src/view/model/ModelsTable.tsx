@@ -9,6 +9,7 @@ import {
   StateOverview,
   TableError,
   SkeletonCell,
+  PaginationListContainerProps,
 } from "../../components";
 import {
   useSearchedResources,
@@ -26,16 +27,10 @@ export type ModelsTableProps = {
   modelsWatchState: ModelsWatchState;
   isError: boolean;
   isLoading: boolean;
-  marginBottom?: string;
-};
+} & Pick<PaginationListContainerProps, "marginBottom">;
 
-export const ModelsTable = ({
-  models,
-  modelsWatchState,
-  marginBottom,
-  isError,
-  isLoading,
-}: ModelsTableProps) => {
+export const ModelsTable = (props: ModelsTableProps) => {
+  const { models, modelsWatchState, marginBottom, isError, isLoading } = props;
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
@@ -51,7 +46,7 @@ export const ModelsTable = ({
       return chunk(models, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
     }
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedModels, models]);
+  }, [searchedModels, models, searchTerm]);
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchTerm ? searchedModels : models,
@@ -116,10 +111,7 @@ export const ModelsTable = ({
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <ModelTablePlaceholder
-          enablePlaceholderCreateButton={false}
-          marginBottom={null}
-        />
+        <ModelTablePlaceholder enableCreateButton={false} />
       </PaginationListContainer>
     );
   }

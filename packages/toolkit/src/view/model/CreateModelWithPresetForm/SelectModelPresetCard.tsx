@@ -10,11 +10,9 @@ import {
   useCreateResourceFormStore,
   type Nullable,
 } from "../../../lib";
-import { CardBase } from "./CardBase";
+import { CardBase, CardBaseProps } from "./CardBase";
 
-export type SelectModelPresetCardProps = {
-  marginBottom: Nullable<string>;
-};
+export type SelectModelPresetCardProps = Pick<CardBaseProps, "marginBottom">;
 
 export const SelectModelPresetCard = ({
   marginBottom,

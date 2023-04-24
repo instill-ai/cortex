@@ -4,13 +4,17 @@ import { Model, Nullable } from "../../lib";
 
 export type ModelConfigurationFieldsProps = {
   model: Nullable<Model>;
-  marginBottom: Nullable<string>;
+
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
 };
 
-export const ModelConfigurationFields = ({
-  model,
-  marginBottom,
-}: ModelConfigurationFieldsProps) => {
+export const ModelConfigurationFields = (
+  props: ModelConfigurationFieldsProps
+) => {
+  const { model, marginBottom } = props;
   return (
     <div className={cn("flex flex-col gap-y-5", marginBottom)}>
       {model?.model_definition === "model-definitions/github" ? (

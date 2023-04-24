@@ -37,9 +37,10 @@ export type SetPipelineDestinationStepProps = {
   accessToken: Nullable<string>;
 };
 
-export const SetPipelineDestinationStep = ({
-  accessToken,
-}: SetPipelineDestinationStepProps) => {
+export const SetPipelineDestinationStep = (
+  props: SetPipelineDestinationStepProps
+) => {
+  const { accessToken } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -244,7 +245,6 @@ export const SetPipelineDestinationStep = ({
               }}
               title="Setup a new destination"
               formLess={true}
-              marginBottom={null}
               initStoreOnCreate={false}
               accessToken={accessToken}
             />

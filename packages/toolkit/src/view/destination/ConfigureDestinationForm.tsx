@@ -11,6 +11,7 @@ import {
   OutlineButton,
   SolidButton,
   type ProgressMessageBoxState,
+  type FormRootProps,
 } from "@instill-ai/design-system";
 import {
   useAirbyteFieldValues,
@@ -38,15 +39,14 @@ import { AirbyteDestinationFields } from "../airbyte";
 import { DeleteResourceModal, ImageWithFallback } from "../../components";
 
 export type ConfigureDestinationFormProps = {
+  accessToken: Nullable<string>;
   destination: DestinationWithDefinition;
-  width: Nullable<string>;
   onConfigure: Nullable<() => void>;
-  disableConfigure: boolean;
+  disabledConfigure?: boolean;
   initStoreOnConfigure: boolean;
   onDelete: Nullable<() => void>;
-  disableDelete: boolean;
-  accessToken: Nullable<string>;
-};
+  disabledDelete?: boolean;
+} & Pick<FormRootProps, "marginBottom" | "width">;
 
 const formSelector = (state: CreateResourceFormStore) => ({
   setFormIsDirty: state.setFormIsDirty,
@@ -58,16 +58,20 @@ const modalSelector = (state: ModalStore) => ({
   closeModal: state.closeModal,
 });
 
-export const ConfigureDestinationForm = ({
-  destination,
-  onDelete,
-  onConfigure,
-  initStoreOnConfigure,
-  width,
-  accessToken,
-  disableConfigure,
-  disableDelete,
-}: ConfigureDestinationFormProps) => {
+export const ConfigureDestinationForm = (
+  props: ConfigureDestinationFormProps
+) => {
+  const {
+    destination,
+    onDelete,
+    onConfigure,
+    initStoreOnConfigure,
+    accessToken,
+    disabledConfigure,
+    disabledDelete,
+    width,
+    marginBottom,
+  } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -403,7 +407,7 @@ export const ConfigureDestinationForm = ({
 
   return (
     <>
-      <FormRoot marginBottom={null} formLess={false} width={width}>
+      <FormRoot marginBottom={marginBottom} width={width}>
         <div className="mb-8 flex flex-col gap-y-5">
           <BasicSingleSelect
             id="destination-definition"
@@ -447,7 +451,7 @@ export const ConfigureDestinationForm = ({
         </div>
         <div className="mb-10 flex flex-row">
           <OutlineButton
-            disabled={disableDelete ? true : false}
+            disabled={disabledDelete ? true : false}
             onClickHandler={() => openModal()}
             position="mr-auto my-auto"
             type="button"
@@ -460,7 +464,7 @@ export const ConfigureDestinationForm = ({
             type="button"
             color="primary"
             disabled={
-              disableConfigure ? true : isSyncDestination ? true : false
+              disabledConfigure ? true : isSyncDestination ? true : false
             }
             position="ml-auto my-auto"
             onClickHandler={() => handleSubmit()}

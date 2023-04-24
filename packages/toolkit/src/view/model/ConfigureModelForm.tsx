@@ -7,6 +7,7 @@ import {
   SolidButton,
   BasicTextArea,
   FormRoot,
+  FormRootProps,
 } from "@instill-ai/design-system";
 
 import {
@@ -28,13 +29,25 @@ import { shallow } from "zustand/shallow";
 
 export type ConfigureModelFormProps = {
   model: Nullable<Model>;
-  marginBottom: Nullable<string>;
   onConfigure: Nullable<() => void>;
-  disableConfigure: boolean;
   onDelete: Nullable<() => void>;
-  disableDelete: boolean;
   accessToken: Nullable<string>;
-};
+
+  /**
+   * - Default is false
+   */
+  disabledDelete?: boolean;
+
+  /**
+   * - Default is false
+   */
+  disabledConfigure?: boolean;
+
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
+} & Pick<FormRootProps, "width" | "marginBottom">;
 
 const formSelector = (state: ConfigureModelFormStore) => ({
   description: state.fields.description,
@@ -48,15 +61,18 @@ const modalSelector = (state: ModalStore) => ({
   closeModal: state.closeModal,
 });
 
-export const ConfigureModelForm = ({
-  model,
-  marginBottom,
-  onConfigure,
-  disableConfigure,
-  onDelete,
-  disableDelete,
-  accessToken,
-}: ConfigureModelFormProps) => {
+export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
+  const {
+    model,
+    accessToken,
+    onConfigure,
+    onDelete,
+    disabledConfigure,
+    disabledDelete,
+    marginBottom,
+    width,
+  } = props;
+
   const { amplitudeIsInit } = useAmplitudeCtx();
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -236,7 +252,7 @@ export const ConfigureModelForm = ({
 
   return (
     <>
-      <FormRoot marginBottom={marginBottom} formLess={false} width={null}>
+      <FormRoot marginBottom={marginBottom} width={width}>
         <div className="mb-10 flex flex-col">
           <BasicTextArea
             id="model-description"
@@ -254,7 +270,7 @@ export const ConfigureModelForm = ({
         </div>
         <div className="mb-8 flex flex-row">
           <OutlineButton
-            disabled={disableDelete ? true : false}
+            disabled={disabledDelete ? true : false}
             onClickHandler={() => openModal()}
             position="mr-auto my-auto"
             type="button"
@@ -264,7 +280,7 @@ export const ConfigureModelForm = ({
             Delete
           </OutlineButton>
           <SolidButton
-            disabled={disableConfigure ? true : false}
+            disabled={disabledConfigure ? true : false}
             onClickHandler={handleConfigureModel}
             position="ml-auto my-auto"
             type="button"

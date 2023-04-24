@@ -34,10 +34,8 @@ export type SetPipelineModeStepProps = {
   syncModelOnly: boolean;
 };
 
-export const SetPipelineModeStep = ({
-  accessToken,
-  syncModelOnly,
-}: SetPipelineModeStepProps) => {
+export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
+  const { accessToken, syncModelOnly } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------

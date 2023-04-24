@@ -3,11 +3,7 @@ import * as React from "react";
 import { getElementPosition } from "@instill-ai/design-system";
 
 import { ProgressStep } from "./ProgressStep";
-import {
-  useOnScreen,
-  useCreateResourceFormStore,
-  type Nullable,
-} from "../../../../lib";
+import { useOnScreen, useCreateResourceFormStore } from "../../../../lib";
 
 //  Currently, we make number 0 & 1 stay at the first step
 //  0: Choose pipeline mode
@@ -18,12 +14,14 @@ import {
 //  4: setup pipeline details
 
 export type CreatePipelineProgressProps = {
-  marginBottom: Nullable<string>;
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
 };
 
-export const CreatePipelineProgress = ({
-  marginBottom,
-}: CreatePipelineProgressProps) => {
+export const CreatePipelineProgress = (props: CreatePipelineProgressProps) => {
+  const { marginBottom } = props;
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
   );

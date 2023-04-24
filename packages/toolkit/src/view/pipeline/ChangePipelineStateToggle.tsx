@@ -27,20 +27,23 @@ export type ChangePipelineStateToggleProps = {
     },
     unknown
   >;
-  marginBottom?: string;
   accessToken: Nullable<string>;
-  disabled: boolean;
+  disabled?: boolean;
+  marginBottom?: string;
 };
 
-export const ChangePipelineStateToggle = ({
-  pipeline,
-  pipelineWatchState,
-  switchOn,
-  switchOff,
-  marginBottom,
-  accessToken,
-  disabled,
-}: ChangePipelineStateToggleProps) => {
+export const ChangePipelineStateToggle = (
+  props: ChangePipelineStateToggleProps
+) => {
+  const {
+    pipeline,
+    pipelineWatchState,
+    switchOn,
+    switchOff,
+    marginBottom,
+    accessToken,
+    disabled,
+  } = props;
   const [error, setError] = React.useState<Nullable<string>>(null);
 
   React.useEffect(() => {
