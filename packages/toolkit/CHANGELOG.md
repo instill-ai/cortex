@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.36.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.35.0...@instill-ai/toolkit-v0.36.0) (2023-04-24)
+
+
+### Features
+
+* rename updateLocalUserMutation to updateUserMutation ([#376](https://github.com/instill-ai/design-system/issues/376)) ([7613727](https://github.com/instill-ai/design-system/commit/7613727474e9d9484a270ef55ae1ecb318967880))
+
 ## [0.35.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.34.2...@instill-ai/toolkit-v0.35.0) (2023-04-24)
 
 
