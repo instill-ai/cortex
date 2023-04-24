@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.10.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.4...@instill-ai/design-system-v0.10.5) (2023-04-24)
+
+
+### Miscellaneous
+
+* refactor components api ([#373](https://github.com/instill-ai/design-system/issues/373)) ([c4753ed](https://github.com/instill-ai/design-system/commit/c4753edc67515a446d54c3458ef20e98f5936740))
+
 ## [0.10.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.3...@instill-ai/design-system-v0.10.4) (2023-04-19)
 
 

@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.35.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.34.2...@instill-ai/toolkit-v0.35.0) (2023-04-24)
+
+
+### Features
+
+* update component api to remove all non-nullable policy ([#375](https://github.com/instill-ai/design-system/issues/375)) ([ccbf751](https://github.com/instill-ai/design-system/commit/ccbf751928e8cae1f03b28b6a584f8d9094c92e2))
+
+
+### Miscellaneous
+
+* refactor components api ([#373](https://github.com/instill-ai/design-system/issues/373)) ([c4753ed](https://github.com/instill-ai/design-system/commit/c4753edc67515a446d54c3458ef20e98f5936740))
+
 ## [0.34.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.34.1...@instill-ai/toolkit-v0.34.2) (2023-04-22)
 
 
