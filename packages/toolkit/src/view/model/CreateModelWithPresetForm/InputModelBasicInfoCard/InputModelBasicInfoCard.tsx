@@ -1,22 +1,19 @@
 import { ModelIdField } from "./ModelIdField";
 import { ModelDescriptionField } from "./ModelDescriptionField";
 import { ModelBasicInputControl } from "./ModelBasicInputControl";
-import { CardBase } from "../CardBase";
+import { CardBase, CardBaseProps } from "../CardBase";
 import { Nullable } from "../../../../lib";
 
 export type InputModelBasicInfoCardProps = {
-  marginBottom: Nullable<string>;
   accessToken: Nullable<string>;
   onCreate: Nullable<() => void>;
   initStoreOnCreate: boolean;
-};
+} & Pick<CardBaseProps, "marginBottom">;
 
-export const InputModelBasicInfoCard = ({
-  marginBottom,
-  accessToken,
-  onCreate,
-  initStoreOnCreate,
-}: InputModelBasicInfoCardProps) => {
+export const InputModelBasicInfoCard = (
+  props: InputModelBasicInfoCardProps
+) => {
+  const { accessToken, onCreate, initStoreOnCreate, marginBottom } = props;
   return (
     <CardBase
       title="Fill out selected model information"

@@ -27,9 +27,12 @@ export type ChangeModelStateToggleProps = {
     },
     unknown
   >;
-  marginBottom?: string;
+  /**
+   * - Default is undefined
+   */
   accessToken: Nullable<string>;
-  disabled: boolean;
+  marginBottom?: string;
+  disabled?: boolean;
 };
 
 export const ChangeModelStateToggle = ({

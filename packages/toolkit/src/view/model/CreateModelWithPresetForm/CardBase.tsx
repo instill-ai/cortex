@@ -5,7 +5,11 @@ import type { Nullable } from "../../../lib";
 export type CardBaseProps = {
   title: Nullable<string>;
   children?: React.ReactNode;
-  marginBottom: Nullable<string>;
+
+  /**
+   * - Default is undefinded
+   */
+  marginBottom?: string;
 };
 
 export const CardBase = ({ title, children, marginBottom }: CardBaseProps) => {

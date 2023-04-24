@@ -13,8 +13,12 @@ export type TablePlaceholderBaseProps = {
   placeholderTitle: string;
   createButtonTitle: string;
   createButtonLink: string;
-  marginBottom: Nullable<string>;
   enableCreateButton: boolean;
+
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
 };
 
 export const TablePlaceholderBase = ({
