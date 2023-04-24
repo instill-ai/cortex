@@ -8,14 +8,21 @@ import { useDestination } from "./useDestination";
 export const useDestinationWithPipelines = ({
   destinationName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  retry?: number;
 }) => {
-  const pipelines = usePipelines({ enable, accessToken });
-  const destination = useDestination({ destinationName, accessToken, enable });
+  const pipelines = usePipelines({ enabled, accessToken, retry });
+  const destination = useDestination({
+    destinationName,
+    accessToken,
+    enabled,
+    retry,
+  });
 
   let enableQuery = false;
 
@@ -23,7 +30,7 @@ export const useDestinationWithPipelines = ({
     destinationName &&
     pipelines.isSuccess &&
     destination.isSuccess &&
-    enable
+    enabled
   ) {
     enableQuery = true;
   }
@@ -56,7 +63,7 @@ export const useDestinationWithPipelines = ({
     },
     {
       enabled: enableQuery,
-      retry: 3,
+      retry: retry ? retry : 3,
     }
   );
 };

@@ -9,10 +9,12 @@ import {
 
 export const useDestinations = ({
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  retry?: number;
 }) => {
   return useQuery(
     ["destinations"],
@@ -41,8 +43,8 @@ export const useDestinations = ({
       return Promise.resolve(destinationsWithDefinition);
     },
     {
-      retry: 3,
-      enabled: enable,
+      enabled: enabled,
+      retry: retry ? retry : 3,
     }
   );
 };
