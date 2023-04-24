@@ -5,15 +5,21 @@ import { watchPipeline, type PipelinesWatchState } from "../../vdp-sdk";
 export function useWatchPipelines({
   pipelineNames,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   pipelineNames: Nullable<string[]>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) {
   let enableQuery = false;
 
-  if (pipelineNames && enable && pipelineNames.length > 0) {
+  if (pipelineNames && enabled && pipelineNames.length > 0) {
     enableQuery = true;
   }
 
@@ -37,8 +43,8 @@ export function useWatchPipelines({
       return Promise.resolve(watches);
     },
     {
-      retry: 3,
       enabled: enableQuery,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 }

@@ -5,15 +5,21 @@ import { watchSource, type ConnectorsWatchState } from "../../../vdp-sdk";
 export function useWatchSources({
   sourceNames,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   sourceNames: Nullable<string[]>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) {
   let enableQuery = false;
 
-  if (sourceNames && enable && sourceNames.length > 0) {
+  if (sourceNames && enabled && sourceNames.length > 0) {
     enableQuery = true;
   }
 
@@ -37,8 +43,8 @@ export function useWatchSources({
       return Promise.resolve(watches);
     },
     {
-      retry: 3,
       enabled: enableQuery,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 }

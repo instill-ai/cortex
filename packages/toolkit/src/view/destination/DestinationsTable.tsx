@@ -9,7 +9,7 @@ import {
   TableError,
   SkeletonCell,
   type TableHeadItem,
-  PaginationListContainerProps,
+  type PaginationListContainerProps,
 } from "../../components";
 import {
   useStateOverviewCounts,

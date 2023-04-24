@@ -52,7 +52,7 @@ export const SelectExistingDestinationFlow = (
   const [destinationOptions, setDestinationOptions] = React.useState<
     SingleSelectOption[] | null
   >(null);
-  const destinations = useDestinations({ accessToken, enable: true });
+  const destinations = useDestinations({ accessToken, enabled: true });
 
   React.useEffect(() => {
     if (!destinations.isSuccess || !destinations.data) return;

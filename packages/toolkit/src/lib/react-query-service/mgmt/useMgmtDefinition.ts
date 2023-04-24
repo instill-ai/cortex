@@ -1,7 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { listRepoFileContent } from "../../github";
 
-export const useMgmtDefinition = ({ enable }: { enable: boolean }) => {
+export const useMgmtDefinition = ({
+  enabled,
+  retry,
+}: {
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
+}) => {
   return useQuery(
     ["mgmt", "encoded-definition"],
     async (): Promise<string> => {
@@ -15,8 +25,8 @@ export const useMgmtDefinition = ({ enable }: { enable: boolean }) => {
       return Promise.resolve(decode);
     },
     {
-      retry: 3,
-      enabled: enable,
+      enabled: enabled,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

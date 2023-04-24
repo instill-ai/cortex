@@ -9,15 +9,21 @@ import { Nullable } from "../../../type";
 export const useSource = ({
   sourceName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   sourceName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   let enableQuery = false;
 
-  if (sourceName && enable) {
+  if (sourceName && enabled) {
     enableQuery = true;
   }
 
@@ -41,7 +47,7 @@ export const useSource = ({
     },
     {
       enabled: enableQuery,
-      retry: 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

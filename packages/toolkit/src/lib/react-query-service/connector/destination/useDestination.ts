@@ -10,11 +10,17 @@ import { env } from "../../../utility";
 export const useDestination = ({
   destinationName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   if (env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") && !accessToken) {
     throw new Error(
@@ -24,7 +30,7 @@ export const useDestination = ({
 
   let enableQuery = false;
 
-  if (enable && destinationName) {
+  if (enabled && destinationName) {
     enableQuery = true;
   }
 
@@ -54,7 +60,7 @@ export const useDestination = ({
     },
     {
       enabled: enableQuery,
-      retry: 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

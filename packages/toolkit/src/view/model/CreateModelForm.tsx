@@ -124,7 +124,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
 
   const modelDefinitions = useModelDefinitions({
     accessToken,
-    enable: true,
+    enabled: true,
   });
 
   const modelDefinitionOptions = React.useMemo(() => {

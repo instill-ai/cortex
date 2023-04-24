@@ -4,10 +4,16 @@ import { getUserQuery, User } from "../../vdp-sdk";
 
 export const useUser = ({
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   return useQuery<User>(
     ["user"],
@@ -16,8 +22,8 @@ export const useUser = ({
       return Promise.resolve(user);
     },
     {
-      enabled: enable,
-      retry: 3,
+      enabled,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

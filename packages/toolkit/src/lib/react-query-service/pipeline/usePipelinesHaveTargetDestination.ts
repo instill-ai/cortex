@@ -6,18 +6,24 @@ import { usePipelines } from "./usePipelines";
 export const usePipelinesHaveTargetDestination = ({
   destinationId,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   destinationId: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
-  const pipelines = usePipelines({ enable, accessToken });
+  const pipelines = usePipelines({ enabled, accessToken, retry });
   const queryClient = useQueryClient();
 
   let enableQuery = false;
 
-  if (destinationId && pipelines.isSuccess && enable) {
+  if (destinationId && pipelines.isSuccess && enabled) {
     enableQuery = true;
   }
 
@@ -55,7 +61,7 @@ export const usePipelinesHaveTargetDestination = ({
         }
       },
       enabled: enableQuery,
-      retry: 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

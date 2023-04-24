@@ -5,15 +5,21 @@ import { watchModel } from "../../vdp-sdk";
 export function useWatchModel({
   modelName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   modelName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) {
   let enableQuery = false;
 
-  if (modelName && enable) {
+  if (modelName && enabled) {
     enableQuery = true;
   }
 
@@ -32,8 +38,8 @@ export function useWatchModel({
       return Promise.resolve(watch);
     },
     {
-      retry: 3,
       enabled: enableQuery,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 }

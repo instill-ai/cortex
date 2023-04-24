@@ -5,10 +5,16 @@ import { listSourceDefinitionsQuery } from "../../../vdp-sdk";
 
 export const useSourceDefinitions = ({
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   return useQuery(
     ["sources", "definition"],
@@ -21,8 +27,8 @@ export const useSourceDefinitions = ({
       return Promise.resolve(sourceDefinitions);
     },
     {
-      retry: 3,
-      enabled: enable,
+      enabled,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

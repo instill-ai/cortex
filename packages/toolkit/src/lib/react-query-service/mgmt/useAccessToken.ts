@@ -9,7 +9,7 @@ import {
 } from "../../type/apiRoute";
 import { env } from "../../utility";
 
-export const useAccessToken = ({ enable }: { enable: boolean }) => {
+export const useAccessToken = ({ enabled }: { enabled: boolean }) => {
   const queryClient = useQueryClient();
 
   let expiresAt: Nullable<number> = null;
@@ -21,7 +21,7 @@ export const useAccessToken = ({ enable }: { enable: boolean }) => {
 
   let enableQuery = false;
 
-  if (enable) {
+  if (enabled) {
     if (expiresAt) {
       if (expiresAt < Date.now()) {
         enableQuery = true;
@@ -51,6 +51,7 @@ export const useAccessToken = ({ enable }: { enable: boolean }) => {
     {
       refetchOnWindowFocus: false,
       enabled: enableQuery,
+      retry: false,
     }
   );
 };

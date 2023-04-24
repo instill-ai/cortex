@@ -5,11 +5,17 @@ import { Nullable } from "../../type";
 import { env } from "../../utility";
 
 export const usePipelines = ({
-  enable,
+  enabled,
   accessToken,
+  retry,
 }: {
-  enable: boolean;
+  enabled: boolean;
   accessToken: Nullable<string>;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   return useQuery(
     ["pipelines"],
@@ -33,8 +39,8 @@ export const usePipelines = ({
       return pipelines;
     },
     {
-      enabled: enable,
-      retry: 3,
+      enabled,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

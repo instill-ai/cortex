@@ -6,10 +6,16 @@ import { listDestinationDefinitionsQuery } from "../../../vdp-sdk";
 
 export const useDestinationDefinitions = ({
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   if (env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") && !accessToken) {
     throw new Error(
@@ -28,8 +34,8 @@ export const useDestinationDefinitions = ({
       return Promise.resolve(destinationDefinition);
     },
     {
-      retry: 3,
-      enabled: enable,
+      enabled,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

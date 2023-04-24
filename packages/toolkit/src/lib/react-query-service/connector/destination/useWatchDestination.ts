@@ -5,15 +5,21 @@ import { watchDestination } from "../../../vdp-sdk";
 export function useWatchDestination({
   destinationName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) {
   let enableQuery = false;
 
-  if (destinationName && enable) {
+  if (destinationName && enabled) {
     enableQuery = true;
   }
 
@@ -32,8 +38,8 @@ export function useWatchDestination({
       return Promise.resolve(watch);
     },
     {
-      retry: 3,
       enabled: enableQuery,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 }

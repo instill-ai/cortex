@@ -9,10 +9,16 @@ import {
 
 export const useSources = ({
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   return useQuery(
     ["sources"],
@@ -38,8 +44,8 @@ export const useSources = ({
       return Promise.resolve(sourcesWithDefinition);
     },
     {
-      retry: 3,
-      enabled: enable,
+      enabled,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

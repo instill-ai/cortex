@@ -137,7 +137,7 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
    * -----------------------------------------------------------------------*/
 
   const createSource = useCreateSource();
-  const sources = useSources({ accessToken, enable: true });
+  const sources = useSources({ accessToken, enabled: true });
 
   const canGoNext = React.useMemo(() => {
     if (!pipelineMode) return false;
