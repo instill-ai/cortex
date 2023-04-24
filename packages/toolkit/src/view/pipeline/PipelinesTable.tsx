@@ -33,6 +33,7 @@ export type PipelinesTableProps = {
 export const PipelinesTable = (props: PipelinesTableProps) => {
   const { pipelines, pipelinesWatchState, marginBottom, isError, isLoading } =
     props;
+
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
