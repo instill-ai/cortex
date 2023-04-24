@@ -6,7 +6,7 @@ export type UpdateUserResponse = {
   user: User;
 };
 
-export const updateLocalUserMutation = async ({
+export const updateUserMutation = async ({
   payload,
   accessToken,
 }: {
