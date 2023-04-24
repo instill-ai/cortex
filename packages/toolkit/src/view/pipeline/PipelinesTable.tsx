@@ -48,7 +48,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       return chunk(pipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
     }
     return chunk(searchedPipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedPipelines, pipelines]);
+  }, [searchedPipelines, pipelines, searchTerm]);
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchTerm ? searchedPipelines : pipelines,

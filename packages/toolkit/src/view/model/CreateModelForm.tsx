@@ -1,3 +1,4 @@
+import cn from "clsx";
 import axios from "axios";
 import * as React from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -75,8 +76,14 @@ const selector = (state: CreateResourceFormStore) => ({
 });
 
 export const CreateModelForm = (props: CreateModelFormProps) => {
-  const { accessToken, marginBottom, initStoreOnCreate, onCreate, width } =
-    props;
+  const {
+    accessToken,
+    marginBottom,
+    initStoreOnCreate,
+    onCreate,
+    width,
+    disabledCreateModel,
+  } = props;
 
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -563,6 +570,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
       );
     }
   }, [
+    deployModel,
     createArtivcModel,
     createGithubModel,
     createLocalModel,
@@ -581,7 +589,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     init,
     initStoreOnCreate,
     onCreate,
-    setFieldValue,
     prepareNewModel,
     setFieldError,
   ]);
@@ -600,6 +607,17 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
         return "https://www.instill.tech/docs/import-models/overview";
     }
   }, []);
+
+  if (disabledCreateModel) {
+    return (
+      <div className={cn("flex-1 h-full", width || "w-full")}>
+        <p className="font-normal text-sm font-sans m-auto w-2/3 text-center">
+          Model creation is currently disabled, Please use our pre-deployed
+          models
+        </p>
+      </div>
+    );
+  }
 
   return (
     <FormRoot marginBottom={marginBottom} width={width}>

@@ -1,4 +1,3 @@
-import { Nullable } from "../types/general";
 import * as React from "react";
 import cn from "clsx";
 

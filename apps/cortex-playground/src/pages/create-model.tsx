@@ -8,11 +8,10 @@ const CreateModelPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        <CreateModelWithPresetForm
+        <CreateModelForm
           onCreate={null}
           initStoreOnCreate={false}
           accessToken={null}
-          marginBottom={null}
           disabledCreateModel={true}
         />
       </div>

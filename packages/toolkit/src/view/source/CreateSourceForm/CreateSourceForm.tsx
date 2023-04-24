@@ -7,7 +7,6 @@ import {
   FormRootProps,
 } from "@instill-ai/design-system";
 
-import { Nullable, SourceWithDefinition } from "../../../lib";
 import {
   CreateSourceControl,
   CreateSourceControlProps,

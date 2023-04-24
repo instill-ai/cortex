@@ -46,7 +46,7 @@ export const ModelsTable = (props: ModelsTableProps) => {
       return chunk(models, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
     }
     return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedModels, models]);
+  }, [searchedModels, models, searchTerm]);
 
   const stateOverviewCounts = useStateOverviewCounts(
     searchTerm ? searchedModels : models,
