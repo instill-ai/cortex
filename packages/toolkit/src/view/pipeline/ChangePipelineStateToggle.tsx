@@ -44,6 +44,7 @@ export const ChangePipelineStateToggle = (
     accessToken,
     disabled,
   } = props;
+
   const [error, setError] = React.useState<Nullable<string>>(null);
 
   React.useEffect(() => {
