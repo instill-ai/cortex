@@ -7,17 +7,19 @@ import { useSources } from "./useSources";
 
 export const useSourcesWithPipelines = ({
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  retry?: number;
 }) => {
-  const sources = useSources({ accessToken, enable });
-  const pipelines = usePipelines({ enable: true, accessToken });
+  const sources = useSources({ accessToken, enabled, retry });
+  const pipelines = usePipelines({ accessToken, enabled, retry });
 
   let enableQuery = false;
 
-  if (sources.isSuccess && pipelines.isSuccess && enable) {
+  if (sources.isSuccess && pipelines.isSuccess && enabled) {
     enableQuery = true;
   }
 
@@ -42,7 +44,7 @@ export const useSourcesWithPipelines = ({
     },
     {
       enabled: enableQuery,
-      retry: 3,
+      retry: retry ? retry : 3,
     }
   );
 };
