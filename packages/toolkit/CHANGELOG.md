@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.37.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.36.0...@instill-ai/toolkit-v0.37.0) (2023-04-24)
+
+
+### Features
+
+* [INS-529] update react-query api ([#378](https://github.com/instill-ai/design-system/issues/378)) ([7e9820d](https://github.com/instill-ai/design-system/commit/7e9820d9de08cd6a4e75cee921d069d305eacf3e))
+* add check user exist query ([#380](https://github.com/instill-ai/design-system/issues/380)) ([a7b0d57](https://github.com/instill-ai/design-system/commit/a7b0d571e2d9659b9680fe9758fa8c1f3b18c9bd))
+
 ## [0.36.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.35.0...@instill-ai/toolkit-v0.36.0) (2023-04-24)
 
 
