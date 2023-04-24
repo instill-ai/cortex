@@ -4,15 +4,18 @@ import { Nullable } from "../lib";
 
 export type ModelDefinitionLabelProps = {
   modelDefinition: Nullable<string>;
-  marginBottom: Nullable<string>;
-  position: Nullable<string>;
+  /**
+   * - Default is undefined
+   */
+  position?: string;
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
 };
 
-export const ModelDefinitionLabel = ({
-  modelDefinition,
-  marginBottom,
-  position,
-}: ModelDefinitionLabelProps) => {
+export const ModelDefinitionLabel = (props: ModelDefinitionLabelProps) => {
+  const { modelDefinition, marginBottom, position } = props;
   const iconStyle = {
     width: "w-[18px]",
     height: "h-[18px]",

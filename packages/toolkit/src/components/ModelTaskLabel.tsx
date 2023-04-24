@@ -4,15 +4,18 @@ import { Nullable } from "../lib";
 
 export type ModelTaskLabelProps = {
   task: Nullable<string>;
-  marginBottom: Nullable<string>;
-  position: Nullable<string>;
+  /**
+   * - Default is undefined
+   */
+  marginBottom?: string;
+  /**
+   * - Default is undefined
+   */
+  position?: string;
 };
 
-export const ModelTaskLabel = ({
-  task,
-  marginBottom,
-  position,
-}: ModelTaskLabelProps) => {
+export const ModelTaskLabel = (props: ModelTaskLabelProps) => {
+  const { task, marginBottom, position } = props;
   const iconStyle = {
     width: "w-[18px]",
     height: "h-[18px]",

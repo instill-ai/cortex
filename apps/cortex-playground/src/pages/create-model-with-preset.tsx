@@ -9,7 +9,6 @@ const CreateModelWithPresetPage = () => {
           onCreate={null}
           initStoreOnCreate={false}
           accessToken={null}
-          marginBottom={null}
           width=""
         />
       </div>

@@ -94,7 +94,7 @@ export const SourcesTable = (props: SourcesTableProps) => {
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <TableError marginBottom={null} />
+        <TableError />
       </PaginationListContainer>
     );
   }

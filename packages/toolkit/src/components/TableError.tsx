@@ -1,11 +1,11 @@
 import cn from "clsx";
-import { Nullable } from "../lib";
 
 export type TableErrorProps = {
-  marginBottom: Nullable<string>;
+  marginBottom?: string;
 };
 
-export const TableError = ({ marginBottom }: TableErrorProps) => {
+export const TableError = (props: TableErrorProps) => {
+  const { marginBottom } = props;
   return (
     <div
       className={cn(

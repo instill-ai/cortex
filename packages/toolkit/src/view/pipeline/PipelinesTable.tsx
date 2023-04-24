@@ -105,7 +105,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <TableError marginBottom={null} />
+        <TableError />
       </PaginationListContainer>
     );
   }
