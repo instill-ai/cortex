@@ -9,13 +9,13 @@ import {
 const SourcesTablePage = () => {
   const sources = useSourcesWithPipelines({
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
 
   const sourcesWatchState = useWatchSources({
     sourceNames: sources.isSuccess ? sources.data.map((p) => p.name) : [],
     accessToken: null,
-    enable: sources.isSuccess && sources.data.length > 0,
+    enabled: sources.isSuccess && sources.data.length > 0,
   });
 
   return (

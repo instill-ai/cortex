@@ -60,12 +60,12 @@ const IndexPage = () => {
   const model = useModel({
     modelName: "models/yoyo",
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
   const modelWatchState = useWatchModel({
     modelName: "models/yoyo",
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
   const deployModel = useDeployModel();
   const unDeployModel = useUnDeployModel();

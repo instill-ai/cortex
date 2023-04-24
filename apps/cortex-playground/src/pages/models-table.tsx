@@ -6,13 +6,13 @@ import { useModels, useWatchModels } from "@instill-ai/toolkit";
 const ModelsTablePage = () => {
   const models = useModels({
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
 
   const modelsWatchState = useWatchModels({
     modelNames: models.isSuccess ? models.data.map((p) => p.name) : [],
     accessToken: null,
-    enable: models.isSuccess && models.data.length > 0,
+    enabled: models.isSuccess && models.data.length > 0,
   });
 
   return (
