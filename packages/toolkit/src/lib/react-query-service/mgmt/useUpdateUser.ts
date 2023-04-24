@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Nullable } from "../../type";
-import { updateLocalUserMutation, User } from "../../vdp-sdk";
+import { updateUserMutation, User } from "../../vdp-sdk";
 
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();
@@ -12,7 +12,7 @@ export const useUpdateUser = () => {
       payload: Partial<User>;
       accessToken: Nullable<string>;
     }) => {
-      const user = await updateLocalUserMutation({ payload, accessToken });
+      const user = await updateUserMutation({ payload, accessToken });
       return Promise.resolve(user);
     },
     {
