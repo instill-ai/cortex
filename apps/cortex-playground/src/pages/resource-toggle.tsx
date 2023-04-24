@@ -22,12 +22,12 @@ const ResourceTogglePage = () => {
   const model = useModel({
     modelName,
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
   const modelWatchState = useWatchModel({
     modelName,
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
   const deployModel = useDeployModel();
   const unDeployModel = useUnDeployModel();
@@ -35,13 +35,13 @@ const ResourceTogglePage = () => {
   const pipeline = usePipeline({
     pipelineName,
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
 
   const watchPipelineState = useWatchPipeline({
     pipelineName,
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
 
   const activatePipeline = useActivatePipeline();

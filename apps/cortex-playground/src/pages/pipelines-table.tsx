@@ -9,13 +9,13 @@ import {
 const PipelinesTablePage = () => {
   const pipelines = usePipelines({
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
 
   const pipelinesWatchState = useWatchPipelines({
     pipelineNames: pipelines.isSuccess ? pipelines.data.map((p) => p.name) : [],
     accessToken: null,
-    enable: pipelines.isSuccess && pipelines.data.length > 0,
+    enabled: pipelines.isSuccess && pipelines.data.length > 0,
   });
 
   return (

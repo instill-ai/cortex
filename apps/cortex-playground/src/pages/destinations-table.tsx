@@ -9,7 +9,7 @@ import {
 const DestinationsTablePage = () => {
   const destinations = useDestinationsWithPipelines({
     accessToken: null,
-    enable: true,
+    enabled: true,
   });
 
   const destinationsWatchState = useWatchDestinations({
@@ -17,7 +17,7 @@ const DestinationsTablePage = () => {
       ? destinations.data.map((p) => p.name)
       : [],
     accessToken: null,
-    enable: destinations.isSuccess && destinations.data.length > 0,
+    enabled: destinations.isSuccess && destinations.data.length > 0,
   });
 
   return (
