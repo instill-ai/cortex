@@ -3,10 +3,23 @@ import * as React from "react";
 import cn from "clsx";
 
 export type FormRootProps = {
-  marginBottom: Nullable<string>;
-  formLess: boolean;
-  width: Nullable<string>;
   children?: React.ReactNode;
+
+  /**
+   * #### Whether to use the <form><form> to wrap the children
+   * - Default is true
+   */
+  formLess?: boolean;
+
+  /**
+   * - Default is w-full
+   */
+  width?: string;
+
+  /**
+   * - Default is undefinded
+   */
+  marginBottom?: string;
 };
 
 export const FormRoot = ({
