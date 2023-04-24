@@ -28,10 +28,10 @@ export type SelectExistingDestinationFlowProps = {
   onSelect: () => void;
 };
 
-export const SelectExistingDestinationFlow = ({
-  accessToken,
-  onSelect,
-}: SelectExistingDestinationFlowProps) => {
+export const SelectExistingDestinationFlow = (
+  props: SelectExistingDestinationFlowProps
+) => {
+  const { accessToken, onSelect } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------

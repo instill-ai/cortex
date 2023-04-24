@@ -11,15 +11,13 @@ import {
   type TablePlaceholderBaseProps,
 } from "../../components";
 
-export type SourceTablePlaceholderProps = {
-  marginBottom: TablePlaceholderBaseProps["marginBottom"];
-  enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
-};
+export type SourceTablePlaceholderProps = Pick<
+  TablePlaceholderBaseProps,
+  "enableCreateButton" | "marginBottom"
+>;
 
-export const SourceTablePlaceholder = ({
-  marginBottom,
-  enablePlaceholderCreateButton,
-}: SourceTablePlaceholderProps) => {
+export const SourceTablePlaceholder = (props: SourceTablePlaceholderProps) => {
+  const { marginBottom, enableCreateButton } = props;
   const width = "w-[136px]";
   const height = "h-[136px]";
 
@@ -61,7 +59,7 @@ export const SourceTablePlaceholder = ({
       createButtonTitle="Set up your first source"
       createButtonLink="/sources/create"
       marginBottom={marginBottom}
-      enableCreateButton={enablePlaceholderCreateButton}
+      enableCreateButton={enableCreateButton}
     />
   );
 };

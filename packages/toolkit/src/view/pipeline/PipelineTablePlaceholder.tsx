@@ -4,15 +4,15 @@ import {
   type TablePlaceholderBaseProps,
 } from "../../components";
 
-export type PipelineTablePlaceholderProps = {
-  marginBottom: TablePlaceholderBaseProps["marginBottom"];
-  enablePlaceholderCreateButton: TablePlaceholderBaseProps["enableCreateButton"];
-};
+export type PipelineTablePlaceholderProps = Pick<
+  TablePlaceholderBaseProps,
+  "marginBottom" | "enableCreateButton"
+>;
 
-export const PipelineTablePlaceholder = ({
-  marginBottom,
-  enablePlaceholderCreateButton,
-}: PipelineTablePlaceholderProps) => {
+export const PipelineTablePlaceholder = (
+  props: PipelineTablePlaceholderProps
+) => {
+  const { marginBottom, enableCreateButton } = props;
   const width = "w-[136px]";
   const height = "h-[136px]";
   const color = "fill-instillGrey95";
@@ -273,7 +273,7 @@ export const PipelineTablePlaceholder = ({
       createButtonLink="/pipelines/create"
       createButtonTitle="Set up your first pipeline"
       marginBottom={marginBottom}
-      enableCreateButton={enablePlaceholderCreateButton}
+      enableCreateButton={enableCreateButton}
     />
   );
 };

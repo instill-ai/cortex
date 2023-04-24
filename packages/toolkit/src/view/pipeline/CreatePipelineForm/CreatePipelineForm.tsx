@@ -22,12 +22,8 @@ export type CreatePipelineFormProps = {
   withModelPreset: boolean;
 };
 
-export const CreatePipelineForm = ({
-  onCreate,
-  accessToken,
-  syncModelOnly,
-  withModelPreset,
-}: CreatePipelineFormProps) => {
+export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
+  const { onCreate, accessToken, syncModelOnly, withModelPreset } = props;
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
   );

@@ -1,37 +1,36 @@
-import { FormRoot } from "@instill-ai/design-system";
-import { Nullable, SourceWithPipelines } from "../../../lib";
-import { ConfigureSourceControl } from "./ConfigureSourceControl";
+import { FormRoot, FormRootProps } from "@instill-ai/design-system";
+import {
+  ConfigureSourceControl,
+  ConfigureSourceControlProps,
+} from "./ConfigureSourceControl";
 import { SourceDefinitionField } from "./SourceDefinitionField";
 
-export type ConfigureSourceFormProps = {
-  source: Nullable<SourceWithPipelines>;
-  onDelete: Nullable<() => void>;
-  disableDelete: boolean;
-  disableConfigure: boolean;
-  marginBottom: Nullable<string>;
-  width: Nullable<string>;
-  accessToken: Nullable<string>;
-};
+export type ConfigureSourceFormProps = Pick<
+  FormRootProps,
+  "width" | "marginBottom"
+> &
+  ConfigureSourceControlProps;
 
-export const ConfigureSourceForm = ({
-  source,
-  onDelete,
-  disableDelete,
-  disableConfigure,
-  marginBottom,
-  width,
-  accessToken,
-}: ConfigureSourceFormProps) => {
+export const ConfigureSourceForm = (props: ConfigureSourceFormProps) => {
+  const {
+    source,
+    onDelete,
+    disabledDelete,
+    disabledConfigure,
+    marginBottom,
+    width,
+    accessToken,
+  } = props;
   return (
-    <FormRoot marginBottom={marginBottom} formLess={false} width={width}>
+    <FormRoot marginBottom={marginBottom} width={width}>
       <div className="flex flex-col gap-y-10">
         <SourceDefinitionField source={source} />
         <ConfigureSourceControl
           source={source}
           onDelete={onDelete}
           accessToken={accessToken}
-          disableDelete={disableDelete}
-          disableConfigure={disableConfigure}
+          disabledDelete={disabledDelete}
+          disabledConfigure={disabledConfigure}
         />
       </div>
     </FormRoot>

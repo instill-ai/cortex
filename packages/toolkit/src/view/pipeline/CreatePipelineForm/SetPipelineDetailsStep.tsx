@@ -57,10 +57,8 @@ export type SetPipelineDetailsStepProps = {
   accessToken: Nullable<string>;
 };
 
-export const SetPipelineDetailsStep = ({
-  onCreate,
-  accessToken,
-}: SetPipelineDetailsStepProps) => {
+export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
+  const { onCreate, accessToken } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------

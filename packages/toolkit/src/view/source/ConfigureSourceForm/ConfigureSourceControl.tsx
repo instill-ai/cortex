@@ -36,17 +36,13 @@ export type ConfigureSourceControlProps = {
   source: Nullable<SourceWithPipelines>;
   onDelete: Nullable<() => void>;
   accessToken: Nullable<string>;
-  disableDelete: boolean;
-  disableConfigure: boolean;
+  disabledDelete?: boolean;
+  disabledConfigure?: boolean;
 };
 
-export const ConfigureSourceControl = ({
-  source,
-  onDelete,
-  accessToken,
-  disableDelete,
-  disableConfigure,
-}: ConfigureSourceControlProps) => {
+export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
+  const { source, onDelete, accessToken, disabledDelete, disabledConfigure } =
+    props;
   const { amplitudeIsInit } = useAmplitudeCtx();
   const { canEdit, setFieldValue } = useConfigureSourceFormStore(
     selector,
@@ -149,7 +145,7 @@ export const ConfigureSourceControl = ({
     <div className="flex flex-col">
       <div className="mb-10 flex flex-row">
         <OutlineButton
-          disabled={disableDelete ? true : false}
+          disabled={disabledDelete ? true : false}
           onClickHandler={() => openModal()}
           position="mr-auto my-auto"
           type="button"
@@ -160,7 +156,7 @@ export const ConfigureSourceControl = ({
         </OutlineButton>
         <SolidButton
           type="submit"
-          disabled={disableConfigure ? true : false}
+          disabled={disabledConfigure ? true : false}
           position="ml-auto my-auto"
           color="primary"
           onClickHandler={handleSubmit}

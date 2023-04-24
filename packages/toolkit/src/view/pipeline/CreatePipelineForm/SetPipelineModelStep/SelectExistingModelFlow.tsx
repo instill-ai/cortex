@@ -24,10 +24,10 @@ export type SelectExistingModelFlowProps = {
   onSelect: () => void;
 };
 
-export const SelectExistingModelFlow = ({
-  accessToken,
-  onSelect,
-}: SelectExistingModelFlowProps) => {
+export const SelectExistingModelFlow = (
+  props: SelectExistingModelFlowProps
+) => {
+  const { accessToken, onSelect } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------

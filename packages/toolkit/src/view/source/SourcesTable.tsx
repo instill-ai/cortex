@@ -9,6 +9,7 @@ import {
   PaginationListContainer,
   TableError,
   SkeletonCell,
+  PaginationListContainerProps,
 } from "../../components";
 import {
   useSearchedResources,
@@ -26,16 +27,11 @@ export type SourcesTableProps = {
   sourcesWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
-  marginBottom?: string;
-};
+} & Pick<PaginationListContainerProps, "marginBottom">;
 
-export const SourcesTable = ({
-  sources,
-  sourcesWatchState,
-  marginBottom,
-  isError,
-  isLoading,
-}: SourcesTableProps) => {
+export const SourcesTable = (props: SourcesTableProps) => {
+  const { sources, sourcesWatchState, marginBottom, isError, isLoading } =
+    props;
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
@@ -116,10 +112,7 @@ export const SourcesTable = ({
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <SourceTablePlaceholder
-          enablePlaceholderCreateButton={false}
-          marginBottom={null}
-        />
+        <SourceTablePlaceholder enableCreateButton={false} />
       </PaginationListContainer>
     );
   }

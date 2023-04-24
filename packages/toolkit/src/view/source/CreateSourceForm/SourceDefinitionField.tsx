@@ -21,9 +21,8 @@ const selector = (state: CreateResourceFormStore) => ({
   setFieldValue: state.setFieldValue,
 });
 
-export const SourceDefinitionField = ({
-  sourceDefinitionOptions,
-}: SourceDefinitionFieldProps) => {
+export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
+  const { sourceDefinitionOptions } = props;
   const { sourceDefinition, sourceDefinitionError, setFieldValue } =
     useCreateResourceFormStore(selector, shallow);
 

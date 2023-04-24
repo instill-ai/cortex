@@ -12,11 +12,11 @@ import {
   useAmplitudeCtx,
   useCreateSource,
   useCreateResourceFormStore,
+  getInstillApiErrorMessage,
   type CreateResourceFormStore,
   type CreateSourcePayload,
   type Nullable,
   type SourceWithDefinition,
-  getInstillApiErrorMessage,
 } from "../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -32,12 +32,8 @@ export type CreateSourceControlProps = {
   accessToken: Nullable<string>;
 };
 
-export const CreateSourceControl = ({
-  sources,
-  initStoreOnCreate,
-  onCreate,
-  accessToken,
-}: CreateSourceControlProps) => {
+export const CreateSourceControl = (props: CreateSourceControlProps) => {
+  const { sources, initStoreOnCreate, onCreate, accessToken } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
   const { init, sourceDefinition, setFieldError } = useCreateResourceFormStore(
     selector,

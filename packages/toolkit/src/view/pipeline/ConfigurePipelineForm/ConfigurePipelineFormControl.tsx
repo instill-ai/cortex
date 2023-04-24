@@ -24,14 +24,22 @@ const selector = (state: ConfigurePipelineFormStore) => ({
 });
 
 export type ConfigurePipelineFormControlProps = {
+  accessToken: Nullable<string>;
   pipeline: Nullable<Pipeline>;
   setMessageBoxState: React.Dispatch<
     React.SetStateAction<ProgressMessageBoxState>
   >;
   onConfigure: Nullable<() => void>;
-  disableConfigure: boolean;
-  accessToken: Nullable<string>;
-  disableDelete: boolean;
+
+  /**
+   * - Default is false
+   */
+  disabledConfigure?: boolean;
+
+  /**
+   * - Default is false
+   */
+  disabledDelete?: boolean;
 };
 
 export const ConfigurePipelineFormControl = (
@@ -42,8 +50,8 @@ export const ConfigurePipelineFormControl = (
     setMessageBoxState,
     onConfigure,
     accessToken,
-    disableConfigure,
-    disableDelete,
+    disabledConfigure,
+    disabledDelete,
   } = props;
 
   const {
@@ -132,7 +140,7 @@ export const ConfigurePipelineFormControl = (
   return (
     <div className="flex flex-row">
       <OutlineButton
-        disabled={disableDelete ? true : false}
+        disabled={disabledDelete ? true : false}
         onClickHandler={() => openModal()}
         position="mr-auto my-auto"
         type="button"
@@ -142,7 +150,7 @@ export const ConfigurePipelineFormControl = (
         Delete
       </OutlineButton>
       <SolidButton
-        disabled={disableConfigure ? true : false}
+        disabled={disabledConfigure ? true : false}
         onClickHandler={() => handleSubmit()}
         position="ml-auto my-auto"
         type="button"

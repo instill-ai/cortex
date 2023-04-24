@@ -10,6 +10,7 @@ import {
   ModelCountsCell,
   TableError,
   SkeletonCell,
+  PaginationListContainerProps,
 } from "../../components";
 import {
   chunk,
@@ -27,16 +28,11 @@ export type PipelinesTableProps = {
   pipelinesWatchState: PipelinesWatchState;
   isError: boolean;
   isLoading: boolean;
-  marginBottom?: string;
-};
+} & Pick<PaginationListContainerProps, "marginBottom">;
 
-export const PipelinesTable = ({
-  pipelines,
-  pipelinesWatchState,
-  marginBottom,
-  isError,
-  isLoading,
-}: PipelinesTableProps) => {
+export const PipelinesTable = (props: PipelinesTableProps) => {
+  const { pipelines, pipelinesWatchState, marginBottom, isError, isLoading } =
+    props;
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
@@ -127,10 +123,7 @@ export const PipelinesTable = ({
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <PipelineTablePlaceholder
-          enablePlaceholderCreateButton={false}
-          marginBottom={null}
-        />
+        <PipelineTablePlaceholder enableCreateButton={false} />
       </PaginationListContainer>
     );
   }

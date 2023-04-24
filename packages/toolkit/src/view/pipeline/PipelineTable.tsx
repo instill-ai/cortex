@@ -14,15 +14,15 @@ export type PipelineTableProps = {
   pipeline: Pipeline;
   isError: boolean;
   isLoading: boolean;
+
+  /**
+   * Default is undefined
+   */
   marginBottom?: string;
 };
 
-export const PipelineTable = ({
-  pipeline,
-  marginBottom,
-  isError,
-  isLoading,
-}: PipelineTableProps) => {
+export const PipelineTable = (props: PipelineTableProps) => {
+  const { pipeline, marginBottom, isError, isLoading } = props;
   const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
     const getHeadItem = (name: string) => {
       return (
