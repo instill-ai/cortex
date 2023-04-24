@@ -93,7 +93,7 @@ export const ModelsTable = (props: ModelsTableProps) => {
         disabledSearchField={true}
         marginBottom={marginBottom}
       >
-        <TableError marginBottom={null} />
+        <TableError />
       </PaginationListContainer>
     );
   }

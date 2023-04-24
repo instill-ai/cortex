@@ -54,7 +54,7 @@ export const PipelineTable = (props: PipelineTableProps) => {
   }, []);
 
   if (isError) {
-    return <TableError marginBottom={null} />;
+    return <TableError />;
   }
 
   return (
