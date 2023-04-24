@@ -118,7 +118,7 @@ export const SetPipelineDestinationStep = (
    * -----------------------------------------------------------------------*/
 
   const createDestination = useCreateDestination();
-  const destinations = useDestinations({ accessToken, enable: true });
+  const destinations = useDestinations({ accessToken, enabled: true });
 
   const handleGoNext = () => {
     if (!destinations.isSuccess || !selectedSyncDestinationOption) {

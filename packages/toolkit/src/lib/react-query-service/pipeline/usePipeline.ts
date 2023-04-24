@@ -6,15 +6,21 @@ import { constructPipelineRecipeWithDefinition } from "../helper";
 export const usePipeline = ({
   pipelineName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   pipelineName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   let enableQuery = false;
 
-  if (pipelineName && enable) {
+  if (pipelineName && enabled) {
     enableQuery = true;
   }
 
@@ -40,7 +46,7 @@ export const usePipeline = ({
     },
     {
       enabled: enableQuery,
-      retry: 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

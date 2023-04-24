@@ -5,15 +5,21 @@ import { Nullable } from "../../type";
 export const useModel = ({
   modelName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   modelName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   let enableQuery = false;
 
-  if (modelName && enable) {
+  if (modelName && enabled) {
     enableQuery = true;
   }
 
@@ -30,7 +36,7 @@ export const useModel = ({
     },
     {
       enabled: enableQuery,
-      retry: 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

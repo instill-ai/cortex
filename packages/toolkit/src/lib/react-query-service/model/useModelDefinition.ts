@@ -5,15 +5,21 @@ import { Nullable } from "../../type";
 export const useModelDefinition = ({
   modelDefinitionName,
   accessToken,
-  enable,
+  enabled,
+  retry,
 }: {
   modelDefinitionName: Nullable<string>;
   accessToken: Nullable<string>;
-  enable: boolean;
+  enabled: boolean;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   let enableQuery = false;
 
-  if (modelDefinitionName && enable) {
+  if (modelDefinitionName && enabled) {
     enableQuery = true;
   }
 
@@ -31,6 +37,6 @@ export const useModelDefinition = ({
 
       return Promise.resolve(definition);
     },
-    { enabled: enableQuery, retry: 3 }
+    { enabled: enableQuery, retry: retry === false ? false : retry ? retry : 3 }
   );
 };

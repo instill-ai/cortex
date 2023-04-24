@@ -86,7 +86,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
 
   const destinationDefinitions = useDestinationDefinitions({
     accessToken,
-    enable: true,
+    enabled: true,
   });
 
   const destinationOptions = React.useMemo(() => {

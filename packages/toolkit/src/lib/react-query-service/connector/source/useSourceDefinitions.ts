@@ -10,7 +10,11 @@ export const useSourceDefinitions = ({
 }: {
   accessToken: Nullable<string>;
   enabled: boolean;
-  retry?: number;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   return useQuery(
     ["sources", "definition"],
@@ -24,7 +28,7 @@ export const useSourceDefinitions = ({
     },
     {
       enabled,
-      retry: retry ? retry : 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

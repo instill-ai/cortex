@@ -11,7 +11,11 @@ export function useWatchDestination({
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
-  retry?: number;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) {
   let enableQuery = false;
 
@@ -35,7 +39,7 @@ export function useWatchDestination({
     },
     {
       enabled: enableQuery,
-      retry: retry ? retry : 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 }

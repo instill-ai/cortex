@@ -14,7 +14,11 @@ export const useDestinationWithPipelines = ({
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
-  retry?: number;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   const pipelines = usePipelines({ enabled, accessToken, retry });
   const destination = useDestination({
@@ -63,7 +67,7 @@ export const useDestinationWithPipelines = ({
     },
     {
       enabled: enableQuery,
-      retry: retry ? retry : 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

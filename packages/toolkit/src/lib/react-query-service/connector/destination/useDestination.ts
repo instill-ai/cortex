@@ -16,7 +16,11 @@ export const useDestination = ({
   destinationName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
-  retry?: number;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   if (env("NEXT_PUBLIC_ENABLE_INSTILL_API_AUTH") && !accessToken) {
     throw new Error(
@@ -56,7 +60,7 @@ export const useDestination = ({
     },
     {
       enabled: enableQuery,
-      retry: retry ? retry : 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

@@ -14,7 +14,11 @@ export const useSourceWithPipelines = ({
   sourceName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
-  retry?: number;
+  /**
+   * - Default is 3
+   * - Set to false to disable retry
+   */
+  retry?: false | number;
 }) => {
   const pipelines = usePipelines({ enabled, accessToken, retry });
   const source = useSource({ enabled, sourceName, accessToken, retry });
@@ -53,7 +57,7 @@ export const useSourceWithPipelines = ({
     },
     {
       enabled: enableQuery,
-      retry: retry ? retry : 3,
+      retry: retry === false ? false : retry ? retry : 3,
     }
   );
 };

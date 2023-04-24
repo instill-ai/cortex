@@ -49,7 +49,7 @@ export const SelectExistingModelFlow = (
     React.useState<Nullable<SingleSelectOption>>(null);
 
   const models = useModels({
-    enable: true,
+    enabled: true,
     accessToken,
   });
 
