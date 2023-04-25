@@ -9,18 +9,24 @@ import {
 } from "@instill-ai/design-system";
 import {
   useCreateDestination,
-  useDestinations,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
   type CreateDestinationPayload,
   type CreateResourceFormStore,
   type Nullable,
+  type DestinationWithDefinition,
 } from "../../../../lib";
 
 import { FormVerticalDivider } from "../FormVerticalDivider";
-import { SelectExistingDestinationFlow } from "./SelectExistingDestinationFlow";
-import { CreateDestinationForm } from "../../../destination";
+import {
+  SelectExistingDestinationFlow,
+  SelectExistingDestinationFlowProps,
+} from "./SelectExistingDestinationFlow";
+import {
+  CreateDestinationForm,
+  CreateDestinationFormProps,
+} from "../../../destination";
 
 const selector = (state: CreateResourceFormStore) => ({
   pipelineMode: state.fields.pipeline.mode,
@@ -35,12 +41,13 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type SetPipelineDestinationStepProps = {
   accessToken: Nullable<string>;
-};
+} & Pick<SelectExistingDestinationFlowProps, "destinations"> &
+  Pick<CreateDestinationFormProps, "destinationDefinitions">;
 
 export const SetPipelineDestinationStep = (
   props: SetPipelineDestinationStepProps
 ) => {
-  const { accessToken } = props;
+  const { accessToken, destinations, destinationDefinitions } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -118,15 +125,14 @@ export const SetPipelineDestinationStep = (
    * -----------------------------------------------------------------------*/
 
   const createDestination = useCreateDestination();
-  const destinations = useDestinations({ accessToken, enabled: true });
 
   const handleGoNext = () => {
-    if (!destinations.isSuccess || !selectedSyncDestinationOption) {
+    if (!destinations || !selectedSyncDestinationOption) {
       return;
     }
 
     if (pipelineMode === "MODE_SYNC") {
-      const destinationIndex = destinations.data.findIndex(
+      const destinationIndex = destinations.findIndex(
         (e) => e.id === selectedSyncDestinationOption.value
       );
 
@@ -226,7 +232,7 @@ export const SetPipelineDestinationStep = (
               onSelect={() => {
                 increasePipelineFormStep();
               }}
-              accessToken={accessToken}
+              destinations={destinations}
             />
           </div>
           <div className="flex">
@@ -247,6 +253,7 @@ export const SetPipelineDestinationStep = (
               formLess={true}
               initStoreOnCreate={false}
               accessToken={accessToken}
+              destinationDefinitions={destinationDefinitions}
             />
           </div>
         </div>

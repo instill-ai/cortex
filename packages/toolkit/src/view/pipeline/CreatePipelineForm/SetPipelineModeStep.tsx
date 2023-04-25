@@ -8,6 +8,7 @@ import {
   type CreateResourceFormStore,
   type CreateSourcePayload,
   type Nullable,
+  SourceWithDefinition,
 } from "../../../lib";
 import {
   AsyncIcon,
@@ -32,10 +33,11 @@ const selector = (state: CreateResourceFormStore) => ({
 export type SetPipelineModeStepProps = {
   accessToken: Nullable<string>;
   syncModelOnly: boolean;
+  sources: Nullable<SourceWithDefinition[]>;
 };
 
 export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
-  const { accessToken, syncModelOnly } = props;
+  const { accessToken, syncModelOnly, sources } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -137,7 +139,6 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
    * -----------------------------------------------------------------------*/
 
   const createSource = useCreateSource();
-  const sources = useSources({ accessToken, enabled: true });
 
   const canGoNext = React.useMemo(() => {
     if (!pipelineMode) return false;
@@ -149,9 +150,9 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
   }, [pipelineMode, selectedSyncSourceOption]);
 
   const handleGoNext = () => {
-    if (!sources.isSuccess || !selectedSyncSourceOption?.value) return;
+    if (!sources || !selectedSyncSourceOption?.value) return;
 
-    const sourceIndex = sources.data.findIndex(
+    const sourceIndex = sources.findIndex(
       (e) => e.id === selectedSyncSourceOption.value
     );
 

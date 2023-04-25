@@ -21,7 +21,6 @@ import {
   useCreateGithubModel,
   useCreateHuggingFaceModel,
   useCreateLocalModel,
-  useModelDefinitions,
   getModelQuery,
   validateResourceId,
   useAmplitudeCtx,
@@ -37,11 +36,13 @@ import {
   type Model,
   type Nullable,
   type CreateResourceFormStore,
+  ModelDefinition,
 } from "../../lib";
 import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
 export type CreateModelFormProps = {
   accessToken: Nullable<string>;
+  modelDefinitions: Nullable<ModelDefinition[]>;
   initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
   disabledCreateModel?: boolean;
@@ -78,6 +79,7 @@ const selector = (state: CreateResourceFormStore) => ({
 export const CreateModelForm = (props: CreateModelFormProps) => {
   const {
     accessToken,
+    modelDefinitions,
     marginBottom,
     initStoreOnCreate,
     onCreate,
@@ -122,15 +124,10 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
    * Initialize the model definition
    * -----------------------------------------------------------------------*/
 
-  const modelDefinitions = useModelDefinitions({
-    accessToken,
-    enabled: true,
-  });
-
   const modelDefinitionOptions = React.useMemo(() => {
-    if (!modelDefinitions.isSuccess) return [];
+    if (!modelDefinitions) return [];
 
-    return modelDefinitions.data.map((e) => {
+    return modelDefinitions.map((e) => {
       const { getIcon } = getModelDefinitionToolkit(e.name);
       return {
         label: e.title,
@@ -143,7 +140,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
         }),
       };
     });
-  }, [modelDefinitions.isSuccess, modelDefinitions.data]);
+  }, [modelDefinitions]);
 
   const [selectedModelDefinitionOption, setSelectedModelDefinitionOption] =
     React.useState<Nullable<SingleSelectOption>>(null);
@@ -631,9 +628,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
                   numbers, and hyphen, with the first character a letter, 
                   the last a letter or a number, and a 63 character maximum."
           required={true}
-          disabled={
-            modelDefinitions.isSuccess ? (modelCreated ? true : false) : false
-          }
+          disabled={modelDefinitions ? (modelCreated ? true : false) : false}
           value={modelId}
           error={modelIdError}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -663,9 +658,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
           key="description"
           description="Fill with a short description."
           required={false}
-          disabled={
-            modelDefinitions.isSuccess ? (modelCreated ? true : false) : false
-          }
+          disabled={modelDefinitions ? (modelCreated ? true : false) : false}
           value={modelDescription}
           error={modelDescriptionError}
           enableCounter={true}
@@ -685,9 +678,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
             setFieldValue("model.new.definition", option?.value);
             setSelectedModelDefinitionOption(option);
           }}
-          disabled={
-            modelDefinitions.isSuccess ? (modelCreated ? true : false) : false
-          }
+          disabled={modelDefinitions ? (modelCreated ? true : false) : false}
           required={true}
           description={`<a href="${getModelSetupGuide(
             modelDefinition || ""

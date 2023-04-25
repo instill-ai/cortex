@@ -12,6 +12,7 @@ import {
   useCreateResourceFormStore,
   type CreateResourceFormStore,
   type Nullable,
+  Model,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -22,12 +23,13 @@ const selector = (state: CreateResourceFormStore) => ({
 export type SelectExistingModelFlowProps = {
   accessToken: Nullable<string>;
   onSelect: () => void;
+  models: Nullable<Model[]>;
 };
 
 export const SelectExistingModelFlow = (
   props: SelectExistingModelFlowProps
 ) => {
-  const { accessToken, onSelect } = props;
+  const { accessToken, onSelect, models } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -48,20 +50,15 @@ export const SelectExistingModelFlow = (
   const [selectedModelOption, setSelectedModelOption] =
     React.useState<Nullable<SingleSelectOption>>(null);
 
-  const models = useModels({
-    enabled: true,
-    accessToken,
-  });
-
   React.useEffect(() => {
-    if (!models.isSuccess || !models.data) return;
+    if (!models) return;
 
-    const onlineModels = models.data.filter((e) => e.state === "STATE_ONLINE");
+    const onlineModels = models.filter((e) => e.state === "STATE_ONLINE");
 
     setModelOptions(
       onlineModels.map((e) => ({ label: e.name, value: e.name }))
     );
-  }, [models.isSuccess, models.data]);
+  }, [models]);
 
   /* -------------------------------------------------------------------------
    * Use existing model
@@ -76,11 +73,11 @@ export const SelectExistingModelFlow = (
   }, [modelType]);
 
   const handleUseModel = React.useCallback(() => {
-    if (!models.isSuccess || !models.data) {
+    if (!models) {
       return;
     }
 
-    const targetModel = models.data.find(
+    const targetModel = models.find(
       (e) => e.name === (selectedModelOption?.value as string)
     );
 
@@ -98,14 +95,7 @@ export const SelectExistingModelFlow = (
         process: "pipeline",
       });
     }
-  }, [
-    models.isSuccess,
-    models.data,
-    amplitudeIsInit,
-    selectedModelOption?.value,
-    setFieldValue,
-    onSelect,
-  ]);
+  }, [amplitudeIsInit, selectedModelOption?.value, setFieldValue, onSelect]);
 
   /* -------------------------------------------------------------------------
    * Render

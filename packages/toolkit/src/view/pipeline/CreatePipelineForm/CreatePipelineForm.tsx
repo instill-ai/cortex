@@ -3,9 +3,18 @@ import * as React from "react";
 import { Nullable, useCreateResourceFormStore } from "../../../lib";
 import { CreatePipelineProgress } from "./CreatePipelineProgress";
 import { SetPipelineDetailsStep } from "./SetPipelineDetailsStep";
-import { SetPipelineDestinationStep } from "./SetPipelineDestinationStep";
-import { SetPipelineModelStep } from "./SetPipelineModelStep";
-import { SetPipelineModeStep } from "./SetPipelineModeStep";
+import {
+  SetPipelineDestinationStep,
+  SetPipelineDestinationStepProps,
+} from "./SetPipelineDestinationStep";
+import {
+  SetPipelineModelStep,
+  SetPipelineModelStepProps,
+} from "./SetPipelineModelStep";
+import {
+  SetPipelineModeStep,
+  SetPipelineModeStepProps,
+} from "./SetPipelineModeStep";
 
 //  Currently, we make number 0 & 1 stay at the first step
 //  0: Choose pipeline mode
@@ -20,10 +29,25 @@ export type CreatePipelineFormProps = {
   accessToken: Nullable<string>;
   syncModelOnly: boolean;
   withModelPreset: boolean;
-};
+} & Pick<SetPipelineModeStepProps, "sources"> &
+  Pick<SetPipelineModelStepProps, "models" | "modelDefinitions"> &
+  Pick<
+    SetPipelineDestinationStepProps,
+    "destinationDefinitions" | "destinations"
+  >;
 
 export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
-  const { onCreate, accessToken, syncModelOnly, withModelPreset } = props;
+  const {
+    onCreate,
+    accessToken,
+    syncModelOnly,
+    withModelPreset,
+    sources,
+    models,
+    modelDefinitions,
+    destinations,
+    destinationDefinitions,
+  } = props;
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
   );
@@ -36,6 +60,7 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
           <SetPipelineModeStep
             syncModelOnly={syncModelOnly}
             accessToken={accessToken}
+            sources={sources}
           />
         );
       case 2:
@@ -43,10 +68,18 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
           <SetPipelineModelStep
             withModelPreset={withModelPreset}
             accessToken={accessToken}
+            models={models}
+            modelDefinitions={modelDefinitions}
           />
         );
       case 3:
-        return <SetPipelineDestinationStep accessToken={accessToken} />;
+        return (
+          <SetPipelineDestinationStep
+            accessToken={accessToken}
+            destinations={destinations}
+            destinationDefinitions={destinationDefinitions}
+          />
+        );
       case 4:
         return (
           <SetPipelineDetailsStep

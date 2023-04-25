@@ -43,6 +43,7 @@ export type CreateDestinationFormProps = {
   onCreate: Nullable<(id: string) => void>;
   initStoreOnCreate: boolean;
   accessToken: Nullable<string>;
+  destinationDefinitions: Nullable<ConnectorDefinition[]>;
 } & Pick<FormRootProps, "width" | "marginBottom" | "formLess">;
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -58,6 +59,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     title,
     onCreate,
     initStoreOnCreate,
+    destinationDefinitions,
     accessToken,
     marginBottom,
     formLess,
@@ -84,16 +86,11 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
 
-  const destinationDefinitions = useDestinationDefinitions({
-    accessToken,
-    enabled: true,
-  });
-
   const destinationOptions = React.useMemo(() => {
-    if (!destinationDefinitions.isSuccess) return [];
+    if (!destinationDefinitions) return [];
 
     if (pipelineMode === "MODE_ASYNC") {
-      return destinationDefinitions.data
+      return destinationDefinitions
         .filter(
           (e) =>
             e.name !== "destination-connector-definitions/destination-http" &&
@@ -119,7 +116,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         }));
     }
 
-    return destinationDefinitions.data.map((e) => ({
+    return destinationDefinitions.map((e) => ({
       label: e.connector_definition.title,
       value: e.name,
       startIcon: (
@@ -136,11 +133,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         />
       ),
     }));
-  }, [
-    destinationDefinitions.isSuccess,
-    destinationDefinitions.data,
-    pipelineMode,
-  ]);
+  }, [destinationDefinitions, pipelineMode]);
 
   const [selectedDestinationDefinition, setSelectedDestinationDefinition] =
     React.useState<Nullable<ConnectorDefinition>>(null);
@@ -516,8 +509,8 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
             setFieldErrors(null);
             setSelectedDestinationOption(option);
             setSelectedDestinationDefinition(
-              destinationDefinitions.data
-                ? destinationDefinitions.data.find(
+              destinationDefinitions
+                ? destinationDefinitions.find(
                     (e) => e.name === option?.value
                   ) ?? null
                 : null
