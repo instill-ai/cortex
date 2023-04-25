@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.38.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.37.1...@instill-ai/toolkit-v0.38.0) (2023-04-25)
+
+
+### Features
+
+* remove interior query ([#383](https://github.com/instill-ai/design-system/issues/383)) ([8653cbb](https://github.com/instill-ai/design-system/commit/8653cbb51b904b4cfa0231e569de1e2cccb30484))
+
 ## [0.37.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.37.0...@instill-ai/toolkit-v0.37.1) (2023-04-24)
 
 
