@@ -8,12 +8,12 @@ import {
   SolidButton,
 } from "@instill-ai/design-system";
 import {
-  useDestinations,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
   type CreateResourceFormStore,
   type Nullable,
+  type DestinationWithDefinition,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -24,14 +24,14 @@ const selector = (state: CreateResourceFormStore) => ({
 });
 
 export type SelectExistingDestinationFlowProps = {
-  accessToken: Nullable<string>;
   onSelect: () => void;
+  destinations: Nullable<DestinationWithDefinition[]>;
 };
 
 export const SelectExistingDestinationFlow = (
   props: SelectExistingDestinationFlowProps
 ) => {
-  const { accessToken, onSelect } = props;
+  const { onSelect, destinations } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -52,14 +52,13 @@ export const SelectExistingDestinationFlow = (
   const [destinationOptions, setDestinationOptions] = React.useState<
     SingleSelectOption[] | null
   >(null);
-  const destinations = useDestinations({ accessToken, enabled: true });
 
   React.useEffect(() => {
-    if (!destinations.isSuccess || !destinations.data) return;
+    if (!destinations) return;
 
     if (pipelineMode === "MODE_ASYNC") {
       setDestinationOptions(
-        destinations.data
+        destinations
           .filter(
             (e) =>
               e.name !== "destination-connectors/destination-http" &&
@@ -89,7 +88,7 @@ export const SelectExistingDestinationFlow = (
       );
     } else {
       setDestinationOptions(
-        destinations.data.map((e) => {
+        destinations.map((e) => {
           return {
             label: e.id,
             value: e.id,
@@ -97,7 +96,7 @@ export const SelectExistingDestinationFlow = (
         })
       );
     }
-  }, [destinations.isSuccess, destinations.data, pipelineMode]);
+  }, [destinations, pipelineMode]);
 
   const [selectedDestinationOption, setSelectedDestinationOption] =
     React.useState<Nullable<SingleSelectOption>>(null);
@@ -115,7 +114,7 @@ export const SelectExistingDestinationFlow = (
   }, [existingDestinationId]);
 
   const handleUseExistingDestination = () => {
-    if (!existingDestinationId || !destinations.isSuccess) return;
+    if (!existingDestinationId || !destinations) return;
 
     setFieldValue(
       "destination.existing.definition",
