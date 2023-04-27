@@ -9,31 +9,42 @@ import {
 
 import {
   CreateSourceControl,
-  CreateSourceControlProps,
+  type CreateSourceControlProps,
 } from "./CreateSourceControl";
 import { SourceDefinitionField } from "./SourceDefinitionField";
+import { useSources } from "../../../lib";
 
 export type CreateSourceFormProps = Pick<
   FormRootProps,
   "marginBottom" | "width"
 > &
-  CreateSourceControlProps;
+  Pick<
+    CreateSourceControlProps,
+    "accessToken" | "onCreate" | "initStoreOnCreate"
+  > & {
+    enabledQuery: boolean;
+  };
 
 export const CreateSourceForm = (props: CreateSourceFormProps) => {
   const {
-    sources,
     marginBottom,
     width,
     onCreate,
     accessToken,
     initStoreOnCreate,
+    enabledQuery,
   } = props;
   const [sourceDefinitionOptions, setSourceDefinitionOptions] = React.useState<
     SingleSelectOption[]
   >([]);
 
+  const sources = useSources({
+    accessToken,
+    enabled: enabledQuery,
+  });
+
   React.useEffect(() => {
-    if (!sources) return;
+    if (!sources.isSuccess) return;
 
     setSourceDefinitionOptions([
       {
@@ -70,7 +81,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
           sourceDefinitionOptions={sourceDefinitionOptions}
         />
         <CreateSourceControl
-          sources={sources}
+          sources={sources.isSuccess ? sources.data : null}
           onCreate={onCreate}
           accessToken={accessToken}
           initStoreOnCreate={initStoreOnCreate}
