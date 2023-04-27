@@ -29,6 +29,7 @@ import {
   getInstillApiErrorMessage,
   useDeployModel,
   watchModel,
+  useModelDefinitions,
   type CreateGithubModelPayload,
   type CreateHuggingFaceModelPayload,
   type CreateArtivcModelPayload,
@@ -36,18 +37,17 @@ import {
   type Model,
   type Nullable,
   type CreateResourceFormStore,
-  ModelDefinition,
 } from "../../lib";
 import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
 export type CreateModelFormProps = {
   accessToken: Nullable<string>;
-  modelDefinitions: Nullable<ModelDefinition[]>;
   initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
   disabledCreateModel?: boolean;
   width?: string;
   marginBottom?: string;
+  enabledQuery: boolean;
 };
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -79,7 +79,7 @@ const selector = (state: CreateResourceFormStore) => ({
 export const CreateModelForm = (props: CreateModelFormProps) => {
   const {
     accessToken,
-    modelDefinitions,
+    enabledQuery,
     marginBottom,
     initStoreOnCreate,
     onCreate,
@@ -124,10 +124,15 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
    * Initialize the model definition
    * -----------------------------------------------------------------------*/
 
-  const modelDefinitionOptions = React.useMemo(() => {
-    if (!modelDefinitions) return [];
+  const modelDefinitions = useModelDefinitions({
+    enabled: enabledQuery,
+    accessToken,
+  });
 
-    return modelDefinitions.map((e) => {
+  const modelDefinitionOptions = React.useMemo(() => {
+    if (!modelDefinitions.isSuccess) return [];
+
+    return modelDefinitions.data.map((e) => {
       const { getIcon } = getModelDefinitionToolkit(e.name);
       return {
         label: e.title,

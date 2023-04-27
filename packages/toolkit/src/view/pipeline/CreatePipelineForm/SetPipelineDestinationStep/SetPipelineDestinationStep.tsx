@@ -12,21 +12,15 @@ import {
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
+  useDestinations,
   type CreateDestinationPayload,
   type CreateResourceFormStore,
   type Nullable,
-  type DestinationWithDefinition,
 } from "../../../../lib";
 
 import { FormVerticalDivider } from "../FormVerticalDivider";
-import {
-  SelectExistingDestinationFlow,
-  SelectExistingDestinationFlowProps,
-} from "./SelectExistingDestinationFlow";
-import {
-  CreateDestinationForm,
-  CreateDestinationFormProps,
-} from "../../../destination";
+import { SelectExistingDestinationFlow } from "./SelectExistingDestinationFlow";
+import { CreateDestinationForm } from "../../../destination";
 
 const selector = (state: CreateResourceFormStore) => ({
   pipelineMode: state.fields.pipeline.mode,
@@ -41,13 +35,13 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type SetPipelineDestinationStepProps = {
   accessToken: Nullable<string>;
-} & Pick<SelectExistingDestinationFlowProps, "destinations"> &
-  Pick<CreateDestinationFormProps, "destinationDefinitions">;
+  enabledQuery: boolean;
+};
 
 export const SetPipelineDestinationStep = (
   props: SetPipelineDestinationStepProps
 ) => {
-  const { accessToken, destinations, destinationDefinitions } = props;
+  const { accessToken, enabledQuery } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -73,6 +67,11 @@ export const SetPipelineDestinationStep = (
 
   const [selectedSyncDestinationOption, setSelectedSyncDestinationOption] =
     React.useState<SingleSelectOption | null>(null);
+
+  const destinations = useDestinations({
+    accessToken,
+    enabled: enabledQuery,
+  });
 
   React.useEffect(() => {
     const syncDestinationOptions = [
@@ -127,12 +126,12 @@ export const SetPipelineDestinationStep = (
   const createDestination = useCreateDestination();
 
   const handleGoNext = () => {
-    if (!destinations || !selectedSyncDestinationOption) {
+    if (!destinations.isSuccess || !selectedSyncDestinationOption) {
       return;
     }
 
     if (pipelineMode === "MODE_SYNC") {
-      const destinationIndex = destinations.findIndex(
+      const destinationIndex = destinations.data.findIndex(
         (e) => e.id === selectedSyncDestinationOption.value
       );
 
@@ -232,7 +231,8 @@ export const SetPipelineDestinationStep = (
               onSelect={() => {
                 increasePipelineFormStep();
               }}
-              destinations={destinations}
+              accessToken={accessToken}
+              enabledQuery={enabledQuery}
             />
           </div>
           <div className="flex">
@@ -253,7 +253,7 @@ export const SetPipelineDestinationStep = (
               formLess={true}
               initStoreOnCreate={false}
               accessToken={accessToken}
-              destinationDefinitions={destinationDefinitions}
+              enabledQuery={enabledQuery}
             />
           </div>
         </div>
