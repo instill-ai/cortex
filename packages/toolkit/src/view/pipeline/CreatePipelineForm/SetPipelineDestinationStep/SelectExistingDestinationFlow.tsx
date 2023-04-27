@@ -10,10 +10,10 @@ import {
 import {
   useAmplitudeCtx,
   sendAmplitudeData,
+  useDestinations,
   useCreateResourceFormStore,
   type CreateResourceFormStore,
   type Nullable,
-  type DestinationWithDefinition,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -25,13 +25,14 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type SelectExistingDestinationFlowProps = {
   onSelect: () => void;
-  destinations: Nullable<DestinationWithDefinition[]>;
+  accessToken: Nullable<string>;
+  enabledQuery: boolean;
 };
 
 export const SelectExistingDestinationFlow = (
   props: SelectExistingDestinationFlowProps
 ) => {
-  const { onSelect, destinations } = props;
+  const { onSelect, accessToken, enabledQuery } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -49,16 +50,21 @@ export const SelectExistingDestinationFlow = (
    * Get existing destinations and set up options
    * -----------------------------------------------------------------------*/
 
+  const destinations = useDestinations({
+    accessToken: accessToken,
+    enabled: enabledQuery,
+  });
+
   const [destinationOptions, setDestinationOptions] = React.useState<
     SingleSelectOption[] | null
   >(null);
 
   React.useEffect(() => {
-    if (!destinations) return;
+    if (!destinations.isSuccess) return;
 
     if (pipelineMode === "MODE_ASYNC") {
       setDestinationOptions(
-        destinations
+        destinations.data
           .filter(
             (e) =>
               e.name !== "destination-connectors/destination-http" &&
@@ -88,7 +94,7 @@ export const SelectExistingDestinationFlow = (
       );
     } else {
       setDestinationOptions(
-        destinations.map((e) => {
+        destinations.data.map((e) => {
           return {
             label: e.id,
             value: e.id,

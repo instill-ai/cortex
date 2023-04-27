@@ -3,18 +3,9 @@ import * as React from "react";
 import { Nullable, useCreateResourceFormStore } from "../../../lib";
 import { CreatePipelineProgress } from "./CreatePipelineProgress";
 import { SetPipelineDetailsStep } from "./SetPipelineDetailsStep";
-import {
-  SetPipelineDestinationStep,
-  SetPipelineDestinationStepProps,
-} from "./SetPipelineDestinationStep";
-import {
-  SetPipelineModelStep,
-  SetPipelineModelStepProps,
-} from "./SetPipelineModelStep";
-import {
-  SetPipelineModeStep,
-  SetPipelineModeStepProps,
-} from "./SetPipelineModeStep";
+import { SetPipelineDestinationStep } from "./SetPipelineDestinationStep";
+import { SetPipelineModelStep } from "./SetPipelineModelStep";
+import { SetPipelineModeStep } from "./SetPipelineModeStep";
 
 //  Currently, we make number 0 & 1 stay at the first step
 //  0: Choose pipeline mode
@@ -29,12 +20,8 @@ export type CreatePipelineFormProps = {
   accessToken: Nullable<string>;
   syncModelOnly: boolean;
   withModelPreset: boolean;
-} & Pick<SetPipelineModeStepProps, "sources"> &
-  Pick<SetPipelineModelStepProps, "models" | "modelDefinitions"> &
-  Pick<
-    SetPipelineDestinationStepProps,
-    "destinationDefinitions" | "destinations"
-  >;
+  enabledQuery: boolean;
+};
 
 export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
   const {
@@ -42,11 +29,7 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
     accessToken,
     syncModelOnly,
     withModelPreset,
-    sources,
-    models,
-    modelDefinitions,
-    destinations,
-    destinationDefinitions,
+    enabledQuery,
   } = props;
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
@@ -60,7 +43,7 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
           <SetPipelineModeStep
             syncModelOnly={syncModelOnly}
             accessToken={accessToken}
-            sources={sources}
+            enabledQuery={enabledQuery}
           />
         );
       case 2:
@@ -68,16 +51,14 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
           <SetPipelineModelStep
             withModelPreset={withModelPreset}
             accessToken={accessToken}
-            models={models}
-            modelDefinitions={modelDefinitions}
+            enabledQuery={enabledQuery}
           />
         );
       case 3:
         return (
           <SetPipelineDestinationStep
             accessToken={accessToken}
-            destinations={destinations}
-            destinationDefinitions={destinationDefinitions}
+            enabledQuery={enabledQuery}
           />
         );
       case 4:
@@ -90,7 +71,14 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
       default:
         return null;
     }
-  }, [pipelineFormStep, onCreate, accessToken, syncModelOnly, withModelPreset]);
+  }, [
+    pipelineFormStep,
+    onCreate,
+    accessToken,
+    syncModelOnly,
+    withModelPreset,
+    enabledQuery,
+  ]);
 
   return (
     <div className="flex flex-col">

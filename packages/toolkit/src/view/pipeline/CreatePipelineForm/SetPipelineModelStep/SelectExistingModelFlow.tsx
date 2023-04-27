@@ -12,7 +12,6 @@ import {
   useCreateResourceFormStore,
   type CreateResourceFormStore,
   type Nullable,
-  Model,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -23,13 +22,13 @@ const selector = (state: CreateResourceFormStore) => ({
 export type SelectExistingModelFlowProps = {
   accessToken: Nullable<string>;
   onSelect: () => void;
-  models: Nullable<Model[]>;
+  enabledQuery: boolean;
 };
 
 export const SelectExistingModelFlow = (
   props: SelectExistingModelFlowProps
 ) => {
-  const { accessToken, onSelect, models } = props;
+  const { accessToken, onSelect, enabledQuery } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -50,10 +49,15 @@ export const SelectExistingModelFlow = (
   const [selectedModelOption, setSelectedModelOption] =
     React.useState<Nullable<SingleSelectOption>>(null);
 
-  React.useEffect(() => {
-    if (!models) return;
+  const models = useModels({
+    accessToken,
+    enabled: enabledQuery,
+  });
 
-    const onlineModels = models.filter((e) => e.state === "STATE_ONLINE");
+  React.useEffect(() => {
+    if (!models.isSuccess) return;
+
+    const onlineModels = models.data.filter((e) => e.state === "STATE_ONLINE");
 
     setModelOptions(
       onlineModels.map((e) => ({ label: e.name, value: e.name }))
@@ -73,11 +77,11 @@ export const SelectExistingModelFlow = (
   }, [modelType]);
 
   const handleUseModel = React.useCallback(() => {
-    if (!models) {
+    if (!models.isSuccess) {
       return;
     }
 
-    const targetModel = models.find(
+    const targetModel = models.data.find(
       (e) => e.name === (selectedModelOption?.value as string)
     );
 
@@ -95,7 +99,14 @@ export const SelectExistingModelFlow = (
         process: "pipeline",
       });
     }
-  }, [amplitudeIsInit, selectedModelOption?.value, setFieldValue, onSelect]);
+  }, [
+    amplitudeIsInit,
+    selectedModelOption?.value,
+    setFieldValue,
+    onSelect,
+    models.data,
+    models.isSuccess,
+  ]);
 
   /* -------------------------------------------------------------------------
    * Render

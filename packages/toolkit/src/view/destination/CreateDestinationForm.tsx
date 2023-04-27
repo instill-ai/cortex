@@ -43,7 +43,7 @@ export type CreateDestinationFormProps = {
   onCreate: Nullable<(id: string) => void>;
   initStoreOnCreate: boolean;
   accessToken: Nullable<string>;
-  destinationDefinitions: Nullable<ConnectorDefinition[]>;
+  enabledQuery: boolean;
 } & Pick<FormRootProps, "width" | "marginBottom" | "formLess">;
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -59,7 +59,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     title,
     onCreate,
     initStoreOnCreate,
-    destinationDefinitions,
+    enabledQuery,
     accessToken,
     marginBottom,
     formLess,
@@ -86,11 +86,16 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
 
+  const destinationDefinitions = useDestinationDefinitions({
+    accessToken,
+    enabled: enabledQuery,
+  });
+
   const destinationOptions = React.useMemo(() => {
-    if (!destinationDefinitions) return [];
+    if (!destinationDefinitions.isSuccess) return [];
 
     if (pipelineMode === "MODE_ASYNC") {
-      return destinationDefinitions
+      return destinationDefinitions.data
         .filter(
           (e) =>
             e.name !== "destination-connector-definitions/destination-http" &&
@@ -116,7 +121,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         }));
     }
 
-    return destinationDefinitions.map((e) => ({
+    return destinationDefinitions.data.map((e) => ({
       label: e.connector_definition.title,
       value: e.name,
       startIcon: (
@@ -509,8 +514,8 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
             setFieldErrors(null);
             setSelectedDestinationOption(option);
             setSelectedDestinationDefinition(
-              destinationDefinitions
-                ? destinationDefinitions.find(
+              destinationDefinitions.isSuccess
+                ? destinationDefinitions.data.find(
                     (e) => e.name === option?.value
                   ) ?? null
                 : null

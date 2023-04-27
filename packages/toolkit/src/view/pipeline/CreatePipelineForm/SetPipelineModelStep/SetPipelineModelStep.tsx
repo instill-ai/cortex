@@ -1,23 +1,16 @@
 import { FormVerticalDivider } from "../FormVerticalDivider";
-import {
-  SelectExistingModelFlow,
-  SelectExistingModelFlowProps,
-} from "./SelectExistingModelFlow";
-import {
-  CreateModelForm,
-  CreateModelFormProps,
-  CreateModelWithPresetForm,
-} from "../../../model";
+import { SelectExistingModelFlow } from "./SelectExistingModelFlow";
+import { CreateModelForm, CreateModelWithPresetForm } from "../../../model";
 import { useCreateResourceFormStore, type Nullable } from "../../../../lib";
 
 export type SetPipelineModelStepProps = {
   accessToken: Nullable<string>;
   withModelPreset: boolean;
-} & Pick<SelectExistingModelFlowProps, "models"> &
-  Pick<CreateModelFormProps, "modelDefinitions">;
+  enabledQuery: boolean;
+};
 
 export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
-  const { accessToken, withModelPreset, models, modelDefinitions } = props;
+  const { accessToken, withModelPreset, enabledQuery } = props;
   const increasePipelineFormStep = useCreateResourceFormStore(
     (state) => state.increasePipelineFormStep
   );
@@ -30,7 +23,7 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
             increasePipelineFormStep();
           }}
           accessToken={accessToken}
-          models={models}
+          enabledQuery={enabledQuery}
         />
       </div>
       <div className="flex">
@@ -52,7 +45,7 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
             }}
             initStoreOnCreate={false}
             accessToken={accessToken}
-            modelDefinitions={modelDefinitions}
+            enabledQuery={enabledQuery}
           />
         )}
       </div>
