@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.39.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.39.0...@instill-ai/toolkit-v0.39.1) (2023-04-27)
+
+
+### Bug Fixes
+
+* fix CreateSourceForm arg ([#387](https://github.com/instill-ai/design-system/issues/387)) ([89b1e51](https://github.com/instill-ai/design-system/commit/89b1e513b5439ce074684446b6989d4004a21833))
+
 ## [0.39.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.38.0...@instill-ai/toolkit-v0.39.0) (2023-04-27)
 
 
