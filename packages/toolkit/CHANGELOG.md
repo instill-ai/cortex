@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.39.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.38.0...@instill-ai/toolkit-v0.39.0) (2023-04-27)
+
+
+### Features
+
+* rollback to old createPipelineForm and add enabledQuery argument ([#385](https://github.com/instill-ai/design-system/issues/385)) ([ba4356a](https://github.com/instill-ai/design-system/commit/ba4356a7874c9164bc80fc6ff911b153a79b2f18))
+
 ## [0.38.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.37.1...@instill-ai/toolkit-v0.38.0) (2023-04-25)
 
 
