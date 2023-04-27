@@ -144,17 +144,11 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
 
   const createSource = useCreateSource();
 
-  const canGoNext = React.useMemo(() => {
-    if (!pipelineMode) return false;
-    if (pipelineMode === "MODE_SYNC" && !selectedSyncSourceOption) {
-      return false;
-    }
-
-    return true;
-  }, [pipelineMode, selectedSyncSourceOption]);
+  const canGoNext =
+    pipelineMode && sources.isSuccess && selectedSyncSourceOption;
 
   const handleGoNext = () => {
-    if (!sources.isSuccess || !selectedSyncSourceOption?.value) return;
+    if (!canGoNext) return;
 
     const sourceIndex = sources.data.findIndex(
       (e) => e.id === selectedSyncSourceOption.value
