@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.39.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.39.1...@instill-ai/toolkit-v0.39.2) (2023-04-27)
+
+
+### Bug Fixes
+
+* fix setup destination step hint not implemented ([#389](https://github.com/instill-ai/design-system/issues/389)) ([6978360](https://github.com/instill-ai/design-system/commit/697836053c65be726921b196c9e3fda15da35ffe))
+
 ## [0.39.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.39.0...@instill-ai/toolkit-v0.39.1) (2023-04-27)
 
 
