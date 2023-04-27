@@ -125,8 +125,10 @@ export const SetPipelineDestinationStep = (
 
   const createDestination = useCreateDestination();
 
+  const canGoNext = destinations.isSuccess && selectedSyncDestinationOption;
+
   const handleGoNext = () => {
-    if (!destinations.isSuccess || !selectedSyncDestinationOption) {
+    if (!canGoNext) {
       return;
     }
 
@@ -216,7 +218,7 @@ export const SetPipelineDestinationStep = (
           />
           <SolidButton
             position="ml-auto"
-            disabled={false}
+            disabled={canGoNext ? false : true}
             type="button"
             color="primary"
             onClickHandler={handleGoNext}
