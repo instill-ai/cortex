@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.40.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.1...@instill-ai/toolkit-v0.40.2) (2023-04-28)
+
+
+### Bug Fixes
+
+* fix wrong getQueryString function ([#396](https://github.com/instill-ai/design-system/issues/396)) ([4def97b](https://github.com/instill-ai/design-system/commit/4def97b9c81bd87b8c244e1a5d4da6ae80dfddb8))
+
 ## [0.40.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.0...@instill-ai/toolkit-v0.40.1) (2023-04-28)
 
 
