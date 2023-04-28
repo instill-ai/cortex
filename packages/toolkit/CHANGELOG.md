@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.40.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.39.2...@instill-ai/toolkit-v0.40.0) (2023-04-28)
+
+
+### Features
+
+* [INS-553] add api token related react-query function and sdk ([#391](https://github.com/instill-ai/design-system/issues/391)) ([1d81422](https://github.com/instill-ai/design-system/commit/1d81422ef2649542fb2f9359abfd7027f9c735d9))
+
+
+### Bug Fixes
+
+* [INS-554] fix react-query didn't correctly update cache after mutation ([#393](https://github.com/instill-ai/design-system/issues/393)) ([08f8779](https://github.com/instill-ai/design-system/commit/08f8779379e9d0e8c0ef26e260da93d88af7ae6d))
+
 ## [0.39.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.39.1...@instill-ai/toolkit-v0.39.2) (2023-04-27)
 
 
