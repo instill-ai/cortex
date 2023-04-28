@@ -1,16 +1,16 @@
 import { Nullable } from "../../type";
-import { createInstillAxiosClient } from "../helper";
-import { User } from "./types";
+import { createInstillAxiosClient, getQueryString } from "../helper";
+import { ApiToken, User } from "./types";
 
 export type GetUserResponse = {
   user: User;
 };
 
-export const getUserQuery = async ({
+export async function getUserQuery({
   accessToken,
 }: {
   accessToken: Nullable<string>;
-}): Promise<User> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -20,7 +20,7 @@ export const getUserQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type CheckUserIdExistResponse = {
   exists: boolean;
@@ -39,6 +39,69 @@ export async function checkUserIdExist({
       `/users/${id}/exist`
     );
     return Promise.resolve(data.exists);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type GetApiTokenResponse = {
+  token: ApiToken;
+};
+
+export async function getApiTokenQuery({
+  tokenName,
+  accessToken,
+}: {
+  tokenName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken);
+
+    const { data } = await client.get<GetApiTokenResponse>(`/${tokenName}`);
+
+    return Promise.resolve(data.token);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type ListApiTokensResponse = {
+  tokens: ApiToken[];
+  next_page_token: string;
+  total_size: string;
+};
+
+export async function listApiTokensQuery({
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken);
+    const tokens: ApiToken[] = [];
+
+    const queryString = getQueryString("/tokens", pageSize, nextPageToken);
+
+    const { data } = await client.get<ListApiTokensResponse>(queryString);
+
+    tokens.push(...data.tokens);
+
+    if (data.next_page_token) {
+      tokens.push(
+        ...(await listApiTokensQuery({
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
+      );
+    }
+
+    return Promise.resolve(tokens);
   } catch (err) {
     return Promise.reject(err);
   }
