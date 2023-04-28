@@ -1,5 +1,9 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { CreateApiTokenPayload, createApiTokenMutation } from "../../vdp-sdk";
+import {
+  ApiToken,
+  CreateApiTokenPayload,
+  createApiTokenMutation,
+} from "../../vdp-sdk";
 import { Nullable } from "../../type";
 
 export const useCreateApiToken = () => {
@@ -19,8 +23,11 @@ export const useCreateApiToken = () => {
       return Promise.resolve({ token });
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["api-tokens"]);
+      onSuccess: ({ token }) => {
+        queryClient.setQueryData<ApiToken[]>(["api-tokens"], (old) =>
+          old ? [...old, token] : [token]
+        );
+        queryClient.setQueryData<ApiToken>(["api-tokens", token.name], token);
       },
     }
   );

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Nullable } from "../../type";
-import { deleteApiTokenMutation } from "../../vdp-sdk";
+import { ApiToken, deleteApiTokenMutation } from "../../vdp-sdk";
 
 export const useDeleteApiToken = () => {
   const queryClient = useQueryClient();
@@ -13,11 +13,14 @@ export const useDeleteApiToken = () => {
       accessToken: Nullable<string>;
     }) => {
       await deleteApiTokenMutation({ tokenName, accessToken });
-      return tokenName;
+      return Promise.resolve(tokenName);
     },
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(["api-tokens"]);
+      onSuccess: (tokenName) => {
+        queryClient.setQueryData<ApiToken[]>(["api-tokens"], (old) =>
+          old ? old.filter((e) => e.name !== tokenName) : []
+        );
+        queryClient.removeQueries(["api-tokens", tokenName], { exact: true });
       },
     }
   );

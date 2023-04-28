@@ -13,7 +13,7 @@ export const useDeleteModel = () => {
       accessToken: Nullable<string>;
     }) => {
       await deleteModelMutation({ modelName, accessToken });
-      return modelName;
+      return Promise.resolve(modelName);
     },
     {
       onSuccess: (modelName) => {
