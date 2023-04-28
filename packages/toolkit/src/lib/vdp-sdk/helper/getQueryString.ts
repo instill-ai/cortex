@@ -17,11 +17,11 @@ export const getQueryString = (
   }
 
   if (pageSize) {
-    url += `pageSize=${pageSize}&`;
+    url += `page_size=${pageSize}&`;
   }
 
   if (nextPageToken) {
-    url += `pageToken=${nextPageToken}&`;
+    url += `page_token=${nextPageToken}&`;
   }
 
   // Remove the trailing '&' if there are any query parameters
