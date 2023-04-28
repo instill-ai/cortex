@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Nullable } from "../../type";
 import { watchPipeline, type PipelinesWatchState } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export function useWatchPipelines({
   pipelineNames,

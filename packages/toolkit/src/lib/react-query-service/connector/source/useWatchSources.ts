@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Nullable } from "../../../type";
 import { watchSource, type ConnectorsWatchState } from "../../../vdp-sdk";
+import type { Nullable } from "../../../type";
 
 export function useWatchSources({
   sourceNames,

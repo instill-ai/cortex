@@ -1,8 +1,8 @@
-import { listPipelinesQuery, Pipeline } from "../../vdp-sdk";
 import { useQuery } from "@tanstack/react-query";
+import { listPipelinesQuery, type Pipeline } from "../../vdp-sdk";
 import { constructPipelineRecipeWithDefinition } from "../helper";
-import { Nullable } from "../../type";
 import { env } from "../../utility";
+import type { Nullable } from "../../type";
 
 export const usePipelines = ({
   enabled,

@@ -1,12 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Nullable } from "../../../type";
-
-import { env } from "../../../utility";
+import { env, removeObjKey } from "../../../utility";
 import {
   createDestinationMutation,
   CreateDestinationPayload,
-  DestinationWithDefinition,
   getDestinationDefinitionQuery,
+  watchDestination,
+  type ConnectorsWatchState,
+  type ConnectorWatchState,
+  type DestinationWithDefinition,
 } from "../../../vdp-sdk";
 
 export const useCreateDestination = () => {
@@ -50,13 +52,36 @@ export const useCreateDestination = () => {
           (old) =>
             old
               ? [
-                  ...old.filter((e) => e.id !== newDestination.id),
+                  ...old.filter((e) => e.name !== newDestination.name),
                   newDestinationWithDefinition,
                 ]
               : [newDestinationWithDefinition]
         );
 
-        queryClient.invalidateQueries(["destinations", "watch"]);
+        // Invalidate destination with pipeline cache
+        queryClient.invalidateQueries(["destinations", "with-pipelines"]);
+
+        // Process watch state
+        const watch = await watchDestination({
+          destinationName: newDestination.name,
+          accessToken,
+        });
+
+        queryClient.setQueryData<ConnectorWatchState>(
+          ["destinations", newDestination.name, "watch"],
+          watch
+        );
+
+        queryClient.setQueryData<ConnectorsWatchState>(
+          ["destinations", "watch"],
+          (old) =>
+            old
+              ? {
+                  ...removeObjKey(old, newDestination.name),
+                  [newDestination.name]: watch,
+                }
+              : { [newDestination.name]: watch }
+        );
       },
     }
   );

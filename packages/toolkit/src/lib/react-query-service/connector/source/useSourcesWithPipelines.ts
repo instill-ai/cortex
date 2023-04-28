@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { Nullable } from "../../../type";
-
-import { SourceWithPipelines } from "../../../vdp-sdk";
 import { usePipelines } from "../../pipeline";
 import { useSources } from "./useSources";
+import type { Nullable } from "../../../type";
+import type { SourceWithPipelines } from "../../../vdp-sdk";
 
 export const useSourcesWithPipelines = ({
   accessToken,

@@ -1,7 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Nullable } from "../../type";
-import { deActivatePipelineMutation, Pipeline } from "../../vdp-sdk";
 import { constructPipelineRecipeWithDefinition } from "../helper";
+import { removeObjKey } from "../../utility";
+import {
+  deActivatePipelineMutation,
+  watchPipeline,
+  type Pipeline,
+  type PipelinesWatchState,
+  type PipelineWatchState,
+} from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useDeActivatePipeline = () => {
   const queryClient = useQueryClient();
@@ -27,23 +34,42 @@ export const useDeActivatePipeline = () => {
         recipe: recipe,
       };
 
-      return Promise.resolve(pipeline);
+      return Promise.resolve({ pipeline, accessToken });
     },
     {
-      onSuccess: (newPipeline) => {
+      onSuccess: async ({ pipeline, accessToken }) => {
         queryClient.setQueryData<Pipeline>(
-          ["pipelines", newPipeline.id],
-          newPipeline
+          ["pipelines", pipeline.name],
+          pipeline
         );
-        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) => {
-          if (!old) {
-            return [newPipeline];
-          }
 
-          return [...old.filter((e) => e.id !== newPipeline.id), newPipeline];
+        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
+          old
+            ? [...old.filter((e) => e.name !== pipeline.name), pipeline]
+            : [pipeline]
+        );
+
+        // Process watch state
+        const watch = await watchPipeline({
+          pipelineName: pipeline.name,
+          accessToken,
         });
-        queryClient.invalidateQueries(["pipelines", "watch"]);
-        queryClient.invalidateQueries(["pipelines", newPipeline.name, "watch"]);
+
+        queryClient.setQueryData<PipelineWatchState>(
+          ["pipelines", pipeline.name, "watch"],
+          watch
+        );
+
+        queryClient.setQueryData<PipelinesWatchState>(
+          ["pipelines", "watch"],
+          (old) =>
+            old
+              ? {
+                  ...removeObjKey(old, pipeline.name),
+                  [pipeline.name]: watch,
+                }
+              : { [pipeline.name]: watch }
+        );
       },
     }
   );

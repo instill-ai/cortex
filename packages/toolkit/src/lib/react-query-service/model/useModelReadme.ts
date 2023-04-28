@@ -1,6 +1,6 @@
-import { getModelReadmeQuery } from "../../vdp-sdk";
-import { Nullable } from "../../type";
 import { useQuery } from "@tanstack/react-query";
+import { getModelReadmeQuery } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useModelReadme = ({
   modelName,

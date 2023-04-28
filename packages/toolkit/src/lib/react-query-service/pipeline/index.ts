@@ -2,8 +2,6 @@ export * from "./useCreatePipeline";
 export * from "./usePipeline";
 export * from "./usePipelines";
 export * from "./usePipelineSchema";
-export * from "./usePipelinesHaveTargetDestination";
-export * from "./usePipelinesHaveTargetSource";
 export * from "./useUpdatePipeline";
 export * from "./useDeletePipeline";
 export * from "./useActivatePipeline";
