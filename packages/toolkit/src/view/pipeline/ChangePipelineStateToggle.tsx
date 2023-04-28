@@ -10,7 +10,7 @@ export type ChangePipelineStateToggleProps = {
   pipeline: Nullable<Pipeline>;
   pipelineWatchState: Nullable<PipelineState>;
   switchOff: UseMutationResult<
-    Pipeline,
+    { pipeline: Pipeline; accessToken: Nullable<string> },
     unknown,
     {
       pipelineName: string;
@@ -19,7 +19,7 @@ export type ChangePipelineStateToggleProps = {
     unknown
   >;
   switchOn: UseMutationResult<
-    Pipeline,
+    { pipeline: Pipeline; accessToken: Nullable<string> },
     unknown,
     {
       pipelineName: string;
