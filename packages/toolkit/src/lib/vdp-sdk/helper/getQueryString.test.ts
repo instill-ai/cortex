@@ -9,7 +9,7 @@ test("baseUrl contains no query string", () => {
   const queryString = getQueryString(baseUrl, pageSize, nextPageToken);
 
   expect(queryString).toBe(
-    "https://www.google.com?pageSize=10&pageToken=nextPageToken"
+    "https://www.google.com?page_size=10&page_token=nextPageToken"
   );
 });
 
@@ -21,7 +21,7 @@ test("baseUrl contains a query string", () => {
   const queryString = getQueryString(baseUrl, pageSize, nextPageToken);
 
   expect(queryString).toBe(
-    "https://www.google.com?q=hello&pageSize=10&pageToken=nextPageToken"
+    "https://www.google.com?q=hello&page_size=10&page_token=nextPageToken"
   );
 });
 
@@ -32,7 +32,7 @@ test("pageSize is null", () => {
 
   const queryString = getQueryString(baseUrl, pageSize, nextPageToken);
 
-  expect(queryString).toBe("https://www.google.com?pageToken=nextPageToken");
+  expect(queryString).toBe("https://www.google.com?page_token=nextPageToken");
 });
 
 test("nextPageToken is null", () => {
@@ -42,7 +42,7 @@ test("nextPageToken is null", () => {
 
   const queryString = getQueryString(baseUrl, pageSize, nextPageToken);
 
-  expect(queryString).toBe("https://www.google.com?pageSize=10");
+  expect(queryString).toBe("https://www.google.com?page_size=10");
 });
 
 test("pageSize and nextPageToken are null", () => {
@@ -73,7 +73,7 @@ test("baseUrl contains a query string, pageSize is null", () => {
   const queryString = getQueryString(baseUrl, pageSize, nextPageToken);
 
   expect(queryString).toBe(
-    "https://www.google.com?q=hello&pageToken=nextPageToken"
+    "https://www.google.com?q=hello&page_token=nextPageToken"
   );
 });
 
@@ -84,5 +84,5 @@ test("baseUrl contains a query string, nextPageToken is null", () => {
 
   const queryString = getQueryString(baseUrl, pageSize, nextPageToken);
 
-  expect(queryString).toBe("https://www.google.com?q=hello&pageSize=10");
+  expect(queryString).toBe("https://www.google.com?q=hello&page_size=10");
 });
