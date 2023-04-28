@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.40.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.2...@instill-ai/toolkit-v0.40.3) (2023-04-28)
+
+
+### Bug Fixes
+
+* fix ChangePipelineStateToggleProps ([#398](https://github.com/instill-ai/design-system/issues/398)) ([0f77db4](https://github.com/instill-ai/design-system/commit/0f77db469026eaf8349a7a713a518a4dd1bb71ae))
+
 ## [0.40.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.1...@instill-ai/toolkit-v0.40.2) (2023-04-28)
 
 
