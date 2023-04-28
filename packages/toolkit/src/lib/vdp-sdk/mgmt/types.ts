@@ -14,3 +14,20 @@ export type User = {
   update_time: string;
   cookie_token?: string;
 };
+
+export type ApiToken = {
+  name: string;
+  uid: string;
+  id: string;
+  create_time: string;
+  update_time: string;
+  access_token: string;
+  state: ApiTokenState;
+  token_type: string;
+};
+
+export type ApiTokenState =
+  | "STATE_UNSPECIFIED"
+  | "STATE_INACTIVE"
+  | "STATE_ACTIVE"
+  | "STATE_EXPIRED";
