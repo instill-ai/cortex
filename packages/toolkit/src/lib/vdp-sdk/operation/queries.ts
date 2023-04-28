@@ -6,13 +6,13 @@ export type GetModelOperationResponse = {
   operation: Operation;
 };
 
-export const getOperationQuery = async ({
+export async function getOperationQuery({
   operationName,
   accessToken,
 }: {
   operationName: string;
   accessToken: Nullable<string>;
-}): Promise<Operation> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -23,15 +23,15 @@ export const getOperationQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
-export const checkUntilOperationIsDoen = async ({
+export async function checkUntilOperationIsDoen({
   operationName,
   accessToken,
 }: {
   operationName: string;
   accessToken: Nullable<string>;
-}): Promise<boolean> => {
+}): Promise<boolean> {
   try {
     const operation = await getOperationQuery({
       operationName,
@@ -51,4 +51,4 @@ export const checkUntilOperationIsDoen = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}

@@ -17,13 +17,13 @@ export type CreateDestinationPayload = {
   };
 };
 
-export const createDestinationMutation = async ({
+export async function createDestinationMutation({
   payload,
   accessToken,
 }: {
   payload: CreateDestinationPayload;
   accessToken: Nullable<string>;
-}): Promise<Destination> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -35,15 +35,15 @@ export const createDestinationMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
-export const deleteDestinationMutation = async ({
+export async function deleteDestinationMutation({
   destinationName,
   accessToken,
 }: {
   destinationName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -51,7 +51,7 @@ export const deleteDestinationMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type UpdateDestinationResponse = {
   destination_connector: Destination;
@@ -66,13 +66,13 @@ export type UpdateDestinationPayload = {
   };
 };
 
-export const updateDestinationMutation = async ({
+export async function updateDestinationMutation({
   payload,
   accessToken,
 }: {
   payload: UpdateDestinationPayload;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
     const { name, ...data } = payload;
@@ -82,4 +82,4 @@ export const updateDestinationMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}

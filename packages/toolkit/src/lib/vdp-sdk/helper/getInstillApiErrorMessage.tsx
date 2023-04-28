@@ -2,7 +2,7 @@ import { AxiosError } from "axios";
 
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-export const getInstillApiErrorMessage = (error: AxiosError<any, any>) => {
+export function getInstillApiErrorMessage(error: AxiosError<any, any>) {
   if (!error.response) {
     return null;
   }
@@ -16,4 +16,4 @@ export const getInstillApiErrorMessage = (error: AxiosError<any, any>) => {
   }
 
   return JSON.stringify(error.response?.data.details, null, "\t");
-};
+}

@@ -13,7 +13,7 @@ export type ListSourceDefinitionsResponse = {
   total_size: string;
 };
 
-export const listSourceDefinitionsQuery = async ({
+export async function listSourceDefinitionsQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -21,7 +21,7 @@ export const listSourceDefinitionsQuery = async ({
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
-}): Promise<ConnectorDefinition[]> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -53,19 +53,19 @@ export const listSourceDefinitionsQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type GetSourceDefinitionResponse = {
   source_connector_definition: ConnectorDefinition;
 };
 
-export const getSourceDefinitionQuery = async ({
+export async function getSourceDefinitionQuery({
   sourceDefinitionName,
   accessToken,
 }: {
   sourceDefinitionName: string;
   accessToken: Nullable<string>;
-}): Promise<ConnectorDefinition> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -77,7 +77,7 @@ export const getSourceDefinitionQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 // ############################################################################
 // # Source                                                                   #
@@ -87,13 +87,13 @@ export type GetSourceResponse = {
   source_connector: Source;
 };
 
-export const getSourceQuery = async ({
+export async function getSourceQuery({
   sourceName,
   accessToken,
 }: {
   sourceName: string;
   accessToken: Nullable<string>;
-}): Promise<Source> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -105,7 +105,7 @@ export const getSourceQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type ListSourcesResponse = {
   source_connectors: Source[];
@@ -113,7 +113,7 @@ export type ListSourcesResponse = {
   total_size: string;
 };
 
-export const listSourcesQuery = async ({
+export async function listSourcesQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -121,7 +121,7 @@ export const listSourcesQuery = async ({
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
-}): Promise<Source[]> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
     const sources: Source[] = [];
@@ -150,7 +150,7 @@ export const listSourcesQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 /* -------------------------------------------------------------------------
  * Watch Source State

@@ -6,13 +6,13 @@ export type UpdateUserResponse = {
   user: User;
 };
 
-export const updateUserMutation = async ({
+export async function updateUserMutation({
   payload,
   accessToken,
 }: {
   payload: Partial<User>;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -25,7 +25,7 @@ export const updateUserMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type CreateApiTokenPayload = {
   id: string;

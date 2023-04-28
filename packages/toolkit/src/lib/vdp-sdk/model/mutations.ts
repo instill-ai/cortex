@@ -19,13 +19,13 @@ export type CreateGithubModelResponse = {
   operation: Operation;
 };
 
-export const createGithubModelMutation = async ({
+export async function createGithubModelMutation({
   payload,
   accessToken,
 }: {
   payload: CreateGithubModelPayload;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -42,7 +42,7 @@ export const createGithubModelMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type CreateLocalModelConfiguration = {
   content: File;
@@ -59,13 +59,13 @@ export type CreateLocalModelResponse = {
   operation: Operation;
 };
 
-export const createLocalModelMutation = async ({
+export async function createLocalModelMutation({
   payload,
   accessToken,
 }: {
   payload: CreateLocalModelPayload;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -91,7 +91,7 @@ export const createLocalModelMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type ArtivcConfiguration = {
   url: string;
@@ -110,13 +110,13 @@ export type CreateArtivcModelResponse = {
   operation: Operation;
 };
 
-export const createArtivcModelMutation = async ({
+export async function createArtivcModelMutation({
   payload,
   accessToken,
 }: {
   payload: CreateArtivcModelPayload;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -136,7 +136,7 @@ export const createArtivcModelMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type HuggingFaceConfiguration = {
   repo_id: string;
@@ -153,13 +153,13 @@ export type CreateHuggingFaceModelResponse = {
   operation: Operation;
 };
 
-export const createHuggingFaceModelMutation = async ({
+export async function createHuggingFaceModelMutation({
   payload,
   accessToken,
 }: {
   payload: CreateHuggingFaceModelPayload;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -175,7 +175,7 @@ export const createHuggingFaceModelMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type UpdateModelPayload = Partial<Model> & {
   name: string;
@@ -185,13 +185,13 @@ export type UpdateModelResponse = {
   model: Model;
 };
 
-export const updateModelMutation = async ({
+export async function updateModelMutation({
   payload,
   accessToken,
 }: {
   payload: UpdateModelPayload;
   accessToken: Nullable<string>;
-}): Promise<Model> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -203,15 +203,15 @@ export const updateModelMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
-export const deleteModelMutation = async ({
+export async function deleteModelMutation({
   modelName,
   accessToken,
 }: {
   modelName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -219,4 +219,4 @@ export const deleteModelMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}

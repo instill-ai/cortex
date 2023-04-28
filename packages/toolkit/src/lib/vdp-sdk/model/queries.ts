@@ -1,4 +1,3 @@
-import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
 import type {
   Model,
@@ -6,6 +5,7 @@ import type {
   ModelDefinition,
   ModelWatchState,
 } from "./types";
+import type { Nullable } from "../../type";
 
 /* -------------------------------------------------------------------------
  * Model Definition
@@ -15,13 +15,13 @@ export type GetModelDefinitionResponse = {
   model_definition: ModelDefinition;
 };
 
-export const getModelDefinitionQuery = async ({
+export async function getModelDefinitionQuery({
   modelDefinitionName,
   accessToken,
 }: {
   modelDefinitionName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -33,7 +33,7 @@ export const getModelDefinitionQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type ListModelDefinitionsResponse = {
   model_definitions: ModelDefinition[];
@@ -41,7 +41,7 @@ export type ListModelDefinitionsResponse = {
   total_size: string;
 };
 
-export const listModelDefinitionsQuery = async ({
+export async function listModelDefinitionsQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -49,7 +49,7 @@ export const listModelDefinitionsQuery = async ({
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
-}): Promise<ModelDefinition[]> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -81,7 +81,7 @@ export const listModelDefinitionsQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 /* -------------------------------------------------------------------------
  * Model
@@ -91,13 +91,13 @@ export type GetModelResponse = {
   model: Model;
 };
 
-export const getModelQuery = async ({
+export async function getModelQuery({
   modelName,
   accessToken,
 }: {
   modelName: string;
   accessToken: Nullable<string>;
-}): Promise<Model> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -108,7 +108,7 @@ export const getModelQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type ListModelsResponse = {
   models: Model[];
@@ -116,7 +116,7 @@ export type ListModelsResponse = {
   total_size: string;
 };
 
-export const listModelsQuery = async ({
+export async function listModelsQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -124,7 +124,7 @@ export const listModelsQuery = async ({
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
-}): Promise<Model[]> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -154,19 +154,19 @@ export const listModelsQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type GetModelReadmeQueryResponse = {
   readme: ModelReadme;
 };
 
-export const getModelReadmeQuery = async ({
+export async function getModelReadmeQuery({
   modelName,
   accessToken,
 }: {
   modelName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -177,7 +177,7 @@ export const getModelReadmeQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 /* -------------------------------------------------------------------------
  * Watch Model State

@@ -2,13 +2,13 @@ import { Nullable } from "../../type";
 import { watchModel } from "./queries";
 import { ModelHubPreset } from "./types";
 
-export const checkCreateModelStateUntilOffline = async ({
+export async function checkCreateModelStateUntilOffline({
   modelName,
   accessToken,
 }: {
   modelName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const watchModelState = await watchModel({
       modelName,
@@ -31,7 +31,7 @@ export const checkCreateModelStateUntilOffline = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export const modelHubPresetsList: ModelHubPreset[] = [
   {

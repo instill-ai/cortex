@@ -2,7 +2,7 @@ import { env } from "../../utility";
 import axios from "axios";
 import { Nullable } from "../../type";
 
-export const createInstillAxiosClient = (accessToken: Nullable<string>) => {
+export function createInstillAxiosClient(accessToken: Nullable<string>) {
   const headers = accessToken
     ? {
         Authorization: `Bearer ${accessToken}`,
@@ -16,4 +16,4 @@ export const createInstillAxiosClient = (accessToken: Nullable<string>) => {
     }/${env("NEXT_PUBLIC_API_VERSION")}`,
     headers,
   });
-};
+}
