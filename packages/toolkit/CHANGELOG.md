@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.40.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.0...@instill-ai/toolkit-v0.40.1) (2023-04-28)
+
+
+### Bug Fixes
+
+* fix missing export of apiToken related query ([#394](https://github.com/instill-ai/design-system/issues/394)) ([307c11d](https://github.com/instill-ai/design-system/commit/307c11da37ba322a60c173b906c4eda4371c8ca8))
+
 ## [0.40.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.39.2...@instill-ai/toolkit-v0.40.0) (2023-04-28)
 
 
