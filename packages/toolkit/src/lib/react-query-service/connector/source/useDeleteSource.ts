@@ -1,6 +1,11 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Nullable } from "../../../type";
-import { deleteSourceMutation, SourceWithDefinition } from "../../../vdp-sdk";
+import {
+  deleteSourceMutation,
+  type ConnectorsWatchState,
+  type SourceWithDefinition,
+} from "../../../vdp-sdk";
+import { removeObjKey } from "../../../utility";
 
 export const useDeleteSource = () => {
   const queryClient = useQueryClient();
@@ -17,22 +22,35 @@ export const useDeleteSource = () => {
     },
     {
       onSuccess: (sourceName) => {
-        const sourceId = sourceName.split("/")[1];
+        queryClient.removeQueries(["sources", sourceName], {
+          exact: true,
+        });
 
-        queryClient.removeQueries(["sources", sourceId], { exact: true });
+        queryClient.setQueryData<SourceWithDefinition[]>(["sources"], (old) => {
+          return old ? old.filter((e) => e.name !== sourceName) : [];
+        });
 
-        const sources = queryClient.getQueryData<SourceWithDefinition[]>([
-          "sources",
-        ]);
+        // Deal with destinations with pipelines cache
+        queryClient.setQueryData<SourceWithDefinition[]>(
+          ["sources", "with-pipelines"],
+          (old) => (old ? old.filter((e) => e.name !== sourceName) : [])
+        );
 
-        if (sources) {
-          queryClient.setQueryData<SourceWithDefinition[]>(
-            ["sources"],
-            sources.filter((e) => e.name !== sourceName)
-          );
-        }
+        queryClient.removeQueries(["sources", sourceName, "with-pipelines"], {
+          exact: true,
+        });
 
-        queryClient.invalidateQueries(["sources", "watch"]);
+        // Process watch state
+        queryClient.removeQueries(["sources", sourceName, "watch"], {
+          exact: true,
+        });
+
+        queryClient.setQueryData<ConnectorsWatchState>(
+          ["sources", "watch"],
+          (old) => {
+            return old ? removeObjKey(old, sourceName) : {};
+          }
+        );
       },
     }
   );

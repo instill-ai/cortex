@@ -4,7 +4,7 @@ import {
   getSourceQuery,
   SourceWithDefinition,
 } from "../../../vdp-sdk";
-import { Nullable } from "../../../type";
+import type { Nullable } from "../../../type";
 
 export const useSource = ({
   sourceName,

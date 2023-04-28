@@ -1,6 +1,11 @@
-import { deletePipelineMutation, Pipeline } from "../../vdp-sdk";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Nullable } from "../../type";
+import { removeObjKey } from "../../utility";
+import {
+  deletePipelineMutation,
+  type Pipeline,
+  type PipelinesWatchState,
+} from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useDeletePipeline = () => {
   const queryClient = useQueryClient();
@@ -17,18 +22,20 @@ export const useDeletePipeline = () => {
     },
     {
       onSuccess: (pipelineName) => {
-        const pipelineId = pipelineName.split("/")[1];
+        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
+          old ? old.filter((e) => e.name !== pipelineName) : []
+        );
+        queryClient.removeQueries(["pipelines", pipelineName], { exact: true });
 
-        queryClient.removeQueries(["pipelines", pipelineId], { exact: true });
+        // Process watch state
+        queryClient.removeQueries(["pipelines", pipelineName, "watch"], {
+          exact: true,
+        });
 
-        const pipelines = queryClient.getQueryData<Pipeline[]>(["pipelines"]);
-
-        if (pipelines) {
-          queryClient.setQueryData<Pipeline[]>(
-            ["pipelines"],
-            pipelines.filter((e) => e.name !== pipelineName)
-          );
-        }
+        queryClient.setQueryData<PipelinesWatchState>(
+          ["pipelines", "watch"],
+          (old) => (old ? removeObjKey(old, pipelineName) : {})
+        );
       },
     }
   );

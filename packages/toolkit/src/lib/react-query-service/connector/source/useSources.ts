@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { Nullable } from "../../../type";
 import { env } from "../../../utility";
 import {
   getSourceDefinitionQuery,
   listSourcesQuery,
   SourceWithDefinition,
 } from "../../../vdp-sdk";
+import type { Nullable } from "../../../type";
 
 export const useSources = ({
   accessToken,

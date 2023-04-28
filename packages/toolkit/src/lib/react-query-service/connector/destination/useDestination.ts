@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  DestinationWithDefinition,
   getDestinationDefinitionQuery,
   getDestinationQuery,
+  type DestinationWithDefinition,
 } from "../../../vdp-sdk";
 import { Nullable } from "../../../type";
 import { env } from "../../../utility";

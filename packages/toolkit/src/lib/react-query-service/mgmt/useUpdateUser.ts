@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Nullable } from "../../type";
-import { updateUserMutation, User } from "../../vdp-sdk";
+import { updateUserMutation, type User } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useUpdateUser = () => {
   const queryClient = useQueryClient();

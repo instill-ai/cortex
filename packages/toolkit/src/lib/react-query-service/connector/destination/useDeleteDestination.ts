@@ -1,9 +1,11 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   deleteDestinationMutation,
-  DestinationWithDefinition,
+  type ConnectorsWatchState,
+  type DestinationWithDefinition,
+  DestinationWithPipelines,
 } from "../../../vdp-sdk";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { env } from "../../../utility";
+import { env, removeObjKey } from "../../../utility";
 import { Nullable } from "../../../type";
 
 export const useDeleteDestination = () => {
@@ -26,24 +28,41 @@ export const useDeleteDestination = () => {
     },
     {
       onSuccess: (destinationName) => {
-        const destinationId = destinationName.split("/")[1];
-
-        queryClient.removeQueries(["destinations", destinationId], {
+        queryClient.removeQueries(["destinations", destinationName], {
           exact: true,
         });
 
-        const destinations = queryClient.getQueryData<
-          DestinationWithDefinition[]
-        >(["destinations"]);
+        queryClient.setQueryData<DestinationWithDefinition[]>(
+          ["destinations"],
+          (old) => {
+            return old ? old.filter((e) => e.name !== destinationName) : [];
+          }
+        );
 
-        if (destinations) {
-          queryClient.setQueryData<DestinationWithDefinition[]>(
-            ["destinations"],
-            destinations.filter((e) => e.name !== destinationName)
-          );
-        }
+        // Deal with destinations with pipelines cache
+        queryClient.setQueryData<DestinationWithPipelines[]>(
+          ["destinations", "with-pipelines"],
+          (old) => (old ? old.filter((e) => e.name !== destinationName) : [])
+        );
 
-        queryClient.invalidateQueries(["destinations", "watch"]);
+        queryClient.removeQueries(
+          ["destinations", destinationName, "with-pipelines"],
+          {
+            exact: true,
+          }
+        );
+
+        // Process watch state
+        queryClient.removeQueries(["destinations", destinationName, "watch"], {
+          exact: true,
+        });
+
+        queryClient.setQueryData<ConnectorsWatchState>(
+          ["destinations", "watch"],
+          (old) => {
+            return old ? removeObjKey(old, destinationName) : {};
+          }
+        );
       },
     }
   );

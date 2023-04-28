@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Nullable } from "../../type";
 import { getApiTokenQuery } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useApiToken = ({
   tokenName,

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { Nullable } from "../../type";
 import { watchModel } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export function useWatchModel({
   modelName,

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Nullable } from "../../type";
-import { deployModelAction, getModelQuery, type Model } from "../../vdp-sdk";
+import { deployModelAction } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useDeployModel = () => {
   const queryClient = useQueryClient();
@@ -24,8 +24,11 @@ export const useDeployModel = () => {
     },
     {
       onSuccess: ({ modelName }) => {
-        queryClient.invalidateQueries(["models", modelName]);
+        // Because deploy model is a long running operation, we will not
+        // query the model and update the cache mediately. We left this
+        // decision to the user.
         queryClient.invalidateQueries(["models"]);
+        queryClient.invalidateQueries(["models", modelName]);
         queryClient.invalidateQueries(["models", "watch"]);
         queryClient.invalidateQueries(["models", modelName, "watch"]);
       },

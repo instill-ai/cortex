@@ -1,11 +1,15 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { Nullable } from "../../type";
-import {
-  createPipelineMutation,
-  CreatePipelinePayload,
-  Pipeline,
-} from "../../vdp-sdk";
 import { constructPipelineRecipeWithDefinition } from "../helper";
+import { removeObjKey } from "../../utility";
+import {
+  watchPipeline,
+  createPipelineMutation,
+  type CreatePipelinePayload,
+  type Pipeline,
+  type PipelinesWatchState,
+  type PipelineWatchState,
+} from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
 export const useCreatePipeline = () => {
   const queryClient = useQueryClient();
@@ -42,6 +46,29 @@ export const useCreatePipeline = () => {
           old
             ? [...old.filter((e) => e.id !== newPipeline.id), pipeline]
             : [pipeline]
+        );
+
+        // process watch state
+
+        const watch = await watchPipeline({
+          pipelineName: pipeline.name,
+          accessToken,
+        });
+
+        queryClient.setQueryData<PipelineWatchState>(
+          ["pipelines", pipeline.name, "watch"],
+          watch
+        );
+
+        queryClient.setQueryData<PipelinesWatchState>(
+          ["pipelines", "watch"],
+          (old) =>
+            old
+              ? {
+                  ...removeObjKey(old, pipeline.name),
+                  [pipeline.name]: watch,
+                }
+              : { [pipeline.name]: watch }
         );
       },
     }

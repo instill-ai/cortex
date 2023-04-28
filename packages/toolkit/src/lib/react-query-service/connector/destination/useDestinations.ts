@@ -2,9 +2,9 @@ import { useQuery } from "@tanstack/react-query";
 import { Nullable } from "../../../type";
 import { env } from "../../../utility";
 import {
-  DestinationWithDefinition,
   getDestinationDefinitionQuery,
   listDestinationsQuery,
+  type DestinationWithDefinition,
 } from "../../../vdp-sdk";
 
 export const useDestinations = ({

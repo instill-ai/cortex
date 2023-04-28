@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getModelQuery } from "../../vdp-sdk";
-import { Nullable } from "../../type";
+import type { Nullable } from "../../type";
 
 export const useModel = ({
   modelName,

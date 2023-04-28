@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-
-import { DestinationWithPipelines } from "../../../vdp-sdk";
 import { usePipelines } from "../../pipeline";
-import { Nullable } from "../../../type";
 import { useDestination } from "./useDestination";
+import type { DestinationWithPipelines } from "../../../vdp-sdk";
+import type { Nullable } from "../../../type";
 
 export const useDestinationWithPipelines = ({
   destinationName,
