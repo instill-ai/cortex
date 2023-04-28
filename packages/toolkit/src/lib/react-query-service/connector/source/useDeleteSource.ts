@@ -13,7 +13,7 @@ export const useDeleteSource = () => {
       accessToken: Nullable<string>;
     }) => {
       await deleteSourceMutation({ sourceName, accessToken });
-      return sourceName;
+      return Promise.resolve(sourceName);
     },
     {
       onSuccess: (sourceName) => {

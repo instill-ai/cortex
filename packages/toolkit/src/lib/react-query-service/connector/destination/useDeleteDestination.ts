@@ -22,7 +22,7 @@ export const useDeleteDestination = () => {
         );
       }
       await deleteDestinationMutation({ destinationName, accessToken });
-      return destinationName;
+      return Promise.resolve(destinationName);
     },
     {
       onSuccess: (destinationName) => {

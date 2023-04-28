@@ -6,13 +6,13 @@ export type DeployModelResponse = {
   operation: Operation;
 };
 
-export const deployModelAction = async ({
+export async function deployModelAction({
   modelName,
   accessToken,
 }: {
   modelName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -23,19 +23,19 @@ export const deployModelAction = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type UnDeployModelResponse = {
   operation: Operation;
 };
 
-export const unDeployModeleAction = async ({
+export async function unDeployModeleAction({
   modelName,
   accessToken,
 }: {
   modelName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -46,4 +46,4 @@ export const unDeployModeleAction = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}

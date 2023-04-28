@@ -6,13 +6,13 @@ export type ActivatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const activatePipelineMutation = async ({
+export async function activatePipelineMutation({
   pipelineName,
   accessToken,
 }: {
   pipelineName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -23,19 +23,19 @@ export const activatePipelineMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type DeActivatePipelineResponse = {
   pipeline: PipelineWithRawRecipe;
 };
 
-export const deActivatePipelineMutation = async ({
+export async function deActivatePipelineMutation({
   pipelineName,
   accessToken,
 }: {
   pipelineName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -46,4 +46,4 @@ export const deActivatePipelineMutation = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}

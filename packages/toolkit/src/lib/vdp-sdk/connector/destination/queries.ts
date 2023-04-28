@@ -18,7 +18,7 @@ export type ListDestinationDefinitionsPayload = {
   nextPageToken: Nullable<string>;
 };
 
-export const listDestinationDefinitionsQuery = async ({
+export async function listDestinationDefinitionsQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -26,7 +26,7 @@ export const listDestinationDefinitionsQuery = async ({
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
-}): Promise<ConnectorDefinition[]> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
     const destinationDefinitions: ConnectorDefinition[] = [];
@@ -56,19 +56,19 @@ export const listDestinationDefinitionsQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type GetDestinationDefinitionResponse = {
   destination_connector_definition: ConnectorDefinition;
 };
 
-export const getDestinationDefinitionQuery = async ({
+export async function getDestinationDefinitionQuery({
   destinationDefinitionName,
   accessToken,
 }: {
   destinationDefinitionName: string;
   accessToken: Nullable<string>;
-}) => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -80,7 +80,7 @@ export const getDestinationDefinitionQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 // ############################################################################
 // # Destination                                                              #
@@ -90,13 +90,13 @@ export type GetDestinationResponse = {
   destination_connector: Destination;
 };
 
-export const getDestinationQuery = async ({
+export async function getDestinationQuery({
   destinationName,
   accessToken,
 }: {
   destinationName: string;
   accessToken: Nullable<string>;
-}): Promise<Destination> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
 
@@ -108,7 +108,7 @@ export const getDestinationQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 export type ListDestinationsResponse = {
   destination_connectors: Destination[];
@@ -116,7 +116,7 @@ export type ListDestinationsResponse = {
   total_size: string;
 };
 
-export const listDestinationsQuery = async ({
+export async function listDestinationsQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -124,7 +124,7 @@ export const listDestinationsQuery = async ({
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
-}): Promise<Destination[]> => {
+}) {
   try {
     const client = createInstillAxiosClient(accessToken);
     const destinations: Destination[] = [];
@@ -153,7 +153,7 @@ export const listDestinationsQuery = async ({
   } catch (err) {
     return Promise.reject(err);
   }
-};
+}
 
 /* -------------------------------------------------------------------------
  * Watch Destination State

@@ -13,7 +13,7 @@ export const useDeletePipeline = () => {
       accessToken: Nullable<string>;
     }) => {
       await deletePipelineMutation({ pipelineName, accessToken });
-      return pipelineName;
+      return Promise.resolve(pipelineName);
     },
     {
       onSuccess: (pipelineName) => {
