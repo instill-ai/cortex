@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.42.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.41.0...@instill-ai/toolkit-v0.42.0) (2023-05-03)
+
+
+### Features
+
+* add flag to disable create model during creating pipeline ([#404](https://github.com/instill-ai/design-system/issues/404)) ([42a081f](https://github.com/instill-ai/design-system/commit/42a081ff489d367224b9f2eb7b2f4bac529a665f))
+* export UseQueryResult and UseMutationResult ([#402](https://github.com/instill-ai/design-system/issues/402)) ([3ddd5b6](https://github.com/instill-ai/design-system/commit/3ddd5b631fe7b466f33e06328da076875a3cc56b))
+
 ## [0.41.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.3...@instill-ai/toolkit-v0.41.0) (2023-05-03)
 
 
