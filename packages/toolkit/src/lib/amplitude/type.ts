@@ -4,23 +4,7 @@ export type AmplitudeEventProperties = {
 };
 
 export type AmplitudeEvent =
-  // Navigtion
-  | "hit_pipelines_page"
-  | "hit_pipeline_page"
-  | "hit_create_pipeline_page"
-  | "hit_models_page"
-  | "hit_model_page"
-  | "hit_create_model_page"
-  | "hit_sources_page"
-  | "hit_source_page"
-  | "hit_create_source_page"
-  | "hit_destinations_page"
-  | "hit_destination_page"
-  | "hit_create_destination_page"
-  | "hit_onboarding_page"
-
   // Critical event
-  | "fill_onboarding_form"
   | "create_local_model"
   | "create_github_model"
   | "create_artivc_model"
@@ -40,4 +24,10 @@ export type AmplitudeEvent =
   | "create_source"
   | "delete_source"
   | "update_source"
-  | "use_existing_source";
+  | "use_existing_source"
+  | "go_to_stripe_portal"
+  | "go_to_stripe_checkout"
+  | "submit_onboarding_form"
+  | "change_user_info"
+  | "create_api_token"
+  | "delete_api_token";
