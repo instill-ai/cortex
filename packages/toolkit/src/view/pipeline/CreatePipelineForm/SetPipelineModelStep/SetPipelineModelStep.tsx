@@ -7,10 +7,12 @@ export type SetPipelineModelStepProps = {
   accessToken: Nullable<string>;
   withModelPreset: boolean;
   enabledQuery: boolean;
+  disabledCreateModel?: boolean;
 };
 
 export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
-  const { accessToken, withModelPreset, enabledQuery } = props;
+  const { accessToken, withModelPreset, enabledQuery, disabledCreateModel } =
+    props;
   const increasePipelineFormStep = useCreateResourceFormStore(
     (state) => state.increasePipelineFormStep
   );
@@ -30,7 +32,9 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
         <FormVerticalDivider />
       </div>
       <div className="flex w-2/3">
-        {withModelPreset ? (
+        {disabledCreateModel ? (
+          <div className="m-auto">Please use our pre-deployed models</div>
+        ) : withModelPreset ? (
           <CreateModelWithPresetForm
             onCreate={() => {
               increasePipelineFormStep();

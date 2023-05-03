@@ -21,6 +21,7 @@ export type CreatePipelineFormProps = {
   syncModelOnly: boolean;
   withModelPreset: boolean;
   enabledQuery: boolean;
+  disabledCreateModel?: boolean;
 };
 
 export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
@@ -30,6 +31,7 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
     syncModelOnly,
     withModelPreset,
     enabledQuery,
+    disabledCreateModel,
   } = props;
   const pipelineFormStep = useCreateResourceFormStore(
     (state) => state.pipelineFormStep
@@ -52,6 +54,7 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
             withModelPreset={withModelPreset}
             accessToken={accessToken}
             enabledQuery={enabledQuery}
+            disabledCreateModel={disabledCreateModel}
           />
         );
       case 3:
