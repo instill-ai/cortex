@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.41.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.3...@instill-ai/toolkit-v0.41.0) (2023-05-03)
+
+
+### Features
+
+* update amplitude config and enable pageViews and Sessions tracking ([#400](https://github.com/instill-ai/design-system/issues/400)) ([e1daf07](https://github.com/instill-ai/design-system/commit/e1daf07bbc0f19b9b418c4fe9e2f727868d54581))
+
 ## [0.40.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.40.2...@instill-ai/toolkit-v0.40.3) (2023-04-28)
 
 
