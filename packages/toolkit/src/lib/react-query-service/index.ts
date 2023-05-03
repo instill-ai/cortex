@@ -17,4 +17,8 @@ export {
   dehydrate,
 } from "@tanstack/react-query";
 export { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-export type { DehydratedState } from "@tanstack/react-query";
+export type {
+  DehydratedState,
+  UseQueryResult,
+  UseMutationResult,
+} from "@tanstack/react-query";
