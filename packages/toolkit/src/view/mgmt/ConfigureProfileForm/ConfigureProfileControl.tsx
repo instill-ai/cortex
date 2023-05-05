@@ -43,13 +43,6 @@ export const ConfigureProfileControl = (
     try {
       validateConfigureProfileFormFieldSchema(fields);
 
-      setMessageBoxState(() => ({
-        activate: true,
-        status: "progressing",
-        description: null,
-        message: "Updating...",
-      }));
-
       // Check whether user id exist
       const userIdExist = await checkUserIdExist({
         id: fields.userName as string,
@@ -63,6 +56,13 @@ export const ConfigureProfileControl = (
         );
         return;
       }
+
+      setMessageBoxState(() => ({
+        activate: true,
+        status: "progressing",
+        description: null,
+        message: "Updating...",
+      }));
 
       updateUser.mutate(
         {
@@ -102,13 +102,13 @@ export const ConfigureProfileControl = (
 
   return (
     <div className="flex flex-row">
-      <div className="mb-auto">
+      <div className="mb-auto w-1/2">
         <BasicProgressMessageBox
           state={messageBoxState}
           setActivate={(activate) =>
             setMessageBoxState((prev) => ({ ...prev, activate }))
           }
-          width="w-[25vw]"
+          width="w-full"
           closable={true}
         />
       </div>
