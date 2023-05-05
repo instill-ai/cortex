@@ -17,7 +17,7 @@ export const useUpdateUser = () => {
     },
     {
       onSuccess: (newUser) => {
-        queryClient.setQueryData<User>(["user", newUser.name], newUser);
+        queryClient.setQueryData<User>(["user"], newUser);
       },
     }
   );
