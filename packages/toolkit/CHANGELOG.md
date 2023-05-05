@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.3...@instill-ai/toolkit-v0.43.4) (2023-05-05)
+
+
+### Bug Fixes
+
+* stop user from submitting the same name ([#413](https://github.com/instill-ai/design-system/issues/413)) ([2a2bb28](https://github.com/instill-ai/design-system/commit/2a2bb2810f9862443500e02b8443e4d653939b64))
+
 ## [0.43.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.2...@instill-ai/toolkit-v0.43.3) (2023-05-05)
 
 
