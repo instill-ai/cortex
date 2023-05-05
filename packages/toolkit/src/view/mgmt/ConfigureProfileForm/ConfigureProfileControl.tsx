@@ -12,6 +12,7 @@ import {
   useUpdateUser,
   validateConfigureProfileFormFieldSchema,
   type ConfigureProfileFormState,
+  checkUserIdExist,
 } from "../../../lib";
 
 export type ConfigureProfileControlProps = {
@@ -38,7 +39,7 @@ export const ConfigureProfileControl = (
 
   const updateUser = useUpdateUser();
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     try {
       validateConfigureProfileFormFieldSchema(fields);
 
@@ -49,13 +50,27 @@ export const ConfigureProfileControl = (
         message: "Updating...",
       }));
 
+      // Check whether user id exist
+      const userIdExist = await checkUserIdExist({
+        id: fields.userName as string,
+        accessToken,
+      });
+
+      if (userIdExist) {
+        setFieldError(
+          "userName",
+          "User ID already exists. Please try another one."
+        );
+        return;
+      }
+
       updateUser.mutate(
         {
           payload: {
             first_name: fields.firstName || "",
             last_name: fields.lastName || "",
             org_name: fields.orgName || "",
-            name: `users/${fields.userName}` || undefined,
+            id: fields.userName || "",
             role: fields.role || undefined,
             newsletter_subscription: fields.newsletterSubscription || undefined,
           },
