@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.0...@instill-ai/toolkit-v0.43.1) (2023-05-05)
+
+
+### Bug Fixes
+
+* fix useUpdateUser not correctly sync after updating ([#407](https://github.com/instill-ai/design-system/issues/407)) ([fb93cf1](https://github.com/instill-ai/design-system/commit/fb93cf1d6fd8ac5ef614c31fb3099c0c16bdc390))
+
 ## [0.43.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.42.0...@instill-ai/toolkit-v0.43.0) (2023-05-05)
 
 
