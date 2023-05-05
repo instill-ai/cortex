@@ -6,6 +6,12 @@ export function createInstillAxiosClient(accessToken: Nullable<string>) {
   const headers = accessToken
     ? {
         Authorization: `Bearer ${accessToken}`,
+        "CF-Access-Client-Id": env("CF_ACCESS_CLIENT_ID")
+          ? env("CF_ACCESS_CLIENT_ID")
+          : undefined,
+        "CF-Access-Client-Secret": env("CF_ACCESS_CLIENT_SECRET")
+          ? env("CF_ACCESS_CLIENT_SECRET")
+          : undefined,
       }
     : {};
 
