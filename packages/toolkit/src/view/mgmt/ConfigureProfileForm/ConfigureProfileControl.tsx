@@ -11,8 +11,9 @@ import {
   useConfigureProfileFormStore,
   useUpdateUser,
   validateConfigureProfileFormFieldSchema,
-  type ConfigureProfileFormState,
   checkUserIdExist,
+  useUser,
+  type ConfigureProfileFormState,
 } from "../../../lib";
 
 export type ConfigureProfileControlProps = {
@@ -29,6 +30,11 @@ export const ConfigureProfileControl = (
     (state) => state.setFieldError
   );
 
+  const instillUser = useUser({
+    accessToken,
+    enabled: accessToken ? true : false,
+  });
+
   const [messageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
       activate: false,
@@ -41,6 +47,10 @@ export const ConfigureProfileControl = (
 
   const handleSubmit = async () => {
     try {
+      if (!instillUser.isSuccess || fields.userName === instillUser.data.id) {
+        return;
+      }
+
       validateConfigureProfileFormFieldSchema(fields);
 
       // Check whether user id exist
@@ -126,7 +136,7 @@ export const ConfigureProfileControl = (
         <SolidButton
           type="button"
           color="primary"
-          disabled={false}
+          disabled={instillUser.isSuccess ? false : true}
           position="my-auto"
           onClickHandler={() => handleSubmit()}
         >
