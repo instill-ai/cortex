@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.2...@instill-ai/toolkit-v0.43.3) (2023-05-05)
+
+
+### Bug Fixes
+
+* fix configure user info form style ([#411](https://github.com/instill-ai/design-system/issues/411)) ([da134cc](https://github.com/instill-ai/design-system/commit/da134cc53e8edcd1f0c72dd5d038647cf47e0d85))
+
 ## [0.43.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.1...@instill-ai/toolkit-v0.43.2) (2023-05-05)
 
 
