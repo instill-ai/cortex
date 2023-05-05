@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.42.0...@instill-ai/toolkit-v0.43.0) (2023-05-05)
+
+
+### Features
+
+* add CF header for staging ([#405](https://github.com/instill-ai/design-system/issues/405)) ([f692117](https://github.com/instill-ai/design-system/commit/f692117ca5f7e6fcb5af2707dbca4c1ae784bd58))
+
 ## [0.42.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.41.0...@instill-ai/toolkit-v0.42.0) (2023-05-03)
 
 
