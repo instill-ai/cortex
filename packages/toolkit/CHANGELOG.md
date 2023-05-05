@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.1...@instill-ai/toolkit-v0.43.2) (2023-05-05)
+
+
+### Bug Fixes
+
+* fix user configure form ([#409](https://github.com/instill-ai/design-system/issues/409)) ([cba798a](https://github.com/instill-ai/design-system/commit/cba798aef6488c0178a10e0323d1ea47883dbec7))
+
 ## [0.43.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.0...@instill-ai/toolkit-v0.43.1) (2023-05-05)
 
 
