@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.4...@instill-ai/toolkit-v0.43.5) (2023-05-08)
+
+
+### Miscellaneous
+
+* update ModelsTable head from Model task to AI task ([#415](https://github.com/instill-ai/design-system/issues/415)) ([3612f30](https://github.com/instill-ai/design-system/commit/3612f305222ac47a4c2d9612c85ef0fc9b30cb8a))
+
 ## [0.43.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.3...@instill-ai/toolkit-v0.43.4) (2023-05-05)
 
 
