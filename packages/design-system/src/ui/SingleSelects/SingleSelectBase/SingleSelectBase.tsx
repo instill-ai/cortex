@@ -1,7 +1,6 @@
 import * as React from "react";
 import cn from "clsx";
 import * as Select from "@radix-ui/react-select";
-import * as ScrollArea from "@radix-ui/react-scroll-area";
 
 import { BasicInputProps, Nullable } from "../../../types/general";
 import InputLabelBase from "../../InputLabels/InputLabelBase";
@@ -230,7 +229,7 @@ const SingleSelectBase = (props: SingleSelectBaseProps) => {
                 {selectedOption ? (
                   <div className={cn("flex flex-row", selectItemTextIconGap)}>
                     {selectedOption.startIcon ? selectedOption.startIcon : null}
-                    <p className={"align-middle pt-0.5"}>
+                    <p className={"align-middle my-auto pt-0.5"}>
                       {selectedOption.label}
                     </p>
                     {selectedOption.endIcon ? selectedOption.endIcon : null}
@@ -261,42 +260,23 @@ const SingleSelectBase = (props: SingleSelectBaseProps) => {
                   selectPopoverBorderRadius,
                   selectPopoverBorderStyle,
                   selectPopoverBorderWidth,
-                  selectPopoverPadding
+                  selectPopoverPadding,
+                  "overflow-hidden max-h-[320px]"
                 )}
                 position="popper"
                 sideOffset={8}
                 style={{ width: triggerWidth ? triggerWidth : undefined }}
               >
-                <ScrollArea.Root className="w-full h-80">
-                  <Select.Viewport asChild>
-                    {/* 
-                      We do this to silent the warning from the ScrollArea component
-                      (Warning: Updating a style property during rerender (overflowY) 
-                      when a conflicting property is set (overflow) can lead to styling bugs.)
-
-                      https://github.com/radix-ui/primitives/issues/2059
-                    */}
-                    <ScrollArea.Viewport
-                      className="w-full h-full"
-                      style={{ overflowY: undefined }}
-                    >
-                      {options.map((option) => (
-                        <SelectItem
-                          key={option.value}
-                          width={triggerWidth}
-                          selectItemTextIconGap={selectItemTextIconGap}
-                          option={option}
-                        />
-                      ))}
-                    </ScrollArea.Viewport>
-                  </Select.Viewport>
-                  <ScrollArea.Scrollbar
-                    className="w-2 py-0.5 px-0.5"
-                    orientation="vertical"
-                  >
-                    <ScrollArea.Thumb className="flex select-none touch-none bg-instillGrey70 rounded-sm" />
-                  </ScrollArea.Scrollbar>
-                </ScrollArea.Root>
+                <Select.Viewport className="SelectViewport">
+                  {options.map((option) => (
+                    <SelectItem
+                      key={option.value}
+                      width={triggerWidth}
+                      selectItemTextIconGap={selectItemTextIconGap}
+                      option={option}
+                    />
+                  ))}
+                </Select.Viewport>
               </Select.Content>
             </Select.Portal>
           </Select.Root>
