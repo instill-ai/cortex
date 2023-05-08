@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.10.6](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.5...@instill-ai/design-system-v0.10.6) (2023-05-08)
+
+
+### Bug Fixes
+
+* [INS-617] fix SingleSelect not correctly display its height ([#417](https://github.com/instill-ai/design-system/issues/417)) ([7fe1f25](https://github.com/instill-ai/design-system/commit/7fe1f254dc8873276652a8dcc0e057485189ddc3))
+
 ## [0.10.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.4...@instill-ai/design-system-v0.10.5) (2023-04-24)
 
 
