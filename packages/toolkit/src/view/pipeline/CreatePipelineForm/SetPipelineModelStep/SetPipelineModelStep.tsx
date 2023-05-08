@@ -1,3 +1,4 @@
+import cn from "clsx";
 import { FormVerticalDivider } from "../FormVerticalDivider";
 import { SelectExistingModelFlow } from "./SelectExistingModelFlow";
 import { CreateModelForm, CreateModelWithPresetForm } from "../../../model";
@@ -19,7 +20,7 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
 
   return (
     <div className="flex flex-1 flex-row h-full items-stretch">
-      <div className="flex w-1/3">
+      <div className={cn("flex", disabledCreateModel ? "w-full" : "w-1/3")}>
         <SelectExistingModelFlow
           onSelect={() => {
             increasePipelineFormStep();
@@ -28,31 +29,33 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
           enabledQuery={enabledQuery}
         />
       </div>
-      <div className="flex">
-        <FormVerticalDivider />
-      </div>
-      <div className="flex w-2/3">
-        {disabledCreateModel ? (
-          <div className="m-auto">Please use our pre-deployed models</div>
-        ) : withModelPreset ? (
-          <CreateModelWithPresetForm
-            onCreate={() => {
-              increasePipelineFormStep();
-            }}
-            initStoreOnCreate={false}
-            accessToken={accessToken}
-          />
-        ) : (
-          <CreateModelForm
-            onCreate={() => {
-              increasePipelineFormStep();
-            }}
-            initStoreOnCreate={false}
-            accessToken={accessToken}
-            enabledQuery={enabledQuery}
-          />
-        )}
-      </div>
+      {disabledCreateModel ? null : (
+        <>
+          <div className="flex">
+            <FormVerticalDivider />
+          </div>
+          <div className="flex w-2/3">
+            {withModelPreset ? (
+              <CreateModelWithPresetForm
+                onCreate={() => {
+                  increasePipelineFormStep();
+                }}
+                initStoreOnCreate={false}
+                accessToken={accessToken}
+              />
+            ) : (
+              <CreateModelForm
+                onCreate={() => {
+                  increasePipelineFormStep();
+                }}
+                initStoreOnCreate={false}
+                accessToken={accessToken}
+                enabledQuery={enabledQuery}
+              />
+            )}
+          </div>
+        </>
+      )}
     </div>
   );
 };
