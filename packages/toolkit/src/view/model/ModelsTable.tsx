@@ -73,8 +73,8 @@ export const ModelsTable = (props: ModelsTableProps) => {
         width: "w-[240px]",
       },
       {
-        key: "model-task-head",
-        item: "Model task",
+        key: "ai-task-head",
+        item: "AI task",
         width: "w-[240px]",
       },
     ];
