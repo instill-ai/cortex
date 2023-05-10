@@ -38,7 +38,7 @@ export const FirstNameField = (props: FirstNameFieldProps) => {
         value={firstName}
         error={firstNameError}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setFieldValue("firstName", event.target.value.trim())
+          setFieldValue("firstName", event.target.value)
         }
       />
     </div>

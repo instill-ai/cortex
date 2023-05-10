@@ -40,7 +40,7 @@ export const UserNameField = (props: UserNameFieldProps) => {
         value={userName}
         error={userNameError}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          const value = event.target.value.trim();
+          const value = event.target.value;
           setFieldValue("userName", value);
           if (!validateResourceId(value)) {
             setFieldError(

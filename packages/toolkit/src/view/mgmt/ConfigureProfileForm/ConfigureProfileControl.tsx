@@ -47,7 +47,7 @@ export const ConfigureProfileControl = (
 
   const handleSubmit = async () => {
     try {
-      if (!instillUser.isSuccess || fields.userName === instillUser.data.id) {
+      if (!instillUser.isSuccess) {
         return;
       }
 
@@ -77,10 +77,13 @@ export const ConfigureProfileControl = (
       updateUser.mutate(
         {
           payload: {
-            first_name: fields.firstName || "",
-            last_name: fields.lastName || "",
-            org_name: fields.orgName || "",
-            id: fields.userName || "",
+            first_name: fields.firstName?.trim() || "",
+            last_name: fields.lastName?.trim() || "",
+            org_name: fields.orgName?.trim() || "",
+            id:
+              fields.userName === instillUser.data.id
+                ? undefined
+                : fields.userName?.trim() || undefined,
             role: fields.role || undefined,
             newsletter_subscription: fields.newsletterSubscription || undefined,
           },

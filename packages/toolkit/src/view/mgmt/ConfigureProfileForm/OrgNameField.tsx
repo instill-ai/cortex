@@ -40,7 +40,7 @@ export const OrgNameField = (props: OrgNameFieldProps) => {
         value={orgName}
         error={orgNameError}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setFieldValue("orgName", event.target.value.trim())
+          setFieldValue("orgName", event.target.value)
         }
       />
     </div>
