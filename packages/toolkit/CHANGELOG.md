@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.8...@instill-ai/toolkit-v0.43.9) (2023-05-10)
+
+
+### Bug Fixes
+
+* fix role not correctly pick ([#424](https://github.com/instill-ai/design-system/issues/424)) ([c43407a](https://github.com/instill-ai/design-system/commit/c43407a6655ec96eb8aba6dd5feaface42e35b66))
+
 ## [0.43.8](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.7...@instill-ai/toolkit-v0.43.8) (2023-05-10)
 
 
