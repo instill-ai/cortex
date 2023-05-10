@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.8](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.7...@instill-ai/toolkit-v0.43.8) (2023-05-10)
+
+
+### Bug Fixes
+
+* fix configure profile form wrongly check user id ([#422](https://github.com/instill-ai/design-system/issues/422)) ([2acaabd](https://github.com/instill-ai/design-system/commit/2acaabd96adbe330b42e71875da2fd955b7fc7c3))
+
 ## [0.43.7](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.6...@instill-ai/toolkit-v0.43.7) (2023-05-10)
 
 
