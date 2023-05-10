@@ -24,18 +24,19 @@ const selector = (state: ConfigureProfileFormStore) => ({
 
 export const RoleField = (props: RoleFieldProps) => {
   const { roles, user } = props;
-  const { role, setFieldValue, roleError } = useConfigureProfileFormStore(
+  const { setFieldValue, roleError } = useConfigureProfileFormStore(
     selector,
     shallow
   );
 
-  React.useEffect(() => {
-    setFieldValue("role", user?.role || null);
-  }, [user?.role, setFieldValue]);
+  const [selectedRoleOption, setSelectedRoleOption] =
+    React.useState<Nullable<SingleSelectOption>>(null);
 
-  const selectedRoleOption = React.useMemo(() => {
-    return roles.find((e) => e.value === role) || null;
-  }, [roles, role]);
+  React.useEffect(() => {
+    if (!user) return;
+    setFieldValue("role", user.role || null);
+    setSelectedRoleOption(roles.find((e) => e.value === user.role) || null);
+  }, [user?.role, setFieldValue, roles]);
 
   return (
     <div className="w-[287px]">
@@ -48,9 +49,12 @@ export const RoleField = (props: RoleFieldProps) => {
         options={roles}
         value={selectedRoleOption}
         error={roleError}
-        onChange={(option) =>
-          setFieldValue("role", option ? option.value.toString() : null)
-        }
+        onChange={(option) => {
+          setFieldValue("role", option ? option.value.toString() : null);
+          setSelectedRoleOption(
+            roles.find((e) => e.value === option?.value.toString()) || null
+          );
+        }}
       />
     </div>
   );
