@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.7](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.6...@instill-ai/toolkit-v0.43.7) (2023-05-10)
+
+
+### Bug Fixes
+
+* fix configure user profile incorrectly set value ([#420](https://github.com/instill-ai/design-system/issues/420)) ([d8227b9](https://github.com/instill-ai/design-system/commit/d8227b9c7fb3e25fd755a0058ede1f153a03b078))
+
 ## [0.43.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.5...@instill-ai/toolkit-v0.43.6) (2023-05-08)
 
 
