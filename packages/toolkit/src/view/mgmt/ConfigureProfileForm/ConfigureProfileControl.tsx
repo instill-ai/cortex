@@ -53,18 +53,20 @@ export const ConfigureProfileControl = (
 
       validateConfigureProfileFormFieldSchema(fields);
 
-      // Check whether user id exist
-      const userIdExist = await checkUserIdExist({
-        id: fields.userName as string,
-        accessToken,
-      });
+      if (fields.userName !== instillUser.data.id) {
+        // Check whether user id exist
+        const userIdExist = await checkUserIdExist({
+          id: fields.userName as string,
+          accessToken,
+        });
 
-      if (userIdExist) {
-        setFieldError(
-          "userName",
-          "User ID already exists. Please try another one."
-        );
-        return;
+        if (userIdExist) {
+          setFieldError(
+            "userName",
+            "User ID already exists. Please try another one."
+          );
+          return;
+        }
       }
 
       setMessageBoxState(() => ({
