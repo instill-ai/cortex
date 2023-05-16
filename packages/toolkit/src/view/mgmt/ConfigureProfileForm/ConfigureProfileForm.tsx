@@ -24,9 +24,6 @@ export const ConfigureProfileForm = (props: ConfigureProfileFormProps) => {
 
   return (
     <FormRoot marginBottom={marginBottom} width={width}>
-      <div className="mb-6 flex flex-row">
-        <div className="h-16 w-16 rounded-full bg-instillGrey20">{}</div>
-      </div>
       <div className="mb-8 flex flex-col gap-y-6">
         <div className="flex flex-row gap-x-6">
           <FirstNameField user={user} />
