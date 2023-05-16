@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.10](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.9...@instill-ai/toolkit-v0.43.10) (2023-05-16)
+
+
+### Miscellaneous
+
+* remove the unused profile avatar on configure profile form ([#426](https://github.com/instill-ai/design-system/issues/426)) ([93422c8](https://github.com/instill-ai/design-system/commit/93422c8b9abf9c83d79a13f1e8009429ea32428b))
+
 ## [0.43.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.8...@instill-ai/toolkit-v0.43.9) (2023-05-10)
 
 
