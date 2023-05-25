@@ -8,7 +8,6 @@ import {
   type PipelineWatchState,
   type UpdatePipelinePayload,
 } from "../../vdp-sdk";
-import { constructPipelineRecipeWithDefinition } from "../helper";
 import { removeObjKey } from "../../utility";
 
 export const useUpdatePipeline = () => {
@@ -21,21 +20,10 @@ export const useUpdatePipeline = () => {
       payload: UpdatePipelinePayload;
       accessToken: Nullable<string>;
     }) => {
-      const rawPipeline = await updatePipelineMutation({
+      const pipeline = await updatePipelineMutation({
         payload,
         accessToken,
       });
-
-      const recipe = await constructPipelineRecipeWithDefinition({
-        rawRecipe: rawPipeline.recipe,
-        accessToken,
-      });
-
-      const pipeline: Pipeline = {
-        ...rawPipeline,
-        recipe: recipe,
-      };
-
       return Promise.resolve({ pipeline, accessToken });
     },
     {

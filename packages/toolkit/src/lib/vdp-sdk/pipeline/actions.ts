@@ -1,9 +1,9 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { PipelineWithRawRecipe } from "./types";
+import { Pipeline } from "./types";
 
 export type ActivatePipelineResponse = {
-  pipeline: PipelineWithRawRecipe;
+  pipeline: Pipeline;
 };
 
 export async function activatePipelineMutation({
@@ -26,7 +26,7 @@ export async function activatePipelineMutation({
 }
 
 export type DeActivatePipelineResponse = {
-  pipeline: PipelineWithRawRecipe;
+  pipeline: Pipeline;
 };
 
 export async function deActivatePipelineMutation({

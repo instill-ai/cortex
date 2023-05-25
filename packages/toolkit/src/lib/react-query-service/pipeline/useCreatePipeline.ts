@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { constructPipelineRecipeWithDefinition } from "../helper";
 import { removeObjKey } from "../../utility";
 import {
   watchPipeline,
@@ -22,29 +21,19 @@ export const useCreatePipeline = () => {
       payload: CreatePipelinePayload;
       accessToken: Nullable<string>;
     }) => {
-      const res = await createPipelineMutation({ payload, accessToken });
-      return Promise.resolve({ newPipeline: res, accessToken });
+      const pipeline = await createPipelineMutation({ payload, accessToken });
+      return Promise.resolve({ pipeline, accessToken });
     },
     {
-      onSuccess: async ({ newPipeline, accessToken }) => {
-        const recipe = await constructPipelineRecipeWithDefinition({
-          rawRecipe: newPipeline.recipe,
-          accessToken,
-        });
-
-        const pipeline: Pipeline = {
-          ...newPipeline,
-          recipe: recipe,
-        };
-
+      onSuccess: async ({ pipeline, accessToken }) => {
         queryClient.setQueryData<Pipeline>(
-          ["pipelines", newPipeline.id],
+          ["pipelines", pipeline.name],
           pipeline
         );
 
         queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
           old
-            ? [...old.filter((e) => e.id !== newPipeline.id), pipeline]
+            ? [...old.filter((e) => e.name !== pipeline.name), pipeline]
             : [pipeline]
         );
 

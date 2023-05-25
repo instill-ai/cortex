@@ -1,9 +1,9 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { PipelineWithRawRecipe, PipelineWatchState } from "./types";
+import { PipelineWatchState, Pipeline } from "./types";
 
 export type ListPipelinesResponse = {
-  pipelines: PipelineWithRawRecipe[];
+  pipelines: Pipeline[];
   next_page_token: string;
   total_size: string;
 };
@@ -19,7 +19,7 @@ export async function listPipelinesQuery({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken);
-    const pipelines: PipelineWithRawRecipe[] = [];
+    const pipelines: Pipeline[] = [];
 
     const queryString = getQueryString(
       `/pipelines?view=VIEW_FULL`,
@@ -48,7 +48,7 @@ export async function listPipelinesQuery({
 }
 
 export type GetPipelineResponse = {
-  pipeline: PipelineWithRawRecipe;
+  pipeline: Pipeline;
 };
 
 export async function getPipelineQuery({

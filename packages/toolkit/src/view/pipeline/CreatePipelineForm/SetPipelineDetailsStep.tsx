@@ -301,7 +301,7 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
           updatePipeline.mutate(
             {
               payload: {
-                name: res.newPipeline.name,
+                name: res.pipeline.name,
                 description: pipelineDescription,
               },
               accessToken,

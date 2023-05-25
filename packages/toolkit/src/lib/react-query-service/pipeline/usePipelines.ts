@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { listPipelinesQuery, type Pipeline } from "../../vdp-sdk";
-import { constructPipelineRecipeWithDefinition } from "../helper";
+import { listPipelinesQuery } from "../../vdp-sdk";
 import { env } from "../../utility";
 import type { Nullable } from "../../type";
 
@@ -20,23 +19,13 @@ export const usePipelines = ({
   return useQuery(
     ["pipelines"],
     async () => {
-      const pipelinesWithRawRecipe = await listPipelinesQuery({
+      const pipelines = await listPipelinesQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });
 
-      const pipelines: Pipeline[] = [];
-
-      for (const pipeline of pipelinesWithRawRecipe) {
-        const recipe = await constructPipelineRecipeWithDefinition({
-          rawRecipe: pipeline.recipe,
-          accessToken,
-        });
-        pipelines.push({ ...pipeline, recipe: recipe });
-      }
-
-      return pipelines;
+      return Promise.resolve(pipelines);
     },
     {
       enabled,
