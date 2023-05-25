@@ -23,7 +23,7 @@ export const ModelConfigurationFields = (
             id="model-github-repo-url"
             label="GitHub repository"
             description="The name of a public GitHub repository, e.g.
-                      `instill-ai/model-mobilenetv2`."
+                      `instill-ai/model-mobilenetv2-dvc`."
             required={true}
             value={model.configuration.repository}
             error={null}
