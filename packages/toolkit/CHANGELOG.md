@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.43.11](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.10...@instill-ai/toolkit-v0.43.11) (2023-05-25)
+
+
+### Bug Fixes
+
+* [INS-700] fix model repo description typo ([#428](https://github.com/instill-ai/design-system/issues/428)) ([133a858](https://github.com/instill-ai/design-system/commit/133a8580007b813eb95a2c63d80f2371f376a1ff))
+
 ## [0.43.10](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.9...@instill-ai/toolkit-v0.43.10) (2023-05-16)
 
 
