@@ -41,7 +41,7 @@ export const modelHubPresetsList: ModelHubPreset[] = [
     task: "TASK_CLASSIFICATION",
     model_definition: "model-definitions/github",
     configuration: {
-      repository: "instill-ai/model-mobilenetv2",
+      repository: "instill-ai/model-mobilenetv2-dvc",
       tag: "v1.0-cpu",
     },
   },
