@@ -3,8 +3,11 @@ import { createInstillAxiosClient } from "../helper";
 import { Pipeline, RawPipelineRecipeComponent } from "./types";
 
 export type CreatePipelinePayload = {
-  version: string;
-  recipe: RawPipelineRecipeComponent[];
+  id: string;
+  recipe: {
+    version: string;
+    components: RawPipelineRecipeComponent[];
+  };
 };
 
 export type CreatePipelineResponse = {
