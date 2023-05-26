@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/toolkit",
-  "version": "0.44.1-rc.0",
+  "version": "0.44.1-rc.1",
   "description": "Instill AI's frontend toolkit",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -28,6 +28,7 @@
     "@instill-ai/eslint-config-cortex": "workspace:*",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/cookie": "^0.5.1",
+    "@types/uuid": "^9.0.1",
     "@types/json-schema": "^7.0.11",
     "@types/node": "^18.14.1",
     "@types/react": "^17.0.39",
@@ -62,6 +63,7 @@
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "uuid": "^9.0.0",
     "yup": "^0.32.11",
     "zod": "^3.21.4",
     "zustand": "^4.3.6"
@@ -80,6 +82,7 @@
     "react-dom": "^18.2.0",
     "yup": "^0.32.11",
     "zod": "^3.21.4",
-    "zustand": "^4.3.6"
+    "zustand": "^4.3.6",
+    "uuid": "^9.0.0"
   }
 }
