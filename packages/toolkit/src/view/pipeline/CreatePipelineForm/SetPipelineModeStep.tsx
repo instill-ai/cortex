@@ -5,6 +5,7 @@ import {
   sendAmplitudeData,
   useAmplitudeCtx,
   useCreateResourceFormStore,
+  prefetchModels,
   type CreateResourceFormStore,
   type CreateSourcePayload,
   type Nullable,
@@ -245,8 +246,9 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
         value={selectedSyncSourceOption}
         options={syncSourceOptions}
         error={existingSourceIdError}
-        onChange={(option: Nullable<SingleSelectOption>) => {
+        onChange={async (option: Nullable<SingleSelectOption>) => {
           setSelectedSyncSourceOption(option);
+          await prefetchModels(accessToken, 10 * 1000);
         }}
         disabled={false}
         additionalMessageOnLabel={null}

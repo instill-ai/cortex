@@ -2,7 +2,11 @@ import cn from "clsx";
 import { FormVerticalDivider } from "../FormVerticalDivider";
 import { SelectExistingModelFlow } from "./SelectExistingModelFlow";
 import { CreateModelForm, CreateModelWithPresetForm } from "../../../model";
-import { useCreateResourceFormStore, type Nullable } from "../../../../lib";
+import {
+  useCreateResourceFormStore,
+  prefetchDestinations,
+  type Nullable,
+} from "../../../../lib";
 
 export type SetPipelineModelStepProps = {
   accessToken: Nullable<string>;
@@ -22,8 +26,9 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
     <div className="flex flex-1 flex-row h-full items-stretch">
       <div className={cn("flex", disabledCreateModel ? "w-full" : "w-1/3")}>
         <SelectExistingModelFlow
-          onSelect={() => {
+          onSelect={async () => {
             increasePipelineFormStep();
+            await prefetchDestinations(accessToken, 10 * 1000);
           }}
           accessToken={accessToken}
           enabledQuery={enabledQuery}
