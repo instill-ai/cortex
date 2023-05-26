@@ -6,6 +6,7 @@ import {
   useAmplitudeCtx,
   useCreateResourceFormStore,
   prefetchModels,
+  useQueryClient,
   type CreateResourceFormStore,
   type CreateSourcePayload,
   type Nullable,
@@ -39,6 +40,7 @@ export type SetPipelineModeStepProps = {
 export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
   const { accessToken, syncModelOnly, enabledQuery } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
+  const queryClient = useQueryClient();
 
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -151,7 +153,7 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
   const handleGoNext = async () => {
     if (!canGoNext) return;
 
-    prefetchModels(accessToken, 10 * 1000);
+    prefetchModels(queryClient, accessToken, 10 * 1000);
 
     const sourceIndex = sources.data.findIndex(
       (e) => e.id === selectedSyncSourceOption.value

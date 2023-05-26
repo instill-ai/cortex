@@ -10,9 +10,10 @@ import {
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
+  prefetchDestinations,
+  useQueryClient,
   type CreateResourceFormStore,
   type Nullable,
-  prefetchDestinations,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -31,6 +32,7 @@ export const SelectExistingModelFlow = (
 ) => {
   const { accessToken, onSelect, enabledQuery } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
+  const queryClient = useQueryClient();
 
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -82,7 +84,7 @@ export const SelectExistingModelFlow = (
       return;
     }
 
-    prefetchDestinations(accessToken, 10 * 1000);
+    prefetchDestinations(queryClient, accessToken, 10 * 1000);
 
     const targetModel = models.data.find(
       (e) => e.name === (selectedModelOption?.value as string)
