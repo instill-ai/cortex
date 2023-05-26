@@ -7,12 +7,12 @@ export async function prefetchDestinations(
   staleTime?: number
 ) {
   const queryClient = useQueryClient();
-  await queryClient.prefetchQuery(
-    ["destinations"],
-    async () => {
+  await queryClient.prefetchQuery({
+    queryKey: ["destinations"],
+    queryFn: async () => {
       const destinations = await fetchDestinations(accessToken);
       return Promise.resolve(destinations);
     },
-    { staleTime }
-  );
+    staleTime,
+  });
 }

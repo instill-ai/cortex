@@ -26,9 +26,8 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
     <div className="flex flex-1 flex-row h-full items-stretch">
       <div className={cn("flex", disabledCreateModel ? "w-full" : "w-1/3")}>
         <SelectExistingModelFlow
-          onSelect={async () => {
+          onSelect={() => {
             increasePipelineFormStep();
-            await prefetchDestinations(accessToken, 10 * 1000);
           }}
           accessToken={accessToken}
           enabledQuery={enabledQuery}

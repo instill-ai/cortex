@@ -7,12 +7,12 @@ export async function prefetchPipelines(
   staleTime?: number
 ) {
   const queryClient = useQueryClient();
-  await queryClient.prefetchQuery(
-    ["pipelines"],
-    async () => {
+  await queryClient.prefetchQuery({
+    queryKey: ["pipelines"],
+    queryFn: async () => {
       const pipelines = await fetchPipelines(accessToken);
       return Promise.resolve(pipelines);
     },
-    { staleTime }
-  );
+    staleTime,
+  });
 }

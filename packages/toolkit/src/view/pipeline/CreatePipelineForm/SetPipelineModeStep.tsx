@@ -246,9 +246,8 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
         value={selectedSyncSourceOption}
         options={syncSourceOptions}
         error={existingSourceIdError}
-        onChange={async (option: Nullable<SingleSelectOption>) => {
+        onChange={(option: Nullable<SingleSelectOption>) => {
           setSelectedSyncSourceOption(option);
-          await prefetchModels(accessToken, 10 * 1000);
         }}
         disabled={false}
         additionalMessageOnLabel={null}
