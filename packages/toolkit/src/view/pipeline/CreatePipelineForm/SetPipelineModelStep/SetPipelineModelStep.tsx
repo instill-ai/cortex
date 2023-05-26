@@ -2,7 +2,11 @@ import cn from "clsx";
 import { FormVerticalDivider } from "../FormVerticalDivider";
 import { SelectExistingModelFlow } from "./SelectExistingModelFlow";
 import { CreateModelForm, CreateModelWithPresetForm } from "../../../model";
-import { useCreateResourceFormStore, type Nullable } from "../../../../lib";
+import {
+  useCreateResourceFormStore,
+  prefetchDestinations,
+  type Nullable,
+} from "../../../../lib";
 
 export type SetPipelineModelStepProps = {
   accessToken: Nullable<string>;

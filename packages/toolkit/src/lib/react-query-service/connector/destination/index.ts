@@ -1,3 +1,4 @@
+export * from "./prefetchDestinations";
 export * from "./useCreateDestination";
 export * from "./useDeleteDestination";
 export * from "./useDestination";

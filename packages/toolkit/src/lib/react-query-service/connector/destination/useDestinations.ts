@@ -7,6 +7,34 @@ import {
   type DestinationWithDefinition,
 } from "../../../vdp-sdk";
 
+export async function fetchDestinations(accessToken: Nullable<string>) {
+  try {
+    const destinations = await listDestinationsQuery({
+      pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
+      nextPageToken: null,
+      accessToken,
+    });
+
+    const destinationsWithDefinition: DestinationWithDefinition[] = [];
+
+    for (const destination of destinations) {
+      const destinationDefinition = await getDestinationDefinitionQuery({
+        destinationDefinitionName: destination.destination_connector_definition,
+        accessToken,
+      });
+
+      destinationsWithDefinition.push({
+        ...destination,
+        destination_connector_definition: destinationDefinition,
+      });
+    }
+
+    return Promise.resolve(destinationsWithDefinition);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 export const useDestinations = ({
   accessToken,
   enabled,
@@ -23,28 +51,8 @@ export const useDestinations = ({
   return useQuery(
     ["destinations"],
     async () => {
-      const destinations = await listDestinationsQuery({
-        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
-        nextPageToken: null,
-        accessToken,
-      });
-
-      const destinationsWithDefinition: DestinationWithDefinition[] = [];
-
-      for (const destination of destinations) {
-        const destinationDefinition = await getDestinationDefinitionQuery({
-          destinationDefinitionName:
-            destination.destination_connector_definition,
-          accessToken,
-        });
-
-        destinationsWithDefinition.push({
-          ...destination,
-          destination_connector_definition: destinationDefinition,
-        });
-      }
-
-      return Promise.resolve(destinationsWithDefinition);
+      const destinations = await fetchDestinations(accessToken);
+      return Promise.resolve(destinations);
     },
     {
       enabled: enabled,
