@@ -148,8 +148,10 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
   const canGoNext =
     pipelineMode && sources.isSuccess && selectedSyncSourceOption;
 
-  const handleGoNext = () => {
+  const handleGoNext = async () => {
     if (!canGoNext) return;
+
+    prefetchModels(accessToken, 10 * 1000);
 
     const sourceIndex = sources.data.findIndex(
       (e) => e.id === selectedSyncSourceOption.value

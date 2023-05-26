@@ -12,6 +12,7 @@ import {
   useCreateResourceFormStore,
   type CreateResourceFormStore,
   type Nullable,
+  prefetchDestinations,
 } from "../../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -76,10 +77,12 @@ export const SelectExistingModelFlow = (
     return true;
   }, [modelType]);
 
-  const handleUseModel = React.useCallback(() => {
+  const handleUseModel = React.useCallback(async () => {
     if (!models.isSuccess) {
       return;
     }
+
+    prefetchDestinations(accessToken, 10 * 1000);
 
     const targetModel = models.data.find(
       (e) => e.name === (selectedModelOption?.value as string)
