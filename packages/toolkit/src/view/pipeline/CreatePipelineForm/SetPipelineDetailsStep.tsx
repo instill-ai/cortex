@@ -1,4 +1,5 @@
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import * as React from "react";
 import {
   BasicProgressMessageBox,
@@ -272,15 +273,15 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
         version: "v1alpha",
         components: [
           {
-            id: sourceName.split("/")[1],
+            id: uuidv4(),
             resource_name: sourceName,
           },
           {
-            id: modelName.split("/")[1],
+            id: uuidv4(),
             resource_name: modelName,
           },
           {
-            id: destinationName.split("/")[1],
+            id: uuidv4(),
             resource_name: destinationName,
           },
         ],
