@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.44.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.0...@instill-ai/toolkit-v0.44.1) (2023-05-26)
+
+
+### Bug Fixes
+
+* fix createPipelineForm not generate unique uuid ([#435](https://github.com/instill-ai/design-system/issues/435)) ([eb56b2e](https://github.com/instill-ai/design-system/commit/eb56b2e1789c83d8f0406eccbfe3e8d439f3218c))
+* fix prefetch wrongly use queryClient ([#433](https://github.com/instill-ai/design-system/issues/433)) ([f20b674](https://github.com/instill-ai/design-system/commit/f20b6741e662688ae759b79c21bc86b6d2979dd7))
+
 ## [0.44.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.11...@instill-ai/toolkit-v0.44.0) (2023-05-26)
 
 
