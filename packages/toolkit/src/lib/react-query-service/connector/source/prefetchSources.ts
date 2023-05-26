@@ -1,12 +1,12 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import { Nullable } from "../../../type";
 import { fetchSources } from "./useSources";
 
 export async function prefetchSources(
+  queryClient: QueryClient,
   accessToken: Nullable<string>,
   staleTime?: number
 ) {
-  const queryClient = useQueryClient();
   await queryClient.prefetchQuery({
     queryKey: ["sources"],
     queryFn: async () => {
