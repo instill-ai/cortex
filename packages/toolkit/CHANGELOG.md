@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.44.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.11...@instill-ai/toolkit-v0.44.0) (2023-05-26)
+
+
+### Features
+
+* [INS-751] adapt pipeline recipe ([#430](https://github.com/instill-ai/design-system/issues/430)) ([9b91bb8](https://github.com/instill-ai/design-system/commit/9b91bb832e36c8ec09f005feaa677d1412a765d2))
+* add prefetch resources function and prefetch resource in create pipeline form ([#432](https://github.com/instill-ai/design-system/issues/432)) ([f8204b0](https://github.com/instill-ai/design-system/commit/f8204b0cf4388d2094aaba4147d188e8f8ca7acb))
+
 ## [0.43.11](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.43.10...@instill-ai/toolkit-v0.43.11) (2023-05-25)
 
 
