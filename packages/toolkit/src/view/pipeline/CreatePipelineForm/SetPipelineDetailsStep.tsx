@@ -269,9 +269,21 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
     const payload: CreatePipelinePayload = {
       id: pipelineId,
       recipe: {
-        source: sourceName,
-        models: [modelName],
-        destination: destinationName,
+        version: "v1alpha",
+        components: [
+          {
+            id: sourceName.split("/")[1],
+            resource_name: sourceName,
+          },
+          {
+            id: modelName.split("/")[1],
+            resource_name: modelName,
+          },
+          {
+            id: destinationName.split("/")[1],
+            resource_name: destinationName,
+          },
+        ],
       },
     };
 
@@ -301,7 +313,7 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
           updatePipeline.mutate(
             {
               payload: {
-                name: res.newPipeline.name,
+                name: res.pipeline.name,
                 description: pipelineDescription,
               },
               accessToken,

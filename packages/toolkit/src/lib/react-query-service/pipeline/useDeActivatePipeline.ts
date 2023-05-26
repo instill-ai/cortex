@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { constructPipelineRecipeWithDefinition } from "../helper";
 import { removeObjKey } from "../../utility";
 import {
   deActivatePipelineMutation,
@@ -20,19 +19,10 @@ export const useDeActivatePipeline = () => {
       pipelineName: string;
       accessToken: Nullable<string>;
     }) => {
-      const rawPipeline = await deActivatePipelineMutation({
+      const pipeline = await deActivatePipelineMutation({
         pipelineName,
         accessToken,
       });
-      const recipe = await constructPipelineRecipeWithDefinition({
-        rawRecipe: rawPipeline.recipe,
-        accessToken,
-      });
-
-      const pipeline: Pipeline = {
-        ...rawPipeline,
-        recipe: recipe,
-      };
 
       return Promise.resolve({ pipeline, accessToken });
     },

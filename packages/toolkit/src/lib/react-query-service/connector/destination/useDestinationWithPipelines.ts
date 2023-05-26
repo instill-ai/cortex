@@ -3,6 +3,7 @@ import { usePipelines } from "../../pipeline";
 import { useDestination } from "./useDestination";
 import type { DestinationWithPipelines } from "../../../vdp-sdk";
 import type { Nullable } from "../../../type";
+import { getComponentFromPipelineRecipe } from "../../../utility";
 
 export const useDestinationWithPipelines = ({
   destinationName,
@@ -54,7 +55,11 @@ export const useDestinationWithPipelines = ({
       }
 
       const targetPipelines = pipelines.data.filter(
-        (e) => e.recipe.destination.name === destinationName
+        (e) =>
+          getComponentFromPipelineRecipe({
+            recipe: e.recipe,
+            componentName: "destination",
+          })?.id === destination.data.id
       );
 
       const destinationWithPipelines: DestinationWithPipelines = {

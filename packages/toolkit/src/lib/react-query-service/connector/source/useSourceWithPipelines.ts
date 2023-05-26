@@ -3,6 +3,7 @@ import { usePipelines } from "../../pipeline";
 import { useSource } from "./useSource";
 import type { SourceWithPipelines } from "../../../vdp-sdk";
 import type { Nullable } from "../../../type";
+import { getComponentFromPipelineRecipe } from "../../../utility";
 
 export const useSourceWithPipelines = ({
   sourceName,
@@ -44,7 +45,11 @@ export const useSourceWithPipelines = ({
       }
 
       const targetPipelines = pipelines.data.filter(
-        (e) => e.recipe.source.name === sourceName
+        (e) =>
+          getComponentFromPipelineRecipe({
+            recipe: e.recipe,
+            componentName: "destination",
+          })?.id === source.data.id
       );
 
       const sourceWithPipelines: SourceWithPipelines = {

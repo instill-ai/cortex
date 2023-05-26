@@ -8,7 +8,7 @@ import {
   SkeletonCell,
   type TableHeadItem,
 } from "../../components";
-import type { Pipeline } from "../../lib";
+import { Pipeline, getComponentFromPipelineRecipe } from "../../lib";
 
 export type PipelineTableProps = {
   pipeline: Pipeline;
@@ -78,12 +78,25 @@ export const PipelineTable = (props: PipelineTableProps) => {
                 width={null}
                 padding="py-2 pl-6"
                 connectorDefinition={
-                  pipeline.recipe.source.source_connector_definition
+                  getComponentFromPipelineRecipe({
+                    recipe: pipeline.recipe,
+                    componentName: "source",
+                  })?.resource_detail.source_connector_definition_detail ?? null
                 }
-                connectorName={pipeline.recipe.source.id}
+                connectorName={
+                  getComponentFromPipelineRecipe({
+                    recipe: pipeline.recipe,
+                    componentName: "source",
+                  })?.resource_detail.id ?? null
+                }
               />
               <ModelsCell
-                models={pipeline.recipe.models}
+                models={
+                  getComponentFromPipelineRecipe({
+                    recipe: pipeline.recipe,
+                    componentName: "model",
+                  }) || []
+                }
                 width={null}
                 padding="py-2"
               />
@@ -91,9 +104,18 @@ export const PipelineTable = (props: PipelineTableProps) => {
                 width={null}
                 padding="py-2 pr-6"
                 connectorDefinition={
-                  pipeline.recipe.destination.destination_connector_definition
+                  getComponentFromPipelineRecipe({
+                    recipe: pipeline.recipe,
+                    componentName: "destination",
+                  })?.resource_detail.destination_connector_definition_detail ??
+                  null
                 }
-                connectorName={pipeline.recipe.destination.id}
+                connectorName={
+                  getComponentFromPipelineRecipe({
+                    recipe: pipeline.recipe,
+                    componentName: "destination",
+                  })?.resource_detail.id ?? null
+                }
               />
             </>
           )}
