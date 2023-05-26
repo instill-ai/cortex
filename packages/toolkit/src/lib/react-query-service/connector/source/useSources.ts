@@ -7,6 +7,32 @@ import {
 } from "../../../vdp-sdk";
 import type { Nullable } from "../../../type";
 
+export async function fetchSources(accessToken: Nullable<string>) {
+  try {
+    const sources = await listSourcesQuery({
+      pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
+      nextPageToken: null,
+      accessToken,
+    });
+    const sourcesWithDefinition: SourceWithDefinition[] = [];
+
+    for (const source of sources) {
+      const sourceDefinition = await getSourceDefinitionQuery({
+        sourceDefinitionName: source.source_connector_definition,
+        accessToken,
+      });
+      sourcesWithDefinition.push({
+        ...source,
+        source_connector_definition: sourceDefinition,
+      });
+    }
+
+    return Promise.resolve(sourcesWithDefinition);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
 export const useSources = ({
   accessToken,
   enabled,
@@ -23,25 +49,8 @@ export const useSources = ({
   return useQuery(
     ["sources"],
     async () => {
-      const sources = await listSourcesQuery({
-        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
-        nextPageToken: null,
-        accessToken,
-      });
-      const sourcesWithDefinition: SourceWithDefinition[] = [];
-
-      for (const source of sources) {
-        const sourceDefinition = await getSourceDefinitionQuery({
-          sourceDefinitionName: source.source_connector_definition,
-          accessToken,
-        });
-        sourcesWithDefinition.push({
-          ...source,
-          source_connector_definition: sourceDefinition,
-        });
-      }
-
-      return Promise.resolve(sourcesWithDefinition);
+      const sources = await fetchSources(accessToken);
+      return Promise.resolve(sources);
     },
     {
       enabled,

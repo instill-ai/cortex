@@ -1,3 +1,4 @@
+export * from "./prefetchSources";
 export * from "./useSource";
 export * from "./useSources";
 export * from "./useSourceDefinitions";

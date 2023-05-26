@@ -1,3 +1,4 @@
+export * from "./prefetchModels";
 export * from "./useCreateGithubModel";
 export * from "./useCreateLocalModel";
 export * from "./useCreateArtivcModel";
