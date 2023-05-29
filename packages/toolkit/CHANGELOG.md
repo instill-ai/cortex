@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.1...@instill-ai/toolkit-v0.44.2) (2023-05-29)
+
+
+### Bug Fixes
+
+* fix ModelsCell takes wrong field as modelName ([#436](https://github.com/instill-ai/design-system/issues/436)) ([4a779b4](https://github.com/instill-ai/design-system/commit/4a779b4fed654157b1cef69f3c452f34631af662))
+
 ## [0.44.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.0...@instill-ai/toolkit-v0.44.1) (2023-05-26)
 
 
