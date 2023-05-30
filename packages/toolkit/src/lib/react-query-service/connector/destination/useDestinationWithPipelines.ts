@@ -59,7 +59,7 @@ export const useDestinationWithPipelines = ({
           getComponentFromPipelineRecipe({
             recipe: e.recipe,
             componentName: "destination",
-          })?.id === destination.data.id
+          })?.resource_detail.id === destination.data.id
       );
 
       const destinationWithPipelines: DestinationWithPipelines = {

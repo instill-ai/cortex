@@ -1,5 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
+import { Pipeline } from "../pipeline";
+
 export type ModelReleaseStage =
   | "RELEASE_STAGE_UNSPECIFIED"
   | "RELEASE_STAGE_ALPHA"
@@ -84,3 +86,7 @@ export type ModelWatchState = {
 };
 
 export type ModelsWatchState = Record<string, ModelWatchState>;
+
+export type ModelWithPipelines = Model & {
+  pipelines: Pipeline[];
+};
