@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.44.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.2...@instill-ai/toolkit-v0.44.3) (2023-05-30)
+
+
+### Bug Fixes
+
+* fix not correctly query pipelines that use this resource ([#438](https://github.com/instill-ai/design-system/issues/438)) ([59033f7](https://github.com/instill-ai/design-system/commit/59033f7cbb819c576f89fc13f40c286bdc0bc7ce))
+
 ## [0.44.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.1...@instill-ai/toolkit-v0.44.2) (2023-05-29)
 
 
