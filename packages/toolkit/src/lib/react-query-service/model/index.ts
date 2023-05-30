@@ -7,6 +7,7 @@ export * from "./useModel";
 export * from "./useModelDefinition";
 export * from "./useModelDefinitions";
 export * from "./useModels";
+export * from "./useModelWithPipelines";
 export * from "./useUpdateModel";
 export * from "./useDeleteModel";
 export * from "./useUnDeployModel";

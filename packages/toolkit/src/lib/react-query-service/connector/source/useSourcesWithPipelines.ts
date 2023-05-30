@@ -40,7 +40,7 @@ export const useSourcesWithPipelines = ({
             getComponentFromPipelineRecipe({
               recipe: e.recipe,
               componentName: "source",
-            })?.id === source.id
+            })?.resource_detail.id === source.id
         );
         newSources.push({
           ...source,
