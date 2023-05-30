@@ -1,7 +1,7 @@
 {
-  "Product": {
-    "Headings": {
-      "Heading 1": {
+  "product": {
+    "headings": {
+      "heading-1": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-0}",
@@ -15,7 +15,7 @@
         },
         "type": "typography"
       },
-      "Heading 2": {
+      "heading-2": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -29,7 +29,7 @@
         },
         "type": "typography"
       },
-      "Heading 3": {
+      "heading-3": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-0}",
@@ -43,7 +43,7 @@
         },
         "type": "typography"
       },
-      "Heading 4": {
+      "heading-4": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-2}",
@@ -57,7 +57,7 @@
         },
         "type": "typography"
       },
-      "Heading 5": {
+      "heading-5": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-2}",
@@ -71,7 +71,7 @@
         },
         "type": "typography"
       },
-      "Heading 6": {
+      "heading-6": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-2}",
@@ -86,8 +86,8 @@
         "type": "typography"
       }
     },
-    "Body": {
-      "Text 1 regular": {
+    "body": {
+      "text-1-regular": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-3}",
@@ -101,7 +101,7 @@
         },
         "type": "typography"
       },
-      "Text 1 rmedium": {
+      "text-1-medium": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-Medium}",
@@ -115,7 +115,7 @@
         },
         "type": "typography"
       },
-      "Text 1 italic": {
+      "text-1-italic": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-4}",
@@ -129,7 +129,7 @@
         },
         "type": "typography"
       },
-      "Text 1 semibold": {
+      "text-1-semibold": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -143,7 +143,7 @@
         },
         "type": "typography"
       },
-      "Text 2 regular": {
+      "text-2-regular": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-3}",
@@ -157,7 +157,7 @@
         },
         "type": "typography"
       },
-      "Text 2 rmedium": {
+      "text-2-medium": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-Medium}",
@@ -171,7 +171,7 @@
         },
         "type": "typography"
       },
-      "Text 2 italic": {
+      "text-2-italic": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-4}",
@@ -185,7 +185,7 @@
         },
         "type": "typography"
       },
-      "Text 2 semibold": {
+      "text-2-semibold": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -199,7 +199,7 @@
         },
         "type": "typography"
       },
-      "Text 3 regular": {
+      "text-3-regular": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-3}",
@@ -213,7 +213,7 @@
         },
         "type": "typography"
       },
-      "Text 3 rmedium": {
+      "text-3-medium": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-Medium}",
@@ -227,7 +227,7 @@
         },
         "type": "typography"
       },
-      "Text 3 italic": {
+      "text-3-italic": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-4}",
@@ -241,7 +241,7 @@
         },
         "type": "typography"
       },
-      "Text 3 semibold": {
+      "text-3-semibold": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -255,7 +255,7 @@
         },
         "type": "typography"
       },
-      "Text 4 regular": {
+      "text-4-regular": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-3}",
@@ -269,7 +269,7 @@
         },
         "type": "typography"
       },
-      "Text 4 medium": {
+      "text-4-medium": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-2}",
@@ -283,7 +283,7 @@
         },
         "type": "typography"
       },
-      "Text 4 italic": {
+      "text-4-italic": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-4}",
@@ -297,54 +297,12 @@
         },
         "type": "typography"
       },
-      "Text 4 semibold": {
+      "text-4-semibold": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
           "lineHeight": "{lineHeights.12}",
           "fontSize": "{fontSize.1}",
-          "letterSpacing": "{letterSpacing.7}",
-          "paragraphSpacing": "{paragraphSpacing.0}",
-          "paragraphIndent": "{paragraphIndent.0}",
-          "textCase": "{textCase.none}",
-          "textDecoration": "{textDecoration.none}"
-        },
-        "type": "typography"
-      },
-      "Text 1 medium": {
-        "value": {
-          "fontFamily": "{fontFamilies.ibm-plex-sans}",
-          "fontWeight": "{fontWeights.ibm-plex-sans-2}",
-          "lineHeight": "{lineHeights.4}",
-          "fontSize": "{fontSize.5}",
-          "letterSpacing": "{letterSpacing.7}",
-          "paragraphSpacing": "{paragraphSpacing.0}",
-          "paragraphIndent": "{paragraphIndent.0}",
-          "textCase": "{textCase.none}",
-          "textDecoration": "{textDecoration.none}"
-        },
-        "type": "typography"
-      },
-      "Text 2 medium": {
-        "value": {
-          "fontFamily": "{fontFamilies.ibm-plex-sans}",
-          "fontWeight": "{fontWeights.ibm-plex-sans-2}",
-          "lineHeight": "{lineHeights.11}",
-          "fontSize": "{fontSize.4}",
-          "letterSpacing": "{letterSpacing.7}",
-          "paragraphSpacing": "{paragraphSpacing.0}",
-          "paragraphIndent": "{paragraphIndent.0}",
-          "textCase": "{textCase.none}",
-          "textDecoration": "{textDecoration.none}"
-        },
-        "type": "typography"
-      },
-      "Text 3 medium": {
-        "value": {
-          "fontFamily": "{fontFamilies.ibm-plex-sans}",
-          "fontWeight": "{fontWeights.ibm-plex-sans-2}",
-          "lineHeight": "{lineHeights.5}",
-          "fontSize": "{fontSize.3}",
           "letterSpacing": "{letterSpacing.7}",
           "paragraphSpacing": "{paragraphSpacing.0}",
           "paragraphIndent": "{paragraphIndent.0}",
@@ -354,8 +312,8 @@
         "type": "typography"
       }
     },
-    "Label": {
-      "Label 1": {
+    "label": {
+      "label-1": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-2}",
@@ -369,7 +327,7 @@
         },
         "type": "typography"
       },
-      "Label 2": {
+      "label-2": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-2}",
@@ -384,8 +342,8 @@
         "type": "typography"
       }
     },
-    "Button": {
-      "Button 1": {
+    "button": {
+      "button-1": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -399,7 +357,7 @@
         },
         "type": "typography"
       },
-      "Button 2": {
+      "button-2": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -413,7 +371,7 @@
         },
         "type": "typography"
       },
-      "Button 3": {
+      "button-3": {
         "value": {
           "fontFamily": "{fontFamilies.ibm-plex-sans}",
           "fontWeight": "{fontWeights.ibm-plex-sans-1}",
@@ -429,7 +387,7 @@
       }
     }
   },
-  "fontFamilies-copy": {
+  "font-families": {
     "ibm-plex-sans": {
       "value": "IBM Plex Sans",
       "type": "fontFamilies"
