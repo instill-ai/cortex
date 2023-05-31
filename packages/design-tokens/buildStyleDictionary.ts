@@ -1,6 +1,3 @@
-import { makeSdTailwindConfig } from "sd-tailwindcss-transformer";
-// import { createDictionary } from "style-dictionary/lib/utils/createDictionary.js";
-
 import StyleDictionaryPackage from "style-dictionary";
 
 function main() {
@@ -10,11 +7,12 @@ function main() {
     matcher: function (prop) {
       // You can be more specific here if you only want 'em' units for font sizes
       return [
-        "fontSizes",
+        "fontSize",
         "spacing",
         "borderRadius",
         "borderWidth",
         "sizing",
+        "lineHeight",
       ].includes(prop.attributes?.category || "");
     },
     transformer: function (prop) {
@@ -24,11 +22,15 @@ function main() {
   });
 
   const StyleDictionary = StyleDictionaryPackage.extend({
-    source: ["tokens/semantic/*.json"],
-    include: ["tokens/global.json"],
+    source: [
+      "tokens/global.json",
+      "tokens/semantic/typography.json",
+      "tokens/semantic/comp.json",
+      "tokens/semantic/colour.json",
+    ],
     format: {
       tailwindFormat: ({ dictionary }) => {
-        return JSON.stringify(dictionary.allTokens);
+        return `export const tokens = ${JSON.stringify(dictionary.allTokens)}`;
       },
     },
     platforms: {
@@ -37,7 +39,7 @@ function main() {
         buildPath: "build/tailwind/",
         files: [
           {
-            destination: "tailwind.config.js",
+            destination: "tailwind.config.ts",
             format: "tailwindFormat",
 
             // We don't want to use the style in the global. They are more like a foundation
@@ -48,10 +50,7 @@ function main() {
       },
     },
   });
-  // StyleDictionary.buildAllPlatforms();
-  // const StyleDictionary = StyleDictionaryModule.extend(
-  //   makeSdTailwindConfig({ source: ["tokens/global.json"], type: "all" })
-  // );
+
   StyleDictionary.buildAllPlatforms();
 }
 
