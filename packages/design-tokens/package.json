@@ -10,7 +10,7 @@
     "design-tokens"
   ],
   "scripts": {
-    "test": "vitest --run",
+    "test": "vitest --run --passWithNoTests",
     "build": "pnpm build-sd && pnpm build-tw",
     "ts-types": "tsc --emitDeclarationOnly",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
