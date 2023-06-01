@@ -23,7 +23,7 @@
     "test:coverage": "vitest --collectCoverage",
     "ts-types": "tsc --emitDeclarationOnly",
     "build": "pnpm rimraf dist && tsup src && pnpm ts-types",
-    "test": "vitest --run",
+    "test": "vitest --run --passWithNoTests",
     "dev": "tsup src --watch"
   },
   "main": "./dist/index.js",
