@@ -246,5 +246,35 @@
       "value": "{opacity.10}",
       "type": "opacity"
     }
+  },
+  "shadow": {
+    "xxs-shadow": {
+      "value": "{Shadows.Shadow-100}",
+      "type": "boxShadow"
+    },
+    "xs-shadow": {
+      "value": "{Shadows.Shadow-200}",
+      "type": "boxShadow"
+    },
+    "sm-shadow": {
+      "value": "{Shadows.Shadow-300}",
+      "type": "boxShadow"
+    },
+    "md-shadow": {
+      "value": "{Shadows.Shadow-400}",
+      "type": "boxShadow"
+    },
+    "lg-shadow": {
+      "value": "{Shadows.Shadow-500}",
+      "type": "boxShadow"
+    },
+    "xl-shadow": {
+      "value": "{Shadows.Shadow-600}",
+      "type": "boxShadow"
+    },
+    "xxl-shadow": {
+      "value": "{Shadows.Shadow-700}",
+      "type": "boxShadow"
+    }
   }
 }
