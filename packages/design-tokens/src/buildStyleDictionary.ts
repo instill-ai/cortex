@@ -22,6 +22,12 @@ function main() {
   });
 
   generateSemantic();
+  generateTheme([
+    {
+      themeName: "light",
+      themePath: "tokens/theme/light.json",
+    },
+  ]);
 }
 
 main();
@@ -37,7 +43,7 @@ function generateSemantic() {
     platforms: {
       tailwind: {
         transforms: ["attribute/cti", "name/cti/kebab", "sizes/px"],
-        buildPath: "build/tailwind/",
+        buildPath: "dist/semantic/",
         files: [
           {
             destination: "sd-tokens.ts",
@@ -53,4 +59,55 @@ function generateSemantic() {
   });
 
   StyleDictionary.buildAllPlatforms();
+}
+
+function generateTheme(themes: { themeName: string; themePath: string }[]) {
+  for (const theme of themes) {
+    const StyleDictionary = StyleDictionaryPackage.extend({
+      source: ["tokens/global.json", theme.themePath],
+      format: {
+        cssVariables: ({ dictionary }) => {
+          const colours = dictionary.allTokens.filter(
+            (e) => e.type === "color"
+          );
+          const colourCSS = colours
+            .map((e) => `--${e.name}: ${e.value};`)
+            .join("\n");
+
+          const boxShadows = dictionary.allTokens.filter(
+            (e) => e.type === "boxShadow"
+          );
+          const boxShadowCSS = boxShadows
+            .map(
+              (e) =>
+                `--${e.name}: ${e.value.x}px ${e.value.y}px ${e.value.blur}px ${e.value.spread}px ${e.value.color};`
+            )
+            .join("\n");
+
+          return `.${theme.themeName} {
+            ${colourCSS}
+            ${boxShadowCSS}
+          }`;
+        },
+      },
+      platforms: {
+        tailwind: {
+          transforms: ["attribute/cti", "name/cti/kebab", "sizes/px"],
+          buildPath: "dist/theme/",
+          files: [
+            {
+              destination: `${theme.themeName}.css`,
+              format: "cssVariables",
+
+              // We don't want to use the style in the global. They are more like a foundation
+              // Users of the design token should use the style in the semantic and theme folder
+              filter: (token) => token.filePath !== "tokens/global.json",
+            },
+          ],
+        },
+      },
+    });
+
+    StyleDictionary.buildAllPlatforms();
+  }
 }

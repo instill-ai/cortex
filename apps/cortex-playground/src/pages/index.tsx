@@ -72,17 +72,8 @@ const IndexPage = () => {
 
   return (
     <Root>
-      <div className="w-[1200px]">
-        <ChangeModelStateToggle
-          model={model.data ? model.data : null}
-          modelWatchState={
-            modelWatchState.isSuccess ? modelWatchState.data.state : null
-          }
-          switchOn={deployModel}
-          switchOff={unDeployModel}
-          marginBottom="mb-10"
-          accessToken={null}
-        />
+      <div className="w-[1200px] bg-semantic-bg-primary rounded-xxs  product-headings-heading-1 border-xxs border-semantic-bg-secondary">
+        <p className="font-medium text-3xl">Hello</p>
       </div>
     </Root>
   );
