@@ -13,7 +13,7 @@ function main() {
         "borderWidth",
         "sizing",
         "lineHeight",
-      ].includes(prop.attributes?.category || "");
+      ].includes(prop.original.type || "");
     },
     transformer: function (prop) {
       // You can also modify the value here if you want to convert pixels to ems
@@ -21,13 +21,14 @@ function main() {
     },
   });
 
+  generateSemantic();
+}
+
+main();
+
+function generateSemantic() {
   const StyleDictionary = StyleDictionaryPackage.extend({
-    source: [
-      "tokens/global.json",
-      "tokens/semantic/typography.json",
-      "tokens/semantic/comp.json",
-      "tokens/semantic/colour.json",
-    ],
+    source: ["tokens/global.json", "tokens/semantic/*.json"],
     format: {
       tailwindFormat: ({ dictionary }) => {
         return `export const tokens = ${JSON.stringify(dictionary.allTokens)}`;
@@ -39,7 +40,7 @@ function main() {
         buildPath: "build/tailwind/",
         files: [
           {
-            destination: "tailwind.config.ts",
+            destination: "sd-tokens.ts",
             format: "tailwindFormat",
 
             // We don't want to use the style in the global. They are more like a foundation
@@ -53,5 +54,3 @@ function main() {
 
   StyleDictionary.buildAllPlatforms();
 }
-
-main();
