@@ -2,23 +2,23 @@
   "semantic": {
     "bg": {
       "primary": {
-        "value": "{base.neutral.0}",
+        "value": "{base.neutral.700}",
         "type": "color"
       },
       "alt-primary": {
-        "value": "{base.neutral.10}",
+        "value": "{base.neutral.600}",
         "type": "color"
       },
       "base-bg": {
-        "value": "{base.neutral.50}",
+        "value": "{base.neutral.800}",
         "type": "color"
       },
       "secondary": {
-        "value": "{base.neutral.100}",
+        "value": "{base.neutral.900}",
         "type": "color"
       },
       "line": {
-        "value": "{base.neutral.200}",
+        "value": "{base.neutral.600}",
         "type": "color"
       }
     },
@@ -30,44 +30,10 @@
     },
     "fg": {
       "primary": {
-        "value": "{base.Text+Icon.Primary Black}",
+        "value": "{base.Text+Icon.Primary White}",
         "type": "color"
       },
       "secondary": {
-        "value": "{base.Text+Icon.Secondary Black}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": "0.8",
-              "space": "hsl"
-            }
-          }
-        }
-      },
-      "disabled": {
-        "value": "{base.Text+Icon.Disabled Black}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "alpha",
-              "value": "0.65",
-              "space": "hsl"
-            }
-          }
-        }
-      },
-      "on-default": {
-        "value": "{base.Text+Icon.Primary White}",
-        "type": "color"
-      },
-      "primary-on-bg-secondary": {
-        "value": "{base.Text+Icon.Primary White}",
-        "type": "color"
-      },
-      "secondary-on-bg-secondary": {
         "value": "{base.Text+Icon.Secondary White}",
         "type": "color",
         "$extensions": {
@@ -80,7 +46,7 @@
           }
         }
       },
-      "disabled-on-secondary-bg": {
+      "disabled": {
         "value": "{base.Text+Icon.Disabled White}",
         "type": "color",
         "$extensions": {
@@ -92,6 +58,10 @@
             }
           }
         }
+      },
+      "on-default": {
+        "value": "{base.Text+Icon.Primary White}",
+        "type": "color"
       }
     },
     "accent": {
@@ -100,15 +70,15 @@
         "type": "color"
       },
       "default": {
-        "value": "{base.primary.600}",
+        "value": "{base.primary.300}",
         "type": "color"
       },
       "hover": {
-        "value": "{base.primary.700}",
+        "value": "{base.primary.400}",
         "type": "color"
       },
       "pressed": {
-        "value": "{base.primary.800}",
+        "value": "{base.primary.500}",
         "type": "color"
       },
       "on-bg": {
@@ -122,15 +92,15 @@
         "type": "color"
       },
       "default": {
-        "value": "{base.warning.600}",
+        "value": "{base.warning.300}",
         "type": "color"
       },
       "hover": {
-        "value": "{base.warning.700}",
+        "value": "{base.warning.400}",
         "type": "color"
       },
       "pressed": {
-        "value": "{base.warning.800}",
+        "value": "{base.warning.500}",
         "type": "color"
       },
       "on-bg": {
@@ -144,15 +114,15 @@
         "type": "color"
       },
       "default": {
-        "value": "{base.danger.600}",
+        "value": "{base.danger.300}",
         "type": "color"
       },
       "hover": {
-        "value": "{base.danger.700}",
+        "value": "{base.danger.400}",
         "type": "color"
       },
       "pressed": {
-        "value": "{base.danger.800}",
+        "value": "{base.danger.500}",
         "type": "color"
       },
       "on-bg": {
