@@ -1,4 +1,4 @@
-import { tokens } from "./build/tailwind/sd-tokens";
+import { tokens } from "../build/tailwind/sd-tokens";
 import fs from "fs/promises";
 
 async function main() {

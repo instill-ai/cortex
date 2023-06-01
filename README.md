@@ -9,3 +9,15 @@ This is the repo that stores various functions/components, used across instill-a
   - sdk: Instill API Axios wrapper and typescript type related to the requests/responses of the API
   - hook: React hooks
   - type: General Typescript types that we are using
+
+
+
+## Caveats
+
+If you encounter some error like this, and the target file may not need to be covered by tsconfig. Please put the file into `.eslintignore`
+
+```
+/Users/summerbud/Documents/instill-ai/design-system/packages/design-tokens/vitest.config.ts
+  0:0  error  Parsing error: ESLint was configured to run on `<tsconfigRootDir>/vitest.config.ts` using `parserOptions.project`: /users/summerbud/documents/instill-ai/design-system/packages/design-tokens/tsconfig.json
+However, that TSConfig does not include this file. Either:
+```

@@ -15,8 +15,8 @@
     "ts-types": "tsc --emitDeclarationOnly",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
     "dev": "tsx ./buildStyleDictionary.ts",
-    "build-sd": "tsx ./buildStyleDictionary.ts",
-    "build-tw": "tsx ./buildTailwindPlugin.ts"
+    "build-sd": "tsx ./src/buildStyleDictionary.ts",
+    "build-tw": "tsx ./src/buildTailwindPlugin.ts"
   },
   "files": [
     "dist"

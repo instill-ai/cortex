@@ -4,5 +4,5 @@
     "outDir": "dist"
   },
   "include": ["**/*.ts", "**/*.tsx"],
-  "exclude": ["./setupTests.ts", "vitest.config.ts", "tsup.config.ts"]
+  "exclude": ["vitest.config.ts"]
 }
