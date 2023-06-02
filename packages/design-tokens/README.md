@@ -13,7 +13,7 @@ Once the PR is merged the Github action will be triggered and generate the new t
 
 ## How to use
 
-First you need to install this package.
+Install this package.
 
 ```bash
 pnpm add @instill-ai/design-tokens
