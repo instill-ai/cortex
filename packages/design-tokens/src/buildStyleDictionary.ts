@@ -59,6 +59,9 @@ function generateSemantic() {
             filter: (token) => token.filePath !== "tokens/global.json",
           },
         ],
+        options: {
+          log: "error",
+        },
       },
     },
   });
@@ -109,6 +112,9 @@ function generateTheme(themes: { themeName: string; themePath: string }[]) {
               filter: (token) => token.filePath !== "tokens/global.json",
             },
           ],
+          options: {
+            log: "error",
+          },
         },
       },
     });
@@ -157,6 +163,9 @@ function generateRootTheme() {
             filter: (token) => token.filePath !== "tokens/global.json",
           },
         ],
+        options: {
+          log: "error",
+        },
       },
     },
   });

@@ -2,7 +2,7 @@ import { Html, Head, Main, NextScript } from "next/document";
 
 export default function Document() {
   return (
-    <Html lang="en" className="light">
+    <Html lang="en">
       <Head>
         <script src="/__env.js" />
       </Head>

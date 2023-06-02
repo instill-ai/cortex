@@ -1,17 +1,6 @@
 import { Root } from "@/components/Root";
-import { useLayoutEffect } from "react";
 
 const IndexPage = () => {
-  useLayoutEffect(() => {
-    const currentTheme = localStorage.getItem("theme")
-      ? localStorage.getItem("theme")
-      : null;
-
-    if (currentTheme) {
-      document.documentElement.setAttribute("data-theme", currentTheme);
-    }
-  }, []);
-
   return (
     <Root>
       <div className="bg-semantic-bg-secondary mx-auto w-[400px] flex flex-col p-10">
