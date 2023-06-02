@@ -1,13 +1,13 @@
 
 ## Preface
 
-To speed up the development, avoid the silo effect between the design and development teams, and reduce the cost of the development(especially light/dark theme). We decide to embrace a set rule of design tokens. [^1]
+To speed up the development, avoid the silo effect between the design and development teams, and reduce the cost of the development(especially the light/dark theme). We decide to embrace a set rule of design tokens. [^1]
 
 ## Package structure
 
 ## How it works
 
-We have the tokens studio plugin installed in our Figma editor. Whenever designer have a new set of tokens, they can use the sync functionality to push new tokens to this Github repo and create a new PR based on the branch.
+We have the tokens studio plugin installed in our Figma editor. Whenever designers have a new set of tokens, they can use the sync functionality to push new tokens to this GitHub repo and create a new PR based on the branch.
 
 Once the PR is merged the Github action will be triggered and generate the new tokens file. The new tokens file will be published to the npm registry and can be used by other packages.
 
@@ -24,7 +24,7 @@ This package will export a /dist folder and contains the following files:
 ```
 ├── dist
 │   ├── semantic
-│   │   └── sd-tokens.ts <-- Normally you won't have a chance to user this file
+│   │   └── sd-tokens.ts <-- Normally you won't have a chance to use this file
 │   ├── tailwind.config.cjs <-- The tailwind preset file
 │   └── theme
 │       ├── dark.css <-- The dark theme CSS variables file
@@ -32,7 +32,7 @@ This package will export a /dist folder and contains the following files:
 │       └── root.css <-- The root CSS variables file
 ```
 
-You need to digest the whole TailwindCSS configuration preset like below and set the rest configration you need. (If you are building the Instill-AI's product we are not recommended to add extra style besides this preset. If the style is lacking please file the issue in the repo)
+You need to digest the whole TailwindCSS configuration preset like below and set the rest configuration you need. (If you are building the Instill-AI's product we are not recommended to add extra style besides this preset. If the style is lacking please file the issue in the repo)
 
 ```js
 module.exports = {
@@ -61,7 +61,7 @@ Don't forget to import the base style of TailwindCSS [^2]
 
 ## How to switch theme
 
-Initialize the user perference in the root of the app
+Initialize the user preference at the root of the app
 
 ```ts
 // pages/_app.tsx
@@ -103,13 +103,13 @@ Toggle the theme in the app
 
 ### The Tokens Studio's token
 
-The tokens comes from Token Studio's plugin will be stored in the /tokens folder and convert into git. (The plugin will treat this repo as a remote storage. So it's forbiddened to directly change the tokens stored in this folder)
+The tokens that come from Token Studio's plugin will be stored in the /tokens folder and committed into git. (The plugin will treat this repo as remote storage. So it's forbidden to directly change the tokens stored in this folder)
 
-The stucture will looks like. 
+The structure will look like this. 
 
-- `global.json`: This file has all the style a designer need to construct a proper design-tokens. Right now the owner is our design Dani.
-- `/semantic`: This folder store the base of the design tokens. We will construct the base TailwindCSS preset from this file
-- `/theme`: This folder store the theme related tokens. We will construct the theme CSS variables from this file
+- `global.json`: This file has all the styles a designer needs to construct a proper design-tokens. Right now the owner is our designer Dani.
+- `/semantic`: This folder stores the base of the design tokens. We will construct the base TailwindCSS preset from this file
+- `/theme`: This folder stores the theme-related tokens. We will construct the theme CSS variables from this file
 
 ```
 ├── tokens
@@ -131,19 +131,19 @@ The stucture will looks like.
 
 - Construct `sd-tokens`
   - Merge `global.json`, `/semantic/*.json`
-  - Make every inherited styles get what they need
-  - Filter out the tokens which has filePath=global.json to remove the base style in the style dictionary tokens.
-  - Transform the style dictionary tokens to full tokens list and store in the `/dist/semantic/sd-tokens.ts` file
+  - Make every inherited style get what they need
+  - Filter out the tokens which have filePath=global.json to remove the base style in the style dictionary tokens.
+  - Transform the style dictionary tokens to full tokens list and store them in the `/dist/semantic/sd-tokens.ts` file
 - Construct `/theme` CSS variables
   - Merge `global.json`, `/theme/*.json`
-  - Make every inherited styles get what they need
-  - Filter out the tokens which has filePath=global.json to remove the base style in the style dictionary tokens.
-  - Transform the style dictionary tokens to CSS variables and store in the `/dist/theme` folder
+  - Make every inherited style get what they need
+  - Filter out the tokens which have filePath=global.json to remove the base style in the style dictionary tokens.
+  - Transform the style dictionary tokens to CSS variables and store them in the `/dist/theme` folder
 - Use the `/dist/semantic/sd-tokens.ts` to construct the TailwindCSS preset
 
-### One to one mapping
+### One-to-one mapping
 
-Currently we are not greedy transformation all the style we get from the tokens but only transform a part of it. Here are the style we transform right now.
+Currently, we are not greedy in transforming all the styles we get from the tokens but only transform a part of it. Here is the style we transform right now.
 
 - color
 - boxShadow
@@ -158,9 +158,9 @@ If you find out these styles are not enough. Please file issue in this repo.
 
 ### Naming agnostic
 
-We are trying to not affect the naming convention of designers by emiting additional naming rules. So we do a lot of naming transformation under the hood. 
+We are trying to not affect the naming convention of designers by emitting additional naming rules. So we do a lot of naming transformation under the hood. 
 
-Takes fontFamily for example, the tokens comes from the plugin looks like
+Takes fontFamily for example, the tokens that come from the plugin look like
 
 ```json
 {
@@ -173,7 +173,7 @@ Takes fontFamily for example, the tokens comes from the plugin looks like
 }
 ```
 
-The style dictionary will transform it to this and you will notice that it construct the name to kebeb-case. This is due to we are using Style Dictionary pre-defined transforms. `attribute/cti` [^3] will add attribute object based on the location of the token and `name/cti/kebab`[^4] will create a kebab case name based on the attribute object.
+The style dictionary will transform it to this and you will notice that it constructs the name to kebab-case. This is due to we are using Style Dictionary pre-defined transforms. `attribute/cti` [^3] will add an attribute object based on the location of the token and `name/cti/kebab`[^4] will create a kebab case name based on the attribute object.
 
 ```json
 {
@@ -185,10 +185,10 @@ The style dictionary will transform it to this and you will notice that it const
   name: "font-families-ibm-plex-sans",
   attributes: { category: "font-families", type: "ibm-plex-sans" },
   path: ["font-families", "ibm-plex-sans"],
-},
+}
 ```
 
-But this will make our tailwind class as `font-font-families-ibm-plex-sans`, it's too verboase and increase the bundle size of the css files. So we will transform it to `ibm-plex-sans` in the TailwindCSS preset.
+But this will make our tailwind class `font-font-families-ibm-plex-sans`, it's too verbose and increases the bundle size of the CSS files. So we will transform it to `ibm-plex-sans` in the TailwindCSS preset.
 
 ```ts
 const fontFamilies = tokens.filter((e) => e.type === "fontFamilies");
@@ -203,7 +203,7 @@ const configuration = `module.exports = {
 }`;
 ```
 
-Due to this act, designer can choose whatever they want to name for the tokens, but they need to stick consistent across different version.
+Due to this act, the designer can choose whatever they want to name for the tokens, but they need to stick consistently across different versions.
 
 ## Reference 
 
