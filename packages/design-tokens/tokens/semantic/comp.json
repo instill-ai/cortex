@@ -12,15 +12,15 @@
       "value": "{s}",
       "type": "borderRadius"
     },
-    "s": {
+    "sm": {
       "value": "{m}",
       "type": "borderRadius"
     },
-    "m": {
+    "md": {
       "value": "{l}",
       "type": "borderRadius"
     },
-    "l": {
+    "lg": {
       "value": "{xl}",
       "type": "borderRadius"
     },
