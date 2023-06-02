@@ -69,6 +69,13 @@ jobs:
           token: ${{ secrets.NPMTOKEN }}
           package: "./packages/design-system/package.json"
 
+      - name: Publish design-tokens
+        if: ${{ steps.release.outputs.releases_created }}
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPMTOKEN }}
+          package: "./packages/design-tokens/package.json"
+
       - name: Publish toolkit
         if: ${{ steps.release.outputs.releases_created }}
         uses: JS-DevTools/npm-publish@v1
