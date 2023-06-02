@@ -127,10 +127,17 @@ The stucture will looks like.
 
 ### The flow
 
-- Merge `global.json`, `/semantic/*.json` and `/theme/*json` to form a proper style dictionary tokens. 
-- Merge `global.json`, `/semantic/*.json` and `/theme/*json` to generate the theme CSS variables.
-- Remove the tokens which filePath=global.json to remove the base style in the style dictionary tokens.
-- Generate the TailwindCSS preset from the style dictionary tokens.
+- Construct `sd-tokens`
+  - Merge `global.json`, `/semantic/*.json`
+  - Make every inherited styles get what they need
+  - Filter out the tokens which has filePath=global.json to remove the base style in the style dictionary tokens.
+  - Transform the style dictionary tokens to full tokens list and store in the `/dist/semantic/sd-tokens.ts` file
+- Construct `/theme` CSS variables
+  - Merge `global.json`, `/theme/*.json`
+  - Make every inherited styles get what they need
+  - Filter out the tokens which has filePath=global.json to remove the base style in the style dictionary tokens.
+  - Transform the style dictionary tokens to CSS variables and store in the `/dist/theme` folder
+- Use the `/dist/semantic/sd-tokens.ts` to construct the TailwindCSS preset
 
 ### One to one mapping
 
