@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.11.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.6...@instill-ai/design-system-v0.11.0) (2023-06-02)
+
+
+### Features
+
+* [INS-820] transform design tokens to style dictionary ([#441](https://github.com/instill-ai/design-system/issues/441)) ([f92e777](https://github.com/instill-ai/design-system/commit/f92e777cb3508ff8ce134293d971b0edfce7a25c))
+* **design-tokens:** [INS-822][INS-825] Implement tailwind css variables for theme switch ([#444](https://github.com/instill-ai/design-system/issues/444)) ([78bc6b1](https://github.com/instill-ai/design-system/commit/78bc6b1ff0b5d4e08a763367409438e546fa5915))
+
 ## [0.10.6](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.5...@instill-ai/design-system-v0.10.6) (2023-05-08)
 
 

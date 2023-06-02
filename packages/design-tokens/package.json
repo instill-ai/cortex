@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/design-tokens",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha",
   "description": "Instill AI's design tokens",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
