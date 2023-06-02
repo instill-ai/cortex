@@ -129,17 +129,17 @@ The structure will look like this.
 
 ![design-tokens-flow](https://github.com/instill-ai/design-system/assets/57251712/98728c68-0288-453d-9abb-dd11fbfb2ea0)
 
-- Construct `sd-tokens`
+- Build `sd-tokens` (`./src/buildSDTokens.ts`)
   - Merge `global.json`, `/semantic/*.json`
   - Make every inherited style get what they need
   - Filter out the tokens which have filePath=global.json to remove the base style in the style dictionary tokens.
   - Transform the style dictionary tokens to full tokens list and store them in the `/dist/semantic/sd-tokens.ts` file
-- Construct `/theme` CSS variables
+- Build `/theme` CSS variables (`./src/buildCSSVariables.ts`)
   - Merge `global.json`, `/theme/*.json`
   - Make every inherited style get what they need
   - Filter out the tokens which have filePath=global.json to remove the base style in the style dictionary tokens.
   - Transform the style dictionary tokens to CSS variables and store them in the `/dist/theme` folder
-- Use the `/dist/semantic/sd-tokens.ts` to construct the TailwindCSS preset
+- Use the `/dist/semantic/sd-tokens.ts` to build the TailwindCSS preset (`./src/buildTailwindPreset`)
 
 ### One-to-one mapping
 

@@ -11,12 +11,13 @@
   ],
   "scripts": {
     "test": "vitest --run --passWithNoTests",
-    "build": "pnpm build-sd && pnpm build-tw",
+    "build": "pnpm build-sd && pnpm build-tw && pnpm build-css-variables",
     "ts-types": "tsc --emitDeclarationOnly",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
     "dev": "tsx ./buildStyleDictionary.ts",
-    "build-sd": "tsx ./src/buildStyleDictionary.ts",
-    "build-tw": "tsx ./src/buildTailwindPlugin.ts"
+    "build-sd": "tsx ./src/buildSDTokens.ts",
+    "build-tw": "tsx ./src/buildTailwindPreset.ts",
+    "build-css-variables": "tsx ./src/buildCSSVariables.ts"
   },
   "files": [
     "dist"

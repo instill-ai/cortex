@@ -21,7 +21,6 @@ function main() {
     },
   });
 
-  generateSemantic();
   generateRootTheme();
   generateTheme([
     {
@@ -33,40 +32,6 @@ function main() {
       themePath: "tokens/theme/dark.json",
     },
   ]);
-}
-
-main();
-
-function generateSemantic() {
-  const StyleDictionary = StyleDictionaryPackage.extend({
-    source: ["tokens/global.json", "tokens/semantic/*.json"],
-    format: {
-      tailwindFormat: ({ dictionary }) => {
-        return `export const tokens = ${JSON.stringify(dictionary.allTokens)}`;
-      },
-    },
-    platforms: {
-      tailwind: {
-        transforms: ["attribute/cti", "name/cti/kebab", "sizes/px"],
-        buildPath: "dist/semantic/",
-        files: [
-          {
-            destination: "sd-tokens.ts",
-            format: "tailwindFormat",
-
-            // We don't want to use the style in the global. They are more like a foundation
-            // Users of the design token should use the style in the semantic and theme folder
-            filter: (token) => token.filePath !== "tokens/global.json",
-          },
-        ],
-        options: {
-          log: "error",
-        },
-      },
-    },
-  });
-
-  StyleDictionary.buildAllPlatforms();
 }
 
 function generateTheme(themes: { themeName: string; themePath: string }[]) {
@@ -172,3 +137,5 @@ function generateRootTheme() {
 
   StyleDictionary.buildAllPlatforms();
 }
+
+main();
