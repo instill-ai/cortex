@@ -1,88 +1,42 @@
 import { Root } from "@/components/Root";
-import {
-  GrpcIcon,
-  HttpIcon,
-  MongoDbIcon,
-  SingleSelectOption,
-  SnowflakeIcon,
-} from "@instill-ai/design-system";
-import {
-  ChangeModelStateToggle,
-  useDeployModel,
-  useModel,
-  usePipeline,
-  useUnDeployModel,
-  useWatchModel,
-} from "@instill-ai/toolkit";
+import { useLayoutEffect } from "react";
 
 const IndexPage = () => {
-  const options: SingleSelectOption[] = [
-    {
-      value: "grpc",
-      label: "gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-gRPC-",
-      startIcon: (
-        <GrpcIcon
-          width="w-[30px]"
-          height="h-[30px]"
-          color="fill-black"
-          position="my-auto"
-        />
-      ),
-    },
-    {
-      value: "http",
-      label: "HTTP",
-      startIcon: (
-        <HttpIcon
-          width="w-[30px]"
-          height="h-[30px]"
-          color="fill-black"
-          position="my-auto"
-        />
-      ),
-    },
-    {
-      value: "snowflake",
-      label: "Snowflake",
-      startIcon: (
-        <SnowflakeIcon width="w-[30px]" height="h-[30px]" position="my-auto" />
-      ),
-    },
-    {
-      value: "mongodb",
-      label: "MongoDB",
-      startIcon: (
-        <MongoDbIcon width="w-[30px]" height="h-[30px]" position="my-auto" />
-      ),
-    },
-  ];
+  useLayoutEffect(() => {
+    const currentTheme = localStorage.getItem("theme")
+      ? localStorage.getItem("theme")
+      : null;
 
-  const model = useModel({
-    modelName: "models/yoyo",
-    accessToken: null,
-    enabled: true,
-  });
-  const modelWatchState = useWatchModel({
-    modelName: "models/yoyo",
-    accessToken: null,
-    enabled: true,
-  });
-  const deployModel = useDeployModel();
-  const unDeployModel = useUnDeployModel();
+    if (currentTheme) {
+      document.documentElement.setAttribute("data-theme", currentTheme);
+    }
+  }, []);
 
   return (
     <Root>
-      <div className="w-[1200px]">
-        <ChangeModelStateToggle
-          model={model.data ? model.data : null}
-          modelWatchState={
-            modelWatchState.isSuccess ? modelWatchState.data.state : null
-          }
-          switchOn={deployModel}
-          switchOff={unDeployModel}
-          marginBottom="mb-10"
-          accessToken={null}
-        />
+      <div className="bg-semantic-bg-secondary mx-auto w-[400px] flex flex-col p-10">
+        <p className="font-medium text-3xl font-ibm-plex-sans mb-10 mx-auto text-semantic-fg-primary">
+          Hello
+        </p>
+
+        <button
+          className="font-sans text-semantic-fg-primary"
+          onClick={() => {
+            const currentTheme = localStorage.getItem("instill-console-theme")
+              ? localStorage.getItem("instill-console-theme")
+              : null;
+
+            if (currentTheme === "dark") {
+              document.documentElement.setAttribute("data-theme", "light");
+              localStorage.setItem("instill-console-theme", "light");
+            } else {
+              document.documentElement.setAttribute("data-theme", "dark");
+              localStorage.setItem("instill-console-theme", "dark");
+            }
+          }}
+        >
+          Theme switch
+        </button>
       </div>
     </Root>
   );
