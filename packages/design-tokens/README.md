@@ -127,6 +127,8 @@ The stucture will looks like.
 
 ### The flow
 
+![design-tokens-flow](https://github.com/instill-ai/design-system/assets/57251712/98728c68-0288-453d-9abb-dd11fbfb2ea0)
+
 - Construct `sd-tokens`
   - Merge `global.json`, `/semantic/*.json`
   - Make every inherited styles get what they need
