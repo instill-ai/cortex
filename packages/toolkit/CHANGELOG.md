@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.45.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.3...@instill-ai/toolkit-v0.45.0) (2023-06-02)
+
+
+### Features
+
+* [INS-820] transform design tokens to style dictionary ([#441](https://github.com/instill-ai/design-system/issues/441)) ([f92e777](https://github.com/instill-ai/design-system/commit/f92e777cb3508ff8ce134293d971b0edfce7a25c))
+
 ## [0.44.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.2...@instill-ai/toolkit-v0.44.3) (2023-05-30)
 
 
