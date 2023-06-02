@@ -36,9 +36,12 @@ async function main() {
     return `".${name}": ${JSON.stringify(value)}`;
   });
 
+  // The name of the token will look like font-families-ibm-plex-sans and
+  // we only need ibm-plex-sans
+
   const fontFamilies = tokens.filter((e) => e.type === "fontFamilies");
   const fontFamiliesString = fontFamilies
-    .map((e) => `"${e.name}": "${e.value}"`)
+    .map((e) => `"${e.name.replace("font-families-", "")}": "${e.value}"`)
     .join(",\n");
 
   const configuration = `module.exports = {
