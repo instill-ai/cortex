@@ -10,6 +10,7 @@ async function main() {
     (e) =>
       e.type === "boxShadow" && e.filePath === "tokens/semantic/colour.json"
   );
+
   const typography = tokens.filter((e) => e.type === "typography");
   const borderWidth = tokens.filter((e) => e.type === "borderWidth");
   const borderWitdhString = borderWidth
