@@ -6,12 +6,15 @@
       "outputs": ["dist/**", ".next/**"]
     },
     "lint": {
-      "outputs": []
+      "outputs": [],
+      "dependsOn": ["build"]
     },
     "dev": {
       "cache": false
     },
-    "test": {}
+    "test": {
+      "dependsOn": ["build"]
+    }
   },
   "globalEnv": ["NEXT_PUBLIC_API_VERSION","NODE_ENV"]
 }
