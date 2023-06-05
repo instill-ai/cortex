@@ -7,11 +7,11 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: StoryFn = (args) => {
+const Template: StoryFn = () => {
   return (
     <div className="grid grid-flow-row grid-cols-8">
-      {Object.entries(Icons).map(([, Icon]) => {
-        return <Icon className="w-6 h-6 stroke-slate-500" />;
+      {Object.entries(Icons).map(([key, Icon]) => {
+        return <Icon key={key} className="w-6 h-6 stroke-slate-500" />;
       })}
     </div>
   );
