@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.1...@instill-ai/design-tokens-v0.1.2) (2023-06-05)
+
+
+### Miscellaneous
+
+* **design-tokens:** extend style instead of replace them in design-tokens tailwind configuration ([#458](https://github.com/instill-ai/design-system/issues/458)) ([157d763](https://github.com/instill-ai/design-system/commit/157d7636ef1f834b4744438b7f704593afbfabcd))
+
 ## [0.1.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.0...@instill-ai/design-tokens-v0.1.1) (2023-06-05)
 
 
