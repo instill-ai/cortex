@@ -205,6 +205,41 @@ const configuration = `module.exports = {
 
 Due to this act, the designer can choose whatever they want to name for the tokens, but they need to stick consistently across different versions.
 
+### How do we achieve the theme switch using CSS variables?
+
+As mentioned by above section , we can switch between dark and light theme by switching the root's data-theme value. This is done by two layer of design.
+
+1. We set the TailwindCSS configuration preset with CSS variable. It will looks like below.
+
+```js
+module.exports = {
+  theme: {
+    colors: {
+      "semantic-bg-primary": "var(--semantic-bg-primary)",
+    }
+  }
+}
+```
+
+2. We construct the css variable and import them at the root. The css file will looks like below
+
+```css
+:root {
+  --semantic-bg-primary: #ffffff;
+}
+
+[data-theme="light"] {
+  --semantic-bg-primary: #ffffff;
+}
+
+[data-theme="dark"] {
+  --semantic-bg-primary: #23272f;
+}
+```
+
+So when you switch the `data-theme` value, the `--semantic-bg-primary` will also change. Which makes the theme switch possible.
+
+
 ## Reference 
 
 [^1]: [W3C Design Tokens Technical Reports](https://tr.designtokens.org/)
