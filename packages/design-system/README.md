@@ -1,4 +1,13 @@
-# About this design system
+# About new design system
+
+We are undergoing a series of revamps for our design-system, which included several aspects:
+
+1. Compound component first approach. Under the hood, we will use Radix-UI.
+2. We are abandoning one style one prop approach due to it being too verbose to use
+
+--- 
+
+# Old design system
 
 This is a react design system builds on top of TailwindCSS with several principles:
 
