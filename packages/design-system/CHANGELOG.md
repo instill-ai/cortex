@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.12.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.11.0...@instill-ai/design-system-v0.12.0) (2023-06-05)
+
+
+### Features
+
+* **design-system:** add Gear01 and Database01 icon ([#456](https://github.com/instill-ai/design-system/issues/456)) ([8761eb4](https://github.com/instill-ai/design-system/commit/8761eb4d65ad6cb6e4bc3373ce3098590e3885f4))
+
 ## [0.11.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.10.6...@instill-ai/design-system-v0.11.0) (2023-06-02)
 
 
