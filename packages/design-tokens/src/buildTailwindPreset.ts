@@ -47,21 +47,23 @@ async function main() {
 
   const configuration = `module.exports = {
     theme: {
-      colors: {
-        ${semanticColours
-          .map((e) => `"${e.name}": "var(--${e.name})"`)
-          .join(",\n")}
-      },
-      boxShadow: {
-        ${semanticBoxShadow
-          .map((e) => `"${e.name.split("-")[1]}": "var(--${e.name})"`)
-          .join(",\n")}
-      },
-      fontFamily: {${fontFamiliesString}},
-      borderWidth: {${borderWitdhString}},
-      opacity: {${opacityString}},
-      spacing: {${spacingString}},
-      borderRadius: {${borderRadiusString}}
+      extend: {
+        colors: {
+          ${semanticColours
+            .map((e) => `"${e.name}": "var(--${e.name})"`)
+            .join(",\n")}
+        },
+        boxShadow: {
+          ${semanticBoxShadow
+            .map((e) => `"${e.name.split("-")[1]}": "var(--${e.name})"`)
+            .join(",\n")}
+        },
+        fontFamily: {${fontFamiliesString}},
+        borderWidth: {${borderWitdhString}},
+        opacity: {${opacityString}},
+        spacing: {${spacingString}},
+        borderRadius: {${borderRadiusString}}
+      }
     },
     plugins: [
       ({ addUtilities }) => {
