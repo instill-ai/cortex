@@ -1,5 +1,5 @@
-import { GearIcon } from "./GearIcon";
+import { GearIcon01 } from "./GearIcon01";
 
 export const Icons = {
-  GearIcon,
+  GearIcon01,
 };

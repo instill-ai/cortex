@@ -1,6 +1,6 @@
 import { IconBase, IconBaseProps } from "../IconBase";
 
-export const GearIcon = (
+export const GearIcon01 = (
   props: Omit<IconBaseProps, "viewBox" | "children">
 ) => {
   const { className, ...passThrough } = props;
