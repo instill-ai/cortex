@@ -8,9 +8,11 @@ export const IconBase = (props: IconBaseProps) => {
   const { children, viewBox, className, ...passThrough } = props;
   return (
     <svg
+      {...passThrough}
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
       className={className}
+      fill="none"
     >
       {children}
     </svg>
