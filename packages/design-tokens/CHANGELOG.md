@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.0...@instill-ai/design-tokens-v0.1.1) (2023-06-05)
+
+
+### Miscellaneous
+
+* **docs:** update docs about the theme switch ([#454](https://github.com/instill-ai/design-system/issues/454)) ([f5e2ff7](https://github.com/instill-ai/design-system/commit/f5e2ff7006fe7536902f843163f46573d1fd92b5))
+
 ## [0.1.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.0.1...@instill-ai/design-tokens-v0.1.0) (2023-06-05)
 
 
