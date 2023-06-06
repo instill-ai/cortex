@@ -1,34 +1,18 @@
 {
   "base": {
     "0": {
-      "5": {
-        "value": "2px",
-        "type": "spacing"
-      },
       "value": "0px",
       "type": "spacing"
     },
     "1": {
-      "5": {
-        "value": "6px",
-        "type": "spacing"
-      },
       "value": "4px",
       "type": "spacing"
     },
     "2": {
-      "5": {
-        "value": "10px",
-        "type": "spacing"
-      },
       "value": "8px",
       "type": "spacing"
     },
     "3": {
-      "5": {
-        "value": "14px",
-        "type": "spacing"
-      },
       "value": "12px",
       "type": "spacing"
     },
@@ -138,6 +122,22 @@
     },
     "px": {
       "value": "1px",
+      "type": "spacing"
+    },
+    "0,5": {
+      "value": "2px",
+      "type": "spacing"
+    },
+    "1,5": {
+      "value": "6px",
+      "type": "spacing"
+    },
+    "2,5": {
+      "value": "10px",
+      "type": "spacing"
+    },
+    "3,5": {
+      "value": "14px",
       "type": "spacing"
     },
     "Text+Icon": {
