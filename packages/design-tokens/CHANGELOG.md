@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.2...@instill-ai/design-tokens-v0.1.3) (2023-06-06)
+
+
+### Bug Fixes
+
+* **design-tokens:** transform fontStyle, textCase, letterSpacing edge cases ([#459](https://github.com/instill-ai/design-system/issues/459)) ([0b6c35f](https://github.com/instill-ai/design-system/commit/0b6c35f1600b9c0d36de5d91702a970ec36ac5de))
+
 ## [0.1.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.1...@instill-ai/design-tokens-v0.1.2) (2023-06-05)
 
 
