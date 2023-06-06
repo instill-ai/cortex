@@ -239,6 +239,45 @@ module.exports = {
 
 So when you switch the `data-theme` value, the `--semantic-bg-primary` will also change. Which makes the theme switch possible.
 
+## Caveats
+
+### TextCase and TextTransformation
+
+When it comes to the uppercase and lowercase, Tokens Studio is using `textCase` as identifier but css is using `textTransformation`. We need to transform this identifier.
+
+### FontWeight and FontStyle
+
+There has no fontStyle property in Figma so Tokens Studio embraces this idea [^5]. So the token its return will have something like
+
+```js
+{
+  value: {
+    fontFamily: "IBM Plex Sans",
+    fontWeight: "Italic",
+    lineHeight: "28px",
+    fontSize: "18px",
+    letterSpacing: "0%",
+    paragraphSpacing: "0px",
+    paragraphIndent: "0px",
+    textCase: "none",
+    textDecoration: "none",
+  }
+}
+```
+
+We need to do the transformation ourselves.
+
+### `paragraphSpacing` and `paragraphIndent` is not a valid CSS property
+
+Figma use `paragraphSpacing`[^6] and `paragraphIndent` internally and it's not a valid CSS property.
+
+At this stage we will remove the `paragraphSpacing` and transform the `paragraphIndent` to `textIndent` in CSS.
+
+### `letterSpacing` is represented as percentage in Figma
+
+Figma is a platform agonistic design tool, it's not only for web. So the `letterSpacing` is represented as percentage[^8] in Figma. We need to transform it to `em` in CSS.
+
+The letterSpacing in the Tokens Studio output may be inconsistent. But currently, besides from the typography, we will not use them. So we will not bother about its naming rules. But directly transform the value.
 
 ## Reference 
 
@@ -246,3 +285,7 @@ So when you switch the `data-theme` value, the `--semantic-bg-primary` will also
 [^2]: [TailwindCSS - Installation](https://tailwindcss.com/docs/installation)
 [^3]: [Style Dictionary - attribute/cti](https://amzn.github.io/style-dictionary/#/transforms?id=attributecti)
 [^4]: [Style Dictionary - name/cti/kebab](https://amzn.github.io/style-dictionary/#/transforms?id=namectikebab)
+[^5]: [Issue - Italic font style on typography](https://github.com/tokens-studio/figma-plugin/issues/1639)
+[^6]: [Figma - Paragraph spacing](https://help.figma.com/hc/en-us/articles/360039956634-Explore-text-properties#paragraph-spacing)
+[^7]: [Figma - Paragraph indent](https://help.figma.com/hc/en-us/articles/360039956634-Explore-text-properties#paragraph-indentation)
+[^8]: [Figma - Letter spacing](https://help.figma.com/hc/en-us/articles/360039956634-Explore-text-properties#letter-spacing)

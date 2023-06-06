@@ -1,6 +1,7 @@
 import { tokens } from "../dist/semantic/sd-tokens";
 import fs from "fs/promises";
 import path from "path";
+import { TypographyValue } from "./type";
 
 async function main() {
   const semanticColours = tokens.filter(
@@ -11,7 +12,6 @@ async function main() {
       e.type === "boxShadow" && e.filePath === "tokens/semantic/colour.json"
   );
 
-  const typography = tokens.filter((e) => e.type === "typography");
   const borderWidth = tokens.filter((e) => e.type === "borderWidth");
   const borderWitdhString = borderWidth
     .map((e) => `"${e.name.split("-")[2]}": "${e.value}"`)
@@ -32,11 +32,6 @@ async function main() {
     .map((e) => `"${e.name.split("-")[1]}": "${e.value}"`)
     .join(",\n");
 
-  const typographyUtility = typography.map((e) => {
-    const { name, value } = e;
-    return `".${name}": ${JSON.stringify(value)}`;
-  });
-
   // The name of the token will look like font-families-ibm-plex-sans and
   // we only need ibm-plex-sans
 
@@ -44,6 +39,77 @@ async function main() {
   const fontFamiliesString = fontFamilies
     .map((e) => `"${e.name.replace("font-families-", "")}": "${e.value}"`)
     .join(",\n");
+
+  const typography = tokens.filter((e) => e.type === "typography");
+  const typographyUtility = typography.map((e) => {
+    const name = e.name;
+    const value = e.value as TypographyValue;
+    const textCase = value.textCase;
+    const paragraphIndent = value.paragraphIndent;
+
+    if (value.fontWeight === "Italic") {
+      return `".${name}": ${JSON.stringify({
+        ...value,
+        fontStyle: "italic",
+        fontWeight: 400,
+        textTransform: textCase,
+        textCase: undefined,
+        textIndent: paragraphIndent,
+        paragraphIndent: undefined,
+        paragraphSpacing: undefined,
+      })}`;
+    }
+
+    if (value.fontWeight === "Medium Italic") {
+      return `".${name}": ${JSON.stringify({
+        ...value,
+        fontStyle: "italic",
+        fontWeight: 500,
+        textTransform: textCase,
+        textCase: undefined,
+        textIndent: paragraphIndent,
+        paragraphIndent: undefined,
+        paragraphSpacing: undefined,
+      })}`;
+    }
+
+    if (value.fontWeight === "SemiBold Italic") {
+      return `".${name}": ${JSON.stringify({
+        ...value,
+        fontStyle: "italic",
+        fontWeight: 600,
+        textTransform: textCase,
+        textCase: undefined,
+        textIndent: paragraphIndent,
+        paragraphIndent: undefined,
+        paragraphSpacing: undefined,
+      })}`;
+    }
+
+    if (value.fontWeight === "Bold Italic") {
+      return `".${name}": ${JSON.stringify({
+        ...value,
+        fontStyle: "italic",
+        fontWeight: 700,
+        textTransform: textCase,
+        textCase: undefined,
+        textIndent: paragraphIndent,
+        paragraphIndent: undefined,
+        paragraphSpacing: undefined,
+      })}`;
+    }
+
+    if (value) {
+      return `".${name}": ${JSON.stringify({
+        ...value,
+        textTransform: textCase,
+        textCase: undefined,
+        textIndent: paragraphIndent,
+        paragraphIndent: undefined,
+        paragraphSpacing: undefined,
+      })}`;
+    }
+  });
 
   const configuration = `module.exports = {
     theme: {
