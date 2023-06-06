@@ -26,6 +26,10 @@
       "alt-primary": {
         "value": "{base.neutral.600}",
         "type": "color"
+      },
+      "disabled": {
+        "value": "{base.neutral.600}",
+        "type": "color"
       }
     },
     "fg": {
