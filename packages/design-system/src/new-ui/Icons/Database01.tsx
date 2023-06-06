@@ -1,4 +1,4 @@
-import { IconBase, IconBaseProps } from "../IconBase";
+import { IconBase, IconBaseProps } from "./IconBase";
 
 export const Database01 = (
   props: Omit<IconBaseProps, "viewBox" | "children">
