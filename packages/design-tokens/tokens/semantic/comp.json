@@ -90,40 +90,28 @@
       "value": "{base.12}",
       "type": "spacing"
     },
-    "spacing-13": {
-      "value": "{base.13}",
-      "type": "spacing"
-    },
     "spacing-14": {
       "value": "{base.14}",
-      "type": "spacing"
-    },
-    "spacing-15": {
-      "value": "{base.15}",
       "type": "spacing"
     },
     "spacing-16": {
       "value": "{base.16}",
       "type": "spacing"
     },
-    "spacing-17": {
-      "value": "{base.17}",
-      "type": "spacing"
-    },
-    "spacing-18": {
-      "value": "{base.18}",
-      "type": "spacing"
-    },
-    "spacing-19": {
-      "value": "{base.19}",
-      "type": "spacing"
-    },
     "spacing-20": {
       "value": "{base.20}",
       "type": "spacing"
     },
-    "spacing-21": {
-      "value": "{base.21}",
+    "spacing-24": {
+      "value": "{base.24}",
+      "type": "spacing"
+    },
+    "spacing-28": {
+      "value": "{base.28}",
+      "type": "spacing"
+    },
+    "spacing-32": {
+      "value": "{base.32}",
       "type": "spacing"
     }
   },
