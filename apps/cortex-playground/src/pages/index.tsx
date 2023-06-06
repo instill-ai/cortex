@@ -4,7 +4,7 @@ const IndexPage = () => {
   return (
     <Root>
       <div className="bg-semantic-bg-secondary mx-auto w-[400px] flex flex-col p-10">
-        <p className="font-medium text-3xl font-ibm-plex-sans mb-10 mx-auto text-semantic-fg-primary">
+        <p className="mb-10 mx-auto text-semantic-fg-primary product-button-button-1">
           Hello
         </p>
 
