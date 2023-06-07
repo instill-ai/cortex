@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.14.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.13.0...@instill-ai/design-system-v0.14.0) (2023-06-07)
+
+
+### Features
+
+* **design-system:** add new model and pipeline icon ([#463](https://github.com/instill-ai/design-system/issues/463)) ([5ee6e2e](https://github.com/instill-ai/design-system/commit/5ee6e2e31ef13462ab061bba0bf4e8de3e847506))
+
 ## [0.13.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.12.0...@instill-ai/design-system-v0.13.0) (2023-06-06)
 
 

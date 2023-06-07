@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.1.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.3...@instill-ai/design-tokens-v0.1.4) (2023-06-07)
+
+
+### Bug Fixes
+
+* **design-tokens:** fix spacing tokens to align with Tailwind convention ([#464](https://github.com/instill-ai/design-system/issues/464)) ([392e51a](https://github.com/instill-ai/design-system/commit/392e51a8cc3de286c98bdede58d66405c0e2ce05))
+* **design-tokens:** update docs about float and fix boxShadow value ([#466](https://github.com/instill-ai/design-system/issues/466)) ([8005884](https://github.com/instill-ai/design-system/commit/80058845f7cfdc8574bb8fb85b18a32a9483671b))
+
 ## [0.1.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.2...@instill-ai/design-tokens-v0.1.3) (2023-06-06)
 
 
