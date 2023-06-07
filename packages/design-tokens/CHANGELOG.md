@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.4...@instill-ai/design-tokens-v0.1.5) (2023-06-07)
+
+
+### Bug Fixes
+
+* **design-tokens:** use CSS variables to set up fontFamily ([#469](https://github.com/instill-ai/design-system/issues/469)) ([f626637](https://github.com/instill-ai/design-system/commit/f626637fbb85ae14b7b81b37f9e2aa66217c729e))
+
+
+### Documentation
+
+* **design-tokens:** update design-tokens preface ([#467](https://github.com/instill-ai/design-system/issues/467)) ([e17e5cd](https://github.com/instill-ai/design-system/commit/e17e5cd7c03179b81d1b507a4cadee74d493eeb7))
+
 ## [0.1.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.3...@instill-ai/design-tokens-v0.1.4) (2023-06-07)
 
 
