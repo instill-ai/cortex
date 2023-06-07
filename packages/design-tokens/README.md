@@ -109,6 +109,72 @@ Toggle the theme in the app
 </button>
 ```
 
+## How to set up the font 
+
+Import the Google font in the Head
+
+```html
+<head>
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+    as="font"
+    crossOrigin=""
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+</head>
+```
+
+Set up the CSS variables
+
+```
+:root {
+  --font-ibm-plex-sans: "IBM Plex Sans", sans-serif;
+}
+```
+
+
+
+## How to use the font with Nextjs optimization
+
+You need to first check all the CSS variables related to FontFamily in the TailwindCSS preset, and add the CSS variable at the root of your Nextjs APP. Take IBM Plex Sans as an example. The TailwindCSS preset looks like
+
+```js
+module.exports = {
+  theme: {
+    fontFamily: {
+      "ibm-plex-sans": "var(--font-ibm-plex-sans)"
+    },
+  }
+}
+```
+
+You need to set the font optimization according to the identifier `--font-ibm-plex-sans`
+
+```ts
+// pages/_app.tsx
+import { IBM_Plex_Sans } from "next/font/google";
+import { Inter } from 'next/font/google';
+ 
+const ibmPlexSans = IBM_Plex_Sans({
+  style: ["italic", "normal"],
+  weight: ["100", "200", "300", "400", "500", "600", "700"],
+  subsets: ["latin"],
+  variable: '--font-ibm-plex-sans',
+});
+ 
+export default function MyApp({ Component, pageProps }) {
+  return (
+    <main className={`${inter.variable} font-sans`}>
+      <Component {...pageProps} />
+    </main>
+  );
+}
+```
+
 ## Technological details 
 
 ### The Tokens Studio's token
