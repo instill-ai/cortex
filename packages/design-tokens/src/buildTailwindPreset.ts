@@ -36,7 +36,14 @@ async function main() {
 
   const fontFamilies = tokens.filter((e) => e.type === "fontFamilies");
   const fontFamiliesString = fontFamilies
-    .map((e) => `"${e.name.replace("font-families-", "")}": "${e.value}"`)
+    .map(
+      (e) =>
+        `"${e.name.replace("font-families-", "")}": "var(--font-${(
+          e.value as string
+        )
+          .replaceAll(" ", "-")
+          .toLowerCase()})"`
+    )
     .join(",\n");
 
   const typography = tokens.filter((e) => e.type === "typography");
@@ -56,6 +63,9 @@ async function main() {
         textIndent: paragraphIndent,
         paragraphIndent: undefined,
         paragraphSpacing: undefined,
+        fontFamily: `var(--font-${value.fontFamily
+          .replaceAll(" ", "-")
+          .toLowerCase()})`,
       })}`;
     }
 
@@ -69,6 +79,9 @@ async function main() {
         textIndent: paragraphIndent,
         paragraphIndent: undefined,
         paragraphSpacing: undefined,
+        fontFamily: `var(--font-${value.fontFamily
+          .replaceAll(" ", "-")
+          .toLowerCase()})`,
       })}`;
     }
 
@@ -82,6 +95,9 @@ async function main() {
         textIndent: paragraphIndent,
         paragraphIndent: undefined,
         paragraphSpacing: undefined,
+        fontFamily: `var(--font-${value.fontFamily
+          .replaceAll(" ", "-")
+          .toLowerCase()})`,
       })}`;
     }
 
@@ -95,6 +111,9 @@ async function main() {
         textIndent: paragraphIndent,
         paragraphIndent: undefined,
         paragraphSpacing: undefined,
+        fontFamily: `var(--font-${value.fontFamily
+          .replaceAll(" ", "-")
+          .toLowerCase()})`,
       })}`;
     }
 
@@ -106,6 +125,9 @@ async function main() {
         textIndent: paragraphIndent,
         paragraphIndent: undefined,
         paragraphSpacing: undefined,
+        fontFamily: `var(--font-${value.fontFamily
+          .replaceAll(" ", "-")
+          .toLowerCase()})`,
       })}`;
     }
   });
