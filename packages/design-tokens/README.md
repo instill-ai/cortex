@@ -279,6 +279,10 @@ Figma is a platform agonistic design tool, it's not only for web. So the `letter
 
 The letterSpacing in the Tokens Studio output may be inconsistent. But currently, besides from the typography, we will not use them. So we will not bother about its naming rules. But directly transform the value.
 
+### How float is handling in Tokens Studio
+
+Be careful, due to Tokens Studio is using . as a separator for it's object's path, we can not use `0.5` but `0,5` to represent the float value. The transform we have right now can handle them correctly. But do look close to this potential issue.
+
 ## Reference 
 
 [^1]: [W3C Design Tokens Technical Reports](https://tr.designtokens.org/)
