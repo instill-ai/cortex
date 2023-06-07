@@ -1,7 +1,17 @@
 
 ## Preface
 
-To speed up the development, avoid the silo effect between the design and development teams, and reduce the cost of the development(especially the light/dark theme). We decide to embrace a set rule of design tokens. [^1]
+Normally, what big company does not necessarily mean it will fit into a small and agile startup. Design tokens are not in that category and it will benefit our developer cycle in the long run. Let’s bring some examples here
+
+- Color, we are using lots of color on our website and console. These colors usually are represented with hex values like #FFFFFF. This hex value doesn’t have any explicit meaning and is hard to remember. But with design-tokens, we can transfer them into something more verbose like primary, secondary…etc
+- Light and Dark theme: Under the context of TailwindCSS, the way to implement the light/dark theme is normally with the help of a special utility class like bg-white dark:bg-black and when we switch the className at the root element from “” to “dark” the style will change. But this will cost us to set up all these color pairs again and again. Which makes sense when the project is small but not efficient when the project begins to grow. Right now we are using CSS variables and TailwindCSS together to accomplish this. (We can accomplish this without the help of Design-Tokens, but design-tokens bring us a much more stable platform to work with. So Dani Sosa and I take this opportunity) Later on, all we need to do is switch the data-theme at the root with a single color utility class set to enable dark mode
+- Style tracing and versioning: The design-tokens are stored in our Github repo and version controlled.
+
+There are lots of other minor goodies like
+
+- Fast typography setup
+- GitHub CI/CD for testing style conflict
+- Additional abstraction to encapsulate styles
 
 ## Package structure
 
