@@ -65,7 +65,7 @@ export const SelectExistingModelFlow = (
     setModelOptions(
       onlineModels.map((e) => ({ label: e.name, value: e.name }))
     );
-  }, [models]);
+  }, [models.isSuccess, models.data]);
 
   /* -------------------------------------------------------------------------
    * Use existing model
