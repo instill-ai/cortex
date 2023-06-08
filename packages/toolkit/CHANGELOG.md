@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.46.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.0...@instill-ai/toolkit-v0.46.1) (2023-06-08)
+
+
+### Bug Fixes
+
+* **toolkit:** fix test connection action incorrectly disabled ([#472](https://github.com/instill-ai/design-system/issues/472)) ([fa69069](https://github.com/instill-ai/design-system/commit/fa69069e2b912b048ae246a1e1fb4442a6900c6c))
+
 ## [0.46.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.45.0...@instill-ai/toolkit-v0.46.0) (2023-06-08)
 
 
