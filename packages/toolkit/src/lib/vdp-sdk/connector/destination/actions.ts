@@ -15,7 +15,7 @@ export async function testDestinationConnectionAction({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken);
-    const { data } = await client.get<TestDestinationesponse>(
+    const { data } = await client.post<TestDestinationesponse>(
       `/${destinationName}/testConnection`
     );
     return Promise.resolve(data);

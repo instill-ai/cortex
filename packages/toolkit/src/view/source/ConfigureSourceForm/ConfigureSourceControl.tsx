@@ -14,6 +14,7 @@ import {
   useAmplitudeCtx,
   getInstillApiErrorMessage,
   sendAmplitudeData,
+  testSourceConnectionAction,
   type ModalStore,
   type Nullable,
   type SourceWithPipelines,
@@ -48,6 +49,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     selector,
     shallow
   );
+  const [canTest, setCanTest] = React.useState<boolean>(false);
 
   /* -------------------------------------------------------------------------
    * Handle configure source
@@ -137,32 +139,74 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     accessToken,
   ]);
 
+  const handleTestSource = async function () {
+    if (!source) return;
+
+    setMessageBoxState(() => ({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Testing...",
+    }));
+
+    try {
+      const res = await testSourceConnectionAction({
+        sourceName: source.name,
+        accessToken,
+      });
+
+      setMessageBoxState(() => ({
+        activate: true,
+        status: res.state === "STATE_ERROR" ? "error" : "success",
+        description: null,
+        message: `The source's state is ${res.state}`,
+      }));
+    } catch (err) {
+      setMessageBoxState(() => ({
+        activate: true,
+        status: "error",
+        description: null,
+        message: "Something went wrong when test the source",
+      }));
+    }
+  };
+
   /* -------------------------------------------------------------------------
    * Render
    * -----------------------------------------------------------------------*/
 
   return (
     <div className="flex flex-col">
-      <div className="mb-10 flex flex-row">
+      <div className="mb-10 flex flex-row items-center">
+        <div className="flex flex-row items-center space-x-5 mr-auto">
+          <SolidButton
+            type="submit"
+            disabled={disabledConfigure ? true : false}
+            color="primary"
+            onClickHandler={handleTestSource}
+          >
+            Test
+          </SolidButton>
+          <SolidButton
+            type="submit"
+            disabled={disabledConfigure ? true : false}
+            color="primary"
+            onClickHandler={handleSubmit}
+          >
+            {canEdit ? "Save" : "Edit"}
+          </SolidButton>
+        </div>
+
         <OutlineButton
           disabled={disabledDelete ? true : false}
           onClickHandler={() => openModal()}
-          position="mr-auto my-auto"
+          position="my-auto"
           type="button"
           color="danger"
           hoveredShadow={null}
         >
           Delete
         </OutlineButton>
-        <SolidButton
-          type="submit"
-          disabled={disabledConfigure ? true : false}
-          position="ml-auto my-auto"
-          color="primary"
-          onClickHandler={handleSubmit}
-        >
-          {canEdit ? "Save" : "Edit"}
-        </SolidButton>
       </div>
       <div className="flex">
         <BasicProgressMessageBox

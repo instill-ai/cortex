@@ -33,6 +33,7 @@ import {
   type Nullable,
   type CreateResourceFormStore,
   type ModalStore,
+  testDestinationConnectionAction,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
@@ -405,6 +406,38 @@ export const ConfigureDestinationForm = (
     accessToken,
   ]);
 
+  const handleTestDestination = async function () {
+    if (!destination) return;
+
+    setMessageBoxState(() => ({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Testing...",
+    }));
+
+    try {
+      const res = await testDestinationConnectionAction({
+        destinationName: destination.name,
+        accessToken,
+      });
+
+      setMessageBoxState(() => ({
+        activate: true,
+        status: res.state === "STATE_ERROR" ? "error" : "success",
+        description: null,
+        message: `The destination's state is ${res.state}`,
+      }));
+    } catch (err) {
+      setMessageBoxState(() => ({
+        activate: true,
+        status: "error",
+        description: null,
+        message: "Something went wrong when test the destination",
+      }));
+    }
+  };
+
   return (
     <>
       <FormRoot marginBottom={marginBottom} width={width}>
@@ -450,27 +483,37 @@ export const ConfigureDestinationForm = (
           />
         </div>
         <div className="mb-10 flex flex-row">
+          <div className="flex flex-row items-center space-x-5 mr-auto">
+            <SolidButton
+              type="submit"
+              disabled={disabledConfigure ? true : false}
+              color="primary"
+              onClickHandler={handleTestDestination}
+            >
+              Test
+            </SolidButton>
+            <SolidButton
+              type="button"
+              color="primary"
+              disabled={
+                disabledConfigure ? true : isSyncDestination ? true : false
+              }
+              onClickHandler={() => handleSubmit()}
+            >
+              {canEdit ? "Save" : "Edit"}
+            </SolidButton>
+          </div>
+
           <OutlineButton
             disabled={disabledDelete ? true : false}
             onClickHandler={() => openModal()}
-            position="mr-auto my-auto"
+            position="my-auto"
             type="button"
             color="danger"
             hoveredShadow={null}
           >
             Delete
           </OutlineButton>
-          <SolidButton
-            type="button"
-            color="primary"
-            disabled={
-              disabledConfigure ? true : isSyncDestination ? true : false
-            }
-            position="ml-auto my-auto"
-            onClickHandler={() => handleSubmit()}
-          >
-            {canEdit ? "Save" : "Edit"}
-          </SolidButton>
         </div>
         <div className="flex">
           <BasicProgressMessageBox
