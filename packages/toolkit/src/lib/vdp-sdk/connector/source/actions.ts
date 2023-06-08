@@ -6,7 +6,7 @@ export type TestSourceResponse = {
   state: ConnectorState;
 };
 
-export async function testSource({
+export async function testSourceConnectionAction({
   sourceName,
   accessToken,
 }: {

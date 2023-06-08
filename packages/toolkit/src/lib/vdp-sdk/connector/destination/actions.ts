@@ -6,7 +6,7 @@ export type TestDestinationesponse = {
   state: ConnectorState;
 };
 
-export async function testDestination({
+export async function testDestinationConnectionAction({
   destinationName,
   accessToken,
 }: {
