@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.46.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.45.0...@instill-ai/toolkit-v0.46.0) (2023-06-08)
+
+
+### Features
+
+* **toolkit:** add test connector connection button ([#470](https://github.com/instill-ai/design-system/issues/470)) ([f611d1d](https://github.com/instill-ai/design-system/commit/f611d1dd1eba38204aa22a09a4a92d968abb59f3))
+
 ## [0.45.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.44.3...@instill-ai/toolkit-v0.45.0) (2023-06-02)
 
 
