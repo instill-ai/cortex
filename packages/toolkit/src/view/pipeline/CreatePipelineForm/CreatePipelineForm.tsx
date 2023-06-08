@@ -81,6 +81,7 @@ export const CreatePipelineForm = (props: CreatePipelineFormProps) => {
     syncModelOnly,
     withModelPreset,
     enabledQuery,
+    disabledCreateModel,
   ]);
 
   return (

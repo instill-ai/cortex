@@ -36,7 +36,7 @@ export const RoleField = (props: RoleFieldProps) => {
     if (!user) return;
     setFieldValue("role", user.role || null);
     setSelectedRoleOption(roles.find((e) => e.value === user.role) || null);
-  }, [user?.role, setFieldValue, roles]);
+  }, [user, setFieldValue, roles]);
 
   return (
     <div className="w-[287px]">

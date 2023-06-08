@@ -111,6 +111,8 @@ export const SelectExistingModelFlow = (
     onSelect,
     models.data,
     models.isSuccess,
+    accessToken,
+    queryClient,
   ]);
 
   /* -------------------------------------------------------------------------

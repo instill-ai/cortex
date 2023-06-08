@@ -49,8 +49,6 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     selector,
     shallow
   );
-  const [canTest, setCanTest] = React.useState<boolean>(false);
-
   /* -------------------------------------------------------------------------
    * Handle configure source
    * -----------------------------------------------------------------------*/
