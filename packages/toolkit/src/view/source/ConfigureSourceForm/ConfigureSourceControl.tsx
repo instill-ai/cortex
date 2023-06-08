@@ -179,7 +179,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
         <div className="flex flex-row items-center space-x-5 mr-auto">
           <SolidButton
             type="submit"
-            disabled={disabledConfigure ? true : false}
+            disabled={false}
             color="primary"
             onClickHandler={handleTestSource}
           >
