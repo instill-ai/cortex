@@ -15,16 +15,6 @@ export const queryCache = new QueryCache();
 export const queryClient = new QueryClient({ queryCache });
 
 export default function App({ Component, pageProps }: AppProps) {
-  useLayoutEffect(() => {
-    const currentTheme = localStorage.getItem("instill-console-theme")
-      ? localStorage.getItem("instill-console-theme")
-      : null;
-
-    if (currentTheme) {
-      document.documentElement.setAttribute("data-theme", currentTheme);
-    }
-  }, []);
-
   return (
     <QueryClientProvider client={queryClient}>
       <Component {...pageProps} />;

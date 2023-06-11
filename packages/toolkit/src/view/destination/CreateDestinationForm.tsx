@@ -138,7 +138,11 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         />
       ),
     }));
-  }, [destinationDefinitions, pipelineMode]);
+  }, [
+    destinationDefinitions.isSuccess,
+    destinationDefinitions.data,
+    pipelineMode,
+  ]);
 
   const [selectedDestinationDefinition, setSelectedDestinationDefinition] =
     React.useState<Nullable<ConnectorDefinition>>(null);

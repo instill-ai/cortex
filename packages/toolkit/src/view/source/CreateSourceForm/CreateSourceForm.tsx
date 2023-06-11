@@ -72,7 +72,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
         ),
       },
     ]);
-  }, [sources]);
+  }, [sources.isSuccess]);
 
   return (
     <FormRoot marginBottom={marginBottom} width={width}>
