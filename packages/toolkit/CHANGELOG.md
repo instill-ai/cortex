@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.0...@instill-ai/toolkit-v0.47.1) (2023-06-11)
+
+
+### Miscellaneous
+
+* **toolkit:** remove PageBase from toolkit ([#483](https://github.com/instill-ai/design-system/issues/483)) ([949404b](https://github.com/instill-ai/design-system/commit/949404bc92fe35b0cad9d375d502b0087c19da78))
+
 ## [0.47.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.3...@instill-ai/toolkit-v0.47.0) (2023-06-11)
 
 
