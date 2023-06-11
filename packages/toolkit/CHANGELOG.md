@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.46.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.1...@instill-ai/toolkit-v0.46.2) (2023-06-11)
+
+
+### Bug Fixes
+
+* fix react-query instance cause hook re-render issue ([#476](https://github.com/instill-ai/design-system/issues/476)) ([52138a5](https://github.com/instill-ai/design-system/commit/52138a578d420d0901f7bde7f651ef36cba32683))
+
+
+### Miscellaneous
+
+* remove all the initStoreOn... props ([#478](https://github.com/instill-ai/design-system/issues/478)) ([3a7bc73](https://github.com/instill-ai/design-system/commit/3a7bc7384de25df048aa9ec77fdc34e2f084adbf))
+
 ## [0.46.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.0...@instill-ai/toolkit-v0.46.1) (2023-06-08)
 
 
