@@ -26,6 +26,7 @@ import {
   useModalStore,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
+  testDestinationConnectionAction,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
   type DestinationWithDefinition,
@@ -33,7 +34,6 @@ import {
   type Nullable,
   type CreateResourceFormStore,
   type ModalStore,
-  testDestinationConnectionAction,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";

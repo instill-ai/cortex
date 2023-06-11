@@ -102,7 +102,7 @@ export const SelectExistingDestinationFlow = (
         })
       );
     }
-  }, [destinations, pipelineMode]);
+  }, [destinations.isSuccess, destinations.data, pipelineMode]);
 
   const [selectedDestinationOption, setSelectedDestinationOption] =
     React.useState<Nullable<SingleSelectOption>>(null);
