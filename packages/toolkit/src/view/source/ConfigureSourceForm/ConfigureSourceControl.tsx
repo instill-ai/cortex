@@ -24,6 +24,7 @@ import {
 import { DeleteResourceModal } from "../../../components";
 
 const selector = (state: ConfigureSourceFormStore) => ({
+  init: state.init,
   canEdit: state.fields.canEdit,
   setFieldValue: state.setFieldValue,
 });
@@ -35,17 +36,24 @@ const modalSelector = (state: ModalStore) => ({
 
 export type ConfigureSourceControlProps = {
   source: Nullable<SourceWithPipelines>;
-  onDelete: Nullable<() => void>;
+  onDelete: Nullable<(initStore: () => void) => void>;
+  onConfigure: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
   disabledDelete?: boolean;
   disabledConfigure?: boolean;
 };
 
 export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
-  const { source, onDelete, accessToken, disabledDelete, disabledConfigure } =
-    props;
+  const {
+    source,
+    onDelete,
+    onConfigure,
+    accessToken,
+    disabledDelete,
+    disabledConfigure,
+  } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const { canEdit, setFieldValue } = useConfigureSourceFormStore(
+  const { canEdit, setFieldValue, init } = useConfigureSourceFormStore(
     selector,
     shallow
   );
@@ -59,7 +67,8 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     } else {
       setFieldValue("canEdit", true);
     }
-  }, [canEdit, setFieldValue]);
+    if (onConfigure) onConfigure(init);
+  }, [canEdit, setFieldValue, init, onConfigure]);
 
   /* -------------------------------------------------------------------------
    * Handle delete source
@@ -107,7 +116,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
               process: "source",
             });
           }
-          if (onDelete) onDelete();
+          if (onDelete) onDelete(init);
         },
         onError: (error) => {
           if (axios.isAxiosError(error)) {
@@ -129,6 +138,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
       }
     );
   }, [
+    init,
     source,
     amplitudeIsInit,
     deleteSource,
@@ -174,55 +184,57 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
    * -----------------------------------------------------------------------*/
 
   return (
-    <div className="flex flex-col">
-      <div className="mb-10 flex flex-row items-center">
-        <div className="flex flex-row items-center space-x-5 mr-auto">
-          <SolidButton
-            type="submit"
-            disabled={false}
-            color="primary"
-            onClickHandler={handleTestSource}
-          >
-            Test
-          </SolidButton>
-          <SolidButton
-            type="submit"
-            disabled={disabledConfigure ? true : false}
-            color="primary"
-            onClickHandler={handleSubmit}
-          >
-            {canEdit ? "Save" : "Edit"}
-          </SolidButton>
-        </div>
+    <>
+      <div className="flex flex-col">
+        <div className="mb-10 flex flex-row items-center">
+          <div className="flex flex-row items-center space-x-5 mr-auto">
+            <SolidButton
+              type="submit"
+              disabled={false}
+              color="primary"
+              onClickHandler={handleTestSource}
+            >
+              Test
+            </SolidButton>
+            <SolidButton
+              type="submit"
+              disabled={disabledConfigure ? true : false}
+              color="primary"
+              onClickHandler={handleSubmit}
+            >
+              {canEdit ? "Save" : "Edit"}
+            </SolidButton>
+          </div>
 
-        <OutlineButton
-          disabled={disabledDelete ? true : false}
-          onClickHandler={() => openModal()}
-          position="my-auto"
-          type="button"
-          color="danger"
-          hoveredShadow={null}
-        >
-          Delete
-        </OutlineButton>
-      </div>
-      <div className="flex">
-        <BasicProgressMessageBox
-          state={messageBoxState}
-          setActivate={(activate) =>
-            setMessageBoxState((prev) => ({
-              ...prev,
-              activate,
-            }))
-          }
-          width="w-[25vw]"
-          closable={true}
-        />
+          <OutlineButton
+            disabled={disabledDelete ? true : false}
+            onClickHandler={() => openModal()}
+            position="my-auto"
+            type="button"
+            color="danger"
+            hoveredShadow={null}
+          >
+            Delete
+          </OutlineButton>
+        </div>
+        <div className="flex">
+          <BasicProgressMessageBox
+            state={messageBoxState}
+            setActivate={(activate) =>
+              setMessageBoxState((prev) => ({
+                ...prev,
+                activate,
+              }))
+            }
+            width="w-[25vw]"
+            closable={true}
+          />
+        </div>
       </div>
       <DeleteResourceModal
         resource={source}
         handleDeleteResource={handleDeleteSource}
       />
-    </div>
+    </>
   );
 };

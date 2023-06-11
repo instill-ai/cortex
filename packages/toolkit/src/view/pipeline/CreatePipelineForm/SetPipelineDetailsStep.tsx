@@ -54,7 +54,7 @@ const selector = (state: CreateResourceFormStore) => ({
 });
 
 export type SetPipelineDetailsStepProps = {
-  onCreate: Nullable<() => void>;
+  onCreate: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
 };
 
@@ -307,7 +307,7 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
               message: "Succeed.",
             }));
             setCreateNewResourceIsComplete(true);
-            if (onCreate) onCreate();
+            if (onCreate) onCreate(init);
             return;
           }
           updatePipeline.mutate(
@@ -327,7 +327,7 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
                   });
                 }
                 setCreateNewResourceIsComplete(true);
-                if (onCreate) onCreate();
+                if (onCreate) onCreate(init);
               },
               onError: (error) => {
                 if (axios.isAxiosError(error)) {

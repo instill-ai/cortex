@@ -29,8 +29,8 @@ import { shallow } from "zustand/shallow";
 
 export type ConfigureModelFormProps = {
   model: Nullable<Model>;
-  onConfigure: Nullable<() => void>;
-  onDelete: Nullable<() => void>;
+  onConfigure: Nullable<(initStore: () => void) => void>;
+  onDelete: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
 
   /**
@@ -141,10 +141,8 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
             message: "Succeed.",
           }));
 
-          init();
-
           if (onConfigure) {
-            onConfigure();
+            onConfigure(init);
           }
 
           if (amplitudeIsInit) {
@@ -222,7 +220,7 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
           }
 
           if (onDelete) {
-            onDelete();
+            onDelete(init);
           }
         },
         onError: (error) => {
@@ -244,7 +242,15 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
         },
       }
     );
-  }, [model, amplitudeIsInit, deleteModel, closeModal, onDelete, accessToken]);
+  }, [
+    init,
+    model,
+    amplitudeIsInit,
+    deleteModel,
+    closeModal,
+    onDelete,
+    accessToken,
+  ]);
 
   /* -------------------------------------------------------------------------
    * Render

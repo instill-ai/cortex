@@ -1,4 +1,3 @@
-import axios from "axios";
 import * as React from "react";
 import {
   BasicProgressMessageBox,
@@ -6,17 +5,8 @@ import {
   FormRootProps,
   ProgressMessageBoxState,
 } from "@instill-ai/design-system";
-import {
-  getInstillApiErrorMessage,
-  sendAmplitudeData,
-  useAmplitudeCtx,
-  useDeletePipeline,
-  useModalStore,
-  type Nullable,
-  type Pipeline,
-} from "../../../lib";
+import { type Nullable, type Pipeline } from "../../../lib";
 
-import { DeleteResourceModal } from "../../../components";
 import {
   ConfigurePipelineFormControl,
   ConfigurePipelineFormControlProps,
@@ -51,68 +41,6 @@ export const ConfigurePipelineForm = (props: ConfigurePipelineFormProps) => {
       message: null,
       description: null,
     });
-  const closeModal = useModalStore((state) => state.closeModal);
-  const { amplitudeIsInit } = useAmplitudeCtx();
-  const deletePipeline = useDeletePipeline();
-
-  const handleDeletePipeline = React.useCallback(() => {
-    if (!pipeline) return;
-
-    setMessageBoxState({
-      activate: true,
-      status: "progressing",
-      description: null,
-      message: "Deleting...",
-    });
-
-    closeModal();
-
-    deletePipeline.mutate(
-      { pipelineName: pipeline.name, accessToken },
-      {
-        onSuccess: () => {
-          setMessageBoxState({
-            activate: true,
-            status: "success",
-            description: null,
-            message: "Succeed.",
-          });
-          if (amplitudeIsInit) {
-            sendAmplitudeData("delete_pipeline", {
-              type: "critical_action",
-              process: "destination",
-            });
-          }
-          if (onDelete) onDelete();
-        },
-        onError: (error) => {
-          if (axios.isAxiosError(error)) {
-            setMessageBoxState({
-              activate: true,
-              status: "error",
-              description: getInstillApiErrorMessage(error),
-              message: error.message,
-            });
-          } else {
-            setMessageBoxState({
-              activate: true,
-              status: "error",
-              description: null,
-              message: "Something went wrong when delete the pipeline",
-            });
-          }
-        },
-      }
-    );
-  }, [
-    pipeline,
-    amplitudeIsInit,
-    deletePipeline,
-    closeModal,
-    accessToken,
-    setMessageBoxState,
-    onDelete,
-  ]);
 
   return (
     <>
@@ -126,6 +54,7 @@ export const ConfigurePipelineForm = (props: ConfigurePipelineFormProps) => {
             accessToken={accessToken}
             disabledConfigure={disabledConfigure}
             disabledDelete={disabledDelete}
+            onDelete={onDelete}
           />
           <div className="flex">
             <BasicProgressMessageBox
@@ -139,10 +68,6 @@ export const ConfigurePipelineForm = (props: ConfigurePipelineFormProps) => {
           </div>
         </div>
       </FormRoot>
-      <DeleteResourceModal
-        resource={pipeline}
-        handleDeleteResource={handleDeletePipeline}
-      />
     </>
   );
 };

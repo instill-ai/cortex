@@ -40,7 +40,7 @@ import { shallow } from "zustand/shallow";
 
 export type CreateDestinationFormProps = {
   title: Nullable<string>;
-  onCreate: Nullable<(id: string) => void>;
+  onCreate: Nullable<(id: string, init: () => void) => void>;
   accessToken: Nullable<string>;
   enabledQuery: boolean;
 } & Pick<FormRootProps, "width" | "marginBottom" | "formLess">;
@@ -398,7 +398,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
           }
 
           if (onCreate) {
-            onCreate(fieldValues.id as string);
+            onCreate(fieldValues.id as string, init);
             setCreateNewResourceIsComplete(true);
           }
         },

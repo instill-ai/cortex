@@ -18,8 +18,8 @@ const ConfigureSourcePage = () => {
           <ConfigureDestinationForm
             width="w-full"
             destination={destination.data}
-            onConfigure={null}
-            onDelete={null}
+            onConfigure={(init) => init()}
+            onDelete={(init) => init()}
             disabledDelete={false}
             accessToken={null}
             disabledConfigure={false}

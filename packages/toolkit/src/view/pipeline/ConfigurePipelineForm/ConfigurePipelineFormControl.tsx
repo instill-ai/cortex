@@ -11,16 +11,20 @@ import {
   useModalStore,
   useUpdatePipeline,
   getInstillApiErrorMessage,
+  sendAmplitudeData,
+  useAmplitudeCtx,
+  useDeletePipeline,
   type Pipeline,
   type Nullable,
   type ConfigurePipelineFormStore,
 } from "../../../lib";
+import { DeleteResourceModal } from "../../../components";
 
 const selector = (state: ConfigurePipelineFormStore) => ({
   setFieldValue: state.setFieldValue,
   canEdit: state.fields.canEdit,
   pipelineDescription: state.fields.pipelineDescription,
-  initConfigurePipelineFormStore: state.init,
+  init: state.init,
 });
 
 export type ConfigurePipelineFormControlProps = {
@@ -29,7 +33,8 @@ export type ConfigurePipelineFormControlProps = {
   setMessageBoxState: React.Dispatch<
     React.SetStateAction<ProgressMessageBoxState>
   >;
-  onConfigure: Nullable<() => void>;
+  onDelete: Nullable<(initStore: () => void) => void>;
+  onConfigure: Nullable<(initStore: () => void) => void>;
 
   /**
    * - Default is false
@@ -49,19 +54,18 @@ export const ConfigurePipelineFormControl = (
     pipeline,
     setMessageBoxState,
     onConfigure,
+    onDelete,
     accessToken,
     disabledConfigure,
     disabledDelete,
   } = props;
 
-  const {
-    canEdit,
-    pipelineDescription,
-    setFieldValue,
-    initConfigurePipelineFormStore,
-  } = useConfigurePipelineFormStore(selector, shallow);
+  const { canEdit, pipelineDescription, setFieldValue, init } =
+    useConfigurePipelineFormStore(selector, shallow);
 
+  const { amplitudeIsInit } = useAmplitudeCtx();
   const openModal = useModalStore((state) => state.openModal);
+  const closeModal = useModalStore((state) => state.closeModal);
   const updatePipeline = useUpdatePipeline();
 
   const handleSubmit = React.useCallback(() => {
@@ -95,9 +99,8 @@ export const ConfigurePipelineFormControl = (
       {
         onSuccess: () => {
           setFieldValue("canEdit", false);
-          initConfigurePipelineFormStore();
 
-          if (onConfigure) onConfigure();
+          if (onConfigure) onConfigure(init);
 
           setMessageBoxState({
             activate: true,
@@ -132,32 +135,100 @@ export const ConfigurePipelineFormControl = (
     pipeline,
     setFieldValue,
     setMessageBoxState,
-    initConfigurePipelineFormStore,
+    init,
     onConfigure,
     accessToken,
   ]);
 
+  const deletePipeline = useDeletePipeline();
+
+  const handleDeletePipeline = React.useCallback(() => {
+    if (!pipeline) return;
+
+    setMessageBoxState({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Deleting...",
+    });
+
+    closeModal();
+
+    deletePipeline.mutate(
+      { pipelineName: pipeline.name, accessToken },
+      {
+        onSuccess: () => {
+          setMessageBoxState({
+            activate: true,
+            status: "success",
+            description: null,
+            message: "Succeed.",
+          });
+          if (amplitudeIsInit) {
+            sendAmplitudeData("delete_pipeline", {
+              type: "critical_action",
+              process: "destination",
+            });
+          }
+          if (onDelete) onDelete(init);
+        },
+        onError: (error) => {
+          if (axios.isAxiosError(error)) {
+            setMessageBoxState({
+              activate: true,
+              status: "error",
+              description: getInstillApiErrorMessage(error),
+              message: error.message,
+            });
+          } else {
+            setMessageBoxState({
+              activate: true,
+              status: "error",
+              description: null,
+              message: "Something went wrong when delete the pipeline",
+            });
+          }
+        },
+      }
+    );
+  }, [
+    init,
+    pipeline,
+    amplitudeIsInit,
+    deletePipeline,
+    closeModal,
+    accessToken,
+    setMessageBoxState,
+    onDelete,
+  ]);
+
   return (
-    <div className="flex flex-row">
-      <OutlineButton
-        disabled={disabledDelete ? true : false}
-        onClickHandler={() => openModal()}
-        position="mr-auto my-auto"
-        type="button"
-        color="danger"
-        hoveredShadow={null}
-      >
-        Delete
-      </OutlineButton>
-      <SolidButton
-        disabled={disabledConfigure ? true : false}
-        onClickHandler={() => handleSubmit()}
-        position="ml-auto my-auto"
-        type="button"
-        color="primary"
-      >
-        {canEdit ? "Save" : "Edit"}
-      </SolidButton>
-    </div>
+    <>
+      <div className="flex flex-row">
+        <OutlineButton
+          disabled={disabledDelete ? true : false}
+          onClickHandler={() => openModal()}
+          position="mr-auto my-auto"
+          type="button"
+          color="danger"
+          hoveredShadow={null}
+        >
+          Delete
+        </OutlineButton>
+        <SolidButton
+          disabled={disabledConfigure ? true : false}
+          onClickHandler={() => handleSubmit()}
+          position="ml-auto my-auto"
+          type="button"
+          color="primary"
+        >
+          {canEdit ? "Save" : "Edit"}
+        </SolidButton>
+      </div>
+      <DeleteResourceModal
+        resource={pipeline}
+        handleDeleteResource={handleDeletePipeline}
+      />
+    </>
   );
 };

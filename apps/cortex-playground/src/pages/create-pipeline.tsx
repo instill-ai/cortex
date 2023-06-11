@@ -6,7 +6,7 @@ const CreatePipelinePage = () => {
     <Root>
       <div className="w-[1200px]">
         <CreatePipelineForm
-          onCreate={null}
+          onCreate={(init) => init()}
           accessToken={null}
           syncModelOnly={false}
           withModelPreset={false}

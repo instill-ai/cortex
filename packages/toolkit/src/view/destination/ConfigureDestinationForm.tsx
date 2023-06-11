@@ -42,9 +42,9 @@ import { DeleteResourceModal, ImageWithFallback } from "../../components";
 export type ConfigureDestinationFormProps = {
   accessToken: Nullable<string>;
   destination: DestinationWithDefinition;
-  onConfigure: Nullable<() => void>;
+  onConfigure: Nullable<(initStore: () => void) => void>;
   disabledConfigure?: boolean;
-  onDelete: Nullable<() => void>;
+  onDelete: Nullable<(initStore: () => void) => void>;
   disabledDelete?: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
 
@@ -279,7 +279,7 @@ export const ConfigureDestinationForm = (
             setCanEdit(false);
             setAirbyteFormIsDirty(false);
 
-            if (onConfigure) onConfigure();
+            if (onConfigure) onConfigure(init);
 
             setMessageBoxState(() => ({
               activate: true,
@@ -362,7 +362,7 @@ export const ConfigureDestinationForm = (
             message: "Succeed.",
           }));
 
-          if (onDelete) onDelete();
+          if (onDelete) onDelete(init);
 
           if (amplitudeIsInit) {
             sendAmplitudeData("delete_destination", {
@@ -391,6 +391,7 @@ export const ConfigureDestinationForm = (
       }
     );
   }, [
+    init,
     amplitudeIsInit,
     deleteDestination,
     destination,

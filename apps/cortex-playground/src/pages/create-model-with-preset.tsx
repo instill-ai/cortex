@@ -5,7 +5,10 @@ const CreateModelWithPresetPage = () => {
   return (
     <Root>
       <div className="w-[1200px]">
-        <CreateModelWithPresetForm onCreate={null} accessToken={null} />
+        <CreateModelWithPresetForm
+          onCreate={(init) => init()}
+          accessToken={null}
+        />
       </div>
     </Root>
   );

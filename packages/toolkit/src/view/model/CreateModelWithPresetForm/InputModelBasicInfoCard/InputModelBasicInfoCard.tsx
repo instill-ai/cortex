@@ -1,12 +1,15 @@
 import { ModelIdField } from "./ModelIdField";
 import { ModelDescriptionField } from "./ModelDescriptionField";
-import { ModelBasicInputControl } from "./ModelBasicInputControl";
+import {
+  ModelBasicInputControl,
+  ModelBasicInputControlProps,
+} from "./ModelBasicInputControl";
 import { CardBase, CardBaseProps } from "../CardBase";
 import { Nullable } from "../../../../lib";
 
 export type InputModelBasicInfoCardProps = {
   accessToken: Nullable<string>;
-  onCreate: Nullable<() => void>;
+  onCreate: ModelBasicInputControlProps["onCreate"];
 } & Pick<CardBaseProps, "marginBottom">;
 
 export const InputModelBasicInfoCard = (
