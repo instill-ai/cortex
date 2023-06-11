@@ -3,10 +3,13 @@ import { FormRoot, FormRootProps } from "@instill-ai/design-system";
 import type { Nullable } from "../../../lib";
 
 import { SelectModelPresetCard } from "./SelectModelPresetCard";
-import { InputModelBasicInfoCard } from "./InputModelBasicInfoCard";
+import {
+  InputModelBasicInfoCard,
+  InputModelBasicInfoCardProps,
+} from "./InputModelBasicInfoCard";
 
 export type CreateModelWithPresetFormProps = {
-  onCreate: Nullable<() => void>;
+  onCreate: InputModelBasicInfoCardProps["onCreate"];
   accessToken: Nullable<string>;
   disabledCreateModel?: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;

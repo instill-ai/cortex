@@ -15,6 +15,7 @@ export const ConfigureSourceForm = (props: ConfigureSourceFormProps) => {
   const {
     source,
     onDelete,
+    onConfigure,
     disabledDelete,
     disabledConfigure,
     marginBottom,
@@ -28,6 +29,7 @@ export const ConfigureSourceForm = (props: ConfigureSourceFormProps) => {
         <ConfigureSourceControl
           source={source}
           onDelete={onDelete}
+          onConfigure={onConfigure}
           accessToken={accessToken}
           disabledDelete={disabledDelete}
           disabledConfigure={disabledConfigure}

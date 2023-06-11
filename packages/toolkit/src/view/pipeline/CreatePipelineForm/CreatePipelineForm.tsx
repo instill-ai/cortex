@@ -2,7 +2,10 @@ import * as React from "react";
 
 import { Nullable, useCreateResourceFormStore } from "../../../lib";
 import { CreatePipelineProgress } from "./CreatePipelineProgress";
-import { SetPipelineDetailsStep } from "./SetPipelineDetailsStep";
+import {
+  SetPipelineDetailsStep,
+  type SetPipelineDetailsStepProps,
+} from "./SetPipelineDetailsStep";
 import { SetPipelineDestinationStep } from "./SetPipelineDestinationStep";
 import { SetPipelineModelStep } from "./SetPipelineModelStep";
 import { SetPipelineModeStep } from "./SetPipelineModeStep";
@@ -16,7 +19,7 @@ import { SetPipelineModeStep } from "./SetPipelineModeStep";
 //  4: setup pipeline details
 
 export type CreatePipelineFormProps = {
-  onCreate: Nullable<() => void>;
+  onCreate: SetPipelineDetailsStepProps["onCreate"];
   accessToken: Nullable<string>;
   syncModelOnly: boolean;
   withModelPreset: boolean;

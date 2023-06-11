@@ -42,9 +42,9 @@ import { DeleteResourceModal, ImageWithFallback } from "../../components";
 export type ConfigureDestinationFormProps = {
   accessToken: Nullable<string>;
   destination: DestinationWithDefinition;
-  onConfigure: Nullable<() => void>;
+  onConfigure: Nullable<(initStore: () => void) => void>;
   disabledConfigure?: boolean;
-  onDelete: Nullable<() => void>;
+  onDelete: Nullable<(initStore: () => void) => void>;
   disabledDelete?: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
 
@@ -221,7 +221,9 @@ export const ConfigureDestinationForm = (
       setCanEdit(true);
       return;
     } else {
-      if (!airbyteFormIsDirty) return;
+      if (!airbyteFormIsDirty) {
+        setCanEdit(false);
+      }
       try {
         // We use yup to strip not necessary condition value. Please read
         // /lib/airbyte/README.md for more information, especially the section
@@ -278,8 +280,9 @@ export const ConfigureDestinationForm = (
           onSuccess: () => {
             setCanEdit(false);
             setAirbyteFormIsDirty(false);
+            setFormIsDirty(false);
 
-            if (onConfigure) onConfigure();
+            if (onConfigure) onConfigure(init);
 
             setMessageBoxState(() => ({
               activate: true,
@@ -332,6 +335,7 @@ export const ConfigureDestinationForm = (
     init,
     onConfigure,
     accessToken,
+    setFormIsDirty,
   ]);
 
   // ##########################################################################
@@ -362,7 +366,7 @@ export const ConfigureDestinationForm = (
             message: "Succeed.",
           }));
 
-          if (onDelete) onDelete();
+          if (onDelete) onDelete(init);
 
           if (amplitudeIsInit) {
             sendAmplitudeData("delete_destination", {
@@ -391,6 +395,7 @@ export const ConfigureDestinationForm = (
       }
     );
   }, [
+    init,
     amplitudeIsInit,
     deleteDestination,
     destination,

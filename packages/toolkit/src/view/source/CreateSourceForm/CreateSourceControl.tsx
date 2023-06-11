@@ -27,7 +27,7 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type CreateSourceControlProps = {
   sources: Nullable<SourceWithDefinition[]>;
-  onCreate: Nullable<() => void>;
+  onCreate: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
 };
 
@@ -96,7 +96,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
               process: "source",
             });
           }
-          if (onCreate) onCreate();
+          if (onCreate) onCreate(init);
         },
         onError: (error) => {
           if (axios.isAxiosError(error)) {

@@ -42,7 +42,7 @@ import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
 export type CreateModelFormProps = {
   accessToken: Nullable<string>;
-  onCreate: Nullable<() => void>;
+  onCreate: Nullable<(initStore: () => void) => void>;
   disabledCreateModel?: boolean;
   width?: string;
   marginBottom?: string;
@@ -312,7 +312,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               });
 
               if (onCreate) {
-                onCreate();
+                onCreate(init);
               }
             }
           },
@@ -384,7 +384,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               });
 
               if (onCreate) {
-                onCreate();
+                onCreate(init);
               }
             }
           },
@@ -458,7 +458,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               });
 
               if (onCreate) {
-                onCreate();
+                onCreate(init);
               }
             }
           },
@@ -528,7 +528,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               });
 
               if (onCreate) {
-                onCreate();
+                onCreate(init);
               }
             }
           },

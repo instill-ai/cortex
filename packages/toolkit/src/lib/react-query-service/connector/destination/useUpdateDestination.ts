@@ -65,7 +65,7 @@ export const useUpdateDestination = () => {
         queryClient.invalidateQueries(["destinations", "with-pipelines"]);
         queryClient.invalidateQueries([
           "destinations",
-          newDestinationWithDefinition.name,
+          destination.name,
           "with-pipelines",
         ]);
 

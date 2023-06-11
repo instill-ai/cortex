@@ -29,8 +29,8 @@ import { shallow } from "zustand/shallow";
 
 export type ConfigureModelFormProps = {
   model: Nullable<Model>;
-  onConfigure: Nullable<() => void>;
-  onDelete: Nullable<() => void>;
+  onConfigure: Nullable<(initStore: () => void) => void>;
+  onDelete: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
 
   /**
@@ -82,6 +82,13 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
     useConfigureModelFormStore(formSelector, shallow);
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
+
+  React.useEffect(() => {
+    setFieldValue("description", model?.description || null);
+
+    // This is to set the initial data so the form is not dirty
+    setFormIsDirty(false);
+  }, [model?.description, setFieldValue, setFormIsDirty]);
 
   /* -------------------------------------------------------------------------
    * Handle update model
@@ -141,10 +148,10 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
             message: "Succeed.",
           }));
 
-          init();
+          setFormIsDirty(false);
 
           if (onConfigure) {
-            onConfigure();
+            onConfigure(init);
           }
 
           if (amplitudeIsInit) {
@@ -182,6 +189,7 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
     init,
     onConfigure,
     accessToken,
+    setFormIsDirty,
   ]);
 
   /* -------------------------------------------------------------------------
@@ -222,7 +230,7 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
           }
 
           if (onDelete) {
-            onDelete();
+            onDelete(init);
           }
         },
         onError: (error) => {
@@ -244,7 +252,15 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
         },
       }
     );
-  }, [model, amplitudeIsInit, deleteModel, closeModal, onDelete, accessToken]);
+  }, [
+    init,
+    model,
+    amplitudeIsInit,
+    deleteModel,
+    closeModal,
+    onDelete,
+    accessToken,
+  ]);
 
   /* -------------------------------------------------------------------------
    * Render
@@ -259,12 +275,11 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
             name="description"
             label="Description"
             description="Fill with a short description."
-            value={description ? description : model?.description || null}
+            value={description}
             disabled={canEdit ? false : true}
             required={false}
             onChange={(event) => {
               setFieldValue("description", event.target.value);
-              setFormIsDirty(true);
             }}
           />
         </div>

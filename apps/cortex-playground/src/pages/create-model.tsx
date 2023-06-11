@@ -16,7 +16,7 @@ const CreateModelPage = () => {
     <Root>
       <div className="w-[1200px]">
         <CreateModelForm
-          onCreate={null}
+          onCreate={(init) => init()}
           accessToken={null}
           disabledCreateModel={true}
           enabledQuery={true}

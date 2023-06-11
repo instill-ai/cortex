@@ -18,10 +18,11 @@ const ConfigureSourcePage = () => {
           <ConfigureSourceForm
             width="w-full"
             source={sourceWithPipelines.data}
-            onDelete={null}
+            onDelete={(init) => init()}
             disabledDelete={false}
             accessToken={null}
             disabledConfigure={false}
+            onConfigure={(init) => init()}
           />
         ) : null}
       </div>

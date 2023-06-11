@@ -9,7 +9,8 @@ const CreateSourcePage = () => {
     <Root>
       <div className="w-[1200px]">
         <CreateSourceForm
-          onCreate={() => {
+          onCreate={(init) => {
+            init();
             router.push("/sources");
           }}
           accessToken={null}

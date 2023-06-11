@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeObjKey } from "../../utility";
+import { getComponentFromPipelineRecipe, removeObjKey } from "../../utility";
 import {
   updateModelMutation,
   watchModel,
@@ -7,8 +7,10 @@ import {
   type ModelsWatchState,
   type ModelWatchState,
   type UpdateModelPayload,
+  ModelWithPipelines,
 } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
+import { fetchPipelines } from "../pipeline";
 
 export const useUpdateModel = () => {
   const queryClient = useQueryClient();
@@ -51,6 +53,28 @@ export const useUpdateModel = () => {
                 [model.name]: watch,
               }
             : { [model.name]: watch }
+        );
+
+        // Process model with pipelines query
+        const pipelines = await fetchPipelines(accessToken);
+
+        const targetPipelines = pipelines.filter((e) => {
+          const models = getComponentFromPipelineRecipe({
+            recipe: e.recipe,
+            componentName: "model",
+          });
+
+          return models?.some((e) => e.resource_detail.id === model.id);
+        });
+
+        const modelWithPipelines: ModelWithPipelines = {
+          ...model,
+          pipelines: targetPipelines,
+        };
+
+        queryClient.setQueryData<ModelWithPipelines>(
+          ["models", model.name, "with-pipelines"],
+          modelWithPipelines
         );
       },
     }

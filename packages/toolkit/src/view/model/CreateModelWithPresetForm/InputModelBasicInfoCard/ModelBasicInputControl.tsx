@@ -39,9 +39,9 @@ const selector = (state: CreateResourceFormStore) => ({
   init: state.init,
 });
 
-type ModelBasicInputControlProps = {
+export type ModelBasicInputControlProps = {
   accessToken: Nullable<string>;
-  onCreate: Nullable<() => void>;
+  onCreate: Nullable<(initStore: () => void) => void>;
 };
 
 export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
@@ -160,7 +160,7 @@ export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
               });
 
               if (onCreate) {
-                onCreate();
+                onCreate(init);
               }
             }
           },
@@ -216,7 +216,7 @@ export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
             });
 
             if (onCreate) {
-              onCreate();
+              onCreate(init);
             }
           },
           onError: (error) => {
