@@ -16,11 +16,10 @@ import { PipelineDescriptionField } from "./PipelineDescriptionField";
 export type ConfigurePipelineFormProps = {
   pipeline: Nullable<Pipeline>;
   accessToken: Nullable<string>;
-  onDelete: Nullable<() => void>;
 } & Pick<FormRootProps, "width" | "marginBottom"> &
   Pick<
     ConfigurePipelineFormControlProps,
-    "disabledConfigure" | "disabledDelete" | "onConfigure"
+    "disabledConfigure" | "disabledDelete" | "onConfigure" | "onDelete"
   >;
 
 export const ConfigurePipelineForm = (props: ConfigurePipelineFormProps) => {

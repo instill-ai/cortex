@@ -25,6 +25,7 @@ const selector = (state: ConfigurePipelineFormStore) => ({
   canEdit: state.fields.canEdit,
   pipelineDescription: state.fields.pipelineDescription,
   init: state.init,
+  setFormIsDirty: state.setFormIsDirty,
 });
 
 export type ConfigurePipelineFormControlProps = {
@@ -60,7 +61,7 @@ export const ConfigurePipelineFormControl = (
     disabledDelete,
   } = props;
 
-  const { canEdit, pipelineDescription, setFieldValue, init } =
+  const { canEdit, pipelineDescription, setFieldValue, init, setFormIsDirty } =
     useConfigurePipelineFormStore(selector, shallow);
 
   const { amplitudeIsInit } = useAmplitudeCtx();
@@ -68,7 +69,7 @@ export const ConfigurePipelineFormControl = (
   const closeModal = useModalStore((state) => state.closeModal);
   const updatePipeline = useUpdatePipeline();
 
-  const handleSubmit = React.useCallback(() => {
+  const handleConfigurePipeline = React.useCallback(() => {
     if (!canEdit) {
       setFieldValue("canEdit", true);
       return;
@@ -99,6 +100,8 @@ export const ConfigurePipelineFormControl = (
       {
         onSuccess: () => {
           setFieldValue("canEdit", false);
+
+          setFormIsDirty(false);
 
           if (onConfigure) onConfigure(init);
 
@@ -138,6 +141,7 @@ export const ConfigurePipelineFormControl = (
     init,
     onConfigure,
     accessToken,
+    setFormIsDirty,
   ]);
 
   const deletePipeline = useDeletePipeline();
@@ -217,7 +221,7 @@ export const ConfigurePipelineFormControl = (
         </OutlineButton>
         <SolidButton
           disabled={disabledConfigure ? true : false}
-          onClickHandler={() => handleSubmit()}
+          onClickHandler={() => handleConfigurePipeline()}
           position="ml-auto my-auto"
           type="button"
           color="primary"

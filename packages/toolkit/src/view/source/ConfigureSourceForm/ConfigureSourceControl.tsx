@@ -61,7 +61,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
    * Handle configure source
    * -----------------------------------------------------------------------*/
 
-  const handleSubmit = React.useCallback(() => {
+  const handleConfigureSource = React.useCallback(() => {
     if (canEdit) {
       setFieldValue("canEdit", false);
     } else {
@@ -200,7 +200,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
               type="submit"
               disabled={disabledConfigure ? true : false}
               color="primary"
-              onClickHandler={handleSubmit}
+              onClickHandler={handleConfigureSource}
             >
               {canEdit ? "Save" : "Edit"}
             </SolidButton>

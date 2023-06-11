@@ -221,7 +221,9 @@ export const ConfigureDestinationForm = (
       setCanEdit(true);
       return;
     } else {
-      if (!airbyteFormIsDirty) return;
+      if (!airbyteFormIsDirty) {
+        setCanEdit(false);
+      }
       try {
         // We use yup to strip not necessary condition value. Please read
         // /lib/airbyte/README.md for more information, especially the section
@@ -278,6 +280,7 @@ export const ConfigureDestinationForm = (
           onSuccess: () => {
             setCanEdit(false);
             setAirbyteFormIsDirty(false);
+            setFormIsDirty(false);
 
             if (onConfigure) onConfigure(init);
 
@@ -332,6 +335,7 @@ export const ConfigureDestinationForm = (
     init,
     onConfigure,
     accessToken,
+    setFormIsDirty,
   ]);
 
   // ##########################################################################
