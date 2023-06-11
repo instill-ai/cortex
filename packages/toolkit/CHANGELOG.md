@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.3...@instill-ai/toolkit-v0.47.0) (2023-06-11)
+
+
+### Features
+
+* add PageBase component into toolkit ([#481](https://github.com/instill-ai/design-system/issues/481)) ([f1b8539](https://github.com/instill-ai/design-system/commit/f1b853968f523f3f365fbf7a67e874d7dd9985e2))
+
 ## [0.46.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.2...@instill-ai/toolkit-v0.46.3) (2023-06-11)
 
 
