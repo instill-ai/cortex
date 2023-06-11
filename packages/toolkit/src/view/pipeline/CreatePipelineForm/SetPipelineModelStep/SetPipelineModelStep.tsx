@@ -37,18 +37,12 @@ export const SetPipelineModelStep = (props: SetPipelineModelStepProps) => {
           <div className="flex w-2/3">
             {withModelPreset ? (
               <CreateModelWithPresetForm
-                onCreate={() => {
-                  increasePipelineFormStep();
-                }}
-                initStoreOnCreate={false}
+                onCreate={() => increasePipelineFormStep()}
                 accessToken={accessToken}
               />
             ) : (
               <CreateModelForm
-                onCreate={() => {
-                  increasePipelineFormStep();
-                }}
-                initStoreOnCreate={false}
+                onCreate={() => increasePipelineFormStep()}
                 accessToken={accessToken}
                 enabledQuery={enabledQuery}
               />

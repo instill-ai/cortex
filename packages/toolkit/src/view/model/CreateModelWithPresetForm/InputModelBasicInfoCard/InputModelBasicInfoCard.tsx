@@ -7,13 +7,12 @@ import { Nullable } from "../../../../lib";
 export type InputModelBasicInfoCardProps = {
   accessToken: Nullable<string>;
   onCreate: Nullable<() => void>;
-  initStoreOnCreate: boolean;
 } & Pick<CardBaseProps, "marginBottom">;
 
 export const InputModelBasicInfoCard = (
   props: InputModelBasicInfoCardProps
 ) => {
-  const { accessToken, onCreate, initStoreOnCreate, marginBottom } = props;
+  const { accessToken, onCreate, marginBottom } = props;
   return (
     <CardBase
       title="Fill out selected model information"
@@ -22,11 +21,7 @@ export const InputModelBasicInfoCard = (
       <div className="flex h-full w-full flex-col gap-y-6 p-6">
         <ModelIdField />
         <ModelDescriptionField />
-        <ModelBasicInputControl
-          accessToken={accessToken}
-          onCreate={onCreate}
-          initStoreOnCreate={initStoreOnCreate}
-        />
+        <ModelBasicInputControl accessToken={accessToken} onCreate={onCreate} />
       </div>
     </CardBase>
   );

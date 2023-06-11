@@ -308,7 +308,6 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
             }));
             setCreateNewResourceIsComplete(true);
             if (onCreate) onCreate();
-            init();
             return;
           }
           updatePipeline.mutate(
@@ -329,7 +328,6 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
                 }
                 setCreateNewResourceIsComplete(true);
                 if (onCreate) onCreate();
-                init();
               },
               onError: (error) => {
                 if (axios.isAxiosError(error)) {

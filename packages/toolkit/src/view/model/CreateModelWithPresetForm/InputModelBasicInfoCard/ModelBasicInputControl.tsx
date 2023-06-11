@@ -42,11 +42,10 @@ const selector = (state: CreateResourceFormStore) => ({
 type ModelBasicInputControlProps = {
   accessToken: Nullable<string>;
   onCreate: Nullable<() => void>;
-  initStoreOnCreate: boolean;
 };
 
 export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
-  const { accessToken, onCreate, initStoreOnCreate } = props;
+  const { accessToken, onCreate } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
   const queryClient = useQueryClient();
 
@@ -160,10 +159,6 @@ export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
                 message: "Succeed.",
               });
 
-              if (initStoreOnCreate) {
-                init();
-              }
-
               if (onCreate) {
                 onCreate();
               }
@@ -220,10 +215,6 @@ export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
               message: "Succeed.",
             });
 
-            if (initStoreOnCreate) {
-              init();
-            }
-
             if (onCreate) {
               onCreate();
             }
@@ -263,7 +254,6 @@ export const ModelBasicInputControl = (props: ModelBasicInputControlProps) => {
     deployModel,
     onCreate,
     githubModelTag,
-    initStoreOnCreate,
   ]);
 
   return (

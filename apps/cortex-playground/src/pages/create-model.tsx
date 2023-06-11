@@ -17,12 +17,9 @@ const CreateModelPage = () => {
       <div className="w-[1200px]">
         <CreateModelForm
           onCreate={null}
-          initStoreOnCreate={false}
           accessToken={null}
           disabledCreateModel={true}
-          modelDefinitions={
-            modelDefinitions.isSuccess ? modelDefinitions.data : null
-          }
+          enabledQuery={true}
         />
       </div>
     </Root>

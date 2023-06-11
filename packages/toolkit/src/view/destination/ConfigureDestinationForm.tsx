@@ -44,7 +44,6 @@ export type ConfigureDestinationFormProps = {
   destination: DestinationWithDefinition;
   onConfigure: Nullable<() => void>;
   disabledConfigure?: boolean;
-  initStoreOnConfigure: boolean;
   onDelete: Nullable<() => void>;
   disabledDelete?: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
@@ -66,7 +65,6 @@ export const ConfigureDestinationForm = (
     destination,
     onDelete,
     onConfigure,
-    initStoreOnConfigure,
     accessToken,
     disabledConfigure,
     disabledDelete,
@@ -281,10 +279,6 @@ export const ConfigureDestinationForm = (
             setCanEdit(false);
             setAirbyteFormIsDirty(false);
 
-            if (initStoreOnConfigure) {
-              init();
-            }
-
             if (onConfigure) onConfigure();
 
             setMessageBoxState(() => ({
@@ -336,7 +330,6 @@ export const ConfigureDestinationForm = (
     destination.name,
     updateDestination,
     init,
-    initStoreOnConfigure,
     onConfigure,
     accessToken,
   ]);
