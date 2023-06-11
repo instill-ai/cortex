@@ -28,13 +28,13 @@
     "@instill-ai/eslint-config-cortex": "workspace:*",
     "@testing-library/jest-dom": "^5.16.5",
     "@types/cookie": "^0.5.1",
-    "@types/uuid": "^9.0.1",
     "@types/json-schema": "^7.0.11",
     "@types/node": "^18.14.1",
     "@types/react": "^18.2.0",
     "@types/react-dom": "18.2.0",
     "@types/simple-oauth2": "^5.0.2",
     "@types/testing-library__jest-dom": "^5.14.5",
+    "@types/uuid": "^9.0.1",
     "@vitejs/plugin-react": "^3.1.0",
     "esbuild": "^0.14.34",
     "eslint": "^8.35.0",
@@ -53,6 +53,7 @@
   "dependencies": {
     "@amplitude/analytics-browser": "^1.10.2",
     "@instill-ai/design-system": "workspace:*",
+    "@instill-ai/design-tokens": "workspace:*",
     "@tanstack/react-query": "^4.29.3",
     "@tanstack/react-query-devtools": "^4.29.3",
     "axios": "^1.3.4",
@@ -71,6 +72,7 @@
   "peerDependencies": {
     "@amplitude/analytics-browser": "^1.9.1",
     "@instill-ai/design-system": "workspace:*",
+    "@instill-ai/design-tokens": "workspace:*",
     "@tanstack/react-query": "^4.29.0",
     "@tanstack/react-query-devtools": "^4.29.0",
     "axios": "^1.0.0",
@@ -80,9 +82,9 @@
     "next": "^13.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "uuid": "^9.0.0",
     "yup": "^0.32.11",
     "zod": "^3.21.4",
-    "zustand": "^4.3.6",
-    "uuid": "^9.0.0"
+    "zustand": "^4.3.6"
   }
 }
