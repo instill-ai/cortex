@@ -27,13 +27,12 @@ const selector = (state: CreateResourceFormStore) => ({
 
 export type CreateSourceControlProps = {
   sources: Nullable<SourceWithDefinition[]>;
-  initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
   accessToken: Nullable<string>;
 };
 
 export const CreateSourceControl = (props: CreateSourceControlProps) => {
-  const { sources, initStoreOnCreate, onCreate, accessToken } = props;
+  const { sources, onCreate, accessToken } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
   const { init, sourceDefinition, setFieldError } = useCreateResourceFormStore(
     selector,
@@ -97,7 +96,6 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
               process: "source",
             });
           }
-          if (initStoreOnCreate) init();
           if (onCreate) onCreate();
         },
         onError: (error) => {
@@ -128,7 +126,6 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
     setFieldError,
     onCreate,
     accessToken,
-    initStoreOnCreate,
   ]);
 
   return (

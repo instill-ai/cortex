@@ -18,22 +18,12 @@ export type CreateSourceFormProps = Pick<
   FormRootProps,
   "marginBottom" | "width"
 > &
-  Pick<
-    CreateSourceControlProps,
-    "accessToken" | "onCreate" | "initStoreOnCreate"
-  > & {
+  Pick<CreateSourceControlProps, "accessToken" | "onCreate"> & {
     enabledQuery: boolean;
   };
 
 export const CreateSourceForm = (props: CreateSourceFormProps) => {
-  const {
-    marginBottom,
-    width,
-    onCreate,
-    accessToken,
-    initStoreOnCreate,
-    enabledQuery,
-  } = props;
+  const { marginBottom, width, onCreate, accessToken, enabledQuery } = props;
   const [sourceDefinitionOptions, setSourceDefinitionOptions] = React.useState<
     SingleSelectOption[]
   >([]);
@@ -72,7 +62,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
         ),
       },
     ]);
-  }, [sources]);
+  }, [sources.isSuccess]);
 
   return (
     <FormRoot marginBottom={marginBottom} width={width}>
@@ -84,7 +74,6 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
           sources={sources.isSuccess ? sources.data : null}
           onCreate={onCreate}
           accessToken={accessToken}
-          initStoreOnCreate={initStoreOnCreate}
         />
       </div>
     </FormRoot>
