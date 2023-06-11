@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.46.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.2...@instill-ai/toolkit-v0.46.3) (2023-06-11)
+
+
+### Bug Fixes
+
+* fix several issues related to configure resource ([#479](https://github.com/instill-ai/design-system/issues/479)) ([e1d1dce](https://github.com/instill-ai/design-system/commit/e1d1dce53474083fe50502181d16f41b9e1a7e13))
+
 ## [0.46.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.46.1...@instill-ai/toolkit-v0.46.2) (2023-06-11)
 
 
