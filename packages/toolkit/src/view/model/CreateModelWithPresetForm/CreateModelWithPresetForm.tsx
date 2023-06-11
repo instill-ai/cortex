@@ -8,13 +8,11 @@ import { InputModelBasicInfoCard } from "./InputModelBasicInfoCard";
 export type CreateModelWithPresetFormProps = {
   onCreate: Nullable<() => void>;
   accessToken: Nullable<string>;
-  initStoreOnCreate: boolean;
   disabledCreateModel?: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
 
 export const CreateModelWithPresetForm = ({
   onCreate,
-  initStoreOnCreate,
   marginBottom,
   width,
   accessToken,
@@ -37,7 +35,6 @@ export const CreateModelWithPresetForm = ({
         <InputModelBasicInfoCard
           accessToken={accessToken}
           onCreate={onCreate}
-          initStoreOnCreate={initStoreOnCreate}
         />
       </div>
     </FormRoot>

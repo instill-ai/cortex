@@ -253,7 +253,6 @@ export const SetPipelineDestinationStep = (
               }}
               title="Setup a new destination"
               formLess={true}
-              initStoreOnCreate={false}
               accessToken={accessToken}
               enabledQuery={enabledQuery}
             />

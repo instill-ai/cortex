@@ -41,7 +41,6 @@ import { shallow } from "zustand/shallow";
 export type CreateDestinationFormProps = {
   title: Nullable<string>;
   onCreate: Nullable<(id: string) => void>;
-  initStoreOnCreate: boolean;
   accessToken: Nullable<string>;
   enabledQuery: boolean;
 } & Pick<FormRootProps, "width" | "marginBottom" | "formLess">;
@@ -58,7 +57,6 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   const {
     title,
     onCreate,
-    initStoreOnCreate,
     enabledQuery,
     accessToken,
     marginBottom,
@@ -399,10 +397,6 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
             });
           }
 
-          if (initStoreOnCreate) {
-            init();
-          }
-
           if (onCreate) {
             onCreate(fieldValues.id as string);
             setCreateNewResourceIsComplete(true);
@@ -429,7 +423,6 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     );
   }, [
     init,
-    initStoreOnCreate,
     amplitudeIsInit,
     createDestination,
     formYup,

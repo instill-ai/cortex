@@ -42,7 +42,6 @@ import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
 export type CreateModelFormProps = {
   accessToken: Nullable<string>;
-  initStoreOnCreate: boolean;
   onCreate: Nullable<() => void>;
   disabledCreateModel?: boolean;
   width?: string;
@@ -81,7 +80,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     accessToken,
     enabledQuery,
     marginBottom,
-    initStoreOnCreate,
     onCreate,
     width,
     disabledCreateModel,
@@ -313,10 +311,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
                 message: "Succeed.",
               });
 
-              if (initStoreOnCreate) {
-                init();
-              }
-
               if (onCreate) {
                 onCreate();
               }
@@ -388,10 +382,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
                 description: null,
                 message: "Succeed.",
               });
-
-              if (initStoreOnCreate) {
-                init();
-              }
 
               if (onCreate) {
                 onCreate();
@@ -467,10 +457,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
                 message: "Succeed.",
               });
 
-              if (initStoreOnCreate) {
-                init();
-              }
-
               if (onCreate) {
                 onCreate();
               }
@@ -541,10 +527,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
                 message: "Succeed.",
               });
 
-              if (initStoreOnCreate) {
-                init();
-              }
-
               if (onCreate) {
                 onCreate();
               }
@@ -589,7 +571,6 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     modelGithubTag,
     accessToken,
     init,
-    initStoreOnCreate,
     onCreate,
     prepareNewModel,
     setFieldError,

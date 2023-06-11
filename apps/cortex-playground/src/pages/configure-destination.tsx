@@ -18,7 +18,6 @@ const ConfigureSourcePage = () => {
           <ConfigureDestinationForm
             width="w-full"
             destination={destination.data}
-            initStoreOnConfigure={true}
             onConfigure={null}
             onDelete={null}
             disabledDelete={false}

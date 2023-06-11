@@ -12,7 +12,6 @@ const CreateSourcePage = () => {
           onCreate={() => {
             router.push("/sources");
           }}
-          initStoreOnCreate={true}
           accessToken={null}
           width="w-full"
           enabledQuery={true}
