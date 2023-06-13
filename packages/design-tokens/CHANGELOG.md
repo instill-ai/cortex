@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.5...@instill-ai/design-tokens-v0.1.6) (2023-06-13)
+
+
+### Bug Fixes
+
+* **design-tokens:** fix boxShadow is not included in built package ([#485](https://github.com/instill-ai/design-system/issues/485)) ([da50ef7](https://github.com/instill-ai/design-system/commit/da50ef7f79043db717c94a8d36a61ebdf8f94181))
+
 ## [0.1.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.4...@instill-ai/design-tokens-v0.1.5) (2023-06-07)
 
 
