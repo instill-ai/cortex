@@ -174,7 +174,11 @@ function generateTheme(themes: { themeName: string; themePath: string }[]) {
 
 function generateRootTheme() {
   const StyleDictionary = StyleDictionaryPackage.extend({
-    source: ["tokens/global.json", "tokens/semantic/colour.json"],
+    source: [
+      "tokens/global.json",
+      "tokens/semantic/colour.json",
+      "tokens/semantic/comp.json",
+    ],
     format: {
       cssVariables: ({ dictionary }) => {
         const colours = dictionary.allTokens.filter((e) => e.type === "color");
@@ -185,6 +189,9 @@ function generateRootTheme() {
         const boxShadows = dictionary.allTokens.filter(
           (e) => e.type === "boxShadow"
         );
+
+        console.log(boxShadows);
+
         const boxShadowCSS = boxShadows
           .map(
             (e) =>
