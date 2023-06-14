@@ -117,6 +117,14 @@
         "value": "{base.danger.50}",
         "type": "color"
       },
+      "bg-secondary": {
+        "value": "{base.danger.100}",
+        "type": "color"
+      },
+      "bg-alt": {
+        "value": "{base.danger.200}",
+        "type": "color"
+      },
       "default": {
         "value": "{base.danger.300}",
         "type": "color"
@@ -139,16 +147,24 @@
         "value": "{base.success.50}",
         "type": "color"
       },
+      "bg-secondary": {
+        "value": "{base.success.100}",
+        "type": "color"
+      },
+      "bg-alt": {
+        "value": "{base.success.200}",
+        "type": "color"
+      },
       "default": {
-        "value": "{base.success.600}",
+        "value": "{base.success.300}",
         "type": "color"
       },
       "hover": {
-        "value": "{base.success.700}",
+        "value": "{base.success.400}",
         "type": "color"
       },
       "pressed": {
-        "value": "{base.success.800}",
+        "value": "{base.success.500}",
         "type": "color"
       },
       "on-bg": {

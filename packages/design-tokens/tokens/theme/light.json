@@ -147,6 +147,14 @@
         "value": "{base.danger.50}",
         "type": "color"
       },
+      "bg-secondary": {
+        "value": "{base.danger.100}",
+        "type": "color"
+      },
+      "bg-alt": {
+        "value": "{base.danger.200}",
+        "type": "color"
+      },
       "default": {
         "value": "{base.danger.600}",
         "type": "color"
@@ -167,6 +175,14 @@
     "success": {
       "bg": {
         "value": "{base.success.50}",
+        "type": "color"
+      },
+      "bg-secondary": {
+        "value": "{base.success.100}",
+        "type": "color"
+      },
+      "bg-alt": {
+        "value": "{base.success.200}",
         "type": "color"
       },
       "default": {
