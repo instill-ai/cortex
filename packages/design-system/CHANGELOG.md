@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.16.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.15.0...@instill-ai/design-system-v0.16.0) (2023-06-14)
+
+
+### Features
+
+* add Chip01 and Chip02 icon ([#489](https://github.com/instill-ai/design-system/issues/489)) ([6dd8785](https://github.com/instill-ai/design-system/commit/6dd8785854b36b6dcf303110a1da8bd85f3a51a6))
+
 ## [0.15.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.14.0...@instill-ai/design-system-v0.15.0) (2023-06-10)
 
 
