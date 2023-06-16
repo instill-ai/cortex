@@ -94,11 +94,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "@radix-ui/react-scroll-area": "^1.0.0",
-    "@radix-ui/react-select": "^1.2.0"
+    "@radix-ui/react-select": "^1.2.0",
+    "@instill-ai/design-tokens": "workspace:*"
   },
   "dependencies": {
     "@radix-ui/react-scroll-area": "^1.0.3",
     "@radix-ui/react-select": "^1.2.1",
+    "@instill-ai/design-tokens": "workspace:*",
     "sanitize-html": "^2.7.0"
   },
   "engines": {
