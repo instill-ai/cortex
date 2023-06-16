@@ -17,12 +17,12 @@
     "lint:time": "TIMING=1 eslint . --ext .ts,.tsx,.js,.jsx --cache",
     "lint:debug": "eslint . --ext .ts,.tsx,.js,.jsx --cache --debug",
     "sb": "storybook dev -p 6006",
-    "build-storybook": "storybook build -c .storybook -o out",
+    "build-storybook": "storybook build -c .storybook",
     "prettier:fix": "prettier --write",
     "prettier:check": "prettier --check",
     "test:coverage": "vitest --collectCoverage",
     "ts-types": "tsc --emitDeclarationOnly",
-    "build": "pnpm rimraf dist && tsup src && pnpm ts-types",
+    "build": "pnpm rimraf dist && tsup src && pnpm ts-types && pnpm build-storybook",
     "test": "vitest --run --passWithNoTests",
     "dev": "tsup src --watch"
   },
@@ -30,7 +30,7 @@
   "module": "./dist/index.mjs",
   "typings": "./dist/index.d.ts",
   "sideEffects": [
-    "*.css"
+    "**/*.css"
   ],
   "files": [
     "dist"

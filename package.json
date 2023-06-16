@@ -11,7 +11,7 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "ci-build-packages": "turbo run build lint test"
+    "ci-build-packages": "turbo run build lint test" 
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
