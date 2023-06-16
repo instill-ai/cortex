@@ -99,7 +99,7 @@ importers:
   packages/design-system:
     dependencies:
       '@instill-ai/design-tokens':
-        specifier: workspace:*
+        specifier: workspace:^
         version: link:../design-tokens
       '@radix-ui/react-dialog':
         specifier: ^1.0.4
