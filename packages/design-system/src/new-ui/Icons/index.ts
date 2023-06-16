@@ -14,6 +14,7 @@ import { Pipeline } from "./Pipeline";
 import { Plus } from "./Plus";
 import { Play } from "./Play";
 import { Sliders01 } from "./Sliders01";
+import { X } from "./X";
 
 export const Icons = {
   BarChartSquare02,
@@ -32,4 +33,5 @@ export const Icons = {
   Play,
   Plus,
   Sliders01,
+  X,
 };
