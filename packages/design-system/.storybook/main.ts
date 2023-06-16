@@ -1,4 +1,6 @@
-module.exports = {
+import type { StorybookConfig } from "@storybook/react-webpack5";
+
+const config: StorybookConfig = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   staticDirs: ["../public"],
   addons: [
@@ -19,13 +21,12 @@ module.exports = {
     name: "@storybook/react-webpack5",
     options: {},
   },
-  features: {
-    previewMdx2: true,
-  },
   docs: {
     autodocs: true,
   },
   core: {
-    builder: "webpack5",
+    builder: "@storybook/builder-webpack5",
   },
 };
+
+export default config;
