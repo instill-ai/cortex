@@ -1,6 +1,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
-  // presets: [require("@instill-ai/design-tokens/dist/tailwind.config.cjs")],
+  presets: [require("@instill-ai/design-tokens/dist/tailwind.config.cjs")],
   content: [
     "./src/generators/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,ts,jsx,tsx}",

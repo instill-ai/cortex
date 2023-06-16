@@ -20,7 +20,7 @@
     "build-css-variables": "tsx ./src/buildCSSVariables.ts"
   },
   "sideEffects": [
-    "*.css"
+    "**/*.css"
   ],
   "files": [
     "dist"
