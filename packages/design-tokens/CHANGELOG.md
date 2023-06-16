@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.7...@instill-ai/design-tokens-v0.2.0) (2023-06-16)
+
+
+### Features
+
+* **design-system:** add new Dialog component ([#492](https://github.com/instill-ai/design-system/issues/492)) ([1b25c66](https://github.com/instill-ai/design-system/commit/1b25c66a34ea225fa8d4d51cb7cc1109f4b36948))
+
 ## [0.1.7](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.1.6...@instill-ai/design-tokens-v0.1.7) (2023-06-14)
 
 
