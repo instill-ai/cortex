@@ -73,6 +73,7 @@ module.exports = {
     },
   },
   plugins: [
+    require("tailwindcss-animate"),
     ({ addUtilities }) => {
       addUtilities({
         ".text-instill-h1": {
