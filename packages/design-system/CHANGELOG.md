@@ -1,5 +1,18 @@
 # @instill-ai/design-system
 
+## [0.17.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.16.0...@instill-ai/design-system-v0.17.0) (2023-06-16)
+
+
+### Features
+
+* **design-system:** add new Dialog component ([#492](https://github.com/instill-ai/design-system/issues/492)) ([1b25c66](https://github.com/instill-ai/design-system/commit/1b25c66a34ea225fa8d4d51cb7cc1109f4b36948))
+* **design-system:** add new Textarea component ([#490](https://github.com/instill-ai/design-system/issues/490)) ([81d3a22](https://github.com/instill-ai/design-system/commit/81d3a22eb684363d255995ea40f9aae5b1c638eb))
+
+
+### Bug Fixes
+
+* **design-system:** fix storybook build issue ([#493](https://github.com/instill-ai/design-system/issues/493)) ([a77b2aa](https://github.com/instill-ai/design-system/commit/a77b2aa8a92338bc557b32eb478359adc950f88c))
+
 ## [0.16.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.15.0...@instill-ai/design-system-v0.16.0) (2023-06-14)
 
 
