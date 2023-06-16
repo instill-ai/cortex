@@ -9,7 +9,7 @@ const meta: Meta<typeof Textarea> = {
 
 export default meta;
 
-const Template: StoryFn<typeof Textarea> = (args) => {
+const Template: StoryFn<typeof Textarea> = () => {
   const [value, setValue] = React.useState("");
   return (
     <Textarea
