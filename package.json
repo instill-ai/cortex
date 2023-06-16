@@ -12,7 +12,7 @@
     "test": "turbo run test",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "ci-build-packages": "turbo run build lint test",
-    "ci-build-storybook": "turbo run build --filter=design-token --filter=design-system"
+    "ci-build-storybook": "turbo run build --filter=@instill-ai/design-tokens --filter=@instill-ai/design-system"
   },
   "devDependencies": {
     "@changesets/cli": "^2.26.0",
