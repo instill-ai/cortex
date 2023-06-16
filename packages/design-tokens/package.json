@@ -19,6 +19,9 @@
     "build-tw": "tsx ./src/buildTailwindPreset.ts",
     "build-css-variables": "tsx ./src/buildCSSVariables.ts"
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "dist"
   ],

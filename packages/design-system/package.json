@@ -29,6 +29,9 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "typings": "./dist/index.d.ts",
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "dist"
   ],
@@ -90,20 +93,19 @@
     "webpack": "^5.70.0"
   },
   "peerDependencies": {
-    "@instill-ai/design-tokens": "workspace:*",
     "@radix-ui/react-scroll-area": "^1.0.0",
     "@radix-ui/react-select": "^1.2.0",
     "clsx": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tailwindcss-animate": "^1.0.0"
+    "tailwindcss-animate": "^1.0.0",
+    "@instill-ai/design-tokens": "workspace:*"
   },
   "dependencies": {
     "@instill-ai/design-tokens": "workspace:*",
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-scroll-area": "^1.0.3",
     "@radix-ui/react-select": "^1.2.1",
-    "reactflow": "^11.7.2",
     "sanitize-html": "^2.7.0",
     "tailwindcss-animate": "^1.0.6"
   },

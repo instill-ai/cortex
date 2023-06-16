@@ -5,7 +5,6 @@ import "../src/styles/global.css";
 // import "@instill-ai/design-tokens/dist/theme/root.css";
 // import "@instill-ai/design-tokens/dist/theme/light.css";
 import "@instill-ai/design-tokens/dist/theme/dark.css";
-import "reactflow/dist/style.css";
 
 const preview: Preview = {
   parameters: {
