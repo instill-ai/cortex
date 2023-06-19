@@ -78,9 +78,7 @@ export const SelectExistingDestinationFlow = (
                 <Image
                   className="my-auto"
                   src={
-                    e.destination_connector_definition.connector_definition.docker_repository.split(
-                      "/"
-                    )[0] === "airbyte"
+                    e.destination_connector_definition.id.startsWith("airbyte")
                       ? `/icons/airbyte/${e.destination_connector_definition.connector_definition.icon}`
                       : `/icons/instill/${e.destination_connector_definition.connector_definition.icon}`
                   }

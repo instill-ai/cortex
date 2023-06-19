@@ -65,22 +65,10 @@ export type DestinationComponent = {
 
 export type PipelineConnectorComponentDefinition = {
   connector_definition: {
-    create_time: string;
-    docker_repository: string;
     documentation_url: string;
     icon: string;
     public: boolean;
-    release_date:
-      | {
-          year: number;
-          month: number;
-          day: number;
-        }
-      | {};
-    release_stage: string;
-    resource_requirements: Record<string, any>;
     title: string;
-    update_time: string;
   };
   id: string;
   name: string;

@@ -29,9 +29,7 @@ export const ConnectionTypeCell = ({
           <div className="flex flex-row gap-x-[5px]">
             <ImageWithFallback
               src={
-                connectorDefinition.connector_definition.docker_repository.split(
-                  "/"
-                )[0] === "airbyte"
+                connectorDefinition.id.startsWith("airbyte")
                   ? `/icons/airbyte/${connectorDefinition.connector_definition.icon}`
                   : `/icons/instill/${connectorDefinition.connector_definition.icon}`
               }

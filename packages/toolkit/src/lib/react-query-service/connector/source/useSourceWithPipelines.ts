@@ -93,17 +93,11 @@ const tt = {
                 "source-connector-definitions/source-grpc",
               source_connector_definition_detail: {
                 connector_definition: {
-                  create_time: "2023-05-26T09:20:29.403416Z",
-                  docker_repository: "instill-ai/source-grpc",
                   documentation_url:
                     "https://www.instill.tech/docs/source-connectors/grpc",
                   icon: "grpc.svg",
                   public: true,
-                  release_date: {},
-                  release_stage: "RELEASE_STAGE_GENERALLY_AVAILABLE",
-                  resource_requirements: {},
                   title: "gRPC",
-                  update_time: "2023-05-26T09:20:29.403416Z",
                 },
                 id: "source-grpc",
                 name: "source-connector-definitions/source-grpc",
@@ -215,18 +209,11 @@ const tt = {
                 "destination-connector-definitions/destination-google-sheets",
               destination_connector_definition_detail: {
                 connector_definition: {
-                  create_time: "2023-05-26T09:20:29.523499Z",
-                  docker_image_tag: "0.1.1",
-                  docker_repository: "airbyte/destination-google-sheets",
                   documentation_url:
                     "https://docs.airbyte.io/integrations/destinations/google-sheets",
                   icon: "google-sheets.svg",
                   public: true,
-                  release_date: {},
-                  release_stage: "RELEASE_STAGE_ALPHA",
-                  resource_requirements: {},
                   title: "Google Sheets",
-                  update_time: "2023-05-26T09:20:29.523499Z",
                 },
                 id: "destination-google-sheets",
                 name: "destination-connector-definitions/destination-google-sheets",
@@ -272,17 +259,11 @@ const tt = {
                 "source-connector-definitions/source-http",
               source_connector_definition_detail: {
                 connector_definition: {
-                  create_time: "2023-05-26T09:20:29.399803Z",
-                  docker_repository: "instill-ai/source-http",
                   documentation_url:
                     "https://www.instill.tech/docs/source-connectors/http",
                   icon: "http.svg",
                   public: true,
-                  release_date: {},
-                  release_stage: "RELEASE_STAGE_GENERALLY_AVAILABLE",
-                  resource_requirements: {},
                   title: "HTTP",
-                  update_time: "2023-05-26T09:20:29.399803Z",
                 },
                 id: "source-http",
                 name: "source-connector-definitions/source-http",
@@ -394,17 +375,11 @@ const tt = {
                 "destination-connector-definitions/destination-http",
               destination_connector_definition_detail: {
                 connector_definition: {
-                  create_time: "2023-05-26T09:20:29.405093Z",
-                  docker_repository: "instill-ai/destination-http",
                   documentation_url:
                     "https://www.instill.tech/docs/destination-connectors/http",
                   icon: "http.svg",
                   public: true,
-                  release_date: {},
-                  release_stage: "RELEASE_STAGE_GENERALLY_AVAILABLE",
-                  resource_requirements: {},
                   title: "HTTP",
-                  update_time: "2023-05-26T09:20:29.405093Z",
                 },
                 id: "destination-http",
                 name: "destination-connector-definitions/destination-http",
