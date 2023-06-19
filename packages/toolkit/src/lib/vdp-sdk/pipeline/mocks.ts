@@ -30,17 +30,11 @@ export const mockPipeline: Pipeline = {
             "source-connector-definitions/source-http",
           source_connector_definition_detail: {
             connector_definition: {
-              create_time: "2023-05-16T02:43:06.336673Z",
-              docker_repository: "instill-ai/source-http",
               documentation_url:
                 "https://www.instill.tech/docs/source-connectors/http",
               icon: "http.svg",
               public: true,
-              release_date: {},
-              release_stage: "RELEASE_STAGE_GENERALLY_AVAILABLE",
-              resource_requirements: {},
               title: "HTTP",
-              update_time: "2023-05-16T02:43:06.336673Z",
             },
             id: "source-http",
             name: "source-connector-definitions/source-http",
@@ -238,17 +232,11 @@ export const mockPipeline: Pipeline = {
             "destination-connector-definitions/destination-http",
           destination_connector_definition_detail: {
             connector_definition: {
-              create_time: "2023-05-16T02:43:06.342962Z",
-              docker_repository: "instill-ai/destination-http",
               documentation_url:
                 "https://www.instill.tech/docs/destination-connectors/http",
               icon: "http.svg",
               public: true,
-              release_date: {},
-              release_stage: "RELEASE_STAGE_GENERALLY_AVAILABLE",
-              resource_requirements: {},
               title: "HTTP",
-              update_time: "2023-05-16T02:43:06.342962Z",
             },
             id: "destination-http",
             name: "destination-connector-definitions/destination-http",

@@ -26,33 +26,16 @@ export type ConnectorDefinition = {
   id: string;
   connector_definition: {
     title: string;
-    docker_repository: string;
-    docker_image_tag: string;
     documentation_url: string;
     icon: string;
     connection_type: string;
     spec: {
       documentation_url: string;
-      changelog_url?: string;
       connection_specification: JSONSchema7;
-      supports_incremental: boolean;
-      supports_normalization: boolean;
-      supports_dbt: boolean;
-      supported_destination_sync_modes: string[];
-      advanced_auth: Nullable<Record<string, any>>;
     };
     tombstone: boolean;
     public: boolean;
     custom: boolean;
-    release_stage: string;
-    release_date: {
-      year: number;
-      month: number;
-      day: number;
-    };
-    resource_requirements: Record<string, any>;
-    create_time: string;
-    update_time: string;
   };
 };
 

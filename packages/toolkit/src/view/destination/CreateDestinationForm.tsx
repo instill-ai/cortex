@@ -106,8 +106,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
             <Image
               className="my-auto"
               src={
-                e.connector_definition.docker_repository.split("/")[0] ===
-                "airbyte"
+                e.id.startsWith("airbyte")
                   ? `/icons/airbyte/${e.connector_definition.icon}`
                   : `/icons/instill/${e.connector_definition.icon}`
               }
@@ -125,7 +124,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
       startIcon: (
         <ImageWithFallback
           src={
-            e.connector_definition.docker_repository.split("/")[0] === "airbyte"
+            e.id.startsWith("airbyte")
               ? `/icons/airbyte/${e.connector_definition.icon}`
               : `/icons/instill/${e.connector_definition.icon}`
           }
@@ -156,10 +155,8 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     if (!selectedDestinationDefinition) return true;
 
     if (
-      selectedDestinationDefinition.connector_definition.docker_repository ===
-        "instill-ai/destination-grpc" ||
-      selectedDestinationDefinition.connector_definition.docker_repository ===
-        "instill-ai/destination-http"
+      selectedDestinationDefinition.id === "destination-grpc" ||
+      selectedDestinationDefinition.id === "destination-http"
     ) {
       return false;
     } else {
@@ -171,15 +168,13 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     if (!selectedDestinationDefinition) return null;
 
     if (
-      selectedDestinationDefinition.connector_definition.docker_repository ===
-      "instill-ai/destination-grpc"
+      selectedDestinationDefinition.id === "destination-grpc"
     ) {
       return "destination-grpc";
     }
 
     if (
-      selectedDestinationDefinition.connector_definition.docker_repository ===
-      "instill-ai/destination-http"
+      selectedDestinationDefinition.id === "destination-http"
     ) {
       return "destination-http";
     }
@@ -332,8 +327,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     // our own payload
 
     if (
-      selectedDestinationDefinition?.connector_definition.docker_repository ===
-      "instill-ai/destination-grpc"
+      selectedDestinationDefinition?.id === "destination-grpc"
     ) {
       payload = {
         id: "destination-grpc",
@@ -346,8 +340,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         },
       };
     } else if (
-      selectedDestinationDefinition?.connector_definition.docker_repository ===
-      "instill-ai/destination-http"
+      selectedDestinationDefinition?.id === "destination-http"
     ) {
       payload = {
         id: "destination-http",

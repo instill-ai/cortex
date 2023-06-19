@@ -90,10 +90,8 @@ export const ConfigureDestinationForm = (
 
   const isSyncDestination = React.useMemo(() => {
     if (
-      destination.destination_connector_definition.connector_definition
-        .docker_repository === "instill-ai/destination-grpc" ||
-      destination.destination_connector_definition.connector_definition
-        .docker_repository === "instill-ai/destination-http"
+      destination.destination_connector_definition.id === "destination-grpc" ||
+      destination.destination_connector_definition.id === "destination-http"
     ) {
       return true;
     }
@@ -109,9 +107,7 @@ export const ConfigureDestinationForm = (
       startIcon: (
         <ImageWithFallback
           src={
-            destination.destination_connector_definition.connector_definition.docker_repository.split(
-              "/"
-            )[0] === "airbyte"
+            destination.destination_connector_definition.id.startsWith("airbyte")
               ? `/icons/airbyte/${destination.destination_connector_definition.connector_definition.icon}`
               : `/icons/instill/${destination.destination_connector_definition.connector_definition.icon}`
           }
@@ -203,10 +199,8 @@ export const ConfigureDestinationForm = (
 
   const handleSubmit = React.useCallback(async () => {
     if (
-      destination.destination_connector_definition.connector_definition
-        .docker_repository === "instill-ai/destination-grpc" ||
-      destination.destination_connector_definition.connector_definition
-        .docker_repository === "instill-ai/destination-http"
+      destination.id === "destination-grpc" ||
+      destination.id === "destination-http"
     ) {
       return;
     }
@@ -328,8 +322,6 @@ export const ConfigureDestinationForm = (
     setCanEdit,
     airbyteFormIsDirty,
     setAirbyteFormIsDirty,
-    destination.destination_connector_definition.connector_definition
-      .docker_repository,
     destination.name,
     updateDestination,
     init,
