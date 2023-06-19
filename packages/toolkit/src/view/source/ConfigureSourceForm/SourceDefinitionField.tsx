@@ -9,11 +9,11 @@ import {
 import {
   useConfigureSourceFormStore,
   type Nullable,
-  type SourceWithPipelines,
+  SourceWithDefinition,
 } from "../../../lib";
 
 export type SourceDefinitionFieldProps = {
-  source: Nullable<SourceWithPipelines>;
+  source: Nullable<SourceWithDefinition>;
 };
 
 export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
