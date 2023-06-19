@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.17.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.17.0...@instill-ai/design-system-v0.17.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **design-system:** fix design-token can't be successfully build into design-system storybook ([#495](https://github.com/instill-ai/design-system/issues/495)) ([647afee](https://github.com/instill-ai/design-system/commit/647afee8ea9cb9c28334e5aba5288e3d94154f1b))
+
 ## [0.17.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.16.0...@instill-ai/design-system-v0.17.0) (2023-06-16)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.1...@instill-ai/toolkit-v0.47.2) (2023-06-19)
+
+
+### Bug Fixes
+
+* **toolkit:** fix ConfigureSourceForm source input type ([#497](https://github.com/instill-ai/design-system/issues/497)) ([9b1bf79](https://github.com/instill-ai/design-system/commit/9b1bf790eaae351294a9c5bf79ce2d73b32cf82d))
+
 ## [0.47.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.0...@instill-ai/toolkit-v0.47.1) (2023-06-11)
 
 
