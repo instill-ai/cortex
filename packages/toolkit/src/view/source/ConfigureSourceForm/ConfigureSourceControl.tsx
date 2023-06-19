@@ -17,8 +17,8 @@ import {
   testSourceConnectionAction,
   type ModalStore,
   type Nullable,
-  type SourceWithPipelines,
   type ConfigureSourceFormStore,
+  SourceWithDefinition,
 } from "../../../lib";
 
 import { DeleteResourceModal } from "../../../components";
@@ -35,7 +35,7 @@ const modalSelector = (state: ModalStore) => ({
 });
 
 export type ConfigureSourceControlProps = {
-  source: Nullable<SourceWithPipelines>;
+  source: Nullable<SourceWithDefinition>;
   onDelete: Nullable<(initStore: () => void) => void>;
   onConfigure: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
