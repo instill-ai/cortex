@@ -22,7 +22,6 @@ export const ConnectionTypeCell = ({
   width,
   padding,
 }: ConnectionTypeCellProps) => {
-  console.log(11111, connectorDefinition)
   return (
     <td>
       <div className={cn("py-2.5", width, padding)}>
