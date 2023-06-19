@@ -108,6 +108,7 @@ export const BasicSingleSelect = (props: BasicSingleSelectProps) => {
     required,
     inputLabelType,
     placeholder,
+    debug,
   } = props;
 
   return (
@@ -125,6 +126,7 @@ export const BasicSingleSelect = (props: BasicSingleSelectProps) => {
       readOnly={readOnly ?? false}
       required={required ?? false}
       placeholder={placeholder || null}
+      debug={debug ?? false}
       {...basicInputDescriptionConfig}
       {...basicSingleSelectConfig}
     />
