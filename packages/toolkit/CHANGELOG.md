@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.2...@instill-ai/toolkit-v0.47.3) (2023-06-19)
+
+
+### Miscellaneous
+
+* **cortex:** update tailwindcss version ([#498](https://github.com/instill-ai/design-system/issues/498)) ([c6dd679](https://github.com/instill-ai/design-system/commit/c6dd6794028b9e42cb051f360db47d9eca3d3987))
+
 ## [0.47.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.1...@instill-ai/toolkit-v0.47.2) (2023-06-19)
 
 
