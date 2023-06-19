@@ -1,5 +1,19 @@
 # @instill-ai/design-system
 
+## [0.18.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.17.1...@instill-ai/design-system-v0.18.0) (2023-06-19)
+
+
+### Features
+
+* **design-system:** implement new switch ([#494](https://github.com/instill-ai/design-system/issues/494)) ([157069c](https://github.com/instill-ai/design-system/commit/157069c3cf4c926b4be3bd38a376fdb139b1f37c))
+
+
+### Miscellaneous
+
+* **cortex:** update tailwindcss version ([#498](https://github.com/instill-ai/design-system/issues/498)) ([c6dd679](https://github.com/instill-ai/design-system/commit/c6dd6794028b9e42cb051f360db47d9eca3d3987))
+* **design-system:** add data-testid in BasicSingleSelect ([#502](https://github.com/instill-ai/design-system/issues/502)) ([28d40fa](https://github.com/instill-ai/design-system/commit/28d40fac0f20e65c3953ff0898756fd29e57a6ec))
+* **design-system:** update how we handle import tailwindcss style to storybook ([#500](https://github.com/instill-ai/design-system/issues/500)) ([fcbf5e9](https://github.com/instill-ai/design-system/commit/fcbf5e9fdcc64ed6ea63f6359c8938ff716084a8))
+
 ## [0.17.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.17.0...@instill-ai/design-system-v0.17.1) (2023-06-19)
 
 
