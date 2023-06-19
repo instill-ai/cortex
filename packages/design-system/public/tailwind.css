@@ -729,6 +729,10 @@ video {
   border-width: 0;
 }
 
+.pointer-events-none {
+  pointer-events: none;
+}
+
 .fixed {
   position: fixed;
 }
@@ -847,6 +851,10 @@ video {
   display: flex;
 }
 
+.inline-flex {
+  display: inline-flex;
+}
+
 .grid {
   display: grid;
 }
@@ -857,6 +865,14 @@ video {
 
 .h-10 {
   height: 40px;
+}
+
+.h-2 {
+  height: 8px;
+}
+
+.h-2\.5 {
+  height: 0.625rem;
 }
 
 .h-4 {
@@ -883,6 +899,10 @@ video {
   height: 14px;
 }
 
+.h-\[24px\] {
+  height: 24px;
+}
+
 .h-\[250px\] {
   height: 250px;
 }
@@ -901,6 +921,14 @@ video {
 
 .h-full {
   height: 100%;
+}
+
+.h-\[21px\] {
+  height: 21px;
+}
+
+.h-\[15px\] {
+  height: 15px;
 }
 
 .max-h-\[320px\] {
@@ -929,6 +957,14 @@ video {
 
 .w-12 {
   width: 48px;
+}
+
+.w-2 {
+  width: 8px;
+}
+
+.w-2\.5 {
+  width: 0.625rem;
 }
 
 .w-20 {
@@ -979,6 +1015,10 @@ video {
   width: 30px;
 }
 
+.w-\[44px\] {
+  width: 44px;
+}
+
 .w-\[90px\] {
   width: 90px;
 }
@@ -991,11 +1031,23 @@ video {
   width: 100%;
 }
 
+.w-\[36px\] {
+  width: 36px;
+}
+
+.w-\[15px\] {
+  width: 15px;
+}
+
 .flex-1 {
   flex: 1 1 0%;
 }
 
 .flex-shrink-0 {
+  flex-shrink: 0;
+}
+
+.shrink-0 {
   flex-shrink: 0;
 }
 
@@ -1098,6 +1150,10 @@ video {
   align-items: flex-end;
 }
 
+.items-center {
+  align-items: center;
+}
+
 .justify-center {
   justify-content: center;
 }
@@ -1165,6 +1221,10 @@ video {
 
 .rounded-\[1px\] {
   border-radius: 1px;
+}
+
+.rounded-full {
+  border-radius: 9999px;
 }
 
 .rounded-sm {
@@ -1255,6 +1315,10 @@ video {
 .border-instillRed {
   --tw-border-opacity: 1;
   border-color: rgb(255 83 83 / var(--tw-border-opacity));
+}
+
+.border-transparent {
+  border-color: transparent;
 }
 
 .bg-\[\#02D085\] {
@@ -1756,6 +1820,10 @@ video {
   --tw-ring-color: rgb(255 255 255 / var(--tw-ring-opacity));
 }
 
+.ring-offset-2 {
+  --tw-ring-offset-width: 2px;
+}
+
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
@@ -1780,8 +1848,22 @@ video {
   transition-duration: 150ms;
 }
 
+.transition-colors {
+  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
 .transition-opacity {
   transition-property: opacity;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+}
+
+.transition-transform {
+  transition-property: transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
@@ -2148,12 +2230,32 @@ video {
   --tw-ring-color: var(--semantic-accent-default);
 }
 
+.focus-visible\:ring-offset-2:focus-visible {
+  --tw-ring-offset-width: 2px;
+}
+
 .disabled\:pointer-events-none:disabled {
   pointer-events: none;
 }
 
 .disabled\:cursor-not-allowed:disabled {
   cursor: not-allowed;
+}
+
+.disabled\:bg-semantic-fg-disabled-on-secondary-bg:disabled {
+  background-color: var(--semantic-fg-disabled-on-secondary-bg);
+}
+
+.disabled\:\!bg-semantic-fg-disabled-on-secondary-bg:disabled {
+  background-color: var(--semantic-fg-disabled-on-secondary-bg) !important;
+}
+
+.disabled\:\!bg-semantic-fg-disabled:disabled {
+  background-color: var(--semantic-fg-disabled) !important;
+}
+
+.disabled\:opacity-50:disabled {
+  opacity: 50%;
 }
 
 .disabled\:opacity-80:disabled {
@@ -2197,6 +2299,46 @@ video {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.data-\[state\=checked\]\:translate-x-5[data-state=checked] {
+  --tw-translate-x: 20px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=unchecked\]\:translate-x-0[data-state=unchecked] {
+  --tw-translate-x: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=unchecked\]\:translate-x-\[3px\][data-state=unchecked] {
+  --tw-translate-x: 3px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=unchecked\]\:translate-x-\[2px\][data-state=unchecked] {
+  --tw-translate-x: 2px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=unchecked\]\:translate-x-\[2\.5px\][data-state=unchecked] {
+  --tw-translate-x: 2.5px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=checked\]\:translate-x-\[\][data-state=checked] {
+  --tw-translate-x: ;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=checked\]\:translate-x-\[15px\][data-state=checked] {
+  --tw-translate-x: 15px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+.data-\[state\=checked\]\:translate-x-\[18px\][data-state=checked] {
+  --tw-translate-x: 18px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 .data-\[highlighted\]\:border-0[data-highlighted] {
   border-width: 0px;
 }
@@ -2204,6 +2346,14 @@ video {
 .data-\[highlighted\]\:bg-instillGrey05[data-highlighted] {
   --tw-bg-opacity: 1;
   background-color: rgb(246 246 246 / var(--tw-bg-opacity));
+}
+
+.data-\[state\=checked\]\:bg-semantic-accent-default[data-state=checked] {
+  background-color: var(--semantic-accent-default);
+}
+
+.data-\[state\=unchecked\]\:bg-semantic-info-secondary-text-on-bg[data-state=unchecked] {
+  background-color: var(--semantic-info-secondary-text-on-bg);
 }
 
 .data-\[highlighted\]\:outline-none[data-highlighted] {
@@ -2241,6 +2391,30 @@ video {
 
 .data-\[state\=open\]\:slide-in-from-bottom-10[data-state=open] {
   --tw-enter-translate-y: 40px;
+}
+
+.hover\:data-\[state\=checked\]\:bg-semantic-accent-hover[data-state=checked]:hover {
+  background-color: var(--semantic-accent-hover);
+}
+
+.hover\:data-\[state\=unchecked\]\:bg-semantic-fg-primary[data-state=unchecked]:hover {
+  background-color: var(--semantic-fg-primary);
+}
+
+.focus-visible\:data-\[state\=checked\]\:ring-semantic-accent-hover[data-state=checked]:focus-visible {
+  --tw-ring-color: var(--semantic-accent-hover);
+}
+
+.focus-visible\:data-\[state\=checked\]\:ring-semantic-fg-primary[data-state=checked]:focus-visible {
+  --tw-ring-color: var(--semantic-fg-primary);
+}
+
+.focus-visible\:data-\[state\=unchecked\]\:ring-semantic-fg-primary[data-state=unchecked]:focus-visible {
+  --tw-ring-color: var(--semantic-fg-primary);
+}
+
+.focus-visible\:data-\[state\=checked\]\:ring-offset-semantic-accent-hover[data-state=checked]:focus-visible {
+  --tw-ring-offset-color: var(--semantic-accent-hover);
 }
 
 @media (min-width: 640px) {

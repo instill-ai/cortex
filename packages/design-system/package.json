@@ -68,7 +68,7 @@
     "@types/sanitize-html": "^2.6.2",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^3.1.0",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.14",
     "babel-loader": "^8.2.4",
     "clsx": "^1.1.1",
     "esbuild": "^0.14.54",
@@ -109,6 +109,7 @@
     "@radix-ui/react-dialog": "^1.0.4",
     "@radix-ui/react-scroll-area": "^1.0.3",
     "@radix-ui/react-select": "^1.2.1",
+    "@radix-ui/react-switch": "^1.0.3",
     "sanitize-html": "^2.7.0",
     "tailwindcss-animate": "^1.0.6"
   },
