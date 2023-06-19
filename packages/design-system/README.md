@@ -5,6 +5,11 @@ We are undergoing a series of revamps for our design-system, which included seve
 1. Compound component first approach. Under the hood, we will use Radix-UI.
 2. We are abandoning one style one prop approach due to it being too verbose to use
 
+# How to use the storybook at local
+
+- `pnpm watch:css` and let it run
+- `pnpm sb`
+
 --- 
 
 # Old design system
