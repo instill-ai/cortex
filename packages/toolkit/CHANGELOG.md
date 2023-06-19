@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.3...@instill-ai/toolkit-v0.47.4) (2023-06-19)
+
+
+### Miscellaneous
+
+* **toolkit:** adopt new connector definition format ([#501](https://github.com/instill-ai/design-system/issues/501)) ([6125733](https://github.com/instill-ai/design-system/commit/6125733c51de3de811cf2af14ea92cd1257b1fbe))
+
 ## [0.47.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.2...@instill-ai/toolkit-v0.47.3) (2023-06-19)
 
 

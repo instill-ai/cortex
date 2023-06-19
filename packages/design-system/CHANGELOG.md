@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.18.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.18.0...@instill-ai/design-system-v0.18.1) (2023-06-19)
+
+
+### Bug Fixes
+
+* **design-system:** fix debug option affect select behavior issue ([#503](https://github.com/instill-ai/design-system/issues/503)) ([653f83d](https://github.com/instill-ai/design-system/commit/653f83d19742c5efd351db2f652cacf869ac87b7))
+
 ## [0.18.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.17.1...@instill-ai/design-system-v0.18.0) (2023-06-19)
 
 
