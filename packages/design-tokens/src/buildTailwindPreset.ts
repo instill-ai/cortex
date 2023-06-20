@@ -132,7 +132,10 @@ async function main() {
     }
   });
 
-  const configuration = `module.exports = {
+  const configuration = `
+  const plugin = require('tailwindcss/plugin');
+
+  module.exports = {
     theme: {
       extend: {
         colors: {
@@ -156,6 +159,9 @@ async function main() {
       ({ addUtilities }) => {
         addUtilities({${typographyUtility.join(",\n")}})
       },
+      plugin(function ({ addVariant }) {
+        addVariant('disabled-within', "&:has(input:is(:disabled),button:is(:disabled))")
+      })
     ],
   }`;
 

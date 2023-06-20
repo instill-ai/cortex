@@ -190,8 +190,6 @@ function generateRootTheme() {
           (e) => e.type === "boxShadow"
         );
 
-        console.log(boxShadows);
-
         const boxShadowCSS = boxShadows
           .map(
             (e) =>
