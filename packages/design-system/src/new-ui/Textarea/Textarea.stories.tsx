@@ -3,7 +3,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import { Textarea } from "./Textarea";
 
 const meta: Meta<typeof Textarea> = {
-  title: "Components/NewUi/Input/Textarea",
+  title: "Components/NewUi/Textarea",
   component: Textarea,
 };
 
