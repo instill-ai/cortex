@@ -107,7 +107,7 @@ const Description = React.forwardRef<
   return (
     <p
       className={cn(
-        "flex product-body-text-3-regular text-semantic-fg-primary text-opacity-10",
+        "flex product-body-text-3-regular text-[#1D2433CC]",
         className
       )}
       ref={ref}
