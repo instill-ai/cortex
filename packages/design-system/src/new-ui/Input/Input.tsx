@@ -36,8 +36,7 @@ const FieldContainer = React.forwardRef<
 });
 FieldContainer.displayName = "InputFieldContainer";
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+export type InputProps = React.InputHTMLAttributes<HTMLInputElement>;
 
 const Field = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, ...props }, ref) => {
@@ -66,6 +65,7 @@ const LeftIcon = React.forwardRef<
     </div>
   );
 });
+LeftIcon.displayName = "InputLeftIcon";
 
 const RightIcon = React.forwardRef<
   HTMLDivElement,
@@ -81,6 +81,7 @@ const RightIcon = React.forwardRef<
     </div>
   );
 });
+RightIcon.displayName = "InputRightIcon";
 
 const Label = React.forwardRef<
   HTMLLabelElement,
@@ -99,6 +100,7 @@ const Label = React.forwardRef<
     </label>
   );
 });
+Label.displayName = "InputLabel";
 
 const Description = React.forwardRef<
   HTMLParagraphElement,
@@ -117,6 +119,7 @@ const Description = React.forwardRef<
     </p>
   );
 });
+Description.displayName = "InputDescription";
 
 export const Input = {
   Root,
