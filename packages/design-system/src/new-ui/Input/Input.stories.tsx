@@ -11,20 +11,21 @@ export default meta;
 const Template: StoryFn = () => {
   return (
     <Input.Root>
+      <Input.Label>Label</Input.Label>
       <Input.FieldContainer>
-        <Input.LeftIcon>
+        {/* <Input.LeftIcon>
           <Icons.Box className="w-5 h-5 my-auto stroke-slate-800" />
-        </Input.LeftIcon>
-        <Input.Field disabled={true} type="text" placeholder="Hello world" />
-        <Input.LeftIcon>
-          <Icons.Box
-            onClick={() => {
-              alert("hi");
-            }}
-            className="w-5 h-5 my-auto stroke-slate-800 cursor-pointer"
-          />
+        </Input.LeftIcon> */}
+        <Input.Field disabled={false} type="text" placeholder="Hello world" />
+        <Input.LeftIcon
+          onClick={() => {
+            alert("hi");
+          }}
+        >
+          <Icons.Box className="w-5 h-5 my-auto stroke-slate-800 cursor-pointer" />
         </Input.LeftIcon>
       </Input.FieldContainer>
+      <Input.Description>This is description</Input.Description>
     </Input.Root>
   );
 };
