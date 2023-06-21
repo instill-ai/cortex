@@ -97,7 +97,7 @@ const FormLabel = React.forwardRef<
   return (
     <Label
       ref={ref}
-      className={cn(error && "text-destructive", className)}
+      className={cn(error && "text-semantic-error-default", className)}
       htmlFor={formItemId}
       {...props}
     />
@@ -148,6 +148,33 @@ const FormDescription = React.forwardRef<
 });
 FormDescription.displayName = "FormDescription";
 
+const FormMessage = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, children, ...props }, ref) => {
+  const { error, formMessageId } = useFormField();
+  const body = error ? String(error?.message) : children;
+
+  if (!body) {
+    return null;
+  }
+
+  return (
+    <p
+      ref={ref}
+      id={formMessageId}
+      className={cn(
+        "product-body-text-3-regular text-semantic-error-default",
+        className
+      )}
+      {...props}
+    >
+      {body}
+    </p>
+  );
+});
+FormMessage.displayName = "FormMessage";
+
 export const Form = {
   Root,
   Item: FormItem,
@@ -155,4 +182,5 @@ export const Form = {
   Control: FormControl,
   Description: FormDescription,
   Field: FormField,
+  Message: FormMessage,
 };

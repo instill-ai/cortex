@@ -53,6 +53,7 @@ const Template: StoryFn = () => {
                 <Form.Description>
                   Please fill in your username
                 </Form.Description>
+                <Form.Message />
               </Form.Item>
             );
           }}
