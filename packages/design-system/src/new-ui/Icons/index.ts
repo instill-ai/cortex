@@ -1,5 +1,6 @@
 import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
+import { Check } from "./Check";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronUp } from "./ChevronUp";
 import { Chip01 } from "./Chip01";
@@ -19,6 +20,7 @@ import { X } from "./X";
 export const Icons = {
   BarChartSquare02,
   Box,
+  Check,
   ChevronDown,
   ChevronUp,
   Chip01,
