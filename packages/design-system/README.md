@@ -5,10 +5,15 @@ We are undergoing a series of revamps for our design-system, which included seve
 1. Compound component first approach. Under the hood, we will use Radix-UI.
 2. We are abandoning one style one prop approach due to it being too verbose to use
 
-# How to use the storybook at local
+## How to use the storybook at local
 
 - `pnpm watch:css` and let it run
 - `pnpm sb`
+
+## How to deploy storybook
+
+- Because design-system relies on design-tokens, when deploy to Vercel, we need to build the package first from the root with `pnpm ci-build-storybook`
+- The output will be put into `/packages/design-system/storybook-static`, we indicate this folder in the Vercel setting
 
 --- 
 
