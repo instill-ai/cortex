@@ -1,8 +1,6 @@
 import { Meta, StoryFn } from "@storybook/react";
 import { Input } from "./Input";
 import { Icons } from "../Icons";
-import { Field } from "../Field";
-import { Form } from "../Form/Form";
 
 const meta: Meta = {
   title: "Components/NewUi/Input",
