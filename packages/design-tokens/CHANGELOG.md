@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.2.2...@instill-ai/design-tokens-v0.3.0) (2023-06-22)
+
+
+### Features
+
+* **design-tokens:** add disabled-within variant ([#505](https://github.com/instill-ai/design-system/issues/505)) ([7c296cd](https://github.com/instill-ai/design-system/commit/7c296cde0a158635582895da3e42c9607427872f))
+
 ## [0.2.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.2.1...@instill-ai/design-tokens-v0.2.2) (2023-06-19)
 
 
