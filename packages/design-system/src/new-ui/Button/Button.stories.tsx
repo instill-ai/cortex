@@ -48,3 +48,29 @@ export const TertiaryGrey: Story = {
     </Button>
   ),
 };
+
+export const TertiaryColour: Story = {
+  render: () => (
+    <Button variant="tertiaryColour" size="lg">
+      I am a button
+    </Button>
+  ),
+};
+
+export const TertiaryDanger: Story = {
+  render: () => (
+    <Button variant="tertiaryDanger" size="lg">
+      I am a button
+    </Button>
+  ),
+};
+
+export const White: Story = {
+  render: () => (
+    <div className="bg-black p-10">
+      <Button variant="white" size="lg">
+        I am a button
+      </Button>
+    </div>
+  ),
+};
