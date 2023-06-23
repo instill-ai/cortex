@@ -7,13 +7,13 @@ import {
   ControllerProps,
   FieldPath,
   FieldValues,
-  FormProvider,
+  FormProvider as ReactHookFormProvider,
   useFormContext,
 } from "react-hook-form";
 
 import { Label } from "../Label";
 
-const Root = FormProvider;
+const FormProvider = ReactHookFormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -176,7 +176,7 @@ const FormMessage = React.forwardRef<
 FormMessage.displayName = "FormMessage";
 
 export const Form = {
-  Root,
+  Provider: FormProvider,
   Item: FormItem,
   Label: FormLabel,
   Control: FormControl,

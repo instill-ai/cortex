@@ -28,7 +28,7 @@ const Template: StoryFn = () => {
   }
 
   return (
-    <Form.Root {...form}>
+    <Form.Provider {...form}>
       <form
         className="flex flex-col space-y-5"
         onSubmit={form.handleSubmit(onSubmit)}
@@ -60,7 +60,7 @@ const Template: StoryFn = () => {
         />
         <button type="submit">Submit</button>
       </form>
-    </Form.Root>
+    </Form.Provider>
   );
 };
 
