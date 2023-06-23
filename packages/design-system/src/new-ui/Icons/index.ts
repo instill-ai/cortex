@@ -9,6 +9,7 @@ import { Database01 } from "./Database01";
 import { Edit05 } from "./Edit05";
 import { Gear01 } from "./Gear01";
 import { HelpCircle } from "./HelpCircle";
+import { InfoCircle } from "./InfoCircle";
 import { Logout01 } from "./Logout01";
 import { Model } from "./Model";
 import { Pipeline } from "./Pipeline";
@@ -29,6 +30,7 @@ export const Icons = {
   Edit05,
   Gear01,
   HelpCircle,
+  InfoCircle,
   Logout01,
   Model,
   Pipeline,
