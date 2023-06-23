@@ -3,7 +3,7 @@ import { Toast } from "./Toast";
 import { Toaster } from "./Toaster";
 import { Button } from "../Button";
 import { useToast } from "./use-toast";
-import { ToastAction } from "@radix-ui/react-toast";
+import { LinkButton } from "../LinkButton";
 
 const meta: Meta<typeof Toast> = {
   title: "Components/NewUi/Toast",
@@ -27,7 +27,7 @@ export const AlertInfo: Story = {
             toast({
               title: "Scheduled: Catch up",
               description: "Friday, February 10, 2023 at 5:57 PM",
-              variant: "alert-info",
+              variant: "notification-icon",
               size: "small",
             });
           }}
@@ -133,7 +133,18 @@ export const AlertWithAction: Story = {
               description: "Friday, February 10, 2023 at 5:57 PM",
               variant: "alert-error",
               size: "large",
-              action: <Toast.Action altText="UndoAction">Undo</Toast.Action>,
+              action: (
+                <Toast.Action altText="UndoAction" asChild>
+                  <div className="flex flex-row space-x-4">
+                    <LinkButton variant="secondary" size="md">
+                      Dismiss
+                    </LinkButton>
+                    <LinkButton variant="primary" size="md">
+                      Dismiss
+                    </LinkButton>
+                  </div>
+                </Toast.Action>
+              ),
             });
           }}
         >

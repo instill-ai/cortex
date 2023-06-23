@@ -10,7 +10,7 @@ export function Toaster() {
   const { toasts } = useToast();
 
   return (
-    <Toast.Provider>
+    <Toast.Provider swipeDirection="right">
       {toasts.map(function ({
         id,
         title,
@@ -33,10 +33,11 @@ export function Toaster() {
                   </div>
                   <Toast.Close />
                 </div>
-                <div className="flex flex-col w-full pl-8">
+                <div className="flex flex-col w-full pl-8 space-y-4">
                   {description && (
                     <Toast.Description>{description}</Toast.Description>
                   )}
+                  {action}
                 </div>
               </div>
             ) : (
@@ -48,7 +49,6 @@ export function Toaster() {
                 <Toast.Close />
               </div>
             )}
-            {action}
           </Toast.Core>
         );
       })}
