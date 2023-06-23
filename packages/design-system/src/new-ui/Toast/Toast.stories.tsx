@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Toast, ToastProps } from "./Toast";
 import { Toaster } from "./Toaster";
-import { Button, ButtonProps } from "../Button";
+import { Button } from "../Button";
 import { ToasterToast, useToast } from "./use-toast";
 import { LinkButton } from "../LinkButton";
 import { Icons } from "../Icons";
