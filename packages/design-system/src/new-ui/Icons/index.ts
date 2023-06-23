@@ -8,6 +8,7 @@ import { ChevronDown } from "./ChevronDown";
 import { ChevronUp } from "./ChevronUp";
 import { Chip01 } from "./Chip01";
 import { Chip02 } from "./Chip02";
+import { Cube01 } from "./Cube01";
 import { Database01 } from "./Database01";
 import { Edit05 } from "./Edit05";
 import { Gear01 } from "./Gear01";
@@ -32,6 +33,7 @@ export const Icons = {
   ChevronUp,
   Chip01,
   Chip02,
+  Cube01,
   Database01,
   Edit05,
   Gear01,
