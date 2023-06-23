@@ -2,7 +2,7 @@ import { Meta, StoryFn } from "@storybook/react";
 import { Icons } from ".";
 
 const meta: Meta = {
-  title: "Components/Ui/Icons",
+  title: "Components/NewUi/Icons",
 };
 
 export default meta;

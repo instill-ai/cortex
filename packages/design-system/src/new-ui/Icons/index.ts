@@ -1,3 +1,4 @@
+import { AlertTriangle } from "./AlertTriangle";
 import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
 import { Check } from "./Check";
@@ -20,6 +21,7 @@ import { Sliders01 } from "./Sliders01";
 import { X } from "./X";
 
 export const Icons = {
+  AlertTriangle,
   BarChartSquare02,
   Box,
   Check,
