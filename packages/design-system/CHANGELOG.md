@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.21.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.20.0...@instill-ai/design-system-v0.21.0) (2023-06-24)
+
+
+### Features
+
+* **design-system:** implement Separator component ([#517](https://github.com/instill-ai/design-system/issues/517)) ([a955b70](https://github.com/instill-ai/design-system/commit/a955b70ad8e14b9ebfc958aec927e6df79d3b3c0))
+
 ## [0.20.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.19.0...@instill-ai/design-system-v0.20.0) (2023-06-24)
 
 
