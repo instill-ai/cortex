@@ -28,7 +28,7 @@ export type ConnectorDefinition = {
     title: string;
     documentation_url: string;
     icon: string;
-    connection_type: string;
+    icon_url: string;
     spec: {
       documentation_url: string;
       connection_specification: JSONSchema7;
@@ -36,6 +36,8 @@ export type ConnectorDefinition = {
     tombstone: boolean;
     public: boolean;
     custom: boolean;
+    vendor: string;
+    vendor_attributes: JSONSchema7;
   };
 };
 
