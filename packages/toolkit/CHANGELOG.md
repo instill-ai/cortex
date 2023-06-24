@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.47.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.4...@instill-ai/toolkit-v0.47.5) (2023-06-24)
+
+
+### Bug Fixes
+
+* **toolkit:** fix connector definition type ([#516](https://github.com/instill-ai/design-system/issues/516)) ([d9a14cd](https://github.com/instill-ai/design-system/commit/d9a14cd2d4017e153de79730380c7c719a6b0f3e))
+
 ## [0.47.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.3...@instill-ai/toolkit-v0.47.4) (2023-06-19)
 
 
