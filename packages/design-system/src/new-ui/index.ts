@@ -5,6 +5,7 @@ export * from "./Icons";
 export * from "./Input";
 export * from "./LinkButton";
 export * from "./Select";
+export * from "./Separator";
 export * from "./Switch";
 export * from "./Textarea";
 export * from "./Toast";
