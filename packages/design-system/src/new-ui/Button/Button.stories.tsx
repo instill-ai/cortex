@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
+import { Icons } from "../Icons";
 
 const meta: Meta<typeof Button> = {
   title: "Components/NewUi/Button",
@@ -72,5 +73,14 @@ export const White: Story = {
         I am a button
       </Button>
     </div>
+  ),
+};
+
+export const PrimaryWithIcon: Story = {
+  render: () => (
+    <Button className="gap-x-2" variant="primary" size="lg">
+      I am a button
+      <Icons.Play className="w-5 h-5 stroke-semantic-bg-primary" />
+    </Button>
   ),
 };
