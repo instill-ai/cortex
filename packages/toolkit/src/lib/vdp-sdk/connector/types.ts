@@ -37,6 +37,7 @@ export type ConnectorDefinition = {
     public: boolean;
     custom: boolean;
     vendor: string;
+    vendor_attributes: JSONSchema7;
   };
 };
 
