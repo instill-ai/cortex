@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.20.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.19.0...@instill-ai/design-system-v0.20.0) (2023-06-24)
+
+
+### Features
+
+* **design-system:** add LinkButton component ([#513](https://github.com/instill-ai/design-system/issues/513)) ([c94494e](https://github.com/instill-ai/design-system/commit/c94494e3d6b819756e5ac8d41e54d7a69b18f138))
+* **design-system:** implement Toast component ([#515](https://github.com/instill-ai/design-system/issues/515)) ([cb48d4a](https://github.com/instill-ai/design-system/commit/cb48d4ae43a07c8b5585fc909d6584f05c952a70))
+
 ## [0.19.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.18.1...@instill-ai/design-system-v0.19.0) (2023-06-22)
 
 
