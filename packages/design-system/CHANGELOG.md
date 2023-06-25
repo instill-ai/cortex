@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.22.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.21.0...@instill-ai/design-system-v0.22.0) (2023-06-25)
+
+
+### Features
+
+* **design-system:** Dialog is not complete ([#519](https://github.com/instill-ai/design-system/issues/519)) ([e47597b](https://github.com/instill-ai/design-system/commit/e47597b657ae068140fb2ab9b06ff7802a9ad795))
+
 ## [0.21.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.20.0...@instill-ai/design-system-v0.21.0) (2023-06-24)
 
 
