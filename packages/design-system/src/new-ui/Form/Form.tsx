@@ -13,7 +13,7 @@ import {
 
 import { Label } from "../Label";
 
-const FormProvider = ReactHookFormProvider;
+const FormRoot = ReactHookFormProvider;
 
 type FormFieldContextValue<
   TFieldValues extends FieldValues = FieldValues,
@@ -176,7 +176,7 @@ const FormMessage = React.forwardRef<
 FormMessage.displayName = "FormMessage";
 
 export const Form = {
-  Provider: FormProvider,
+  Root: FormRoot,
   Item: FormItem,
   Label: FormLabel,
   Control: FormControl,

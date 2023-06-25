@@ -28,6 +28,7 @@ const Template: StoryFn = () => {
             Save changes
           </button>
         </Dialog.Footer>
+        <Dialog.Close />
       </Dialog.Content>
     </Dialog.Root>
   );

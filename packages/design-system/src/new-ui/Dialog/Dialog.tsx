@@ -5,11 +5,11 @@ import * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { Icons } from "../Icons";
 
-const Root = DialogPrimitive.Root;
+const DialogRoot = DialogPrimitive.Root;
 
-const Trigger = DialogPrimitive.Trigger;
+const DialogTrigger = DialogPrimitive.Trigger;
 
-const Portal = ({
+const DialogPortal = ({
   className,
   children,
   ...props
@@ -20,9 +20,9 @@ const Portal = ({
     </div>
   </DialogPrimitive.Portal>
 );
-Portal.displayName = DialogPrimitive.Portal.displayName;
+DialogPortal.displayName = DialogPrimitive.Portal.displayName;
 
-const Overlay = React.forwardRef<
+const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
@@ -35,14 +35,14 @@ const Overlay = React.forwardRef<
     {...props}
   />
 ));
-Overlay.displayName = DialogPrimitive.Overlay.displayName;
+DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
-const Content = React.forwardRef<
+const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
-  <Portal>
-    <Overlay />
+  <DialogPortal>
+    <DialogOverlay />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
@@ -57,19 +57,34 @@ const Content = React.forwardRef<
         <span className="sr-only">Close</span>
       </DialogPrimitive.Close>
     </DialogPrimitive.Content>
-  </Portal>
+  </DialogPortal>
 ));
-Content.displayName = DialogPrimitive.Content.displayName;
+DialogContent.displayName = DialogPrimitive.Content.displayName;
 
-const Header = ({
+const DialogClose = React.forwardRef<
+  React.ElementRef<typeof DialogPrimitive.Close>,
+  React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Close
+    ref={ref}
+    className="absolute right-4 top-4 rounded opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-semantic-accent-hover focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+    {...props}
+  >
+    <Icons.X className="w-5 h-5 stroke-semantic-fg-primary" />
+    <span className="sr-only">Close</span>
+  </DialogPrimitive.Close>
+));
+DialogClose.displayName = DialogPrimitive.Close.displayName;
+
+const DialogHeader = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div className={cn("flex flex-col space-y-2", className)} {...props} />
 );
-Header.displayName = "DialogHeader";
+DialogHeader.displayName = "DialogHeader";
 
-const Footer = ({
+const DialogFooter = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => (
@@ -81,38 +96,42 @@ const Footer = ({
     {...props}
   />
 );
-Footer.displayName = "DialogFooter";
+DialogFooter.displayName = "DialogFooter";
 
-const Title = React.forwardRef<
+const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("product-headings-heading-1", className)}
+    className={cn("product-body-text-2-semibold", className)}
     {...props}
   />
 ));
-Title.displayName = DialogPrimitive.Title.displayName;
+DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
-const Description = React.forwardRef<
+const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("product-body-text-3-regular", className)}
+    className={cn(
+      "product-body-text-2-regular text-semantic-fg-secondary",
+      className
+    )}
     {...props}
   />
 ));
-Description.displayName = DialogPrimitive.Description.displayName;
+DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
 export const Dialog = {
-  Root,
-  Trigger,
-  Content,
-  Header,
-  Footer,
-  Title,
-  Description,
+  Root: DialogRoot,
+  Trigger: DialogTrigger,
+  Content: DialogContent,
+  Header: DialogHeader,
+  Footer: DialogFooter,
+  Title: DialogTitle,
+  Description: DialogDescription,
+  Close: DialogClose,
 };
