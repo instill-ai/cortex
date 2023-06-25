@@ -1,14 +1,16 @@
-import { Meta, StoryFn } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react";
 import { Dialog } from "./Dialog";
 
-const meta: Meta = {
+const meta: Meta<typeof Dialog> = {
   title: "Components/NewUi/Dialog",
 };
 
 export default meta;
 
-const Template: StoryFn = () => {
-  return (
+type Story = StoryObj<typeof Dialog>;
+
+export const Regular: Story = {
+  render: () => (
     <Dialog.Root>
       <Dialog.Trigger asChild>
         <button>Open Dialog</button>
@@ -31,9 +33,5 @@ const Template: StoryFn = () => {
         <Dialog.Close />
       </Dialog.Content>
     </Dialog.Root>
-  );
+  ),
 };
-
-export const Playground: StoryFn<typeof Dialog> = Template.bind({});
-
-Playground.args = {};
