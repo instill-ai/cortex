@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.22.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.22.0...@instill-ai/design-system-v0.22.1) (2023-06-25)
+
+
+### Bug Fixes
+
+* **design-system:** remove Dialog.Close in the Dialog.Content ([#521](https://github.com/instill-ai/design-system/issues/521)) ([81630ea](https://github.com/instill-ai/design-system/commit/81630ea32221e7c635610058931410f132f4bd56))
+
 ## [0.22.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.21.0...@instill-ai/design-system-v0.22.0) (2023-06-25)
 
 
