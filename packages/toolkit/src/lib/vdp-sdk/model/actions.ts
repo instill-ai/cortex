@@ -14,7 +14,7 @@ export async function deployModelAction({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.post<DeployModelResponse>(
       `/${modelName}/deploy`
@@ -37,7 +37,7 @@ export async function unDeployModeleAction({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.post<UnDeployModelResponse>(
       `/${modelName}/undeploy`

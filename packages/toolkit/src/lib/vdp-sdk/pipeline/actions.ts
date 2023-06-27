@@ -14,7 +14,7 @@ export async function activatePipelineMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<ActivatePipelineResponse>(
       `/${pipelineName}/activate`
@@ -37,7 +37,7 @@ export async function deActivatePipelineMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<DeActivatePipelineResponse>(
       `/${pipelineName}/deactivate`

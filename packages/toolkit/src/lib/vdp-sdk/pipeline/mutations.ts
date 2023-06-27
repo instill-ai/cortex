@@ -22,7 +22,7 @@ export async function createPipelineMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<CreatePipelineResponse>(
       "/pipelines",
@@ -55,7 +55,7 @@ export async function updatePipelineMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.patch<UpdatePipelineResponse>(
       `/${payload.name}`,
@@ -75,7 +75,7 @@ export async function deletePipelineMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     await client.delete(`/${pipelineName}`);
   } catch (err) {
@@ -98,7 +98,7 @@ export async function renamePipelineMutation({
   const { pipelineId, newPipelineId } = payload;
 
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post(`/pipelines/${pipelineId}/rename`, {
       new_pipeline_id: newPipelineId,

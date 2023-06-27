@@ -14,7 +14,7 @@ export async function updateUserMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "base");
 
     const { data } = await client.patch<UpdateUserResponse>(
       "/users/me",
@@ -44,7 +44,7 @@ export async function createApiTokenMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "base");
 
     const { data } = await client.post<CreateApiTokenResponse>(
       "/tokens",
@@ -65,7 +65,7 @@ export async function deleteApiTokenMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "base");
 
     await client.delete(`/${tokenName}`);
   } catch (err) {

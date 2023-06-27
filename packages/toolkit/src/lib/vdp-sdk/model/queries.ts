@@ -23,7 +23,7 @@ export async function getModelDefinitionQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.get<GetModelDefinitionResponse>(
       `/${modelDefinitionName}`
@@ -51,7 +51,7 @@ export async function listModelDefinitionsQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const modelDefinitions: ModelDefinition[] = [];
 
@@ -99,7 +99,7 @@ export async function getModelQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.get<GetModelResponse>(
       `/${modelName}?view=VIEW_FULL`
@@ -126,7 +126,7 @@ export async function listModelsQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const models: Model[] = [];
 
@@ -168,7 +168,7 @@ export async function getModelReadmeQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.get<GetModelReadmeQueryResponse>(
       `/${modelName}/readme`
@@ -191,7 +191,7 @@ export async function watchModel({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
     const { data } = await client.get<ModelWatchState>(`/${modelName}/watch`);
     return Promise.resolve(data);
   } catch (err) {

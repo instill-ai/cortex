@@ -28,7 +28,7 @@ export async function listDestinationDefinitionsQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const destinationDefinitions: ConnectorDefinition[] = [];
     const queryString = getQueryString(
       `/destination-connector-definitions?view=VIEW_FULL`,
@@ -70,7 +70,7 @@ export async function getDestinationDefinitionQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetDestinationDefinitionResponse>(
       `/${destinationDefinitionName}?view=VIEW_FULL`
@@ -98,7 +98,7 @@ export async function getDestinationQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetDestinationResponse>(
       `/${destinationName}?view=VIEW_FULL`
@@ -126,7 +126,7 @@ export async function listDestinationsQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const destinations: Destination[] = [];
 
     const queryString = getQueryString(
@@ -167,7 +167,7 @@ export async function watchDestination({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { data } = await client.get<ConnectorWatchState>(
       `/${destinationName}/watch`
     );

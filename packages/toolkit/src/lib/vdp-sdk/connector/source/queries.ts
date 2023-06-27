@@ -23,7 +23,7 @@ export async function listSourceDefinitionsQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const sourceDefinitions: ConnectorDefinition[] = [];
 
@@ -67,7 +67,7 @@ export async function getSourceDefinitionQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetSourceDefinitionResponse>(
       `/${sourceDefinitionName}`
@@ -95,7 +95,7 @@ export async function getSourceQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetSourceResponse>(
       `/${sourceName}?view=VIEW_FULL`
@@ -123,7 +123,7 @@ export async function listSourcesQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const sources: Source[] = [];
 
     const queryString = getQueryString(
@@ -164,7 +164,7 @@ export async function watchSource({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { data } = await client.get<ConnectorWatchState>(
       `/${sourceName}/watch`
     );
