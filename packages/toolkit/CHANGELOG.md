@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.48.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.5...@instill-ai/toolkit-v0.48.0) (2023-06-27)
+
+
+### Features
+
+* **toolkit:** add rename pipeline mutation and react-query hook ([#523](https://github.com/instill-ai/design-system/issues/523)) ([398f6b9](https://github.com/instill-ai/design-system/commit/398f6b9c841ce0ee3d144d87cfab92d699fb924c))
+
 ## [0.47.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.4...@instill-ai/toolkit-v0.47.5) (2023-06-24)
 
 
