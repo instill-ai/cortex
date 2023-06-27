@@ -93,7 +93,7 @@ export const ConfigurePipelineFormControl = (
       {
         payload: {
           name: pipeline.name,
-          description: pipelineDescription ?? null,
+          description: pipelineDescription ?? undefined,
         },
         accessToken,
       },

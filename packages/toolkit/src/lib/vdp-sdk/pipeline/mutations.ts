@@ -36,7 +36,11 @@ export async function createPipelineMutation({
 
 export type UpdatePipelinePayload = {
   name: string;
-  description: Nullable<string>;
+  description?: string;
+  recipe?: {
+    version: string;
+    components: RawPipelineRecipeComponent[];
+  };
 };
 
 export type UpdatePipelineResponse = {
@@ -55,10 +59,7 @@ export async function updatePipelineMutation({
 
     const { data } = await client.patch<UpdatePipelineResponse>(
       `/${payload.name}`,
-      {
-        ...payload,
-        description: payload.description ?? undefined,
-      }
+      payload
     );
     return Promise.resolve(data.pipeline);
   } catch (err) {
@@ -77,6 +78,33 @@ export async function deletePipelineMutation({
     const client = createInstillAxiosClient(accessToken);
 
     await client.delete(`/${pipelineName}`);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type RenamePipelinePayload = {
+  pipelineId: string;
+  newPipelineId: string;
+};
+
+export async function renamePipelineMutation({
+  payload,
+  accessToken,
+}: {
+  payload: RenamePipelinePayload;
+  accessToken: Nullable<string>;
+}) {
+  const { pipelineId, newPipelineId } = payload;
+
+  try {
+    const client = createInstillAxiosClient(accessToken);
+
+    const { data } = await client.post(`/pipelines/${pipelineId}/rename`, {
+      new_pipeline_id: newPipelineId,
+    });
+
+    return Promise.resolve(data.pipeline);
   } catch (err) {
     return Promise.reject(err);
   }
