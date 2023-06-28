@@ -14,7 +14,7 @@ export async function testConnectorConnectionAction({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { data } = await client.post<TestConnectorResponse>(
       `/${connectorName}/testConnection`
     );

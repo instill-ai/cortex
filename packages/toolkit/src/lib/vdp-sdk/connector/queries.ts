@@ -20,7 +20,7 @@ export async function listConnectorsQuery({
   filter: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const connectors: Connector[] = [];
 
     const queryString = getQueryString(
@@ -69,7 +69,7 @@ export async function listConnectorDefinitionsQuery({
   filter: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const connectorDefinitions: ConnectorDefinition[] = [];
 
     const queryString = getQueryString(
@@ -114,7 +114,7 @@ export async function getConnectorDefinitionQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetConnectorDefinitionResponse>(
       `/${connectorDefinitionName}?view=VIEW_FULL`
@@ -138,7 +138,7 @@ export async function getConnectorQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetConnectorResponse>(
       `/${connectorName}?view=VIEW_FULL`
@@ -158,7 +158,7 @@ export async function watchConnector({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { data } = await client.get<ConnectorWatchState>(
       `/${connectorName}/watch`
     );

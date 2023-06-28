@@ -22,7 +22,7 @@ export async function createConnectorMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { connectorName, ...data } = payload;
 
     const res = await client.post<CreateConnectorResponse>("/connectors", {
@@ -43,7 +43,7 @@ export async function deleteConnectorMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     await client.delete(`/${connectorName}`);
   } catch (err) {
@@ -70,7 +70,7 @@ export async function updateConnectorMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { connectorName, ...data } = payload;
 
     const res = await client.patch<UpdateConnectorResponse>(
