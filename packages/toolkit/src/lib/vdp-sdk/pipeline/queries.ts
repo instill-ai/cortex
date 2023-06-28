@@ -18,7 +18,7 @@ export async function listPipelinesQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const pipelines: Pipeline[] = [];
 
     const queryString = getQueryString(
@@ -59,7 +59,7 @@ export async function getPipelineQuery({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetPipelineResponse>(
       `/${pipelineName}?view=VIEW_FULL`
@@ -83,7 +83,7 @@ export async function watchPipeline({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "vdp");
     const { data } = await client.get<PipelineWatchState>(
       `/${pipelineName}/watch`
     );

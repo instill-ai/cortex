@@ -27,7 +27,7 @@ export async function createGithubModelMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.post<CreateGithubModelResponse>("/models", {
       id: payload.id,
@@ -67,7 +67,7 @@ export async function createLocalModelMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const formData = new FormData();
     formData.append("id", payload.id);
@@ -118,7 +118,7 @@ export async function createArtivcModelMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.post<CreateLocalModelResponse>("/models", {
       id: payload.id,
@@ -161,7 +161,7 @@ export async function createHuggingFaceModelMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.post<CreateLocalModelResponse>("/models", {
       id: payload.id,
@@ -193,7 +193,7 @@ export async function updateModelMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     const { data } = await client.patch<UpdateModelResponse>(
       `/${payload.name}`,
@@ -213,7 +213,7 @@ export async function deleteModelMutation({
   accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken);
+    const client = createInstillAxiosClient(accessToken, "model");
 
     await client.delete(`/${modelName}`);
   } catch (err) {
