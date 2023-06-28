@@ -22,18 +22,18 @@ export function createInstillAxiosClient(
 
   if (apiGatewayType === "base") {
     baseURL = `${
-      process.env.NEXT_SERVER_BASE_API_GATEWAY_BASE_URL ??
-      env("NEXT_PUBLIC_BASE_API_GATEWAY_BASE_URL")
+      process.env.NEXT_SERVER_BASE_API_GATEWAY_URL ??
+      env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
     }/${env("NEXT_PUBLIC_API_VERSION")}`;
   } else if (apiGatewayType === "model") {
     baseURL = `${
-      process.env.NEXT_SERVER_MODEL_API_GATEWAY_BASE_URL ??
-      env("NEXT_PUBLIC_MODEL_API_GATEWAY_BASE_URL")
+      process.env.NEXT_SERVER_MODEL_API_GATEWAY_URL ??
+      env("NEXT_PUBLIC_MODEL_API_GATEWAY_URL")
     }/${env("NEXT_PUBLIC_API_VERSION")}`;
   } else if (apiGatewayType === "vdp") {
     baseURL = `${
-      process.env.NEXT_SERVER_VDP_API_GATEWAY_BASE_URL ??
-      env("NEXT_PUBLIC_VDP_API_GATEWAY_BASE_URL")
+      process.env.NEXT_SERVER_VDP_API_GATEWAY_URL ??
+      env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
     }/${env("NEXT_PUBLIC_API_VERSION")}`;
   }
 

@@ -52,7 +52,7 @@ export async function listConnectorsQuery({
 }
 
 export type ListConnectorDefinitionsResponse = {
-  connector_defintitions: ConnectorDefinition[];
+  connector_definitions: ConnectorDefinition[];
   next_page_token: string;
   total_size: string;
 };
@@ -83,7 +83,7 @@ export async function listConnectorDefinitionsQuery({
       queryString
     );
 
-    connectorDefinitions.push(...data.connector_defintitions);
+    connectorDefinitions.push(...data.connector_definitions);
 
     if (data.next_page_token) {
       connectorDefinitions.push(
