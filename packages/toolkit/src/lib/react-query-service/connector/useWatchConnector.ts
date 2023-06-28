@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { watchSource } from "../../../vdp-sdk";
-import type { Nullable } from "../../../type";
+import { watchConnector } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
-export function useWatchSource({
-  sourceName,
+export function useWatchConnector({
+  connectorName,
   accessToken,
   enabled,
   retry,
 }: {
-  sourceName: Nullable<string>;
+  connectorName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -19,19 +19,19 @@ export function useWatchSource({
 }) {
   let enableQuery = false;
 
-  if (sourceName && enabled) {
+  if (connectorName && enabled) {
     enableQuery = true;
   }
 
   return useQuery(
-    ["sources", sourceName, "watch"],
+    [connectorName, "watch"],
     async () => {
-      if (!sourceName) {
-        return Promise.reject(new Error("Source name not provided"));
+      if (!connectorName) {
+        return Promise.reject(new Error("Invalid connector name"));
       }
 
-      const watch = await watchSource({
-        sourceName,
+      const watch = await watchConnector({
+        connectorName,
         accessToken,
       });
 

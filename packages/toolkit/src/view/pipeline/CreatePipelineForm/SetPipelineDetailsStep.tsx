@@ -237,10 +237,10 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
 
     if (sourceType === "new") {
       if (!newSourceId) return;
-      sourceName = `source-connectors/${newSourceId}`;
+      sourceName = `connectors/${newSourceId}`;
     } else {
       if (!existingSourceId) return;
-      sourceName = `source-connectors/${existingSourceId}`;
+      sourceName = `connectors/${existingSourceId}`;
     }
 
     let modelName: string;

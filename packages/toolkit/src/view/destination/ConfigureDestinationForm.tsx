@@ -19,18 +19,18 @@ import {
   useBuildAirbyteYup,
   dot,
   useAirbyteSelectedConditionMap,
-  useDeleteDestination,
-  useUpdateDestination,
+  useDeleteConnector,
+  useUpdateConnector,
   useAmplitudeCtx,
   sendAmplitudeData,
   useModalStore,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
-  testDestinationConnectionAction,
+  testConnectorConnectionAction,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
-  type DestinationWithDefinition,
-  type UpdateDestinationPayload,
+  type ConnectorWithDefinition,
+  type UpdateConnectorPayload,
   type Nullable,
   type CreateResourceFormStore,
   type ModalStore,
@@ -41,7 +41,7 @@ import { DeleteResourceModal, ImageWithFallback } from "../../components";
 
 export type ConfigureDestinationFormProps = {
   accessToken: Nullable<string>;
-  destination: DestinationWithDefinition;
+  destination: ConnectorWithDefinition;
   onConfigure: Nullable<(initStore: () => void) => void>;
   disabledConfigure?: boolean;
   onDelete: Nullable<(initStore: () => void) => void>;
@@ -90,8 +90,8 @@ export const ConfigureDestinationForm = (
 
   const isSyncDestination = React.useMemo(() => {
     if (
-      destination.destination_connector_definition.id === "destination-grpc" ||
-      destination.destination_connector_definition.id === "destination-http"
+      destination.connector_definition.id === "destination-grpc" ||
+      destination.connector_definition.id === "destination-http"
     ) {
       return true;
     }
@@ -101,19 +101,18 @@ export const ConfigureDestinationForm = (
 
   const destinationDefinitionOption = React.useMemo(() => {
     return {
-      label:
-        destination.destination_connector_definition.connector_definition.title,
-      value: destination.destination_connector_definition.id,
+      label: destination.connector_definition.title,
+      value: destination.connector_definition.id,
       startIcon: (
         <ImageWithFallback
           src={
-            destination.destination_connector_definition.id.startsWith("airbyte")
-              ? `/icons/airbyte/${destination.destination_connector_definition.connector_definition.icon}`
-              : `/icons/instill/${destination.destination_connector_definition.connector_definition.icon}`
+            destination.connector_definition.vendor === "airbyte"
+              ? `/icons/airbyte/${destination.connector_definition.icon}`
+              : `/icons/instill/${destination.connector_definition.icon}`
           }
           width={24}
           height={24}
-          alt={`${destination.destination_connector_definition.connector_definition.title}-icon`}
+          alt={`${destination.connector_definition.title}-icon`}
           fallbackImg={<DataDestinationIcon width="w-6" height="h-6" />}
         />
       ),
@@ -137,13 +136,13 @@ export const ConfigureDestinationForm = (
     React.useState<Nullable<AirbyteFieldErrors>>(null);
 
   const destinationFormTree = useAirbyteFormTree(
-    destination.destination_connector_definition
+    destination.connector_definition
   );
 
   const initialValues: AirbyteFieldValues = {
-    configuration: destination.connector.configuration,
-    ...dot.toDot(destination.connector.configuration),
-    description: destination.connector.description || undefined,
+    configuration: destination.configuration,
+    ...dot.toDot(destination.configuration),
+    description: destination.description || undefined,
   };
 
   const [selectedConditionMap, setSelectedConditionMap] =
@@ -164,8 +163,7 @@ export const ConfigureDestinationForm = (
     });
 
   const airbyteYup = useBuildAirbyteYup(
-    destination.destination_connector_definition.connector_definition.spec
-      .connection_specification ?? null,
+    destination.connector_definition.spec.connection_specification ?? null,
     selectedConditionMap,
     null
   );
@@ -195,7 +193,7 @@ export const ConfigureDestinationForm = (
    * Configure destination
    * -----------------------------------------------------------------------*/
 
-  const updateDestination = useUpdateDestination();
+  const updateConnector = useUpdateConnector();
 
   const handleSubmit = React.useCallback(async () => {
     if (
@@ -253,12 +251,10 @@ export const ConfigureDestinationForm = (
       }
       setFieldErrors(null);
 
-      const payload: UpdateDestinationPayload = {
-        name: destination.name,
-        connector: {
-          description: fieldValues.description as string | undefined,
-          ...stripValues,
-        },
+      const payload: UpdateConnectorPayload = {
+        connectorName: destination.name,
+        description: fieldValues.description as string | undefined,
+        ...stripValues,
       };
 
       setMessageBoxState(() => ({
@@ -268,7 +264,7 @@ export const ConfigureDestinationForm = (
         message: "Updating...",
       }));
 
-      updateDestination.mutate(
+      updateConnector.mutate(
         { payload, accessToken },
         {
           onSuccess: () => {
@@ -323,7 +319,7 @@ export const ConfigureDestinationForm = (
     airbyteFormIsDirty,
     setAirbyteFormIsDirty,
     destination.name,
-    updateDestination,
+    updateConnector,
     init,
     onConfigure,
     accessToken,
@@ -334,7 +330,7 @@ export const ConfigureDestinationForm = (
   // # Handle delete destination                                              #
   // ##########################################################################
 
-  const deleteDestination = useDeleteDestination();
+  const deleteConnector = useDeleteConnector();
   const handleDeleteDestination = React.useCallback(() => {
     if (!destination) return;
 
@@ -347,8 +343,8 @@ export const ConfigureDestinationForm = (
 
     closeModal();
 
-    deleteDestination.mutate(
-      { destinationName: destination.name, accessToken },
+    deleteConnector.mutate(
+      { connectorName: destination.name, accessToken },
       {
         onSuccess: () => {
           setMessageBoxState(() => ({
@@ -389,7 +385,7 @@ export const ConfigureDestinationForm = (
   }, [
     init,
     amplitudeIsInit,
-    deleteDestination,
+    deleteConnector,
     destination,
     closeModal,
     onDelete,
@@ -407,8 +403,8 @@ export const ConfigureDestinationForm = (
     }));
 
     try {
-      const res = await testDestinationConnectionAction({
-        destinationName: destination.name,
+      const res = await testConnectorConnectionAction({
+        connectorName: destination.name,
         accessToken,
       });
 
@@ -439,7 +435,7 @@ export const ConfigureDestinationForm = (
             disabled={true}
             value={destinationDefinitionOption}
             options={[destinationDefinitionOption]}
-            description={`<a href='${destination.destination_connector_definition.connector_definition.documentation_url}'>Setup Guide</a>`}
+            description={`<a href='${destination.connector_definition.documentation_url}'>Setup Guide</a>`}
           />
           {!isSyncDestination ? (
             <BasicTextArea

@@ -10,13 +10,13 @@ import {
 import {
   sendAmplitudeData,
   useAmplitudeCtx,
-  useCreateSource,
+  useCreateConnector,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   type CreateResourceFormStore,
-  type CreateSourcePayload,
+  type CreateConnectorPayload,
   type Nullable,
-  type SourceWithDefinition,
+  type ConnectorWithDefinition,
 } from "../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -26,7 +26,7 @@ const selector = (state: CreateResourceFormStore) => ({
 });
 
 export type CreateSourceControlProps = {
-  sources: Nullable<SourceWithDefinition[]>;
+  sources: Nullable<ConnectorWithDefinition[]>;
   onCreate: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
 };
@@ -47,7 +47,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
       status: null,
     });
 
-  const createSource = useCreateSource();
+  const createConnector = useCreateConnector();
 
   const handleSubmit = React.useCallback(() => {
     if (!sourceDefinition) return;
@@ -65,12 +65,10 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
       return;
     }
 
-    const payload: CreateSourcePayload = {
-      id: sourceDefinition,
-      source_connector_definition: `source-connector-definitions/${sourceDefinition}`,
-      connector: {
-        configuration: {},
-      },
+    const payload: CreateConnectorPayload = {
+      connectorName: `connectors/${sourceDefinition}`,
+      connector_definition: `connector-definitions/${sourceDefinition}`,
+      configuration: {},
     };
 
     setMessageBoxState(() => ({
@@ -80,7 +78,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
       message: "Creating...",
     }));
 
-    createSource.mutate(
+    createConnector.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -120,7 +118,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
   }, [
     init,
     amplitudeIsInit,
-    createSource,
+    createConnector,
     sources,
     sourceDefinition,
     setFieldError,

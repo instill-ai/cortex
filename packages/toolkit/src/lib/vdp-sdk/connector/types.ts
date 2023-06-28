@@ -1,7 +1,6 @@
-import { Nullable } from "../../type";
-import type { JSONSchema7 } from "json-schema";
-
 /* eslint-disable  @typescript-eslint/no-explicit-any */
+
+import { Pipeline } from "../pipeline";
 
 export type ConnectorState =
   | "STATE_CONNECTED"
@@ -9,41 +8,69 @@ export type ConnectorState =
   | "STATE_ERROR"
   | "STATE_UNSPECIFIED";
 
+export type ConnectorVisibility =
+  | "VISIBILITY_UNSPECIFIED"
+  | "VISIBILITY_PRIVATE"
+  | "VISIBILITY_PUBLIC";
+
+export type ConnectorType =
+  | "CONNECTOR_TYPE_UNSPECIFIED"
+  | "CONNECTOR_TYPE_SOURCE"
+  | "CONNECTOR_TYPE_DESTINATION"
+  | "CONNECTOR_TYPE_AI"
+  | "CONNECTOR_TYPE_BLOCKCHAIN";
+
 export type Connector = {
+  name: string;
+  uid: string;
+  id: string;
+  connector_definition: string;
+  connector_type: ConnectorType;
   description: string;
   configuration: Record<string, any>;
+  state: ConnectorState;
   tombstone: boolean;
-  user: string;
-  org: string;
+  owner: {
+    user: string;
+    org: string;
+  };
   create_time: string;
   update_time: string;
-  state: ConnectorState;
+};
+
+export type ConnectorWithDefinition = Omit<
+  Connector,
+  "connector_definition"
+> & {
+  connector_definition: ConnectorDefinition;
+};
+
+export type ConnectorWithPipelines = ConnectorWithDefinition & {
+  pipelines: Pipeline[];
 };
 
 export type ConnectorDefinition = {
   name: string;
   uid: string;
   id: string;
-  connector_definition: {
-    title: string;
+  title: string;
+  documentation_url: string;
+  icon: string;
+  icon_url: string;
+  connector_type: ConnectorType;
+  spec: {
     documentation_url: string;
-    icon: string;
-    icon_url: string;
-    spec: {
-      documentation_url: string;
-      connection_specification: JSONSchema7;
-    };
-    tombstone: boolean;
-    public: boolean;
-    custom: boolean;
-    vendor: string;
-    vendor_attributes: JSONSchema7;
+    connection_specification: Record<string, any>;
   };
+  tombstone: boolean;
+  public: boolean;
+  custom: boolean;
+  vendor: string;
+  vendor_attributes: Record<string, any>;
 };
 
 export type ConnectorWatchState = {
   state: ConnectorState;
-  progress: number;
 };
 
 export type ConnectorsWatchState = Record<string, ConnectorWatchState>;

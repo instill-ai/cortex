@@ -9,11 +9,11 @@ import {
 import {
   useConfigureSourceFormStore,
   type Nullable,
-  SourceWithDefinition,
+  type ConnectorWithDefinition,
 } from "../../../lib";
 
 export type SourceDefinitionFieldProps = {
-  source: Nullable<SourceWithDefinition>;
+  source: Nullable<ConnectorWithDefinition>;
 };
 
 export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {

@@ -12,7 +12,7 @@ import {
   type CreateSourceControlProps,
 } from "./CreateSourceControl";
 import { SourceDefinitionField } from "./SourceDefinitionField";
-import { useSources } from "../../../lib";
+import { useConnectors } from "../../../lib";
 
 export type CreateSourceFormProps = Pick<
   FormRootProps,
@@ -28,13 +28,14 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
     SingleSelectOption[]
   >([]);
 
-  const sources = useSources({
+  const connectors = useConnectors({
+    connectorType: "CONNECTOR_TYPE_SOURCE",
     accessToken,
     enabled: enabledQuery,
   });
 
   React.useEffect(() => {
-    if (!sources.isSuccess) return;
+    if (!connectors.isSuccess) return;
 
     setSourceDefinitionOptions([
       {
@@ -62,7 +63,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
         ),
       },
     ]);
-  }, [sources.isSuccess]);
+  }, [connectors.isSuccess]);
 
   return (
     <FormRoot marginBottom={marginBottom} width={width}>
@@ -71,7 +72,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
           sourceDefinitionOptions={sourceDefinitionOptions}
         />
         <CreateSourceControl
-          sources={sources.isSuccess ? sources.data : null}
+          sources={connectors.isSuccess ? connectors.data : null}
           onCreate={onCreate}
           accessToken={accessToken}
         />

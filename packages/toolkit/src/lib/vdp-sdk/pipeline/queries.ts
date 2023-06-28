@@ -24,7 +24,8 @@ export async function listPipelinesQuery({
     const queryString = getQueryString(
       `/pipelines?view=VIEW_FULL`,
       pageSize,
-      nextPageToken
+      nextPageToken,
+      null
     );
 
     const { data } = await client.get<ListPipelinesResponse>(queryString);

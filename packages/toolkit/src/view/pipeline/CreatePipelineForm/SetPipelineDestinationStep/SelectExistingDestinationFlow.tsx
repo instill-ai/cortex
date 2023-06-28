@@ -10,7 +10,7 @@ import {
 import {
   useAmplitudeCtx,
   sendAmplitudeData,
-  useDestinations,
+  useConnectors,
   useCreateResourceFormStore,
   type CreateResourceFormStore,
   type Nullable,
@@ -50,7 +50,8 @@ export const SelectExistingDestinationFlow = (
    * Get existing destinations and set up options
    * -----------------------------------------------------------------------*/
 
-  const destinations = useDestinations({
+  const destinations = useConnectors({
+    connectorType: "CONNECTOR_TYPE_DESTINATION",
     accessToken: accessToken,
     enabled: enabledQuery,
   });
@@ -67,8 +68,8 @@ export const SelectExistingDestinationFlow = (
         destinations.data
           .filter(
             (e) =>
-              e.name !== "destination-connectors/destination-http" &&
-              e.name !== "destination-connectors/destination-grpc"
+              e.name !== "connectors/destination-http" &&
+              e.name !== "connectors/destination-grpc"
           )
           .map((e) => {
             return {
@@ -78,9 +79,9 @@ export const SelectExistingDestinationFlow = (
                 <Image
                   className="my-auto"
                   src={
-                    e.destination_connector_definition.id.startsWith("airbyte")
-                      ? `/icons/airbyte/${e.destination_connector_definition.connector_definition.icon}`
-                      : `/icons/instill/${e.destination_connector_definition.connector_definition.icon}`
+                    e.connector_definition.vendor === "airbyte"
+                      ? `/icons/airbyte/${e.connector_definition.icon}`
+                      : `/icons/instill/${e.connector_definition.icon}`
                   }
                   width={24}
                   height={24}
@@ -122,7 +123,7 @@ export const SelectExistingDestinationFlow = (
 
     setFieldValue(
       "destination.existing.definition",
-      `destination-connector-definitions/${existingDestinationId}`
+      `connector-definitions/${existingDestinationId}`
     );
     setFieldValue("destination.type", "existing");
     onSelect();
