@@ -25,7 +25,7 @@ export const useConnectorDefinitions = ({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
-        filter: `connector_type="${connectorType}"`,
+        filter: `connector_type=${connectorType}`,
       });
       return Promise.resolve(connectorDefinitions);
     },
