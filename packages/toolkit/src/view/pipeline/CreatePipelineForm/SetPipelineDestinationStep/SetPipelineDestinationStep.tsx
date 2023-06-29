@@ -165,7 +165,7 @@ export const SetPipelineDestinationStep = (
 
       const payload: CreateConnectorPayload = {
         connectorName: `connectors/${selectedSyncDestinationOption.value}`,
-        connector_definition: `connector-definitions/${selectedSyncDestinationOption.value}`,
+        connector_definition_name: `connector-definitions/${selectedSyncDestinationOption.value}`,
         configuration: {},
       };
 

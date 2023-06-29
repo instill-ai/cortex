@@ -24,7 +24,7 @@ export async function fetchConnectors(
 
     for (const connector of connectors) {
       const definition = await getConnectorDefinitionQuery({
-        connectorDefinitionName: connector.connector_definition,
+        connectorDefinitionName: connector.connector_definition_name,
         accessToken,
       });
       connectorsWithDefinition.push({

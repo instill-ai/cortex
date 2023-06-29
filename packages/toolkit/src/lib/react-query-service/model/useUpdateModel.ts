@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { getComponentFromPipelineRecipe, removeObjKey } from "../../utility";
+import { getComponentsFromPipelineRecipe, removeObjKey } from "../../utility";
 import {
   updateModelMutation,
   watchModel,
@@ -59,12 +59,12 @@ export const useUpdateModel = () => {
         const pipelines = await fetchPipelines(accessToken);
 
         const targetPipelines = pipelines.filter((e) => {
-          const models = getComponentFromPipelineRecipe({
+          const components = getComponentsFromPipelineRecipe({
             recipe: e.recipe,
-            componentName: "model",
+            connectorType: "CONNECTOR_TYPE_AI",
           });
 
-          return models?.some((e) => e.resource_detail.id === model.id);
+          return components.some((e) => e.resource_detail.id === model.id);
         });
 
         const modelWithPipelines: ModelWithPipelines = {

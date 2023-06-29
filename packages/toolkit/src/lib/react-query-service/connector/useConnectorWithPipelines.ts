@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { usePipelines } from "../pipeline";
 import type { ConnectorWithPipelines } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
-import { getComponentFromPipelineRecipe } from "../../utility";
+import { getComponentsFromPipelineRecipe } from "../../utility";
 import { useConnector } from "./useConnector";
 
 export const useConnectorWithPipelines = ({
@@ -49,13 +49,16 @@ export const useConnectorWithPipelines = ({
         return Promise.reject(new Error("Invalid pipeline data"));
       }
 
-      const targetPipelines = pipelines.data.filter(
-        (e) =>
-          getComponentFromPipelineRecipe({
-            recipe: e.recipe,
-            componentName: "source",
-          })?.resource_detail.id === connector.data.id
-      );
+      const targetPipelines = pipelines.data.filter((e) => {
+        const components = getComponentsFromPipelineRecipe({
+          recipe: e.recipe,
+          connectorType: connector.data.connector_type,
+        });
+
+        return components.some(
+          (e) => e.resource_detail.id === connector.data.id
+        );
+      });
 
       const connectorWithPipelines: ConnectorWithPipelines = {
         ...connector.data,

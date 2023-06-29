@@ -181,7 +181,7 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
 
     const payload: CreateConnectorPayload = {
       connectorName: `connectors/${selectedSyncSourceOption.value}`,
-      connector_definition: `connector-definitions/${selectedSyncSourceOption.value}`,
+      connector_definition_name: `connector-definitions/${selectedSyncSourceOption.value}`,
       configuration: {},
     };
 

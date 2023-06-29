@@ -1,14 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeObjKey } from "../../utility";
+import { getComponentsFromPipelineRecipe, removeObjKey } from "../../utility";
 import type { Nullable } from "../../type";
 import {
-  ConnectorWithDefinition,
-  CreateConnectorPayload,
   createConnectorMutation,
-  getConnectorDefinitionQuery,
   watchConnector,
+  Pipeline,
+  getConnectorQuery,
+  type ConnectorsWatchState,
   type ConnectorWatchState,
-  ConnectorsWatchState,
+  type CreateConnectorPayload,
+  type ConnectorWithDefinition,
+  type ConnectorWithPipelines,
 } from "../../vdp-sdk";
 
 export const useCreateConnector = () => {
@@ -26,19 +28,46 @@ export const useCreateConnector = () => {
     },
     {
       onSuccess: async ({ connector, accessToken }) => {
-        const connectorDefinition = await getConnectorDefinitionQuery({
-          connectorDefinitionName: connector.connector_definition,
+        const pipelines = queryClient.getQueryData<Pipeline[]>(["pipelines"]);
+
+        const connectorWithDefinition = await getConnectorQuery({
+          connectorName: connector.name,
           accessToken,
         });
 
-        const connectorWithDefinition: ConnectorWithDefinition = {
-          ...connector,
-          connector_definition: connectorDefinition,
+        queryClient.setQueryData<ConnectorWithDefinition>(
+          ["connectors", connector.name],
+          connectorWithDefinition
+        );
+
+        const targetPipelines = pipelines?.filter((e) => {
+          const components = getComponentsFromPipelineRecipe({
+            recipe: e.recipe,
+            connectorType: connector.connector_type,
+          });
+
+          return components.some((e) => e.resource_detail.id === connector.id);
+        });
+
+        const connectorWithPipelines: ConnectorWithPipelines = {
+          ...connectorWithDefinition,
+          pipelines: targetPipelines ? targetPipelines : [],
         };
 
-        queryClient.setQueryData<ConnectorWithDefinition>(
-          ["connector", connector.name],
-          connectorWithDefinition
+        queryClient.setQueryData<ConnectorWithPipelines>(
+          ["connectors", connector.name, "with-pipelines"],
+          connectorWithPipelines
+        );
+
+        queryClient.setQueryData<ConnectorWithPipelines[]>(
+          ["connectors", connector.connector_type, "with-pipelines"],
+          (old) =>
+            old
+              ? [
+                  ...old.filter((e) => e.id !== connector.id),
+                  connectorWithPipelines,
+                ]
+              : [connectorWithPipelines]
         );
 
         queryClient.setQueryData<ConnectorWithDefinition[]>(
@@ -46,28 +75,20 @@ export const useCreateConnector = () => {
           (old) =>
             old
               ? [
-                  ...old.filter((e) => e.name !== connector.name),
+                  ...old.filter((e) => e.id !== connector.id),
                   connectorWithDefinition,
                 ]
               : [connectorWithDefinition]
         );
 
-        // Invalidate destination with pipeline cache
-        queryClient.invalidateQueries(["connectors", "with-pipelines"]);
-        queryClient.invalidateQueries([
-          "connectors",
-          connector.name,
-          "with-pipelines",
-        ]);
-
         // Process watch state
         const watch = await watchConnector({
-          connectorName: connectorWithDefinition.name,
+          connectorName: connector.name,
           accessToken,
         });
 
         queryClient.setQueryData<ConnectorWatchState>(
-          ["connectors", connectorWithDefinition.name, "watch"],
+          ["connectors", connector.name, "watch"],
           watch
         );
 
@@ -76,10 +97,10 @@ export const useCreateConnector = () => {
           (old) =>
             old
               ? {
-                  ...removeObjKey(old, connectorWithDefinition.name),
-                  [connectorWithDefinition.name]: watch,
+                  ...removeObjKey(old, connector.name),
+                  [connector.name]: watch,
                 }
-              : { [connectorWithDefinition.name]: watch }
+              : { [connector.name]: watch }
         );
       },
     }

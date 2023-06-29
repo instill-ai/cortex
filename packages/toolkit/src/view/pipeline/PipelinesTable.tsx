@@ -17,7 +17,7 @@ import {
   env,
   useSearchedResources,
   useStateOverviewCounts,
-  getComponentFromPipelineRecipe,
+  getComponentsFromPipelineRecipe,
   type Nullable,
   type Pipeline,
   type PipelinesWatchState,
@@ -183,25 +183,24 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                   <ConnectionTypeCell
                     width={null}
                     connectorDefinition={
-                      getComponentFromPipelineRecipe({
+                      getComponentsFromPipelineRecipe({
                         recipe: pipeline.recipe,
-                        componentName: "source",
-                      })?.resource_detail.source_connector_definition_detail ??
-                      null
+                        connectorType: "CONNECTOR_TYPE_SOURCE",
+                      })[0].resource_detail.connector_definition
                     }
                     connectorName={
-                      getComponentFromPipelineRecipe({
+                      getComponentsFromPipelineRecipe({
                         recipe: pipeline.recipe,
-                        componentName: "source",
-                      })?.resource_detail.id ?? null
+                        connectorType: "CONNECTOR_TYPE_SOURCE",
+                      })[0].resource_name
                     }
                     padding="py-2"
                   />
                   <ModelCountsCell
                     modelCount={
-                      getComponentFromPipelineRecipe({
+                      getComponentsFromPipelineRecipe({
                         recipe: pipeline.recipe,
-                        componentName: "model",
+                        connectorType: "CONNECTOR_TYPE_AI",
                       })?.length || 0
                     }
                     width={null}
@@ -210,17 +209,16 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                   <ConnectionTypeCell
                     width={null}
                     connectorDefinition={
-                      getComponentFromPipelineRecipe({
+                      getComponentsFromPipelineRecipe({
                         recipe: pipeline.recipe,
-                        componentName: "destination",
-                      })?.resource_detail
-                        .destination_connector_definition_detail ?? null
+                        connectorType: "CONNECTOR_TYPE_DESTINATION",
+                      })[0].resource_detail.connector_definition
                     }
                     connectorName={
-                      getComponentFromPipelineRecipe({
+                      getComponentsFromPipelineRecipe({
                         recipe: pipeline.recipe,
-                        componentName: "destination",
-                      })?.resource_detail.id ?? null
+                        connectorType: "CONNECTOR_TYPE_DESTINATION",
+                      })[0].resource_name
                     }
                     padding="py-2 pr-6"
                   />

@@ -325,7 +325,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     if (selectedDestinationDefinition?.id === "destination-grpc") {
       payload = {
         connectorName: "connectors/destination-grpc",
-        connector_definition: `connector-definitions/${
+        connector_definition_name: `connector-definitions/${
           fieldValues.definition as string
         }`,
         description: fieldValues.description as string,
@@ -334,7 +334,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     } else if (selectedDestinationDefinition?.id === "destination-http") {
       payload = {
         connectorName: "connectors/destination-http",
-        connector_definition: `connector-definitions/${
+        connector_definition_name: `connector-definitions/${
           fieldValues.definition as string
         }`,
         description: fieldValues.description as string,
@@ -343,9 +343,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     } else {
       payload = {
         connectorName: `connectors/${fieldValues.id}` as string,
-        connector_definition: `connector-definitions/${
-          fieldValues.definition as string
-        }`,
+        connector_definition_name: fieldValues.definition as string,
         description: fieldValues.description as string,
         configuration: stripValues.configuration,
       };

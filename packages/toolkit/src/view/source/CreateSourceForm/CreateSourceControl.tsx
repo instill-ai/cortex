@@ -67,7 +67,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
 
     const payload: CreateConnectorPayload = {
       connectorName: `connectors/${sourceDefinition}`,
-      connector_definition: `connector-definitions/${sourceDefinition}`,
+      connector_definition_name: `connector-definitions/${sourceDefinition}`,
       configuration: {},
     };
 

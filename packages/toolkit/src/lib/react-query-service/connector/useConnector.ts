@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  ConnectorType,
   ConnectorWithDefinition,
   getConnectorDefinitionQuery,
   getConnectorQuery,
@@ -37,7 +36,7 @@ export const useConnector = ({
 
       const connector = await getConnectorQuery({ connectorName, accessToken });
       const connectorDefinition = await getConnectorDefinitionQuery({
-        connectorDefinitionName: connector.connector_definition,
+        connectorDefinitionName: connector.connector_definition_name,
         accessToken,
       });
       const connectorWithDefinition: ConnectorWithDefinition = {

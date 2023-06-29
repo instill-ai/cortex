@@ -3,7 +3,7 @@ import { usePipelines } from "../pipeline";
 import { useConnectors } from "./useConnectors";
 import type { Nullable } from "../../type";
 import type { ConnectorType, ConnectorWithPipelines } from "../../vdp-sdk";
-import { getComponentFromPipelineRecipe } from "../../utility";
+import { getComponentsFromPipelineRecipe } from "../../utility";
 
 export const useConnectorsWithPipelines = ({
   connectorType,
@@ -43,13 +43,14 @@ export const useConnectorsWithPipelines = ({
       const connectorsWithPipelines: ConnectorWithPipelines[] = [];
 
       for (const connector of connectors.data) {
-        const targetPipelines = pipelines.data.filter(
-          (e) =>
-            getComponentFromPipelineRecipe({
-              recipe: e.recipe,
-              componentName: "source",
-            })?.resource_detail.id === connector.id
-        );
+        const targetPipelines = pipelines.data.filter((e) => {
+          const components = getComponentsFromPipelineRecipe({
+            recipe: e.recipe,
+            connectorType: connector.connector_type,
+          });
+
+          return components.some((e) => e.resource_detail.id === connector.id);
+        });
         connectorsWithPipelines.push({
           ...connector,
           pipelines: targetPipelines,

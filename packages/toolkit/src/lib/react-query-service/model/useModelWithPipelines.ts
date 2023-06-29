@@ -3,7 +3,7 @@ import { Nullable } from "../../type";
 import { usePipelines } from "../pipeline";
 import { useModel } from "./useModel";
 import { ModelWithPipelines } from "../../vdp-sdk";
-import { getComponentFromPipelineRecipe } from "../../utility";
+import { getComponentsFromPipelineRecipe } from "../../utility";
 
 export function useModelWithPipelines({
   modelName,
@@ -45,12 +45,12 @@ export function useModelWithPipelines({
       }
 
       const targetPipelines = pipelines.data.filter((e) => {
-        const models = getComponentFromPipelineRecipe({
+        const components = getComponentsFromPipelineRecipe({
           recipe: e.recipe,
-          componentName: "model",
+          connectorType: "CONNECTOR_TYPE_AI",
         });
 
-        return models?.some((e) => e.resource_detail.id === model.data.id);
+        return components.some((e) => e.resource_detail.id === model.data.id);
       });
 
       const modelWithPipelines: ModelWithPipelines = {

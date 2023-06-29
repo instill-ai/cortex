@@ -5,7 +5,7 @@ import { Connector } from "./types";
 
 export type CreateConnectorPayload = {
   connectorName: string;
-  connector_definition: string;
+  connector_definition_name: string;
   description?: string;
   configuration: Record<string, any> | Record<string, never>;
 };

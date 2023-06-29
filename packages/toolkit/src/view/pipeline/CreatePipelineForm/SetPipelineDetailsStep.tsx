@@ -261,10 +261,10 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
 
     if (destinationType === "new") {
       if (!newDestinationId) return;
-      destinationName = `destination-connectors/${newDestinationId}`;
+      destinationName = `connectors/${newDestinationId}`;
     } else {
       if (!existingDestinationId) return;
-      destinationName = `destination-connectors/${existingDestinationId}`;
+      destinationName = `connectors/${existingDestinationId}`;
     }
 
     const payload: CreatePipelinePayload = {

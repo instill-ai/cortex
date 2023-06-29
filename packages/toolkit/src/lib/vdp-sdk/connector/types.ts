@@ -24,25 +24,26 @@ export type Connector = {
   name: string;
   uid: string;
   id: string;
-  connector_definition: string;
+  connector_definition: null;
+  connector_definition_name: string;
   connector_type: ConnectorType;
+  task: string;
   description: string;
-  configuration: Record<string, any>;
+  configuration: null;
   state: ConnectorState;
   tombstone: boolean;
-  owner: {
-    user: string;
-    org: string;
-  };
+  user: string;
   create_time: string;
   update_time: string;
+  visibility: ConnectorVisibility;
 };
 
 export type ConnectorWithDefinition = Omit<
   Connector,
-  "connector_definition"
+  "connector_definition" | "configuration"
 > & {
   connector_definition: ConnectorDefinition;
+  configuration: Record<string, any> | Record<string, never>;
 };
 
 export type ConnectorWithPipelines = ConnectorWithDefinition & {

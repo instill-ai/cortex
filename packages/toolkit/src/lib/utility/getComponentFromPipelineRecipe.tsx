@@ -1,54 +1,14 @@
-import { Nullable } from "../type";
-import {
-  DestinationComponent,
-  ModelComponent,
-  PipelineRecipe,
-  SourceComponent,
-} from "../vdp-sdk";
+import { ConnectorType, PipelineRecipe } from "../vdp-sdk";
 
-export type getComponentFromPipelineRecipeProps = {
+export type getComponentsFromPipelineRecipeProps = {
   recipe: PipelineRecipe;
-  componentName: "source" | "model" | "destination";
+  connectorType: ConnectorType;
 };
 
-export type GetComponentFromPipelineRecipeReturn<T> = T extends "source"
-  ? Nullable<SourceComponent>
-  : T extends "model"
-  ? Nullable<ModelComponent[]>
-  : T extends "destination"
-  ? Nullable<DestinationComponent>
-  : null;
+export function getComponentsFromPipelineRecipe(
+  props: getComponentsFromPipelineRecipeProps
+) {
+  const { recipe, connectorType } = props;
 
-export function getComponentFromPipelineRecipe<
-  T extends getComponentFromPipelineRecipeProps
->(props: T): GetComponentFromPipelineRecipeReturn<T["componentName"]> {
-  const { recipe, componentName } = props;
-  switch (componentName) {
-    case "source": {
-      const component = (recipe.components.find(
-        (e) => e.resource_name.split("/")[0] === "source-connectors"
-      ) || null) as GetComponentFromPipelineRecipeReturn<T["componentName"]>;
-
-      return component;
-    }
-
-    case "destination": {
-      const component = (recipe.components.find(
-        (e) => e.resource_name.split("/")[0] === "destination-connectors"
-      ) || null) as GetComponentFromPipelineRecipeReturn<T["componentName"]>;
-
-      return component;
-    }
-
-    case "model": {
-      const component = (recipe.components.filter(
-        (e) => e.resource_name.split("/")[0] === "models"
-      ) || null) as GetComponentFromPipelineRecipeReturn<T["componentName"]>;
-
-      return component;
-    }
-
-    default:
-      return null as GetComponentFromPipelineRecipeReturn<T["componentName"]>;
-  }
+  return recipe.components.filter((e) => e.type === connectorType);
 }

@@ -1,14 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   deleteConnectorMutation,
-  type ConnectorsWatchState,
   getConnectorQuery,
-  ConnectorWithDefinition,
-  ConnectorWithPipelines,
+  type ConnectorsWatchState,
+  type ConnectorWithDefinition,
+  type ConnectorWithPipelines,
 } from "../../vdp-sdk";
-import { env, removeObjKey } from "../../utility";
+import { removeObjKey } from "../../utility";
 import { Nullable } from "../../type";
-import { useConnector } from "./useConnector";
 
 export const useDeleteConnector = () => {
   const queryClient = useQueryClient();

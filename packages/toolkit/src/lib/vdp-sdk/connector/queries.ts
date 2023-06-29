@@ -1,9 +1,14 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { Connector, ConnectorDefinition, ConnectorWatchState } from "./types";
+import {
+  Connector,
+  ConnectorDefinition,
+  ConnectorWatchState,
+  ConnectorWithDefinition,
+} from "./types";
 
 export type ListConnectorsResponse = {
-  connectors: Connector[];
+  connectors: ConnectorWithDefinition[];
   next_page_token: string;
   total_size: string;
 };
@@ -21,7 +26,7 @@ export async function listConnectorsQuery({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const connectors: Connector[] = [];
+    const connectors: ConnectorWithDefinition[] = [];
 
     const queryString = getQueryString(
       `/connectors?view=VIEW_FULL`,
@@ -127,7 +132,7 @@ export async function getConnectorDefinitionQuery({
 }
 
 export type GetConnectorResponse = {
-  connector: Connector;
+  connector: ConnectorWithDefinition;
 };
 
 export async function getConnectorQuery({
