@@ -79,6 +79,9 @@ const CreateAIFormSchema = z
 export const CreateAIForm = () => {
   const form = useForm<z.infer<typeof CreateAIFormSchema>>({
     resolver: zodResolver(CreateAIFormSchema),
+    defaultValues: {
+      connector_definition_name: "connector-definitions/instill-ai-model",
+    },
   });
 
   function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
