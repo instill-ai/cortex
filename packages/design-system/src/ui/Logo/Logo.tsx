@@ -101,14 +101,14 @@ export const Logo = (props: LogoProps) => {
 
   const getBlackLogomarkBlackType = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 195 42"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={styleName}
+        className={className}
         style={{ width: `${width}px` }}
         data-testid="black-logomark-black-type"
       >
@@ -186,7 +186,7 @@ export const Logo = (props: LogoProps) => {
 
   const getWhiteLogomark = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
@@ -194,7 +194,7 @@ export const Logo = (props: LogoProps) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ width: `${width}px` }}
-        className={styleName}
+        className={className}
         data-testid="white-logomark"
       >
         <path
@@ -207,7 +207,7 @@ export const Logo = (props: LogoProps) => {
 
   const getBlackLogomark = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
@@ -215,7 +215,7 @@ export const Logo = (props: LogoProps) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ width: `${width}px` }}
-        className={styleName}
+        className={className}
         data-testid="black-logomark"
       >
         <g>
@@ -230,7 +230,7 @@ export const Logo = (props: LogoProps) => {
 
   const getBlueLogomark = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
@@ -238,7 +238,7 @@ export const Logo = (props: LogoProps) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ width: `${width}px` }}
-        className={styleName}
+        className={className}
         data-testid="blue-logomark"
       >
         <g clipPath="url(#clip0_2_3148)">
@@ -326,13 +326,13 @@ export const Logo = (props: LogoProps) => {
 
   const getColourLogomark = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 202 202"
         style={{ width: `${width}px` }}
-        className={styleName}
+        className={className}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         data-testid="colour-logomark"
@@ -422,7 +422,7 @@ export const Logo = (props: LogoProps) => {
 
   const getColourLogomarkBlackType = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
@@ -430,7 +430,7 @@ export const Logo = (props: LogoProps) => {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         style={{ width: `${width}px` }}
-        className={styleName}
+        className={className}
         data-testid="colour-logomark-black-type"
       >
         <path
@@ -567,14 +567,14 @@ export const Logo = (props: LogoProps) => {
 
   const getColourLogomarkWhiteType = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 1069 225"
         fill="none"
         style={{ width: `${width}px` }}
-        className={styleName}
+        className={className}
         xmlns="http://www.w3.org/2000/svg"
         data-testid="colour-logomark-white-type"
       >
@@ -789,5 +789,5 @@ export const Logo = (props: LogoProps) => {
     }
   }
 
-  return <div className={cn("my-auto", styleName)}>{logo}</div>;
+  return <div className={cn("my-auto", className)}>{logo}</div>;
 };
