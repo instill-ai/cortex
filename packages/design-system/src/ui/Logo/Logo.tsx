@@ -1,7 +1,7 @@
 import * as React from "react";
 import cn from "clsx";
 
-export type LogoColorType =
+export type LogoColorVariant =
   | "responsiveColourLogomarkWhiteType"
   | "ColourLogomarkWhiteType"
   | "responsiveColourLogomarkBlackType"
@@ -17,12 +17,12 @@ export type LogoColorType =
 
 export type LogoProps = {
   styleName?: string;
-  type: LogoColorType;
+  variant: LogoColorVariant;
   width: number;
 };
 
-const Logo = (props: LogoProps) => {
-  const { styleName, type, width } = props;
+export const Logo = (props: LogoProps) => {
+  const { styleName, variant, width } = props;
 
   let logo: React.ReactNode;
 
@@ -718,7 +718,7 @@ const Logo = (props: LogoProps) => {
     );
   };
 
-  switch (type) {
+  switch (variant) {
     case "responsiveWhiteLogomarkWhiteType": {
       logo = (
         <div className="flex flex-col">
@@ -791,5 +791,3 @@ const Logo = (props: LogoProps) => {
 
   return <div className={cn("my-auto", styleName)}>{logo}</div>;
 };
-
-export default Logo;

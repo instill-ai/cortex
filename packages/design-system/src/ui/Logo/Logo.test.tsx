@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
-import Logo from "./Logo";
+import { Logo } from "./Logo";
 import { describe, it, expect } from "vitest";
 
 describe("Logo", () => {
   it("should render responsive colour logomark with black type", () => {
-    render(<Logo type="responsiveColourLogomarkBlackType" width={300} />);
+    render(<Logo variant="responsiveColourLogomarkBlackType" width={300} />);
 
     const colourLogomark = screen.getByTestId("colour-logomark");
 
@@ -20,7 +20,7 @@ describe("Logo", () => {
   });
 
   it("should render non-responsive colour logomark with black type", () => {
-    render(<Logo type="ColourLogomarkBlackType" width={300} />);
+    render(<Logo variant="ColourLogomarkBlackType" width={300} />);
 
     const colourLogomarkBlackType = screen.getByTestId(
       "colour-logomark-black-type"
@@ -30,7 +30,7 @@ describe("Logo", () => {
   });
 
   it("should render responsive colour logomark with white type", () => {
-    render(<Logo type="responsiveColourLogomarkWhiteType" width={300} />);
+    render(<Logo variant="responsiveColourLogomarkWhiteType" width={300} />);
 
     const colourLogomark = screen.getByTestId("colour-logomark");
 
@@ -46,7 +46,7 @@ describe("Logo", () => {
   });
 
   it("should render non-responsive colour logomark with white type", () => {
-    render(<Logo type="ColourLogomarkWhiteType" width={300} />);
+    render(<Logo variant="ColourLogomarkWhiteType" width={300} />);
 
     const colourLogomarkWhiteType = screen.getByTestId(
       "colour-logomark-white-type"
@@ -56,7 +56,7 @@ describe("Logo", () => {
   });
 
   it("should render responsive white logomark with white type", () => {
-    render(<Logo type="responsiveWhiteLogomarkWhiteType" width={300} />);
+    render(<Logo variant="responsiveWhiteLogomarkWhiteType" width={300} />);
 
     const whiteLogomark = screen.getByTestId("white-logomark");
 
@@ -72,7 +72,7 @@ describe("Logo", () => {
   });
 
   it("should render non-responsive white logomark with white type", () => {
-    render(<Logo type="whiteLogomarkWhiteType" width={300} />);
+    render(<Logo variant="whiteLogomarkWhiteType" width={300} />);
 
     const whiteLogomarkWhiteType = screen.getByTestId(
       "white-logomark-white-type"
@@ -82,7 +82,7 @@ describe("Logo", () => {
   });
 
   it("should render responsive black logomark with black type", () => {
-    render(<Logo type="responsiveBlackLogomarkBlackType" width={300} />);
+    render(<Logo variant="responsiveBlackLogomarkBlackType" width={300} />);
 
     const blackLogomark = screen.getByTestId("black-logomark");
 
@@ -98,7 +98,7 @@ describe("Logo", () => {
   });
 
   it("should render non-responsive black logomark with black type", () => {
-    render(<Logo type="blackLogomarkBlackType" width={300} />);
+    render(<Logo variant="blackLogomarkBlackType" width={300} />);
 
     const blackLogomarkWhiteType = screen.getByTestId(
       "black-logomark-black-type"
@@ -108,7 +108,7 @@ describe("Logo", () => {
   });
 
   it("should render black logomark", () => {
-    render(<Logo type="blackLogomark" width={300} />);
+    render(<Logo variant="blackLogomark" width={300} />);
 
     const blackLogomark = screen.getByTestId("black-logomark");
     expect(blackLogomark).not.toHaveClass();
@@ -116,7 +116,7 @@ describe("Logo", () => {
   });
 
   it("should render white logomark", () => {
-    render(<Logo type="whiteLogomark" width={300} />);
+    render(<Logo variant="whiteLogomark" width={300} />);
 
     const whiteLogomark = screen.getByTestId("white-logomark");
     expect(whiteLogomark).not.toHaveClass();
@@ -124,7 +124,7 @@ describe("Logo", () => {
   });
 
   it("should render blue logomark", () => {
-    render(<Logo type="blueLogomark" width={300} />);
+    render(<Logo variant="blueLogomark" width={300} />);
 
     const blueLogomark = screen.getByTestId("blue-logomark");
     expect(blueLogomark).not.toHaveClass();
@@ -132,7 +132,7 @@ describe("Logo", () => {
   });
 
   it("should render colour logomark", () => {
-    render(<Logo type="colourLogomark" width={300} />);
+    render(<Logo variant="colourLogomark" width={300} />);
 
     const colourLogomark = screen.getByTestId("colour-logomark");
     expect(colourLogomark).not.toHaveClass();

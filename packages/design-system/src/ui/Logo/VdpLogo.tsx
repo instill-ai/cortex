@@ -1,15 +1,15 @@
 import cn from "clsx";
 
 export type VdpLogoProps = {
-  type: "square" | "expand";
+  variant: "square" | "expand";
   position?: string;
   width: number;
 };
 
-const VdpLogo = (props: VdpLogoProps) => {
-  const { type, width, position } = props;
+export const VdpLogo = (props: VdpLogoProps) => {
+  const { variant, width, position } = props;
 
-  switch (type) {
+  switch (variant) {
     case "square": {
       return (
         <svg
@@ -116,5 +116,3 @@ const VdpLogo = (props: VdpLogoProps) => {
     }
   }
 };
-
-export default VdpLogo;
