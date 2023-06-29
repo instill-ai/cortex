@@ -1,27 +1,39 @@
+import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
+  BasicProgressMessageBox,
   Form,
   Icons,
   Input,
   ModelLogo,
+  ProgressMessageBoxState,
   Select,
   Textarea,
 } from "@instill-ai/design-system";
 import { ImageWithFallback } from "../../components";
+import {
+  CreateConnectorPayload,
+  Nullable,
+  getInstillApiErrorMessage,
+  sendAmplitudeData,
+  useAmplitudeCtx,
+  useCreateConnector,
+} from "../../lib";
+import { isAxiosError } from "axios";
 
 const CreateAIFormSchema = z
   .object({
-    id: z.string(),
-    description: z.string().nullable(),
+    id: z.string().min(1, { message: "ID is required" }),
+    description: z.string().optional(),
     connector_definition_name: z.string(),
     configuration: z.object({
-      api_key: z.string().nullable(),
-      server_url: z.string().nullable(),
-      task: z.string().nullable(),
-      engine: z.string().nullable(),
-      model_id: z.string().nullable(),
+      api_key: z.string().optional(),
+      server_url: z.string().optional(),
+      task: z.string().optional(),
+      engine: z.string().optional(),
+      model_id: z.string().optional(),
     }),
   })
   .superRefine((state, ctx) => {
@@ -58,6 +70,14 @@ const CreateAIFormSchema = z
       state.connector_definition_name ===
       "connector-definitions/instill-ai-model"
     ) {
+      if (!state.configuration.api_key) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "API Key is required",
+          path: ["configuration", "api_key"],
+        });
+      }
+
       if (!state.configuration.model_id) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -76,7 +96,14 @@ const CreateAIFormSchema = z
     }
   });
 
-export const CreateAIForm = () => {
+export type CreateAIFormProps = {
+  accessToken: Nullable<string>;
+  onCreate: Nullable<() => void>;
+};
+
+export const CreateAIForm = (props: CreateAIFormProps) => {
+  const { accessToken, onCreate } = props;
+  const { amplitudeIsInit } = useAmplitudeCtx();
   const form = useForm<z.infer<typeof CreateAIFormSchema>>({
     resolver: zodResolver(CreateAIFormSchema),
     defaultValues: {
@@ -84,8 +111,80 @@ export const CreateAIForm = () => {
     },
   });
 
+  const [messageBoxState, setMessageBoxState] =
+    React.useState<ProgressMessageBoxState>({
+      activate: false,
+      message: null,
+      description: null,
+      status: null,
+    });
+
+  const createConnector = useCreateConnector();
+
   function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
-    alert(JSON.stringify(data));
+    form.trigger([
+      "configuration",
+      "configuration.api_key",
+      "configuration.engine",
+      "configuration.model_id",
+      "configuration.server_url",
+      "configuration.task",
+      "connector_definition_name",
+      "description",
+      "id",
+    ]);
+
+    const payload: CreateConnectorPayload = {
+      connectorName: `connectors/${data.id}`,
+      connector_definition_name: data.connector_definition_name,
+      description: data.description,
+      configuration: data.configuration,
+    };
+
+    setMessageBoxState(() => ({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Creating...",
+    }));
+
+    createConnector.mutate(
+      { payload, accessToken },
+      {
+        onSuccess: () => {
+          setMessageBoxState(() => ({
+            activate: true,
+            status: "success",
+            description: null,
+            message: "Succeed.",
+          }));
+          if (amplitudeIsInit) {
+            sendAmplitudeData("create_ai", {
+              type: "critical_action",
+              process: "source",
+            });
+          }
+          if (onCreate) onCreate();
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            setMessageBoxState(() => ({
+              activate: true,
+              status: "error",
+              description: getInstillApiErrorMessage(error),
+              message: error.message,
+            }));
+          } else {
+            setMessageBoxState(() => ({
+              activate: true,
+              status: "error",
+              description: null,
+              message: "Something went wrong when create the AI",
+            }));
+          }
+        },
+      }
+    );
   }
 
   return (
@@ -102,12 +201,13 @@ export const CreateAIForm = () => {
               <Form.Item>
                 <Form.Label htmlFor={field.name}>ID *</Form.Label>
                 <Form.Control>
-                  <Input.Root>
+                  <Input.Root className="!rounded-none">
                     <Input.Core
+                      {...field}
                       id={field.name}
                       type="text"
                       placeholder="AI's name"
-                      {...field}
+                      value={field.value ?? ""}
                     />
                   </Input.Root>
                 </Form.Control>
@@ -135,6 +235,7 @@ export const CreateAIForm = () => {
                     id={field.name}
                     placeholder="Description"
                     value={field.value ?? ""}
+                    className="!rounded-none"
                   />
                 </Form.Control>
                 <Form.Description>
@@ -152,38 +253,39 @@ export const CreateAIForm = () => {
             return (
               <Form.Item>
                 <Form.Label htmlFor={field.name}>AI Connector Type</Form.Label>
-                <Select.Root>
+                <Select.Root
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <Form.Control>
-                    <Select.Trigger className="w-full">
+                    <Select.Trigger className="w-full !rounded-none">
                       <Select.Value placeholder="Select an AI connector type" />
                     </Select.Trigger>
                   </Form.Control>
                   <Select.Content>
-                    <Select.Item
-                      className="flex flex-row space-x-2"
-                      value="connector-definitions/instill-ai-model"
-                    >
-                      <ModelLogo width={20} variant="square" />
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        Instill Model
-                      </p>
+                    <Select.Item value="connector-definitions/instill-ai-model">
+                      <div className="flex flex-row space-x-2">
+                        <ModelLogo width={20} variant="square" />
+                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
+                          Instill Model
+                        </p>
+                      </div>
                     </Select.Item>
-                    <Select.Item
-                      className="flex flex-row space-x-2"
-                      value="connector-definitions/stability-ai-model"
-                    >
-                      <ImageWithFallback
-                        src={"/icons/stability-ai/logo.png"}
-                        width={20}
-                        height={20}
-                        alt="Stability AI model logo"
-                        fallbackImg={
-                          <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
-                        }
-                      />
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        Stability AI Model
-                      </p>
+                    <Select.Item value="connector-definitions/stability-ai-model">
+                      <div className="flex flex-row space-x-2">
+                        <ImageWithFallback
+                          src={"/icons/stability-ai/logo.png"}
+                          width={20}
+                          height={20}
+                          alt="Stability AI model logo"
+                          fallbackImg={
+                            <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
+                          }
+                        />
+                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
+                          Stability AI Model
+                        </p>
+                      </div>
                     </Select.Item>
                   </Select.Content>
                 </Select.Root>
@@ -203,7 +305,7 @@ export const CreateAIForm = () => {
               <Form.Item>
                 <Form.Label htmlFor={field.name}>API Key *</Form.Label>
                 <Form.Control>
-                  <Input.Root>
+                  <Input.Root className="!rounded-none">
                     <Input.Core
                       {...field}
                       id={field.name}
@@ -229,30 +331,30 @@ export const CreateAIForm = () => {
             return (
               <Form.Item
                 className={
-                  form.getValues("connector_definition_name") !==
+                  form.getValues("connector_definition_name") ===
                   "connector-definitions/stability-ai-model"
-                    ? "hidden"
-                    : ""
+                    ? ""
+                    : "hidden"
                 }
               >
                 <Form.Label htmlFor={field.name}>Task *</Form.Label>
-                <Select.Root>
+                <Select.Root
+                  onValueChange={field.onChange}
+                  defaultValue={field.value ?? undefined}
+                >
                   <Form.Control>
-                    <Select.Trigger className="w-full">
+                    <Select.Trigger className="w-full !rounded-none">
                       <Select.Value placeholder="Select an AI task" />
                     </Select.Trigger>
                   </Form.Control>
                   <Select.Content>
-                    <Select.Item value="Text to Image">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        Text to Image
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="Image to Image">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        Image to Image
-                      </p>
-                    </Select.Item>
+                    {["Text to Image", "Image to Image"].map((engine) => (
+                      <Select.Item value={engine}>
+                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
+                          {engine}
+                        </p>
+                      </Select.Item>
+                    ))}
                   </Select.Content>
                 </Select.Root>
                 <Form.Description>AI task type.</Form.Description>
@@ -268,75 +370,42 @@ export const CreateAIForm = () => {
             return (
               <Form.Item
                 className={
-                  form.getValues("connector_definition_name") !==
+                  form.getValues("connector_definition_name") ===
                   "connector-definitions/stability-ai-model"
-                    ? "hidden"
-                    : ""
+                    ? ""
+                    : "hidden"
                 }
               >
                 <Form.Label htmlFor={field.name}>Engine</Form.Label>
-                <Select.Root>
+                <Select.Root
+                  onValueChange={field.onChange}
+                  defaultValue={field.value ?? undefined}
+                >
                   <Form.Control>
-                    <Select.Trigger className="w-full">
+                    <Select.Trigger className="w-full !rounded-none">
                       <Select.Value placeholder="Select an AI engine" />
                     </Select.Trigger>
                   </Form.Control>
                   <Select.Content>
-                    <Select.Item value="stable-diffusion-v1">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-v1
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-v1-5">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-v1-5
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-512-v2-0">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-512-v2-0
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-768-v2-0">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-768-v2-0
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-512-v2-1">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-512-v2-1
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-768-v2-1">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-768-v2-1
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-xl-beta-v2-2-2">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-xl-beta-v2-2-2
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-inpainting-v1-0">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-inpainting-v1-0
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-inpainting-512-v2-0">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-inpainting-512-v2-0
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="esrgan-v1-x2plus">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        esrgan-v1-x2plus
-                      </p>
-                    </Select.Item>
-                    <Select.Item value="stable-diffusion-x4-latent-upscaler">
-                      <p className="my-auto text-semantic-fg-primary product-body-text-2-regular">
-                        stable-diffusion-x4-latent-upscaler
-                      </p>
-                    </Select.Item>
+                    {[
+                      "stable-diffusion-v1",
+                      "stable-diffusion-v1-5",
+                      "stable-diffusion-512-v2-0",
+                      "stable-diffusion-768-v2-0",
+                      "stable-diffusion-512-v2-1",
+                      "stable-diffusion-768-v2-1",
+                      "stable-diffusion-xl-beta-v2-2-2",
+                      "stable-inpainting-v1-0",
+                      "stable-inpainting-512-v2-0",
+                      "esrgan-v1-x2plus",
+                      "stable-diffusion-x4-latent-upscaler",
+                    ].map((engine) => (
+                      <Select.Item value={engine}>
+                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
+                          {engine}
+                        </p>
+                      </Select.Item>
+                    ))}
                   </Select.Content>
                 </Select.Root>
                 <Form.Description>Engine (model) to use.</Form.Description>
@@ -350,10 +419,17 @@ export const CreateAIForm = () => {
           name="configuration.server_url"
           render={({ field }) => {
             return (
-              <Form.Item>
+              <Form.Item
+                className={
+                  form.getValues("connector_definition_name") ===
+                  "connector-definitions/instill-ai-model"
+                    ? ""
+                    : "hidden"
+                }
+              >
                 <Form.Label htmlFor={field.name}>Server URL *</Form.Label>
                 <Form.Control>
-                  <Input.Root>
+                  <Input.Root className="!rounded-none">
                     <Input.Core
                       {...field}
                       id={field.name}
@@ -376,10 +452,17 @@ export const CreateAIForm = () => {
           name="configuration.model_id"
           render={({ field }) => {
             return (
-              <Form.Item>
+              <Form.Item
+                className={
+                  form.getValues("connector_definition_name") ===
+                  "connector-definitions/instill-ai-model"
+                    ? ""
+                    : "hidden"
+                }
+              >
                 <Form.Label htmlFor={field.name}>Model ID *</Form.Label>
                 <Form.Control>
-                  <Input.Root>
+                  <Input.Root className="!rounded-none">
                     <Input.Core
                       {...field}
                       id={field.name}
@@ -396,7 +479,25 @@ export const CreateAIForm = () => {
           }}
         />
 
-        <button type="submit">Submit</button>
+        <div className="flex flex-row">
+          <BasicProgressMessageBox
+            state={messageBoxState}
+            setActivate={(activate) =>
+              setMessageBoxState((prev) => ({
+                ...prev,
+                activate,
+              }))
+            }
+            width="w-[25vw]"
+            closable={true}
+          />
+          <button
+            className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto"
+            type="submit"
+          >
+            Set up
+          </button>
+        </div>
       </form>
     </Form.Root>
   );
