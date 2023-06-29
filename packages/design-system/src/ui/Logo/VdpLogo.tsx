@@ -1,13 +1,11 @@
-import cn from "clsx";
-
 export type VdpLogoProps = {
   variant: "square" | "expand";
-  position?: string;
+  className?: string;
   width: number;
 };
 
 export const VdpLogo = (props: VdpLogoProps) => {
-  const { variant, width, position } = props;
+  const { variant, width, className } = props;
 
   switch (variant) {
     case "square": {
@@ -17,7 +15,7 @@ export const VdpLogo = (props: VdpLogoProps) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: `${width}px` }}
-          className={cn(position)}
+          className={className}
         >
           <path
             fillRule="evenodd"
@@ -40,7 +38,7 @@ export const VdpLogo = (props: VdpLogoProps) => {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: `${width}px` }}
-          className={cn(position)}
+          className={className}
         >
           <g clipPath="url(#clip0_373_141)">
             <path

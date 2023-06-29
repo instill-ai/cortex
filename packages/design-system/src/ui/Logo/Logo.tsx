@@ -16,26 +16,26 @@ export type LogoColorVariant =
   | "blackLogomark";
 
 export type LogoProps = {
-  styleName?: string;
+  className?: string;
   variant: LogoColorVariant;
   width: number;
 };
 
 export const Logo = (props: LogoProps) => {
-  const { styleName, variant, width } = props;
+  const { className, variant, width } = props;
 
   let logo: React.ReactNode;
 
   const getWhiteLogomarkWhiteType = (
     width: number,
-    styleName?: string
+    className?: string
   ): React.ReactElement => {
     return (
       <svg
         viewBox="0 0 400 88"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className={styleName}
+        className={className}
         style={{ width: `${width}px` }}
         data-testid="white-logomark-white-type"
       >
