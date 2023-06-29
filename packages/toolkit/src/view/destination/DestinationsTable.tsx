@@ -16,14 +16,14 @@ import {
   useSearchedResources,
   chunk,
   env,
-  type DestinationWithPipelines,
+  type ConnectorWithPipelines,
   type Nullable,
   type ConnectorsWatchState,
 } from "../../lib";
 import { DestinationTablePlaceholder } from "./DestinationTablePlaceholder";
 
 export type DestinationsTableProps = {
-  destinations: DestinationWithPipelines[];
+  destinations: ConnectorWithPipelines[];
   destinationsWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
@@ -172,9 +172,7 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
                     padding="pl-6 py-2"
                   />
                   <ConnectionTypeCell
-                    connectorDefinition={
-                      destination.destination_connector_definition
-                    }
+                    connectorDefinition={destination.connector_definition}
                     connectorName={destination.id}
                     width="w-full"
                     padding="py-2"

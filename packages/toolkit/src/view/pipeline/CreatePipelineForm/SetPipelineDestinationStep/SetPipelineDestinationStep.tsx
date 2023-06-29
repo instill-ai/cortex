@@ -8,12 +8,12 @@ import {
   SolidButton,
 } from "@instill-ai/design-system";
 import {
-  useCreateDestination,
+  useCreateConnector,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
-  useDestinations,
-  type CreateDestinationPayload,
+  useConnectors,
+  type CreateConnectorPayload,
   type CreateResourceFormStore,
   type Nullable,
 } from "../../../../lib";
@@ -68,7 +68,8 @@ export const SetPipelineDestinationStep = (
   const [selectedSyncDestinationOption, setSelectedSyncDestinationOption] =
     React.useState<SingleSelectOption | null>(null);
 
-  const destinations = useDestinations({
+  const destinations = useConnectors({
+    connectorType: "CONNECTOR_TYPE_DESTINATION",
     accessToken,
     enabled: enabledQuery,
   });
@@ -123,7 +124,7 @@ export const SetPipelineDestinationStep = (
    * We have to make sure there has no duplicated destination
    * -----------------------------------------------------------------------*/
 
-  const createDestination = useCreateDestination();
+  const createConnector = useCreateConnector();
 
   const canGoNext = destinations.isSuccess && selectedSyncDestinationOption;
 
@@ -139,7 +140,7 @@ export const SetPipelineDestinationStep = (
 
       setFieldValue(
         "destination.existing.definition",
-        `destination-connector-definitions/${selectedSyncDestinationOption.value}`
+        `connector-definitions/${selectedSyncDestinationOption.value}`
       );
 
       if (destinationIndex !== -1) {
@@ -156,21 +157,19 @@ export const SetPipelineDestinationStep = (
         );
         setFieldValue(
           "destination.existing.definition",
-          `destination-connector-definitions/${selectedSyncDestinationOption.value}`
+          `connector-definitions/${selectedSyncDestinationOption.value}`
         );
         increasePipelineFormStep();
         return;
       }
 
-      const payload: CreateDestinationPayload = {
-        id: selectedSyncDestinationOption.value,
-        destination_connector_definition: `destination-connector-definitions/${selectedSyncDestinationOption.value}`,
-        connector: {
-          configuration: {},
-        },
+      const payload: CreateConnectorPayload = {
+        connectorName: `connectors/${selectedSyncDestinationOption.value}`,
+        connector_definition_name: `connector-definitions/${selectedSyncDestinationOption.value}`,
+        configuration: {},
       };
 
-      createDestination.mutate(
+      createConnector.mutate(
         { payload, accessToken },
         {
           onSuccess: () => {
@@ -187,7 +186,7 @@ export const SetPipelineDestinationStep = (
             );
             setFieldValue(
               "destination.new.definition",
-              `destination-connector-definitions/${selectedSyncDestinationOption.value}`
+              `connector-definitions/${selectedSyncDestinationOption.value}`
             );
             increasePipelineFormStep();
           },
@@ -246,7 +245,7 @@ export const SetPipelineDestinationStep = (
                 setFieldValue("destination.new.id", id);
                 setFieldValue(
                   "destination.new.definition",
-                  `destination-connector-definitions/${id}`
+                  `connector-definitions/${id}`
                 );
                 setFieldValue("destination.type", "new");
                 increasePipelineFormStep();

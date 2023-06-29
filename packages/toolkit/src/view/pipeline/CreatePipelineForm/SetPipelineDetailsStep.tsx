@@ -237,10 +237,10 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
 
     if (sourceType === "new") {
       if (!newSourceId) return;
-      sourceName = `source-connectors/${newSourceId}`;
+      sourceName = `connectors/${newSourceId}`;
     } else {
       if (!existingSourceId) return;
-      sourceName = `source-connectors/${existingSourceId}`;
+      sourceName = `connectors/${existingSourceId}`;
     }
 
     let modelName: string;
@@ -261,10 +261,10 @@ export const SetPipelineDetailsStep = (props: SetPipelineDetailsStepProps) => {
 
     if (destinationType === "new") {
       if (!newDestinationId) return;
-      destinationName = `destination-connectors/${newDestinationId}`;
+      destinationName = `connectors/${newDestinationId}`;
     } else {
       if (!existingDestinationId) return;
-      destinationName = `destination-connectors/${existingDestinationId}`;
+      destinationName = `connectors/${existingDestinationId}`;
     }
 
     const payload: CreatePipelinePayload = {

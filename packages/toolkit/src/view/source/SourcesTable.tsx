@@ -16,14 +16,14 @@ import {
   useStateOverviewCounts,
   chunk,
   env,
-  type SourceWithPipelines,
+  type ConnectorWithPipelines,
   type Nullable,
   type ConnectorsWatchState,
 } from "../../lib";
 import { SourceTablePlaceholder } from "./SourceTablePlaceholder";
 
 export type SourcesTableProps = {
-  sources: SourceWithPipelines[];
+  sources: ConnectorWithPipelines[];
   sourcesWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
@@ -167,7 +167,7 @@ export const SourcesTable = (props: SourcesTableProps) => {
                     link={`/sources/${source.id}`}
                   />
                   <ConnectionTypeCell
-                    connectorDefinition={source.source_connector_definition}
+                    connectorDefinition={source.connector_definition}
                     connectorName={source.id}
                     width={null}
                     padding="py-2"

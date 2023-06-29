@@ -7,18 +7,15 @@ import {
 } from "@instill-ai/design-system";
 import {
   useModalStore,
-  type DestinationWithDefinition,
+  type ConnectorWithDefinition,
   type Model,
   type Pipeline,
-  type SourceWithDefinition,
   type Nullable,
   type ModalStore,
 } from "../lib";
 
 export type DeleteResourceModalProps = {
-  resource: Nullable<
-    SourceWithDefinition | DestinationWithDefinition | Pipeline | Model
-  >;
+  resource: Nullable<ConnectorWithDefinition | Pipeline | Model>;
   handleDeleteResource: () => void;
 };
 
@@ -44,54 +41,46 @@ export const DeleteResourceModal = ({
       };
     }
 
-    const resourcePrefix = resource.name.split("/")[0];
     let title: string;
     let description: string;
 
-    switch (resourcePrefix) {
-      case "pipelines": {
-        title = "Delete This Pipeline";
-        description =
-          "This action cannot be undone. This will permanently delete the pipeline.";
-        break;
-      }
-
-      case "source-connectors": {
+    if ("connector_definition" in resource) {
+      if (resource.connector_type === "CONNECTOR_TYPE_SOURCE") {
         title = "Delete This Source";
         description =
           "This action cannot be undone. This will permanently delete the source.";
-        break;
-      }
-
-      case "destination-connectors": {
+      } else if (resource.connector_type === "CONNECTOR_TYPE_DESTINATION") {
         title = "Delete This Destination";
         description =
           "This action cannot be undone. This will permanently delete the destination.";
-        break;
-      }
-
-      case "models": {
-        if (resource.name.split("/")[2]) {
-          title = "Delete This Model";
-          description =
-            "This action cannot be undone. This will permanently delete the model.";
-          break;
-        } else {
-          title = "Delete This Model";
-          description =
-            "This action cannot be undone. This will permanently delete the model.";
-          break;
-        }
-      }
-
-      default: {
-        title = "Delete resource";
+      } else if (resource.connector_type === "CONNECTOR_TYPE_AI") {
+        title = "Delete This AI";
         description =
-          "Something went wrong when try to activate the flow of deleting resource, please contact our support.";
-        console.error(
-          "You have passed resource not included in Pipeline, Model and Connector"
-        );
+          "This action cannot be undone. This will permanently delete the AI.";
+      } else if (resource.connector_type === "CONNECTOR_TYPE_BLOCKCHAIN") {
+        title = "Delete This Blockchain";
+        description =
+          "This action cannot be undone. This will permanently delete the blockchain.";
+      } else {
+        title = "Delete This Connector";
+        description =
+          "This action cannot be undone. This will permanently delete the connector.";
       }
+    } else if ("recipe" in resource) {
+      title = "Delete This Pipeline";
+      description =
+        "This action cannot be undone. This will permanently delete the pipeline.";
+    } else if ("model_definition" in resource) {
+      title = "Delete This Model";
+      description =
+        "This action cannot be undone. This will permanently delete the model.";
+    } else {
+      title = "Delete resource";
+      description =
+        "Something went wrong when try to activate the flow of deleting resource, please contact our support.";
+      console.error(
+        "You have passed resource not included in Pipeline, Model, Connector, BlockChain and AI"
+      );
     }
 
     return {

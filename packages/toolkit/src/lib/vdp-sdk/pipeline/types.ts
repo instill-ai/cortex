@@ -1,5 +1,4 @@
-import { DestinationWithDefinition, SourceWithDefinition } from "../connector";
-import { Model } from "../model";
+import { ConnectorType, ConnectorWithDefinition } from "../connector";
 
 export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
 
@@ -11,12 +10,23 @@ export type PipelineState =
 
 export type PipelineRecipe = {
   version: string;
-  components: (ModelComponent | SourceComponent | DestinationComponent)[];
+  components: PipelineComponent[];
 };
 
 export type PipelineWatchState = {
   state: PipelineState;
   progress: number;
+};
+
+export type PipelineComponent = {
+  id: string;
+  resource_name: string;
+  resource_detail: ConnectorWithDefinition;
+  metadata: any;
+  dependencies: Record<string, any>;
+
+  // We will add logic_operator in the future
+  type: ConnectorType | string;
 };
 
 export type PipelinesWatchState = Record<string, PipelineWatchState>;
@@ -40,6 +50,7 @@ export type SourceComponent = {
   };
   metadata: any;
   dependencies: Record<string, any>;
+  type: ConnectorType;
 };
 
 export type DestinationComponent = {

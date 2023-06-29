@@ -1,9 +1,9 @@
 import cn from "clsx";
 import { ModelInstanceIcon } from "@instill-ai/design-system";
-import { type Nullable, type Model, ModelComponent } from "../../lib";
+import type { Nullable, Model, PipelineComponent } from "../../lib";
 
 export type ModelsCellProps = {
-  models: ModelComponent[] | Model[];
+  models: PipelineComponent[] | Model[];
   width: Nullable<string>;
   padding: string;
 };

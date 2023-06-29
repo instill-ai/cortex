@@ -1,13 +1,13 @@
 import { Root } from "@/components/Root";
 import {
   ConfigureSourceForm,
-  useSourceWithPipelines,
+  useConnectorWithPipelines,
 } from "@instill-ai/toolkit";
 
 const ConfigureSourcePage = () => {
-  const sourceWithPipelines = useSourceWithPipelines({
+  const sourceWithPipelines = useConnectorWithPipelines({
     enabled: true,
-    sourceName: "source-connectors/source-http",
+    connectorName: "connectors/source-http",
     accessToken: null,
   });
 

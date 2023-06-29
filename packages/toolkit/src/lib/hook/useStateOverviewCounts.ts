@@ -1,24 +1,16 @@
-import {
+import type {
   ConnectorsWatchState,
-  Destination,
-  DestinationWithPipelines,
+  Connector,
+  ConnectorWithPipelines,
   Model,
-  type ModelsWatchState,
-  type Pipeline,
-  type PipelinesWatchState,
-  type Source,
-  type SourceWithPipelines,
+  ModelsWatchState,
+  Pipeline,
+  PipelinesWatchState,
 } from "../vdp-sdk";
 import { Nullable } from "../type";
 import * as React from "react";
 
-type Item =
-  | Pipeline
-  | Source
-  | Destination
-  | DestinationWithPipelines
-  | SourceWithPipelines
-  | Model;
+type Item = Pipeline | Connector | ConnectorWithPipelines | Model;
 
 export type StateOverviewCounts = {
   online: number;
@@ -73,30 +65,8 @@ export function useStateOverviewCounts(
       return;
     }
 
-    if (itemNameList[0] === "source-connectors") {
-      for (const item of items as Source[]) {
-        if ((itemsWatchState as ConnectorsWatchState)[item.name]) {
-          const watchState = (itemsWatchState as ConnectorsWatchState)[
-            item.name
-          ].state;
-          if (watchState === "STATE_CONNECTED") {
-            counts.online += 1;
-          } else if (
-            watchState === "STATE_DISCONNECTED" ||
-            watchState === "STATE_UNSPECIFIED"
-          ) {
-            counts.offline += 1;
-          } else {
-            counts.error += 1;
-          }
-        }
-      }
-      setStateOverviewCount(counts);
-      return;
-    }
-
-    if (itemNameList[0] === "destination-connectors") {
-      for (const item of items as Destination[]) {
+    if (itemNameList[0] === "connectors") {
+      for (const item of items as Connector[]) {
         if ((itemsWatchState as ConnectorsWatchState)[item.name]) {
           const watchState = (itemsWatchState as ConnectorsWatchState)[
             item.name

@@ -10,15 +10,15 @@ import {
 import {
   useConfigureSourceFormStore,
   useModalStore,
-  useDeleteSource,
+  useDeleteConnector,
   useAmplitudeCtx,
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  testSourceConnectionAction,
+  testConnectorConnectionAction,
   type ModalStore,
   type Nullable,
   type ConfigureSourceFormStore,
-  SourceWithDefinition,
+  type ConnectorWithDefinition,
 } from "../../../lib";
 
 import { DeleteResourceModal } from "../../../components";
@@ -35,7 +35,7 @@ const modalSelector = (state: ModalStore) => ({
 });
 
 export type ConfigureSourceControlProps = {
-  source: Nullable<SourceWithDefinition>;
+  source: Nullable<ConnectorWithDefinition>;
   onDelete: Nullable<(initStore: () => void) => void>;
   onConfigure: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
@@ -83,7 +83,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
       status: null,
     });
 
-  const deleteSource = useDeleteSource();
+  const deleteConnector = useDeleteConnector();
   const handleDeleteSource = React.useCallback(() => {
     if (!source) return;
 
@@ -96,9 +96,9 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
 
     closeModal();
 
-    deleteSource.mutate(
+    deleteConnector.mutate(
       {
-        sourceName: source.name,
+        connectorName: source.name,
         accessToken,
       },
       {
@@ -141,7 +141,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     init,
     source,
     amplitudeIsInit,
-    deleteSource,
+    deleteConnector,
     closeModal,
     onDelete,
     accessToken,
@@ -158,8 +158,8 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     }));
 
     try {
-      const res = await testSourceConnectionAction({
-        sourceName: source.name,
+      const res = await testConnectorConnectionAction({
+        connectorName: source.name,
         accessToken,
       });
 

@@ -1,17 +1,8 @@
-import {
-  DestinationWithPipelines,
-  Model,
-  Pipeline,
-  SourceWithPipelines,
-} from "../vdp-sdk";
+import { ConnectorWithPipelines, Model, Pipeline } from "../vdp-sdk";
 import { Nullable } from "../type";
 import * as React from "react";
 
-type Resources =
-  | DestinationWithPipelines
-  | Model
-  | Pipeline
-  | SourceWithPipelines;
+type Resources = ConnectorWithPipelines | Model | Pipeline;
 
 export function useSearchedResources<T extends Resources>({
   resources,

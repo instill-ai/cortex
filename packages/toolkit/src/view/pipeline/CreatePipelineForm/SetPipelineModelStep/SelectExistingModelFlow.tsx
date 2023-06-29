@@ -10,7 +10,6 @@ import {
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
-  prefetchDestinations,
   useQueryClient,
   type CreateResourceFormStore,
   type Nullable,
@@ -83,8 +82,6 @@ export const SelectExistingModelFlow = (
     if (!models.isSuccess) {
       return;
     }
-
-    prefetchDestinations(queryClient, accessToken, 10 * 1000);
 
     const targetModel = models.data.find(
       (e) => e.name === (selectedModelOption?.value as string)

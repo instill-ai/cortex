@@ -1,14 +1,14 @@
 import * as React from "react";
 import {
-  useCreateSource,
-  useSources,
+  useCreateConnector,
+  useConnectors,
   sendAmplitudeData,
   useAmplitudeCtx,
   useCreateResourceFormStore,
   prefetchModels,
   useQueryClient,
   type CreateResourceFormStore,
-  type CreateSourcePayload,
+  type CreateConnectorPayload,
   type Nullable,
 } from "../../../lib";
 import {
@@ -59,7 +59,8 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
    * Initialize options
    * -----------------------------------------------------------------------*/
 
-  const sources = useSources({
+  const sources = useConnectors({
+    connectorType: "CONNECTOR_TYPE_SOURCE",
     accessToken,
     enabled: enabledQuery,
   });
@@ -145,7 +146,7 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
    * Create source if it is not presenting
    * -----------------------------------------------------------------------*/
 
-  const createSource = useCreateSource();
+  const createConnector = useCreateConnector();
 
   const canGoNext =
     pipelineMode && sources.isSuccess && selectedSyncSourceOption;
@@ -168,7 +169,7 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
       }
       setFieldValue(
         "source.existing.definition",
-        `source-connector-definitions/${selectedSyncSourceOption.value}`
+        `connector-definitions/${selectedSyncSourceOption.value}`
       );
       setFieldValue("source.existing.id", selectedSyncSourceOption.value);
       setFieldValue("source.type", "existing");
@@ -178,15 +179,13 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
       return;
     }
 
-    const payload: CreateSourcePayload = {
-      id: selectedSyncSourceOption.value,
-      source_connector_definition: `source-connector-definitions/${selectedSyncSourceOption.value}`,
-      connector: {
-        configuration: {},
-      },
+    const payload: CreateConnectorPayload = {
+      connectorName: `connectors/${selectedSyncSourceOption.value}`,
+      connector_definition_name: `connector-definitions/${selectedSyncSourceOption.value}`,
+      configuration: {},
     };
 
-    createSource.mutate(
+    createConnector.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -200,7 +199,7 @@ export const SetPipelineModeStep = (props: SetPipelineModeStepProps) => {
           setFieldValue("pipeline.mode", "MODE_SYNC");
           setFieldValue(
             "source.new.definition",
-            `source-connector-definitions/${selectedSyncSourceOption.value}`
+            `connector-definitions/${selectedSyncSourceOption.value}`
           );
           setFieldValue("source.new.id", selectedSyncSourceOption.value);
           setFieldValue("source.type", "new");

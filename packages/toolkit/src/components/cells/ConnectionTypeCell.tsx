@@ -29,9 +29,13 @@ export const ConnectionTypeCell = ({
           <div className="flex flex-row gap-x-[5px]">
             <ImageWithFallback
               src={
-                connectorDefinition.id.startsWith("airbyte")
-                  ? `/icons/airbyte/${connectorDefinition.connector_definition.icon}`
-                  : `/icons/instill/${connectorDefinition.connector_definition.icon}`
+                "connector_definition" in connectorDefinition
+                  ? connectorDefinition.id.startsWith("airbyte")
+                    ? `/icons/airbyte/${connectorDefinition.connector_definition.icon}`
+                    : `/icons/instill/${connectorDefinition.connector_definition.icon}`
+                  : connectorDefinition.vendor === "airbyte"
+                  ? `/icons/airbyte/${connectorDefinition.icon}`
+                  : `/icons/instill/${connectorDefinition.icon}`
               }
               width={24}
               height={24}
@@ -60,7 +64,9 @@ export const ConnectionTypeCell = ({
                 "my-auto text-instillGrey90 text-instill-body line-clamp-1"
               )}
             >
-              {connectorDefinition.connector_definition.title}
+              {"connector_definition" in connectorDefinition
+                ? connectorDefinition.connector_definition.title
+                : connectorDefinition.title}
             </p>
           </div>
         ) : null}

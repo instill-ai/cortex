@@ -1,13 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import { env } from "../../../utility";
-import { listSourceDefinitionsQuery } from "../../../vdp-sdk";
-import type { Nullable } from "../../../type";
+import { env } from "../../utility";
+import { ConnectorType, listConnectorDefinitionsQuery } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 
-export const useSourceDefinitions = ({
+export const useConnectorDefinitions = ({
+  connectorType,
   accessToken,
   enabled,
   retry,
 }: {
+  connectorType: ConnectorType;
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -17,14 +19,15 @@ export const useSourceDefinitions = ({
   retry?: false | number;
 }) => {
   return useQuery(
-    ["sources", "definition"],
+    ["connector-definitions", connectorType],
     async () => {
-      const sourceDefinitions = await listSourceDefinitionsQuery({
+      const connectorDefinitions = await listConnectorDefinitionsQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
+        filter: `connector_type=${connectorType}`,
       });
-      return Promise.resolve(sourceDefinitions);
+      return Promise.resolve(connectorDefinitions);
     },
     {
       enabled,

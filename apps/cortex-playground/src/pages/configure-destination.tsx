@@ -1,13 +1,13 @@
 import { Root } from "@/components/Root";
 import {
   ConfigureDestinationForm,
-  useDestinationWithPipelines,
+  useConnectorWithPipelines,
 } from "@instill-ai/toolkit";
 
 const ConfigureSourcePage = () => {
-  const destination = useDestinationWithPipelines({
+  const destination = useConnectorWithPipelines({
     enabled: true,
-    destinationName: "destination-connectors/hello",
+    connectorName: "connectors/hello",
     accessToken: null,
   });
 

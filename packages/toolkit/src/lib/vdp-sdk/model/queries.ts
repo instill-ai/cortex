@@ -58,7 +58,8 @@ export async function listModelDefinitionsQuery({
     const queryString = getQueryString(
       "/model-definitions",
       pageSize,
-      nextPageToken
+      nextPageToken,
+      null
     );
 
     const { data } = await client.get<ListModelDefinitionsResponse>(
@@ -133,7 +134,8 @@ export async function listModelsQuery({
     const queryString = getQueryString(
       "/models?view=VIEW_FULL",
       pageSize,
-      nextPageToken
+      nextPageToken,
+      null
     );
 
     const { data } = await client.get<ListModelsResponse>(queryString);

@@ -12,12 +12,12 @@ import {
   SingleSelectOption,
   SolidButton,
   FormRoot,
-  FormRootProps,
+  type FormRootProps,
 } from "@instill-ai/design-system";
 import {
   validateResourceId,
-  useCreateDestination,
-  useDestinationDefinitions,
+  useCreateConnector,
+  useConnectorDefinitions,
   useAmplitudeCtx,
   useBuildAirbyteYup,
   useAirbyteFormTree,
@@ -26,7 +26,7 @@ import {
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   type ConnectorDefinition,
-  type CreateDestinationPayload,
+  type CreateConnectorPayload,
   type Nullable,
   type AirbyteFieldValues,
   type AirbyteFieldErrors,
@@ -84,7 +84,8 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
 
-  const destinationDefinitions = useDestinationDefinitions({
+  const destinationDefinitions = useConnectorDefinitions({
+    connectorType: "CONNECTOR_TYPE_DESTINATION",
     accessToken,
     enabled: enabledQuery,
   });
@@ -96,41 +97,41 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
       return destinationDefinitions.data
         .filter(
           (e) =>
-            e.name !== "destination-connector-definitions/destination-http" &&
-            e.name !== "destination-connector-definitions/destination-grpc"
+            e.name !== "connector-definitions/destination-http" &&
+            e.name !== "connector-definitions/destination-grpc"
         )
         .map((e) => ({
-          label: e.connector_definition.title,
+          label: e.title,
           value: e.name,
           startIcon: (
             <Image
               className="my-auto"
               src={
-                e.id.startsWith("airbyte")
-                  ? `/icons/airbyte/${e.connector_definition.icon}`
-                  : `/icons/instill/${e.connector_definition.icon}`
+                e.vendor === "airbyte"
+                  ? `/icons/airbyte/${e.icon}`
+                  : `/icons/instill/${e.icon}`
               }
               width={24}
               height={24}
-              alt={`${e.connector_definition.title}-icon`}
+              alt={`${e.title}-icon`}
             />
           ),
         }));
     }
 
     return destinationDefinitions.data.map((e) => ({
-      label: e.connector_definition.title,
+      label: e.title,
       value: e.name,
       startIcon: (
         <ImageWithFallback
           src={
-            e.id.startsWith("airbyte")
-              ? `/icons/airbyte/${e.connector_definition.icon}`
-              : `/icons/instill/${e.connector_definition.icon}`
+            e.vendor === "airbyte"
+              ? `/icons/airbyte/${e.icon}`
+              : `/icons/instill/${e.icon}`
           }
           width={24}
           height={24}
-          alt={`${e.connector_definition.title}-icon`}
+          alt={`${e.title}-icon`}
           fallbackImg={<DataDestinationIcon width="w-6" height="h-6" />}
         />
       ),
@@ -167,15 +168,11 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   const defaultId = React.useMemo(() => {
     if (!selectedDestinationDefinition) return null;
 
-    if (
-      selectedDestinationDefinition.id === "destination-grpc"
-    ) {
+    if (selectedDestinationDefinition.id === "destination-grpc") {
       return "destination-grpc";
     }
 
-    if (
-      selectedDestinationDefinition.id === "destination-http"
-    ) {
+    if (selectedDestinationDefinition.id === "destination-http") {
       return "destination-http";
     }
 
@@ -192,7 +189,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
     }
 
     return selectedDestinationDefinition
-      ? selectedDestinationDefinition.connector_definition.documentation_url
+      ? selectedDestinationDefinition.documentation_url
       : "https://www.instill.tech/docs/destination-connectors/overview";
   }, [selectedDestinationDefinition]);
 
@@ -223,11 +220,10 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
       status: null,
     });
 
-  const createDestination = useCreateDestination();
+  const createConnector = useCreateConnector();
 
   const airbyteYup = useBuildAirbyteYup(
-    selectedDestinationDefinition?.connector_definition.spec
-      .connection_specification ?? null,
+    selectedDestinationDefinition?.spec.connection_specification ?? null,
     selectedConditionMap,
     null
   );
@@ -321,47 +317,35 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
 
     setFieldErrors(null);
 
-    let payload = {} as CreateDestinationPayload;
+    let payload = {} as CreateConnectorPayload;
 
     // destination-grpc and destination-http come from instill-ai and follow
     // our own payload
 
-    if (
-      selectedDestinationDefinition?.id === "destination-grpc"
-    ) {
+    if (selectedDestinationDefinition?.id === "destination-grpc") {
       payload = {
-        id: "destination-grpc",
-        destination_connector_definition: `destination-connector-definitions/${
+        connectorName: "connectors/destination-grpc",
+        connector_definition_name: `connector-definitions/${
           fieldValues.definition as string
         }`,
-        connector: {
-          description: fieldValues.description as string,
-          configuration: {},
-        },
+        description: fieldValues.description as string,
+        configuration: {},
       };
-    } else if (
-      selectedDestinationDefinition?.id === "destination-http"
-    ) {
+    } else if (selectedDestinationDefinition?.id === "destination-http") {
       payload = {
-        id: "destination-http",
-        destination_connector_definition: `destination-connector-definitions/${
+        connectorName: "connectors/destination-http",
+        connector_definition_name: `connector-definitions/${
           fieldValues.definition as string
         }`,
-        connector: {
-          description: fieldValues.description as string,
-          configuration: {},
-        },
+        description: fieldValues.description as string,
+        configuration: {},
       };
     } else {
       payload = {
-        id: fieldValues.id as string,
-        destination_connector_definition: `destination-connector-definitions/${
-          fieldValues.definition as string
-        }`,
-        connector: {
-          description: fieldValues.description as string,
-          ...stripValues,
-        },
+        connectorName: `connectors/${fieldValues.id}` as string,
+        connector_definition_name: fieldValues.definition as string,
+        description: fieldValues.description as string,
+        configuration: stripValues.configuration,
       };
     }
 
@@ -372,7 +356,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
       message: "Creating...",
     }));
 
-    createDestination.mutate(
+    createConnector.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -417,7 +401,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   }, [
     init,
     amplitudeIsInit,
-    createDestination,
+    createConnector,
     formYup,
     fieldValues,
     selectedDestinationDefinition,
