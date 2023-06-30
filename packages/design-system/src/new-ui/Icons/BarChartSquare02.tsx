@@ -22,3 +22,4 @@ export const BarChartSquare02 = React.forwardRef<
     </IconBase>
   );
 });
+BarChartSquare02.displayName = "IconBarChartSquare02";

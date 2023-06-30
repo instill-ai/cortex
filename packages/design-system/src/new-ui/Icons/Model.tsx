@@ -26,3 +26,4 @@ export const Model = React.forwardRef<
     </IconBase>
   );
 });
+Model.displayName = "IconModel";

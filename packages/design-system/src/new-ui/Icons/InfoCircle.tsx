@@ -22,3 +22,4 @@ export const InfoCircle = React.forwardRef<
     </IconBase>
   );
 });
+InfoCircle.displayName = "IconInfoCircle";

@@ -46,3 +46,4 @@ export const Pipeline = React.forwardRef<
     </IconBase>
   );
 });
+Pipeline.displayName = "IconPipeline";

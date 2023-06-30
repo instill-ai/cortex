@@ -22,3 +22,4 @@ export const ChevronDown = React.forwardRef<
     </IconBase>
   );
 });
+ChevronDown.displayName = "IconChevronDown";

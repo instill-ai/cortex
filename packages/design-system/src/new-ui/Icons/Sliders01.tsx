@@ -22,3 +22,4 @@ export const Sliders01 = React.forwardRef<
     </IconBase>
   );
 });
+Sliders01.displayName = "IconSliders01";

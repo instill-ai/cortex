@@ -22,3 +22,4 @@ export const Check = React.forwardRef<
     </IconBase>
   );
 });
+Check.displayName = "IconCheck";

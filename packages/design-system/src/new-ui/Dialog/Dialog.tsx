@@ -60,11 +60,11 @@ DialogContent.displayName = DialogPrimitive.Content.displayName;
 const DialogClose = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Close>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
->(({ className, ...props }, ref) => (
+>((props, ref) => (
   <DialogPrimitive.Close
+    {...props}
     ref={ref}
     className="absolute right-4 top-4 rounded opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-semantic-accent-hover focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
-    {...props}
   >
     <Icons.X className="w-5 h-5 stroke-semantic-fg-primary" />
     <span className="sr-only">Close</span>

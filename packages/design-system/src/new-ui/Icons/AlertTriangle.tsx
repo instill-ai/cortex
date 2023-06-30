@@ -22,3 +22,4 @@ export const AlertTriangle = React.forwardRef<
     </IconBase>
   );
 });
+AlertTriangle.displayName = "IconAlertTriangle";

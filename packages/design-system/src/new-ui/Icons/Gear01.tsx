@@ -28,3 +28,4 @@ export const Gear01 = React.forwardRef<
     </IconBase>
   );
 });
+Gear01.displayName = "IconGear01";

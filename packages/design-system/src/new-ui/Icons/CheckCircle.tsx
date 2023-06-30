@@ -22,3 +22,4 @@ export const CheckCircle = React.forwardRef<
     </IconBase>
   );
 });
+CheckCircle.displayName = "IconCheckCircle";

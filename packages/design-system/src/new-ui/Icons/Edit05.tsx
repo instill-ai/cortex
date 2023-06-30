@@ -22,3 +22,4 @@ export const Edit05 = React.forwardRef<
     </IconBase>
   );
 });
+Edit05.displayName = "IconEdit05";

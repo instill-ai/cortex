@@ -22,3 +22,4 @@ export const Logout01 = React.forwardRef<
     </IconBase>
   );
 });
+Logout01.displayName = "IconLogout01";

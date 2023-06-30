@@ -22,3 +22,4 @@ export const Play = React.forwardRef<
     </IconBase>
   );
 });
+Play.displayName = "IconPlay";
