@@ -1,5 +1,19 @@
 # @instill-ai/design-system
 
+## [0.24.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.23.0...@instill-ai/design-system-v0.24.0) (2023-06-30)
+
+
+### Features
+
+* **design-system:** add group attribute into Select ([#532](https://github.com/instill-ai/design-system/issues/532)) ([13ea575](https://github.com/instill-ai/design-system/commit/13ea575dcdc235627cf2354c27ba70b99bc8201f))
+* **design-system:** add ModelLogo and refactor other Logo's API ([#530](https://github.com/instill-ai/design-system/issues/530)) ([0dad2f8](https://github.com/instill-ai/design-system/commit/0dad2f87f03ecda449a675e856147a67ede4a6e2))
+
+
+### Bug Fixes
+
+* **design-system:** fix IconBase not forward ref issue ([#535](https://github.com/instill-ai/design-system/issues/535)) ([16e554b](https://github.com/instill-ai/design-system/commit/16e554b7bb6c2647afb6938772c6e71611cd1deb))
+* **design-system:** fix Icons displayName issue ([#536](https://github.com/instill-ai/design-system/issues/536)) ([4994e53](https://github.com/instill-ai/design-system/commit/4994e53112c8cd819a31ac641f73d314aa224e43))
+
 ## [0.23.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.22.1...@instill-ai/design-system-v0.23.0) (2023-06-27)
 
 
