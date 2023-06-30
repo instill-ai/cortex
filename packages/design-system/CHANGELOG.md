@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.24.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.24.0...@instill-ai/design-system-v0.24.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* fix release workflow ([#540](https://github.com/instill-ai/design-system/issues/540)) ([d8690c7](https://github.com/instill-ai/design-system/commit/d8690c7be0fbb3ac3497be8556248382fb9b0f86))
+
 ## [0.24.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.23.0...@instill-ai/design-system-v0.24.0) (2023-06-30)
 
 

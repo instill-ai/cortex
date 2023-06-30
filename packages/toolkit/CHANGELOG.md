@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.49.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.49.0...@instill-ai/toolkit-v0.49.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* fix release workflow ([#540](https://github.com/instill-ai/design-system/issues/540)) ([d8690c7](https://github.com/instill-ai/design-system/commit/d8690c7be0fbb3ac3497be8556248382fb9b0f86))
+
 ## [0.49.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.48.0...@instill-ai/toolkit-v0.49.0) (2023-06-30)
 
 
