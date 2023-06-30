@@ -89,7 +89,7 @@ test("find path when some of the const field is missing", () => {
         jsonSchema: {
           properties: {
             ssh_key: {
-              airbyte_secret: true,
+              credential_field: true,
               description:
                 "OS-level user account ssh key credentials in RSA PEM format ( created with ssh-keygen -t rsa -m PEM -f myuser_rsa )",
               multiline: true,

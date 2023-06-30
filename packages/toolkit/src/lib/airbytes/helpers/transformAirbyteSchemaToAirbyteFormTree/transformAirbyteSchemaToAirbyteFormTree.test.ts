@@ -23,7 +23,7 @@ test("should reformat jsonSchema to formTree representation", () => {
       },
       dbname: { type: "string", description: "Name of the database." },
       password: {
-        airbyte_secret: true,
+        credential_field: true,
         type: "string",
         description: "Password associated with the username.",
       },
@@ -49,7 +49,7 @@ test("should reformat jsonSchema to formTree representation", () => {
           type: "string",
         },
         password: {
-          airbyte_secret: true,
+          credential_field: true,
           description: "Password associated with the username.",
           type: "string",
         },

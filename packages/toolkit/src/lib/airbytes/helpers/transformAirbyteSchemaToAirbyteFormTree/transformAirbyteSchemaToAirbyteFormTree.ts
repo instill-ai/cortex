@@ -117,7 +117,7 @@ export const transformAirbyteSchemaToAirbyteFormTree = (
     path: path || key,
     fieldKey: key,
     isRequired,
-    isSecret: !!jsonSchema.airbyte_secret,
+    isSecret: !!jsonSchema.credential_field,
     multiline: !!jsonSchema.multiline,
     type:
       (Array.isArray(jsonSchema.type) ? jsonSchema.type[0] : jsonSchema.type) ??

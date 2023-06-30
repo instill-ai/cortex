@@ -372,7 +372,7 @@ test("should find one selected condition map", () => {
               order: 0,
               properties: {
                 access_token: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter you application's Access Token",
                   title: "Access Token",
                   type: "string",
@@ -385,19 +385,19 @@ test("should find one selected condition map", () => {
                   type: "string",
                 },
                 client_id: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter your application's Client ID",
                   title: "Client ID",
                   type: "string",
                 },
                 client_secret: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter your application's Client secret",
                   title: "Client Secret",
                   type: "string",
                 },
                 refresh_token: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter your application's Refresh Token",
                   title: "Refresh Token",
                   type: "string",
@@ -477,7 +477,7 @@ test("should find one selected condition map", () => {
               order: 1,
               properties: {
                 password: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     "Enter the password associated with the username.",
                   order: 1,
@@ -606,7 +606,7 @@ test("should find one selected condition map", () => {
                 "Recommended for large production workloads for better speed and scalability.",
               properties: {
                 access_key_id: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter your <a href="https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html">AWS access key ID</a>. Airbyte requires Read and Write permissions on your S3 bucket ',
                   order: 3,
@@ -731,7 +731,7 @@ test("should find one selected condition map", () => {
                   type: "string",
                 },
                 secret_access_key: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter your <a href="https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html">AWS secret access key</a>',
                   order: 4,
@@ -917,7 +917,7 @@ test("should find one selected condition map", () => {
                           type: "string",
                         },
                         key_encrypting_key: {
-                          airbyte_secret: true,
+                          credential_field: true,
                           description:
                             "The key, base64-encoded. Must be either 128, 192, or 256 bits. Leave blank to have Airbyte generate an ephemeral key for each sync.",
                           title: "Key",
@@ -1001,7 +1001,7 @@ test("should find one selected condition map", () => {
                   type: "string",
                 },
                 credentials_json: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter your <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys">Google Cloud service account key</a> in the JSON format with read/write access to your Cloud Storage staging bucket',
                   multiline: true,
@@ -1131,7 +1131,7 @@ test("should find one selected condition map", () => {
                   type: "string",
                 },
                 azure_blob_storage_sas_token: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter the <a href="https://docs.snowflake.com/en/user-guide/data-load-azure-config.html#option-2-generating-a-sas-token">Shared access signature</a> (SAS) token to grant Snowflake limited access to objects in your Azure Blob Storage account',
                   examples: [
@@ -1638,7 +1638,7 @@ test("should find multiple selected condition map", () => {
               order: 0,
               properties: {
                 access_token: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter you application's Access Token",
                   title: "Access Token",
                   type: "string",
@@ -1651,19 +1651,19 @@ test("should find multiple selected condition map", () => {
                   type: "string",
                 },
                 client_id: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter your application's Client ID",
                   title: "Client ID",
                   type: "string",
                 },
                 client_secret: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter your application's Client secret",
                   title: "Client Secret",
                   type: "string",
                 },
                 refresh_token: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description: "Enter your application's Refresh Token",
                   title: "Refresh Token",
                   type: "string",
@@ -1743,7 +1743,7 @@ test("should find multiple selected condition map", () => {
               order: 1,
               properties: {
                 password: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     "Enter the password associated with the username.",
                   order: 1,
@@ -1872,7 +1872,7 @@ test("should find multiple selected condition map", () => {
                 "Recommended for large production workloads for better speed and scalability.",
               properties: {
                 access_key_id: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter your <a href="https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html">AWS access key ID</a>. Airbyte requires Read and Write permissions on your S3 bucket ',
                   order: 3,
@@ -1997,7 +1997,7 @@ test("should find multiple selected condition map", () => {
                   type: "string",
                 },
                 secret_access_key: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter your <a href="https://docs.aws.amazon.com/powershell/latest/userguide/pstools-appendix-sign-up.html">AWS secret access key</a>',
                   order: 4,
@@ -2183,7 +2183,7 @@ test("should find multiple selected condition map", () => {
                           type: "string",
                         },
                         key_encrypting_key: {
-                          airbyte_secret: true,
+                          credential_field: true,
                           description:
                             "The key, base64-encoded. Must be either 128, 192, or 256 bits. Leave blank to have Airbyte generate an ephemeral key for each sync.",
                           title: "Key",
@@ -2267,7 +2267,7 @@ test("should find multiple selected condition map", () => {
                   type: "string",
                 },
                 credentials_json: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter your <a href="https://cloud.google.com/iam/docs/creating-managing-service-account-keys#creating_service_account_keys">Google Cloud service account key</a> in the JSON format with read/write access to your Cloud Storage staging bucket',
                   multiline: true,
@@ -2397,7 +2397,7 @@ test("should find multiple selected condition map", () => {
                   type: "string",
                 },
                 azure_blob_storage_sas_token: {
-                  airbyte_secret: true,
+                  credential_field: true,
                   description:
                     'Enter the <a href="https://docs.snowflake.com/en/user-guide/data-load-azure-config.html#option-2-generating-a-sas-token">Shared access signature</a> (SAS) token to grant Snowflake limited access to objects in your Azure Blob Storage account',
                   examples: [
