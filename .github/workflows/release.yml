@@ -54,6 +54,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
+      - name: Setup npmrc
+        if: ${{ steps.release.outputs.releases_created }}
+        run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPMTOKEN }}" > .npmrc
+
       - name: Install dependencies
         if: ${{ steps.release.outputs.releases_created }}
         run: rm -rf node_modules && pnpm i --frozen-lockfile
@@ -62,30 +66,6 @@ jobs:
         if: ${{ steps.release.outputs.releases_created }}
         run: pnpm ci-build-packages
 
-      - name: Publish design-system
+      - name: Publish packages
         if: ${{ steps.release.outputs.releases_created }}
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPMTOKEN }}
-          package: "./packages/design-system/package.json"
-
-      - name: Publish design-tokens
-        if: ${{ steps.release.outputs.releases_created }}
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPMTOKEN }}
-          package: "./packages/design-tokens/package.json"
-
-      - name: Publish toolkit
-        if: ${{ steps.release.outputs.releases_created }}
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPMTOKEN }}
-          package: "./packages/toolkit/package.json"
-
-      - name: Publish eslint-config-cortex
-        if: ${{ steps.release.outputs.releases_created }}
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.NPMTOKEN }}
-          package: "./packages/eslint-config-cortex/package.json"
+        run: pnpm -r publish --no-git-checks

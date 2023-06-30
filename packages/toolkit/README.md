@@ -271,3 +271,4 @@ This lib converts dot notation like `path.to.value` to reference `{ path: { to: 
 
 - Currently don't support bracket path `foo[0][1]`, it only support `foo.0.1`
 - `Error: Element type is invalid: expected a string` Please double check your peerDeps. For example, this package should have instill-ai/design-system and instill-ai/design-token as its peerDeps.
+- We use pnpm -r publish at the root folder to publish the packages
