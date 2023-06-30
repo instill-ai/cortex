@@ -11,7 +11,7 @@ export const VdpLogo = (props: VdpLogoProps) => {
     case "square": {
       return (
         <svg
-          viewBox="0 0 120 120"
+          viewBox="0 0 60 60"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           style={{ width: `${width}px` }}
@@ -20,14 +20,20 @@ export const VdpLogo = (props: VdpLogoProps) => {
           <path
             fillRule="evenodd"
             clipRule="evenodd"
-            d="M0 0H40V60H80V0H120V80H100V100H80V120H40V100H20V80H0V0ZM30 10V70H10V10H30ZM49.9997 70.0001V90.0001H29.9997V70.0001H49.9997ZM69.9999 110V90.0001H89.9996V70.0001H69.9996V89.9998H49.9999V110H69.9999ZM110 70V10H89.9998V70H110Z"
+            d="M9.99742 10H23.3308V30H36.6641V10H49.9974V36.6667H43.3308V43.3333H36.6641V50H23.3308V43.3333H16.6641V36.6667H9.99742V10ZM19.9974 13.3333V33.3333H13.3308V13.3333H19.9974ZM26.664 33.3334V40H19.9973V33.3334H26.664ZM33.3307 46.6666V40H39.9973V33.3334H33.3306V39.9999H26.6641V46.6666H33.3307ZM46.664 33.3333V13.3333H39.9974V33.3333H46.664Z"
             fill="#2B2B2B"
           />
-          <path d="M70 110V90H50V110H70Z" fill="#FFDF3A" />
-          <path d="M50 90V70H30V90H50Z" fill="#28F77E" />
-          <path d="M90 90V70H70V90H90Z" fill="#FFDF3A" />
-          <path d="M30 70L30 10L10 10L10 70H30Z" fill="#F7F7F7" />
-          <path d="M110 70V10L90 10V70H110Z" fill="#40A8F5" />
+          <path d="M33.332 46.6667V40H26.6654V46.6667H33.332Z" fill="#FFDF3A" />
+          <path d="M26.6654 40V33.3333H19.9987V40H26.6654Z" fill="#28F77E" />
+          <path d="M39.9987 40V33.3333H33.3321V40H39.9987Z" fill="#FFDF3A" />
+          <path
+            d="M19.9987 33.3333V13.3333H13.3321V33.3333H19.9987Z"
+            fill="#F7F7F7"
+          />
+          <path
+            d="M46.6654 33.3333V13.3333H39.9987V33.3333H46.6654Z"
+            fill="#40A8F5"
+          />
         </svg>
       );
     }
