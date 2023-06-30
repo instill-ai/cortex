@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.50.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.0...@instill-ai/toolkit-v0.50.1) (2023-06-30)
+
+
+### Bug Fixes
+
+* disable the user from changing the ai-connector ([#548](https://github.com/instill-ai/design-system/issues/548)) ([7cc76b2](https://github.com/instill-ai/design-system/commit/7cc76b2e1db1c539e6992fe519ea6dc7e89bd43f))
+
 ## [0.50.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.49.1...@instill-ai/toolkit-v0.50.0) (2023-06-30)
 
 
