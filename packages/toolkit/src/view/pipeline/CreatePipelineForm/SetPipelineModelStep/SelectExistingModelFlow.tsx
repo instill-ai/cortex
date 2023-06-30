@@ -10,7 +10,6 @@ import {
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
-  useQueryClient,
   type CreateResourceFormStore,
   type Nullable,
 } from "../../../../lib";
@@ -31,7 +30,6 @@ export const SelectExistingModelFlow = (
 ) => {
   const { accessToken, onSelect, enabledQuery } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const queryClient = useQueryClient();
 
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -108,8 +106,6 @@ export const SelectExistingModelFlow = (
     onSelect,
     models.data,
     models.isSuccess,
-    accessToken,
-    queryClient,
   ]);
 
   /* -------------------------------------------------------------------------

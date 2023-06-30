@@ -1,4 +1,5 @@
 export * from "./airbyte";
+export * from "./ai";
 export * from "./destination";
 export * from "./mgmt";
 export * from "./model";
