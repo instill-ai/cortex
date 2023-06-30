@@ -1,9 +1,18 @@
+import * as React from "react";
 import { IconBase, IconBaseProps } from "./IconBase";
 
-export const Gear01 = (props: Omit<IconBaseProps, "viewBox" | "children">) => {
+export const Gear01 = React.forwardRef<
+  SVGSVGElement,
+  Omit<IconBaseProps, "viewBox" | "children">
+>((props, ref) => {
   const { className, ...passThrough } = props;
   return (
-    <IconBase viewBox="0 0 24 24" className={className} {...passThrough}>
+    <IconBase
+      {...passThrough}
+      ref={ref}
+      viewBox="0 0 24 24"
+      className={className}
+    >
       <path
         d="M12 15C13.6569 15 15 13.6569 15 12C15 10.3431 13.6569 9 12 9C10.3431 9 9 10.3431 9 12C9 13.6569 10.3431 15 12 15Z"
         strokeWidth="2"
@@ -18,4 +27,4 @@ export const Gear01 = (props: Omit<IconBaseProps, "viewBox" | "children">) => {
       />
     </IconBase>
   );
-};
+});

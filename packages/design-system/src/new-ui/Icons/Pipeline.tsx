@@ -1,11 +1,18 @@
+import * as React from "react";
 import { IconBase, IconBaseProps } from "./IconBase";
 
-export const Pipeline = (
-  props: Omit<IconBaseProps, "viewBox" | "children">
-) => {
+export const Pipeline = React.forwardRef<
+  SVGSVGElement,
+  Omit<IconBaseProps, "viewBox" | "children">
+>((props, ref) => {
   const { className, ...passThrough } = props;
   return (
-    <IconBase viewBox="0 0 24 24" className={className} {...passThrough}>
+    <IconBase
+      {...passThrough}
+      ref={ref}
+      viewBox="0 0 24 24"
+      className={className}
+    >
       <path
         d="M5.94955 9.14731V15.2878C5.94955 16.4091 5.94955 16.9698 6.16981 17.3969C6.36337 17.7707 6.6704 18.0777 7.04416 18.2713C7.47133 18.4915 8.03198 18.4915 9.15329 18.4915H13.9589"
         strokeWidth="2"
@@ -38,4 +45,4 @@ export const Pipeline = (
       />
     </IconBase>
   );
-};
+});
