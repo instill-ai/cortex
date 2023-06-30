@@ -189,302 +189,304 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
 
   return (
     <Form.Root {...form}>
-      <form
-        className="flex flex-col space-y-5"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <Form.Field
-          control={form.control}
-          name="id"
-          render={({ field }) => {
-            return (
-              <Form.Item>
-                <Form.Label htmlFor={field.name}>ID *</Form.Label>
-                <Form.Control>
-                  <Input.Root className="!rounded-none">
-                    <Input.Core
+      <form onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="flex flex-col space-y-5 mb-10">
+          <Form.Field
+            control={form.control}
+            name="id"
+            render={({ field }) => {
+              return (
+                <Form.Item>
+                  <Form.Label htmlFor={field.name}>ID *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        id={field.name}
+                        type="text"
+                        placeholder="AI's name"
+                        value={field.value ?? ""}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    Pick an ID to help you identify this resource. The ID
+                    conforms to RFC-1034, which restricts to letters, numbers,
+                    and hyphen, with the first character a letter, the last a
+                    letter or a number, and a 63 character maximum.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="description"
+            render={({ field }) => {
+              return (
+                <Form.Item>
+                  <Form.Label htmlFor={field.name}>Description</Form.Label>
+                  <Form.Control>
+                    <Textarea
                       {...field}
                       id={field.name}
-                      type="text"
-                      placeholder="AI's name"
+                      placeholder="Description"
                       value={field.value ?? ""}
+                      className="!rounded-none"
                     />
-                  </Input.Root>
-                </Form.Control>
-                <Form.Description>
-                  Pick an ID to help you identify this resource. The ID conforms
-                  to RFC-1034, which restricts to letters, numbers, and hyphen,
-                  with the first character a letter, the last a letter or a
-                  number, and a 63 character maximum.
-                </Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="description"
-          render={({ field }) => {
-            return (
-              <Form.Item>
-                <Form.Label htmlFor={field.name}>Description</Form.Label>
-                <Form.Control>
-                  <Textarea
-                    {...field}
-                    id={field.name}
-                    placeholder="Description"
-                    value={field.value ?? ""}
-                    className="!rounded-none"
-                  />
-                </Form.Control>
-                <Form.Description>
-                  Fill with a short description.
-                </Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="connector_definition_name"
-          render={({ field }) => {
-            return (
-              <Form.Item>
-                <Form.Label htmlFor={field.name}>AI Connector Type</Form.Label>
-                <Select.Root
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <Form.Control>
-                    <Select.Trigger className="w-full !rounded-none">
-                      <Select.Value placeholder="Select an AI connector type" />
-                    </Select.Trigger>
                   </Form.Control>
-                  <Select.Content>
-                    <Select.Item
-                      key="connector-definitions/instill-ai-model"
-                      value="connector-definitions/instill-ai-model"
-                    >
-                      <div className="flex flex-row space-x-2">
-                        <ModelLogo width={20} variant="square" />
-                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
-                          Instill Model
-                        </p>
-                      </div>
-                    </Select.Item>
-                    <Select.Item
-                      key="connector-definitions/stability-ai-model"
-                      value="connector-definitions/stability-ai-model"
-                    >
-                      <div className="flex flex-row space-x-2">
-                        <ImageWithFallback
-                          src={"/icons/stability-ai/logo.png"}
-                          width={20}
-                          height={20}
-                          alt="Stability AI model logo"
-                          fallbackImg={
-                            <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
-                          }
-                        />
-                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
-                          Stability AI Model
-                        </p>
-                      </div>
-                    </Select.Item>
-                  </Select.Content>
-                </Select.Root>
-                <Form.Description>
-                  Fill with a short description.
-                </Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="configuration.api_key"
-          render={({ field }) => {
-            return (
-              <Form.Item>
-                <Form.Label htmlFor={field.name}>API Key *</Form.Label>
-                <Form.Control>
-                  <Input.Root className="!rounded-none">
-                    <Input.Core
-                      {...field}
-                      id={field.name}
-                      type="text"
-                      placeholder="API Key"
-                      value={field.value ?? ""}
-                    />
-                  </Input.Root>
-                </Form.Control>
-                <Form.Description>
-                  Access to your API keys can then be managed through Stability
-                  AI&apos;s Account page.
-                </Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="configuration.task"
-          render={({ field }) => {
-            return (
-              <Form.Item
-                className={
-                  form.getValues("connector_definition_name") ===
-                  "connector-definitions/stability-ai-model"
-                    ? ""
-                    : "hidden"
-                }
-              >
-                <Form.Label htmlFor={field.name}>Task *</Form.Label>
-                <Select.Root
-                  onValueChange={field.onChange}
-                  defaultValue={field.value ?? undefined}
-                >
-                  <Form.Control>
-                    <Select.Trigger className="w-full !rounded-none">
-                      <Select.Value placeholder="Select an AI task" />
-                    </Select.Trigger>
-                  </Form.Control>
-                  <Select.Content>
-                    {["Text to Image", "Image to Image"].map((task) => (
-                      <Select.Item key={task} value={task}>
-                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
-                          {task}
-                        </p>
+                  <Form.Description>
+                    Fill with a short description.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="connector_definition_name"
+            render={({ field }) => {
+              return (
+                <Form.Item>
+                  <Form.Label htmlFor={field.name}>
+                    AI Connector Type
+                  </Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value placeholder="Select an AI connector type" />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      <Select.Item
+                        key="connector-definitions/instill-ai-model"
+                        value="connector-definitions/instill-ai-model"
+                        className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                      >
+                        <div className="flex flex-row space-x-2">
+                          <ModelLogo width={20} variant="square" />
+                          <p className="my-auto">Instill Model</p>
+                        </div>
                       </Select.Item>
-                    ))}
-                  </Select.Content>
-                </Select.Root>
-                <Form.Description>AI task type.</Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="configuration.engine"
-          render={({ field }) => {
-            return (
-              <Form.Item
-                className={
-                  form.getValues("connector_definition_name") ===
-                  "connector-definitions/stability-ai-model"
-                    ? ""
-                    : "hidden"
-                }
-              >
-                <Form.Label htmlFor={field.name}>Engine</Form.Label>
-                <Select.Root
-                  onValueChange={field.onChange}
-                  defaultValue={field.value ?? undefined}
-                >
-                  <Form.Control>
-                    <Select.Trigger className="w-full !rounded-none">
-                      <Select.Value placeholder="Select an AI engine" />
-                    </Select.Trigger>
-                  </Form.Control>
-                  <Select.Content>
-                    {[
-                      "stable-diffusion-v1",
-                      "stable-diffusion-v1-5",
-                      "stable-diffusion-512-v2-0",
-                      "stable-diffusion-768-v2-0",
-                      "stable-diffusion-512-v2-1",
-                      "stable-diffusion-768-v2-1",
-                      "stable-diffusion-xl-beta-v2-2-2",
-                      "stable-inpainting-v1-0",
-                      "stable-inpainting-512-v2-0",
-                      "esrgan-v1-x2plus",
-                      "stable-diffusion-x4-latent-upscaler",
-                    ].map((engine) => (
-                      <Select.Item key={engine} value={engine}>
-                        <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
-                          {engine}
-                        </p>
+                      <Select.Item
+                        key="connector-definitions/stability-ai-model"
+                        value="connector-definitions/stability-ai-model"
+                        className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                      >
+                        <div className="flex flex-row space-x-2">
+                          <ImageWithFallback
+                            src={"/icons/stability-ai/logo.png"}
+                            width={20}
+                            height={20}
+                            alt="Stability AI model logo"
+                            fallbackImg={
+                              <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
+                            }
+                          />
+                          <p className="my-auto">Stability AI Model</p>
+                        </div>
                       </Select.Item>
-                    ))}
-                  </Select.Content>
-                </Select.Root>
-                <Form.Description>Engine (model) to use.</Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="configuration.server_url"
-          render={({ field }) => {
-            return (
-              <Form.Item
-                className={
-                  form.getValues("connector_definition_name") ===
-                  "connector-definitions/instill-ai-model"
-                    ? ""
-                    : "hidden"
-                }
-              >
-                <Form.Label htmlFor={field.name}>Server URL *</Form.Label>
-                <Form.Control>
-                  <Input.Root className="!rounded-none">
-                    <Input.Core
-                      {...field}
-                      id={field.name}
-                      type="text"
-                      placeholder="URL"
-                      value={field.value ?? ""}
-                    />
-                  </Input.Root>
-                </Form.Control>
-                <Form.Description>
-                  Base URL for the Instill Model API.
-                </Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-        <Form.Field
-          control={form.control}
-          name="configuration.model_id"
-          render={({ field }) => {
-            return (
-              <Form.Item
-                className={
-                  form.getValues("connector_definition_name") ===
-                  "connector-definitions/instill-ai-model"
-                    ? ""
-                    : "hidden"
-                }
-              >
-                <Form.Label htmlFor={field.name}>Model ID *</Form.Label>
-                <Form.Control>
-                  <Input.Root className="!rounded-none">
-                    <Input.Core
-                      {...field}
-                      id={field.name}
-                      type="text"
-                      placeholder="ID"
-                      value={field.value ?? ""}
-                    />
-                  </Input.Root>
-                </Form.Control>
-                <Form.Description>ID of the model to use.</Form.Description>
-                <Form.Message />
-              </Form.Item>
-            );
-          }}
-        />
-
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>
+                    Fill with a short description.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.api_key"
+            render={({ field }) => {
+              return (
+                <Form.Item>
+                  <Form.Label htmlFor={field.name}>API Key *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        id={field.name}
+                        type="text"
+                        placeholder="API Key"
+                        value={field.value ?? ""}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    Access to your API keys can then be managed through
+                    Stability AI&apos;s Account page.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.task"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/stability-ai-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label htmlFor={field.name}>Task *</Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value ?? undefined}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value placeholder="Select an AI task" />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      {["Text to Image", "Image to Image"].map((task) => (
+                        <Select.Item
+                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                          key={task}
+                          value={task}
+                        >
+                          <p className="my-auto">{task}</p>
+                        </Select.Item>
+                      ))}
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>AI task type.</Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.engine"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/stability-ai-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label htmlFor={field.name}>Engine</Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value ?? undefined}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value placeholder="Select an AI engine" />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      {[
+                        "stable-diffusion-v1",
+                        "stable-diffusion-v1-5",
+                        "stable-diffusion-512-v2-0",
+                        "stable-diffusion-768-v2-0",
+                        "stable-diffusion-512-v2-1",
+                        "stable-diffusion-768-v2-1",
+                        "stable-diffusion-xl-beta-v2-2-2",
+                        "stable-inpainting-v1-0",
+                        "stable-inpainting-512-v2-0",
+                        "esrgan-v1-x2plus",
+                        "stable-diffusion-x4-latent-upscaler",
+                      ].map((engine) => (
+                        <Select.Item
+                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                          key={engine}
+                          value={engine}
+                        >
+                          <p className="my-auto">{engine}</p>
+                        </Select.Item>
+                      ))}
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>Engine (model) to use.</Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.server_url"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/instill-ai-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label htmlFor={field.name}>Server URL *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        id={field.name}
+                        type="text"
+                        placeholder="URL"
+                        value={field.value ?? ""}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    Base URL for the Instill Model API.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.model_id"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/instill-ai-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label htmlFor={field.name}>Model ID *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        id={field.name}
+                        type="text"
+                        placeholder="ID"
+                        value={field.value ?? ""}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>ID of the model to use.</Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+        </div>
         <div className="flex flex-row">
           <BasicProgressMessageBox
             state={messageBoxState}

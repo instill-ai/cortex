@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -5,16 +6,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   BasicProgressMessageBox,
   Form,
-  Icons,
   Input,
-  ModelLogo,
   OutlineButton,
   ProgressMessageBoxState,
   Select,
   SolidButton,
+  Switch,
   Textarea,
 } from "@instill-ai/design-system";
-import { DeleteResourceModal, ImageWithFallback } from "../../components";
+
+import { isAxiosError } from "axios";
 import {
   ConnectorWithDefinition,
   ModalStore,
@@ -28,7 +29,7 @@ import {
   useModalStore,
   useUpdateConnector,
 } from "../../lib";
-import { isAxiosError } from "axios";
+import { DeleteResourceModal } from "../../components";
 import { shallow } from "zustand/shallow";
 
 const CreateAIFormSchema = z
@@ -37,68 +38,49 @@ const CreateAIFormSchema = z
     description: z.string().optional(),
     connector_definition_name: z.string(),
     configuration: z.object({
-      api_key: z.string().optional(),
-      server_url: z.string().optional(),
-      task: z.string().optional(),
-      engine: z.string().optional(),
-      model_id: z.string().optional(),
+      capture_token: z.string().optional(),
+      creator_name: z.string().optional(),
+      license: z.string().optional(),
+      asset_type: z.string().optional(),
+      metadata_texts: z.boolean().optional(),
+      metadata_structured_data: z.boolean().optional(),
+      metadata_metadata: z.boolean().optional(),
     }),
   })
   .superRefine((state, ctx) => {
     if (
       state.connector_definition_name ===
-      "connector-definitions/stability-ai-model"
+      "connector-definitions/numbers-blockchain-nit"
     ) {
-      if (!state.configuration.api_key) {
+      if (!state.configuration.capture_token) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "API Key is required",
-          path: ["configuration", "api_key"],
+          message: "Capture token is required",
+          path: ["configuration", "capture_token"],
         });
       }
 
-      if (!state.configuration.task) {
+      if (!state.configuration.creator_name) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Task is required",
-          path: ["configuration", "task"],
+          message: "Creator name is required",
+          path: ["configuration", "creator_name"],
         });
       }
 
-      if (!state.configuration.engine) {
+      if (!state.configuration.license) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Engine is required",
-          path: ["configuration", "engine"],
-        });
-      }
-    }
-
-    if (
-      state.connector_definition_name ===
-      "connector-definitions/instill-ai-model"
-    ) {
-      if (!state.configuration.api_key) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "API Key is required",
-          path: ["configuration", "api_key"],
+          message: "License is required",
+          path: ["configuration", "license"],
         });
       }
 
-      if (!state.configuration.model_id) {
+      if (!state.configuration.asset_type) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Model ID is required",
-          path: ["configuration", "model_id"],
-        });
-      }
-
-      if (!state.configuration.server_url) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Server URL is required",
-          path: ["configuration", "server_url"],
+          message: "Asset type is required",
+          path: ["configuration", "asset_type"],
         });
       }
     }
@@ -109,28 +91,31 @@ const modalSelector = (state: ModalStore) => ({
   openModal: state.openModal,
 });
 
-export type ConfigureAIFormProps = {
+export type ConfigureBlockchainFormProps = {
   accessToken: Nullable<string>;
   onDelete: Nullable<() => void>;
   onConfigure: Nullable<() => void>;
   onTestConnection: Nullable<() => void>;
-  ai: ConnectorWithDefinition;
+  blockchain: ConnectorWithDefinition;
   disabledConfigure?: boolean;
   disabledDelete?: boolean;
   disabledTestConnection?: boolean;
 };
 
-export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
+export const ConfigureBlockchainForm = (
+  props: ConfigureBlockchainFormProps
+) => {
   const {
     accessToken,
     onDelete,
     onConfigure,
     onTestConnection,
-    ai,
+    blockchain,
     disabledConfigure,
     disabledDelete,
     disabledTestConnection,
   } = props;
+
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
@@ -138,7 +123,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
   const form = useForm<z.infer<typeof CreateAIFormSchema>>({
     resolver: zodResolver(CreateAIFormSchema),
     defaultValues: {
-      ...ai,
+      ...blockchain,
     },
   });
 
@@ -213,63 +198,73 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
   }
 
   const deleteConnector = useDeleteConnector();
-  const handleDeleteAI = React.useCallback(() => {
-    if (!ai) return;
+  const handleDeleteBlockchain = React.useCallback(
+    function () {
+      if (!blockchain) return;
 
-    setMessageBoxState(() => ({
-      activate: true,
-      status: "progressing",
-      description: null,
-      message: "Deleting...",
-    }));
+      setMessageBoxState(() => ({
+        activate: true,
+        status: "progressing",
+        description: null,
+        message: "Deleting...",
+      }));
 
-    closeModal();
+      closeModal();
 
-    deleteConnector.mutate(
-      {
-        connectorName: ai.name,
-        accessToken,
-      },
-      {
-        onSuccess: () => {
-          setMessageBoxState(() => ({
-            activate: true,
-            status: "success",
-            description: null,
-            message: "Succeed.",
-          }));
-
-          if (amplitudeIsInit) {
-            sendAmplitudeData("delete_source", {
-              type: "critical_action",
-              process: "source",
-            });
-          }
-          if (onDelete) onDelete();
+      deleteConnector.mutate(
+        {
+          connectorName: blockchain.name,
+          accessToken,
         },
-        onError: (error) => {
-          if (isAxiosError(error)) {
+        {
+          onSuccess: () => {
             setMessageBoxState(() => ({
               activate: true,
-              message: error.message,
-              description: getInstillApiErrorMessage(error),
-              status: "error",
-            }));
-          } else {
-            setMessageBoxState(() => ({
-              activate: true,
-              status: "error",
+              status: "success",
               description: null,
-              message: "Something went wrong when delete the source",
+              message: "Succeed.",
             }));
-          }
-        },
-      }
-    );
-  }, [ai, amplitudeIsInit, deleteConnector, closeModal, onDelete, accessToken]);
 
-  const handleTestAI = async function () {
-    if (!ai) return;
+            if (amplitudeIsInit) {
+              sendAmplitudeData("delete_blockchain", {
+                type: "critical_action",
+                process: "blockchain",
+              });
+            }
+            if (onDelete) onDelete();
+          },
+          onError: (error) => {
+            if (isAxiosError(error)) {
+              setMessageBoxState(() => ({
+                activate: true,
+                message: error.message,
+                description: getInstillApiErrorMessage(error),
+                status: "error",
+              }));
+            } else {
+              setMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message: "Something went wrong when delete the blockchain",
+              }));
+            }
+          },
+        }
+      );
+    },
+    [
+      blockchain,
+      amplitudeIsInit,
+      deleteConnector,
+      closeModal,
+      onDelete,
+      accessToken,
+    ]
+  );
+
+  const handleTestBlockchain = React.useCallback(async function () {
+    if (!blockchain) return;
 
     setMessageBoxState(() => ({
       activate: true,
@@ -280,7 +275,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
     try {
       const res = await testConnectorConnectionAction({
-        connectorName: ai.name,
+        connectorName: blockchain.name,
         accessToken,
       });
 
@@ -288,7 +283,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
         activate: true,
         status: res.state === "STATE_ERROR" ? "error" : "success",
         description: null,
-        message: `The AI's state is ${res.state}`,
+        message: `The blockchain's state is ${res.state}`,
       }));
 
       if (onTestConnection) onTestConnection();
@@ -297,15 +292,15 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
         activate: true,
         status: "error",
         description: null,
-        message: "Something went wrong when test the AI",
+        message: "Something went wrong when test the blockchain",
       }));
     }
-  };
+  }, []);
 
   return (
     <Form.Root {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-col space-y-5 mb-10">
+        <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}
             name="id"
@@ -319,8 +314,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="AI's name"
                         value={field.value ?? ""}
+                        disabled={true}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -346,7 +341,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     <Textarea
                       {...field}
                       id={field.name}
-                      placeholder="Description"
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -380,32 +374,11 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     </Form.Control>
                     <Select.Content>
                       <Select.Item
-                        key="connector-definitions/instill-ai-model"
-                        value="connector-definitions/instill-ai-model"
-                        className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                        key="connector-definitions/numbers-blockchain-nit"
+                        value="connector-definitions/numbers-blockchain-nit"
+                        className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
-                        <div className="flex flex-row space-x-2">
-                          <ModelLogo width={20} variant="square" />
-                          <p className="my-auto">Instill Model</p>
-                        </div>
-                      </Select.Item>
-                      <Select.Item
-                        key="connector-definitions/stability-ai-model"
-                        value="connector-definitions/stability-ai-model"
-                        className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
-                      >
-                        <div className="flex flex-row space-x-2">
-                          <ImageWithFallback
-                            src={"/icons/stability-ai/logo.png"}
-                            width={20}
-                            height={20}
-                            alt="Stability AI model logo"
-                            fallbackImg={
-                              <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
-                            }
-                          />
-                          <p className="my-auto">Stability AI Model</p>
-                        </div>
+                        <p className="my-auto">NumbersProtocol NIT</p>
                       </Select.Item>
                     </Select.Content>
                   </Select.Root>
@@ -419,25 +392,30 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="configuration.api_key"
+            name="configuration.capture_token"
             render={({ field }) => {
               return (
-                <Form.Item>
-                  <Form.Label htmlFor={field.name}>API Key *</Form.Label>
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label htmlFor={field.name}>Capture token *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
                         id={field.name}
-                        type="text"
-                        placeholder="API Key"
+                        type="password"
                         value={field.value ?? ""}
                       />
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Access to your API keys can then be managed through
-                    Stability AI&apos;s Account page.
+                    Capture token from NumbersProtocol.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -446,125 +424,30 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="configuration.task"
+            name="configuration.license"
             render={({ field }) => {
               return (
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/stability-ai-model"
+                    "connector-definitions/numbers-blockchain-nit"
                       ? ""
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Task *</Form.Label>
-                  <Select.Root
-                    onValueChange={field.onChange}
-                    defaultValue={field.value ?? undefined}
-                  >
-                    <Form.Control>
-                      <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI task" />
-                      </Select.Trigger>
-                    </Form.Control>
-                    <Select.Content>
-                      {["Text to Image", "Image to Image"].map((task) => (
-                        <Select.Item
-                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
-                          key={task}
-                          value={task}
-                        >
-                          <p className="my-auto">{task}</p>
-                        </Select.Item>
-                      ))}
-                    </Select.Content>
-                  </Select.Root>
-                  <Form.Description>AI task type.</Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
-          <Form.Field
-            control={form.control}
-            name="configuration.engine"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.getValues("connector_definition_name") ===
-                    "connector-definitions/stability-ai-model"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label htmlFor={field.name}>Engine</Form.Label>
-                  <Select.Root
-                    onValueChange={field.onChange}
-                    defaultValue={field.value ?? undefined}
-                  >
-                    <Form.Control>
-                      <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI engine" />
-                      </Select.Trigger>
-                    </Form.Control>
-                    <Select.Content>
-                      {[
-                        "stable-diffusion-v1",
-                        "stable-diffusion-v1-5",
-                        "stable-diffusion-512-v2-0",
-                        "stable-diffusion-768-v2-0",
-                        "stable-diffusion-512-v2-1",
-                        "stable-diffusion-768-v2-1",
-                        "stable-diffusion-xl-beta-v2-2-2",
-                        "stable-inpainting-v1-0",
-                        "stable-inpainting-512-v2-0",
-                        "esrgan-v1-x2plus",
-                        "stable-diffusion-x4-latent-upscaler",
-                      ].map((engine) => (
-                        <Select.Item
-                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
-                          key={engine}
-                          value={engine}
-                        >
-                          <p className="my-auto">{engine}</p>
-                        </Select.Item>
-                      ))}
-                    </Select.Content>
-                  </Select.Root>
-                  <Form.Description>Engine (model) to use.</Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
-          <Form.Field
-            control={form.control}
-            name="configuration.server_url"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.getValues("connector_definition_name") ===
-                    "connector-definitions/instill-ai-model"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label htmlFor={field.name}>Server URL *</Form.Label>
+                  <Form.Label htmlFor={field.name}>License *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="URL"
                         value={field.value ?? ""}
                       />
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Base URL for the Instill Model API.
+                    License of the Web3 asset.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -573,31 +456,172 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="configuration.model_id"
+            name="configuration.creator_name"
             render={({ field }) => {
               return (
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/instill-ai-model"
+                    "connector-definitions/numbers-blockchain-nit"
                       ? ""
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Model ID *</Form.Label>
+                  <Form.Label htmlFor={field.name}>Creator Name *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="ID"
                         value={field.value ?? ""}
                       />
                     </Input.Root>
                   </Form.Control>
-                  <Form.Description>ID of the model to use.</Form.Description>
+                  <Form.Description>
+                    Name of the creator who owns the Web3 asset.
+                  </Form.Description>
                   <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.asset_type"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label htmlFor={field.name}>Asset type *</Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value placeholder="Select an asset type" />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      {["images"].map((item) => (
+                        <Select.Item
+                          className="my-auto capitalize text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                          key={item}
+                          value={item}
+                        >
+                          <p className="my-auto">{item}</p>
+                        </Select.Item>
+                      ))}
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>
+                    The type of asset to be added to Blockchain.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.metadata_texts"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={cn(
+                    "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
+                    form.getValues("connector_definition_name") ===
+                      "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  )}
+                >
+                  <div className="space-y-1">
+                    <Form.Label>
+                      Add input texts to Blockchain&apos;s metadata
+                    </Form.Label>
+                    <Form.Description>
+                      Add the texts input as the metadata to Blockchain.
+                    </Form.Description>
+                  </div>
+                  <Form.Control>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </Form.Control>
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.metadata_structured_data"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={cn(
+                    "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
+                    form.getValues("connector_definition_name") ===
+                      "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  )}
+                >
+                  <div className="space-y-1">
+                    <Form.Label>
+                      Add input structured_data to Blockchain&apos;s metadata
+                    </Form.Label>
+                    <Form.Description>
+                      Add the structured_data input as the metadata to
+                      Blockchain.
+                    </Form.Description>
+                  </div>
+                  <Form.Control>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </Form.Control>
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.metadata_metadata"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={cn(
+                    "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
+                    form.getValues("connector_definition_name") ===
+                      "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  )}
+                >
+                  <div className="space-y-1">
+                    <Form.Label>
+                      Add input metadata to Blockchain&apos;s metadata
+                    </Form.Label>
+                    <Form.Description>
+                      Add the metadata input as the metadata to Blockchain.
+                    </Form.Description>
+                  </div>
+                  <Form.Control>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </Form.Control>
                 </Form.Item>
               );
             }}
@@ -611,7 +635,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 type="submit"
                 disabled={disabledTestConnection}
                 color="primary"
-                onClickHandler={handleTestAI}
+                onClickHandler={handleTestBlockchain}
               >
                 Test
               </SolidButton>
@@ -657,8 +681,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
         </div>
       </form>
       <DeleteResourceModal
-        resource={ai}
-        handleDeleteResource={handleDeleteAI}
+        resource={blockchain}
+        handleDeleteResource={handleDeleteBlockchain}
       />
     </Form.Root>
   );
