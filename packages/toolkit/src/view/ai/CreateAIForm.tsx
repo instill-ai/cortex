@@ -263,7 +263,10 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                     </Select.Trigger>
                   </Form.Control>
                   <Select.Content>
-                    <Select.Item value="connector-definitions/instill-ai-model">
+                    <Select.Item
+                      key="connector-definitions/instill-ai-model"
+                      value="connector-definitions/instill-ai-model"
+                    >
                       <div className="flex flex-row space-x-2">
                         <ModelLogo width={20} variant="square" />
                         <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
@@ -271,7 +274,10 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         </p>
                       </div>
                     </Select.Item>
-                    <Select.Item value="connector-definitions/stability-ai-model">
+                    <Select.Item
+                      key="connector-definitions/stability-ai-model"
+                      value="connector-definitions/stability-ai-model"
+                    >
                       <div className="flex flex-row space-x-2">
                         <ImageWithFallback
                           src={"/icons/stability-ai/logo.png"}
