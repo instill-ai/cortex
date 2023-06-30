@@ -187,6 +187,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="text"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -239,7 +240,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI connector type" />
+                        <Select.Value placeholder="Select a blockchain connector type" />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -256,7 +257,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                     </Select.Content>
                   </Select.Root>
                   <Form.Description>
-                    Fill with a short description.
+                    Select a blockchain connector type.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -284,6 +285,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="password"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -316,6 +318,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="text"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -348,6 +351,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="text"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>

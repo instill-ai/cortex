@@ -206,6 +206,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         type="text"
                         placeholder="AI's name"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -294,7 +295,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                     </Select.Content>
                   </Select.Root>
                   <Form.Description>
-                    Fill with a short description.
+                    Select an AI connector type.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -316,6 +317,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         type="text"
                         placeholder="API Key"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -444,6 +446,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         type="text"
                         placeholder="URL"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -477,6 +480,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         type="text"
                         placeholder="ID"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
