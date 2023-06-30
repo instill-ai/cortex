@@ -4,6 +4,7 @@ export * from "./Form";
 export * from "./Icons";
 export * from "./Input";
 export * from "./LinkButton";
+export * from "./Logos";
 export * from "./Select";
 export * from "./Separator";
 export * from "./Switch";
