@@ -22,3 +22,4 @@ export const Box = React.forwardRef<
     </IconBase>
   );
 });
+Box.displayName = "IconBox";

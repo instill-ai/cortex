@@ -22,3 +22,4 @@ export const Plus = React.forwardRef<
     </IconBase>
   );
 });
+Plus.displayName = "IconPlus";

@@ -22,3 +22,4 @@ export const AlertCircle = React.forwardRef<
     </IconBase>
   );
 });
+AlertCircle.displayName = "IconAlertCircle";

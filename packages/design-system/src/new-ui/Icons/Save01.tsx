@@ -22,3 +22,4 @@ export const Save01 = React.forwardRef<
     </IconBase>
   );
 });
+Save01.displayName = "IconSave01";

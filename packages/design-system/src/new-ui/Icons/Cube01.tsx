@@ -22,3 +22,4 @@ export const Cube01 = React.forwardRef<
     </IconBase>
   );
 });
+Cube01.displayName = "IconCube01";

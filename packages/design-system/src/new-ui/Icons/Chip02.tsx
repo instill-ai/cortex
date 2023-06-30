@@ -22,3 +22,4 @@ export const Chip02 = React.forwardRef<
     </IconBase>
   );
 });
+Chip02.displayName = "IconChip02";

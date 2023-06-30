@@ -22,3 +22,4 @@ export const Database01 = React.forwardRef<
     </IconBase>
   );
 });
+Database01.displayName = "IconDatabase01";
