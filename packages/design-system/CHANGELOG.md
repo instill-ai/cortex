@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.25.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.24.1...@instill-ai/design-system-v0.25.0) (2023-06-30)
+
+
+### Features
+
+* **design-system:** add MDL, StabilityAI logos and CubeOutline icon ([#545](https://github.com/instill-ai/design-system/issues/545)) ([1eda6bf](https://github.com/instill-ai/design-system/commit/1eda6bf85068018d6542a697c85f5421d44dbda2))
+* **design-system:** add Number, MDL, VDP Logos ([#542](https://github.com/instill-ai/design-system/issues/542)) ([20a40f7](https://github.com/instill-ai/design-system/commit/20a40f7b72010b9b8fb5f2c363a42d35d6b359d0))
+
 ## [0.24.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.24.0...@instill-ai/design-system-v0.24.1) (2023-06-30)
 
 

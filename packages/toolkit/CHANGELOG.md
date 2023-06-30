@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.50.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.49.1...@instill-ai/toolkit-v0.50.0) (2023-06-30)
+
+
+### Features
+
+* **toolkit:** add BlockchainsTable ([#546](https://github.com/instill-ai/design-system/issues/546)) ([8f30002](https://github.com/instill-ai/design-system/commit/8f3000226a80ada79429f5de1907f7c59fcf0255))
+* **toolkit:** add ConfigureBlockchainForm ([#547](https://github.com/instill-ai/design-system/issues/547)) ([5e46a95](https://github.com/instill-ai/design-system/commit/5e46a95d491a616d2bb41f2af93108aa3b5e7819))
+* **toolkit:** add CreateBlockchainForm  ([#544](https://github.com/instill-ai/design-system/issues/544)) ([dad67c1](https://github.com/instill-ai/design-system/commit/dad67c103e416b845757f86384fed2e526756271))
+
 ## [0.49.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.49.0...@instill-ai/toolkit-v0.49.1) (2023-06-30)
 
 
