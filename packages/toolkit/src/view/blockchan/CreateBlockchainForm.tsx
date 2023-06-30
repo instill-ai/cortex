@@ -406,7 +406,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item className="flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6">
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input texts to Blockchain's metadata
+                      Add input texts to Blockchain&apos;s metadata
                     </Form.Label>
                     <Form.Description>
                       Add the texts input as the metadata to Blockchain.
@@ -430,7 +430,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item className="flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6">
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input structured_data to Blockchain's metadata
+                      Add input structured_data to Blockchain&apos;s metadata
                     </Form.Label>
                     <Form.Description>
                       Add the structured_data input as the metadata to
@@ -455,7 +455,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item className="flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6">
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input metadata to Blockchain's metadata
+                      Add input metadata to Blockchain&apos;s metadata
                     </Form.Label>
                     <Form.Description>
                       Add the metadata input as the metadata to Blockchain.
