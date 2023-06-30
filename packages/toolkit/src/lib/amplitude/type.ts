@@ -1,6 +1,12 @@
 export type AmplitudeEventProperties = {
   type: "navigation" | "critical_action";
-  process?: "source" | "destination" | "pipeline" | "model";
+  process?:
+    | "source"
+    | "destination"
+    | "pipeline"
+    | "model"
+    | "ai"
+    | "blockchain";
 };
 
 export type AmplitudeEvent =

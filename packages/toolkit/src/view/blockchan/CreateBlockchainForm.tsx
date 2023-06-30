@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -10,6 +11,7 @@ import {
   Select,
   Switch,
   Textarea,
+  Logos,
 } from "@instill-ai/design-system";
 
 import { isAxiosError } from "axios";
@@ -185,6 +187,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="text"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -237,7 +240,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI connector type" />
+                        <Select.Value placeholder="Select a blockchain connector type" />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -246,16 +249,15 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         value="connector-definitions/numbers-blockchain-nit"
                         className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
-                        <div className="flex flex-row space-x-2 bg-inherit text-inherit">
-                          <p className="bg-inherit text-inherit">
-                            NumbersProtocol NIT
-                          </p>
+                        <div className="flex flex-row space-x-2">
+                          <Logos.Number className="w-5 h-5 my-auto" />
+                          <p className="my-auto">NumbersProtocol NIT</p>
                         </div>
                       </Select.Item>
                     </Select.Content>
                   </Select.Root>
                   <Form.Description>
-                    Fill with a short description.
+                    Select a blockchain connector type.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -283,6 +285,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="password"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -315,6 +318,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="text"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -347,6 +351,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         id={field.name}
                         type="text"
                         value={field.value ?? ""}
+                        autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
@@ -363,7 +368,14 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
             name="configuration.asset_type"
             render={({ field }) => {
               return (
-                <Form.Item>
+                <Form.Item
+                  className={
+                    form.getValues("connector_definition_name") ===
+                    "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  }
+                >
                   <Form.Label htmlFor={field.name}>Asset type *</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
@@ -381,11 +393,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                           key={item}
                           value={item}
                         >
-                          <div className="flex flex-row bg-inherit text-inherit">
-                            <p className="my-auto bg-inherit text-inherit">
-                              {item}
-                            </p>
-                          </div>
+                          <p className="my-auto">{item}</p>
                         </Select.Item>
                       ))}
                     </Select.Content>
@@ -403,7 +411,15 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
             name="configuration.metadata_texts"
             render={({ field }) => {
               return (
-                <Form.Item className="flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6">
+                <Form.Item
+                  className={cn(
+                    "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
+                    form.getValues("connector_definition_name") ===
+                      "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  )}
+                >
                   <div className="space-y-1">
                     <Form.Label>
                       Add input texts to Blockchain&apos;s metadata
@@ -427,7 +443,15 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
             name="configuration.metadata_structured_data"
             render={({ field }) => {
               return (
-                <Form.Item className="flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6">
+                <Form.Item
+                  className={cn(
+                    "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
+                    form.getValues("connector_definition_name") ===
+                      "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  )}
+                >
                   <div className="space-y-1">
                     <Form.Label>
                       Add input structured_data to Blockchain&apos;s metadata
@@ -452,7 +476,15 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
             name="configuration.metadata_metadata"
             render={({ field }) => {
               return (
-                <Form.Item className="flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6">
+                <Form.Item
+                  className={cn(
+                    "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
+                    form.getValues("connector_definition_name") ===
+                      "connector-definitions/numbers-blockchain-nit"
+                      ? ""
+                      : "hidden"
+                  )}
+                >
                   <div className="space-y-1">
                     <Form.Label>
                       Add input metadata to Blockchain&apos;s metadata
