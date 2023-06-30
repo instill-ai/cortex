@@ -317,7 +317,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                 </Form.Control>
                 <Form.Description>
                   Access to your API keys can then be managed through Stability
-                  AI's Account page.
+                  AI&apos;s Account page.
                 </Form.Description>
                 <Form.Message />
               </Form.Item>

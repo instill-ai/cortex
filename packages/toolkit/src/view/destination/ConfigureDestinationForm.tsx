@@ -311,6 +311,7 @@ export const ConfigureDestinationForm = (
       return;
     }
   }, [
+    destination.id,
     amplitudeIsInit,
     formYup,
     fieldValues,
