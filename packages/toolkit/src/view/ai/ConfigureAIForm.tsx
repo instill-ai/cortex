@@ -384,7 +384,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       </div>
                     </Select.Item>
                     <Select.Item
-                      key="connector-definitions/instill-ai-model"
+                      key="connector-definitions/stability-ai-model"
                       value="connector-definitions/stability-ai-model"
                     >
                       <div className="flex flex-row space-x-2">
