@@ -22,8 +22,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#F6F6F6"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M14.2329 0V6.79066H20.9279V13.4857H21.098V6.79066H27.793V0H41.0129V40H27.793V20.0106H27.6229V26.7056H14.403V20.0106H14.2329V40H1.01293V0H14.2329ZM10.9704 3.26246V10.0531H17.6654V16.7481H10.9704V36.7375H4.2754V3.26246H10.9704ZM17.6654 16.7481V23.4431H24.3604V16.7481H31.0554V36.7375H37.7505V3.26246H31.0554V10.0531H24.3604V16.7481H17.6654Z"
             fill="#2B2B2B"
           />
@@ -32,8 +32,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#FFDF3A"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M0.987091 0H14.4483V20.062H0.987091V0ZM4.24955 3.26246V16.7995H11.1859V3.26246H4.24955Z"
             fill="#2B2B2B"
           />
@@ -46,8 +46,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#40A8F5"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M37.7508 20.0095V16.7471H31.0559L31.0559 20.0095H37.7508Z"
             fill="#2B2B2B"
           />
@@ -72,8 +72,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#F6F6F6"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M57.1632 0.604324V18.228H70.373V26.9633H48.4279V0.604324H57.1632ZM68.2281 20.373V24.8183H50.5729V2.74929H55.0182V20.373H68.2281Z"
             fill="#2B2B2B"
           />
@@ -90,8 +90,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#40A8F5"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M50.5729 14.9359H55.0662V17.0808H50.5729V14.9359Z"
             fill="#2B2B2B"
           />
@@ -100,8 +100,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#F6F6F6"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M46.1591 0.641069V5.05487H50.5729V22.5862H46.1591V27H24.214V0.641069H46.1591ZM44.0141 20.4412V24.855H26.3589V2.78603H44.0141V7.19983H30.7727V20.4412H44.0141ZM32.9177 18.2963H41.8692V9.3448H32.9177V18.2963ZM44.0141 7.19983V20.4412H48.4279V7.19983H44.0141Z"
             fill="#2B2B2B"
           />
@@ -114,8 +114,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#FFDF3A"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M34.0767 24.8845V20.3911H36.2217V24.8845H34.0767Z"
             fill="#2B2B2B"
           />
@@ -124,8 +124,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#FFDF3A"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M30.7786 17.1176H26.3589V14.9726H30.7786V17.1176Z"
             fill="#2B2B2B"
           />
@@ -134,8 +134,8 @@ export const ModelLogo = (props: ModelLogoProps) => {
             fill="#F6F6F6"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M8.70372 0.641023V5.11788H13.1175V9.53168H13.2414V5.11788H17.6552V0.641023H26.3589V27H17.6552V13.8216H17.5313V18.2354H8.8276V13.8216H8.70372V27H0V0.641023H8.70372ZM6.55876 2.78599V7.26284H10.9726V11.6766H6.55876V24.855H2.14496V2.78599H6.55876ZM10.9726 11.6766V16.0904H15.3864V11.6766H19.8002V24.855H24.214V2.78599H19.8002V7.26284H15.3864V11.6766H10.9726Z"
             fill="#2B2B2B"
           />
