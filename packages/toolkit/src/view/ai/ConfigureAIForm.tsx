@@ -8,20 +8,28 @@ import {
   Icons,
   Input,
   ModelLogo,
+  OutlineButton,
   ProgressMessageBoxState,
   Select,
+  SolidButton,
   Textarea,
 } from "@instill-ai/design-system";
-import { ImageWithFallback } from "../../components";
+import { DeleteResourceModal, ImageWithFallback } from "../../components";
 import {
-  CreateConnectorPayload,
+  ConnectorWithDefinition,
+  ModalStore,
   Nullable,
+  UpdateConnectorPayload,
   getInstillApiErrorMessage,
   sendAmplitudeData,
+  testConnectorConnectionAction,
   useAmplitudeCtx,
-  useCreateConnector,
+  useDeleteConnector,
+  useModalStore,
+  useUpdateConnector,
 } from "../../lib";
 import { isAxiosError } from "axios";
+import { shallow } from "zustand/shallow";
 
 const CreateAIFormSchema = z
   .object({
@@ -96,18 +104,30 @@ const CreateAIFormSchema = z
     }
   });
 
-export type CreateAIFormProps = {
+const modalSelector = (state: ModalStore) => ({
+  closeModal: state.closeModal,
+  openModal: state.openModal,
+});
+
+export type ConfigureAIFormProps = {
   accessToken: Nullable<string>;
-  onCreate: Nullable<() => void>;
+  onDelete: Nullable<() => void>;
+  ai: ConnectorWithDefinition;
+  disabledConfigure?: boolean;
+  disabledDelete?: boolean;
 };
 
-export const CreateAIForm = (props: CreateAIFormProps) => {
-  const { accessToken, onCreate } = props;
+export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
+  const { accessToken, onDelete, ai, disabledConfigure, disabledDelete } =
+    props;
   const { amplitudeIsInit } = useAmplitudeCtx();
+
+  const { openModal, closeModal } = useModalStore(modalSelector, shallow);
+
   const form = useForm<z.infer<typeof CreateAIFormSchema>>({
     resolver: zodResolver(CreateAIFormSchema),
     defaultValues: {
-      connector_definition_name: "connector-definitions/instill-ai-model",
+      ...ai,
     },
   });
 
@@ -119,7 +139,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
       status: null,
     });
 
-  const createConnector = useCreateConnector();
+  const updateConnector = useUpdateConnector();
 
   function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
     form.trigger([
@@ -134,9 +154,8 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
       "id",
     ]);
 
-    const payload: CreateConnectorPayload = {
+    const payload: UpdateConnectorPayload = {
       connectorName: `connectors/${data.id}`,
-      connector_definition_name: data.connector_definition_name,
       description: data.description,
       configuration: data.configuration,
     };
@@ -148,7 +167,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
       message: "Creating...",
     }));
 
-    createConnector.mutate(
+    updateConnector.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -164,7 +183,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               process: "source",
             });
           }
-          if (onCreate) onCreate();
+          if (onDelete) onDelete();
         },
         onError: (error) => {
           if (isAxiosError(error)) {
@@ -179,13 +198,101 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               activate: true,
               status: "error",
               description: null,
-              message: "Something went wrong when create the AI",
+              message: "Something went wrong when update the AI",
             }));
           }
         },
       }
     );
   }
+
+  const deleteConnector = useDeleteConnector();
+  const handleDeleteAI = React.useCallback(() => {
+    if (!ai) return;
+
+    setMessageBoxState(() => ({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Deleting...",
+    }));
+
+    closeModal();
+
+    deleteConnector.mutate(
+      {
+        connectorName: ai.name,
+        accessToken,
+      },
+      {
+        onSuccess: () => {
+          setMessageBoxState(() => ({
+            activate: true,
+            status: "success",
+            description: null,
+            message: "Succeed.",
+          }));
+
+          if (amplitudeIsInit) {
+            sendAmplitudeData("delete_source", {
+              type: "critical_action",
+              process: "source",
+            });
+          }
+          if (onDelete) onDelete();
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            setMessageBoxState(() => ({
+              activate: true,
+              message: error.message,
+              description: getInstillApiErrorMessage(error),
+              status: "error",
+            }));
+          } else {
+            setMessageBoxState(() => ({
+              activate: true,
+              status: "error",
+              description: null,
+              message: "Something went wrong when delete the source",
+            }));
+          }
+        },
+      }
+    );
+  }, [ai, amplitudeIsInit, deleteConnector, closeModal, onDelete, accessToken]);
+
+  const handleTestAI = async function () {
+    if (!ai) return;
+
+    setMessageBoxState(() => ({
+      activate: true,
+      status: "progressing",
+      description: null,
+      message: "Testing...",
+    }));
+
+    try {
+      const res = await testConnectorConnectionAction({
+        connectorName: ai.name,
+        accessToken,
+      });
+
+      setMessageBoxState(() => ({
+        activate: true,
+        status: res.state === "STATE_ERROR" ? "error" : "success",
+        description: null,
+        message: `The AI's state is ${res.state}`,
+      }));
+    } catch (err) {
+      setMessageBoxState(() => ({
+        activate: true,
+        status: "error",
+        description: null,
+        message: "Something went wrong when test the AI",
+      }));
+    }
+  };
 
   return (
     <Form.Root {...form}>
@@ -208,6 +315,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                       type="text"
                       placeholder="AI's name"
                       value={field.value ?? ""}
+                      disabled={true}
                     />
                   </Input.Root>
                 </Form.Control>
@@ -256,6 +364,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                 <Select.Root
                   onValueChange={field.onChange}
                   defaultValue={field.value}
+                  disabled={true}
                 >
                   <Form.Control>
                     <Select.Trigger className="w-full !rounded-none">
@@ -263,7 +372,10 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                     </Select.Trigger>
                   </Form.Control>
                   <Select.Content>
-                    <Select.Item value="connector-definitions/instill-ai-model">
+                    <Select.Item
+                      key="connector-definitions/instill-ai-model"
+                      value="connector-definitions/instill-ai-model"
+                    >
                       <div className="flex flex-row space-x-2">
                         <ModelLogo width={20} variant="square" />
                         <p className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary">
@@ -271,7 +383,10 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         </p>
                       </div>
                     </Select.Item>
-                    <Select.Item value="connector-definitions/stability-ai-model">
+                    <Select.Item
+                      key="connector-definitions/instill-ai-model"
+                      value="connector-definitions/stability-ai-model"
+                    >
                       <div className="flex flex-row space-x-2">
                         <ImageWithFallback
                           src={"/icons/stability-ai/logo.png"}
@@ -479,26 +594,62 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
           }}
         />
 
-        <div className="flex flex-row">
-          <BasicProgressMessageBox
-            state={messageBoxState}
-            setActivate={(activate) =>
-              setMessageBoxState((prev) => ({
-                ...prev,
-                activate,
-              }))
-            }
-            width="w-[25vw]"
-            closable={true}
-          />
-          <button
-            className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto"
-            type="submit"
-          >
-            Set up
-          </button>
+        <div className="flex flex-col">
+          <div className="mb-10 flex flex-row items-center">
+            <div className="flex flex-row items-center space-x-5 mr-auto">
+              <SolidButton
+                type="submit"
+                disabled={false}
+                color="primary"
+                onClickHandler={handleTestAI}
+              >
+                Test
+              </SolidButton>
+              <button
+                className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
+                type="submit"
+                disabled={
+                  disabledConfigure
+                    ? true
+                    : form.formState.isDirty === true
+                    ? false
+                    : true
+                }
+              >
+                Update
+              </button>
+            </div>
+
+            <OutlineButton
+              disabled={disabledDelete ? true : false}
+              onClickHandler={() => openModal()}
+              position="my-auto"
+              type="button"
+              color="danger"
+              hoveredShadow={null}
+            >
+              Delete
+            </OutlineButton>
+          </div>
+          <div className="flex">
+            <BasicProgressMessageBox
+              state={messageBoxState}
+              setActivate={(activate) =>
+                setMessageBoxState((prev) => ({
+                  ...prev,
+                  activate,
+                }))
+              }
+              width="w-[25vw]"
+              closable={true}
+            />
+          </div>
         </div>
       </form>
+      <DeleteResourceModal
+        resource={ai}
+        handleDeleteResource={handleDeleteAI}
+      />
     </Form.Root>
   );
 };
