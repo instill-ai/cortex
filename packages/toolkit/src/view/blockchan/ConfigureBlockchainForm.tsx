@@ -263,39 +263,42 @@ export const ConfigureBlockchainForm = (
     ]
   );
 
-  const handleTestBlockchain = React.useCallback(async function () {
-    if (!blockchain) return;
-
-    setMessageBoxState(() => ({
-      activate: true,
-      status: "progressing",
-      description: null,
-      message: "Testing...",
-    }));
-
-    try {
-      const res = await testConnectorConnectionAction({
-        connectorName: blockchain.name,
-        accessToken,
-      });
+  const handleTestBlockchain = React.useCallback(
+    async function () {
+      if (!blockchain) return;
 
       setMessageBoxState(() => ({
         activate: true,
-        status: res.state === "STATE_ERROR" ? "error" : "success",
+        status: "progressing",
         description: null,
-        message: `The blockchain's state is ${res.state}`,
+        message: "Testing...",
       }));
 
-      if (onTestConnection) onTestConnection();
-    } catch (err) {
-      setMessageBoxState(() => ({
-        activate: true,
-        status: "error",
-        description: null,
-        message: "Something went wrong when test the blockchain",
-      }));
-    }
-  }, []);
+      try {
+        const res = await testConnectorConnectionAction({
+          connectorName: blockchain.name,
+          accessToken,
+        });
+
+        setMessageBoxState(() => ({
+          activate: true,
+          status: res.state === "STATE_ERROR" ? "error" : "success",
+          description: null,
+          message: `The blockchain's state is ${res.state}`,
+        }));
+
+        if (onTestConnection) onTestConnection();
+      } catch (err) {
+        setMessageBoxState(() => ({
+          activate: true,
+          status: "error",
+          description: null,
+          message: "Something went wrong when test the blockchain",
+        }));
+      }
+    },
+    [accessToken, blockchain, onTestConnection]
+  );
 
   return (
     <Form.Root {...form}>

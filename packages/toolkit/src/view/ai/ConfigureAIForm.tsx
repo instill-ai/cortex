@@ -268,39 +268,42 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     );
   }, [ai, amplitudeIsInit, deleteConnector, closeModal, onDelete, accessToken]);
 
-  const handleTestAI = async function () {
-    if (!ai) return;
-
-    setMessageBoxState(() => ({
-      activate: true,
-      status: "progressing",
-      description: null,
-      message: "Testing...",
-    }));
-
-    try {
-      const res = await testConnectorConnectionAction({
-        connectorName: ai.name,
-        accessToken,
-      });
+  const handleTestAI = React.useCallback(
+    async function () {
+      if (!ai) return;
 
       setMessageBoxState(() => ({
         activate: true,
-        status: res.state === "STATE_ERROR" ? "error" : "success",
+        status: "progressing",
         description: null,
-        message: `The AI's state is ${res.state}`,
+        message: "Testing...",
       }));
 
-      if (onTestConnection) onTestConnection();
-    } catch (err) {
-      setMessageBoxState(() => ({
-        activate: true,
-        status: "error",
-        description: null,
-        message: "Something went wrong when test the AI",
-      }));
-    }
-  };
+      try {
+        const res = await testConnectorConnectionAction({
+          connectorName: ai.name,
+          accessToken,
+        });
+
+        setMessageBoxState(() => ({
+          activate: true,
+          status: res.state === "STATE_ERROR" ? "error" : "success",
+          description: null,
+          message: `The AI's state is ${res.state}`,
+        }));
+
+        if (onTestConnection) onTestConnection();
+      } catch (err) {
+        setMessageBoxState(() => ({
+          activate: true,
+          status: "error",
+          description: null,
+          message: "Something went wrong when test the AI",
+        }));
+      }
+    },
+    [accessToken, ai, onTestConnection]
+  );
 
   return (
     <Form.Root {...form}>
