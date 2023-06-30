@@ -1,5 +1,26 @@
 # Changelog
 
+## [0.49.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.48.0...@instill-ai/toolkit-v0.49.0) (2023-06-30)
+
+
+### Features
+
+* **toolkit:** adapt new instill-ai base/vdp/model structure ([#527](https://github.com/instill-ai/design-system/issues/527)) ([aa26467](https://github.com/instill-ai/design-system/commit/aa26467827c5dad0505983480a281f8c9232e43b))
+* **toolkit:** adapt singular connector endpoint ([#529](https://github.com/instill-ai/design-system/issues/529)) ([4ac3734](https://github.com/instill-ai/design-system/commit/4ac37348a527af527047f41acf733cbf2ed543ba))
+* **toolkit:** add CreateAIForm and AIsTable ([#533](https://github.com/instill-ai/design-system/issues/533)) ([ad70594](https://github.com/instill-ai/design-system/commit/ad7059431248b1c92a46e60adc14c125d0c73d2f))
+
+
+### Bug Fixes
+
+* **toolkit:** fix duplicated key ([#537](https://github.com/instill-ai/design-system/issues/537)) ([06ddb70](https://github.com/instill-ai/design-system/commit/06ddb7045dbc4fbf84a511d6a5f0ab95a3ddce20))
+* **toolkit:** fix VisibilityCell wording ([#539](https://github.com/instill-ai/design-system/issues/539)) ([bde0800](https://github.com/instill-ai/design-system/commit/bde0800721382f7a553456c168107f41d3a039c8))
+
+
+### Miscellaneous
+
+* **toolkit:** add multiple on action at ConfigureAIForm ([#538](https://github.com/instill-ai/design-system/issues/538)) ([01e07c2](https://github.com/instill-ai/design-system/commit/01e07c2836613f5570a81c04908beae61b099b19))
+* **toolkit:** replace airbyte_secret with credential_field ([#534](https://github.com/instill-ai/design-system/issues/534)) ([9d15496](https://github.com/instill-ai/design-system/commit/9d154963b90b929abc696430e6109e8cf4bf9714))
+
 ## [0.48.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.47.5...@instill-ai/toolkit-v0.48.0) (2023-06-27)
 
 
