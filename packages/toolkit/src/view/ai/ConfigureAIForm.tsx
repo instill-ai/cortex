@@ -325,6 +325,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         placeholder="AI's name"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        disabled={true}
                       />
                     </Input.Root>
                   </Form.Control>
