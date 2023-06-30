@@ -16,7 +16,11 @@ export const VisibilityCell = ({
     <td>
       <div className={cn("flex flex-row gap-x-2", width, padding)}>
         <p className="my-auto flex text-instillGrey90 text-instill-body">
-          {visibility}
+          {visibility === "VISIBILITY_PRIVATE"
+            ? "Private"
+            : visibility === "VISIBILITY_PUBLIC"
+            ? "Public"
+            : "Unspecified"}
         </p>
       </div>
     </td>
