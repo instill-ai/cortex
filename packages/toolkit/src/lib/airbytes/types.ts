@@ -13,7 +13,7 @@ import * as React from "react";
  */
 
 type AirbyteJsonSchemaProps = {
-  airbyte_secret?: boolean;
+  credential_field?: boolean;
   is_auth?: boolean;
   airbyte_hidden?: boolean;
   multiline?: boolean;
