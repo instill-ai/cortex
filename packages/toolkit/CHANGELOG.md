@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.50.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.2...@instill-ai/toolkit-v0.50.3) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix getComponentsFromPipelineRecipe not getting data and cause error ([#553](https://github.com/instill-ai/design-system/issues/553)) ([e72f1b6](https://github.com/instill-ai/design-system/commit/e72f1b6e0002e78185d31e1f7f5427b9e96d77c5))
+
 ## [0.50.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.1...@instill-ai/toolkit-v0.50.2) (2023-07-03)
 
 
