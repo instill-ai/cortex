@@ -7,4 +7,5 @@ export * from "./ModelTaskCell";
 export * from "./NameCell";
 export * from "./PipelinesCell";
 export * from "./SkeletonCell";
+export * from "./TextCell";
 export * from "./VisibilityCell";
