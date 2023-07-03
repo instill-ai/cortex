@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.50.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.1...@instill-ai/toolkit-v0.50.2) (2023-07-03)
+
+
+### Bug Fixes
+
+* fix Connector configuration type ([#552](https://github.com/instill-ai/design-system/issues/552)) ([76f8530](https://github.com/instill-ai/design-system/commit/76f85304c004c5ebb8bab6b796ea6bcb9f2a6ace))
+* **toolkit:** fix type typo and export form schema in AI and blockchain forms ([#550](https://github.com/instill-ai/design-system/issues/550)) ([99e75fa](https://github.com/instill-ai/design-system/commit/99e75fa97240581b662e195374b37f9216751829))
+
 ## [0.50.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.0...@instill-ai/toolkit-v0.50.1) (2023-06-30)
 
 
