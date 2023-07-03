@@ -29,7 +29,7 @@ export type Connector = {
   connector_type: ConnectorType;
   task: string;
   description: string;
-  configuration: null;
+  configuration: Record<string, any> | Record<string, never>;
   state: ConnectorState;
   tombstone: boolean;
   user: string;
