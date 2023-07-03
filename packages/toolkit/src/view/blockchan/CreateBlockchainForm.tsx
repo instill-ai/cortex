@@ -24,7 +24,7 @@ import {
   useCreateConnector,
 } from "../../lib";
 
-const CreateAIFormSchema = z
+export const CreateBlockchainFormSchema = z
   .object({
     id: z.string().min(1, { message: "ID is required" }),
     description: z.string().optional(),
@@ -86,8 +86,8 @@ export type CreateBlockchainFormProps = {
 export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
   const { accessToken, onCreate } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
-  const form = useForm<z.infer<typeof CreateAIFormSchema>>({
-    resolver: zodResolver(CreateAIFormSchema),
+  const form = useForm<z.infer<typeof CreateBlockchainFormSchema>>({
+    resolver: zodResolver(CreateBlockchainFormSchema),
     defaultValues: {
       connector_definition_name: "connector-definitions/numbers-blockchain-nit",
       configuration: {
@@ -108,7 +108,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
 
   const createConnector = useCreateConnector();
 
-  function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
+  function onSubmit(data: z.infer<typeof CreateBlockchainFormSchema>) {
     form.trigger([
       "configuration",
       "connector_definition_name",

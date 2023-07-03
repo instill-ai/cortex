@@ -31,7 +31,7 @@ import {
 import { isAxiosError } from "axios";
 import { shallow } from "zustand/shallow";
 
-const CreateAIFormSchema = z
+export const ConfigureAIFormSchema = z
   .object({
     id: z.string().min(1, { message: "ID is required" }),
     description: z.string().optional(),
@@ -135,8 +135,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
 
-  const form = useForm<z.infer<typeof CreateAIFormSchema>>({
-    resolver: zodResolver(CreateAIFormSchema),
+  const form = useForm<z.infer<typeof ConfigureAIFormSchema>>({
+    resolver: zodResolver(ConfigureAIFormSchema),
     defaultValues: {
       ...ai,
     },
@@ -152,7 +152,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
   const updateConnector = useUpdateConnector();
 
-  function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
+  function onSubmit(data: z.infer<typeof ConfigureAIFormSchema>) {
     form.trigger([
       "configuration",
       "connector_definition_name",
