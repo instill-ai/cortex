@@ -24,7 +24,7 @@ import {
   useCreateConnector,
 } from "../../lib";
 
-const CreateAIFormSchema = z
+export const CreateAIFormSchema = z
   .object({
     id: z.string().min(1, { message: "ID is required" }),
     description: z.string().optional(),

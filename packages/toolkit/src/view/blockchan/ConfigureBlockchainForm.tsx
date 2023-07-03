@@ -32,7 +32,7 @@ import {
 import { DeleteResourceModal } from "../../components";
 import { shallow } from "zustand/shallow";
 
-const CreateAIFormSchema = z
+export const ConfigureAIFormSchema = z
   .object({
     id: z.string().min(1, { message: "ID is required" }),
     description: z.string().optional(),
@@ -120,8 +120,8 @@ export const ConfigureBlockchainForm = (
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
 
-  const form = useForm<z.infer<typeof CreateAIFormSchema>>({
-    resolver: zodResolver(CreateAIFormSchema),
+  const form = useForm<z.infer<typeof ConfigureAIFormSchema>>({
+    resolver: zodResolver(ConfigureAIFormSchema),
     defaultValues: {
       ...blockchain,
     },
@@ -137,7 +137,7 @@ export const ConfigureBlockchainForm = (
 
   const updateConnector = useUpdateConnector();
 
-  function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
+  function onSubmit(data: z.infer<typeof ConfigureAIFormSchema>) {
     form.trigger([
       "configuration",
       "connector_definition_name",
