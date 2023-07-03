@@ -7,6 +7,7 @@ import {
   TableError,
   SkeletonCell,
   type TableHeadItem,
+  TextCell,
 } from "../../components";
 import { Pipeline, getComponentsFromPipelineRecipe } from "../../lib";
 
@@ -57,6 +58,21 @@ export const PipelineTable = (props: PipelineTableProps) => {
     return <TableError />;
   }
 
+  const sourceComponent = getComponentsFromPipelineRecipe({
+    recipe: pipeline.recipe,
+    connectorType: "CONNECTOR_TYPE_SOURCE",
+  });
+
+  const destinationComponent = getComponentsFromPipelineRecipe({
+    recipe: pipeline.recipe,
+    connectorType: "CONNECTOR_TYPE_DESTINATION",
+  });
+
+  const aiComponent = getComponentsFromPipelineRecipe({
+    recipe: pipeline.recipe,
+    connectorType: "CONNECTOR_TYPE_AI",
+  });
+
   return (
     <table className={cn("w-full table-auto border-collapse", marginBottom)}>
       <TableHead
@@ -74,46 +90,31 @@ export const PipelineTable = (props: PipelineTableProps) => {
             </>
           ) : (
             <>
-              <ConnectionTypeCell
-                padding="py-2 pl-6"
-                width={null}
-                connectorDefinition={
-                  getComponentsFromPipelineRecipe({
-                    recipe: pipeline.recipe,
-                    connectorType: "CONNECTOR_TYPE_SOURCE",
-                  })[0].resource_detail.connector_definition
-                }
-                connectorName={
-                  getComponentsFromPipelineRecipe({
-                    recipe: pipeline.recipe,
-                    connectorType: "CONNECTOR_TYPE_SOURCE",
-                  })[0].resource_name
-                }
-              />
-              <ModelsCell
-                models={getComponentsFromPipelineRecipe({
-                  recipe: pipeline.recipe,
-                  connectorType: "CONNECTOR_TYPE_AI",
-                })}
-                width={null}
-                padding="py-2"
-              />
-              <ConnectionTypeCell
-                width={null}
-                padding="py-2 pr-6"
-                connectorDefinition={
-                  getComponentsFromPipelineRecipe({
-                    recipe: pipeline.recipe,
-                    connectorType: "CONNECTOR_TYPE_DESTINATION",
-                  })[0].resource_detail.connector_definition
-                }
-                connectorName={
-                  getComponentsFromPipelineRecipe({
-                    recipe: pipeline.recipe,
-                    connectorType: "CONNECTOR_TYPE_DESTINATION",
-                  })[0].resource_name
-                }
-              />
+              {sourceComponent[0] ? (
+                <ConnectionTypeCell
+                  width={null}
+                  connectorDefinition={
+                    sourceComponent[0].resource_detail.connector_definition
+                  }
+                  connectorName={sourceComponent[0].resource_name}
+                  padding="py-2 pl-6"
+                />
+              ) : (
+                <TextCell text="Not set" width={null} padding="py-2" />
+              )}
+              <ModelsCell models={aiComponent} width={null} padding="py-2" />
+              {destinationComponent[0] ? (
+                <ConnectionTypeCell
+                  width={null}
+                  connectorDefinition={
+                    destinationComponent[0].resource_detail.connector_definition
+                  }
+                  connectorName={destinationComponent[0].resource_name}
+                  padding="py-2 pr-6"
+                />
+              ) : (
+                <TextCell text="Not set" width={null} padding="py-2" />
+              )}
             </>
           )}
         </tr>

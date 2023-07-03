@@ -49,7 +49,7 @@ export const useUpdateConnector = () => {
             connectorType: connector.connector_type,
           });
 
-          return components?.some((e) => e.resource_detail.id === connector.id);
+          return components.some((e) => e.resource_detail.id === connector.id);
         });
 
         const connectorWithPipelines: ConnectorWithPipelines = {

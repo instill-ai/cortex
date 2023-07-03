@@ -11,6 +11,7 @@ import {
   TableError,
   SkeletonCell,
   PaginationListContainerProps,
+  TextCell,
 } from "../../components";
 import {
   chunk,
@@ -163,67 +164,73 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                 </tr>
               ))
             : pipelinePages[currentPage]
-            ? pipelinePages[currentPage].map((pipeline) => (
-                <tr
-                  key={pipeline.name}
-                  className="bg-white border border-instillGrey20"
-                >
-                  <NameCell
-                    name={pipeline.id}
-                    width={null}
-                    state={
-                      pipelinesWatchState[pipeline.name]
-                        ? pipelinesWatchState[pipeline.name].state
-                        : "STATE_UNSPECIFIED"
-                    }
-                    padding="py-2 pl-6"
-                    link={`/pipelines/${pipeline.id}`}
-                  />
-                  <ModeCell width="" mode={pipeline.mode} padding="py-2" />
-                  <ConnectionTypeCell
-                    width={null}
-                    connectorDefinition={
-                      getComponentsFromPipelineRecipe({
-                        recipe: pipeline.recipe,
-                        connectorType: "CONNECTOR_TYPE_SOURCE",
-                      })[0].resource_detail.connector_definition
-                    }
-                    connectorName={
-                      getComponentsFromPipelineRecipe({
-                        recipe: pipeline.recipe,
-                        connectorType: "CONNECTOR_TYPE_SOURCE",
-                      })[0].resource_name
-                    }
-                    padding="py-2"
-                  />
-                  <ModelCountsCell
-                    modelCount={
-                      getComponentsFromPipelineRecipe({
-                        recipe: pipeline.recipe,
-                        connectorType: "CONNECTOR_TYPE_AI",
-                      })?.length || 0
-                    }
-                    width={null}
-                    padding="py-2"
-                  />
-                  <ConnectionTypeCell
-                    width={null}
-                    connectorDefinition={
-                      getComponentsFromPipelineRecipe({
-                        recipe: pipeline.recipe,
-                        connectorType: "CONNECTOR_TYPE_DESTINATION",
-                      })[0].resource_detail.connector_definition
-                    }
-                    connectorName={
-                      getComponentsFromPipelineRecipe({
-                        recipe: pipeline.recipe,
-                        connectorType: "CONNECTOR_TYPE_DESTINATION",
-                      })[0].resource_name
-                    }
-                    padding="py-2 pr-6"
-                  />
-                </tr>
-              ))
+            ? pipelinePages[currentPage].map((pipeline) => {
+                const sourceComponent = getComponentsFromPipelineRecipe({
+                  recipe: pipeline.recipe,
+                  connectorType: "CONNECTOR_TYPE_SOURCE",
+                });
+
+                const destinationComponent = getComponentsFromPipelineRecipe({
+                  recipe: pipeline.recipe,
+                  connectorType: "CONNECTOR_TYPE_DESTINATION",
+                });
+
+                const aiComponent = getComponentsFromPipelineRecipe({
+                  recipe: pipeline.recipe,
+                  connectorType: "CONNECTOR_TYPE_AI",
+                });
+
+                return (
+                  <tr
+                    key={pipeline.name}
+                    className="bg-white border border-instillGrey20"
+                  >
+                    <NameCell
+                      name={pipeline.id}
+                      width={null}
+                      state={
+                        pipelinesWatchState[pipeline.name]
+                          ? pipelinesWatchState[pipeline.name].state
+                          : "STATE_UNSPECIFIED"
+                      }
+                      padding="py-2 pl-6"
+                      link={`/pipelines/${pipeline.id}`}
+                    />
+                    <ModeCell width="" mode={pipeline.mode} padding="py-2" />
+                    {sourceComponent[0] ? (
+                      <ConnectionTypeCell
+                        width={null}
+                        connectorDefinition={
+                          sourceComponent[0].resource_detail
+                            .connector_definition
+                        }
+                        connectorName={sourceComponent[0].resource_name}
+                        padding="py-2"
+                      />
+                    ) : (
+                      <TextCell text="Not set" width={null} padding="py-2" />
+                    )}
+                    <ModelCountsCell
+                      modelCount={aiComponent?.length || 0}
+                      width={null}
+                      padding="py-2"
+                    />
+                    {destinationComponent[0] ? (
+                      <ConnectionTypeCell
+                        width={null}
+                        connectorDefinition={
+                          destinationComponent[0].resource_detail
+                            .connector_definition
+                        }
+                        connectorName={destinationComponent[0].resource_name}
+                        padding="py-2 pr-6"
+                      />
+                    ) : (
+                      <TextCell text="Not set" width={null} padding="py-2" />
+                    )}
+                  </tr>
+                );
+              })
             : null}
         </tbody>
       </table>
