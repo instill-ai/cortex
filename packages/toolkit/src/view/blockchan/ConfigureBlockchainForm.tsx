@@ -275,16 +275,16 @@ export const ConfigureBlockchainForm = (
       }));
 
       try {
-        const res = await testConnectorConnectionAction({
+        const state = await testConnectorConnectionAction({
           connectorName: blockchain.name,
           accessToken,
         });
 
         setMessageBoxState(() => ({
           activate: true,
-          status: res.state === "STATE_ERROR" ? "error" : "success",
+          status: state === "STATE_ERROR" ? "error" : "success",
           description: null,
-          message: `The blockchain's state is ${res.state}`,
+          message: `The blockchain's state is ${state}`,
         }));
 
         if (onTestConnection) onTestConnection();

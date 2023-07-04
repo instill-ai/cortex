@@ -158,16 +158,16 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     }));
 
     try {
-      const res = await testConnectorConnectionAction({
+      const state = await testConnectorConnectionAction({
         connectorName: source.name,
         accessToken,
       });
 
       setMessageBoxState(() => ({
         activate: true,
-        status: res.state === "STATE_ERROR" ? "error" : "success",
+        status: state === "STATE_ERROR" ? "error" : "success",
         description: null,
-        message: `The source's state is ${res.state}`,
+        message: `The source's state is ${state}`,
       }));
     } catch (err) {
       setMessageBoxState(() => ({

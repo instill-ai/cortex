@@ -280,16 +280,16 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       }));
 
       try {
-        const res = await testConnectorConnectionAction({
+        const state = await testConnectorConnectionAction({
           connectorName: ai.name,
           accessToken,
         });
 
         setMessageBoxState(() => ({
           activate: true,
-          status: res.state === "STATE_ERROR" ? "error" : "success",
+          status: state === "STATE_ERROR" ? "error" : "success",
           description: null,
-          message: `The AI's state is ${res.state}`,
+          message: `The AI's state is ${state}`,
         }));
 
         if (onTestConnection) onTestConnection();

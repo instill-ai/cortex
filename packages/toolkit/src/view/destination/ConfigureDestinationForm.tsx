@@ -404,16 +404,16 @@ export const ConfigureDestinationForm = (
     }));
 
     try {
-      const res = await testConnectorConnectionAction({
+      const state = await testConnectorConnectionAction({
         connectorName: destination.name,
         accessToken,
       });
 
       setMessageBoxState(() => ({
         activate: true,
-        status: res.state === "STATE_ERROR" ? "error" : "success",
+        status: state === "STATE_ERROR" ? "error" : "success",
         description: null,
-        message: `The destination's state is ${res.state}`,
+        message: `The destination's state is ${state}`,
       }));
     } catch (err) {
       setMessageBoxState(() => ({
