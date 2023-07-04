@@ -22,7 +22,7 @@ export const useUnDeployModel = () => {
     {
       onSuccess: ({ modelName }) => {
         // Because deploy model is a long running operation, we will not
-        // query the model and update the cache mediately. We left this
+        // query the model and update the cache immediately. We left this
         // decision to the user.
         queryClient.invalidateQueries(["models"]);
         queryClient.invalidateQueries(["models", modelName]);
