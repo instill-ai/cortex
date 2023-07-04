@@ -20,7 +20,7 @@ import { Model } from "./Model";
 import { Pipeline } from "./Pipeline";
 import { Plus } from "./Plus";
 import { Play } from "./Play";
-import { Refresh } from "./Refresh";
+import { RefreshCw05 } from "./RefreshCw05";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
 import { X } from "./X";
@@ -48,7 +48,7 @@ export const Icons = {
   Pipeline,
   Play,
   Plus,
-  Refresh,
+  RefreshCw05,
   Save01,
   Sliders01,
   X,
