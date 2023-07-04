@@ -22,6 +22,7 @@ import { Plus } from "./Plus";
 import { Play } from "./Play";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
+import { Stop } from "./Stop";
 import { X } from "./X";
 
 export const Icons = {
@@ -49,5 +50,6 @@ export const Icons = {
   Plus,
   Save01,
   Sliders01,
+  Stop,
   X,
 };
