@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.51.0...@instill-ai/toolkit-v0.51.1) (2023-07-04)
+
+
+### Bug Fixes
+
+* fix model-hub link in ModelTabel ([#559](https://github.com/instill-ai/design-system/issues/559)) ([09e290e](https://github.com/instill-ai/design-system/commit/09e290e9ed2693aa3653484fe92eaf185b47fa91))
+
 ## [0.51.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.3...@instill-ai/toolkit-v0.51.0) (2023-07-04)
 
 
