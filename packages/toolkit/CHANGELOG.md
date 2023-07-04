@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.51.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.3...@instill-ai/toolkit-v0.51.0) (2023-07-04)
+
+
+### Features
+
+* **toolkit:** add dis/connect connector SDK ([#556](https://github.com/instill-ai/design-system/issues/556)) ([dc60cf5](https://github.com/instill-ai/design-system/commit/dc60cf5c04c701e4b48d091c4410cea0f55fe2b7))
+
 ## [0.50.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.50.2...@instill-ai/toolkit-v0.50.3) (2023-07-03)
 
 
