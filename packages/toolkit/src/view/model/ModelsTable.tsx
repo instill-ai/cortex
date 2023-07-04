@@ -163,7 +163,7 @@ export const ModelsTable = (props: ModelsTableProps) => {
                         : "STATE_UNSPECIFIED"
                     }
                     padding="py-2 px-6"
-                    link={`/models/${model.id}`}
+                    link={`/model-hub/${model.id}`}
                   />
                   <ModelDefinitionCell
                     width={null}
