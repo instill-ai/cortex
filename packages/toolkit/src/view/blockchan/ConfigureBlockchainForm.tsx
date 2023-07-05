@@ -430,7 +430,7 @@ export const ConfigureBlockchainForm = (
                         onBlur={() => {
                           if (
                             field.value === "" &&
-                            blockchain.configuration.api_key ===
+                            blockchain.configuration.capture_token ===
                               "*****MASK*****"
                           ) {
                             field.onChange("*****MASK*****");
