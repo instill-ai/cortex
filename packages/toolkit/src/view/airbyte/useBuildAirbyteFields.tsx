@@ -307,11 +307,7 @@ export const pickComponent = (
           setValues((prev) => {
             const value = "";
             const configuration = prev?.configuration || {};
-            dot.setter(
-              configuration,
-              formTree.path,
-              inputType === "number" ? parseInt(value) : value
-            );
+            dot.setter(configuration, formTree.path, value);
             return {
               ...prev,
               configuration: configuration,
