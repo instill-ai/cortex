@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.27.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.26.0...@instill-ai/design-system-v0.27.0) (2023-07-05)
+
+
+### Features
+
+* added refresh icon INS-1090 ([#555](https://github.com/instill-ai/design-system/issues/555)) ([d3fdc11](https://github.com/instill-ai/design-system/commit/d3fdc11332354f18411e7a0cf1b1c1a94bbffb7c))
+
 ## [0.26.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.25.0...@instill-ai/design-system-v0.26.0) (2023-07-04)
 
 

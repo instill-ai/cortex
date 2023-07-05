@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.2...@instill-ai/toolkit-v0.52.3) (2023-07-05)
+
+
+### Bug Fixes
+
+* fix typo at ConfigureBlockchainForm ([#568](https://github.com/instill-ai/design-system/issues/568)) ([fc0f869](https://github.com/instill-ai/design-system/commit/fc0f86974fdc1820d5eb3defd9e35382112cbd14))
+
 ## [0.52.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.1...@instill-ai/toolkit-v0.52.2) (2023-07-05)
 
 
