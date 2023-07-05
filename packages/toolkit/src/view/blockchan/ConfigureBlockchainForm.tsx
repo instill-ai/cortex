@@ -127,6 +127,12 @@ export const ConfigureBlockchainForm = (
     },
   });
 
+  React.useEffect(() => {
+    form.reset({
+      ...blockchain,
+    });
+  }, [blockchain, form]);
+
   const [messageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
       activate: false,

@@ -142,6 +142,12 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     },
   });
 
+  React.useEffect(() => {
+    form.reset({
+      ...ai,
+    });
+  }, [ai, form]);
+
   const [messageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
       activate: false,
