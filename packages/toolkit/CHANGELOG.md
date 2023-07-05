@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.51.1...@instill-ai/toolkit-v0.52.0) (2023-07-05)
+
+
+### Features
+
+* **toolkit:** adapt backend input_only secret design ([#561](https://github.com/instill-ai/design-system/issues/561)) ([049b65b](https://github.com/instill-ai/design-system/commit/049b65b234466dc8d81158383705e1808c7ed4a4))
+
 ## [0.51.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.51.0...@instill-ai/toolkit-v0.51.1) (2023-07-04)
 
 
