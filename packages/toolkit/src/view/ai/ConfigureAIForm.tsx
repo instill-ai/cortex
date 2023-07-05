@@ -47,7 +47,7 @@ export const ConfigureAIFormSchema = z
   .superRefine((state, ctx) => {
     if (
       state.connector_definition_name ===
-      "connector-definitions/stability-ai-model"
+      "connector-definitions/ai-stability-ai"
     ) {
       if (!state.configuration.api_key) {
         ctx.addIssue({
@@ -76,7 +76,7 @@ export const ConfigureAIFormSchema = z
 
     if (
       state.connector_definition_name ===
-      "connector-definitions/instill-ai-model"
+      "connector-definitions/ai-instill-model"
     ) {
       if (!state.configuration.api_key) {
         ctx.addIssue({
@@ -391,8 +391,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     </Form.Control>
                     <Select.Content>
                       <Select.Item
-                        key="connector-definitions/instill-ai-model"
-                        value="connector-definitions/instill-ai-model"
+                        key="connector-definitions/ai-instill-model"
+                        value="connector-definitions/ai-instill-model"
                         className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
                         <div className="flex flex-row space-x-2">
@@ -401,8 +401,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         </div>
                       </Select.Item>
                       <Select.Item
-                        key="connector-definitions/stability-ai-model"
-                        value="connector-definitions/stability-ai-model"
+                        key="connector-definitions/ai-stability-ai"
+                        value="connector-definitions/ai-stability-ai"
                         className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
                         <div className="flex flex-row space-x-2">
@@ -477,7 +477,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/stability-ai-model"
+                    "connector-definitions/ai-stability-ai"
                       ? ""
                       : "hidden"
                   }
@@ -518,7 +518,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/stability-ai-model"
+                    "connector-definitions/ai-stability-ai"
                       ? ""
                       : "hidden"
                   }
@@ -571,7 +571,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/instill-ai-model"
+                    "connector-definitions/ai-instill-model"
                       ? ""
                       : "hidden"
                   }
@@ -605,7 +605,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/instill-ai-model"
+                    "connector-definitions/ai-instill-model"
                       ? ""
                       : "hidden"
                   }

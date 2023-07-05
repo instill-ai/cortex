@@ -31,8 +31,6 @@ export const CreateBlockchainFormSchema = z
     connector_definition_name: z.string(),
     configuration: z.object({
       capture_token: z.string().optional(),
-      creator_name: z.string().optional(),
-      license: z.string().optional(),
       asset_type: z.string().optional(),
       metadata_texts: z.boolean().optional(),
       metadata_structured_data: z.boolean().optional(),
@@ -42,29 +40,13 @@ export const CreateBlockchainFormSchema = z
   .superRefine((state, ctx) => {
     if (
       state.connector_definition_name ===
-      "connector-definitions/numbers-blockchain-nit"
+      "connector-definitions/blockchain-numbers"
     ) {
       if (!state.configuration.capture_token) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Capture token is required",
           path: ["configuration", "capture_token"],
-        });
-      }
-
-      if (!state.configuration.creator_name) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "Creator name is required",
-          path: ["configuration", "creator_name"],
-        });
-      }
-
-      if (!state.configuration.license) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "License is required",
-          path: ["configuration", "license"],
         });
       }
 
@@ -89,7 +71,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
   const form = useForm<z.infer<typeof CreateBlockchainFormSchema>>({
     resolver: zodResolver(CreateBlockchainFormSchema),
     defaultValues: {
-      connector_definition_name: "connector-definitions/numbers-blockchain-nit",
+      connector_definition_name: "connector-definitions/blockchain-numbers",
       configuration: {
         metadata_texts: false,
         metadata_structured_data: false,
@@ -245,8 +227,8 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                     </Form.Control>
                     <Select.Content>
                       <Select.Item
-                        key="connector-definitions/numbers-blockchain-nit"
-                        value="connector-definitions/numbers-blockchain-nit"
+                        key="connector-definitions/blockchain-numbers"
+                        value="connector-definitions/blockchain-numbers"
                         className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
                         <div className="flex flex-row space-x-2">
@@ -272,7 +254,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/numbers-blockchain-nit"
+                    "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
                   }
@@ -299,79 +281,13 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="configuration.license"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.getValues("connector_definition_name") ===
-                    "connector-definitions/numbers-blockchain-nit"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label htmlFor={field.name}>License *</Form.Label>
-                  <Form.Control>
-                    <Input.Root className="!rounded-none">
-                      <Input.Core
-                        {...field}
-                        id={field.name}
-                        type="text"
-                        value={field.value ?? ""}
-                        autoComplete="off"
-                      />
-                    </Input.Root>
-                  </Form.Control>
-                  <Form.Description>
-                    License of the Web3 asset.
-                  </Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
-          <Form.Field
-            control={form.control}
-            name="configuration.creator_name"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.getValues("connector_definition_name") ===
-                    "connector-definitions/numbers-blockchain-nit"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label htmlFor={field.name}>Creator Name *</Form.Label>
-                  <Form.Control>
-                    <Input.Root className="!rounded-none">
-                      <Input.Core
-                        {...field}
-                        id={field.name}
-                        type="text"
-                        value={field.value ?? ""}
-                        autoComplete="off"
-                      />
-                    </Input.Root>
-                  </Form.Control>
-                  <Form.Description>
-                    Name of the creator who owns the Web3 asset.
-                  </Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
-          <Form.Field
-            control={form.control}
             name="configuration.asset_type"
             render={({ field }) => {
               return (
                 <Form.Item
                   className={
                     form.getValues("connector_definition_name") ===
-                    "connector-definitions/numbers-blockchain-nit"
+                    "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
                   }
@@ -415,7 +331,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
                     form.getValues("connector_definition_name") ===
-                      "connector-definitions/numbers-blockchain-nit"
+                      "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
                   )}
@@ -447,7 +363,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
                     form.getValues("connector_definition_name") ===
-                      "connector-definitions/numbers-blockchain-nit"
+                      "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
                   )}
@@ -480,7 +396,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
                     form.getValues("connector_definition_name") ===
-                      "connector-definitions/numbers-blockchain-nit"
+                      "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
                   )}
