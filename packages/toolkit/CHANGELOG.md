@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.3...@instill-ai/toolkit-v0.53.0) (2023-07-05)
+
+
+### Features
+
+* **toolkit:** update the changes of connector ([#569](https://github.com/instill-ai/design-system/issues/569)) ([d04a4b2](https://github.com/instill-ai/design-system/commit/d04a4b2476892e703cd6cef1f960c6859d7f550b))
+
 ## [0.52.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.2...@instill-ai/toolkit-v0.52.3) (2023-07-05)
 
 
