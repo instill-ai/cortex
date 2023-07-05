@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.1...@instill-ai/toolkit-v0.52.2) (2023-07-05)
+
+
+### Bug Fixes
+
+* fix configure ai and blockchain form not update the value ([#565](https://github.com/instill-ai/design-system/issues/565)) ([23be331](https://github.com/instill-ai/design-system/commit/23be3314b768649def16434113f38b99c920edda))
+
 ## [0.52.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.0...@instill-ai/toolkit-v0.52.1) (2023-07-05)
 
 
