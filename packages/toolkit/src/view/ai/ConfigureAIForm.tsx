@@ -438,6 +438,19 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         placeholder="API Key"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        onFocus={() => {
+                          if (field.value === "*****MASK*****") {
+                            field.onChange("");
+                          }
+                        }}
+                        onBlur={() => {
+                          if (
+                            field.value === "" &&
+                            ai.configuration.api_key === "*****MASK*****"
+                          ) {
+                            field.onChange("*****MASK*****");
+                          }
+                        }}
                       />
                     </Input.Root>
                   </Form.Control>

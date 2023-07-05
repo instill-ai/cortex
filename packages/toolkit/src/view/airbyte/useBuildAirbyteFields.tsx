@@ -299,6 +299,26 @@ export const pickComponent = (
             };
           });
         }}
+        onFocus={() => {
+          // When the user focus, we will remove the *****MASK***** value
+          // This is a temp solution.
+
+          if (setFormIsDirty) setFormIsDirty(true);
+          setValues((prev) => {
+            const value = "";
+            const configuration = prev?.configuration || {};
+            dot.setter(
+              configuration,
+              formTree.path,
+              inputType === "number" ? parseInt(value) : value
+            );
+            return {
+              ...prev,
+              configuration: configuration,
+              [formTree.path]: value,
+            };
+          });
+        }}
         readOnly={false}
       />
     );

@@ -416,6 +416,20 @@ export const ConfigureBlockchainForm = (
                         type="password"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        onFocus={() => {
+                          if (field.value === "*****MASK*****") {
+                            field.onChange("");
+                          }
+                        }}
+                        onBlur={() => {
+                          if (
+                            field.value === "" &&
+                            blockchain.configuration.api_key ===
+                              "*****MASK*****"
+                          ) {
+                            field.onChange("*****MASK*****");
+                          }
+                        }}
                       />
                     </Input.Root>
                   </Form.Control>
