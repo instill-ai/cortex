@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.52.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.0...@instill-ai/toolkit-v0.52.1) (2023-07-05)
+
+
+### Bug Fixes
+
+* **toolkit:** fix Airbyte input only field wrongly access variable ([#563](https://github.com/instill-ai/design-system/issues/563)) ([08d945e](https://github.com/instill-ai/design-system/commit/08d945ee6c15f7f80befa9409a6250216963a9bc))
+
 ## [0.52.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.51.1...@instill-ai/toolkit-v0.52.0) (2023-07-05)
 
 
