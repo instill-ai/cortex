@@ -3,7 +3,7 @@ import { createInstillAxiosClient } from "../helper";
 import { Pipeline } from "./types";
 
 export type ActivatePipelineResponse = {
-  pipeline: Pipeline;
+  pipeline: Omit<Pipeline, "recipe"> & { recipe: null };
 };
 
 export async function activatePipelineMutation({
@@ -26,7 +26,7 @@ export async function activatePipelineMutation({
 }
 
 export type DeActivatePipelineResponse = {
-  pipeline: Pipeline;
+  pipeline: Omit<Pipeline, "recipe"> & { recipe: null };
 };
 
 export async function deActivatePipelineMutation({

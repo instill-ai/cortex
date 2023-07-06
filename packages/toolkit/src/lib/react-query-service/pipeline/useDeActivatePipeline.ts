@@ -6,6 +6,7 @@ import {
   type Pipeline,
   type PipelinesWatchState,
   type PipelineWatchState,
+  getPipelineQuery,
 } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
@@ -28,15 +29,35 @@ export const useDeActivatePipeline = () => {
     },
     {
       onSuccess: async ({ pipeline, accessToken }) => {
+        let targetPipeline = queryClient.getQueryData<Pipeline>([
+          "pipelines",
+          pipeline.name,
+        ]);
+
+        if (!targetPipeline) {
+          const newPipeline = await getPipelineQuery({
+            pipelineName: pipeline.name,
+            accessToken,
+          });
+
+          targetPipeline = newPipeline;
+        }
+
+        const updatedPipeline: Pipeline = {
+          ...targetPipeline,
+          state: pipeline.state,
+          mode: pipeline.mode,
+        };
+
         queryClient.setQueryData<Pipeline>(
           ["pipelines", pipeline.name],
-          pipeline
+          updatedPipeline
         );
 
         queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
           old
-            ? [...old.filter((e) => e.name !== pipeline.name), pipeline]
-            : [pipeline]
+            ? [...old.filter((e) => e.name !== pipeline.name), updatedPipeline]
+            : [updatedPipeline]
         );
 
         // Process watch state
