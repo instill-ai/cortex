@@ -4,6 +4,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   BasicProgressMessageBox,
+  Button,
   Form,
   Icons,
   Input,
@@ -16,7 +17,7 @@ import {
 } from "@instill-ai/design-system";
 import { DeleteResourceModal, ImageWithFallback } from "../../components";
 import {
-  ConnectorWithDefinition,
+  ConnectorWithWatchState,
   ModalStore,
   Nullable,
   UpdateConnectorPayload,
@@ -24,7 +25,9 @@ import {
   sendAmplitudeData,
   testConnectorConnectionAction,
   useAmplitudeCtx,
+  useConnectConnector,
   useDeleteConnector,
+  useDisonnectConnector,
   useModalStore,
   useUpdateConnector,
 } from "../../lib";
@@ -114,7 +117,7 @@ export type ConfigureAIFormProps = {
   onDelete: Nullable<() => void>;
   onConfigure: Nullable<() => void>;
   onTestConnection: Nullable<() => void>;
-  ai: ConnectorWithDefinition;
+  ai: ConnectorWithWatchState;
   disabledConfigure?: boolean;
   disabledDelete?: boolean;
   disabledTestConnection?: boolean;
@@ -310,6 +313,92 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     },
     [accessToken, ai, onTestConnection]
   );
+
+  const [isConnecting, setIsConnecting] = React.useState(false);
+
+  const connectBlockchain = useConnectConnector();
+  const disconnectBlockchain = useDisonnectConnector();
+
+  const handleConnectAI = async function () {
+    if (!ai) return;
+    setIsConnecting(true);
+    if (ai.watchState === "STATE_CONNECTED") {
+      disconnectBlockchain.mutate(
+        {
+          connectorName: ai.name,
+          accessToken,
+        },
+        {
+          onSuccess: () => {
+            setMessageBoxState(() => ({
+              activate: true,
+              status: "success",
+              description: null,
+              message: `Successfully disconnect ${ai.id}`,
+            }));
+
+            setIsConnecting(false);
+          },
+          onError: (error) => {
+            setIsConnecting(false);
+
+            if (isAxiosError(error)) {
+              setMessageBoxState(() => ({
+                activate: true,
+                message: error.message,
+                description: getInstillApiErrorMessage(error),
+                status: "error",
+              }));
+            } else {
+              setMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message: "Something went wrong when disconnect the AI",
+              }));
+            }
+          },
+        }
+      );
+    } else {
+      connectBlockchain.mutate(
+        {
+          connectorName: ai.name,
+          accessToken,
+        },
+        {
+          onSuccess: () => {
+            setMessageBoxState(() => ({
+              activate: true,
+              status: "success",
+              description: null,
+              message: `Successfully connect ${ai.id}`,
+            }));
+            setIsConnecting(false);
+          },
+          onError: (error) => {
+            setIsConnecting(false);
+
+            if (isAxiosError(error)) {
+              setMessageBoxState(() => ({
+                activate: true,
+                message: error.message,
+                description: getInstillApiErrorMessage(error),
+                status: "error",
+              }));
+            } else {
+              setMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: null,
+                message: "Something went wrong when connect the AI",
+              }));
+            }
+          },
+        }
+      );
+    }
+  };
 
   return (
     <Form.Root {...form}>
@@ -642,6 +731,43 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
               >
                 Test
               </SolidButton>
+              <Button
+                onClick={handleConnectAI}
+                className="gap-x-2 !rounded-none"
+                variant="primary"
+                size="lg"
+                type="button"
+                disabled={false}
+              >
+                {ai.watchState === "STATE_CONNECTED" ? "Disconnect" : "Connect"}
+                {isConnecting ? (
+                  <svg
+                    className="m-auto h-4 w-4 animate-spin text-white"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
+                  </svg>
+                ) : ai.watchState === "STATE_CONNECTED" ||
+                  ai.watchState === "STATE_ERROR" ? (
+                  <Icons.Stop className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+                ) : (
+                  <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+                )}
+              </Button>
               <button
                 className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
                 type="submit"
