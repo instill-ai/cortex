@@ -3,6 +3,8 @@ import * as React from "react";
 import { shallow } from "zustand/shallow";
 import {
   BasicProgressMessageBox,
+  Button,
+  Icons,
   OutlineButton,
   ProgressMessageBoxState,
   SolidButton,
@@ -19,6 +21,7 @@ import {
   type Nullable,
   type ConfigureSourceFormStore,
   type ConnectorWithDefinition,
+  ConnectorWithWatchState,
 } from "../../../lib";
 
 import { DeleteResourceModal } from "../../../components";
@@ -35,7 +38,7 @@ const modalSelector = (state: ModalStore) => ({
 });
 
 export type ConfigureSourceControlProps = {
-  source: Nullable<ConnectorWithDefinition>;
+  source: ConnectorWithWatchState;
   onDelete: Nullable<(initStore: () => void) => void>;
   onConfigure: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
@@ -196,6 +199,23 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
             >
               Test
             </SolidButton>
+            <Button
+              className="gap-x-2 !rounded-none"
+              variant="primary"
+              size="lg"
+              type="button"
+              disabled={true}
+            >
+              {source.watchState === "STATE_CONNECTED"
+                ? "Disconnect"
+                : "Connect"}
+              {source.watchState === "STATE_CONNECTED" ||
+              source.watchState === "STATE_ERROR" ? (
+                <Icons.Stop className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              ) : (
+                <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              )}
+            </Button>
             <SolidButton
               type="submit"
               disabled={disabledConfigure ? true : false}

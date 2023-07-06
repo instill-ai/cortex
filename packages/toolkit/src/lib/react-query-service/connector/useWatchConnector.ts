@@ -24,7 +24,7 @@ export function useWatchConnector({
   }
 
   return useQuery(
-    [connectorName, "watch"],
+    ["connectors", connectorName, "watch"],
     async () => {
       if (!connectorName) {
         return Promise.reject(new Error("Invalid connector name"));
