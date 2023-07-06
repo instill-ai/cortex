@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.28.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.27.0...@instill-ai/design-system-v0.28.0) (2023-07-06)
+
+
+### Features
+
+* add chev icons ([#571](https://github.com/instill-ai/design-system/issues/571)) ([7f256b9](https://github.com/instill-ai/design-system/commit/7f256b9fa247870597be4f27f2849618e79ff18d))
+
 ## [0.27.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.26.0...@instill-ai/design-system-v0.27.0) (2023-07-05)
 
 
