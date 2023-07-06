@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.53.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.53.0...@instill-ai/toolkit-v0.53.1) (2023-07-06)
+
+
+### Bug Fixes
+
+* **toolkit:** fix airbyte form not correctly update by the changes of initial value ([#573](https://github.com/instill-ai/design-system/issues/573)) ([aebfdf5](https://github.com/instill-ai/design-system/commit/aebfdf5064938d730b9d02a8f4aaef3b2c73cca7))
+
 ## [0.53.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.52.3...@instill-ai/toolkit-v0.53.0) (2023-07-05)
 
 
