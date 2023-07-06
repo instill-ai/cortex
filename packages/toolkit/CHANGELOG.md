@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.54.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.53.1...@instill-ai/toolkit-v0.54.0) (2023-07-06)
+
+
+### Features
+
+* add SyntaxHighlighter CodeBlock ([#575](https://github.com/instill-ai/design-system/issues/575)) ([7a79ae5](https://github.com/instill-ai/design-system/commit/7a79ae58748300945bd43080fa0bd015df4125be))
+* **toolkit:** componentize pipeline-builder ([#577](https://github.com/instill-ai/design-system/issues/577)) ([aba7118](https://github.com/instill-ai/design-system/commit/aba7118fd5467255086bd2c93434f373eff8c74d))
+
 ## [0.53.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.53.0...@instill-ai/toolkit-v0.53.1) (2023-07-06)
 
 
