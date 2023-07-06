@@ -5,7 +5,13 @@ import { Box } from "./Box";
 import { Check } from "./Check";
 import { CheckCircle } from "./CheckCircle";
 import { ChevronDown } from "./ChevronDown";
+import { ChevronDownDouble } from "./ChevronDownDouble";
+import { ChevronLeft } from "./ChevronLeft";
+import { ChevronLeftDouble } from "./ChevronLeftDouble";
+import { ChevronRight } from "./ChevronRight";
+import { ChevronRightDouble } from "./ChevronRightDouble";
 import { ChevronUp } from "./ChevronUp";
+import { ChevronUpDouble } from "./ChevronUpDouble";
 import { Chip01 } from "./Chip01";
 import { Chip02 } from "./Chip02";
 import { Cube01 } from "./Cube01";
@@ -34,7 +40,13 @@ export const Icons = {
   Check,
   CheckCircle,
   ChevronDown,
+  ChevronDownDouble,
+  ChevronLeft,
+  ChevronLeftDouble,
+  ChevronRight,
+  ChevronRightDouble,
   ChevronUp,
+  ChevronUpDouble,
   Chip01,
   Chip02,
   Cube01,
