@@ -12,9 +12,22 @@ export const useAirbyteFieldValues = (
 
   React.useEffect(() => {
     if (!formTree) return;
-    if (initialValue) return;
-    if (fieldValues && fieldValues.configuration) return;
-    pickInitialValues(formTree, fieldValues, setFieldValues);
+    if (!fieldValues) {
+      setFieldValues(initialValue);
+      return;
+    }
+
+    if (!initialValue) {
+      pickInitialValues(formTree, fieldValues, setFieldValues);
+      return;
+    }
+
+    // When we switch the form value without triggering the rerender of the
+    // whole component, we need to reset the field values to the new initial
+    // value
+    if (fieldValues.id !== initialValue.id) {
+      setFieldValues(initialValue);
+    }
   }, [formTree, fieldValues, setFieldValues, initialValue]);
 
   return { fieldValues, setFieldValues };
