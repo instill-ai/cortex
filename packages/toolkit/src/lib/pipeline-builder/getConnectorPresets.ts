@@ -27,6 +27,11 @@ export const ais: ConnectorPreset[] = [
   },
 ];
 
+// The reason the id and name is not compatiable in preset is because
+// we use id as a displayed value in the leftPanel and name as a identifier
+// to find the connector definition. When the dragEnd we will make sure they
+// have compatiable value
+
 const sources: ConnectorPreset[] = [
   {
     id: "source-http",
