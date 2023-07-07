@@ -31,6 +31,7 @@ export const CreateAIFormSchema = z
     connector_definition_name: z.string(),
     configuration: z.object({
       api_key: z.string().optional(),
+      api_token: z.string().optional(),
       server_url: z.string().optional(),
       task: z.string().optional(),
       engine: z.string().optional(),
@@ -42,6 +43,14 @@ export const CreateAIFormSchema = z
       state.connector_definition_name ===
       "connector-definitions/ai-stability-ai"
     ) {
+      if (!state.configuration.api_key) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "API Key is required",
+          path: ["configuration", "api_key"],
+        });
+      }
+
       if (!state.configuration.task) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -274,36 +283,62 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
             control={form.control}
             name="configuration.api_key"
             render={({ field }) => {
-              let apiKeyDescription: Nullable<string> = null;
-
-              switch (form.watch("connector_definition_name")) {
-                case "connector-definitions/ai-instill-model":
-                  apiKeyDescription =
-                    "To access models on Instill Cloud, enter your Instill Cloud API Token. You can find your tokens by visiting your Instill Cloud's Settings > API Tokens page. Leave this field empty to access models on your local Instill Model.";
-                  break;
-                case "connector-definitions/ai-stability-ai":
-                  apiKeyDescription =
-                    "Fill your Stability AI API key. To find your keys, navigate to your DreamStudio's Account page.";
-                  break;
-                default:
-                  apiKeyDescription = "API Key";
-              }
-
               return (
-                <Form.Item>
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-stability-ai"
+                      ? ""
+                      : "hidden"
+                  }
+                >
                   <Form.Label>API Key *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
-                        type="text"
+                        type="password"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
-                  <Form.Description>{apiKeyDescription}</Form.Description>
+                  <Form.Description>
+                    Fill your Stability AI API key. To find your keys, navigate
+                    to your DreamStudio's Account page.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.api_token"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-instill-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>API Token</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        type="password"
+                        value={field.value ?? ""}
+                        autoComplete="off"
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    {`To access models on Instill Cloud, enter your Instill Cloud API Token. You can find your tokens by visiting your Instill Cloud's Settings > API Tokens page. Leave this field empty to access models on your local Instill Model.`}
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
