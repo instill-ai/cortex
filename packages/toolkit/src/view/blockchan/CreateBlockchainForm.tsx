@@ -71,7 +71,6 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
   const form = useForm<z.infer<typeof CreateBlockchainFormSchema>>({
     resolver: zodResolver(CreateBlockchainFormSchema),
     defaultValues: {
-      connector_definition_name: "connector-definitions/blockchain-numbers",
       configuration: {
         metadata_texts: false,
         metadata_structured_data: false,
