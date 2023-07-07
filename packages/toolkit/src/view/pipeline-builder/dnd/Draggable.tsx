@@ -106,6 +106,24 @@ const Item = (props: {
     );
   }
 
+  let displayedName: Nullable<string> = null;
+
+  if (
+    resource.connector_definition_name ===
+      "connector-definitions/source-http" ||
+    resource.connector_definition_name ===
+      "connector-definitions/destination-http"
+  ) {
+    displayedName = "HTTP";
+  } else if (
+    resource.connector_definition_name ===
+      "connector-definitions/source-grpc" ||
+    resource.connector_definition_name ===
+      "connector-definitions/destination-grpc"
+  ) {
+    displayedName = "gRPC";
+  }
+
   return (
     <div className="flex w-full cursor-grab rounded border border-semantic-bg-line p-2 hover:bg-semantic-accent-bg">
       <div className="flex h-8 w-full flex-row">
@@ -124,7 +142,7 @@ const Item = (props: {
             />
           </div>
           <h5 className="my-auto w-[160px] truncate text-semantic-fg-primary product-headings-heading-5">
-            {resource.name.split("/")[1]}
+            {displayedName ? displayedName : resource.id}
           </h5>
         </div>
       </div>
