@@ -506,11 +506,10 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>Description</Form.Label>
+                  <Form.Label>Description</Form.Label>
                   <Form.Control>
                     <Textarea
                       {...field}
-                      id={field.name}
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -529,9 +528,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>
-                    AI Connector Type
-                  </Form.Label>
+                  <Form.Label>AI Connector Type</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -626,7 +623,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Asset type *</Form.Label>
+                  <Form.Label>Asset type *</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -672,7 +669,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                 >
                   <div className="space-y-1">
                     <Form.Label>{`'texts' input as asset metadata`}</Form.Label>
-                    <Form.Description>
+                    <Form.Description className="w-8/12">
                       Include the `texts` input in the asset metadata on the
                       Blockchain.
                     </Form.Description>
@@ -705,7 +702,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                     <Form.Label>
                       {`'structured_data' input as asset metadata`}
                     </Form.Label>
-                    <Form.Description>
+                    <Form.Description className="w-8/12">
                       Include the `structured_data` input in the asset metadata
                       on the Blockchain.
                     </Form.Description>
@@ -738,7 +735,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                     <Form.Label>
                       {`'metadata' input as asset metadata`}
                     </Form.Label>
-                    <Form.Description>
+                    <Form.Description className="w-8/12">
                       Include the `metadata` input in the asset metadata on the
                       Blockchain.
                     </Form.Description>
