@@ -7,7 +7,6 @@ import {
   TableHeadItem,
   StateOverview,
   PaginationListContainer,
-  ModelCountsCell,
   TableError,
   SkeletonCell,
   PaginationListContainerProps,
@@ -70,7 +69,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
             onlineCounts={stateOverviewCounts?.online || 0}
           />
         ),
-        width: "w-auto",
+        width: "w-[480px]",
       },
       {
         key: "pipeline-mode-head",
@@ -80,11 +79,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       {
         key: "pipeline-source-head",
         item: "Source",
-        width: "w-[160px]",
-      },
-      {
-        key: "pipeline-models-head",
-        item: "Models",
         width: "w-[160px]",
       },
       {
@@ -160,7 +154,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                   <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
             : pipelinePages[currentPage]
@@ -173,11 +166,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                 const destinationComponent = getComponentsFromPipelineRecipe({
                   recipe: pipeline.recipe,
                   connectorType: "CONNECTOR_TYPE_DESTINATION",
-                });
-
-                const aiComponent = getComponentsFromPipelineRecipe({
-                  recipe: pipeline.recipe,
-                  connectorType: "CONNECTOR_TYPE_AI",
                 });
 
                 return (
@@ -210,11 +198,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                     ) : (
                       <TextCell text="Not set" width={null} padding="py-2" />
                     )}
-                    <ModelCountsCell
-                      modelCount={aiComponent?.length || 0}
-                      width={null}
-                      padding="py-2"
-                    />
                     {destinationComponent[0] ? (
                       <ConnectionTypeCell
                         width={null}
