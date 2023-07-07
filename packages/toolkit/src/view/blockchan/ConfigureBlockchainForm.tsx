@@ -1,4 +1,5 @@
 import cn from "clsx";
+import { isAxiosError } from "axios";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -18,9 +19,7 @@ import {
   Textarea,
 } from "@instill-ai/design-system";
 
-import { isAxiosError } from "axios";
 import {
-  ConnectorWithDefinition,
   ConnectorWithWatchState,
   ModalStore,
   Nullable,

@@ -305,7 +305,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                   </Form.Control>
                   <Form.Description>
                     Fill your Stability AI API key. To find your keys, navigate
-                    to your DreamStudio's Account page.
+                    to your DreamStudio&apos;s Account page.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>

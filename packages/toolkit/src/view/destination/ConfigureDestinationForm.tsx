@@ -29,16 +29,15 @@ import {
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   testConnectorConnectionAction,
+  useConnectConnector,
+  useDisonnectConnector,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
-  type ConnectorWithDefinition,
   type UpdateConnectorPayload,
   type Nullable,
   type CreateResourceFormStore,
   type ModalStore,
-  ConnectorWithWatchState,
-  useConnectConnector,
-  useDisonnectConnector,
+  type ConnectorWithWatchState,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";

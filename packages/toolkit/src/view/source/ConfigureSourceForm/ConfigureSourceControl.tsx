@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as React from "react";
 import { shallow } from "zustand/shallow";
+
 import {
   BasicProgressMessageBox,
   Button,
@@ -20,8 +21,7 @@ import {
   type ModalStore,
   type Nullable,
   type ConfigureSourceFormStore,
-  type ConnectorWithDefinition,
-  ConnectorWithWatchState,
+  type ConnectorWithWatchState,
 } from "../../../lib";
 
 import { DeleteResourceModal } from "../../../components";
