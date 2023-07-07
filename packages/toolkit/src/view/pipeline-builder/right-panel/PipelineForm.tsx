@@ -26,7 +26,12 @@ import {
   usePipelineBuilderStore,
   useWatchPipeline,
 } from "../../../lib";
-import { async, sync } from "./triggerPipelineSnippets";
+import {
+  asyncCE,
+  asyncCloud,
+  syncCE,
+  syncCloud,
+} from "./triggerPipelineSnippets";
 import { CodeBlock } from "../../../components";
 
 export const pipelineFormSchema = z.object({
@@ -140,10 +145,23 @@ export const PipelineForm = (props: PipelineForm) => {
 
   let pipelineTriggerSnippet: Nullable<string> = null;
 
-  if (watchPipeline.isSuccess && pipeline.isSuccess) {
-    if (watchPipeline.data.state === "STATE_ACTIVE") {
-      if (pipeline.data.mode === "MODE_ASYNC") {
-        pipelineTriggerSnippet = async.replace(
+  if (
+    watchPipeline.isSuccess &&
+    pipeline.isSuccess &&
+    watchPipeline.data.state === "STATE_ACTIVE"
+  ) {
+    if (pipeline.data.mode === "MODE_ASYNC") {
+      if (accessToken) {
+        pipelineTriggerSnippet = asyncCloud.replace(
+          /\{vdp-pipeline-base-url\}/g,
+          env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
+        );
+        pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
+          /\{pipeline-id\}/g,
+          pipeline.data.id
+        );
+      } else {
+        pipelineTriggerSnippet = asyncCE.replace(
           /\{vdp-pipeline-base-url\}/g,
           env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
         );
@@ -152,9 +170,18 @@ export const PipelineForm = (props: PipelineForm) => {
           pipeline.data.id
         );
       }
-
-      if (pipeline.data.mode === "MODE_SYNC") {
-        pipelineTriggerSnippet = sync.replace(
+    } else if (pipeline.data.mode === "MODE_SYNC") {
+      if (accessToken) {
+        pipelineTriggerSnippet = syncCloud.replace(
+          /\{vdp-pipeline-base-url\}/g,
+          env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
+        );
+        pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
+          /\{pipeline-id\}/g,
+          pipeline.data.id
+        );
+      } else {
+        pipelineTriggerSnippet = syncCE.replace(
           /\{vdp-pipeline-base-url\}/g,
           env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
         );
@@ -364,6 +391,7 @@ export const PipelineForm = (props: PipelineForm) => {
             wrapLines={true}
             customStyle={{
               borderRadius: "0.5rem",
+              fontSize: "14px",
             }}
           />
         ) : null}

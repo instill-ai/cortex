@@ -557,7 +557,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -603,7 +603,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -647,7 +647,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                 <Form.Item
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                       "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -679,7 +679,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                 <Form.Item
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                       "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -712,7 +712,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                 <Form.Item
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                       "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"

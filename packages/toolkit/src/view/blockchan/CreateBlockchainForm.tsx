@@ -221,7 +221,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select a blockchain connector type" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -252,7 +252,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -285,7 +285,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -298,7 +298,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an asset type" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -329,7 +329,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                       "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -361,7 +361,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                       "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"
@@ -394,7 +394,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                 <Form.Item
                   className={cn(
                     "flex !flex-row items-center justify-between border border-semantic-bg-line py-3 pl-3 pr-6",
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                       "connector-definitions/blockchain-numbers"
                       ? ""
                       : "hidden"

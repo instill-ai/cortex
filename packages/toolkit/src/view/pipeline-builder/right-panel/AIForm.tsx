@@ -696,7 +696,7 @@ export const AIForm = (props: AIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-stability-ai"
                       ? ""
                       : "hidden"
@@ -737,7 +737,7 @@ export const AIForm = (props: AIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-stability-ai"
                       ? ""
                       : "hidden"
@@ -790,7 +790,7 @@ export const AIForm = (props: AIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-instill-model"
                       ? ""
                       : "hidden"
@@ -823,7 +823,7 @@ export const AIForm = (props: AIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-instill-model"
                       ? ""
                       : "hidden"
