@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { ConnectorVisibility, Nullable } from "../../lib";
+import { Nullable } from "../../lib";
 
 export type TextCellProps = {
   width: Nullable<string>;
