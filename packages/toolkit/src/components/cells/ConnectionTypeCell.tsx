@@ -1,17 +1,11 @@
 import { DataDestinationIcon, DataSourceIcon } from "@instill-ai/design-system";
 import cn from "clsx";
-import {
-  ConnectorDefinition,
-  Nullable,
-  PipelineConnectorComponentDefinition,
-} from "../../lib";
+import { ConnectorDefinition, Nullable } from "../../lib";
 import { ImageWithFallback } from "../ImageWithFallback";
 
 export type ConnectionTypeCellProps = {
   connectorName: Nullable<string>;
-  connectorDefinition: Nullable<
-    ConnectorDefinition | PipelineConnectorComponentDefinition
-  >;
+  connectorDefinition: Nullable<ConnectorDefinition>;
   width: Nullable<string>;
   padding: string;
 };
@@ -28,15 +22,7 @@ export const ConnectionTypeCell = ({
         {connectorDefinition ? (
           <div className="flex flex-row gap-x-[5px]">
             <ImageWithFallback
-              src={
-                "connector_definition" in connectorDefinition
-                  ? connectorDefinition.id.startsWith("airbyte")
-                    ? `/icons/airbyte/${connectorDefinition.connector_definition.icon}`
-                    : `/icons/instill/${connectorDefinition.connector_definition.icon}`
-                  : connectorDefinition.vendor === "airbyte"
-                  ? `/icons/airbyte/${connectorDefinition.icon}`
-                  : `/icons/instill/${connectorDefinition.icon}`
-              }
+              src={`/icons/${connectorDefinition.vendor}/${connectorDefinition.icon}`}
               width={24}
               height={24}
               alt={`${connectorName}-icon`}
@@ -64,9 +50,7 @@ export const ConnectionTypeCell = ({
                 "my-auto text-instillGrey90 text-instill-body line-clamp-1"
               )}
             >
-              {"connector_definition" in connectorDefinition
-                ? connectorDefinition.connector_definition.title
-                : connectorDefinition.title}
+              {connectorDefinition.title}
             </p>
           </div>
         ) : null}

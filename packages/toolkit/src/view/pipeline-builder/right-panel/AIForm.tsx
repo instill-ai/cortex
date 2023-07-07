@@ -628,7 +628,7 @@ export const AIForm = (props: AIFormProps) => {
                       >
                         <div className="flex flex-row space-x-2">
                           <ImageWithFallback
-                            src={"/icons/stability-ai/logo.png"}
+                            src={"/icons/stabilityAI/stabilityai.svg"}
                             width={20}
                             height={20}
                             alt="Stability AI model logo"
