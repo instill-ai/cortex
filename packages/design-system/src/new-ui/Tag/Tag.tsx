@@ -5,24 +5,31 @@ import { cva, type VariantProps } from "class-variance-authority";
 const tagVariants = cva("inline-flex items-center rounded-md font-medium", {
   variants: {
     variant: {
-      default: "bg-slate-50 text-gray-800 border border-slate-200 ",
-      lightBlue: "bg-blue-50 text-blue-700",
-      borderBlue: "bg-blue-50 text-blue-700 border border-blue-700",
-      darkBlue: "bg-blue-600 text-white",
-      lightRed: "bg-red-50 text-rose-700",
-      lightYellow: "bg-orange-50 text-yellow-800",
-      lightGreen: "bg-emerald-50 text-teal-700",
-      lightPurple: "bg-purple-50 text-violet-700",
-      darkRed: "bg-rose-600 text-white",
-      darkYellow: "bg-amber-700 text-white",
-      darkGreen: "bg-emerald-600 text-white",
-      darkPurple: "bg-violet-500 text-white",
-      borderRed: "border border-rose-700 text-rose-700",
-      borderYellow: "border border-yellow-800 text-yellow-800",
-      borderGreen: "border border-teal-700 text-teal-700",
-      borderPurple: "border border-violet-700 text-violet-700",
-      lightNeutral: "bg-slate-100 text-gray-800 text-opacity-80",
-      darkNeutral: "bg-zinc-700 text-white",
+      default:
+        "text-semantic-fg-primary border border-semantic-bg-line hover:bg-semantic-bg-base-bg",
+      lightBlue: "bg-semantic-accent-bg text-semantic-accent-default",
+      borderBlue:
+        "text-semantic-accent-hover border border-semantic-accent-default hover:bg-semantic-accent-bg",
+      darkBlue: "bg-semantic-accent-default text-semantic-fg-on-default",
+      lightRed: "bg-semantic-error-bg text-semantic-error-default",
+      lightYellow: "bg-semantic-warning-bg text-semantic-warning-default",
+      lightGreen: "bg-semantic-success-bg text-semantic-success-default",
+      lightPurple: "bg-semantic-secondary-bg text-semantic-secondary-default",
+      darkRed: "bg-semantic-error-default text-semantic-fg-on-default",
+      darkYellow: "bg-semantic-warning-default text-semantic-fg-on-default",
+      darkGreen: "bg-semantic-success-default text-semantic-fg-on-default",
+      darkPurple: "bg-semantic-secondary-default text-semantic-fg-on-default",
+      borderRed:
+        "border border-semantic-error-default text-semantic-error-default hover:bg-semantic-error-bg",
+      borderYellow:
+        "border border-semantic-warning-default text-semantic-warning-default hover:bg-semantic-warning-bg",
+      borderGreen:
+        "border border-semantic-success-default text-semantic-success-default hover:bg-semantic-success-bg",
+      borderPurple:
+        "border border-semantic-secondary-default text-semantic-secondary-default hover:bg-semantic-secondary-bg",
+      lightNeutral: "bg-semantic-bg-secondary text-semantic-fg-secondary",
+      darkNeutral:
+        "bg-semantic-bg-secondary-alt-primary text-semantic-fg-on-default",
     },
     size: {
       xs: "px-2 py-1 text-xs",

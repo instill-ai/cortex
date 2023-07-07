@@ -144,7 +144,7 @@ export const WithIconSmall: Story = {
 export const LightBlueWithIcon: Story = {
   render: () => (
     <Tag className="gap-x-2" variant="lightBlue" size="md">
-      <Icons.Play className="h-5 w-5 stroke-blue-700" />
+      <Icons.Play className="h-5 w-5 stroke-semantic-accent-default" />
       Label
     </Tag>
   ),
