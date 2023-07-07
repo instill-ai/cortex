@@ -22,13 +22,13 @@ import { Icons, getModelDefinitionToolkit } from "@instill-ai/design-system";
 import { ImageWithFallback } from "../../../components";
 
 export type LeftPanelProps = {
-  selectedTab: Nullable<ConnectorType>;
   children: React.ReactNode;
   reactFlowInstance: Nullable<ReactFlowInstance>;
 };
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   addNode: state.addNode,
+  leftSidebarSelectedTab: state.leftSidebarSelectedTab,
 });
 
 export type LeftPanelSectionProps = {
@@ -50,38 +50,40 @@ const LeftPanelSection = (props: LeftPanelSectionProps) => {
 };
 
 export const LeftPanel = (props: LeftPanelProps) => {
-  const { children, selectedTab, reactFlowInstance } = props;
-
-  const { addNode } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const { children, reactFlowInstance } = props;
+  const { addNode, leftSidebarSelectedTab } = usePipelineBuilderStore(
+    pipelineBuilderSelector,
+    shallow
+  );
 
   const sourceDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: selectedTab === "CONNECTOR_TYPE_SOURCE",
+    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE",
     accessToken: null,
   });
 
   const destinationDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_DESTINATION",
-    enabled: selectedTab === "CONNECTOR_TYPE_DESTINATION",
+    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION",
     accessToken: null,
   });
 
   const aiDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_AI",
-    enabled: selectedTab === "CONNECTOR_TYPE_AI",
+    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_AI",
     accessToken: null,
   });
 
   const blockchainDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_BLOCKCHAIN",
-    enabled: selectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
+    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
     accessToken: null,
   });
 
   return (
     <div className="flex w-full flex-col">
-      {selectedTab === "CONNECTOR_TYPE_SOURCE" ? (
-        <SelectConnectorDefinitionDialog type={selectedTab}>
+      {leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE" ? (
+        <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {sourceDefinitions.isSuccess
             ? sourceDefinitions.data.map((definition) => (
                 <SelectConnectorDefinitionDialog.Item
@@ -104,7 +106,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                           connector_definition_name: definition.name,
                           connector_definition: definition,
                           watchState: "STATE_UNSPECIFIED",
-                          connector_type: selectedTab,
+                          connector_type: leftSidebarSelectedTab,
                           configuration: {},
                         },
                       },
@@ -134,8 +136,8 @@ export const LeftPanel = (props: LeftPanelProps) => {
             : null}
         </SelectConnectorDefinitionDialog>
       ) : null}
-      {selectedTab === "CONNECTOR_TYPE_DESTINATION" ? (
-        <SelectConnectorDefinitionDialog type={selectedTab}>
+      {leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION" ? (
+        <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {destinationDefinitions.isSuccess
             ? destinationDefinitions.data.map((definition) => (
                 <SelectConnectorDefinitionDialog.Item
@@ -164,7 +166,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                           connector_definition_name: definition.name,
                           configuration: {},
                           watchState: "STATE_UNSPECIFIED",
-                          connector_type: selectedTab,
+                          connector_type: leftSidebarSelectedTab,
                         },
                       },
                       position: reactFlowInstance.project({
@@ -193,8 +195,8 @@ export const LeftPanel = (props: LeftPanelProps) => {
             : null}
         </SelectConnectorDefinitionDialog>
       ) : null}
-      {selectedTab === "CONNECTOR_TYPE_AI" ? (
-        <SelectConnectorDefinitionDialog type={selectedTab}>
+      {leftSidebarSelectedTab === "CONNECTOR_TYPE_AI" ? (
+        <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {aiDefinitions.isSuccess
             ? aiDefinitions.data.map((definition) => {
                 const { getIcon } = getModelDefinitionToolkit(definition.name);
@@ -225,7 +227,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                             connector_definition_name: definition.name,
                             watchState: "STATE_UNSPECIFIED",
                             configuration: {},
-                            connector_type: selectedTab,
+                            connector_type: leftSidebarSelectedTab,
                           },
                         },
                         position: reactFlowInstance.project({
@@ -252,8 +254,8 @@ export const LeftPanel = (props: LeftPanelProps) => {
             : null}
         </SelectConnectorDefinitionDialog>
       ) : null}
-      {selectedTab === "CONNECTOR_TYPE_BLOCKCHAIN" ? (
-        <SelectConnectorDefinitionDialog type={selectedTab}>
+      {leftSidebarSelectedTab === "CONNECTOR_TYPE_BLOCKCHAIN" ? (
+        <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {blockchainDefinitions.isSuccess
             ? blockchainDefinitions.data.map((definition) => {
                 return (
@@ -283,7 +285,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                             connector_definition_name: definition.name,
                             watchState: "STATE_UNSPECIFIED",
                             configuration: {},
-                            connector_type: selectedTab,
+                            connector_type: leftSidebarSelectedTab,
                           },
                         },
                         position: reactFlowInstance.project({
