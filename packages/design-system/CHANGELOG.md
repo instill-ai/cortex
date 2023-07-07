@@ -1,5 +1,23 @@
 # @instill-ai/design-system
 
+## [0.29.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.28.0...@instill-ai/design-system-v0.29.0) (2023-07-07)
+
+
+### Features
+
+* **design-system:** make form and input bg color to be primary white ([#593](https://github.com/instill-ai/design-system/issues/593)) ([ddb7368](https://github.com/instill-ai/design-system/commit/ddb7368ee01e1a39cfa9900fea937e6d96f4875f))
+* update ai and blockchain table placeholder ([#594](https://github.com/instill-ai/design-system/issues/594)) ([497c574](https://github.com/instill-ai/design-system/commit/497c574ac0e58e952e60a40584bbd73b7cca1588))
+
+
+### Bug Fixes
+
+* **toolkit,design-system:** unify text color across different form component ([#581](https://github.com/instill-ai/design-system/issues/581)) ([73ec2b9](https://github.com/instill-ai/design-system/commit/73ec2b92981a84dc5942bda8e3d69c0087d9afdf))
+
+
+### Miscellaneous
+
+* **toolkit:** disable pipeline builder topbar editor ([#595](https://github.com/instill-ai/design-system/issues/595)) ([02786f1](https://github.com/instill-ai/design-system/commit/02786f15604d183e6dd0bd75b4852195e34a34db))
+
 ## [0.28.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.27.0...@instill-ai/design-system-v0.28.0) (2023-07-06)
 
 
