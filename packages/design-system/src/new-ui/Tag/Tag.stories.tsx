@@ -124,7 +124,7 @@ export const LightNeutral: Story = {
     </Tag>
   ),
 };
-export const arkNeutral: Story = {
+export const DarkNeutral: Story = {
   render: () => (
     <Tag variant="darkNeutral" size="md" className="">
       Label
@@ -136,6 +136,15 @@ export const WithIconSmall: Story = {
   render: () => (
     <Tag className="gap-x-2" variant="darkNeutral" size="md">
       <Icons.Play className="h-5 w-5 stroke-semantic-bg-primary" />
+      Label
+    </Tag>
+  ),
+};
+
+export const LightBlueWithIcon: Story = {
+  render: () => (
+    <Tag className="gap-x-2" variant="lightBlue" size="md">
+      <Icons.Play className="h-5 w-5 stroke-blue-700" />
       Label
     </Tag>
   ),
