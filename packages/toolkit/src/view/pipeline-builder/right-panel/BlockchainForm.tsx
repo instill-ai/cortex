@@ -56,15 +56,21 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
     },
   });
 
-  React.useEffect(() => {
-    updateResourceFormIsDirty(() => form.formState.isDirty);
-  }, [form.formState.isDirty, updateResourceFormIsDirty]);
+  // Read the state before render to subscribe the form state through Proxy
+  const {
+    reset,
+    formState: { isDirty },
+  } = form;
 
   React.useEffect(() => {
-    form.reset({
+    updateResourceFormIsDirty(() => isDirty);
+  }, [isDirty, updateResourceFormIsDirty]);
+
+  React.useEffect(() => {
+    reset({
       ...blockchain,
     });
-  }, [blockchain, form]);
+  }, [blockchain, reset]);
 
   const updateConnector = useUpdateConnector();
   const createConnector = useCreateConnector();
@@ -782,14 +788,8 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
           <Button
             type="submit"
             variant="secondaryColour"
-            disabled={
-              "uid" in blockchain
-                ? form.formState.isDirty
-                  ? false
-                  : true
-                : false
-            }
-            size={form.formState.isDirty ? "lg" : "md"}
+            disabled={"uid" in blockchain ? (isDirty ? false : true) : false}
+            size={isDirty ? "lg" : "md"}
             className="gap-x-2"
           >
             {"uid" in blockchain ? "Update" : "Create"}
