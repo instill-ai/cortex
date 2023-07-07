@@ -106,9 +106,6 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
   const { amplitudeIsInit } = useAmplitudeCtx();
   const form = useForm<z.infer<typeof CreateAIFormSchema>>({
     resolver: zodResolver(CreateAIFormSchema),
-    defaultValues: {
-      connector_definition_name: "connector-definitions/ai-instill-model",
-    },
   });
 
   const [messageBoxState, setMessageBoxState] =
