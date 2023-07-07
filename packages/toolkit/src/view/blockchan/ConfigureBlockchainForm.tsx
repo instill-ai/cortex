@@ -114,11 +114,17 @@ export const ConfigureBlockchainForm = (
     },
   });
 
+  // Read the state before render to subscribe the form state through Proxy
+  const {
+    reset,
+    formState: { isDirty },
+  } = form;
+
   React.useEffect(() => {
-    form.reset({
+    reset({
       ...blockchain,
     });
-  }, [blockchain, form]);
+  }, [blockchain, reset]);
 
   const [messageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
@@ -716,11 +722,7 @@ export const ConfigureBlockchainForm = (
                 className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
                 type="submit"
                 disabled={
-                  disabledConfigure
-                    ? true
-                    : form.formState.isDirty === true
-                    ? false
-                    : true
+                  disabledConfigure ? true : isDirty === true ? false : true
                 }
               >
                 Update
