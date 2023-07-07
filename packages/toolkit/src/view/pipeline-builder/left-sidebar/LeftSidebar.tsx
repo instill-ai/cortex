@@ -1,22 +1,21 @@
 import cn from "clsx";
-import * as React from "react";
-
 import { Icons } from "@instill-ai/design-system";
-import { ConnectorType, Nullable } from "../../../lib";
+import { PipelineBuilderStore, usePipelineBuilderStore } from "../../../lib";
+import { shallow } from "zustand/shallow";
 
-export type LeftSidebarProps = {
-  selectedTab: Nullable<ConnectorType>;
-  setSelectedTab: React.Dispatch<React.SetStateAction<Nullable<ConnectorType>>>;
-};
-
-export const LeftSidebar = (props: LeftSidebarProps) => {
-  const { selectedTab, setSelectedTab } = props;
+const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
+  leftSidebarSelectedTab: state.leftSidebarSelectedTab,
+  setLeftSidebarSelectedTab: state.setLeftSidebarSelectedTab,
+});
+export const LeftSidebar = () => {
+  const { leftSidebarSelectedTab, setLeftSidebarSelectedTab } =
+    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   return (
     <div className="mb-auto flex flex-col space-y-2 pt-8">
       <button
         onClick={() =>
-          setSelectedTab((prev) =>
+          setLeftSidebarSelectedTab((prev) =>
             prev === "CONNECTOR_TYPE_SOURCE" ? null : "CONNECTOR_TYPE_SOURCE"
           )
         }
@@ -24,7 +23,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
           "mx-auto flex flex-col rounded-xs border border-transparent p-1 hover:bg-semantic-bg-base-bg",
           {
             "!border-semantic-accent-default border-opacity-100 bg-semantic-accent-bg hover:bg-semantic-accent-bg":
-              selectedTab === "CONNECTOR_TYPE_SOURCE",
+              leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE",
           }
         )}
       >
@@ -39,7 +38,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
       </button>
       <button
         onClick={() =>
-          setSelectedTab((prev) =>
+          setLeftSidebarSelectedTab((prev) =>
             prev === "CONNECTOR_TYPE_AI" ? null : "CONNECTOR_TYPE_AI"
           )
         }
@@ -47,7 +46,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
           "mx-auto flex flex-col rounded-xs border border-transparent p-1 hover:bg-semantic-bg-base-bg",
           {
             "!border-semantic-accent-default border-opacity-100 bg-semantic-accent-bg hover:bg-semantic-accent-bg":
-              selectedTab === "CONNECTOR_TYPE_AI",
+              leftSidebarSelectedTab === "CONNECTOR_TYPE_AI",
           }
         )}
       >
@@ -62,7 +61,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
       </button>
       <button
         onClick={() =>
-          setSelectedTab((prev) =>
+          setLeftSidebarSelectedTab((prev) =>
             prev === "CONNECTOR_TYPE_BLOCKCHAIN"
               ? null
               : "CONNECTOR_TYPE_BLOCKCHAIN"
@@ -72,7 +71,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
           "mx-auto flex flex-col rounded-xs border border-transparent p-1 hover:bg-semantic-bg-base-bg",
           {
             "!border-semantic-accent-default border-opacity-100 bg-semantic-accent-bg hover:bg-semantic-accent-bg":
-              selectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
+              leftSidebarSelectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
           }
         )}
       >
@@ -87,7 +86,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
       </button>
       <button
         onClick={() =>
-          setSelectedTab((prev) =>
+          setLeftSidebarSelectedTab((prev) =>
             prev === "CONNECTOR_TYPE_DESTINATION"
               ? null
               : "CONNECTOR_TYPE_DESTINATION"
@@ -97,7 +96,7 @@ export const LeftSidebar = (props: LeftSidebarProps) => {
           "mx-auto flex flex-col rounded-xs border border-transparent p-1 hover:bg-semantic-bg-base-bg",
           {
             "!border-semantic-accent-default border-opacity-100 bg-semantic-accent-bg hover:bg-semantic-accent-bg":
-              selectedTab === "CONNECTOR_TYPE_DESTINATION",
+              leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION",
           }
         )}
       >
