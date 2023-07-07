@@ -2,17 +2,42 @@ import { useDraggable } from "@dnd-kit/core";
 import * as React from "react";
 
 import { Icons, getModelInstanceTaskToolkit } from "@instill-ai/design-system";
-import {
+import type {
   ConnectorWithWatchState,
   IncompleteConnectorWithWatchState,
   Nullable,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 
+type DraggableContextValue = {
+  isPreset: boolean;
+};
+
+const DraggableContext = React.createContext<DraggableContextValue>(
+  {} as DraggableContextValue
+);
+
+export const useDraggableContext = () => {
+  const draggableContext = React.useContext(DraggableContext);
+
+  if (!draggableContext) {
+    throw new Error(
+      "useDraggableContext should be used within <Draggable.Root>"
+    );
+  }
+
+  const { isPreset } = draggableContext;
+
+  return {
+    isPreset,
+  };
+};
+
 const Item = (props: {
   resource: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
 }) => {
   const { resource } = props;
+  const { isPreset } = useDraggableContext();
 
   let fallbackImg: Nullable<React.ReactElement> = null;
 
@@ -70,11 +95,13 @@ const Item = (props: {
             </h5>
           </div>
         </div>
-        <div className="flex">
-          <p className="rounded-full bg-semantic-accent-bg px-2 py-0.5 pl-2 text-semantic-accent-on-bg product-label-label-1">
-            {taskLabel ? taskLabel : "unspecified"}
-          </p>
-        </div>
+        {isPreset ? null : (
+          <div className="flex">
+            <p className="rounded-full bg-semantic-accent-bg px-2 py-0.5 pl-2 text-semantic-accent-on-bg product-label-label-1">
+              {taskLabel ? taskLabel : "unspecified"}
+            </p>
+          </div>
+        )}
       </div>
     );
   }
@@ -119,14 +146,16 @@ const Root = (props: {
   });
 
   return (
-    <div
-      className={isDragging ? "opacity-40" : ""}
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-    >
-      {children}
-    </div>
+    <DraggableContext.Provider value={{ isPreset }}>
+      <div
+        className={isDragging ? "opacity-40" : ""}
+        ref={setNodeRef}
+        {...attributes}
+        {...listeners}
+      >
+        {children}
+      </div>
+    </DraggableContext.Provider>
   );
 };
 
