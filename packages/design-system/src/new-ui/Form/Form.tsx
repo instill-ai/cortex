@@ -94,6 +94,7 @@ const FormLabel = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { error, formItemId } = useFormField();
 
+  // We use hex code temporary, until our design-token support opacity
   return (
     <Label
       ref={ref}
@@ -134,12 +135,13 @@ const FormDescription = React.forwardRef<
 >(({ className, ...props }, ref) => {
   const { formDescriptionId } = useFormField();
 
+  // We use hex code temporary, until our design-token support opacity
   return (
     <p
       ref={ref}
       id={formDescriptionId}
       className={cn(
-        "flex product-body-text-3-regular text-[#1D2433CC]",
+        "flex product-body-text-3-regular text-[#1D243380]",
         className
       )}
       {...props}

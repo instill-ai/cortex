@@ -204,7 +204,6 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="AI's name"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />
@@ -232,7 +231,6 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                     <Textarea
                       {...field}
                       id={field.name}
-                      placeholder="Description"
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -315,7 +313,6 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="API Key"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />
@@ -444,7 +441,6 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="URL"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />
@@ -478,7 +474,6 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="ID"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />

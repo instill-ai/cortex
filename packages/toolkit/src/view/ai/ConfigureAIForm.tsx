@@ -417,7 +417,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="AI's name"
                         value={field.value ?? ""}
                         autoComplete="off"
                         disabled={true}
@@ -446,7 +445,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     <Textarea
                       {...field}
                       id={field.name}
-                      placeholder="Description"
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -530,7 +528,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="API Key"
                         value={field.value ?? ""}
                         autoComplete="off"
                         onFocus={() => {
@@ -672,7 +669,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="URL"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />
@@ -706,7 +702,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         {...field}
                         id={field.name}
                         type="text"
-                        placeholder="ID"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />

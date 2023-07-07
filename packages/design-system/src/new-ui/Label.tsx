@@ -11,7 +11,7 @@ export const Label = React.forwardRef<
   <LabelPrimitive.Root
     ref={ref}
     className={cn(
-      "flex product-body-text-2-semibold text-semantic-fg-primary",
+      "flex text-semantic-fg-primary product-body-text-2-regular",
       className
     )}
     {...props}
