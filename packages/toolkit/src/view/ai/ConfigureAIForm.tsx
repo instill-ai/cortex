@@ -559,7 +559,9 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                             field.value === "" &&
                             ai.configuration.api_key === "*****MASK*****"
                           ) {
-                            field.onChange("*****MASK*****");
+                            form.resetField("configuration.api_key", {
+                              defaultValue: "*****MASK*****",
+                            });
                           }
                         }}
                       />

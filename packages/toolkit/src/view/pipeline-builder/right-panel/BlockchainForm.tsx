@@ -25,6 +25,7 @@ import {
   Form,
   Icons,
   Input,
+  Logos,
   Select,
   Switch,
   Textarea,
@@ -505,10 +506,11 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label>Description</Form.Label>
+                  <Form.Label htmlFor={field.name}>Description</Form.Label>
                   <Form.Control>
                     <Textarea
                       {...field}
+                      id={field.name}
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -527,7 +529,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label>AI Connector Type</Form.Label>
+                  <Form.Label htmlFor={field.name}>
+                    AI Connector Type
+                  </Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -544,7 +548,10 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         value="connector-definitions/blockchain-numbers"
                         className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
-                        <p className="my-auto">NumbersProtocol NIT</p>
+                        <div className="flex flex-row space-x-2">
+                          <Logos.Number className="w-5 h-5 my-auto" />
+                          <p className="my-auto">Numbers Protocol</p>
+                        </div>
                       </Select.Item>
                     </Select.Content>
                   </Select.Root>
@@ -588,14 +595,18 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                             blockchain.configuration.capture_token ===
                               "*****MASK*****"
                           ) {
-                            field.onChange("*****MASK*****");
+                            form.resetField("configuration.capture_token", {
+                              defaultValue: "*****MASK*****",
+                            });
                           }
                         }}
                       />
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Capture token from NumbersProtocol.
+                    Fill your Capture token in the Capture App. To access your
+                    tokens, you need a Capture App account and you can sign in
+                    with email or wallet to acquire the Capture Token.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -615,7 +626,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label>Asset type *</Form.Label>
+                  <Form.Label htmlFor={field.name}>Asset type *</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -638,7 +649,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                     </Select.Content>
                   </Select.Root>
                   <Form.Description>
-                    The type of asset to be added to Blockchain.
+                    The type of asset to be added to the Blockchain.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -660,11 +671,10 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                   )}
                 >
                   <div className="space-y-1">
-                    <Form.Label>
-                      Add input texts to Blockchain&apos;s metadata
-                    </Form.Label>
+                    <Form.Label>{`'texts' input as asset metadata`}</Form.Label>
                     <Form.Description>
-                      Add the texts input as the metadata to Blockchain.
+                      Include the `texts` input in the asset metadata on the
+                      Blockchain.
                     </Form.Description>
                   </div>
                   <Form.Control>
@@ -693,11 +703,11 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                 >
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input structured_data to Blockchain&apos;s metadata
+                      {`'structured_data' input as asset metadata`}
                     </Form.Label>
                     <Form.Description>
-                      Add the structured_data input as the metadata to
-                      Blockchain.
+                      Include the `structured_data` input in the asset metadata
+                      on the Blockchain.
                     </Form.Description>
                   </div>
                   <Form.Control>
@@ -726,10 +736,11 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                 >
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input metadata to Blockchain&apos;s metadata
+                      {`'metadata' input as asset metadata`}
                     </Form.Label>
                     <Form.Description>
-                      Add the metadata input as the metadata to Blockchain.
+                      Include the `metadata` input in the asset metadata on the
+                      Blockchain.
                     </Form.Description>
                   </div>
                   <Form.Control>
