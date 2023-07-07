@@ -337,7 +337,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
-                      {["Text to Image", "Image to Image"].map((task) => (
+                      {["Text to Image"].map((task) => (
                         <Select.Item
                           className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                           key={task}
