@@ -18,7 +18,7 @@ const Trigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-10 w-full items-center product-body-text-2-regular data-[placeholder]:text-[#1D2433CC] justify-between rounded-sm border border-semantic-bg-line bg-transparent p-2 focus:outline-none focus:ring-2 focus:border-semantic-accent-default focus:ring-semantic-accent-default focus:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50",
+      "flex h-10 w-full items-center justify-between rounded-sm border border-semantic-bg-line bg-semantic-bg-primary p-2 product-body-text-2-regular focus:border-semantic-accent-default focus:outline-none focus:ring-2 focus:ring-semantic-accent-default focus:ring-offset-0 disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-[#1D2433CC]",
       className
     )}
     {...props}
@@ -79,7 +79,7 @@ const Item = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative group flex data-[highlighted]:stroke-semantic-bg-primary w-full cursor-pointer select-none items-center stroke-semantic-fg-primary rounded py-1.5 pl-8 pr-2 text-sm outline-none focus:text-semantic-bg-primary focus:bg-semantic-accent-default data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "group relative flex w-full cursor-pointer select-none items-center rounded stroke-semantic-fg-primary py-1.5 pl-8 pr-2 text-sm outline-none focus:bg-semantic-accent-default focus:text-semantic-bg-primary data-[disabled]:pointer-events-none data-[highlighted]:stroke-semantic-bg-primary data-[disabled]:opacity-50",
       className
     )}
     {...props}
