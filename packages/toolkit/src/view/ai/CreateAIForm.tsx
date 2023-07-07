@@ -2,26 +2,27 @@ import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { isAxiosError } from "axios";
+
 import {
   BasicProgressMessageBox,
   Form,
   Icons,
   Input,
   ModelLogo,
-  ProgressMessageBoxState,
   Select,
   Textarea,
+  type ProgressMessageBoxState,
 } from "@instill-ai/design-system";
-import { ImageWithFallback } from "../../components";
 import {
-  CreateConnectorPayload,
-  Nullable,
   getInstillApiErrorMessage,
   sendAmplitudeData,
   useAmplitudeCtx,
   useCreateConnector,
+  type CreateConnectorPayload,
+  type Nullable,
 } from "../../lib";
-import { isAxiosError } from "axios";
+import { ImageWithFallback } from "../../components";
 
 export const CreateAIFormSchema = z
   .object({
@@ -119,17 +120,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
   const createConnector = useCreateConnector();
 
   function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
-    form.trigger([
-      "configuration",
-      "configuration.api_key",
-      "configuration.engine",
-      "configuration.model_id",
-      "configuration.server_url",
-      "configuration.task",
-      "connector_definition_name",
-      "description",
-      "id",
-    ]);
+    form.trigger(["configuration", "description", "id"]);
 
     const payload: CreateConnectorPayload = {
       connectorName: `connectors/${data.id}`,
@@ -187,7 +178,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
   return (
     <Form.Root {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-col space-y-5 mb-10">
+        <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}
             name="id"
@@ -255,7 +246,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI connector type" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -281,7 +272,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                             height={20}
                             alt="Stability AI model logo"
                             fallbackImg={
-                              <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
+                              <Icons.Model className="h-5 w-5 stroke-semantic-fg-primary" />
                             }
                           />
                           <p className="my-auto">Stability AI Model</p>
@@ -331,7 +322,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-stability-ai"
                       ? ""
                       : "hidden"
@@ -344,7 +335,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI task" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -372,7 +363,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-stability-ai"
                       ? ""
                       : "hidden"
@@ -385,7 +376,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI engine" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -425,7 +416,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-instill-model"
                       ? ""
                       : "hidden"
@@ -458,7 +449,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               return (
                 <Form.Item
                   className={
-                    form.getValues("connector_definition_name") ===
+                    form.watch("connector_definition_name") ===
                     "connector-definitions/ai-instill-model"
                       ? ""
                       : "hidden"
@@ -496,7 +487,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
             closable={true}
           />
           <button
-            className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto"
+            className="my-auto ml-auto rounded-[1px] bg-instillBlue50 px-5 py-2.5 text-instillGrey05 hover:bg-instillBlue80 hover:text-instillBlue10"
             type="submit"
           >
             Set up
