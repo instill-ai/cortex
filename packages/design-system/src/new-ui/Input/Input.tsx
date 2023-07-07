@@ -8,7 +8,7 @@ const Root = React.forwardRef<
   return (
     <div
       className={cn(
-        "relative flex flex-row space-x-2 rounded-sm border border-semantic-bg-line p-2 focus-within:border-semantic-accent-default focus-within:outline-semantic-accent-default focus-within:outline focus-within:outline-1 focus-within:ring-0 disabled-within:cursor-not-allowed disabled-within:bg-semantic-bg-secondary",
+        "relative flex flex-row space-x-2 rounded-sm border border-semantic-bg-line bg-semantic-bg-primary p-2 focus-within:border-semantic-accent-default focus-within:outline focus-within:outline-1 focus-within:outline-semantic-accent-default focus-within:ring-0 disabled-within:cursor-not-allowed disabled-within:bg-semantic-bg-secondary",
         className
       )}
       ref={ref}
@@ -28,7 +28,7 @@ const Core = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex w-full bg-transparent product-body-text-2-regular text-semantic-fg-primary focus-visible:outline-0 disabled:cursor-not-allowed focus-visible:ring-0 border-0 file:border-0 file:bg-transparent file:product-body-text-2-semibold placeholder:text-[#1D243380]",
+          "flex w-full border-0 bg-semantic-bg-primary text-semantic-fg-primary product-body-text-2-regular file:border-0 file:bg-transparent file:product-body-text-2-semibold placeholder:text-[#1D243380] focus-visible:outline-0 focus-visible:ring-0 disabled:cursor-not-allowed",
           className
         )}
         ref={ref}
