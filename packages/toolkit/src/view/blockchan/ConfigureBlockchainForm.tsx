@@ -1,4 +1,5 @@
 import cn from "clsx";
+import { isAxiosError } from "axios";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -9,6 +10,7 @@ import {
   Form,
   Icons,
   Input,
+  Logos,
   OutlineButton,
   ProgressMessageBoxState,
   Select,
@@ -17,9 +19,7 @@ import {
   Textarea,
 } from "@instill-ai/design-system";
 
-import { isAxiosError } from "axios";
 import {
-  ConnectorWithDefinition,
   ConnectorWithWatchState,
   ModalStore,
   Nullable,
@@ -114,11 +114,17 @@ export const ConfigureBlockchainForm = (
     },
   });
 
+  // Read the state before render to subscribe the form state through Proxy
+  const {
+    reset,
+    formState: { isDirty },
+  } = form;
+
   React.useEffect(() => {
-    form.reset({
+    reset({
       ...blockchain,
     });
-  }, [blockchain, form]);
+  }, [blockchain, reset]);
 
   const [messageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
@@ -389,12 +395,11 @@ export const ConfigureBlockchainForm = (
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>ID *</Form.Label>
+                  <Form.Label>ID *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
                         type="text"
                         value={field.value ?? ""}
                         disabled={true}
@@ -419,11 +424,10 @@ export const ConfigureBlockchainForm = (
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>Description</Form.Label>
+                  <Form.Label>Description</Form.Label>
                   <Form.Control>
                     <Textarea
                       {...field}
-                      id={field.name}
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -442,9 +446,7 @@ export const ConfigureBlockchainForm = (
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>
-                    AI Connector Type
-                  </Form.Label>
+                  <Form.Label>AI Connector Type</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -461,7 +463,10 @@ export const ConfigureBlockchainForm = (
                         value="connector-definitions/blockchain-numbers"
                         className="my-auto text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                       >
-                        <p className="my-auto">NumbersProtocol NIT</p>
+                        <div className="flex flex-row space-x-2">
+                          <Logos.Number className="w-5 h-5 my-auto" />
+                          <p className="my-auto">Numbers Protocol</p>
+                        </div>
                       </Select.Item>
                     </Select.Content>
                   </Select.Root>
@@ -486,12 +491,11 @@ export const ConfigureBlockchainForm = (
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Capture token *</Form.Label>
+                  <Form.Label>Capture token *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
                         type="password"
                         value={field.value ?? ""}
                         autoComplete="off"
@@ -506,14 +510,18 @@ export const ConfigureBlockchainForm = (
                             blockchain.configuration.capture_token ===
                               "*****MASK*****"
                           ) {
-                            field.onChange("*****MASK*****");
+                            form.resetField("configuration.capture_token", {
+                              defaultValue: "*****MASK*****",
+                            });
                           }
                         }}
                       />
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Capture token from NumbersProtocol.
+                    Fill your Capture token in the Capture App. To access your
+                    tokens, you need a Capture App account and you can sign in
+                    with email or wallet to acquire the Capture Token.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -533,7 +541,7 @@ export const ConfigureBlockchainForm = (
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Asset type *</Form.Label>
+                  <Form.Label>Asset type *</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -556,7 +564,7 @@ export const ConfigureBlockchainForm = (
                     </Select.Content>
                   </Select.Root>
                   <Form.Description>
-                    The type of asset to be added to Blockchain.
+                    The type of asset to be added to the Blockchain.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -578,11 +586,10 @@ export const ConfigureBlockchainForm = (
                   )}
                 >
                   <div className="space-y-1">
-                    <Form.Label>
-                      Add input texts to Blockchain&apos;s metadata
-                    </Form.Label>
-                    <Form.Description>
-                      Add the texts input as the metadata to Blockchain.
+                    <Form.Label>{`'texts' input as asset metadata`}</Form.Label>
+                    <Form.Description className="w-8/12">
+                      Include the `texts` input in the asset metadata on the
+                      Blockchain.
                     </Form.Description>
                   </div>
                   <Form.Control>
@@ -611,11 +618,11 @@ export const ConfigureBlockchainForm = (
                 >
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input structured_data to Blockchain&apos;s metadata
+                      {`'structured_data' input as asset metadata`}
                     </Form.Label>
-                    <Form.Description>
-                      Add the structured_data input as the metadata to
-                      Blockchain.
+                    <Form.Description className="w-8/12">
+                      Include the `structured_data` input in the asset metadata
+                      on the Blockchain.
                     </Form.Description>
                   </div>
                   <Form.Control>
@@ -644,10 +651,11 @@ export const ConfigureBlockchainForm = (
                 >
                   <div className="space-y-1">
                     <Form.Label>
-                      Add input metadata to Blockchain&apos;s metadata
+                      {`'metadata' input as asset metadata`}
                     </Form.Label>
-                    <Form.Description>
-                      Add the metadata input as the metadata to Blockchain.
+                    <Form.Description className="w-8/12">
+                      Include the `metadata` input in the asset metadata on the
+                      Blockchain.
                     </Form.Description>
                   </div>
                   <Form.Control>
@@ -716,11 +724,7 @@ export const ConfigureBlockchainForm = (
                 className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
                 type="submit"
                 disabled={
-                  disabledConfigure
-                    ? true
-                    : form.formState.isDirty === true
-                    ? false
-                    : true
+                  disabledConfigure ? true : isDirty === true ? false : true
                 }
               >
                 Update

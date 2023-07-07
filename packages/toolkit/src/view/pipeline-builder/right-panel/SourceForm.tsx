@@ -43,6 +43,12 @@ export const SourceForm = (props: SourceFormProps) => {
     },
   });
 
+  // Read the state before render to subscribe the form state through Proxy
+  const {
+    reset,
+    formState: { isDirty },
+  } = form;
+
   const sourceDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_SOURCE",
     enabled: true,
@@ -56,10 +62,10 @@ export const SourceForm = (props: SourceFormProps) => {
   });
 
   React.useEffect(() => {
-    form.reset({
+    reset({
       sourceDefinition: source.connector_definition_name,
     });
-  }, [form, source]);
+  }, [reset, source]);
 
   const { toast } = useToast();
 
@@ -248,7 +254,7 @@ export const SourceForm = (props: SourceFormProps) => {
               type="submit"
               variant="secondaryColour"
               disabled={disabledSubmit}
-              size={form.formState.isDirty ? "lg" : "md"}
+              size={isDirty ? "lg" : "md"}
               className="gap-x-2"
             >
               {sources.isSuccess

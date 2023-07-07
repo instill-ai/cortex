@@ -41,6 +41,7 @@ export const ConfigureAIFormSchema = z
     connector_definition_name: z.string(),
     configuration: z.object({
       api_key: z.string().optional(),
+      api_token: z.string().optional(),
       server_url: z.string().optional(),
       task: z.string().optional(),
       engine: z.string().optional(),
@@ -81,14 +82,6 @@ export const ConfigureAIFormSchema = z
       state.connector_definition_name ===
       "connector-definitions/ai-instill-model"
     ) {
-      if (!state.configuration.api_key) {
-        ctx.addIssue({
-          code: z.ZodIssueCode.custom,
-          message: "API Key is required",
-          path: ["configuration", "api_key"],
-        });
-      }
-
       if (!state.configuration.model_id) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
@@ -145,11 +138,17 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     },
   });
 
+  // Read the state before render to subscribe the form state through Proxy
+  const {
+    reset,
+    formState: { isDirty },
+  } = form;
+
   React.useEffect(() => {
-    form.reset({
+    reset({
       ...ai,
     });
-  }, [ai, form]);
+  }, [ai, reset]);
 
   const [messageBoxState, setMessageBoxState] =
     React.useState<ProgressMessageBoxState>({
@@ -403,23 +402,21 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
   return (
     <Form.Root {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-col space-y-5 mb-10">
+        <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}
             name="id"
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>ID *</Form.Label>
+                  <Form.Label>ID *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
-                        disabled={true}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -440,11 +437,10 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>Description</Form.Label>
+                  <Form.Label>Description</Form.Label>
                   <Form.Control>
                     <Textarea
                       {...field}
-                      id={field.name}
                       value={field.value ?? ""}
                       className="!rounded-none"
                     />
@@ -463,9 +459,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label htmlFor={field.name}>
-                    AI Connector Type
-                  </Form.Label>
+                  <Form.Label>AI Connector Type</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -473,7 +467,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI connector type" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -499,7 +493,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                             height={20}
                             alt="Stability AI model logo"
                             fallbackImg={
-                              <Icons.Model className="w-5 h-5 stroke-semantic-fg-primary" />
+                              <Icons.Model className="h-5 w-5 stroke-semantic-fg-primary" />
                             }
                           />
                           <p className="my-auto">Stability AI Model</p>
@@ -520,14 +514,20 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
             name="configuration.api_key"
             render={({ field }) => {
               return (
-                <Form.Item>
-                  <Form.Label htmlFor={field.name}>API Key *</Form.Label>
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-stability-ai"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>API Key *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
-                        type="text"
+                        type="password"
                         value={field.value ?? ""}
                         autoComplete="off"
                         onFocus={() => {
@@ -540,15 +540,64 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                             field.value === "" &&
                             ai.configuration.api_key === "*****MASK*****"
                           ) {
-                            field.onChange("*****MASK*****");
+                            form.resetField("configuration.api_key", {
+                              defaultValue: "*****MASK*****",
+                            });
                           }
                         }}
                       />
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Access to your API keys can then be managed through
-                    Stability AI&apos;s Account page.
+                    Fill your Stability AI API key. To find your keys, navigate
+                    to your DreamStudio&apos;s Account page.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.api_token"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-instill-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>API Token</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        type="password"
+                        value={field.value ?? ""}
+                        autoComplete="off"
+                        onFocus={() => {
+                          if (field.value === "*****MASK*****") {
+                            field.onChange("");
+                          }
+                        }}
+                        onBlur={() => {
+                          if (
+                            field.value === "" &&
+                            ai.configuration.api_key === "*****MASK*****"
+                          ) {
+                            form.resetField("configuration.api_key", {
+                              defaultValue: "*****MASK*****",
+                            });
+                          }
+                        }}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    {`To access models on Instill Cloud, enter your Instill Cloud API Token. You can find your tokens by visiting your Instill Cloud's Settings > API Tokens page. Leave this field empty to access models on your local Instill Model.`}
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -568,18 +617,18 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Task *</Form.Label>
+                  <Form.Label>Task *</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI task" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
-                      {["Text to Image", "Image to Image"].map((task) => (
+                      {["Text to Image"].map((task) => (
                         <Select.Item
                           className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
                           key={task}
@@ -609,14 +658,14 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Engine</Form.Label>
+                  <Form.Label>Engine</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value placeholder="Select an AI engine" />
+                        <Select.Value />
                       </Select.Trigger>
                     </Form.Control>
                     <Select.Content>
@@ -643,7 +692,9 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       ))}
                     </Select.Content>
                   </Select.Root>
-                  <Form.Description>Engine (model) to use.</Form.Description>
+                  <Form.Description>
+                    Stability AI Engine (model) to be used.
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
@@ -662,12 +713,11 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Server URL *</Form.Label>
+                  <Form.Label>Server URL *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
@@ -675,7 +725,11 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Base URL for the Instill Model API.
+                    Base URL for the Instill Model API. To access models on
+                    Instill Cloud, use the base URL
+                    `https://api-model.instill.tech`. To access models on your
+                    local Instill Model, use the base URL
+                    `http://localhost:9080`.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -695,19 +749,20 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label htmlFor={field.name}>Model ID *</Form.Label>
+                  <Form.Label>Model ID *</Form.Label>
                   <Form.Control>
                     <Input.Root className="!rounded-none">
                       <Input.Core
                         {...field}
-                        id={field.name}
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
                       />
                     </Input.Root>
                   </Form.Control>
-                  <Form.Description>ID of the model to use.</Form.Description>
+                  <Form.Description>
+                    ID of the Instill Model model to be used.
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
@@ -767,11 +822,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
                 type="submit"
                 disabled={
-                  disabledConfigure
-                    ? true
-                    : form.formState.isDirty === true
-                    ? false
-                    : true
+                  disabledConfigure ? true : isDirty === true ? false : true
                 }
               >
                 Update
