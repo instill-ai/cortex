@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.55.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.54.0...@instill-ai/toolkit-v0.55.0) (2023-07-06)
+
+
+### Features
+
+* add connect button in connector pages ([#580](https://github.com/instill-ai/design-system/issues/580)) ([e6d2fc3](https://github.com/instill-ai/design-system/commit/e6d2fc35582f6df059f45cdda5defa48fcdc2c67))
+
+
+### Bug Fixes
+
+* fix wrongly cache activate/deactivate pipeline response ([#578](https://github.com/instill-ai/design-system/issues/578)) ([0fbd5f7](https://github.com/instill-ai/design-system/commit/0fbd5f74446e8ceced22a61179399fdd5d65146e))
+
 ## [0.54.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.53.1...@instill-ai/toolkit-v0.54.0) (2023-07-06)
 
 
