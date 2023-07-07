@@ -10,7 +10,7 @@ export type ModeCellProps = {
 };
 
 export const ModeCell = ({ width, mode, padding }: ModeCellProps) => {
-  let modeIcon: React.ReactElement;
+  let modeIcon: Nullable<React.ReactElement>;
   const iconStyle = {
     width: "w-5",
     height: "h-5",
@@ -27,7 +27,7 @@ export const ModeCell = ({ width, mode, padding }: ModeCellProps) => {
       break;
 
     default:
-      modeIcon = <div className={cn(iconStyle.width, iconStyle.height)} />;
+      modeIcon = null;
       break;
   }
 
@@ -36,7 +36,11 @@ export const ModeCell = ({ width, mode, padding }: ModeCellProps) => {
       <div className={cn("mr-auto flex gap-x-2", width, padding)}>
         {modeIcon}
         <p className="text-instillGrey90 text-instill-body">
-          {mode === "MODE_ASYNC" ? "Async" : "Sync"}
+          {mode === "MODE_ASYNC"
+            ? "Async"
+            : mode === "MODE_SYNC"
+            ? "Sync"
+            : "Unspecified"}
         </p>
       </div>
     </td>
