@@ -789,7 +789,10 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 type="button"
                 disabled={false}
               >
-                {ai.watchState === "STATE_CONNECTED" ? "Disconnect" : "Connect"}
+                {ai.watchState === "STATE_CONNECTED" ||
+                ai.watchState === "STATE_ERROR"
+                  ? "Disconnect"
+                  : "Connect"}
                 {isConnecting ? (
                   <svg
                     className="m-auto h-4 w-4 animate-spin text-white"
