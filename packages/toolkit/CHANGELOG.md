@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.57.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.56.0...@instill-ai/toolkit-v0.57.0) (2023-07-08)
+
+
+### Features
+
+* add DraggableItem skeleton ([#603](https://github.com/instill-ai/design-system/issues/603)) ([6b43ed0](https://github.com/instill-ai/design-system/commit/6b43ed0cee956c4a2830148b6783ecc3bd65e146))
+* **toolkit:** add pipeline-builder main loading spin ([#601](https://github.com/instill-ai/design-system/issues/601)) ([fc47e39](https://github.com/instill-ai/design-system/commit/fc47e398790ca1a1dfd1ff59b61d113df26637ef))
+
+
+### Bug Fixes
+
+* fix accessToken and enableQuery not correctly pass down ([#596](https://github.com/instill-ai/design-system/issues/596)) ([b86883d](https://github.com/instill-ai/design-system/commit/b86883d1fc3f1144e6ba49ed3fae6bb7dbadff38))
+* fix blockchain/create id field disabled issue ([#600](https://github.com/instill-ai/design-system/issues/600)) ([7017d1f](https://github.com/instill-ai/design-system/commit/7017d1f4a108aac030bafdc70a8d5a06ab197dc8))
+
 ## [0.56.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.55.0...@instill-ai/toolkit-v0.56.0) (2023-07-07)
 
 

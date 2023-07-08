@@ -1,5 +1,18 @@
 # @instill-ai/design-system
 
+## [0.30.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.29.0...@instill-ai/design-system-v0.30.0) (2023-07-08)
+
+
+### Features
+
+* add skeleton ([#602](https://github.com/instill-ai/design-system/issues/602)) ([4275b6b](https://github.com/instill-ai/design-system/commit/4275b6bed539fc23ad0b231b6d8ba7aa92dd2652))
+* move toast at the middle ([#598](https://github.com/instill-ai/design-system/issues/598)) ([fdc2c17](https://github.com/instill-ai/design-system/commit/fdc2c176aac2db8134d233ec301f6129d90177c6))
+
+
+### Bug Fixes
+
+* fix disabled input bg-color ([#599](https://github.com/instill-ai/design-system/issues/599)) ([1ff58c2](https://github.com/instill-ai/design-system/commit/1ff58c2768384ab7992ef0efea6d7edb8ab205d6))
+
 ## [0.29.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.28.0...@instill-ai/design-system-v0.29.0) (2023-07-07)
 
 
