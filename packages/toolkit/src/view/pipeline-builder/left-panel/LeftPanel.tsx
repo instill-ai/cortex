@@ -21,16 +21,6 @@ import { SelectConnectorDefinitionDialog } from "./SelectConnectorDefinitionDial
 import { Icons, getModelDefinitionToolkit } from "@instill-ai/design-system";
 import { ImageWithFallback } from "../../../components";
 
-export type LeftPanelProps = {
-  children: React.ReactNode;
-  reactFlowInstance: Nullable<ReactFlowInstance>;
-};
-
-const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
-  addNode: state.addNode,
-  leftSidebarSelectedTab: state.leftSidebarSelectedTab,
-});
-
 export type LeftPanelSectionProps = {
   title: string;
   children: React.ReactNode;
@@ -49,8 +39,20 @@ const LeftPanelSection = (props: LeftPanelSectionProps) => {
   );
 };
 
+export type LeftPanelProps = {
+  children: React.ReactNode;
+  reactFlowInstance: Nullable<ReactFlowInstance>;
+  enableQuery: boolean;
+  accessToken: Nullable<string>;
+};
+
+const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
+  addNode: state.addNode,
+  leftSidebarSelectedTab: state.leftSidebarSelectedTab,
+});
+
 export const LeftPanel = (props: LeftPanelProps) => {
-  const { children, reactFlowInstance } = props;
+  const { children, reactFlowInstance, accessToken, enableQuery } = props;
   const { addNode, leftSidebarSelectedTab } = usePipelineBuilderStore(
     pipelineBuilderSelector,
     shallow
@@ -58,26 +60,28 @@ export const LeftPanel = (props: LeftPanelProps) => {
 
   const sourceDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE",
-    accessToken: null,
+    enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE",
+    accessToken,
   });
 
   const destinationDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_DESTINATION",
-    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION",
-    accessToken: null,
+    enabled:
+      enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION",
+    accessToken,
   });
 
   const aiDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_AI",
-    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_AI",
-    accessToken: null,
+    enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_AI",
+    accessToken,
   });
 
   const blockchainDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_BLOCKCHAIN",
-    enabled: leftSidebarSelectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
-    accessToken: null,
+    enabled:
+      enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
+    accessToken,
   });
 
   return (

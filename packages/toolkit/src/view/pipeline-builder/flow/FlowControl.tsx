@@ -30,10 +30,11 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
 
 export type FlowControlProps = {
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 export const FlowControl = (props: FlowControlProps) => {
-  const { accessToken } = props;
+  const { accessToken, enableQuery } = props;
   const router = useRouter();
   const { nodes, pipelineId, pipelineDescription, setPipelineUid, edges } =
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
@@ -43,14 +44,14 @@ export const FlowControl = (props: FlowControlProps) => {
 
   const pipeline = usePipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id,
-    accessToken: null,
+    accessToken,
+    enabled: !!id && enableQuery,
   });
 
   const pipelineWatchState = useWatchPipeline({
     pipelineName: `pipelines/${id}`,
-    accessToken: null,
-    enabled: !!id,
+    accessToken,
+    enabled: !!id && enableQuery,
   });
 
   const updatePipeline = useUpdatePipeline();
@@ -72,7 +73,7 @@ export const FlowControl = (props: FlowControlProps) => {
             deactivatePipeline.mutate(
               {
                 pipelineName: `pipelines/${pipelineId}`,
-                accessToken: null,
+                accessToken,
               },
               {
                 onSuccess: () => {
@@ -106,7 +107,7 @@ export const FlowControl = (props: FlowControlProps) => {
             activatePipeline.mutate(
               {
                 pipelineName: `pipelines/${pipelineId}`,
-                accessToken: null,
+                accessToken,
               },
               {
                 onSuccess: () => {
@@ -215,7 +216,7 @@ export const FlowControl = (props: FlowControlProps) => {
             updatePipeline.mutate(
               {
                 payload,
-                accessToken: null,
+                accessToken,
               },
               {
                 onSuccess: () => {
@@ -255,7 +256,7 @@ export const FlowControl = (props: FlowControlProps) => {
           createPipeline.mutate(
             {
               payload,
-              accessToken: null,
+              accessToken,
             },
             {
               onSuccess: async (res) => {
@@ -283,7 +284,7 @@ export const FlowControl = (props: FlowControlProps) => {
                         components: [],
                       },
                     },
-                    accessToken: null,
+                    accessToken,
                   },
                   {
                     onSuccess: () => {

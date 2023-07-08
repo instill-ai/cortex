@@ -7,10 +7,11 @@ import { Nullable, usePipelineBuilderStore } from "../../../lib";
 
 export type RightPanelProps = {
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 export const RightPanel = (props: RightPanelProps) => {
-  const { accessToken } = props;
+  const { accessToken, enableQuery } = props;
   const selectedNode = usePipelineBuilderStore((state) => state.selectedNode);
 
   return (
@@ -29,27 +30,34 @@ export const RightPanel = (props: RightPanelProps) => {
       <div className="flex w-full pb-10">
         {selectedNode &&
         selectedNode.data.connectorType === "CONNECTOR_TYPE_SOURCE" ? (
-          <SourceForm source={selectedNode.data.connector} accessToken={null} />
+          <SourceForm
+            source={selectedNode.data.connector}
+            accessToken={accessToken}
+            enableQuery={enableQuery}
+          />
         ) : null}
         {selectedNode &&
         selectedNode.data.connectorType === "CONNECTOR_TYPE_AI" ? (
-          <AIForm ai={selectedNode.data.connector} accessToken={null} />
+          <AIForm ai={selectedNode.data.connector} accessToken={accessToken} />
         ) : null}
         {selectedNode &&
         selectedNode.data.connectorType === "CONNECTOR_TYPE_DESTINATION" ? (
           <DestinationForm
             destination={selectedNode.data.connector}
-            accessToken={null}
+            accessToken={accessToken}
+            enableQuery={enableQuery}
           />
         ) : null}
         {selectedNode &&
         selectedNode.data.connectorType === "CONNECTOR_TYPE_BLOCKCHAIN" ? (
           <BlockchainForm
             blockchain={selectedNode.data.connector}
-            accessToken={null}
+            accessToken={accessToken}
           />
         ) : null}
-        {!selectedNode ? <PipelineForm accessToken={accessToken} /> : null}
+        {!selectedNode ? (
+          <PipelineForm accessToken={accessToken} enableQuery={enableQuery} />
+        ) : null}
       </div>
     </div>
   );

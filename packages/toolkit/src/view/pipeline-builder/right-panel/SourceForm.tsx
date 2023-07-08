@@ -13,25 +13,23 @@ import {
 } from "@instill-ai/design-system";
 import {
   getInstillApiErrorMessage,
-  testConnectorConnectionAction,
   useConnectorDefinitions,
   useConnectors,
   useCreateConnector,
-  type ConnectorWithDefinition,
-  type CreateConnectorPayload,
-  type Nullable,
-  type IncompleteConnectorWithWatchState,
-  ConnectorWatchState,
-  ConnectorWithWatchState,
   useConnectConnector,
   useDisonnectConnector,
   usePipelineBuilderStore,
+  type CreateConnectorPayload,
+  type Nullable,
+  type IncompleteConnectorWithWatchState,
+  type ConnectorWithWatchState,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 
 export type SourceFormProps = {
   source: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 const SourceFormSchema = z.object({
@@ -39,7 +37,7 @@ const SourceFormSchema = z.object({
 });
 
 export const SourceForm = (props: SourceFormProps) => {
-  const { source, accessToken } = props;
+  const { source, accessToken, enableQuery } = props;
 
   const form = useForm<z.infer<typeof SourceFormSchema>>({
     resolver: zodResolver(SourceFormSchema),
@@ -60,14 +58,14 @@ export const SourceForm = (props: SourceFormProps) => {
 
   const sourceDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: true,
     accessToken,
+    enabled: enableQuery,
   });
 
   const sources = useConnectors({
     connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: true,
     accessToken,
+    enabled: enableQuery,
   });
 
   React.useEffect(() => {
@@ -90,7 +88,7 @@ export const SourceForm = (props: SourceFormProps) => {
     createConnector.mutate(
       {
         payload,
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {
