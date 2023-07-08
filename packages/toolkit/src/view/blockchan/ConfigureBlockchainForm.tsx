@@ -689,7 +689,8 @@ export const ConfigureBlockchainForm = (
                 type="button"
                 disabled={false}
               >
-                {blockchain.watchState === "STATE_CONNECTED"
+                {blockchain.watchState === "STATE_CONNECTED" ||
+                blockchain.watchState === "STATE_ERROR"
                   ? "Disconnect"
                   : "Connect"}
                 {isConnecting ? (
