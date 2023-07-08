@@ -167,7 +167,6 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
                         {...field}
                         type="text"
                         value={field.value ?? ""}
-                        disabled={true}
                         autoComplete="off"
                       />
                     </Input.Root>
