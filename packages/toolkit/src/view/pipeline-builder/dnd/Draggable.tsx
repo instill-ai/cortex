@@ -1,7 +1,12 @@
+import cn from "clsx";
 import { useDraggable } from "@dnd-kit/core";
 import * as React from "react";
 
-import { Icons, getModelInstanceTaskToolkit } from "@instill-ai/design-system";
+import {
+  Icons,
+  getModelInstanceTaskToolkit,
+  Skeleton,
+} from "@instill-ai/design-system";
 import type {
   ConnectorWithWatchState,
   IncompleteConnectorWithWatchState,
@@ -177,7 +182,14 @@ const Root = (props: {
   );
 };
 
+const DraggableItemSkeleton = (
+  props: React.ComponentProps<typeof Skeleton>
+) => {
+  return <Skeleton {...props} className={cn("w-full h-12", props.className)} />;
+};
+
 export const Draggable = {
   Root,
   Item,
+  Skeleton: DraggableItemSkeleton,
 };
