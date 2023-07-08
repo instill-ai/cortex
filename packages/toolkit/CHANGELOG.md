@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.58.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.57.0...@instill-ai/toolkit-v0.58.0) (2023-07-08)
+
+
+### Features
+
+* let user clean up unsaved form ([#608](https://github.com/instill-ai/design-system/issues/608)) ([7da8b74](https://github.com/instill-ai/design-system/commit/7da8b743b6ebde7be584d3fbf4afea12c4c17c46))
+
+
+### Bug Fixes
+
+* disable all the actions toward public connector ([#606](https://github.com/instill-ai/design-system/issues/606)) ([d5eb689](https://github.com/instill-ai/design-system/commit/d5eb689e2f1af624d3f2c8301f3ec597650a17ab))
+* fix left panel scroll issue ([#604](https://github.com/instill-ai/design-system/issues/604)) ([315aff2](https://github.com/instill-ai/design-system/commit/315aff2a7291589a4ccfe0edc94327eff7b6e2a7))
+
 ## [0.57.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.56.0...@instill-ai/toolkit-v0.57.0) (2023-07-08)
 
 
