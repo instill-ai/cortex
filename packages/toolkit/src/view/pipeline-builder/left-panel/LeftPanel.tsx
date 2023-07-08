@@ -319,7 +319,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
             : null}
         </SelectConnectorDefinitionDialog>
       ) : null}
-      <div className="flex flex-1 flex-col h-full overflow-y-scroll max-h-[calc(100vh-var(--topbar-height)-88px)]">
+      <div className="flex flex-1 flex-col h-full overflow-y-auto max-h-[calc(100vh-var(--topbar-height)-88px)]">
         {children}
       </div>
     </div>

@@ -60,6 +60,14 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     selector,
     shallow
   );
+
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if ("visibility" in source && source.visibility === "VISIBILITY_PUBLIC") {
+    disabledAll = true;
+  }
+
   /* -------------------------------------------------------------------------
    * Handle configure source
    * -----------------------------------------------------------------------*/
@@ -192,7 +200,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
         <div className="mb-10 flex flex-row items-center">
           <div className="flex flex-row items-center space-x-5 mr-auto">
             <SolidButton
-              type="submit"
+              type="button"
               disabled={false}
               color="primary"
               onClickHandler={handleTestSource}
@@ -218,7 +226,9 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
             </Button>
             <SolidButton
               type="submit"
-              disabled={disabledConfigure ? true : false}
+              disabled={
+                disabledAll ? disabledAll : disabledConfigure ? true : false
+              }
               color="primary"
               onClickHandler={handleConfigureSource}
             >
@@ -227,7 +237,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
           </div>
 
           <OutlineButton
-            disabled={disabledDelete ? true : false}
+            disabled={disabledAll ? disabledAll : disabledDelete ? true : false}
             onClickHandler={() => openModal()}
             position="my-auto"
             type="button"

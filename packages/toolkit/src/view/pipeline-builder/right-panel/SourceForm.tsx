@@ -39,6 +39,13 @@ const SourceFormSchema = z.object({
 export const SourceForm = (props: SourceFormProps) => {
   const { source, accessToken, enableQuery } = props;
 
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if ("visibility" in source && source.visibility === "VISIBILITY_PUBLIC") {
+    disabledAll = true;
+  }
+
   const form = useForm<z.infer<typeof SourceFormSchema>>({
     resolver: zodResolver(SourceFormSchema),
     defaultValues: {
@@ -340,7 +347,9 @@ export const SourceForm = (props: SourceFormProps) => {
               variant="primary"
               size="lg"
               type="button"
-              disabled={"uid" in source ? false : true}
+              disabled={
+                disabledAll ? disabledAll : "uid" in source ? false : true
+              }
             >
               {source.watchState === "STATE_CONNECTED" ||
               source.watchState === "STATE_ERROR"
@@ -377,7 +386,7 @@ export const SourceForm = (props: SourceFormProps) => {
             <Button
               type="submit"
               variant="secondaryColour"
-              disabled={disabledSubmit}
+              disabled={disabledAll ? disabledAll : disabledSubmit}
               size={isDirty ? "lg" : "md"}
               className="gap-x-2"
             >

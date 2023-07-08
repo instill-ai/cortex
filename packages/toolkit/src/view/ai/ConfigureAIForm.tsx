@@ -129,6 +129,13 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
   } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if ("visibility" in ai && ai.visibility === "VISIBILITY_PUBLIC") {
+    disabledAll = true;
+  }
+
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
 
   const form = useForm<z.infer<typeof ConfigureAIFormSchema>>({
@@ -417,6 +424,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        disabled={true}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -443,6 +451,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                       {...field}
                       value={field.value ?? ""}
                       className="!rounded-none"
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                   <Form.Description>
@@ -545,6 +554,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                             });
                           }
                         }}
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -593,6 +603,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                             });
                           }
                         }}
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -621,6 +632,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -662,6 +674,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -721,6 +734,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -757,6 +771,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -774,7 +789,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
           <div className="mb-10 flex flex-row items-center">
             <div className="flex flex-row items-center space-x-5 mr-auto">
               <SolidButton
-                type="submit"
+                type="button"
                 disabled={disabledTestConnection}
                 color="primary"
                 onClickHandler={handleTestAI}
@@ -787,7 +802,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 variant="primary"
                 size="lg"
                 type="button"
-                disabled={false}
+                disabled={disabledAll}
               >
                 {ai.watchState === "STATE_CONNECTED" ||
                 ai.watchState === "STATE_ERROR"
@@ -825,7 +840,13 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                 className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
                 type="submit"
                 disabled={
-                  disabledConfigure ? true : isDirty === true ? false : true
+                  disabledAll
+                    ? disabledAll
+                    : disabledConfigure
+                    ? true
+                    : isDirty === true
+                    ? false
+                    : true
                 }
               >
                 Update
@@ -833,7 +854,9 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
             </div>
 
             <OutlineButton
-              disabled={disabledDelete ? true : false}
+              disabled={
+                disabledAll ? disabledAll : disabledDelete ? true : false
+              }
               onClickHandler={() => openModal()}
               position="my-auto"
               type="button"

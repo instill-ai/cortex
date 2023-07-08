@@ -105,6 +105,16 @@ export const ConfigureBlockchainForm = (
 
   const { amplitudeIsInit } = useAmplitudeCtx();
 
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if (
+    "visibility" in blockchain &&
+    blockchain.visibility === "VISIBILITY_PUBLIC"
+  ) {
+    disabledAll = true;
+  }
+
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
 
   const form = useForm<z.infer<typeof ConfigureBlockchainFormSchema>>({
@@ -430,6 +440,7 @@ export const ConfigureBlockchainForm = (
                       {...field}
                       value={field.value ?? ""}
                       className="!rounded-none"
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                   <Form.Description>
@@ -515,6 +526,7 @@ export const ConfigureBlockchainForm = (
                             });
                           }
                         }}
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -545,6 +557,7 @@ export const ConfigureBlockchainForm = (
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -596,6 +609,7 @@ export const ConfigureBlockchainForm = (
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                 </Form.Item>
@@ -629,6 +643,7 @@ export const ConfigureBlockchainForm = (
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                 </Form.Item>
@@ -662,6 +677,7 @@ export const ConfigureBlockchainForm = (
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                 </Form.Item>
@@ -674,7 +690,7 @@ export const ConfigureBlockchainForm = (
           <div className="mb-10 flex flex-row items-center">
             <div className="flex flex-row items-center space-x-5 mr-auto">
               <SolidButton
-                type="submit"
+                type="button"
                 disabled={disabledTestConnection}
                 color="primary"
                 onClickHandler={handleTestBlockchain}
@@ -687,7 +703,7 @@ export const ConfigureBlockchainForm = (
                 variant="primary"
                 size="lg"
                 type="button"
-                disabled={false}
+                disabled={disabledAll}
               >
                 {blockchain.watchState === "STATE_CONNECTED" ||
                 blockchain.watchState === "STATE_ERROR"
@@ -725,7 +741,13 @@ export const ConfigureBlockchainForm = (
                 className="bg-instillBlue50 hover:bg-instillBlue80 text-instillGrey05 hover:text-instillBlue10 ml-auto rounded-[1px] px-5 py-2.5 my-auto disabled:cursor-not-allowed disabled:bg-instillGrey15 disabled:text-instillGrey50"
                 type="submit"
                 disabled={
-                  disabledConfigure ? true : isDirty === true ? false : true
+                  disabledAll
+                    ? disabledAll
+                    : disabledConfigure
+                    ? true
+                    : isDirty === true
+                    ? false
+                    : true
                 }
               >
                 Update
@@ -733,7 +755,9 @@ export const ConfigureBlockchainForm = (
             </div>
 
             <OutlineButton
-              disabled={disabledDelete ? true : false}
+              disabled={
+                disabledAll ? disabledAll : disabledDelete ? true : false
+              }
               onClickHandler={() => openModal()}
               position="my-auto"
               type="button"

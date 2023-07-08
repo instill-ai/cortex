@@ -18,6 +18,18 @@ export type SourceDefinitionFieldProps = {
 
 export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
   const { source } = props;
+
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if (
+    source &&
+    "visibility" in source &&
+    source.visibility === "VISIBILITY_PUBLIC"
+  ) {
+    disabledAll = true;
+  }
+
   /* -------------------------------------------------------------------------
    * Initialize state
    * -----------------------------------------------------------------------*/
@@ -72,7 +84,7 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
     <BasicSingleSelect
       id="source-definition"
       label="Source"
-      disabled={canEdit ? false : true}
+      disabled={disabledAll ? disabledAll : canEdit ? false : true}
       options={sourceDefinitionOptions || []}
       required={true}
       value={selectedSourceDefinitionOption}
