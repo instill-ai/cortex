@@ -15,7 +15,7 @@ const ToastViewport = React.forwardRef<
   <ToastPrimitives.Viewport
     ref={ref}
     className={cn(
-      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-0 sm:right-0 sm:top-auto sm:flex-col md:max-w-[420px]",
+      "fixed top-0 z-[100] flex max-h-screen w-full flex-col-reverse p-4 sm:bottom-auto sm:left-1/2 sm:top-0 sm:-translate-x-1/2 sm:flex-col md:max-w-[420px]",
       className
     )}
     {...props}
@@ -27,7 +27,7 @@ ToastViewport.displayName = ToastPrimitives.Viewport.displayName;
 
 const toastMainStyle = cn(
   "group pointer-events-auto relative flex w-full items-center justify-between space-x-4 overflow-hidden rounded-sm shadow-lg transition-all",
-  "data-[state=open]:animate-in data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-bottom-full",
+  "data-[state=open]:animate-in data-[state=open]:slide-in-from-top-full data-[state=open]:sm:slide-in-from-top-full",
   "data-[state=closed]:animate-out data-[state=closed]:fade-out-80 data-[state=closed]:slide-out-to-right-full",
   "data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[swipe=move]:transition-none",
   "data-[swipe=cancel]:translate-x-0",
@@ -84,7 +84,7 @@ const ToastClose = React.forwardRef<
   <ToastPrimitives.Close
     ref={ref}
     className={cn(
-      "active:ring-1 rounded active:ring-semantic-bg-line",
+      "rounded active:ring-1 active:ring-semantic-bg-line",
       className
     )}
     toast-close=""
@@ -102,7 +102,7 @@ const ToastTitle = React.forwardRef<
   <ToastPrimitives.Title
     ref={ref}
     className={cn(
-      "product-body-text-2-semibold text-semantic-fg-primary",
+      "text-semantic-fg-primary product-body-text-2-semibold",
       className
     )}
     {...props}
@@ -117,7 +117,7 @@ const ToastDescription = React.forwardRef<
   <ToastPrimitives.Description
     ref={ref}
     className={cn(
-      "product-body-text-3-regular text-semantic-fg-secondary",
+      "text-semantic-fg-secondary product-body-text-3-regular",
       className
     )}
     {...props}
