@@ -14,7 +14,7 @@ import { DestinationNode, AINode, SourceNode, BlockchainNode } from "../nodes";
 import { CustomEdge } from "../CustomEdge";
 import { FlowControl } from "./FlowControl";
 import { useDroppable } from "@dnd-kit/core";
-import { Icons, useToast } from "@instill-ai/design-system";
+import { Icons, LinkButton, Toast, useToast } from "@instill-ai/design-system";
 import {
   Nullable,
   PipelineBuilderStore,
@@ -32,6 +32,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   setSelectedNode: state.setSelectedNode,
   selectedNode: state.selectedNode,
   resourceFormIsDirty: state.resourceFormIsDirty,
+  updateResourceFormIsDirty: state.updateResourceFormIsDirty,
   rightPanelIsOpen: state.rightPanelIsOpen,
 });
 
@@ -64,8 +65,9 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
     setRightPanelIsOpen,
     setSelectedNode,
     selectedNode,
-    resourceFormIsDirty,
     rightPanelIsOpen,
+    resourceFormIsDirty,
+    updateResourceFormIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { setNodeRef } = useDroppable({
@@ -110,6 +112,22 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                     "Please save or discard your changes before editing another resource.",
                   size: "large",
                   variant: "alert-warning",
+                  action: (
+                    <Toast.Action altText="UndoAction" asChild>
+                      <div className="flex flex-row space-x-4">
+                        <LinkButton
+                          onClick={() => {
+                            setSelectedNode(null);
+                            updateResourceFormIsDirty(() => false);
+                          }}
+                          variant="secondary"
+                          size="md"
+                        >
+                          Clean up
+                        </LinkButton>
+                      </div>
+                    </Toast.Action>
+                  ),
                 });
                 return;
               }
@@ -124,6 +142,22 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                     "Please save or discard your changes before editing another resource.",
                   size: "large",
                   variant: "alert-warning",
+                  action: (
+                    <Toast.Action altText="UndoAction" asChild>
+                      <div className="flex flex-row space-x-4">
+                        <LinkButton
+                          onClick={() => {
+                            setSelectedNode(null);
+                            updateResourceFormIsDirty(() => false);
+                          }}
+                          variant="secondary"
+                          size="md"
+                        >
+                          Clean up
+                        </LinkButton>
+                      </div>
+                    </Toast.Action>
+                  ),
                 });
                 return;
               }
@@ -146,6 +180,22 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                     "Please save or discard your changes before editing another resource.",
                   size: "large",
                   variant: "alert-warning",
+                  action: (
+                    <Toast.Action altText="UndoAction" asChild>
+                      <div className="flex flex-row space-x-4">
+                        <LinkButton
+                          onClick={() => {
+                            setSelectedNode(null);
+                            updateResourceFormIsDirty(() => false);
+                          }}
+                          variant="secondary"
+                          size="md"
+                        >
+                          Clean up
+                        </LinkButton>
+                      </div>
+                    </Toast.Action>
+                  ),
                 });
               } else {
                 setSelectedNode(node);
@@ -166,9 +216,23 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                     "Please save or discard your changes before editing another resource.",
                   size: "large",
                   variant: "alert-warning",
+                  action: (
+                    <Toast.Action altText="UndoAction" asChild>
+                      <div className="flex flex-row space-x-4">
+                        <LinkButton
+                          onClick={() => {
+                            setSelectedNode(null);
+                            updateResourceFormIsDirty(() => false);
+                          }}
+                          variant="secondary"
+                          size="md"
+                        >
+                          Clean up
+                        </LinkButton>
+                      </div>
+                    </Toast.Action>
+                  ),
                 });
-              } else {
-                setSelectedNode(null);
               }
             }}
 
