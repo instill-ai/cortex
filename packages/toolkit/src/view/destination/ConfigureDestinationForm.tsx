@@ -88,6 +88,16 @@ export const ConfigureDestinationForm = (
 
   const { openModal, closeModal } = useModalStore(modalSelector, shallow);
 
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if (
+    "visibility" in destination &&
+    destination.visibility === "VISIBILITY_PUBLIC"
+  ) {
+    disabledAll = true;
+  }
+
   /* -------------------------------------------------------------------------
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
@@ -544,7 +554,7 @@ export const ConfigureDestinationForm = (
               onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
                 updateFieldValues("description", event.target.value)
               }
-              disabled={!canEdit}
+              disabled={disabledAll ? disabledAll : !canEdit}
             />
           ) : null}
           <AirbyteDestinationFields
@@ -554,7 +564,7 @@ export const ConfigureDestinationForm = (
             fieldErrors={fieldErrors}
             selectedConditionMap={selectedConditionMap}
             setSelectedConditionMap={setSelectedConditionMap}
-            disableAll={!canEdit}
+            disableAll={disabledAll ? disabledAll : !canEdit}
             formIsDirty={airbyteFormIsDirty}
             setFormIsDirty={setAirbyteFormIsDirty}
           />
@@ -562,7 +572,7 @@ export const ConfigureDestinationForm = (
         <div className="mb-10 flex flex-row">
           <div className="flex flex-row items-center space-x-5 mr-auto">
             <SolidButton
-              type="submit"
+              type="button"
               disabled={false}
               color="primary"
               onClickHandler={handleTestDestination}
@@ -576,8 +586,10 @@ export const ConfigureDestinationForm = (
               size="lg"
               type="button"
               disabled={
-                destination.name === "connectors/destination-http" ||
-                destination.name === "connectors/destination-grpc"
+                disabledAll
+                  ? disabledAll
+                  : destination.name === "connectors/destination-http" ||
+                    destination.name === "connectors/destination-grpc"
                   ? true
                   : false
               }
@@ -617,7 +629,13 @@ export const ConfigureDestinationForm = (
               type="button"
               color="primary"
               disabled={
-                disabledConfigure ? true : isSyncDestination ? true : false
+                disabledAll
+                  ? disabledAll
+                  : disabledConfigure
+                  ? true
+                  : isSyncDestination
+                  ? true
+                  : false
               }
               onClickHandler={() => handleSubmit()}
             >
