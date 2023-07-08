@@ -43,8 +43,9 @@ export const deletePipelineFormSchema = z.object({
   confirmationCode: z.string().optional(),
 });
 
-export type PipelineForm = {
+export type PipelineFormProps = {
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
@@ -53,8 +54,8 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   setPipelineDescription: state.setPipelineDescription,
 });
 
-export const PipelineForm = (props: PipelineForm) => {
-  const { accessToken } = props;
+export const PipelineForm = (props: PipelineFormProps) => {
+  const { accessToken, enableQuery } = props;
   const router = useRouter();
   const updatePipelineform = useForm<z.infer<typeof pipelineFormSchema>>({
     resolver: zodResolver(pipelineFormSchema),
@@ -68,13 +69,13 @@ export const PipelineForm = (props: PipelineForm) => {
 
   const pipeline = usePipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id,
+    enabled: !!id && enableQuery,
     accessToken,
   });
 
   const watchPipeline = useWatchPipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id,
+    enabled: !!id && enableQuery,
     accessToken,
   });
 

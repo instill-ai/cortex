@@ -44,6 +44,7 @@ import { AirbyteDestinationFields } from "../../airbyte";
 export type DestinationFormProps = {
   accessToken: Nullable<string>;
   destination: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
+  enableQuery: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
@@ -53,7 +54,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
 });
 
 export const DestinationForm = (props: DestinationFormProps) => {
-  const { destination, accessToken, width, marginBottom } = props;
+  const { destination, accessToken, enableQuery, width, marginBottom } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
   /* -------------------------------------------------------------------------
@@ -165,7 +166,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
   const destinations = useConnectors({
     connectorType: "CONNECTOR_TYPE_DESTINATION",
     accessToken,
-    enabled: true,
+    enabled: enableQuery,
   });
 
   /* -------------------------------------------------------------------------
