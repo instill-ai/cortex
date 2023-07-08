@@ -85,7 +85,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
   });
 
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex h-full w-full flex-col">
       {leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE" ? (
         <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {sourceDefinitions.isSuccess
@@ -319,7 +319,9 @@ export const LeftPanel = (props: LeftPanelProps) => {
             : null}
         </SelectConnectorDefinitionDialog>
       ) : null}
-      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="flex flex-1 flex-col h-full overflow-y-scroll max-h-[calc(100vh-var(--topbar-height)-88px)]">
+        {children}
+      </div>
     </div>
   );
 };
