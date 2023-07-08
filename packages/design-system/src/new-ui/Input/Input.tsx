@@ -28,7 +28,7 @@ const Core = React.forwardRef<HTMLInputElement, InputProps>(
       <input
         type={type}
         className={cn(
-          "flex w-full border-0 bg-semantic-bg-primary text-semantic-fg-primary product-body-text-2-regular file:border-0 file:bg-transparent file:product-body-text-2-semibold placeholder:text-[#1D243380] focus-visible:outline-0 focus-visible:ring-0 disabled:cursor-not-allowed",
+          "flex w-full border-0 bg-semantic-bg-primary text-semantic-fg-primary product-body-text-2-regular file:border-0 file:bg-semantic-bg-primary file:product-body-text-2-semibold placeholder:text-[#1D243380] focus-visible:outline-0 focus-visible:ring-0 disabled:cursor-not-allowed disabled:bg-semantic-bg-secondary",
           className
         )}
         ref={ref}
