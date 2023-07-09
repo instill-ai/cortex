@@ -233,6 +233,8 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                     </Toast.Action>
                   ),
                 });
+              } else {
+                setSelectedNode(null);
               }
             }}
 
