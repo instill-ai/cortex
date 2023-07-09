@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.30.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.30.0...@instill-ai/design-system-v0.30.1) (2023-07-09)
+
+
+### Bug Fixes
+
+* fix switch color ([#614](https://github.com/instill-ai/design-system/issues/614)) ([dbcd6fc](https://github.com/instill-ai/design-system/commit/dbcd6fc5a2542375b3e76755707c50dc724345c7))
+
 ## [0.30.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.29.0...@instill-ai/design-system-v0.30.0) (2023-07-08)
 
 

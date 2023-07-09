@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.0...@instill-ai/toolkit-v0.59.1) (2023-07-09)
+
+
+### Bug Fixes
+
+* remove duplicated save button ([#612](https://github.com/instill-ai/design-system/issues/612)) ([a6ee0e6](https://github.com/instill-ai/design-system/commit/a6ee0e633520568ac8a723a43ba4a82b1d60d43b))
+
 ## [0.59.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.58.0...@instill-ai/toolkit-v0.59.0) (2023-07-09)
 
 
