@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.59.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.1...@instill-ai/toolkit-v0.59.2) (2023-07-09)
+
+
+### Bug Fixes
+
+* **toolkit:** fix pipeline builder ondelete issue ([#615](https://github.com/instill-ai/design-system/issues/615)) ([e2af146](https://github.com/instill-ai/design-system/commit/e2af14688d3870849adc6b88b8b6bed83def8052))
+
 ## [0.59.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.0...@instill-ai/toolkit-v0.59.1) (2023-07-09)
 
 
