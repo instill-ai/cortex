@@ -102,6 +102,7 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
             onNodesDelete={(nodes) => {
               if (nodes.some((node) => node.id === selectedNode?.id)) {
                 setSelectedNode(null);
+                updateResourceFormIsDirty(() => false);
               }
             }}
             onNodesChange={(event) => {
