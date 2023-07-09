@@ -1,5 +1,8 @@
 import { AlertCircle } from "./AlertCircle";
 import { AlertTriangle } from "./AlertTriangle";
+import { ArrowUp } from "./ArrowUp";
+import { ArrowDown } from "./ArrowDown";
+
 import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
 import { Check } from "./Check";
@@ -35,6 +38,8 @@ import { X } from "./X";
 export const Icons = {
   AlertCircle,
   AlertTriangle,
+  ArrowUp,
+  ArrowDown,
   BarChartSquare02,
   Box,
   Check,
