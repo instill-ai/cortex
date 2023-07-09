@@ -11,7 +11,6 @@ import {
   Button,
   Dialog,
   Form,
-  Icons,
   Input,
   LinkButton,
   Separator,
@@ -19,19 +18,13 @@ import {
   useToast,
 } from "@instill-ai/design-system";
 import {
-  CreatePipelinePayload,
   Nullable,
   PipelineBuilderStore,
-  UpdatePipelinePayload,
-  constructPipelineRecipe,
   env,
   getInstillApiErrorMessage,
-  useCreatePipeline,
   useDeletePipeline,
   usePipeline,
   usePipelineBuilderStore,
-  useRenamePipeline,
-  useUpdatePipeline,
   useWatchPipeline,
 } from "../../../lib";
 import {
@@ -60,23 +53,14 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
   setPipelineId: state.setPipelineId,
   setPipelineDescription: state.setPipelineDescription,
-  setPipelineUid: state.setPipelineUid,
-  nodes: state.nodes,
-  edges: state.edges,
 });
 
 export const PipelineForm = (props: PipelineFormProps) => {
   const { accessToken, enableQuery } = props;
   const router = useRouter();
 
-  const {
-    pipelineId,
-    setPipelineId,
-    setPipelineDescription,
-    setPipelineUid,
-    nodes,
-    edges,
-  } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const { pipelineId, setPipelineId, setPipelineDescription } =
+    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const updatePipelineform = useForm<z.infer<typeof pipelineFormSchema>>({
     resolver: zodResolver(pipelineFormSchema),
@@ -212,183 +196,6 @@ export const PipelineForm = (props: PipelineFormProps) => {
     }
   }
 
-  const updatePipeline = useUpdatePipeline();
-  const createPipeline = useCreatePipeline();
-  const renamePipeline = useRenamePipeline();
-
-  async function handleUpdatePipeline() {
-    if (!pipelineId) {
-      toast({
-        title: "Pipeline ID not set",
-        description:
-          "The pipeline ID should be set before saving the pipeline.",
-        variant: "alert-error",
-        size: "large",
-      });
-      return;
-    }
-
-    const pipelineDescription = updatePipelineform.getValues("description");
-
-    if (pipeline.isSuccess) {
-      if (pipelineId !== pipeline.data.id) {
-        try {
-          await renamePipeline.mutateAsync({
-            payload: {
-              pipelineId: pipeline.data.id,
-              newPipelineId: pipelineId,
-            },
-            accessToken,
-          });
-
-          router.push(`/pipelines/${pipelineId}`, undefined, {
-            shallow: true,
-          });
-        } catch (error) {
-          if (isAxiosError(error)) {
-            toast({
-              title: "Something went wrong when rename the pipeline",
-              description: getInstillApiErrorMessage(error),
-              variant: "alert-error",
-              size: "large",
-            });
-          } else {
-            toast({
-              title: "Something went wrong when rename the pipeline",
-              variant: "alert-error",
-              description: "Please try again later",
-              size: "large",
-            });
-          }
-        }
-      }
-
-      const payload: UpdatePipelinePayload = {
-        name: `pipelines/${pipelineId}`,
-        description: pipelineDescription ?? undefined,
-        recipe: constructPipelineRecipe(nodes, edges),
-      };
-
-      updatePipeline.mutate(
-        {
-          payload,
-          accessToken,
-        },
-        {
-          onSuccess: () => {
-            toast({
-              title: "Pipeline is saved",
-              variant: "alert-success",
-              size: "small",
-            });
-          },
-          onError: (error) => {
-            if (isAxiosError(error)) {
-              toast({
-                title: "Something went wrong when save the pipeline",
-                description: getInstillApiErrorMessage(error),
-                variant: "alert-error",
-                size: "large",
-              });
-            } else {
-              toast({
-                title: "Something went wrong when save the pipeline",
-                variant: "alert-error",
-                size: "large",
-              });
-            }
-          },
-        }
-      );
-
-      return;
-    }
-
-    const payload: CreatePipelinePayload = {
-      id: pipelineId,
-      recipe: constructPipelineRecipe(nodes, edges),
-    };
-
-    createPipeline.mutate(
-      {
-        payload,
-        accessToken,
-      },
-      {
-        onSuccess: async (res) => {
-          setPipelineUid(res.pipeline.uid);
-
-          router.push(`/pipelines/${pipelineId}`, undefined, {
-            shallow: true,
-          });
-
-          if (!pipelineDescription) {
-            toast({
-              title: "Pipeline is saved",
-              variant: "alert-success",
-              size: "small",
-            });
-            return;
-          }
-          updatePipeline.mutate(
-            {
-              payload: {
-                name: res.pipeline.name,
-                description: pipelineDescription,
-                recipe: {
-                  version: "v1alpha",
-                  components: [],
-                },
-              },
-              accessToken,
-            },
-            {
-              onSuccess: () => {
-                toast({
-                  title: "Pipeline is saved",
-                  variant: "alert-success",
-                  size: "small",
-                });
-              },
-              onError: (error) => {
-                if (isAxiosError(error)) {
-                  toast({
-                    title: "Something went wrong when save the pipeline",
-                    description: getInstillApiErrorMessage(error),
-                    variant: "alert-error",
-                    size: "large",
-                  });
-                } else {
-                  toast({
-                    title: "Something went wrong when save the pipeline",
-                    variant: "alert-error",
-                    size: "large",
-                  });
-                }
-              },
-            }
-          );
-        },
-        onError: (error) => {
-          if (isAxiosError(error)) {
-            toast({
-              title: "Something went wrong when save the pipeline",
-              description: getInstillApiErrorMessage(error),
-              variant: "alert-error",
-              size: "large",
-            });
-          } else {
-            toast({
-              title: "Something went wrong when save the pipeline",
-              variant: "alert-error",
-              size: "large",
-            });
-          }
-        },
-      }
-    );
-  }
-
   return (
     <div className="flex w-full flex-col">
       <Form.Root {...updatePipelineform}>
@@ -451,126 +258,109 @@ export const PipelineForm = (props: PipelineFormProps) => {
           </div>
         </form>
       </Form.Root>
-      <div className="flex mb-10 flex-row justify-between">
-        <Button
-          onClick={handleUpdatePipeline}
-          className="gap-x-2 my-auto"
-          variant="secondaryGrey"
-          size="lg"
-          type="button"
-        >
-          {pipeline.isSuccess ? (
-            <>
-              Save
-              <Icons.Save01 className="h-5 w-5 stroke-semantic-fg-primary" />
-            </>
-          ) : (
-            "Create"
-          )}
-        </Button>
-        <Dialog.Root>
-          <Dialog.Trigger className="my-auto" asChild>
-            <Button
-              disabled={pipeline.isSuccess ? false : true}
-              variant="danger"
-              size="lg"
-            >
-              Delete
-            </Button>
-          </Dialog.Trigger>
-          <Dialog.Content>
-            <Dialog.Header>
-              <Dialog.Title className="!product-headings-heading-1">
-                Delete Pipeline
-              </Dialog.Title>
-              <Dialog.Description>
-                This action cannot be undone. This will permanently delete the
-                source.
-              </Dialog.Description>
-            </Dialog.Header>
-            <div className="flex flex-col space-y-2">
-              <Form.Root {...deletePipelineForm}>
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                  }}
-                  className="flex w-full flex-col"
-                >
-                  <div className="mb-5 flex flex-col space-y-5">
-                    <Form.Field
-                      control={deletePipelineForm.control}
-                      name="confirmationCode"
-                      render={({ field }) => {
-                        return (
-                          <Form.Item>
-                            <Form.Label>
-                              Please type
-                              <span className="mx-1 select-all font-bold">{` ${pipeline.data?.id} `}</span>
-                              to confirm.
-                            </Form.Label>
-                            <Form.Control>
-                              <Input.Root className="!rounded-none">
-                                <Input.Core
-                                  {...field}
-                                  type="text"
-                                  value={field.value ?? ""}
-                                  autoComplete="off"
-                                  disabled={false}
-                                />
-                              </Input.Root>
-                            </Form.Control>
-                          </Form.Item>
-                        );
-                      }}
-                    />
-                  </div>
-                  <Button
-                    disabled={
-                      pipeline.isSuccess
-                        ? deletePipelineForm.watch("confirmationCode") ===
-                          pipeline.data?.id
-                          ? isDeleting
-                            ? true
-                            : false
-                          : true
+      <Dialog.Root>
+        <Dialog.Trigger className="mb-10" asChild>
+          <Button
+            disabled={pipeline.isSuccess ? false : true}
+            variant="danger"
+            size="lg"
+          >
+            Delete
+          </Button>
+        </Dialog.Trigger>
+        <Dialog.Content>
+          <Dialog.Header>
+            <Dialog.Title className="!product-headings-heading-1">
+              Delete Pipeline
+            </Dialog.Title>
+            <Dialog.Description>
+              This action cannot be undone. This will permanently delete the
+              source.
+            </Dialog.Description>
+          </Dialog.Header>
+          <div className="flex flex-col space-y-2">
+            <Form.Root {...deletePipelineForm}>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+                className="flex w-full flex-col"
+              >
+                <div className="mb-5 flex flex-col space-y-5">
+                  <Form.Field
+                    control={deletePipelineForm.control}
+                    name="confirmationCode"
+                    render={({ field }) => {
+                      const pipelineId = `${pipeline.data?.id}`;
+                      return (
+                        <Form.Item>
+                          <Form.Label>
+                            Please type
+                            <span className="mx-1 select-all font-bold">{` ${pipelineId} `}</span>
+                            to confirm.
+                          </Form.Label>
+                          <Form.Control>
+                            <Input.Root className="!rounded-none">
+                              <Input.Core
+                                {...field}
+                                type="text"
+                                value={field.value ?? ""}
+                                autoComplete="off"
+                                disabled={false}
+                              />
+                            </Input.Root>
+                          </Form.Control>
+                        </Form.Item>
+                      );
+                    }}
+                  />
+                </div>
+                <Button
+                  disabled={
+                    pipeline.isSuccess
+                      ? deletePipelineForm.watch("confirmationCode") ===
+                        pipeline.data?.id
+                        ? isDeleting
+                          ? true
+                          : false
                         : true
-                    }
-                    variant="danger"
-                    size="lg"
-                    type="button"
-                    onClick={() => handleDeletePipeline()}
-                  >
-                    {isDeleting ? (
-                      <svg
-                        className="m-auto h-4 w-4 animate-spin text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                        />
-                      </svg>
-                    ) : (
-                      "Delete"
-                    )}
-                  </Button>
-                </form>
-              </Form.Root>
-            </div>
-          </Dialog.Content>
-        </Dialog.Root>
-      </div>
+                      : true
+                  }
+                  variant="danger"
+                  size="lg"
+                  type="button"
+                  onClick={() => handleDeletePipeline()}
+                >
+                  {isDeleting ? (
+                    <svg
+                      className="m-auto h-4 w-4 animate-spin text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      ></circle>
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                  ) : (
+                    "Delete"
+                  )}
+                </Button>
+              </form>
+            </Form.Root>
+          </div>
+        </Dialog.Content>
+      </Dialog.Root>
       <div className="relative mb-6 w-full">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-semantic-bg-primary px-2">
           <p className="text-semantic-fg-secondary product-body-text-2-medium">

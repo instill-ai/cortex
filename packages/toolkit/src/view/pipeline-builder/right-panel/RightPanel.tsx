@@ -20,7 +20,7 @@ export const RightPanel = (props: RightPanelProps) => {
         <p className="py-2 text-semantic-fg-primary product-body-text-1-semibold">
           {selectedNode
             ? selectedNode.data.connector.name.split("/")[1]
-            : "Pipline Properties"}
+            : "Pipeline Properties"}
         </p>
       </div>
       {/* 
