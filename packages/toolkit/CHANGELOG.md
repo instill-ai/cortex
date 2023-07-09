@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.59.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.58.0...@instill-ai/toolkit-v0.59.0) (2023-07-09)
+
+
+### Features
+
+* **toolkit:** Add save button at the right panel ([#611](https://github.com/instill-ai/design-system/issues/611)) ([60482c0](https://github.com/instill-ai/design-system/commit/60482c04f72e1017faa175c71f8498f66799b959))
+
+
+### Bug Fixes
+
+* fix pipeline-builder unselect not working ([#609](https://github.com/instill-ai/design-system/issues/609)) ([0fec1b0](https://github.com/instill-ai/design-system/commit/0fec1b08263dd9aeb1dc2e3bf332866ff755e452))
+
 ## [0.58.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.57.0...@instill-ai/toolkit-v0.58.0) (2023-07-08)
 
 
