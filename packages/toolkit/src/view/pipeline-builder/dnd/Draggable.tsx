@@ -119,14 +119,18 @@ const Item = (props: {
     resource.connector_definition_name ===
       "connector-definitions/destination-http"
   ) {
-    displayedName = "HTTP";
+    if (isPreset) {
+      displayedName = "HTTP";
+    }
   } else if (
     resource.connector_definition_name ===
       "connector-definitions/source-grpc" ||
     resource.connector_definition_name ===
       "connector-definitions/destination-grpc"
   ) {
-    displayedName = "gRPC";
+    if (isPreset) {
+      displayedName = "gRPC";
+    }
   }
 
   return (
