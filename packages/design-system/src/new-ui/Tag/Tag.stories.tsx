@@ -16,7 +16,7 @@ export const Dafault: Story = {
 
 export const LightBlue: Story = {
   render: () => (
-    <Tag variant="lightBlue" size="xs" className="">
+    <Tag variant="lightBlue" size="sm" className="">
       Label
     </Tag>
   ),
@@ -48,7 +48,7 @@ export const LightRed: Story = {
 
 export const LightYellow: Story = {
   render: () => (
-    <Tag variant="lightYellow" size="xs" className="">
+    <Tag variant="lightYellow" size="sm" className="">
       Label
     </Tag>
   ),
@@ -56,77 +56,77 @@ export const LightYellow: Story = {
 
 export const LightGreen: Story = {
   render: () => (
-    <Tag variant="lightGreen" size="xs" className="">
+    <Tag variant="lightGreen" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const LightPurple: Story = {
   render: () => (
-    <Tag variant="lightPurple" size="xs" className="">
+    <Tag variant="lightPurple" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const DarkRed: Story = {
   render: () => (
-    <Tag variant="darkRed" size="xs" className="">
+    <Tag variant="darkRed" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const DarkYellow: Story = {
   render: () => (
-    <Tag variant="darkYellow" size="xs" className="">
+    <Tag variant="darkYellow" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const DarkPurple: Story = {
   render: () => (
-    <Tag variant="darkPurple" size="xs" className="">
+    <Tag variant="darkPurple" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const BorderRed: Story = {
   render: () => (
-    <Tag variant="borderRed" size="xs" className="">
+    <Tag variant="borderRed" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const BorderYellow: Story = {
   render: () => (
-    <Tag variant="borderYellow" size="xs" className="">
+    <Tag variant="borderYellow" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const BorderGreen: Story = {
   render: () => (
-    <Tag variant="borderGreen" size="xs" className="">
+    <Tag variant="borderGreen" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const BorderPurple: Story = {
   render: () => (
-    <Tag variant="borderPurple" size="xs" className="">
+    <Tag variant="borderPurple" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const LightNeutral: Story = {
   render: () => (
-    <Tag variant="lightNeutral" size="xs" className="">
+    <Tag variant="lightNeutral" size="sm" className="">
       Label
     </Tag>
   ),
 };
 export const DarkNeutral: Story = {
   render: () => (
-    <Tag variant="darkNeutral" size="xs" className="">
+    <Tag variant="darkNeutral" size="sm" className="">
       Label
     </Tag>
   ),
@@ -134,18 +134,18 @@ export const DarkNeutral: Story = {
 
 export const WithIconSmall: Story = {
   render: () => (
-    <Tag className="gap-x-2" variant="darkNeutral" size="xs">
-      <Icons.Play className="h-5 w-5 stroke-semantic-bg-primary" />
+    <Tag className="gap-x-2" variant="darkNeutral" size="sm">
+      <Icons.Play className="h-3 w-3 stroke-semantic-bg-primary" />
       Label
     </Tag>
   ),
 };
 
-export const LightBlueWithIcon: Story = {
+export const LightBlueWithIconSmall: Story = {
   render: () => (
-    <Tag className="gap-x-2" variant="lightBlue" size="xs">
-      <Icons.Play className="h-5 w-5 stroke-semantic-accent-default" />
-      Label
+    <Tag className="gap-x-2" variant="lightBlue" size="sm">
+      <Icons.Play className="h-3 w-3 stroke-semantic-accent-default" />
+      label
     </Tag>
   ),
 };
