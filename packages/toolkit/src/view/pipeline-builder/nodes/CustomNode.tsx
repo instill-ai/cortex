@@ -12,6 +12,8 @@ import {
 import { ImageWithFallback } from "../../../components";
 import "./CustomNode.css";
 
+import "./CustomNode.css";
+
 export type CustomNodeProps = {
   children: React.ReactNode;
   className?: string;
