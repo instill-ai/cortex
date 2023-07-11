@@ -320,12 +320,12 @@ export const FlowControl = (props: FlowControlProps) => {
           pipelineWatchState.data.state === "STATE_ERROR" ? (
             <>
               <span>Deactivate</span>
-              <Icons.Stop className="h-5 w-5 stroke-semantic-bg-primary group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             </>
           ) : (
             <>
               <span>Activate</span>
-              <Icons.Play className="h-5 w-5 stroke-semantic-bg-primary group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             </>
           )
         ) : (

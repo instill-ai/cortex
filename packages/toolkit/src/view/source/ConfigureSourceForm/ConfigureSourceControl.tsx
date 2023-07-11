@@ -219,9 +219,9 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
                 : "Connect"}
               {source.watchState === "STATE_CONNECTED" ||
               source.watchState === "STATE_ERROR" ? (
-                <Icons.Stop className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+                <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
               ) : (
-                <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+                <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
               )}
             </Button>
             <SolidButton
