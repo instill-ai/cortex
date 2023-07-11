@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.0...@instill-ai/toolkit-v0.60.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* fix save pipeline action not correctly early return ([#625](https://github.com/instill-ai/design-system/issues/625)) ([3b96eaf](https://github.com/instill-ai/design-system/commit/3b96eafd19d34e1d9b0c3c23077a6c6373c06e48))
+
 ## [0.60.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.2...@instill-ai/toolkit-v0.60.0) (2023-07-11)
 
 
