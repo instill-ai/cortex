@@ -263,6 +263,8 @@ export const FlowControl = (props: FlowControlProps) => {
           });
         }
       }
+
+      return;
     }
 
     const payload: CreatePipelinePayload = {
