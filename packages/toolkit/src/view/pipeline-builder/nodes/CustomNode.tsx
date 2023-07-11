@@ -78,10 +78,10 @@ Root.displayName = "CustomNodeRoot";
 
 const NameRow = (props: { name: string; icon: React.ReactElement }) => {
   return (
-    <div className="flex h-[56px] rounded-tl-[12px] rounded-tr-[12px] bg-semantic-bg-secondary p-4 transition-colors duration-500 group-hover:bg-semantic-bg-line">
+    <div className="flex rounded-tl-[12px] rounded-tr-[12px] bg-semantic-bg-secondary p-4 transition-colors duration-500 group-hover:bg-semantic-bg-line">
       <div className="flex w-full flex-row space-x-2">
         {props.icon}
-        <p className="text-semantic-fg-primary product-body-text-2-semibold">
+        <p className="text-semantic-fg-primary line-clamp-2 product-body-text-2-semibold">
           {props.name}
         </p>
       </div>
