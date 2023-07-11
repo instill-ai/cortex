@@ -6,7 +6,6 @@ import { Button, Icons, useToast } from "@instill-ai/design-system";
 import {
   CreatePipelinePayload,
   Nullable,
-  Pipeline,
   PipelineBuilderStore,
   UpdatePipelinePayload,
   getInstillApiErrorMessage,
