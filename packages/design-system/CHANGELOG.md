@@ -1,5 +1,51 @@
 # @instill-ai/design-system
 
+## [0.31.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.30.1...@instill-ai/design-system-v0.31.0) (2023-07-11)
+
+
+### Features
+
+* arrow up and down icon ([#617](https://github.com/instill-ai/design-system/issues/617)) ([f1b4201](https://github.com/instill-ai/design-system/commit/f1b4201008532e220bffb893c26c3b426416237e))
+* increase the limit of toast to 3 ([#623](https://github.com/instill-ai/design-system/issues/623)) ([4cab72d](https://github.com/instill-ai/design-system/commit/4cab72d07cae71c62037be90f5417ea0b30fd738))
+
+## [0.30.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.30.0...@instill-ai/design-system-v0.30.1) (2023-07-09)
+
+
+### Bug Fixes
+
+* fix switch color ([#614](https://github.com/instill-ai/design-system/issues/614)) ([dbcd6fc](https://github.com/instill-ai/design-system/commit/dbcd6fc5a2542375b3e76755707c50dc724345c7))
+
+## [0.30.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.29.0...@instill-ai/design-system-v0.30.0) (2023-07-08)
+
+
+### Features
+
+* add skeleton ([#602](https://github.com/instill-ai/design-system/issues/602)) ([4275b6b](https://github.com/instill-ai/design-system/commit/4275b6bed539fc23ad0b231b6d8ba7aa92dd2652))
+* move toast at the middle ([#598](https://github.com/instill-ai/design-system/issues/598)) ([fdc2c17](https://github.com/instill-ai/design-system/commit/fdc2c176aac2db8134d233ec301f6129d90177c6))
+
+
+### Bug Fixes
+
+* fix disabled input bg-color ([#599](https://github.com/instill-ai/design-system/issues/599)) ([1ff58c2](https://github.com/instill-ai/design-system/commit/1ff58c2768384ab7992ef0efea6d7edb8ab205d6))
+
+## [0.29.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.28.0...@instill-ai/design-system-v0.29.0) (2023-07-07)
+
+
+### Features
+
+* **design-system:** make form and input bg color to be primary white ([#593](https://github.com/instill-ai/design-system/issues/593)) ([ddb7368](https://github.com/instill-ai/design-system/commit/ddb7368ee01e1a39cfa9900fea937e6d96f4875f))
+* update ai and blockchain table placeholder ([#594](https://github.com/instill-ai/design-system/issues/594)) ([497c574](https://github.com/instill-ai/design-system/commit/497c574ac0e58e952e60a40584bbd73b7cca1588))
+
+
+### Bug Fixes
+
+* **toolkit,design-system:** unify text color across different form component ([#581](https://github.com/instill-ai/design-system/issues/581)) ([73ec2b9](https://github.com/instill-ai/design-system/commit/73ec2b92981a84dc5942bda8e3d69c0087d9afdf))
+
+
+### Miscellaneous
+
+* **toolkit:** disable pipeline builder topbar editor ([#595](https://github.com/instill-ai/design-system/issues/595)) ([02786f1](https://github.com/instill-ai/design-system/commit/02786f15604d183e6dd0bd75b4852195e34a34db))
+
 ## [0.28.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.27.0...@instill-ai/design-system-v0.28.0) (2023-07-06)
 
 

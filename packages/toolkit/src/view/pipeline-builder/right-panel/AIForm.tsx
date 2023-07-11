@@ -112,6 +112,13 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
 export const AIForm = (props: AIFormProps) => {
   const { ai, accessToken } = props;
 
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if ("visibility" in ai && ai.visibility === "VISIBILITY_PUBLIC") {
+    disabledAll = true;
+  }
+
   const { updateResourceFormIsDirty, updateSelectedNode, updateNodes } =
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -552,7 +559,9 @@ export const AIForm = (props: AIFormProps) => {
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
-                        disabled={"uid" in ai ? true : false}
+                        disabled={
+                          disabledAll ? disabledAll : "uid" in ai ? true : false
+                        }
                       />
                     </Input.Root>
                   </Form.Control>
@@ -579,6 +588,7 @@ export const AIForm = (props: AIFormProps) => {
                       {...field}
                       value={field.value ?? ""}
                       className="!rounded-none"
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                   <Form.Description>
@@ -682,6 +692,7 @@ export const AIForm = (props: AIFormProps) => {
                             });
                           }
                         }}
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -730,6 +741,7 @@ export const AIForm = (props: AIFormProps) => {
                             });
                           }
                         }}
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -758,6 +770,7 @@ export const AIForm = (props: AIFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -799,6 +812,7 @@ export const AIForm = (props: AIFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -858,6 +872,7 @@ export const AIForm = (props: AIFormProps) => {
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -895,6 +910,7 @@ export const AIForm = (props: AIFormProps) => {
                         type="text"
                         value={field.value ?? ""}
                         autoComplete="off"
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -915,7 +931,7 @@ export const AIForm = (props: AIFormProps) => {
             variant="primary"
             size="lg"
             type="button"
-            disabled={"uid" in ai ? false : true}
+            disabled={disabledAll ? disabledAll : "uid" in ai ? false : true}
           >
             {ai.watchState === "STATE_CONNECTED" ? "Disconnect" : "Connect"}
             {isConnecting ? (
@@ -941,15 +957,23 @@ export const AIForm = (props: AIFormProps) => {
               </svg>
             ) : ai.watchState === "STATE_CONNECTED" ||
               ai.watchState === "STATE_ERROR" ? (
-              <Icons.Stop className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             ) : (
-              <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             )}
           </Button>
           <Button
             type="submit"
             variant="secondaryColour"
-            disabled={"uid" in ai ? (isDirty ? false : true) : false}
+            disabled={
+              disabledAll
+                ? disabledAll
+                : "uid" in ai
+                ? isDirty
+                  ? false
+                  : true
+                : false
+            }
             size={isDirty ? "lg" : "md"}
             className="gap-x-2"
           >

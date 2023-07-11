@@ -44,6 +44,7 @@ import { AirbyteDestinationFields } from "../../airbyte";
 export type DestinationFormProps = {
   accessToken: Nullable<string>;
   destination: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
+  enableQuery: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
@@ -53,8 +54,27 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
 });
 
 export const DestinationForm = (props: DestinationFormProps) => {
-  const { destination, accessToken, width, marginBottom } = props;
+  const { destination, accessToken, enableQuery, width, marginBottom } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
+
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if (
+    "visibility" in destination &&
+    destination.visibility === "VISIBILITY_PUBLIC"
+  ) {
+    disabledAll = true;
+  }
+
+  if (
+    destination.connector_definition_name ===
+      "connector-definitions/destination-http" ||
+    destination.connector_definition_name ===
+      "connector-definitions/destination-grpc"
+  ) {
+    disabledAll = true;
+  }
 
   /* -------------------------------------------------------------------------
    * Initialize form state
@@ -165,7 +185,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
   const destinations = useConnectors({
     connectorType: "CONNECTOR_TYPE_DESTINATION",
     accessToken,
-    enabled: true,
+    enabled: enableQuery,
   });
 
   /* -------------------------------------------------------------------------
@@ -687,7 +707,9 @@ export const DestinationForm = (props: DestinationFormProps) => {
               "the last a letter or a number, and a 63 character maximum."
             }
             required={true}
-            disabled={"uid" in destination ? true : false}
+            disabled={
+              disabledAll ? disabledAll : "uid" in destination ? true : false
+            }
             value={fieldValues ? (fieldValues.id as string) ?? null : null}
             error={fieldErrors ? (fieldErrors.id as string) ?? null : null}
             onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -719,7 +741,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
               onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) =>
                 updateFieldValues("description", event.target.value)
               }
-              disabled={false}
+              disabled={disabledAll}
             />
           ) : null}
           <AirbyteDestinationFields
@@ -729,7 +751,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
             fieldErrors={fieldErrors}
             selectedConditionMap={selectedConditionMap}
             setSelectedConditionMap={setSelectedConditionMap}
-            disableAll={false}
+            disableAll={disabledAll}
             formIsDirty={airbyteFormIsDirty}
             setFormIsDirty={setAirbyteFormIsDirty}
           />
@@ -741,7 +763,9 @@ export const DestinationForm = (props: DestinationFormProps) => {
             variant="primary"
             size="lg"
             type="button"
-            disabled={"uid" in destination ? false : true}
+            disabled={
+              disabledAll ? disabledAll : "uid" in destination ? false : true
+            }
           >
             {destination.watchState === "STATE_CONNECTED" ||
             destination.watchState === "STATE_ERROR"
@@ -770,14 +794,14 @@ export const DestinationForm = (props: DestinationFormProps) => {
               </svg>
             ) : destination.watchState === "STATE_CONNECTED" ||
               destination.watchState === "STATE_ERROR" ? (
-              <Icons.Stop className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             ) : (
-              <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             )}
           </Button>
           <Button
             variant="secondaryColour"
-            disabled={disabledSubmit}
+            disabled={disabledAll ? disabledAll : disabledSubmit}
             size={airbyteFormIsDirty ? "lg" : "md"}
             className="gap-x-2"
             onClick={() => handleSubmit()}

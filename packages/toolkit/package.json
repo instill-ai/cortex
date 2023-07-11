@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/toolkit",
-  "version": "0.55.0",
+  "version": "0.60.1",
   "description": "Instill AI's frontend toolkit",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -44,6 +44,7 @@
     "rimraf": "^3.0.2",
     "simple-oauth2": "^5.0.0",
     "tailwindcss": "^3.3.2",
+    "tailwindcss-animate": "^1.0.6",
     "tsup": "^6.7.0",
     "tsx": "^3.12.3",
     "typescript": "^5.1.0",
@@ -76,6 +77,7 @@
     "reactflow": "^11.7.4",
     "unique-names-generator": "^4.7.1",
     "uuid": "^9.0.0",
+    "web-worker": "^1.2.0",
     "yup": "^0.32.11",
     "zod": "^3.21.4",
     "zustand": "^4.3.6"

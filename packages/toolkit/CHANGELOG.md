@@ -1,5 +1,106 @@
 # Changelog
 
+## [0.60.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.0...@instill-ai/toolkit-v0.60.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* fix save pipeline action not correctly early return ([#625](https://github.com/instill-ai/design-system/issues/625)) ([3b96eaf](https://github.com/instill-ai/design-system/commit/3b96eafd19d34e1d9b0c3c23077a6c6373c06e48))
+
+## [0.60.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.2...@instill-ai/toolkit-v0.60.0) (2023-07-11)
+
+
+### Features
+
+* map edge animated status with the state of pipeline ([#622](https://github.com/instill-ai/design-system/issues/622)) ([7c9bb71](https://github.com/instill-ai/design-system/commit/7c9bb71393efe4f605cb843bdd545ca92c02a0f9))
+* **toolkit:** save pipeline before activate/deactivate ([#624](https://github.com/instill-ai/design-system/issues/624)) ([87da931](https://github.com/instill-ai/design-system/commit/87da931758f1a3f7952ae71bf18af072d7451fa2))
+* update save pipeline button to have better loading state ([#621](https://github.com/instill-ai/design-system/issues/621)) ([68ab966](https://github.com/instill-ai/design-system/commit/68ab966c3ba3330f4bfe16067c32ac0ebc275b82))
+
+
+### Bug Fixes
+
+* **pipeline-builder:** fix pipeline-builder's node name overflow text issue ([#619](https://github.com/instill-ai/design-system/issues/619)) ([0c3203d](https://github.com/instill-ai/design-system/commit/0c3203dbafad1849f9f8fa2a19fd59db1b8be87d))
+* replace empty icon with fill icon in activate/deactivate button ([#620](https://github.com/instill-ai/design-system/issues/620)) ([9ed892f](https://github.com/instill-ai/design-system/commit/9ed892f35f51a56c13749923ca9912d90acc6d2d))
+
+## [0.59.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.1...@instill-ai/toolkit-v0.59.2) (2023-07-09)
+
+
+### Bug Fixes
+
+* **toolkit:** fix pipeline builder ondelete issue ([#615](https://github.com/instill-ai/design-system/issues/615)) ([e2af146](https://github.com/instill-ai/design-system/commit/e2af14688d3870849adc6b88b8b6bed83def8052))
+
+## [0.59.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.0...@instill-ai/toolkit-v0.59.1) (2023-07-09)
+
+
+### Bug Fixes
+
+* remove duplicated save button ([#612](https://github.com/instill-ai/design-system/issues/612)) ([a6ee0e6](https://github.com/instill-ai/design-system/commit/a6ee0e633520568ac8a723a43ba4a82b1d60d43b))
+
+## [0.59.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.58.0...@instill-ai/toolkit-v0.59.0) (2023-07-09)
+
+
+### Features
+
+* **toolkit:** Add save button at the right panel ([#611](https://github.com/instill-ai/design-system/issues/611)) ([60482c0](https://github.com/instill-ai/design-system/commit/60482c04f72e1017faa175c71f8498f66799b959))
+
+
+### Bug Fixes
+
+* fix pipeline-builder unselect not working ([#609](https://github.com/instill-ai/design-system/issues/609)) ([0fec1b0](https://github.com/instill-ai/design-system/commit/0fec1b08263dd9aeb1dc2e3bf332866ff755e452))
+
+## [0.58.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.57.0...@instill-ai/toolkit-v0.58.0) (2023-07-08)
+
+
+### Features
+
+* let user clean up unsaved form ([#608](https://github.com/instill-ai/design-system/issues/608)) ([7da8b74](https://github.com/instill-ai/design-system/commit/7da8b743b6ebde7be584d3fbf4afea12c4c17c46))
+
+
+### Bug Fixes
+
+* disable all the actions toward public connector ([#606](https://github.com/instill-ai/design-system/issues/606)) ([d5eb689](https://github.com/instill-ai/design-system/commit/d5eb689e2f1af624d3f2c8301f3ec597650a17ab))
+* fix left panel scroll issue ([#604](https://github.com/instill-ai/design-system/issues/604)) ([315aff2](https://github.com/instill-ai/design-system/commit/315aff2a7291589a4ccfe0edc94327eff7b6e2a7))
+
+## [0.57.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.56.0...@instill-ai/toolkit-v0.57.0) (2023-07-08)
+
+
+### Features
+
+* add DraggableItem skeleton ([#603](https://github.com/instill-ai/design-system/issues/603)) ([6b43ed0](https://github.com/instill-ai/design-system/commit/6b43ed0cee956c4a2830148b6783ecc3bd65e146))
+* **toolkit:** add pipeline-builder main loading spin ([#601](https://github.com/instill-ai/design-system/issues/601)) ([fc47e39](https://github.com/instill-ai/design-system/commit/fc47e398790ca1a1dfd1ff59b61d113df26637ef))
+
+
+### Bug Fixes
+
+* fix accessToken and enableQuery not correctly pass down ([#596](https://github.com/instill-ai/design-system/issues/596)) ([b86883d](https://github.com/instill-ai/design-system/commit/b86883d1fc3f1144e6ba49ed3fae6bb7dbadff38))
+* fix blockchain/create id field disabled issue ([#600](https://github.com/instill-ai/design-system/issues/600)) ([7017d1f](https://github.com/instill-ai/design-system/commit/7017d1f4a108aac030bafdc70a8d5a06ab197dc8))
+
+## [0.56.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.55.0...@instill-ai/toolkit-v0.56.0) (2023-07-07)
+
+
+### Features
+
+* don't show ai task for preset ([#588](https://github.com/instill-ai/design-system/issues/588)) ([39d1972](https://github.com/instill-ai/design-system/commit/39d1972844ab2a5d76ffe02d5a7d99df0eadc18f))
+* **toolkit:** make leftsidebar default close and right panel default open ([#591](https://github.com/instill-ai/design-system/issues/591)) ([da8b5a3](https://github.com/instill-ai/design-system/commit/da8b5a3054cd2169e7af8d6c9b1c879d90eb7f1c))
+* **toolkit:** update blockchain/ai connector definition ([#587](https://github.com/instill-ai/design-system/issues/587)) ([8b25a77](https://github.com/instill-ai/design-system/commit/8b25a775c0a9427c09b0695954a2fdf64f82bf25))
+* **toolkit:** update pipeline table design ([#590](https://github.com/instill-ai/design-system/issues/590)) ([0b9ef4f](https://github.com/instill-ai/design-system/commit/0b9ef4f764d2b34af958503fa9056352c1d84932))
+* update ai and blockchain table placeholder ([#594](https://github.com/instill-ai/design-system/issues/594)) ([497c574](https://github.com/instill-ai/design-system/commit/497c574ac0e58e952e60a40584bbd73b7cca1588))
+* update ai connector definition ([#586](https://github.com/instill-ai/design-system/issues/586)) ([c768a6e](https://github.com/instill-ai/design-system/commit/c768a6e539fa3dae6ba9ad05c885ed892177ad7a))
+* update the pipeline trigger snippet for CE ([#585](https://github.com/instill-ai/design-system/issues/585)) ([8f4dbd7](https://github.com/instill-ai/design-system/commit/8f4dbd7f30e9743bbd1efac4f341a5593681f3f0))
+
+
+### Bug Fixes
+
+* fix ai-connector related icons ([#583](https://github.com/instill-ai/design-system/issues/583)) ([b373039](https://github.com/instill-ai/design-system/commit/b373039e9763cfe74d6972aac50b30c0c9e7d8db))
+* make blockchain flow be consistent as other connector ([#584](https://github.com/instill-ai/design-system/issues/584)) ([72cf67e](https://github.com/instill-ai/design-system/commit/72cf67ec6f819d20e50ad7659d39bfa3e053cfde))
+* **toolkit,design-system:** unify text color across different form component ([#581](https://github.com/instill-ai/design-system/issues/581)) ([73ec2b9](https://github.com/instill-ai/design-system/commit/73ec2b92981a84dc5942bda8e3d69c0087d9afdf))
+* **toolkit:** fix wrong preset name at left panel ([#592](https://github.com/instill-ai/design-system/issues/592)) ([42e9b72](https://github.com/instill-ai/design-system/commit/42e9b72e378a4086272d25eb1245fba6aea033b1))
+
+
+### Miscellaneous
+
+* **toolkit:** disable pipeline builder topbar editor ([#595](https://github.com/instill-ai/design-system/issues/595)) ([02786f1](https://github.com/instill-ai/design-system/commit/02786f15604d183e6dd0bd75b4852195e34a34db))
+
 ## [0.55.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.54.0...@instill-ai/toolkit-v0.55.0) (2023-07-06)
 
 

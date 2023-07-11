@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
@@ -43,8 +44,9 @@ export const deletePipelineFormSchema = z.object({
   confirmationCode: z.string().optional(),
 });
 
-export type PipelineForm = {
+export type PipelineFormProps = {
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
@@ -53,9 +55,13 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   setPipelineDescription: state.setPipelineDescription,
 });
 
-export const PipelineForm = (props: PipelineForm) => {
-  const { accessToken } = props;
+export const PipelineForm = (props: PipelineFormProps) => {
+  const { accessToken, enableQuery } = props;
   const router = useRouter();
+
+  const { pipelineId, setPipelineId, setPipelineDescription } =
+    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+
   const updatePipelineform = useForm<z.infer<typeof pipelineFormSchema>>({
     resolver: zodResolver(pipelineFormSchema),
   });
@@ -68,18 +74,15 @@ export const PipelineForm = (props: PipelineForm) => {
 
   const pipeline = usePipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id,
+    enabled: !!id && enableQuery,
     accessToken,
   });
 
   const watchPipeline = useWatchPipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id,
+    enabled: !!id && enableQuery,
     accessToken,
   });
-
-  const { pipelineId, setPipelineId, setPipelineDescription } =
-    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   React.useEffect(() => {
     updatePipelineform.reset({
@@ -154,7 +157,7 @@ export const PipelineForm = (props: PipelineForm) => {
       if (accessToken) {
         pipelineTriggerSnippet = asyncCloud.replace(
           /\{vdp-pipeline-base-url\}/g,
-          env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
+          env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
         );
         pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
           /\{pipeline-id\}/g,
@@ -163,7 +166,7 @@ export const PipelineForm = (props: PipelineForm) => {
       } else {
         pipelineTriggerSnippet = asyncCE.replace(
           /\{vdp-pipeline-base-url\}/g,
-          env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
+          env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
         );
         pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
           /\{pipeline-id\}/g,
@@ -174,7 +177,7 @@ export const PipelineForm = (props: PipelineForm) => {
       if (accessToken) {
         pipelineTriggerSnippet = syncCloud.replace(
           /\{vdp-pipeline-base-url\}/g,
-          env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
+          env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
         );
         pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
           /\{pipeline-id\}/g,
@@ -183,7 +186,7 @@ export const PipelineForm = (props: PipelineForm) => {
       } else {
         pipelineTriggerSnippet = syncCE.replace(
           /\{vdp-pipeline-base-url\}/g,
-          env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
+          env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
         );
         pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
           /\{pipeline-id\}/g,
@@ -288,11 +291,12 @@ export const PipelineForm = (props: PipelineForm) => {
                     control={deletePipelineForm.control}
                     name="confirmationCode"
                     render={({ field }) => {
+                      const pipelineId = `${pipeline.data?.id}`;
                       return (
                         <Form.Item>
                           <Form.Label>
                             Please type
-                            <span className="mx-1 select-all font-bold">{` ${pipeline.data?.id} `}</span>
+                            <span className="mx-1 select-all font-bold">{` ${pipelineId} `}</span>
                             to confirm.
                           </Form.Label>
                           <Form.Control>
@@ -384,17 +388,22 @@ export const PipelineForm = (props: PipelineForm) => {
             </a>
           </LinkButton>
         </div>
-        {pipelineTriggerSnippet ? (
+        <div
+          className={cn(
+            "transition-opacity",
+            pipelineTriggerSnippet ? "" : "opacity-0"
+          )}
+        >
           <CodeBlock
             showLineNumbers={true}
-            codeString={pipelineTriggerSnippet}
+            codeString={pipelineTriggerSnippet ? pipelineTriggerSnippet : ""}
             wrapLines={true}
             customStyle={{
               borderRadius: "0.5rem",
               fontSize: "14px",
             }}
           />
-        ) : null}
+        </div>
       </div>
     </div>
   );

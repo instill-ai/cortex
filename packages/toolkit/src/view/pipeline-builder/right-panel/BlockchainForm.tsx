@@ -47,6 +47,14 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
 export const BlockchainForm = (props: BlockchainFormProps) => {
   const { blockchain, accessToken } = props;
 
+  let disabledAll = false;
+  if (
+    "visibility" in blockchain &&
+    blockchain.visibility === "VISIBILITY_PUBLIC"
+  ) {
+    disabledAll = true;
+  }
+
   const { updateResourceFormIsDirty, updateSelectedNode, updateNodes } =
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -484,7 +492,13 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         {...field}
                         type="text"
                         value={field.value ?? ""}
-                        disabled={"uid" in blockchain ? true : false}
+                        disabled={
+                          disabledAll
+                            ? disabledAll
+                            : "uid" in blockchain
+                            ? true
+                            : false
+                        }
                         autoComplete="off"
                       />
                     </Input.Root>
@@ -512,6 +526,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       {...field}
                       value={field.value ?? ""}
                       className="!rounded-none"
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                   <Form.Description>
@@ -597,6 +612,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                             });
                           }
                         }}
+                        disabled={disabledAll}
                       />
                     </Input.Root>
                   </Form.Control>
@@ -627,6 +643,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -678,6 +695,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                 </Form.Item>
@@ -711,6 +729,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                 </Form.Item>
@@ -744,6 +763,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                     <Switch
                       checked={field.value}
                       onCheckedChange={field.onChange}
+                      disabled={disabledAll}
                     />
                   </Form.Control>
                 </Form.Item>
@@ -759,7 +779,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             variant="primary"
             size="lg"
             type="button"
-            disabled={"uid" in blockchain ? false : true}
+            disabled={
+              disabledAll ? disabledAll : "uid" in blockchain ? false : true
+            }
           >
             {blockchain.watchState === "STATE_CONNECTED" ||
             blockchain.watchState === "STATE_ERROR"
@@ -788,15 +810,23 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
               </svg>
             ) : blockchain.watchState === "STATE_CONNECTED" ||
               blockchain.watchState === "STATE_ERROR" ? (
-              <Icons.Stop className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             ) : (
-              <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default group-disabled:stroke-semantic-fg-disabled" />
+              <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
             )}
           </Button>
           <Button
             type="submit"
             variant="secondaryColour"
-            disabled={"uid" in blockchain ? (isDirty ? false : true) : false}
+            disabled={
+              disabledAll
+                ? disabledAll
+                : "uid" in blockchain
+                ? isDirty
+                  ? false
+                  : true
+                : false
+            }
             size={isDirty ? "lg" : "md"}
             className="gap-x-2"
           >

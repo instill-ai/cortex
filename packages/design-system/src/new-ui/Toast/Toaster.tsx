@@ -5,7 +5,12 @@ import { Icons } from "../Icons";
 import { Toast, ToastProps } from "./Toast";
 import { ToasterToast, useToast } from "./use-toast";
 
-export function Toaster() {
+export type ToasterProps = {
+  additionalViewPortClassName?: string;
+};
+
+export function Toaster(props: ToasterProps) {
+  const { additionalViewPortClassName } = props;
   const { toasts } = useToast();
 
   return (
@@ -32,15 +37,15 @@ export function Toaster() {
           return (
             <Toast.Core size={size} variant={variant} key={id} {...props}>
               {size === "large" ? (
-                <div className="flex flex-col space-y-1 w-full">
-                  <div className="flex flex-row space-x-2 w-full">
+                <div className="flex w-full flex-col space-y-1">
+                  <div className="flex w-full flex-row space-x-2">
                     {getToasterIcon(variant, icon)}
-                    <div className="flex-grow flex my-auto">
+                    <div className="my-auto flex flex-grow">
                       {title && <Toast.Title>{title}</Toast.Title>}
                     </div>
                     <Toast.Close />
                   </div>
-                  <div className="flex flex-col w-full pl-8 space-y-4">
+                  <div className="flex w-full flex-col space-y-4 pl-8">
                     {description && (
                       <Toast.Description>{description}</Toast.Description>
                     )}
@@ -48,9 +53,9 @@ export function Toaster() {
                   </div>
                 </div>
               ) : (
-                <div className="flex flex-row w-full space-x-2">
+                <div className="flex w-full flex-row space-x-2">
                   {getToasterIcon(variant, icon)}
-                  <div className="flex-grow my-auto">
+                  <div className="my-auto flex-grow">
                     {title && <Toast.Title>{title}</Toast.Title>}
                   </div>
                   <Toast.Close />
@@ -63,10 +68,10 @@ export function Toaster() {
         return (
           <Toast.Core size={size} variant={variant} key={id} {...props}>
             {size === "large" ? (
-              <div className="flex flex-row space-x-4 w-full">
+              <div className="flex w-full flex-row space-x-4">
                 {getToasterIcon(variant, icon)}
-                <div className="flex flex-col flex-grow">
-                  <div className="flex flex-col space-y-1 mb-4">
+                <div className="flex flex-grow flex-col">
+                  <div className="mb-4 flex flex-col space-y-1">
                     {title && <Toast.Title>{title}</Toast.Title>}
                     {description && (
                       <Toast.Description>{description}</Toast.Description>
@@ -79,9 +84,9 @@ export function Toaster() {
                 </div>
               </div>
             ) : (
-              <div className="flex flex-row w-full space-x-2">
+              <div className="flex w-full flex-row space-x-2">
                 {getToasterIcon(variant, icon)}
-                <div className="flex-grow my-auto">
+                <div className="my-auto flex-grow">
                   {title && <Toast.Title>{title}</Toast.Title>}
                 </div>
                 <Toast.Close />
@@ -90,7 +95,7 @@ export function Toaster() {
           </Toast.Core>
         );
       })}
-      <Toast.Viewport />
+      <Toast.Viewport className={additionalViewPortClassName} />
     </Toast.Provider>
   );
 }
@@ -101,29 +106,29 @@ function getToasterIcon(
 ) {
   if (variant?.includes("success")) {
     return (
-      <Icons.CheckCircle className="w-6 h-6 stroke-semantic-success-on-bg" />
+      <Icons.CheckCircle className="h-6 w-6 stroke-semantic-success-on-bg" />
     );
   }
 
   if (variant?.includes("warning")) {
     return (
-      <Icons.AlertTriangle className="w-6 h-6 stroke-semantic-warning-on-bg" />
+      <Icons.AlertTriangle className="h-6 w-6 stroke-semantic-warning-on-bg" />
     );
   }
 
   if (variant?.includes("error")) {
     return (
-      <Icons.AlertCircle className="w-6 h-6 stroke-semantic-error-on-bg" />
+      <Icons.AlertCircle className="h-6 w-6 stroke-semantic-error-on-bg" />
     );
   }
 
   if (variant?.includes("icon")) {
     return (
-      <div className="w-10 h-10 flex rounded-sm border border-semantic-bg-line justify-center items-center">
+      <div className="flex h-10 w-10 items-center justify-center rounded-sm border border-semantic-bg-line">
         {icon}
       </div>
     );
   }
 
-  return <Icons.InfoCircle className="w-6 h-6 stroke-semantic-accent-on-bg" />;
+  return <Icons.InfoCircle className="h-6 w-6 stroke-semantic-accent-on-bg" />;
 }

@@ -14,6 +14,7 @@ import {
 } from "reactflow";
 
 import { ConnectorNodeData, Nullable } from "../type";
+import { ConnectorType } from "../vdp-sdk";
 
 export type PipelineBuilderState = {
   pipelineUid: Nullable<string>;
@@ -26,6 +27,8 @@ export type PipelineBuilderState = {
   rightPanelIsOpen: boolean;
   isSavingPipeline: boolean;
   resourceFormIsDirty: boolean;
+  leftSidebarSelectedTab: Nullable<ConnectorType>;
+  pipelineRecipeIsDirty: boolean;
 };
 
 export type PipelineBuilderAction = {
@@ -55,6 +58,10 @@ export type PipelineBuilderAction = {
   setRightPanelIsOpen: (fn: (prev: boolean) => boolean) => void;
   setIsSavingPipeline: (isSavingPipeline: boolean) => void;
   updateResourceFormIsDirty: (fn: (prev: boolean) => boolean) => void;
+  setLeftSidebarSelectedTab: (
+    fn: (prev: Nullable<ConnectorType>) => Nullable<ConnectorType>
+  ) => void;
+  updatePipelineRecipeIsDirty: (fn: (prev: boolean) => boolean) => void;
 };
 
 export type PipelineBuilderStore = PipelineBuilderState & PipelineBuilderAction;
@@ -68,8 +75,10 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
   pipelineUid: null,
   pipelineDescription: null,
   isSavingPipeline: false,
-  rightPanelIsOpen: false,
+  rightPanelIsOpen: true,
   resourceFormIsDirty: false,
+  leftSidebarSelectedTab: null,
+  pipelineRecipeIsDirty: false,
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
@@ -104,7 +113,10 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
       fn: (prev: Node<ConnectorNodeData>[]) => Node<ConnectorNodeData>[]
     ) =>
       set((state) => {
-        return { ...state, nodes: fn(state.nodes) };
+        return {
+          ...state,
+          nodes: fn(state.nodes),
+        };
       }),
     setEdges: (edges: Edge[]) =>
       set((state) => {
@@ -112,7 +124,10 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
       }),
     updateEdges: (fn: (prev: Edge[]) => Edge[]) =>
       set((state) => {
-        return { ...state, edges: fn(state.edges) };
+        return {
+          ...state,
+          edges: fn(state.edges),
+        };
       }),
     setSelectedNode: (node: Nullable<Node<ConnectorNodeData>>) =>
       set((state) => {
@@ -147,7 +162,7 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
     onConnect: (connection: Connection) => {
       set({
         edges: addEdge(
-          { ...connection, animated: true, type: "customEdge" },
+          { ...connection, animated: false, type: "customEdge" },
           get().edges
         ),
       });
@@ -167,6 +182,22 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
     updateResourceFormIsDirty: (fn: (prev: boolean) => boolean) =>
       set((state) => {
         return { ...state, resourceFormIsDirty: fn(state.resourceFormIsDirty) };
+      }),
+    setLeftSidebarSelectedTab: (
+      fn: (prev: Nullable<ConnectorType>) => Nullable<ConnectorType>
+    ) =>
+      set((state) => {
+        return {
+          ...state,
+          leftSidebarSelectedTab: fn(state.leftSidebarSelectedTab),
+        };
+      }),
+    updatePipelineRecipeIsDirty: (fn: (prev: boolean) => boolean) =>
+      set((state) => {
+        return {
+          ...state,
+          pipelineRecipeIsDirty: fn(state.pipelineRecipeIsDirty),
+        };
       }),
   })
 );

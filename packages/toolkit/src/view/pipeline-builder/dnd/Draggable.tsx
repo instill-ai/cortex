@@ -1,18 +1,48 @@
+import cn from "clsx";
 import { useDraggable } from "@dnd-kit/core";
 import * as React from "react";
 
-import { Icons, getModelInstanceTaskToolkit } from "@instill-ai/design-system";
 import {
+  Icons,
+  getModelInstanceTaskToolkit,
+  Skeleton,
+} from "@instill-ai/design-system";
+import type {
   ConnectorWithWatchState,
   IncompleteConnectorWithWatchState,
   Nullable,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 
+type DraggableContextValue = {
+  isPreset: boolean;
+};
+
+const DraggableContext = React.createContext<DraggableContextValue>(
+  {} as DraggableContextValue
+);
+
+export const useDraggableContext = () => {
+  const draggableContext = React.useContext(DraggableContext);
+
+  if (!draggableContext) {
+    throw new Error(
+      "useDraggableContext should be used within <Draggable.Root>"
+    );
+  }
+
+  const { isPreset } = draggableContext;
+
+  return {
+    isPreset,
+  };
+};
+
 const Item = (props: {
   resource: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
 }) => {
   const { resource } = props;
+  const { isPreset } = useDraggableContext();
 
   let fallbackImg: Nullable<React.ReactElement> = null;
 
@@ -70,13 +100,37 @@ const Item = (props: {
             </h5>
           </div>
         </div>
-        <div className="flex">
-          <p className="rounded-full bg-semantic-accent-bg px-2 py-0.5 pl-2 text-semantic-accent-on-bg product-label-label-1">
-            {taskLabel ? taskLabel : "unspecified"}
-          </p>
-        </div>
+        {isPreset ? null : (
+          <div className="flex">
+            <p className="rounded-full bg-semantic-accent-bg px-2 py-0.5 pl-2 text-semantic-accent-on-bg product-label-label-1">
+              {taskLabel ? taskLabel : "unspecified"}
+            </p>
+          </div>
+        )}
       </div>
     );
+  }
+
+  let displayedName: Nullable<string> = null;
+
+  if (
+    resource.connector_definition_name ===
+      "connector-definitions/source-http" ||
+    resource.connector_definition_name ===
+      "connector-definitions/destination-http"
+  ) {
+    if (isPreset) {
+      displayedName = "HTTP";
+    }
+  } else if (
+    resource.connector_definition_name ===
+      "connector-definitions/source-grpc" ||
+    resource.connector_definition_name ===
+      "connector-definitions/destination-grpc"
+  ) {
+    if (isPreset) {
+      displayedName = "gRPC";
+    }
   }
 
   return (
@@ -97,7 +151,7 @@ const Item = (props: {
             />
           </div>
           <h5 className="my-auto w-[160px] truncate text-semantic-fg-primary product-headings-heading-5">
-            {resource.name.split("/")[1]}
+            {displayedName ? displayedName : resource.id}
           </h5>
         </div>
       </div>
@@ -119,18 +173,27 @@ const Root = (props: {
   });
 
   return (
-    <div
-      className={isDragging ? "opacity-40" : ""}
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-    >
-      {children}
-    </div>
+    <DraggableContext.Provider value={{ isPreset }}>
+      <div
+        className={isDragging ? "opacity-40" : ""}
+        ref={setNodeRef}
+        {...attributes}
+        {...listeners}
+      >
+        {children}
+      </div>
+    </DraggableContext.Provider>
   );
+};
+
+const DraggableItemSkeleton = (
+  props: React.ComponentProps<typeof Skeleton>
+) => {
+  return <Skeleton {...props} className={cn("w-full h-12", props.className)} />;
 };
 
 export const Draggable = {
   Root,
   Item,
+  Skeleton: DraggableItemSkeleton,
 };

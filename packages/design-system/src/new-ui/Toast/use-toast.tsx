@@ -5,7 +5,7 @@ import * as React from "react";
 
 import type { ToastActionElement, ToastProps } from "./Toast";
 
-const TOAST_LIMIT = 1;
+const TOAST_LIMIT = 3;
 const TOAST_REMOVE_DELAY = 10000;
 
 export type ToasterToast = ToastProps & {
@@ -157,6 +157,7 @@ function toast({ ...props }: Toast) {
       id,
       open: true,
       onOpenChange: (open) => {
+        if (props.onOpenChange) props.onOpenChange(open);
         if (!open) dismiss();
       },
     },

@@ -13,6 +13,8 @@ export type TablePlaceholderBaseProps = {
   createButtonLink: string;
   enableCreateButton: boolean;
 
+  svgElement?: React.ReactNode;
+
   /**
    * - Default is undefined
    */
@@ -26,6 +28,7 @@ export const TablePlaceholderBase = ({
   createButtonLink,
   marginBottom,
   enableCreateButton,
+  svgElement,
 }: TablePlaceholderBaseProps) => {
   const router = useRouter();
   const handleOnClick = () => {
@@ -38,11 +41,16 @@ export const TablePlaceholderBase = ({
         marginBottom
       )}
     >
-      <div className="grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-2 px-[27px] opacity-10">
-        {placeholderItems.map((e) => (
-          <React.Fragment key={e.id}>{e.item}</React.Fragment>
-        ))}
-      </div>
+      {svgElement ? (
+        svgElement
+      ) : (
+        <div className="grid grid-cols-3 grid-rows-2 gap-x-2 gap-y-2 px-[27px] opacity-10">
+          {placeholderItems.map((e) => (
+            <React.Fragment key={e.id}>{e.item}</React.Fragment>
+          ))}
+        </div>
+      )}
+
       <div className="m-auto flex flex-col gap-y-5">
         <h3 className="text-instillGrey80 text-instill-h3">
           {placeholderTitle}

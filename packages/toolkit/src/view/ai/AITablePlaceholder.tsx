@@ -1,11 +1,4 @@
-import {
-  ImageClassificationIcon,
-  InstanceSegmentationIcon,
-  KeypointDetectionIcon,
-  ObjectDetectionIcon,
-  OpticalCharacterRecognitionIcon,
-  SemanticSegmentationIcon,
-} from "@instill-ai/design-system";
+import { Logos } from "@instill-ai/design-system";
 
 import {
   TablePlaceholderBase,
@@ -20,65 +13,34 @@ export type AITablePlaceholderProps = Pick<
 export const AITablePlaceholder = (props: AITablePlaceholderProps) => {
   const { marginBottom, enableCreateButton } = props;
 
-  const width = "w-[136px]";
-  const height = "h-[136px]";
-
   const placeholderItems = [
     {
-      id: "model-image-classification",
-      item: (
-        <ImageClassificationIcon
-          position="m-auto"
-          width={width}
-          height={height}
-        />
-      ),
+      id: "MDL-logo",
+      item: <Logos.MDLSquare className="w-[136px] h-[136px]" />,
     },
     {
-      id: "model-object-detection",
-      item: (
-        <ObjectDetectionIcon position="m-auto" width={width} height={height} />
-      ),
+      id: "Numbers-logo",
+      item: <Logos.Number className="w-[136px] h-[136px]" />,
     },
     {
-      id: "model-keypoint-detection",
-      item: (
-        <KeypointDetectionIcon
-          position="m-auto"
-          width={width}
-          height={height}
-        />
-      ),
+      id: "OpenAI-logo",
+      item: <Logos.OpenAI className="w-[136px] h-[136px]" />,
     },
     {
-      id: "model-instance-segmentation",
-      item: (
-        <InstanceSegmentationIcon
-          position="m-auto"
-          width={width}
-          height={height}
-        />
-      ),
+      id: "Huggingface-logo",
+      item: <Logos.HuggingFace className="w-[136px] h-[136px]" />,
     },
     {
-      id: "model-semantic-segmentation",
+      id: "Langchain-logo",
       item: (
-        <SemanticSegmentationIcon
-          position="m-auto"
-          width={width}
-          height={height}
-        />
+        <div className="flex w-[136px] h-[136px]">
+          <p className="my-auto text-[64px]">🦜️🔗</p>
+        </div>
       ),
     },
     {
       id: "model-optical-character-recognition",
-      item: (
-        <OpticalCharacterRecognitionIcon
-          position="m-auto"
-          width={width}
-          height={height}
-        />
-      ),
+      item: <Logos.StabilityAI className="w-[136px] h-[136px]" />,
     },
   ];
 

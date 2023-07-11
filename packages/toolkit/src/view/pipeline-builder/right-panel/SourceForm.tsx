@@ -13,20 +13,23 @@ import {
 } from "@instill-ai/design-system";
 import {
   getInstillApiErrorMessage,
-  testConnectorConnectionAction,
   useConnectorDefinitions,
   useConnectors,
   useCreateConnector,
-  type ConnectorWithDefinition,
+  useConnectConnector,
+  useDisonnectConnector,
+  usePipelineBuilderStore,
   type CreateConnectorPayload,
   type Nullable,
   type IncompleteConnectorWithWatchState,
+  type ConnectorWithWatchState,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 
 export type SourceFormProps = {
-  source: ConnectorWithDefinition | IncompleteConnectorWithWatchState;
+  source: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 const SourceFormSchema = z.object({
@@ -34,7 +37,21 @@ const SourceFormSchema = z.object({
 });
 
 export const SourceForm = (props: SourceFormProps) => {
-  const { source, accessToken } = props;
+  const { source, accessToken, enableQuery } = props;
+
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  let disabledAll = false;
+  if ("visibility" in source && source.visibility === "VISIBILITY_PUBLIC") {
+    disabledAll = true;
+  }
+
+  if (
+    source.connector_definition_name === "connector-definitions/source-http" ||
+    source.connector_definition_name === "connector-definitions/source-grpc"
+  ) {
+    disabledAll = true;
+  }
 
   const form = useForm<z.infer<typeof SourceFormSchema>>({
     resolver: zodResolver(SourceFormSchema),
@@ -49,16 +66,20 @@ export const SourceForm = (props: SourceFormProps) => {
     formState: { isDirty },
   } = form;
 
+  const updateSelectedNode = usePipelineBuilderStore(
+    (state) => state.updateSelectedNode
+  );
+
   const sourceDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: true,
     accessToken,
+    enabled: enableQuery,
   });
 
   const sources = useConnectors({
     connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: true,
     accessToken,
+    enabled: enableQuery,
   });
 
   React.useEffect(() => {
@@ -68,41 +89,6 @@ export const SourceForm = (props: SourceFormProps) => {
   }, [reset, source]);
 
   const { toast } = useToast();
-
-  const [isTesting, setIsTesting] = React.useState(false);
-
-  const handleTestSource = async function () {
-    if (!source) return;
-
-    setIsTesting(true);
-
-    try {
-      const state = await testConnectorConnectionAction({
-        connectorName: source.name,
-        accessToken,
-      });
-
-      setIsTesting(false);
-
-      toast({
-        title: `${props.source.id} is ${
-          state === "STATE_ERROR" ? "not connected" : "connected"
-        }`,
-        description: `The ${props.source.id} state is ${state}`,
-        variant: state === "STATE_ERROR" ? "alert-error" : "alert-success",
-        size: "large",
-      });
-    } catch (err) {
-      setIsTesting(false);
-
-      toast({
-        title: "Error",
-        description: `There is something wrong when test connection`,
-        variant: "alert-error",
-        size: "large",
-      });
-    }
-  };
 
   const createConnector = useCreateConnector();
 
@@ -116,7 +102,7 @@ export const SourceForm = (props: SourceFormProps) => {
     createConnector.mutate(
       {
         payload,
-        accessToken: null,
+        accessToken,
       },
       {
         onSuccess: () => {
@@ -149,6 +135,151 @@ export const SourceForm = (props: SourceFormProps) => {
       }
     );
   }
+
+  const [isConnecting, setIsConnecting] = React.useState(false);
+  const connectSource = useConnectConnector();
+  const disconnectSource = useDisonnectConnector();
+
+  const handleConnectSource = async function () {
+    if (!source) return;
+
+    setIsConnecting(true);
+
+    const oldState = source.watchState;
+
+    if (
+      source.watchState === "STATE_CONNECTED" ||
+      source.watchState === "STATE_ERROR"
+    ) {
+      disconnectSource.mutate(
+        {
+          connectorName: source.name,
+          accessToken,
+        },
+        {
+          onSuccess: () => {
+            toast({
+              title: `Successfully disconnect ${source.id}`,
+              variant: "alert-success",
+              size: "small",
+            });
+            setIsConnecting(false);
+
+            updateSelectedNode((prev) => {
+              if (prev === null) return prev;
+
+              return {
+                ...prev,
+                data: {
+                  ...prev.data,
+                  connector: {
+                    ...prev.data.connector,
+                    watchState: "STATE_DISCONNECTED",
+                  },
+                },
+              };
+            });
+          },
+          onError: (error) => {
+            setIsConnecting(false);
+            updateSelectedNode((prev) => {
+              if (prev === null) return prev;
+
+              return {
+                ...prev,
+                data: {
+                  ...prev.data,
+                  connector: {
+                    ...prev.data.connector,
+                    watchState: oldState,
+                  },
+                },
+              };
+            });
+
+            if (isAxiosError(error)) {
+              toast({
+                title: "Something went wrong when disconnect the source",
+                variant: "alert-error",
+                size: "large",
+                description: getInstillApiErrorMessage(error),
+              });
+            } else {
+              toast({
+                title: "Something went wrong when disconnect the source",
+                variant: "alert-error",
+                size: "large",
+                description: "Please try again later",
+              });
+            }
+          },
+        }
+      );
+    } else {
+      connectSource.mutate(
+        {
+          connectorName: source.name,
+          accessToken,
+        },
+        {
+          onSuccess: () => {
+            toast({
+              title: `Successfully connect ${source.id}`,
+              variant: "alert-success",
+              size: "small",
+            });
+            setIsConnecting(false);
+            updateSelectedNode((prev) => {
+              if (prev === null) return prev;
+
+              return {
+                ...prev,
+                data: {
+                  ...prev.data,
+                  connector: {
+                    ...prev.data.connector,
+                    watchState: "STATE_CONNECTED",
+                  },
+                },
+              };
+            });
+          },
+          onError: (error) => {
+            setIsConnecting(false);
+            updateSelectedNode((prev) => {
+              if (prev === null) return prev;
+
+              return {
+                ...prev,
+                data: {
+                  ...prev.data,
+                  connector: {
+                    ...prev.data.connector,
+                    watchState: oldState,
+                  },
+                },
+              };
+            });
+            if (isAxiosError(error)) {
+              toast({
+                title: "Something went wrong when connect the source",
+                variant: "alert-error",
+                size: "large",
+                description: getInstillApiErrorMessage(error),
+              });
+            } else {
+              toast({
+                title: "Something went wrong when connect the source",
+                variant: "alert-error",
+                size: "large",
+                description: "Please try again later",
+              });
+            }
+          },
+        }
+      );
+    }
+  };
 
   let disabledSubmit = false;
 
@@ -218,14 +349,20 @@ export const SourceForm = (props: SourceFormProps) => {
           </div>
           <div className="flex w-full flex-row-reverse gap-x-4">
             <Button
-              onClick={handleTestSource}
+              onClick={handleConnectSource}
               className="gap-x-2"
               variant="primary"
               size="lg"
               type="button"
+              disabled={
+                disabledAll ? disabledAll : "uid" in source ? false : true
+              }
             >
-              Test
-              {isTesting ? (
+              {source.watchState === "STATE_CONNECTED" ||
+              source.watchState === "STATE_ERROR"
+                ? "Disconnect"
+                : "Connect"}
+              {isConnecting ? (
                 <svg
                   className="m-auto h-4 w-4 animate-spin text-white"
                   xmlns="http://www.w3.org/2000/svg"
@@ -246,14 +383,17 @@ export const SourceForm = (props: SourceFormProps) => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
+              ) : source.watchState === "STATE_CONNECTED" ||
+                source.watchState === "STATE_ERROR" ? (
+                <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
               ) : (
-                <Icons.Play className="h-4 w-4 stroke-semantic-fg-on-default" />
+                <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
               )}
             </Button>
             <Button
               type="submit"
               variant="secondaryColour"
-              disabled={disabledSubmit}
+              disabled={disabledAll ? disabledAll : disabledSubmit}
               size={isDirty ? "lg" : "md"}
               className="gap-x-2"
             >
