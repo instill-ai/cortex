@@ -235,36 +235,6 @@
         "value": "{base.Text+Icon.Secondary Black}",
         "type": "color"
       }
-    },
-    "secondary": {
-      "bg": {
-        "value": "{base.secondary.50}",
-        "type": "color"
-      },
-      "bg-secondary": {
-        "value": "{base.secondary.100}",
-        "type": "color"
-      },
-      "bg-alt": {
-        "value": "{base.secondary.200}",
-        "type": "color"
-      },
-      "default": {
-        "value": "{base.secondary.600}",
-        "type": "color"
-      },
-      "hover": {
-        "value": "{base.secondary.700}",
-        "type": "color"
-      },
-      "pressed": {
-        "value": "{base.secondary.800}",
-        "type": "color"
-      },
-      "on-bg": {
-        "value": "{base.secondary.700}",
-        "type": "color"
-      }
     }
   }
 }
