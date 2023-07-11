@@ -46,6 +46,13 @@ export const SourceForm = (props: SourceFormProps) => {
     disabledAll = true;
   }
 
+  if (
+    source.connector_definition_name === "connector-definitions/source-http" ||
+    source.connector_definition_name === "connector-definitions/source-grpc"
+  ) {
+    disabledAll = true;
+  }
+
   const form = useForm<z.infer<typeof SourceFormSchema>>({
     resolver: zodResolver(SourceFormSchema),
     defaultValues: {

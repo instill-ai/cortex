@@ -4,6 +4,8 @@ import {
   ConnectorState,
   ConnectorType,
   ConnectorWithDefinition,
+  Pipeline,
+  PipelineState,
 } from "../vdp-sdk";
 
 export type IncompleteConnectorWithWatchState = {
@@ -28,3 +30,7 @@ export type ConnectorPreset = {
   id: string;
   name: string;
 } & Pick<Connector, "configuration">;
+
+export type PipelineWithWatchState = {
+  watchState: PipelineState;
+} & Pipeline;

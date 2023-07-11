@@ -67,6 +67,15 @@ export const DestinationForm = (props: DestinationFormProps) => {
     disabledAll = true;
   }
 
+  if (
+    destination.connector_definition_name ===
+      "connector-definitions/destination-http" ||
+    destination.connector_definition_name ===
+      "connector-definitions/destination-grpc"
+  ) {
+    disabledAll = true;
+  }
+
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/

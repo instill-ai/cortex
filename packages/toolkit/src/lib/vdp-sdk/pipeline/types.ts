@@ -1,3 +1,4 @@
+import { Nullable } from "vitest";
 import { ConnectorType, ConnectorWithDefinition } from "../connector";
 
 export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
@@ -23,7 +24,12 @@ export type PipelineComponent = {
   resource_name: string;
   resource_detail: ConnectorWithDefinition;
   metadata: any;
-  dependencies: Record<string, any>;
+  dependencies: {
+    images: string;
+    texts: string;
+    metadata: string;
+    structured_data: string;
+  };
 
   // We will add logic_operator in the future
   type: ConnectorType | string;
