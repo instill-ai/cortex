@@ -177,7 +177,15 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
               onEdgesChange(event);
             }}
             onInit={setReactFlowInstance}
-            onConnect={onConnect}
+            onConnect={(e) => {
+              // When the user set up new connecton, we will update the pipeline recipe
+              // dirtiness.
+              onConnect(e);
+              updatePipelineRecipeIsDirty((prev) => {
+                if (prev) return prev;
+                return true;
+              });
+            }}
             fitView
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}

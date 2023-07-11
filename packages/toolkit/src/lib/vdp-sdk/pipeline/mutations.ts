@@ -4,6 +4,7 @@ import { Pipeline, RawPipelineRecipeComponent } from "./types";
 
 export type CreatePipelinePayload = {
   id: string;
+  description?: string;
   recipe: {
     version: string;
     components: RawPipelineRecipeComponent[];

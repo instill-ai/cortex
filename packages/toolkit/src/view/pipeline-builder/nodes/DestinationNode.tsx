@@ -18,9 +18,7 @@ export const DestinationNode = (props: NodeProps<ConnectorNodeData>) => {
     >
       <CustomNode.NameRow
         name={data.connector.name.split("/")[1]}
-        icon={
-          <Icons.Box className="my-auto h-4 w-4 stroke-semantic-fg-primary" />
-        }
+        icon={<Icons.Box className="h-4 w-4 stroke-semantic-fg-primary" />}
       />
       <CustomNode.ConnectorDefinitionRow
         definition={data.connector.connector_definition}
