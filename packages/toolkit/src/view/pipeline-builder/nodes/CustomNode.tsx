@@ -37,19 +37,24 @@ export const Root = React.forwardRef<
       >
         <div>{children}</div>
       </div>
-      <div className="absolute !left-none !top-1/2 !h-6 !w-4 !-translate-x-full -translate-y-1/2 !rounded-bl-xl !rounded-br-none !rounded-tl-xl !rounded-tr-none !border-0 !bg-semantic-bg-line px-[2px] py-[6px]">
-        <Handle
-          className="!static !h-3 !w-3 !translate-x-0 !rounded-full !border-0 !bg-[#94A0B8]"
-          type="target"
-          position={Position.Left}
-        />
-      </div>
-      <div className="absolute !right-0 !top-1/2 z-10 !h-6 !w-4 !translate-x-full -translate-y-1/2 !rounded-bl-none !rounded-br-xl !rounded-tl-none !rounded-tr-xl !border-0 !bg-semantic-bg-line px-[2px] py-[6px]">
-        <Handle
-          className="!static !h-3 !w-3 !translate-x-0 !rounded-full !border-0 !bg-[#94A0B8]"
-          type="source"
-          position={Position.Right}
-        />
+      <div className="flex flex-col">
+        {["images", "texts"].map((e) => (
+          <div className="flex flex-row">
+            <Handle
+              className="!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line !bg-semantic-fg-secondary"
+              type="target"
+              position={Position.Left}
+              id={e}
+            />
+            <div className="flex flex-1 justify-center items-center">{e}</div>
+            <Handle
+              className="!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line !bg-semantic-fg-secondary"
+              type="source"
+              position={Position.Right}
+              id={e}
+            />
+          </div>
+        ))}
       </div>
     </>
   );
