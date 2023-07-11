@@ -111,6 +111,12 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                 return true;
               });
             }}
+            onEdgesDelete={() => {
+              updatePipelineRecipeIsDirty((prev) => {
+                if (prev) return prev;
+                return true;
+              });
+            }}
             onNodesChange={(event) => {
               if (resourceFormIsDirty) {
                 toast({
@@ -139,10 +145,6 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                 return;
               }
               onNodesChange(event);
-              updatePipelineRecipeIsDirty((prev) => {
-                if (prev) return prev;
-                return true;
-              });
             }}
             onEdgesChange={(event) => {
               if (resourceFormIsDirty) {
@@ -173,10 +175,6 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
               }
 
               onEdgesChange(event);
-              updatePipelineRecipeIsDirty((prev) => {
-                if (prev) return prev;
-                return true;
-              });
             }}
             onInit={setReactFlowInstance}
             onConnect={onConnect}

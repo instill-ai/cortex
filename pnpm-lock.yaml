@@ -472,6 +472,9 @@ importers:
       uuid:
         specifier: ^9.0.0
         version: 9.0.0
+      web-worker:
+        specifier: ^1.2.0
+        version: 1.2.0
       yup:
         specifier: ^0.32.11
         version: 0.32.11
@@ -17346,6 +17349,10 @@ packages:
     dependencies:
       defaults: 1.0.4
     dev: true
+
+  /web-worker@1.2.0:
+    resolution: {integrity: sha512-PgF341avzqyx60neE9DD+XS26MMNMoUQRz9NOZwW32nPQrF6p77f1htcnjBSEV8BGMKZ16choqUG4hyI0Hx7mA==}
+    dev: false
 
   /webidl-conversions@3.0.1:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==}

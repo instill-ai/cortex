@@ -196,6 +196,7 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
       set((state) => {
         return {
           ...state,
+          pipelineRecipeIsDirty: fn(state.pipelineRecipeIsDirty),
         };
       }),
   })

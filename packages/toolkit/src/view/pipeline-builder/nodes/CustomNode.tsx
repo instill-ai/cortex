@@ -10,6 +10,7 @@ import {
   ModelTask,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
+import "./CustomNode.css";
 
 export type CustomNodeProps = {
   children: React.ReactNode;
@@ -24,29 +25,6 @@ export const Root = React.forwardRef<
 
   return (
     <>
-      <style jsx>{`
-        /* We animate persudo element to implement the box-shadow animation, it's faster than
-             directly animating the box-shadow property.
-          */
-        .instill-custom-node:after {
-          content: "";
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          box-shadow: var(--shadow-md-shadow);
-          opacity: 0;
-          border-radius: 12px;
-          border: 2px solid transparent;
-          -webkit-transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-          transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .instill-custom-node:hover::after {
-          opacity: 1;
-        }
-      `}</style>
       <div
         ref={ref}
         className={cn(
