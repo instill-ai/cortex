@@ -11,7 +11,6 @@ import {
 
 import {
   ConnectorNodeData,
-  ConnectorType,
   Nullable,
   PipelineBuilderStore,
   useConnectorDefinitions,

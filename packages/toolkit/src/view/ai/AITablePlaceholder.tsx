@@ -1,12 +1,4 @@
-import {
-  ImageClassificationIcon,
-  InstanceSegmentationIcon,
-  KeypointDetectionIcon,
-  Logos,
-  ObjectDetectionIcon,
-  OpticalCharacterRecognitionIcon,
-  SemanticSegmentationIcon,
-} from "@instill-ai/design-system";
+import { Logos } from "@instill-ai/design-system";
 
 import {
   TablePlaceholderBase,
