@@ -53,13 +53,14 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
   setPipelineId: state.setPipelineId,
   setPipelineDescription: state.setPipelineDescription,
+  pipelineIsNew: state.pipelineIsNew,
 });
 
 export const PipelineForm = (props: PipelineFormProps) => {
   const { accessToken, enableQuery } = props;
   const router = useRouter();
 
-  const { pipelineId, setPipelineId, setPipelineDescription } =
+  const { pipelineId, setPipelineId, setPipelineDescription, pipelineIsNew } =
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const updatePipelineform = useForm<z.infer<typeof pipelineFormSchema>>({
@@ -74,13 +75,13 @@ export const PipelineForm = (props: PipelineFormProps) => {
 
   const pipeline = usePipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id && enableQuery,
+    enabled: !!id && enableQuery && !pipelineIsNew,
     accessToken,
   });
 
   const watchPipeline = useWatchPipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id && enableQuery,
+    enabled: !!id && enableQuery && !pipelineIsNew,
     accessToken,
   });
 

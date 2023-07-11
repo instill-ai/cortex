@@ -6,7 +6,6 @@ import { Button, Icons, useToast } from "@instill-ai/design-system";
 import {
   CreatePipelinePayload,
   Nullable,
-  Pipeline,
   PipelineBuilderStore,
   UpdatePipelinePayload,
   getInstillApiErrorMessage,
@@ -31,6 +30,8 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   updateEdges: state.updateEdges,
+  updatePipelineIsNew: state.updatePipelineIsNew,
+  pipelineIsNew: state.pipelineIsNew,
 });
 
 export type FlowControlProps = {
@@ -57,6 +58,8 @@ export const FlowControl = (props: FlowControlProps) => {
     updateEdges,
     pipelineRecipeIsDirty,
     updatePipelineRecipeIsDirty,
+    updatePipelineIsNew,
+    pipelineIsNew,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -65,13 +68,13 @@ export const FlowControl = (props: FlowControlProps) => {
   const pipeline = usePipeline({
     pipelineName: `pipelines/${id}`,
     accessToken,
-    enabled: !!id && enableQuery,
+    enabled: !!id && enableQuery && !pipelineIsNew,
   });
 
   const pipelineWatchState = useWatchPipeline({
     pipelineName: `pipelines/${id}`,
     accessToken,
-    enabled: !!id && enableQuery,
+    enabled: !!id && pipeline.isSuccess && enableQuery,
   });
 
   const updatePipeline = useUpdatePipeline();
@@ -222,10 +225,8 @@ export const FlowControl = (props: FlowControlProps) => {
           variant: "alert-success",
           size: "small",
         });
-        setIsSaving(false);
         updatePipelineRecipeIsDirty(() => false);
       } catch (error) {
-        setIsSaving(false);
         if (isAxiosError(error)) {
           toast({
             title: "Something went wrong when save the pipeline",
@@ -241,7 +242,7 @@ export const FlowControl = (props: FlowControlProps) => {
           });
         }
       }
-
+      setIsSaving(false);
       return;
     }
 
@@ -264,8 +265,15 @@ export const FlowControl = (props: FlowControlProps) => {
       router.push(`/pipelines/${pipelineId}`, undefined, {
         shallow: true,
       });
+
+      updatePipelineIsNew(() => false);
+
+      toast({
+        title: "Successfully created the pipeline",
+        variant: "alert-success",
+        size: "small",
+      });
     } catch (error) {
-      setIsSaving(false);
       if (isAxiosError(error)) {
         toast({
           title: "Something went wrong when save the pipeline",
@@ -281,6 +289,8 @@ export const FlowControl = (props: FlowControlProps) => {
         });
       }
     }
+
+    setIsSaving(false);
   }
 
   async function handleRenamePipeline() {

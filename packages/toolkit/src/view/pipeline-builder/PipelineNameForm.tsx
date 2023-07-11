@@ -11,6 +11,7 @@ import {
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
+  pipelineIsNew: state.pipelineIsNew,
 });
 
 export type PipelineNameFormProps = {
@@ -24,14 +25,14 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
 
   const { id } = router.query;
 
-  const { pipelineId } = usePipelineBuilderStore(
+  const { pipelineId, pipelineIsNew} = usePipelineBuilderStore(
     pipelineBuilderSelector,
     shallow
   );
 
   const pipelineWatchState = useWatchPipeline({
     pipelineName: `pipelines/${id}`,
-    enabled: !!id && enableQuery,
+    enabled: !!id && enableQuery && !pipelineIsNew,
     accessToken,
   });
 
