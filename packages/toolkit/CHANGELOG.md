@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.60.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.1...@instill-ai/toolkit-v0.60.2) (2023-07-11)
+
+
+### Bug Fixes
+
+* **toolkit:** fix pipelineBuilderStore pipelineRecipeIsDirty setter issue ([#627](https://github.com/instill-ai/design-system/issues/627)) ([a59b61c](https://github.com/instill-ai/design-system/commit/a59b61c3db2666b4dc4ea58c46016bbce8bc0750))
+* **toolkit:** fix rename issue ([#630](https://github.com/instill-ai/design-system/issues/630)) ([2b65d91](https://github.com/instill-ai/design-system/commit/2b65d9152d641bc5f0460cd168b97118d318f0e2))
+
 ## [0.60.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.0...@instill-ai/toolkit-v0.60.1) (2023-07-11)
 
 
