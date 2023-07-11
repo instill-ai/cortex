@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.2...@instill-ai/toolkit-v0.60.3) (2023-07-11)
+
+
+### Bug Fixes
+
+* **toolkit:** fix unnecessary fetch in pipeline-builder ([#632](https://github.com/instill-ai/design-system/issues/632)) ([6fe4b71](https://github.com/instill-ai/design-system/commit/6fe4b718a72318462fa4194ed2185842ccd5f37d))
+
 ## [0.60.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.1...@instill-ai/toolkit-v0.60.2) (2023-07-11)
 
 
