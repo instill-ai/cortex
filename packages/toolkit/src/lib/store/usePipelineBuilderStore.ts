@@ -107,7 +107,7 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
       }),
     setNodes: (nodes: Node<ConnectorNodeData>[]) =>
       set((state) => {
-        return { ...state, nodes, pipelineRecipeIsDirty: true };
+        return { ...state, nodes };
       }),
     updateNodes: (
       fn: (prev: Node<ConnectorNodeData>[]) => Node<ConnectorNodeData>[]
@@ -116,19 +116,17 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
         return {
           ...state,
           nodes: fn(state.nodes),
-          pipelineRecipeIsDirty: true,
         };
       }),
     setEdges: (edges: Edge[]) =>
       set((state) => {
-        return { ...state, edges, pipelineRecipeIsDirty: true };
+        return { ...state, edges };
       }),
     updateEdges: (fn: (prev: Edge[]) => Edge[]) =>
       set((state) => {
         return {
           ...state,
           edges: fn(state.edges),
-          pipelineRecipeIsDirty: true,
         };
       }),
     setSelectedNode: (node: Nullable<Node<ConnectorNodeData>>) =>
@@ -154,13 +152,11 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
     onNodesChange: (changes: NodeChange[]) => {
       set({
         nodes: applyNodeChanges(changes, get().nodes),
-        pipelineRecipeIsDirty: true,
       });
     },
     onEdgesChange: (changes: EdgeChange[]) => {
       set({
         edges: applyEdgeChanges(changes, get().edges),
-        pipelineRecipeIsDirty: true,
       });
     },
     onConnect: (connection: Connection) => {
@@ -169,14 +165,12 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
           { ...connection, animated: false, type: "customEdge" },
           get().edges
         ),
-        pipelineRecipeIsDirty: true,
       });
     },
     addNode: (node: Node<ConnectorNodeData>) =>
       set((state) => ({
         ...state,
         nodes: [...state.nodes, node],
-        pipelineRecipeIsDirty: true,
       })),
     removeNode: (node: Node<ConnectorNodeData>) =>
       set((state) => ({
@@ -184,7 +178,6 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
         nodes: state.nodes.filter(
           (e) => e.data.connector.id === node.data.connector.id
         ),
-        pipelineRecipeIsDirty: true,
       })),
     updateResourceFormIsDirty: (fn: (prev: boolean) => boolean) =>
       set((state) => {
@@ -203,7 +196,6 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
       set((state) => {
         return {
           ...state,
-          pipelineRecipeIsDirty: fn(state.pipelineRecipeIsDirty),
         };
       }),
   })

@@ -34,6 +34,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   resourceFormIsDirty: state.resourceFormIsDirty,
   updateResourceFormIsDirty: state.updateResourceFormIsDirty,
   rightPanelIsOpen: state.rightPanelIsOpen,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export type FlowProps = {
@@ -68,6 +69,7 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
     rightPanelIsOpen,
     resourceFormIsDirty,
     updateResourceFormIsDirty,
+    updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { setNodeRef } = useDroppable({
@@ -104,6 +106,10 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                 setSelectedNode(null);
                 updateResourceFormIsDirty(() => false);
               }
+              updatePipelineRecipeIsDirty((prev) => {
+                if (prev) return prev;
+                return true;
+              });
             }}
             onNodesChange={(event) => {
               if (resourceFormIsDirty) {
@@ -132,8 +138,11 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
                 });
                 return;
               }
-
               onNodesChange(event);
+              updatePipelineRecipeIsDirty((prev) => {
+                if (prev) return prev;
+                return true;
+              });
             }}
             onEdgesChange={(event) => {
               if (resourceFormIsDirty) {
@@ -164,6 +173,10 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
               }
 
               onEdgesChange(event);
+              updatePipelineRecipeIsDirty((prev) => {
+                if (prev) return prev;
+                return true;
+              });
             }}
             onInit={setReactFlowInstance}
             onConnect={onConnect}
