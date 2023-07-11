@@ -85,10 +85,6 @@ export const FlowControl = (props: FlowControlProps) => {
   async function handleTogglePipeline() {
     if (!pipeline.isSuccess || !pipelineWatchState.isSuccess) return;
 
-    if (pipelineRecipeIsDirty) {
-      await handleSavePipeline();
-    }
-
     setIsHandlingConnection(true);
 
     if (
@@ -136,6 +132,10 @@ export const FlowControl = (props: FlowControlProps) => {
         }
       );
     } else {
+      if (pipelineRecipeIsDirty) {
+        await handleSavePipeline();
+      }
+
       activatePipeline.mutate(
         {
           pipelineName: `pipelines/${pipelineId}`,

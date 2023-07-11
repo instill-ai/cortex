@@ -48,14 +48,13 @@ export type LeftPanelProps = {
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   addNode: state.addNode,
   leftSidebarSelectedTab: state.leftSidebarSelectedTab,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export const LeftPanel = (props: LeftPanelProps) => {
   const { children, reactFlowInstance, accessToken, enableQuery } = props;
-  const { addNode, leftSidebarSelectedTab } = usePipelineBuilderStore(
-    pipelineBuilderSelector,
-    shallow
-  );
+  const { addNode, leftSidebarSelectedTab, updatePipelineRecipeIsDirty } =
+    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const sourceDefinitions = useConnectorDefinitions({
     connectorType: "CONNECTOR_TYPE_SOURCE",
@@ -120,6 +119,10 @@ export const LeftPanel = (props: LeftPanelProps) => {
                     };
 
                     addNode(newNode);
+                    updatePipelineRecipeIsDirty((prev) => {
+                      if (prev) return prev;
+                      return true;
+                    });
                   }}
                 >
                   <ImageWithFallback
@@ -179,6 +182,10 @@ export const LeftPanel = (props: LeftPanelProps) => {
                     };
 
                     addNode(newNode);
+                    updatePipelineRecipeIsDirty((prev) => {
+                      if (prev) return prev;
+                      return true;
+                    });
                   }}
                 >
                   <ImageWithFallback
@@ -240,6 +247,10 @@ export const LeftPanel = (props: LeftPanelProps) => {
                       };
 
                       addNode(newNode);
+                      updatePipelineRecipeIsDirty((prev) => {
+                        if (prev) return prev;
+                        return true;
+                      });
                     }}
                   >
                     {getIcon({
@@ -298,6 +309,10 @@ export const LeftPanel = (props: LeftPanelProps) => {
                       };
 
                       addNode(newNode);
+                      updatePipelineRecipeIsDirty((prev) => {
+                        if (prev) return prev;
+                        return true;
+                      });
                     }}
                   >
                     <ImageWithFallback
