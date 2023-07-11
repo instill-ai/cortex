@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.3.0...@instill-ai/design-tokens-v0.3.1) (2023-07-11)
+
+
+### Bug Fixes
+
+* **design-tokens:** fix missing tokens ([#631](https://github.com/instill-ai/design-system/issues/631)) ([4e02a69](https://github.com/instill-ai/design-system/commit/4e02a69c2db5e02da823533dd32c4bc81ca9d6ab))
+
 ## [0.3.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-tokens-v0.2.2...@instill-ai/design-tokens-v0.3.0) (2023-06-22)
 
 
