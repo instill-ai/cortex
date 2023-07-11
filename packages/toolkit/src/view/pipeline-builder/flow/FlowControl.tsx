@@ -87,95 +87,100 @@ export const FlowControl = (props: FlowControlProps) => {
 
     setIsHandlingConnection(true);
 
+    // If the user changed the pipeline's name we need to update the pipeline's name first
+    if (pipelineId !== pipeline.data.id) {
+      await handleRenamePipeline();
+    }
+
     if (
       pipelineWatchState.data.state === "STATE_ACTIVE" ||
       pipelineWatchState.data.state === "STATE_ERROR"
     ) {
-      deactivatePipeline.mutate(
-        {
+      try {
+        await deactivatePipeline.mutateAsync({
           pipelineName: `pipelines/${pipelineId}`,
           accessToken,
-        },
-        {
-          onSuccess: () => {
-            toast({
-              title: "Successfully deativated the pipeline",
-              variant: "alert-success",
-              size: "small",
-            });
-            setIsHandlingConnection(false);
+        });
 
-            updateEdges((edges) => {
-              return edges.map((edge) => ({
-                ...edge,
-                animated: false,
-              }));
-            });
-          },
-          onError: (error) => {
-            setIsHandlingConnection(false);
-            if (isAxiosError(error)) {
-              toast({
-                title: "Something went wrong when deactivated the pipeline",
-                description: getInstillApiErrorMessage(error),
-                variant: "alert-error",
-                size: "large",
-              });
-            } else {
-              toast({
-                title: "Something went wrong when deactivated the pipeline",
-                variant: "alert-error",
-                size: "large",
-              });
-            }
-          },
+        toast({
+          title: "Successfully deativated the pipeline",
+          variant: "alert-success",
+          size: "small",
+        });
+        setIsHandlingConnection(false);
+
+        updateEdges((edges) => {
+          return edges.map((edge) => ({
+            ...edge,
+            animated: false,
+          }));
+        });
+
+        // When user deactivate the pipeline we help them update the pipeline recipe
+        if (pipelineRecipeIsDirty) {
+          await handleSavePipeline();
         }
-      );
-    } else {
-      if (pipelineRecipeIsDirty) {
-        await handleSavePipeline();
+      } catch (error) {
+        setIsHandlingConnection(false);
+        if (isAxiosError(error)) {
+          toast({
+            title: "Something went wrong when deactivated the pipeline",
+            description: getInstillApiErrorMessage(error),
+            variant: "alert-error",
+            size: "large",
+          });
+        } else {
+          toast({
+            title: "Something went wrong when deactivated the pipeline",
+            variant: "alert-error",
+            size: "large",
+          });
+        }
       }
+    } else {
+      try {
+        // If the user had changed the recipe, we will first save the pipeline
+        // then activate the pipeline.
 
-      activatePipeline.mutate(
-        {
+        if (pipelineRecipeIsDirty) {
+          await handleSavePipeline();
+        }
+
+        await activatePipeline.mutateAsync({
           pipelineName: `pipelines/${pipelineId}`,
           accessToken,
-        },
-        {
-          onSuccess: () => {
-            toast({
-              title: "Successfully activated the pipeline",
-              variant: "alert-success",
-              size: "small",
-            });
-            setIsHandlingConnection(false);
+        });
 
-            updateEdges((edges) => {
-              return edges.map((edge) => ({
-                ...edge,
-                animated: true,
-              }));
-            });
-          },
-          onError: (error) => {
-            setIsHandlingConnection(false);
-            if (isAxiosError(error)) {
-              toast({
-                title: "Something went wrong when activated the pipeline",
-                description: getInstillApiErrorMessage(error),
-                variant: "alert-error",
-                size: "large",
-              });
-            } else {
-              toast({
-                title: "Something went wrong when activated the pipeline",
-                variant: "alert-error",
-                size: "large",
-              });
-            }
-          },
+        toast({
+          title: "Successfully activated the pipeline",
+          variant: "alert-success",
+          size: "small",
+        });
+        setIsHandlingConnection(false);
+
+        updateEdges((edges) => {
+          return edges.map((edge) => ({
+            ...edge,
+            animated: true,
+          }));
+        });
+      } catch (error) {
+        setIsHandlingConnection(false);
+        if (isAxiosError(error)) {
+          toast({
+            title: "Something went wrong when activated the pipeline",
+            description: getInstillApiErrorMessage(error),
+            variant: "alert-error",
+            size: "large",
+          });
+        } else {
+          toast({
+            title: "Something went wrong when activated the pipeline",
+            variant: "alert-error",
+            size: "large",
+          });
         }
-      );
+      }
     }
   }
 
@@ -196,36 +201,9 @@ export const FlowControl = (props: FlowControlProps) => {
     setIsSaving(true);
 
     if (pipeline.isSuccess) {
+      // We need to rename the pipeline if the user changed the pipeline's name
       if (pipelineId !== pipeline.data.id) {
-        try {
-          await renamePipeline.mutateAsync({
-            payload: {
-              pipelineId: pipeline.data.id,
-              newPipelineId: pipelineId,
-            },
-            accessToken,
-          });
-
-          router.push(`/pipelines/${pipelineId}`, undefined, {
-            shallow: true,
-          });
-        } catch (error) {
-          if (isAxiosError(error)) {
-            toast({
-              title: "Something went wrong when rename the pipeline",
-              description: getInstillApiErrorMessage(error),
-              variant: "alert-error",
-              size: "large",
-            });
-          } else {
-            toast({
-              title: "Something went wrong when rename the pipeline",
-              variant: "alert-error",
-              description: "Please try again later",
-              size: "large",
-            });
-          }
-        }
+        await handleRenamePipeline();
       }
 
       const payload: UpdatePipelinePayload = {
@@ -267,12 +245,13 @@ export const FlowControl = (props: FlowControlProps) => {
       return;
     }
 
+    // If the user haven't created the pipeline yet, we will create the pipeline
+
     const payload: CreatePipelinePayload = {
       id: pipelineId,
+      description: pipelineDescription ?? undefined,
       recipe: constructPipelineRecipe(nodes, edges),
     };
-
-    let newPipeline: Nullable<Pipeline> = null;
 
     try {
       const res = await createPipeline.mutateAsync({
@@ -281,8 +260,6 @@ export const FlowControl = (props: FlowControlProps) => {
       });
 
       setPipelineUid(res.pipeline.uid);
-
-      newPipeline = res.pipeline;
 
       router.push(`/pipelines/${pipelineId}`, undefined, {
         shallow: true,
@@ -304,61 +281,44 @@ export const FlowControl = (props: FlowControlProps) => {
         });
       }
     }
+  }
 
-    if (!pipelineDescription) {
-      toast({
-        title: "Pipeline is saved",
-        variant: "alert-success",
-        size: "small",
-      });
-      setIsSaving(false);
-      updatePipelineRecipeIsDirty(() => false);
-      return;
-    }
-
-    if (!newPipeline) {
-      toast({
-        title: "Something went wrong when save the pipeline",
-        description: "Please try again later",
-        variant: "alert-error",
-        size: "large",
-      });
+  async function handleRenamePipeline() {
+    if (!pipelineId || !pipeline.isSuccess) {
       return;
     }
 
     try {
-      await updatePipeline.mutateAsync({
+      await renamePipeline.mutateAsync({
         payload: {
-          name: newPipeline.name,
-          description: pipelineDescription,
-          recipe: {
-            version: "v1alpha",
-            components: [],
-          },
+          pipelineId: pipeline.data.id,
+          newPipelineId: pipelineId,
         },
         accessToken,
       });
 
+      router.push(`/pipelines/${pipelineId}`, undefined, {
+        shallow: true,
+      });
+
       toast({
-        title: "Pipeline is saved",
+        title: "Sussessfully renamed the pipeline",
         variant: "alert-success",
         size: "small",
       });
-      setIsSaving(false);
-      updatePipelineRecipeIsDirty(() => false);
     } catch (error) {
-      setIsSaving(false);
       if (isAxiosError(error)) {
         toast({
-          title: "Something went wrong when save the pipeline",
+          title: "Something went wrong when rename the pipeline",
           description: getInstillApiErrorMessage(error),
           variant: "alert-error",
           size: "large",
         });
       } else {
         toast({
-          title: "Something went wrong when save the pipeline",
+          title: "Something went wrong when rename the pipeline",
           variant: "alert-error",
+          description: "Please try again later",
           size: "large",
         });
       }

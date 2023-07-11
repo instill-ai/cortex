@@ -18,7 +18,7 @@ export const BlockchainNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
       <CustomNode.NameRow
         name={data.connector.name.split("/")[1]}
         icon={
-          <Icons.Database01 className="my-auto h-4 w-4 stroke-semantic-fg-primary" />
+          <Icons.CubeOutline className="h-4 w-4 stroke-semantic-fg-primary" />
         }
       />
       <CustomNode.ConnectorDefinitionRow
