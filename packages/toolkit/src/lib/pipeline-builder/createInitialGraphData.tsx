@@ -1,10 +1,14 @@
 import { Edge, Node } from "reactflow";
 import { parseDependencyComponents } from "./parseDependencyComponents";
 import { Pipeline } from "../vdp-sdk";
-import { ConnectorNodeData, ConnectorWithWatchState } from "../type";
+import {
+  ConnectorNodeData,
+  ConnectorWithWatchState,
+  PipelineWithWatchState,
+} from "../type";
 
 export type CreateInitialGraphDataProps = {
-  pipeline: Pipeline;
+  pipeline: PipelineWithWatchState;
   ais: ConnectorWithWatchState[];
   sources: ConnectorWithWatchState[];
   destinations: ConnectorWithWatchState[];
@@ -49,7 +53,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             type: "customEdge",
             source: dependentComponent,
             target: component.id,
-            animated: true,
+            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
           });
         }
 
@@ -84,7 +88,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             type: "customEdge",
             source: dependentComponent,
             target: component.id,
-            animated: true,
+            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
           });
         }
         break;
@@ -119,7 +123,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             type: "customEdge",
             source: dependentComponent,
             target: component.id,
-            animated: true,
+            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
           });
         }
         break;
@@ -153,7 +157,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             type: "customEdge",
             source: dependentComponent,
             target: component.id,
-            animated: true,
+            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
           });
         }
         break;

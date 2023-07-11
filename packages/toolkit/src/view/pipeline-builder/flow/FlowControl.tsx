@@ -27,6 +27,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
   pipelineDescription: state.pipelineDescription,
   setPipelineUid: state.setPipelineUid,
+  updateEdges: state.updateEdges,
 });
 
 export type FlowControlProps = {
@@ -34,11 +35,24 @@ export type FlowControlProps = {
   enableQuery: boolean;
 };
 
+/**
+ * FlowControl is a component that handles the crucial action of pipeline like
+ * - Save pipeline
+ * - Activate pipeline
+ * - Deactivate pipeline
+ */
+
 export const FlowControl = (props: FlowControlProps) => {
   const { accessToken, enableQuery } = props;
   const router = useRouter();
-  const { nodes, pipelineId, pipelineDescription, setPipelineUid, edges } =
-    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const {
+    nodes,
+    pipelineId,
+    pipelineDescription,
+    setPipelineUid,
+    edges,
+    updateEdges,
+  } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
   const { id } = router.query;
@@ -85,6 +99,13 @@ export const FlowControl = (props: FlowControlProps) => {
               size: "small",
             });
             setIsHandlingConnection(false);
+
+            updateEdges((edges) => {
+              return edges.map((edge) => ({
+                ...edge,
+                animated: false,
+              }));
+            });
           },
           onError: (error) => {
             setIsHandlingConnection(false);
@@ -119,6 +140,13 @@ export const FlowControl = (props: FlowControlProps) => {
               size: "small",
             });
             setIsHandlingConnection(false);
+
+            updateEdges((edges) => {
+              return edges.map((edge) => ({
+                ...edge,
+                animated: true,
+              }));
+            });
           },
           onError: (error) => {
             setIsHandlingConnection(false);

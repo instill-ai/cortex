@@ -153,7 +153,7 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
     onConnect: (connection: Connection) => {
       set({
         edges: addEdge(
-          { ...connection, animated: true, type: "customEdge" },
+          { ...connection, animated: false, type: "customEdge" },
           get().edges
         ),
       });
