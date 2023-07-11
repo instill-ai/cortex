@@ -3,15 +3,14 @@ import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const tagVariants = cva(
-  "inline-flex items-center rounded-full border font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border font-semibold transition-colors",
   {
     variants: {
       variant: {
-        default:
-          "text-semantic-fg-primary border border-semantic-bg-line hover:bg-semantic-bg-base-bg",
+        default: "text-semantic-fg-primary border border-semantic-bg-line",
         lightBlue: "bg-semantic-accent-bg text-semantic-accent-default",
         borderBlue:
-          "text-semantic-accent-hover border border-semantic-accent-default hover:bg-semantic-accent-bg",
+          "text-semantic-accent-hover border border-semantic-accent-default",
         darkBlue: "bg-semantic-accent-default text-semantic-fg-on-default",
         lightRed: "bg-semantic-error-bg text-semantic-error-default",
         lightYellow: "bg-semantic-warning-bg text-semantic-warning-default",
@@ -22,13 +21,13 @@ const tagVariants = cva(
         darkGreen: "bg-semantic-success-default text-semantic-fg-on-default",
         darkPurple: "bg-semantic-secondary-default text-semantic-fg-on-default",
         borderRed:
-          "border border-semantic-error-default text-semantic-error-default hover:bg-semantic-error-bg",
+          "border border-semantic-error-default text-semantic-error-default",
         borderYellow:
-          "border border-semantic-warning-default text-semantic-warning-default hover:bg-semantic-warning-bg",
+          "border border-semantic-warning-default text-semantic-warning-default",
         borderGreen:
-          "border border-semantic-success-default text-semantic-success-default hover:bg-semantic-success-bg",
+          "border border-semantic-success-default text-semantic-success-default",
         borderPurple:
-          "border border-semantic-secondary-default text-semantic-secondary-default hover:bg-semantic-secondary-bg",
+          "border border-semantic-secondary-default text-semantic-secondary-default",
         lightNeutral: "bg-semantic-bg-secondary text-semantic-fg-secondary",
         darkNeutral:
           "bg-semantic-bg-secondary-alt-primary text-semantic-fg-on-default",
