@@ -24,7 +24,7 @@ export const Root = React.forwardRef<
 
   return (
     <>
-      <style jsx={true}>{`
+      <style jsx>{`
         /* We animate persudo element to implement the box-shadow animation, it's faster than
              directly animating the box-shadow property.
           */
