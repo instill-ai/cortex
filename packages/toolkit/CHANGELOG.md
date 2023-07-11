@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.60.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.2...@instill-ai/toolkit-v0.60.0) (2023-07-11)
+
+
+### Features
+
+* map edge animated status with the state of pipeline ([#622](https://github.com/instill-ai/design-system/issues/622)) ([7c9bb71](https://github.com/instill-ai/design-system/commit/7c9bb71393efe4f605cb843bdd545ca92c02a0f9))
+* **toolkit:** save pipeline before activate/deactivate ([#624](https://github.com/instill-ai/design-system/issues/624)) ([87da931](https://github.com/instill-ai/design-system/commit/87da931758f1a3f7952ae71bf18af072d7451fa2))
+* update save pipeline button to have better loading state ([#621](https://github.com/instill-ai/design-system/issues/621)) ([68ab966](https://github.com/instill-ai/design-system/commit/68ab966c3ba3330f4bfe16067c32ac0ebc275b82))
+
+
+### Bug Fixes
+
+* **pipeline-builder:** fix pipeline-builder's node name overflow text issue ([#619](https://github.com/instill-ai/design-system/issues/619)) ([0c3203d](https://github.com/instill-ai/design-system/commit/0c3203dbafad1849f9f8fa2a19fd59db1b8be87d))
+* replace empty icon with fill icon in activate/deactivate button ([#620](https://github.com/instill-ai/design-system/issues/620)) ([9ed892f](https://github.com/instill-ai/design-system/commit/9ed892f35f51a56c13749923ca9912d90acc6d2d))
+
 ## [0.59.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.59.1...@instill-ai/toolkit-v0.59.2) (2023-07-09)
 
 

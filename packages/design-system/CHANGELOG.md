@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.31.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.30.1...@instill-ai/design-system-v0.31.0) (2023-07-11)
+
+
+### Features
+
+* arrow up and down icon ([#617](https://github.com/instill-ai/design-system/issues/617)) ([f1b4201](https://github.com/instill-ai/design-system/commit/f1b4201008532e220bffb893c26c3b426416237e))
+* increase the limit of toast to 3 ([#623](https://github.com/instill-ai/design-system/issues/623)) ([4cab72d](https://github.com/instill-ai/design-system/commit/4cab72d07cae71c62037be90f5417ea0b30fd738))
+
 ## [0.30.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.30.0...@instill-ai/design-system-v0.30.1) (2023-07-09)
 
 
