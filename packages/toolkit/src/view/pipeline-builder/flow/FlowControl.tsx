@@ -30,6 +30,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   setPipelineUid: state.setPipelineUid,
   pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
+  updateEdges: state.updateEdges,
 });
 
 export type FlowControlProps = {
@@ -53,6 +54,7 @@ export const FlowControl = (props: FlowControlProps) => {
     pipelineDescription,
     setPipelineUid,
     edges,
+    updateEdges,
     pipelineRecipeIsDirty,
     updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
