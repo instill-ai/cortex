@@ -57,25 +57,6 @@ export const DestinationForm = (props: DestinationFormProps) => {
   const { destination, accessToken, enableQuery, width, marginBottom } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
 
-  // We will disable all the fields if the connector is public (which mean
-  // it is provided by Instill AI)
-  let disabledAll = false;
-  if (
-    "visibility" in destination &&
-    destination.visibility === "VISIBILITY_PUBLIC"
-  ) {
-    disabledAll = true;
-  }
-
-  if (
-    destination.connector_definition_name ===
-      "connector-definitions/destination-http" ||
-    destination.connector_definition_name ===
-      "connector-definitions/destination-grpc"
-  ) {
-    disabledAll = true;
-  }
-
   /* -------------------------------------------------------------------------
    * Initialize form state
    * -----------------------------------------------------------------------*/
@@ -187,6 +168,24 @@ export const DestinationForm = (props: DestinationFormProps) => {
     accessToken,
     enabled: enableQuery,
   });
+
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  const disabledAll = React.useMemo(() => {
+    if (!destinations.isSuccess) {
+      return true;
+    }
+
+    if ("visibility" in destination && destination.visibility === "VISIBILITY_PUBLIC") {
+      return true;
+    }
+
+    if (destinations.data.some(e => e.name === destination.name)) {
+      return true;
+    }
+
+    return false
+  }, [destinations.isSuccess, destinations.data, destination]);
 
   /* -------------------------------------------------------------------------
    * Configure destination

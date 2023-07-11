@@ -39,20 +39,6 @@ const SourceFormSchema = z.object({
 export const SourceForm = (props: SourceFormProps) => {
   const { source, accessToken, enableQuery } = props;
 
-  // We will disable all the fields if the connector is public (which mean
-  // it is provided by Instill AI)
-  let disabledAll = false;
-  if ("visibility" in source && source.visibility === "VISIBILITY_PUBLIC") {
-    disabledAll = true;
-  }
-
-  if (
-    source.connector_definition_name === "connector-definitions/source-http" ||
-    source.connector_definition_name === "connector-definitions/source-grpc"
-  ) {
-    disabledAll = true;
-  }
-
   const form = useForm<z.infer<typeof SourceFormSchema>>({
     resolver: zodResolver(SourceFormSchema),
     defaultValues: {
@@ -81,6 +67,26 @@ export const SourceForm = (props: SourceFormProps) => {
     accessToken,
     enabled: enableQuery,
   });
+
+
+  // We will disable all the fields if the connector is public (which mean
+  // it is provided by Instill AI)
+  const disabledAll = React.useMemo(() => {
+    if (!sources.isSuccess) {
+      return true;
+    }
+
+    if ("visibility" in source && source.visibility === "VISIBILITY_PUBLIC") {
+      return true;
+    }
+
+    if (sources.data.some(e => e.name === source.name)) {
+      return true;
+    }
+
+    return false
+  }, [sources.isSuccess, sources.data, source]);
+
 
   React.useEffect(() => {
     reset({

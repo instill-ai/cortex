@@ -29,6 +29,7 @@ export type PipelineBuilderState = {
   resourceFormIsDirty: boolean;
   leftSidebarSelectedTab: Nullable<ConnectorType>;
   pipelineRecipeIsDirty: boolean;
+  pipelineIsNew: boolean;
 };
 
 export type PipelineBuilderAction = {
@@ -62,6 +63,7 @@ export type PipelineBuilderAction = {
     fn: (prev: Nullable<ConnectorType>) => Nullable<ConnectorType>
   ) => void;
   updatePipelineRecipeIsDirty: (fn: (prev: boolean) => boolean) => void;
+  updatePipelineIsNew: (fn: (prev: boolean) => boolean) => void;
 };
 
 export type PipelineBuilderStore = PipelineBuilderState & PipelineBuilderAction;
@@ -79,6 +81,7 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
   resourceFormIsDirty: false,
   leftSidebarSelectedTab: null,
   pipelineRecipeIsDirty: false,
+  pipelineIsNew: false,
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
@@ -197,6 +200,13 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
         return {
           ...state,
           pipelineRecipeIsDirty: fn(state.pipelineRecipeIsDirty),
+        };
+      }),
+    updatePipelineIsNew: (fn: (prev: boolean) => boolean) =>
+      set((state) => {
+        return {
+          ...state,
+          pipelineIsNew: fn(state.pipelineIsNew),
         };
       }),
   })
