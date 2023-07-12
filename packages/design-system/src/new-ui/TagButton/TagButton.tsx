@@ -2,7 +2,7 @@ import cn from "clsx";
 import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const tagVariants = cva(
+const tagButtonVariants = cva(
   "inline-flex items-center rounded-full font-semibold transition-colors",
   {
     variants: {
@@ -25,13 +25,13 @@ const tagVariants = cva(
 
 export interface TagButtonProps
   extends React.HTMLAttributes<HTMLDivElement>,
-    VariantProps<typeof tagVariants> {}
+    VariantProps<typeof tagButtonVariants> {}
 
 const TagButton = React.forwardRef<HTMLDivElement, TagButtonProps>(
   ({ className, variant, size, ...props }, ref) => {
     return (
       <div
-        className={cn(tagVariants({ variant, size, className }))}
+        className={cn(tagButtonVariants({ variant, size, className }))}
         ref={ref}
         {...props}
       />
@@ -40,4 +40,4 @@ const TagButton = React.forwardRef<HTMLDivElement, TagButtonProps>(
 );
 TagButton.displayName = "TagButton";
 
-export { TagButton, tagVariants };
+export { TagButton, tagButtonVariants };

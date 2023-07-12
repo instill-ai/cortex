@@ -10,6 +10,7 @@ export * from "./Skeleton";
 export * from "./Separator";
 export * from "./Switch";
 export * from "./Tag";
+export * from "./TagButton";
 export * from "./Textarea";
 export * from "./Toast";
 export * from "./Tooltip";
