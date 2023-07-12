@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.3...@instill-ai/toolkit-v0.60.4) (2023-07-12)
+
+
+### Bug Fixes
+
+* fix the spin animation text color of save button in pipeline-builder ([#634](https://github.com/instill-ai/design-system/issues/634)) ([1902a5a](https://github.com/instill-ai/design-system/commit/1902a5a73a30cddae18477636d8a5c82b90f6403))
+
 ## [0.60.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.2...@instill-ai/toolkit-v0.60.3) (2023-07-11)
 
 
