@@ -420,7 +420,7 @@ export const FlowControl = (props: FlowControlProps) => {
             Save
             {isSaving ? (
               <svg
-                className="m-auto h-4 w-4 animate-spin text-white"
+                className="m-auto h-4 w-4 animate-spin text-semantic-fg-secondary"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
