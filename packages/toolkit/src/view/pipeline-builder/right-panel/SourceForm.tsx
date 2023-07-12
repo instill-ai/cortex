@@ -81,7 +81,9 @@ export const SourceForm = (props: SourceFormProps) => {
     }
 
     if (sources.data.some(e => e.name === source.name)) {
-      return true;
+      if (source.name === "connectors/source-grpc" || source.name === "connectors/source-http"){
+        return true;
+      }
     }
 
     return false

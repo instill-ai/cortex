@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.60.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.4...@instill-ai/toolkit-v0.60.5) (2023-07-12)
+
+
+### Bug Fixes
+
+* fix connector form in pipeline-builder wrongly disable connect button issue ([#636](https://github.com/instill-ai/design-system/issues/636)) ([80ccd23](https://github.com/instill-ai/design-system/commit/80ccd23a0d07068a18cf05a92b277cbeab12ac2d))
+
 ## [0.60.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.3...@instill-ai/toolkit-v0.60.4) (2023-07-12)
 
 
