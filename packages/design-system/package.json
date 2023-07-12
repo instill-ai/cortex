@@ -110,6 +110,7 @@
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-toast": "^1.1.4",
+    "@radix-ui/react-tooltip": "^1.0.6",
     "class-variance-authority": "^0.6.0",
     "react-hook-form": "^7.45.0",
     "sanitize-html": "^2.7.0",
