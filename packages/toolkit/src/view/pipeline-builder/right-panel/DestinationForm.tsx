@@ -181,7 +181,9 @@ export const DestinationForm = (props: DestinationFormProps) => {
     }
 
     if (destinations.data.some(e => e.name === destination.name)) {
-      return true;
+      if (destination.name === "connectors/destination-grpc" || destination.name === "connectors/destination-http"){
+        return true;
+      }
     }
 
     return false
@@ -406,7 +408,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
       {
         onSuccess: () => {
           toast({
-            title: "Successfully update destination",
+            title: "Successfully create destination",
             variant: "alert-success",
             size: "small",
           });
