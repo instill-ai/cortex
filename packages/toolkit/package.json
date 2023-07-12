@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/toolkit",
-  "version": "0.60.5",
+  "version": "0.61.0-rc.4",
   "description": "Instill AI's frontend toolkit",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -14,7 +14,8 @@
     "test": "vitest --run --passWithNoTests",
     "build": "pnpm rimraf dist && tsup src && pnpm ts-types",
     "ts-types": "tsc --emitDeclarationOnly",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache"
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
+    "publish-rc": "pnpm build && pnpm publish --no-git-checks"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

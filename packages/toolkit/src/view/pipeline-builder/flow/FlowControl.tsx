@@ -201,6 +201,11 @@ export const FlowControl = (props: FlowControlProps) => {
       return;
     }
 
+    if (1 === 1) {
+      console.log(nodes, edges);
+      return;
+    }
+
     setIsSaving(true);
 
     if (pipeline.isSuccess) {

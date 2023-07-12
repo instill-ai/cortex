@@ -1,5 +1,4 @@
 import { NodeProps } from "reactflow";
-import { Icons } from "@instill-ai/design-system";
 
 import { CustomNode } from "./CustomNode";
 import { ConnectorNodeData, usePipelineBuilderStore } from "../../../lib";
@@ -14,17 +13,13 @@ export const BlockchainNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           ? "outline outline-2 outline-semantic-accent-default"
           : ""
       }
+      nodeId={id}
+      watchState={data.connector.watchState}
     >
       <CustomNode.NameRow
         name={data.connector.name.split("/")[1]}
-        icon={
-          <Icons.CubeOutline className="h-4 w-4 stroke-semantic-fg-primary" />
-        }
-      />
-      <CustomNode.ConnectorDefinitionRow
         definition={data.connector.connector_definition}
       />
-      <CustomNode.StateRow state={data.connector.watchState} />
     </CustomNode.Root>
   );
 };
