@@ -3,7 +3,7 @@ import React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const tagVariants = cva(
-  "inline-flex items-center rounded-full border font-semibold transition-colors",
+  "inline-flex items-center rounded-full border font-semibold",
   {
     variants: {
       variant: {
