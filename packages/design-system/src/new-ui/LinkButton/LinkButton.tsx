@@ -30,11 +30,10 @@ const linkButtonVariants = cva(
   }
 );
 
-export interface LinkButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof linkButtonVariants> {
-  asChild?: boolean;
-}
+export type LinkButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  VariantProps<typeof linkButtonVariants> & {
+    asChild?: boolean;
+  };
 
 const LinkButton = React.forwardRef<HTMLButtonElement, LinkButtonProps>(
   ({ className, variant, size, asChild = false, ...props }, ref) => {
