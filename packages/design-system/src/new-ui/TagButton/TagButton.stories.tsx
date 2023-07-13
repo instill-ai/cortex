@@ -10,5 +10,5 @@ export default meta;
 type Story = StoryObj<typeof TagButton>;
 
 export const Dafault: Story = {
-  render: () => <TagButton variant="default">Label</TagButton>,
+  render: () => <TagButton>Label</TagButton>,
 };
