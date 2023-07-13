@@ -7,12 +7,9 @@ import {
   ConnectorDefinition,
   ConnectorState,
   Nullable,
-  usePipeline,
   usePipelineBuilderStore,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
-import "./CustomNode.css";
-
 import "./CustomNode.css";
 
 export type CustomNodeProps = {
@@ -69,21 +66,22 @@ export const Root = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "instill-custom-node group z-30 box-border flex w-[400px] flex-col rounded-sm border-4",
+          "instill-custom-node outline group z-30 transition-colors duration-500 flex w-[400px] flex-col rounded-sm outline-4",
           {
-            "border-semantic-node-connected-default-stroke hover:border-semantic-node-connected-hover-stroke":
+            "outline-semantic-node-connected-default-stroke hover:outline-semantic-node-connected-hover-stroke":
               watchState === "STATE_CONNECTED",
           },
           {
-            "border-semantic-node-error-default-stroke hover:border-semantic-node-error-hover-stroke":
+            "outline-semantic-node-error-default-stroke hover:outline-semantic-node-error-hover-stroke":
               watchState === "STATE_ERROR",
           },
           {
-            "border-semantic-node-disconnected-default-stroke hover:border-semantic-node-disconnected-hover-stroke":
-              watchState === "STATE_DISCONNECTED",
+            "outline-semantic-node-disconnected-default-stroke hover:outline-semantic-node-disconnected-hover-stroke":
+              watchState === "STATE_DISCONNECTED" ||
+              watchState === "STATE_UNSPECIFIED",
           },
           {
-            "outline outline-2 outline-offset-2 outline-semantic-accent-default":
+            "ring-4 ring-offset-8 ring-semantic-accent-default":
               selectedId === nodeId,
           },
           className
@@ -97,7 +95,7 @@ export const Root = React.forwardRef<
         */}
         <div
           className={cn(
-            "h-4 shrink-0 w-full rounded-tl rounded-tr scale-x-[1.005] scale-y-[1.01]",
+            "h-4 shrink-0 w-full rounded-tl-sm rounded-tr transition-colors duration-500",
             {
               "bg-semantic-node-connected-default-stroke group-hover:bg-semantic-node-connected-hover-stroke":
                 watchState === "STATE_CONNECTED",
@@ -108,20 +106,44 @@ export const Root = React.forwardRef<
             },
             {
               "bg-semantic-node-disconnected-default-stroke group-hover:bg-semantic-node-disconnected-hover-stroke":
-                watchState === "STATE_DISCONNECTED",
+                watchState === "STATE_DISCONNECTED" ||
+                watchState === "STATE_UNSPECIFIED",
             }
           )}
-        ></div>
+        />
         <div>{children}</div>
         <div className="flex flex-col">
+          {/* 
+
+            Multiple handlers of the node. 
+
+            - Style wise we male the size of it be 12px and exclude the border 
+            width out of the node using box-content.
+          
+            - About the logic. We give each handler an ID, when we connect the 
+            handler to another handler, under the hood reactflow will record it
+            using sourceHandler and targetHandler.
+
+            For example, if we connect node-1.texts to node-2.texts, the edge
+            will be recorded as:
+
+            {
+              id: "edge-1",
+              source: "node-1",
+              sourceHandle: "node-1.texts",
+              target: "node-2",
+              targetHandle: "node-2.texts",
+            }
+          
+          */}
           {["texts", "images", "metadata", "structured_data"].map((e) => (
             <div
               key={`${nodeId}-${e}`}
-              className="flex flex-row py-4 odd:bg-semantic-bg-base-bg even:bg-semantic-secondary-bg"
+              className="flex px-2 flex-row py-4 odd:bg-semantic-bg-base-bg even:bg-semantic-secondary-bg last:rounded-br-sm last:rounded-bl-sm"
             >
               <Handle
                 className={cn(
-                  "!relative !top-none !left-none !transform-none !w-4 !h-4 box-border !border-semantic-bg-line",
+                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
                   edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
                     ? "!bg-[#595959]"
                     : "!bg-[#94A0B8]"
@@ -133,7 +155,7 @@ export const Root = React.forwardRef<
               <div className="flex flex-1 justify-center items-center">{e}</div>
               <Handle
                 className={cn(
-                  "!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line",
+                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
                   edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
                     ? "!bg-[#595959]"
                     : "!bg-[#94A0B8]"
