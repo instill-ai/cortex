@@ -1,14 +1,14 @@
 import cn from "clsx";
 import * as React from "react";
-import { Handle, Position, useReactFlow } from "reactflow";
+import { Handle, Position } from "reactflow";
 
-import { Icons, getModelInstanceTaskToolkit } from "@instill-ai/design-system";
+import { Icons } from "@instill-ai/design-system";
 import {
   ConnectorDefinition,
   ConnectorState,
-  ModelState,
-  ModelTask,
   Nullable,
+  usePipeline,
+  usePipelineBuilderStore,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 import "./CustomNode.css";
@@ -62,7 +62,7 @@ export const Root = React.forwardRef<
     ...customNodeProps
   } = props;
 
-  const reactflowInstance = useReactFlow();
+  const edges = usePipelineBuilderStore((state) => state.edges);
 
   return (
     <CustomNodeContext.Provider value={{ nodeId, watchState }}>
@@ -121,8 +121,10 @@ export const Root = React.forwardRef<
             >
               <Handle
                 className={cn(
-                  "!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line",
-                  "!bg-[#94A0B8]"
+                  "!relative !top-none !left-none !transform-none !w-4 !h-4 box-border !border-semantic-bg-line",
+                  edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
+                    ? "!bg-[#595959]"
+                    : "!bg-[#94A0B8]"
                 )}
                 type="target"
                 position={Position.Left}
@@ -132,7 +134,9 @@ export const Root = React.forwardRef<
               <Handle
                 className={cn(
                   "!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line",
-                  "!bg-[#94A0B8]"
+                  edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
+                    ? "!bg-[#595959]"
+                    : "!bg-[#94A0B8]"
                 )}
                 type="source"
                 position={Position.Right}
