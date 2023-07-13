@@ -1,5 +1,15 @@
 # @instill-ai/design-system
 
+## [0.32.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.31.0...@instill-ai/design-system-v0.32.0) (2023-07-13)
+
+
+### Features
+
+* add comment reference ([502d44e](https://github.com/instill-ai/design-system/commit/502d44eae0aadc7217c12f5b8a0d5ac8fdecb464))
+* namananand/create tagbutton for design system ([#639](https://github.com/instill-ai/design-system/issues/639)) ([9187d05](https://github.com/instill-ai/design-system/commit/9187d054e99c8969f5bf11817eb913d6e85bb7a5))
+* namananand/ins 1092 add badge component in design system ([#589](https://github.com/instill-ai/design-system/issues/589)) ([e3fb270](https://github.com/instill-ai/design-system/commit/e3fb27056e2ba3f1c4fe39097c32224cc15ae60a))
+* tooltip component for design-system INS-1163 ([#607](https://github.com/instill-ai/design-system/issues/607)) ([70f517f](https://github.com/instill-ai/design-system/commit/70f517f820c942e73fefa7e00603214fbc065cd2))
+
 ## [0.31.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.30.1...@instill-ai/design-system-v0.31.0) (2023-07-11)
 
 
