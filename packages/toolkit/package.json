@@ -14,7 +14,8 @@
     "test": "vitest --run --passWithNoTests",
     "build": "pnpm rimraf dist && tsup src && pnpm ts-types",
     "ts-types": "tsc --emitDeclarationOnly",
-    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache"
+    "lint": "eslint . --ext .ts,.tsx,.js,.jsx --cache",
+    "publish-rc": "pnpm build && pnpm publish --no-git-checks"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

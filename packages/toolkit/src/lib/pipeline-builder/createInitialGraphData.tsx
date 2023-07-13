@@ -1,6 +1,6 @@
 import { Edge, Node } from "reactflow";
 import { parseDependencyComponents } from "./parseDependencyComponents";
-import { Pipeline } from "../vdp-sdk";
+import { PipelineComponent, PipelineState } from "../vdp-sdk";
 import {
   ConnectorNodeData,
   ConnectorWithWatchState,
@@ -40,23 +40,13 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
           });
         }
 
-        // There are 4 type of dependencies: images, texts, structured_data, metadata
-        // Because we are only support single handler right now, we only need to have read
-        // metadata dependency
-        const dependentComponents = parseDependencyComponents(
-          component.dependencies.metadata
+        const componentEdges = composeEdgesFromDependency(
+          component.dependencies,
+          component.id,
+          pipeline.watchState
         );
 
-        for (const dependentComponent of dependentComponents) {
-          edges.push({
-            id: `${dependentComponent}-${component.id}`,
-            type: "customEdge",
-            source: dependentComponent,
-            target: component.id,
-            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
-          });
-        }
-
+        edges.push(...componentEdges);
         break;
       }
       case "CONNECTOR_TYPE_DESTINATION": {
@@ -75,22 +65,13 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
           });
         }
 
-        // There are 4 type of dependencies: images, texts, structured_data, metadata
-        // Because we are only support single handler right now, we only need to have read
-        // metadata dependency
-        const dependentComponents = parseDependencyComponents(
-          component.dependencies.metadata
+        const componentEdges = composeEdgesFromDependency(
+          component.dependencies,
+          component.id,
+          pipeline.watchState
         );
 
-        for (const dependentComponent of dependentComponents) {
-          edges.push({
-            id: `${dependentComponent}-${component.id}`,
-            type: "customEdge",
-            source: dependentComponent,
-            target: component.id,
-            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
-          });
-        }
+        edges.push(...componentEdges);
         break;
       }
       case "CONNECTOR_TYPE_BLOCKCHAIN": {
@@ -110,22 +91,13 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
           });
         }
 
-        // There are 4 type of dependencies: images, texts, structured_data, metadata
-        // Because we are only support single handler right now, we only need to have read
-        // metadata dependency
-        const dependentComponents = parseDependencyComponents(
-          component.dependencies.metadata
+        const componentEdges = composeEdgesFromDependency(
+          component.dependencies,
+          component.id,
+          pipeline.watchState
         );
 
-        for (const dependentComponent of dependentComponents) {
-          edges.push({
-            id: `${dependentComponent}-${component.id}`,
-            type: "customEdge",
-            source: dependentComponent,
-            target: component.id,
-            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
-          });
-        }
+        edges.push(...componentEdges);
         break;
       }
       case "CONNECTOR_TYPE_AI": {
@@ -143,23 +115,13 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
           });
         }
 
-        // There are 4 type of dependencies: images, texts, structured_data, metadata
-        // Because we are only support single handler right now, we only need to have read
-        // metadata dependency
-
-        const dependentComponents = parseDependencyComponents(
-          component.dependencies.metadata
+        const componentEdges = composeEdgesFromDependency(
+          component.dependencies,
+          component.id,
+          pipeline.watchState
         );
 
-        for (const dependentComponent of dependentComponents) {
-          edges.push({
-            id: `${dependentComponent}-${component.id}`,
-            type: "customEdge",
-            source: dependentComponent,
-            target: component.id,
-            animated: pipeline.watchState === "STATE_ACTIVE" ? true : false,
-          });
-        }
+        edges.push(...componentEdges);
         break;
       }
       default:
@@ -171,4 +133,72 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
     nodes,
     edges,
   };
+}
+
+function composeEdgesFromDependency(
+  dependencies: PipelineComponent["dependencies"],
+  componentId: string,
+  pipelineWatchState: PipelineState
+) {
+  const edges: Edge[] = [];
+
+  const textComponents = parseDependencyComponents(dependencies.texts);
+
+  for (const dependentComponent of textComponents) {
+    edges.push({
+      id: `${dependentComponent}-${componentId}.texts`,
+      type: "customEdge",
+      source: dependentComponent.split(".")[0],
+      sourceHandle: dependentComponent,
+      target: componentId,
+      targetHandle: `${componentId}.texts`,
+      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
+    });
+  }
+
+  const imageComponents = parseDependencyComponents(dependencies.images);
+
+  for (const dependentComponent of imageComponents) {
+    edges.push({
+      id: `${dependentComponent}-${componentId}.images`,
+      type: "customEdge",
+      source: dependentComponent.split(".")[0],
+      sourceHandle: dependentComponent,
+      target: componentId,
+      targetHandle: `${componentId}.images`,
+      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
+    });
+  }
+
+  const metadataComponent = parseDependencyComponents(dependencies.metadata);
+
+  for (const dependentComponent of metadataComponent) {
+    edges.push({
+      id: `${dependentComponent}-${componentId}.metadata`,
+      type: "customEdge",
+      source: dependentComponent.split(".")[0],
+      sourceHandle: dependentComponent,
+      target: componentId,
+      targetHandle: `${componentId}.metadata`,
+      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
+    });
+  }
+
+  const structuredDataComponent = parseDependencyComponents(
+    dependencies.structured_data
+  );
+
+  for (const dependentComponent of structuredDataComponent) {
+    edges.push({
+      id: `${dependentComponent}-${componentId}.structured_data`,
+      type: "customEdge",
+      source: dependentComponent.split(".")[0],
+      sourceHandle: dependentComponent,
+      target: componentId,
+      targetHandle: `${componentId}.structured_data`,
+      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
+    });
+  }
+
+  return edges;
 }

@@ -1,5 +1,20 @@
 # cortex/toolkit
 
+## How to use
+
+### Install
+
+```bash
+pnpm add @instill-ai/toolkit
+```
+
+### Import necessary CSS at the root
+
+```js
+import "@instill-ai/toolkit/dist/index.css";
+```
+
+
 ## Env
 
 When using this toolkit, you need to set up below environment variables

@@ -2,12 +2,12 @@ import cn from "clsx";
 import * as React from "react";
 import { Handle, Position } from "reactflow";
 
-import { Icons, getModelInstanceTaskToolkit } from "@instill-ai/design-system";
+import { Icons } from "@instill-ai/design-system";
 import {
   ConnectorDefinition,
   ConnectorState,
-  ModelState,
-  ModelTask,
+  Nullable,
+  usePipelineBuilderStore,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 import "./CustomNode.css";
@@ -15,62 +15,168 @@ import "./CustomNode.css";
 export type CustomNodeProps = {
   children: React.ReactNode;
   className?: string;
+  nodeId: string;
+  selectedId: Nullable<string>;
+  watchState: ConnectorState;
+};
+
+type CustomNodeContextValue = {
+  nodeId: string;
+  watchState: ConnectorState;
+};
+
+const CustomNodeContext = React.createContext<CustomNodeContextValue>(
+  {} as CustomNodeContextValue
+);
+
+export const useCustomNodeContext = () => {
+  const customNodeContext = React.useContext(CustomNodeContext);
+
+  if (!customNodeContext) {
+    throw new Error(
+      "useCustomNodeContext should be used within <CustomNode.Root>"
+    );
+  }
+
+  const { nodeId, watchState } = customNodeContext;
+
+  return {
+    nodeId,
+    watchState,
+  };
 };
 
 export const Root = React.forwardRef<
   HTMLDivElement,
   CustomNodeProps & React.HTMLAttributes<HTMLDivElement>
 >((props, ref) => {
-  const { className, children, ...customNodeProps } = props;
+  const {
+    className,
+    nodeId,
+    selectedId,
+    children,
+    watchState,
+    ...customNodeProps
+  } = props;
+
+  const edges = usePipelineBuilderStore((state) => state.edges);
 
   return (
-    <>
+    <CustomNodeContext.Provider value={{ nodeId, watchState }}>
       <div
         ref={ref}
         className={cn(
-          "instill-custom-node group relative z-30 box-border flex w-[343px] flex-col rounded-[12px]",
+          "instill-custom-node outline group z-30 transition-colors duration-500 flex w-[400px] flex-col rounded-sm outline-4",
+          {
+            "outline-semantic-node-connected-default-stroke hover:outline-semantic-node-connected-hover-stroke":
+              watchState === "STATE_CONNECTED",
+          },
+          {
+            "outline-semantic-node-error-default-stroke hover:outline-semantic-node-error-hover-stroke":
+              watchState === "STATE_ERROR",
+          },
+          {
+            "outline-semantic-node-disconnected-default-stroke hover:outline-semantic-node-disconnected-hover-stroke":
+              watchState === "STATE_DISCONNECTED" ||
+              watchState === "STATE_UNSPECIFIED",
+          },
+          {
+            "ring-4 ring-offset-8 ring-semantic-accent-default":
+              selectedId === nodeId,
+          },
           className
         )}
         {...customNodeProps}
       >
+        {/* 
+          This is the topbar of the connector node.
+          There has a very small gap between this topbar to the border of the container.
+          In order to cover it we will slightly scale the size of this topbar.
+        */}
+        <div
+          className={cn(
+            "h-4 shrink-0 w-full rounded-tl-sm rounded-tr transition-colors duration-500",
+            {
+              "bg-semantic-node-connected-default-stroke group-hover:bg-semantic-node-connected-hover-stroke":
+                watchState === "STATE_CONNECTED",
+            },
+            {
+              "bg-semantic-node-error-default-stroke group-hover:bg-semantic-node-error-hover-stroke":
+                watchState === "STATE_ERROR",
+            },
+            {
+              "bg-semantic-node-disconnected-default-stroke group-hover:bg-semantic-node-disconnected-hover-stroke":
+                watchState === "STATE_DISCONNECTED" ||
+                watchState === "STATE_UNSPECIFIED",
+            }
+          )}
+        />
         <div>{children}</div>
+        <div className="flex flex-col">
+          {/* 
+
+            Multiple handlers of the node. 
+
+            - Style wise we male the size of it be 12px and exclude the border 
+            width out of the node using box-content.
+          
+            - About the logic. We give each handler an ID, when we connect the 
+            handler to another handler, under the hood reactflow will record it
+            using sourceHandler and targetHandler.
+
+            For example, if we connect node-1.texts to node-2.texts, the edge
+            will be recorded as:
+
+            {
+              id: "edge-1",
+              source: "node-1",
+              sourceHandle: "node-1.texts",
+              target: "node-2",
+              targetHandle: "node-2.texts",
+            }
+          
+          */}
+          {["texts", "images", "metadata", "structured_data"].map((e) => (
+            <div
+              key={`${nodeId}-${e}`}
+              className="flex px-2 flex-row py-4 odd:bg-semantic-bg-base-bg even:bg-semantic-secondary-bg last:rounded-br-sm last:rounded-bl-sm"
+            >
+              <Handle
+                className={cn(
+                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
+                  edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
+                    ? "!bg-[#595959]"
+                    : "!bg-[#94A0B8]"
+                )}
+                type="target"
+                position={Position.Left}
+                id={`${nodeId}.${e}`}
+              />
+              <div className="flex flex-1 justify-center items-center">{e}</div>
+              <Handle
+                className={cn(
+                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
+                  edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
+                    ? "!bg-[#595959]"
+                    : "!bg-[#94A0B8]"
+                )}
+                type="source"
+                position={Position.Right}
+                id={`${nodeId}.${e}`}
+              />
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="absolute !left-none !top-1/2 !h-6 !w-4 !-translate-x-full -translate-y-1/2 !rounded-bl-xl !rounded-br-none !rounded-tl-xl !rounded-tr-none !border-0 !bg-semantic-bg-line px-[2px] py-[6px]">
-        <Handle
-          className="!static !h-3 !w-3 !translate-x-0 !rounded-full !border-0 !bg-[#94A0B8]"
-          type="target"
-          position={Position.Left}
-        />
-      </div>
-      <div className="absolute !right-0 !top-1/2 z-10 !h-6 !w-4 !translate-x-full -translate-y-1/2 !rounded-bl-none !rounded-br-xl !rounded-tl-none !rounded-tr-xl !border-0 !bg-semantic-bg-line px-[2px] py-[6px]">
-        <Handle
-          className="!static !h-3 !w-3 !translate-x-0 !rounded-full !border-0 !bg-[#94A0B8]"
-          type="source"
-          position={Position.Right}
-        />
-      </div>
-    </>
+    </CustomNodeContext.Provider>
   );
 });
 Root.displayName = "CustomNodeRoot";
 
-const NameRow = (props: { name: string; icon: React.ReactElement }) => {
-  return (
-    <div className="flex rounded-tl-[12px] rounded-tr-[12px] bg-semantic-bg-secondary p-4 transition-colors duration-500 group-hover:bg-semantic-bg-line">
-      <div className="flex w-full flex-row space-x-2">
-        <div className="flex min-w-[20px] min-h-[20px] items-center justify-center">
-          {props.icon}
-        </div>
-        <p className="text-semantic-fg-primary line-clamp-2 product-body-text-2-semibold">
-          {props.name}
-        </p>
-      </div>
-    </div>
-  );
-};
+const NameRow = (props: { name: string; definition: ConnectorDefinition }) => {
+  const { name, definition } = props;
+  const { watchState } = useCustomNodeContext();
 
-const ConnectorDefinitionRow = (props: { definition: ConnectorDefinition }) => {
-  const { definition } = props;
   let fallbackImage: React.ReactElement;
 
   switch (definition.connector_type) {
@@ -105,87 +211,74 @@ const ConnectorDefinitionRow = (props: { definition: ConnectorDefinition }) => {
     }
   }
 
-  return (
-    <div className="flex h-[56px] bg-semantic-bg-primary p-4">
-      <div className="flex w-full flex-row space-x-2">
-        <p className="mr-auto !capitalize text-semantic-fg-primary product-body-text-3-regular">
-          {definition.title}
-        </p>
-        <ImageWithFallback
-          src={`/icons/${definition.vendor}/${definition.icon}`}
-          width={30}
-          height={30}
-          alt={`${definition.title}-icon`}
-          fallbackImg={fallbackImage}
-        />
-      </div>
-    </div>
-  );
-};
+  let stateName: Nullable<string> = null;
 
-const ModelTaskRow = (props: { task: ModelTask }) => {
-  const toolkit = getModelInstanceTaskToolkit(props.task);
-  return (
-    <div className="flex h-[56px] bg-semantic-bg-primary p-4">
-      <div className="flex w-full flex-row space-x-2">
-        <p className="mr-auto !capitalize text-semantic-fg-primary product-body-text-3-regular">
-          {toolkit.label}
-        </p>
-        {toolkit.getIcon({
-          width: "w-4",
-          height: "h-4",
-          color: "fill-semantic-fg-primary",
-          position: "my-auto",
-        })}
-      </div>
-    </div>
-  );
-};
-
-const StateRow = (props: { state: ModelState | ConnectorState }) => {
-  const state = props.state;
-  const _state =
-    state === "STATE_ONLINE" || state === "STATE_CONNECTED"
-      ? "connected"
-      : state === "STATE_ERROR"
-      ? "error"
-      : "disconnected";
+  switch (watchState) {
+    case "STATE_CONNECTED": {
+      stateName = "CONNECTED";
+      break;
+    }
+    case "STATE_DISCONNECTED": {
+      stateName = "DISCONNECTED";
+      break;
+    }
+    case "STATE_ERROR": {
+      stateName = "ERROR";
+      break;
+    }
+    default: {
+      stateName = "UNSPECIFIED";
+    }
+  }
 
   return (
     <div
       className={cn(
-        "flex h-[56px] rounded-bl-[12px] rounded-br-[12px] p-4 transition-colors duration-500",
-        _state === "connected"
-          ? "bg-semantic-success-bg group-hover:bg-[#d1faed]"
-          : _state === "error"
-          ? "bg-semantic-error-bg group-hover:bg-[#fec8cd]"
-          : "bg-semantic-bg-secondary group-hover:bg-semantic-bg-line"
+        "flex flex-col bg-semantic-bg-secondary pt-2 pb-4 px-2.5 transition-colors duration-500 group-hover:bg-semantic-bg-line",
+        {
+          "border-semantic-node-connected-default-stroke":
+            watchState === "STATE_CONNECTED",
+        },
+        {
+          "border-semantic-node-error-default-stroke":
+            watchState === "STATE_ERROR",
+        },
+        {
+          "border-semantic-node-disconnected-default-stroke":
+            watchState === "STATE_DISCONNECTED",
+        }
       )}
     >
       <div className="flex w-full flex-row space-x-2">
-        <div
-          className={cn(
-            "my-auto h-2 w-2 rounded-full",
-            _state === "connected"
-              ? "bg-semantic-success-on-bg"
-              : _state === "error"
-              ? "bg-semantic-error-on-bg"
-              : "bg-semantic-fg-primary"
-          )}
-        />
-        <p
-          className={cn(
-            "my-auto mr-auto !uppercase product-label-label-1",
-            _state === "connected"
-              ? "text-semantic-success-on-bg"
-              : _state === "error"
-              ? "text-semantic-error-on-bg"
-              : "text-semantic-fg-primary"
-          )}
-        >
-          {_state}
+        <p className="my-auto w-full line-clamp-2 product-body-text-2-semibold">
+          {name}
         </p>
+        <div className="shrink-0 w-6 h-6 flex items-center justify-center">
+          <ImageWithFallback
+            src={`/icons/${definition.vendor}/${definition.icon}`}
+            width={24}
+            height={24}
+            alt={`${definition.title}-icon`}
+            fallbackImg={fallbackImage}
+          />
+        </div>
       </div>
+      <p
+        className={cn(
+          "product-label-label-2",
+          {
+            "text-semantic-success-on-bg": watchState === "STATE_CONNECTED",
+          },
+          {
+            "text-semantic-error-on-bg": watchState === "STATE_ERROR",
+          },
+          {
+            "text-semantic-fg-secondary": watchState === "STATE_DISCONNECTED",
+          }
+        )}
+      >
+        {stateName}
+      </p>
     </div>
   );
 };
@@ -193,7 +286,4 @@ const StateRow = (props: { state: ModelState | ConnectorState }) => {
 export const CustomNode = {
   Root,
   NameRow,
-  ConnectorDefinitionRow,
-  ModelTaskRow,
-  StateRow,
 };
