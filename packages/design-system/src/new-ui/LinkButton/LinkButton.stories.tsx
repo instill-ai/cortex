@@ -42,3 +42,11 @@ export const White: Story = {
     </div>
   ),
 };
+
+export const PrimaryWithAsChild: Story = {
+  render: () => (
+    <LinkButton className="gap-x-2" variant="primary" size="lg" asChild>
+      <a href="https://www.instill.tech/">Instill AI</a>
+    </LinkButton>
+  ),
+};

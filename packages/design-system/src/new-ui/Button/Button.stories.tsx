@@ -80,7 +80,15 @@ export const PrimaryWithIcon: Story = {
   render: () => (
     <Button className="gap-x-2" variant="primary" size="lg">
       I am a button
-      <Icons.Play className="w-5 h-5 stroke-semantic-bg-primary" />
+      <Icons.Play className="h-5 w-5 stroke-semantic-bg-primary" />
+    </Button>
+  ),
+};
+
+export const PrimaryWithAsChild: Story = {
+  render: () => (
+    <Button className="gap-x-2" variant="primary" size="lg" asChild>
+      <a href="https://www.instill.tech/">Instill AI</a>
     </Button>
   ),
 };
