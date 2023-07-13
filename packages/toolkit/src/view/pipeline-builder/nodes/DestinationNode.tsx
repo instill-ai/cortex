@@ -9,13 +9,9 @@ export const DestinationNode = (props: NodeProps<ConnectorNodeData>) => {
 
   return (
     <CustomNode.Root
-      className={
-        selectedNode?.id === id
-          ? "outline outline-2 outline-semantic-accent-default"
-          : ""
-      }
       nodeId={id}
       watchState={data.connector.watchState}
+      selectedId={selectedNode ? selectedNode.id : null}
     >
       <CustomNode.NameRow
         name={data.connector.name.split("/")[1]}

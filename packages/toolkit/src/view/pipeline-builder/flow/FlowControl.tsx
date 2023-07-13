@@ -201,10 +201,9 @@ export const FlowControl = (props: FlowControlProps) => {
       return;
     }
 
-    if (1 === 1) {
-      console.log(nodes, edges);
-      return;
-    }
+    console.log("nodes", nodes);
+    console.log("edges", edges);
+    console.log("recipe", constructPipelineRecipe(nodes, edges));
 
     setIsSaving(true);
 

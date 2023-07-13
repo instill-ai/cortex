@@ -146,7 +146,7 @@ function composeEdgesFromDependency(
 
   for (const dependentComponent of textComponents) {
     edges.push({
-      id: `${dependentComponent}-${componentId}`,
+      id: `${dependentComponent}-${componentId}.texts`,
       type: "customEdge",
       source: dependentComponent.split(".")[0],
       sourceHandle: dependentComponent,
@@ -160,7 +160,7 @@ function composeEdgesFromDependency(
 
   for (const dependentComponent of imageComponents) {
     edges.push({
-      id: `${dependentComponent}-${componentId}`,
+      id: `${dependentComponent}-${componentId}.images`,
       type: "customEdge",
       source: dependentComponent.split(".")[0],
       sourceHandle: dependentComponent,
@@ -174,7 +174,7 @@ function composeEdgesFromDependency(
 
   for (const dependentComponent of metadataComponent) {
     edges.push({
-      id: `${dependentComponent}-${componentId}`,
+      id: `${dependentComponent}-${componentId}.metadata`,
       type: "customEdge",
       source: dependentComponent.split(".")[0],
       sourceHandle: dependentComponent,
@@ -190,7 +190,7 @@ function composeEdgesFromDependency(
 
   for (const dependentComponent of structuredDataComponent) {
     edges.push({
-      id: `${dependentComponent}-${componentId}`,
+      id: `${dependentComponent}-${componentId}.structured_data`,
       type: "customEdge",
       source: dependentComponent.split(".")[0],
       sourceHandle: dependentComponent,

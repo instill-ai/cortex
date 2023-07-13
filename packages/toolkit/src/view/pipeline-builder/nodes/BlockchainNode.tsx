@@ -8,12 +8,8 @@ export const BlockchainNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
   return (
     <CustomNode.Root
-      className={
-        selectedNode?.id === id
-          ? "outline outline-2 outline-semantic-accent-default"
-          : ""
-      }
       nodeId={id}
+      selectedId={selectedNode ? selectedNode.id : null}
       watchState={data.connector.watchState}
     >
       <CustomNode.NameRow

@@ -19,6 +19,7 @@ export type CustomNodeProps = {
   children: React.ReactNode;
   className?: string;
   nodeId: string;
+  selectedId: Nullable<string>;
   watchState: ConnectorState;
 };
 
@@ -52,7 +53,14 @@ export const Root = React.forwardRef<
   HTMLDivElement,
   CustomNodeProps & React.HTMLAttributes<HTMLDivElement>
 >((props, ref) => {
-  const { className, nodeId, children, watchState, ...customNodeProps } = props;
+  const {
+    className,
+    nodeId,
+    selectedId,
+    children,
+    watchState,
+    ...customNodeProps
+  } = props;
 
   const reactflowInstance = useReactFlow();
 
@@ -74,13 +82,22 @@ export const Root = React.forwardRef<
             "border-semantic-node-disconnected-default-stroke hover:border-semantic-node-disconnected-hover-stroke":
               watchState === "STATE_DISCONNECTED",
           },
+          {
+            "outline outline-2 outline-offset-2 outline-semantic-accent-default":
+              selectedId === nodeId,
+          },
           className
         )}
         {...customNodeProps}
       >
+        {/* 
+          This is the topbar of the connector node.
+          There has a very small gap between this topbar to the border of the container.
+          In order to cover it we will slightly scale the size of this topbar.
+        */}
         <div
           className={cn(
-            "h-[12px] shrink-0 w-full rounded-tl-sm rounded-tr-sm",
+            "h-4 shrink-0 w-full rounded-tl rounded-tr scale-x-[1.005] scale-y-[1.01]",
             {
               "bg-semantic-node-connected-default-stroke group-hover:bg-semantic-node-connected-hover-stroke":
                 watchState === "STATE_CONNECTED",
@@ -105,7 +122,7 @@ export const Root = React.forwardRef<
               <Handle
                 className={cn(
                   "!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line",
-                  "bg-[#94A0B8]"
+                  "!bg-[#94A0B8]"
                 )}
                 type="target"
                 position={Position.Left}
@@ -115,7 +132,7 @@ export const Root = React.forwardRef<
               <Handle
                 className={cn(
                   "!relative !top-none !left-none !transform-none !w-4 !h-4 !border-semantic-bg-line",
-                  "bg-[#94A0B8]"
+                  "!bg-[#94A0B8]"
                 )}
                 type="source"
                 position={Position.Right}
