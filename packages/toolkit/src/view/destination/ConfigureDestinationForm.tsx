@@ -102,11 +102,8 @@ export const ConfigureDestinationForm = (
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
 
-  const isSyncDestination = React.useMemo(() => {
-    if (
-      destination.connector_definition.id === "destination-grpc" ||
-      destination.connector_definition.id === "destination-http"
-    ) {
+  const isResponseOperator = React.useMemo(() => {
+    if (destination.connector_definition.id === "response") {
       return true;
     }
 
@@ -210,10 +207,7 @@ export const ConfigureDestinationForm = (
   const updateConnector = useUpdateConnector();
 
   const handleSubmit = React.useCallback(async () => {
-    if (
-      destination.id === "destination-grpc" ||
-      destination.id === "destination-http"
-    ) {
+    if (destination.id === "response") {
       return;
     }
 
@@ -538,7 +532,7 @@ export const ConfigureDestinationForm = (
             options={[destinationDefinitionOption]}
             description={`<a href='${destination.connector_definition.documentation_url}'>Setup Guide</a>`}
           />
-          {!isSyncDestination ? (
+          {!isResponseOperator ? (
             <BasicTextArea
               id="destination-description"
               label="Description"
@@ -588,8 +582,7 @@ export const ConfigureDestinationForm = (
               disabled={
                 disabledAll
                   ? disabledAll
-                  : destination.name === "connectors/destination-http" ||
-                    destination.name === "connectors/destination-grpc"
+                  : destination.name === "connectors/response"
                   ? true
                   : false
               }
@@ -633,7 +626,7 @@ export const ConfigureDestinationForm = (
                   ? disabledAll
                   : disabledConfigure
                   ? true
-                  : isSyncDestination
+                  : isResponseOperator
                   ? true
                   : false
               }

@@ -68,11 +68,8 @@ export const DestinationForm = (props: DestinationFormProps) => {
    * Get the destination definition and static state for fields
    * -----------------------------------------------------------------------*/
 
-  const isSyncDestination = React.useMemo(() => {
-    if (
-      destination.connector_definition.id === "destination-grpc" ||
-      destination.connector_definition.id === "destination-http"
-    ) {
+  const isResponseOperator = React.useMemo(() => {
+    if (destination.connector_definition.id === "response") {
       return true;
     }
 
@@ -176,17 +173,20 @@ export const DestinationForm = (props: DestinationFormProps) => {
       return true;
     }
 
-    if ("visibility" in destination && destination.visibility === "VISIBILITY_PUBLIC") {
+    if (
+      "visibility" in destination &&
+      destination.visibility === "VISIBILITY_PUBLIC"
+    ) {
       return true;
     }
 
-    if (destinations.data.some(e => e.name === destination.name)) {
-      if (destination.name === "connectors/destination-grpc" || destination.name === "connectors/destination-http"){
+    if (destinations.data.some((e) => e.name === destination.name)) {
+      if (destination.name === "connectors/response") {
         return true;
       }
     }
 
-    return false
+    return false;
   }, [destinations.isSuccess, destinations.data, destination]);
 
   /* -------------------------------------------------------------------------
@@ -205,10 +205,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
     let stripValues = {} as { configuration: AirbyteFieldValues };
 
     if (!airbyteFormIsDirty) {
-      if (
-        destination.name !== "connectors/destination-http" &&
-        destination.name !== "connectors/destination-grpc"
-      ) {
+      if (destination.name !== "connectors/response") {
         return;
       }
     }
@@ -377,19 +374,11 @@ export const DestinationForm = (props: DestinationFormProps) => {
 
     let payload = {} as CreateConnectorPayload;
 
-    // destination-grpc and destination-http come from instill-ai and follow
-    // our own payload
+    // Response operator come from instill-ai and follow our own payload
 
-    if (destination.id === "destination-grpc") {
+    if (destination.id === "response") {
       payload = {
-        connectorName: "connectors/destination-grpc",
-        connector_definition_name: destination.connector_definition_name,
-        description: fieldValues.description as string,
-        configuration: {},
-      };
-    } else if (destination.id === "destination-http") {
-      payload = {
-        connectorName: "connectors/destination-http",
+        connectorName: "connectors/response",
         connector_definition_name: destination.connector_definition_name,
         description: fieldValues.description as string,
         configuration: {},
@@ -662,26 +651,17 @@ export const DestinationForm = (props: DestinationFormProps) => {
       disabledSubmit = true;
     }
 
-    // The connectors/destination-http and connectors/destination-grpc
-    // can not be updated
+    // The connectors/response can not be updated
 
-    if (
-      destination.name === "connectors/destination-http" ||
-      destination.name === "connectors/destination-grpc"
-    ) {
+    if (destination.name === "connectors/response") {
       disabledSubmit = true;
     }
   } else {
     // This is for new connector
     // The connector can not be created if the form is clean
-    // But the connectors/destination-http and connectors/destination-grpc
-    // can be created even the form is clean
+    // But the connectors/response can be created even the form is clean
 
-    if (
-      destination.name !== "connectors/destination-http" &&
-      destination.name !== "connectors/destination-grpc" &&
-      !airbyteFormIsDirty
-    ) {
+    if (destination.name !== "connectors/response" && !airbyteFormIsDirty) {
       disabledSubmit = true;
     }
 
@@ -726,7 +706,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
             options={[destinationDefinitionOption]}
             description={`<a href='${destination.connector_definition.documentation_url}'>Setup Guide</a>`}
           />
-          {!isSyncDestination ? (
+          {!isResponseOperator ? (
             <BasicTextArea
               id="destination-description"
               label="Description"

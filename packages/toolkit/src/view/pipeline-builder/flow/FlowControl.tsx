@@ -90,11 +90,6 @@ export const FlowControl = (props: FlowControlProps) => {
 
     setIsHandlingConnection(true);
 
-    // If the user changed the pipeline's name we need to update the pipeline's name first
-    if (pipelineId !== pipeline.data.id) {
-      await handleRenamePipeline();
-    }
-
     if (
       pipelineWatchState.data.state === "STATE_ACTIVE" ||
       pipelineWatchState.data.state === "STATE_ERROR"
@@ -141,6 +136,13 @@ export const FlowControl = (props: FlowControlProps) => {
         }
       }
     } else {
+      // If the user changed the pipeline's name we need to update the
+      // pipeline's name first
+
+      if (pipelineId !== pipeline.data.id) {
+        await handleRenamePipeline();
+      }
+
       try {
         // If the user had changed the recipe, we will first save the pipeline
         // then activate the pipeline.
@@ -200,10 +202,6 @@ export const FlowControl = (props: FlowControlProps) => {
       });
       return;
     }
-
-    console.log("nodes", nodes);
-    console.log("edges", edges);
-    console.log("recipe", constructPipelineRecipe(nodes, edges));
 
     setIsSaving(true);
 

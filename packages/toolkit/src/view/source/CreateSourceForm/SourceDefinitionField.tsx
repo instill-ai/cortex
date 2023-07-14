@@ -51,13 +51,7 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
         error={sourceDefinitionError}
         onChange={handleSourceDefinitionChange}
         required={true}
-        description={`<a href=${
-          sourceDefinition === null
-            ? "https://www.instill.tech/docs/source-connectors/overview"
-            : sourceDefinition === "source-http"
-            ? "https://www.instill.tech/docs/source-connectors/http"
-            : "https://www.instill.tech/docs/source-connectors/grpc"
-        }>Setup Guide</a>`}
+        description={`<a href="https://www.instill.tech/docs/source-connectors/overview">Setup Guide</a>`}
       />
     </div>
   );
