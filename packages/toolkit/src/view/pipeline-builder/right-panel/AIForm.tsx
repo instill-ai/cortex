@@ -31,21 +31,71 @@ import {
 } from "@instill-ai/design-system";
 import { ImageWithFallback } from "../../../components";
 
-const ConfigureAIFormSchema = z
+const AIFormSchema = z
   .object({
     id: z.string().min(1, { message: "ID is required" }),
     description: z.string().optional(),
     connector_definition_name: z.string(),
     configuration: z.object({
-      api_key: z.string().optional(),
+      // Instill Model
       api_token: z.string().optional(),
       server_url: z.string().optional(),
-      task: z.string().optional(),
-      engine: z.string().optional(),
       model_id: z.string().optional(),
+
+      // Stability AI / Open AI
+      api_key: z.string().optional(),
+      task: z.string().optional(),
+
+      // Stability AI
+      engine: z.string().optional(),
+
+      // Open AI
+      organization: z.string().optional(),
+      model: z.string().optional(),
+      system_message: z.string().optional(),
+      temperature: z.coerce
+        .number()
+        .positive({ message: "Value must be positive" })
+        .min(0, "Value must be greater than or equal to 0")
+        .max(2, "Value must be less than or equal to 2")
+        .optional(),
+      n: z.coerce
+        .number()
+        .positive({ message: "Value must be positive" })
+        .int({ message: "Value must be an integer" })
+        .min(1, "Value must be greater than or equal to 1")
+        .max(5, "Value must be less than or equal to 5")
+        .optional(),
+      max_tokens: z.coerce
+        .number()
+        .positive({ message: "Value must be positive" })
+        .int({ message: "Value must be an integer" })
+        .min(1, "Value must be greater than or equal to 1")
+        .optional(),
     }),
   })
   .superRefine((state, ctx) => {
+    if (
+      state.connector_definition_name ===
+      "connector-definitions/ai-instill-model"
+    ) {
+      if (!state.configuration.model_id) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Model ID is required",
+          path: ["configuration", "model_id"],
+        });
+      }
+
+      if (!state.configuration.server_url) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Server URL is required",
+          path: ["configuration", "server_url"],
+        });
+      }
+    }
+
     if (
       state.connector_definition_name ===
       "connector-definitions/ai-stability-ai"
@@ -75,24 +125,57 @@ const ConfigureAIFormSchema = z
       }
     }
 
-    if (
-      state.connector_definition_name ===
-      "connector-definitions/ai-instill-model"
-    ) {
-      if (!state.configuration.model_id) {
+    if (state.connector_definition_name === "connector-definitions/ai-openai") {
+      if (!state.configuration.api_key) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Model ID is required",
-          path: ["configuration", "model_id"],
+          message: "API Key is required",
+          path: ["configuration", "api_key"],
         });
       }
 
-      if (!state.configuration.server_url) {
+      if (!state.configuration.task) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
-          message: "Server URL is required",
-          path: ["configuration", "server_url"],
+          message: "Task is required",
+          path: ["configuration", "task"],
         });
+      }
+
+      if (state.configuration.task === "Text Generation") {
+        if (!state.configuration.temperature) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Temperature is required",
+            path: ["configuration", "temperature"],
+          });
+        }
+
+        if (!state.configuration.n) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "N is required",
+            path: ["configuration", "n"],
+          });
+        }
+
+        if (!state.configuration.model) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Model is required",
+            path: ["configuration", "model"],
+          });
+        }
+      }
+
+      if (state.configuration.task === "Text Embeddings") {
+        if (!state.configuration.model) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: "Model is required",
+            path: ["configuration", "model"],
+          });
+        }
       }
     }
   });
@@ -122,8 +205,8 @@ export const AIForm = (props: AIFormProps) => {
   const { updateResourceFormIsDirty, updateSelectedNode, updateNodes } =
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
-  const form = useForm<z.infer<typeof ConfigureAIFormSchema>>({
-    resolver: zodResolver(ConfigureAIFormSchema),
+  const form = useForm<z.infer<typeof AIFormSchema>>({
+    resolver: zodResolver(AIFormSchema),
     defaultValues: {
       ...ai,
     },
@@ -149,7 +232,7 @@ export const AIForm = (props: AIFormProps) => {
   const createConnector = useCreateConnector();
   const { toast } = useToast();
 
-  function onSubmit(data: z.infer<typeof ConfigureAIFormSchema>) {
+  function onSubmit(data: z.infer<typeof AIFormSchema>) {
     form.trigger([
       "configuration",
       "connector_definition_name",
@@ -610,7 +693,6 @@ export const AIForm = (props: AIFormProps) => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                     value={field.value}
-                    disabled={true}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -638,12 +720,30 @@ export const AIForm = (props: AIFormProps) => {
                             src={"/icons/stabilityAI/stabilityai.svg"}
                             width={20}
                             height={20}
-                            alt="Stability AI model logo"
+                            alt="Stability AI logo"
                             fallbackImg={
                               <Icons.Model className="h-5 w-5 stroke-semantic-fg-primary" />
                             }
                           />
-                          <p className="my-auto">Stability AI Model</p>
+                          <p className="my-auto">Stability AI</p>
+                        </div>
+                      </Select.Item>
+                      <Select.Item
+                        key="connector-definitions/ai-openai"
+                        value="connector-definitions/ai-openai"
+                        className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                      >
+                        <div className="flex flex-row space-x-2">
+                          <ImageWithFallback
+                            src={"/icons/openai/openai.svg"}
+                            width={20}
+                            height={20}
+                            alt="Open AI model logo"
+                            fallbackImg={
+                              <Icons.Model className="h-5 w-5 stroke-semantic-fg-primary" />
+                            }
+                          />
+                          <p className="my-auto">OpenAI</p>
                         </div>
                       </Select.Item>
                     </Select.Content>
@@ -656,55 +756,11 @@ export const AIForm = (props: AIFormProps) => {
               );
             }}
           />
-          <Form.Field
-            control={form.control}
-            name="configuration.api_key"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.watch("connector_definition_name") ===
-                    "connector-definitions/ai-stability-ai"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label>API Key *</Form.Label>
-                  <Form.Control>
-                    <Input.Root className="!rounded-none">
-                      <Input.Core
-                        {...field}
-                        type="password"
-                        value={field.value ?? ""}
-                        autoComplete="off"
-                        onFocus={() => {
-                          if (field.value === "*****MASK*****") {
-                            field.onChange("");
-                          }
-                        }}
-                        onBlur={() => {
-                          if (
-                            field.value === "" &&
-                            ai.configuration.api_key === "*****MASK*****"
-                          ) {
-                            form.resetField("configuration.api_key", {
-                              defaultValue: "*****MASK*****",
-                            });
-                          }
-                        }}
-                        disabled={disabledAll}
-                      />
-                    </Input.Root>
-                  </Form.Control>
-                  <Form.Description>
-                    Fill your Stability AI API key. To find your keys, navigate
-                    to your DreamStudio&apos;s Account page.
-                  </Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
+
+          {/* 
+            Instill Model
+          */}
+
           <Form.Field
             control={form.control}
             name="configuration.api_token"
@@ -736,7 +792,7 @@ export const AIForm = (props: AIFormProps) => {
                             field.value === "" &&
                             ai.configuration.api_key === "*****MASK*****"
                           ) {
-                            form.resetField("configuration.api_key", {
+                            form.resetField("configuration.api_token", {
                               defaultValue: "*****MASK*****",
                             });
                           }
@@ -747,104 +803,6 @@ export const AIForm = (props: AIFormProps) => {
                   </Form.Control>
                   <Form.Description>
                     {`To access models on Instill Cloud, enter your Instill Cloud API Token. You can find your tokens by visiting your Instill Cloud's Settings > API Tokens page. Leave this field empty to access models on your local Instill Model.`}
-                  </Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
-          <Form.Field
-            control={form.control}
-            name="configuration.task"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.watch("connector_definition_name") ===
-                    "connector-definitions/ai-stability-ai"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label>Task *</Form.Label>
-                  <Select.Root
-                    onValueChange={field.onChange}
-                    defaultValue={field.value ?? undefined}
-                    disabled={disabledAll}
-                  >
-                    <Form.Control>
-                      <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value />
-                      </Select.Trigger>
-                    </Form.Control>
-                    <Select.Content>
-                      {["Text to Image", "Image to Image"].map((task) => (
-                        <Select.Item
-                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
-                          key={task}
-                          value={task}
-                        >
-                          <p className="my-auto">{task}</p>
-                        </Select.Item>
-                      ))}
-                    </Select.Content>
-                  </Select.Root>
-                  <Form.Description>AI task type.</Form.Description>
-                  <Form.Message />
-                </Form.Item>
-              );
-            }}
-          />
-          <Form.Field
-            control={form.control}
-            name="configuration.engine"
-            render={({ field }) => {
-              return (
-                <Form.Item
-                  className={
-                    form.watch("connector_definition_name") ===
-                    "connector-definitions/ai-stability-ai"
-                      ? ""
-                      : "hidden"
-                  }
-                >
-                  <Form.Label>Engine</Form.Label>
-                  <Select.Root
-                    onValueChange={field.onChange}
-                    defaultValue={field.value ?? undefined}
-                    disabled={disabledAll}
-                  >
-                    <Form.Control>
-                      <Select.Trigger className="w-full !rounded-none">
-                        <Select.Value />
-                      </Select.Trigger>
-                    </Form.Control>
-                    <Select.Content>
-                      {[
-                        "stable-diffusion-v1",
-                        "stable-diffusion-v1-5",
-                        "stable-diffusion-512-v2-0",
-                        "stable-diffusion-768-v2-0",
-                        "stable-diffusion-512-v2-1",
-                        "stable-diffusion-768-v2-1",
-                        "stable-diffusion-xl-beta-v2-2-2",
-                        "stable-inpainting-v1-0",
-                        "stable-inpainting-512-v2-0",
-                        "esrgan-v1-x2plus",
-                        "stable-diffusion-x4-latent-upscaler",
-                      ].map((engine) => (
-                        <Select.Item
-                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
-                          key={engine}
-                          value={engine}
-                        >
-                          <p className="my-auto">{engine}</p>
-                        </Select.Item>
-                      ))}
-                    </Select.Content>
-                  </Select.Root>
-                  <Form.Description>
-                    Stability AI Engine (model) to be used.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -916,6 +874,383 @@ export const AIForm = (props: AIFormProps) => {
                   </Form.Control>
                   <Form.Description>
                     ID of the Instill Model model to be used.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+
+          {/* 
+            General field for OpenAI and StabilityAI connector
+          */}
+
+          <Form.Field
+            control={form.control}
+            name="configuration.api_key"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-stability-ai" ||
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>API Key *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        type="password"
+                        value={field.value ?? ""}
+                        autoComplete="off"
+                        onFocus={() => {
+                          if (field.value === "*****MASK*****") {
+                            field.onChange("");
+                          }
+                        }}
+                        onBlur={() => {
+                          if (
+                            field.value === "" &&
+                            ai.configuration.api_key === "*****MASK*****"
+                          ) {
+                            form.resetField("configuration.api_key", {
+                              defaultValue: "*****MASK*****",
+                            });
+                          }
+                        }}
+                        disabled={disabledAll}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    {form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-openai"
+                      ? "Fill your OpenAI API key. To find your keys, visit your OpenAI's API Keys page."
+                      : null}
+                    {form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-stability-ai"
+                      ? "Fill your Stability AI API key. To find your keys, navigate to your DreamStudio's Account page."
+                      : null}
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.task"
+            render={({ field }) => {
+              const tasks =
+                form.watch("connector_definition_name") ===
+                "connector-definitions/ai-stability-ai"
+                  ? ["Text to Image", "Image to Image"]
+                  : ["Text Generation", "Text Embeddings"];
+
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-stability-ai" ||
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Task *</Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      {tasks.map((task) => (
+                        <Select.Item
+                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                          key={task}
+                          value={task}
+                        >
+                          <p className="my-auto">{task}</p>
+                        </Select.Item>
+                      ))}
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>AI task type.</Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+
+          {/* 
+            StabilityAI connector fields
+          */}
+
+          <Form.Field
+            control={form.control}
+            name="configuration.engine"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                    "connector-definitions/ai-stability-ai"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Engine</Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      {[
+                        "stable-diffusion-v1",
+                        "stable-diffusion-v1-5",
+                        "stable-diffusion-512-v2-0",
+                        "stable-diffusion-768-v2-0",
+                        "stable-diffusion-512-v2-1",
+                        "stable-diffusion-768-v2-1",
+                        "stable-diffusion-xl-beta-v2-2-2",
+                        "stable-inpainting-v1-0",
+                        "stable-inpainting-512-v2-0",
+                        "esrgan-v1-x2plus",
+                        "stable-diffusion-x4-latent-upscaler",
+                      ].map((engine) => (
+                        <Select.Item
+                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                          key={engine}
+                          value={engine}
+                        >
+                          <p className="my-auto">{engine}</p>
+                        </Select.Item>
+                      ))}
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>
+                    Stability AI Engine (model) to be used.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+
+          {/* 
+            OpenAI connector fields
+          */}
+
+          <Form.Field
+            control={form.control}
+            name="configuration.model"
+            render={({ field }) => {
+              const models =
+                form.watch("configuration.task") === "Text Generation"
+                  ? ["gpt-4", "gpt-4-32k", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"]
+                  : ["text-embedding-ada-002"];
+
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai" &&
+                    form.watch("configuration.task")
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Model *</Form.Label>
+                  <Select.Root
+                    onValueChange={field.onChange}
+                    defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
+                  >
+                    <Form.Control>
+                      <Select.Trigger className="w-full !rounded-none">
+                        <Select.Value />
+                      </Select.Trigger>
+                    </Form.Control>
+                    <Select.Content>
+                      {models.map((model) => (
+                        <Select.Item
+                          className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                          key={model}
+                          value={model}
+                        >
+                          <p className="my-auto">{model}</p>
+                        </Select.Item>
+                      ))}
+                    </Select.Content>
+                  </Select.Root>
+                  <Form.Description>OpenAI model to be used.</Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+
+          {/* 
+            OpenAI Text Generation connector fields
+          */}
+
+          <Form.Field
+            control={form.control}
+            name="configuration.system_message"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai" &&
+                    form.watch("configuration.task") === "Text Generation"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>System message</Form.Label>
+                  <Form.Control>
+                    <Textarea
+                      {...field}
+                      value={field.value ?? ""}
+                      className="!rounded-none"
+                      disabled={disabledAll}
+                    />
+                  </Form.Control>
+                  <Form.Description>
+                    The system message helps set the behavior of the assistant.
+                    For example, you can modify the personality of the assistant
+                    or provide specific instructions about how it should behave
+                    throughout the conversation. By default, the model’s
+                    behavior is using a generic message as \"You are a helpful
+                    assistant.\"
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.temperature"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai" &&
+                    form.watch("configuration.task") === "Text Generation"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Temperature *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        type="number"
+                        value={field.value}
+                        autoComplete="off"
+                        disabled={disabledAll}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    Base URL for the Instill Model API. To access models on
+                    Instill Cloud, use the base URL
+                    `https://api-model.instill.tech`. To access models on your
+                    local Instill Model, use the base URL
+                    `http://localhost:9080`.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.n"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai" &&
+                    form.watch("configuration.task") === "Text Generation"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Number of text completions *</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        type="number"
+                        value={field.value}
+                        autoComplete="off"
+                        disabled={disabledAll}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    How many chat completion choices to generate for each input
+                    message.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+          <Form.Field
+            control={form.control}
+            name="configuration.max_tokens"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    form.watch("connector_definition_name") ===
+                      "connector-definitions/ai-openai" &&
+                    form.watch("configuration.task") === "Text Generation"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Max tokens</Form.Label>
+                  <Form.Control>
+                    <Input.Root className="!rounded-none">
+                      <Input.Core
+                        {...field}
+                        type="number"
+                        value={field.value}
+                        autoComplete="off"
+                        disabled={disabledAll}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    The maximum number of tokens to generate in the chat
+                    completion. If it is not set, meaning no maximum number. The
+                    total length of input tokens and generated tokens is limited
+                    by the model's context length.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
