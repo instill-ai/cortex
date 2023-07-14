@@ -113,23 +113,15 @@ const Item = (props: {
 
   let displayedName: Nullable<string> = null;
 
-  if (
-    resource.connector_definition_name ===
-      "connector-definitions/source-http" ||
-    resource.connector_definition_name ===
-      "connector-definitions/destination-http"
-  ) {
+  if (resource.connector_definition_name === "connector-definitions/trigger") {
     if (isPreset) {
-      displayedName = "HTTP";
+      displayedName = "Trigger";
     }
   } else if (
-    resource.connector_definition_name ===
-      "connector-definitions/source-grpc" ||
-    resource.connector_definition_name ===
-      "connector-definitions/destination-grpc"
+    resource.connector_definition_name === "connector-definitions/response"
   ) {
     if (isPreset) {
-      displayedName = "gRPC";
+      displayedName = "Response";
     }
   }
 

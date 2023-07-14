@@ -34,30 +34,18 @@ export const ais: ConnectorPreset[] = [
 
 const sources: ConnectorPreset[] = [
   {
-    id: "source-http",
-    name: "connectors/source-http",
-    connector_definition_name: "connector-definitions/source-http",
-    configuration: {},
-  },
-  {
-    id: "source-grpc",
-    name: "connectors/source-grpc",
-    connector_definition_name: "connector-definitions/source-grpc",
+    id: "trigger",
+    name: "connectors/trigger",
+    connector_definition_name: "connector-definitions/trigger",
     configuration: {},
   },
 ];
 
 const destinations: ConnectorPreset[] = [
   {
-    id: "destination-http",
-    name: "connectors/destination-http",
-    connector_definition_name: "connector-definitions/destination-http",
-    configuration: {},
-  },
-  {
-    id: "destination-grpc",
-    name: "connectors/destination-grpc",
-    connector_definition_name: "connector-definitions/destination-grpc",
+    id: "response",
+    name: "connectors/response",
+    connector_definition_name: "connector-definitions/response",
     configuration: {},
   },
   {

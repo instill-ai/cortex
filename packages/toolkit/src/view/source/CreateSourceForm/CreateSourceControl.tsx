@@ -60,7 +60,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
     if (sources?.find((e) => e.id === sourceDefinition)) {
       setFieldError(
         "source.new.definition",
-        "You could only create one http and one grpc source. Check the setup guide for more information."
+        "You could only create one trigger. Check the setup guide for more information."
       );
       return;
     }

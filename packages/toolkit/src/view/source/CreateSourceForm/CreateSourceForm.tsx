@@ -39,20 +39,8 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
 
     setSourceDefinitionOptions([
       {
-        label: "gRPC",
-        value: "source-grpc",
-        startIcon: (
-          <GrpcIcon
-            color="fill-instillGrey90"
-            height="h-[30px]"
-            width="w-[30px]"
-            position="my-auto"
-          />
-        ),
-      },
-      {
-        label: "HTTP",
-        value: "source-http",
+        label: "Trigger",
+        value: "trigger",
         startIcon: (
           <HttpIcon
             color="fill-instillGrey90"

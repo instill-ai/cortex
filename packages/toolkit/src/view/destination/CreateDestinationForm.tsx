@@ -93,42 +93,12 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   const destinationOptions = React.useMemo(() => {
     if (!destinationDefinitions.isSuccess) return [];
 
-    if (pipelineMode === "MODE_ASYNC") {
-      return destinationDefinitions.data
-        .filter(
-          (e) =>
-            e.name !== "connector-definitions/destination-http" &&
-            e.name !== "connector-definitions/destination-grpc"
-        )
-        .map((e) => ({
-          label: e.title,
-          value: e.name,
-          startIcon: (
-            <Image
-              className="my-auto"
-              src={
-                e.vendor === "airbyte"
-                  ? `/icons/airbyte/${e.icon}`
-                  : `/icons/instill/${e.icon}`
-              }
-              width={24}
-              height={24}
-              alt={`${e.title}-icon`}
-            />
-          ),
-        }));
-    }
-
     return destinationDefinitions.data.map((e) => ({
       label: e.title,
       value: e.name,
       startIcon: (
         <ImageWithFallback
-          src={
-            e.vendor === "airbyte"
-              ? `/icons/airbyte/${e.icon}`
-              : `/icons/instill/${e.icon}`
-          }
+          src={`/icons/${e.vendor}/${e.icon}`}
           width={24}
           height={24}
           alt={`${e.title}-icon`}
@@ -136,11 +106,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         />
       ),
     }));
-  }, [
-    destinationDefinitions.isSuccess,
-    destinationDefinitions.data,
-    pipelineMode,
-  ]);
+  }, [destinationDefinitions.isSuccess, destinationDefinitions.data]);
 
   const [selectedDestinationDefinition, setSelectedDestinationDefinition] =
     React.useState<Nullable<ConnectorDefinition>>(null);
@@ -148,17 +114,14 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   const [selectedDestinationOption, setSelectedDestinationOption] =
     React.useState<Nullable<SingleSelectOption>>(null);
 
-  // Instill Ai provided connector HTTP and gRPC can only have default id
-  // destination-http and destination-grpc. We need to make sure user have
+  // Instill Ai provided response operator can only have default id
+  // response. We need to make sure user have
   // proper instruction on this issue.
 
   const canSetIdField = React.useMemo(() => {
     if (!selectedDestinationDefinition) return true;
 
-    if (
-      selectedDestinationDefinition.id === "destination-grpc" ||
-      selectedDestinationDefinition.id === "destination-http"
-    ) {
+    if (selectedDestinationDefinition.id === "response") {
       return false;
     } else {
       return true;
@@ -168,29 +131,11 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   const defaultId = React.useMemo(() => {
     if (!selectedDestinationDefinition) return null;
 
-    if (selectedDestinationDefinition.id === "destination-grpc") {
-      return "destination-grpc";
-    }
-
-    if (selectedDestinationDefinition.id === "destination-http") {
-      return "destination-http";
+    if (selectedDestinationDefinition.id === "response") {
+      return "response";
     }
 
     return null;
-  }, [selectedDestinationDefinition]);
-
-  const getSetupGuide = React.useCallback(() => {
-    if (selectedDestinationDefinition) {
-      if (selectedDestinationDefinition.id === "destination-http") {
-        return "https://www.instill.tech/docs/destination-connectors/http";
-      } else if (selectedDestinationDefinition.id === "destination-grpc") {
-        return "https://www.instill.tech/docs/destination-connectors/grpc";
-      }
-    }
-
-    return selectedDestinationDefinition
-      ? selectedDestinationDefinition.documentation_url
-      : "https://www.instill.tech/docs/destination-connectors/overview";
   }, [selectedDestinationDefinition]);
 
   /* -------------------------------------------------------------------------
@@ -319,24 +264,12 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
 
     let payload = {} as CreateConnectorPayload;
 
-    // destination-grpc and destination-http come from instill-ai and follow
-    // our own payload
+    // Response come from instill-ai and follow our own payload
 
-    if (selectedDestinationDefinition?.id === "destination-grpc") {
+    if (selectedDestinationDefinition?.id === "response") {
       payload = {
-        connectorName: "connectors/destination-grpc",
-        connector_definition_name: `connector-definitions/${
-          fieldValues.definition as string
-        }`,
-        description: fieldValues.description as string,
-        configuration: {},
-      };
-    } else if (selectedDestinationDefinition?.id === "destination-http") {
-      payload = {
-        connectorName: "connectors/destination-http",
-        connector_definition_name: `connector-definitions/${
-          fieldValues.definition as string
-        }`,
+        connectorName: "connectors/response",
+        connector_definition_name: `connector-definitions/response`,
         description: fieldValues.description as string,
         configuration: {},
       };
@@ -499,7 +432,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
               definition: option?.value ?? null,
             }));
           }}
-          description={`<a href='${getSetupGuide()}'>Setup Guide</a>`}
+          description={`<a href="https://www.instill.tech/docs/destination-connectors/overview">Setup Guide</a>`}
         />
         <AirbyteDestinationFields
           destinationFormTree={destinationFormTree}

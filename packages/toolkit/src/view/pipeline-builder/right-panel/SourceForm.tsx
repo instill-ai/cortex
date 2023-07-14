@@ -68,7 +68,6 @@ export const SourceForm = (props: SourceFormProps) => {
     enabled: enableQuery,
   });
 
-
   // We will disable all the fields if the connector is public (which mean
   // it is provided by Instill AI)
   const disabledAll = React.useMemo(() => {
@@ -80,15 +79,14 @@ export const SourceForm = (props: SourceFormProps) => {
       return true;
     }
 
-    if (sources.data.some(e => e.name === source.name)) {
-      if (source.name === "connectors/source-grpc" || source.name === "connectors/source-http"){
+    if (sources.data.some((e) => e.name === source.name)) {
+      if (source.name === "connectors/trigger") {
         return true;
       }
     }
 
-    return false
+    return false;
   }, [sources.isSuccess, sources.data, source]);
-
 
   React.useEffect(() => {
     reset({
