@@ -1008,9 +1008,9 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     The system message helps set the behavior of the assistant.
                     For example, you can modify the personality of the assistant
                     or provide specific instructions about how it should behave
-                    throughout the conversation. By default, the model’s
-                    behavior is using a generic message as \"You are a helpful
-                    assistant.\"
+                    throughout the conversation. By default, the model&apos;s
+                    behavior is using a generic message as &quot;You are a
+                    helpful assistant.&quot;
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -1120,7 +1120,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                     The maximum number of tokens to generate in the chat
                     completion. If it is not set, meaning no maximum number. The
                     total length of input tokens and generated tokens is limited
-                    by the model's context length.
+                    by the model&apos;s context length.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
