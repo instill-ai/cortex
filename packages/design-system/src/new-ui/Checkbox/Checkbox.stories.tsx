@@ -28,7 +28,7 @@ export const WithText: Story = {
         >
           Accept terms and conditions
         </label>
-        <p className="text-sm text-semantic-fg-primary">
+        <p className="text-sm text-semantic-fg-disabled">
           You agree to our Terms of Service and Privacy Policy.
         </p>
       </div>
