@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IconBase, IconBaseProps } from "./IconBase";
 
-export const ChevronLeft = React.forwardRef<
+export const ArrowNarrowRight = React.forwardRef<
   SVGSVGElement,
   Omit<IconBaseProps, "viewBox" | "children">
 >((props, ref) => {
@@ -14,7 +14,7 @@ export const ChevronLeft = React.forwardRef<
       className={className}
     >
       <path
-        d="M15 18L9 12L15 6"
+        d="M4 12H20M20 12L14 6M20 12L14 18"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -22,4 +22,4 @@ export const ChevronLeft = React.forwardRef<
     </IconBase>
   );
 });
-ChevronLeft.displayName = "IconChevronLeft";
+ArrowNarrowRight.displayName = "IconArrowNarrowRight";
