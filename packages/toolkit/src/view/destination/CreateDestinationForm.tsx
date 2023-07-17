@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as yup from "yup";
-import Image from "next/image";
 import axios from "axios";
 import {
   BasicProgressMessageBox,
@@ -48,7 +47,6 @@ export type CreateDestinationFormProps = {
 const selector = (state: CreateResourceFormStore) => ({
   init: state.init,
   formIsDirty: state.formIsDirty,
-  pipelineMode: state.fields.pipeline.mode,
   setCreateNewResourceIsComplete: state.setCreateNewResourceIsComplete,
   setFormIsDirty: state.setFormIsDirty,
 });
@@ -72,13 +70,8 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   // Notice: We don't directly use our destination form state here because we
   // construct the form with airbyte way. We set our form state at the end.
 
-  const {
-    init,
-    formIsDirty,
-    pipelineMode,
-    setCreateNewResourceIsComplete,
-    setFormIsDirty,
-  } = useCreateResourceFormStore(selector, shallow);
+  const { init, formIsDirty, setCreateNewResourceIsComplete, setFormIsDirty } =
+    useCreateResourceFormStore(selector, shallow);
 
   /* -------------------------------------------------------------------------
    * Get the destination definition and static state for fields

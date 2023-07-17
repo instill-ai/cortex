@@ -1,4 +1,6 @@
+export * from "./Cell";
 export * from "./ConnectionTypeCell";
+export * from "./GeneralStateCell";
 export * from "./ModeCell";
 export * from "./ModelDefinitionCell";
 export * from "./ModelCountsCell";
