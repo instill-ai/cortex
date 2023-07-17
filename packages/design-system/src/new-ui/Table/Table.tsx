@@ -21,7 +21,7 @@ const TableHeader = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
-    className={cn("[&_tr]:border- bg-semantic-bg-base-bg", className)}
+    className={cn("bg-semantic-bg-base-bg [&_tr]:border-b", className)}
     {...props}
   />
 ));
@@ -45,11 +45,26 @@ const TableFooter = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
-    className={cn("bg-primary text-primary-foreground font-medium", className)}
+    className={cn("border-t bg-semantic-bg-base-bg", className)}
     {...props}
   />
 ));
 TableFooter.displayName = "TableFooter";
+
+const TableFoot = React.forwardRef<
+  HTMLTableCellElement,
+  React.ThHTMLAttributes<HTMLTableCellElement>
+>(({ className, ...props }, ref) => (
+  <th
+    ref={ref}
+    className={cn(
+      "px-6 py-3 text-semantic-fg-secondary product-body-text-4-semibold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      className
+    )}
+    {...props}
+  />
+));
+TableFoot.displayName = "TableFoot";
 
 const TableRow = React.forwardRef<
   HTMLTableRowElement,
@@ -73,7 +88,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "px-6 py-3 text-xs font-semibold leading-none text-semantic-fg-primary text-opacity-80 [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "px-6 py-3 text-semantic-fg-secondary product-body-text-4-semibold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
       className
     )}
     {...props}
@@ -88,7 +103,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "px-6 py-5 align-middle text-sm text-semantic-fg-primary [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+      "p-6 align-middle text-semantic-fg-primary product-body-text-3-semibold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
       className
     )}
     {...props}
@@ -102,7 +117,10 @@ const TableCaption = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}
-    className={cn("mt-4 text-sm text-semantic-fg-primary", className)}
+    className={cn(
+      "mt-4 text-semantic-fg-secondary product-body-text-4-semibold",
+      className
+    )}
     {...props}
   />
 ));
@@ -113,6 +131,7 @@ export const Table = {
   Header: TableHeader,
   Body: TableBody,
   Footer: TableFooter,
+  Foot: TableFoot,
   Head: TableHead,
   Row: TableRow,
   Cell: TableCell,

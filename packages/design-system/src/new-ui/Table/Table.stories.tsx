@@ -27,38 +27,34 @@ export const Regular: Story = {
       </Table.Header>
       <Table.Body>
         <Table.Row>
-          <Table.Cell className="font-semibold leading-tight">
-            Pipeline-name-1
-          </Table.Cell>
+          <Table.Cell>Pipeline-name-1</Table.Cell>
           <Table.Cell>
             <Tag variant="lightRed" className="border-0" size="sm">
               Deleted
             </Tag>
           </Table.Cell>
-          <Table.Cell className="text-center font-normal leading-tight text-opacity-80">
-            250
-          </Table.Cell>
-          <Table.Cell className="text-center font-normal leading-tight text-opacity-80">
-            250
-          </Table.Cell>
+          <Table.Cell className="text-center">250</Table.Cell>
+          <Table.Cell className="text-center">250</Table.Cell>
         </Table.Row>
         <Table.Row>
-          <Table.Cell className="font-semibold leading-tight">
-            Pipeline-name-1
-          </Table.Cell>
+          <Table.Cell>Pipeline-name-1</Table.Cell>
           <Table.Cell>
             <Tag variant="lightGreen" className="border-0" size="sm">
               Active
             </Tag>
           </Table.Cell>
-          <Table.Cell className="text-center font-normal leading-tight text-opacity-80">
-            250
-          </Table.Cell>
-          <Table.Cell className="text-center font-normal leading-tight text-opacity-80">
-            250
-          </Table.Cell>
+          <Table.Cell className="text-center">250</Table.Cell>
+          <Table.Cell className="text-center">250</Table.Cell>
         </Table.Row>
       </Table.Body>
+      <Table.Footer>
+        <Table.Row>
+          <Table.Foot className="text-left">foot-1</Table.Foot>
+          <Table.Foot className="text-center">foot-2</Table.Foot>
+          <Table.Foot className="text-center">foot-3</Table.Foot>
+          <Table.Foot className="text-center">foot-4</Table.Foot>
+        </Table.Row>
+      </Table.Footer>
     </Table.Root>
   ),
 };
