@@ -32,7 +32,7 @@ export function DataTable<TData, TValue>({
     onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: {
-        pageSize: pageSize || 10,
+        pageSize: pageSize,
       },
     },
     state: {

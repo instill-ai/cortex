@@ -182,5 +182,5 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
 ];
 
 export const Default: Story = {
-  render: () => <DataTable columns={columns} data={data}  pageSize={6}/>,
+  render: () => <DataTable columns={columns} data={data} pageSize={6} />,
 };
