@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { DataTable } from "./DataTable";
 import { ColumnDef } from "@tanstack/react-table";
+import { PipelineState } from "../../types/general";
+import { Tag } from "../Tag";
+import { Checkbox } from "../Checkbox";
 
 const meta: Meta<typeof DataTable> = {
   title: "Components/NewUi/DataTable",
@@ -11,153 +14,95 @@ export default meta;
 type Story = StoryObj<typeof DataTable>;
 
 // Fetch data from your API here.
-const data: Payment[] = [
+const data: PipelineTriggerCount[] = [
   {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
+    pipeline_id: "Pipeline-name-1",
+    watchState: "STATE_ACTIVE",
+    pipeline_completed: 20,
+    pipeline_errored: 12,
   },
   {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
+    pipeline_id: "Pipeline-name-2",
+    watchState: "STATE_ERROR",
+    pipeline_completed: 20,
+    pipeline_errored: 12,
   },
   {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
+    pipeline_id: "Pipeline-name-3",
+    watchState: "STATE_ACTIVE",
+    pipeline_completed: 20,
+    pipeline_errored: 12,
   },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  {
-    id: "728ed52f",
-    amount: 100,
-    status: "pending",
-    email: "m@example.com",
-  },
-  // ...
 ];
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
+export type PipelineTriggerCount = {
+  pipeline_id: string;
+  pipeline_completed: number;
+  pipeline_errored: number;
+  watchState: PipelineState;
 };
 
-const columns: ColumnDef<Payment>[] = [
+const columns: ColumnDef<PipelineTriggerCount>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    id: "select",
+    header: ({ table }) => (
+      <div className="text-left">
+        <Checkbox
+          checked={table.getIsAllPageRowsSelected()}
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+          className="text h-4 w-4"
+        />
+      </div>
+    ),
+    cell: ({ row }) => (
+      <Checkbox
+        checked={row.getIsSelected()}
+        onCheckedChange={(value) => row.toggleSelected(!!value)}
+        aria-label="Select row"
+        className="h-4 w-4"
+      />
+    ),
+    enableSorting: false,
+    enableHiding: false,
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    accessorKey: "pipeline_id",
+    header: () => <div className="text-left">Pipeline Id</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
+    accessorKey: "watchState",
+    header: () => <div className="text-center">Status</div>,
     cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-
-      return <div className="text-right font-medium">{formatted}</div>;
+      return (
+        <div className="text-center">
+          <Tag variant="lightGreen" className="border-0" size={"sm"}>
+            Active
+          </Tag>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "pipeline_completed",
+    header: () => <div className="text-center">Completed Triggers</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="text-center text-semantic-fg-secondary">
+          {row.getValue("pipeline_completed")}
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "pipeline_errored",
+    header: () => <div className="text-center">Errored Triggers</div>,
+    cell: ({ row }) => {
+      return (
+        <div className="text-center text-semantic-fg-secondary">
+          {row.getValue("pipeline_errored")}
+        </div>
+      );
     },
   },
 ];
