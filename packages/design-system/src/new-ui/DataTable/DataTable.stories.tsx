@@ -25,12 +25,12 @@ const data: PipelineTriggerCount[] = [
     pipeline_id: "Pipeline-name-2",
     watchState: "STATE_ERROR",
     pipeline_completed: 20,
-    pipeline_errored: 12,
+    pipeline_errored: 132,
   },
   {
     pipeline_id: "Pipeline-name-3",
-    watchState: "STATE_ACTIVE",
-    pipeline_completed: 20,
+    watchState: "STATE_ERROR",
+    pipeline_completed: 23,
     pipeline_errored: 12,
   },
   {
@@ -73,7 +73,7 @@ const data: PipelineTriggerCount[] = [
     pipeline_id: "Pipeline-name-1",
     watchState: "STATE_ACTIVE",
     pipeline_completed: 20,
-    pipeline_errored: 12,
+    pipeline_errored: 2,
   },
   {
     pipeline_id: "Pipeline-name-2",
@@ -101,9 +101,9 @@ const data: PipelineTriggerCount[] = [
   },
   {
     pipeline_id: "Pipeline-name-3",
-    watchState: "STATE_ACTIVE",
+    watchState: "STATE_ERROR",
     pipeline_completed: 20,
-    pipeline_errored: 12,
+    pipeline_errored: 32,
   },
 ];
 
@@ -138,7 +138,15 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
     cell: ({ row }) => {
       return (
         <div className="text-center">
-          <Tag variant="lightGreen" className="border-0" size={"sm"}>
+          <Tag
+            variant={
+              row.getValue("watchState") === "STATE_ACTIVE"
+                ? "lightGreen"
+                : "lightRed"
+            }
+            className="border-0"
+            size={"sm"}
+          >
             Active
           </Tag>
         </div>
@@ -174,5 +182,5 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
 ];
 
 export const Default: Story = {
-  render: () => <DataTable columns={columns} data={data} />,
+  render: () => <DataTable columns={columns} data={data}  pageSize={6}/>,
 };
