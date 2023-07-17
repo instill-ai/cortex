@@ -12,9 +12,9 @@ export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
   return (
-    <div className="flex items-center justify-end space-x-2 py-4">
+    <div className="flex items-center justify-end py-8">
       <Button
-        className="gap-x-2"
+        className="h-10 !rounded-none"
         variant="secondaryGrey"
         size="sm"
         onClick={() => table.previousPage()}
@@ -23,8 +23,19 @@ export function DataTablePagination<TData>({
         <Icons.ChevronLeft className="h-4 w-4 stroke-semantic-fg-secondary" />
         Previous
       </Button>
+      {[...Array(4).keys()].map((e, index) => (
+        <Button
+          className="h-10 w-10 !rounded-none"
+          variant="secondaryGrey"
+          size="sm"
+          onClick={() => table.setPageIndex(index + 1)}
+          disabled={!table.getCanNextPage()}
+        >
+          {index + 1}
+        </Button>
+      ))}
       <Button
-        className="gap-x-2"
+        className="h-10 !rounded-none"
         variant="secondaryGrey"
         size="sm"
         onClick={() => table.nextPage()}
