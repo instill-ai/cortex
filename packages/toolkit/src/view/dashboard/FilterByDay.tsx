@@ -21,7 +21,7 @@ export const FilterByDay = ({
     <div className="flex flex-row-reverse space-x-4 space-x-reverse">
       <div className="border-semantic flex items-start justify-start">
         {timeLineOptions.map((timeLineOption) => (
-          <div
+          <button
             key={timeLineOption.value}
             className={cn(
               "flex cursor-pointer items-center justify-center self-stretch px-4 py-3 outline outline-1 outline-semantic-bg-line first:rounded-l-sm last:rounded-r-sm hover:bg-semantic-bg-secondary",
@@ -36,7 +36,7 @@ export const FilterByDay = ({
             <div className="text-semantic-fg-primary product-body-text-4-semibold">
               {timeLineOption.label}
             </div>
-          </div>
+          </button>
         ))}
       </div>
       <Button
