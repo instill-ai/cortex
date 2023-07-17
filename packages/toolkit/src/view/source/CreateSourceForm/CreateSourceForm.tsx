@@ -2,7 +2,6 @@ import * as React from "react";
 import {
   FormRoot,
   SingleSelectOption,
-  GrpcIcon,
   HttpIcon,
   FormRootProps,
 } from "@instill-ai/design-system";
