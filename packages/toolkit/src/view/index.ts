@@ -1,6 +1,7 @@
 export * from "./ai";
 export * from "./airbyte";
 export * from "./blockchan";
+export * from "./dashboard";
 export * from "./destination";
 export * from "./mgmt";
 export * from "./model";
