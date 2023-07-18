@@ -103,14 +103,29 @@ export const WithRoundedNone: Story = {
 };
 
 export const SortingButton = () => {
-  const [sorting, setSorting] = React.useState("");
+  type Sort = "asc" | "desc" | null;
+  const [sorting, setSorting] = React.useState<Sort>(null);
 
-  const toggleSorting = (type: string) => {
+  const toggleSorting = (type: Sort) => {
     if (type === "asc") {
       setSorting("desc");
     } else {
       setSorting("asc");
     }
+  };
+
+  const getIcon = (type: Sort) => {
+    if (type === "asc") {
+      return (
+        <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
+      );
+    }
+    if (type === "desc") {
+      return <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />;
+    }
+    return (
+      <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
+    );
   };
 
   return (
@@ -121,15 +136,7 @@ export const SortingButton = () => {
       onClick={() => toggleSorting(sorting)}
     >
       Sorting
-      {!sorting && (
-        <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
-      )}
-      {sorting === "asc" && (
-        <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
-      )}
-      {sorting === "desc" && (
-        <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
-      )}
+      {getIcon(sorting)}
     </Button>
   );
 };
