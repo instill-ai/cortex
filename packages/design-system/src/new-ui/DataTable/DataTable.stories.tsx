@@ -162,13 +162,24 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
       return (
         <div className="text-center">
           <Button
-            className="gap-x-2 focus-visible:border-semantic-bg-secondary-secondary focus-visible:ring-2 focus-visible:ring-semantic-bg-secondary-secondary focus-visible:ring-offset-1 active:bg-semantic-bg-line disabled:bg-semantic-bg-secondary"
+            className="gap-x-2 py-0"
             variant="tertiaryGrey"
             size="sm"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             <span className="min-w-[130px]">Completed Triggers</span>
-            <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
+
+            {!column.getIsSorted() && (
+              <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
+            )}
+
+            {column.getIsSorted() === "asc" && (
+              <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
+            )}
+
+            {column.getIsSorted() === "desc" && (
+              <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
+            )}
           </Button>
         </div>
       );
@@ -187,13 +198,24 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
     header: ({ column }) => (
       <div className="text-center">
         <Button
-          className="gap-x-2 focus-visible:border-semantic-bg-secondary-secondary focus-visible:ring-2 focus-visible:ring-semantic-bg-secondary-secondary focus-visible:ring-offset-1 active:bg-semantic-bg-line disabled:bg-semantic-bg-secondary"
+          className="gap-x-2 py-0"
           variant="tertiaryGrey"
           size="sm"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           <span className="min-w-[110px]">Errored Triggers</span>
-          <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
+
+          {!column.getIsSorted() && (
+            <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
+          )}
+
+          {column.getIsSorted() === "asc" && (
+            <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
+          )}
+
+          {column.getIsSorted() === "desc" && (
+            <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
+          )}
         </Button>
       </div>
     ),

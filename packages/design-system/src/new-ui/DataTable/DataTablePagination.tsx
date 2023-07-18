@@ -12,7 +12,7 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex items-center justify-end py-8">
       <Button
-        className="h-10 gap-x-2 !rounded-none"
+        className="h-10 gap-x-3 !rounded-r-none rounded-l-[8px]"
         variant="secondaryGrey"
         size="sm"
         onClick={() => table.previousPage()}
@@ -34,7 +34,7 @@ export function DataTablePagination<TData>({
         </Button>
       ))}
       <Button
-        className="h-10 gap-x-2 !rounded-none"
+        className="h-10 gap-x-3 !rounded-l-none rounded-r-[8px]"
         variant="secondaryGrey"
         size="sm"
         onClick={() => table.nextPage()}
