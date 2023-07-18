@@ -167,11 +167,7 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             Completed Triggers
-            {column.getIsSorted() === "asc" ? (
-              <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
-            ) : (
-              <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
-            )}
+            <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
           </Button>
         </div>
       );
@@ -196,11 +192,7 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Errored Triggers
-          {column.getIsSorted() === "asc" ? (
-            <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
-          ) : (
-            <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
-          )}
+          <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
         </Button>
       </div>
     ),
