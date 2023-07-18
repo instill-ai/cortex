@@ -16,6 +16,7 @@ import { ChevronRight } from "./ChevronRight";
 import { ChevronRightDouble } from "./ChevronRightDouble";
 import { ChevronUp } from "./ChevronUp";
 import { ChevronUpDouble } from "./ChevronUpDouble";
+import { ChevronSelectorVertical } from "./ChevronSelectorVertical";
 import { Chip01 } from "./Chip01";
 import { Chip02 } from "./Chip02";
 import { Cube01 } from "./Cube01";
@@ -55,6 +56,7 @@ export const Icons = {
   ChevronRightDouble,
   ChevronUp,
   ChevronUpDouble,
+  ChevronSelectorVertical,
   Chip01,
   Chip02,
   Cube01,
