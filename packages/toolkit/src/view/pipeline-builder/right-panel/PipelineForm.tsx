@@ -18,21 +18,16 @@ import {
   useToast,
 } from "@instill-ai/design-system";
 import {
-  Nullable,
-  PipelineBuilderStore,
   env,
   getInstillApiErrorMessage,
   useDeletePipeline,
   usePipeline,
   usePipelineBuilderStore,
   useWatchPipeline,
+  type PipelineBuilderStore,
+  type Nullable,
 } from "../../../lib";
-import {
-  asyncCE,
-  asyncCloud,
-  syncCE,
-  syncCloud,
-} from "./triggerPipelineSnippets";
+import { triggerPipelineSnippets } from "./triggerPipelineSnippets";
 import { CodeBlock } from "../../../components";
 
 export const pipelineFormSchema = z.object({
@@ -154,46 +149,20 @@ export const PipelineForm = (props: PipelineFormProps) => {
     pipeline.isSuccess &&
     watchPipeline.data.state === "STATE_ACTIVE"
   ) {
-    if (pipeline.data.mode === "MODE_ASYNC") {
-      if (accessToken) {
-        pipelineTriggerSnippet = asyncCloud.replace(
+    if (accessToken) {
+      pipelineTriggerSnippet = triggerPipelineSnippets.cloud
+        .replace(
           /\{vdp-pipeline-base-url\}/g,
           env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
-        );
-        pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
-          /\{pipeline-id\}/g,
-          pipeline.data.id
-        );
-      } else {
-        pipelineTriggerSnippet = asyncCE.replace(
+        )
+        .replace(/\{pipeline-id\}/g, pipeline.data.id);
+    } else {
+      pipelineTriggerSnippet = triggerPipelineSnippets.ce
+        .replace(
           /\{vdp-pipeline-base-url\}/g,
           env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
-        );
-        pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
-          /\{pipeline-id\}/g,
-          pipeline.data.id
-        );
-      }
-    } else if (pipeline.data.mode === "MODE_SYNC") {
-      if (accessToken) {
-        pipelineTriggerSnippet = syncCloud.replace(
-          /\{vdp-pipeline-base-url\}/g,
-          env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
-        );
-        pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
-          /\{pipeline-id\}/g,
-          pipeline.data.id
-        );
-      } else {
-        pipelineTriggerSnippet = syncCE.replace(
-          /\{vdp-pipeline-base-url\}/g,
-          env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
-        );
-        pipelineTriggerSnippet = pipelineTriggerSnippet.replace(
-          /\{pipeline-id\}/g,
-          pipeline.data.id
-        );
-      }
+        )
+        .replace(/\{pipeline-id\}/g, pipeline.data.id);
     }
   }
 
