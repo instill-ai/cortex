@@ -28,7 +28,7 @@ export const ais: ConnectorPreset[] = [
   {
     id: "OpenAI",
     name: "connectors/openai",
-    connector_definition_name: "connector-definitions/ai-stability-ai",
+    connector_definition_name: "connector-definitions/ai-openai",
     configuration: {},
   },
 ];
