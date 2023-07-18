@@ -15,6 +15,19 @@ export default meta;
 
 type Story = StoryObj<typeof DataTable>;
 
+type Sort = "asc" | "desc" | false;
+const getIcon = (type: Sort) => {
+  if (type === "asc") {
+    return <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />;
+  }
+  if (type === "desc") {
+    return <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />;
+  }
+  return (
+    <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
+  );
+};
+
 // Fetch data from your API here.
 const data: PipelineTriggerCount[] = [
   {
@@ -168,18 +181,7 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
             <span className="min-w-[130px]">Completed Triggers</span>
-
-            {!column.getIsSorted() && (
-              <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
-            )}
-
-            {column.getIsSorted() === "asc" && (
-              <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
-            )}
-
-            {column.getIsSorted() === "desc" && (
-              <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
-            )}
+            {getIcon(column.getIsSorted())}
           </Button>
         </div>
       );
@@ -204,18 +206,7 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           <span className="min-w-[110px]">Errored Triggers</span>
-
-          {!column.getIsSorted() && (
-            <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
-          )}
-
-          {column.getIsSorted() === "asc" && (
-            <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
-          )}
-
-          {column.getIsSorted() === "desc" && (
-            <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
-          )}
+          {getIcon(column.getIsSorted())}
         </Button>
       </div>
     ),
