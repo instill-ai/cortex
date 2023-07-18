@@ -136,6 +136,7 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
   },
   {
     accessorKey: "watchState",
+    accessorFn: (row) => row.watchState,
     header: () => <div className="max-w-[80px] text-center">Status</div>,
     cell: ({ row }) => {
       return (
@@ -159,14 +160,14 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
     accessorKey: "pipeline_completed",
     header: ({ column }) => {
       return (
-        <div className="min-w-[120px] text-center">
+        <div className="text-center">
           <Button
-            className="gap-x-2"
+            className="gap-x-2 focus-visible:border-semantic-bg-secondary-secondary focus-visible:ring-2 focus-visible:ring-semantic-bg-secondary-secondary focus-visible:ring-offset-1 active:bg-semantic-bg-line disabled:bg-semantic-bg-secondary"
             variant="tertiaryGrey"
             size="sm"
             onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
           >
-            Completed Triggers
+            <span className="min-w-[130px]">Completed Triggers</span>
             <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
           </Button>
         </div>
@@ -184,14 +185,14 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
   {
     accessorKey: "pipeline_errored",
     header: ({ column }) => (
-      <div className="min-w-[100px] text-center">
+      <div className="text-center">
         <Button
-          className="gap-x-2"
+          className="gap-x-2 focus-visible:border-semantic-bg-secondary-secondary focus-visible:ring-2 focus-visible:ring-semantic-bg-secondary-secondary focus-visible:ring-offset-1 active:bg-semantic-bg-line disabled:bg-semantic-bg-secondary"
           variant="tertiaryGrey"
           size="sm"
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Errored Triggers
+          <span className="min-w-[110px]">Errored Triggers</span>
           <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
         </Button>
       </div>
@@ -207,5 +208,13 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
 ];
 
 export const Default: Story = {
-  render: () => <DataTable columns={columns} data={data} pageSize={6} />,
+  render: () => (
+    <DataTable
+      columns={columns}
+      data={data}
+      pageSize={6}
+      searchPlaceholder="Search Pipeline"
+      searchKey="pipeline_id"
+    />
+  ),
 };

@@ -2,9 +2,11 @@
 
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
@@ -12,20 +14,29 @@ import {
 import { Table } from "../Table";
 import * as React from "react";
 import { DataTablePagination } from "./DataTablePagination";
+import { Input } from "../Input";
+import { Nullable } from "../../types/general";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pageSize: number;
+  searchPlaceholder: Nullable<string>;
+  searchKey: Nullable<string>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   pageSize,
+  searchPlaceholder,
+  searchKey,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
 
   const table = useReactTable({
     data,
@@ -34,6 +45,8 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    onColumnFiltersChange: setColumnFilters,
+    getFilteredRowModel: getFilteredRowModel(),
     onRowSelectionChange: setRowSelection,
     initialState: {
       pagination: {
@@ -43,11 +56,28 @@ export function DataTable<TData, TValue>({
     state: {
       rowSelection,
       sorting,
+      columnFilters,
     },
   });
 
   return (
     <div>
+      <div className="flex items-center py-4">
+        {searchKey && (
+          <Input.Root className="w-1/4">
+            <Input.Core
+              type="text"
+              placeholder={searchPlaceholder || ""}
+              value={
+                (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
+              }
+              onChange={(event) =>
+                table.getColumn(searchKey)?.setFilterValue(event.target.value)
+              }
+            />
+          </Input.Root>
+        )}
+      </div>
       <Table.Root>
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
