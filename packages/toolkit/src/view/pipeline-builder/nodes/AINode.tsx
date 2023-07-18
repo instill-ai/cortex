@@ -10,6 +10,7 @@ export const AINode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
       nodeId={id}
       watchState={data.connector.watchState}
       selectedId={selectedNode ? selectedNode.id : null}
+      connectorDefinitionName={data.connector.connector_definition_name}
     >
       <CustomNode.NameRow
         name={data.connector.name.split("/")[1]}

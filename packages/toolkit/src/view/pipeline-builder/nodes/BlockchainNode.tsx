@@ -11,6 +11,7 @@ export const BlockchainNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
       nodeId={id}
       selectedId={selectedNode ? selectedNode.id : null}
       watchState={data.connector.watchState}
+      connectorDefinitionName={data.connector.connector_definition_name}
     >
       <CustomNode.NameRow
         name={data.connector.name.split("/")[1]}
