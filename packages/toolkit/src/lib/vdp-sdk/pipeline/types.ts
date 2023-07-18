@@ -42,7 +42,6 @@ export type Pipeline = {
   uid: string;
   id: string;
   description: string;
-  mode: PipelineMode;
   state: PipelineState;
   user: string;
   create_time: string;

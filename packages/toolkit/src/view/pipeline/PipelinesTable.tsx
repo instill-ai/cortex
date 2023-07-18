@@ -1,7 +1,6 @@
 import * as React from "react";
 import {
   ConnectionTypeCell,
-  ModeCell,
   NameCell,
   TableHead,
   TableHeadItem,
@@ -70,11 +69,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
           />
         ),
         width: "w-[480px]",
-      },
-      {
-        key: "pipeline-mode-head",
-        item: "Mode",
-        width: "w-[160px]",
       },
       {
         key: "pipeline-source-head",
@@ -153,7 +147,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                   <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                   <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
             : pipelinePages[currentPage]
@@ -184,7 +177,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                       padding="py-2 pl-6"
                       link={`/pipelines/${pipeline.id}`}
                     />
-                    <ModeCell width="" mode={pipeline.mode} padding="py-2" />
                     {sourceComponent[0] ? (
                       <ConnectionTypeCell
                         width={null}

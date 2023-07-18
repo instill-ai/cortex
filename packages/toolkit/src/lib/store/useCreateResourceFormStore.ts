@@ -64,11 +64,11 @@ export const createResourceFormFieldSchema = z.object({
   }),
   pipeline: z.object({
     id: z.string().nullable(),
-    mode: z.union([
-      z.literal("MODE_UNSPECIFIED"),
-      z.literal("MODE_SYNC"),
-      z.literal("MODE_ASYNC"),
-    ]),
+    // mode: z.union([
+    //   z.literal("MODE_UNSPECIFIED"),
+    //   z.literal("MODE_SYNC"),
+    //   z.literal("MODE_ASYNC"),
+    // ]),
     description: z.string().nullable(),
   }),
 });
@@ -164,7 +164,6 @@ const createResourceInitialState: CreateResourceFormState = {
     },
     pipeline: {
       id: null,
-      mode: "MODE_SYNC",
       description: null,
     },
   },
@@ -212,7 +211,6 @@ const createResourceInitialState: CreateResourceFormState = {
     },
     pipeline: {
       id: null,
-      mode: "",
       description: null,
     },
   },

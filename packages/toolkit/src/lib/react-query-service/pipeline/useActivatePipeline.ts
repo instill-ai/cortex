@@ -46,7 +46,6 @@ export const useActivatePipeline = () => {
         const updatedPipeline: Pipeline = {
           ...targetPipeline,
           state: pipeline.state,
-          mode: pipeline.mode,
         };
 
         queryClient.setQueryData<Pipeline>(
