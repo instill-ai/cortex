@@ -88,7 +88,15 @@ export const PrimaryWithIcon: Story = {
 export const PrimaryWithAsChild: Story = {
   render: () => (
     <Button className="gap-x-2" variant="primary" size="lg" asChild>
-      <a href="https://www.instill.tech/">Instill AI</a>
+      <a href="https://www.instill.tech/">I am Button</a>
+    </Button>
+  ),
+};
+
+export const WithRoundedNone: Story = {
+  render: () => (
+    <Button className="!rounded-none" variant="primary" size="lg">
+      I am Button
     </Button>
   ),
 };
