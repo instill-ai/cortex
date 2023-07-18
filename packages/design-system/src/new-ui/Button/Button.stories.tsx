@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import { Icons } from "../Icons";
-import * as React from "react";
 
 const meta: Meta<typeof Button> = {
   title: "Components/NewUi/Button",
@@ -100,36 +99,4 @@ export const WithRoundedNone: Story = {
       I am Button
     </Button>
   ),
-};
-
-export const SortingButton = () => {
-  const [sorting, setSorting] = React.useState("");
-
-  const toggleSorting = (type: string) => {
-    if (type === "asc") {
-      setSorting("desc");
-    } else {
-      setSorting("asc");
-    }
-  };
-
-  return (
-    <Button
-      className="gap-x-2"
-      variant="tertiaryGrey"
-      size="sm"
-      onClick={() => toggleSorting(sorting)}
-    >
-      Sorting
-      {!sorting && (
-        <Icons.ChevronSelectorVertical className="h-4 w-4 stroke-semantic-fg-secondary" />
-      )}
-      {sorting === "asc" && (
-        <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
-      )}
-      {sorting === "desc" && (
-        <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
-      )}
-    </Button>
-  );
 };
