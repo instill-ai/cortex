@@ -143,11 +143,11 @@ export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
                   key={pipelineTrigger.pipeline_trigger_id}
                   className="border border-instillGrey20 bg-white"
                 >
-                  <Cell
-                    name={pipelineTrigger.trigger_time}
-                    width={null}
-                    padding="py-2 pl-6"
-                  />
+                  <Cell width={null} padding="py-2 pl-6">
+                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
+                      {pipelineTrigger.trigger_time}
+                    </p>
+                  </Cell>
 
                   <GeneralStateCell
                     width={null}
@@ -155,17 +155,17 @@ export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
                     padding="py-2"
                   />
 
-                  <Cell
-                    name={pipelineTrigger.compute_time_duration}
-                    width={null}
-                    padding="py-2"
-                  />
+                  <Cell width={null} padding="py-2">
+                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
+                      {pipelineTrigger.compute_time_duration}
+                    </p>
+                  </Cell>
 
-                  <Cell
-                    name={String(pipelineTrigger.pipeline_trigger_id)}
-                    width={null}
-                    padding="py-2 pr-6"
-                  />
+                  <Cell width={null} padding="py-2 pr-6">
+                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
+                      {String(pipelineTrigger.pipeline_trigger_id)}
+                    </p>
+                  </Cell>
                 </tr>
               ))
             : null}

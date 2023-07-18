@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { isAxiosError } from "axios";
+import { useSearchParams } from "next/navigation";
 
 import {
   BasicProgressMessageBox,
@@ -181,8 +182,18 @@ export type CreateAIFormProps = {
 export const CreateAIForm = (props: CreateAIFormProps) => {
   const { accessToken, onCreate } = props;
   const { amplitudeIsInit } = useAmplitudeCtx();
+  const searchParams = useSearchParams();
+
   const form = useForm<z.infer<typeof CreateAIFormSchema>>({
     resolver: zodResolver(CreateAIFormSchema),
+    defaultValues: {
+      connector_definition_name:
+        searchParams.get("connector_definition_name") ?? undefined,
+      configuration: {
+        server_url: searchParams.get("server_url") ?? undefined,
+        model_id: searchParams.get("model_id") ?? undefined,
+      },
+    },
   });
 
   // Read the state before render to subscribe the form state through Proxy

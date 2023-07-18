@@ -10,6 +10,7 @@ import {
   TableError,
   SkeletonCell,
   PaginationListContainerProps,
+  Cell,
 } from "../../components";
 import {
   useSearchedResources,
@@ -21,6 +22,8 @@ import {
   type ModelsWatchState,
 } from "../../lib";
 import { ModelTablePlaceholder } from "./ModelTablePlaceholder";
+import { LinkButton } from "@instill-ai/design-system";
+import { useRouter } from "next/router";
 
 export type ModelsTableProps = {
   models: Model[];
@@ -30,6 +33,7 @@ export type ModelsTableProps = {
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const ModelsTable = (props: ModelsTableProps) => {
+  const router = useRouter();
   const { models, modelsWatchState, marginBottom, isError, isLoading } = props;
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
@@ -73,9 +77,14 @@ export const ModelsTable = (props: ModelsTableProps) => {
         width: "w-[240px]",
       },
       {
-        key: "ai-task-head",
+        key: "model-task-head",
         item: "AI task",
         width: "w-[240px]",
+      },
+      {
+        key: "create-ai-connector-head",
+        item: "",
+        width: "w-[120px]",
       },
     ];
   }, [stateOverviewCounts]);
@@ -144,6 +153,7 @@ export const ModelsTable = (props: ModelsTableProps) => {
                   <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
                   <SkeletonCell width={null} padding="py-2 pr-6" />
                   <SkeletonCell width={null} padding="py-2 pr-6" />
+                  <SkeletonCell width={null} padding="py-2 pr-6" />
                 </tr>
               ))
             : modelPages[currentPage]
@@ -175,6 +185,27 @@ export const ModelsTable = (props: ModelsTableProps) => {
                     padding="py-2 pr-6"
                     modelTask={model.task}
                   />
+                  <Cell width={null} padding="py-2 pl-6">
+                    <LinkButton
+                      variant="primary"
+                      size="md"
+                      onClick={() => {
+                        router.push({
+                          pathname: "/ais/create",
+                          query: {
+                            model_id: model.id,
+                            connector_definition_name:
+                              "connector-definitions/ai-instill-model",
+                            server_url: `${env(
+                              "NEXT_PUBLIC_MODEL_API_GATEWAY_URL"
+                            )}`,
+                          },
+                        });
+                      }}
+                    >
+                      Add to VDP
+                    </LinkButton>
+                  </Cell>
                 </tr>
               ))
             : null}
