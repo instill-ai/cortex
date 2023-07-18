@@ -25,6 +25,12 @@ export const ais: ConnectorPreset[] = [
     connector_definition_name: "connector-definitions/ai-stability-ai",
     configuration: {},
   },
+  {
+    id: "OpenAI",
+    name: "connectors/openai",
+    connector_definition_name: "connector-definitions/ai-stability-ai",
+    configuration: {},
+  },
 ];
 
 // The reason the id and name is not compatiable in preset is because
