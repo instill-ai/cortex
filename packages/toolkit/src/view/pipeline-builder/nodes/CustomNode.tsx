@@ -18,6 +18,7 @@ export type CustomNodeProps = {
   nodeId: string;
   selectedId: Nullable<string>;
   watchState: ConnectorState;
+  connectorDefinitionName: string;
 };
 
 type CustomNodeContextValue = {
@@ -56,6 +57,7 @@ export const Root = React.forwardRef<
     selectedId,
     children,
     watchState,
+    connectorDefinitionName,
     ...customNodeProps
   } = props;
 
@@ -66,22 +68,22 @@ export const Root = React.forwardRef<
       <div
         ref={ref}
         className={cn(
-          "instill-custom-node outline group z-30 transition-colors duration-500 flex w-[400px] flex-col rounded-sm outline-4",
+          "instill-custom-node group z-30 border-4 box-border transition-colors duration-500 flex w-[400px] flex-col rounded-sm",
           {
-            "outline-semantic-node-connected-default-stroke hover:outline-semantic-node-connected-hover-stroke":
+            "border-semantic-node-connected-default-stroke hover:border-semantic-node-connected-hover-stroke":
               watchState === "STATE_CONNECTED",
           },
           {
-            "outline-semantic-node-error-default-stroke hover:outline-semantic-node-error-hover-stroke":
+            "border-semantic-node-error-default-stroke hover:border-semantic-node-error-hover-stroke":
               watchState === "STATE_ERROR",
           },
           {
-            "outline-semantic-node-disconnected-default-stroke hover:outline-semantic-node-disconnected-hover-stroke":
+            "border-semantic-node-disconnected-default-stroke hover:border-semantic-node-disconnected-hover-stroke":
               watchState === "STATE_DISCONNECTED" ||
               watchState === "STATE_UNSPECIFIED",
           },
           {
-            "ring-4 ring-offset-8 ring-semantic-accent-default":
+            "ring-4 ring-offset-2 ring-semantic-accent-default":
               selectedId === nodeId,
           },
           className
@@ -89,13 +91,11 @@ export const Root = React.forwardRef<
         {...customNodeProps}
       >
         {/* 
-          This is the topbar of the connector node.
-          There has a very small gap between this topbar to the border of the container.
-          In order to cover it we will slightly scale the size of this topbar.
+          Top color bar of the node
         */}
         <div
           className={cn(
-            "h-4 shrink-0 w-full rounded-tl-sm rounded-tr transition-colors duration-500",
+            "h-4 shrink-0 w-full rounded-tl rounded-tr transition-colors duration-500",
             {
               "bg-semantic-node-connected-default-stroke group-hover:bg-semantic-node-connected-hover-stroke":
                 watchState === "STATE_CONNECTED",
@@ -141,29 +141,39 @@ export const Root = React.forwardRef<
               key={`${nodeId}-${e}`}
               className="flex px-2 flex-row py-4 odd:bg-semantic-bg-base-bg even:bg-semantic-secondary-bg last:rounded-br-sm last:rounded-bl-sm"
             >
-              <Handle
-                className={cn(
-                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
-                  edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
-                    ? "!bg-[#595959]"
-                    : "!bg-[#94A0B8]"
-                )}
-                type="target"
-                position={Position.Left}
-                id={`${nodeId}.${e}`}
-              />
+              {connectorDefinitionName === "connector-definitions/trigger" ? (
+                <div className="w-3 h-3 shrink-0" />
+              ) : (
+                <Handle
+                  className={cn(
+                    "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
+                    edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
+                      ? "!bg-[#595959]"
+                      : "!bg-[#94A0B8]"
+                  )}
+                  type="target"
+                  position={Position.Left}
+                  id={`${nodeId}.${e}`}
+                />
+              )}
+
               <div className="flex flex-1 justify-center items-center">{e}</div>
-              <Handle
-                className={cn(
-                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
-                  edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
-                    ? "!bg-[#595959]"
-                    : "!bg-[#94A0B8]"
-                )}
-                type="source"
-                position={Position.Right}
-                id={`${nodeId}.${e}`}
-              />
+
+              {connectorDefinitionName === "connector-definitions/response" ? (
+                <div className="w-3 h-3 shrink-0" />
+              ) : (
+                <Handle
+                  className={cn(
+                    "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
+                    edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
+                      ? "!bg-[#595959]"
+                      : "!bg-[#94A0B8]"
+                  )}
+                  type="source"
+                  position={Position.Right}
+                  id={`${nodeId}.${e}`}
+                />
+              )}
             </div>
           ))}
         </div>
@@ -234,17 +244,15 @@ const NameRow = (props: { name: string; definition: ConnectorDefinition }) => {
   return (
     <div
       className={cn(
-        "flex flex-col bg-semantic-bg-secondary pt-2 pb-4 px-2.5 transition-colors duration-500 group-hover:bg-semantic-bg-line",
+        "flex flex-col pt-2 pb-4 px-2.5 transition-colors duration-500",
         {
-          "border-semantic-node-connected-default-stroke":
-            watchState === "STATE_CONNECTED",
+          "bg-semantic-node-connected-bg": watchState === "STATE_CONNECTED",
         },
         {
-          "border-semantic-node-error-default-stroke":
-            watchState === "STATE_ERROR",
+          "bg-semantic-node-error-bg": watchState === "STATE_ERROR",
         },
         {
-          "border-semantic-node-disconnected-default-stroke":
+          "bg-semantic-node-disconnected-bg":
             watchState === "STATE_DISCONNECTED",
         }
       )}
