@@ -11,6 +11,7 @@ import {
 } from "../../components";
 import { Nullable, PipelineTriggerCount, chunk, env } from "../../lib";
 import { PipelineTablePlaceholder } from "../pipeline";
+import Link from "next/link";
 
 export type DashboardPipelinesTableProps = {
   pipelineTriggerCounts: PipelineTriggerCount[];
@@ -129,12 +130,14 @@ export const DashboardPipelinesTable = (
                   key={pipelineTriggerCount.pipeline_uid}
                   className="border border-instillGrey20 bg-white"
                 >
-                  <Cell
-                    name={pipelineTriggerCount.pipeline_id}
-                    width={null}
-                    padding="py-2 pl-6"
-                    link={`/dashboard/pipeline/${pipelineTriggerCount.pipeline_id}`}
-                  />
+                  <Cell width={null} padding="py-2 pl-6">
+                    <Link
+                      className="truncate product-body-text-3-regular hover:underline text-semantic-fg-secondary"
+                      href={`/dashboard/pipeline/${pipelineTriggerCount.pipeline_id}`}
+                    >
+                      {pipelineTriggerCount.pipeline_id}
+                    </Link>
+                  </Cell>
 
                   <GeneralStateCell
                     width={null}
@@ -142,17 +145,17 @@ export const DashboardPipelinesTable = (
                     padding="py-2"
                   />
 
-                  <Cell
-                    name={pipelineTriggerCount.pipeline_completed}
-                    width={null}
-                    padding="py-2"
-                  />
+                  <Cell width={null} padding="py-2">
+                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
+                      {pipelineTriggerCount.pipeline_completed}
+                    </p>
+                  </Cell>
 
-                  <Cell
-                    name={pipelineTriggerCount.pipeline_errored}
-                    width={null}
-                    padding="py-2 pr-6"
-                  />
+                  <Cell width={null} padding="py-2 pr-6">
+                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
+                      {pipelineTriggerCount.pipeline_errored}
+                    </p>
+                  </Cell>
                 </tr>
               ))
             : null}
