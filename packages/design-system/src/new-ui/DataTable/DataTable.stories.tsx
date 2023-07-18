@@ -4,6 +4,8 @@ import { ColumnDef } from "@tanstack/react-table";
 import { PipelineState } from "../../types/general";
 import { Tag } from "../Tag";
 import { Checkbox } from "../Checkbox";
+import { Icons } from "../Icons";
+import { Button } from "../Button";
 
 const meta: Meta<typeof DataTable> = {
   title: "Components/NewUi/DataTable",
@@ -18,19 +20,19 @@ const data: PipelineTriggerCount[] = [
   {
     pipeline_id: "Pipeline-name-1",
     watchState: "STATE_ACTIVE",
-    pipeline_completed: 20,
+    pipeline_completed: 0,
     pipeline_errored: 12,
   },
   {
     pipeline_id: "Pipeline-name-2",
     watchState: "STATE_ERROR",
-    pipeline_completed: 20,
+    pipeline_completed: 120,
     pipeline_errored: 132,
   },
   {
     pipeline_id: "Pipeline-name-3",
     watchState: "STATE_ERROR",
-    pipeline_completed: 23,
+    pipeline_completed: 923,
     pipeline_errored: 12,
   },
   {
@@ -42,7 +44,7 @@ const data: PipelineTriggerCount[] = [
   {
     pipeline_id: "Pipeline-name-2",
     watchState: "STATE_ERROR",
-    pipeline_completed: 20,
+    pipeline_completed: 220,
     pipeline_errored: 12,
   },
   {
@@ -54,7 +56,7 @@ const data: PipelineTriggerCount[] = [
   {
     pipeline_id: "Pipeline-name-1",
     watchState: "STATE_ACTIVE",
-    pipeline_completed: 20,
+    pipeline_completed: 320,
     pipeline_errored: 12,
   },
   {
@@ -78,7 +80,7 @@ const data: PipelineTriggerCount[] = [
   {
     pipeline_id: "Pipeline-name-2",
     watchState: "STATE_ERROR",
-    pipeline_completed: 20,
+    pipeline_completed: 270,
     pipeline_errored: 12,
   },
   {
@@ -90,7 +92,7 @@ const data: PipelineTriggerCount[] = [
   {
     pipeline_id: "Pipeline-name-1",
     watchState: "STATE_ACTIVE",
-    pipeline_completed: 20,
+    pipeline_completed: 210,
     pipeline_errored: 12,
   },
   {
@@ -102,7 +104,7 @@ const data: PipelineTriggerCount[] = [
   {
     pipeline_id: "Pipeline-name-3",
     watchState: "STATE_ERROR",
-    pipeline_completed: 20,
+    pipeline_completed: 260,
     pipeline_errored: 32,
   },
 ];
@@ -155,9 +157,26 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
   },
   {
     accessorKey: "pipeline_completed",
-    header: () => (
-      <div className="min-w-[120px] text-center">Completed Triggers</div>
-    ),
+    header: ({ column }) => {
+      return (
+        <div className="min-w-[120px] text-center">
+          <Button
+            className="gap-x-2"
+            variant="tertiaryGrey"
+            size="sm"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Completed Triggers
+            {column.getIsSorted() === "asc" ? (
+              <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
+            ) : (
+              <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
+            )}
+          </Button>
+        </div>
+      );
+    },
+
     cell: ({ row }) => {
       return (
         <div className="text-center text-semantic-fg-secondary">
@@ -168,8 +187,22 @@ const columns: ColumnDef<PipelineTriggerCount>[] = [
   },
   {
     accessorKey: "pipeline_errored",
-    header: () => (
-      <div className="min-w-[100px] text-center">Errored Triggers</div>
+    header: ({ column }) => (
+      <div className="min-w-[100px] text-center">
+        <Button
+          className="gap-x-2"
+          variant="tertiaryGrey"
+          size="sm"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Errored Triggers
+          {column.getIsSorted() === "asc" ? (
+            <Icons.ArrowDown className="h-4 w-4 stroke-semantic-fg-secondary" />
+          ) : (
+            <Icons.ArrowUp className="h-4 w-4 stroke-semantic-fg-secondary" />
+          )}
+        </Button>
+      </div>
     ),
     cell: ({ row }) => {
       return (
