@@ -35,3 +35,15 @@ export const WithText: Story = {
     </div>
   ),
 };
+
+export const DisabledWhenChecked: Story = {
+  render: () => (
+    <Checkbox disabled={true} checked={true} className="h-10 w-10" />
+  ),
+};
+
+export const DisabledWhenNotChecked: Story = {
+  render: () => (
+    <Checkbox disabled={true} checked={false} className="h-10 w-10" />
+  ),
+};
