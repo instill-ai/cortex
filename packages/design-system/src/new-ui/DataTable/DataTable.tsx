@@ -16,6 +16,7 @@ import * as React from "react";
 import { DataTablePagination } from "./DataTablePagination";
 import { Input } from "../Input";
 import { Nullable } from "../../types/general";
+import { Skeleton } from "../Skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -23,6 +24,7 @@ interface DataTableProps<TData, TValue> {
   pageSize: number;
   searchPlaceholder: Nullable<string>;
   searchKey: Nullable<string>;
+  isLoading: boolean;
 }
 
 export function DataTable<TData, TValue>({
@@ -31,6 +33,7 @@ export function DataTable<TData, TValue>({
   pageSize,
   searchPlaceholder,
   searchKey,
+  isLoading,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -98,25 +101,43 @@ export function DataTable<TData, TValue>({
           ))}
         </Table.Header>
         <Table.Body>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <Table.Row
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <Table.Cell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Table.Cell>
-                ))}
-              </Table.Row>
-            ))
-          ) : (
+          {isLoading ? (
             <Table.Row>
-              <Table.Cell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </Table.Cell>
+              {[...Array(columns.length).keys()].map((e) => (
+                <Table.Cell key={`table-skeleton-cell-${e}`}>
+                  <Skeleton className="h-5" />
+                </Table.Cell>
+              ))}
             </Table.Row>
+          ) : (
+            <>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <Table.Row
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <Table.Cell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </Table.Cell>
+                    ))}
+                  </Table.Row>
+                ))
+              ) : (
+                <Table.Row>
+                  <Table.Cell
+                    colSpan={columns.length}
+                    className="h-24 text-center"
+                  >
+                    No results.
+                  </Table.Cell>
+                </Table.Row>
+              )}
+            </>
           )}
         </Table.Body>
       </Table.Root>

@@ -133,7 +133,7 @@ export const Default = () => {
   const columns: ColumnDef<PipelineTriggerCount>[] = [
     {
       accessorKey: "pipeline_id",
-      header: () => <div className="w-auto text-left">Pipeline Id</div>,
+      header: () => <div className="min-w-[600px] text-left">Pipeline Id</div>,
       cell: ({ row }) => {
         return (
           <div className="flex min-w-[600px] flex-row gap-x-2">
@@ -174,7 +174,7 @@ export const Default = () => {
       accessorKey: "pipeline_completed",
       header: ({ column }) => {
         return (
-          <div className="text-center">
+          <div className="min-w-[130px] text-center">
             <Button
               className="gap-x-2 py-0"
               variant="tertiaryGrey"
@@ -201,7 +201,7 @@ export const Default = () => {
     {
       accessorKey: "pipeline_errored",
       header: ({ column }) => (
-        <div className="text-center">
+        <div className="min-w-[110px] text-center">
           <Button
             className="gap-x-2 py-0"
             variant="tertiaryGrey"
@@ -230,6 +230,7 @@ export const Default = () => {
       pageSize={6}
       searchPlaceholder="Search Pipeline"
       searchKey="pipeline_id"
+      isLoading={true}
     />
   );
 };
