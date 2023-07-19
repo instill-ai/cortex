@@ -22,7 +22,10 @@ import { Chip02 } from "./Chip02";
 import { Cube01 } from "./Cube01";
 import { CubeOutline } from "./CubeOutline";
 import { Database01 } from "./Database01";
+import { DownloadCloud01 } from "./DownloadCloud01";
 import { Edit05 } from "./Edit05";
+import { File04 } from "./File04";
+import { FilterLines } from "./FilterLines";
 import { Gear01 } from "./Gear01";
 import { HelpCircle } from "./HelpCircle";
 import { InfoCircle } from "./InfoCircle";
@@ -35,6 +38,8 @@ import { RefreshCw05 } from "./RefreshCw05";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
 import { Stop } from "./Stop";
+import { Tag01 } from "./Tag01";
+import { Trash01 } from "./Trash01";
 import { X } from "./X";
 
 export const Icons = {
@@ -62,7 +67,10 @@ export const Icons = {
   Cube01,
   CubeOutline,
   Database01,
+  DownloadCloud01,
   Edit05,
+  File04,
+  FilterLines,
   Gear01,
   HelpCircle,
   InfoCircle,
@@ -75,5 +83,7 @@ export const Icons = {
   Save01,
   Sliders01,
   Stop,
+  Tag01,
+  Trash01,
   X,
 };
