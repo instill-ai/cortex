@@ -1,5 +1,34 @@
 # @instill-ai/design-system
 
+## [0.33.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.32.0...@instill-ai/design-system-v0.33.0) (2023-07-19)
+
+
+### Features
+
+* ArrowNarrowLeft and ArrowNarrowRight ([#651](https://github.com/instill-ai/design-system/issues/651)) ([972ef9c](https://github.com/instill-ai/design-system/commit/972ef9c99d5eb228e7909f55d9424ca30c0cc64a))
+* checkbox component ([#649](https://github.com/instill-ai/design-system/issues/649)) ([ae34ff3](https://github.com/instill-ai/design-system/commit/ae34ff376901aa9c626e92a0af67db6c336f6cdd))
+* ChevronSelectorVertical icon ([#656](https://github.com/instill-ai/design-system/issues/656)) ([7a6a5aa](https://github.com/instill-ai/design-system/commit/7a6a5aaf4629543a2546016afe58c8a22d1a3646))
+* component from shacdnui for the table ([#648](https://github.com/instill-ai/design-system/issues/648)) ([e88d72d](https://github.com/instill-ai/design-system/commit/e88d72d357a2e242220d8afa38c1817ca91c9928))
+* **design-system:** add new complicate icons ([#670](https://github.com/instill-ai/design-system/issues/670)) ([c4985f1](https://github.com/instill-ai/design-system/commit/c4985f18f413555e51bd449307fb2253cd68c69d))
+* **design-system:** icons trash-icon, filter-icon, tag-icon, file-icon ([#669](https://github.com/instill-ai/design-system/issues/669)) ([e5daf77](https://github.com/instill-ai/design-system/commit/e5daf77131f0d5e360980bfe5066915aaf9b3063))
+* example for asChild in components ([#640](https://github.com/instill-ai/design-system/issues/640)) ([bc6fc69](https://github.com/instill-ai/design-system/commit/bc6fc69336bff6a45b9bd21b5810ef32b54dd023))
+* Namananand/ins 1312 datatable component ([#654](https://github.com/instill-ai/design-system/issues/654)) ([7592e61](https://github.com/instill-ai/design-system/commit/7592e61b29a5256a5a062bb39072e888337ee25d))
+* rounded-none example button ([#653](https://github.com/instill-ai/design-system/issues/653)) ([41ec010](https://github.com/instill-ai/design-system/commit/41ec010ac7742901f15089797f19bbeb4c2699b7))
+* sorting button example ([#659](https://github.com/instill-ai/design-system/issues/659)) ([2e079c6](https://github.com/instill-ai/design-system/commit/2e079c6f7f179d0a03f79b6ffe6fae1d9bfd556e))
+* **toolkit:** implement new multiple handlers pipeline builder ([#642](https://github.com/instill-ai/design-system/issues/642)) ([876778c](https://github.com/instill-ai/design-system/commit/876778c319427ca37f6949018e30b822234402d4))
+
+
+### Bug Fixes
+
+* **design-system:** fix data-table pagination button border ([#663](https://github.com/instill-ai/design-system/issues/663)) ([dd19795](https://github.com/instill-ai/design-system/commit/dd19795323e7f5125c5ba48fdfb89766aedceda3))
+* **design-system:** fix the style of checkbox ([#664](https://github.com/instill-ai/design-system/issues/664)) ([ec0f786](https://github.com/instill-ai/design-system/commit/ec0f786a68a2ea1bf16287ee41dfd7e7b1ee8826))
+
+
+### Miscellaneous
+
+* **release:** release main ([95ce09e](https://github.com/instill-ai/design-system/commit/95ce09ede9f33550f5aad385e334910a1638c49e))
+* **release:** release main ([a93e6d2](https://github.com/instill-ai/design-system/commit/a93e6d2d9d8dc2d04a2c094f740c49fff09f2fc2))
+
 ## [0.32.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.31.0...@instill-ai/design-system-v0.32.0) (2023-07-13)
 
 
