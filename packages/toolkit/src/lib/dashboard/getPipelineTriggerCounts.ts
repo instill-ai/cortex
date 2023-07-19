@@ -2,7 +2,7 @@ import { SingleSelectOption } from "@instill-ai/design-system";
 import { PipelineWithWatchState } from "../type";
 import { PipelineTriggerCount, PipelineTriggerRecord } from "../vdp-sdk";
 import { defaultTimeOption } from "./options";
-import { getDateRange } from "./getDtateRange";
+import { getDateRange } from "./getDateRange";
 import { formatDateTime } from "./formatDateTime";
 
 export function getPipelineTriggerCounts(
