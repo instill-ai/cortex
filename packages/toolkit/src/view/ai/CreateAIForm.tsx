@@ -14,6 +14,7 @@ import {
   Textarea,
   type ProgressMessageBoxState,
   Logos,
+  ComplicateIcons,
 } from "@instill-ai/design-system";
 import {
   getInstillApiErrorMessage,
@@ -555,8 +556,47 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
               const tasks =
                 form.watch("connector_definition_name") ===
                 "connector-definitions/ai-stability-ai"
-                  ? ["Text to Image", "Image to Image"]
-                  : ["Text Generation", "Text Embeddings"];
+                  ? [
+                      {
+                        label: "Text to Image",
+                        icon: (
+                          <ComplicateIcons.TextToImage
+                            className="w-5 h-5 my-auto"
+                            fillAreaColor="fill-semantic-fg-primary"
+                          />
+                        ),
+                      },
+                      {
+                        label: "Image to Image",
+                        icon: (
+                          <ComplicateIcons.ImageToImage
+                            className="w-5 h-5 my-auto"
+                            pathColor="stroke-semantic-fg-primary"
+                          />
+                        ),
+                      },
+                    ]
+                  : [
+                      {
+                        label: "Text Generation",
+                        icon: (
+                          <ComplicateIcons.TextGeneration
+                            className="w-5 h-5 my-auto"
+                            fillAreaColor="fill-semantic-fg-primary"
+                          />
+                        ),
+                      },
+                      {
+                        label: "Text Embeddings",
+                        icon: (
+                          <ComplicateIcons.TextEmbedding
+                            className="w-5 h-5 my-auto"
+                            pathColor="stroke-semantic-fg-primary"
+                            fillAreaColor="fill-semantic-fg-primary"
+                          />
+                        ),
+                      },
+                    ];
 
               return (
                 <Form.Item
@@ -583,10 +623,13 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                       {tasks.map((task) => (
                         <Select.Item
                           className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
-                          key={task}
-                          value={task}
+                          key={task.label}
+                          value={task.label}
                         >
-                          <p className="my-auto">{task}</p>
+                          <div className="flex flex-row gap-x-2">
+                            {task.icon}
+                            <p className="my-auto">{task.label}</p>
+                          </div>
                         </Select.Item>
                       ))}
                     </Select.Content>
