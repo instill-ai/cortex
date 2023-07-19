@@ -255,7 +255,8 @@ const NameRow = (props: { name: string; definition: ConnectorDefinition }) => {
         },
         {
           "bg-semantic-node-disconnected-bg":
-            watchState === "STATE_DISCONNECTED",
+            watchState === "STATE_DISCONNECTED" ||
+            watchState === "STATE_UNSPECIFIED",
         }
       )}
     >
