@@ -5,22 +5,29 @@ import * as CheckboxPrimitive from "@radix-ui/react-checkbox";
 import cn from "clsx";
 import { Icons } from "../Icons";
 
+const checkboxStyle = cn(
+  "peer shrink-0 rounded border border-semantic-fg-secondary bg-semantic-bg-primary",
+  "hover:border-semantic-accent-hover hover:bg-semantic-accent-bg hover:data-[state=checked]:bg-semantic-accent-hover hover:data-[state=checked]:border-semantic-accent-hover",
+  "data-[state=checked]:bg-semantic-accent-default data-[state=checked]:border-semantic-accent-default",
+  "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-semantic-accent-default focus-visible:ring-offset-2",
+  "disabled:cursor-not-allowed disabled:!bg-semantic-bg-secondary disabled:!border-semantic-bg-line"
+);
+
 const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof CheckboxPrimitive.Root>
 >(({ className, ...props }, ref) => (
   <CheckboxPrimitive.Root
     ref={ref}
-    className={cn(
-      "peer shrink-0 rounded border border-semantic-accent-default shadow focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-semantic-accent-default focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-semantic-accent-default data-[state=checked]:text-semantic-bg-primary",
-      className
-    )}
+    className={cn(checkboxStyle, className, "")}
     {...props}
   >
-    <CheckboxPrimitive.Indicator
-      className={cn("flex items-center justify-center text-current")}
-    >
-      <Icons.Check className="stroke-semantic-bg-primary" />
+    <CheckboxPrimitive.Indicator className="flex items-center justify-center text-current">
+      <Icons.Check
+        className={cn("stroke-semantic-bg-primary", {
+          "stroke-semantic-fg-disabled": props.disabled,
+        })}
+      />
     </CheckboxPrimitive.Indicator>
   </CheckboxPrimitive.Root>
 ));

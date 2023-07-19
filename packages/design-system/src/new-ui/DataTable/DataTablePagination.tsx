@@ -13,7 +13,7 @@ export function DataTablePagination<TData>({
   return (
     <div className="flex items-center justify-end py-8">
       <Button
-        className="gap-x-2 !rounded-r-none rounded-l-sm border-semantic-bg-line !py-2.5 px-4 hover:border-semantic-bg-line"
+        className="gap-x-2 !rounded-r-none rounded-l-sm !border-semantic-bg-line !py-2.5 px-4"
         variant="secondaryGrey"
         size="sm"
         onClick={() => table.previousPage()}
@@ -25,7 +25,7 @@ export function DataTablePagination<TData>({
       {table.getPageOptions().map((e, index) => (
         <Button
           className={cn(
-            "!rounded-none border-l-0 border-semantic-bg-line !py-2.5 px-2.5 hover:border-semantic-bg-line",
+            "!rounded-none border-l-0 !border-semantic-bg-line !py-2.5 px-2.5",
             table.getPageCount() === index + 1 && "border-r-0"
           )}
           variant="secondaryGrey"
@@ -38,7 +38,7 @@ export function DataTablePagination<TData>({
         </Button>
       ))}
       <Button
-        className="gap-x-2 !rounded-l-none rounded-r-sm border-semantic-bg-line !py-2.5 px-4 hover:border-semantic-bg-line"
+        className="gap-x-2 !rounded-l-none rounded-r-sm !border-semantic-bg-line !py-2.5 px-4"
         variant="secondaryGrey"
         size="sm"
         onClick={() => table.nextPage()}

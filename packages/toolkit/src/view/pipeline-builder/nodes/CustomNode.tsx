@@ -112,7 +112,7 @@ export const Root = React.forwardRef<
           )}
         />
         <div>{children}</div>
-        <div className="flex flex-col">
+        <div className="flex flex-col z-30">
           {/* 
 
             Multiple handlers of the node. 
@@ -141,39 +141,41 @@ export const Root = React.forwardRef<
               key={`${nodeId}-${e}`}
               className="flex px-2 flex-row py-4 odd:bg-semantic-bg-base-bg even:bg-semantic-secondary-bg last:rounded-br-sm last:rounded-bl-sm"
             >
-              {connectorDefinitionName === "connector-definitions/trigger" ? (
-                <div className="w-3 h-3 shrink-0" />
-              ) : (
-                <Handle
-                  className={cn(
-                    "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
-                    edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
-                      ? "!bg-[#595959]"
-                      : "!bg-[#94A0B8]"
-                  )}
-                  type="target"
-                  position={Position.Left}
-                  id={`${nodeId}.${e}`}
-                />
-              )}
+              <Handle
+                className={cn(
+                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
+                  edges.some((edge) => edge.targetHandle === `${nodeId}.${e}`)
+                    ? "!bg-[#595959]"
+                    : "!bg-[#94A0B8]",
+                  {
+                    invisible:
+                      connectorDefinitionName ===
+                      "connector-definitions/trigger",
+                  }
+                )}
+                type="target"
+                position={Position.Left}
+                id={`${nodeId}.${e}`}
+              />
 
               <div className="flex flex-1 justify-center items-center">{e}</div>
 
-              {connectorDefinitionName === "connector-definitions/response" ? (
-                <div className="w-3 h-3 shrink-0" />
-              ) : (
-                <Handle
-                  className={cn(
-                    "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
-                    edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
-                      ? "!bg-[#595959]"
-                      : "!bg-[#94A0B8]"
-                  )}
-                  type="source"
-                  position={Position.Right}
-                  id={`${nodeId}.${e}`}
-                />
-              )}
+              <Handle
+                className={cn(
+                  "!relative !my-auto !top-none !left-none !transform-none !w-3 !h-3 !border !box-content !border-semantic-bg-line",
+                  edges.some((edge) => edge.sourceHandle === `${nodeId}.${e}`)
+                    ? "!bg-[#595959]"
+                    : "!bg-[#94A0B8]",
+                  {
+                    invisible:
+                      connectorDefinitionName ===
+                      "connector-definitions/response",
+                  }
+                )}
+                type="source"
+                position={Position.Right}
+                id={`${nodeId}.${e}`}
+              />
             </div>
           ))}
         </div>

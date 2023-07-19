@@ -34,6 +34,15 @@ export function getDateRange(range: string): string[] {
         })
       );
     }
+    // push end date
+    dates.push(
+      endDate.toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      })
+    );
   } else if (range === "24h") {
     const startDate = new Date(
       today.getFullYear(),
@@ -58,17 +67,15 @@ export function getDateRange(range: string): string[] {
         })
       );
     }
-
-    if (dates.length === 1) {
-      dates.push(
-        today.toLocaleString("en-US", {
-          month: "short",
-          day: "numeric",
-          hour: "numeric",
-          minute: "numeric",
-        })
-      );
-    }
+    // push end date
+    dates.push(
+      today.toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      })
+    );
   } else if (range.endsWith("d")) {
     const days = parseInt(range.slice(0, -1));
     const startDate = new Date(today.getTime() - days * 24 * 60 * 60 * 1000);

@@ -1,6 +1,6 @@
 export * from "./calculatePercentageDelta";
 export * from "./formatDateTime";
-export * from "./getDtateRange";
+export * from "./getDateRange";
 export * from "./getPipeLineOptions";
 export * from "./getPipelineTriggerCounts";
 export * from "./getPipelineTriggersSummary";
