@@ -136,7 +136,7 @@ export const Root = React.forwardRef<
             }
           
           */}
-          {["texts", "images", "metadata", "structured_data"].map((e) => (
+          {["texts", "images", "structured_data", "metadata"].map((e) => (
             <div
               key={`${nodeId}-${e}`}
               className="flex px-2 flex-row py-4 odd:bg-semantic-bg-base-bg even:bg-semantic-secondary-bg last:rounded-br-sm last:rounded-bl-sm"
