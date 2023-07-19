@@ -1,5 +1,6 @@
 export * from "./Button";
 export * from "./Checkbox";
+export * from "./ComplicateIcons";
 export * from "./Dialog";
 export * from "./DataTable";
 export * from "./Form";

@@ -1,0 +1,47 @@
+import { Meta, StoryObj } from "@storybook/react";
+import { ComplicateIcons } from ".";
+
+const meta: Meta = {
+  title: "Components/NewUi/ComplicateIcons",
+};
+
+export default meta;
+
+type Story = StoryObj;
+
+export const TextEmbedding: Story = {
+  render: () => (
+    <ComplicateIcons.TextEmbedding
+      fillAreaColor="fill-semantic-fg-secondary"
+      pathColor="stroke-semantic-fg-secondary"
+      className="h-5 w-5"
+    />
+  ),
+};
+
+export const ImageToText: Story = {
+  render: () => (
+    <ComplicateIcons.ImageToText
+      fillAreaColor="fill-semantic-fg-secondary"
+      className="h-5 w-5"
+    />
+  ),
+};
+
+export const TextGeneration: Story = {
+  render: () => (
+    <ComplicateIcons.TextGeneration
+      fillAreaColor="fill-semantic-fg-secondary"
+      className="h-5 w-5"
+    />
+  ),
+};
+
+export const TextToImage: Story = {
+  render: () => (
+    <ComplicateIcons.TextToImage
+      fillAreaColor="fill-semantic-fg-secondary"
+      className="h-5 w-5"
+    />
+  ),
+};
