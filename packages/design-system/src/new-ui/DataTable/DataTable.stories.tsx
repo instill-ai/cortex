@@ -6,6 +6,7 @@ import { Tag } from "../Tag";
 import { Checkbox } from "../Checkbox";
 import { Icons } from "../Icons";
 import { Button } from "../Button";
+import * as React from "react";
 
 const meta: Meta<typeof DataTable> = {
   title: "Components/NewUi/DataTable",
@@ -130,6 +131,14 @@ export type PipelineTriggerCount = {
 };
 
 export const Default = () => {
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
   const columns: ColumnDef<PipelineTriggerCount>[] = [
     {
       accessorKey: "pipeline_id",
@@ -230,7 +239,7 @@ export const Default = () => {
       pageSize={6}
       searchPlaceholder="Search Pipeline"
       searchKey="pipeline_id"
-      isLoading={true}
+      isLoading={isLoading}
     />
   );
 };
