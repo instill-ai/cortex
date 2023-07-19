@@ -25,6 +25,7 @@ interface DataTableProps<TData, TValue> {
   searchPlaceholder: Nullable<string>;
   searchKey: Nullable<string>;
   isLoading: boolean;
+  loadingRows: Nullable<number>;
 }
 
 export function DataTable<TData, TValue>({
@@ -34,6 +35,7 @@ export function DataTable<TData, TValue>({
   searchPlaceholder,
   searchKey,
   isLoading,
+  loadingRows,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -102,13 +104,17 @@ export function DataTable<TData, TValue>({
         </Table.Header>
         <Table.Body>
           {isLoading ? (
-            <Table.Row>
-              {[...Array(columns.length).keys()].map((e) => (
-                <Table.Cell key={`table-skeleton-cell-${e}`}>
-                  <Skeleton className="h-5" />
-                </Table.Cell>
+            <>
+              {[...Array(loadingRows || 6).keys()].map((e) => (
+                <Table.Row key={`table-skeleton-row-${e}`}>
+                  {[...Array(columns.length).keys()].map((e) => (
+                    <Table.Cell key={`table-skeleton-cell-${e}`}>
+                      <Skeleton className="h-5" />
+                    </Table.Cell>
+                  ))}
+                </Table.Row>
               ))}
-            </Table.Row>
+            </>
           ) : (
             <>
               {table.getRowModel().rows?.length ? (

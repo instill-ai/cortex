@@ -240,6 +240,7 @@ export const Default = () => {
       searchPlaceholder="Search Pipeline"
       searchKey="pipeline_id"
       isLoading={isLoading}
+      loadingRows={6}
     />
   );
 };
