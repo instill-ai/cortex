@@ -28,7 +28,6 @@ import { File04 } from "./File04";
 import { FilterLines } from "./FilterLines";
 import { Gear01 } from "./Gear01";
 import { HelpCircle } from "./HelpCircle";
-import { ImageToImage } from "./ImageToImage";
 import { InfoCircle } from "./InfoCircle";
 import { Logout01 } from "./Logout01";
 import { Model } from "./Model";
@@ -74,7 +73,6 @@ export const Icons = {
   FilterLines,
   Gear01,
   HelpCircle,
-  ImageToImage,
   InfoCircle,
   Logout01,
   Model,

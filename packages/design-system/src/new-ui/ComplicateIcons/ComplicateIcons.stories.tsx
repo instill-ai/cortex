@@ -45,3 +45,12 @@ export const TextToImage: Story = {
     />
   ),
 };
+
+export const ImageToImage: Story = {
+  render: () => (
+    <ComplicateIcons.ImageToImage
+      pathColor="stroke-semantic-fg-secondary"
+      className="h-5 w-5"
+    />
+  ),
+};

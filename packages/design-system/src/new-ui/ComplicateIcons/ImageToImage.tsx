@@ -1,16 +1,21 @@
 import * as React from "react";
-import { IconBase, IconBaseProps } from "./IconBase";
+import {
+  ComplicateIconBase,
+  ComplicateIconBaseProps,
+} from "./ComplicateIconBase";
 
 export const ImageToImage = React.forwardRef<
   SVGSVGElement,
-  Omit<IconBaseProps, "viewBox" | "children">
+  Omit<ComplicateIconBaseProps, "viewBox" | "children"> & {
+    pathColor: string;
+  }
 >((props, ref) => {
-  const { className, ...passThrough } = props;
+  const { className, pathColor, ...passThrough } = props;
   return (
-    <IconBase
+    <ComplicateIconBase
       {...passThrough}
       ref={ref}
-      viewBox="0 0 24 24"
+      viewBox="0 0 25 24"
       className={className}
     >
       <path
@@ -18,8 +23,9 @@ export const ImageToImage = React.forwardRef<
         strokeWidth="1.2"
         strokeLinecap="round"
         strokeLinejoin="round"
+        className={pathColor}
       />
-    </IconBase>
+    </ComplicateIconBase>
   );
 });
-ImageToImage.displayName = "IconChevronUp";
+ImageToImage.displayName = "ImageToImage";
