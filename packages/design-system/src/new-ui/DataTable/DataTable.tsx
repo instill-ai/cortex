@@ -26,6 +26,7 @@ interface DataTableProps<TData, TValue> {
   searchKey: Nullable<string>;
   isLoading: boolean;
   loadingRows: Nullable<number>;
+  children?: React.ReactNode;
 }
 
 const DataTable = <TData, TValue>({
@@ -36,6 +37,7 @@ const DataTable = <TData, TValue>({
   searchKey,
   isLoading,
   loadingRows,
+  children,
 }: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -106,7 +108,10 @@ const DataTable = <TData, TValue>({
           {isLoading ? (
             <>
               {[...Array(loadingRows || 6).keys()].map((e) => (
-                <Table.Row key={`table-skeleton-row-${e}`}>
+                <Table.Row
+                  key={`table-skeleton-row-${e}`}
+                  className="bg-semantic-bg-primary"
+                >
                   {[...Array(columns.length).keys()].map((e) => (
                     <Table.Cell key={`table-skeleton-cell-${e}`}>
                       <Skeleton className="h-5" />
@@ -122,6 +127,7 @@ const DataTable = <TData, TValue>({
                   <Table.Row
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
+                    className="bg-semantic-bg-primary"
                   >
                     {row.getVisibleCells().map((cell) => (
                       <Table.Cell key={cell.id}>
@@ -134,12 +140,12 @@ const DataTable = <TData, TValue>({
                   </Table.Row>
                 ))
               ) : (
-                <Table.Row>
+                <Table.Row className="bg-semantic-bg-primary">
                   <Table.Cell
                     colSpan={columns.length}
                     className="h-24 text-center"
                   >
-                    No results.
+                    {children}
                   </Table.Cell>
                 </Table.Row>
               )}
