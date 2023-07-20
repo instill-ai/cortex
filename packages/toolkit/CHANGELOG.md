@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.0...@instill-ai/toolkit-v0.61.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* **toolkit:** fix public connector not disabled issue ([#679](https://github.com/instill-ai/design-system/issues/679)) ([da3a083](https://github.com/instill-ai/design-system/commit/da3a0830e824c84d82f97bb986447ebc5290f5fe))
+
 ## [0.61.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.5...@instill-ai/toolkit-v0.61.0) (2023-07-19)
 
 
