@@ -7,7 +7,6 @@ import { Checkbox } from "../Checkbox";
 import { Icons } from "../Icons";
 import { Button } from "../Button";
 import * as React from "react";
-import { PipelineTablePlaceholder } from "../../../../toolkit/src/view/pipeline/PipelineTablePlaceholder";
 
 const meta: Meta<typeof DataTable> = {
   title: "Components/NewUi/DataTable",
