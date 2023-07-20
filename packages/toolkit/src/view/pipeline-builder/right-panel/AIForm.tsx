@@ -694,6 +694,7 @@ export const AIForm = (props: AIFormProps) => {
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                     value={field.value}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
@@ -1007,6 +1008,7 @@ export const AIForm = (props: AIFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value ?? undefined}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">
