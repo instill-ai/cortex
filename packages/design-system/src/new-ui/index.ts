@@ -13,6 +13,7 @@ export * from "./Skeleton";
 export * from "./Separator";
 export * from "./Switch";
 export * from "./Table";
+export * from "./TableCell";
 export * from "./Tag";
 export * from "./TagButton";
 export * from "./Textarea";
