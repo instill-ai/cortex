@@ -5,6 +5,7 @@ export * from "./Dialog";
 export * from "./DataTable";
 export * from "./Form";
 export * from "./Icons";
+export * from "./IconWithBackground";
 export * from "./Input";
 export * from "./LinkButton";
 export * from "./Logos";
