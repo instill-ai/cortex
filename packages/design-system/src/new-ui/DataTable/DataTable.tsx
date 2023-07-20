@@ -28,7 +28,7 @@ interface DataTableProps<TData, TValue> {
   loadingRows: Nullable<number>;
 }
 
-export function DataTable<TData, TValue>({
+const DataTable = <TData, TValue>({
   columns,
   data,
   pageSize,
@@ -36,7 +36,7 @@ export function DataTable<TData, TValue>({
   searchKey,
   isLoading,
   loadingRows,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -151,4 +151,6 @@ export function DataTable<TData, TValue>({
       <DataTablePagination table={table} />
     </div>
   );
-}
+};
+
+export { DataTable };
