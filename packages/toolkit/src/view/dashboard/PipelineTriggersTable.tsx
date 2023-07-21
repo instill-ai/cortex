@@ -15,6 +15,9 @@ import {
   env,
   type PipelineTriggerRecord,
   type Nullable,
+  convertTimestamp,
+  convertToSecondsAndMilliseconds,
+  parseTriggerStatusLabel,
 } from "../../lib";
 import { PipelineTablePlaceholder } from "../pipeline";
 
@@ -59,7 +62,7 @@ export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
       },
       {
         key: "pipeline-triggers-trigger-time-head",
-        item: "Trigger time",
+        item: "Trigger Duration",
         width: "w-[160px]",
       },
       {
@@ -145,7 +148,7 @@ export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
                 >
                   <Cell width={null} padding="py-2 pl-6">
                     <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {pipelineTrigger.trigger_time}
+                      {convertTimestamp(pipelineTrigger.trigger_time)}
                     </p>
                   </Cell>
 
@@ -153,11 +156,14 @@ export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
                     width={null}
                     state={pipelineTrigger.status}
                     padding="py-2"
+                    label={parseTriggerStatusLabel(pipelineTrigger.status)}
                   />
 
                   <Cell width={null} padding="py-2">
                     <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {pipelineTrigger.compute_time_duration}
+                      {convertToSecondsAndMilliseconds(
+                        pipelineTrigger.compute_time_duration
+                      )}
                     </p>
                   </Cell>
 
