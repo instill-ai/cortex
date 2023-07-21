@@ -1,4 +1,6 @@
 export * from "./calculatePercentageDelta";
+export * from "./convertTimestamp";
+export * from "./convertToSecondsAndMilliseconds";
 export * from "./formatDateTime";
 export * from "./getDateRange";
 export * from "./getPipeLineOptions";
@@ -7,5 +9,6 @@ export * from "./getPipelineTriggersSummary";
 export * from "./getPipelinesSeries";
 export * from "./getPreviousTimeframe";
 export * from "./getTimeInRFC3339Format";
+export * from "./parseTriggerStatusLabel";
 export * from "./options";
 export * from "./orderCountsByTriggerTime";
