@@ -6,8 +6,10 @@ export function formatDateTime(timeStr: string, format: string): string {
   if (format === "1d" || format === "24h") {
     const hours = dt.getHours();
     const minutes = dt.getMinutes();
-    const period = format === "1d" ? (hours >= 12 ? "PM" : "AM") : "";
-    const formattedHours = format === "1d" ? hours % 12 || 12 : hours;
+    const period =
+      format === "1d" || format === "24h" ? (hours >= 12 ? "PM" : "AM") : "";
+    const formattedHours =
+      format === "1d" || format === "24h" ? hours % 12 || 12 : hours;
 
     return `${month} ${day}, ${formattedHours}:${String(minutes).padStart(
       2,

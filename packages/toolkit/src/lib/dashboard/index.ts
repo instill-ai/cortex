@@ -9,3 +9,4 @@ export * from "./getPreviousTimeframe";
 export * from "./getTimeInRFC3339Format";
 export * from "./options";
 export * from "./orderCountsByTriggerTime";
+export * from "./xAxisRange";

@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { Icons, SingleSelectOption, Tooltip } from "@instill-ai/design-system";
-import { PipelineTriggerCount } from "../../lib";
-import { getDateRange } from "../../lib/dashboard/getDateRange";
+import { PipelineTriggerCount, xAxisRange } from "../../lib";
 import { getPipelinesSeries } from "../../lib/dashboard/getPipelinesSeries";
 
 type PipelineTriggerCountsLineChartProps = {
@@ -17,7 +16,7 @@ export const PipelineTriggerCountsLineChart = ({
   selectedTimeOption,
 }: PipelineTriggerCountsLineChartProps) => {
   const chartRef = useRef<HTMLDivElement>(null);
-  const xAxisData = getDateRange(selectedTimeOption.value);
+  const xAxisData = xAxisRange(pipelines, selectedTimeOption.value);
   const seriesData = getPipelinesSeries(pipelines);
 
   useEffect(() => {
