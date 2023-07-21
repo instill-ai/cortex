@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.61.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.1...@instill-ai/toolkit-v0.61.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* **toolkit:** chart trigger count fix ([#681](https://github.com/instill-ai/design-system/issues/681)) ([a73f076](https://github.com/instill-ai/design-system/commit/a73f076d15b6b5f1df020a4a9eaddaf9e3e823f9))
+* **toolkit:** trigger pipeline specific fix ([#682](https://github.com/instill-ai/design-system/issues/682)) ([8fa4477](https://github.com/instill-ai/design-system/commit/8fa4477b8057c3ab48895e8b07d8e2e6795d9059))
+
 ## [0.61.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.0...@instill-ai/toolkit-v0.61.1) (2023-07-20)
 
 
