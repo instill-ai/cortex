@@ -12,6 +12,7 @@ import {
   TextGenerationIcon,
   TextToImageIcon,
 } from "../ui";
+import { ComplicateIcons } from "../new-ui";
 
 export const getModelInstanceTaskToolkit = (task: string) => {
   switch (task) {
@@ -68,6 +69,19 @@ export const getModelInstanceTaskToolkit = (task: string) => {
           return <TextGenerationIcon {...iconStyle} />;
         },
         label: "Text Generation",
+      };
+    case "TASK_TEXT_EMBEDDINGS":
+      return {
+        getIcon: (iconStyle: IconStyle) => {
+          return (
+            <ComplicateIcons.TextEmbedding
+              fillAreaColor="fill-semantic-fg-secondary"
+              pathColor="stroke-semantic-fg-secondary"
+              className="h-5 w-5"
+            />
+          );
+        },
+        label: "Text Embeddings",
       };
 
     case "TASK_TEXT_TO_IMAGE":
