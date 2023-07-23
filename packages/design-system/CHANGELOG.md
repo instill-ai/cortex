@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.33.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.33.0...@instill-ai/design-system-v0.33.1) (2023-07-23)
+
+
+### Bug Fixes
+
+* **design-system:** text Embeddings label add ([#684](https://github.com/instill-ai/design-system/issues/684)) ([e24c83f](https://github.com/instill-ai/design-system/commit/e24c83fad3bad3796be223da12efc6845f8bf3df))
+
 ## [0.33.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.32.0...@instill-ai/design-system-v0.33.0) (2023-07-19)
 
 
