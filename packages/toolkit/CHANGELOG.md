@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.2...@instill-ai/toolkit-v0.61.3) (2023-07-23)
+
+
+### Bug Fixes
+
+* **design-system:** refresh button fix ([#686](https://github.com/instill-ai/design-system/issues/686)) ([523a5c0](https://github.com/instill-ai/design-system/commit/523a5c0dd6341db2e845ce5deaf6cbba3972c720))
+
 ## [0.61.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.1...@instill-ai/toolkit-v0.61.2) (2023-07-21)
 
 
