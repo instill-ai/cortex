@@ -1,5 +1,10 @@
 export function formatDateTime(timeStr: string, format: string): string {
   const dt = new Date(timeStr);
+  // Check if the date is valid
+  if (!isFinite(dt.getTime())) {
+    return "Invalid Date";
+  }
+
   const month = new Intl.DateTimeFormat("en", { month: "short" }).format(dt);
   const day = dt.getDate();
 
