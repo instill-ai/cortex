@@ -16,6 +16,7 @@ import * as React from "react";
 import { DataTablePagination } from "./DataTablePagination";
 import { Input } from "../Input";
 import { Nullable } from "../../types/general";
+import { Skeleton } from "../Skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -23,15 +24,21 @@ interface DataTableProps<TData, TValue> {
   pageSize: number;
   searchPlaceholder: Nullable<string>;
   searchKey: Nullable<string>;
+  isLoading: boolean;
+  loadingRows: Nullable<number>;
+  children?: React.ReactNode;
 }
 
-export function DataTable<TData, TValue>({
+const DataTable = <TData, TValue>({
   columns,
   data,
   pageSize,
   searchPlaceholder,
   searchKey,
-}: DataTableProps<TData, TValue>) {
+  isLoading,
+  loadingRows,
+  children,
+}: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -98,25 +105,51 @@ export function DataTable<TData, TValue>({
           ))}
         </Table.Header>
         <Table.Body>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <Table.Row
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <Table.Cell key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </Table.Cell>
-                ))}
-              </Table.Row>
-            ))
+          {isLoading ? (
+            <>
+              {[...Array(loadingRows || 6).keys()].map((e) => (
+                <Table.Row
+                  key={`table-skeleton-row-${e}`}
+                  className="bg-semantic-bg-primary"
+                >
+                  {[...Array(columns.length).keys()].map((e) => (
+                    <Table.Cell key={`table-skeleton-cell-${e}`}>
+                      <Skeleton className="h-5" />
+                    </Table.Cell>
+                  ))}
+                </Table.Row>
+              ))}
+            </>
           ) : (
-            <Table.Row>
-              <Table.Cell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </Table.Cell>
-            </Table.Row>
+            <>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <Table.Row
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className="bg-semantic-bg-primary"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <Table.Cell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </Table.Cell>
+                    ))}
+                  </Table.Row>
+                ))
+              ) : (
+                <Table.Row className="bg-semantic-bg-primary">
+                  <Table.Cell
+                    colSpan={columns.length}
+                    className="h-24 text-center !p-0"
+                  >
+                    {children}
+                  </Table.Cell>
+                </Table.Row>
+              )}
+            </>
           )}
         </Table.Body>
       </Table.Root>
@@ -124,4 +157,6 @@ export function DataTable<TData, TValue>({
       <DataTablePagination table={table} />
     </div>
   );
-}
+};
+
+export { DataTable };
