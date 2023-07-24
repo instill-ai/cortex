@@ -1,6 +1,6 @@
 {
   "name": "@instill-ai/design-system",
-  "version": "0.32.0",
+  "version": "0.33.1",
   "description": "Instill AI's design system",
   "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
@@ -26,7 +26,8 @@
     "test": "vitest --run --passWithNoTests",
     "dev": "tsup src --watch",
     "watch:css": "npx tailwindcss -i ./src/styles/global.css -o ./public/tailwind.css --watch",
-    "build:css": "npx tailwindcss -i ./src/styles/global.css -o ./public/tailwind.css"
+    "build:css": "npx tailwindcss -i ./src/styles/global.css -o ./public/tailwind.css",
+    "publish-rc": "pnpm rimraf dist && tsup src && pnpm ts-types && pnpm publish --no-git-checks"
   },
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

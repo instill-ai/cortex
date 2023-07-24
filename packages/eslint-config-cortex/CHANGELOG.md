@@ -1,5 +1,13 @@
 # eslint-config-cortex
 
+## [0.4.1](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.4.0...@instill-ai/eslint-config-cortex-v0.4.1) (2023-07-19)
+
+
+### Miscellaneous
+
+* **release:** release main ([95ce09e](https://github.com/instill-ai/design-system/commit/95ce09ede9f33550f5aad385e334910a1638c49e))
+* **release:** release main ([a93e6d2](https://github.com/instill-ai/design-system/commit/a93e6d2d9d8dc2d04a2c094f740c49fff09f2fc2))
+
 ## [0.4.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.3.0...@instill-ai/eslint-config-cortex-v0.4.0) (2023-03-15)
 
 

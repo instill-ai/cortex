@@ -7,12 +7,14 @@ export type GeneralStateCellProps = {
   state: ResourceState | PipelineTriggerStatus;
   width: Nullable<string>;
   padding: string;
+  label?: string;
 };
 
 export const GeneralStateCell = ({
   state,
   width,
   padding,
+  label,
 }: GeneralStateCellProps) => {
   let element: Nullable<ReactElement> = null;
 
@@ -21,7 +23,7 @@ export const GeneralStateCell = ({
     case "STATUS_ERRORED":
       element = (
         <Tag variant="lightRed" size="sm">
-          Error
+          {label || "Error"}
         </Tag>
       );
       break;
@@ -30,7 +32,7 @@ export const GeneralStateCell = ({
     case "STATUS_COMPLETED":
       element = (
         <Tag variant="lightGreen" size="sm">
-          Active
+          {label || "Active"}
         </Tag>
       );
       break;
@@ -38,7 +40,7 @@ export const GeneralStateCell = ({
     case "STATE_INACTIVE":
       element = (
         <Tag variant="default" size="sm">
-          Inactive
+          {label || "Inactive"}
         </Tag>
       );
       break;

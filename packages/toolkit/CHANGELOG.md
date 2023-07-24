@@ -1,5 +1,59 @@
 # Changelog
 
+## [0.61.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.2...@instill-ai/toolkit-v0.61.3) (2023-07-23)
+
+
+### Bug Fixes
+
+* **design-system:** refresh button fix ([#686](https://github.com/instill-ai/design-system/issues/686)) ([523a5c0](https://github.com/instill-ai/design-system/commit/523a5c0dd6341db2e845ce5deaf6cbba3972c720))
+
+## [0.61.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.1...@instill-ai/toolkit-v0.61.2) (2023-07-21)
+
+
+### Bug Fixes
+
+* **toolkit:** chart trigger count fix ([#681](https://github.com/instill-ai/design-system/issues/681)) ([a73f076](https://github.com/instill-ai/design-system/commit/a73f076d15b6b5f1df020a4a9eaddaf9e3e823f9))
+* **toolkit:** trigger pipeline specific fix ([#682](https://github.com/instill-ai/design-system/issues/682)) ([8fa4477](https://github.com/instill-ai/design-system/commit/8fa4477b8057c3ab48895e8b07d8e2e6795d9059))
+
+## [0.61.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.0...@instill-ai/toolkit-v0.61.1) (2023-07-20)
+
+
+### Bug Fixes
+
+* **toolkit:** fix public connector not disabled issue ([#679](https://github.com/instill-ai/design-system/issues/679)) ([da3a083](https://github.com/instill-ai/design-system/commit/da3a0830e824c84d82f97bb986447ebc5290f5fe))
+
+## [0.61.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.5...@instill-ai/toolkit-v0.61.0) (2023-07-19)
+
+
+### Features
+
+* add dashboard into cortex ([#650](https://github.com/instill-ai/design-system/issues/650)) ([aa292b7](https://github.com/instill-ai/design-system/commit/aa292b7125eb1324b1b38fd4975b0ffcd4c8e2d1))
+* add support stability AI SDXL model ([#646](https://github.com/instill-ai/design-system/issues/646)) ([deca30b](https://github.com/instill-ai/design-system/commit/deca30b694841b1ae1b58bb0094c5b86f924653d))
+* **toolkit:** add Image to Image task into Stability AI connector ([#644](https://github.com/instill-ai/design-system/issues/644)) ([8dcde3a](https://github.com/instill-ai/design-system/commit/8dcde3a5d528fa6ee6dcff9d7ca9a29f1feb26ec))
+* **toolkit:** add OpenAI preset ([#655](https://github.com/instill-ai/design-system/issues/655)) ([f76b76e](https://github.com/instill-ai/design-system/commit/f76b76ed703e3377f5407ecfe135ee025fb1b29a))
+* **toolkit:** add query param to pre-fill the field of AI connector ([#658](https://github.com/instill-ai/design-system/issues/658)) ([555eb77](https://github.com/instill-ai/design-system/commit/555eb77e4f6bba30247a772d89eb75448ee13c63))
+* **toolkit:** implement new multiple handlers pipeline builder ([#642](https://github.com/instill-ai/design-system/issues/642)) ([876778c](https://github.com/instill-ai/design-system/commit/876778c319427ca37f6949018e30b822234402d4))
+* **toolkit:** support openai connector ([#645](https://github.com/instill-ai/design-system/issues/645)) ([1b85139](https://github.com/instill-ai/design-system/commit/1b85139068cc164c84d3578670f667d9490eeba0))
+* update the node style and disable one side of trigger/response handler ([#657](https://github.com/instill-ai/design-system/issues/657)) ([359884b](https://github.com/instill-ai/design-system/commit/359884b91278fab327a2eef44755a0bd8bccea2c))
+
+
+### Bug Fixes
+
+* fix div non interactive lint issue ([#652](https://github.com/instill-ai/design-system/issues/652)) ([9c55fac](https://github.com/instill-ai/design-system/commit/9c55facfe1096e0728397153cad42e124f66294b))
+* **toolkit:** chart date range not correct for today and last day ([#666](https://github.com/instill-ai/design-system/issues/666)) ([feed468](https://github.com/instill-ai/design-system/commit/feed468d69d785fa7c21c50cb50d932346baea22))
+* **toolkit:** fix pipeline-builder CustomNode not stay on top issue ([#665](https://github.com/instill-ai/design-system/issues/665)) ([d2251fa](https://github.com/instill-ai/design-system/commit/d2251fad647bc126c9d196f3ac19f21673235b81))
+* **toolkit:** fix the bg-color of the unspecified state node ([#667](https://github.com/instill-ai/design-system/issues/667)) ([597e4c1](https://github.com/instill-ai/design-system/commit/597e4c1dc3d012d98bfe2449795bcf1941222fa7))
+
+
+### Miscellaneous
+
+* **release:** release main ([95ce09e](https://github.com/instill-ai/design-system/commit/95ce09ede9f33550f5aad385e334910a1638c49e))
+* **release:** release main ([a93e6d2](https://github.com/instill-ai/design-system/commit/a93e6d2d9d8dc2d04a2c094f740c49fff09f2fc2))
+* **toolkit:** adapt new unify source and destination  ([#647](https://github.com/instill-ai/design-system/issues/647)) ([d8a5a5f](https://github.com/instill-ai/design-system/commit/d8a5a5f21a9a79edb12fb3dde1b05f8c40e9adf8))
+* **toolkit:** deprecate pipeline.mode ([#661](https://github.com/instill-ai/design-system/issues/661)) ([1b26f5c](https://github.com/instill-ai/design-system/commit/1b26f5c904cab3095f9c4d6418fec23958b534f7))
+* **toolkit:** update model task icons in AI related fields ([#671](https://github.com/instill-ai/design-system/issues/671)) ([a173cac](https://github.com/instill-ai/design-system/commit/a173cac60cb2c53d3c1353f5548a91e4ea60eae5))
+* **toolkit:** update pipeline trigger script ([#660](https://github.com/instill-ai/design-system/issues/660)) ([fc5b797](https://github.com/instill-ai/design-system/commit/fc5b79712c316e8561f6d90558751980b32252ff))
+
 ## [0.60.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.60.4...@instill-ai/toolkit-v0.60.5) (2023-07-12)
 
 

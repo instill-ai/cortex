@@ -547,7 +547,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
-                    disabled={true}
+                    disabled={disabledAll}
                   >
                     <Form.Control>
                       <Select.Trigger className="w-full !rounded-none">

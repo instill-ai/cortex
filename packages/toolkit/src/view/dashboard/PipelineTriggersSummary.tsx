@@ -9,7 +9,7 @@ const PipelineTriggersSummaryCard = (props: {
     return (
       <div
         key={`cards-skeleton`}
-        className="inline-flex h-[108px] w-[246] flex-col items-start justify-start gap-2 rounded-sm border border-semantic-bg-line bg-white p-6 shadow"
+        className="inline-flex h-[110px] w-[246] flex-col items-start justify-start gap-2 rounded-sm border border-semantic-bg-line bg-white p-6 shadow"
       >
         <div className="self-stretch">
           <Skeleton className="h-5 w-full rounded" />
