@@ -143,7 +143,7 @@ const DataTable = <TData, TValue>({
                 <Table.Row className="bg-semantic-bg-primary">
                   <Table.Cell
                     colSpan={columns.length}
-                    className="h-24 text-center"
+                    className="h-24 text-center !p-0"
                   >
                     {children}
                   </Table.Cell>
