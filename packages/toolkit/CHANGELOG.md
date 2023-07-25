@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.3...@instill-ai/toolkit-v0.61.4) (2023-07-25)
+
+
+### Bug Fixes
+
+* create blockchain wrong label ([#689](https://github.com/instill-ai/design-system/issues/689)) ([da2bb1b](https://github.com/instill-ai/design-system/commit/da2bb1b6d17e2614c1d2f7e48639bafde28e919d))
+
 ## [0.61.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.2...@instill-ai/toolkit-v0.61.3) (2023-07-23)
 
 
