@@ -142,7 +142,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
               activate: true,
               status: "error",
               description: null,
-              message: "Something went wrong when create the AI",
+              message: "Something went wrong when create the Blockchain",
             }));
           }
         },
@@ -210,7 +210,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
             render={({ field }) => {
               return (
                 <Form.Item>
-                  <Form.Label>AI Connector Type</Form.Label>
+                  <Form.Label>Blockchain Connector Type</Form.Label>
                   <Select.Root
                     onValueChange={field.onChange}
                     defaultValue={field.value}
