@@ -1,8 +1,9 @@
 import { Button, Icons, SingleSelectOption } from "@instill-ai/design-system";
 import { QueryObserverResult } from "@tanstack/react-query";
-import React from "react";
+import React, { useEffect } from "react";
 import cn from "clsx";
 import { timeLineOptions } from "../../lib";
+import { useRouter } from "next/router";
 
 export type FilterProps = {
   setSelectedTimeOption: React.Dispatch<
@@ -17,6 +18,20 @@ export const FilterByDay = ({
   selectedTimeOption,
   setSelectedTimeOption,
 }: FilterProps) => {
+  const router = useRouter();
+  const { days } = router.query;
+
+  useEffect(() => {
+    if (days) {
+      const timeLineOption = timeLineOptions.find(
+        (timeLineOption) => timeLineOption.value === days
+      );
+      if (timeLineOption) {
+        setSelectedTimeOption(timeLineOption);
+      }
+    }
+  }, [days]);
+
   return (
     <div className="flex flex-row-reverse space-x-4 space-x-reverse">
       <div className="border-semantic flex items-start justify-start">
@@ -31,6 +46,13 @@ export const FilterByDay = ({
             )}
             onClick={() => {
               setSelectedTimeOption(timeLineOption);
+              router.push({
+                pathname: new URL(
+                  router.asPath,
+                  process.env.NEXT_PUBLIC_CONSOLE_BASE_URL
+                ).pathname,
+                query: { days: timeLineOption.value },
+              });
             }}
           >
             <div className="text-semantic-fg-primary product-body-text-4-semibold">
