@@ -2,7 +2,7 @@ import { Button, Icons, SingleSelectOption } from "@instill-ai/design-system";
 import { QueryObserverResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import cn from "clsx";
-import { timeLineOptions } from "../../lib";
+import { env, timeLineOptions } from "../../lib";
 import { useRouter } from "next/router";
 
 export type FilterProps = {
@@ -30,7 +30,7 @@ export const FilterByDay = ({
         setSelectedTimeOption(timeLineOption);
       }
     }
-  }, [days]);
+  }, [days, setSelectedTimeOption]);
 
   return (
     <div className="flex flex-row-reverse space-x-4 space-x-reverse">
@@ -49,7 +49,7 @@ export const FilterByDay = ({
               router.push({
                 pathname: new URL(
                   router.asPath,
-                  process.env.NEXT_PUBLIC_CONSOLE_BASE_URL
+                  env("NEXT_PUBLIC_CONSOLE_BASE_URL")
                 ).pathname,
                 query: { days: timeLineOption.value },
               });
