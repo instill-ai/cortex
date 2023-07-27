@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.5...@instill-ai/toolkit-v0.61.6) (2023-07-27)
+
+
+### Bug Fixes
+
+* Namananand/ins 1413 after refresh the day value reset to today ([#698](https://github.com/instill-ai/design-system/issues/698)) ([6727b93](https://github.com/instill-ai/design-system/commit/6727b93e091bb811cd6c63c3408b1c59d8233f32))
+
 ## [0.61.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.4...@instill-ai/toolkit-v0.61.5) (2023-07-27)
 
 
