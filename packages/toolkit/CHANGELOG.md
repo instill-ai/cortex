@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.7](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.6...@instill-ai/toolkit-v0.61.7) (2023-07-27)
+
+
+### Bug Fixes
+
+* **toolkit:** pipeline state fix ([#700](https://github.com/instill-ai/design-system/issues/700)) ([ecf34ed](https://github.com/instill-ai/design-system/commit/ecf34edfe931c7895d39aff8138b7e4b487c9c08))
+
 ## [0.61.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.5...@instill-ai/toolkit-v0.61.6) (2023-07-27)
 
 
