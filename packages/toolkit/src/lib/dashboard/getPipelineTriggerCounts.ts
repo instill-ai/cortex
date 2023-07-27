@@ -55,7 +55,7 @@ export function getPipelineTriggerCounts(
         counts: [{ trigger_time: triggerTime, count: 1 }],
         watchState: targetPipeline
           ? targetPipeline.watchState
-          : "STATE_UNSPECIFIED",
+          : "STATE_DELETED",
       };
       pipelinesTriggerCount.push(newPipelineTriggerCount);
     }
