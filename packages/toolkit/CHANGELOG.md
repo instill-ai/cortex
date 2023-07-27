@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.8](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.7...@instill-ai/toolkit-v0.61.8) (2023-07-27)
+
+
+### Bug Fixes
+
+* namananand/ins 1408 make pipeline status as delete not unspecified for metrics ([#702](https://github.com/instill-ai/design-system/issues/702)) ([4dc263b](https://github.com/instill-ai/design-system/commit/4dc263b35eae5858f4870aef45a338219d20ffb6))
+
 ## [0.61.7](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.6...@instill-ai/toolkit-v0.61.7) (2023-07-27)
 
 
