@@ -38,6 +38,7 @@ import { RefreshCw05 } from "./RefreshCw05";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
 import { Stop } from "./Stop";
+import { SearchSm } from "./SearchSm";
 import { Tag01 } from "./Tag01";
 import { Trash01 } from "./Trash01";
 import { X } from "./X";
@@ -83,6 +84,7 @@ export const Icons = {
   Save01,
   Sliders01,
   Stop,
+  SearchSm,
   Tag01,
   Trash01,
   X,
