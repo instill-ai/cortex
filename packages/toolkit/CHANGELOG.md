@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.10](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.9...@instill-ai/toolkit-v0.61.10) (2023-07-27)
+
+
+### Bug Fixes
+
+* namananand/ins 1412 dashboard chart change not correct ([#706](https://github.com/instill-ai/design-system/issues/706)) ([9ac1c1b](https://github.com/instill-ai/design-system/commit/9ac1c1b6c62dd1f1b726f474f86dd6c18dc2c28d))
+
 ## [0.61.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.8...@instill-ai/toolkit-v0.61.9) (2023-07-27)
 
 
