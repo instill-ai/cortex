@@ -7,6 +7,7 @@ import { ArrowNarrowRight } from "./ArrowNarrowRight";
 import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
 import { Check } from "./Check";
+import { Circle } from "./Circle";
 import { CheckCircle } from "./CheckCircle";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronDownDouble } from "./ChevronDownDouble";
@@ -65,6 +66,7 @@ export const Icons = {
   ChevronSelectorVertical,
   Chip01,
   Chip02,
+  Circle,
   Cube01,
   CubeOutline,
   Database01,
