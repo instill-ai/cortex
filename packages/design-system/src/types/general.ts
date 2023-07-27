@@ -353,7 +353,8 @@ export type PipelineState =
   | "STATE_UNSPECIFIED"
   | "STATE_ACTIVE"
   | "STATE_INACTIVE"
-  | "STATE_ERROR";
+  | "STATE_ERROR"
+  | "STATE_DELETED"
 
 export type ConnectorState =
   | "STATE_UNSPECIFIED"
