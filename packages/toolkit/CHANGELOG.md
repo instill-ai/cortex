@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.61.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.4...@instill-ai/toolkit-v0.61.5) (2023-07-27)
+
+
+### Bug Fixes
+
+* table placeholder export ([#691](https://github.com/instill-ai/design-system/issues/691)) ([b824f62](https://github.com/instill-ai/design-system/commit/b824f62301ed53f7ac81c396026721d531622e48))
+* **toolkit:** url fix for dashboard ([#695](https://github.com/instill-ai/design-system/issues/695)) ([f68abad](https://github.com/instill-ai/design-system/commit/f68abad08d7f8069ad258a60fdb846ad6ea005a2))
+
 ## [0.61.4](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.3...@instill-ai/toolkit-v0.61.4) (2023-07-25)
 
 

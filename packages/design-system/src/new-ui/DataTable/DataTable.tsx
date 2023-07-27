@@ -17,6 +17,7 @@ import { DataTablePagination } from "./DataTablePagination";
 import { Input } from "../Input";
 import { Nullable } from "../../types/general";
 import { Skeleton } from "../Skeleton";
+import { Icons } from "../Icons";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -27,6 +28,8 @@ interface DataTableProps<TData, TValue> {
   isLoading: boolean;
   loadingRows: Nullable<number>;
   children?: React.ReactNode;
+  primaryText: Nullable<string>;
+  secondaryText: Nullable<string>;
 }
 
 const DataTable = <TData, TValue>({
@@ -38,6 +41,8 @@ const DataTable = <TData, TValue>({
   isLoading,
   loadingRows,
   children,
+  primaryText,
+  secondaryText,
 }: DataTableProps<TData, TValue>) => {
   const [rowSelection, setRowSelection] = React.useState({});
   const [sorting, setSorting] = React.useState<SortingState>([]);
@@ -69,21 +74,37 @@ const DataTable = <TData, TValue>({
 
   return (
     <div>
-      <div className="flex items-center py-4">
-        {searchKey && (
-          <Input.Root className="w-1/4">
-            <Input.Core
-              type="text"
-              placeholder={searchPlaceholder || ""}
-              value={
-                (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
-              }
-              onChange={(event) =>
-                table.getColumn(searchKey)?.setFilterValue(event.target.value)
-              }
-            />
-          </Input.Root>
-        )}
+      <div className="flex flex-row rounded-t-sm border border-b-0 bg-semantic-bg-primary px-6 py-5">
+        <div className="w-3/4">
+          <div className="flex flex-col space-y-2">
+            <h4 className="w-full text-semantic-fg-primary product-body-text-1-semibold">
+              {primaryText}
+            </h4>
+            <p className="w-full text-semantic-fg-disabled product-body-text-3-regular">
+              {secondaryText}
+            </p>
+          </div>
+        </div>
+        <div className="flex w-1/4 items-end">
+          {searchKey && (
+            <Input.Root className="w-full">
+              <Input.LeftIcon>
+                <Icons.SearchSm className="my-auto h-5 w-5 stroke-semantic-fg-secondary" />
+              </Input.LeftIcon>
+              <Input.Core
+                disabled={false}
+                type="text"
+                placeholder={searchPlaceholder || ""}
+                value={
+                  (table.getColumn(searchKey)?.getFilterValue() as string) ?? ""
+                }
+                onChange={(event) =>
+                  table.getColumn(searchKey)?.setFilterValue(event.target.value)
+                }
+              />
+            </Input.Root>
+          )}
+        </div>
       </div>
       <Table.Root>
         <Table.Header>
@@ -143,7 +164,7 @@ const DataTable = <TData, TValue>({
                 <Table.Row className="bg-semantic-bg-primary">
                   <Table.Cell
                     colSpan={columns.length}
-                    className="h-24 text-center !p-0"
+                    className="h-24 !p-0 text-center"
                   >
                     {children}
                   </Table.Cell>

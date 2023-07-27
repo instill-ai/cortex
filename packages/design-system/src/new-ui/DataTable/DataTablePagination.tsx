@@ -11,7 +11,7 @@ export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
   return (
-    <div className="flex items-center justify-end py-8">
+    <div className="flex items-center justify-end py-4">
       <Button
         className="gap-x-2 !rounded-r-none rounded-l-sm !border-semantic-bg-line !py-2.5 px-4"
         variant="secondaryGrey"

@@ -7,6 +7,7 @@ import { ArrowNarrowRight } from "./ArrowNarrowRight";
 import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
 import { Check } from "./Check";
+import { Circle } from "./Circle";
 import { CheckCircle } from "./CheckCircle";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronDownDouble } from "./ChevronDownDouble";
@@ -37,7 +38,9 @@ import { Play } from "./Play";
 import { RefreshCw05 } from "./RefreshCw05";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
+import { SpeechRecognition } from "./SpeechRecognition";
 import { Stop } from "./Stop";
+import { SearchSm } from "./SearchSm";
 import { Tag01 } from "./Tag01";
 import { Trash01 } from "./Trash01";
 import { X } from "./X";
@@ -64,6 +67,7 @@ export const Icons = {
   ChevronSelectorVertical,
   Chip01,
   Chip02,
+  Circle,
   Cube01,
   CubeOutline,
   Database01,
@@ -81,8 +85,10 @@ export const Icons = {
   Plus,
   RefreshCw05,
   Save01,
+  SpeechRecognition,
   Sliders01,
   Stop,
+  SearchSm,
   Tag01,
   Trash01,
   X,
