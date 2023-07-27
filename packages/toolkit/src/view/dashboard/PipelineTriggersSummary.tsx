@@ -51,17 +51,20 @@ const PipelineTriggersSummaryCard = (props: {
           {amount}
         </div>
         <div className="my-auto flex items-center justify-center">
-          {statusType === "STATUS_ERRORED" ? (
+          {delta < 0 ? (
             <Tag variant="lightRed" size="sm" className="gap-x-2 border-0">
               <Icons.ArrowDown className="h-4 w-4 stroke-semantic-error-default" />
               {`${delta} %`}
             </Tag>
           ) : null}
-          {statusType === "STATUS_COMPLETED" ? (
+          {delta > 0 ? (
             <Tag variant="lightGreen" size="sm" className="gap-x-2 border-0">
               <Icons.ArrowUp className="h-4 w-4 stroke-semantic-success-default" />
               {`${delta} %`}
             </Tag>
+          ) : null}
+          {delta === 0 ? (
+            <Tag size="sm" className="px-3">{`${delta} %`}</Tag>
           ) : null}
         </div>
       </div>
