@@ -12,6 +12,7 @@ import {
 import { Nullable, PipelineTriggerCount, chunk, env } from "../../lib";
 import { PipelineTablePlaceholder } from "../pipeline";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export type DashboardPipelinesTableProps = {
   pipelineTriggerCounts: PipelineTriggerCount[];
@@ -22,6 +23,8 @@ export type DashboardPipelinesTableProps = {
 export const DashboardPipelinesTable = (
   props: DashboardPipelinesTableProps
 ) => {
+  const router = useRouter();
+  const { days } = router.query;
   const { pipelineTriggerCounts, marginBottom, isError, isLoading } = props;
   const [currentPage, setCurrentPage] = React.useState(0);
   const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
@@ -133,7 +136,9 @@ export const DashboardPipelinesTable = (
                   <Cell width={null} padding="py-2 pl-6">
                     <Link
                       className="truncate product-body-text-3-regular hover:underline text-semantic-fg-secondary"
-                      href={`/dashboard/pipeline/${pipelineTriggerCount.pipeline_id}`}
+                      href={`/dashboard/pipeline/${
+                        pipelineTriggerCount.pipeline_id
+                      }${days ? "?days=" + days : ""}`}
                     >
                       {pipelineTriggerCount.pipeline_id}
                     </Link>
