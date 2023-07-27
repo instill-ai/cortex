@@ -1,5 +1,20 @@
 # @instill-ai/design-system
 
+## [0.35.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.34.0...@instill-ai/design-system-v0.35.0) (2023-07-27)
+
+
+### Features
+
+* **design-system:** add search and table primary and secondary text ([#694](https://github.com/instill-ai/design-system/issues/694)) ([cc83442](https://github.com/instill-ai/design-system/commit/cc83442cb8fe0e31560a3ccb4affdfd67ad80a30))
+* **design-system:** circle icon ([#677](https://github.com/instill-ai/design-system/issues/677)) ([437a840](https://github.com/instill-ai/design-system/commit/437a840a1045d39d8568ca966fa6e6a9d4ef1b74))
+* **design-system:** search icon ([#693](https://github.com/instill-ai/design-system/issues/693)) ([4a1aeb9](https://github.com/instill-ai/design-system/commit/4a1aeb957b0824aaa5763b75da33d125bceb9b28))
+* **design-system:** SpeechRecognition icon ([#697](https://github.com/instill-ai/design-system/issues/697)) ([fbb18b1](https://github.com/instill-ai/design-system/commit/fbb18b1a89df7a4e71b0c38d2580fa19b22ab21f))
+
+
+### Bug Fixes
+
+* **design-system:** namananand/ins 1414 update data table add search and title and sub title of ([#696](https://github.com/instill-ai/design-system/issues/696)) ([dc3129e](https://github.com/instill-ai/design-system/commit/dc3129e63d7e51abab6cb618032242dd468a6334))
+
 ## [0.34.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.33.1...@instill-ai/design-system-v0.34.0) (2023-07-24)
 
 
