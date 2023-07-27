@@ -74,7 +74,7 @@ const DataTable = <TData, TValue>({
 
   return (
     <div>
-      <div className="flex flex-row rounded-t-sm border border-b-0 bg-white px-6 py-5">
+      <div className="flex flex-row rounded-t-sm border border-b-0 bg-semantic-bg-primary px-6 py-5">
         <div className="w-3/4">
           <div className="flex flex-col space-y-2">
             <h4 className="w-full text-semantic-fg-primary product-body-text-1-semibold">
@@ -89,7 +89,7 @@ const DataTable = <TData, TValue>({
           {searchKey && (
             <Input.Root className="w-full">
               <Input.LeftIcon>
-                <Icons.Box className="my-auto h-5 w-5 stroke-slate-800" />
+                <Icons.SearchSm className="my-auto h-5 w-5 stroke-semantic-fg-secondary" />
               </Input.LeftIcon>
               <Input.Core
                 disabled={false}
