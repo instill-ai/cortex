@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.35.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.35.0...@instill-ai/design-system-v0.35.1) (2023-07-27)
+
+
+### Bug Fixes
+
+* **toolkit:** pipeline state fix ([#700](https://github.com/instill-ai/design-system/issues/700)) ([ecf34ed](https://github.com/instill-ai/design-system/commit/ecf34edfe931c7895d39aff8138b7e4b487c9c08))
+
 ## [0.35.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.34.0...@instill-ai/design-system-v0.35.0) (2023-07-27)
 
 
