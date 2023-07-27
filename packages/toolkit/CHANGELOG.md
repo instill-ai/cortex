@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.61.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.8...@instill-ai/toolkit-v0.61.9) (2023-07-27)
+
+
+### Bug Fixes
+
+* delta changes calculation ([#704](https://github.com/instill-ai/design-system/issues/704)) ([8158a58](https://github.com/instill-ai/design-system/commit/8158a58bbbfd0ef52f9f33199a08dc2f56ca1dbf))
+
 ## [0.61.8](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.7...@instill-ai/toolkit-v0.61.8) (2023-07-27)
 
 
