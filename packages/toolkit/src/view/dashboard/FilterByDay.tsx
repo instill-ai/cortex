@@ -2,7 +2,7 @@ import { Button, Icons, SingleSelectOption } from "@instill-ai/design-system";
 import { QueryObserverResult } from "@tanstack/react-query";
 import React, { useEffect } from "react";
 import cn from "clsx";
-import { env, timeLineOptions } from "../../lib";
+import { defaultTimeOption, env, timeLineOptions } from "../../lib";
 import { useRouter } from "next/router";
 
 export type FilterProps = {
@@ -29,6 +29,8 @@ export const FilterByDay = ({
       if (timeLineOption) {
         setSelectedTimeOption(timeLineOption);
       }
+    } else {
+      setSelectedTimeOption(defaultTimeOption);
     }
   }, [days, setSelectedTimeOption]);
 
