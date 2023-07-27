@@ -241,6 +241,8 @@ export const Default = () => {
       searchKey="pipeline_id"
       isLoading={isLoading}
       loadingRows={6}
+      primaryText="Primary Text"
+      secondaryText="Secondary Text"
     />
   );
 };
@@ -356,6 +358,8 @@ export const NoDataFound = () => {
       searchKey="pipeline_id"
       isLoading={isLoading}
       loadingRows={6}
+      primaryText="Primary Text"
+      secondaryText="Secondary Text"
     >
       <div>No Pipeline Found</div>
     </DataTable>
