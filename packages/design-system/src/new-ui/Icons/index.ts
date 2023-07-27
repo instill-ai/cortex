@@ -38,6 +38,7 @@ import { Play } from "./Play";
 import { RefreshCw05 } from "./RefreshCw05";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
+import { SpeechRecognition } from "./SpeechRecognition";
 import { Stop } from "./Stop";
 import { SearchSm } from "./SearchSm";
 import { Tag01 } from "./Tag01";
@@ -84,6 +85,7 @@ export const Icons = {
   Plus,
   RefreshCw05,
   Save01,
+  SpeechRecognition,
   Sliders01,
   Stop,
   SearchSm,
