@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.36.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.35.1...@instill-ai/design-system-v0.36.0) (2023-07-28)
+
+
+### Features
+
+* **toolkit:** move components to toolkit ([#710](https://github.com/instill-ai/design-system/issues/710)) ([6284b72](https://github.com/instill-ai/design-system/commit/6284b722955385c99668d728504c47c88fac1eb2))
+
 ## [0.35.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.35.0...@instill-ai/design-system-v0.35.1) (2023-07-27)
 
 

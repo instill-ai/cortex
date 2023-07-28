@@ -33,7 +33,6 @@ export const DashboardPipelinesTable = (
               aria-label="Select row"
               className="h-5 w-5"
             />
-
             <Link
               href={`/dashboard/pipeline/${row.getValue("pipeline_id")}${
                 days ? "?days=" + days : ""
