@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.62.1...@instill-ai/toolkit-v0.63.0) (2023-07-28)
+
+
+### Features
+
+* update OpenAI AI Connector creation form ([#714](https://github.com/instill-ai/design-system/issues/714)) ([8801bdb](https://github.com/instill-ai/design-system/commit/8801bdbf91efb9822bccb3df9a889fb06752864f))
+
 ## [0.62.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.62.0...@instill-ai/toolkit-v0.62.1) (2023-07-28)
 
 
