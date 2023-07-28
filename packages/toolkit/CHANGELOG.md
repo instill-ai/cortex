@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.11...@instill-ai/toolkit-v0.62.0) (2023-07-28)
+
+
+### Features
+
+* **toolkit:** move components to toolkit ([#710](https://github.com/instill-ai/design-system/issues/710)) ([6284b72](https://github.com/instill-ai/design-system/commit/6284b722955385c99668d728504c47c88fac1eb2))
+
 ## [0.61.11](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.10...@instill-ai/toolkit-v0.61.11) (2023-07-27)
 
 
