@@ -19,6 +19,7 @@ export const GeneralStateCell = ({
   let element: Nullable<ReactElement> = null;
 
   switch (state) {
+    case "STATE_DELETED":
     case "STATE_ERROR":
     case "STATUS_ERRORED":
       element = (
@@ -30,6 +31,8 @@ export const GeneralStateCell = ({
 
     case "STATE_ACTIVE":
     case "STATUS_COMPLETED":
+    case "STATE_ONLINE":
+    case "STATE_CONNECTED":
       element = (
         <Tag variant="lightGreen" size="sm">
           {label || "Active"}
@@ -38,6 +41,8 @@ export const GeneralStateCell = ({
       break;
 
     case "STATE_INACTIVE":
+    case "STATE_OFFLINE":
+    case "STATE_DISCONNECTED":
       element = (
         <Tag variant="default" size="sm">
           {label || "Inactive"}
@@ -53,9 +58,5 @@ export const GeneralStateCell = ({
       );
   }
 
-  return (
-    <td>
-      <div className={cn("flex flex-row", width, padding)}>{element}</div>
-    </td>
-  );
+  return <div className={cn("flex flex-row", width, padding)}>{element}</div>;
 };
