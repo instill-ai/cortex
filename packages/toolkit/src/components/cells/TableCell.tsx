@@ -30,14 +30,14 @@ function TableCell({
             <>
               {primaryLink ? (
                 <Link href={primaryLink} className="hover:underline">
-                  <h1 className="text-semantic-fg-primary product-body-text-3-semibold">
+                  <h3 className="text-semantic-fg-primary product-body-text-3-semibold">
                     {primaryText}
-                  </h1>
+                  </h3>
                 </Link>
               ) : (
-                <h1 className="text-semantic-fg-primary product-body-text-3-semibold">
+                <h3 className="text-semantic-fg-primary product-body-text-3-semibold">
                   {primaryText}
-                </h1>
+                </h3>
               )}
             </>
           )}
