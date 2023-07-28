@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.62.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.62.0...@instill-ai/toolkit-v0.62.1) (2023-07-28)
+
+
+### Bug Fixes
+
+* Namananand/ins 1427 move console new table design to design system and toolkit ([#712](https://github.com/instill-ai/design-system/issues/712)) ([1ad21fc](https://github.com/instill-ai/design-system/commit/1ad21fcd121ef09af42e4a7a6b939f16741845a0))
+
 ## [0.62.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.61.11...@instill-ai/toolkit-v0.62.0) (2023-07-28)
 
 
