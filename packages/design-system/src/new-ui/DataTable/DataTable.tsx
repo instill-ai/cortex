@@ -161,7 +161,10 @@ const DataTable = <TData, TValue>({
                   </Table.Row>
                 ))
               ) : (
-                <Table.Row className="bg-semantic-bg-primary">
+                <Table.Row
+                  className="bg-semantic-bg-primary"
+                  key="table-empty-placeholder-row"
+                >
                   <Table.Cell
                     colSpan={columns.length}
                     className="h-24 !p-0 text-center"

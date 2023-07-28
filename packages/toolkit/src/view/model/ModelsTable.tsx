@@ -1,29 +1,21 @@
-import * as React from "react";
 import {
-  NameCell,
-  TableHead,
-  TableHeadItem,
-  ModelDefinitionCell,
-  PaginationListContainer,
-  ModelTaskCell,
-  StateOverview,
-  TableError,
-  SkeletonCell,
-  PaginationListContainerProps,
-  Cell,
-} from "../../components";
-import {
-  useSearchedResources,
-  env,
-  chunk,
-  useStateOverviewCounts,
-  type Model,
-  type Nullable,
-  type ModelsWatchState,
-} from "../../lib";
-import { ModelTablePlaceholder } from "./ModelTablePlaceholder";
-import { LinkButton } from "@instill-ai/design-system";
+  Button,
+  DataTable,
+  getModelDefinitionToolkit,
+} from "@instill-ai/design-system";
 import { useRouter } from "next/router";
+import { ColumnDef } from "@tanstack/react-table";
+import { Model, ModelsWatchState } from "../../lib";
+import {
+  GeneralStateCell,
+  GeneralTaskCell,
+  PaginationListContainerProps,
+  SortIcon,
+  TableError,
+} from "../../components";
+import { TableCell } from "../../components/cells/TableCell";
+import { formatDate, parseStatusLabel } from "../../lib/table";
+import { ModelTablePlaceholder } from "./ModelTablePlaceholder";
 
 export type ModelsTableProps = {
   models: Model[];
@@ -35,182 +27,166 @@ export type ModelsTableProps = {
 export const ModelsTable = (props: ModelsTableProps) => {
   const router = useRouter();
   const { models, modelsWatchState, marginBottom, isError, isLoading } = props;
-  const [currentPage, setCurrentPage] = React.useState(0);
-  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
 
-  // We will only use searched resource when user input search term
-
-  const searchedModels = useSearchedResources({
-    resources: models,
-    searchTerm,
-  });
-
-  const modelPages = React.useMemo(() => {
-    if (!searchTerm) {
-      return chunk(models, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-    }
-    return chunk(searchedModels, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedModels, models, searchTerm]);
-
-  const stateOverviewCounts = useStateOverviewCounts(
-    searchTerm ? searchedModels : models,
-    modelsWatchState,
-    isLoading
-  );
-
-  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
-    return [
-      {
-        key: "model-state-overview-head",
-        item: (
-          <StateOverview
-            errorCounts={stateOverviewCounts?.error || 0}
-            offlineCounts={stateOverviewCounts?.offline || 0}
-            onlineCounts={stateOverviewCounts?.online || 0}
-          />
-        ),
-        width: "w-auto",
+  const columns: ColumnDef<Model>[] = [
+    {
+      accessorKey: "id",
+      header: () => <div className="min-w-[300px] text-left">Model Name</div>,
+      cell: ({ row }) => {
+        const { getIcon } = getModelDefinitionToolkit(
+          row.original.model_definition
+        );
+        return (
+          <div className="text-left">
+            <TableCell
+              primaryLink={`/model-hub/${row.getValue("id")}`}
+              primaryText={row.getValue("id")}
+              secondaryLink={null}
+              secondaryText={row.original.model_definition}
+              iconElement={getIcon({
+                width: "w-4",
+                height: "h-4",
+                position: "my-auto",
+                color: "fill-semantic-bg-secondary-base-bg",
+              })}
+            />
+          </div>
+        );
       },
-      {
-        key: "model-source-head",
-        item: "Model source",
-        width: "w-[240px]",
+    },
+    {
+      accessorKey: "create_time",
+      header: ({ column }) => {
+        return (
+          <div className="text-center">
+            <Button
+              className="gap-x-2 py-0"
+              variant="tertiaryGrey"
+              size="sm"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <span className="min-w-[130px]">Date added</span>
+              <SortIcon type={column.getIsSorted()} />
+            </Button>
+          </div>
+        );
       },
-      {
-        key: "model-task-head",
-        item: "AI task",
-        width: "w-[240px]",
+      cell: ({ row }) => {
+        return (
+          <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
+            {formatDate(row.getValue("create_time"))}
+          </div>
+        );
       },
-      {
-        key: "create-ai-connector-head",
-        item: "",
-        width: "w-[120px]",
+    },
+    {
+      accessorKey: "state",
+      header: () => <div className="text-center">Status</div>,
+      cell: ({ row }) => {
+        const name: string = row.original.name;
+        return (
+          <div className="grid justify-items-center">
+            <GeneralStateCell
+              width={null}
+              state={
+                modelsWatchState
+                  ? modelsWatchState[name]
+                    ? modelsWatchState[name].state
+                    : "STATE_UNSPECIFIED"
+                  : "STATE_UNSPECIFIED"
+              }
+              padding="py-2"
+              label={parseStatusLabel(row.getValue("state"))}
+            />
+          </div>
+        );
       },
-    ];
-  }, [stateOverviewCounts]);
+    },
+    {
+      accessorKey: "task",
+      header: () => <div className="text-center">Task</div>,
+      cell: ({ row }) => {
+        return (
+          <GeneralTaskCell modelTask={row.getValue("task")} className={null} />
+        );
+      },
+    },
+    {
+      accessorKey: "uid",
+      header: () => <div className="text-center">Plan</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-semantic-fg-secondary product-body-text-3-regular">
+            Basic
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "uid",
+      header: () => <div className="text-center"></div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+            Delete
+          </div>
+        );
+      },
+    },
+  ];
 
   if (isError) {
     return (
-      <PaginationListContainer
-        title="Model"
-        description="These are the models you can select"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        totalPage={modelPages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText="Models"
+        secondaryText="Check and organise your imported Models"
       >
-        <TableError />
-      </PaginationListContainer>
+        <TableError marginBottom="!border-0" />
+      </DataTable>
     );
   }
 
   if (models.length === 0 && !isLoading) {
     return (
-      <PaginationListContainer
-        title="Model"
-        description="These are the models you can select"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        totalPage={modelPages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText="Models"
+        secondaryText="Check and organise your imported Models"
       >
-        <ModelTablePlaceholder enableCreateButton={false} />
-      </PaginationListContainer>
+        <ModelTablePlaceholder
+          enableCreateButton={false}
+          marginBottom="!border-0"
+        />
+      </DataTable>
     );
   }
 
   return (
-    <PaginationListContainer
-      title="Model"
-      description="These are the models you can select"
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-      totalPage={modelPages.length}
-      disabledSearchField={isLoading ? true : false}
-      marginBottom={marginBottom}
-    >
-      <table className="table-fixed border-collapse w-full">
-        <TableHead
-          borderColor="border-instillGrey20"
-          bgColor="bg-instillGrey05"
-          items={tableHeadItems}
-        />
-        <tbody>
-          {isLoading
-            ? [...Array(5).keys()].map((e) => (
-                <tr
-                  key={`models-table-skeleton-${e}`}
-                  className="bg-white border border-instillGrey20"
-                >
-                  <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                </tr>
-              ))
-            : modelPages[currentPage]
-            ? modelPages[currentPage].map((model) => (
-                <tr
-                  key={model.name}
-                  className="bg-white border border-instillGrey20"
-                >
-                  <NameCell
-                    name={model.id}
-                    width={null}
-                    state={
-                      modelsWatchState
-                        ? modelsWatchState[model.name]
-                          ? modelsWatchState[model.name].state
-                          : "STATE_UNSPECIFIED"
-                        : "STATE_UNSPECIFIED"
-                    }
-                    padding="py-2 px-6"
-                    link={`/model-hub/${model.id}`}
-                  />
-                  <ModelDefinitionCell
-                    width={null}
-                    modelDefinition={model.model_definition}
-                    padding="py-2"
-                  />
-                  <ModelTaskCell
-                    width={null}
-                    padding="py-2 pr-6"
-                    modelTask={model.task}
-                  />
-                  <Cell width={null} padding="py-2 pl-6">
-                    <LinkButton
-                      variant="primary"
-                      size="md"
-                      onClick={() => {
-                        router.push({
-                          pathname: "/ais/create",
-                          query: {
-                            model_id: model.id,
-                            connector_definition_name:
-                              "connector-definitions/ai-instill-model",
-                            server_url: `${env(
-                              "NEXT_PUBLIC_MODEL_API_GATEWAY_URL"
-                            )}`,
-                          },
-                        });
-                      }}
-                    >
-                      Add to VDP
-                    </LinkButton>
-                  </Cell>
-                </tr>
-              ))
-            : null}
-        </tbody>
-      </table>
-    </PaginationListContainer>
+    <DataTable
+      columns={columns}
+      data={models}
+      pageSize={6}
+      searchPlaceholder={"Search Models"}
+      searchKey={"id"}
+      isLoading={isLoading}
+      loadingRows={6}
+      primaryText="Models"
+      secondaryText="Check and organise your imported Models"
+    />
   );
 };

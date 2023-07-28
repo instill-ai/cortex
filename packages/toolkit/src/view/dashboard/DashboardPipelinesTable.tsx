@@ -1,171 +1,166 @@
-import * as React from "react";
-import {
-  Cell,
-  GeneralStateCell,
-  PaginationListContainer,
-  PaginationListContainerProps,
-  SkeletonCell,
-  TableError,
-  TableHead,
-  TableHeadItem,
-} from "../../components";
-import { Nullable, PipelineTriggerCount, chunk, env } from "../../lib";
-import { PipelineTablePlaceholder } from "../pipeline";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { Button, Checkbox, DataTable } from "@instill-ai/design-system";
+import { ColumnDef } from "@tanstack/react-table";
+import { PipelineTriggerCount } from "../../lib";
+import { GeneralStateCell, SortIcon, TableError } from "../../components";
+import { parseStatusLabel } from "../../lib/table";
+import { PipelineTablePlaceholder } from "../pipeline";
 
 export type DashboardPipelinesTableProps = {
   pipelineTriggerCounts: PipelineTriggerCount[];
   isError: boolean;
   isLoading: boolean;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const DashboardPipelinesTable = (
   props: DashboardPipelinesTableProps
 ) => {
-  const router = useRouter();
-  const { days } = router.query;
-  const { pipelineTriggerCounts, marginBottom, isError, isLoading } = props;
-  const [currentPage, setCurrentPage] = React.useState(0);
-  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
+  const { pipelineTriggerCounts, isError, isLoading } = props;
 
-  // We will only use searched resource when user input search term
+  const columns: ColumnDef<PipelineTriggerCount>[] = [
+    {
+      accessorKey: "pipeline_id",
+      header: () => <div className="min-w-[600px] text-left">Pipeline Id</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="flex min-w-[600px] flex-row gap-x-2">
+            <Checkbox
+              checked={row.getIsSelected()}
+              onCheckedChange={(value) => row.toggleSelected(!!value)}
+              aria-label="Select row"
+              className="h-5 w-5"
+            />
 
-  const pipelineTriggerPages = React.useMemo(() => {
-    return chunk(pipelineTriggerCounts, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [pipelineTriggerCounts]);
+            <Link
+              href={`/dashboard/pipeline/${row.getValue("pipeline_id")}`}
+              className="hover:underline"
+            >
+              {row.getValue("pipeline_id")}
+            </Link>
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "watchState",
+      accessorFn: (row) => row.watchState,
+      header: () => <div className="max-w-[80px] text-center">Status</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-center">
+            <GeneralStateCell
+              width={null}
+              state={row.getValue("watchState")}
+              padding="py-2"
+              label={parseStatusLabel(row.getValue("watchState"))}
+            />
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "pipeline_completed",
+      header: ({ column }) => {
+        return (
+          <div className="min-w-[130px] text-center">
+            <Button
+              className="gap-x-2 py-0"
+              variant="tertiaryGrey"
+              size="sm"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <span className="min-w-[130px]">Completed Triggers</span>
+              <SortIcon type={column.getIsSorted()} />
+            </Button>
+          </div>
+        );
+      },
 
-  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
-    return [
-      {
-        key: "pipeline-id-head",
-        item: "Pipeline ID",
-        width: "w-auto",
+      cell: ({ row }) => {
+        return (
+          <div className="text-center text-semantic-fg-secondary">
+            {row.getValue("pipeline_completed")}
+          </div>
+        );
       },
-      {
-        key: "pipeline-state-overview-head",
-        item: "Status",
-        width: "w-[160px]",
+    },
+    {
+      accessorKey: "pipeline_errored",
+      header: ({ column }) => (
+        <div className="min-w-[110px] text-center">
+          <Button
+            className="gap-x-2 py-0"
+            variant="tertiaryGrey"
+            size="sm"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            <span className="min-w-[110px]">Errored Triggers</span>
+            <SortIcon type={column.getIsSorted()} />
+          </Button>
+        </div>
+      ),
+      cell: ({ row }) => {
+        return (
+          <div className="text-center text-semantic-fg-secondary">
+            {row.getValue("pipeline_errored")}
+          </div>
+        );
       },
-      {
-        key: "pipeline-completed-triggers-head",
-        item: "Completed triggers",
-        width: "w-[160px]",
-      },
-      {
-        key: "pipeline-errored-triggers-head",
-        item: "Errorred triggers",
-        width: "w-[160px]",
-      },
-    ];
-  }, []);
+    },
+  ];
 
   if (isError) {
     return (
-      <PaginationListContainer
-        title=""
-        description=""
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        totalPage={pipelineTriggerPages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText="Pipelines"
+        secondaryText="Select pipelines from the table below to view the number of pipeline triggers"
       >
-        <TableError />
-      </PaginationListContainer>
+        <TableError marginBottom="!border-0" />
+      </DataTable>
     );
   }
 
   if (pipelineTriggerCounts.length === 0 && !isLoading) {
     return (
-      <PaginationListContainer
-        title=""
-        description=""
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        totalPage={pipelineTriggerPages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText="Pipelines"
+        secondaryText="Select pipelines from the table below to view the number of pipeline triggers"
       >
-        <PipelineTablePlaceholder enableCreateButton={false} />
-      </PaginationListContainer>
+        <PipelineTablePlaceholder
+          enableCreateButton={false}
+          marginBottom="!border-0"
+        />
+      </DataTable>
     );
   }
 
   return (
-    <PaginationListContainer
-      title=""
-      description=""
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      searchTerm={null}
-      setSearchTerm={setSearchTerm}
-      totalPage={pipelineTriggerPages.length}
-      disabledSearchField={true}
-      marginBottom={marginBottom}
-    >
-      <table className="table-auto border-collapse">
-        <TableHead
-          borderColor="border-instillGrey20"
-          bgColor="bg-instillGrey05"
-          items={tableHeadItems}
-        />
-        <tbody>
-          {isLoading
-            ? [Array(4).keys()].map((e) => (
-                <tr
-                  key={`pipelines-table-skeleton-${e}`}
-                  className="border border-instillGrey20 bg-white"
-                >
-                  <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                </tr>
-              ))
-            : pipelineTriggerPages[currentPage]
-            ? pipelineTriggerPages[currentPage]?.map((pipelineTriggerCount) => (
-                <tr
-                  key={pipelineTriggerCount.pipeline_uid}
-                  className="border border-instillGrey20 bg-white"
-                >
-                  <Cell width={null} padding="py-2 pl-6">
-                    <Link
-                      className="truncate product-body-text-3-regular hover:underline text-semantic-fg-secondary"
-                      href={`/dashboard/pipeline/${
-                        pipelineTriggerCount.pipeline_id
-                      }${days ? "?days=" + days : ""}`}
-                    >
-                      {pipelineTriggerCount.pipeline_id}
-                    </Link>
-                  </Cell>
-
-                  <GeneralStateCell
-                    width={null}
-                    state={pipelineTriggerCount.watchState}
-                    padding="py-2"
-                  />
-
-                  <Cell width={null} padding="py-2">
-                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {pipelineTriggerCount.pipeline_completed}
-                    </p>
-                  </Cell>
-
-                  <Cell width={null} padding="py-2 pr-6">
-                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {pipelineTriggerCount.pipeline_errored}
-                    </p>
-                  </Cell>
-                </tr>
-              ))
-            : null}
-        </tbody>
-      </table>
-    </PaginationListContainer>
+    <DataTable
+      columns={columns}
+      data={pipelineTriggerCounts}
+      pageSize={6}
+      searchPlaceholder={"Search Pipelines"}
+      searchKey={"pipeline_id"}
+      isLoading={isLoading}
+      loadingRows={6}
+      primaryText="Pipelines"
+      secondaryText="Select pipelines from the table below to view the number of pipeline triggers"
+    />
   );
 };

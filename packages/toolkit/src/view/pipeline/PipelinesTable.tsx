@@ -1,26 +1,13 @@
-import * as React from "react";
+import { ColumnDef } from "@tanstack/react-table";
+import { Button, DataTable, Icons } from "@instill-ai/design-system";
+import { Pipeline, PipelinesWatchState } from "../../lib";
 import {
-  ConnectionTypeCell,
-  NameCell,
-  TableHead,
-  TableHeadItem,
-  StateOverview,
-  PaginationListContainer,
-  TableError,
-  SkeletonCell,
   PaginationListContainerProps,
-  TextCell,
+  SortIcon,
+  TableError,
 } from "../../components";
-import {
-  chunk,
-  env,
-  useSearchedResources,
-  useStateOverviewCounts,
-  getComponentsFromPipelineRecipe,
-  type Nullable,
-  type Pipeline,
-  type PipelinesWatchState,
-} from "../../lib";
+import { TableCell } from "../../components/cells/TableCell";
+import { formatDate } from "../../lib/table";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
 
 export type PipelinesTableProps = {
@@ -34,181 +21,114 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
   const { pipelines, pipelinesWatchState, marginBottom, isError, isLoading } =
     props;
 
-  const [currentPage, setCurrentPage] = React.useState(0);
-  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
-
-  // We will only use searched resource when user input search term
-
-  const searchedPipelines = useSearchedResources({
-    resources: pipelines,
-    searchTerm,
-  });
-
-  const pipelinePages = React.useMemo(() => {
-    if (!searchTerm) {
-      return chunk(pipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-    }
-    return chunk(searchedPipelines, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [searchedPipelines, pipelines, searchTerm]);
-
-  const stateOverviewCounts = useStateOverviewCounts(
-    searchTerm ? searchedPipelines : pipelines,
-    pipelinesWatchState,
-    isLoading
-  );
-
-  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
-    return [
-      {
-        key: "pipeline-state-overview-head",
-        item: (
-          <StateOverview
-            errorCounts={stateOverviewCounts?.error || 0}
-            offlineCounts={stateOverviewCounts?.offline || 0}
-            onlineCounts={stateOverviewCounts?.online || 0}
-          />
-        ),
-        width: "w-[480px]",
+  const columns: ColumnDef<Pipeline>[] = [
+    {
+      accessorKey: "id",
+      header: () => <div className="min-w-[300px] text-left">Pipelines</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-left">
+            <TableCell
+              primaryLink={`/pipelines/${row.getValue("id")}`}
+              primaryText={row.getValue("id")}
+              secondaryLink={null}
+              secondaryText={null}
+              iconElement={null}
+            />
+          </div>
+        );
       },
-      {
-        key: "pipeline-source-head",
-        item: "Source",
-        width: "w-[160px]",
+    },
+    {
+      accessorKey: "create_time",
+      header: ({ column }) => {
+        return (
+          <div className="text-center">
+            <Button
+              className="gap-x-2 py-0"
+              variant="tertiaryGrey"
+              size="sm"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <span className="min-w-[130px]">Date added</span>
+              <SortIcon type={column.getIsSorted()} />
+            </Button>
+          </div>
+        );
       },
-      {
-        key: "pipeline-destination-head",
-        item: "Destination",
-        width: "w-[160px]",
+      cell: ({ row }) => {
+        return (
+          <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
+            {formatDate(row.getValue("create_time"))}
+          </div>
+        );
       },
-    ];
-  }, [stateOverviewCounts]);
+    },
+    {
+      accessorKey: "uid",
+      header: () => <div className="min-w-[100px] text-center"></div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+            <Icons.Trash01 className="h-5 w-5 stroke-semantic-error-default" />
+          </div>
+        );
+      },
+    },
+  ];
 
   if (isError) {
     return (
-      <PaginationListContainer
-        title="Pipeline"
-        description="These are the pipelines you can select"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        totalPage={pipelinePages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText="Pipelines"
+        secondaryText="Check your pipelines"
       >
-        <TableError />
-      </PaginationListContainer>
+        <TableError marginBottom="!border-0" />
+      </DataTable>
     );
   }
 
   if (pipelines.length === 0 && !isLoading) {
     return (
-      <PaginationListContainer
-        title="Pipeline"
-        description="These are the pipelines you can select"
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        totalPage={pipelinePages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText="Pipelines"
+        secondaryText="Check your pipelines"
       >
-        <PipelineTablePlaceholder enableCreateButton={false} />
-      </PaginationListContainer>
+        <PipelineTablePlaceholder
+          enableCreateButton={false}
+          marginBottom="!border-0"
+        />
+      </DataTable>
     );
   }
 
   return (
-    <PaginationListContainer
-      title="Pipeline"
-      description="These are the pipelines you can select"
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-      totalPage={pipelinePages.length}
-      disabledSearchField={isLoading ? true : false}
-      marginBottom={marginBottom}
-    >
-      <table className="table-auto border-collapse">
-        <TableHead
-          borderColor="border-instillGrey20"
-          bgColor="bg-instillGrey05"
-          items={tableHeadItems}
-        />
-        <tbody>
-          {isLoading
-            ? [...Array(5).keys()].map((e) => (
-                <tr
-                  key={`pipelines-table-skeleton-${e}`}
-                  className="bg-white border border-instillGrey20"
-                >
-                  <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                </tr>
-              ))
-            : pipelinePages[currentPage]
-            ? pipelinePages[currentPage].map((pipeline) => {
-                const sourceComponent = getComponentsFromPipelineRecipe({
-                  recipe: pipeline.recipe,
-                  connectorType: "CONNECTOR_TYPE_SOURCE",
-                });
-
-                const destinationComponent = getComponentsFromPipelineRecipe({
-                  recipe: pipeline.recipe,
-                  connectorType: "CONNECTOR_TYPE_DESTINATION",
-                });
-
-                return (
-                  <tr
-                    key={pipeline.name}
-                    className="bg-white border border-instillGrey20"
-                  >
-                    <NameCell
-                      name={pipeline.id}
-                      width={null}
-                      state={
-                        pipelinesWatchState[pipeline.name]
-                          ? pipelinesWatchState[pipeline.name].state
-                          : "STATE_UNSPECIFIED"
-                      }
-                      padding="py-2 pl-6"
-                      link={`/pipelines/${pipeline.id}`}
-                    />
-                    {sourceComponent[0] ? (
-                      <ConnectionTypeCell
-                        width={null}
-                        connectorDefinition={
-                          sourceComponent[0].resource_detail
-                            .connector_definition
-                        }
-                        connectorName={sourceComponent[0].resource_name}
-                        padding="py-2"
-                      />
-                    ) : (
-                      <TextCell text="Not set" width={null} padding="py-2" />
-                    )}
-                    {destinationComponent[0] ? (
-                      <ConnectionTypeCell
-                        width={null}
-                        connectorDefinition={
-                          destinationComponent[0].resource_detail
-                            .connector_definition
-                        }
-                        connectorName={destinationComponent[0].resource_name}
-                        padding="py-2 pr-6"
-                      />
-                    ) : (
-                      <TextCell text="Not set" width={null} padding="py-2" />
-                    )}
-                  </tr>
-                );
-              })
-            : null}
-        </tbody>
-      </table>
-    </PaginationListContainer>
+    <DataTable
+      columns={columns}
+      data={pipelines}
+      pageSize={6}
+      searchPlaceholder={"Search Pipelines"}
+      searchKey={"id"}
+      isLoading={isLoading}
+      loadingRows={6}
+      primaryText="Pipelines"
+      secondaryText="Check your pipelines"
+    />
   );
 };

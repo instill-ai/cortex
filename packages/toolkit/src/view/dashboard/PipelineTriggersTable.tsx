@@ -1,182 +1,143 @@
-import * as React from "react";
+import { Button, DataTable } from "@instill-ai/design-system";
+import { ColumnDef } from "@tanstack/react-table";
 import {
-  TableHead,
-  TableHeadItem,
-  PaginationListContainer,
-  TableError,
-  SkeletonCell,
-  PaginationListContainerProps,
-  Cell,
-  GeneralStateCell,
-} from "../../components";
-
-import {
-  chunk,
-  env,
-  type PipelineTriggerRecord,
-  type Nullable,
+  PipelineTriggerRecord,
   convertTimestamp,
   convertToSecondsAndMilliseconds,
   parseTriggerStatusLabel,
 } from "../../lib";
-import { PipelineTablePlaceholder } from "../pipeline";
+import { GeneralStateCell, SortIcon, TableError } from "../../components";
+import { TriggersTablePlaceholder } from "./TriggersTablePlaceholder";
 
 export type PipelineTriggersTableProps = {
   pipelineTriggers: PipelineTriggerRecord[];
   isError: boolean;
   isLoading: boolean;
-} & Pick<
-  PaginationListContainerProps,
-  "marginBottom" | "currentPage" | "setCurrentPage"
->;
+};
 
 export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
-  const {
-    pipelineTriggers,
-    marginBottom,
-    isError,
-    isLoading,
-    currentPage,
-    setCurrentPage,
-  } = props;
+  const { pipelineTriggers, isError, isLoading } = props;
 
-  const [searchTerm, setSearchTerm] = React.useState<Nullable<string>>(null);
-
-  // We will only use searched resource when user input search term
-
-  const pipelineTriggerPages = React.useMemo(() => {
-    return chunk(pipelineTriggers, env("NEXT_PUBLIC_LIST_PAGE_SIZE"));
-  }, [pipelineTriggers]);
-
-  const tableHeadItems = React.useMemo<TableHeadItem[]>(() => {
-    return [
-      {
-        key: "pipeline-triggers-timestamp",
-        item: "Timestamp",
-        width: "w-[360px]",
+  const columns: ColumnDef<PipelineTriggerRecord>[] = [
+    {
+      accessorKey: "trigger_time",
+      header: () => <div className="min-w-[400px] text-left">Timestamp</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-left">
+            {convertTimestamp(row.getValue("trigger_time"))}
+          </div>
+        );
       },
-      {
-        key: "pipeline-triggers-mode-head",
-        item: "State",
-        width: "w-[160px]",
+    },
+    {
+      accessorKey: "status",
+      header: () => <div className="max-w-[100px] text-center">Status</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="text-center">
+            <GeneralStateCell
+              width={null}
+              state={row.getValue("status")}
+              padding="py-2"
+              label={parseTriggerStatusLabel(row.getValue("status"))}
+            />
+          </div>
+        );
       },
-      {
-        key: "pipeline-triggers-trigger-time-head",
-        item: "Trigger Duration",
-        width: "w-[160px]",
+    },
+    {
+      accessorKey: "compute_time_duration",
+      header: ({ column }) => {
+        return (
+          <div className="min-w-[150px] text-center">
+            <Button
+              className="gap-x-2 py-0"
+              variant="tertiaryGrey"
+              size="sm"
+              onClick={() =>
+                column.toggleSorting(column.getIsSorted() === "asc")
+              }
+            >
+              <span className="min-w-[130px]">Trigger Duration</span>
+              <SortIcon type={column.getIsSorted()} />
+            </Button>
+          </div>
+        );
       },
-      {
-        key: "pipeline-triggers-trigger-id-head",
-        item: "Trigger ID",
-        width: "w-auto",
+      cell: ({ row }) => {
+        return (
+          <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
+            {convertToSecondsAndMilliseconds(
+              row.getValue("compute_time_duration")
+            )}
+          </div>
+        );
       },
-    ];
-  }, []);
+    },
+    {
+      accessorKey: "pipeline_trigger_id",
+      header: () => <div className="min-w-[350px] text-center">Trigger ID</div>,
+      cell: ({ row }) => {
+        return (
+          <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
+            {row.getValue("pipeline_trigger_id")}
+          </div>
+        );
+      },
+    },
+  ];
 
   if (isError) {
     return (
-      <PaginationListContainer
-        title="Pipeline Trigger"
-        description=""
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={null}
-        setSearchTerm={setSearchTerm}
-        totalPage={pipelineTriggerPages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText={null}
+        secondaryText="Pipeline triggers"
       >
-        <TableError />
-      </PaginationListContainer>
+        <TableError marginBottom="!border-0" />
+      </DataTable>
     );
   }
 
   if (pipelineTriggers.length === 0 && !isLoading) {
     return (
-      <PaginationListContainer
-        title="Pipeline Triggers"
-        description=""
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        searchTerm={null}
-        setSearchTerm={setSearchTerm}
-        totalPage={pipelineTriggerPages.length}
-        disabledSearchField={true}
-        marginBottom={marginBottom}
+      <DataTable
+        columns={columns}
+        data={[]}
+        pageSize={6}
+        searchPlaceholder={null}
+        searchKey={null}
+        isLoading={isLoading}
+        loadingRows={6}
+        primaryText={null}
+        secondaryText="Pipeline triggers"
       >
-        <PipelineTablePlaceholder enableCreateButton={false} />
-      </PaginationListContainer>
+        <TriggersTablePlaceholder
+          enableCreateButton={false}
+          marginBottom="!border-0"
+        />
+      </DataTable>
     );
   }
 
   return (
-    <PaginationListContainer
-      title="Pipeline Triggers"
-      description=""
-      currentPage={currentPage}
-      setCurrentPage={setCurrentPage}
-      searchTerm={searchTerm}
-      setSearchTerm={setSearchTerm}
-      totalPage={pipelineTriggerPages.length}
-      disabledSearchField={true}
-      marginBottom={marginBottom}
-    >
-      <table className="table-auto border-collapse">
-        <TableHead
-          borderColor="border-instillGrey20"
-          bgColor="bg-instillGrey05"
-          items={tableHeadItems}
-        />
-        <tbody>
-          {isLoading
-            ? [Array(4).keys()].map((e) => (
-                <tr
-                  key={`pipelines-table-skeleton-${e}`}
-                  className="border border-instillGrey20 bg-white"
-                >
-                  <SkeletonCell width={null} padding="py-2 pl-6 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                  <SkeletonCell width={null} padding="py-2 pr-6" />
-                </tr>
-              ))
-            : pipelineTriggerPages[currentPage]
-            ? pipelineTriggerPages[currentPage].map((pipelineTrigger) => (
-                <tr
-                  key={pipelineTrigger.pipeline_trigger_id}
-                  className="border border-instillGrey20 bg-white"
-                >
-                  <Cell width={null} padding="py-2 pl-6">
-                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {convertTimestamp(pipelineTrigger.trigger_time)}
-                    </p>
-                  </Cell>
-
-                  <GeneralStateCell
-                    width={null}
-                    state={pipelineTrigger.status}
-                    padding="py-2"
-                    label={parseTriggerStatusLabel(pipelineTrigger.status)}
-                  />
-
-                  <Cell width={null} padding="py-2">
-                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {convertToSecondsAndMilliseconds(
-                        pipelineTrigger.compute_time_duration
-                      )}
-                    </p>
-                  </Cell>
-
-                  <Cell width={null} padding="py-2 pr-6">
-                    <p className="truncate product-body-text-3-regular text-semantic-fg-secondary">
-                      {String(pipelineTrigger.pipeline_trigger_id)}
-                    </p>
-                  </Cell>
-                </tr>
-              ))
-            : null}
-        </tbody>
-      </table>
-    </PaginationListContainer>
+    <DataTable
+      columns={columns}
+      data={pipelineTriggers}
+      pageSize={6}
+      searchPlaceholder={"Search Triggers"}
+      searchKey={null}
+      isLoading={isLoading}
+      loadingRows={6}
+      primaryText={null}
+      secondaryText="Pipeline triggers"
+    />
   );
 };
