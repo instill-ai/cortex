@@ -5,6 +5,7 @@ import { PipelineTriggerCount } from "../../lib";
 import { GeneralStateCell, SortIcon, TableError } from "../../components";
 import { parseStatusLabel } from "../../lib/table";
 import { PipelineTablePlaceholder } from "../pipeline";
+import { useRouter } from "next/router";
 
 export type DashboardPipelinesTableProps = {
   pipelineTriggerCounts: PipelineTriggerCount[];
@@ -15,6 +16,8 @@ export type DashboardPipelinesTableProps = {
 export const DashboardPipelinesTable = (
   props: DashboardPipelinesTableProps
 ) => {
+  const router = useRouter();
+  const { days } = router.query;
   const { pipelineTriggerCounts, isError, isLoading } = props;
 
   const columns: ColumnDef<PipelineTriggerCount>[] = [
@@ -32,7 +35,9 @@ export const DashboardPipelinesTable = (
             />
 
             <Link
-              href={`/dashboard/pipeline/${row.getValue("pipeline_id")}`}
+              href={`/dashboard/pipeline/${row.getValue("pipeline_id")}${
+                days ? "?days=" + days : ""
+              }`}
               className="hover:underline"
             >
               {row.getValue("pipeline_id")}
