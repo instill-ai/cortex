@@ -115,17 +115,6 @@ export const ModelsTable = (props: ModelsTableProps) => {
     },
     {
       accessorKey: "uid",
-      header: () => <div className="text-center">Plan</div>,
-      cell: ({ row }) => {
-        return (
-          <div className="text-semantic-fg-secondary product-body-text-3-regular">
-            Basic
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: "uid",
       header: () => <div className="text-center"></div>,
       cell: ({ row }) => {
         return (
