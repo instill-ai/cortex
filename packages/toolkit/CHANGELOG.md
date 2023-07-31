@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.0...@instill-ai/toolkit-v0.63.1) (2023-07-31)
+
+
+### Miscellaneous
+
+* update export components  ([#717](https://github.com/instill-ai/design-system/issues/717)) ([5d99c1c](https://github.com/instill-ai/design-system/commit/5d99c1c098fe092adc2512c7d814a6864c92a7b2))
+
 ## [0.63.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.62.1...@instill-ai/toolkit-v0.63.0) (2023-07-28)
 
 
