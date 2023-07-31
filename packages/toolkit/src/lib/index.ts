@@ -7,6 +7,7 @@ export * from "./hook";
 export * from "./pipeline-builder";
 export * from "./react-query-service";
 export * from "./store";
+export * from "./table";
 export * from "./type";
 export * from "./utility";
 export * from "./vdp-sdk";

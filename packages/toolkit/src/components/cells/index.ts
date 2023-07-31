@@ -10,4 +10,5 @@ export * from "./NameCell";
 export * from "./PipelinesCell";
 export * from "./SkeletonCell";
 export * from "./TextCell";
+export * from "./TableCell";
 export * from "./VisibilityCell";
