@@ -31,7 +31,7 @@ import {
   Textarea,
   useToast,
 } from "@instill-ai/design-system";
-import { ConfigureBlockchainFormSchema } from "../../blockchan";
+import { ConfigureBlockchainFormSchema } from "../../blockchain";
 
 export type BlockchainFormProps = {
   blockchain: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
