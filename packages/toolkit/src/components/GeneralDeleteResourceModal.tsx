@@ -134,7 +134,7 @@ export const GeneralDeleteResourceModal = (props: DeleteResourceModalProps) => {
         </Input.Root>
       </div>
       <div className="flex flex-row gap-x-2">
-        <Dialog.Close asChild>
+        <Dialog.Close>
           <Button
             variant="secondaryGrey"
             size="lg"

@@ -1,22 +1,37 @@
+import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { ConnectorWithPipelines, ConnectorsWatchState } from "../../lib";
+import {
+  Button,
+  DataDestinationIcon,
+  DataSourceIcon,
+  DataTable,
+  Dialog,
+  useToast,
+} from "@instill-ai/design-system";
+import { isAxiosError } from "axios";
+import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
+import {
+  ConnectorWithDefinition,
+  ConnectorWithPipelines,
+  ConnectorsWatchState,
+  Model,
+  Nullable,
+  Pipeline,
+  formatDate,
+  getInstillApiErrorMessage,
+  parseStatusLabel,
+  useDeleteConnector,
+} from "../../lib";
 import {
   GeneralStateCell,
   GeneralTaskCell,
   ImageWithFallback,
   PaginationListContainerProps,
   SortIcon,
+  TableCell,
   TableError,
 } from "../../components";
-import { TableCell } from "../../components/cells/TableCell";
-import { formatDate, parseStatusLabel } from "../../lib/table";
 import { AITablePlaceholder } from "./AITablePlaceholder";
-import {
-  Button,
-  DataDestinationIcon,
-  DataSourceIcon,
-  DataTable,
-} from "@instill-ai/design-system";
 
 export type AIsTableProps = {
   ais: ConnectorWithPipelines[];
@@ -27,6 +42,52 @@ export type AIsTableProps = {
 
 export const AIsTable = (props: AIsTableProps) => {
   const { ais, aisWatchState, marginBottom, isError, isLoading } = props;
+
+  const deleteConnector = useDeleteConnector();
+  const { toast } = useToast();
+  const [isDeleting, setIsDeleting] = React.useState(false);
+  const handleDeleteAI = (
+    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+  ) => {
+    if (!resource) return;
+
+    setIsDeleting(true);
+
+    deleteConnector.mutate(
+      {
+        connectorName: resource.name,
+        accessToken: null,
+      },
+      {
+        onSuccess: () => {
+          setIsDeleting(false);
+          toast({
+            title: "AI deleted",
+            variant: "alert-success",
+            size: "large",
+          });
+        },
+        onError: (error) => {
+          setIsDeleting(false);
+          if (isAxiosError(error)) {
+            toast({
+              title: "Something went wrong when delete the AI",
+              description: getInstillApiErrorMessage(error),
+              variant: "alert-error",
+              size: "large",
+            });
+          } else {
+            toast({
+              title: "Something went wrong when delete the AI",
+              variant: "alert-error",
+              description: "Please try again later",
+              size: "large",
+            });
+          }
+        },
+      }
+    );
+  };
 
   const columns: ColumnDef<ConnectorWithPipelines>[] = [
     {
@@ -136,9 +197,20 @@ export const AIsTable = (props: AIsTableProps) => {
       header: () => <div className="text-center"></div>,
       cell: ({ row }) => {
         return (
-          <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-            Delete
-          </div>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+                Delete
+              </div>
+            </Dialog.Trigger>
+            <Dialog.Content>
+              <GeneralDeleteResourceModal
+                resource={row.original}
+                handleDeleteResource={handleDeleteAI}
+                isDeleting={isDeleting}
+              />
+            </Dialog.Content>
+          </Dialog.Root>
         );
       },
     },
