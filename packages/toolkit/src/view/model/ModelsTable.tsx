@@ -113,17 +113,6 @@ export const ModelsTable = (props: ModelsTableProps) => {
         );
       },
     },
-    {
-      accessorKey: "uid",
-      header: () => <div className="text-center"></div>,
-      cell: ({ row }) => {
-        return (
-          <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-            Delete
-          </div>
-        );
-      },
-    },
   ];
 
   if (isError) {

@@ -4,8 +4,19 @@ import {
   DataDestinationIcon,
   DataSourceIcon,
   DataTable,
+  Dialog,
+  useToast,
 } from "@instill-ai/design-system";
-import { ConnectorWithPipelines, ConnectorsWatchState } from "../../lib";
+import {
+  ConnectorWithDefinition,
+  ConnectorWithPipelines,
+  ConnectorsWatchState,
+  Model,
+  Nullable,
+  Pipeline,
+  getInstillApiErrorMessage,
+  useDeleteConnector,
+} from "../../lib";
 import {
   GeneralStateCell,
   ImageWithFallback,
@@ -16,6 +27,9 @@ import {
 import { formatDate, parseStatusLabel } from "../../lib/table";
 import { BlockchainTablePlaceholder } from "./BlockchainTablePlaceholder";
 import { TableCell } from "../../components/cells/TableCell";
+import React from "react";
+import { isAxiosError } from "axios";
+import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 
 export type BlockchainsTableProps = {
   blockchains: ConnectorWithPipelines[];
@@ -32,6 +46,51 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
     isError,
     isLoading,
   } = props;
+
+  const deleteConnector = useDeleteConnector();
+  const { toast } = useToast();
+  const [isDeleting, setIsDeleting] = React.useState(false);
+
+  const handleDeleteBlockchain = (
+    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+  ) => {
+    if (!resource) return;
+    setIsDeleting(true);
+    deleteConnector.mutate(
+      {
+        connectorName: resource.name,
+        accessToken: null,
+      },
+      {
+        onSuccess: () => {
+          setIsDeleting(false);
+          toast({
+            title: "Blockchain deleted",
+            variant: "alert-success",
+            size: "large",
+          });
+        },
+        onError: (error) => {
+          setIsDeleting(false);
+          if (isAxiosError(error)) {
+            toast({
+              title: "Something went wrong when delete the Blockchain",
+              description: getInstillApiErrorMessage(error),
+              variant: "alert-error",
+              size: "large",
+            });
+          } else {
+            toast({
+              title: "Something went wrong when delete the Blockchain",
+              variant: "alert-error",
+              description: "Please try again later",
+              size: "large",
+            });
+          }
+        },
+      }
+    );
+  };
 
   const columns: ColumnDef<ConnectorWithPipelines>[] = [
     {
@@ -134,9 +193,20 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
       header: () => <div className="text-center"></div>,
       cell: ({ row }) => {
         return (
-          <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-            Delete
-          </div>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+                Delete
+              </div>
+            </Dialog.Trigger>
+            <Dialog.Content>
+              <GeneralDeleteResourceModal
+                resource={row.original}
+                handleDeleteResource={handleDeleteBlockchain}
+                isDeleting={isDeleting}
+              />
+            </Dialog.Content>
+          </Dialog.Root>
         );
       },
     },
