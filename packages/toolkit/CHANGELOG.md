@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.1...@instill-ai/toolkit-v0.63.2) (2023-08-01)
+
+
+### Miscellaneous
+
+* namananand/ins 1451 add delete model for blockchain table ([#719](https://github.com/instill-ai/design-system/issues/719)) ([4e5d1ea](https://github.com/instill-ai/design-system/commit/4e5d1ea3b22cc74bcd479598dbbb7347bbf2e257))
+
 ## [0.63.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.0...@instill-ai/toolkit-v0.63.1) (2023-07-31)
 
 
