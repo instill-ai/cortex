@@ -18,7 +18,8 @@ export type ConnectorType =
   | "CONNECTOR_TYPE_SOURCE"
   | "CONNECTOR_TYPE_DESTINATION"
   | "CONNECTOR_TYPE_AI"
-  | "CONNECTOR_TYPE_BLOCKCHAIN";
+  | "CONNECTOR_TYPE_BLOCKCHAIN"
+  | "CONNECTOR_TYPE_DATA";
 
 export type Connector = {
   name: string;
