@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.2...@instill-ai/toolkit-v0.63.3) (2023-08-01)
+
+
+### Miscellaneous
+
+* pipeline and ai table add delete model ([#721](https://github.com/instill-ai/design-system/issues/721)) ([a41e43c](https://github.com/instill-ai/design-system/commit/a41e43cdbf12b37e898158c9c7424e3c351d63f4))
+
 ## [0.63.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.1...@instill-ai/toolkit-v0.63.2) (2023-08-01)
 
 
