@@ -109,7 +109,7 @@ export function getConnectorPresets(
 
       return constructedPresets;
     }
-    case "CONNECTOR_TYPE_DESTINATION": {
+    case "CONNECTOR_TYPE_DATA": {
       const constructedPresets: IncompleteConnectorWithWatchState[] = [];
 
       destinations.forEach((preset) => {

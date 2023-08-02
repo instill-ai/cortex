@@ -35,7 +35,7 @@ export const GeneralDeleteResourceModal = (
         title = `Delete ${resource.id} Source`;
         description =
           "This action cannot be undone. This will permanently delete the source.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_DESTINATION") {
+      } else if (resource.connector_type === "CONNECTOR_TYPE_DATA") {
         title = `Delete ${resource.id} Destination`;
         description =
           "This action cannot be undone. This will permanently delete the destination.";

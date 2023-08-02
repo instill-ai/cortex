@@ -57,7 +57,7 @@ const Item = (props: {
         <Icons.CubeOutline className="h-4 w-4 stroke-semantic-fg-primary" />
       );
       break;
-    case "CONNECTOR_TYPE_DESTINATION":
+    case "CONNECTOR_TYPE_DATA":
       fallbackImg = (
         <Icons.Box className="h-4 w-4 stroke-semantic-fg-primary" />
       );

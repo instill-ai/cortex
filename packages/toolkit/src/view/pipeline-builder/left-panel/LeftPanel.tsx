@@ -63,9 +63,9 @@ export const LeftPanel = (props: LeftPanelProps) => {
   });
 
   const destinationDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_DESTINATION",
+    connectorType: "CONNECTOR_TYPE_DATA",
     enabled:
-      enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION",
+      enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_DATA",
     accessToken,
   });
 
@@ -142,7 +142,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
             : null}
         </SelectConnectorDefinitionDialog>
       ) : null}
-      {leftSidebarSelectedTab === "CONNECTOR_TYPE_DESTINATION" ? (
+      {leftSidebarSelectedTab === "CONNECTOR_TYPE_DATA" ? (
         <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {destinationDefinitions.isSuccess
             ? destinationDefinitions.data.map((definition) => (
@@ -164,7 +164,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                       sourcePosition: Position.Left,
                       targetPosition: Position.Right,
                       data: {
-                        connectorType: "CONNECTOR_TYPE_DESTINATION",
+                        connectorType: "CONNECTOR_TYPE_DATA",
                         connector: {
                           id: randomName,
                           name: `connectors/${randomName}`,

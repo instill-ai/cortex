@@ -65,7 +65,7 @@ export const PipelineTable = (props: PipelineTableProps) => {
 
   const destinationComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_DESTINATION",
+    connectorType: "CONNECTOR_TYPE_DATA",
   });
 
   const aiComponent = getComponentsFromPipelineRecipe({
