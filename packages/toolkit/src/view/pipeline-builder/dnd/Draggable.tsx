@@ -62,7 +62,7 @@ const Item = (props: {
         <Icons.Box className="h-4 w-4 stroke-semantic-fg-primary" />
       );
       break;
-    case "CONNECTOR_TYPE_SOURCE":
+    case "CONNECTOR_TYPE_OPERATOR":
       fallbackImg = (
         <Icons.Database01 className="h-4 w-4 stroke-semantic-fg-primary" />
       );
