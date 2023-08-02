@@ -16,14 +16,14 @@ export const LeftSidebar = () => {
       <button
         onClick={() =>
           setLeftSidebarSelectedTab((prev) =>
-            prev === "CONNECTOR_TYPE_SOURCE" ? null : "CONNECTOR_TYPE_SOURCE"
+            prev === "CONNECTOR_TYPE_OPERATOR" ? null : "CONNECTOR_TYPE_OPERATOR"
           )
         }
         className={cn(
           "mx-auto flex flex-col rounded-xs border border-transparent p-1 hover:bg-semantic-bg-base-bg",
           {
             "!border-semantic-accent-default border-opacity-100 bg-semantic-accent-bg hover:bg-semantic-accent-bg":
-              leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE",
+              leftSidebarSelectedTab === "CONNECTOR_TYPE_OPERATOR",
           }
         )}
       >

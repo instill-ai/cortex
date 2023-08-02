@@ -57,8 +57,8 @@ export const LeftPanel = (props: LeftPanelProps) => {
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const sourceDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_SOURCE",
-    enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE",
+    connectorType: "CONNECTOR_TYPE_OPERATOR",
+    enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_OPERATOR",
     accessToken,
   });
 
@@ -84,7 +84,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
 
   return (
     <div className="flex h-full w-full flex-col">
-      {leftSidebarSelectedTab === "CONNECTOR_TYPE_SOURCE" ? (
+      {leftSidebarSelectedTab === "CONNECTOR_TYPE_OPERATOR" ? (
         <SelectConnectorDefinitionDialog type={leftSidebarSelectedTab}>
           {sourceDefinitions.isSuccess
             ? sourceDefinitions.data.map((definition) => (
@@ -101,7 +101,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                       sourcePosition: Position.Left,
                       targetPosition: Position.Right,
                       data: {
-                        connectorType: "CONNECTOR_TYPE_SOURCE",
+                        connectorType: "CONNECTOR_TYPE_OPERATOR",
                         connector: {
                           id: definition.id,
                           name: `connectors/${definition.id}`,

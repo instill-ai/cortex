@@ -89,7 +89,7 @@ export function getConnectorPresets(
   definitions: ConnectorDefinition[]
 ) {
   switch (type) {
-    case "CONNECTOR_TYPE_SOURCE": {
+    case "CONNECTOR_TYPE_OPERATOR": {
       const constructedPresets: IncompleteConnectorWithWatchState[] = [];
 
       sources.forEach((preset) => {

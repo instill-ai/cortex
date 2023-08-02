@@ -31,7 +31,7 @@ export const GeneralDeleteResourceModal = (
     let description: string;
 
     if ("connector_definition" in resource) {
-      if (resource.connector_type === "CONNECTOR_TYPE_SOURCE") {
+      if (resource.connector_type === "CONNECTOR_TYPE_OPERATOR") {
         title = `Delete ${resource.id} Source`;
         description =
           "This action cannot be undone. This will permanently delete the source.";

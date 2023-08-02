@@ -47,7 +47,7 @@ export const SelectConnectorDefinitionDialog = (
   let connectorTypeName: Nullable<string> = null;
 
   switch (type) {
-    case "CONNECTOR_TYPE_SOURCE":
+    case "CONNECTOR_TYPE_OPERATOR":
       icon = (
         <Icons.Database01 className="h-6 w-6 stroke-semantic-fg-primary" />
       );

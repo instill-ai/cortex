@@ -57,13 +57,13 @@ export const SourceForm = (props: SourceFormProps) => {
   );
 
   const sourceDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_SOURCE",
+    connectorType: "CONNECTOR_TYPE_OPERATOR",
     accessToken,
     enabled: enableQuery,
   });
 
   const sources = useConnectors({
-    connectorType: "CONNECTOR_TYPE_SOURCE",
+    connectorType: "CONNECTOR_TYPE_OPERATOR",
     accessToken,
     enabled: enableQuery,
   });

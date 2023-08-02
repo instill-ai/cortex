@@ -1,5 +1,33 @@
 # Changelog
 
+## [0.63.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.8...@instill-ai/toolkit-v0.63.9) (2023-08-02)
+
+
+### Miscellaneous
+
+* **toolkit:** update CONNECTOR_TYPE_SOURCE to CONNECTOR_TYPE_OPERATOR  ([#734](https://github.com/instill-ai/design-system/issues/734)) ([7273635](https://github.com/instill-ai/design-system/commit/7273635cc268e8a867e5abf8de2a9975d8db320a))
+
+## [0.63.8](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.7...@instill-ai/toolkit-v0.63.8) (2023-08-02)
+
+
+### Miscellaneous
+
+* **toolkit:** update connector type ([#732](https://github.com/instill-ai/design-system/issues/732)) ([e620929](https://github.com/instill-ai/design-system/commit/e620929fdcc2ee8dc6a6752fd8c72ba5c37749e7))
+
+## [0.63.7](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.6...@instill-ai/toolkit-v0.63.7) (2023-08-02)
+
+
+### Bug Fixes
+
+* **toolkit:** export fix ([#730](https://github.com/instill-ai/design-system/issues/730)) ([7eac52f](https://github.com/instill-ai/design-system/commit/7eac52f88dfc988a471e42da4cdeeaf930b5a6ef))
+
+## [0.63.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.5...@instill-ai/toolkit-v0.63.6) (2023-08-02)
+
+
+### Bug Fixes
+
+* **toolkit:** pipeline table column alignment ([#728](https://github.com/instill-ai/design-system/issues/728)) ([827b85e](https://github.com/instill-ai/design-system/commit/827b85e417c37c0eae21c8510118badd2efbe1d1))
+
 ## [0.63.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.4...@instill-ai/toolkit-v0.63.5) (2023-08-02)
 
 
