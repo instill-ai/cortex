@@ -82,7 +82,7 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
   return (
     <BasicSingleSelect
       id="source-definition"
-      label="Source"
+      label="Operator"
       disabled={disabledAll ? disabledAll : canEdit ? false : true}
       options={sourceDefinitionOptions || []}
       required={true}
