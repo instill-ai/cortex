@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.6](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.5...@instill-ai/toolkit-v0.63.6) (2023-08-02)
+
+
+### Bug Fixes
+
+* **toolkit:** pipeline table column alignment ([#728](https://github.com/instill-ai/design-system/issues/728)) ([827b85e](https://github.com/instill-ai/design-system/commit/827b85e417c37c0eae21c8510118badd2efbe1d1))
+
 ## [0.63.5](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.4...@instill-ai/toolkit-v0.63.5) (2023-08-02)
 
 
