@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.63.11](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.10...@instill-ai/toolkit-v0.63.11) (2023-08-02)
+
+
+### Bug Fixes
+
+* update label ([#738](https://github.com/instill-ai/design-system/issues/738)) ([0348a3a](https://github.com/instill-ai/design-system/commit/0348a3ad08fa98abf8fe7d0e04ec380a7fc346c1))
+
+
+### Miscellaneous
+
+* add data and operator delete model ([#740](https://github.com/instill-ai/design-system/issues/740)) ([44c796d](https://github.com/instill-ai/design-system/commit/44c796d154b366d5c4f5d88f74578f2cca741bb9))
+
 ## [0.63.10](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.9...@instill-ai/toolkit-v0.63.10) (2023-08-02)
 
 
