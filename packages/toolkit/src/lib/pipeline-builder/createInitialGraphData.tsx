@@ -49,7 +49,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
         edges.push(...componentEdges);
         break;
       }
-      case "CONNECTOR_TYPE_DESTINATION": {
+      case "CONNECTOR_TYPE_DATA": {
         const target = destinations.find(
           (destination) => destination.name === component.resource_name
         );
@@ -58,7 +58,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "destinationNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_DESTINATION",
+              connectorType: "CONNECTOR_TYPE_DATA",
               connector: target,
             },
             position: { x: 0, y: 0 },

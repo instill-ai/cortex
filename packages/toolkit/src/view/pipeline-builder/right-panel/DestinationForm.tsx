@@ -161,7 +161,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
    * -----------------------------------------------------------------------*/
 
   const destinations = useConnectors({
-    connectorType: "CONNECTOR_TYPE_DESTINATION",
+    connectorType: "CONNECTOR_TYPE_DATA",
     accessToken,
     enabled: enableQuery,
   });

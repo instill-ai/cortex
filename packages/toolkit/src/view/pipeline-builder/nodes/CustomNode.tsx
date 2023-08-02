@@ -204,7 +204,7 @@ const NameRow = (props: { name: string; definition: ConnectorDefinition }) => {
       );
       break;
     }
-    case "CONNECTOR_TYPE_DESTINATION": {
+    case "CONNECTOR_TYPE_DATA": {
       fallbackImage = (
         <Icons.Database01 className="h-4 w-4 stroke-semantic-fg-primary" />
       );

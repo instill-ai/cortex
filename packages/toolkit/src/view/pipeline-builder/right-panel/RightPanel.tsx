@@ -41,7 +41,7 @@ export const RightPanel = (props: RightPanelProps) => {
           <AIForm ai={selectedNode.data.connector} accessToken={accessToken} />
         ) : null}
         {selectedNode &&
-        selectedNode.data.connectorType === "CONNECTOR_TYPE_DESTINATION" ? (
+        selectedNode.data.connectorType === "CONNECTOR_TYPE_DATA" ? (
           <DestinationForm
             destination={selectedNode.data.connector}
             accessToken={accessToken}

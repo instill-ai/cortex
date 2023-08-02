@@ -69,7 +69,7 @@ export const SelectConnectorDefinitionDialog = (
       dialogDescription = "Select a blockchain to add to your pipeline";
       connectorTypeName = "Add Blockchain";
       break;
-    case "CONNECTOR_TYPE_DESTINATION":
+    case "CONNECTOR_TYPE_DATA":
       icon = <Icons.Box className="h-6 w-6 stroke-semantic-fg-primary" />;
       dialogTitle = "Add a new destination";
       dialogDescription = "Select a destination to add to your pipeline";
