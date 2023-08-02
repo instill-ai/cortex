@@ -32,7 +32,7 @@ export const LeftSidebar = () => {
             <Icons.Database01 className="h-6 w-6 stroke-semantic-fg-primary" />
           </div>
           <p className="font-sans text-semantic-fg-primary product-label-label-2">
-            Source
+            Operator
           </p>
         </div>
       </button>
@@ -105,7 +105,7 @@ export const LeftSidebar = () => {
             <Icons.Box className="h-6 w-6 stroke-semantic-fg-primary" />
           </div>
           <p className="font-sans text-semantic-fg-primary product-label-label-2">
-            Destination
+            Data
           </p>
         </div>
       </button>
