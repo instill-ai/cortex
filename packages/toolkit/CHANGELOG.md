@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.10](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.9...@instill-ai/toolkit-v0.63.10) (2023-08-02)
+
+
+### Miscellaneous
+
+* update CONNECTOR_TYPE_DESTINATION to CONNECTOR_TYPE_DATA ([#736](https://github.com/instill-ai/design-system/issues/736)) ([5fc44a9](https://github.com/instill-ai/design-system/commit/5fc44a9aabc03840e6806665ca0367465262cfa0))
+
 ## [0.63.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.8...@instill-ai/toolkit-v0.63.9) (2023-08-02)
 
 
