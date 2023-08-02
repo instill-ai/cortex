@@ -55,7 +55,7 @@ export const SourceTablePlaceholder = (props: SourceTablePlaceholderProps) => {
   return (
     <TablePlaceholderBase
       placeholderItems={placeholderItems}
-      placeholderTitle="No source"
+      placeholderTitle="No operator"
       createButtonTitle="Set up your first source"
       createButtonLink="/sources/create"
       marginBottom={marginBottom}

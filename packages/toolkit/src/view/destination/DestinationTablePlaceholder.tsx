@@ -54,7 +54,7 @@ export const DestinationTablePlaceholder = (
   return (
     <TablePlaceholderBase
       placeholderItems={placeholderItems}
-      placeholderTitle="No destination"
+      placeholderTitle="No data"
       createButtonTitle="Set up your first destination"
       createButtonLink="/destinations/create"
       marginBottom={marginBottom}
