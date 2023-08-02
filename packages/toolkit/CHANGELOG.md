@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.9](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.8...@instill-ai/toolkit-v0.63.9) (2023-08-02)
+
+
+### Miscellaneous
+
+* **toolkit:** update CONNECTOR_TYPE_SOURCE to CONNECTOR_TYPE_OPERATOR  ([#734](https://github.com/instill-ai/design-system/issues/734)) ([7273635](https://github.com/instill-ai/design-system/commit/7273635cc268e8a867e5abf8de2a9975d8db320a))
+
 ## [0.63.8](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.7...@instill-ai/toolkit-v0.63.8) (2023-08-02)
 
 
