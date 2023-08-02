@@ -23,7 +23,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
 
   for (const component of pipeline.recipe.components) {
     switch (component.type) {
-      case "CONNECTOR_TYPE_SOURCE": {
+      case "CONNECTOR_TYPE_OPERATOR": {
         const target = sources.find(
           (source) => source.name === component.resource_name
         );
@@ -33,7 +33,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "sourceNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_SOURCE",
+              connectorType: "CONNECTOR_TYPE_OPERATOR",
               connector: target,
             },
             position: { x: 0, y: 0 },

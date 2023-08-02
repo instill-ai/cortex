@@ -15,12 +15,11 @@ export type ConnectorVisibility =
 
 export type ConnectorType =
   | "CONNECTOR_TYPE_UNSPECIFIED"
-  | "CONNECTOR_TYPE_SOURCE"
+  | "CONNECTOR_TYPE_OPERATOR"
   | "CONNECTOR_TYPE_DESTINATION"
   | "CONNECTOR_TYPE_AI"
   | "CONNECTOR_TYPE_BLOCKCHAIN"
-  | "CONNECTOR_TYPE_DATA"
-  | "CONNECTOR_TYPE_OPERATOR";
+  | "CONNECTOR_TYPE_DATA";
 
 export type Connector = {
   name: string;

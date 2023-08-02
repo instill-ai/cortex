@@ -44,8 +44,20 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
 
     const options = [
       {
-        label: "Trigger",
-        value: "trigger",
+        label: "Start Operator",
+        value: "start-operator",
+        startIcon: (
+          <HttpIcon
+            color="fill-instillGrey90"
+            height="h-[30px]"
+            width="w-[30px]"
+            position="my-auto"
+          />
+        ),
+      },
+      {
+        label: "End Operator",
+        value: "end-operator",
         startIcon: (
           <HttpIcon
             color="fill-instillGrey90"

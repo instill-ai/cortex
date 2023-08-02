@@ -29,7 +29,7 @@ export const RightPanel = (props: RightPanelProps) => {
       */}
       <div className="flex w-full pb-10">
         {selectedNode &&
-        selectedNode.data.connectorType === "CONNECTOR_TYPE_SOURCE" ? (
+        selectedNode.data.connectorType === "CONNECTOR_TYPE_OPERATOR" ? (
           <SourceForm
             source={selectedNode.data.connector}
             accessToken={accessToken}
