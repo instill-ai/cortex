@@ -1,20 +1,35 @@
+import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   Button,
   DataDestinationIcon,
   DataSourceIcon,
   DataTable,
+  Dialog,
+  useToast,
 } from "@instill-ai/design-system";
-import { ConnectorWithPipelines, ConnectorsWatchState } from "../../lib";
+import { isAxiosError } from "axios";
 import {
+  ConnectorWithDefinition,
+  ConnectorWithPipelines,
+  ConnectorsWatchState,
+  Model,
+  Nullable,
+  Pipeline,
+  formatDate,
+  getInstillApiErrorMessage,
+  parseStatusLabel,
+  useDeleteConnector,
+} from "../../lib";
+import {
+  GeneralDeleteResourceModal,
   GeneralStateCell,
   ImageWithFallback,
   PaginationListContainerProps,
   SortIcon,
+  TableCell,
   TableError,
 } from "../../components";
-import { TableCell } from "../../components/cells/TableCell";
-import { formatDate, parseStatusLabel } from "../../lib/table";
 import { DestinationTablePlaceholder } from "./DestinationTablePlaceholder";
 
 export type DestinationsTableProps = {
@@ -33,6 +48,51 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
     marginBottom,
   } = props;
 
+  const deleteConnector = useDeleteConnector();
+  const { toast } = useToast();
+  const [isDeleting, setIsDeleting] = React.useState(false);
+
+  const handleDeleteData = (
+    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+  ) => {
+    if (!resource) return;
+    setIsDeleting(true);
+    deleteConnector.mutate(
+      {
+        connectorName: resource.name,
+        accessToken: null,
+      },
+      {
+        onSuccess: () => {
+          setIsDeleting(false);
+          toast({
+            title: "Data deleted",
+            variant: "alert-success",
+            size: "large",
+          });
+        },
+        onError: (error) => {
+          setIsDeleting(false);
+          if (isAxiosError(error)) {
+            toast({
+              title: "Something went wrong when delete the Data",
+              description: getInstillApiErrorMessage(error),
+              variant: "alert-error",
+              size: "large",
+            });
+          } else {
+            toast({
+              title: "Something went wrong when delete the Data",
+              variant: "alert-error",
+              description: "Please try again later",
+              size: "large",
+            });
+          }
+        },
+      }
+    );
+  };
+
   const columns: ColumnDef<ConnectorWithPipelines>[] = [
     {
       accessorKey: "id",
@@ -41,7 +101,7 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
         return (
           <div className="text-left">
             <TableCell
-              primaryLink={`/destinations/${row.getValue("id")}`}
+              primaryLink={`/data/${row.getValue("id")}`}
               primaryText={row.getValue("id")}
               secondaryLink={null}
               secondaryText={row.original.connector_definition.title}
@@ -54,7 +114,7 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
                   fallbackImg={
                     row.original.connector_definition.name
                       .split("/")[0]
-                      .split("-")[0] === "source" ? (
+                      .split("-")[0] === "operator" ? (
                       <DataSourceIcon
                         width="w-4"
                         height="h-4"
@@ -132,9 +192,20 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
       header: () => <div className="text-center"></div>,
       cell: ({ row }) => {
         return (
-          <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-            Delete
-          </div>
+          <Dialog.Root>
+            <Dialog.Trigger asChild>
+              <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+                Delete
+              </div>
+            </Dialog.Trigger>
+            <Dialog.Content>
+              <GeneralDeleteResourceModal
+                resource={row.original}
+                handleDeleteResource={handleDeleteData}
+                isDeleting={isDeleting}
+              />
+            </Dialog.Content>
+          </Dialog.Root>
         );
       },
     },
@@ -150,8 +221,8 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
         searchKey={null}
         isLoading={isLoading}
         loadingRows={6}
-        primaryText="Destination"
-        secondaryText="Add and organise your Destination"
+        primaryText="Data"
+        secondaryText="Add and organise your Data"
       >
         <TableError marginBottom="!border-0" />
       </DataTable>
@@ -168,8 +239,8 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
         searchKey={null}
         isLoading={isLoading}
         loadingRows={6}
-        primaryText="Destination"
-        secondaryText="Add and organise your Destination"
+        primaryText="Data"
+        secondaryText="Add and organise your Data"
       >
         <DestinationTablePlaceholder
           enableCreateButton={false}
@@ -184,12 +255,12 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
       columns={columns}
       data={destinations}
       pageSize={6}
-      searchPlaceholder={"Search Destination"}
+      searchPlaceholder={"Search Data"}
       searchKey={"id"}
       isLoading={isLoading}
       loadingRows={6}
-      primaryText="Destination"
-      secondaryText="Add and organise your Destination"
+      primaryText="Data"
+      secondaryText="Add and organise your Data"
     />
   );
 };
