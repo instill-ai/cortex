@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.12](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.11...@instill-ai/toolkit-v0.63.12) (2023-08-02)
+
+
+### Bug Fixes
+
+* **toolkit:** fix placeholder ([#741](https://github.com/instill-ai/design-system/issues/741)) ([a8e4ca6](https://github.com/instill-ai/design-system/commit/a8e4ca645f0232026b32a77ed20d2615d31d2e28))
+
 ## [0.63.11](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.10...@instill-ai/toolkit-v0.63.11) (2023-08-02)
 
 
