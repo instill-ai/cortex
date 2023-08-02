@@ -526,7 +526,7 @@ export const ConfigureDestinationForm = (
           <BasicSingleSelect
             id="destination-definition"
             key="definition"
-            label="Destination type"
+            label="Data type"
             disabled={true}
             value={destinationDefinitionOption}
             options={[destinationDefinitionOption]}

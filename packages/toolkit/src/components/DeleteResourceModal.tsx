@@ -46,13 +46,13 @@ export const DeleteResourceModal = ({
 
     if ("connector_definition" in resource) {
       if (resource.connector_type === "CONNECTOR_TYPE_OPERATOR") {
-        title = "Delete This Source";
+        title = "Delete This Operator";
         description =
-          "This action cannot be undone. This will permanently delete the source.";
+          "This action cannot be undone. This will permanently delete the operator.";
       } else if (resource.connector_type === "CONNECTOR_TYPE_DATA") {
-        title = "Delete This Destination";
+        title = "Delete This Data";
         description =
-          "This action cannot be undone. This will permanently delete the destination.";
+          "This action cannot be undone. This will permanently delete the data.";
       } else if (resource.connector_type === "CONNECTOR_TYPE_AI") {
         title = "Delete This AI";
         description =

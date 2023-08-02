@@ -404,7 +404,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
         <BasicSingleSelect
           id="destination-definition"
           key="definition"
-          label="Destination type"
+          label="Data type"
           error={
             fieldErrors ? (fieldErrors.definition as string) ?? null : null
           }
