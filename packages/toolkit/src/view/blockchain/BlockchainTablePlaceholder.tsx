@@ -17,8 +17,8 @@ export const BlockchainTablePlaceholder = (
   return (
     <TablePlaceholderBase
       placeholderItems={[]}
-      placeholderTitle="No model"
-      createButtonTitle="Set up your first model"
+      placeholderTitle="No blockchain"
+      createButtonTitle="Set up your first blockchain"
       createButtonLink="/ais/create"
       marginBottom={marginBottom}
       enableCreateButton={enableCreateButton}

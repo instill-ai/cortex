@@ -47,14 +47,14 @@ const sources: ConnectorPreset[] = [
   },
   {
     id: "start-operator",
-    name: "connector/start-operator",
+    name: "connectors/start-operator",
     connector_definition_name: "connector-definitions/start-operator",
     configuration: {},
   },
   {
     id: "end-operator",
-    name: "connector/end-operator",
-    connector_definition_name: "onnector-definitions/end-operator",
+    name: "connectors/end-operator",
+    connector_definition_name: "connector-definitions/end-operator",
     configuration: {},
   },
 ];
