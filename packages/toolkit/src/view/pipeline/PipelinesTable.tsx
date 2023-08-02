@@ -87,7 +87,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
   const columns: ColumnDef<Pipeline>[] = [
     {
       accessorKey: "id",
-      header: () => <div className="min-w-[300px] text-left">Pipelines</div>,
+      header: () => <div className="min-w-[650px] text-left">Pipelines</div>,
       cell: ({ row }) => {
         return (
           <div className="text-left">
@@ -131,23 +131,25 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
     },
     {
       accessorKey: "uid",
-      header: () => <div className="min-w-[100px] text-center"></div>,
+      header: () => <div className="max-w-[100px] text-center"></div>,
       cell: ({ row }) => {
         return (
-          <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-                <Icons.Trash01 className="h-5 w-5 stroke-semantic-error-default" />
-              </div>
-            </Dialog.Trigger>
-            <Dialog.Content>
-              <GeneralDeleteResourceModal
-                resource={row.original}
-                handleDeleteResource={handleDeletePipeline}
-                isDeleting={isDeleting}
-              />
-            </Dialog.Content>
-          </Dialog.Root>
+          <div className="flex justify-center">
+            <Dialog.Root>
+              <Dialog.Trigger asChild>
+                <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+                  <Icons.Trash01 className="h-5 w-5 stroke-semantic-error-default" />
+                </div>
+              </Dialog.Trigger>
+              <Dialog.Content>
+                <GeneralDeleteResourceModal
+                  resource={row.original}
+                  handleDeleteResource={handleDeletePipeline}
+                  isDeleting={isDeleting}
+                />
+              </Dialog.Content>
+            </Dialog.Root>
+          </div>
         );
       },
     },
