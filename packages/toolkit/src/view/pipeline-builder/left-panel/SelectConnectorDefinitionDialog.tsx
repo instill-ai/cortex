@@ -51,9 +51,9 @@ export const SelectConnectorDefinitionDialog = (
       icon = (
         <Icons.Database01 className="h-6 w-6 stroke-semantic-fg-primary" />
       );
-      dialogTitle = "Add a new source";
-      dialogDescription = "Select a source to add to your pipeline";
-      connectorTypeName = "Add Source";
+      dialogTitle = "Add a new operator";
+      dialogDescription = "Select a operator to add to your pipeline";
+      connectorTypeName = "Add operator";
       break;
     case "CONNECTOR_TYPE_AI":
       icon = <Icons.Model className="h-6 w-6 stroke-semantic-fg-primary" />;
@@ -71,9 +71,9 @@ export const SelectConnectorDefinitionDialog = (
       break;
     case "CONNECTOR_TYPE_DATA":
       icon = <Icons.Box className="h-6 w-6 stroke-semantic-fg-primary" />;
-      dialogTitle = "Add a new destination";
-      dialogDescription = "Select a destination to add to your pipeline";
-      connectorTypeName = "Add Destination";
+      dialogTitle = "Add a new data";
+      dialogDescription = "Select a data to add to your pipeline";
+      connectorTypeName = "Add data";
       break;
   }
   return (
