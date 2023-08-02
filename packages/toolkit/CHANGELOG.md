@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.13](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.12...@instill-ai/toolkit-v0.63.13) (2023-08-02)
+
+
+### Miscellaneous
+
+* **toolkit:** update label ([#743](https://github.com/instill-ai/design-system/issues/743)) ([075cdbe](https://github.com/instill-ai/design-system/commit/075cdbe48f971942cb5a6cf5d6ea0ff0bc56bc23))
+
 ## [0.63.12](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.11...@instill-ai/toolkit-v0.63.12) (2023-08-02)
 
 
