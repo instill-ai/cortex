@@ -45,6 +45,18 @@ const sources: ConnectorPreset[] = [
     connector_definition_name: "connector-definitions/trigger",
     configuration: {},
   },
+  {
+    id: "start-operator",
+    name: "connector/start-operator",
+    connector_definition_name: "connector-definitions/start-operator",
+    configuration: {},
+  },
+  {
+    id: "end-operator",
+    name: "connector/end-operator",
+    connector_definition_name: "onnector-definitions/end-operator",
+    configuration: {},
+  },
 ];
 
 const destinations: ConnectorPreset[] = [
