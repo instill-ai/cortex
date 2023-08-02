@@ -3,7 +3,7 @@ import { Button, Dialog, Icons, Input } from "@instill-ai/design-system";
 import { ConnectorWithDefinition, Model, Nullable, Pipeline } from "../lib";
 import { IconWithBackground } from "./IconWithBackground";
 
-export type DeleteResourceModalProps = {
+export type GenralDeleteResourceModalProps = {
   resource: Nullable<ConnectorWithDefinition | Pipeline | Model>;
   handleDeleteResource: (
     resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
@@ -11,7 +11,9 @@ export type DeleteResourceModalProps = {
   isDeleting: boolean;
 };
 
-export const GeneralDeleteResourceModal = (props: DeleteResourceModalProps) => {
+export const GeneralDeleteResourceModal = (
+  props: GenralDeleteResourceModalProps
+) => {
   const { resource, handleDeleteResource, isDeleting } = props;
 
   const modalDetails = React.useMemo<{

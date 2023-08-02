@@ -3,6 +3,7 @@ export * from "./IconWithBackground";
 export * from "./TablePlaceholderBase";
 export * from "./ImageWithFallback";
 export * from "./DeleteResourceModal";
+export * from "./GeneralDeleteResourceModal";
 export * from "./PaginationListContainer";
 export * from "./StateIcon";
 export * from "./StateLabel";
