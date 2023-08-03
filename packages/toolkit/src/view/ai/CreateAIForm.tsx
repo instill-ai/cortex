@@ -688,6 +688,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                         "esrgan-v1-x2plus",
                         "stable-diffusion-x4-latent-upscaler",
                         "stable-diffusion-xl-1024-v0-9",
+                        "stable-diffusion-xl-1024-v1-0",
                       ].map((engine) => (
                         <Select.Item
                           className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
