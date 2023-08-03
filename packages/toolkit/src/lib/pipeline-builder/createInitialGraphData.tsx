@@ -200,5 +200,19 @@ function composeEdgesFromDependency(
     });
   }
 
+  const audiosComponent = parseDependencyComponents(dependencies.audios);
+
+  for (const dependentComponent of audiosComponent) {
+    edges.push({
+      id: `${dependentComponent}-${componentId}.audios`,
+      type: "customEdge",
+      source: dependentComponent.split(".")[0],
+      sourceHandle: dependentComponent,
+      target: componentId,
+      targetHandle: `${componentId}.audios`,
+      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
+    });
+  }
+
   return edges;
 }
