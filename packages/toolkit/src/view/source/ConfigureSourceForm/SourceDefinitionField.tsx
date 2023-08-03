@@ -44,7 +44,7 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
 
     const options = [
       {
-        label: "Start Operator",
+        label: "Start",
         value: "start-operator",
         startIcon: (
           <HttpIcon
@@ -56,7 +56,7 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
         ),
       },
       {
-        label: "End Operator",
+        label: "End",
         value: "end-operator",
         startIcon: (
           <HttpIcon
