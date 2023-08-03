@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.20](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.19...@instill-ai/toolkit-v0.63.20) (2023-08-03)
+
+
+### Bug Fixes
+
+* **toolkit:** update pipeline delete button ([#757](https://github.com/instill-ai/design-system/issues/757)) ([2b830bb](https://github.com/instill-ai/design-system/commit/2b830bb29025e99b6ff5d0fb29e426815defdd7c))
+
 ## [0.63.19](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.18...@instill-ai/toolkit-v0.63.19) (2023-08-03)
 
 
