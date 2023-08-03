@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.14](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.13...@instill-ai/toolkit-v0.63.14) (2023-08-03)
+
+
+### Miscellaneous
+
+* update label for operators ([#745](https://github.com/instill-ai/design-system/issues/745)) ([c6d8f6f](https://github.com/instill-ai/design-system/commit/c6d8f6fcaa78f3a589649a79d35eecedccdcf5b7))
+
 ## [0.63.13](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.12...@instill-ai/toolkit-v0.63.13) (2023-08-02)
 
 
