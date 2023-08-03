@@ -38,7 +38,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
 
     setSourceDefinitionOptions([
       {
-        label: "Start Operator",
+        label: "Start",
         value: "start-operator",
         startIcon: (
           <HttpIcon
@@ -50,7 +50,7 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
         ),
       },
       {
-        label: "End Operator",
+        label: "End",
         value: "end-operator",
         startIcon: (
           <HttpIcon

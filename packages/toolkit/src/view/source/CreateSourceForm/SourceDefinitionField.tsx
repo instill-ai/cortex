@@ -45,7 +45,7 @@ export const SourceDefinitionField = (props: SourceDefinitionFieldProps) => {
     <div className="flex flex-col">
       <BasicSingleSelect
         id="source-definition"
-        label="Source type"
+        label="Operator type"
         options={sourceDefinitionOptions}
         value={selectedSourceDefinitionOption}
         error={sourceDefinitionError}

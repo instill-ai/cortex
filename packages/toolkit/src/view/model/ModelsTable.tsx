@@ -1,12 +1,14 @@
 import {
   Button,
   DataTable,
+  LinkButton,
   getModelDefinitionToolkit,
 } from "@instill-ai/design-system";
 import { useRouter } from "next/router";
 import { ColumnDef } from "@tanstack/react-table";
-import { Model, ModelsWatchState } from "../../lib";
+import { Model, ModelsWatchState, env } from "../../lib";
 import {
+  Cell,
   GeneralStateCell,
   GeneralTaskCell,
   PaginationListContainerProps,
@@ -51,6 +53,15 @@ export const ModelsTable = (props: ModelsTableProps) => {
               })}
             />
           </div>
+        );
+      },
+    },
+    {
+      accessorKey: "task",
+      header: () => <div className="text-center">Task</div>,
+      cell: ({ row }) => {
+        return (
+          <GeneralTaskCell modelTask={row.getValue("task")} className={null} />
         );
       },
     },
@@ -105,11 +116,32 @@ export const ModelsTable = (props: ModelsTableProps) => {
       },
     },
     {
-      accessorKey: "task",
-      header: () => <div className="text-center">Task</div>,
+      accessorKey: "uid",
+      header: () => <div className="text-center"></div>,
       cell: ({ row }) => {
+        const name: string = row.original.name;
         return (
-          <GeneralTaskCell modelTask={row.getValue("task")} className={null} />
+          <div className="grid justify-items-center">
+            <Cell width={null} padding="py-2 pl-6">
+              <LinkButton
+                variant="primary"
+                size="md"
+                onClick={() => {
+                  router.push({
+                    pathname: "/ais/create",
+                    query: {
+                      model_id: row.original.id,
+                      connector_definition_name:
+                        "connector-definitions/ai-instill-model",
+                      server_url: `${env("NEXT_PUBLIC_MODEL_API_GATEWAY_URL")}`,
+                    },
+                  });
+                }}
+              >
+                Add to VDP
+              </LinkButton>
+            </Cell>
+          </div>
         );
       },
     },
