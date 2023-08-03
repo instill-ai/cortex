@@ -92,7 +92,7 @@ export const AIsTable = (props: AIsTableProps) => {
   const columns: ColumnDef<ConnectorWithPipelines>[] = [
     {
       accessorKey: "id",
-      header: () => <div className="min-w-[300px] text-left">Model Name</div>,
+      header: () => <div className="min-w-[300px] text-left">ID</div>,
       cell: ({ row }) => {
         return (
           <div className="text-left">
