@@ -840,11 +840,10 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Base URL for the Instill Model API. To access models on
-                    Instill Cloud, use the base URL
-                    `https://api-model.instill.tech`. To access models on your
-                    local Instill Model, use the base URL
-                    `http://localhost:9080`.
+                    What sampling temperature to use, between 0 and 2. Higher
+                    values like 0.8 will make the output more random, while
+                    lower values like 0.2 will make it more focused and
+                    deterministic. Defaults to 1.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
