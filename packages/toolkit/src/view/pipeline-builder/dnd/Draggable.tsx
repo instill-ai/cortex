@@ -113,9 +113,19 @@ const Item = (props: {
 
   let displayedName: Nullable<string> = null;
 
-  if (resource.connector_definition_name === "connector-definitions/trigger") {
+  if (
+    resource.connector_definition_name ===
+    "connector-definitions/start-operator"
+  ) {
     if (isPreset) {
-      displayedName = "Trigger";
+      displayedName = "Start Operator";
+    }
+  }
+  if (
+    resource.connector_definition_name === "connector-definitions/end-operator"
+  ) {
+    if (isPreset) {
+      displayedName = "End Operator";
     }
   } else if (
     resource.connector_definition_name === "connector-definitions/response"
