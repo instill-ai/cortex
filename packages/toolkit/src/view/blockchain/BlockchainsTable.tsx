@@ -96,7 +96,7 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
     {
       accessorKey: "id",
       header: () => (
-        <div className="min-w-[300px] text-left">Blockchain Name</div>
+        <div className="min-w-[300px] text-left">ID</div>
       ),
       cell: ({ row }) => {
         return (

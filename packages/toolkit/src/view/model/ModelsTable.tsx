@@ -33,7 +33,7 @@ export const ModelsTable = (props: ModelsTableProps) => {
   const columns: ColumnDef<Model>[] = [
     {
       accessorKey: "id",
-      header: () => <div className="min-w-[300px] text-left">Model Name</div>,
+      header: () => <div className="min-w-[300px] text-left">ID</div>,
       cell: ({ row }) => {
         const { getIcon } = getModelDefinitionToolkit(
           row.original.model_definition

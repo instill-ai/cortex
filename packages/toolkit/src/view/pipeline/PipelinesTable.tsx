@@ -138,7 +138,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
             <Dialog.Root>
               <Dialog.Trigger asChild>
                 <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-                  <Icons.Trash01 className="h-5 w-5 stroke-semantic-error-default" />
+                  Delete
                 </div>
               </Dialog.Trigger>
               <Dialog.Content>
