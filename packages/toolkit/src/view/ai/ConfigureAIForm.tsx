@@ -839,12 +839,6 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                           />
                         ),
                       },
-                      {
-                        label: "Speech Recognition",
-                        icon: (
-                          <Icons.SpeechRecognition className="my-auto h-5 w-5 stroke-semantic-fg-primary" />
-                        ),
-                      },
                     ]
                   : [
                       {
@@ -864,6 +858,12 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                             pathColor="stroke-semantic-fg-primary"
                             fillAreaColor="fill-semantic-fg-primary"
                           />
+                        ),
+                      },
+                      {
+                        label: "Speech Recognition",
+                        icon: (
+                          <Icons.SpeechRecognition className="my-auto h-5 w-5 stroke-semantic-fg-primary" />
                         ),
                       },
                     ];
