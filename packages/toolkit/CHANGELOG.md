@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.17](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.16...@instill-ai/toolkit-v0.63.17) (2023-08-03)
+
+
+### Bug Fixes
+
+* update pipeline component dependency ([#751](https://github.com/instill-ai/design-system/issues/751)) ([a03c963](https://github.com/instill-ai/design-system/commit/a03c963b6d9501094f44e6441f8f696383adab49))
+
 ## [0.63.16](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.15...@instill-ai/toolkit-v0.63.16) (2023-08-03)
 
 
