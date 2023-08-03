@@ -12,7 +12,7 @@ import {
   TextGenerationIcon,
   TextToImageIcon,
 } from "../ui";
-import { ComplicateIcons } from "../new-ui";
+import { ComplicateIcons, Icons } from "../new-ui";
 
 export const getModelInstanceTaskToolkit = (task: string) => {
   switch (task) {
@@ -106,6 +106,15 @@ export const getModelInstanceTaskToolkit = (task: string) => {
           return <ImageToTextIcon {...iconStyle} />;
         },
         label: "Image To Text",
+      };
+    case "TASK_SPEECH_RECOGNITION":
+      return {
+        getIcon: (iconStyle: IconStyle) => {
+          return (
+            <Icons.SpeechRecognition className="my-auto h-5 w-5 stroke-semantic-fg-primary" />
+          );
+        },
+        label: "Speech Recognition",
       };
 
     default:

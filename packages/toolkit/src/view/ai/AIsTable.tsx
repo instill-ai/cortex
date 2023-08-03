@@ -198,11 +198,13 @@ export const AIsTable = (props: AIsTableProps) => {
       cell: ({ row }) => {
         return (
           <Dialog.Root>
-            <Dialog.Trigger asChild>
-              <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-                Delete
-              </div>
-            </Dialog.Trigger>
+            {row.original.visibility !== "VISIBILITY_PUBLIC" && (
+              <Dialog.Trigger asChild>
+                <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
+                  Delete
+                </div>
+              </Dialog.Trigger>
+            )}
             <Dialog.Content>
               <GeneralDeleteResourceModal
                 resource={row.original}
