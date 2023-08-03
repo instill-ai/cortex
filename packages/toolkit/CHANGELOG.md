@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.15](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.14...@instill-ai/toolkit-v0.63.15) (2023-08-03)
+
+
+### Miscellaneous
+
+* support audios node ([#747](https://github.com/instill-ai/design-system/issues/747)) ([b00ba19](https://github.com/instill-ai/design-system/commit/b00ba19ad58fdd68781fdedca6e89b0144c97b4f))
+
 ## [0.63.14](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.13...@instill-ai/toolkit-v0.63.14) (2023-08-03)
 
 
