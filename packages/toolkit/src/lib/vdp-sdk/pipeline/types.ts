@@ -30,6 +30,7 @@ export type PipelineComponent = {
     texts: string;
     metadata: string;
     structured_data: string;
+    audios: string;
   };
 
   // We will add logic_operator in the future
