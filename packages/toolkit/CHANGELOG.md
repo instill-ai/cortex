@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.22](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.21...@instill-ai/toolkit-v0.63.22) (2023-08-03)
+
+
+### Miscellaneous
+
+* **toolkit:** update engine for stability AI ([#761](https://github.com/instill-ai/design-system/issues/761)) ([7cf5d2a](https://github.com/instill-ai/design-system/commit/7cf5d2a20f8b334493013dde577f5696a65dc7d9))
+
 ## [0.63.21](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.20...@instill-ai/toolkit-v0.63.21) (2023-08-03)
 
 
