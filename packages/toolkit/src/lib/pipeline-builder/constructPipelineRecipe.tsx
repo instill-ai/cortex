@@ -62,15 +62,15 @@ export function constructPipelineRecipe(
               (connection) =>
                 connection.targetHandle?.split(".")[1] === "images"
             )
-            .map((edge) => `*${edge.sourceHandle}}`)
+            .map((edge) => `*${edge.sourceHandle}`)
             .join(",")}]`,
-          audios: `{${connections
+          audios: `[${connections
             .filter(
               (connection) =>
                 connection.targetHandle?.split(".")[1] === "audios"
             )
             .map((edge) => `**${edge.sourceHandle}`)
-            .join(",")}}`,
+            .join(",")}]`,
           structured_data: `{${connections
             .filter(
               (connection) =>
