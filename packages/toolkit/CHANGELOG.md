@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.21](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.20...@instill-ai/toolkit-v0.63.21) (2023-08-03)
+
+
+### Bug Fixes
+
+* **toolkit:** column name ([#759](https://github.com/instill-ai/design-system/issues/759)) ([afd3119](https://github.com/instill-ai/design-system/commit/afd3119bdf23b5d71fa80835dbfed61fba93d57d))
+
 ## [0.63.20](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.19...@instill-ai/toolkit-v0.63.20) (2023-08-03)
 
 
