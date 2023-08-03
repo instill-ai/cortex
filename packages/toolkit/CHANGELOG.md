@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.18](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.17...@instill-ai/toolkit-v0.63.18) (2023-08-03)
+
+
+### Bug Fixes
+
+* **toolkit:** update label AI form ([#753](https://github.com/instill-ai/design-system/issues/753)) ([8cc70e0](https://github.com/instill-ai/design-system/commit/8cc70e0e7857fd6eb9680137a3b571902d0f463f))
+
 ## [0.63.17](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.16...@instill-ai/toolkit-v0.63.17) (2023-08-03)
 
 
