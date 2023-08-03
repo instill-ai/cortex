@@ -118,14 +118,14 @@ const Item = (props: {
     "connector-definitions/start-operator"
   ) {
     if (isPreset) {
-      displayedName = "Start Operator";
+      displayedName = "Start";
     }
   }
   if (
     resource.connector_definition_name === "connector-definitions/end-operator"
   ) {
     if (isPreset) {
-      displayedName = "End Operator";
+      displayedName = "End";
     }
   } else if (
     resource.connector_definition_name === "connector-definitions/response"
