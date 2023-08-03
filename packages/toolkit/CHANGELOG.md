@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.19](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.18...@instill-ai/toolkit-v0.63.19) (2023-08-03)
+
+
+### Bug Fixes
+
+* **toolkit:** update preset label ([#755](https://github.com/instill-ai/design-system/issues/755)) ([9a8c674](https://github.com/instill-ai/design-system/commit/9a8c674988c517bfc319f93e3214692f07dcf17e))
+
 ## [0.63.18](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.17...@instill-ai/toolkit-v0.63.18) (2023-08-03)
 
 
