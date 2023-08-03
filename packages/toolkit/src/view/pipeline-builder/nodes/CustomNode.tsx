@@ -136,7 +136,7 @@ export const Root = React.forwardRef<
             }
           
           */}
-          {["texts", "images", "structured_data", "metadata", "audios"].map(
+          {["texts", "images", "audios", "structured_data", "metadata"].map(
             (e) => (
               <div
                 key={`${nodeId}-${e}`}

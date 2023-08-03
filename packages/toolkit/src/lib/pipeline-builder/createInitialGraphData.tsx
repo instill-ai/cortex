@@ -170,6 +170,20 @@ function composeEdgesFromDependency(
     });
   }
 
+  const audiosComponent = parseDependencyComponents(dependencies.audios);
+
+  for (const dependentComponent of audiosComponent) {
+    edges.push({
+      id: `${dependentComponent}-${componentId}.audios`,
+      type: "customEdge",
+      source: dependentComponent.split(".")[0],
+      sourceHandle: dependentComponent,
+      target: componentId,
+      targetHandle: `${componentId}.audios`,
+      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
+    });
+  }
+
   const metadataComponent = parseDependencyComponents(dependencies.metadata);
 
   for (const dependentComponent of metadataComponent) {
@@ -196,20 +210,6 @@ function composeEdgesFromDependency(
       sourceHandle: dependentComponent,
       target: componentId,
       targetHandle: `${componentId}.structured_data`,
-      animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
-    });
-  }
-
-  const audiosComponent = parseDependencyComponents(dependencies.audios);
-
-  for (const dependentComponent of audiosComponent) {
-    edges.push({
-      id: `${dependentComponent}-${componentId}.audios`,
-      type: "customEdge",
-      source: dependentComponent.split(".")[0],
-      sourceHandle: dependentComponent,
-      target: componentId,
-      targetHandle: `${componentId}.audios`,
       animated: pipelineWatchState === "STATE_ACTIVE" ? true : false,
     });
   }

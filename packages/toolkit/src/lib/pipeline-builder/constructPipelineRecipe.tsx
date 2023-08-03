@@ -64,6 +64,13 @@ export function constructPipelineRecipe(
             )
             .map((edge) => `*${edge.sourceHandle}}`)
             .join(",")}]`,
+          audios: `{${connections
+            .filter(
+              (connection) =>
+                connection.targetHandle?.split(".")[1] === "audios"
+            )
+            .map((edge) => `**${edge.sourceHandle}`)
+            .join(",")}}`,
           structured_data: `{${connections
             .filter(
               (connection) =>
@@ -75,13 +82,6 @@ export function constructPipelineRecipe(
             .filter(
               (connection) =>
                 connection.targetHandle?.split(".")[1] === "metadata"
-            )
-            .map((edge) => `**${edge.sourceHandle}`)
-            .join(",")}}`,
-          audios: `{${connections
-            .filter(
-              (connection) =>
-                connection.targetHandle?.split(".")[1] === "audios"
             )
             .map((edge) => `**${edge.sourceHandle}`)
             .join(",")}}`,
