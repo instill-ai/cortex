@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.36.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.0...@instill-ai/design-system-v0.36.1) (2023-08-03)
+
+
+### Bug Fixes
+
+* **toolkit:** AIs table fix ([#749](https://github.com/instill-ai/design-system/issues/749)) ([8b9da69](https://github.com/instill-ai/design-system/commit/8b9da695a1197d5907d7e025d1a6e0f1cc5b3914))
+
 ## [0.36.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.35.1...@instill-ai/design-system-v0.36.0) (2023-07-28)
 
 
