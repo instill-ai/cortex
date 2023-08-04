@@ -991,6 +991,12 @@ export const AIForm = (props: AIFormProps) => {
                           />
                         ),
                       },
+                      {
+                        label: "Speech Recognition",
+                        icon: (
+                          <Icons.SpeechRecognition className="my-auto h-5 w-5 stroke-semantic-fg-primary" />
+                        ),
+                      },
                     ];
 
               return (
@@ -1108,10 +1114,25 @@ export const AIForm = (props: AIFormProps) => {
             control={form.control}
             name="configuration.model"
             render={({ field }) => {
-              const models =
-                form.watch("configuration.task") === "Text Generation"
-                  ? ["gpt-4", "gpt-4-32k", "gpt-3.5-turbo", "gpt-3.5-turbo-16k"]
-                  : ["text-embedding-ada-002"];
+              let models: string[] = [];
+              switch (form.watch("configuration.task")) {
+                case "Text Generation":
+                  models = [
+                    "gpt-4",
+                    "gpt-4-32k",
+                    "gpt-3.5-turbo",
+                    "gpt-3.5-turbo-16k",
+                  ];
+                  break;
+                case "Text Embeddings":
+                  models = ["text-embedding-ada-002"];
+                  break;
+                case "Speech Recognition":
+                  models = ["whisper-1"];
+                  break;
+                default:
+                  models = [];
+              }
 
               return (
                 <Form.Item
