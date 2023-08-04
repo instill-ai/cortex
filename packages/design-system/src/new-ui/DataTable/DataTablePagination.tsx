@@ -16,7 +16,7 @@ export function createPaginationArray(
 
   if (totalPages <= maxVisiblePages) {
     // If total pages are less than or equal to maxVisiblePages, show all pages
-    for (let i = 1; i <= totalPages; i++) {
+    for (let i = 0; i < totalPages; i++) {
       paginationArray.push(i);
     }
   } else {
@@ -24,7 +24,8 @@ export function createPaginationArray(
     const numPagesBefore: number = Math.floor((maxVisiblePages - 3) / 2);
     const numPagesAfter: number = maxVisiblePages - 3 - numPagesBefore;
 
-    // Add the first page and an ellipsis if needed
+    // Add the first pages and an ellipsis if needed
+    paginationArray.push(0);
     paginationArray.push(1);
     if (currentPage - numPagesBefore > 2) {
       paginationArray.push("...");
@@ -33,7 +34,7 @@ export function createPaginationArray(
     // Calculate the range of visible pages around the current page
     const startPage: number = Math.max(2, currentPage - numPagesBefore);
     const endPage: number = Math.min(
-      totalPages - 1,
+      totalPages - 2,
       currentPage + numPagesAfter
     );
 
@@ -43,12 +44,12 @@ export function createPaginationArray(
     }
 
     // Add an ellipsis if needed
-    if (currentPage + numPagesAfter < totalPages - 1) {
+    if (currentPage + numPagesAfter < totalPages - 2) {
       paginationArray.push("...");
     }
 
     // Add the last page
-    paginationArray.push(totalPages);
+    paginationArray.push(totalPages - 1);
   }
 
   return paginationArray;
@@ -87,7 +88,9 @@ export function DataTablePagination<TData>({
             e === table.options.state.pagination?.pageIndex || e === "..."
           }
         >
-          <span className="px-2 product-body-text-3-semibold">{e}</span>
+          <span className="px-2 product-body-text-3-semibold">
+            {e === "..." ? e : Number(e) + 1}
+          </span>
         </Button>
       ))}
       <Button
