@@ -22,10 +22,7 @@ export const GeneralTaskCell = ({
 
   return (
     <div
-      className={cn(
-        "flex flex-row justify-center gap-x-2 py-2 pr-6",
-        className
-      )}
+      className={cn("flex flex-row justify-left gap-x-2 py-2 pr-6", className)}
     >
       {getIcon(iconStyle)}
       <p className="text-product-body-text-3-regular my-auto flex text-semantic-bg-secondary-base-bg">
