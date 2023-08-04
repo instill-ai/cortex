@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.24](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.23...@instill-ai/toolkit-v0.63.24) (2023-08-04)
+
+
+### Bug Fixes
+
+* **toolkit:** Speech Recognition form select ([#773](https://github.com/instill-ai/design-system/issues/773)) ([15f399d](https://github.com/instill-ai/design-system/commit/15f399d43de2b3164af36519d0af8e2fd40225be))
+
 ## [0.63.23](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.22...@instill-ai/toolkit-v0.63.23) (2023-08-04)
 
 
