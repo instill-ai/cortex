@@ -605,7 +605,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
                         <div className="flex flex-row space-x-2">
                           <div className="my-auto">
                             <ImageWithFallback
-                              src={"/icons/openai/openai.svg"}
+                              src={"/icons/openAI/openai.svg"}
                               width={20}
                               height={20}
                               alt="Open AI model logo"

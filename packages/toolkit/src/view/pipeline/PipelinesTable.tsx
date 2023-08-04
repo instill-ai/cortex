@@ -18,9 +18,11 @@ import {
   PipelinesWatchState,
   formatDate,
   getInstillApiErrorMessage,
+  parseStatusLabel,
   useDeletePipeline,
 } from "../../lib";
 import {
+  GeneralStateCell,
   PaginationListContainerProps,
   SortIcon,
   TableCell,
@@ -121,10 +123,34 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
           </div>
         );
       },
+
       cell: ({ row }) => {
         return (
           <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
             {formatDate(row.getValue("create_time"))}
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: "state",
+      header: () => <div className="text-center">Status</div>,
+      cell: ({ row }) => {
+        const name: string = row.original.name;
+        return (
+          <div className="grid justify-items-center">
+            <GeneralStateCell
+              width={null}
+              state={
+                pipelinesWatchState
+                  ? pipelinesWatchState[name]
+                    ? pipelinesWatchState[name].state
+                    : "STATE_UNSPECIFIED"
+                  : "STATE_UNSPECIFIED"
+              }
+              padding="py-2"
+              label={parseStatusLabel(row.getValue("state"))}
+            />
           </div>
         );
       },
