@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.36.6](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.5...@instill-ai/design-system-v0.36.6) (2023-08-04)
+
+
+### Bug Fixes
+
+* **design-system:** datatable pagination ([#771](https://github.com/instill-ai/design-system/issues/771)) ([130f8a6](https://github.com/instill-ai/design-system/commit/130f8a6d57bd0955870249e4fd60b861e6e1e7e8))
+
 ## [0.36.5](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.4...@instill-ai/design-system-v0.36.5) (2023-08-04)
 
 
