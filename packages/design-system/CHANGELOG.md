@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.36.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.1...@instill-ai/design-system-v0.36.2) (2023-08-04)
+
+
+### Miscellaneous
+
+* **design-system:** add pagination for long pages ([#763](https://github.com/instill-ai/design-system/issues/763)) ([4778eae](https://github.com/instill-ai/design-system/commit/4778eaea55011d39f92715829b04182ab2a7fc46))
+
 ## [0.36.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.0...@instill-ai/design-system-v0.36.1) (2023-08-03)
 
 
