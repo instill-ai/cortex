@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.36.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.2...@instill-ai/design-system-v0.36.3) (2023-08-04)
+
+
+### Bug Fixes
+
+* **toolkit:** small fixes for AI, model and Pipeline table ([#765](https://github.com/instill-ai/design-system/issues/765)) ([86790ee](https://github.com/instill-ai/design-system/commit/86790ee317c562ecab039de821f5c0bfde611c75))
+
 ## [0.36.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.1...@instill-ai/design-system-v0.36.2) (2023-08-04)
 
 
