@@ -81,10 +81,10 @@ export function DataTablePagination<TData>({
           )}
           variant="secondaryGrey"
           size="sm"
-          onClick={() => table.setPageIndex(index)}
+          onClick={() => table.setPageIndex(Number(e))}
           key={`table-page-button-${index}`}
           disabled={
-            index === table.options.state.pagination?.pageIndex || e === "..."
+            e === table.options.state.pagination?.pageIndex || e === "..."
           }
         >
           <span className="px-2 product-body-text-3-semibold">{e}</span>
