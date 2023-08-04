@@ -7,6 +7,53 @@ interface DataTablePaginationProps<TData> {
   table: Table<TData>;
 }
 
+export function createPaginationArray(
+  currentPage: number,
+  totalPages: number,
+  maxVisiblePages: number = 10
+): (number | string)[] {
+  const paginationArray: (number | string)[] = [];
+
+  if (totalPages <= maxVisiblePages) {
+    // If total pages are less than or equal to maxVisiblePages, show all pages
+    for (let i = 1; i <= totalPages; i++) {
+      paginationArray.push(i);
+    }
+  } else {
+    // Calculate the number of pages to be shown before and after the current page
+    const numPagesBefore: number = Math.floor((maxVisiblePages - 3) / 2);
+    const numPagesAfter: number = maxVisiblePages - 3 - numPagesBefore;
+
+    // Add the first page and an ellipsis if needed
+    paginationArray.push(1);
+    if (currentPage - numPagesBefore > 2) {
+      paginationArray.push("...");
+    }
+
+    // Calculate the range of visible pages around the current page
+    const startPage: number = Math.max(2, currentPage - numPagesBefore);
+    const endPage: number = Math.min(
+      totalPages - 1,
+      currentPage + numPagesAfter
+    );
+
+    // Add visible pages to the pagination array
+    for (let i = startPage; i <= endPage; i++) {
+      paginationArray.push(i);
+    }
+
+    // Add an ellipsis if needed
+    if (currentPage + numPagesAfter < totalPages - 1) {
+      paginationArray.push("...");
+    }
+
+    // Add the last page
+    paginationArray.push(totalPages);
+  }
+
+  return paginationArray;
+}
+
 export function DataTablePagination<TData>({
   table,
 }: DataTablePaginationProps<TData>) {
@@ -22,7 +69,11 @@ export function DataTablePagination<TData>({
         <Icons.ArrowNarrowLeft className="h-5 w-5 stroke-semantic-fg-secondary" />
         <span className="product-body-text-3-semibold">Previous</span>
       </Button>
-      {table.getPageOptions().map((e, index) => (
+      {createPaginationArray(
+        (table.options.state.pagination?.pageIndex || 0) + 1,
+        table.getPageCount(),
+        8
+      ).map((e, index) => (
         <Button
           className={cn(
             "!rounded-none border-l-0 !border-semantic-bg-line !py-2.5 px-2.5",
@@ -32,9 +83,11 @@ export function DataTablePagination<TData>({
           size="sm"
           onClick={() => table.setPageIndex(index)}
           key={`table-page-button-${index}`}
-          disabled={index === table.options.state.pagination?.pageIndex}
+          disabled={
+            index === table.options.state.pagination?.pageIndex || e === "..."
+          }
         >
-          <span className="px-2 product-body-text-3-semibold">{index + 1}</span>
+          <span className="px-2 product-body-text-3-semibold">{e}</span>
         </Button>
       ))}
       <Button
