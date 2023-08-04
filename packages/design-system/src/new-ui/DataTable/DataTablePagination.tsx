@@ -78,7 +78,7 @@ export function DataTablePagination<TData>({
         <Button
           className={cn(
             "!rounded-none border-l-0 !border-semantic-bg-line !py-2.5 px-2.5",
-            table.getPageCount() === e && "border-r-0"
+            table.getPageCount() - 1 === e && "border-r-0"
           )}
           variant="secondaryGrey"
           size="sm"
