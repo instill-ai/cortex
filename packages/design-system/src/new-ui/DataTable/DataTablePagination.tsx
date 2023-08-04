@@ -10,7 +10,7 @@ interface DataTablePaginationProps<TData> {
 export function createPaginationArray(
   currentPage: number,
   totalPages: number,
-  maxVisiblePages: number = 10
+  maxVisiblePages = 10
 ): (number | string)[] {
   const paginationArray: (number | string)[] = [];
 
