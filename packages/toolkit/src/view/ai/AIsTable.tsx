@@ -135,7 +135,7 @@ export const AIsTable = (props: AIsTableProps) => {
     },
     {
       accessorKey: "task",
-      header: () => <div className="text-center">Task</div>,
+      header: () => <div className="text-left">Task</div>,
       cell: ({ row }) => {
         return (
           <GeneralTaskCell modelTask={row.getValue("task")} className={null} />
