@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.25](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.24...@instill-ai/toolkit-v0.63.25) (2023-08-06)
+
+
+### Miscellaneous
+
+* **toolkit:** update time in local timezone for pipeline trigger table ([#775](https://github.com/instill-ai/design-system/issues/775)) ([86f8adc](https://github.com/instill-ai/design-system/commit/86f8adcfccc22823d63232b7f793f12db08981e0))
+
 ## [0.63.24](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.23...@instill-ai/toolkit-v0.63.24) (2023-08-04)
 
 
