@@ -1,5 +1,5 @@
 export * from "./calculatePercentageDelta";
-export * from "./convertTimestamp";
+export * from "./convertTimestampToLocal";
 export * from "./convertToSecondsAndMilliseconds";
 export * from "./formatDateTime";
 export * from "./getDateRange";
