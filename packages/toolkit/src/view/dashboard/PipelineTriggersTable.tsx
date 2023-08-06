@@ -2,7 +2,7 @@ import { Button, DataTable } from "@instill-ai/design-system";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   PipelineTriggerRecord,
-  convertTimestamp,
+  convertTimestampToLocal,
   convertToSecondsAndMilliseconds,
   parseTriggerStatusLabel,
 } from "../../lib";
@@ -25,7 +25,7 @@ export const PipelineTriggersTable = (props: PipelineTriggersTableProps) => {
       cell: ({ row }) => {
         return (
           <div className="text-left">
-            {convertTimestamp(row.getValue("trigger_time"))}
+            {convertTimestampToLocal(row.getValue("trigger_time"))}
           </div>
         );
       },
