@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.63.27](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.26...@instill-ai/toolkit-v0.63.27) (2023-08-07)
+
+
+### Bug Fixes
+
+* **toolkit:** AI table column size ([#780](https://github.com/instill-ai/design-system/issues/780)) ([495b44e](https://github.com/instill-ai/design-system/commit/495b44e334d7c27c9ecdb83e14a40ba728049f25))
+
 ## [0.63.26](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.25...@instill-ai/toolkit-v0.63.26) (2023-08-07)
 
 
