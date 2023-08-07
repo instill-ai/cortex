@@ -92,7 +92,7 @@ export const AIsTable = (props: AIsTableProps) => {
   const columns: ColumnDef<ConnectorWithPipelines>[] = [
     {
       accessorKey: "id",
-      header: () => <div className="w-[550px] text-left">ID</div>,
+      header: () => <div className="w-[450px] text-left">ID</div>,
       cell: ({ row }) => {
         return (
           <div className="text-left">
@@ -135,7 +135,7 @@ export const AIsTable = (props: AIsTableProps) => {
     },
     {
       accessorKey: "task",
-      header: () => <div className="text-left">Task</div>,
+      header: () => <div className="text-left w-[200px]">Task</div>,
       cell: ({ row }) => {
         return (
           <GeneralTaskCell modelTask={row.getValue("task")} className={null} />
