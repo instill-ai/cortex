@@ -12,4 +12,5 @@ export * from "./getTimeInRFC3339Format";
 export * from "./parseTriggerStatusLabel";
 export * from "./options";
 export * from "./orderCountsByTriggerTime";
+export * from "./sortByTriggerTime";
 export * from "./xAxisRange";
