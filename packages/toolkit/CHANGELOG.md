@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.63.26](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.25...@instill-ai/toolkit-v0.63.26) (2023-08-07)
+
+
+### Bug Fixes
+
+* **toolkit:** column size fix ([#779](https://github.com/instill-ai/design-system/issues/779)) ([935a8cb](https://github.com/instill-ai/design-system/commit/935a8cb79fdef654292dc409e62e5cdf53d27708))
+
+
+### Miscellaneous
+
+* **toolkit:** add sortByTriggerTime for pipeline triggertable ([#777](https://github.com/instill-ai/design-system/issues/777)) ([067dc47](https://github.com/instill-ai/design-system/commit/067dc4783d3943c6dcb3c9fed460299f16efb251))
+
 ## [0.63.25](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.24...@instill-ai/toolkit-v0.63.25) (2023-08-06)
 
 
