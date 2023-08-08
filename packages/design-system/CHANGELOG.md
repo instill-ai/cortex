@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.37.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.37.0...@instill-ai/design-system-v0.37.1) (2023-08-08)
+
+
+### Miscellaneous
+
+* **design-system:** cancel button for table search ([#786](https://github.com/instill-ai/design-system/issues/786)) ([279a503](https://github.com/instill-ai/design-system/commit/279a5033ff5de5921a7901eabce8cfa3b37e40e9))
+
 ## [0.37.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.36.6...@instill-ai/design-system-v0.37.0) (2023-08-08)
 
 
