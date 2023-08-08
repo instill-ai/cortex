@@ -102,13 +102,15 @@ const DataTable = <TData, TValue>({
                   table.getColumn(searchKey)?.setFilterValue(event.target.value)
                 }
               />
-              <Input.LeftIcon
-                onClick={() => {
-                  table.getColumn(searchKey)?.setFilterValue("");
-                }}
-              >
-                <Icons.X className="my-auto h-5 w-5 cursor-pointer stroke-semantic-fg-secondary" />
-              </Input.LeftIcon>
+              {(table.getColumn(searchKey)?.getFilterValue() as string) && (
+                <Input.LeftIcon
+                  onClick={() => {
+                    table.getColumn(searchKey)?.setFilterValue("");
+                  }}
+                >
+                  <Icons.X className="my-auto h-5 w-5 cursor-pointer stroke-semantic-fg-secondary" />
+                </Input.LeftIcon>
+              )}
             </Input.Root>
           )}
         </div>
