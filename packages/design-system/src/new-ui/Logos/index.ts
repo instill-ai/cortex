@@ -2,6 +2,7 @@ import { AssemblyAI } from "./AssemblyAI";
 import { ATFSquare } from "./ATFSquare";
 import { ATFExpand } from "./ATFExpand";
 import { HuggingFace } from "./HuggingFace";
+import { InstillCloud } from "./InstillCloud";
 import { MDLExpand } from "./MDLExpand";
 import { MDLSquare } from "./MDLSquare";
 import { Number } from "./Number";
@@ -15,6 +16,7 @@ export const Logos = {
   ATFSquare,
   ATFExpand,
   HuggingFace,
+  InstillCloud,
   MDLExpand,
   MDLSquare,
   Number,
