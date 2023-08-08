@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.37.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.37.1...@instill-ai/design-system-v0.37.2) (2023-08-08)
+
+
+### Miscellaneous
+
+* namananand/ins 1478 search also dont have cancel icon to remove search string ([#788](https://github.com/instill-ai/design-system/issues/788)) ([88b0c9e](https://github.com/instill-ai/design-system/commit/88b0c9ec32ec5e7522fb925c26eca2a371832353))
+
 ## [0.37.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.37.0...@instill-ai/design-system-v0.37.1) (2023-08-08)
 
 
