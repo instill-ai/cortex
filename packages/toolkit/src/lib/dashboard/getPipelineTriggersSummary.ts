@@ -1,27 +1,25 @@
-import {
-  PipelineTriggerRecord,
-  PipelineTriggersStatusSummary,
-} from "../vdp-sdk";
+import { PipelineTriggersStatusSummary, TriggeredPipeline } from "../vdp-sdk";
 import { calculatePercentageDelta } from "./calculatePercentageDelta";
-import { getPipelineTriggerCounts } from "./getPipelineTriggerCounts";
 
 export function getPipelineTriggersSummary(
-  triggers: PipelineTriggerRecord[],
-  triggersPrevious: PipelineTriggerRecord[]
+  pipelines: TriggeredPipeline[],
+  pipelinesPrevious: TriggeredPipeline[]
 ): PipelineTriggersStatusSummary {
   let pipelineCompleteAmount = 0;
   let pipelineCompleteAmountPrevious = 0;
   let pipelineErroredAmount = 0;
   let pipelineErroredAmountPrevious = 0;
 
-  getPipelineTriggerCounts(triggers).forEach((trigger) => {
-    pipelineCompleteAmount += trigger.pipeline_completed;
-    pipelineErroredAmount += trigger.pipeline_errored;
+  pipelines.forEach((pipeline) => {
+    pipelineCompleteAmount += parseInt(pipeline.trigger_count_completed);
+    pipelineErroredAmount += parseInt(pipeline.trigger_count_errored);
   });
 
-  getPipelineTriggerCounts(triggersPrevious).forEach((trigger) => {
-    pipelineCompleteAmountPrevious += trigger.pipeline_completed;
-    pipelineErroredAmountPrevious += trigger.pipeline_errored;
+  pipelinesPrevious.forEach((pipeline) => {
+    pipelineCompleteAmountPrevious += parseInt(
+      pipeline.trigger_count_completed
+    );
+    pipelineErroredAmountPrevious += parseInt(pipeline.trigger_count_errored);
   });
 
   return {
