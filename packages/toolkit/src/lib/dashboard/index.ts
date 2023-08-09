@@ -8,6 +8,7 @@ export * from "./getPipeLineOptions";
 export * from "./getPipelineTriggersSummary";
 export * from "./getPreviousTimeframe";
 export * from "./getTimeInRFC3339Format";
+export * from "./getTriggersSummary";
 export * from "./parseTriggerStatusLabel";
 export * from "./options";
 export * from "./orderCountsByTriggerTime";
