@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.64.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.0...@instill-ai/toolkit-v0.64.1) (2023-08-09)
+
+
+### Miscellaneous
+
+* **toolkit:** namananand/ins 1487 based on separate metric data into buckets in backend adopt ([#792](https://github.com/instill-ai/design-system/issues/792)) ([8cdad68](https://github.com/instill-ai/design-system/commit/8cdad686b042a6ba348706432f21043fe8ad48b5))
+
 ## [0.64.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.63.28...@instill-ai/toolkit-v0.64.0) (2023-08-09)
 
 
