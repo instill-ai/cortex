@@ -9,6 +9,14 @@ export type PipelineTriggerCount = {
   counts: Count[];
 };
 
+export type TriggeredPipeline = {
+  pipeline_id: string;
+  pipeline_uid: string;
+  trigger_count_completed: string;
+  trigger_count_errored: string;
+  watchState?: PipelineState;
+};
+
 export type PipelineTriggerStatus =
   | "STATUS_UNSPECIFIED"
   | "STATUS_COMPLETED"

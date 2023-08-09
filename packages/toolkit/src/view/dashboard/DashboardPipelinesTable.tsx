@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { Button, Checkbox, DataTable } from "@instill-ai/design-system";
 import { ColumnDef } from "@tanstack/react-table";
-import { PipelineTriggerCount } from "../../lib";
+import { TriggeredPipeline } from "../../lib";
 import { GeneralStateCell, SortIcon, TableError } from "../../components";
 import { parseStatusLabel } from "../../lib/table";
 import { PipelineTablePlaceholder } from "../pipeline";
 import { useRouter } from "next/router";
 
 export type DashboardPipelinesTableProps = {
-  pipelineTriggerCounts: PipelineTriggerCount[];
+  pipelineTriggerCounts: TriggeredPipeline[];
   isError: boolean;
   isLoading: boolean;
 };
@@ -20,7 +20,7 @@ export const DashboardPipelinesTable = (
   const { days } = router.query;
   const { pipelineTriggerCounts, isError, isLoading } = props;
 
-  const columns: ColumnDef<PipelineTriggerCount>[] = [
+  const columns: ColumnDef<TriggeredPipeline>[] = [
     {
       accessorKey: "pipeline_id",
       header: () => <div className="min-w-[600px] text-left">Pipeline Id</div>,
@@ -63,7 +63,7 @@ export const DashboardPipelinesTable = (
       },
     },
     {
-      accessorKey: "pipeline_completed",
+      accessorKey: "trigger_count_completed",
       header: ({ column }) => {
         return (
           <div className="min-w-[130px] text-center">
@@ -81,17 +81,16 @@ export const DashboardPipelinesTable = (
           </div>
         );
       },
-
       cell: ({ row }) => {
         return (
           <div className="text-center text-semantic-fg-secondary">
-            {row.getValue("pipeline_completed")}
+            {row.getValue("trigger_count_completed")}
           </div>
         );
       },
     },
     {
-      accessorKey: "pipeline_errored",
+      accessorKey: "trigger_count_errored",
       header: ({ column }) => (
         <div className="min-w-[110px] text-center">
           <Button
@@ -108,7 +107,7 @@ export const DashboardPipelinesTable = (
       cell: ({ row }) => {
         return (
           <div className="text-center text-semantic-fg-secondary">
-            {row.getValue("pipeline_errored")}
+            {row.getValue("trigger_count_errored")}
           </div>
         );
       },
