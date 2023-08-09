@@ -9,6 +9,25 @@ export type PipelineTriggerCount = {
   counts: Count[];
 };
 
+export type TriggeredPipeline = {
+  pipeline_id: string;
+  pipeline_uid: string;
+  trigger_count_completed: string;
+  trigger_count_errored: string;
+  watchState?: PipelineState;
+};
+
+export type PipelinesChart = {
+  pipeline_id: string;
+  pipeline_uid: string;
+  trigger_mode: "MODE_SYNC" | "MODE_ASYNC";
+  status: PipelineState;
+  time_buckets: string[];
+  trigger_counts: number[] | string[];
+  compute_time_duration: number[] | string[];
+  watchState?: PipelineState;
+};
+
 export type PipelineTriggerStatus =
   | "STATUS_UNSPECIFIED"
   | "STATUS_COMPLETED"
