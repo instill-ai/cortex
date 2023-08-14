@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.38.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.37.2...@instill-ai/design-system-v0.38.0) (2023-08-14)
+
+
+### Features
+
+* **design-system:** add icons ([#794](https://github.com/instill-ai/design-system/issues/794)) ([949fb04](https://github.com/instill-ai/design-system/commit/949fb0446371148cb3e4f4ced0892f0162e68f4c))
+
 ## [0.37.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.37.1...@instill-ai/design-system-v0.37.2) (2023-08-08)
 
 
