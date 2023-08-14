@@ -47,3 +47,16 @@ export const DisabledWhenNotChecked: Story = {
     <Checkbox disabled={true} checked={false} className="h-10 w-10" />
   ),
 };
+
+export const RoundedChecked: Story = {
+  render: () => (
+    <div className="flex">
+      <Checkbox
+        className="flex h-4 w-4 rounded-full"
+        checkedElement={
+          <div className="m-auto h-2 w-2 shrink-0 rounded-full bg-semantic-bg-primary data-[disabled]:bg-semantic-fg-disabled" />
+        }
+      />
+    </div>
+  ),
+};
