@@ -2,6 +2,8 @@ import { AlertCircle } from "./AlertCircle";
 import { AlertTriangle } from "./AlertTriangle";
 import { ArrowUp } from "./ArrowUp";
 import { ArrowDown } from "./ArrowDown";
+import { ArrowLeft } from "./ArrowLeft";
+import { ArrowRight } from "./ArrowRight";
 import { ArrowNarrowLeft } from "./ArrowNarrowLeft";
 import { ArrowNarrowRight } from "./ArrowNarrowRight";
 import { BarChartSquare02 } from "./BarChartSquare02";
@@ -30,12 +32,14 @@ import { FilterLines } from "./FilterLines";
 import { Gear01 } from "./Gear01";
 import { HelpCircle } from "./HelpCircle";
 import { InfoCircle } from "./InfoCircle";
+import { Image01 } from "./Image01";
 import { Logout01 } from "./Logout01";
 import { Model } from "./Model";
 import { Pipeline } from "./Pipeline";
 import { Plus } from "./Plus";
 import { Play } from "./Play";
 import { RefreshCw05 } from "./RefreshCw05";
+import { Recording02 } from "./Recording02";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
 import { SpeechRecognition } from "./SpeechRecognition";
@@ -43,6 +47,7 @@ import { Stop } from "./Stop";
 import { SearchSm } from "./SearchSm";
 import { Tag01 } from "./Tag01";
 import { Trash01 } from "./Trash01";
+import { Type02 } from "./Type02";
 import { X } from "./X";
 
 export const Icons = {
@@ -50,6 +55,8 @@ export const Icons = {
   AlertTriangle,
   ArrowUp,
   ArrowDown,
+  ArrowLeft,
+  ArrowRight,
   ArrowNarrowLeft,
   ArrowNarrowRight,
   BarChartSquare02,
@@ -78,12 +85,14 @@ export const Icons = {
   Gear01,
   HelpCircle,
   InfoCircle,
+  Image01,
   Logout01,
   Model,
   Pipeline,
   Play,
   Plus,
   RefreshCw05,
+  Recording02,
   Save01,
   SpeechRecognition,
   Sliders01,
@@ -91,5 +100,6 @@ export const Icons = {
   SearchSm,
   Tag01,
   Trash01,
+  Type02,
   X,
 };
