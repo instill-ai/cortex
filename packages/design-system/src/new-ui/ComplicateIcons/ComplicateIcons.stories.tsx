@@ -54,3 +54,21 @@ export const ImageToImage: Story = {
     />
   ),
 };
+export const Number: Story = {
+  render: () => (
+    <ComplicateIcons.Number
+      fillAreaColor="fill-semantic-fg-secondary"
+      // fillColor="#64748b"
+      className="h-5 w-5"
+    />
+  ),
+};
+export const ToogleLeft: Story = {
+  render: () => (
+    <ComplicateIcons.ToogleLeft
+      fillAreaColor="fill-semantic-fg-secondary"
+      className="h-5 w-5"
+      // fillColor="#64748b"
+    />
+  ),
+};
