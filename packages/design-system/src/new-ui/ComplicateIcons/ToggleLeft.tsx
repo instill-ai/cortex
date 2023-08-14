@@ -1,7 +1,7 @@
 import * as React from "react";
 import { IconBase, IconBaseProps } from "../Icons/IconBase";
 
-export const ToogleLeft = React.forwardRef<
+export const ToggleLeft = React.forwardRef<
   SVGSVGElement,
   Omit<IconBaseProps, "viewBox" | "children"> & {
     fillAreaColor: string;
@@ -24,4 +24,4 @@ export const ToogleLeft = React.forwardRef<
     </IconBase>
   );
 });
-ToogleLeft.displayName = "ToogleLeft";
+ToggleLeft.displayName = "ToggleLeft";
