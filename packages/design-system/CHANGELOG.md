@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.38.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.38.0...@instill-ai/design-system-v0.38.1) (2023-08-14)
+
+
+### Miscellaneous
+
+* rename ToogleLeft to ToggleLeft ([#796](https://github.com/instill-ai/design-system/issues/796)) ([779bccd](https://github.com/instill-ai/design-system/commit/779bccd695060045db32c9e9a664ec62109eee00))
+
 ## [0.38.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.37.2...@instill-ai/design-system-v0.38.0) (2023-08-14)
 
 
