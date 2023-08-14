@@ -1,7 +1,7 @@
 import { ImageToImage } from "./ImageToImage";
 import { ImageToText } from "./ImageToText";
 import { Number } from "./Number";
-import { ToogleLeft } from "./ToogleLeft";
+import { ToggleLeft } from "./ToggleLeft";
 import { TextEmbedding } from "./TextEmbedding";
 import { TextGeneration } from "./TextGeneration";
 import { TextToImage } from "./TextToImage";
@@ -11,7 +11,7 @@ export const ComplicateIcons = {
   ImageToText,
   Number,
   TextEmbedding,
-  ToogleLeft,
+  ToggleLeft,
   TextGeneration,
   TextToImage,
 };
