@@ -8,6 +8,7 @@ export * from "./Icons";
 export * from "./Input";
 export * from "./LinkButton";
 export * from "./Logos";
+export * from "./Popover";
 export * from "./Select";
 export * from "./Skeleton";
 export * from "./Separator";
