@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.40.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.40.1...@instill-ai/design-system-v0.40.2) (2023-08-15)
+
+
+### Bug Fixes
+
+* **design-system:** update combobox item ([#808](https://github.com/instill-ai/design-system/issues/808)) ([ca44c5f](https://github.com/instill-ai/design-system/commit/ca44c5f80f734592aecbda5364ff64182e1ed09b))
+
 ## [0.40.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.40.0...@instill-ai/design-system-v0.40.1) (2023-08-15)
 
 
