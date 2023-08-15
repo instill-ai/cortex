@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.40.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.39.0...@instill-ai/design-system-v0.40.0) (2023-08-15)
+
+
+### Features
+
+* **design-system:** add combobox component ([#804](https://github.com/instill-ai/design-system/issues/804)) ([bc21a94](https://github.com/instill-ai/design-system/commit/bc21a944ce68c5d6073a5425a6ef006739c6e4d2))
+
 ## [0.39.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.38.1...@instill-ai/design-system-v0.39.0) (2023-08-15)
 
 
