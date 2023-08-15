@@ -46,7 +46,7 @@ export function Combobox({
               >
                 <Icons.Check
                   className={cn(
-                    "mr-2 h-4 w-4 stroke-slate-500",
+                    "h-4 w-4 stroke-slate-500",
                     value === item.value ? "opacity-100" : "opacity-0"
                   )}
                 />
