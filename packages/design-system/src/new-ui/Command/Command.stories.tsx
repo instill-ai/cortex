@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Command } from "./Command";
-import React from "react";
+import * as React from "react";
 import { Icons } from "../Icons";
 
 const meta: Meta<typeof Command> = {

@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Combobox } from "./Combobox";
 import { SingleSelectOption } from "../../ui";
 import { Icons } from "../Icons";
+import * as React from "react";
 
 const meta: Meta<typeof Combobox> = {
   title: "Components/NewUi/Combobox",
@@ -42,13 +43,16 @@ const items: SingleSelectOption[] = [
   },
 ];
 
-export const Default: Story = {
-  render: () => (
+export const Default = () => {
+  const [value, setValue] = React.useState("");
+  return (
     <Combobox
       items={items}
       placeholder="Search"
       notFoundPlaceholder="No Item Found"
       buttonLabel="Select"
+      value={value}
+      setValue={setValue}
     />
-  ),
+  );
 };
