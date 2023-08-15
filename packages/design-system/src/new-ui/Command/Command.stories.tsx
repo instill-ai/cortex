@@ -40,6 +40,7 @@ export function CommandDialogDemo() {
           <Command.Empty>No results found.</Command.Empty>
           <Command.Group heading="Suggestions">
             <Command.Item>
+              <Icons.AlertCircle className="mr-2 h-4 w-4 stroke-semantic-fg-secondary" />
               <span>Calendar</span>
             </Command.Item>
             <Command.Item>
