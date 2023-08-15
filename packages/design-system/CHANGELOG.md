@@ -1,5 +1,20 @@
 # @instill-ai/design-system
 
+## [0.39.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.38.1...@instill-ai/design-system-v0.39.0) (2023-08-15)
+
+
+### Features
+
+* add RoundedCheck ([#798](https://github.com/instill-ai/design-system/issues/798)) ([eacc043](https://github.com/instill-ai/design-system/commit/eacc043cec4e79ec62bbdd5cafec3dbbff72ae2d))
+* **design-system:** add combobox component ([#803](https://github.com/instill-ai/design-system/issues/803)) ([f6997c3](https://github.com/instill-ai/design-system/commit/f6997c33d377bdf8b52a43f55205e1e0dce197df))
+* **design-system:** add command component ([#802](https://github.com/instill-ai/design-system/issues/802)) ([989e955](https://github.com/instill-ai/design-system/commit/989e9557310463d7e5079ef11f4a54b87f18954a))
+* **design-system:** add popover component ([#801](https://github.com/instill-ai/design-system/issues/801)) ([fd5c935](https://github.com/instill-ai/design-system/commit/fd5c9356d5c8d72ecb18225b7d5e001d4cd519c3))
+
+
+### Bug Fixes
+
+* fix icons dimension ([#800](https://github.com/instill-ai/design-system/issues/800)) ([99afdbc](https://github.com/instill-ai/design-system/commit/99afdbc2a5f8e80432312803b26816bceed6d257))
+
 ## [0.38.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.38.0...@instill-ai/design-system-v0.38.1) (2023-08-14)
 
 
