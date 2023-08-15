@@ -13,16 +13,16 @@ type ComboboxProps = {
   items: SingleSelectOption[];
   placeholder: Nullable<string>;
   notFoundPlaceholder: Nullable<string>;
-  buttonLabel: Nullable<string>;
   value: string;
   setValue: React.Dispatch<React.SetStateAction<string>>;
+  label: React.ReactElement;
 };
 
 export function Combobox({
   items,
   placeholder,
   notFoundPlaceholder,
-  buttonLabel,
+  label,
   value,
   setValue,
 }: ComboboxProps) {
@@ -30,20 +30,7 @@ export function Combobox({
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
-      <Popover.Trigger asChild>
-        <Button
-          variant="secondaryGrey"
-          role="combobox"
-          aria-expanded={open}
-          className="w-[300px] justify-between"
-        >
-          {value
-            ? items.find((item) => item.value === value)?.label
-            : buttonLabel}
-
-          <Icons.ChevronSelectorVertical className="ml-2 h-4 w-4 stroke-slate-500" />
-        </Button>
-      </Popover.Trigger>
+      <Popover.Trigger asChild>{label}</Popover.Trigger>
       <Popover.Content className="w-[300px] !rounded-sm !p-0">
         <Command.Root>
           <Command.Input placeholder={placeholder || ""} />

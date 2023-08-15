@@ -3,6 +3,7 @@ import { Combobox } from "./Combobox";
 import { SingleSelectOption } from "../../ui";
 import { Icons } from "../Icons";
 import * as React from "react";
+import { Button } from "../Button";
 
 const meta: Meta<typeof Combobox> = {
   title: "Components/NewUi/Combobox",
@@ -50,9 +51,14 @@ export const Default = () => {
       items={items}
       placeholder="Search"
       notFoundPlaceholder="No Item Found"
-      buttonLabel="Select"
       value={value}
       setValue={setValue}
+      label={
+        <Button variant="secondaryGrey" className="w-[300px] justify-between">
+          {value ? items.find((item) => item.value === value)?.label : "Select"}
+          <Icons.ChevronSelectorVertical className="ml-2 h-4 w-4 stroke-slate-500" />
+        </Button>
+      }
     />
   );
 };
