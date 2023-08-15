@@ -116,6 +116,7 @@
     "@radix-ui/react-tooltip": "^1.0.6",
     "@tanstack/react-table": "^8.9.3",
     "class-variance-authority": "^0.6.0",
+    "cmdk": "^0.2.0",
     "react-hook-form": "^7.45.0",
     "sanitize-html": "^2.7.0",
     "tailwindcss-animate": "^1.0.6",
