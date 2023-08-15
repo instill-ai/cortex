@@ -14,6 +14,8 @@ type ComboboxProps = {
   placeholder: Nullable<string>;
   notFoundPlaceholder: Nullable<string>;
   buttonLabel: Nullable<string>;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 export function Combobox({
@@ -21,9 +23,10 @@ export function Combobox({
   placeholder,
   notFoundPlaceholder,
   buttonLabel,
+  value,
+  setValue,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("");
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
