@@ -37,11 +37,18 @@ export type SourcesTableProps = {
   sourcesWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
+  accessToken: Nullable<string>;
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const SourcesTable = (props: SourcesTableProps) => {
-  const { sources, sourcesWatchState, marginBottom, isError, isLoading } =
-    props;
+  const {
+    sources,
+    sourcesWatchState,
+    marginBottom,
+    isError,
+    isLoading,
+    accessToken,
+  } = props;
 
   const deleteConnector = useDeleteConnector();
   const { toast } = useToast();
@@ -55,7 +62,7 @@ export const SourcesTable = (props: SourcesTableProps) => {
     deleteConnector.mutate(
       {
         connectorName: resource.name,
-        accessToken: null,
+        accessToken: accessToken ? accessToken : null,
       },
       {
         onSuccess: () => {

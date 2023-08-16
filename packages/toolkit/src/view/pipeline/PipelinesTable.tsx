@@ -36,13 +36,20 @@ export type PipelinesTableProps = {
   pipelinesWatchState: PipelinesWatchState;
   isError: boolean;
   isLoading: boolean;
+  accessToken: Nullable<string>;
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const PipelinesTable = (props: PipelinesTableProps) => {
   const router = useRouter();
 
-  const { pipelines, pipelinesWatchState, marginBottom, isError, isLoading } =
-    props;
+  const {
+    pipelines,
+    pipelinesWatchState,
+    marginBottom,
+    isError,
+    isLoading,
+    accessToken,
+  } = props;
 
   const deletePipeline = useDeletePipeline();
   const { toast } = useToast();
@@ -54,7 +61,10 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
     if (!resource) return;
     setIsDeleting(true);
     deletePipeline.mutate(
-      { pipelineName: resource.name, accessToken: null },
+      {
+        pipelineName: resource.name,
+        accessToken: accessToken ? accessToken : null,
+      },
       {
         onSuccess: () => {
           setIsDeleting(false);
