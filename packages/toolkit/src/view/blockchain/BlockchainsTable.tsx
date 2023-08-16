@@ -36,6 +36,7 @@ export type BlockchainsTableProps = {
   blockchainsWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
+  accessToken: Nullable<string>;
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const BlockchainsTable = (props: BlockchainsTableProps) => {
@@ -45,6 +46,7 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
     marginBottom,
     isError,
     isLoading,
+    accessToken,
   } = props;
 
   const deleteConnector = useDeleteConnector();
@@ -59,7 +61,7 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
     deleteConnector.mutate(
       {
         connectorName: resource.name,
-        accessToken: null,
+        accessToken: accessToken ? accessToken : null,
       },
       {
         onSuccess: () => {
@@ -95,9 +97,7 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
   const columns: ColumnDef<ConnectorWithPipelines>[] = [
     {
       accessorKey: "id",
-      header: () => (
-        <div className="min-w-[300px] text-left">ID</div>
-      ),
+      header: () => <div className="min-w-[300px] text-left">ID</div>,
       cell: ({ row }) => {
         return (
           <div className="text-left">

@@ -37,6 +37,7 @@ export type DestinationsTableProps = {
   destinationsWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
+  accessToken: Nullable<string>;
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const DestinationsTable = (props: DestinationsTableProps) => {
@@ -46,6 +47,7 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
     isError,
     isLoading,
     marginBottom,
+    accessToken,
   } = props;
 
   const deleteConnector = useDeleteConnector();
@@ -60,7 +62,7 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
     deleteConnector.mutate(
       {
         connectorName: resource.name,
-        accessToken: null,
+        accessToken: accessToken ? accessToken : null,
       },
       {
         onSuccess: () => {

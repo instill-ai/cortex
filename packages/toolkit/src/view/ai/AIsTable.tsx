@@ -38,10 +38,12 @@ export type AIsTableProps = {
   aisWatchState: ConnectorsWatchState;
   isError: boolean;
   isLoading: boolean;
+  accessToken: Nullable<string>;
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const AIsTable = (props: AIsTableProps) => {
-  const { ais, aisWatchState, marginBottom, isError, isLoading } = props;
+  const { ais, aisWatchState, marginBottom, isError, isLoading, accessToken } =
+    props;
 
   const deleteConnector = useDeleteConnector();
   const { toast } = useToast();
@@ -56,7 +58,7 @@ export const AIsTable = (props: AIsTableProps) => {
     deleteConnector.mutate(
       {
         connectorName: resource.name,
-        accessToken: null,
+        accessToken: accessToken ? accessToken : null,
       },
       {
         onSuccess: () => {
