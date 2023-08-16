@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.64.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.1...@instill-ai/toolkit-v0.64.2) (2023-08-16)
+
+
+### Miscellaneous
+
+* **toolkit:** update all table props accessToken ([#810](https://github.com/instill-ai/design-system/issues/810)) ([4cf3120](https://github.com/instill-ai/design-system/commit/4cf3120b63c39be9e76ab310cc66ea7d9d8a500d))
+
 ## [0.64.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.0...@instill-ai/toolkit-v0.64.1) (2023-08-09)
 
 
