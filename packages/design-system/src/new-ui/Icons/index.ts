@@ -26,6 +26,7 @@ import { Cube01 } from "./Cube01";
 import { CubeOutline } from "./CubeOutline";
 import { Database01 } from "./Database01";
 import { DownloadCloud01 } from "./DownloadCloud01";
+import { Edit03 } from "./Edit03";
 import { Edit05 } from "./Edit05";
 import { File04 } from "./File04";
 import { FilterLines } from "./FilterLines";
@@ -79,6 +80,7 @@ export const Icons = {
   CubeOutline,
   Database01,
   DownloadCloud01,
+  Edit03,
   Edit05,
   File04,
   FilterLines,
