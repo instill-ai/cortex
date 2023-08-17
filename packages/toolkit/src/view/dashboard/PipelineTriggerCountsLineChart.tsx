@@ -9,6 +9,26 @@ type PipelineTriggerCountsLineChartProps = {
   selectedTimeOption: SingleSelectOption;
 };
 
+function selectGraph(params: any, myChart: echarts.ECharts): void {
+  myChart.dispatchAction({
+    type: "legendSelect",
+    // legend name
+    name: params.name as string,
+  });
+}
+
+function unselectGraph(params: any, myChart: echarts.ECharts): void {
+  for (const legend in params.selected) {
+    if (legend !== params.name) {
+      myChart.dispatchAction({
+        type: "legendUnSelect",
+        // legend name
+        name: legend,
+      });
+    }
+  }
+}
+
 export const PipelineTriggerCountsLineChart = ({
   isLoading,
   pipelines,
@@ -82,6 +102,10 @@ export const PipelineTriggerCountsLineChart = ({
       };
 
       myChart.setOption(option, true);
+      myChart.on("legendselectchanged", function (params) {
+        selectGraph(params, myChart);
+        unselectGraph(params, myChart);
+      });
     }
   }, [isLoading, xAxisData, seriesData, pipelines]);
 
