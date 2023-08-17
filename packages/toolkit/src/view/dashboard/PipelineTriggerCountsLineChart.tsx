@@ -9,10 +9,7 @@ type PipelineTriggerCountsLineChartProps = {
   selectedTimeOption: SingleSelectOption;
 };
 
-function selectGraph(
-  params: echarts.EChartsOption.EventData,
-  myChart: echarts.ECharts
-): void {
+function selectGraph(params: any, myChart: echarts.ECharts): void {
   myChart.dispatchAction({
     type: "legendSelect",
     // legend name
@@ -20,10 +17,7 @@ function selectGraph(
   });
 }
 
-function unselectGraph(
-  params: echarts.EChartsOption.EventData,
-  myChart: echarts.ECharts
-): void {
+function unselectGraph(params: any, myChart: echarts.ECharts): void {
   for (const legend in params.selected) {
     if (legend !== params.name) {
       myChart.dispatchAction({
