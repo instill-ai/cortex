@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.41.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.40.2...@instill-ai/design-system-v0.41.0) (2023-08-17)
+
+
+### Features
+
+* add Edit03 icon ([#812](https://github.com/instill-ai/design-system/issues/812)) ([781adcf](https://github.com/instill-ai/design-system/commit/781adcf92f4b70ef4d969bdfbfb4906c24ed88c0))
+
 ## [0.40.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.40.1...@instill-ai/design-system-v0.40.2) (2023-08-15)
 
 

@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.64.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.2...@instill-ai/toolkit-v0.64.3) (2023-08-17)
+
+
+### Miscellaneous
+
+* **toolkit:** update dashboard chart legend click option ([#814](https://github.com/instill-ai/design-system/issues/814)) ([f1c0377](https://github.com/instill-ai/design-system/commit/f1c0377cbcfe98f75d10e2c96ed82731fea7b1a3))
+
 ## [0.64.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.1...@instill-ai/toolkit-v0.64.2) (2023-08-16)
 
 
