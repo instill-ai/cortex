@@ -45,6 +45,7 @@ export const ChangeModelStateToggle = ({
   disabled,
 }: ChangeModelStateToggleProps) => {
   const [error, setError] = React.useState<Nullable<string>>(null);
+  const [isChangingState, setIsChangingState] = React.useState<boolean>(false);
 
   React.useEffect(() => {
     if (modelWatchState === "STATE_ERROR") {
@@ -58,8 +59,8 @@ export const ChangeModelStateToggle = ({
     if (!model || !modelWatchState || modelWatchState === "STATE_UNSPECIFIED") {
       return;
     }
-
     if (modelWatchState === "STATE_ONLINE") {
+      setIsChangingState(true);
       switchOff.mutate(
         {
           modelName: model.name,
@@ -76,9 +77,15 @@ export const ChangeModelStateToggle = ({
               setError("There is an error. Please try again.");
             }
           },
+          onSuccess: () => {
+            setTimeout(() => {
+              setIsChangingState(false);
+            }, 3000);
+          },
         }
       );
     } else {
+      setIsChangingState(true);
       switchOn.mutate(
         {
           modelName: model.name,
@@ -95,6 +102,11 @@ export const ChangeModelStateToggle = ({
               setError("There is an error. Please try again.");
             }
           },
+          onSuccess: () => {
+            setTimeout(() => {
+              setIsChangingState(false);
+            }, 3000);
+          },
         }
       );
     }
@@ -109,12 +121,12 @@ export const ChangeModelStateToggle = ({
         label="State"
         error={error}
         state={
-          modelWatchState === "STATE_UNSPECIFIED"
+          modelWatchState === "STATE_UNSPECIFIED" || isChangingState
             ? "STATE_LOADING"
             : modelWatchState || "STATE_UNSPECIFIED"
         }
         disabled={disabled ? true : modelWatchState === "STATE_UNSPECIFIED"}
-        loadingLabelText="Model is in the long running operation, please refresh this page to get the new status"
+        loadingLabelText="Model is in the long running operation, please wait on this page to get the new status"
       />
     </div>
   );

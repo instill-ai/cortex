@@ -17,6 +17,8 @@ export const useDeployModel = () => {
           modelName,
           accessToken,
         });
+        console.log("operation", operation);
+
         return Promise.resolve({ operation, modelName });
       } catch (err) {
         return Promise.reject(err);
@@ -27,10 +29,13 @@ export const useDeployModel = () => {
         // Because deploy model is a long running operation, we will not
         // query the model and update the cache mediately. We left this
         // decision to the user.
-        queryClient.invalidateQueries(["models"]);
-        queryClient.invalidateQueries(["models", modelName]);
-        queryClient.invalidateQueries(["models", "watch"]);
-        queryClient.invalidateQueries(["models", modelName, "watch"]);
+
+        setTimeout(() => {
+          queryClient.invalidateQueries(["models"]);
+          queryClient.invalidateQueries(["models", modelName]);
+          queryClient.invalidateQueries(["models", "watch"]);
+          queryClient.invalidateQueries(["models", modelName, "watch"]);
+        }, 3000);
       },
     }
   );
