@@ -17,7 +17,6 @@ export const useDeployModel = () => {
           modelName,
           accessToken,
         });
-        console.log("operation", operation);
 
         return Promise.resolve({ operation, modelName });
       } catch (err) {
@@ -27,7 +26,7 @@ export const useDeployModel = () => {
     {
       onSuccess: ({ modelName }) => {
         // Because deploy model is a long running operation, we will not
-        // query the model and update the cache mediately. We left this
+        // query the model and update the cache immediately. We left this
         // decision to the user.
 
         setTimeout(() => {
