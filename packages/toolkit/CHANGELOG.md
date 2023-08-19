@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.3...@instill-ai/toolkit-v0.65.0) (2023-08-19)
+
+
+### Features
+
+* **toolkit:** add loader to state change for model deploy and undeploy ([#815](https://github.com/instill-ai/design-system/issues/815)) ([06af5eb](https://github.com/instill-ai/design-system/commit/06af5eb2de65be080deb1636f092de3e2193cb65))
+
 ## [0.64.3](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.2...@instill-ai/toolkit-v0.64.3) (2023-08-17)
 
 
