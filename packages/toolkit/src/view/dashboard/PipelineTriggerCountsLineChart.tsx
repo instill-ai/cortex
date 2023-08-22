@@ -102,9 +102,16 @@ export const PipelineTriggerCountsLineChart = ({
       };
 
       myChart.setOption(option, true);
-      myChart.on("legendselectchanged", function (params) {
-        selectGraph(params, myChart);
-        unselectGraph(params, myChart);
+      myChart.on("legendselectchanged", function (params: any) {
+        const selected = Object.values(params.selected);
+        if (selected.filter((select) => !select).length === selected.length) {
+          myChart.dispatchAction({
+            type: "legendAllSelect",
+          });
+        } else {
+          selectGraph(params, myChart);
+          unselectGraph(params, myChart);
+        }
       });
     }
   }, [isLoading, xAxisData, seriesData, pipelines]);
