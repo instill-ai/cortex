@@ -14,10 +14,12 @@ export function generateChartData(
     return pipeline.time_buckets.map((bucket) => formatDateTime(bucket, range));
   });
 
-  const xAxis = sortByDate([
+  const xAxisSortedDates = sortByDate([
     ...getDateRange(range),
     ...formattedTimeBuckets.flat(),
   ]);
+
+  const xAxis = Array.from(new Set(xAxisSortedDates));
   const yAxis: any = [];
 
   // Initialize yAxis arrays for each pipeline
