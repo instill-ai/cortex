@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.1...@instill-ai/toolkit-v0.65.2) (2023-08-23)
+
+
+### Bug Fixes
+
+* **toolkit:** update minInterval of y-axis ([#819](https://github.com/instill-ai/design-system/issues/819)) ([4b7c1d2](https://github.com/instill-ai/design-system/commit/4b7c1d28ff1d0e3f362b91ef69cf2d8255dce711))
+
 ## [0.65.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.0...@instill-ai/toolkit-v0.65.1) (2023-08-22)
 
 
