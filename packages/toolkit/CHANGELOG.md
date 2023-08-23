@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.65.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.0...@instill-ai/toolkit-v0.65.1) (2023-08-22)
+
+
+### Miscellaneous
+
+* **toolkit:** update dashboard chart ([#817](https://github.com/instill-ai/design-system/issues/817)) ([98457de](https://github.com/instill-ai/design-system/commit/98457debf6a1265579a093ecf362e16396f984f5))
+
 ## [0.65.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.64.3...@instill-ai/toolkit-v0.65.0) (2023-08-19)
 
 
