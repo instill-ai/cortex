@@ -97,6 +97,7 @@ export const PipelineTriggerCountsLineChart = ({
         },
         yAxis: {
           type: "value",
+          minInterval: 1,
         },
         series: seriesData,
       };
