@@ -49,6 +49,7 @@ export const PipelineTriggerCountsLineChart = ({
       echarts.dispose(chartRef.current); // eslint-disable-line
       const myChart = echarts.init(chartRef.current); // eslint-disable-line
       const option = {
+        animation: false,
         title: {
           show: pipelines.length === 0,
           textStyle: {
@@ -97,6 +98,7 @@ export const PipelineTriggerCountsLineChart = ({
         },
         yAxis: {
           type: "value",
+          minInterval: 1,
         },
         series: seriesData,
       };
