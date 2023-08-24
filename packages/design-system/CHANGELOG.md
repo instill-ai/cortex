@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.42.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.41.0...@instill-ai/design-system-v0.42.0) (2023-08-24)
+
+
+### Features
+
+* **design-system:** add instill square icon ([#821](https://github.com/instill-ai/design-system/issues/821)) ([cd85dc5](https://github.com/instill-ai/design-system/commit/cd85dc509e0081b8a8495b8ae637ce449206629d))
+
 ## [0.41.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.40.2...@instill-ai/design-system-v0.41.0) (2023-08-17)
 
 
