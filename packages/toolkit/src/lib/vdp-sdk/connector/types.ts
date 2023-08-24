@@ -2,51 +2,51 @@
 
 import { Pipeline } from "../pipeline";
 
-export type ConnectorState =
+export type ConnectorResourceState =
   | "STATE_CONNECTED"
   | "STATE_DISCONNECTED"
   | "STATE_ERROR"
   | "STATE_UNSPECIFIED";
 
-export type ConnectorVisibility =
+export type ConnectorResourceVisibility =
   | "VISIBILITY_UNSPECIFIED"
   | "VISIBILITY_PRIVATE"
   | "VISIBILITY_PUBLIC";
 
-export type ConnectorType =
+export type ConnectorResourceType =
   | "CONNECTOR_TYPE_UNSPECIFIED"
   | "CONNECTOR_TYPE_OPERATOR"
   | "CONNECTOR_TYPE_DATA"
   | "CONNECTOR_TYPE_AI"
   | "CONNECTOR_TYPE_BLOCKCHAIN";
 
-export type Connector = {
+export type ConnectorResource = {
   name: string;
   uid: string;
   id: string;
   connector_definition: null;
   connector_definition_name: string;
-  connector_type: ConnectorType;
+  connector_type: ConnectorResourceType;
   task: string;
   description: string;
   configuration: Record<string, any> | Record<string, never>;
-  state: ConnectorState;
+  state: ConnectorResourceState;
   tombstone: boolean;
   user: string;
   create_time: string;
   update_time: string;
-  visibility: ConnectorVisibility;
+  visibility: ConnectorResourceVisibility;
 };
 
-export type ConnectorWithDefinition = Omit<
-  Connector,
+export type ConnectorResourceWithDefinition = Omit<
+  ConnectorResource,
   "connector_definition" | "configuration"
 > & {
   connector_definition: ConnectorDefinition;
   configuration: Record<string, any> | Record<string, never>;
 };
 
-export type ConnectorWithPipelines = ConnectorWithDefinition & {
+export type ConnectorResourceWithPipelines = ConnectorResourceWithDefinition & {
   pipelines: Pipeline[];
 };
 
@@ -58,7 +58,7 @@ export type ConnectorDefinition = {
   documentation_url: string;
   icon: string;
   icon_url: string;
-  connector_type: ConnectorType;
+  connector_type: ConnectorResourceType;
   spec: {
     documentation_url: string;
     connection_specification: Record<string, any>;
@@ -70,8 +70,11 @@ export type ConnectorDefinition = {
   vendor_attributes: Record<string, any>;
 };
 
-export type ConnectorWatchState = {
-  state: ConnectorState;
+export type ConnectorResourceWatchState = {
+  state: ConnectorResourceState;
 };
 
-export type ConnectorsWatchState = Record<string, ConnectorWatchState>;
+export type ConnectorResourcesWatchState = Record<
+  string,
+  ConnectorResourceWatchState
+>;

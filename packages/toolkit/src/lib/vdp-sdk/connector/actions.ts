@@ -1,22 +1,22 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Connector, ConnectorState } from "./types";
+import { ConnectorResource, ConnectorResourceState } from "./types";
 
-export type TestConnectorResponse = {
-  state: ConnectorState;
+export type TestConnectorResourceConnectionResponse = {
+  state: ConnectorResourceState;
 };
 
-export async function testConnectorConnectionAction({
-  connectorName,
+export async function testConnectorResourceConnectionAction({
+  connectorResourceName,
   accessToken,
 }: {
-  connectorName: string;
+  connectorResourceName: string;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { data } = await client.post<TestConnectorResponse>(
-      `/${connectorName}/testConnection`
+    const { data } = await client.post<TestConnectorResourceConnectionResponse>(
+      `/${connectorResourceName}/testConnection`
     );
     return Promise.resolve(data.state);
   } catch (err) {
@@ -24,45 +24,45 @@ export async function testConnectorConnectionAction({
   }
 }
 
-export type ConnectConnectorResponse = {
-  connector: Connector;
+export type ConnectConnectorResourceResponse = {
+  connector_resource: ConnectorResource;
 };
 
-export async function connectConnectorAction({
-  connectorName,
+export async function connectConnectorResourceAction({
+  connectorResourceName,
   accessToken,
 }: {
-  connectorName: string;
+  connectorResourceName: string;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { data } = await client.post<ConnectConnectorResponse>(
-      `/${connectorName}/connect`
+    const { data } = await client.post<ConnectConnectorResourceResponse>(
+      `/${connectorResourceName}/connect`
     );
-    return Promise.resolve(data.connector);
+    return Promise.resolve(data.connector_resource);
   } catch (err) {
     return Promise.reject(err);
   }
 }
 
-export type DisconnectConnectorResponse = {
-  connector: Connector;
+export type DisconnectConnectorResourceResponse = {
+  connector_resource: ConnectorResource;
 };
 
-export async function disconnectConnectorAction({
-  connectorName,
+export async function disconnectConnectorResourceAction({
+  connectorResourceName,
   accessToken,
 }: {
-  connectorName: string;
+  connectorResourceName: string;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { data } = await client.post<DisconnectConnectorResponse>(
-      `/${connectorName}/disconnect`
+    const { data } = await client.post<DisconnectConnectorResourceResponse>(
+      `/${connectorResourceName}/disconnect`
     );
-    return Promise.resolve(data.connector);
+    return Promise.resolve(data.connector_resource);
   } catch (err) {
     return Promise.reject(err);
   }
