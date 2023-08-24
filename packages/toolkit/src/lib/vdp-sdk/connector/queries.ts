@@ -1,7 +1,6 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
 import {
-  Connector,
   ConnectorDefinition,
   ConnectorWatchState,
   ConnectorWithDefinition,
@@ -29,7 +28,7 @@ export async function listConnectorsQuery({
     const connectors: ConnectorWithDefinition[] = [];
 
     const queryString = getQueryString(
-      `/connectors?view=VIEW_FULL`,
+      `/connector-resources?view=VIEW_FULL`,
       pageSize,
       nextPageToken,
       filter
