@@ -98,7 +98,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
     ]);
 
     const payload: CreateConnectorPayload = {
-      connectorName: `connectors/${data.id}`,
+      connectorName: `connector-resources/${data.id}`,
       connector_definition_name: data.connector_definition_name,
       description: data.description,
       configuration: data.configuration,

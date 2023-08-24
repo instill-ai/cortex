@@ -378,14 +378,14 @@ export const DestinationForm = (props: DestinationFormProps) => {
 
     if (destination.id === "response") {
       payload = {
-        connectorName: "connectors/response",
+        connectorName: "connector-resources/response",
         connector_definition_name: destination.connector_definition_name,
         description: fieldValues.description as string,
         configuration: {},
       };
     } else {
       payload = {
-        connectorName: `connectors/${fieldValues.id}` as string,
+        connectorName: `connector-resources/${fieldValues.id}` as string,
         connector_definition_name: destination.connector_definition_name,
         description: fieldValues.description as string,
         configuration: stripValues.configuration,

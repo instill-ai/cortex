@@ -213,7 +213,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
     form.trigger(["configuration", "description", "id"]);
 
     const payload: CreateConnectorPayload = {
-      connectorName: `connectors/${data.id}`,
+      connectorName: `connector-resources/${data.id}`,
       connector_definition_name: data.connector_definition_name,
       description: data.description,
       configuration: data.configuration,

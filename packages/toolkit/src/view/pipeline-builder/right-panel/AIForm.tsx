@@ -382,7 +382,7 @@ export const AIForm = (props: AIFormProps) => {
       );
     } else {
       const payload: CreateConnectorPayload = {
-        connectorName: `connectors/${data.id}`,
+        connectorName: `connector-resources/${data.id}`,
         connector_definition_name: data.connector_definition_name,
         description: data.description,
         configuration: data.configuration,
@@ -482,8 +482,8 @@ export const AIForm = (props: AIFormProps) => {
 
   const [isConnecting, setIsConnecting] = React.useState(false);
 
-  const connectBlockchain = useConnectConnector();
-  const disconnectBlockchain = useDisonnectConnector();
+  const connectAI = useConnectConnector();
+  const disconnectAI = useDisonnectConnector();
 
   const handleConnectAI = async function () {
     if (!ai) return;
@@ -493,7 +493,7 @@ export const AIForm = (props: AIFormProps) => {
     const oldState = ai.watchState;
 
     if (ai.watchState === "STATE_CONNECTED") {
-      disconnectBlockchain.mutate(
+      disconnectAI.mutate(
         {
           connectorName: ai.name,
           accessToken,
@@ -558,7 +558,7 @@ export const AIForm = (props: AIFormProps) => {
         }
       );
     } else {
-      connectBlockchain.mutate(
+      connectAI.mutate(
         {
           connectorName: ai.name,
           accessToken,
