@@ -1,17 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { usePipelines } from "../pipeline";
-import type { ConnectorWithPipelines } from "../../vdp-sdk";
+import type { ConnectorResourceWithPipelines } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 import { getComponentsFromPipelineRecipe } from "../../utility";
-import { useConnector } from "./useConnector";
+import { useConnectorResource } from "./useConnectorResource";
 
-export const useConnectorWithPipelines = ({
-  connectorName,
+export const useConnectorResourceWithPipelines = ({
+  connectorResourceName,
   accessToken,
   enabled,
   retry,
 }: {
-  connectorName: Nullable<string>;
+  connectorResourceName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -21,28 +21,33 @@ export const useConnectorWithPipelines = ({
   retry?: false | number;
 }) => {
   const pipelines = usePipelines({ enabled, accessToken, retry });
-  const connector = useConnector({
+  const connectorResource = useConnectorResource({
     enabled,
-    connectorName,
+    connectorResourceName,
     accessToken,
     retry,
   });
 
   let enableQuery = false;
 
-  if (connectorName && connector.isSuccess && pipelines.isSuccess && enabled) {
+  if (
+    connectorResourceName &&
+    connectorResource.isSuccess &&
+    pipelines.isSuccess &&
+    enabled
+  ) {
     enableQuery = true;
   }
 
   return useQuery(
-    ["connectors", connectorName, "with-pipelines"],
+    ["connector-resources", connectorResourceName, "with-pipelines"],
     async () => {
-      if (!connectorName) {
-        return Promise.reject(new Error("Invalid connector name"));
+      if (!connectorResourceName) {
+        return Promise.reject(new Error("Invalid connector resource name"));
       }
 
-      if (!connector.data) {
-        return Promise.reject(new Error("Invalid connector data"));
+      if (!connectorResource.data) {
+        return Promise.reject(new Error("Invalid connector resource data"));
       }
 
       if (!pipelines.data) {
@@ -52,20 +57,20 @@ export const useConnectorWithPipelines = ({
       const targetPipelines = pipelines.data.filter((e) => {
         const components = getComponentsFromPipelineRecipe({
           recipe: e.recipe,
-          connectorType: connector.data.connector_type,
+          connectorType: connectorResource.data.connector_type,
         });
 
         return components.some(
-          (e) => e.resource_detail.id === connector.data.id
+          (e) => e.resource_detail.id === connectorResource.data.id
         );
       });
 
-      const connectorWithPipelines: ConnectorWithPipelines = {
-        ...connector.data,
+      const connectorResourceWithPipelines: ConnectorResourceWithPipelines = {
+        ...connectorResource.data,
         pipelines: targetPipelines,
       };
 
-      return Promise.resolve(connectorWithPipelines);
+      return Promise.resolve(connectorResourceWithPipelines);
     },
     {
       enabled: enableQuery,

@@ -1,86 +1,86 @@
 import { AirbyteFieldValues } from "../../airbytes";
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Connector } from "./types";
+import { ConnectorResource } from "./types";
 
-export type CreateConnectorPayload = {
-  connectorName: string;
+export type CreateConnectorResourcePayload = {
+  connectorResourceName: string;
   connector_definition_name: string;
   description?: string;
   configuration: Record<string, any> | Record<string, never>;
 };
 
-export type CreateConnectorResponse = {
-  connector: Connector;
+export type CreateConnectorResourceResponse = {
+  connector_resource: ConnectorResource;
 };
 
-export async function createConnectorMutation({
+export async function createConnectorResourceMutation({
   payload,
   accessToken,
 }: {
-  payload: CreateConnectorPayload;
+  payload: CreateConnectorResourcePayload;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { connectorName, ...data } = payload;
+    const { connectorResourceName, ...data } = payload;
 
-    const res = await client.post<CreateConnectorResponse>(
+    const res = await client.post<CreateConnectorResourceResponse>(
       "/connector-resources",
       {
         ...data,
-        id: connectorName.split("/")[1],
+        id: connectorResourceName.split("/")[1],
       }
     );
-    return Promise.resolve(res.data.connector);
+    return Promise.resolve(res.data.connector_resource);
   } catch (err) {
     return Promise.reject(err);
   }
 }
 
-export async function deleteConnectorMutation({
-  connectorName,
+export async function deleteConnectorResourceMutation({
+  connectorResourceName,
   accessToken,
 }: {
-  connectorName: string;
+  connectorResourceName: string;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
-    await client.delete(`/${connectorName}`);
+    await client.delete(`/${connectorResourceName}`);
   } catch (err) {
     return Promise.reject(err);
   }
 }
 
-export type UpdateConnectorResponse = {
-  connector: Connector;
+export type UpdateConnectorResourceResponse = {
+  connector_resource: ConnectorResource;
 };
 
-export type UpdateConnectorPayload = {
-  connectorName: string;
+export type UpdateConnectorResourcePayload = {
+  connectorResourceName: string;
   description?: string;
   configuration: /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
   Record<string, any> | AirbyteFieldValues | Record<string, never>;
 };
 
-export async function updateConnectorMutation({
+export async function updateConnectorResourceMutation({
   payload,
   accessToken,
 }: {
-  payload: UpdateConnectorPayload;
+  payload: UpdateConnectorResourcePayload;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { connectorName, ...data } = payload;
+    const { connectorResourceName, ...data } = payload;
 
-    const res = await client.patch<UpdateConnectorResponse>(
-      `/${connectorName}`,
+    const res = await client.patch<UpdateConnectorResourceResponse>(
+      `/${connectorResourceName}`,
       data
     );
-    return Promise.resolve(res.data.connector);
+    return Promise.resolve(res.data.connector_resource);
   } catch (err) {
     return Promise.reject(err);
   }

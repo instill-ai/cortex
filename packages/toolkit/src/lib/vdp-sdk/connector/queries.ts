@@ -2,17 +2,17 @@ import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
 import {
   ConnectorDefinition,
-  ConnectorWatchState,
-  ConnectorWithDefinition,
+  ConnectorResourceWatchState,
+  ConnectorResourceWithDefinition,
 } from "./types";
 
-export type ListConnectorsResponse = {
-  connectors: ConnectorWithDefinition[];
+export type ListConnectorResourcesResponse = {
+  connector_resources: ConnectorResourceWithDefinition[];
   next_page_token: string;
   total_size: string;
 };
 
-export async function listConnectorsQuery({
+export async function listConnectorResourcesQuery({
   pageSize,
   nextPageToken,
   accessToken,
@@ -25,7 +25,7 @@ export async function listConnectorsQuery({
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const connectors: ConnectorWithDefinition[] = [];
+    const connectors: ConnectorResourceWithDefinition[] = [];
 
     const queryString = getQueryString(
       `/connector-resources?view=VIEW_FULL`,
@@ -34,13 +34,15 @@ export async function listConnectorsQuery({
       filter
     );
 
-    const { data } = await client.get<ListConnectorsResponse>(queryString);
+    const { data } = await client.get<ListConnectorResourcesResponse>(
+      queryString
+    );
 
-    connectors.push(...data.connectors);
+    connectors.push(...data.connector_resources);
 
     if (data.next_page_token) {
       connectors.push(
-        ...(await listConnectorsQuery({
+        ...(await listConnectorResourcesQuery({
           pageSize,
           accessToken,
           nextPageToken: data.next_page_token,
@@ -130,41 +132,41 @@ export async function getConnectorDefinitionQuery({
   }
 }
 
-export type GetConnectorResponse = {
-  connector: ConnectorWithDefinition;
+export type GetConnectorResourceResponse = {
+  connector_resource: ConnectorResourceWithDefinition;
 };
 
-export async function getConnectorQuery({
-  connectorName,
+export async function getConnectorResourceQuery({
+  connectorResourceName,
   accessToken,
 }: {
-  connectorName: string;
+  connectorResourceName: string;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
-    const { data } = await client.get<GetConnectorResponse>(
-      `/${connectorName}?view=VIEW_FULL`
+    const { data } = await client.get<GetConnectorResourceResponse>(
+      `/${connectorResourceName}?view=VIEW_FULL`
     );
 
-    return Promise.resolve(data.connector);
+    return Promise.resolve(data.connector_resource);
   } catch (err) {
     return Promise.reject(err);
   }
 }
 
-export async function watchConnector({
-  connectorName,
+export async function watchConnectorResource({
+  connectorResourceName,
   accessToken,
 }: {
-  connectorName: string;
+  connectorResourceName: string;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { data } = await client.get<ConnectorWatchState>(
-      `/${connectorName}/watch`
+    const { data } = await client.get<ConnectorResourceWatchState>(
+      `/${connectorResourceName}/watch`
     );
     return Promise.resolve(data);
   } catch (err) {
