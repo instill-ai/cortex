@@ -25,10 +25,13 @@ export async function createConnectorMutation({
     const client = createInstillAxiosClient(accessToken, "vdp");
     const { connectorName, ...data } = payload;
 
-    const res = await client.post<CreateConnectorResponse>("/connectors", {
-      ...data,
-      id: connectorName.split("/")[1],
-    });
+    const res = await client.post<CreateConnectorResponse>(
+      "/connector-resources",
+      {
+        ...data,
+        id: connectorName.split("/")[1],
+      }
+    );
     return Promise.resolve(res.data.connector);
   } catch (err) {
     return Promise.reject(err);
