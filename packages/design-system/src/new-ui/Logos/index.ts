@@ -3,6 +3,7 @@ import { ATFSquare } from "./ATFSquare";
 import { ATFExpand } from "./ATFExpand";
 import { HuggingFace } from "./HuggingFace";
 import { InstillCloud } from "./InstillCloud";
+import { InstillSquare } from "./InstillSquare";
 import { MDLExpand } from "./MDLExpand";
 import { MDLSquare } from "./MDLSquare";
 import { Number } from "./Number";
@@ -17,6 +18,7 @@ export const Logos = {
   ATFExpand,
   HuggingFace,
   InstillCloud,
+  InstillSquare,
   MDLExpand,
   MDLSquare,
   Number,
