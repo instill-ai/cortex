@@ -406,14 +406,14 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
   const [isConnecting, setIsConnecting] = React.useState(false);
 
-  const connectBlockchain = useConnectConnector();
-  const disconnectBlockchain = useDisonnectConnector();
+  const connectAI = useConnectConnector();
+  const disconnectAI = useDisonnectConnector();
 
   const handleConnectAI = async function () {
     if (!ai) return;
     setIsConnecting(true);
     if (ai.watchState === "STATE_CONNECTED") {
-      disconnectBlockchain.mutate(
+      disconnectAI.mutate(
         {
           connectorName: ai.name,
           accessToken,
@@ -451,7 +451,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
         }
       );
     } else {
-      connectBlockchain.mutate(
+      connectAI.mutate(
         {
           connectorName: ai.name,
           accessToken,

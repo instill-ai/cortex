@@ -435,14 +435,14 @@ export const ConfigureDestinationForm = (
 
   const [isConnecting, setIsConnecting] = React.useState(false);
 
-  const connectBlockchain = useConnectConnector();
-  const disconnectBlockchain = useDisonnectConnector();
+  const connectDestination = useConnectConnector();
+  const disconnectDestination = useDisonnectConnector();
 
   const handleConnectAI = async function () {
     if (!destination) return;
     setIsConnecting(true);
     if (destination.watchState === "STATE_CONNECTED") {
-      disconnectBlockchain.mutate(
+      disconnectDestination.mutate(
         {
           connectorName: destination.name,
           accessToken,
@@ -480,7 +480,7 @@ export const ConfigureDestinationForm = (
         }
       );
     } else {
-      connectBlockchain.mutate(
+      connectDestination.mutate(
         {
           connectorName: destination.name,
           accessToken,

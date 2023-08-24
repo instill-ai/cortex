@@ -100,7 +100,7 @@ export const SourceForm = (props: SourceFormProps) => {
 
   async function handleCreateSource() {
     const payload: CreateConnectorPayload = {
-      connectorName: `connectors/${source.id}`,
+      connectorName: `connector-resources/${source.id}`,
       connector_definition_name: source.connector_definition_name,
       configuration: {},
     };
