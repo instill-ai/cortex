@@ -10,16 +10,15 @@ import {
 import { ColumnDef } from "@tanstack/react-table";
 import { isAxiosError } from "axios";
 import {
-  ConnectorWithDefinition,
-  ConnectorWithPipelines,
-  ConnectorsWatchState,
-  Model,
-  Nullable,
-  Pipeline,
   formatDate,
   getInstillApiErrorMessage,
   parseStatusLabel,
-  useDeleteConnector,
+  useDeleteConnectorResource,
+  type ConnectorResourceWithDefinition,
+  type ConnectorResourceWithPipelines,
+  type Nullable,
+  type Model,
+  type Pipeline,
 } from "../../lib";
 import {
   GeneralDeleteResourceModal,
@@ -33,35 +32,27 @@ import {
 import { SourceTablePlaceholder } from "./SourceTablePlaceholder";
 
 export type SourcesTableProps = {
-  sources: ConnectorWithPipelines[];
-  sourcesWatchState: ConnectorsWatchState;
+  sources: ConnectorResourceWithPipelines[];
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
 } & Pick<PaginationListContainerProps, "marginBottom">;
 
 export const SourcesTable = (props: SourcesTableProps) => {
-  const {
-    sources,
-    sourcesWatchState,
-    marginBottom,
-    isError,
-    isLoading,
-    accessToken,
-  } = props;
+  const { sources, isError, isLoading, accessToken } = props;
 
-  const deleteConnector = useDeleteConnector();
+  const deleteSource = useDeleteConnectorResource();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
   const handleDeleteOperator = (
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<ConnectorResourceWithDefinition | Model | Pipeline>
   ) => {
     if (!resource) return;
     setIsDeleting(true);
-    deleteConnector.mutate(
+    deleteSource.mutate(
       {
-        connectorName: resource.name,
+        connectorResourceName: resource.name,
         accessToken: accessToken ? accessToken : null,
       },
       {
@@ -95,7 +86,7 @@ export const SourcesTable = (props: SourcesTableProps) => {
     );
   };
 
-  const columns: ColumnDef<ConnectorWithPipelines>[] = [
+  const columns: ColumnDef<ConnectorResourceWithPipelines>[] = [
     {
       accessorKey: "id",
       header: () => <div className="min-w-[300px] text-left">ID</div>,

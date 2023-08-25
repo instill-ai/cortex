@@ -1,7 +1,7 @@
 import type {
-  ConnectorsWatchState,
-  Connector,
-  ConnectorWithPipelines,
+  ConnectorResourcesWatchState,
+  ConnectorResource,
+  ConnectorResourceWithPipelines,
   Model,
   ModelsWatchState,
   Pipeline,
@@ -10,7 +10,11 @@ import type {
 import { Nullable } from "../type";
 import * as React from "react";
 
-type Item = Pipeline | Connector | ConnectorWithPipelines | Model;
+type Item =
+  | Pipeline
+  | ConnectorResource
+  | ConnectorResourceWithPipelines
+  | Model;
 
 export type StateOverviewCounts = {
   online: number;
@@ -21,7 +25,7 @@ export type StateOverviewCounts = {
 export function useStateOverviewCounts(
   items: Item[] | null,
   itemsWatchState: Nullable<
-    ConnectorsWatchState | ModelsWatchState | PipelinesWatchState
+    ConnectorResourcesWatchState | ModelsWatchState | PipelinesWatchState
   >,
   isLoading: boolean
 ): Nullable<StateOverviewCounts> {
@@ -66,9 +70,9 @@ export function useStateOverviewCounts(
     }
 
     if (itemNameList[0] === "connectors") {
-      for (const item of items as Connector[]) {
-        if ((itemsWatchState as ConnectorsWatchState)[item.name]) {
-          const watchState = (itemsWatchState as ConnectorsWatchState)[
+      for (const item of items as ConnectorResource[]) {
+        if ((itemsWatchState as ConnectorResourcesWatchState)[item.name]) {
+          const watchState = (itemsWatchState as ConnectorResourcesWatchState)[
             item.name
           ].state;
           if (watchState === "STATE_CONNECTED") {

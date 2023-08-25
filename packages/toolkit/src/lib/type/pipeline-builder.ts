@@ -1,35 +1,34 @@
 import {
-  Connector,
+  ConnectorResource,
   ConnectorDefinition,
-  ConnectorState,
-  ConnectorType,
-  ConnectorWithDefinition,
+  ConnectorResourceState,
+  ConnectorResourceType,
+  ConnectorResourceWithDefinition,
   Pipeline,
   PipelineState,
+  ConnectorResourceWithWatchState,
 } from "../vdp-sdk";
 
-export type IncompleteConnectorWithWatchState = {
+export type IncompleteConnectorResourceWithWatchState = {
   id: string;
   name: string;
   connector_definition: ConnectorDefinition;
   connector_definition_name: string;
-  watchState: ConnectorState;
-} & Pick<ConnectorWithDefinition, "configuration" | "connector_type">;
-
-export type ConnectorWithWatchState = {
-  watchState: ConnectorState;
-} & ConnectorWithDefinition;
+  watchState: ConnectorResourceState;
+} & Pick<ConnectorResourceWithDefinition, "configuration" | "connector_type">;
 
 export type ConnectorNodeData = {
-  connectorType: ConnectorType;
-  connector: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
+  connectorResourceType: ConnectorResourceType;
+  connector:
+    | ConnectorResourceWithWatchState
+    | IncompleteConnectorResourceWithWatchState;
 };
 
-export type ConnectorPreset = {
+export type ConnectorResourcePreset = {
   connector_definition_name: string;
   id: string;
   name: string;
-} & Pick<Connector, "configuration">;
+} & Pick<ConnectorResource, "configuration">;
 
 export type PipelineWithWatchState = {
   watchState: PipelineState;

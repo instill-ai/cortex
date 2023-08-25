@@ -10,10 +10,10 @@ import {
   DataDestinationIcon,
   OutlineButton,
   SolidButton,
-  type ProgressMessageBoxState,
-  type FormRootProps,
   Button,
   Icons,
+  type ProgressMessageBoxState,
+  type FormRootProps,
 } from "@instill-ai/design-system";
 import {
   useAirbyteFieldValues,
@@ -21,23 +21,23 @@ import {
   useBuildAirbyteYup,
   dot,
   useAirbyteSelectedConditionMap,
-  useDeleteConnector,
-  useUpdateConnector,
+  useDeleteConnectorResource,
+  useUpdateConnectorResource,
   useAmplitudeCtx,
   sendAmplitudeData,
   useModalStore,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
-  testConnectorConnectionAction,
-  useConnectConnector,
-  useDisonnectConnector,
+  testConnectorResourceConnectionAction,
+  useConnectConnectorResource,
+  useDisonnectConnectorResource,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
-  type UpdateConnectorPayload,
+  type UpdateConnectorResourcePayload,
   type Nullable,
   type CreateResourceFormStore,
   type ModalStore,
-  type ConnectorWithWatchState,
+  type ConnectorResourceWithWatchState,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
@@ -45,7 +45,7 @@ import { DeleteResourceModal, ImageWithFallback } from "../../components";
 
 export type ConfigureDestinationFormProps = {
   accessToken: Nullable<string>;
-  destination: ConnectorWithWatchState;
+  destination: ConnectorResourceWithWatchState;
   onConfigure: Nullable<(initStore: () => void) => void>;
   disabledConfigure?: boolean;
   onDelete: Nullable<(initStore: () => void) => void>;
@@ -204,7 +204,7 @@ export const ConfigureDestinationForm = (
    * Configure destination
    * -----------------------------------------------------------------------*/
 
-  const updateConnector = useUpdateConnector();
+  const updateDestination = useUpdateConnectorResource();
 
   const handleSubmit = React.useCallback(async () => {
     if (destination.id === "response") {
@@ -259,8 +259,8 @@ export const ConfigureDestinationForm = (
       }
       setFieldErrors(null);
 
-      const payload: UpdateConnectorPayload = {
-        connectorName: destination.name,
+      const payload: UpdateConnectorResourcePayload = {
+        connectorResourceName: destination.name,
         description: fieldValues.description as string | undefined,
         ...stripValues,
       };
@@ -272,7 +272,7 @@ export const ConfigureDestinationForm = (
         message: "Updating...",
       }));
 
-      updateConnector.mutate(
+      updateDestination.mutate(
         { payload, accessToken },
         {
           onSuccess: () => {
@@ -328,7 +328,7 @@ export const ConfigureDestinationForm = (
     airbyteFormIsDirty,
     setAirbyteFormIsDirty,
     destination.name,
-    updateConnector,
+    updateDestination,
     init,
     onConfigure,
     accessToken,
@@ -339,7 +339,7 @@ export const ConfigureDestinationForm = (
   // # Handle delete destination                                              #
   // ##########################################################################
 
-  const deleteConnector = useDeleteConnector();
+  const deleteDestination = useDeleteConnectorResource();
   const handleDeleteDestination = React.useCallback(() => {
     if (!destination) return;
 
@@ -352,8 +352,8 @@ export const ConfigureDestinationForm = (
 
     closeModal();
 
-    deleteConnector.mutate(
-      { connectorName: destination.name, accessToken },
+    deleteDestination.mutate(
+      { connectorResourceName: destination.name, accessToken },
       {
         onSuccess: () => {
           setMessageBoxState(() => ({
@@ -394,7 +394,7 @@ export const ConfigureDestinationForm = (
   }, [
     init,
     amplitudeIsInit,
-    deleteConnector,
+    deleteDestination,
     destination,
     closeModal,
     onDelete,
@@ -412,8 +412,8 @@ export const ConfigureDestinationForm = (
     }));
 
     try {
-      const state = await testConnectorConnectionAction({
-        connectorName: destination.name,
+      const state = await testConnectorResourceConnectionAction({
+        connectorResourceName: destination.name,
         accessToken,
       });
 
@@ -435,8 +435,8 @@ export const ConfigureDestinationForm = (
 
   const [isConnecting, setIsConnecting] = React.useState(false);
 
-  const connectDestination = useConnectConnector();
-  const disconnectDestination = useDisonnectConnector();
+  const connectDestination = useConnectConnectorResource();
+  const disconnectDestination = useDisonnectConnectorResource();
 
   const handleConnectAI = async function () {
     if (!destination) return;
@@ -444,7 +444,7 @@ export const ConfigureDestinationForm = (
     if (destination.watchState === "STATE_CONNECTED") {
       disconnectDestination.mutate(
         {
-          connectorName: destination.name,
+          connectorResourceName: destination.name,
           accessToken,
         },
         {
@@ -482,7 +482,7 @@ export const ConfigureDestinationForm = (
     } else {
       connectDestination.mutate(
         {
-          connectorName: destination.name,
+          connectorResourceName: destination.name,
           accessToken,
         },
         {

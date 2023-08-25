@@ -7,13 +7,13 @@ import {
 import type { Nullable } from "../../type";
 
 export function useWatchConnectorResources({
-  connectorType,
+  connectorResourceType,
   connectorResourceNames,
   accessToken,
   enabled,
   retry,
 }: {
-  connectorType: ConnectorResourceType;
+  connectorResourceType: ConnectorResourceType;
   connectorResourceNames: Nullable<string[]>;
   accessToken: Nullable<string>;
   enabled: boolean;
@@ -30,7 +30,7 @@ export function useWatchConnectorResources({
   }
 
   return useQuery(
-    ["connector-resources", connectorType, "watch"],
+    ["connector-resources", connectorResourceType, "watch"],
     async () => {
       if (!connectorResourceNames || connectorResourceNames.length === 0) {
         return Promise.reject(new Error("Invalid connector name"));

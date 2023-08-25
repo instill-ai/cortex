@@ -1,18 +1,18 @@
 import { Edge, Node } from "reactflow";
 import { parseDependencyComponents } from "./parseDependencyComponents";
-import { PipelineComponent, PipelineState } from "../vdp-sdk";
 import {
-  ConnectorNodeData,
-  ConnectorWithWatchState,
-  PipelineWithWatchState,
-} from "../type";
+  PipelineComponent,
+  PipelineState,
+  ConnectorResourceWithWatchState,
+} from "../vdp-sdk";
+import { ConnectorNodeData, PipelineWithWatchState } from "../type";
 
 export type CreateInitialGraphDataProps = {
   pipeline: PipelineWithWatchState;
-  ais: ConnectorWithWatchState[];
-  sources: ConnectorWithWatchState[];
-  destinations: ConnectorWithWatchState[];
-  blockchains: ConnectorWithWatchState[];
+  ais: ConnectorResourceWithWatchState[];
+  sources: ConnectorResourceWithWatchState[];
+  destinations: ConnectorResourceWithWatchState[];
+  blockchains: ConnectorResourceWithWatchState[];
 };
 
 export function createInitialGraphData(props: CreateInitialGraphDataProps) {
@@ -33,7 +33,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "sourceNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_OPERATOR",
+              connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
               connector: target,
             },
             position: { x: 0, y: 0 },
@@ -58,7 +58,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "destinationNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_DATA",
+              connectorResourceType: "CONNECTOR_TYPE_DATA",
               connector: target,
             },
             position: { x: 0, y: 0 },
@@ -84,7 +84,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "blockchainNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_BLOCKCHAIN",
+              connectorResourceType: "CONNECTOR_TYPE_BLOCKCHAIN",
               connector: target,
             },
             position: { x: 0, y: 0 },
@@ -108,7 +108,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "aiNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_AI",
+              connectorResourceType: "CONNECTOR_TYPE_AI",
               connector: target,
             },
             position: { x: 0, y: 0 },

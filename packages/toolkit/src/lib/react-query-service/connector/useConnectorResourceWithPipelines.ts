@@ -57,7 +57,7 @@ export const useConnectorResourceWithPipelines = ({
       const targetPipelines = pipelines.data.filter((e) => {
         const components = getComponentsFromPipelineRecipe({
           recipe: e.recipe,
-          connectorType: connectorResource.data.connector_type,
+          connectorResourceType: connectorResource.data.connector_type,
         });
 
         return components.some(

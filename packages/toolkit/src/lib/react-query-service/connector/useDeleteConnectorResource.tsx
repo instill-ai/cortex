@@ -8,7 +8,6 @@ import {
 } from "../../vdp-sdk";
 import { removeObjKey } from "../../utility";
 import { Nullable } from "../../type";
-import { ConnectorsWatchState } from "../../../../dist";
 
 export const useDeleteConnectorResource = () => {
   const queryClient = useQueryClient();
@@ -74,7 +73,7 @@ export const useDeleteConnectorResource = () => {
           }
         );
 
-        queryClient.setQueryData<ConnectorsWatchState>(
+        queryClient.setQueryData<ConnectorResourcesWatchState>(
           ["connector-resources", connectorResource.connector_type, "watch"],
           (old) => {
             return old ? removeObjKey(old, connectorResource.name) : {};

@@ -5,7 +5,7 @@ import { Handle, Position } from "reactflow";
 import { Icons } from "@instill-ai/design-system";
 import {
   ConnectorDefinition,
-  ConnectorState,
+  ConnectorResourceState,
   Nullable,
   usePipelineBuilderStore,
 } from "../../../lib";
@@ -17,13 +17,13 @@ export type CustomNodeProps = {
   className?: string;
   nodeId: string;
   selectedId: Nullable<string>;
-  watchState: ConnectorState;
+  watchState: ConnectorResourceState;
   connectorDefinitionName: string;
 };
 
 type CustomNodeContextValue = {
   nodeId: string;
-  watchState: ConnectorState;
+  watchState: ConnectorResourceState;
 };
 
 const CustomNodeContext = React.createContext<CustomNodeContextValue>(

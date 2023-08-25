@@ -47,7 +47,7 @@ export function useModelWithPipelines({
       const targetPipelines = pipelines.data.filter((e) => {
         const components = getComponentsFromPipelineRecipe({
           recipe: e.recipe,
-          connectorType: "CONNECTOR_TYPE_AI",
+          connectorResourceType: "CONNECTOR_TYPE_AI",
         });
 
         return components.some((e) => e.resource_detail.id === model.data.id);

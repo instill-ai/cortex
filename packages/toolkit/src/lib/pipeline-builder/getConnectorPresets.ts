@@ -1,7 +1,10 @@
-import { ConnectorPreset, IncompleteConnectorWithWatchState } from "../type";
-import { ConnectorDefinition, ConnectorType } from "../vdp-sdk";
+import {
+  ConnectorResourcePreset,
+  IncompleteConnectorResourceWithWatchState,
+} from "../type";
+import { ConnectorDefinition, ConnectorResourceType } from "../vdp-sdk";
 
-export const blockchains: ConnectorPreset[] = [
+export const blockchains: ConnectorResourcePreset[] = [
   {
     id: "Numbers",
     name: "connectors/numbers",
@@ -12,7 +15,7 @@ export const blockchains: ConnectorPreset[] = [
   },
 ];
 
-export const ais: ConnectorPreset[] = [
+export const ais: ConnectorResourcePreset[] = [
   {
     id: "Instill Model",
     name: "connectors/instill-model",
@@ -38,7 +41,7 @@ export const ais: ConnectorPreset[] = [
 // to find the connector definition. When the dragEnd we will make sure they
 // have compatiable value
 
-const sources: ConnectorPreset[] = [
+const sources: ConnectorResourcePreset[] = [
   {
     id: "trigger",
     name: "connectors/trigger",
@@ -59,7 +62,7 @@ const sources: ConnectorPreset[] = [
   },
 ];
 
-const destinations: ConnectorPreset[] = [
+const destinations: ConnectorResourcePreset[] = [
   {
     id: "response",
     name: "connectors/response",
@@ -76,7 +79,7 @@ const destinations: ConnectorPreset[] = [
 ];
 
 export function getAllConnectorPresets(definitions: ConnectorDefinition[]) {
-  const constructedPresets: IncompleteConnectorWithWatchState[] = [];
+  const constructedPresets: IncompleteConnectorResourceWithWatchState[] = [];
 
   [...blockchains, ...ais, ...sources, ...destinations].forEach((preset) => {
     const definition = definitions.find(
@@ -97,12 +100,13 @@ export function getAllConnectorPresets(definitions: ConnectorDefinition[]) {
 }
 
 export function getConnectorPresets(
-  type: ConnectorType,
+  type: ConnectorResourceType,
   definitions: ConnectorDefinition[]
 ) {
   switch (type) {
     case "CONNECTOR_TYPE_OPERATOR": {
-      const constructedPresets: IncompleteConnectorWithWatchState[] = [];
+      const constructedPresets: IncompleteConnectorResourceWithWatchState[] =
+        [];
 
       sources.forEach((preset) => {
         const definition = definitions.find(
@@ -122,7 +126,8 @@ export function getConnectorPresets(
       return constructedPresets;
     }
     case "CONNECTOR_TYPE_DATA": {
-      const constructedPresets: IncompleteConnectorWithWatchState[] = [];
+      const constructedPresets: IncompleteConnectorResourceWithWatchState[] =
+        [];
 
       destinations.forEach((preset) => {
         const definition = definitions.find(
@@ -143,7 +148,8 @@ export function getConnectorPresets(
     }
 
     case "CONNECTOR_TYPE_AI": {
-      const constructedPresets: IncompleteConnectorWithWatchState[] = [];
+      const constructedPresets: IncompleteConnectorResourceWithWatchState[] =
+        [];
 
       ais.forEach((preset) => {
         const definition = definitions.find(
@@ -164,7 +170,8 @@ export function getConnectorPresets(
     }
 
     case "CONNECTOR_TYPE_BLOCKCHAIN": {
-      const constructedPresets: IncompleteConnectorWithWatchState[] = [];
+      const constructedPresets: IncompleteConnectorResourceWithWatchState[] =
+        [];
 
       blockchains.forEach((preset) => {
         const definition = definitions.find(

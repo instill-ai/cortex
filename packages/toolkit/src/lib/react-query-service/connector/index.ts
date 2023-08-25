@@ -10,4 +10,4 @@ export * from "./useDeleteConnectorResource";
 export * from "./useDisonnectConnectorResource";
 export * from "./useUpdateConnectorResource";
 export * from "./useWatchConnectorResource";
-export * from "./useWatchConnectors";
+export * from "./useWatchConnectorResources";

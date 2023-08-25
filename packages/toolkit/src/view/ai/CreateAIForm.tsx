@@ -20,8 +20,8 @@ import {
   getInstillApiErrorMessage,
   sendAmplitudeData,
   useAmplitudeCtx,
-  useCreateConnector,
-  type CreateConnectorPayload,
+  useCreateConnectorResource,
+  type CreateConnectorResourcePayload,
   type Nullable,
 } from "../../lib";
 import { ImageWithFallback } from "../../components";
@@ -207,13 +207,13 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
       status: null,
     });
 
-  const createConnector = useCreateConnector();
+  const createAI = useCreateConnectorResource();
 
   function onSubmit(data: z.infer<typeof CreateAIFormSchema>) {
     form.trigger(["configuration", "description", "id"]);
 
-    const payload: CreateConnectorPayload = {
-      connectorName: `connector-resources/${data.id}`,
+    const payload: CreateConnectorResourcePayload = {
+      connectorResourceName: `connector-resources/${data.id}`,
       connector_definition_name: data.connector_definition_name,
       description: data.description,
       configuration: data.configuration,
@@ -226,7 +226,7 @@ export const CreateAIForm = (props: CreateAIFormProps) => {
       message: "Creating...",
     }));
 
-    createConnector.mutate(
+    createAI.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {

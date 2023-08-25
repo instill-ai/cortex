@@ -24,11 +24,11 @@ export type ModelsTableProps = {
   modelsWatchState: ModelsWatchState;
   isError: boolean;
   isLoading: boolean;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const ModelsTable = (props: ModelsTableProps) => {
   const router = useRouter();
-  const { models, modelsWatchState, marginBottom, isError, isLoading } = props;
+  const { models, modelsWatchState, isError, isLoading } = props;
 
   const columns: ColumnDef<Model>[] = [
     {

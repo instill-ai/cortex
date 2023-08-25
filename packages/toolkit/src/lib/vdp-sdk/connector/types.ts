@@ -78,3 +78,7 @@ export type ConnectorResourcesWatchState = Record<
   string,
   ConnectorResourceWatchState
 >;
+
+export type ConnectorResourceWithWatchState = {
+  watchState: ConnectorResourceState;
+} & ConnectorResourceWithDefinition;

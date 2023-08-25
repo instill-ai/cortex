@@ -15,7 +15,7 @@ import {
 } from "@instill-ai/design-system";
 import {
   validateResourceId,
-  useCreateConnector,
+  useCreateConnectorResource,
   useConnectorDefinitions,
   useAmplitudeCtx,
   useBuildAirbyteYup,
@@ -25,7 +25,7 @@ import {
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   type ConnectorDefinition,
-  type CreateConnectorPayload,
+  type CreateConnectorResourcePayload,
   type Nullable,
   type AirbyteFieldValues,
   type AirbyteFieldErrors,
@@ -78,7 +78,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
    * -----------------------------------------------------------------------*/
 
   const destinationDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_DATA",
+    connectorResourceType: "CONNECTOR_TYPE_DATA",
     accessToken,
     enabled: enabledQuery,
   });
@@ -158,7 +158,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
       status: null,
     });
 
-  const createConnector = useCreateConnector();
+  const createDestination = useCreateConnectorResource();
 
   const airbyteYup = useBuildAirbyteYup(
     selectedDestinationDefinition?.spec.connection_specification ?? null,
@@ -255,20 +255,21 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
 
     setFieldErrors(null);
 
-    let payload = {} as CreateConnectorPayload;
+    let payload = {} as CreateConnectorResourcePayload;
 
     // Response come from instill-ai and follow our own payload
 
     if (selectedDestinationDefinition?.id === "response") {
       payload = {
-        connectorName: "connector-resources/response",
+        connectorResourceName: "connector-resources/response",
         connector_definition_name: `connector-definitions/response`,
         description: fieldValues.description as string,
         configuration: {},
       };
     } else {
       payload = {
-        connectorName: `connector-resources/${fieldValues.id}` as string,
+        connectorResourceName:
+          `connector-resources/${fieldValues.id}` as string,
         connector_definition_name: fieldValues.definition as string,
         description: fieldValues.description as string,
         configuration: stripValues.configuration,
@@ -282,7 +283,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
       message: "Creating...",
     }));
 
-    createConnector.mutate(
+    createDestination.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -327,7 +328,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   }, [
     init,
     amplitudeIsInit,
-    createConnector,
+    createDestination,
     formYup,
     fieldValues,
     selectedDestinationDefinition,

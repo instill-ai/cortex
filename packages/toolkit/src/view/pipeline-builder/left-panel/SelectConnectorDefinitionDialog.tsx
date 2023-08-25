@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { Dialog, Icons } from "@instill-ai/design-system";
-import { ConnectorType, Nullable } from "../../../lib";
+import { ConnectorResourceType, Nullable } from "../../../lib";
 
 type DialogCtxValue = {
   open: boolean;
@@ -22,7 +22,7 @@ const useDialogContext = () => {
 
 export type SelectConnectorDefinitionDialogProps = {
   children: React.ReactNode;
-  type: ConnectorType;
+  type: ConnectorResourceType;
 };
 
 export const SelectConnectorDefinitionDialog = (

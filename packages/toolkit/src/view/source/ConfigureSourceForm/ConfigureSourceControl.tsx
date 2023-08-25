@@ -13,15 +13,15 @@ import {
 import {
   useConfigureSourceFormStore,
   useModalStore,
-  useDeleteConnector,
+  useDeleteConnectorResource,
   useAmplitudeCtx,
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  testConnectorConnectionAction,
+  testConnectorResourceConnectionAction,
   type ModalStore,
   type Nullable,
   type ConfigureSourceFormStore,
-  type ConnectorWithWatchState,
+  type ConnectorResourceWithWatchState,
 } from "../../../lib";
 
 import { DeleteResourceModal } from "../../../components";
@@ -38,7 +38,7 @@ const modalSelector = (state: ModalStore) => ({
 });
 
 export type ConfigureSourceControlProps = {
-  source: ConnectorWithWatchState;
+  source: ConnectorResourceWithWatchState;
   onDelete: Nullable<(initStore: () => void) => void>;
   onConfigure: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
@@ -94,7 +94,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
       status: null,
     });
 
-  const deleteConnector = useDeleteConnector();
+  const deleteSource = useDeleteConnectorResource();
   const handleDeleteSource = React.useCallback(() => {
     if (!source) return;
 
@@ -107,9 +107,9 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
 
     closeModal();
 
-    deleteConnector.mutate(
+    deleteSource.mutate(
       {
-        connectorName: source.name,
+        connectorResourceName: source.name,
         accessToken,
       },
       {
@@ -152,7 +152,7 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     init,
     source,
     amplitudeIsInit,
-    deleteConnector,
+    deleteSource,
     closeModal,
     onDelete,
     accessToken,
@@ -169,8 +169,8 @@ export const ConfigureSourceControl = (props: ConfigureSourceControlProps) => {
     }));
 
     try {
-      const state = await testConnectorConnectionAction({
-        connectorName: source.name,
+      const state = await testConnectorResourceConnectionAction({
+        connectorResourceName: source.name,
         accessToken,
       });
 

@@ -8,19 +8,18 @@ import {
   useToast,
 } from "@instill-ai/design-system";
 import {
-  ConnectorWithDefinition,
-  ConnectorWithPipelines,
-  ConnectorsWatchState,
-  Model,
-  Nullable,
-  Pipeline,
   getInstillApiErrorMessage,
-  useDeleteConnector,
+  useDeleteConnectorResource,
+  type ConnectorResourceWithDefinition,
+  type ConnectorResourceWithPipelines,
+  type ConnectorResourcesWatchState,
+  type Nullable,
+  type Model,
+  type Pipeline,
 } from "../../lib";
 import {
   GeneralStateCell,
   ImageWithFallback,
-  PaginationListContainerProps,
   SortIcon,
   TableError,
 } from "../../components";
@@ -32,35 +31,34 @@ import { isAxiosError } from "axios";
 import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 
 export type BlockchainsTableProps = {
-  blockchains: ConnectorWithPipelines[];
-  blockchainsWatchState: ConnectorsWatchState;
+  blockchains: ConnectorResourceWithPipelines[];
+  blockchainsWatchState: ConnectorResourcesWatchState;
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const BlockchainsTable = (props: BlockchainsTableProps) => {
   const {
     blockchains,
     blockchainsWatchState,
-    marginBottom,
     isError,
     isLoading,
     accessToken,
   } = props;
 
-  const deleteConnector = useDeleteConnector();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
+  const deleteBlockchain = useDeleteConnectorResource();
   const handleDeleteBlockchain = (
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<ConnectorResourceWithDefinition | Model | Pipeline>
   ) => {
     if (!resource) return;
     setIsDeleting(true);
-    deleteConnector.mutate(
+    deleteBlockchain.mutate(
       {
-        connectorName: resource.name,
+        connectorResourceName: resource.name,
         accessToken: accessToken ? accessToken : null,
       },
       {
@@ -94,7 +92,7 @@ export const BlockchainsTable = (props: BlockchainsTableProps) => {
     );
   };
 
-  const columns: ColumnDef<ConnectorWithPipelines>[] = [
+  const columns: ColumnDef<ConnectorResourceWithPipelines>[] = [
     {
       accessorKey: "id",
       header: () => <div className="min-w-[300px] text-left">ID</div>,

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ConnectorState } from "./connector";
+import { ConnectorResourceState } from "./connector";
 import { ModelState } from "./model";
 import { PipelineState } from "./pipeline";
 
@@ -16,4 +16,4 @@ export type Violation = {
   subject: string;
 };
 
-export type ResourceState = ModelState | PipelineState | ConnectorState;
+export type ResourceState = ModelState | PipelineState | ConnectorResourceState;
