@@ -101,7 +101,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                       sourcePosition: Position.Left,
                       targetPosition: Position.Right,
                       data: {
-                        connectorType: "CONNECTOR_TYPE_OPERATOR",
+                        connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
                         connector: {
                           id: definition.id,
                           name: `connectors/${definition.id}`,
@@ -164,7 +164,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                       sourcePosition: Position.Left,
                       targetPosition: Position.Right,
                       data: {
-                        connectorType: "CONNECTOR_TYPE_DATA",
+                        connectorResourceType: "CONNECTOR_TYPE_DATA",
                         connector: {
                           id: randomName,
                           name: `connectors/${randomName}`,
@@ -229,7 +229,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                         sourcePosition: Position.Left,
                         targetPosition: Position.Right,
                         data: {
-                          connectorType: "CONNECTOR_TYPE_AI",
+                          connectorResourceType: "CONNECTOR_TYPE_AI",
                           connector: {
                             id: randomName,
                             name: `connectors/${randomName}`,
@@ -291,7 +291,7 @@ export const LeftPanel = (props: LeftPanelProps) => {
                         sourcePosition: Position.Left,
                         targetPosition: Position.Right,
                         data: {
-                          connectorType: "CONNECTOR_TYPE_BLOCKCHAIN",
+                          connectorResourceType: "CONNECTOR_TYPE_BLOCKCHAIN",
                           connector: {
                             id: randomName,
                             name: `connectors/${randomName}`,

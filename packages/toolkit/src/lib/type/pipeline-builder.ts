@@ -18,7 +18,7 @@ export type IncompleteConnectorResourceWithWatchState = {
 } & Pick<ConnectorResourceWithDefinition, "configuration" | "connector_type">;
 
 export type ConnectorNodeData = {
-  connectorType: ConnectorResourceType;
+  connectorResourceType: ConnectorResourceType;
   connector:
     | ConnectorResourceWithWatchState
     | IncompleteConnectorResourceWithWatchState;

@@ -33,7 +33,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "sourceNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_OPERATOR",
+              connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
               connector: target,
             },
             position: { x: 0, y: 0 },
@@ -58,7 +58,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "destinationNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_DATA",
+              connectorResourceType: "CONNECTOR_TYPE_DATA",
               connector: target,
             },
             position: { x: 0, y: 0 },
@@ -84,7 +84,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "blockchainNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_BLOCKCHAIN",
+              connectorResourceType: "CONNECTOR_TYPE_BLOCKCHAIN",
               connector: target,
             },
             position: { x: 0, y: 0 },
@@ -108,7 +108,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             id: component.id,
             type: "aiNode",
             data: {
-              connectorType: "CONNECTOR_TYPE_AI",
+              connectorResourceType: "CONNECTOR_TYPE_AI",
               connector: target,
             },
             position: { x: 0, y: 0 },

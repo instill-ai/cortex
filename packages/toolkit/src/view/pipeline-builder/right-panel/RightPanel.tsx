@@ -29,7 +29,8 @@ export const RightPanel = (props: RightPanelProps) => {
       */}
       <div className="flex w-full pb-10">
         {selectedNode &&
-        selectedNode.data.connectorType === "CONNECTOR_TYPE_OPERATOR" ? (
+        selectedNode.data.connectorResourceType ===
+          "CONNECTOR_TYPE_OPERATOR" ? (
           <SourceForm
             source={selectedNode.data.connector}
             accessToken={accessToken}
@@ -37,11 +38,11 @@ export const RightPanel = (props: RightPanelProps) => {
           />
         ) : null}
         {selectedNode &&
-        selectedNode.data.connectorType === "CONNECTOR_TYPE_AI" ? (
+        selectedNode.data.connectorResourceType === "CONNECTOR_TYPE_AI" ? (
           <AIForm ai={selectedNode.data.connector} accessToken={accessToken} />
         ) : null}
         {selectedNode &&
-        selectedNode.data.connectorType === "CONNECTOR_TYPE_DATA" ? (
+        selectedNode.data.connectorResourceType === "CONNECTOR_TYPE_DATA" ? (
           <DestinationForm
             destination={selectedNode.data.connector}
             accessToken={accessToken}
@@ -49,7 +50,8 @@ export const RightPanel = (props: RightPanelProps) => {
           />
         ) : null}
         {selectedNode &&
-        selectedNode.data.connectorType === "CONNECTOR_TYPE_BLOCKCHAIN" ? (
+        selectedNode.data.connectorResourceType ===
+          "CONNECTOR_TYPE_BLOCKCHAIN" ? (
           <BlockchainForm
             blockchain={selectedNode.data.connector}
             accessToken={accessToken}
