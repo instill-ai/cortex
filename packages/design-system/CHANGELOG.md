@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.44.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.43.0...@instill-ai/design-system-v0.44.0) (2023-08-25)
+
+
+### Features
+
+* **design-system:** add ArrowUpRight icon ([#828](https://github.com/instill-ai/design-system/issues/828)) ([3c49981](https://github.com/instill-ai/design-system/commit/3c49981845ddbf74b222965d5ac3c7e52ab7a975))
+* **design-system:** add Menu icon ([#826](https://github.com/instill-ai/design-system/issues/826)) ([3c2d868](https://github.com/instill-ai/design-system/commit/3c2d8688263a417504be36575a377b728e69cc36))
+
 ## [0.43.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.42.0...@instill-ai/design-system-v0.43.0) (2023-08-25)
 
 
