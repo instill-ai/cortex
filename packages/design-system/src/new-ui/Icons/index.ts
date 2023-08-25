@@ -36,6 +36,7 @@ import { InfoCircle } from "./InfoCircle";
 import { Image01 } from "./Image01";
 import { Logout01 } from "./Logout01";
 import { Model } from "./Model";
+import { Menu01 } from "./Menu01";
 import { Pipeline } from "./Pipeline";
 import { Plus } from "./Plus";
 import { Play } from "./Play";
@@ -90,6 +91,7 @@ export const Icons = {
   Image01,
   Logout01,
   Model,
+  Menu01,
   Pipeline,
   Play,
   Plus,
