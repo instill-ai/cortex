@@ -19,31 +19,33 @@ import {
   useBuildAirbyteYup,
   dot,
   useAirbyteSelectedConditionMap,
-  useUpdateConnector,
+  useUpdateConnectorResource,
   useAmplitudeCtx,
   sendAmplitudeData,
   getInstillApiErrorMessage,
-  useCreateConnector,
-  useConnectConnector,
-  useDisonnectConnector,
-  useConnectors,
+  useCreateConnectorResource,
+  useConnectConnectorResource,
+  useDisonnectConnectorResource,
   useAirbyteFieldValues,
   usePipelineBuilderStore,
+  useConnectorResources,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
-  type UpdateConnectorPayload,
+  type UpdateConnectorResourcePayload,
   type Nullable,
-  type CreateConnectorPayload,
-  type IncompleteConnectorWithWatchState,
+  type CreateConnectorResourcePayload,
+  type IncompleteConnectorResourceWithWatchState,
   type PipelineBuilderStore,
-  type ConnectorWithWatchState,
+  type ConnectorResourceWithWatchState,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 import { AirbyteDestinationFields } from "../../airbyte";
 
 export type DestinationFormProps = {
   accessToken: Nullable<string>;
-  destination: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
+  destination:
+    | ConnectorResourceWithWatchState
+    | IncompleteConnectorResourceWithWatchState;
   enableQuery: boolean;
 } & Pick<FormRootProps, "marginBottom" | "width">;
 
@@ -160,8 +162,8 @@ export const DestinationForm = (props: DestinationFormProps) => {
    * get destinations
    * -----------------------------------------------------------------------*/
 
-  const destinations = useConnectors({
-    connectorType: "CONNECTOR_TYPE_DATA",
+  const destinations = useConnectorResources({
+    connectorResourceType: "CONNECTOR_TYPE_DATA",
     accessToken,
     enabled: enableQuery,
   });
@@ -193,8 +195,8 @@ export const DestinationForm = (props: DestinationFormProps) => {
    * Configure destination
    * -----------------------------------------------------------------------*/
 
-  const updateDestination = useUpdateConnector();
-  const createDestination = useCreateConnector();
+  const createDestination = useCreateConnectorResource();
+  const updateDestination = useUpdateConnectorResource();
   const { toast } = useToast();
 
   const handleSubmit = React.useCallback(async () => {
@@ -288,8 +290,8 @@ export const DestinationForm = (props: DestinationFormProps) => {
     });
 
     if ("uid" in destination) {
-      const payload: UpdateConnectorPayload = {
-        connectorName: destination.name,
+      const payload: UpdateConnectorResourcePayload = {
+        connectorResourceName: destination.name,
         description: fieldValues.description as string | undefined,
         ...stripValues,
       };
@@ -372,20 +374,21 @@ export const DestinationForm = (props: DestinationFormProps) => {
       return;
     }
 
-    let payload = {} as CreateConnectorPayload;
+    let payload = {} as CreateConnectorResourcePayload;
 
     // Response operator come from instill-ai and follow our own payload
 
     if (destination.id === "response") {
       payload = {
-        connectorName: "connector-resources/response",
+        connectorResourceName: "connector-resources/response",
         connector_definition_name: destination.connector_definition_name,
         description: fieldValues.description as string,
         configuration: {},
       };
     } else {
       payload = {
-        connectorName: `connector-resources/${fieldValues.id}` as string,
+        connectorResourceName:
+          `connector-resources/${fieldValues.id}` as string,
         connector_definition_name: destination.connector_definition_name,
         description: fieldValues.description as string,
         configuration: stripValues.configuration,
@@ -498,8 +501,8 @@ export const DestinationForm = (props: DestinationFormProps) => {
   ]);
 
   const [isConnecting, setIsConnecting] = React.useState(false);
-  const connectDestination = useConnectConnector();
-  const disconnectDestination = useDisonnectConnector();
+  const connectDestination = useConnectConnectorResource();
+  const disconnectDestination = useDisonnectConnectorResource();
 
   const handleConnectDestination = async function () {
     if (!destination) return;
@@ -514,7 +517,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
     ) {
       disconnectDestination.mutate(
         {
-          connectorName: destination.name,
+          connectorResourceName: destination.name,
           accessToken,
         },
         {
@@ -579,7 +582,7 @@ export const DestinationForm = (props: DestinationFormProps) => {
     } else {
       connectDestination.mutate(
         {
-          connectorName: destination.name,
+          connectorResourceName: destination.name,
           accessToken,
         },
         {

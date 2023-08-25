@@ -57,26 +57,26 @@ export const LeftPanel = (props: LeftPanelProps) => {
     usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const sourceDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_OPERATOR",
-    enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_OPERATOR",
+    connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
+    enabled:
+      enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_OPERATOR",
     accessToken,
   });
 
   const destinationDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_DATA",
-    enabled:
-      enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_DATA",
+    connectorResourceType: "CONNECTOR_TYPE_DATA",
+    enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_DATA",
     accessToken,
   });
 
   const aiDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_AI",
+    connectorResourceType: "CONNECTOR_TYPE_AI",
     enabled: enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_AI",
     accessToken,
   });
 
   const blockchainDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_BLOCKCHAIN",
+    connectorResourceType: "CONNECTOR_TYPE_BLOCKCHAIN",
     enabled:
       enableQuery && leftSidebarSelectedTab === "CONNECTOR_TYPE_BLOCKCHAIN",
     accessToken,

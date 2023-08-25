@@ -1,12 +1,17 @@
 import * as React from "react";
 import { Button, Dialog, Icons, Input } from "@instill-ai/design-system";
-import { ConnectorWithDefinition, Model, Nullable, Pipeline } from "../lib";
+import {
+  ConnectorResourceWithDefinition,
+  Model,
+  Nullable,
+  Pipeline,
+} from "../lib";
 import { IconWithBackground } from "./IconWithBackground";
 
 export type GenralDeleteResourceModalProps = {
-  resource: Nullable<ConnectorWithDefinition | Pipeline | Model>;
+  resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>;
   handleDeleteResource: (
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>
   ) => void;
   isDeleting: boolean;
 };

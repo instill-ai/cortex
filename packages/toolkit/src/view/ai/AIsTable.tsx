@@ -11,16 +11,16 @@ import {
 import { isAxiosError } from "axios";
 import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 import {
-  ConnectorWithDefinition,
-  ConnectorWithPipelines,
-  ConnectorsWatchState,
-  Model,
-  Nullable,
-  Pipeline,
   formatDate,
   getInstillApiErrorMessage,
   parseStatusLabel,
-  useDeleteConnector,
+  useDeleteConnectorResource,
+  type ConnectorResourceWithDefinition,
+  type ConnectorResourceWithPipelines,
+  type ConnectorResourcesWatchState,
+  type Nullable,
+  type Pipeline,
+  type Model,
 } from "../../lib";
 import {
   GeneralStateCell,
@@ -34,30 +34,30 @@ import {
 import { AITablePlaceholder } from "./AITablePlaceholder";
 
 export type AIsTableProps = {
-  ais: ConnectorWithPipelines[];
-  aisWatchState: ConnectorsWatchState;
+  ais: ConnectorResourceWithPipelines[];
+  aisWatchState: ConnectorResourcesWatchState;
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const AIsTable = (props: AIsTableProps) => {
-  const { ais, aisWatchState, marginBottom, isError, isLoading, accessToken } =
-    props;
+  const { ais, aisWatchState, isError, isLoading, accessToken } = props;
 
-  const deleteConnector = useDeleteConnector();
+  const deleteAI = useDeleteConnectorResource();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
+
   const handleDeleteAI = (
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>
   ) => {
     if (!resource) return;
 
     setIsDeleting(true);
 
-    deleteConnector.mutate(
+    deleteAI.mutate(
       {
-        connectorName: resource.name,
+        connectorResourceName: resource.name,
         accessToken: accessToken ? accessToken : null,
       },
       {
@@ -91,7 +91,7 @@ export const AIsTable = (props: AIsTableProps) => {
     );
   };
 
-  const columns: ColumnDef<ConnectorWithPipelines>[] = [
+  const columns: ColumnDef<ConnectorResourceWithPipelines>[] = [
     {
       accessorKey: "id",
       header: () => <div className="w-[450px] text-left">ID</div>,

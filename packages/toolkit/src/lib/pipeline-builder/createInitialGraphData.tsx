@@ -1,18 +1,18 @@
 import { Edge, Node } from "reactflow";
 import { parseDependencyComponents } from "./parseDependencyComponents";
-import { PipelineComponent, PipelineState } from "../vdp-sdk";
 import {
-  ConnectorNodeData,
-  ConnectorWithWatchState,
-  PipelineWithWatchState,
-} from "../type";
+  PipelineComponent,
+  PipelineState,
+  ConnectorResourceWithWatchState,
+} from "../vdp-sdk";
+import { ConnectorNodeData, PipelineWithWatchState } from "../type";
 
 export type CreateInitialGraphDataProps = {
   pipeline: PipelineWithWatchState;
-  ais: ConnectorWithWatchState[];
-  sources: ConnectorWithWatchState[];
-  destinations: ConnectorWithWatchState[];
-  blockchains: ConnectorWithWatchState[];
+  ais: ConnectorResourceWithWatchState[];
+  sources: ConnectorResourceWithWatchState[];
+  destinations: ConnectorResourceWithWatchState[];
+  blockchains: ConnectorResourceWithWatchState[];
 };
 
 export function createInitialGraphData(props: CreateInitialGraphDataProps) {

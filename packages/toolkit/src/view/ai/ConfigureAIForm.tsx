@@ -18,19 +18,19 @@ import {
 } from "@instill-ai/design-system";
 import { DeleteResourceModal, ImageWithFallback } from "../../components";
 import {
-  ConnectorWithWatchState,
-  ModalStore,
-  Nullable,
-  UpdateConnectorPayload,
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  testConnectorConnectionAction,
+  testConnectorResourceConnectionAction,
   useAmplitudeCtx,
-  useConnectConnector,
-  useDeleteConnector,
-  useDisonnectConnector,
+  useConnectConnectorResource,
+  useDeleteConnectorResource,
+  useDisonnectConnectorResource,
   useModalStore,
-  useUpdateConnector,
+  useUpdateConnectorResource,
+  type ConnectorResourceWithWatchState,
+  type ModalStore,
+  type Nullable,
+  type UpdateConnectorResourcePayload,
 } from "../../lib";
 import { isAxiosError } from "axios";
 import { shallow } from "zustand/shallow";
@@ -194,7 +194,7 @@ export type ConfigureAIFormProps = {
   onDelete: Nullable<() => void>;
   onConfigure: Nullable<() => void>;
   onTestConnection: Nullable<() => void>;
-  ai: ConnectorWithWatchState;
+  ai: ConnectorResourceWithWatchState;
   disabledConfigure?: boolean;
   disabledDelete?: boolean;
   disabledTestConnection?: boolean;
@@ -249,7 +249,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       status: null,
     });
 
-  const updateConnector = useUpdateConnector();
+  const updateConnectorResource = useUpdateConnectorResource();
 
   function onSubmit(data: z.infer<typeof ConfigureAIFormSchema>) {
     form.trigger([
@@ -259,8 +259,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       "id",
     ]);
 
-    const payload: UpdateConnectorPayload = {
-      connectorName: `connectors/${data.id}`,
+    const payload: UpdateConnectorResourcePayload = {
+      connectorResourceName: `connector-resources/${data.id}`,
       description: data.description,
       configuration: data.configuration,
     };
@@ -272,7 +272,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       message: "Creating...",
     }));
 
-    updateConnector.mutate(
+    updateConnectorResource.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -311,7 +311,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     );
   }
 
-  const deleteConnector = useDeleteConnector();
+  const deleteConnectorResource = useDeleteConnectorResource();
   const handleDeleteAI = React.useCallback(() => {
     if (!ai) return;
 
@@ -324,9 +324,9 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
     closeModal();
 
-    deleteConnector.mutate(
+    deleteConnectorResource.mutate(
       {
-        connectorName: ai.name,
+        connectorResourceName: ai.name,
         accessToken,
       },
       {
@@ -365,7 +365,14 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
         },
       }
     );
-  }, [ai, amplitudeIsInit, deleteConnector, closeModal, onDelete, accessToken]);
+  }, [
+    ai,
+    amplitudeIsInit,
+    deleteConnectorResource,
+    closeModal,
+    onDelete,
+    accessToken,
+  ]);
 
   const handleTestAI = React.useCallback(
     async function () {
@@ -379,8 +386,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       }));
 
       try {
-        const state = await testConnectorConnectionAction({
-          connectorName: ai.name,
+        const state = await testConnectorResourceConnectionAction({
+          connectorResourceName: ai.name,
           accessToken,
         });
 
@@ -406,8 +413,8 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
   const [isConnecting, setIsConnecting] = React.useState(false);
 
-  const connectAI = useConnectConnector();
-  const disconnectAI = useDisonnectConnector();
+  const connectAI = useConnectConnectorResource();
+  const disconnectAI = useDisonnectConnectorResource();
 
   const handleConnectAI = async function () {
     if (!ai) return;
@@ -415,7 +422,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     if (ai.watchState === "STATE_CONNECTED") {
       disconnectAI.mutate(
         {
-          connectorName: ai.name,
+          connectorResourceName: ai.name,
           accessToken,
         },
         {
@@ -453,7 +460,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     } else {
       connectAI.mutate(
         {
-          connectorName: ai.name,
+          connectorResourceName: ai.name,
           accessToken,
         },
         {

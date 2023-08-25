@@ -46,13 +46,15 @@ export const useUpdateModel = () => {
           watch
         );
 
-        queryClient.setQueryData<ModelsWatchState>(["models", "watch"], (old) =>
-          old
-            ? {
-                ...removeObjKey(old, model.name),
-                [model.name]: watch,
-              }
-            : { [model.name]: watch }
+        queryClient.setQueryData<ModelsWatchState>(
+          ["models", "watch"],
+          (old) =>
+            old
+              ? {
+                  ...removeObjKey(old, model.name),
+                  [model.name]: watch,
+                }
+              : { [model.name]: watch }
         );
 
         // Process model with pipelines query
@@ -61,7 +63,7 @@ export const useUpdateModel = () => {
         const targetPipelines = pipelines.filter((e) => {
           const components = getComponentsFromPipelineRecipe({
             recipe: e.recipe,
-            connectorType: "CONNECTOR_TYPE_AI",
+            connectorResourceType: "CONNECTOR_TYPE_AI",
           });
 
           return components.some((e) => e.resource_detail.id === model.id);

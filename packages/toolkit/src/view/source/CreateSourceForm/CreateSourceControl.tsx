@@ -10,13 +10,13 @@ import {
 import {
   sendAmplitudeData,
   useAmplitudeCtx,
-  useCreateConnector,
+  useCreateConnectorResource,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   type CreateResourceFormStore,
-  type CreateConnectorPayload,
+  type CreateConnectorResourcePayload,
   type Nullable,
-  type ConnectorWithDefinition,
+  type ConnectorResourceWithDefinition,
 } from "../../../lib";
 
 const selector = (state: CreateResourceFormStore) => ({
@@ -26,7 +26,7 @@ const selector = (state: CreateResourceFormStore) => ({
 });
 
 export type CreateSourceControlProps = {
-  sources: Nullable<ConnectorWithDefinition[]>;
+  sources: Nullable<ConnectorResourceWithDefinition[]>;
   onCreate: Nullable<(initStore: () => void) => void>;
   accessToken: Nullable<string>;
 };
@@ -47,7 +47,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
       status: null,
     });
 
-  const createConnector = useCreateConnector();
+  const createSource = useCreateConnectorResource();
 
   const handleSubmit = React.useCallback(() => {
     if (!sourceDefinition) return;
@@ -65,8 +65,8 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
       return;
     }
 
-    const payload: CreateConnectorPayload = {
-      connectorName: `connector-resources/${sourceDefinition}`,
+    const payload: CreateConnectorResourcePayload = {
+      connectorResourceName: `connector-resources/${sourceDefinition}`,
       connector_definition_name: `connector-definitions/${sourceDefinition}`,
       configuration: {},
     };
@@ -78,7 +78,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
       message: "Creating...",
     }));
 
-    createConnector.mutate(
+    createSource.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -118,7 +118,7 @@ export const CreateSourceControl = (props: CreateSourceControlProps) => {
   }, [
     init,
     amplitudeIsInit,
-    createConnector,
+    createSource,
     sources,
     sourceDefinition,
     setFieldError,

@@ -10,22 +10,21 @@ import {
 } from "@instill-ai/design-system";
 import { isAxiosError } from "axios";
 import {
-  ConnectorWithDefinition,
-  ConnectorWithPipelines,
-  ConnectorsWatchState,
-  Model,
-  Nullable,
-  Pipeline,
   formatDate,
   getInstillApiErrorMessage,
   parseStatusLabel,
-  useDeleteConnector,
+  useDeleteConnectorResource,
+  type ConnectorResourceWithDefinition,
+  type ConnectorResourceWithPipelines,
+  type ConnectorResourcesWatchState,
+  type Nullable,
+  type Model,
+  type Pipeline,
 } from "../../lib";
 import {
   GeneralDeleteResourceModal,
   GeneralStateCell,
   ImageWithFallback,
-  PaginationListContainerProps,
   SortIcon,
   TableCell,
   TableError,
@@ -33,12 +32,12 @@ import {
 import { DestinationTablePlaceholder } from "./DestinationTablePlaceholder";
 
 export type DestinationsTableProps = {
-  destinations: ConnectorWithPipelines[];
-  destinationsWatchState: ConnectorsWatchState;
+  destinations: ConnectorResourceWithPipelines[];
+  destinationsWatchState: ConnectorResourcesWatchState;
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const DestinationsTable = (props: DestinationsTableProps) => {
   const {
@@ -46,22 +45,21 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
     destinationsWatchState,
     isError,
     isLoading,
-    marginBottom,
     accessToken,
   } = props;
 
-  const deleteConnector = useDeleteConnector();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
+  const deleteDestination = useDeleteConnectorResource();
   const handleDeleteData = (
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>
   ) => {
     if (!resource) return;
     setIsDeleting(true);
-    deleteConnector.mutate(
+    deleteDestination.mutate(
       {
-        connectorName: resource.name,
+        connectorResourceName: resource.name,
         accessToken: accessToken ? accessToken : null,
       },
       {
@@ -95,7 +93,7 @@ export const DestinationsTable = (props: DestinationsTableProps) => {
     );
   };
 
-  const columns: ColumnDef<ConnectorWithPipelines>[] = [
+  const columns: ColumnDef<ConnectorResourceWithPipelines>[] = [
     {
       accessorKey: "id",
       header: () => <div className="min-w-[300px] text-left">ID</div>,

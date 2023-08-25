@@ -1,5 +1,7 @@
-import { Nullable } from "vitest";
-import { ConnectorType, ConnectorWithDefinition } from "../connector";
+import {
+  ConnectorResourceType,
+  ConnectorResourceWithDefinition,
+} from "../connector";
 
 export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
 
@@ -23,7 +25,7 @@ export type PipelineWatchState = {
 export type PipelineComponent = {
   id: string;
   resource_name: string;
-  resource_detail: ConnectorWithDefinition;
+  resource_detail: ConnectorResourceWithDefinition;
   metadata: any;
   dependencies: {
     images: string;
@@ -34,7 +36,7 @@ export type PipelineComponent = {
   };
 
   // We will add logic_operator in the future
-  type: ConnectorType | string;
+  type: ConnectorResourceType | string;
 };
 
 export type PipelinesWatchState = Record<string, PipelineWatchState>;

@@ -16,12 +16,12 @@ import {
 
 import { isAxiosError } from "axios";
 import {
-  CreateConnectorPayload,
-  Nullable,
   getInstillApiErrorMessage,
   sendAmplitudeData,
   useAmplitudeCtx,
-  useCreateConnector,
+  useCreateConnectorResource,
+  type CreateConnectorResourcePayload,
+  type Nullable,
 } from "../../lib";
 
 export const CreateBlockchainFormSchema = z
@@ -87,7 +87,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
       status: null,
     });
 
-  const createConnector = useCreateConnector();
+  const createBlockchain = useCreateConnectorResource();
 
   function onSubmit(data: z.infer<typeof CreateBlockchainFormSchema>) {
     form.trigger([
@@ -97,8 +97,8 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
       "id",
     ]);
 
-    const payload: CreateConnectorPayload = {
-      connectorName: `connector-resources/${data.id}`,
+    const payload: CreateConnectorResourcePayload = {
+      connectorResourceName: `connector-resources/${data.id}`,
       connector_definition_name: data.connector_definition_name,
       description: data.description,
       configuration: data.configuration,
@@ -111,7 +111,7 @@ export const CreateBlockchainForm = (props: CreateBlockchainFormProps) => {
       message: "Creating...",
     }));
 
-    createConnector.mutate(
+    createBlockchain.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {

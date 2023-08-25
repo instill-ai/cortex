@@ -14,20 +14,22 @@ import {
 import {
   getInstillApiErrorMessage,
   useConnectorDefinitions,
-  useConnectors,
-  useCreateConnector,
-  useConnectConnector,
-  useDisonnectConnector,
+  useConnectorResources,
+  useCreateConnectorResource,
+  useConnectConnectorResource,
+  useDisonnectConnectorResource,
   usePipelineBuilderStore,
-  type CreateConnectorPayload,
+  type CreateConnectorResourcePayload,
   type Nullable,
-  type IncompleteConnectorWithWatchState,
-  type ConnectorWithWatchState,
+  type IncompleteConnectorResourceWithWatchState,
+  type ConnectorResourceWithWatchState,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 
 export type SourceFormProps = {
-  source: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
+  source:
+    | ConnectorResourceWithWatchState
+    | IncompleteConnectorResourceWithWatchState;
   accessToken: Nullable<string>;
   enableQuery: boolean;
 };
@@ -57,13 +59,13 @@ export const SourceForm = (props: SourceFormProps) => {
   );
 
   const sourceDefinitions = useConnectorDefinitions({
-    connectorType: "CONNECTOR_TYPE_OPERATOR",
+    connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
     accessToken,
     enabled: enableQuery,
   });
 
-  const sources = useConnectors({
-    connectorType: "CONNECTOR_TYPE_OPERATOR",
+  const sources = useConnectorResources({
+    connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
     accessToken,
     enabled: enableQuery,
   });
@@ -96,16 +98,16 @@ export const SourceForm = (props: SourceFormProps) => {
 
   const { toast } = useToast();
 
-  const createConnector = useCreateConnector();
+  const createSource = useCreateConnectorResource();
 
   async function handleCreateSource() {
-    const payload: CreateConnectorPayload = {
-      connectorName: `connector-resources/${source.id}`,
+    const payload: CreateConnectorResourcePayload = {
+      connectorResourceName: `connector-resources/${source.id}`,
       connector_definition_name: source.connector_definition_name,
       configuration: {},
     };
 
-    createConnector.mutate(
+    createSource.mutate(
       {
         payload,
         accessToken,
@@ -143,8 +145,8 @@ export const SourceForm = (props: SourceFormProps) => {
   }
 
   const [isConnecting, setIsConnecting] = React.useState(false);
-  const connectSource = useConnectConnector();
-  const disconnectSource = useDisonnectConnector();
+  const connectSource = useConnectConnectorResource();
+  const disconnectSource = useDisonnectConnectorResource();
 
   const handleConnectSource = async function () {
     if (!source) return;
@@ -159,7 +161,7 @@ export const SourceForm = (props: SourceFormProps) => {
     ) {
       disconnectSource.mutate(
         {
-          connectorName: source.name,
+          connectorResourceName: source.name,
           accessToken,
         },
         {
@@ -224,7 +226,7 @@ export const SourceForm = (props: SourceFormProps) => {
     } else {
       connectSource.mutate(
         {
-          connectorName: source.name,
+          connectorResourceName: source.name,
           accessToken,
         },
         {

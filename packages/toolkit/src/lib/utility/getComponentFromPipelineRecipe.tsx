@@ -1,14 +1,14 @@
-import { ConnectorType, PipelineRecipe } from "../vdp-sdk";
+import { ConnectorResourceType, PipelineRecipe } from "../vdp-sdk";
 
 export type getComponentsFromPipelineRecipeProps = {
   recipe: PipelineRecipe;
-  connectorType: ConnectorType;
+  connectorResourceType: ConnectorResourceType;
 };
 
 export function getComponentsFromPipelineRecipe(
   props: getComponentsFromPipelineRecipeProps
 ) {
-  const { recipe, connectorType } = props;
+  const { recipe, connectorResourceType } = props;
 
-  return recipe.components.filter((e) => e.type === connectorType);
+  return recipe.components.filter((e) => e.type === connectorResourceType);
 }

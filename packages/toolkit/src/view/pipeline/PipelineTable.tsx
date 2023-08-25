@@ -6,8 +6,8 @@ import {
   ModelsCell,
   TableError,
   SkeletonCell,
-  type TableHeadItem,
   TextCell,
+  type TableHeadItem,
 } from "../../components";
 import { Pipeline, getComponentsFromPipelineRecipe } from "../../lib";
 
@@ -60,17 +60,17 @@ export const PipelineTable = (props: PipelineTableProps) => {
 
   const sourceComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_OPERATOR",
+    connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
   });
 
   const destinationComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_DATA",
+    connectorResourceType: "CONNECTOR_TYPE_DATA",
   });
 
   const aiComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_AI",
+    connectorResourceType: "CONNECTOR_TYPE_AI",
   });
 
   return (

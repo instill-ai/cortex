@@ -1,29 +1,21 @@
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  Button,
-  DataTable,
-  Dialog,
-  Icons,
-  useToast,
-} from "@instill-ai/design-system";
+import { Button, DataTable, Dialog, useToast } from "@instill-ai/design-system";
 
-import { useRouter } from "next/router";
 import { isAxiosError } from "axios";
 import {
-  ConnectorWithDefinition,
-  Model,
-  Nullable,
-  Pipeline,
-  PipelinesWatchState,
   formatDate,
   getInstillApiErrorMessage,
   parseStatusLabel,
   useDeletePipeline,
+  type Nullable,
+  type Pipeline,
+  type PipelinesWatchState,
+  type Model,
+  type ConnectorResourceWithDefinition,
 } from "../../lib";
 import {
   GeneralStateCell,
-  PaginationListContainerProps,
   SortIcon,
   TableCell,
   TableError,
@@ -37,26 +29,18 @@ export type PipelinesTableProps = {
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const PipelinesTable = (props: PipelinesTableProps) => {
-  const router = useRouter();
+  const { pipelines, pipelinesWatchState, isError, isLoading, accessToken } =
+    props;
 
-  const {
-    pipelines,
-    pipelinesWatchState,
-    marginBottom,
-    isError,
-    isLoading,
-    accessToken,
-  } = props;
-
-  const deletePipeline = useDeletePipeline();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
+  const deletePipeline = useDeletePipeline();
   function handleDeletePipeline(
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<Pipeline | Model | ConnectorResourceWithDefinition>
   ): void {
     if (!resource) return;
     setIsDeleting(true);
@@ -231,18 +215,16 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
   }
 
   return (
-    <>
-      <DataTable
-        columns={columns}
-        data={pipelines}
-        pageSize={6}
-        searchPlaceholder={"Search Pipelines"}
-        searchKey={"id"}
-        isLoading={isLoading}
-        loadingRows={6}
-        primaryText="Pipelines"
-        secondaryText="Check your pipelines"
-      />
-    </>
+    <DataTable
+      columns={columns}
+      data={pipelines}
+      pageSize={6}
+      searchPlaceholder={"Search Pipelines"}
+      searchKey={"id"}
+      isLoading={isLoading}
+      loadingRows={6}
+      primaryText="Pipelines"
+      secondaryText="Check your pipelines"
+    />
   );
 };

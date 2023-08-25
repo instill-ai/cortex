@@ -14,7 +14,7 @@ import {
 } from "reactflow";
 
 import { ConnectorNodeData, Nullable } from "../type";
-import { ConnectorType } from "../vdp-sdk";
+import { ConnectorResourceType } from "../vdp-sdk";
 
 export type PipelineBuilderState = {
   pipelineUid: Nullable<string>;
@@ -27,7 +27,7 @@ export type PipelineBuilderState = {
   rightPanelIsOpen: boolean;
   isSavingPipeline: boolean;
   resourceFormIsDirty: boolean;
-  leftSidebarSelectedTab: Nullable<ConnectorType>;
+  leftSidebarSelectedTab: Nullable<ConnectorResourceType>;
   pipelineRecipeIsDirty: boolean;
   pipelineIsNew: boolean;
 };
@@ -60,7 +60,9 @@ export type PipelineBuilderAction = {
   setIsSavingPipeline: (isSavingPipeline: boolean) => void;
   updateResourceFormIsDirty: (fn: (prev: boolean) => boolean) => void;
   setLeftSidebarSelectedTab: (
-    fn: (prev: Nullable<ConnectorType>) => Nullable<ConnectorType>
+    fn: (
+      prev: Nullable<ConnectorResourceType>
+    ) => Nullable<ConnectorResourceType>
   ) => void;
   updatePipelineRecipeIsDirty: (fn: (prev: boolean) => boolean) => void;
   updatePipelineIsNew: (fn: (prev: boolean) => boolean) => void;
@@ -187,7 +189,9 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
         return { ...state, resourceFormIsDirty: fn(state.resourceFormIsDirty) };
       }),
     setLeftSidebarSelectedTab: (
-      fn: (prev: Nullable<ConnectorType>) => Nullable<ConnectorType>
+      fn: (
+        prev: Nullable<ConnectorResourceType>
+      ) => Nullable<ConnectorResourceType>
     ) =>
       set((state) => {
         return {

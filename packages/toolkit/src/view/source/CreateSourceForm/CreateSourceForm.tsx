@@ -11,7 +11,7 @@ import {
   type CreateSourceControlProps,
 } from "./CreateSourceControl";
 import { SourceDefinitionField } from "./SourceDefinitionField";
-import { useConnectors } from "../../../lib";
+import { useConnectorResources } from "../../../lib";
 
 export type CreateSourceFormProps = Pick<
   FormRootProps,
@@ -27,8 +27,8 @@ export const CreateSourceForm = (props: CreateSourceFormProps) => {
     SingleSelectOption[]
   >([]);
 
-  const connectors = useConnectors({
-    connectorType: "CONNECTOR_TYPE_OPERATOR",
+  const connectors = useConnectorResources({
+    connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
     accessToken,
     enabled: enabledQuery,
   });

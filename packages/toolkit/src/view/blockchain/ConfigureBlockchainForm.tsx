@@ -20,19 +20,19 @@ import {
 } from "@instill-ai/design-system";
 
 import {
-  ConnectorWithWatchState,
-  ModalStore,
-  Nullable,
-  UpdateConnectorPayload,
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  testConnectorConnectionAction,
+  testConnectorResourceConnectionAction,
   useAmplitudeCtx,
-  useConnectConnector,
-  useDeleteConnector,
-  useDisonnectConnector,
+  useConnectConnectorResource,
+  useDeleteConnectorResource,
+  useDisonnectConnectorResource,
   useModalStore,
-  useUpdateConnector,
+  useUpdateConnectorResource,
+  type ConnectorResourceWithWatchState,
+  type ModalStore,
+  type Nullable,
+  type UpdateConnectorResourcePayload,
 } from "../../lib";
 import { DeleteResourceModal } from "../../components";
 import { shallow } from "zustand/shallow";
@@ -83,7 +83,7 @@ export type ConfigureBlockchainFormProps = {
   onDelete: Nullable<() => void>;
   onConfigure: Nullable<() => void>;
   onTestConnection: Nullable<() => void>;
-  blockchain: ConnectorWithWatchState;
+  blockchain: ConnectorResourceWithWatchState;
   disabledConfigure?: boolean;
   disabledDelete?: boolean;
   disabledTestConnection?: boolean;
@@ -144,7 +144,7 @@ export const ConfigureBlockchainForm = (
       status: null,
     });
 
-  const updateConnector = useUpdateConnector();
+  const updateBlockchain = useUpdateConnectorResource();
 
   function onSubmit(data: z.infer<typeof ConfigureBlockchainFormSchema>) {
     form.trigger([
@@ -154,8 +154,8 @@ export const ConfigureBlockchainForm = (
       "id",
     ]);
 
-    const payload: UpdateConnectorPayload = {
-      connectorName: `connectors/${data.id}`,
+    const payload: UpdateConnectorResourcePayload = {
+      connectorResourceName: `connectors/${data.id}`,
       description: data.description,
       configuration: data.configuration,
     };
@@ -167,7 +167,7 @@ export const ConfigureBlockchainForm = (
       message: "Creating...",
     }));
 
-    updateConnector.mutate(
+    updateBlockchain.mutate(
       { payload, accessToken },
       {
         onSuccess: () => {
@@ -206,7 +206,7 @@ export const ConfigureBlockchainForm = (
     );
   }
 
-  const deleteConnector = useDeleteConnector();
+  const deleteBlockchain = useDeleteConnectorResource();
   const handleDeleteBlockchain = React.useCallback(
     function () {
       if (!blockchain) return;
@@ -220,9 +220,9 @@ export const ConfigureBlockchainForm = (
 
       closeModal();
 
-      deleteConnector.mutate(
+      deleteBlockchain.mutate(
         {
-          connectorName: blockchain.name,
+          connectorResourceName: blockchain.name,
           accessToken,
         },
         {
@@ -265,7 +265,7 @@ export const ConfigureBlockchainForm = (
     [
       blockchain,
       amplitudeIsInit,
-      deleteConnector,
+      deleteBlockchain,
       closeModal,
       onDelete,
       accessToken,
@@ -284,8 +284,8 @@ export const ConfigureBlockchainForm = (
       }));
 
       try {
-        const state = await testConnectorConnectionAction({
-          connectorName: blockchain.name,
+        const state = await testConnectorResourceConnectionAction({
+          connectorResourceName: blockchain.name,
           accessToken,
         });
 
@@ -311,8 +311,8 @@ export const ConfigureBlockchainForm = (
 
   const [isConnecting, setIsConnecting] = React.useState(false);
 
-  const connectBlockchain = useConnectConnector();
-  const disconnectBlockchain = useDisonnectConnector();
+  const connectBlockchain = useConnectConnectorResource();
+  const disconnectBlockchain = useDisonnectConnectorResource();
 
   const handleConnectAI = async function () {
     if (!blockchain) return;
@@ -320,7 +320,7 @@ export const ConfigureBlockchainForm = (
     if (blockchain.watchState === "STATE_CONNECTED") {
       disconnectBlockchain.mutate(
         {
-          connectorName: blockchain.name,
+          connectorResourceName: blockchain.name,
           accessToken,
         },
         {
@@ -358,7 +358,7 @@ export const ConfigureBlockchainForm = (
     } else {
       connectBlockchain.mutate(
         {
-          connectorName: blockchain.name,
+          connectorResourceName: blockchain.name,
           accessToken,
         },
         {

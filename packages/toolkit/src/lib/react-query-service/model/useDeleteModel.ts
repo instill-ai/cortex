@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { removeObjKey } from "../../utility/removeObjKey";
 import {
   deleteModelMutation,
-  type ConnectorsWatchState,
+  ModelsWatchState,
   type Model,
 } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
@@ -36,7 +36,7 @@ export const useDeleteModel = () => {
           exact: true,
         });
 
-        queryClient.setQueryData<ConnectorsWatchState>(
+        queryClient.setQueryData<ModelsWatchState>(
           ["models", "watch"],
           (old) => {
             return old ? removeObjKey(old, modelName) : {};

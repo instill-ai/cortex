@@ -8,8 +8,8 @@ import {
   Skeleton,
 } from "@instill-ai/design-system";
 import type {
-  ConnectorWithWatchState,
-  IncompleteConnectorWithWatchState,
+  ConnectorResourceWithWatchState,
+  IncompleteConnectorResourceWithWatchState,
   Nullable,
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
@@ -39,7 +39,9 @@ export const useDraggableContext = () => {
 };
 
 const Item = (props: {
-  resource: ConnectorWithWatchState | IncompleteConnectorWithWatchState;
+  resource:
+    | ConnectorResourceWithWatchState
+    | IncompleteConnectorResourceWithWatchState;
 }) => {
   const { resource } = props;
   const { isPreset } = useDraggableContext();

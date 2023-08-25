@@ -7,7 +7,7 @@ import {
 } from "@instill-ai/design-system";
 import {
   useModalStore,
-  type ConnectorWithDefinition,
+  type ConnectorResourceWithDefinition,
   type Model,
   type Pipeline,
   type Nullable,
@@ -15,7 +15,7 @@ import {
 } from "../lib";
 
 export type DeleteResourceModalProps = {
-  resource: Nullable<ConnectorWithDefinition | Pipeline | Model>;
+  resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>;
   handleDeleteResource: () => void;
 };
 
