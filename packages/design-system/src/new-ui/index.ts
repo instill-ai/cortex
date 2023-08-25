@@ -5,6 +5,7 @@ export * from "./Command";
 export * from "./ComplicateIcons";
 export * from "./Dialog";
 export * from "./DataTable";
+export * from "./Dropdown";
 export * from "./Form";
 export * from "./Icons";
 export * from "./Input";
