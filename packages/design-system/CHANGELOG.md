@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.43.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.42.0...@instill-ai/design-system-v0.43.0) (2023-08-25)
+
+
+### Features
+
+* **design-system:** add dropdown component ([#823](https://github.com/instill-ai/design-system/issues/823)) ([9e7b512](https://github.com/instill-ai/design-system/commit/9e7b5129989f1d519a4fe9a70c5d1d95e42578a0))
+
 ## [0.42.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.41.0...@instill-ai/design-system-v0.42.0) (2023-08-24)
 
 
