@@ -6,6 +6,7 @@ import { ArrowLeft } from "./ArrowLeft";
 import { ArrowRight } from "./ArrowRight";
 import { ArrowNarrowLeft } from "./ArrowNarrowLeft";
 import { ArrowNarrowRight } from "./ArrowNarrowRight";
+import { ArrowUpRight } from "./ArrowUpRight";
 import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
 import { Check } from "./Check";
@@ -61,6 +62,7 @@ export const Icons = {
   ArrowRight,
   ArrowNarrowLeft,
   ArrowNarrowRight,
+  ArrowUpRight,
   BarChartSquare02,
   Box,
   Check,
