@@ -174,7 +174,7 @@ export const ConfigureDestinationForm = (
     });
 
   const airbyteYup = useBuildAirbyteYup(
-    destination.connector_definition.spec.connection_specification ?? null,
+    destination.connector_definition.spec.resource_specification ?? null,
     selectedConditionMap,
     null
   );

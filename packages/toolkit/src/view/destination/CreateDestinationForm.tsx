@@ -161,7 +161,7 @@ export const CreateDestinationForm = (props: CreateDestinationFormProps) => {
   const createDestination = useCreateConnectorResource();
 
   const airbyteYup = useBuildAirbyteYup(
-    selectedDestinationDefinition?.spec.connection_specification ?? null,
+    selectedDestinationDefinition?.spec.resource_specification ?? null,
     selectedConditionMap,
     null
   );

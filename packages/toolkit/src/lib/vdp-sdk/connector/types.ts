@@ -1,6 +1,8 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
+import { JSONSchema7 } from "json-schema";
 import { Pipeline } from "../pipeline";
+import { OpenAPIV3 } from "openapi-types";
 
 export type ConnectorResourceState =
   | "STATE_CONNECTED"
@@ -60,8 +62,9 @@ export type ConnectorDefinition = {
   icon_url: string;
   connector_type: ConnectorResourceType;
   spec: {
-    documentation_url: string;
-    connection_specification: Record<string, any>;
+    resource_specification: JSONSchema7;
+    component_specification: JSONSchema7;
+    openapi_specifications: Record<string, OpenAPIV3.Document>;
   };
   tombstone: boolean;
   public: boolean;

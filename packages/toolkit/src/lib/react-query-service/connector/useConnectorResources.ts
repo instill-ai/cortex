@@ -14,7 +14,7 @@ export const useConnectorResources = ({
   enabled,
   retry,
 }: {
-  connectorResourceType: ConnectorResourceType;
+  connectorResourceType: Nullable<ConnectorResourceType>;
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -24,13 +24,18 @@ export const useConnectorResources = ({
   retry?: false | number;
 }) => {
   return useQuery(
-    ["connector-resources", connectorResourceType],
+    [
+      "connector-resources",
+      connectorResourceType ? connectorResourceType : "all",
+    ],
     async () => {
       const connectorResources = await listConnectorResourcesQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
-        filter: `connector_type=${connectorResourceType}`,
+        filter: connectorResourceType
+          ? `connector_type=${connectorResourceType}`
+          : null,
       });
 
       const connectorResourcesWithDefinition: ConnectorResourceWithDefinition[] =
