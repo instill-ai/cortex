@@ -1,5 +1,17 @@
 # @instill-ai/design-system
 
+## [0.44.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.44.0...@instill-ai/design-system-v0.44.1) (2023-08-28)
+
+
+### Bug Fixes
+
+* **design-system:** namananand/ins 1614 add instill logo to design system ([#829](https://github.com/instill-ai/design-system/issues/829)) ([f4208b8](https://github.com/instill-ai/design-system/commit/f4208b825543f3dde4a5c2d85b07232051f36c7b))
+
+
+### Miscellaneous
+
+* **design-system:** update dropdown separator bg-color ([#831](https://github.com/instill-ai/design-system/issues/831)) ([17289f1](https://github.com/instill-ai/design-system/commit/17289f12b98da6d29c189187e1cbedc1c1d4ccc7))
+
 ## [0.44.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.43.0...@instill-ai/design-system-v0.44.0) (2023-08-25)
 
 
