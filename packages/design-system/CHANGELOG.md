@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.45.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.44.1...@instill-ai/design-system-v0.45.0) (2023-08-29)
+
+
+### Features
+
+* Add intersect Square Icon ([#832](https://github.com/instill-ai/design-system/issues/832)) ([5247015](https://github.com/instill-ai/design-system/commit/524701518ff17053bf82f24af04839512e9d8ce1))
+
 ## [0.44.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.44.0...@instill-ai/design-system-v0.44.1) (2023-08-28)
 
 
