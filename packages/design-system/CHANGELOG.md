@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.46.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.45.0...@instill-ai/design-system-v0.46.0) (2023-08-30)
+
+
+### Features
+
+* add Upload01 Icon ([5128d60](https://github.com/instill-ai/design-system/commit/5128d60dda0a8f1425a250d4702e3e3322e8b128))
+
 ## [0.45.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.44.1...@instill-ai/design-system-v0.45.0) (2023-08-29)
 
 
