@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.46.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.46.0...@instill-ai/design-system-v0.46.1) (2023-08-30)
+
+
+### Miscellaneous
+
+* **design-system:** add twitter icon ([#835](https://github.com/instill-ai/design-system/issues/835)) ([918a5e8](https://github.com/instill-ai/design-system/commit/918a5e851654eea08d851ec663127b2f5080de26))
+
 ## [0.46.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.45.0...@instill-ai/design-system-v0.46.0) (2023-08-30)
 
 
