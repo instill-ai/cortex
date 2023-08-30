@@ -52,6 +52,7 @@ import { SearchSm } from "./SearchSm";
 import { Tag01 } from "./Tag01";
 import { Trash01 } from "./Trash01";
 import { Type02 } from "./Type02";
+import { Upload01 } from "./Upload01";
 import { X } from "./X";
 
 export const Icons = {
@@ -109,5 +110,6 @@ export const Icons = {
   Tag01,
   Trash01,
   Type02,
+  Upload01,
   X,
 };
