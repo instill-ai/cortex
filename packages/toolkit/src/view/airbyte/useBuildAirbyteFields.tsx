@@ -209,7 +209,7 @@ export const pickComponent = (
     });
 
     return (
-      <div className="flex flex-col space-y-2">
+      <div key={formTree.path} className="flex flex-col space-y-2">
         <label className="text-semantic-fg-primary product-body-text-2-regular">
           {formTree.title ?? formTree.fieldKey ?? null}
         </label>
