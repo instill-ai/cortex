@@ -11,11 +11,11 @@ import {
   type SelectedItemMap,
 } from "../../lib";
 import {
-  BasicSingleSelect,
   BasicTextArea,
   BasicTextField,
   BasicToggleField,
   ProtectedBasicTextField,
+  Select,
 } from "@instill-ai/design-system";
 import { OneOfConditionSection } from ".";
 
@@ -209,37 +209,57 @@ export const pickComponent = (
     });
 
     return (
-      <BasicSingleSelect
-        id={formTree.fieldKey}
-        key={formTree.path}
-        required={formTree.isRequired}
-        description={formTree.description ?? ""}
-        label={formTree.title ?? formTree.fieldKey ?? null}
-        disabled={disabledAll}
-        error={errors ? errors[formTree.path] ?? null : null}
-        options={options}
-        value={
-          values
-            ? options.find((e) => e.value === values[formTree.path]) ??
-              options.find((e) => e.value === formTree.default) ??
-              null
-            : null
-        }
-        onChange={(option) => {
-          if (setFormIsDirty) setFormIsDirty(true);
-          setValues((prev) => {
-            const configuration = prev?.configuration || {};
-            dot.setter(configuration, formTree.path, option?.value ?? null);
-            return {
-              ...prev,
-              configuration: configuration,
-              [formTree.path]: option?.value ?? null,
-            };
-          });
-        }}
-        readOnly={false}
-        additionalMessageOnLabel={null}
-      />
+      <div className="flex flex-col space-y-2">
+        <label className="text-semantic-fg-primary product-body-text-2-regular">
+          {formTree.title ?? formTree.fieldKey ?? null}
+        </label>
+        <Select.Root
+          required={formTree.isRequired}
+          onValueChange={(value) => {
+            if (setFormIsDirty) setFormIsDirty(true);
+            setValues((prev) => {
+              const configuration = prev?.configuration || {};
+              dot.setter(configuration, formTree.path, value ?? null);
+              return {
+                ...prev,
+                configuration: configuration,
+                [formTree.path]: value ?? null,
+              };
+            });
+          }}
+          value={
+            values
+              ? options.find((e) => e.value === values[formTree.path])?.value ??
+                options.find((e) => e.value === formTree.default)?.value ??
+                undefined
+              : undefined
+          }
+          disabled={disabledAll}
+        >
+          <Select.Trigger className="w-full !rounded-none">
+            <Select.Value />
+          </Select.Trigger>
+          <Select.Content>
+            {options.map((option) => (
+              <Select.Item
+                className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                key={option.value}
+                value={option.value}
+              >
+                <p className="my-auto">{option.label}</p>
+              </Select.Item>
+            ))}
+          </Select.Content>
+        </Select.Root>
+        <p className="product-body-text-3-regular text-[#1D243380]">
+          {formTree.description ?? ""}
+        </p>
+        {errors ? (
+          <p className="product-body-text-3-regular text-semantic-error-default">
+            {errors[formTree.path] ?? null}
+          </p>
+        ) : null}
+      </div>
     );
   }
 
