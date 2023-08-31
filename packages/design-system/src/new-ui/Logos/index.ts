@@ -9,7 +9,8 @@ import { MDLSquare } from "./MDLSquare";
 import { Number } from "./Number";
 import { OpenAI } from "./OpenAI";
 import { StabilityAI } from "./StabilityAI";
-import { Twitter } from "./Twitter";
+import { TwitterDark } from "./TwitterDark";
+import { TwitterLight } from "./TwitterLight";
 import { VDPExpand } from "./VDPExpand";
 import { VDPSquare } from "./VDPSquare";
 
@@ -24,7 +25,8 @@ export const Logos = {
   MDLSquare,
   Number,
   StabilityAI,
-  Twitter,
+  TwitterDark,
+  TwitterLight,
   OpenAI,
   VDPExpand,
   VDPSquare,

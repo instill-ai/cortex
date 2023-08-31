@@ -1,7 +1,7 @@
 import * as React from "react";
 import { LogoBase, LogoBaseProps } from "./LogoBase";
 
-export const Twitter = React.forwardRef<
+export const TwitterDark = React.forwardRef<
   SVGSVGElement,
   Omit<LogoBaseProps, "viewBox" | "children">
 >((props, ref) => {
@@ -32,4 +32,4 @@ export const Twitter = React.forwardRef<
     </LogoBase>
   );
 });
-Twitter.displayName = "Twitter";
+TwitterDark.displayName = "TwitterDark";
