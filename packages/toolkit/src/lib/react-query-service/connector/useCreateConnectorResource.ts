@@ -10,7 +10,6 @@ import {
   type ConnectorResourceWatchState,
   type CreateConnectorResourcePayload,
   type ConnectorResourceWithDefinition,
-  type ConnectorResourceWithPipelines,
 } from "../../vdp-sdk";
 
 export const useCreateConnectorResource = () => {
@@ -53,27 +52,6 @@ export const useCreateConnectorResource = () => {
 
           return components.some((e) => e.resource.id === connectorResource.id);
         });
-
-        const connectorResourceWithPipelines: ConnectorResourceWithPipelines = {
-          ...connectorResourceWithDefinition,
-          pipelines: targetPipelines ? targetPipelines : [],
-        };
-
-        queryClient.setQueryData<ConnectorResourceWithPipelines>(
-          ["connector-resources", connectorResource.name, "with-pipelines"],
-          connectorResourceWithPipelines
-        );
-
-        queryClient.setQueryData<ConnectorResourceWithPipelines[]>(
-          ["connector-resources", connectorResource.type, "with-pipelines"],
-          (old) =>
-            old
-              ? [
-                  ...old.filter((e) => e.id !== connectorResource.id),
-                  connectorResourceWithPipelines,
-                ]
-              : [connectorResourceWithPipelines]
-        );
 
         queryClient.setQueryData<ConnectorResourceWithDefinition[]>(
           ["connector-resources", connectorResource.type],

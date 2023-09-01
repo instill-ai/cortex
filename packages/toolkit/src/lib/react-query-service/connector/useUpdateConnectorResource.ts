@@ -6,7 +6,6 @@ import {
   getConnectorResourceQuery,
   type Pipeline,
   type ConnectorResourceWithDefinition,
-  type ConnectorResourceWithPipelines,
   type ConnectorResourcesWatchState,
   type ConnectorResourceWatchState,
   type UpdateConnectorResourcePayload,
@@ -53,27 +52,6 @@ export const useUpdateConnectorResource = () => {
 
           return components.some((e) => e.resource.id === connectorResource.id);
         });
-
-        const connectorResourceWithPipelines: ConnectorResourceWithPipelines = {
-          ...connectorResourceWithDefinition,
-          pipelines: targetPipelines ? targetPipelines : [],
-        };
-
-        queryClient.setQueryData<ConnectorResourceWithPipelines>(
-          ["connector-resources", connectorResource.name, "with-pipelines"],
-          connectorResourceWithPipelines
-        );
-
-        queryClient.setQueryData<ConnectorResourceWithPipelines[]>(
-          ["connector-resources", connectorResource.type, "with-pipelines"],
-          (old) =>
-            old
-              ? [
-                  ...old.filter((e) => e.id !== connectorResource.id),
-                  connectorResourceWithPipelines,
-                ]
-              : [connectorResourceWithPipelines]
-        );
 
         queryClient.setQueryData<ConnectorResourceWithDefinition[]>(
           ["connector-resources", connectorResource.type],

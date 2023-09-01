@@ -4,7 +4,6 @@ import {
   getConnectorResourceQuery,
   type ConnectorResourcesWatchState,
   type ConnectorResourceWithDefinition,
-  type ConnectorResourceWithPipelines,
 } from "../../vdp-sdk";
 import { removeObjKey } from "../../utility";
 import { Nullable } from "../../type";
@@ -44,20 +43,6 @@ export const useDeleteConnectorResource = () => {
             return old
               ? old.filter((e) => e.name !== connectorResource.name)
               : [];
-          }
-        );
-
-        // Deal with connectors with pipelines cache
-        queryClient.setQueryData<ConnectorResourceWithPipelines[]>(
-          ["connector-resources", connectorResource.type, "with-pipelines"],
-          (old) =>
-            old ? old.filter((e) => e.name !== connectorResource.name) : []
-        );
-
-        queryClient.removeQueries(
-          ["connector-resources", connectorResource.name, "with-pipelines"],
-          {
-            exact: true,
           }
         );
 

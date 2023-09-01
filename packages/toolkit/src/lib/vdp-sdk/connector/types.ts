@@ -46,10 +46,6 @@ export type ConnectorResourceWithDefinition = Omit<
   connector_definition: ConnectorDefinition;
 };
 
-export type ConnectorResourceWithPipelines = ConnectorResourceWithDefinition & {
-  pipelines: Pipeline[];
-};
-
 export type ConnectorDefinition = {
   name: string;
   uid: string;
