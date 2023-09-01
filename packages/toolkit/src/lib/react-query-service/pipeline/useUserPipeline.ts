@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPipelineQuery } from "../../vdp-sdk";
+import { getUserPipelineQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export const usePipeline = ({
+export const useUserPipeline = ({
   pipelineName,
   accessToken,
   enabled,
@@ -29,7 +29,10 @@ export const usePipeline = ({
       if (!pipelineName) {
         return Promise.reject(new Error("invalid pipeline name"));
       }
-      const pipeline = await getPipelineQuery({ pipelineName, accessToken });
+      const pipeline = await getUserPipelineQuery({
+        pipelineName,
+        accessToken,
+      });
       return Promise.resolve(pipeline);
     },
     {

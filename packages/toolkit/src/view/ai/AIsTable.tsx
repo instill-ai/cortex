@@ -26,7 +26,6 @@ import {
   GeneralStateCell,
   GeneralTaskCell,
   ImageWithFallback,
-  PaginationListContainerProps,
   SortIcon,
   TableCell,
   TableError,

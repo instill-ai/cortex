@@ -1,8 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
-import { JSONSchema7 } from "json-schema";
 import { Pipeline } from "../pipeline";
-import { OpenAPIV3 } from "openapi-types";
+import { Spec } from "../types";
 
 export type ConnectorResourceState =
   | "STATE_CONNECTED"
@@ -28,7 +27,7 @@ export type ConnectorResource = {
   id: string;
   connector_definition: null;
   connector_definition_name: string;
-  connector_type: ConnectorResourceType;
+  type: ConnectorResourceType;
   task: string;
   description: string;
   configuration: Record<string, any> | Record<string, never>;
@@ -42,10 +41,9 @@ export type ConnectorResource = {
 
 export type ConnectorResourceWithDefinition = Omit<
   ConnectorResource,
-  "connector_definition" | "configuration"
+  "connector_definition"
 > & {
   connector_definition: ConnectorDefinition;
-  configuration: Record<string, any> | Record<string, never>;
 };
 
 export type ConnectorResourceWithPipelines = ConnectorResourceWithDefinition & {
@@ -61,11 +59,7 @@ export type ConnectorDefinition = {
   icon: string;
   icon_url: string;
   connector_type: ConnectorResourceType;
-  spec: {
-    resource_specification: JSONSchema7;
-    component_specification: JSONSchema7;
-    openapi_specifications: Record<string, OpenAPIV3.Document>;
-  };
+  spec: Spec;
   tombstone: boolean;
   public: boolean;
   custom: boolean;

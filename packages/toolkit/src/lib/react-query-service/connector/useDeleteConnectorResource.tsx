@@ -39,7 +39,7 @@ export const useDeleteConnectorResource = () => {
         );
 
         queryClient.setQueryData<ConnectorResourceWithDefinition[]>(
-          ["connector-resources", connectorResource.connector_type],
+          ["connector-resources", connectorResource.type],
           (old) => {
             return old
               ? old.filter((e) => e.name !== connectorResource.name)
@@ -49,11 +49,7 @@ export const useDeleteConnectorResource = () => {
 
         // Deal with connectors with pipelines cache
         queryClient.setQueryData<ConnectorResourceWithPipelines[]>(
-          [
-            "connector-resources",
-            connectorResource.connector_type,
-            "with-pipelines",
-          ],
+          ["connector-resources", connectorResource.type, "with-pipelines"],
           (old) =>
             old ? old.filter((e) => e.name !== connectorResource.name) : []
         );
@@ -74,7 +70,7 @@ export const useDeleteConnectorResource = () => {
         );
 
         queryClient.setQueryData<ConnectorResourcesWatchState>(
-          ["connector-resources", connectorResource.connector_type, "watch"],
+          ["connector-resources", connectorResource.type, "watch"],
           (old) => {
             return old ? removeObjKey(old, connectorResource.name) : {};
           }

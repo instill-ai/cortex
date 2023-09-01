@@ -1,13 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { removeObjKey } from "../../utility";
-import {
-  deletePipelineMutation,
-  type Pipeline,
-  type PipelinesWatchState,
-} from "../../vdp-sdk";
+import { deleteUserPipelineMutation, type Pipeline } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export const useDeletePipeline = () => {
+export const useDeleteUserPipeline = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({
@@ -17,12 +12,16 @@ export const useDeletePipeline = () => {
       pipelineName: string;
       accessToken: Nullable<string>;
     }) => {
-      await deletePipelineMutation({ pipelineName, accessToken });
+      await deleteUserPipelineMutation({ pipelineName, accessToken });
       return Promise.resolve(pipelineName);
     },
     {
       onSuccess: (pipelineName) => {
-        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
+        // At this stage the pipelineName will be users/<uid>/pipelines/<pid>
+        const pipelineNameArray = pipelineName.split("/");
+        const userName = `${pipelineNameArray[0]}/${pipelineNameArray[1]}`;
+
+        queryClient.setQueryData<Pipeline[]>(["pipelines", userName], (old) =>
           old ? old.filter((e) => e.name !== pipelineName) : []
         );
         queryClient.removeQueries(["pipelines", pipelineName], { exact: true });
@@ -31,11 +30,6 @@ export const useDeletePipeline = () => {
         queryClient.removeQueries(["pipelines", pipelineName, "watch"], {
           exact: true,
         });
-
-        queryClient.setQueryData<PipelinesWatchState>(
-          ["pipelines", "watch"],
-          (old) => (old ? removeObjKey(old, pipelineName) : {})
-        );
       },
     }
   );

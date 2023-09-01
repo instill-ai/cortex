@@ -1,6 +1,6 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient, getQueryString } from "../helper";
-import { PipelineWatchState, Pipeline } from "./types";
+import { Pipeline, PipelineRelease, PipelineReleaseWatchState } from "./types";
 
 export type ListPipelinesResponse = {
   pipelines: Pipeline[];
@@ -21,12 +21,12 @@ export async function listPipelinesQuery({
     const client = createInstillAxiosClient(accessToken, "vdp");
     const pipelines: Pipeline[] = [];
 
-    const queryString = getQueryString(
-      `/pipelines?view=VIEW_FULL`,
+    const queryString = getQueryString({
+      baseURL: "/pipelines?view=VIEW_FULL",
       pageSize,
       nextPageToken,
-      null
-    );
+      filter: null,
+    });
 
     const { data } = await client.get<ListPipelinesResponse>(queryString);
 
@@ -36,8 +36,8 @@ export async function listPipelinesQuery({
       pipelines.push(
         ...(await listPipelinesQuery({
           pageSize,
-          accessToken,
           nextPageToken: data.next_page_token,
+          accessToken,
         }))
       );
     }
@@ -48,11 +48,60 @@ export async function listPipelinesQuery({
   }
 }
 
-export type GetPipelineResponse = {
+export type ListUserPipelinesResponse = {
+  pipelines: Pipeline[];
+  next_page_token: string;
+  total_size: string;
+};
+
+export async function listUserPipelinesQuery({
+  pageSize,
+  nextPageToken,
+  userName,
+  accessToken,
+}: {
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  userName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "vdp");
+    const pipelines: Pipeline[] = [];
+
+    const queryString = getQueryString({
+      baseURL: `${userName}/pipelines?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken,
+      filter: null,
+    });
+
+    const { data } = await client.get<ListUserPipelinesResponse>(queryString);
+
+    pipelines.push(...data.pipelines);
+
+    if (data.next_page_token) {
+      pipelines.push(
+        ...(await listUserPipelinesQuery({
+          pageSize,
+          nextPageToken: data.next_page_token,
+          accessToken,
+          userName,
+        }))
+      );
+    }
+
+    return Promise.resolve(pipelines);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type GetUserPipelineResponse = {
   pipeline: Pipeline;
 };
 
-export async function getPipelineQuery({
+export async function getUserPipelineQuery({
   pipelineName,
   accessToken,
 }: {
@@ -62,7 +111,7 @@ export async function getPipelineQuery({
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
-    const { data } = await client.get<GetPipelineResponse>(
+    const { data } = await client.get<GetUserPipelineResponse>(
       `/${pipelineName}?view=VIEW_FULL`
     );
 
@@ -73,22 +122,96 @@ export async function getPipelineQuery({
 }
 
 /* -------------------------------------------------------------------------
- * Watch Pipeline State
+ * Pipeline Release
  * -----------------------------------------------------------------------*/
 
-export async function watchPipeline({
+export async function ListUserPipelineReleasesQuery({
+  userName,
   pipelineName,
+  pageSize,
+  nextPageToken,
   accessToken,
 }: {
+  userName: string;
   pipelineName: string;
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const { data } = await client.get<PipelineWatchState>(
-      `/${pipelineName}/watch`
+    const pipelines: Pipeline[] = [];
+
+    const queryString = getQueryString({
+      baseURL: `${userName}/${pipelineName}/release?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken,
+      filter: null,
+    });
+
+    const { data } = await client.get<ListPipelinesResponse>(queryString);
+
+    pipelines.push(...data.pipelines);
+
+    if (data.next_page_token) {
+      pipelines.push(
+        ...(await ListUserPipelineReleasesQuery({
+          userName,
+          pipelineName,
+          pageSize,
+          nextPageToken: data.next_page_token,
+          accessToken,
+        }))
+      );
+    }
+
+    return Promise.resolve(pipelines);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type GetUserPipelineReleaseResponse = {
+  release: PipelineRelease;
+};
+
+export async function getUserPipelineReleaseQuery({
+  pipelineReleaseName,
+  accessToken,
+}: {
+  pipelineReleaseName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "vdp");
+
+    const { data } = await client.get<GetUserPipelineReleaseResponse>(
+      `/${pipelineReleaseName}?view=VIEW_FULL`
     );
-    return Promise.resolve(data);
+
+    return Promise.resolve(data.release);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type WatchUserPipelineReleaseResponse = {
+  state: PipelineReleaseWatchState;
+};
+
+export async function watchUserPipelineReleaseQuery({
+  pipelineReleaseName,
+  accessToken,
+}: {
+  pipelineReleaseName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "vdp");
+    const { data } = await client.get<WatchUserPipelineReleaseResponse>(
+      `/${pipelineReleaseName}/watch`
+    );
+    return Promise.resolve(data.state);
   } catch (err) {
     return Promise.reject(err);
   }

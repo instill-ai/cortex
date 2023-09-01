@@ -55,12 +55,12 @@ export async function listModelDefinitionsQuery({
 
     const modelDefinitions: ModelDefinition[] = [];
 
-    const queryString = getQueryString(
-      "/model-definitions",
+    const queryString = getQueryString({
+      baseURL: "/model-definitions",
       pageSize,
       nextPageToken,
-      null
-    );
+      filter: null,
+    });
 
     const { data } = await client.get<ListModelDefinitionsResponse>(
       queryString
@@ -131,12 +131,12 @@ export async function listModelsQuery({
 
     const models: Model[] = [];
 
-    const queryString = getQueryString(
-      "/models?view=VIEW_FULL",
+    const queryString = getQueryString({
+      baseURL: "/models?view=VIEW_FULL",
       pageSize,
       nextPageToken,
-      null
-    );
+      filter: null,
+    });
 
     const { data } = await client.get<ListModelsResponse>(queryString);
 

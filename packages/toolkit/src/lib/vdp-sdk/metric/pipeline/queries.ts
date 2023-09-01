@@ -37,12 +37,12 @@ export async function listPipelineTriggerRecordsQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const triggers: PipelineTriggerRecord[] = [];
 
-    const queryString = getQueryString(
-      `/metrics/vdp/pipeline/triggers`,
+    const queryString = getQueryString({
+      baseURL: `/metrics/vdp/pipeline/triggers`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
     const { data } = await client.get<ListPipelineTriggerRecordsResponse>(
       queryString
@@ -82,12 +82,12 @@ export async function listTriggeredPipelineQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const pipelines: TriggeredPipeline[] = [];
 
-    const queryString = getQueryString(
-      `/metrics/vdp/pipeline/tables`,
+    const queryString = getQueryString({
+      baseURL: `/metrics/vdp/pipeline/tables`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
     const { data } = await client.get<ListTriggeredPipelinesResponse>(
       queryString
@@ -127,12 +127,12 @@ export async function listTriggeredPipelineChartQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const pipelinesChart: PipelinesChart[] = [];
 
-    const queryString = getQueryString(
-      `/metrics/vdp/pipeline/charts`,
+    const queryString = getQueryString({
+      baseURL: `/metrics/vdp/pipeline/charts`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
     const { data } = await client.get<ListPipelinesChartResponse>(queryString);
     pipelinesChart.push(...data.pipeline_trigger_chart_records);

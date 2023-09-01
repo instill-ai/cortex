@@ -3,7 +3,6 @@ import {
   ConnectorResourceWatchState,
   ConnectorResourceWithDefinition,
   ConnectorResourceWithPipelines,
-  ConnectorResourceState,
   Pipeline,
   disconnectConnectorResourceAction,
   getConnectorResourceQuery,
@@ -49,12 +48,10 @@ export const useDisonnectConnectorResource = () => {
         const targetPipelines = pipelines?.filter((e) => {
           const components = getComponentsFromPipelineRecipe({
             recipe: e.recipe,
-            connectorResourceType: connectorResource.connector_type,
+            connectorResourceType: connectorResource.type,
           });
 
-          return components.some(
-            (e) => e.resource_detail.id === connectorResource.id
-          );
+          return components.some((e) => e.resource.id === connectorResource.id);
         });
 
         const connectorResourceWithPipelines: ConnectorResourceWithPipelines = {
@@ -68,11 +65,7 @@ export const useDisonnectConnectorResource = () => {
         );
 
         queryClient.setQueryData<ConnectorResourceWithPipelines[]>(
-          [
-            "connector-resources",
-            connectorResource.connector_type,
-            "with-pipelines",
-          ],
+          ["connector-resources", connectorResource.type, "with-pipelines"],
           (old) =>
             old
               ? [
@@ -83,7 +76,7 @@ export const useDisonnectConnectorResource = () => {
         );
 
         queryClient.setQueryData<ConnectorResourceWithDefinition[]>(
-          ["connector-resources", connectorResource.connector_type],
+          ["connector-resources", connectorResource.type],
           (old) =>
             old
               ? [
@@ -105,7 +98,7 @@ export const useDisonnectConnectorResource = () => {
         );
 
         queryClient.setQueryData<ConnectorResourcesWatchState>(
-          ["connector-resources", connectorResource.connector_type, "watch"],
+          ["connector-resources", connectorResource.type, "watch"],
           (old) =>
             old
               ? {

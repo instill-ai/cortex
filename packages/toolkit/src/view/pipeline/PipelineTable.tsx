@@ -94,7 +94,7 @@ export const PipelineTable = (props: PipelineTableProps) => {
                 <ConnectionTypeCell
                   width={null}
                   connectorDefinition={
-                    sourceComponent[0].resource_detail.connector_definition
+                    sourceComponent[0].resource.connector_definition
                   }
                   connectorName={sourceComponent[0].resource_name}
                   padding="py-2 pl-6"
@@ -107,7 +107,7 @@ export const PipelineTable = (props: PipelineTableProps) => {
                 <ConnectionTypeCell
                   width={null}
                   connectorDefinition={
-                    destinationComponent[0].resource_detail.connector_definition
+                    destinationComponent[0].resource.connector_definition
                   }
                   connectorName={destinationComponent[0].resource_name}
                   padding="py-2 pr-6"

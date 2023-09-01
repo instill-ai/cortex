@@ -50,7 +50,7 @@ export function useModelWithPipelines({
           connectorResourceType: "CONNECTOR_TYPE_AI",
         });
 
-        return components.some((e) => e.resource_detail.id === model.data.id);
+        return components.some((e) => e.resource.id === model.data.id);
       });
 
       const modelWithPipelines: ModelWithPipelines = {

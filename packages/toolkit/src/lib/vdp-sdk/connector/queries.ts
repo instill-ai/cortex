@@ -27,12 +27,12 @@ export async function listConnectorResourcesQuery({
     const client = createInstillAxiosClient(accessToken, "vdp");
     const connectors: ConnectorResourceWithDefinition[] = [];
 
-    const queryString = getQueryString(
-      `/connector-resources?view=VIEW_FULL`,
+    const queryString = getQueryString({
+      baseURL: `/connector-resources?view=VIEW_FULL`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
     const { data } = await client.get<ListConnectorResourcesResponse>(
       queryString
@@ -78,12 +78,12 @@ export async function listConnectorDefinitionsQuery({
     const client = createInstillAxiosClient(accessToken, "vdp");
     const connectorDefinitions: ConnectorDefinition[] = [];
 
-    const queryString = getQueryString(
-      `/connector-definitions?view=VIEW_FULL`,
+    const queryString = getQueryString({
+      baseURL: `/connector-definitions?view=VIEW_FULL`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
     const { data } = await client.get<ListConnectorDefinitionsResponse>(
       queryString

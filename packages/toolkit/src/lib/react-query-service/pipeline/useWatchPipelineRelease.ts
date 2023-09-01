@@ -1,14 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { watchPipeline } from "../../vdp-sdk";
+import { watchUserPipelineReleaseQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export function useWatchPipeline({
-  pipelineName,
+export function useWatchPipelineRelease({
+  pipelineReleaseName,
   accessToken,
   enabled,
   retry,
 }: {
-  pipelineName: Nullable<string>;
+  pipelineReleaseName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -19,19 +19,19 @@ export function useWatchPipeline({
 }) {
   let enableQuery = false;
 
-  if (pipelineName && enabled) {
+  if (pipelineReleaseName && enabled) {
     enableQuery = true;
   }
 
   return useQuery(
-    ["pipelines", pipelineName, "watch"],
+    ["pipelineReleases", pipelineReleaseName, "watch"],
     async () => {
-      if (!pipelineName) {
-        return Promise.reject(new Error("Pipeline name not provided"));
+      if (!pipelineReleaseName) {
+        return Promise.reject(new Error("pipelineRelease name not provided"));
       }
 
-      const watch = await watchPipeline({
-        pipelineName,
+      const watch = await watchUserPipelineReleaseQuery({
+        pipelineReleaseName,
         accessToken,
       });
 

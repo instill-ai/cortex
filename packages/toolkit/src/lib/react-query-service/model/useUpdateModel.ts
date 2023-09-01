@@ -66,7 +66,7 @@ export const useUpdateModel = () => {
             connectorResourceType: "CONNECTOR_TYPE_AI",
           });
 
-          return components.some((e) => e.resource_detail.id === model.id);
+          return components.some((e) => e.resource.id === model.id);
         });
 
         const modelWithPipelines: ModelWithPipelines = {

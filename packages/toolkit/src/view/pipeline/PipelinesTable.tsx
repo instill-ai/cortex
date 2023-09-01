@@ -6,39 +6,30 @@ import { isAxiosError } from "axios";
 import {
   formatDate,
   getInstillApiErrorMessage,
-  parseStatusLabel,
-  useDeletePipeline,
+  useDeleteUserPipeline,
   type Nullable,
   type Pipeline,
-  type PipelinesWatchState,
   type Model,
   type ConnectorResourceWithDefinition,
 } from "../../lib";
-import {
-  GeneralStateCell,
-  SortIcon,
-  TableCell,
-  TableError,
-} from "../../components";
+import { SortIcon, TableCell, TableError } from "../../components";
 import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
 
 export type PipelinesTableProps = {
   pipelines: Pipeline[];
-  pipelinesWatchState: PipelinesWatchState;
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
 };
 
 export const PipelinesTable = (props: PipelinesTableProps) => {
-  const { pipelines, pipelinesWatchState, isError, isLoading, accessToken } =
-    props;
+  const { pipelines, isError, isLoading, accessToken } = props;
 
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
-  const deletePipeline = useDeletePipeline();
+  const deletePipeline = useDeleteUserPipeline();
   function handleDeletePipeline(
     resource: Nullable<Pipeline | Model | ConnectorResourceWithDefinition>
   ): void {
@@ -122,29 +113,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
         return (
           <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
             {formatDate(row.getValue("create_time"))}
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: "state",
-      header: () => <div className="text-center">Status</div>,
-      cell: ({ row }) => {
-        const name: string = row.original.name;
-        return (
-          <div className="grid justify-items-center">
-            <GeneralStateCell
-              width={null}
-              state={
-                pipelinesWatchState
-                  ? pipelinesWatchState[name]
-                    ? pipelinesWatchState[name].state
-                    : "STATE_UNSPECIFIED"
-                  : "STATE_UNSPECIFIED"
-              }
-              padding="py-2"
-              label={parseStatusLabel(row.getValue("state"))}
-            />
           </div>
         );
       },

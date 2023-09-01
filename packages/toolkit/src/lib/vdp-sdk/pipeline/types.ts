@@ -1,11 +1,9 @@
-import {
-  ConnectorResourceType,
-  ConnectorResourceWithDefinition,
-} from "../connector";
+import { ConnectorDefinition, ConnectorResource } from "../connector";
+import { Spec, Visibility } from "../types";
 
 export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
 
-export type PipelineState =
+export type PipelineReleaseState =
   | "STATE_UNSPECIFIED"
   | "STATE_ACTIVE"
   | "STATE_INACTIVE"
@@ -17,44 +15,80 @@ export type PipelineRecipe = {
   components: PipelineComponent[];
 };
 
-export type PipelineWatchState = {
-  state: PipelineState;
+export type PipelineReleaseWatchState = {
+  state: PipelineReleaseState;
   progress: number;
 };
 
 export type PipelineComponent = {
   id: string;
   resource_name: string;
-  resource_detail: ConnectorResourceWithDefinition;
-  metadata: any;
-  dependencies: {
-    images: string;
-    texts: string;
-    metadata: string;
-    structured_data: string;
-    audios: string;
-  };
-
-  // We will add logic_operator in the future
-  type: ConnectorResourceType | string;
+  resource: ConnectorResource;
+  confiugration: Record<string, any>;
+  definition_name: string;
+  type: PipelineComponentType;
+  definition: OperatorDefinition | ConnectorDefinition;
 };
 
-export type PipelinesWatchState = Record<string, PipelineWatchState>;
+export type PipelineComponentType =
+  | "COMPONENT_TYPE_UNSPECIFIED"
+  | "COMPONENT_TYPE_CONNECTOR_AI"
+  | "COMPONENT_TYPE_CONNECTOR_DATA"
+  | "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN"
+  | "COMPONENT_TYPE_OPERATOR";
+
+export type PipelineReleasesWatchState = Record<
+  string,
+  PipelineReleaseWatchState
+>;
 
 export type Pipeline = {
   name: string;
   uid: string;
   id: string;
   description: string;
-  state: PipelineState;
   user: string;
   create_time: string;
   update_time: string;
   recipe: PipelineRecipe;
+  openapi_schema: Record<string, any>;
+  owner: string;
 };
 
-export type RawPipelineRecipeComponent = {
+export type OperatorDefinition = {
+  name: string;
+  uid: string;
   id: string;
-  resource_name: string;
-  resource_detail?: Record<string, any>;
+  title: string;
+  documentation_url: string;
+  icon: string;
+  spec: Spec;
+  tombstone: boolean;
+  public: boolean;
+  custom: boolean;
+  icon_url: string;
+};
+
+export type PipelineRelease = {
+  name: string;
+  uid: string;
+  id: string;
+  description: string;
+  recipe: PipelineRecipe;
+  create_time: string;
+  update_time: string;
+  visibility: Visibility;
+  openapi_schema: Record<string, any>;
+};
+
+export type PipelineTrace = {
+  success: boolean;
+  inputs: Record<string, any>[];
+  outputs: Record<string, any>[];
+  error: Record<string, any>;
+  compute_time_in_seconds: number;
+};
+
+export type PipelineTriggerMetadata = {
+  traces: Record<string, PipelineTrace>;
 };

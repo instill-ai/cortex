@@ -11,7 +11,6 @@ import {
   Cell,
   GeneralStateCell,
   GeneralTaskCell,
-  PaginationListContainerProps,
   SortIcon,
   TableError,
 } from "../../components";

@@ -57,11 +57,11 @@ export const useConnectorResourceWithPipelines = ({
       const targetPipelines = pipelines.data.filter((e) => {
         const components = getComponentsFromPipelineRecipe({
           recipe: e.recipe,
-          connectorResourceType: connectorResource.data.connector_type,
+          connectorResourceType: connectorResource.data.type,
         });
 
         return components.some(
-          (e) => e.resource_detail.id === connectorResource.data.id
+          (e) => e.resource.id === connectorResource.data.id
         );
       });
 
