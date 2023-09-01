@@ -43,7 +43,7 @@ import {
 import { AirbyteDestinationFields } from "../airbyte";
 import { DeleteResourceModal, ImageWithFallback } from "../../components";
 
-export type ConfigureDestinationFormProps = {
+export type ConfigureDataFormProps = {
   accessToken: Nullable<string>;
   destination: ConnectorResourceWithWatchState;
   onConfigure: Nullable<(initStore: () => void) => void>;
@@ -62,9 +62,7 @@ const modalSelector = (state: ModalStore) => ({
   closeModal: state.closeModal,
 });
 
-export const ConfigureDestinationForm = (
-  props: ConfigureDestinationFormProps
-) => {
+export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   const {
     destination,
     onDelete,
