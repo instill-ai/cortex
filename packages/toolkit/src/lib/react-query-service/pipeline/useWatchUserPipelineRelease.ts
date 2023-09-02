@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { watchUserPipelineReleaseQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export function useWatchPipelineRelease({
+export function useWatchUserPipelineRelease({
   pipelineReleaseName,
   accessToken,
   enabled,

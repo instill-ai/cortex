@@ -24,7 +24,7 @@ export type PipelineComponent = {
   id: string;
   resource_name: string;
   resource: ConnectorResource;
-  confiugration: Record<string, any>;
+  configuration: Record<string, any>;
   definition_name: string;
   type: PipelineComponentType;
   definition: OperatorDefinition | ConnectorDefinition;

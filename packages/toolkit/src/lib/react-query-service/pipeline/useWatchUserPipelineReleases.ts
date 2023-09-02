@@ -5,7 +5,7 @@ import {
 } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export function useWatchPipelineReleases({
+export function useWatchUserPipelineReleases({
   pipelineReleaseNames,
   accessToken,
   enabled,

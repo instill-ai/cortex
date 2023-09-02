@@ -16,5 +16,5 @@ export * from "./useUserPipeline";
 export * from "./useUserPipelineRelease";
 export * from "./useUserPipelineReleases";
 export * from "./useUserPipelines";
-export * from "./useWatchPipelineRelease";
-export * from "./useWatchPipelineReleases";
+export * from "./useWatchUserPipelineRelease";
+export * from "./useWatchUserPipelineReleases";
