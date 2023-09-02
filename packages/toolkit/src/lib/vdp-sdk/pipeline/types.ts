@@ -23,11 +23,8 @@ export type RawPipelineRecipe = {
 export type RawPipelineComponent = {
   id: string;
   resource_name: string;
-  resource: null;
   configuration: Record<string, any>;
   definition_name: string;
-  type: null;
-  definition: null;
 };
 
 export type PipelineReleaseWatchState = {
