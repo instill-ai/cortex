@@ -22,22 +22,22 @@ import {
   dot,
   useAirbyteSelectedConditionMap,
   useDeleteConnectorResource,
-  useUpdateConnectorResource,
   useAmplitudeCtx,
   sendAmplitudeData,
   useModalStore,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
-  testConnectorResourceConnectionAction,
   useConnectConnectorResource,
   useDisonnectConnectorResource,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
-  type UpdateConnectorResourcePayload,
   type Nullable,
   type CreateResourceFormStore,
   type ModalStore,
   type ConnectorResourceWithWatchState,
+  useUpdateUserConnectorResource,
+  UpdateUserConnectorResourcePayload,
+  testUserConnectorResourceConnectionAction,
 } from "../../lib";
 
 import { AirbyteDestinationFields } from "../airbyte";
@@ -45,7 +45,7 @@ import { DeleteResourceModal, ImageWithFallback } from "../../components";
 
 export type ConfigureDataFormProps = {
   accessToken: Nullable<string>;
-  destination: ConnectorResourceWithWatchState;
+  data: ConnectorResourceWithWatchState;
   onConfigure: Nullable<(initStore: () => void) => void>;
   disabledConfigure?: boolean;
   onDelete: Nullable<(initStore: () => void) => void>;
@@ -64,7 +64,7 @@ const modalSelector = (state: ModalStore) => ({
 
 export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   const {
-    destination,
+    data,
     onDelete,
     onConfigure,
     accessToken,
@@ -89,44 +89,41 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   // We will disable all the fields if the connector is public (which mean
   // it is provided by Instill AI)
   let disabledAll = false;
-  if (
-    "visibility" in destination &&
-    destination.visibility === "VISIBILITY_PUBLIC"
-  ) {
+  if ("visibility" in data && data.visibility === "VISIBILITY_PUBLIC") {
     disabledAll = true;
   }
 
   /* -------------------------------------------------------------------------
-   * Get the destination definition and static state for fields
+   * Get the data definition and static state for fields
    * -----------------------------------------------------------------------*/
 
   const isResponseOperator = React.useMemo(() => {
-    if (destination.connector_definition.id === "response") {
+    if (data.connector_definition.id === "response") {
       return true;
     }
 
     return false;
-  }, [destination]);
+  }, [data]);
 
   const destinationDefinitionOption = React.useMemo(() => {
     return {
-      label: destination.connector_definition.title,
-      value: destination.connector_definition.id,
+      label: data.connector_definition.title,
+      value: data.connector_definition.id,
       startIcon: (
         <ImageWithFallback
           src={
-            destination.connector_definition.vendor === "airbyte"
-              ? `/icons/airbyte/${destination.connector_definition.icon}`
-              : `/icons/instill/${destination.connector_definition.icon}`
+            data.connector_definition.vendor === "airbyte"
+              ? `/icons/airbyte/${data.connector_definition.icon}`
+              : `/icons/instill/${data.connector_definition.icon}`
           }
           width={24}
           height={24}
-          alt={`${destination.connector_definition.title}-icon`}
+          alt={`${data.connector_definition.title}-icon`}
           fallbackImg={<DataDestinationIcon width="w-6" height="h-6" />}
         />
       ),
     };
-  }, [destination]);
+  }, [data]);
 
   /* -------------------------------------------------------------------------
    * Create interior state for managing the form
@@ -144,14 +141,12 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   const [fieldErrors, setFieldErrors] =
     React.useState<Nullable<AirbyteFieldErrors>>(null);
 
-  const destinationFormTree = useAirbyteFormTree(
-    destination.connector_definition
-  );
+  const destinationFormTree = useAirbyteFormTree(data.connector_definition);
 
   const initialValues: AirbyteFieldValues = {
-    configuration: destination.configuration,
-    ...dot.toDot(destination.configuration),
-    description: destination.description || undefined,
+    configuration: data.configuration,
+    ...dot.toDot(data.configuration),
+    description: data.description || undefined,
   };
 
   const [selectedConditionMap, setSelectedConditionMap] =
@@ -172,7 +167,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
     });
 
   const airbyteYup = useBuildAirbyteYup(
-    destination.connector_definition.spec.resource_specification ?? null,
+    data.connector_definition.spec.resource_specification ?? null,
     selectedConditionMap,
     null
   );
@@ -199,13 +194,13 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   );
 
   /* -------------------------------------------------------------------------
-   * Configure destination
+   * Configure data
    * -----------------------------------------------------------------------*/
 
-  const updateDestination = useUpdateConnectorResource();
+  const updateData = useUpdateUserConnectorResource();
 
   const handleSubmit = React.useCallback(async () => {
-    if (destination.id === "response") {
+    if (data.id === "response") {
       return;
     }
 
@@ -257,8 +252,8 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
       }
       setFieldErrors(null);
 
-      const payload: UpdateConnectorResourcePayload = {
-        connectorResourceName: destination.name,
+      const payload: UpdateUserConnectorResourcePayload = {
+        connectorResourceName: data.name,
         description: fieldValues.description as string | undefined,
         ...stripValues,
       };
@@ -270,7 +265,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
         message: "Updating...",
       }));
 
-      updateDestination.mutate(
+      updateData.mutate(
         { payload, accessToken },
         {
           onSuccess: () => {
@@ -307,7 +302,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
                 activate: true,
                 status: "error",
                 description: null,
-                message: "Something went wrong when create the destination",
+                message: "Something went wrong when create the data",
               }));
             }
           },
@@ -317,7 +312,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
       return;
     }
   }, [
-    destination.id,
+    data.id,
     amplitudeIsInit,
     formYup,
     fieldValues,
@@ -325,8 +320,8 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
     setCanEdit,
     airbyteFormIsDirty,
     setAirbyteFormIsDirty,
-    destination.name,
-    updateDestination,
+    data.name,
+    updateData,
     init,
     onConfigure,
     accessToken,
@@ -334,12 +329,12 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   ]);
 
   // ##########################################################################
-  // # Handle delete destination                                              #
+  // # Handle delete data                                              #
   // ##########################################################################
 
   const deleteDestination = useDeleteConnectorResource();
   const handleDeleteDestination = React.useCallback(() => {
-    if (!destination) return;
+    if (!data) return;
 
     setMessageBoxState(() => ({
       activate: true,
@@ -351,7 +346,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
     closeModal();
 
     deleteDestination.mutate(
-      { connectorResourceName: destination.name, accessToken },
+      { connectorResourceName: data.name, accessToken },
       {
         onSuccess: () => {
           setMessageBoxState(() => ({
@@ -393,14 +388,14 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
     init,
     amplitudeIsInit,
     deleteDestination,
-    destination,
+    data,
     closeModal,
     onDelete,
     accessToken,
   ]);
 
   const handleTestDestination = async function () {
-    if (!destination) return;
+    if (!data) return;
 
     setMessageBoxState(() => ({
       activate: true,
@@ -410,8 +405,8 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
     }));
 
     try {
-      const state = await testConnectorResourceConnectionAction({
-        connectorResourceName: destination.name,
+      const state = await testUserConnectorResourceConnectionAction({
+        connectorResourceName: data.name,
         accessToken,
       });
 
@@ -419,14 +414,14 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
         activate: true,
         status: state === "STATE_ERROR" ? "error" : "success",
         description: null,
-        message: `The destination's state is ${state}`,
+        message: `The data's state is ${state}`,
       }));
     } catch (err) {
       setMessageBoxState(() => ({
         activate: true,
         status: "error",
         description: null,
-        message: "Something went wrong when test the destination",
+        message: "Something went wrong when test the data",
       }));
     }
   };
@@ -437,12 +432,12 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   const disconnectDestination = useDisonnectConnectorResource();
 
   const handleConnectAI = async function () {
-    if (!destination) return;
+    if (!data) return;
     setIsConnecting(true);
-    if (destination.watchState === "STATE_CONNECTED") {
+    if (data.watchState === "STATE_CONNECTED") {
       disconnectDestination.mutate(
         {
-          connectorResourceName: destination.name,
+          connectorResourceName: data.name,
           accessToken,
         },
         {
@@ -451,7 +446,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
               activate: true,
               status: "success",
               description: null,
-              message: `Successfully disconnect ${destination.id}`,
+              message: `Successfully disconnect ${data.id}`,
             }));
 
             setIsConnecting(false);
@@ -471,7 +466,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
                 activate: true,
                 status: "error",
                 description: null,
-                message: "Something went wrong when disconnect the destination",
+                message: "Something went wrong when disconnect the data",
               }));
             }
           },
@@ -480,7 +475,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
     } else {
       connectDestination.mutate(
         {
-          connectorResourceName: destination.name,
+          connectorResourceName: data.name,
           accessToken,
         },
         {
@@ -489,7 +484,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
               activate: true,
               status: "success",
               description: null,
-              message: `Successfully connect ${destination.id}`,
+              message: `Successfully connect ${data.id}`,
             }));
             setIsConnecting(false);
           },
@@ -508,7 +503,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
                 activate: true,
                 status: "error",
                 description: null,
-                message: "Something went wrong when connect the destination",
+                message: "Something went wrong when connect the data",
               }));
             }
           },
@@ -522,17 +517,17 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
       <FormRoot marginBottom={marginBottom} width={width}>
         <div className="mb-8 flex flex-col gap-y-5">
           <BasicSingleSelect
-            id="destination-definition"
+            id="data-definition"
             key="definition"
             label="Data type"
             disabled={true}
             value={destinationDefinitionOption}
             options={[destinationDefinitionOption]}
-            description={`<a href='${destination.connector_definition.documentation_url}'>Setup Guide</a>`}
+            description={`<a href='${data.connector_definition.documentation_url}'>Setup Guide</a>`}
           />
           {!isResponseOperator ? (
             <BasicTextArea
-              id="destination-description"
+              id="data-description"
               label="Description"
               key="description"
               description="Fill with a short description."
@@ -580,14 +575,12 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
               disabled={
                 disabledAll
                   ? disabledAll
-                  : destination.name === "connectors/response"
+                  : data.name === "connectors/response"
                   ? true
                   : false
               }
             >
-              {destination.watchState === "STATE_CONNECTED"
-                ? "Disconnect"
-                : "Connect"}
+              {data.watchState === "STATE_CONNECTED" ? "Disconnect" : "Connect"}
               {isConnecting ? (
                 <svg
                   className="m-auto h-4 w-4 animate-spin text-white"
@@ -609,8 +602,8 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-              ) : destination.watchState === "STATE_CONNECTED" ||
-                destination.watchState === "STATE_ERROR" ? (
+              ) : data.watchState === "STATE_CONNECTED" ||
+                data.watchState === "STATE_ERROR" ? (
                 <Icons.Stop className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
               ) : (
                 <Icons.Play className="h-4 w-4 fill-semantic-fg-on-default stroke-semantic-fg-on-default group-disabled:fill-semantic-fg-disabled group-disabled:stroke-semantic-fg-disabled" />
@@ -657,7 +650,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
         </div>
       </FormRoot>
       <DeleteResourceModal
-        resource={destination}
+        resource={data}
         handleDeleteResource={handleDeleteDestination}
       />
     </>

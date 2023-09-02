@@ -22,17 +22,17 @@ import {
 import {
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  testConnectorResourceConnectionAction,
   useAmplitudeCtx,
   useConnectConnectorResource,
   useDeleteConnectorResource,
   useDisonnectConnectorResource,
   useModalStore,
-  useUpdateConnectorResource,
+  useUpdateUserConnectorResource,
+  testUserConnectorResourceConnectionAction,
   type ConnectorResourceWithWatchState,
   type ModalStore,
   type Nullable,
-  type UpdateConnectorResourcePayload,
+  type UpdateUserConnectorResourcePayload,
 } from "../../lib";
 import { DeleteResourceModal } from "../../components";
 import { shallow } from "zustand/shallow";
@@ -144,7 +144,7 @@ export const ConfigureBlockchainForm = (
       status: null,
     });
 
-  const updateBlockchain = useUpdateConnectorResource();
+  const updateBlockchain = useUpdateUserConnectorResource();
 
   function onSubmit(data: z.infer<typeof ConfigureBlockchainFormSchema>) {
     form.trigger([
@@ -154,8 +154,8 @@ export const ConfigureBlockchainForm = (
       "id",
     ]);
 
-    const payload: UpdateConnectorResourcePayload = {
-      connectorResourceName: `connectors/${data.id}`,
+    const payload: UpdateUserConnectorResourcePayload = {
+      connectorResourceName: `connector-resources/${data.id}`,
       description: data.description,
       configuration: data.configuration,
     };
@@ -284,7 +284,7 @@ export const ConfigureBlockchainForm = (
       }));
 
       try {
-        const state = await testConnectorResourceConnectionAction({
+        const state = await testUserConnectorResourceConnectionAction({
           connectorResourceName: blockchain.name,
           accessToken,
         });

@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  watchConnectorResource,
+  watchUserConnectorResource,
   type ConnectorResourcesWatchState,
   type ConnectorResourceType,
 } from "../../vdp-sdk";
@@ -33,13 +33,13 @@ export function useWatchConnectorResources({
     ["connector-resources", connectorResourceType, "watch"],
     async () => {
       if (!connectorResourceNames || connectorResourceNames.length === 0) {
-        return Promise.reject(new Error("Invalid connector name"));
+        return Promise.reject(new Error("Invalid connector names"));
       }
 
       let watches: ConnectorResourcesWatchState = {};
 
       for (const connectorResourceName of connectorResourceNames) {
-        const watch = await watchConnectorResource({
+        const watch = await watchUserConnectorResource({
           connectorResourceName,
           accessToken,
         });

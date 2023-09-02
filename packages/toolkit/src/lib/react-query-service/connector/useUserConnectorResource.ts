@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import {
-  ConnectorResourceWithDefinition,
   getConnectorDefinitionQuery,
-  getConnectorResourceQuery,
+  getUserConnectorResourceQuery,
+  type ConnectorResourceWithDefinition,
 } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export const useConnectorResource = ({
+export const useUserConnectorResource = ({
   connectorResourceName,
   accessToken,
   enabled,
@@ -31,10 +31,10 @@ export const useConnectorResource = ({
     ["connector-resources", connectorResourceName],
     async () => {
       if (!connectorResourceName) {
-        return Promise.reject(new Error("Invalid connector resource name"));
+        return Promise.reject(new Error("connectorResourceName not provided"));
       }
 
-      const connectorResource = await getConnectorResourceQuery({
+      const connectorResource = await getUserConnectorResourceQuery({
         connectorResourceName,
         accessToken,
       });

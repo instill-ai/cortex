@@ -1,18 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import {
-  ConnectorResourceWatchState,
-  ConnectorResourceWithDefinition,
-  Pipeline,
-  disconnectConnectorResourceAction,
-  getConnectorResourceQuery,
-  watchConnectorResource,
-  ConnectorResourcesWatchState,
-} from "../../vdp-sdk";
+import { useMutation } from "@tanstack/react-query";
 import type { Nullable } from "../../type";
-import { getComponentsFromPipelineRecipe, removeObjKey } from "../../utility";
+import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
+import { disconnectUserConnectorResourceAction } from "../../vdp-sdk";
 
 export const useDisonnectConnectorResource = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async ({
       connectorResourceName,
@@ -21,7 +12,7 @@ export const useDisonnectConnectorResource = () => {
       connectorResourceName: string;
       accessToken: Nullable<string>;
     }) => {
-      const connectorResource = await disconnectConnectorResourceAction({
+      const connectorResource = await disconnectUserConnectorResourceAction({
         connectorResourceName: connectorResourceName,
         accessToken,
       });
@@ -30,61 +21,11 @@ export const useDisonnectConnectorResource = () => {
     },
     {
       onSuccess: async ({ connectorResource, accessToken }) => {
-        const pipelines = queryClient.getQueryData<Pipeline[]>(["pipelines"]);
-
-        const connectorResourceWithDefinition = await getConnectorResourceQuery(
-          {
-            connectorResourceName: connectorResource.name,
-            accessToken,
-          }
-        );
-
-        queryClient.setQueryData<ConnectorResourceWithDefinition>(
-          ["connector-resources", connectorResource.name],
-          connectorResourceWithDefinition
-        );
-
-        const targetPipelines = pipelines?.filter((e) => {
-          const components = getComponentsFromPipelineRecipe({
-            recipe: e.recipe,
-            connectorResourceType: connectorResource.type,
-          });
-
-          return components.some((e) => e.resource.id === connectorResource.id);
-        });
-
-        queryClient.setQueryData<ConnectorResourceWithDefinition[]>(
-          ["connector-resources", connectorResource.type],
-          (old) =>
-            old
-              ? [
-                  ...old.filter((e) => e.id !== connectorResource.id),
-                  connectorResourceWithDefinition,
-                ]
-              : [connectorResourceWithDefinition]
-        );
-
-        // Process watch state
-        const watch = await watchConnectorResource({
-          connectorResourceName: connectorResource.name,
+        onSuccessAfterConnectResourceMutation({
+          type: "disconnect",
+          connectorResource,
           accessToken,
         });
-
-        queryClient.setQueryData<ConnectorResourceWatchState>(
-          ["connector-resources", connectorResource.name, "watch"],
-          watch
-        );
-
-        queryClient.setQueryData<ConnectorResourcesWatchState>(
-          ["connector-resources", connectorResource.type, "watch"],
-          (old) =>
-            old
-              ? {
-                  ...removeObjKey(old, connectorResource.name),
-                  [connectorResource.name]: watch,
-                }
-              : { [connectorResource.name]: watch }
-        );
       },
     }
   );

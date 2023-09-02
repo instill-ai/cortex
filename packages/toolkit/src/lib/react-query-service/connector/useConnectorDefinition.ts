@@ -8,7 +8,7 @@ export const useConnectorDefinition = ({
   enabled,
   retry,
 }: {
-  connectorDefinitionName: string;
+  connectorDefinitionName: Nullable<string>;
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -17,17 +17,30 @@ export const useConnectorDefinition = ({
    */
   retry?: false | number;
 }) => {
+  let enableQuery = false;
+
+  if (connectorDefinitionName && enabled) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["connector-definition", connectorDefinitionName],
     async () => {
+      if (!connectorDefinitionName) {
+        return Promise.reject(
+          new Error("connectorDefinitionName not provided")
+        );
+      }
+
       const connectorDefinition = await getConnectorDefinitionQuery({
         connectorDefinitionName,
         accessToken,
       });
+
       return Promise.resolve(connectorDefinition);
     },
     {
-      enabled,
+      enabled: enableQuery,
       retry: retry === false ? false : retry ? retry : 3,
     }
   );

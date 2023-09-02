@@ -1,30 +1,28 @@
 import { useMutation } from "@tanstack/react-query";
-import {
-  updateUserConnectorResourceMutation,
-  UpdateUserConnectorResourcePayload,
-} from "../../vdp-sdk";
-import { Nullable } from "../../type";
+import { connectUserConnectorResourceAction } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
 import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
 
-export const useUpdateUserConnectorResource = () => {
+export const useConnectConnectorResource = () => {
   return useMutation(
     async ({
-      payload,
+      connectorResourceName,
       accessToken,
     }: {
-      payload: UpdateUserConnectorResourcePayload;
+      connectorResourceName: string;
       accessToken: Nullable<string>;
     }) => {
-      const connectorResource = await updateUserConnectorResourceMutation({
-        payload,
+      const connectorResource = await connectUserConnectorResourceAction({
+        connectorResourceName,
         accessToken,
       });
+
       return Promise.resolve({ connectorResource, accessToken });
     },
     {
       onSuccess: async ({ connectorResource, accessToken }) => {
         onSuccessAfterConnectResourceMutation({
-          type: "update",
+          type: "connect",
           connectorResource,
           accessToken,
         });

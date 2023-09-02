@@ -20,17 +20,17 @@ import { DeleteResourceModal, ImageWithFallback } from "../../components";
 import {
   getInstillApiErrorMessage,
   sendAmplitudeData,
-  testConnectorResourceConnectionAction,
   useAmplitudeCtx,
   useConnectConnectorResource,
   useDeleteConnectorResource,
   useDisonnectConnectorResource,
   useModalStore,
-  useUpdateConnectorResource,
   type ConnectorResourceWithWatchState,
   type ModalStore,
   type Nullable,
-  type UpdateConnectorResourcePayload,
+  useUpdateUserConnectorResource,
+  UpdateUserConnectorResourcePayload,
+  testUserConnectorResourceConnectionAction,
 } from "../../lib";
 import { isAxiosError } from "axios";
 import { shallow } from "zustand/shallow";
@@ -249,7 +249,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       status: null,
     });
 
-  const updateConnectorResource = useUpdateConnectorResource();
+  const updateConnectorResource = useUpdateUserConnectorResource();
 
   function onSubmit(data: z.infer<typeof ConfigureAIFormSchema>) {
     form.trigger([
@@ -259,7 +259,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       "id",
     ]);
 
-    const payload: UpdateConnectorResourcePayload = {
+    const payload: UpdateUserConnectorResourcePayload = {
       connectorResourceName: `connector-resources/${data.id}`,
       description: data.description,
       configuration: data.configuration,
@@ -386,7 +386,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
       }));
 
       try {
-        const state = await testConnectorResourceConnectionAction({
+        const state = await testUserConnectorResourceConnectionAction({
           connectorResourceName: ai.name,
           accessToken,
         });
