@@ -8,7 +8,7 @@ export const useUserPipelineRelease = ({
   accessToken,
   retry,
 }: {
-  pipelineReleaseName: string;
+  pipelineReleaseName: Nullable<string>;
   enabled: boolean;
   accessToken: Nullable<string>;
   /**
@@ -17,9 +17,19 @@ export const useUserPipelineRelease = ({
    */
   retry?: false | number;
 }) => {
+  let enableQuery = false;
+
+  if (pipelineReleaseName && enabled) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["pipelineReleases", pipelineReleaseName],
     async () => {
+      if (!pipelineReleaseName) {
+        return Promise.reject(new Error("pipelineReleaseName not provided"));
+      }
+
       const pipelineRelease = await getUserPipelineReleaseQuery({
         pipelineReleaseName,
         accessToken,
@@ -27,7 +37,7 @@ export const useUserPipelineRelease = ({
       return Promise.resolve(pipelineRelease);
     },
     {
-      enabled,
+      enabled: enableQuery,
       retry: retry === false ? false : retry ? retry : 3,
     }
   );

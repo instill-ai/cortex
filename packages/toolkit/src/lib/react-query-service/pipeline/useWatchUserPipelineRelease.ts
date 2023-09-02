@@ -27,7 +27,7 @@ export function useWatchUserPipelineRelease({
     ["pipelineReleases", pipelineReleaseName, "watch"],
     async () => {
       if (!pipelineReleaseName) {
-        return Promise.reject(new Error("pipelineRelease name not provided"));
+        return Promise.reject(new Error("pipelineReleaseName not provided"));
       }
 
       const watch = await watchUserPipelineReleaseQuery({
