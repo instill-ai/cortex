@@ -21,9 +21,14 @@ export const useDeleteUserPipeline = () => {
         const pipelineNameArray = pipelineName.split("/");
         const userName = `${pipelineNameArray[0]}/${pipelineNameArray[1]}`;
 
+        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
+          old ? old.filter((e) => e.name !== pipelineName) : []
+        );
+
         queryClient.setQueryData<Pipeline[]>(["pipelines", userName], (old) =>
           old ? old.filter((e) => e.name !== pipelineName) : []
         );
+
         queryClient.removeQueries(["pipelines", pipelineName], { exact: true });
 
         // Process watch state

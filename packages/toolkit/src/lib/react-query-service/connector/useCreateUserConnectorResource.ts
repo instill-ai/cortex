@@ -26,7 +26,7 @@ export const useCreateUserConnectorResource = () => {
     },
     {
       onSuccess: async ({ connectorResource, accessToken }) => {
-        onSuccessAfterConnectResourceMutation({
+        await onSuccessAfterConnectResourceMutation({
           type: "create",
           connectorResource,
           accessToken,

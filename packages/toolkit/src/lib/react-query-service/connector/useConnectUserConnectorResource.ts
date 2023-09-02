@@ -21,7 +21,7 @@ export const useConnectConnectorResource = () => {
     },
     {
       onSuccess: async ({ connectorResource, accessToken }) => {
-        onSuccessAfterConnectResourceMutation({
+        await onSuccessAfterConnectResourceMutation({
           type: "connect",
           connectorResource,
           accessToken,

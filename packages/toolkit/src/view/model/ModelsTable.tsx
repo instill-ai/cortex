@@ -118,7 +118,6 @@ export const ModelsTable = (props: ModelsTableProps) => {
       accessorKey: "uid",
       header: () => <div className="text-center"></div>,
       cell: ({ row }) => {
-        const name: string = row.original.name;
         return (
           <div className="grid justify-items-center">
             <Cell width={null} padding="py-2 pl-6">

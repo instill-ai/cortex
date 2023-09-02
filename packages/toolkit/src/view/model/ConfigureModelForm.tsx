@@ -12,7 +12,6 @@ import {
 
 import {
   useDeleteModel,
-  useUpdateModel,
   sendAmplitudeData,
   useAmplitudeCtx,
   useConfigureModelFormStore,
@@ -22,6 +21,7 @@ import {
   type Nullable,
   type ConfigureModelFormStore,
   type ModalStore,
+  useUpdateUserModel,
 } from "../../lib";
 
 import { DeleteResourceModal } from "../../components";
@@ -104,7 +104,7 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
       status: null,
     });
 
-  const updateModel = useUpdateModel();
+  const updateUserModel = useUpdateUserModel();
 
   const handleConfigureModel = React.useCallback(() => {
     if (!canEdit) {
@@ -129,7 +129,7 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
       message: "Updating...",
     }));
 
-    updateModel.mutate(
+    updateUserModel.mutate(
       {
         payload: {
           name: model.name,
@@ -183,7 +183,7 @@ export const ConfigureModelForm = (props: ConfigureModelFormProps) => {
   }, [
     amplitudeIsInit,
     model,
-    updateModel,
+    updateUserModel,
     description,
     canEdit,
     init,

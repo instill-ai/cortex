@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { watchModel } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
+import { getUserModelQuery } from "../../vdp-sdk";
 
-export function useWatchModel({
+export const useUserModel = ({
   modelName,
   accessToken,
   enabled,
@@ -16,7 +16,7 @@ export function useWatchModel({
    * - Set to false to disable retry
    */
   retry?: false | number;
-}) {
+}) => {
   let enableQuery = false;
 
   if (modelName && enabled) {
@@ -24,22 +24,19 @@ export function useWatchModel({
   }
 
   return useQuery(
-    ["models", modelName, "watch"],
+    ["models", modelName],
     async () => {
       if (!modelName) {
         return Promise.reject(new Error("Model name not provided"));
       }
 
-      const watch = await watchModel({
-        modelName,
-        accessToken,
-      });
+      const model = await getUserModelQuery({ modelName, accessToken });
 
-      return Promise.resolve(watch);
+      return Promise.resolve(model);
     },
     {
       enabled: enableQuery,
       retry: retry === false ? false : retry ? retry : 3,
     }
   );
-}
+};

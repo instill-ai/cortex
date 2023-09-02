@@ -25,8 +25,8 @@ export const useDeleteConnectorResource = () => {
       return Promise.resolve({ connectorResourceName, accessToken });
     },
     {
-      onSuccess: ({ connectorResourceName, accessToken }) => {
-        onSuccessAfterConnectResourceMutation({
+      onSuccess: async ({ connectorResourceName, accessToken }) => {
+        await onSuccessAfterConnectResourceMutation({
           type: "delete",
           connectorResourceName,
           accessToken,

@@ -1,0 +1,29 @@
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { updateModelMutation, UpdateUserModelPayload } from "../../vdp-sdk";
+import type { Nullable } from "../../type";
+import { onSuccessAfterModelMutation } from "./onSuccessAfterModelMutation";
+
+export const useUpdateUserModel = () => {
+  const queryClient = useQueryClient();
+  return useMutation(
+    async ({
+      payload,
+      accessToken,
+    }: {
+      payload: UpdateUserModelPayload;
+      accessToken: Nullable<string>;
+    }) => {
+      const model = await updateModelMutation({ payload, accessToken });
+      return Promise.resolve({ model, accessToken });
+    },
+    {
+      onSuccess: async ({ model, accessToken }) => {
+        await onSuccessAfterModelMutation({
+          type: "update",
+          model,
+          accessToken,
+        });
+      },
+    }
+  );
+};

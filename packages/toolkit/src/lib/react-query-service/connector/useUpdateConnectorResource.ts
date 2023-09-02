@@ -23,7 +23,7 @@ export const useUpdateUserConnectorResource = () => {
     },
     {
       onSuccess: async ({ connectorResource, accessToken }) => {
-        onSuccessAfterConnectResourceMutation({
+        await onSuccessAfterConnectResourceMutation({
           type: "update",
           connectorResource,
           accessToken,

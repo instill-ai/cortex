@@ -21,7 +21,7 @@ export const useDisonnectConnectorResource = () => {
     },
     {
       onSuccess: async ({ connectorResource, accessToken }) => {
-        onSuccessAfterConnectResourceMutation({
+        await onSuccessAfterConnectResourceMutation({
           type: "disconnect",
           connectorResource,
           accessToken,

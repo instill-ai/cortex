@@ -33,6 +33,12 @@ export const useUpdateUserPipeline = () => {
           pipeline
         );
 
+        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
+          old
+            ? [...old.filter((e) => e.name !== pipeline.name), pipeline]
+            : [pipeline]
+        );
+
         queryClient.setQueryData<Pipeline[]>(["pipelines", userName], (old) =>
           old
             ? [...old.filter((e) => e.name !== pipeline.name), pipeline]

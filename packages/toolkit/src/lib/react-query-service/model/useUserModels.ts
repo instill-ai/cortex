@@ -3,7 +3,7 @@ import { env } from "../../utility";
 import { listModelsQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export const useModels = ({
+export const useUserModels = ({
   accessToken,
   enabled,
   retry,

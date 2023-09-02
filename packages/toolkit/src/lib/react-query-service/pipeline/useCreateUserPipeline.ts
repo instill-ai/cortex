@@ -38,6 +38,12 @@ export const useCreateUserPipeline = () => {
             ? [...old.filter((e) => e.name !== pipeline.name), pipeline]
             : [pipeline]
         );
+
+        queryClient.setQueryData<Pipeline[]>(["pipelines"], (old) =>
+          old
+            ? [...old.filter((e) => e.name !== pipeline.name), pipeline]
+            : [pipeline]
+        );
       },
     }
   );

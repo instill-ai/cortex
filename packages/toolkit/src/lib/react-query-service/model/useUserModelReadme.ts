@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import { getModelReadmeQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
+import { getUserModelReadmeQuery } from "../../vdp-sdk";
 
-export const useModelReadme = ({
+export const useUserModelReadme = ({
   modelName,
   accessToken,
   enabled,
@@ -30,7 +30,7 @@ export const useModelReadme = ({
         return Promise.reject(new Error("Modelname not provided"));
       }
 
-      const modelReadme = await getModelReadmeQuery({
+      const modelReadme = await getUserModelReadmeQuery({
         modelName,
         accessToken,
       });
