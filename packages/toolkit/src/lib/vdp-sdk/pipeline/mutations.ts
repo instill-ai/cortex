@@ -1,11 +1,11 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Pipeline, PipelineRecipe, PipelineRelease } from "./types";
+import { Pipeline, RawPipelineRecipe, PipelineRelease } from "./types";
 
 export type CreateUserPipelinePayload = {
   id: string;
   description?: string;
-  recipe: PipelineRecipe;
+  recipe: RawPipelineRecipe;
 };
 
 export type CreatePipelineResponse = {
@@ -39,7 +39,7 @@ export async function createUserPipelineMutation({
 export type UpdateUserPipelinePayload = {
   name: string;
   description?: string;
-  recipe: PipelineRecipe;
+  recipe: RawPipelineRecipe;
 };
 
 export type UpdateUserPipelineResponse = {
@@ -119,7 +119,7 @@ export async function renameUserPipelineMutation({
 export type CreateUserPipelineReleasePayload = {
   id: string;
   description?: string;
-  recipe: PipelineRecipe;
+  recipe: RawPipelineRecipe;
 };
 
 export type CreateUserPipelineReleaseResponse = {
@@ -153,7 +153,7 @@ export async function createUserPipelineReleaseMutation({
 
 export type UpdateUserPipelineReleasePayload = {
   description?: string;
-  recipe: PipelineRecipe;
+  recipe: RawPipelineRecipe;
 };
 
 export type UpdateUserPipelineReleaseResponse = {

@@ -15,6 +15,21 @@ export type PipelineRecipe = {
   components: PipelineComponent[];
 };
 
+export type RawPipelineRecipe = {
+  version: string;
+  components: RawPipelineComponent[];
+};
+
+export type RawPipelineComponent = {
+  id: string;
+  resource_name: string;
+  resource: null;
+  configuration: Record<string, any>;
+  definition_name: string;
+  type: null;
+  definition: null;
+};
+
 export type PipelineReleaseWatchState = {
   state: PipelineReleaseState;
   progress: number;
