@@ -1,10 +1,9 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import type { Nullable } from "../../type";
 import { deployUserModelAction } from "../../vdp-sdk";
 import { onSuccessAfterModelMutation } from "./onSuccessAfterModelMutation";
 
 export const useDeployUserModel = () => {
-  const queryClient = useQueryClient();
   return useMutation(
     async ({
       modelName,
@@ -14,12 +13,12 @@ export const useDeployUserModel = () => {
       accessToken: Nullable<string>;
     }) => {
       try {
-        const operation = await deployUserModelAction({
+        await deployUserModelAction({
           modelName,
           accessToken,
         });
 
-        return Promise.resolve({ modelName, operation, accessToken });
+        return Promise.resolve({ modelName, accessToken });
       } catch (err) {
         return Promise.reject(err);
       }

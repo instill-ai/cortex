@@ -12,12 +12,12 @@ export const useUndeployUserModel = () => {
       modelName: string;
       accessToken: Nullable<string>;
     }) => {
-      const operation = await undeployUserModeleAction({
+      await undeployUserModeleAction({
         modelName,
         accessToken,
       });
 
-      return Promise.resolve({ modelName, operation, accessToken });
+      return Promise.resolve({ modelName, accessToken });
     },
     {
       onSuccess: async ({ modelName, accessToken }) => {

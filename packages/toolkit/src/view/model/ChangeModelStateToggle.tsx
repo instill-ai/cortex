@@ -10,7 +10,7 @@ export type ChangeModelStateToggleProps = {
   model: Nullable<Model>;
   modelWatchState: Nullable<ModelState>;
   switchOff: UseMutationResult<
-    { modelName: string; operation: Operation },
+    { modelName: string; accessToken: Nullable<string> },
     unknown,
     {
       modelName: string;
@@ -19,7 +19,7 @@ export type ChangeModelStateToggleProps = {
     unknown
   >;
   switchOn: UseMutationResult<
-    { modelName: string; operation: Operation },
+    { modelName: string; accessToken: Nullable<string> },
     unknown,
     {
       modelName: string;
