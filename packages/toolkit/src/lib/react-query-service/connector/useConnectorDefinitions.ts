@@ -12,7 +12,7 @@ export const useConnectorDefinitions = ({
   enabled,
   retry,
 }: {
-  connectorResourceType: ConnectorResourceType;
+  connectorResourceType: ConnectorResourceType | "all";
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -28,7 +28,10 @@ export const useConnectorDefinitions = ({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
-        filter: `connector_type=${connectorResourceType}`,
+        filter:
+          connectorResourceType !== "all"
+            ? `connector_type=${connectorResourceType}`
+            : null,
       });
       return Promise.resolve(connectorDefinitions);
     },

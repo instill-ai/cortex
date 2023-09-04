@@ -210,7 +210,6 @@ test("baseURL contains a query string, all other fields included", () => {
   const pageSize = 10;
   const nextPageToken = "nextPageToken";
   const filter = "filter=a";
-  const parent = "parent";
 
   const queryString = getQueryString({
     baseURL,
@@ -220,6 +219,6 @@ test("baseURL contains a query string, all other fields included", () => {
   });
 
   expect(queryString).toBe(
-    "https://www.google.com?q=hello&page_size=10?page_token=nextPageToken&filter=filter=a&parent=parent"
+    "https://www.google.com?q=hello&page_size=10&page_token=nextPageToken&filter=filter=a"
   );
 });

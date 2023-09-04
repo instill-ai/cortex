@@ -13,7 +13,7 @@ export const getQueryString = ({
 }) => {
   let url = baseURL;
 
-  if (pageSize || nextPageToken || filter || parent) {
+  if (pageSize || nextPageToken || filter) {
     // Check if the baseURL already has a query string
     if (baseURL.includes("?")) {
       url += "&";
@@ -32,10 +32,6 @@ export const getQueryString = ({
 
   if (filter) {
     url += `filter=${filter}&`;
-  }
-
-  if (parent) {
-    url += `parent=${parent}&`;
   }
 
   // Remove the trailing '&' if there are any query parameters
