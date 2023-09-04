@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.47.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.46.1...@instill-ai/design-system-v0.47.0) (2023-08-31)
+
+
+### Features
+
+* **design-system:** add new twitter icon to design system ([#837](https://github.com/instill-ai/design-system/issues/837)) ([3bf4ad0](https://github.com/instill-ai/design-system/commit/3bf4ad098d2118c6a7dbf5c17914e873710a2fe3))
+
 ## [0.46.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.46.0...@instill-ai/design-system-v0.46.1) (2023-08-30)
 
 
