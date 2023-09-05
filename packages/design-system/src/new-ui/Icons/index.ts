@@ -11,6 +11,7 @@ import { BarChartSquare02 } from "./BarChartSquare02";
 import { Box } from "./Box";
 import { Check } from "./Check";
 import { Circle } from "./Circle";
+import { CodeBrowser } from "./CodeBrowser";
 import { CheckCircle } from "./CheckCircle";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronDownDouble } from "./ChevronDownDouble";
@@ -81,6 +82,7 @@ export const Icons = {
   Chip01,
   Chip02,
   Circle,
+  CodeBrowser,
   Cube01,
   CubeOutline,
   Database01,
