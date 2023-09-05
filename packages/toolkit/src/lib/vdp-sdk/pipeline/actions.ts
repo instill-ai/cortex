@@ -4,7 +4,7 @@ import { Operation } from "../operation";
 import { PipelineRelease, PipelineTriggerMetadata } from "./types";
 
 export type TriggerUserPipelinePayload = {
-  inputs: Record<string, any>;
+  inputs: Record<string, any>[];
 };
 
 export type TriggerUserPipelineResponse = {
@@ -12,7 +12,7 @@ export type TriggerUserPipelineResponse = {
   metadata: PipelineTriggerMetadata;
 };
 
-export async function TriggerUserPipelineAction({
+export async function triggerUserPipelineAction({
   pipelineName,
   payload,
   accessToken,
@@ -35,14 +35,14 @@ export async function TriggerUserPipelineAction({
 }
 
 export type TriggerAsyncUserPipelinePayload = {
-  inputs: Record<string, any>;
+  inputs: Record<string, any>[];
 };
 
 export type TriggerAsyncUserPipelineResponse = {
   operation: Operation;
 };
 
-export async function TriggerAsyncUserPipelineAction({
+export async function triggerAsyncUserPipelineAction({
   pipelineName,
   payload,
   accessToken,
@@ -115,7 +115,7 @@ export async function restoreUserPipelineReleaseMutation({
 }
 
 export type TriggerUserPipelineReleasePayload = {
-  inputs: Record<string, any>;
+  inputs: Record<string, any>[];
 };
 
 export type TriggerUserPipelineReleaseResponse = {
@@ -124,11 +124,11 @@ export type TriggerUserPipelineReleaseResponse = {
 };
 
 export async function triggerUserPipelineReleaseAction({
-  pipelineName,
+  pipelineReleaseName,
   payload,
   accessToken,
 }: {
-  pipelineName: string;
+  pipelineReleaseName: string;
   payload: TriggerUserPipelinePayload;
   accessToken: Nullable<string>;
 }) {
@@ -136,7 +136,7 @@ export async function triggerUserPipelineReleaseAction({
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<TriggerUserPipelineResponse>(
-      `/${pipelineName}/trigger`,
+      `/${pipelineReleaseName}/trigger`,
       payload
     );
     return Promise.resolve(data);
@@ -146,7 +146,7 @@ export async function triggerUserPipelineReleaseAction({
 }
 
 export type TriggerAsyncUserPipelineReleasePayload = {
-  inputs: Record<string, any>;
+  inputs: Record<string, any>[];
 };
 
 export type TriggerAsyncUserPipelineReleaseResponse = {
@@ -154,11 +154,11 @@ export type TriggerAsyncUserPipelineReleaseResponse = {
 };
 
 export async function triggerAsyncUserPipelineReleaseAction({
-  pipelineName,
+  pipelineReleaseName,
   payload,
   accessToken,
 }: {
-  pipelineName: string;
+  pipelineReleaseName: string;
   payload: TriggerAsyncUserPipelinePayload;
   accessToken: Nullable<string>;
 }) {
@@ -166,7 +166,7 @@ export async function triggerAsyncUserPipelineReleaseAction({
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<TriggerAsyncUserPipelineReleaseResponse>(
-      `/${pipelineName}/triggerAsync`,
+      `/${pipelineReleaseName}/triggerAsync`,
       payload
     );
     return Promise.resolve(data.operation);

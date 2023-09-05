@@ -2,22 +2,22 @@ import { useMutation } from "@tanstack/react-query";
 import { Nullable } from "../../type";
 import {
   type TriggerUserPipelinePayload,
-  triggerUserPipelineReleaseAction,
+  triggerUserPipelineAction,
 } from "../../vdp-sdk";
 
-export const useTriggerUserPipelineRelease = () => {
+export const useTriggerUserPipeline = () => {
   return useMutation(
     async ({
-      pipelineReleaseName,
+      pipelineName,
       payload,
       accessToken,
     }: {
-      pipelineReleaseName: string;
+      pipelineName: string;
       payload: TriggerUserPipelinePayload;
       accessToken: Nullable<string>;
     }) => {
-      const pipelineRelease = await triggerUserPipelineReleaseAction({
-        pipelineReleaseName,
+      const pipelineRelease = await triggerUserPipelineAction({
+        pipelineName,
         payload,
         accessToken,
       });
