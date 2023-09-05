@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.47.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.1...@instill-ai/design-system-v0.47.2) (2023-09-05)
+
+
+### Miscellaneous
+
+* add code browser icon ([#841](https://github.com/instill-ai/design-system/issues/841)) ([d0055bc](https://github.com/instill-ai/design-system/commit/d0055bcaeda405300b4824c9aa8abbc00abd4751))
+
 ## [0.47.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.0...@instill-ai/design-system-v0.47.1) (2023-09-04)
 
 
