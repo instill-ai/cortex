@@ -13,8 +13,8 @@ export const useUserConnectorResources = ({
   enabled,
   retry,
 }: {
-  userName: string;
-  connectorResourceType: Nullable<ConnectorResourceType>;
+  userName: Nullable<string>;
+  connectorResourceType: ConnectorResourceType | "all";
   accessToken: Nullable<string>;
   enabled: boolean;
   /**
@@ -23,27 +23,35 @@ export const useUserConnectorResources = ({
    */
   retry?: false | number;
 }) => {
+  let enableQuery = false;
+
+  if (userName && enabled) {
+    enableQuery = true;
+  }
+
   return useQuery(
-    [
-      "connector-resources",
-      connectorResourceType ? connectorResourceType : "all",
-    ],
+    ["connector-resources", connectorResourceType],
     async () => {
+      if (!userName) {
+        return Promise.reject(new Error("userName not provided"));
+      }
+
       const connectorResourcesWithDefinition =
         await listUserConnectorResourcesQuery({
           userName,
           pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
           nextPageToken: null,
           accessToken,
-          filter: connectorResourceType
-            ? `connector_type=${connectorResourceType}`
-            : null,
+          filter:
+            connectorResourceType !== "all"
+              ? `connector_type=${connectorResourceType}`
+              : null,
         });
 
       return Promise.resolve(connectorResourcesWithDefinition);
     },
     {
-      enabled,
+      enabled: enableQuery,
       retry: retry === false ? false : retry ? retry : 3,
     }
   );
