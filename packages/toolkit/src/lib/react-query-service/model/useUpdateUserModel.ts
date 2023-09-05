@@ -20,6 +20,7 @@ export const useUpdateUserModel = () => {
       onSuccess: async ({ model, accessToken }) => {
         await onSuccessAfterModelMutation({
           type: "update",
+          queryClient,
           model,
           accessToken,
         });

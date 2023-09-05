@@ -1,4 +1,4 @@
-import { useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 import {
   ConnectorResource,
   ConnectorResourceWatchState,
@@ -20,30 +20,35 @@ export type OnSuccessAfterConnectResourceMutationProps =
 
 export type OnSuccessAfterDeleteConnectResourceProps = {
   type: "delete";
+  queryClient: QueryClient;
   connectorResourceName: string;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterCreateConnectResourceProps = {
   type: "create";
+  queryClient: QueryClient;
   connectorResource: ConnectorResource;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterUpdateConnectResourceProps = {
   type: "update";
+  queryClient: QueryClient;
   connectorResource: ConnectorResource;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterConnectConnectResourceProps = {
   type: "connect";
+  queryClient: QueryClient;
   connectorResource: ConnectorResource;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterDisconnectConnectResourceProps = {
   type: "disconnect";
+  queryClient: QueryClient;
   connectorResource: ConnectorResource;
   accessToken: Nullable<string>;
 };
@@ -51,8 +56,7 @@ export type OnSuccessAfterDisconnectConnectResourceProps = {
 export async function onSuccessAfterConnectResourceMutation(
   props: OnSuccessAfterConnectResourceMutationProps
 ) {
-  const queryClient = useQueryClient();
-  const { type } = props;
+  const { type, queryClient } = props;
 
   if (type === "delete") {
     const connectorResource = await getUserConnectorResourceQuery({

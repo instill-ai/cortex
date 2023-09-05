@@ -6,7 +6,7 @@ import {
   ModelsWatchState,
   watchUserModel,
 } from "../../vdp-sdk";
-import { useQueryClient } from "@tanstack/react-query";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
 export type OnSuccessAfterModelMutationProps =
   | OnSuccessAfterDeleteModelProps
@@ -17,30 +17,35 @@ export type OnSuccessAfterModelMutationProps =
 
 export type OnSuccessAfterDeleteModelProps = {
   type: "delete";
+  queryClient: QueryClient;
   modelName: string;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterCreateModelProps = {
   type: "create";
+  queryClient: QueryClient;
   modelName: string;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterUpdateModelProps = {
   type: "update";
+  queryClient: QueryClient;
   model: Model;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterDeployModelProps = {
   type: "deploy";
+  queryClient: QueryClient;
   modelName: string;
   accessToken: Nullable<string>;
 };
 
 export type OnSuccessAfterUndeployModelProps = {
   type: "undeploy";
+  queryClient: QueryClient;
   modelName: string;
   accessToken: Nullable<string>;
 };
@@ -48,8 +53,7 @@ export type OnSuccessAfterUndeployModelProps = {
 export async function onSuccessAfterModelMutation(
   props: OnSuccessAfterModelMutationProps
 ) {
-  const queryClient = useQueryClient();
-  const { type } = props;
+  const { type, queryClient } = props;
 
   if (type === "update") {
     const { model, accessToken } = props;

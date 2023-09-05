@@ -1,9 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { deleteUserModelMutation } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 import { onSuccessAfterModelMutation } from "./onSuccessAfterModelMutation";
 
 export const useDeleteModel = () => {
+  const queryClient = useQueryClient();
   return useMutation(
     async ({
       modelName,
@@ -19,6 +20,7 @@ export const useDeleteModel = () => {
       onSuccess: async ({ modelName, accessToken }) => {
         await onSuccessAfterModelMutation({
           type: "create",
+          queryClient,
           modelName,
           accessToken,
         });

@@ -1,9 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { CreateUserModelPayload, createUserModelMutation } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 import { onSuccessAfterModelMutation } from "./onSuccessAfterModelMutation";
 
 export const useCreateUserModel = () => {
+  const queryClient = useQueryClient();
   return useMutation(
     async ({
       userName,
@@ -29,6 +30,7 @@ export const useCreateUserModel = () => {
       onSuccess: async ({ modelName, accessToken }) => {
         await onSuccessAfterModelMutation({
           type: "create",
+          queryClient,
           modelName,
           accessToken,
         });

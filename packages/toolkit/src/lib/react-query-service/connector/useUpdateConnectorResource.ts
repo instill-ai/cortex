@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   updateUserConnectorResourceMutation,
   UpdateUserConnectorResourcePayload,
@@ -7,6 +7,7 @@ import { Nullable } from "../../type";
 import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
 
 export const useUpdateUserConnectorResource = () => {
+  const queryClient = useQueryClient();
   return useMutation(
     async ({
       payload,
@@ -25,6 +26,7 @@ export const useUpdateUserConnectorResource = () => {
       onSuccess: async ({ connectorResource, accessToken }) => {
         await onSuccessAfterConnectResourceMutation({
           type: "update",
+          queryClient,
           connectorResource,
           accessToken,
         });

@@ -1,9 +1,10 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { connectUserConnectorResourceAction } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
 
 export const useConnectConnectorResource = () => {
+  const queryClient = useQueryClient();
   return useMutation(
     async ({
       connectorResourceName,
@@ -23,6 +24,7 @@ export const useConnectConnectorResource = () => {
       onSuccess: async ({ connectorResource, accessToken }) => {
         await onSuccessAfterConnectResourceMutation({
           type: "connect",
+          queryClient,
           connectorResource,
           accessToken,
         });
