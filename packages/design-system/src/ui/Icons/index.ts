@@ -151,6 +151,8 @@ import MongoDbAtalasIcon from "./MongoDbAtalasIcon";
 import type { MongoDbAtalasIconProps } from "./MongoDbAtalasIcon";
 import GoogleDriveIcon from "./GoogleDriveIcon";
 import type { GoogleDriveIconProps } from "./GoogleDriveIcon";
+import GoogleIcon from "./GoogleIcon";
+import type { GoogleIconProps } from "./GoogleIcon";
 import ImageClassificationIcon from "./ImageClassificationIcon";
 import type { ImageClassificationIconProps } from "./ImageClassificationIcon";
 import ObjectDetectionIcon from "./ObjectDetectionIcon";
@@ -258,6 +260,7 @@ export type {
   MongoDbAtalasIconProps,
   MinusIconProps,
   GoogleDriveIconProps,
+  GoogleIconProps,
   ImageClassificationIconProps,
   ImageToTextIconProps,
   ObjectDetectionIconProps,
@@ -356,6 +359,7 @@ export {
   AwsS3Icon,
   MongoDbAtalasIcon,
   GoogleDriveIcon,
+  GoogleIcon,
   ImageClassificationIcon,
   ObjectDetectionIcon,
   OnnxIcon,
