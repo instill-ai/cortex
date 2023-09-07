@@ -24,7 +24,7 @@ import {
   sendAmplitudeData,
   useAmplitudeCtx,
   useConnectConnectorResource,
-  useDeleteConnectorResource,
+  useDeleteUserConnectorResource,
   useDisonnectConnectorResource,
   useModalStore,
   useUpdateUserConnectorResource,
@@ -206,7 +206,7 @@ export const ConfigureBlockchainForm = (
     );
   }
 
-  const deleteBlockchain = useDeleteConnectorResource();
+  const deleteBlockchain = useDeleteUserConnectorResource();
   const handleDeleteBlockchain = React.useCallback(
     function () {
       if (!blockchain) return;

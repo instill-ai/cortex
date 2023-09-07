@@ -21,7 +21,7 @@ import {
   useBuildAirbyteYup,
   dot,
   useAirbyteSelectedConditionMap,
-  useDeleteConnectorResource,
+  useDeleteUserConnectorResource,
   useAmplitudeCtx,
   sendAmplitudeData,
   useModalStore,
@@ -332,7 +332,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   // # Handle delete data                                              #
   // ##########################################################################
 
-  const deleteDestination = useDeleteConnectorResource();
+  const deleteDestination = useDeleteUserConnectorResource();
   const handleDeleteDestination = React.useCallback(() => {
     if (!data) return;
 

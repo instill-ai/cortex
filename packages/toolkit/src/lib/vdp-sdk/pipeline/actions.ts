@@ -8,7 +8,7 @@ export type TriggerUserPipelinePayload = {
 };
 
 export type TriggerUserPipelineResponse = {
-  outputs: Record<string, any>;
+  outputs: Record<string, any>[];
   metadata: PipelineTriggerMetadata;
 };
 
@@ -119,7 +119,7 @@ export type TriggerUserPipelineReleasePayload = {
 };
 
 export type TriggerUserPipelineReleaseResponse = {
-  outputs: Record<string, any>;
+  outputs: Record<string, any>[];
   metadata: PipelineTriggerMetadata;
 };
 

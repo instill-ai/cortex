@@ -22,7 +22,7 @@ import {
   sendAmplitudeData,
   useAmplitudeCtx,
   useConnectConnectorResource,
-  useDeleteConnectorResource,
+  useDeleteUserConnectorResource,
   useDisonnectConnectorResource,
   useModalStore,
   type ConnectorResourceWithWatchState,
@@ -311,7 +311,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
     );
   }
 
-  const deleteConnectorResource = useDeleteConnectorResource();
+  const deleteUserConnectorResource = useDeleteUserConnectorResource();
   const handleDeleteAI = React.useCallback(() => {
     if (!ai) return;
 
@@ -324,7 +324,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
 
     closeModal();
 
-    deleteConnectorResource.mutate(
+    deleteUserConnectorResource.mutate(
       {
         connectorResourceName: ai.name,
         accessToken,
@@ -368,7 +368,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
   }, [
     ai,
     amplitudeIsInit,
-    deleteConnectorResource,
+    deleteUserConnectorResource,
     closeModal,
     onDelete,
     accessToken,

@@ -1,3 +1,4 @@
+import { OpenAPIV3 } from "openapi-types";
 import { ConnectorDefinition, ConnectorResource } from "../connector";
 import { Spec, Visibility } from "../types";
 
@@ -32,14 +33,28 @@ export type PipelineReleaseWatchState = {
   progress: number;
 };
 
-export type PipelineComponent = {
+export type PipelineComponent =
+  | PipelineOperatorComponent
+  | PipelineConnectorComponent;
+
+export type PipelineOperatorComponent = {
   id: string;
   resource_name: string;
   resource: ConnectorResource;
   configuration: Record<string, any>;
   definition_name: string;
   type: PipelineComponentType;
-  definition: OperatorDefinition | ConnectorDefinition;
+  operator_definition: OperatorDefinition;
+};
+
+export type PipelineConnectorComponent = {
+  id: string;
+  resource_name: string;
+  resource: ConnectorResource;
+  configuration: Record<string, any>;
+  definition_name: string;
+  type: PipelineComponentType;
+  connector_definition: ConnectorDefinition;
 };
 
 export type PipelineComponentType =
@@ -63,7 +78,7 @@ export type Pipeline = {
   create_time: string;
   update_time: string;
   recipe: PipelineRecipe;
-  openapi_schema: Record<string, any>;
+  openapi_schema: OpenAPIV3.Document;
   owner: string;
 };
 
@@ -90,7 +105,7 @@ export type PipelineRelease = {
   create_time: string;
   update_time: string;
   visibility: Visibility;
-  openapi_schema: Record<string, any>;
+  openapi_schema: OpenAPIV3.Document;
 };
 
 export type PipelineTrace = {

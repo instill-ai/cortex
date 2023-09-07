@@ -26,9 +26,7 @@ export async function createUserPipelineMutation({
 
     const { data } = await client.post<CreatePipelineResponse>(
       `${userName}/pipelines`,
-      {
-        payload,
-      }
+      payload
     );
     return Promise.resolve(data.pipeline);
   } catch (err) {

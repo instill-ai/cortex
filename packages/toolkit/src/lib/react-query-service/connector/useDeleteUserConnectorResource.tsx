@@ -4,7 +4,7 @@ import { Nullable } from "../../type";
 import { deleteUserConnectorResourceMutation } from "../../vdp-sdk";
 import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
 
-export const useDeleteConnectorResource = () => {
+export const useDeleteUserConnectorResource = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({
