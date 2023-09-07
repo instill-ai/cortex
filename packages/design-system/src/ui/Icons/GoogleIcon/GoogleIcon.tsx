@@ -1,23 +1,20 @@
 import React from "react";
 import IconBase, { IconBaseProps } from "../IconBase";
 
-export type GoogleIconProps = Omit<
-  IconBaseProps,
-  "viewBox" | "fill" | "color"
->;
+export type GoogleIconProps = Omit<IconBaseProps, "viewBox" | "fill" | "color">;
 
 const GoogleIcon: React.FC<GoogleIconProps> = (props) => {
   const { width, height, position, style } = props;
   return (
     <IconBase
-      viewBox="0 0 30 30"
+      viewBox="0 0 25 24"
       width={width}
       height={height}
       position={position}
       style={style}
       fill="none"
     >
-      <g clip-path="url(#clip0_239_142)">
+      <g>
         <path
           d="M24.266 12.2765C24.266 11.4608 24.1999 10.6406 24.0588 9.83813H12.74V14.4591H19.2217C18.9528 15.9495 18.0885 17.2679 16.823 18.1056V21.104H20.69C22.9608 19.014 24.266 15.9274 24.266 12.2765Z"
           fill="#4285F4"
