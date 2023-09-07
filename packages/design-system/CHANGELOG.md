@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.47.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.2...@instill-ai/design-system-v0.47.3) (2023-09-06)
+
+
+### Miscellaneous
+
+* **design-system:** add google icon ([#843](https://github.com/instill-ai/design-system/issues/843)) ([0710a2e](https://github.com/instill-ai/design-system/commit/0710a2e75a855a1f1bb064ab310a76ad6781da6f))
+
 ## [0.47.2](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.1...@instill-ai/design-system-v0.47.2) (2023-09-05)
 
 
