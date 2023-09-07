@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.47.4](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.3...@instill-ai/design-system-v0.47.4) (2023-09-07)
+
+
+### Bug Fixes
+
+* **design-system:** namananand/ins 1752 update google icon to design system ([#845](https://github.com/instill-ai/design-system/issues/845)) ([02a5feb](https://github.com/instill-ai/design-system/commit/02a5feb87ef2afcc7e896bbb6a5237242923c99a))
+
 ## [0.47.3](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.2...@instill-ai/design-system-v0.47.3) (2023-09-06)
 
 
