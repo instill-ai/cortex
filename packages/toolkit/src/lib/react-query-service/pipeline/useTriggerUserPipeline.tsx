@@ -11,15 +11,18 @@ export const useTriggerUserPipeline = () => {
       pipelineName,
       payload,
       accessToken,
+      returnTraces,
     }: {
       pipelineName: string;
       payload: TriggerUserPipelinePayload;
       accessToken: Nullable<string>;
+      returnTraces?: boolean;
     }) => {
       const pipelineRelease = await triggerUserPipelineAction({
         pipelineName,
         payload,
         accessToken,
+        returnTraces,
       });
       return Promise.resolve(pipelineRelease);
     }

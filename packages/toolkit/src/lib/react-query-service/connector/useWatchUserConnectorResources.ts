@@ -6,14 +6,12 @@ import {
 } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export function useWatchConnectorResources({
-  connectorResourceType,
+export function useWatchUserConnectorResources({
   connectorResourceNames,
   accessToken,
   enabled,
   retry,
 }: {
-  connectorResourceType: ConnectorResourceType;
   connectorResourceNames: Nullable<string[]>;
   accessToken: Nullable<string>;
   enabled: boolean;
@@ -30,7 +28,7 @@ export function useWatchConnectorResources({
   }
 
   return useQuery(
-    ["connector-resources", connectorResourceType, "watch"],
+    ["connector-resources", "watch"],
     async () => {
       if (!connectorResourceNames || connectorResourceNames.length === 0) {
         return Promise.reject(new Error("Invalid connector names"));

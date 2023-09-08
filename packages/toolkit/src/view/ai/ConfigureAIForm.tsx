@@ -23,7 +23,7 @@ import {
   useAmplitudeCtx,
   useConnectConnectorResource,
   useDeleteUserConnectorResource,
-  useDisonnectConnectorResource,
+  useDisonnectUserConnectorResource,
   useModalStore,
   type ConnectorResourceWithWatchState,
   type ModalStore,
@@ -414,7 +414,7 @@ export const ConfigureAIForm = (props: ConfigureAIFormProps) => {
   const [isConnecting, setIsConnecting] = React.useState(false);
 
   const connectAI = useConnectConnectorResource();
-  const disconnectAI = useDisonnectConnectorResource();
+  const disconnectAI = useDisonnectUserConnectorResource();
 
   const handleConnectAI = async function () {
     if (!ai) return;

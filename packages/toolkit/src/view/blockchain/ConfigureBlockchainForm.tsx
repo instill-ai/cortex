@@ -25,7 +25,7 @@ import {
   useAmplitudeCtx,
   useConnectConnectorResource,
   useDeleteUserConnectorResource,
-  useDisonnectConnectorResource,
+  useDisonnectUserConnectorResource,
   useModalStore,
   useUpdateUserConnectorResource,
   testUserConnectorResourceConnectionAction,
@@ -312,7 +312,7 @@ export const ConfigureBlockchainForm = (
   const [isConnecting, setIsConnecting] = React.useState(false);
 
   const connectBlockchain = useConnectConnectorResource();
-  const disconnectBlockchain = useDisonnectConnectorResource();
+  const disconnectBlockchain = useDisonnectUserConnectorResource();
 
   const handleConnectAI = async function () {
     if (!blockchain) return;

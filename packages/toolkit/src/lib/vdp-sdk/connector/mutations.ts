@@ -75,7 +75,10 @@ export async function updateUserConnectorResourceMutation({
 
     const res = await client.patch<UpdateUserConnectorResourceResponse>(
       `/${payload.connectorResourceName}`,
-      payload
+      {
+        ...payload,
+        connectorResourceName: undefined,
+      }
     );
     return Promise.resolve(res.data.connector_resource);
   } catch (err) {

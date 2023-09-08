@@ -3,7 +3,7 @@ import type { Nullable } from "../../type";
 import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
 import { disconnectUserConnectorResourceAction } from "../../vdp-sdk";
 
-export const useDisonnectConnectorResource = () => {
+export const useDisonnectUserConnectorResource = () => {
   const queryClient = useQueryClient();
   return useMutation(
     async ({

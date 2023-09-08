@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { Nullable } from "../../type";
-import { deleteUserConnectorResourceMutation } from "../../vdp-sdk";
+import {
+  ConnectorResourceWithDefinition,
+  deleteUserConnectorResourceMutation,
+} from "../../vdp-sdk";
 import { onSuccessAfterConnectResourceMutation } from "./onSuccessAfterConnectResourceMutation";
 
 export const useDeleteUserConnectorResource = () => {
@@ -14,18 +17,33 @@ export const useDeleteUserConnectorResource = () => {
       accessToken: Nullable<string>;
       connectorResourceName: string;
     }) => {
+      const connectorResource =
+        queryClient.getQueryData<ConnectorResourceWithDefinition>([
+          "connector-resources",
+          connectorResourceName,
+        ]);
+
       await deleteUserConnectorResourceMutation({
         connectorResourceName,
         accessToken,
       });
-      return Promise.resolve({ connectorResourceName, accessToken });
+      return Promise.resolve({
+        connectorResourceName,
+        connectorResource,
+        accessToken,
+      });
     },
     {
-      onSuccess: async ({ connectorResourceName, accessToken }) => {
+      onSuccess: async ({
+        connectorResourceName,
+        connectorResource,
+        accessToken,
+      }) => {
         await onSuccessAfterConnectResourceMutation({
           type: "delete",
           queryClient,
           connectorResourceName,
+          connectorResource,
           accessToken,
         });
       },

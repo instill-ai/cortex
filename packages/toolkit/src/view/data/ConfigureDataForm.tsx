@@ -28,7 +28,7 @@ import {
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
   useConnectConnectorResource,
-  useDisonnectConnectorResource,
+  useDisonnectUserConnectorResource,
   type AirbyteFieldErrors,
   type AirbyteFieldValues,
   type Nullable,
@@ -429,7 +429,7 @@ export const ConfigureDataForm = (props: ConfigureDataFormProps) => {
   const [isConnecting, setIsConnecting] = React.useState(false);
 
   const connectDestination = useConnectConnectorResource();
-  const disconnectDestination = useDisonnectConnectorResource();
+  const disconnectDestination = useDisonnectUserConnectorResource();
 
   const handleConnectAI = async function () {
     if (!data) return;
