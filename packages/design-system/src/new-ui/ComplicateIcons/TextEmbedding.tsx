@@ -47,4 +47,4 @@ export const TextEmbedding = React.forwardRef<
     </IconBase>
   );
 });
-TextEmbedding.displayName = "TextEmbedding";
+TextEmbedding.displayName = "TextEmbeddingIcon";

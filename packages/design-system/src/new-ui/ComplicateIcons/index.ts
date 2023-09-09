@@ -1,3 +1,4 @@
+import { Doc } from "./Doc";
 import { ImageToImage } from "./ImageToImage";
 import { ImageToText } from "./ImageToText";
 import { Number } from "./Number";
@@ -7,6 +8,7 @@ import { TextGeneration } from "./TextGeneration";
 import { TextToImage } from "./TextToImage";
 
 export const ComplicateIcons = {
+  Doc,
   ImageToImage,
   ImageToText,
   Number,

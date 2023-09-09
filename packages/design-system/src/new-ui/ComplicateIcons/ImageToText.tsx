@@ -27,4 +27,4 @@ export const ImageToText = React.forwardRef<
     </ComplicateIconBase>
   );
 });
-ImageToText.displayName = "ImageToText";
+ImageToText.displayName = "ImageToTextIcon";
