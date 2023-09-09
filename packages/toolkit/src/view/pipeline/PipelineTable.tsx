@@ -90,7 +90,7 @@ export const PipelineTable = (props: PipelineTableProps) => {
             </>
           ) : (
             <>
-              {sourceComponent[0] ? (
+              {sourceComponent[0] && sourceComponent[0].resource ? (
                 <ConnectionTypeCell
                   width={null}
                   connectorDefinition={
@@ -103,7 +103,7 @@ export const PipelineTable = (props: PipelineTableProps) => {
                 <TextCell text="Not set" width={null} padding="py-2" />
               )}
               <ModelsCell models={aiComponent} width={null} padding="py-2" />
-              {destinationComponent[0] ? (
+              {destinationComponent[0] && destinationComponent[0].resource ? (
                 <ConnectionTypeCell
                   width={null}
                   connectorDefinition={

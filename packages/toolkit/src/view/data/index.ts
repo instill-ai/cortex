@@ -1,1 +1,1 @@
-export * from "./ConfigureDataForm";
+export * from "./DataResourceForm";

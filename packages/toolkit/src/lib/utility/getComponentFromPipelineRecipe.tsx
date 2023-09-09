@@ -11,6 +11,6 @@ export function getComponentsFromPipelineRecipe(
   const { recipe, connectorResourceType } = props;
 
   return recipe.components.filter(
-    (e) => e.resource.type === connectorResourceType
+    (e) => e.resource?.type === connectorResourceType
   );
 }

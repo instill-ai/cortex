@@ -26,7 +26,7 @@ export const useUserPipelines = ({
   accessToken,
   retry,
 }: {
-  userName: string;
+  userName: Nullable<string>;
   enabled: boolean;
   accessToken: Nullable<string>;
   /**
@@ -35,14 +35,24 @@ export const useUserPipelines = ({
    */
   retry?: false | number;
 }) => {
+  let enableQuery = false;
+
+  if (userName && enabled) {
+    enableQuery = true;
+  }
+
   return useQuery(
     ["pipelines", userName],
     async () => {
+      if (!userName) {
+        return Promise.reject(new Error("userName not provided"));
+      }
+
       const pipelines = await fetchUserPipelines(userName, accessToken);
       return Promise.resolve(pipelines);
     },
     {
-      enabled,
+      enabled: enableQuery,
       retry: retry === false ? false : retry ? retry : 3,
     }
   );

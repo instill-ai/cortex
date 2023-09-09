@@ -1,6 +1,7 @@
 import { OpenAPIV3 } from "openapi-types";
 import { ConnectorDefinition, ConnectorResource } from "../connector";
 import { Spec, Visibility } from "../types";
+import { Nullable } from "../../type";
 
 export type PipelineMode = "MODE_UNSPECIFIED" | "MODE_SYNC" | "MODE_ASYNC";
 
@@ -31,30 +32,6 @@ export type RawPipelineComponent = {
 export type PipelineReleaseWatchState = {
   state: PipelineReleaseState;
   progress: number;
-};
-
-export type PipelineComponent =
-  | PipelineOperatorComponent
-  | PipelineConnectorComponent;
-
-export type PipelineOperatorComponent = {
-  id: string;
-  resource_name: string;
-  resource: ConnectorResource;
-  configuration: Record<string, any>;
-  definition_name: string;
-  type: PipelineComponentType;
-  operator_definition: OperatorDefinition;
-};
-
-export type PipelineConnectorComponent = {
-  id: string;
-  resource_name: string;
-  resource: ConnectorResource;
-  configuration: Record<string, any>;
-  definition_name: string;
-  type: PipelineComponentType;
-  connector_definition: ConnectorDefinition;
 };
 
 export type PipelineComponentType =
@@ -119,3 +96,65 @@ export type PipelineTrace = {
 export type PipelineTriggerMetadata = {
   traces: Record<string, PipelineTrace>;
 };
+
+export type PipelineStartComponent = {
+  id: "start";
+  resource_name: string;
+  resource: Nullable<ConnectorResource>;
+  type: PipelineComponentType;
+  definition_name: string;
+  operator_definition: Nullable<OperatorDefinition>;
+  configuration: Record<string, Record<string, StartOperatorInput>>;
+};
+
+export type PipelineEndComponent = {
+  id: "end";
+  resource_name: string;
+  resource: Nullable<ConnectorResource>;
+  type: PipelineComponentType;
+  definition_name: string;
+  operator_definition: Nullable<OperatorDefinition>;
+  configuration: Record<string, Record<string, any>>;
+};
+
+export type PipelineConnectorComponent = {
+  id: string;
+  resource_name: string;
+  resource: Nullable<ConnectorResource>;
+  type: PipelineComponentType;
+  definition_name: string;
+  connector_definition: Nullable<ConnectorDefinition>;
+  configuration: Record<string, any>;
+};
+
+export type PipelineComponent =
+  | PipelineStartComponent
+  | PipelineEndComponent
+  | PipelineConnectorComponent;
+
+export type StartOperatorBody = Record<string, StartOperatorInput>;
+
+export type StartOperatorInputBodyValue = Record<string, any>;
+
+export type StartOperatorInput = {
+  title: string;
+  type: StartOperatorInputType;
+};
+
+export type StartOperatorInputType =
+  | StartOperatorInputSingularType
+  | StartOperatorInputArrayType;
+
+export type StartOperatorInputSingularType =
+  | "text"
+  | "number"
+  | "boolean"
+  | "audio"
+  | "image";
+
+export type StartOperatorInputArrayType =
+  | "text_array"
+  | "number_array"
+  | "boolean_array"
+  | "audio_array"
+  | "image_array";

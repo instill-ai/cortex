@@ -4,7 +4,7 @@ import { StatefulToggleField } from "@instill-ai/design-system";
 import * as React from "react";
 import { UseMutationResult } from "@tanstack/react-query";
 
-import { Model, ModelState, Nullable, Operation } from "../../lib";
+import { Model, ModelState, Nullable } from "../../lib";
 
 export type ChangeModelStateToggleProps = {
   model: Nullable<Model>;

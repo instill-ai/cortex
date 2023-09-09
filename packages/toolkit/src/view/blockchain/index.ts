@@ -1,1 +1,2 @@
-export * from "./ConfigureBlockchainForm";
+export * from "./BlockchainForm";
+export * from "./BlockchainResourceForm";

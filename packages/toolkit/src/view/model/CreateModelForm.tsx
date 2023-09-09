@@ -514,7 +514,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
             });
 
             if (operationIsDone) {
-              const modelName = `models/${modelId.trim()}`;
+              const modelName = `${user.data.name}/models/${modelId.trim()}`;
               const modelState = await watchUserModel({
                 modelName,
                 accessToken,

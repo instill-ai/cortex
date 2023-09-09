@@ -1,1 +1,2 @@
-export * from "./ConfigureAIForm";
+export * from "./AIForm";
+export * from "./AIResourceForm";
