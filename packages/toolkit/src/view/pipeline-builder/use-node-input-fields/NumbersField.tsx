@@ -87,8 +87,6 @@ export const NumbersField = (props: {
                           newTextFieldArray.splice(idx, 1);
                           setNumberFieldsArray(newTextFieldArray);
 
-                          console.log(newNumberFieldsValue);
-
                           field.onChange(newNumberFieldsValue);
                         }}
                       >

@@ -42,6 +42,7 @@ export type DataResourceFormProps = {
   onSelectConnectorResource?: (
     connectorResource: ConnectorResourceWithDefinition
   ) => void;
+  enableQuery: boolean;
 } & BackButtonProps;
 
 type BackButtonProps =
@@ -61,12 +62,13 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
     onSelectConnectorResource,
     accessToken,
     enableBackButton,
+    enableQuery,
   } = props;
 
   const { toast } = useToast();
 
   const user = useUser({
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 

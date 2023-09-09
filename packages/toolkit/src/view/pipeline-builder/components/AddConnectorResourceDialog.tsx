@@ -23,6 +23,7 @@ type AddConnectorResourceDialogBaseProps = {
   onSelectConnectorResource: (
     connectorResource: ConnectorResourceWithDefinition
   ) => void;
+  enableQuery: boolean;
 };
 
 type AddConnectorResourceDialogAdditionalProps =
@@ -47,6 +48,7 @@ export const AddConnectorResourceDialog = (
     type,
     accessToken,
     onSelectConnectorResource,
+    enableQuery,
   } = props;
 
   const [newConnectorDefinition, setNewConnectorDefinition] =
@@ -55,32 +57,32 @@ export const AddConnectorResourceDialog = (
     React.useState<Nullable<ConnectorResourceType>>(null);
 
   const user = useUser({
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 
   const allConnectorResources = useUserConnectorResources({
     userName: user.isSuccess ? user.data.name : null,
     connectorResourceType: "all",
-    enabled: type === "inPipeline",
+    enabled: enableQuery && type === "inPipeline",
     accessToken,
   });
 
   const aiDefinitions = useConnectorDefinitions({
     connectorResourceType: "CONNECTOR_TYPE_AI",
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 
   const blockchainDefinitions = useConnectorDefinitions({
     connectorResourceType: "CONNECTOR_TYPE_BLOCKCHAIN",
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 
   const dataDefinitions = useConnectorDefinitions({
     connectorResourceType: "CONNECTOR_TYPE_DATA",
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 
@@ -129,6 +131,7 @@ export const AddConnectorResourceDialog = (
                   setNewConnectorDefinition(null);
                   setNewConnectorType(null);
                 }}
+                enableQuery={enableQuery}
               />
             ) : null}
             {newConnectorType === "CONNECTOR_TYPE_BLOCKCHAIN" &&
@@ -143,6 +146,7 @@ export const AddConnectorResourceDialog = (
                   setNewConnectorDefinition(null);
                   setNewConnectorType(null);
                 }}
+                enableQuery={enableQuery}
               />
             ) : null}
             {newConnectorType === "CONNECTOR_TYPE_DATA" &&
@@ -157,6 +161,7 @@ export const AddConnectorResourceDialog = (
                   setNewConnectorDefinition(null);
                   setNewConnectorType(null);
                 }}
+                enableQuery={enableQuery}
               />
             ) : null}
           </div>
@@ -226,28 +231,34 @@ export const AddConnectorResourceDialog = (
               </div>
               <div className="mb-4 grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
                 {aiDefinitions.isSuccess
-                  ? aiDefinitions.data.map((definition) => (
-                      <AddConnectorResourceDialogItem
-                        key={definition.id}
-                        onClick={() => {
-                          setNewConnectorDefinition(definition);
-                          setNewConnectorType("CONNECTOR_TYPE_AI");
-                        }}
-                      >
-                        <ImageWithFallback
-                          src={`/icons/${definition.vendor}/${definition.icon}`}
-                          width={32}
-                          height={32}
-                          alt={`${definition.title}-icon`}
-                          fallbackImg={
-                            <Icons.Box className="h-8 w-8 stroke-semantic-fg-primary" />
-                          }
-                        />
-                        <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
-                          {definition.title}
-                        </p>
-                      </AddConnectorResourceDialogItem>
-                    ))
+                  ? aiDefinitions.data
+                      .filter(
+                        (definition) =>
+                          definition.name !==
+                          "connector-definitions/ai-hugging-face"
+                      )
+                      .map((definition) => (
+                        <AddConnectorResourceDialogItem
+                          key={definition.id}
+                          onClick={() => {
+                            setNewConnectorDefinition(definition);
+                            setNewConnectorType("CONNECTOR_TYPE_AI");
+                          }}
+                        >
+                          <ImageWithFallback
+                            src={`/icons/${definition.vendor}/${definition.icon}`}
+                            width={32}
+                            height={32}
+                            alt={`${definition.title}-icon`}
+                            fallbackImg={
+                              <Icons.Box className="h-8 w-8 stroke-semantic-fg-primary" />
+                            }
+                          />
+                          <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
+                            {definition.title}
+                          </p>
+                        </AddConnectorResourceDialogItem>
+                      ))
                   : null}
               </div>
               <div className="mb-4 text-semantic-fg-secondary product-body-text-3-medium">

@@ -168,7 +168,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
       <div className="flex flex-col rounded-sm bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg">
         <div className="mb-4 flex flex-row gap-x-1">
           <p className="text-semantic-fg-secondary product-body-text-4-medium">
-            End
+            end
           </p>
         </div>
 
@@ -343,7 +343,6 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
         )}
       </div>
       <CustomHandle type="target" position={Position.Left} id={id} />
-      <CustomHandle type="source" position={Position.Right} id={id} />
     </>
   );
 };

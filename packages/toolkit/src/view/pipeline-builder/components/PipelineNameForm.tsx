@@ -30,6 +30,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
 
 export type PipelineNameFormProps = {
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 export const UpdatePipelineIdSchema = z.object({
@@ -37,13 +38,13 @@ export const UpdatePipelineIdSchema = z.object({
 });
 
 export const PipelineNameForm = (props: PipelineNameFormProps) => {
-  const { accessToken } = props;
+  const { accessToken, enableQuery } = props;
   const router = useRouter();
 
   const { toast } = useToast();
 
   const user = useUser({
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 

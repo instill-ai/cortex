@@ -75,7 +75,7 @@ export type FlowControlProps = {
  */
 
 export const FlowControl = (props: FlowControlProps) => {
-  const { accessToken, reactFlowInstance } = props;
+  const { accessToken, enableQuery, reactFlowInstance } = props;
   const {
     nodes,
     edges,
@@ -97,7 +97,7 @@ export const FlowControl = (props: FlowControlProps) => {
   const { toast } = useToast();
 
   const user = useUser({
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 
@@ -300,8 +300,6 @@ export const FlowControl = (props: FlowControlProps) => {
       )
       .replace(/\{input-array\}/g, inputsString);
 
-    console.log(snippet);
-
     return snippet;
   }, [nodes, user.data, user.isSuccess, pipelineId]);
 
@@ -376,6 +374,7 @@ export const FlowControl = (props: FlowControlProps) => {
       </div>
       <div className="absolute left-8 top-8 flex flex-row gap-x-4">
         <AddConnectorResourceDialog
+          enableQuery={enableQuery}
           open={selectResourceDialogIsOpen}
           onOpenChange={(open) => updateSelectResourceDialogIsOpen(() => open)}
           accessToken={accessToken}

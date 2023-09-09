@@ -38,8 +38,6 @@ export function useConnectorTestModeOutputFields(
       outputProperties = getPropertiesFromOpenAPISchema(outputSchema);
     }
 
-    console.log(outputProperties, traces);
-
     const trace = traces ? traces[component.id] : null;
 
     for (const property of outputProperties) {

@@ -60,6 +60,7 @@ export type BlockchainResourceFormProps = {
   onSelectConnectorResource?: (
     connectorResource: ConnectorResourceWithDefinition
   ) => void;
+  enableQuery: boolean;
 } & BackButtonProps;
 
 type BackButtonProps =
@@ -79,6 +80,7 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
     onSelectConnectorResource,
     accessToken,
     enableBackButton,
+    enableQuery,
   } = props;
 
   const form = useForm<z.infer<typeof BlockchainResourceFormSchema>>({
@@ -93,7 +95,7 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
   const { toast } = useToast();
 
   const user = useUser({
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 

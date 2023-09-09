@@ -76,6 +76,7 @@ export type AIResourceFormProps = {
   onSelectConnectorResource?: (
     connectorResource: ConnectorResourceWithDefinition
   ) => void;
+  enableQuery: boolean;
 } & BackButtonProps;
 
 type BackButtonProps =
@@ -95,6 +96,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
     enableBackButton,
     accessToken,
     onSelectConnectorResource,
+    enableQuery,
   } = props;
 
   const { toast } = useToast();
@@ -121,7 +123,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
   }, [aiResource, reset]);
 
   const user = useUser({
-    enabled: true,
+    enabled: enableQuery,
     accessToken,
   });
 

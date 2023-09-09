@@ -300,7 +300,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
       <div className="relative flex min-w-[246px] flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg">
         <div className="mb-4 flex flex-row gap-x-1">
           <p className="text-semantic-fg-secondary product-body-text-4-medium">
-            Start
+            start
           </p>
         </div>
 
@@ -584,7 +584,6 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
           </div>
         )}
       </div>
-      <CustomHandle type="target" position={Position.Left} id={id} />
       <CustomHandle type="source" position={Position.Right} id={id} />
     </>
   );

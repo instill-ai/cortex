@@ -16,8 +16,6 @@ export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
       structuredClone(node.data.component.configuration)
     );
 
-    console.log();
-
     if (node.data.nodeType === "start") {
       components.push({
         id: "start",

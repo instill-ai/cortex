@@ -50,7 +50,6 @@ export const DemoFileReader: StoryFn<typeof BasicUploadFileField> = () => {
 
   const onSubmitHandler = (event: React.FormEvent) => {
     event.preventDefault();
-    console.log(event);
   };
 
   return (

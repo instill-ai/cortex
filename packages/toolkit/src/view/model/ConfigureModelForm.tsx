@@ -17,11 +17,11 @@ import {
   useConfigureModelFormStore,
   useModalStore,
   getInstillApiErrorMessage,
+  useUpdateUserModel,
   type Model,
   type Nullable,
   type ConfigureModelFormStore,
   type ModalStore,
-  useUpdateUserModel,
 } from "../../lib";
 
 import { DeleteResourceModal } from "../../components";
