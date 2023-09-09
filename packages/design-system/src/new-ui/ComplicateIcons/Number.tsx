@@ -24,4 +24,4 @@ export const Number = React.forwardRef<
     </IconBase>
   );
 });
-Number.displayName = "Number";
+Number.displayName = "NumberIcon";

@@ -24,4 +24,4 @@ export const TextGeneration = React.forwardRef<
     </IconBase>
   );
 });
-TextGeneration.displayName = "TextGeneration";
+TextGeneration.displayName = "TextGenerationIcon";

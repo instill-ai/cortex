@@ -28,4 +28,4 @@ export const ImageToImage = React.forwardRef<
     </ComplicateIconBase>
   );
 });
-ImageToImage.displayName = "ImageToImage";
+ImageToImage.displayName = "ImageToImageIcon";

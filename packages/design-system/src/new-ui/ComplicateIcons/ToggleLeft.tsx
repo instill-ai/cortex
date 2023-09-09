@@ -24,4 +24,4 @@ export const ToggleLeft = React.forwardRef<
     </IconBase>
   );
 });
-ToggleLeft.displayName = "ToggleLeft";
+ToggleLeft.displayName = "ToggleLeftIcon";
