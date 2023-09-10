@@ -66,6 +66,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
       if (node.data.nodeType === "end") {
         if (prevFieldKey) {
           delete node.data.component.configuration.metadata[prevFieldKey];
+          delete node.data.component.configuration.input[prevFieldKey];
         }
 
         node.data = {
@@ -122,6 +123,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
     const newNodes = nodes.map((node) => {
       if (node.data.nodeType === "end") {
         delete node.data.component.configuration.metadata[key];
+        delete node.data.component.configuration.input[key];
 
         node.data = {
           ...node.data,
