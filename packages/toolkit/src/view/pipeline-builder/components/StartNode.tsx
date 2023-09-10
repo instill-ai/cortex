@@ -541,7 +541,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                       <div key={key} className="flex flex-col">
                         <div className="mb-2 flex flex-row items-center justify-between">
                           <div className="my-auto font-sans text-base font-semibold text-semantic-fg-primary">
-                            {value.title}
+                            {key}
                           </div>
                           <div className="my-auto flex flex-row gap-x-4">
                             <button

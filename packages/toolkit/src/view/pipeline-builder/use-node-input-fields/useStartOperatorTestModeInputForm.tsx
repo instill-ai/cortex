@@ -145,50 +145,32 @@ export function transformStartOperatorBodyToFields(
   for (const [key, input] of Object.entries(body)) {
     switch (input.type) {
       case "text":
-        fields.push(
-          <TextField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<TextField form={form} fieldKey={key} title={key} />);
         break;
       case "text_array": {
-        fields.push(
-          <TextsField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<TextsField form={form} fieldKey={key} title={key} />);
         break;
       }
       case "boolean":
-        fields.push(
-          <BooleanField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<BooleanField form={form} fieldKey={key} title={key} />);
         break;
       case "number":
-        fields.push(
-          <NumberField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<NumberField form={form} fieldKey={key} title={key} />);
         break;
       case "number_array":
-        fields.push(
-          <NumbersField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<NumbersField form={form} fieldKey={key} title={key} />);
         break;
       case "audio":
-        fields.push(
-          <AudioField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<AudioField form={form} fieldKey={key} title={key} />);
         break;
       case "audio_array":
-        fields.push(
-          <AudiosField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<AudiosField form={form} fieldKey={key} title={key} />);
         break;
       case "image":
-        fields.push(
-          <ImageField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<ImageField form={form} fieldKey={key} title={key} />);
         break;
       case "image_array":
-        fields.push(
-          <ImagesField form={form} fieldKey={key} title={input.title} />
-        );
+        fields.push(<ImagesField form={form} fieldKey={key} title={key} />);
         break;
       default:
         break;
