@@ -48,7 +48,7 @@ const AISchema = z
     // TASK_TEXT_GENERATION
     // TASK_TEXT_TO_IMAGE
 
-    model_id: z.string().nullable().optional(),
+    model_name: z.string().nullable().optional(),
 
     // TASK_CLASSIFICATION
     // TASK_INSTANCE_SEGMENTATION
@@ -59,7 +59,7 @@ const AISchema = z
     image_base64: z.string().nullable().optional(),
 
     // TASK_TEXT_GENERATION
-    // model_id
+    // model_name
     prompt: z.string().nullable().optional(),
     seed: z.string().nullable().optional(),
     output_len: z.string().nullable().optional(),
@@ -68,7 +68,7 @@ const AISchema = z
     top_k: z.string().nullable().optional(),
 
     // TASK_TEXT_TO_IMAGE
-    // model_id
+    // model_name
     // prompt
     cfg_scale: z.string().nullable().optional(),
     steps: z.string().nullable().optional(),
@@ -134,23 +134,23 @@ const AISchema = z
       state.connector_definition_name ===
       "connector-definitions/ai-instill-model"
     ) {
-      if (!state.model_id) {
+      if (!state.model_name) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Model ID is required",
-          path: ["model_id"],
+          path: ["model_name"],
         });
       } else {
         const result = validateIntillUpstreamTypes({
           type: "reference_and_string",
-          value: state.model_id,
+          value: state.model_name,
         });
 
         if (!result.isValid) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: result.error,
-            path: ["model_id"],
+            path: ["model_name"],
           });
         }
       }
@@ -1184,7 +1184,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="model_id"
+            name="model_name"
             render={({ field }) => {
               return (
                 <Form.Item
@@ -1195,7 +1195,7 @@ export const AIForm = (props: AIFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label>Model ID</Form.Label>
+                  <Form.Label>Model Name</Form.Label>
                   <Form.Control>
                     <Input.Root>
                       <Input.Core
