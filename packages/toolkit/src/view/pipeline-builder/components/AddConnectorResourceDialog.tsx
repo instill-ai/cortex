@@ -100,8 +100,8 @@ export const AddConnectorResourceDialog = (
           trigger
         ) : (
           <Button className="gap-x-2" variant="primary" size="lg">
-            Add resource
             <Icons.Plus className="h-4 w-4 stroke-semantic-bg-primary" />
+            Add resource
           </Button>
         )}
       </Dialog.Trigger>
