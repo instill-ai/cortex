@@ -23,10 +23,10 @@ export const DashboardPipelinesTable = (
   const columns: ColumnDef<TriggeredPipeline>[] = [
     {
       accessorKey: "pipeline_id",
-      header: () => <div className="min-w-[600px] text-left">Pipeline Id</div>,
+      header: () => <div className="min-w-[450px] text-left">Pipeline Id</div>,
       cell: ({ row }) => {
         return (
-          <div className="flex min-w-[600px] flex-row gap-x-2">
+          <div className="flex flex-row gap-x-2">
             <Checkbox
               checked={row.getIsSelected()}
               onCheckedChange={(value) => row.toggleSelected(!!value)}
@@ -66,7 +66,7 @@ export const DashboardPipelinesTable = (
       accessorKey: "trigger_count_completed",
       header: ({ column }) => {
         return (
-          <div className="min-w-[130px] text-center">
+          <div className="text-center">
             <Button
               className="gap-x-2 py-0"
               variant="tertiaryGrey"
@@ -83,7 +83,7 @@ export const DashboardPipelinesTable = (
       },
       cell: ({ row }) => {
         return (
-          <div className="text-center text-semantic-fg-secondary">
+          <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
             {row.getValue("trigger_count_completed")}
           </div>
         );
@@ -92,7 +92,7 @@ export const DashboardPipelinesTable = (
     {
       accessorKey: "trigger_count_errored",
       header: ({ column }) => (
-        <div className="min-w-[110px] text-center">
+        <div className="text-center">
           <Button
             className="gap-x-2 py-0"
             variant="tertiaryGrey"
@@ -106,7 +106,7 @@ export const DashboardPipelinesTable = (
       ),
       cell: ({ row }) => {
         return (
-          <div className="text-center text-semantic-fg-secondary">
+          <div className="truncate text-center text-semantic-fg-secondary product-body-text-3-regular">
             {row.getValue("trigger_count_errored")}
           </div>
         );
