@@ -193,7 +193,7 @@ export const FlowControl = (props: FlowControlProps) => {
       updatePipelineIsNew(() => false);
 
       toast({
-        title: "Successfully created the pipeline",
+        title: "Successfully saved the pipeline",
         variant: "alert-success",
         size: "small",
       });

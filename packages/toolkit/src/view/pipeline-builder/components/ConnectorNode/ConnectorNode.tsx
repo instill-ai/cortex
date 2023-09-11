@@ -65,7 +65,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const { toast } = useToast();
 
   const [enableEdit, setEnableEdit] = React.useState(false);
-  const [enableEditName, setEnableEditName] = React.useState(false);
   const connectorNameEditInputRef = React.useRef<HTMLInputElement>(null);
   const [prevFieldKey, setPrevFieldKey] =
     React.useState<Nullable<string>>(null);
@@ -135,7 +134,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
   function handleRenameNode(newNodeId: string) {
     if (newNodeId === id) {
-      setEnableEditName(false);
       return;
     }
 
@@ -182,8 +180,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
       variant: "alert-success",
       size: "small",
     });
-
-    setEnableEditName(false);
   }
 
   function onEditDataConnectorInput(key: string) {
@@ -315,7 +311,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 control={updateNodeIdForm.control}
                 name="nodeId"
                 render={({ field }) => {
-                  return enableEditName ? (
+                  return (
                     <input
                       {...field}
                       className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
@@ -323,7 +319,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                       value={field.value}
                       type="text"
                       autoComplete="off"
-                      disabled={!enableEditName}
+                      disabled={testModeEnabled}
                       onBlur={() => {
                         updateNodeIdForm.handleSubmit((data) => {
                           if (data.nodeId) {
@@ -347,27 +343,20 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                         }
                       }}
                     />
-                  ) : (
-                    <p className="p-1 text-semantic-fg-secondary product-body-text-4-medium">
-                      {field.value}
-                    </p>
                   );
                 }}
               />
             </form>
           </Form.Root>
-          {enableEditName ? null : (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                connectorNameEditInputRef.current?.focus();
-                setEnableEditName(true);
-              }}
-              type="button"
-            >
-              <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-secondary" />
-            </button>
-          )}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              connectorNameEditInputRef.current?.focus();
+            }}
+            type="button"
+          >
+            <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-secondary" />
+          </button>
         </div>
         {enableEdit ? (
           <Form.Root {...dataConnectorInputForm}>

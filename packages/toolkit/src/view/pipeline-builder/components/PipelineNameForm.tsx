@@ -13,19 +13,25 @@ import {
   usePipelineBuilderStore,
 } from "../usePipelineBuilderStore";
 import {
+  CreateUserPipelinePayload,
   Nullable,
   RenameUserPipelinePayload,
   getInstillApiErrorMessage,
+  useCreateUserPipeline,
   useRenameUserPipeline,
   useUser,
 } from "../../../lib";
+import { constructPipelineRecipe } from "../lib";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
   setPipelineId: state.setPipelineId,
+  setPipelineUid: state.setPipelineUid,
   setPipelineName: state.setPipelineName,
+  nodes: state.nodes,
   pipelineIsNew: state.pipelineIsNew,
   testModeEnabled: state.testModeEnabled,
+  updatePipelineIsNew: state.updatePipelineIsNew,
 });
 
 export type PipelineNameFormProps = {
@@ -48,6 +54,8 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     accessToken,
   });
 
+  const pipelineNameRef = React.useRef<HTMLInputElement>(null);
+
   const form = useForm<z.infer<typeof UpdatePipelineIdSchema>>({
     resolver: zodResolver(UpdatePipelineIdSchema),
     mode: "onBlur",
@@ -60,9 +68,12 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   const {
     pipelineId,
     setPipelineId,
+    setPipelineUid,
     setPipelineName,
     pipelineIsNew,
     testModeEnabled,
+    nodes,
+    updatePipelineIsNew,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   // Disable edit on the topbar
@@ -79,10 +90,58 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     });
   }, [pipelineId, form]);
 
+  const createUserPipeline = useCreateUserPipeline();
   const renameUserPipeline = useRenameUserPipeline();
 
   async function handleRenamePipeline(newId: string) {
-    if (!pipelineId || pipelineIsNew || !user.isSuccess) {
+    if (!pipelineId || !user.isSuccess) {
+      return;
+    }
+
+    if (pipelineIsNew) {
+      const payload: CreateUserPipelinePayload = {
+        id: newId,
+        recipe: constructPipelineRecipe(nodes),
+      };
+
+      try {
+        const res = await createUserPipeline.mutateAsync({
+          userName: user.data.name,
+          payload,
+          accessToken,
+        });
+
+        await router.push(`/pipelines/${newId}`, undefined, {
+          shallow: true,
+        });
+
+        setPipelineId(newId);
+        setPipelineUid(res.pipeline.uid);
+        setPipelineName(res.pipeline.name);
+        updatePipelineIsNew(() => false);
+
+        toast({
+          title: "Successfully saved the pipeline",
+          variant: "alert-success",
+          size: "small",
+        });
+      } catch (error) {
+        if (isAxiosError(error)) {
+          toast({
+            title: "Something went wrong when save the pipeline",
+            description: getInstillApiErrorMessage(error),
+            variant: "alert-error",
+            size: "large",
+          });
+        } else {
+          toast({
+            title: "Something went wrong when save the pipeline",
+            variant: "alert-error",
+            size: "large",
+          });
+        }
+      }
+
       return;
     }
 
@@ -147,33 +206,45 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
               name="pipelineId"
               render={({ field }) => {
                 return (
-                  <input
-                    className="w-[360px] bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:outline-none focus:ring-0"
-                    {...field}
-                    value={field.value ?? "Untitled Pipeline"}
-                    type="text"
-                    autoComplete="off"
-                    onBlur={() => {
-                      form.handleSubmit(async (data) => {
-                        if (data.pipelineId && isDirty) {
-                          await handleRenamePipeline(data.pipelineId);
-                        }
-                      })();
-                    }}
-                    onClick={(e) => e.stopPropagation()}
-                    disabled={testModeEnabled}
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        e.stopPropagation();
+                  <div className="flex flex-row gap-x-2">
+                    <input
+                      {...field}
+                      ref={pipelineNameRef}
+                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:outline-none focus:ring-0"
+                      value={field.value ?? "Untitled Pipeline"}
+                      type="text"
+                      autoComplete="off"
+                      onBlur={() => {
                         form.handleSubmit(async (data) => {
                           if (data.pipelineId && isDirty) {
                             await handleRenamePipeline(data.pipelineId);
                           }
                         })();
-                      }
-                    }}
-                  />
+                      }}
+                      onClick={(e) => e.stopPropagation()}
+                      disabled={testModeEnabled}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          form.handleSubmit(async (data) => {
+                            if (data.pipelineId && isDirty) {
+                              await handleRenamePipeline(data.pipelineId);
+                            }
+                          })();
+                        }
+                      }}
+                    />
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        pipelineNameRef.current?.focus();
+                      }}
+                      type="button"
+                    >
+                      <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-primary" />
+                    </button>
+                  </div>
                 );
               }}
             />
