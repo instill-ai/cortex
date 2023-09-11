@@ -217,6 +217,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
     setEnableEdit(false);
     setSelectedType(null);
     setPrevFieldKey(null);
+    setInputTypeIsArray(false);
     createStartOperatorInputform.reset({
       title: "",
       key: "",
@@ -318,6 +319,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                     setEnableEdit(!enableEdit);
                     setSelectedType(null);
                     createStartOperatorInputform.reset();
+                    setInputTypeIsArray(false);
                   }}
                 >
                   <Icons.ArrowLeft className="m-auto h-4 w-4 stroke-slate-500" />
@@ -332,27 +334,62 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                 <StartNodeInputType
                   type="text"
                   selectedType={selectedType}
-                  setSelectedType={setSelectedType}
+                  onSelect={() => {
+                    if (selectedType === "text") {
+                      setSelectedType(null);
+                    } else {
+                      setSelectedType("text");
+                    }
+                    setInputTypeIsArray(false);
+                  }}
                 />
                 <StartNodeInputType
                   type="number"
                   selectedType={selectedType}
-                  setSelectedType={setSelectedType}
+                  onSelect={() => {
+                    if (selectedType === "number") {
+                      setSelectedType(null);
+                    } else {
+                      setSelectedType("number");
+                    }
+                    setInputTypeIsArray(false);
+                  }}
                 />
                 <StartNodeInputType
                   type="image"
                   selectedType={selectedType}
-                  setSelectedType={setSelectedType}
+                  onSelect={() => {
+                    if (selectedType === "image") {
+                      setSelectedType(null);
+                    } else {
+                      setSelectedType("image");
+                    }
+                    setInputTypeIsArray(false);
+                  }}
                 />
                 <StartNodeInputType
                   type="audio"
                   selectedType={selectedType}
-                  setSelectedType={setSelectedType}
+                  onSelect={() => {
+                    if (selectedType === "audio") {
+                      setSelectedType(null);
+                    } else {
+                      setSelectedType("audio");
+                    }
+                    setInputTypeIsArray(false);
+                  }}
                 />
                 <StartNodeInputType
                   type="boolean"
                   selectedType={selectedType}
-                  setSelectedType={setSelectedType}
+                  onSelect={() => {
+                    if (selectedType === "boolean") {
+                      setSelectedType(null);
+                    } else {
+                      setSelectedType("boolean");
+                    }
+                    setInputTypeIsArray(false);
+                  }}
                 />
               </div>
               {["number", "image", "text", "audio"].includes(

@@ -6,15 +6,13 @@ import { Nullable, StartOperatorInputSingularType } from "../../../lib";
 export type StartNodeInputTypeProps = {
   type: StartOperatorInputSingularType;
   selectedType: Nullable<StartOperatorInputSingularType>;
-  setSelectedType: React.Dispatch<
-    React.SetStateAction<Nullable<StartOperatorInputSingularType>>
-  >;
+  onSelect: () => void;
 };
 
 export const StartNodeInputType = ({
   type,
   selectedType,
-  setSelectedType,
+  onSelect,
 }: StartNodeInputTypeProps) => {
   let icon: Nullable<React.ReactElement> = null;
   let label: Nullable<string> = null;
@@ -70,11 +68,7 @@ export const StartNodeInputType = ({
       onClick={() => {
         // We can't use checkbox because of this issue
         // https://github.com/radix-ui/primitives/issues/2291
-        if (type === selectedType) {
-          setSelectedType(null);
-        } else {
-          setSelectedType(type);
-        }
+        onSelect();
       }}
       className="group cursor-pointer flex w-[151px] flex-row gap-x-2 rounded-sm border border-semantic-bg-line bg-semantic-bg-primary px-4 py-3 hover:border-semantic-accent-default"
     >
