@@ -12,28 +12,161 @@ import { useEffect } from "react";
 import {
   extractReferencesFromConfiguration,
   composeEdgesFromReferences,
+  validateIntillUpstreamTypes,
 } from "../pipeline-builder/lib";
 import { GeneralRecord } from "../../lib";
 import { PipelineComponentReference } from "../pipeline-builder";
 
-export const BlockchainFormSchema = z.object({
-  images: z.string().nullable(),
-  asset_creator: z.string().nullable(),
-  abstract: z.string().nullable(),
-  custom: z
-    .object({
-      digital_source_type: z.string().nullable(),
-      mining_preference: z.string().nullable(),
-      generated_through: z.string().nullable(),
-      generated_by: z.string().nullable(),
-      creator_wallet: z.string().nullable(),
-      license: z.object({
-        name: z.string().nullable(),
-        document: z.string().nullable(),
-      }),
-    })
-    .nullable(),
-});
+export const BlockchainFormSchema = z
+  .object({
+    images: z.string().nullable().optional(),
+    asset_creator: z.string().nullable().optional(),
+    abstract: z.string().nullable().optional(),
+    custom: z
+      .object({
+        digital_source_type: z.string().nullable().optional(),
+        mining_preference: z.string().nullable().optional(),
+        generated_through: z.string().nullable().optional(),
+        generated_by: z.string().nullable().optional(),
+        creator_wallet: z.string().nullable().optional(),
+        license: z
+          .object({
+            name: z.string().nullable(),
+            document: z.string().nullable(),
+          })
+          .optional()
+          .nullable(),
+      })
+      .nullable()
+      .optional(),
+  })
+  .superRefine((state, ctx) => {
+    if (!state.images) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: "images is required",
+        path: ["images"],
+      });
+    } else {
+      const result = validateIntillUpstreamTypes({
+        type: "reference",
+        value: state.images,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["images"],
+        });
+      }
+    }
+
+    if (state.asset_creator) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.asset_creator,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["asset_creator"],
+        });
+      }
+    }
+
+    if (state.abstract) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.abstract,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["abstract"],
+        });
+      }
+    }
+
+    if (state.custom?.generated_through) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.custom?.generated_through,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["custom.generated_through"],
+        });
+      }
+    }
+
+    if (state.custom?.generated_by) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.custom?.generated_by,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["custom.generated_by"],
+        });
+      }
+    }
+
+    if (state.custom?.creator_wallet) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.custom?.creator_wallet,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["custom.creator_wallet"],
+        });
+      }
+    }
+
+    if (state.custom?.license?.name) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.custom?.license?.name,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["custom.license.name"],
+        });
+      }
+    }
+
+    if (state.custom?.license?.document) {
+      const result = validateIntillUpstreamTypes({
+        type: "reference_and_string",
+        value: state.custom?.license?.document,
+      });
+
+      if (!result.isValid) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: result.error,
+          path: ["custom.license.document"],
+        });
+      }
+    }
+  });
 
 export type BlockchainFormProps = {
   configuration: GeneralRecord;
@@ -136,6 +269,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       />
                     </Input.Root>
                   </Form.Control>
+                  <Form.Description>
+                    The images you want to upload to blockchain.
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
@@ -159,6 +295,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       />
                     </Input.Root>
                   </Form.Control>
+                  <Form.Description>
+                    Name of the asser creator.
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
@@ -182,6 +321,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       />
                     </Input.Root>
                   </Form.Control>
+                  <Form.Description>
+                    A summary or abstract of the asset.
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
@@ -247,7 +389,8 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                       </Select.Content>
                     </Select.Root>
                     <Form.Description>
-                      Select a blockchain connector type.
+                      Specify the type of the source. More details see
+                      https://docs.numbersprotocol.io/introduction/numbers-protocol/defining-web3-assets/assettree/digitalsourcetype.
                     </Form.Description>
                     <Form.Message />
                   </Form.Item>
@@ -325,6 +468,13 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         </Select.Item>
                       </Select.Content>
                     </Select.Root>
+                    <Form.Description>
+                      Designates the selection made by the asset creators or
+                      licensed owners to decide if the asset is suitable for
+                      inclusion in a data mining or AI/ML training workflow.
+                      More details see
+                      https://docs.numbersprotocol.io/introduction/numbers-protocol/defining-web3-assets/assettree/miningpreference.
+                    </Form.Description>
                     <Form.Message />
                   </Form.Item>
                 );
@@ -348,6 +498,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         />
                       </Input.Root>
                     </Form.Control>
+                    <Form.Description>
+                      URL of the service that is used to generate the content.
+                    </Form.Description>
                     <Form.Message />
                   </Form.Item>
                 );
@@ -371,6 +524,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         />
                       </Input.Root>
                     </Form.Control>
+                    <Form.Description>
+                      The AI model used to generate the content.
+                    </Form.Description>
                     <Form.Message />
                   </Form.Item>
                 );
@@ -394,6 +550,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         />
                       </Input.Root>
                     </Form.Control>
+                    <Form.Description>
+                      The Wallet address of the asset creator.
+                    </Form.Description>
                     <Form.Message />
                   </Form.Item>
                 );
@@ -421,6 +580,9 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                           />
                         </Input.Root>
                       </Form.Control>
+                      <Form.Description>
+                        License of the asset file.
+                      </Form.Description>
                       <Form.Message />
                     </Form.Item>
                   );
@@ -445,7 +607,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
                         </Input.Root>
                       </Form.Control>
                       <Form.Description>
-                        Url to the license document
+                        URL of the license file.
                       </Form.Description>
                       <Form.Message />
                     </Form.Item>
