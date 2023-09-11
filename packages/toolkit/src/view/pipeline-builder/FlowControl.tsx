@@ -424,7 +424,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
             const viewport = reactFlowInstance.getViewport();
 
-            const nodeId = `${nodePrefix}-${nodeIndex}`;
+            const nodeId = `${nodePrefix}_${nodeIndex}`;
 
             let componentType: Nullable<PipelineConnectorComponent["type"]> =
               null;

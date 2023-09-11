@@ -443,7 +443,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               </div>
             ) : null}
             {aiTaskNotSelected ? null : (
-              <div className="mb-1 product-body-text-4-medium">Inputs</div>
+              <div className="mb-1 product-body-text-4-medium">input</div>
             )}
             {inputProperties.length > 0 ? (
               <div className="mb-1 flex flex-col gap-y-1">
@@ -580,9 +580,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               )
             ) : null}
             {aiTaskNotSelected ? null : (
-              <div className="mb-1 product-body-text-4-medium">Outputs</div>
+              <div className="mb-1 product-body-text-4-medium">output</div>
             )}
-
             {outputProperties.length > 0 ? (
               <div className="mb-1 flex flex-col">
                 <div className="mb-1 flex flex-col gap-y-1">

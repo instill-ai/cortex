@@ -53,7 +53,7 @@ export function composeEdgesFromReferences(
 
     for (const inputProperty of inputProperties) {
       otherNodesAvailableReferences.push(
-        `${node.id}.${
+        `${node.id}.input.${
           inputProperty.path?.includes(".")
             ? inputProperty.path?.split(".").pop()
             : inputProperty.path
@@ -63,7 +63,7 @@ export function composeEdgesFromReferences(
 
     for (const outputProperty of outputProperties) {
       otherNodesAvailableReferences.push(
-        `${node.id}.${
+        `${node.id}.output.${
           outputProperty.path?.includes(".")
             ? outputProperty.path?.split(".").pop()
             : outputProperty.path
