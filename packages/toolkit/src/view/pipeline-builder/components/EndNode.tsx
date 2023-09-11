@@ -178,13 +178,17 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
           <Form.Root {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
               <div className="mb-3 flex flex-row justify-between">
-                <Icons.ArrowLeft
-                  className="my-auto h-5 w-5 stroke-slate-500"
+                <Button
+                  variant="tertiaryGrey"
+                  size="sm"
+                  className="!px-2 !py-2"
                   onClick={() => {
                     setEnableEdit(!enableEdit);
                     form.reset();
                   }}
-                />
+                >
+                  <Icons.ArrowLeft className="m-auto h-4 w-4 stroke-slate-500" />
+                </Button>
                 <div>
                   <Button variant="primary" type="submit" size="sm">
                     Save

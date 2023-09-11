@@ -34,6 +34,9 @@ export function useEndOperatorTestModeOutputFields(
       outputProperties = getPropertiesFromOpenAPISchema(outputSchema);
     }
 
+    // This component will only be displayed under test mode, and under test
+    // /view-only mode, we will display user defined title as title.
+
     for (const property of outputProperties) {
       let value: any = null;
       const title = property.title ? property.title : property.path ?? null;

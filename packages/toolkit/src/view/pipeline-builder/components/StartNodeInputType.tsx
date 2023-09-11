@@ -76,7 +76,7 @@ export const StartNodeInputType = ({
           setSelectedType(type);
         }
       }}
-      className="group flex w-[151px] flex-row gap-x-2 rounded-sm border border-semantic-bg-line bg-semantic-bg-primary px-4 py-3 hover:border-semantic-accent-default"
+      className="group cursor-pointer flex w-[151px] flex-row gap-x-2 rounded-sm border border-semantic-bg-line bg-semantic-bg-primary px-4 py-3 hover:border-semantic-accent-default"
     >
       <div
         className={cn(

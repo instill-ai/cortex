@@ -457,9 +457,9 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
             {inputProperties.length > 0 ? (
               <div className="mb-1 flex flex-col gap-y-1">
                 {collapsedInputProperties.map((property) => {
-                  const path = property.title
-                    ? property.title
-                    : property.path ?? null;
+                  const path = property.path
+                    ? property.path
+                    : property.title ?? null;
 
                   return (
                     <InputPropertyItem key={path} propertyPath={path}>

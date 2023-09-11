@@ -142,35 +142,56 @@ export function transformStartOperatorBodyToFields(
 
   if (!body) return fields;
 
+  // This component will only be displayed under test mode, and under test
+  // /view-only mode, we will display user defined title as title.
+
   for (const [key, input] of Object.entries(body)) {
     switch (input.type) {
       case "text":
-        fields.push(<TextField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <TextField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "text_array": {
-        fields.push(<TextsField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <TextsField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       }
       case "boolean":
-        fields.push(<BooleanField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <BooleanField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "number":
-        fields.push(<NumberField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <NumberField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "number_array":
-        fields.push(<NumbersField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <NumbersField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "audio":
-        fields.push(<AudioField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <AudioField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "audio_array":
-        fields.push(<AudiosField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <AudiosField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "image":
-        fields.push(<ImageField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <ImageField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       case "image_array":
-        fields.push(<ImagesField form={form} fieldKey={key} title={key} />);
+        fields.push(
+          <ImagesField form={form} fieldKey={key} title={input.title} />
+        );
         break;
       default:
         break;
