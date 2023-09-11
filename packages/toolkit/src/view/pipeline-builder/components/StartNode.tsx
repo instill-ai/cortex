@@ -318,7 +318,10 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                   onClick={() => {
                     setEnableEdit(!enableEdit);
                     setSelectedType(null);
-                    createStartOperatorInputform.reset();
+                    createStartOperatorInputform.reset({
+                      title: "",
+                      key: "",
+                    });
                     setInputTypeIsArray(false);
                   }}
                 >

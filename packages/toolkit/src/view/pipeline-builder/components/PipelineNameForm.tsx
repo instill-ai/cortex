@@ -167,7 +167,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
       });
 
       setPipelineId(newId);
-      setPipelineName(payload.name);
+      setPipelineName(`${user.data.name}/pipelines/${newId}`);
     } catch (error) {
       if (isAxiosError(error)) {
         toast({
