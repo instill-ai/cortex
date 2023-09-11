@@ -16,7 +16,7 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="break-words text-semantic-fg-primary product-body-text-4-regular"
+            className="break-all text-semantic-fg-primary product-body-text-4-regular"
           >
             {text}
           </div>
@@ -31,7 +31,7 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="flex border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular"
+            className="flex break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular"
           >
             {text}
           </div>

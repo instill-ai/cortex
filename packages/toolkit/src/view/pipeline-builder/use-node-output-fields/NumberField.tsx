@@ -13,7 +13,7 @@ export const NumberField = (props: NumberFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex break-words text-semantic-fg-primary product-body-text-4-regular">
+        <div className="flex break-all text-semantic-fg-primary product-body-text-4-regular">
           {number}
         </div>
       </ConnectorNodeFieldRoot>
@@ -25,7 +25,7 @@ export const NumberField = (props: NumberFieldProps) => {
       <p className="text-semantic-fg-primary product-body-text-3-semibold">
         {title}
       </p>
-      <div className="flex max-w-[200px] break-words border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
+      <div className="flex max-w-[200px] break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
         {number}
       </div>
     </div>

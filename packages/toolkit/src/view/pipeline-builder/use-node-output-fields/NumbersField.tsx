@@ -17,7 +17,7 @@ export const NumbersField = (props: NumbersFieldProps) => {
           {numbers?.map((number) => (
             <div
               key={`${title}-${number}-field`}
-              className="break-words text-semantic-fg-primary product-body-text-4-regular"
+              className="break-all text-semantic-fg-primary product-body-text-4-regular"
             >
               {number}
             </div>
@@ -33,7 +33,7 @@ export const NumbersField = (props: NumbersFieldProps) => {
         {numbers?.map((number) => (
           <div
             key={`${title}-${number}-field`}
-            className="flex border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular"
+            className="flex break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular"
           >
             {number}
           </div>
