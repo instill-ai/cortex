@@ -387,12 +387,44 @@ export const FlowControl = (props: FlowControlProps) => {
           onSelectConnectorResource={(connectorResource) => {
             if (!reactFlowInstance) return;
 
+            let nodePrefix: Nullable<string> = null;
+            let nodeIndex: number = 0;
+
+            switch (connectorResource.type) {
+              case "CONNECTOR_TYPE_AI": {
+                nodePrefix = "ai";
+                nodeIndex =
+                  nodes.filter(
+                    (e) =>
+                      e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_AI"
+                  ).length + 1;
+
+                break;
+              }
+              case "CONNECTOR_TYPE_BLOCKCHAIN": {
+                nodePrefix = "blockchain";
+                nodeIndex =
+                  nodes.filter(
+                    (e) =>
+                      e.data.component?.type ===
+                      "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN"
+                  ).length + 1;
+                break;
+              }
+              case "CONNECTOR_TYPE_DATA": {
+                nodePrefix = "data";
+                nodeIndex =
+                  nodes.filter(
+                    (e) =>
+                      e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_DATA"
+                  ).length + 1;
+                break;
+              }
+            }
+
             const viewport = reactFlowInstance.getViewport();
 
-            const randomName = uniqueNamesGenerator({
-              dictionaries: [adjectives, colors, animals],
-              separator: "-",
-            });
+            const nodeId = `${nodePrefix}-${nodeIndex}`;
 
             let componentType: Nullable<PipelineConnectorComponent["type"]> =
               null;
@@ -442,14 +474,14 @@ export const FlowControl = (props: FlowControlProps) => {
             if (!componentType) return;
 
             newNodes.push({
-              id: randomName,
+              id: nodeId,
               type: "connectorNode",
               sourcePosition: Position.Left,
               targetPosition: Position.Right,
               data: {
                 nodeType: "connector",
                 component: {
-                  id: randomName,
+                  id: nodeId,
                   resource_name: connectorResource.name,
                   resource: {
                     ...connectorResource,
@@ -472,12 +504,12 @@ export const FlowControl = (props: FlowControlProps) => {
                 {
                   id: uuidv4(),
                   source: "start",
-                  target: randomName,
+                  target: nodeId,
                   type: "customEdge",
                 },
                 {
                   id: uuidv4(),
-                  source: randomName,
+                  source: nodeId,
                   target: "end",
                   type: "customEdge",
                 },

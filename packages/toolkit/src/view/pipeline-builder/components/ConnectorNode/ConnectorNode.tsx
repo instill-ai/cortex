@@ -295,59 +295,61 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
         }}
         className="flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg"
       >
-        <div className="mb-2 flex flex-row gap-x-1">
-          <ImageWithFallback
-            src={`/icons/${data.component?.connector_definition?.vendor}/${data.component?.connector_definition?.icon}`}
-            width={16}
-            height={16}
-            alt={`${data.component?.connector_definition?.title}-icon`}
-            fallbackImg={
-              <Icons.Box className="my-auto h-4 w-4 stroke-semantic-fg-primary" />
-            }
-          />
-          <Form.Root {...updateNodeIdForm}>
-            <form className="my-auto flex">
-              <Form.Field
-                control={updateNodeIdForm.control}
-                name="nodeId"
-                render={({ field }) => {
-                  return (
-                    <input
-                      {...field}
-                      className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
-                      ref={connectorNameEditInputRef}
-                      value={field.value}
-                      type="text"
-                      autoComplete="off"
-                      disabled={testModeEnabled}
-                      onBlur={() => {
-                        updateNodeIdForm.handleSubmit((data) => {
-                          if (data.nodeId) {
-                            handleRenameNode(data.nodeId);
-                          }
-                        })();
-                      }}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                      }}
-                      onKeyDown={(e) => {
-                        // Disable enter key to prevent default form submit behavior
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          e.stopPropagation();
+        <div className="mb-2 flex flex-row justify-between">
+          <div className="flex flex-row gap-x-1">
+            <ImageWithFallback
+              src={`/icons/${data.component?.connector_definition?.vendor}/${data.component?.connector_definition?.icon}`}
+              width={16}
+              height={16}
+              alt={`${data.component?.connector_definition?.title}-icon`}
+              fallbackImg={
+                <Icons.Box className="my-auto h-4 w-4 stroke-semantic-fg-primary" />
+              }
+            />
+            <Form.Root {...updateNodeIdForm}>
+              <form className="my-auto flex">
+                <Form.Field
+                  control={updateNodeIdForm.control}
+                  name="nodeId"
+                  render={({ field }) => {
+                    return (
+                      <input
+                        {...field}
+                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
+                        ref={connectorNameEditInputRef}
+                        value={field.value}
+                        type="text"
+                        autoComplete="off"
+                        disabled={testModeEnabled}
+                        onBlur={() => {
                           updateNodeIdForm.handleSubmit((data) => {
                             if (data.nodeId) {
                               handleRenameNode(data.nodeId);
                             }
                           })();
-                        }
-                      }}
-                    />
-                  );
-                }}
-              />
-            </form>
-          </Form.Root>
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        onKeyDown={(e) => {
+                          // Disable enter key to prevent default form submit behavior
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            updateNodeIdForm.handleSubmit((data) => {
+                              if (data.nodeId) {
+                                handleRenameNode(data.nodeId);
+                              }
+                            })();
+                          }
+                        }}
+                      />
+                    );
+                  }}
+                />
+              </form>
+            </Form.Root>
+          </div>
           <button
             onClick={(e) => {
               e.stopPropagation();
