@@ -32,6 +32,7 @@ import { triggerPipelineSnippets } from "./components/triggerPipelineSnippets";
 import {
   CreateUserPipelinePayload,
   GeneralRecord,
+  InstillAppEnv,
   Nullable,
   PipelineConnectorComponent,
   UpdateUserPipelinePayload,
@@ -65,6 +66,7 @@ export type FlowControlProps = {
   accessToken: Nullable<string>;
   enableQuery: boolean;
   reactFlowInstance: Nullable<ReactFlowInstance>;
+  appEnv: InstillAppEnv;
 };
 
 /**
@@ -75,7 +77,7 @@ export type FlowControlProps = {
  */
 
 export const FlowControl = (props: FlowControlProps) => {
-  const { accessToken, enableQuery, reactFlowInstance } = props;
+  const { accessToken, enableQuery, reactFlowInstance, appEnv } = props;
   const {
     nodes,
     edges,
@@ -287,7 +289,10 @@ export const FlowControl = (props: FlowControlProps) => {
 
     const inputsString = JSON.stringify({ inputs: [input] }, null, "\t");
 
-    let snippet = triggerPipelineSnippets.cloud;
+    let snippet =
+      appEnv === "APP_ENV_CLOUD"
+        ? triggerPipelineSnippets.cloud
+        : triggerPipelineSnippets.core;
 
     snippet = snippet
       .replace(

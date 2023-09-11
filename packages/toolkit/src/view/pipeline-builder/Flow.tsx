@@ -21,7 +21,7 @@ import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
 } from "./usePipelineBuilderStore";
-import { Nullable } from "../../lib";
+import { InstillAppEnv, Nullable } from "../../lib";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
@@ -39,6 +39,7 @@ export type FlowProps = {
   accessToken: Nullable<string>;
   enableQuery: boolean;
   isLoading: boolean;
+  appEnv: InstillAppEnv;
 };
 
 const nodeTypes = {
@@ -59,6 +60,7 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
     accessToken,
     enableQuery,
     isLoading,
+    appEnv,
   } = props;
 
   const {
@@ -176,6 +178,7 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
         reactFlowInstance={reactFlowInstance}
         accessToken={accessToken}
         enableQuery={enableQuery}
+        appEnv={appEnv}
       />
     </div>
   );

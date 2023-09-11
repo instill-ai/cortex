@@ -21,3 +21,5 @@ export type GeneralUseFormReturn = UseFormReturn<
 >;
 
 export type GeneralRecord = Record<string, any>;
+
+export type InstillAppEnv = "APP_ENV_CORE" | "APP_ENV_CLOUD";
