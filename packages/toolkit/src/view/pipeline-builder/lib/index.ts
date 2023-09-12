@@ -11,7 +11,7 @@ export * from "./getBlockchainConnectorDefaultConfiguration";
 export * from "./getConnectorInputOutputSchema";
 export * from "./getPropertiesFromOpenAPISchema";
 export * from "./readFileToBinary";
-export * from "./recursiveParseToInt";
+export * from "./recursiveParseToNum";
 export * from "./recursiveRemoveUndefinedAndNullFromArray";
 export * from "./recursiveReplaceNullAndEmptyStringWithUndefined";
 export * from "./recursiveTransformToString";

@@ -1,6 +1,6 @@
 import { Node } from "reactflow";
 import { NodeData } from "../type";
-import { recursiveParseToInt } from "./recursiveParseToInt";
+import { recursiveParseToNum } from "./recursiveParseToNum";
 import { RawPipelineComponent } from "../../../lib";
 import { recursiveReplaceNullAndEmptyStringWithUndefined } from "./recursiveReplaceNullAndEmptyStringWithUndefined";
 
@@ -21,7 +21,7 @@ export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
         id: "start",
         resource_name: "",
         configuration: {
-          ...recursiveParseToInt(configuration),
+          ...recursiveParseToNum(configuration),
           connector_definition_name: undefined,
         },
         definition_name: node.data.component.definition_name,
@@ -34,7 +34,7 @@ export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
         id: "end",
         resource_name: "",
         configuration: {
-          ...recursiveParseToInt(configuration),
+          ...recursiveParseToNum(configuration),
           connector_definition_name: undefined,
         },
         definition_name: node.data.component.definition_name,
@@ -42,7 +42,7 @@ export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
       continue;
     }
 
-    const parsedIntConfiguration = recursiveParseToInt(configuration);
+    const parsedIntConfiguration = recursiveParseToNum(configuration);
 
     components.push({
       id: node.id,

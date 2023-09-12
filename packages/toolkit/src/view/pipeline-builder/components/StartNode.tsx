@@ -25,7 +25,7 @@ import {
 import {
   extractReferencesFromConfiguration,
   composeEdgesFromReferences,
-  recursiveParseToInt,
+  recursiveParseToNum,
   recursiveRemoveUndefinedAndNullFromArray,
   recursiveReplaceNullAndEmptyStringWithUndefined,
 } from "../lib";
@@ -99,7 +99,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
     if (!pipelineName) return;
 
     const input = recursiveRemoveUndefinedAndNullFromArray(
-      recursiveReplaceNullAndEmptyStringWithUndefined(recursiveParseToInt(data))
+      recursiveReplaceNullAndEmptyStringWithUndefined(recursiveParseToNum(data))
     );
 
     setIsTriggering(true);
