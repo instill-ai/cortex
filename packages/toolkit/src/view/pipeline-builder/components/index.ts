@@ -1,4 +1,5 @@
 export * from "./AddConnectorResourceDialog";
+export * from "./CopyToClipboardButton";
 export * from "./ConnectorNode/ConnectorNode";
 export * from "./CustomEdge";
 export * from "./CustomHandle";

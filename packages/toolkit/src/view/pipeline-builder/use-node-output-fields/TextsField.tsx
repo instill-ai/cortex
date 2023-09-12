@@ -1,4 +1,5 @@
 import { Nullable } from "../../../lib";
+import { CopyToClipboardButton } from "../components";
 import { ConnectorNodeFieldRoot, EndNodeFieldRoot } from "./FieldRoot";
 
 export type TextsFieldProps = {
@@ -16,9 +17,12 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="break-all text-semantic-fg-primary product-body-text-4-regular"
+            className="flex max-w-[246px] flex-row justify-between gap-x-2"
           >
-            {text}
+            <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
+              {text}
+            </div>
+            {text ? <CopyToClipboardButton text={text} /> : null}
           </div>
         ))}
       </div>
@@ -31,9 +35,12 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="flex break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular"
+            className="flex max-w-[246px] flex-row justify-between gap-x-2"
           >
-            {text}
+            <div className="flex flex-1 break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
+              {text}
+            </div>
+            {text ? <CopyToClipboardButton text={text} /> : null}
           </div>
         ))}
       </div>

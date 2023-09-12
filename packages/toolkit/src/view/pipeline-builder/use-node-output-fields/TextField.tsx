@@ -1,4 +1,5 @@
 import { Nullable } from "../../../lib";
+import { CopyToClipboardButton } from "../components";
 import { ConnectorNodeFieldRoot, EndNodeFieldRoot } from "./FieldRoot";
 
 export type TextFieldProps = {
@@ -13,8 +14,11 @@ export const TextField = (props: TextFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex break-all text-semantic-fg-primary product-body-text-4-regular">
-          {text}
+        <div className="flex max-w-[246px] flex-row justify-between gap-x-2">
+          <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
+            {text}
+          </div>
+          {text ? <CopyToClipboardButton text={text} /> : null}
         </div>
       </ConnectorNodeFieldRoot>
     );
@@ -22,8 +26,11 @@ export const TextField = (props: TextFieldProps) => {
 
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
-      <div className="flex max-w-[200px] break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
-        {text}
+      <div className="flex max-w-[246px] flex-row justify-between gap-x-2">
+        <div className="flex flex-1 break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
+          {text}
+        </div>
+        {text ? <CopyToClipboardButton text={text} /> : null}
       </div>
     </EndNodeFieldRoot>
   );
