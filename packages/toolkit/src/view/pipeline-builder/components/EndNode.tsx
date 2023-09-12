@@ -41,6 +41,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeEnabled: state.testModeEnabled,
   testModeTriggerResponse: state.testModeTriggerResponse,
   pipelineOpenAPISchema: state.pipelineOpenAPISchema,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
@@ -55,6 +56,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
     testModeEnabled,
     testModeTriggerResponse,
     pipelineOpenAPISchema,
+    updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const form = useForm<z.infer<typeof CreateEndOperatorInputSchema>>({
@@ -109,6 +111,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
 
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
     updateEdges(() => newEdges);
+    updatePipelineRecipeIsDirty(() => true);
 
     setEnableEdit(false);
     setPrevFieldKey(null);
@@ -149,6 +152,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
 
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
     updateEdges(() => newEdges);
+    updatePipelineRecipeIsDirty(() => true);
   }
 
   function onEditField(key: string) {

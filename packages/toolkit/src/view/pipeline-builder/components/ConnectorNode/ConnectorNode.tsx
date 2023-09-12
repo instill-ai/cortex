@@ -40,6 +40,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateEdges: state.updateEdges,
   testModeEnabled: state.testModeEnabled,
   testModeTriggerResponse: state.testModeTriggerResponse,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export const DataConnectorInputSchema = z.object({
@@ -60,6 +61,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     updateEdges,
     testModeEnabled,
     testModeTriggerResponse,
+    updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -180,6 +182,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
       variant: "alert-success",
       size: "small",
     });
+
+    updatePipelineRecipeIsDirty(() => true);
   }
 
   function onEditDataConnectorInput(key: string) {
@@ -233,6 +237,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
     updateEdges(() => newEdges);
+
+    updatePipelineRecipeIsDirty(() => true);
 
     setEnableEdit(false);
     setPrevFieldKey(null);

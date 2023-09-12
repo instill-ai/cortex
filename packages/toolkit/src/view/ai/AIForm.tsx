@@ -878,13 +878,19 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   selectedConnectorNodeId: state.selectedConnectorNodeId,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export const AIForm = (props: AIFormProps) => {
   const { configuration, disabledAll, connectorDefinitionName } = props;
 
-  const { nodes, updateNodes, updateEdges, selectedConnectorNodeId } =
-    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const {
+    nodes,
+    updateNodes,
+    updateEdges,
+    selectedConnectorNodeId,
+    updatePipelineRecipeIsDirty,
+  } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const form = useForm<z.infer<typeof AISchema>>({
     resolver: zodResolver(AISchema),
@@ -945,6 +951,8 @@ export const AIForm = (props: AIFormProps) => {
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
 
     updateEdges(() => newEdges);
+
+    updatePipelineRecipeIsDirty(() => true);
   }
 
   return (

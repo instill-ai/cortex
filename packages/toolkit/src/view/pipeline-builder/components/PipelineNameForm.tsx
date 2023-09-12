@@ -32,6 +32,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineIsNew: state.pipelineIsNew,
   testModeEnabled: state.testModeEnabled,
   updatePipelineIsNew: state.updatePipelineIsNew,
+  pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
 });
 
 export type PipelineNameFormProps = {
@@ -74,6 +75,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     testModeEnabled,
     nodes,
     updatePipelineIsNew,
+    pipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   // Disable edit on the topbar
@@ -250,6 +252,9 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
             />
           </form>
         </Form.Root>
+        {pipelineRecipeIsDirty ? (
+          <p className="my-auto product-body-text-4-regular text-semantic-fg-disabled">{`(unsaved)`}</p>
+        ) : null}
       </div>
     </div>
   );

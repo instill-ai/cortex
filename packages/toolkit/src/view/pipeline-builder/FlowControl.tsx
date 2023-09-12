@@ -2,12 +2,6 @@ import * as React from "react";
 import { isAxiosError } from "axios";
 import { shallow } from "zustand/shallow";
 import { v4 as uuidv4 } from "uuid";
-import {
-  uniqueNamesGenerator,
-  adjectives,
-  colors,
-  animals,
-} from "unique-names-generator";
 
 import { Button, Icons, useToast } from "@instill-ai/design-system";
 
@@ -50,6 +44,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
   pipelineDescription: state.pipelineDescription,
   setPipelineUid: state.setPipelineUid,
+  pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
@@ -86,6 +81,7 @@ export const FlowControl = (props: FlowControlProps) => {
     setPipelineUid,
     updateNodes,
     updateEdges,
+    pipelineRecipeIsDirty,
     updatePipelineRecipeIsDirty,
     updatePipelineIsNew,
     pipelineIsNew,
@@ -317,6 +313,7 @@ export const FlowControl = (props: FlowControlProps) => {
           variant="secondaryGrey"
           size="lg"
           type="button"
+          disabled={pipelineRecipeIsDirty ? false : true}
         >
           Save
           {isSaving ? (
@@ -515,6 +512,8 @@ export const FlowControl = (props: FlowControlProps) => {
                 },
               ]
             );
+
+            updatePipelineRecipeIsDirty(() => true);
 
             createGraphLayout(newNodes, newEdges)
               .then((graphData) => {

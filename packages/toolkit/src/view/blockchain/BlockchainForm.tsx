@@ -178,13 +178,19 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   selectedConnectorNodeId: state.selectedConnectorNodeId,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export const BlockchainForm = (props: BlockchainFormProps) => {
   const { disabledAll, configuration } = props;
 
-  const { nodes, updateNodes, updateEdges, selectedConnectorNodeId } =
-    usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const {
+    nodes,
+    updateNodes,
+    updateEdges,
+    selectedConnectorNodeId,
+    updatePipelineRecipeIsDirty,
+  } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const form = useForm<z.infer<typeof BlockchainFormSchema>>({
     resolver: zodResolver(BlockchainFormSchema),
@@ -245,6 +251,8 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
 
     updateEdges(() => newEdges);
+
+    updatePipelineRecipeIsDirty(() => true);
   }
 
   return (

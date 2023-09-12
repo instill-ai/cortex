@@ -54,6 +54,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeEnabled: state.testModeEnabled,
   updateTestModeTriggerResponse: state.updateTestModeTriggerResponse,
   accessToken: state.accessToken,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
@@ -73,6 +74,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
     testModeEnabled,
     updateTestModeTriggerResponse,
     accessToken,
+    updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -218,6 +220,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
     setSelectedType(null);
     setPrevFieldKey(null);
     setInputTypeIsArray(false);
+    updatePipelineRecipeIsDirty(() => true);
     createStartOperatorInputform.reset({
       title: "",
       key: "",
@@ -253,6 +256,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
 
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
     updateEdges(() => newEdges);
+    updatePipelineRecipeIsDirty(() => true);
   };
 
   const onEditField = (key: string) => {
