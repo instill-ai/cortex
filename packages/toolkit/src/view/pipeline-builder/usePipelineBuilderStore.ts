@@ -12,6 +12,7 @@ import {
   applyEdgeChanges,
   applyNodeChanges,
 } from "reactflow";
+import { subscribeWithSelector } from "zustand/middleware";
 
 import { NodeData } from "./type";
 import { devtools } from "zustand/middleware";
@@ -97,153 +98,157 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
-  devtools((set, get) => ({
-    ...pipelineBuilderInitialState,
-    init: () => set(() => pipelineBuilderInitialState),
-    setPipelineId: (pipelineId: Nullable<string>) =>
-      set((state) => {
-        return { ...state, pipelineId };
-      }),
-    setPipelineUid: (pipelineUid: Nullable<string>) =>
-      set((state) => {
-        return { ...state, pipelineUid };
-      }),
-    setPipelineName: (pipelineName: Nullable<string>) =>
-      set((state) => {
-        return { ...state, pipelineName };
-      }),
-    setPipelineDescription: (pipelineDescription: Nullable<string>) =>
-      set((state) => {
-        return { ...state, pipelineDescription };
-      }),
-    updateRightPanelIsOpenRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return { ...state, rightPanelIsOpen: fn(state.rightPanelIsOpen) };
-      }),
-    updateNodes: (fn: (prev: Node<NodeData>[]) => Node<NodeData>[]) =>
-      set((state) => {
-        return {
-          ...state,
-          nodes: fn(state.nodes),
-        };
-      }),
-    updateEdges: (fn: (prev: Edge[]) => Edge[]) =>
-      set((state) => {
-        return {
-          ...state,
-          edges: fn(state.edges),
-        };
-      }),
-    onNodesChange: (changes: NodeChange[]) => {
-      set({
-        nodes: applyNodeChanges(changes, get().nodes),
-      });
-    },
-    onEdgesChange: (changes: EdgeChange[]) => {
-      set({
-        edges: applyEdgeChanges(changes, get().edges),
-      });
-    },
-    onConnect: (connection: Connection) => {
-      set({
-        edges: addEdge(
-          { ...connection, animated: false, type: "customEdge" },
-          get().edges
-        ),
-      });
-    },
-    updatePipelineRecipeIsDirty: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          pipelineRecipeIsDirty: fn(state.pipelineRecipeIsDirty),
-        };
-      }),
-    updatePipelineIsNew: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          pipelineIsNew: fn(state.pipelineIsNew),
-        };
-      }),
-    updateIsSavingPipeline: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          isSavingPipeline: fn(state.isSavingPipeline),
-        };
-      }),
-    updateRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          rightPanelIsOpen: fn(state.rightPanelIsOpen),
-        };
-      }),
-    updateSelectedConnectorNodeId: (
-      fn: (prev: Nullable<string>) => Nullable<string>
-    ) =>
-      set((state) => {
-        return {
-          ...state,
-          selectedConnectorNodeId: fn(state.selectedConnectorNodeId),
-        };
-      }),
-    updateConnectorFormIsDirty: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          connectorFormIsDirty: fn(state.connectorFormIsDirty),
-        };
-      }),
-    updateSelectResourceDialogIsOpen: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          selectResourceDialogIsOpen: fn(state.selectResourceDialogIsOpen),
-        };
-      }),
-    updateExpandAllNodes: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          expandAllNodes: fn(state.expandAllNodes),
-        };
-      }),
-    updateTestModeEnabled: (fn: (prev: boolean) => boolean) =>
-      set((state) => {
-        return {
-          ...state,
-          testModeEnabled: fn(state.testModeEnabled),
-        };
-      }),
-    updateTestModeTriggerResponse: (
-      fn: (
-        prev: Nullable<TriggerUserPipelineResponse>
-      ) => Nullable<TriggerUserPipelineResponse>
-    ) =>
-      set((state) => {
-        return {
-          ...state,
-          testModeTriggerResponse: fn(state.testModeTriggerResponse),
-        };
-      }),
+  subscribeWithSelector(
+    devtools((set, get) => ({
+      ...pipelineBuilderInitialState,
+      init: () => set(() => pipelineBuilderInitialState),
+      setPipelineId: (pipelineId: Nullable<string>) =>
+        set((state) => {
+          return { ...state, pipelineId };
+        }),
+      setPipelineUid: (pipelineUid: Nullable<string>) =>
+        set((state) => {
+          return { ...state, pipelineUid };
+        }),
+      setPipelineName: (pipelineName: Nullable<string>) =>
+        set((state) => {
+          return { ...state, pipelineName };
+        }),
+      setPipelineDescription: (pipelineDescription: Nullable<string>) =>
+        set((state) => {
+          return { ...state, pipelineDescription };
+        }),
+      updateRightPanelIsOpenRightPanelIsOpen: (
+        fn: (prev: boolean) => boolean
+      ) =>
+        set((state) => {
+          return { ...state, rightPanelIsOpen: fn(state.rightPanelIsOpen) };
+        }),
+      updateNodes: (fn: (prev: Node<NodeData>[]) => Node<NodeData>[]) =>
+        set((state) => {
+          return {
+            ...state,
+            nodes: fn(state.nodes),
+          };
+        }),
+      updateEdges: (fn: (prev: Edge[]) => Edge[]) =>
+        set((state) => {
+          return {
+            ...state,
+            edges: fn(state.edges),
+          };
+        }),
+      onNodesChange: (changes: NodeChange[]) => {
+        set({
+          nodes: applyNodeChanges(changes, get().nodes),
+        });
+      },
+      onEdgesChange: (changes: EdgeChange[]) => {
+        set({
+          edges: applyEdgeChanges(changes, get().edges),
+        });
+      },
+      onConnect: (connection: Connection) => {
+        set({
+          edges: addEdge(
+            { ...connection, animated: false, type: "customEdge" },
+            get().edges
+          ),
+        });
+      },
+      updatePipelineRecipeIsDirty: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            pipelineRecipeIsDirty: fn(state.pipelineRecipeIsDirty),
+          };
+        }),
+      updatePipelineIsNew: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            pipelineIsNew: fn(state.pipelineIsNew),
+          };
+        }),
+      updateIsSavingPipeline: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            isSavingPipeline: fn(state.isSavingPipeline),
+          };
+        }),
+      updateRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            rightPanelIsOpen: fn(state.rightPanelIsOpen),
+          };
+        }),
+      updateSelectedConnectorNodeId: (
+        fn: (prev: Nullable<string>) => Nullable<string>
+      ) =>
+        set((state) => {
+          return {
+            ...state,
+            selectedConnectorNodeId: fn(state.selectedConnectorNodeId),
+          };
+        }),
+      updateConnectorFormIsDirty: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            connectorFormIsDirty: fn(state.connectorFormIsDirty),
+          };
+        }),
+      updateSelectResourceDialogIsOpen: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            selectResourceDialogIsOpen: fn(state.selectResourceDialogIsOpen),
+          };
+        }),
+      updateExpandAllNodes: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            expandAllNodes: fn(state.expandAllNodes),
+          };
+        }),
+      updateTestModeEnabled: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            testModeEnabled: fn(state.testModeEnabled),
+          };
+        }),
+      updateTestModeTriggerResponse: (
+        fn: (
+          prev: Nullable<TriggerUserPipelineResponse>
+        ) => Nullable<TriggerUserPipelineResponse>
+      ) =>
+        set((state) => {
+          return {
+            ...state,
+            testModeTriggerResponse: fn(state.testModeTriggerResponse),
+          };
+        }),
 
-    updatePipelineOpenAPISchema: (
-      fn: (prev: Nullable<OpenAPIV3.Document>) => Nullable<OpenAPIV3.Document>
-    ) =>
-      set((state) => {
-        return {
-          ...state,
-          pipelineOpenAPISchema: fn(state.pipelineOpenAPISchema),
-        };
-      }),
-    updateAccessToken: (fn: (prev: Nullable<string>) => Nullable<string>) =>
-      set((state) => {
-        return {
-          ...state,
-          accessToken: fn(state.accessToken),
-        };
-      }),
-  }))
+      updatePipelineOpenAPISchema: (
+        fn: (prev: Nullable<OpenAPIV3.Document>) => Nullable<OpenAPIV3.Document>
+      ) =>
+        set((state) => {
+          return {
+            ...state,
+            pipelineOpenAPISchema: fn(state.pipelineOpenAPISchema),
+          };
+        }),
+      updateAccessToken: (fn: (prev: Nullable<string>) => Nullable<string>) =>
+        set((state) => {
+          return {
+            ...state,
+            accessToken: fn(state.accessToken),
+          };
+        }),
+    }))
+  )
 );

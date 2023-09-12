@@ -893,7 +893,7 @@ export const AIForm = (props: AIFormProps) => {
     },
   });
 
-  const { reset } = form;
+  const { reset, watch } = form;
 
   React.useEffect(() => {
     reset({
@@ -1157,8 +1157,8 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-instill-model" &&
-                form.watch("task") !== "TASK_TEXT_GENERATION" &&
-                form.watch("task") !== "TASK_TEXT_TO_IMAGE";
+                watch("task") !== "TASK_TEXT_GENERATION" &&
+                watch("task") !== "TASK_TEXT_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1222,18 +1222,18 @@ export const AIForm = (props: AIFormProps) => {
               switch (connectorDefinitionName) {
                 case "connector-definitions/ai-instill-model":
                   if (
-                    form.watch("task") === "TASK_TEXT_GENERATION" ||
-                    form.watch("task") === "TASK_TEXT_TO_IMAGE"
+                    watch("task") === "TASK_TEXT_GENERATION" ||
+                    watch("task") === "TASK_TEXT_TO_IMAGE"
                   ) {
                     display = true;
                   }
                   break;
                 case "connector-definitions/ai-openai":
-                  if (form.watch("task") === "TASK_TEXT_GENERATION") {
+                  if (watch("task") === "TASK_TEXT_GENERATION") {
                     display = true;
                   }
 
-                  if (form.watch("task") === "TASK_SPEECH_RECOGNITION") {
+                  if (watch("task") === "TASK_SPEECH_RECOGNITION") {
                     display = true;
                     description =
                       "An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.\n";
@@ -1267,7 +1267,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-instill-model" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1295,7 +1295,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-instill-model" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1323,7 +1323,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-instill-model" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1351,7 +1351,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-instill-model" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1382,8 +1382,8 @@ export const AIForm = (props: AIFormProps) => {
               switch (connectorDefinitionName) {
                 case "connector-definitions/ai-instill-model":
                   if (
-                    form.watch("task") === "TASK_TEXT_GENERATION" ||
-                    form.watch("task") === "TASK_TEXT_TO_IMAGE"
+                    watch("task") === "TASK_TEXT_GENERATION" ||
+                    watch("task") === "TASK_TEXT_TO_IMAGE"
                   ) {
                     display = true;
                   }
@@ -1424,18 +1424,18 @@ export const AIForm = (props: AIFormProps) => {
 
               switch (connectorDefinitionName) {
                 case "connector-definitions/ai-instill-model":
-                  if (form.watch("task") === "TASK_TEXT_TO_IMAGE") {
+                  if (watch("task") === "TASK_TEXT_TO_IMAGE") {
                     display = true;
                   }
                   break;
                 case "connector-definitions/ai-stability-ai":
-                  if (form.watch("task") === "TASK_TEXT_TO_IMAGE") {
+                  if (watch("task") === "TASK_TEXT_TO_IMAGE") {
                     display = true;
                     description =
                       "How strictly the diffusion process adheres to the prompt text (higher values keep your image closer to your prompt)";
                   }
 
-                  if (form.watch("task") === "TASK_IMAGE_TO_IMAGE") {
+                  if (watch("task") === "TASK_IMAGE_TO_IMAGE") {
                     display = true;
                     description =
                       "How strictly the diffusion process adheres to the prompt text (higher values keep your image closer to your prompt)";
@@ -1472,7 +1472,7 @@ export const AIForm = (props: AIFormProps) => {
 
               switch (connectorDefinitionName) {
                 case "connector-definitions/ai-instill-model":
-                  if (form.watch("task") === "TASK_TEXT_TO_IMAGE") {
+                  if (watch("task") === "TASK_TEXT_TO_IMAGE") {
                     display = true;
                   }
                   break;
@@ -1511,12 +1511,12 @@ export const AIForm = (props: AIFormProps) => {
 
               switch (connectorDefinitionName) {
                 case "connector-definitions/ai-instill-model":
-                  if (form.watch("task") === "TASK_TEXT_TO_IMAGE") {
+                  if (watch("task") === "TASK_TEXT_TO_IMAGE") {
                     display = true;
                   }
                   break;
                 case "connector-definitions/ai-stability-ai":
-                  if (form.watch("task") === "TASK_TEXT_TO_IMAGE") {
+                  if (watch("task") === "TASK_TEXT_TO_IMAGE") {
                     display = true;
                     description = "Number of images to generate";
                   }
@@ -1554,13 +1554,13 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task");
+                !!watch("task");
 
               let models: string[] = [];
               let description: Nullable<string> = null;
 
-              // Upon the first render form.watch("task") is undefined
-              const watchTaskData = form.watch("task") ?? configuration.task;
+              // Upon the first render watch("task") is undefined
+              const watchTaskData = watch("task") ?? configuration.task;
 
               switch (watchTaskData) {
                 case "TASK_TEXT_GENERATION":
@@ -1601,6 +1601,11 @@ export const AIForm = (props: AIFormProps) => {
                     onValueChange={field.onChange}
                     value={field.value ?? undefined}
                     disabled={disabledAll}
+                    // We give the select key to force the re-render of the select
+                    // Due to when it first re-render, the configuration and the
+                    // watch("task") is still previous value which cause models
+                    // to be wrong value
+                    key={JSON.stringify(models)}
                   >
                     <Form.Control>
                       <Select.Trigger>
@@ -1631,7 +1636,7 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1665,8 +1670,8 @@ export const AIForm = (props: AIFormProps) => {
               switch (connectorDefinitionName) {
                 case "connector-definitions/ai-openai":
                   if (
-                    form.watch("task") === "TASK_TEXT_GENERATION" ||
-                    form.watch("task") === "TASK_SPEECH_RECOGNITION"
+                    watch("task") === "TASK_TEXT_GENERATION" ||
+                    watch("task") === "TASK_SPEECH_RECOGNITION"
                   ) {
                     display = true;
                   }
@@ -1675,7 +1680,7 @@ export const AIForm = (props: AIFormProps) => {
 
               let description: Nullable<string> = null;
 
-              switch (form.watch("task")) {
+              switch (watch("task")) {
                 case "TASK_TEXT_GENERATION":
                   description =
                     "What sampling temperature to use, between 0 and 2. Higher values like 0.8 will make the output more random, while lower values like 0.2 will make it more focused and deterministic.\n\nWe generally recommend altering this or `top_p` but not both.\n";
@@ -1712,7 +1717,7 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1743,7 +1748,7 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task") === "TASK_TEXT_GENERATION";
+                watch("task") === "TASK_TEXT_GENERATION";
               return (
                 <Form.Item className={display ? "" : "hidden"}>
                   <Form.Label>max_tokens</Form.Label>
@@ -1776,7 +1781,7 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task") === "TASK_TEXT_EMBEDDINGS";
+                watch("task") === "TASK_TEXT_EMBEDDINGS";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1805,7 +1810,7 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task") === "TASK_SPEECH_RECOGNITION";
+                watch("task") === "TASK_SPEECH_RECOGNITION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1836,7 +1841,7 @@ export const AIForm = (props: AIFormProps) => {
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
-                form.watch("task") === "TASK_SPEECH_RECOGNITION";
+                watch("task") === "TASK_SPEECH_RECOGNITION";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -1983,7 +1988,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_TEXT_TO_IMAGE";
+                watch("task") === "TASK_TEXT_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -2014,7 +2019,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_TEXT_TO_IMAGE";
+                watch("task") === "TASK_TEXT_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -2205,7 +2210,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_IMAGE_TO_IMAGE";
+                watch("task") === "TASK_IMAGE_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -2237,7 +2242,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_IMAGE_TO_IMAGE";
+                watch("task") === "TASK_IMAGE_TO_IMAGE";
               return (
                 <Form.Item className={display ? "" : "hidden"}>
                   <Form.Label>style_preset</Form.Label>
@@ -2280,7 +2285,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_IMAGE_TO_IMAGE";
+                watch("task") === "TASK_IMAGE_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -2320,7 +2325,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_IMAGE_TO_IMAGE";
+                watch("task") === "TASK_IMAGE_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
@@ -2357,7 +2362,7 @@ export const AIForm = (props: AIFormProps) => {
               const display =
                 connectorDefinitionName ===
                   "connector-definitions/ai-stability-ai" &&
-                form.watch("task") === "TASK_IMAGE_TO_IMAGE";
+                watch("task") === "TASK_IMAGE_TO_IMAGE";
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
