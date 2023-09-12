@@ -15,3 +15,4 @@ export * from "./ModelDefinitionLabel";
 export * from "./ModelTaskLabel";
 export * from "./cells";
 export * from "./TableError";
+export * from "./WarnUnsavedChangesModal";
