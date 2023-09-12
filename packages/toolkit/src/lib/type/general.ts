@@ -1,4 +1,5 @@
 import * as React from "react";
+import { NextRouter } from "next/router";
 import { UseFormReturn } from "react-hook-form";
 
 export type Nullable<T> = T | null;
@@ -23,3 +24,9 @@ export type GeneralUseFormReturn = UseFormReturn<
 export type GeneralRecord = Record<string, any>;
 
 export type InstillAppEnv = "APP_ENV_CORE" | "APP_ENV_CLOUD";
+
+export type GeneralPageProp = {
+  router: NextRouter;
+  enableQuery: boolean;
+  accessToken: Nullable<string>;
+};

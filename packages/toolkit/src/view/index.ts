@@ -7,4 +7,5 @@ export * from "./mgmt";
 export * from "./model";
 export * from "./pipeline";
 export * from "./pipeline-builder";
+export * from "./resource";
 export * from "./ResourcesTable";
