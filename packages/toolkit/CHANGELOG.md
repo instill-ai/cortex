@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.67.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.66.0...@instill-ai/toolkit-v0.67.0) (2023-09-13)
+
+
+### Features
+
+* support object and object_array ([#851](https://github.com/instill-ai/design-system/issues/851)) ([50fa8a6](https://github.com/instill-ai/design-system/commit/50fa8a6078412bc7f46036098a587228464f3d13))
+
+
+### Bug Fixes
+
+* fix data connector issue ([#853](https://github.com/instill-ai/design-system/issues/853)) ([2124dd7](https://github.com/instill-ai/design-system/commit/2124dd780f4c15642d34e15d822b2317568c74ff))
+
 ## [0.66.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.2...@instill-ai/toolkit-v0.66.0) (2023-09-13)
 
 
