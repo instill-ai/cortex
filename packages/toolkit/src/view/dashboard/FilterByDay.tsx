@@ -1,8 +1,9 @@
-import { Button, Icons, SingleSelectOption } from "@instill-ai/design-system";
-import React, { useEffect } from "react";
 import cn from "clsx";
-import { defaultTimeOption, env, timeLineOptions } from "../../lib";
+import * as React from "react";
 import { useRouter } from "next/router";
+import { Button, Icons, SingleSelectOption } from "@instill-ai/design-system";
+
+import { dashboardOptions, env } from "../../lib";
 
 export type FilterProps = {
   setSelectedTimeOption: React.Dispatch<
@@ -20,23 +21,23 @@ export const FilterByDay = ({
   const router = useRouter();
   const { days } = router.query;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (days) {
-      const timeLineOption = timeLineOptions.find(
+      const timeLineOption = dashboardOptions.timeLine.find(
         (timeLineOption) => timeLineOption.value === days
       );
       if (timeLineOption) {
         setSelectedTimeOption(timeLineOption);
       }
     } else {
-      setSelectedTimeOption(defaultTimeOption);
+      setSelectedTimeOption(dashboardOptions.timeLine[0]);
     }
   }, [days, setSelectedTimeOption]);
 
   return (
     <div className="flex flex-row-reverse space-x-4 space-x-reverse">
       <div className="border-semantic flex items-start justify-start">
-        {timeLineOptions.map((timeLineOption) => (
+        {dashboardOptions.timeLine.map((timeLineOption) => (
           <button
             key={timeLineOption.value}
             className={cn(

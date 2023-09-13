@@ -1,11 +1,11 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { Button, Checkbox, DataTable } from "@instill-ai/design-system";
 import { ColumnDef } from "@tanstack/react-table";
+
 import { TriggeredPipeline } from "../../lib";
-import { GeneralStateCell, SortIcon, TableError } from "../../components";
-import { parseStatusLabel } from "../../lib/table";
+import { SortIcon, TableError } from "../../components";
 import { PipelineTablePlaceholder } from "../pipeline";
-import { useRouter } from "next/router";
 
 export type DashboardPipelinesTableProps = {
   pipelineTriggerCounts: TriggeredPipeline[];
@@ -45,23 +45,6 @@ export const DashboardPipelinesTable = (
         );
       },
     },
-    // {
-    //   accessorKey: "watchState",
-    //   accessorFn: (row) => row.watchState,
-    //   header: () => <div className="max-w-[80px] text-center">Status</div>,
-    //   cell: ({ row }) => {
-    //     return (
-    //       <div className="text-center">
-    //         <GeneralStateCell
-    //           width={null}
-    //           state={row.getValue("watchState")}
-    //           padding="py-2"
-    //           label={parseStatusLabel(row.getValue("watchState"))}
-    //         />
-    //       </div>
-    //     );
-    //   },
-    // },
     {
       accessorKey: "trigger_count_completed",
       header: ({ column }) => {
