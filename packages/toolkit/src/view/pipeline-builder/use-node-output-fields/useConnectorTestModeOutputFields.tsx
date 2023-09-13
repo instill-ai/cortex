@@ -19,6 +19,8 @@ import {
   getConnectorInputOutputSchema,
   getPropertiesFromOpenAPISchema,
 } from "../lib";
+import { ObjectField } from "./ObjectField";
+import { ObjectsField } from "./ObjectsField";
 
 export function useConnectorTestModeOutputFields(
   component: PipelineConnectorComponent,
@@ -56,7 +58,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <TextField
               nodeType="connector"
-              key={property.path}
               title={title}
               text={propertyValue}
             />
@@ -67,7 +68,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <TextsField
               nodeType="connector"
-              key={property.path}
               title={title}
               texts={propertyValue}
             />
@@ -78,7 +78,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <ImageField
               nodeType="connector"
-              key={property.path}
               title={title}
               image={propertyValue}
             />
@@ -89,7 +88,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <ImagesField
               nodeType="connector"
-              key={property.path}
               title={title}
               images={propertyValue}
             />
@@ -100,7 +98,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <NumberField
               nodeType="connector"
-              key={property.path}
               title={title}
               number={propertyValue}
             />
@@ -111,7 +108,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <NumbersField
               nodeType="connector"
-              key={property.path}
               title={title}
               numbers={propertyValue}
             />
@@ -122,7 +118,6 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <AudioField
               nodeType="connector"
-              key={property.path}
               title={title}
               audio={propertyValue}
             />
@@ -133,9 +128,28 @@ export function useConnectorTestModeOutputFields(
           fields.push(
             <AudiosField
               nodeType="connector"
-              key={property.path}
               title={title}
               audios={propertyValue}
+            />
+          );
+          break;
+        }
+        case "object": {
+          fields.push(
+            <ObjectField
+              nodeType="connector"
+              title={title}
+              object={propertyValue}
+            />
+          );
+          break;
+        }
+        case "object_array": {
+          fields.push(
+            <ObjectsField
+              nodeType="connector"
+              title={title}
+              objects={propertyValue}
             />
           );
           break;

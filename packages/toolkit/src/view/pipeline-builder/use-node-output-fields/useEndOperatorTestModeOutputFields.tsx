@@ -15,6 +15,8 @@ import {
   getPropertiesFromOpenAPISchema,
 } from "../lib";
 import { getPipelineInputOutputSchema } from "../lib/getPipelineInputOutputSchema";
+import { ObjectField } from "./ObjectField";
+import { ObjectsField } from "./ObjectsField";
 
 export function useEndOperatorTestModeOutputFields(
   openAPISchema: Nullable<OpenAPIV3.Document>,
@@ -47,68 +49,48 @@ export function useEndOperatorTestModeOutputFields(
 
       switch (property.instillFormat) {
         case "text": {
-          fields.push(
-            <TextField
-              nodeType="end"
-              key={property.path}
-              title={title}
-              text={value}
-            />
-          );
+          fields.push(<TextField nodeType="end" title={title} text={value} />);
           break;
         }
         case "text_array": {
           fields.push(
-            <TextsField
-              nodeType="end"
-              key={property.path}
-              title={title}
-              texts={value}
-            />
+            <TextsField nodeType="end" title={title} texts={value} />
           );
           break;
         }
         case "image": {
           fields.push(
-            <ImageField
-              nodeType="end"
-              key={property.path}
-              title={title}
-              image={value}
-            />
+            <ImageField nodeType="end" title={title} image={value} />
           );
           break;
         }
         case "image_array": {
           fields.push(
-            <ImagesField
-              nodeType="end"
-              key={property.path}
-              title={title}
-              images={value}
-            />
+            <ImagesField nodeType="end" title={title} images={value} />
           );
           break;
         }
         case "number": {
           fields.push(
-            <NumberField
-              nodeType="end"
-              key={property.path}
-              title={title}
-              number={value}
-            />
+            <NumberField nodeType="end" title={title} number={value} />
           );
           break;
         }
         case "number_array": {
           fields.push(
-            <NumbersField
-              nodeType="end"
-              key={property.path}
-              title={title}
-              numbers={value}
-            />
+            <NumbersField nodeType="end" title={title} numbers={value} />
+          );
+          break;
+        }
+        case "object": {
+          fields.push(
+            <ObjectField nodeType="connector" title={title} object={value} />
+          );
+          break;
+        }
+        case "object_array": {
+          fields.push(
+            <ObjectsField nodeType="connector" title={title} objects={value} />
           );
           break;
         }
