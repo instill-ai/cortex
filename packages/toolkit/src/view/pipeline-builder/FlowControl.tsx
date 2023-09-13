@@ -291,10 +291,7 @@ export const FlowControl = (props: FlowControlProps) => {
         : triggerPipelineSnippets.core;
 
     snippet = snippet
-      .replace(
-        /\{vdp-pipeline-base-url\}/g,
-        env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
-      )
+      .replace(/\{vdp-pipeline-base-url\}/g, env("NEXT_PUBLIC_API_GATEWAY_URL"))
       .replace(
         /\{pipeline-name\}/g,
         `${user.data.name}/pipelines/${pipelineId}`
