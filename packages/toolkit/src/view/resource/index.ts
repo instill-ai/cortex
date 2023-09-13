@@ -1,1 +1,2 @@
-export * from "./ResourcesPageMainView";
+export * from "./ResourceListPageMainView";
+export * from "./ResourceSettingPageMainView";

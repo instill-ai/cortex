@@ -20,7 +20,7 @@ const PipelinesTable = dynamic(
   { ssr: false }
 );
 
-export type PipelinesPageMainViewProps = GeneralPageProp;
+export type PipelineListPageMainViewProps = GeneralPageProp;
 
 const selector = (state: PipelineBuilderStore) => ({
   setPipelineId: state.setPipelineId,
@@ -28,7 +28,9 @@ const selector = (state: PipelineBuilderStore) => ({
   updatePipelineIsNew: state.updatePipelineIsNew,
 });
 
-export const PipelinesPageMainView = (props: PipelinesPageMainViewProps) => {
+export const PipelineListPageMainView = (
+  props: PipelineListPageMainViewProps
+) => {
   const { router, enableQuery, accessToken } = props;
 
   const { setPipelineId, setPipelineName, updatePipelineIsNew } =

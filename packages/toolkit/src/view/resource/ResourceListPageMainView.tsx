@@ -8,9 +8,11 @@ const ResourcesTable = dynamic(
   { ssr: false }
 );
 
-export type ResourcesPageMainViewProps = Omit<GeneralPageProp, "router">;
+export type ResourceListPageMainViewProps = Omit<GeneralPageProp, "router">;
 
-export const ResourcesPageMainView = (props: ResourcesPageMainViewProps) => {
+export const ResourceListPageMainView = (
+  props: ResourceListPageMainViewProps
+) => {
   const { enableQuery, accessToken } = props;
   const [addConnectorDialogIsOpen, seteAddConnectorDialogIsOpen] =
     React.useState(false);
