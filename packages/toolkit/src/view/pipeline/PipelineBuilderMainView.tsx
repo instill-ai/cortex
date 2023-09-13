@@ -112,7 +112,7 @@ export const PipelineBuilderMainView = (
 
   React.useEffect(() => {
     updateAccessToken(() => accessToken);
-  }, [accessToken]);
+  }, [accessToken, updateAccessToken]);
 
   /* -------------------------------------------------------------------------
    * If the pipeline is not new and we can't find it, redirect to /pipelines
@@ -257,6 +257,7 @@ export const PipelineBuilderMainView = (
     setPipelineUid,
     id,
     setPipelineName,
+    graphIsInitialized,
   ]);
 
   /* -------------------------------------------------------------------------

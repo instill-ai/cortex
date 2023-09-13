@@ -302,7 +302,7 @@ export const FlowControl = (props: FlowControlProps) => {
       .replace(/\{input-array\}/g, inputsString);
 
     return snippet;
-  }, [nodes, user.data, user.isSuccess, pipelineId]);
+  }, [nodes, user.data, user.isSuccess, pipelineId, appEnv]);
 
   return (
     <>
@@ -385,7 +385,7 @@ export const FlowControl = (props: FlowControlProps) => {
             if (!reactFlowInstance) return;
 
             let nodePrefix: Nullable<string> = null;
-            let nodeIndex: number = 0;
+            let nodeIndex = 0;
 
             switch (connectorResource.type) {
               case "CONNECTOR_TYPE_AI": {

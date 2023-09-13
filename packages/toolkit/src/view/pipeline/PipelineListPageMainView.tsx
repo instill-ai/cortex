@@ -1,4 +1,3 @@
-import { NextRouter } from "next/router";
 import { Button, Icons } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
 import {

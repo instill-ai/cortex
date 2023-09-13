@@ -267,7 +267,6 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
                             value={field.value ?? ""}
                             autoComplete="off"
                             className="!h-[72px] resize-none !text-sm"
-                            placeholder="Hello world. This is a bot. Hello world. This is a bot. Hello world. This is a bot  {{ openai.prompt }}, {{ start.prompt }}"
                           />
                         </Form.Control>
                         <Form.Message />

@@ -356,11 +356,11 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Base URL for the Instill Model API. To access models on
+                    {`Base URL for the Instill Model API. To access models on
                     Instill Cloud, use the base URL
-                    `https://api-model.instill.tech`. To access models on your
+                    https://api.instill.tech. To access models on your
                     local Instill Model, use the base URL
-                    `http://localhost:9080`.
+                    http://localhost:8080.`}
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>

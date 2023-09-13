@@ -51,7 +51,7 @@ export const WarnUnsavedChangesModal = ({
               size="lg"
               className="!flex-1 !px-2.5"
             >
-              Don't Save
+              Don&apos;t Save
             </Button>
             <Button
               onClick={() => {

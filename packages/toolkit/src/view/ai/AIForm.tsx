@@ -1244,7 +1244,7 @@ export const AIForm = (props: AIFormProps) => {
                   if (watch("task") === "TASK_SPEECH_RECOGNITION") {
                     display = true;
                     description =
-                      "An optional text to guide the model's style or continue a previous audio segment. The [prompt](/docs/guides/speech-to-text/prompting) should match the audio language.\n";
+                      "An optional text to guide the model's style or continue a previous audio segment. The [prompt](https://platform.openai.com/docs/guides/speech-to-text/prompting) should match the audio language.\n";
                   }
               }
 
@@ -1586,12 +1586,12 @@ export const AIForm = (props: AIFormProps) => {
                     "gpt-3.5-turbo-16k-0613",
                   ];
                   description =
-                    "ID of the model to use. See the [model endpoint compatibility](/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.";
+                    "ID of the model to use. See the [model endpoint compatibility](https://platform.openai.com/docs/models/model-endpoint-compatibility) table for details on which models work with the Chat API.";
                   break;
                 case "TASK_TEXT_EMBEDDINGS":
                   models = ["text-embedding-ada-002"];
                   description =
-                    "ID of the model to use. You can use the [List models](/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](/docs/models/overview) for descriptions of them.\n";
+                    "ID of the model to use. You can use the [List models](https://platform.openai.com/docs/api-reference/models/list) API to see all of your available models, or see our [Model overview](https://platform.openai.com/docs/models/overview) for descriptions of them.\n";
                   break;
                 case "TASK_SPEECH_RECOGNITION":
                   models = ["whisper-1"];
@@ -1772,10 +1772,13 @@ export const AIForm = (props: AIFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    The maximum number of tokens to generate in the chat
-                    completion. If it is not set, meaning no maximum number. The
-                    total length of input tokens and generated tokens is limited
-                    by the model&apos;s context length.
+                    The maximum number of
+                    [tokens](https://platform.openai.com/tokenizer) to generate
+                    in the chat completion.\n\nThe total length of input tokens
+                    and generated tokens is limited by the model&apos;s context
+                    length. [Example Python
+                    code](https://github.com/openai/openai-cookbook/blob/main/examples/How_to_count_tokens_with_tiktoken.ipynb)
+                    for counting tokens.\n
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
