@@ -188,7 +188,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
   function onEditDataConnectorInput(key: string) {
     dataConnectorInputForm.reset({
-      value: data.component.configuration.input[key].value,
+      value: data.component.configuration.input[key],
       key: key,
     });
     setEnableEdit(true);
@@ -251,7 +251,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   function onDeleteDataConnectorInput(key: string) {
     const newNodes = nodes.map((node) => {
       if (node.data.nodeType === "connector" && node.id === id) {
-        delete node.data.component.configuration.body[key];
+        delete node.data.component.configuration.input[key];
 
         node.data = {
           ...node.data,
@@ -276,6 +276,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     });
 
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
+    updatePipelineRecipeIsDirty(() => true);
     updateEdges(() => newEdges);
   }
 

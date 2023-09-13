@@ -97,6 +97,24 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
       });
       continue;
     }
+
+    if (component.type === "COMPONENT_TYPE_CONNECTOR_DATA") {
+      nodes.push({
+        id: component.id,
+        type: "connectorNode",
+        data: {
+          nodeType: "connector",
+          component: {
+            ...component,
+            configuration: recursiveTransformToString(component.configuration),
+            connector_definition: (component as PipelineConnectorComponent)
+              .connector_definition,
+          },
+        },
+        position: { x: 0, y: 0 },
+      });
+      continue;
+    }
   }
 
   const allReferences: PipelineComponentReference[] = [];
