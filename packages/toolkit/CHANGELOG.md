@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.66.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.2...@instill-ai/toolkit-v0.66.0) (2023-09-13)
+
+
+### Features
+
+* component centric revamp ([#849](https://github.com/instill-ai/design-system/issues/849)) ([ec5925c](https://github.com/instill-ai/design-system/commit/ec5925c80a8a94376cebe24a1bdb22ba888e271b))
+
 ## [0.65.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.1...@instill-ai/toolkit-v0.65.2) (2023-08-23)
 
 
