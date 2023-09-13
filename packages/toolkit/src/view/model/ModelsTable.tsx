@@ -1,17 +1,13 @@
 import {
   Button,
   DataTable,
-  LinkButton,
   getModelDefinitionToolkit,
 } from "@instill-ai/design-system";
-import { useRouter } from "next/router";
 import { ColumnDef } from "@tanstack/react-table";
-import { Model, ModelsWatchState, env } from "../../lib";
+import { Model, ModelsWatchState } from "../../lib";
 import {
-  Cell,
   GeneralStateCell,
   GeneralTaskCell,
-  PaginationListContainerProps,
   SortIcon,
   TableError,
 } from "../../components";
@@ -24,11 +20,10 @@ export type ModelsTableProps = {
   modelsWatchState: ModelsWatchState;
   isError: boolean;
   isLoading: boolean;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const ModelsTable = (props: ModelsTableProps) => {
-  const router = useRouter();
-  const { models, modelsWatchState, marginBottom, isError, isLoading } = props;
+  const { models, modelsWatchState, isError, isLoading } = props;
 
   const columns: ColumnDef<Model>[] = [
     {
@@ -111,36 +106,6 @@ export const ModelsTable = (props: ModelsTableProps) => {
               padding="py-2"
               label={parseStatusLabel(row.getValue("state"))}
             />
-          </div>
-        );
-      },
-    },
-    {
-      accessorKey: "uid",
-      header: () => <div className="text-center"></div>,
-      cell: ({ row }) => {
-        const name: string = row.original.name;
-        return (
-          <div className="grid justify-items-center">
-            <Cell width={null} padding="py-2 pl-6">
-              <LinkButton
-                variant="primary"
-                size="md"
-                onClick={() => {
-                  router.push({
-                    pathname: "/ais/create",
-                    query: {
-                      model_id: row.original.id,
-                      connector_definition_name:
-                        "connector-definitions/ai-instill-model",
-                      server_url: `${env("NEXT_PUBLIC_MODEL_API_GATEWAY_URL")}`,
-                    },
-                  });
-                }}
-              >
-                Add to VDP
-              </LinkButton>
-            </Cell>
           </div>
         );
       },

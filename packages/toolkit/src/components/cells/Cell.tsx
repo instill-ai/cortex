@@ -1,5 +1,4 @@
 import cn from "clsx";
-import Link from "next/link";
 import { Nullable } from "../../lib";
 
 export type CellProps = {

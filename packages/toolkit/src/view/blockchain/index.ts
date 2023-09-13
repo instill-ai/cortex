@@ -1,4 +1,2 @@
-export * from "./BlockchainsTable";
-export * from "./ConfigureBlockchainForm";
-export * from "./CreateBlockchainForm";
-export * from "./BlockchainTablePlaceholder";
+export * from "./BlockchainForm";
+export * from "./BlockchainResourceForm";

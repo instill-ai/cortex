@@ -62,6 +62,9 @@ module.exports = {
     "jsx-a11y/role-has-required-aria-props": "warn",
     "jsx-a11y/role-supports-aria-props": "warn",
     "react/jsx-no-target-blank": "off",
+    "jsx-a11y/media-has-caption": "warn",
+    "jsx-a11y/click-events-have-key-events": "warn",
+    "jsx-a11y/no-static-element-interactions": "warn",
   },
   overrides: [
     {

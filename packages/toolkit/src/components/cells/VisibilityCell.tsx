@@ -1,9 +1,9 @@
 import cn from "clsx";
-import { ConnectorVisibility, Nullable } from "../../lib";
+import { ConnectorResourceVisibility, Nullable } from "../../lib";
 
 export type VisibilityCellProps = {
   width: Nullable<string>;
-  visibility: ConnectorVisibility;
+  visibility: ConnectorResourceVisibility;
   padding: string;
 };
 

@@ -3,19 +3,6 @@ import { env } from "../../utility";
 import { listModelsQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 
-export async function fetchModels(accessToken: Nullable<string>) {
-  try {
-    const models = await listModelsQuery({
-      pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
-      nextPageToken: null,
-      accessToken,
-    });
-    return Promise.resolve(models);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-}
-
 export const useModels = ({
   accessToken,
   enabled,
@@ -32,7 +19,11 @@ export const useModels = ({
   return useQuery(
     ["models"],
     async () => {
-      const models = await fetchModels(accessToken);
+      const models = await listModelsQuery({
+        pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
+        nextPageToken: null,
+        accessToken,
+      });
       return Promise.resolve(models);
     },
     {

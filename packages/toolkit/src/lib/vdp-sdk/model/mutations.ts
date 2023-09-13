@@ -3,185 +3,158 @@ import { createInstillAxiosClient } from "../helper";
 import { Operation } from "../operation";
 import { Model } from "./types";
 
-export type CreateGithubModelConfiguration = {
+export type CreateUserGithubModelConfiguration = {
   repository: string;
   tag: string;
 };
 
-export type CreateGithubModelPayload = {
-  id: string;
-  model_definition: string;
-  description: Nullable<string>;
-  configuration: CreateGithubModelConfiguration;
-};
-
-export type CreateGithubModelResponse = {
-  operation: Operation;
-};
-
-export async function createGithubModelMutation({
-  payload,
-  accessToken,
-}: {
-  payload: CreateGithubModelPayload;
-  accessToken: Nullable<string>;
-}) {
-  try {
-    const client = createInstillAxiosClient(accessToken, "model");
-
-    const { data } = await client.post<CreateGithubModelResponse>("/models", {
-      id: payload.id,
-      model_definition: payload.model_definition,
-      description: payload.description ?? undefined,
-      configuration: {
-        repository: payload.configuration.repository,
-        tag: payload.configuration.tag,
-      },
-    });
-    return Promise.resolve(data.operation);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-}
-
-export type CreateLocalModelConfiguration = {
+export type CreateUserLocalModelConfiguration = {
   content: File;
 };
 
-export type CreateLocalModelPayload = {
-  id: string;
-  description: Nullable<string>;
-  model_definition: string;
-  configuration: CreateLocalModelConfiguration;
-};
-
-export type CreateLocalModelResponse = {
-  operation: Operation;
-};
-
-export async function createLocalModelMutation({
-  payload,
-  accessToken,
-}: {
-  payload: CreateLocalModelPayload;
-  accessToken: Nullable<string>;
-}) {
-  try {
-    const client = createInstillAxiosClient(accessToken, "model");
-
-    const formData = new FormData();
-    formData.append("id", payload.id);
-    formData.append("model_definition", payload.model_definition);
-    formData.append("content", payload.configuration.content);
-
-    if (payload.description) {
-      formData.append("description", payload.description);
-    }
-
-    const { data } = await client.post<CreateLocalModelResponse>(
-      "/models/multipart",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-    return Promise.resolve(data.operation);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-}
-
-export type ArtivcConfiguration = {
+export type CreateUserArtivcModelConfiguration = {
   url: string;
   tag: string;
   credential: Nullable<string>;
 };
 
-export type CreateArtivcModelPayload = {
-  id: string;
-  model_definition: string;
-  description: Nullable<string>;
-  configuration: ArtivcConfiguration;
-};
-
-export type CreateArtivcModelResponse = {
-  operation: Operation;
-};
-
-export async function createArtivcModelMutation({
-  payload,
-  accessToken,
-}: {
-  payload: CreateArtivcModelPayload;
-  accessToken: Nullable<string>;
-}) {
-  try {
-    const client = createInstillAxiosClient(accessToken, "model");
-
-    const { data } = await client.post<CreateLocalModelResponse>("/models", {
-      id: payload.id,
-      model_definition: payload.model_definition,
-      description: payload.description ?? undefined,
-      configuration: {
-        url: payload.configuration.url,
-        credential: payload.configuration.credential
-          ? JSON.parse(payload.configuration.credential)
-          : undefined,
-        tag: payload.configuration.tag,
-      },
-    });
-    return Promise.resolve(data.operation);
-  } catch (err) {
-    return Promise.reject(err);
-  }
-}
-
-export type HuggingFaceConfiguration = {
+export type CreateUserHuggingFaceModelConfiguration = {
   repo_id: string;
 };
 
-export type CreateHuggingFaceModelPayload = {
+export type CreateUserModelPayload =
+  | CreateUserGitHubModelPayload
+  | CreateUserLocalModelPayload
+  | CreateUserHuggingFaceModelPayload
+  | CreateUserArtiVCModelPayload;
+
+export type CreateUserGitHubModelPayload = {
   id: string;
   model_definition: string;
-  description: Nullable<string>;
-  configuration: HuggingFaceConfiguration;
+  description?: string;
+  type: "GitHub";
+  configuration: CreateUserGithubModelConfiguration;
 };
 
-export type CreateHuggingFaceModelResponse = {
+export type CreateUserLocalModelPayload = {
+  id: string;
+  model_definition: string;
+  description?: string;
+  type: "Local";
+  configuration: CreateUserLocalModelConfiguration;
+};
+
+export type CreateUserHuggingFaceModelPayload = {
+  id: string;
+  model_definition: string;
+  description?: string;
+  type: "HuggingFace";
+  configuration: CreateUserHuggingFaceModelConfiguration;
+};
+
+export type CreateUserArtiVCModelPayload = {
+  id: string;
+  model_definition: string;
+  description?: string;
+  type: "ArtiVC";
+  configuration: CreateUserArtivcModelConfiguration;
+};
+
+export type CreateUserModelResponse = {
   operation: Operation;
 };
 
-export async function createHuggingFaceModelMutation({
+export async function createUserModelMutation({
+  userName,
   payload,
   accessToken,
 }: {
-  payload: CreateHuggingFaceModelPayload;
+  userName: string;
+  payload: CreateUserModelPayload;
   accessToken: Nullable<string>;
 }) {
-  try {
-    const client = createInstillAxiosClient(accessToken, "model");
+  const client = createInstillAxiosClient(accessToken, "model");
+  if (payload.type === "Local") {
+    try {
+      const formData = new FormData();
+      formData.append("id", payload.id);
+      formData.append("model_definition", payload.model_definition);
+      formData.append("content", payload.configuration.content);
 
-    const { data } = await client.post<CreateLocalModelResponse>("/models", {
-      id: payload.id,
-      model_definition: payload.model_definition,
-      description: payload.description ?? undefined,
-      configuration: {
-        repo_id: payload.configuration.repo_id,
-      },
-    });
-    return Promise.resolve(data.operation);
-  } catch (err) {
-    return Promise.reject(err);
+      if (payload.description) {
+        formData.append("description", payload.description);
+      }
+
+      const { data } = await client.post<CreateUserModelResponse>(
+        "/models/multipart",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      return Promise.resolve(data.operation);
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  } else {
+    let input: Record<string, any> = {};
+
+    if (payload.type === "GitHub") {
+      input = {
+        id: payload.id,
+        model_definition: payload.model_definition,
+        description: payload.description,
+        configuration: {
+          repository: payload.configuration.repository,
+          tag: payload.configuration.tag,
+        },
+      };
+    } else if (payload.type === "ArtiVC") {
+      input = {
+        id: payload.id,
+        model_definition: payload.model_definition,
+        description: payload.description,
+        configuration: {
+          url: payload.configuration.url,
+          credential: payload.configuration.credential
+            ? JSON.parse(payload.configuration.credential)
+            : undefined,
+          tag: payload.configuration.tag,
+        },
+      };
+    } else {
+      input = {
+        id: payload.id,
+        model_definition: payload.model_definition,
+        description: payload.description,
+        configuration: {
+          repo_id: payload.configuration.repo_id,
+        },
+      };
+    }
+
+    try {
+      const { data } = await client.post<CreateUserModelResponse>(
+        `${userName}/models`,
+        input
+      );
+
+      return Promise.resolve(data.operation);
+    } catch (err) {
+      return Promise.reject(err);
+    }
   }
 }
 
-export type UpdateModelPayload = Partial<Model> & {
+export type UpdateUserModelPayload = {
   name: string;
+  description?: string;
+  configuration?: Record<string, any>;
 };
 
-export type UpdateModelResponse = {
+export type UpdateUserModelResponse = {
   model: Model;
 };
 
@@ -189,13 +162,13 @@ export async function updateModelMutation({
   payload,
   accessToken,
 }: {
-  payload: UpdateModelPayload;
+  payload: UpdateUserModelPayload;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "model");
 
-    const { data } = await client.patch<UpdateModelResponse>(
+    const { data } = await client.patch<UpdateUserModelResponse>(
       `/${payload.name}`,
       payload
     );
@@ -205,7 +178,7 @@ export async function updateModelMutation({
   }
 }
 
-export async function deleteModelMutation({
+export async function deleteUserModelMutation({
   modelName,
   accessToken,
 }: {

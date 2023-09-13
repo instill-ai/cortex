@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import * as echarts from "echarts";
 import { Icons, SingleSelectOption, Tooltip } from "@instill-ai/design-system";
 import { PipelinesChart, generateChartData } from "../../lib";

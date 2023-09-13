@@ -1,62 +1,37 @@
 import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import {
-  Button,
-  DataTable,
-  Dialog,
-  Icons,
-  useToast,
-} from "@instill-ai/design-system";
+import { Button, DataTable, Dialog, useToast } from "@instill-ai/design-system";
 
-import { useRouter } from "next/router";
 import { isAxiosError } from "axios";
 import {
-  ConnectorWithDefinition,
-  Model,
-  Nullable,
-  Pipeline,
-  PipelinesWatchState,
   formatDate,
   getInstillApiErrorMessage,
-  parseStatusLabel,
-  useDeletePipeline,
+  useDeleteUserPipeline,
+  type Nullable,
+  type Pipeline,
+  type Model,
+  type ConnectorResourceWithDefinition,
 } from "../../lib";
-import {
-  GeneralStateCell,
-  PaginationListContainerProps,
-  SortIcon,
-  TableCell,
-  TableError,
-} from "../../components";
+import { SortIcon, TableCell, TableError } from "../../components";
 import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
 
 export type PipelinesTableProps = {
   pipelines: Pipeline[];
-  pipelinesWatchState: PipelinesWatchState;
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
-} & Pick<PaginationListContainerProps, "marginBottom">;
+};
 
 export const PipelinesTable = (props: PipelinesTableProps) => {
-  const router = useRouter();
+  const { pipelines, isError, isLoading, accessToken } = props;
 
-  const {
-    pipelines,
-    pipelinesWatchState,
-    marginBottom,
-    isError,
-    isLoading,
-    accessToken,
-  } = props;
-
-  const deletePipeline = useDeletePipeline();
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
 
+  const deletePipeline = useDeleteUserPipeline();
   function handleDeletePipeline(
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<Pipeline | Model | ConnectorResourceWithDefinition>
   ): void {
     if (!resource) return;
     setIsDeleting(true);
@@ -143,29 +118,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       },
     },
     {
-      accessorKey: "state",
-      header: () => <div className="text-center">Status</div>,
-      cell: ({ row }) => {
-        const name: string = row.original.name;
-        return (
-          <div className="grid justify-items-center">
-            <GeneralStateCell
-              width={null}
-              state={
-                pipelinesWatchState
-                  ? pipelinesWatchState[name]
-                    ? pipelinesWatchState[name].state
-                    : "STATE_UNSPECIFIED"
-                  : "STATE_UNSPECIFIED"
-              }
-              padding="py-2"
-              label={parseStatusLabel(row.getValue("state"))}
-            />
-          </div>
-        );
-      },
-    },
-    {
       accessorKey: "uid",
       header: () => <div className="max-w-[100px] text-center"></div>,
       cell: ({ row }) => {
@@ -231,18 +183,16 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
   }
 
   return (
-    <>
-      <DataTable
-        columns={columns}
-        data={pipelines}
-        pageSize={6}
-        searchPlaceholder={"Search Pipelines"}
-        searchKey={"id"}
-        isLoading={isLoading}
-        loadingRows={6}
-        primaryText="Pipelines"
-        secondaryText="Check your pipelines"
-      />
-    </>
+    <DataTable
+      columns={columns}
+      data={pipelines}
+      pageSize={6}
+      searchPlaceholder={"Search Pipelines"}
+      searchKey={"id"}
+      isLoading={isLoading}
+      loadingRows={6}
+      primaryText="Pipelines"
+      secondaryText="Check your pipelines"
+    />
   );
 };

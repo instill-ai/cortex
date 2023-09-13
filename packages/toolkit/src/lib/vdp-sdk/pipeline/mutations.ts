@@ -1,32 +1,31 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Pipeline, RawPipelineRecipeComponent } from "./types";
+import { Pipeline, RawPipelineRecipe, PipelineRelease } from "./types";
 
-export type CreatePipelinePayload = {
+export type CreateUserPipelinePayload = {
   id: string;
   description?: string;
-  recipe: {
-    version: string;
-    components: RawPipelineRecipeComponent[];
-  };
+  recipe: RawPipelineRecipe;
 };
 
 export type CreatePipelineResponse = {
   pipeline: Pipeline;
 };
 
-export async function createPipelineMutation({
+export async function createUserPipelineMutation({
+  userName,
   payload,
   accessToken,
 }: {
-  payload: CreatePipelinePayload;
+  userName: string;
+  payload: CreateUserPipelinePayload;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<CreatePipelineResponse>(
-      "/pipelines",
+      `${userName}/pipelines`,
       payload
     );
     return Promise.resolve(data.pipeline);
@@ -35,30 +34,27 @@ export async function createPipelineMutation({
   }
 }
 
-export type UpdatePipelinePayload = {
+export type UpdateUserPipelinePayload = {
   name: string;
   description?: string;
-  recipe?: {
-    version: string;
-    components: RawPipelineRecipeComponent[];
-  };
+  recipe: RawPipelineRecipe;
 };
 
-export type UpdatePipelineResponse = {
+export type UpdateUserPipelineResponse = {
   pipeline: Pipeline;
 };
 
-export async function updatePipelineMutation({
+export async function updateUserPipelineMutation({
   payload,
   accessToken,
 }: {
-  payload: UpdatePipelinePayload;
+  payload: UpdateUserPipelinePayload;
   accessToken: Nullable<string>;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
-    const { data } = await client.patch<UpdatePipelineResponse>(
+    const { data } = await client.patch<UpdateUserPipelineResponse>(
       `/${payload.name}`,
       payload
     );
@@ -68,7 +64,7 @@ export async function updatePipelineMutation({
   }
 }
 
-export async function deletePipelineMutation({
+export async function deleteUserPipelineMutation({
   pipelineName,
   accessToken,
 }: {
@@ -84,28 +80,117 @@ export async function deletePipelineMutation({
   }
 }
 
-export type RenamePipelinePayload = {
-  pipelineId: string;
-  newPipelineId: string;
+export type RenameUserPipelinePayload = {
+  name: string;
+  new_pipeline_id: string;
 };
 
-export async function renamePipelineMutation({
+export type RenameUserPipelineResponse = {
+  pipeline: Pipeline;
+};
+
+export async function renameUserPipelineMutation({
   payload,
   accessToken,
 }: {
-  payload: RenamePipelinePayload;
+  payload: RenameUserPipelinePayload;
   accessToken: Nullable<string>;
 }) {
-  const { pipelineId, newPipelineId } = payload;
-
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
-    const { data } = await client.post(`/pipelines/${pipelineId}/rename`, {
-      new_pipeline_id: newPipelineId,
-    });
+    const { data } = await client.post<RenameUserPipelineResponse>(
+      `/${payload.name}/rename`,
+      payload
+    );
 
     return Promise.resolve(data.pipeline);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+/* -------------------------------------------------------------------------
+ * Pipeline Release
+ * -----------------------------------------------------------------------*/
+
+export type CreateUserPipelineReleasePayload = {
+  id: string;
+  description?: string;
+  recipe: RawPipelineRecipe;
+};
+
+export type CreateUserPipelineReleaseResponse = {
+  release: PipelineRelease;
+};
+
+export async function createUserPipelineReleaseMutation({
+  userName,
+  pipelineName,
+  payload,
+  accessToken,
+}: {
+  userName: string;
+  pipelineName: string;
+  payload: CreateUserPipelineReleasePayload;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "vdp");
+
+    const { data } = await client.post<CreateUserPipelineReleaseResponse>(
+      `${userName}/${pipelineName}/releases`,
+      payload
+    );
+
+    return Promise.resolve(data.release);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type UpdateUserPipelineReleasePayload = {
+  description?: string;
+  recipe: RawPipelineRecipe;
+};
+
+export type UpdateUserPipelineReleaseResponse = {
+  release: PipelineRelease;
+};
+
+export async function updateUserPipelineReleaseMutation({
+  payload,
+  pipelineReleaseName,
+  accessToken,
+}: {
+  payload: UpdateUserPipelineReleasePayload;
+  pipelineReleaseName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "vdp");
+
+    const { data } = await client.patch<UpdateUserPipelineReleaseResponse>(
+      `/${pipelineReleaseName}`,
+      payload
+    );
+    return Promise.resolve(data.release);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export async function deleteUserPipelineReleaseMutation({
+  pipelineReleaseName,
+  accessToken,
+}: {
+  pipelineReleaseName: string;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "vdp");
+
+    await client.delete(`/${pipelineReleaseName}`);
   } catch (err) {
     return Promise.reject(err);
   }

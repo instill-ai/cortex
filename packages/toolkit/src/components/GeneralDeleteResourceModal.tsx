@@ -1,12 +1,17 @@
 import * as React from "react";
 import { Button, Dialog, Icons, Input } from "@instill-ai/design-system";
-import { ConnectorWithDefinition, Model, Nullable, Pipeline } from "../lib";
+import {
+  ConnectorResourceWithDefinition,
+  Model,
+  Nullable,
+  Pipeline,
+} from "../lib";
 import { IconWithBackground } from "./IconWithBackground";
 
 export type GenralDeleteResourceModalProps = {
-  resource: Nullable<ConnectorWithDefinition | Pipeline | Model>;
+  resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>;
   handleDeleteResource: (
-    resource: Nullable<ConnectorWithDefinition | Pipeline | Model>
+    resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>
   ) => void;
   isDeleting: boolean;
 };
@@ -31,19 +36,19 @@ export const GeneralDeleteResourceModal = (
     let description: string;
 
     if ("connector_definition" in resource) {
-      if (resource.connector_type === "CONNECTOR_TYPE_OPERATOR") {
+      if (resource.type === "CONNECTOR_TYPE_OPERATOR") {
         title = `Delete ${resource.id} Source`;
         description =
           "This action cannot be undone. This will permanently delete the source.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_DATA") {
+      } else if (resource.type === "CONNECTOR_TYPE_DATA") {
         title = `Delete ${resource.id} Destination`;
         description =
           "This action cannot be undone. This will permanently delete the destination.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_AI") {
+      } else if (resource.type === "CONNECTOR_TYPE_AI") {
         title = `Delete ${resource.id} AI`;
         description =
           "This action cannot be undone. This will permanently delete the AI.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_BLOCKCHAIN") {
+      } else if (resource.type === "CONNECTOR_TYPE_BLOCKCHAIN") {
         title = `Delete ${resource.id} Blockchain`;
         description =
           "This action cannot be undone. This will permanently delete the blockchain.";

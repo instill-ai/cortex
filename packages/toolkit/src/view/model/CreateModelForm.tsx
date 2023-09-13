@@ -17,26 +17,21 @@ import {
 } from "@instill-ai/design-system";
 
 import {
-  useCreateArtivcModel,
-  useCreateGithubModel,
-  useCreateHuggingFaceModel,
-  useCreateLocalModel,
-  getModelQuery,
   validateResourceId,
   useAmplitudeCtx,
   sendAmplitudeData,
   useCreateResourceFormStore,
   getInstillApiErrorMessage,
-  useDeployModel,
-  watchModel,
   useModelDefinitions,
-  type CreateGithubModelPayload,
-  type CreateHuggingFaceModelPayload,
-  type CreateArtivcModelPayload,
-  type CreateLocalModelPayload,
   type Model,
   type Nullable,
   type CreateResourceFormStore,
+  useCreateUserModel,
+  getUserModelQuery,
+  useUser,
+  useDeployUserModel,
+  CreateUserModelPayload,
+  watchUserModel,
 } from "../../lib";
 import { checkUntilOperationIsDoen } from "../../lib/vdp-sdk/operation";
 
@@ -117,6 +112,11 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     modelHuggingFaceRepoUrl,
     modelHuggingFaceRepoUrlError,
   } = useCreateResourceFormStore(selector, shallow);
+
+  const user = useUser({
+    enabled: enabledQuery,
+    accessToken,
+  });
 
   /* -------------------------------------------------------------------------
    * Initialize the model definition
@@ -206,14 +206,11 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     modelHuggingFaceRepoUrl,
   ]);
 
-  const createGithubModel = useCreateGithubModel();
-  const createLocalModel = useCreateLocalModel();
-  const createArtivcModel = useCreateArtivcModel();
-  const createHuggingFaceModel = useCreateHuggingFaceModel();
+  const createUserModel = useCreateUserModel();
 
   const prepareNewModel = React.useCallback(
     async (modelName: string) => {
-      const model = await getModelQuery({ modelName, accessToken });
+      const model = await getUserModelQuery({ modelName, accessToken });
       setModelCreated(true);
 
       queryClient.setQueryData<Model>(["models", model.name], model);
@@ -241,10 +238,10 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     [amplitudeIsInit, accessToken, queryClient, setFieldValue]
   );
 
-  const deployModel = useDeployModel();
+  const deployUserModel = useDeployUserModel();
 
   const handelCreateModel = React.useCallback(async () => {
-    if (!modelId) return;
+    if (!modelId || !user.isSuccess) return;
 
     // We don't validate the rest of the field if the ID is incorrect
     if (!validateResourceId(modelId as string)) {
@@ -267,18 +264,19 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     if (modelDefinition === "model-definitions/github") {
       if (!modelGithubRepoUrl || !modelGithubTag) return;
 
-      const payload: CreateGithubModelPayload = {
+      const payload: CreateUserModelPayload = {
+        type: "GitHub",
         id: modelId.trim(),
         model_definition: "model-definitions/github",
-        description: modelDescription ?? null,
+        description: modelDescription ?? undefined,
         configuration: {
           repository: modelGithubRepoUrl.trim(),
           tag: modelGithubTag.trim(),
         },
       };
 
-      createGithubModel.mutate(
-        { payload, accessToken },
+      createUserModel.mutate(
+        { userName: user.data.name, payload, accessToken },
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
@@ -289,7 +287,10 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
-              const modelState = await watchModel({ modelName, accessToken });
+              const modelState = await watchUserModel({
+                modelName,
+                accessToken,
+              });
 
               if (modelState.state === "STATE_ERROR") {
                 setCreateModelMessageBoxState(() => ({
@@ -302,7 +303,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               }
 
               await prepareNewModel(modelName);
-              deployModel.mutate({ modelName, accessToken });
+              deployUserModel.mutate({ modelName, accessToken });
 
               setCreateModelMessageBoxState({
                 activate: true,
@@ -340,17 +341,18 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
         return;
       }
 
-      const payload: CreateLocalModelPayload = {
+      const payload: CreateUserModelPayload = {
+        type: "Local",
         id: modelId.trim(),
-        description: modelDescription ? modelDescription : "",
+        description: modelDescription ?? undefined,
         model_definition: "model-definitions/local",
         configuration: {
           content: modelLocalFile,
         },
       };
 
-      createLocalModel.mutate(
-        { payload, accessToken },
+      createUserModel.mutate(
+        { userName: user.data.name, payload, accessToken },
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
@@ -361,7 +363,10 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
-              const modelState = await watchModel({ modelName, accessToken });
+              const modelState = await watchUserModel({
+                modelName,
+                accessToken,
+              });
 
               if (modelState.state === "STATE_ERROR") {
                 setCreateModelMessageBoxState(() => ({
@@ -374,7 +379,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               }
 
               await prepareNewModel(modelName);
-              deployModel.mutate({ modelName, accessToken });
+              deployUserModel.mutate({ modelName, accessToken });
 
               setCreateModelMessageBoxState({
                 activate: true,
@@ -410,10 +415,11 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     } else if (modelDefinition === "model-definitions/artivc") {
       if (!modelArtivcGcsBucketPath || !modelArtivcTag) return;
 
-      const payload: CreateArtivcModelPayload = {
+      const payload: CreateUserModelPayload = {
+        type: "ArtiVC",
         id: modelId.trim(),
         model_definition: "model-definitions/artivc",
-        description: modelDescription ?? null,
+        description: modelDescription ?? undefined,
         configuration: {
           url: modelArtivcGcsBucketPath.trim(),
           credential: modelArtivcCredentials
@@ -423,8 +429,8 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
         },
       };
 
-      createArtivcModel.mutate(
-        { payload, accessToken },
+      createUserModel.mutate(
+        { userName: user.data.name, payload, accessToken },
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
@@ -435,7 +441,10 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
 
             if (operationIsDone) {
               const modelName = `models/${modelId.trim()}`;
-              const modelState = await watchModel({ modelName, accessToken });
+              const modelState = await watchUserModel({
+                modelName,
+                accessToken,
+              });
 
               if (modelState.state === "STATE_ERROR") {
                 setCreateModelMessageBoxState(() => ({
@@ -448,7 +457,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               }
 
               await prepareNewModel(modelName);
-              deployModel.mutate({ modelName, accessToken });
+              deployUserModel.mutate({ modelName, accessToken });
 
               setCreateModelMessageBoxState({
                 activate: true,
@@ -484,17 +493,18 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
     } else {
       if (!modelHuggingFaceRepoUrl) return;
 
-      const payload: CreateHuggingFaceModelPayload = {
+      const payload: CreateUserModelPayload = {
+        type: "HuggingFace",
         id: modelId.trim(),
         model_definition: "model-definitions/huggingface",
-        description: modelDescription ?? null,
+        description: modelDescription ?? undefined,
         configuration: {
           repo_id: modelHuggingFaceRepoUrl.trim(),
         },
       };
 
-      createHuggingFaceModel.mutate(
-        { payload, accessToken },
+      createUserModel.mutate(
+        { userName: user.data.name, payload, accessToken },
         {
           onSuccess: async ({ operation }) => {
             if (!modelId) return;
@@ -504,8 +514,11 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
             });
 
             if (operationIsDone) {
-              const modelName = `models/${modelId.trim()}`;
-              const modelState = await watchModel({ modelName, accessToken });
+              const modelName = `${user.data.name}/models/${modelId.trim()}`;
+              const modelState = await watchUserModel({
+                modelName,
+                accessToken,
+              });
 
               if (modelState.state === "STATE_ERROR") {
                 setCreateModelMessageBoxState(() => ({
@@ -518,7 +531,7 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
               }
 
               await prepareNewModel(modelName);
-              deployModel.mutate({ modelName, accessToken });
+              deployUserModel.mutate({ modelName, accessToken });
 
               setCreateModelMessageBoxState({
                 activate: true,
@@ -554,11 +567,10 @@ export const CreateModelForm = (props: CreateModelFormProps) => {
       );
     }
   }, [
-    deployModel,
-    createArtivcModel,
-    createGithubModel,
-    createLocalModel,
-    createHuggingFaceModel,
+    createUserModel,
+    deployUserModel,
+    user.isSuccess,
+    user.data?.name,
     modelArtivcCredentials,
     modelArtivcGcsBucketPath,
     modelArtivcTag,
