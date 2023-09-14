@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.67.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.67.1...@instill-ai/toolkit-v0.67.2) (2023-09-14)
+
+
+### Bug Fixes
+
+* fix Blockchainform validation ([#856](https://github.com/instill-ai/design-system/issues/856)) ([b2e7d78](https://github.com/instill-ai/design-system/commit/b2e7d78db1b99fec49172ddc262f1321b701cd94))
+
 ## [0.67.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.67.0...@instill-ai/toolkit-v0.67.1) (2023-09-13)
 
 
