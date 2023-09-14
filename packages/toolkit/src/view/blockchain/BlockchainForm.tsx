@@ -31,8 +31,8 @@ export const BlockchainFormSchema = z
         creator_wallet: z.string().nullable().optional(),
         license: z
           .object({
-            name: z.string().nullable(),
-            document: z.string().nullable(),
+            name: z.string().nullable().optional(),
+            document: z.string().nullable().optional(),
           })
           .optional()
           .nullable(),
