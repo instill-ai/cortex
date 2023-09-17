@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.49.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.49.0...@instill-ai/design-system-v0.49.1) (2023-09-17)
+
+
+### Bug Fixes
+
+* fix popover style ([#858](https://github.com/instill-ai/design-system/issues/858)) ([8180b68](https://github.com/instill-ai/design-system/commit/8180b68397734526bbb9638253e71c13bcd53cb5))
+
 ## [0.49.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.48.0...@instill-ai/design-system-v0.49.0) (2023-09-13)
 
 
