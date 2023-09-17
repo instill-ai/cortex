@@ -16,6 +16,7 @@ import {
   useUserPipeline,
 } from "../../lib";
 import {
+  BottomBar,
   Flow,
   NodeData,
   PipelineBuilderStore,
@@ -265,7 +266,7 @@ export const PipelineBuilderMainView = (
    * -----------------------------------------------------------------------*/
 
   return (
-    <>
+    <div className="flex flex-col w-full">
       <style jsx>
         {`
           .pipeline-builder {
@@ -275,7 +276,12 @@ export const PipelineBuilderMainView = (
           }
         `}
       </style>
-      <div className="pipeline-builder flex h-[calc(100vh-var(--topbar-height))] w-full flex-row overflow-x-hidden bg-semantic-bg-base-bg">
+
+      {/* 
+        Pipeline builder main canvas
+      */}
+
+      <div className="pipeline-builder flex h-[calc(100vh-var(--topbar-height)-var(--pipeline-builder-bottom-bar-height))] w-full flex-row overflow-x-hidden bg-semantic-bg-base-bg">
         <Flow
           ref={reactFlowWrapper}
           reactFlowInstance={reactFlowInstance}
@@ -294,6 +300,19 @@ export const PipelineBuilderMainView = (
           <RightPanel />
         </div>
       </div>
+
+      {/* 
+        Pipeline builder bottom bar
+      */}
+
+      <div className="h-[var(--pipeline-builder-bottom-bar-height)]">
+        <BottomBar enableQuery={enableQuery} accessToken={accessToken} />
+      </div>
+
+      {/* 
+        Warn unsaved changes modal
+      */}
+
       <WarnUnsavedChangesModal
         open={warnUnsaveChangesModalIsOpen}
         setOpen={setWarnUnsaveChangesModalIsOpen}
@@ -385,6 +404,6 @@ export const PipelineBuilderMainView = (
           }
         }}
       />
-    </>
+    </div>
   );
 };
