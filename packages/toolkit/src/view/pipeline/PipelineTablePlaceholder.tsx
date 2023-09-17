@@ -1,4 +1,5 @@
 import cn from "clsx";
+import { useRouter } from "next/router";
 import {
   TablePlaceholderBase,
   type TablePlaceholderBaseProps,
@@ -13,6 +14,10 @@ export const PipelineTablePlaceholder = (
   props: PipelineTablePlaceholderProps
 ) => {
   const { marginBottom, enableCreateButton } = props;
+
+  const router = useRouter();
+  const { entity } = router.query;
+
   const width = "w-[136px]";
   const height = "h-[136px]";
   const color = "fill-instillGrey95";
@@ -270,7 +275,7 @@ export const PipelineTablePlaceholder = (
     <TablePlaceholderBase
       placeholderItems={placeholderItems}
       placeholderTitle="No pipeline"
-      createButtonLink="/pipelines/create"
+      createButtonLink={`/${entity}/pipelines`}
       createButtonTitle="Set up your first pipeline"
       marginBottom={marginBottom}
       enableCreateButton={enableCreateButton}

@@ -3,6 +3,7 @@ import {
   TablePlaceholderBase,
   TablePlaceholderBaseProps,
 } from "../../components";
+import { useRouter } from "next/router";
 
 export type TriggersTablePlaceholderProps = Pick<
   TablePlaceholderBaseProps,
@@ -13,6 +14,10 @@ export const TriggersTablePlaceholder = (
   props: TriggersTablePlaceholderProps
 ) => {
   const { marginBottom, enableCreateButton } = props;
+
+  const { query } = useRouter();
+  const { entity } = query;
+
   const width = "w-[136px]";
   const height = "h-[136px]";
   const color = "fill-instillGrey95";
@@ -270,7 +275,7 @@ export const TriggersTablePlaceholder = (
     <TablePlaceholderBase
       placeholderItems={placeholderItems}
       placeholderTitle="No Triggers"
-      createButtonLink="/pipelines/create"
+      createButtonLink={`/${entity}/pipelines/create`}
       createButtonTitle="Set up your first pipeline"
       marginBottom={marginBottom}
       enableCreateButton={enableCreateButton}

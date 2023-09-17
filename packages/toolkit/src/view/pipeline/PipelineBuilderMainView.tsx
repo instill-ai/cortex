@@ -52,7 +52,7 @@ export const PipelineBuilderMainView = (
   props: PipelineBuilderMainViewProps
 ) => {
   const { accessToken, enableQuery, router } = props;
-  const { id } = router.query;
+  const { id, entity } = router.query;
   const [reactFlowInstance, setReactFlowInstance] =
     React.useState<Nullable<ReactFlowInstance>>(null);
   const reactFlowWrapper = React.useRef<HTMLDivElement>(null);
@@ -120,7 +120,7 @@ export const PipelineBuilderMainView = (
 
   React.useEffect(() => {
     if (!pipelineIsNew && pipeline.isError) {
-      router.push("/pipelines");
+      router.push(`/${entity}/pipelines`);
     }
   }, [pipeline.isError, pipelineIsNew, router]);
 

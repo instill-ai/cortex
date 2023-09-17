@@ -14,6 +14,7 @@ export const ModelHubListPageMainView = (
   props: ModelHubListPageMainViewProps
 ) => {
   const { router, enableQuery, accessToken } = props;
+  const { entity } = router.query;
 
   /* -------------------------------------------------------------------------
    * Query resource data
@@ -44,7 +45,7 @@ export const ModelHubListPageMainView = (
           className="gap-x-2"
           variant="primary"
           size="lg"
-          onClick={() => router.push("/model-hub/create")}
+          onClick={() => router.push(`/${entity}/model-hub/create`)}
         >
           <Icons.Plus className="h-5 w-5 stroke-semantic-bg-primary" />
           Add Model

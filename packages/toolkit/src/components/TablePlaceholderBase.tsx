@@ -31,9 +31,7 @@ export const TablePlaceholderBase = ({
   svgElement,
 }: TablePlaceholderBaseProps) => {
   const router = useRouter();
-  const handleOnClick = () => {
-    router.push(createButtonLink);
-  };
+
   return (
     <div
       className={cn(
@@ -60,7 +58,9 @@ export const TablePlaceholderBase = ({
             type="button"
             color="primary"
             disabled={false}
-            onClickHandler={handleOnClick}
+            onClickHandler={() => {
+              router.push(createButtonLink);
+            }}
             position={null}
           >
             {createButtonTitle}

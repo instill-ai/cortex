@@ -9,6 +9,8 @@ export const ModelHubCreatePageMainView = (
 ) => {
   const { accessToken, enableQuery, router } = props;
 
+  const { entity } = router.query;
+
   return (
     <div className="flex flex-col">
       <PageTitle
@@ -20,7 +22,7 @@ export const ModelHubCreatePageMainView = (
         width="w-full"
         onCreate={(initStore) => {
           initStore();
-          router.push("/model-hub");
+          router.push(`/${entity}/model-hub`);
         }}
         accessToken={accessToken}
         enabledQuery={enableQuery}

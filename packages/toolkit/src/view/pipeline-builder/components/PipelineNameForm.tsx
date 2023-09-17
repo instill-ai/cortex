@@ -47,6 +47,7 @@ export const UpdatePipelineIdSchema = z.object({
 export const PipelineNameForm = (props: PipelineNameFormProps) => {
   const { accessToken, enableQuery } = props;
   const router = useRouter();
+  const { entity } = router.query;
 
   const { toast } = useToast();
 
@@ -113,7 +114,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
           accessToken,
         });
 
-        await router.push(`/pipelines/${newId}`, undefined, {
+        await router.push(`/${entity}/pipelines/${newId}`, undefined, {
           shallow: true,
         });
 
@@ -158,7 +159,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
         accessToken,
       });
 
-      await router.push(`/pipelines/${newId}`, undefined, {
+      await router.push(`/${entity}/pipelines/${newId}`, undefined, {
         shallow: true,
       });
 

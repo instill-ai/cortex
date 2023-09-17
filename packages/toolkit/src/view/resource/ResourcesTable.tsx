@@ -93,7 +93,7 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
       cell: ({ row }) => {
         const definition = row.original.connector_definition;
         const resourceNameFragments = row.original.name.split("/");
-        const resourceLink = `${resourceNameFragments[1]}/${resourceNameFragments[2]}/${resourceNameFragments[3]}`;
+        const resourceLink = `/${resourceNameFragments[1]}/resources/${resourceNameFragments[3]}`;
 
         return (
           <div className="text-left">
