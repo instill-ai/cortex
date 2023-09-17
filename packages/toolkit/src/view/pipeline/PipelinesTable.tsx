@@ -76,10 +76,13 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       accessorKey: "id",
       header: () => <div className="min-w-[650px] text-left">Pipelines</div>,
       cell: ({ row }) => {
+        const pipelineNameFragments = row.original.name.split("/");
+        const pipelineLink = `${pipelineNameFragments[1]}/${pipelineNameFragments[2]}/${pipelineNameFragments[3]}`;
+
         return (
           <div className="text-left">
             <TableCell
-              primaryLink={`/pipelines/${row.getValue("id")}`}
+              primaryLink={pipelineLink}
               primaryText={row.getValue("id")}
               secondaryLink={null}
               secondaryText={null}

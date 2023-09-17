@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Button, Checkbox, DataTable } from "@instill-ai/design-system";
 import { ColumnDef } from "@tanstack/react-table";
 
-import { TriggeredPipeline } from "../../lib";
+import { Nullable, TriggeredPipeline, User } from "../../lib";
 import { SortIcon, TableError } from "../../components";
 import { PipelineTablePlaceholder } from "../pipeline";
 
@@ -11,6 +11,7 @@ export type DashboardPipelinesTableProps = {
   pipelineTriggerCounts: TriggeredPipeline[];
   isError: boolean;
   isLoading: boolean;
+  user: Nullable<User>;
 };
 
 export const DashboardPipelinesTable = (
@@ -18,7 +19,7 @@ export const DashboardPipelinesTable = (
 ) => {
   const router = useRouter();
   const { days } = router.query;
-  const { pipelineTriggerCounts, isError, isLoading } = props;
+  const { pipelineTriggerCounts, isError, isLoading, user } = props;
 
   const columns: ColumnDef<TriggeredPipeline>[] = [
     {
@@ -34,9 +35,9 @@ export const DashboardPipelinesTable = (
               className="h-5 w-5"
             />
             <Link
-              href={`/dashboard/pipeline/${row.getValue("pipeline_id")}${
-                days ? "?days=" + days : ""
-              }`}
+              href={`/${user?.id}/dashboard/pipeline/${row.getValue(
+                "pipeline_id"
+              )}${days ? "?days=" + days : ""}`}
               className="hover:underline"
             >
               {row.getValue("pipeline_id")}

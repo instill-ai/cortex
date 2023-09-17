@@ -14,6 +14,7 @@ import {
   useTriggeredPipelines,
   useTriggeredPipelinesChart,
   dashboardOptions,
+  useUser,
 } from "../../lib";
 import { FilterByDay } from "./FilterByDay";
 import { PipelineTriggerCountsLineChart } from "./PipelineTriggerCountsLineChart";
@@ -28,6 +29,11 @@ export const DashboardPipelineListPageMainView = (
   props: DashboardPipelineListPageMainViewProps
 ) => {
   const { accessToken, enableQuery } = props;
+
+  const user = useUser({
+    enabled: enableQuery,
+    accessToken,
+  });
 
   /* -------------------------------------------------------------------------
    * Get the pipeline definition and static state for fields
@@ -204,7 +210,8 @@ export const DashboardPipelineListPageMainView = (
             triggeredPipelines.data ? triggeredPipelineList : []
           }
           isError={triggeredPipelines.isError}
-          isLoading={triggeredPipelines.isLoading}
+          isLoading={triggeredPipelines.isLoading || user.isLoading}
+          user={user.isSuccess ? user.data : null}
         />
       </div>
     </div>
