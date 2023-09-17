@@ -58,7 +58,7 @@ export const BottomBar = (props: BottomBarProps) => {
             {pipelineReleases.isSuccess ? (
               pipelineReleases.data.length > 0 ? (
                 pipelineReleases.data.map((release) => (
-                  <div className="flex flex-col">
+                  <div key={release.id} className="flex flex-col">
                     <p className="mb-2 product-body-text-3-medium text-semantic-fg-primary">
                       {release.id}
                     </p>
