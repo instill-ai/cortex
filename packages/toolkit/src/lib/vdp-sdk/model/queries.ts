@@ -38,7 +38,7 @@ export async function getModelDefinitionQuery({
 export type ListModelDefinitionsResponse = {
   model_definitions: ModelDefinition[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listModelDefinitionsQuery({
@@ -113,7 +113,7 @@ export async function getUserModelQuery({
 export type ListModelsResponse = {
   models: Model[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listModelsQuery({
@@ -160,7 +160,7 @@ export async function listModelsQuery({
 export type ListUserModelsResponse = {
   models: Model[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listUserModelsQuery({
