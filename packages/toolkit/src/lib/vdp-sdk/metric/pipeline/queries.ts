@@ -9,13 +9,13 @@ import {
 export type ListPipelineTriggerRecordsResponse = {
   pipeline_trigger_records: PipelineTriggerRecord[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export type ListTriggeredPipelinesResponse = {
   pipeline_trigger_table_records: TriggeredPipeline[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export type ListPipelinesChartResponse = {
@@ -44,9 +44,8 @@ export async function listPipelineTriggerRecordsQuery({
       filter,
     });
 
-    const { data } = await client.get<ListPipelineTriggerRecordsResponse>(
-      queryString
-    );
+    const { data } =
+      await client.get<ListPipelineTriggerRecordsResponse>(queryString);
 
     triggers.push(...data.pipeline_trigger_records);
 
@@ -89,9 +88,8 @@ export async function listTriggeredPipelineQuery({
       filter,
     });
 
-    const { data } = await client.get<ListTriggeredPipelinesResponse>(
-      queryString
-    );
+    const { data } =
+      await client.get<ListTriggeredPipelinesResponse>(queryString);
 
     pipelines.push(...data.pipeline_trigger_table_records);
 
