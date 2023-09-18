@@ -20,6 +20,7 @@ import { Node, Position, ReactFlowInstance } from "reactflow";
 
 import {
   AddConnectorResourceDialog,
+  ReleasePipelineModal,
   TriggerPipelineSnippetModal,
 } from "./components";
 import { triggerPipelineSnippets } from "./components/triggerPipelineSnippets";
@@ -91,6 +92,9 @@ export const FlowControl = (props: FlowControlProps) => {
     updateTestModeEnabled,
     updateSelectedConnectorNodeId,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+
+  const [releasePipelineModalIsOpen, setReleasePipelineModalIsOpen] =
+    React.useState(false);
 
   const { toast } = useToast();
 
@@ -304,6 +308,11 @@ export const FlowControl = (props: FlowControlProps) => {
   return (
     <>
       <div className="absolute right-8 top-8 flex flex-row-reverse gap-x-4">
+        <ReleasePipelineModal
+          open={releasePipelineModalIsOpen}
+          onOpenChange={(open) => setReleasePipelineModalIsOpen(open)}
+          accessToken={accessToken}
+        />
         <Button
           onClick={handleSavePipeline}
           className="gap-x-2"
