@@ -112,7 +112,7 @@ export async function listUserConnectorResourcesQuery({
 export type ListConnectorDefinitionsResponse = {
   connector_definitions: ConnectorDefinition[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listConnectorDefinitionsQuery({
