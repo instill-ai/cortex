@@ -125,12 +125,10 @@ export type CreateUserPipelineReleaseResponse = {
 };
 
 export async function createUserPipelineReleaseMutation({
-  userName,
   pipelineName,
   payload,
   accessToken,
 }: {
-  userName: string;
   pipelineName: string;
   payload: CreateUserPipelineReleasePayload;
   accessToken: Nullable<string>;
@@ -139,7 +137,7 @@ export async function createUserPipelineReleaseMutation({
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<CreateUserPipelineReleaseResponse>(
-      `${userName}/${pipelineName}/releases`,
+      `${pipelineName}/releases`,
       payload
     );
 
