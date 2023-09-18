@@ -1,6 +1,6 @@
-import { env } from "@instill-ai/toolkit";
 import axios from "axios";
 import { Nullable } from "@instill-ai/toolkit";
+import { env } from "./config";
 
 export function createInstillAxiosClient(
   accessToken: Nullable<string>,
