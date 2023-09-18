@@ -16,18 +16,15 @@ export const useCreateUserPipelineRelease = () => {
   return useMutation(
     async ({
       pipelineName,
-      userName,
       payload,
       accessToken,
     }: {
       pipelineName: string;
-      userName: string;
       payload: CreateUserPipelinePayload;
       accessToken: Nullable<string>;
     }) => {
       const pipelineRelease = await createUserPipelineReleaseMutation({
         pipelineName,
-        userName,
         payload,
         accessToken,
       });
