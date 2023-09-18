@@ -7,5 +7,6 @@ export * from "./CustomHandle";
 export * from "./EmptyNode";
 export * from "./EndNode";
 export * from "./PipelineNameForm";
+export * from "./ReleasePipelineModal";
 export * from "./StartNode";
 export * from "./TriggerPipelineSnippetModal";
