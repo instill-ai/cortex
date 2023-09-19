@@ -1,8 +1,8 @@
 {
   "name": "@instill-ai/vdp-sdk",
-  "version": "0.0.4",
+  "version": "0.0.5-rc.0",
   "description": "Instill AI's Typescript SDK",
-  "repository": "https://github.com/instill-ai/design-system/tree/main/packages/toolkit/src/lib/vdp-sdk",
+  "repository": "https://github.com/instill-ai/design-system.git",
   "bugs": "https://github.com/instill-ai/design-system/issues",
   "keywords": [
     "instill-ai",
