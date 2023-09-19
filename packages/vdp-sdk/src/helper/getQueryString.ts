@@ -1,16 +1,21 @@
 import { Nullable } from "../types";
 
-export const getQueryString = (
-  baseUrl: string,
-  pageSize: Nullable<number>,
-  nextPageToken: Nullable<string>,
-  filter: Nullable<string>
-) => {
-  let url = baseUrl;
+export const getQueryString = ({
+  baseURL,
+  pageSize,
+  nextPageToken,
+  filter,
+}: {
+  baseURL: string;
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  filter: Nullable<string>;
+}) => {
+  let url = baseURL;
 
   if (pageSize || nextPageToken || filter) {
-    // Check if the baseUrl already has a query string
-    if (baseUrl.includes("?")) {
+    // Check if the baseURL already has a query string
+    if (baseURL.includes("?")) {
       url += "&";
     } else {
       url += "?";

@@ -1,6 +1,7 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import { Pipeline } from "../pipeline";
+import { Visibility } from "../types";
 
 export type ModelReleaseStage =
   | "RELEASE_STAGE_UNSPECIFIED"
@@ -41,7 +42,8 @@ export type Model = {
   };
   task: string;
   state: ModelState;
-  visibility: string;
+  visibility: Visibility;
+  owner: string;
   create_time: string;
   update_time: string;
 };

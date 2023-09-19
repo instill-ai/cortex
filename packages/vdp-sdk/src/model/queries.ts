@@ -5,7 +5,7 @@ import type {
   ModelDefinition,
   ModelWatchState,
 } from "./types";
-import type { Nullable } from "./type";
+import type { Nullable } from "../../type";
 
 /* -------------------------------------------------------------------------
  * Model Definition
@@ -38,7 +38,7 @@ export async function getModelDefinitionQuery({
 export type ListModelDefinitionsResponse = {
   model_definitions: ModelDefinition[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listModelDefinitionsQuery({
@@ -55,16 +55,15 @@ export async function listModelDefinitionsQuery({
 
     const modelDefinitions: ModelDefinition[] = [];
 
-    const queryString = getQueryString(
-      "/model-definitions",
+    const queryString = getQueryString({
+      baseURL: "/model-definitions",
       pageSize,
       nextPageToken,
-      null
-    );
+      filter: null,
+    });
 
-    const { data } = await client.get<ListModelDefinitionsResponse>(
-      queryString
-    );
+    const { data } =
+      await client.get<ListModelDefinitionsResponse>(queryString);
 
     modelDefinitions.push(...data.model_definitions);
 
@@ -88,11 +87,11 @@ export async function listModelDefinitionsQuery({
  * Model
  * -----------------------------------------------------------------------*/
 
-export type GetModelResponse = {
+export type GetUserModelResponse = {
   model: Model;
 };
 
-export async function getModelQuery({
+export async function getUserModelQuery({
   modelName,
   accessToken,
 }: {
@@ -102,7 +101,7 @@ export async function getModelQuery({
   try {
     const client = createInstillAxiosClient(accessToken, "model");
 
-    const { data } = await client.get<GetModelResponse>(
+    const { data } = await client.get<GetUserModelResponse>(
       `/${modelName}?view=VIEW_FULL`
     );
     return Promise.resolve(data.model);
@@ -114,7 +113,7 @@ export async function getModelQuery({
 export type ListModelsResponse = {
   models: Model[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listModelsQuery({
@@ -131,12 +130,12 @@ export async function listModelsQuery({
 
     const models: Model[] = [];
 
-    const queryString = getQueryString(
-      "/models?view=VIEW_FULL",
+    const queryString = getQueryString({
+      baseURL: "/models?view=VIEW_FULL",
       pageSize,
       nextPageToken,
-      null
-    );
+      filter: null,
+    });
 
     const { data } = await client.get<ListModelsResponse>(queryString);
 
@@ -158,11 +157,61 @@ export async function listModelsQuery({
   }
 }
 
-export type GetModelReadmeQueryResponse = {
+export type ListUserModelsResponse = {
+  models: Model[];
+  next_page_token: string;
+  total_size: number;
+};
+
+export async function listUserModelsQuery({
+  userName,
+  pageSize,
+  nextPageToken,
+  accessToken,
+}: {
+  userName: string;
+  pageSize: Nullable<number>;
+  nextPageToken: Nullable<string>;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "model");
+
+    const models: Model[] = [];
+
+    const queryString = getQueryString({
+      baseURL: `/${userName}/models?view=VIEW_FULL`,
+      pageSize,
+      nextPageToken,
+      filter: null,
+    });
+
+    const { data } = await client.get<ListUserModelsResponse>(queryString);
+
+    models.push(...data.models);
+
+    if (data.next_page_token) {
+      models.push(
+        ...(await listUserModelsQuery({
+          userName,
+          pageSize,
+          accessToken,
+          nextPageToken: data.next_page_token,
+        }))
+      );
+    }
+
+    return Promise.resolve(models);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
+
+export type GetUserModelReadmeQueryResponse = {
   readme: ModelReadme;
 };
 
-export async function getModelReadmeQuery({
+export async function getUserModelReadmeQuery({
   modelName,
   accessToken,
 }: {
@@ -172,7 +221,7 @@ export async function getModelReadmeQuery({
   try {
     const client = createInstillAxiosClient(accessToken, "model");
 
-    const { data } = await client.get<GetModelReadmeQueryResponse>(
+    const { data } = await client.get<GetUserModelReadmeQueryResponse>(
       `/${modelName}/readme`
     );
     return Promise.resolve(data.readme);
@@ -185,7 +234,7 @@ export async function getModelReadmeQuery({
  * Watch Model State
  * -----------------------------------------------------------------------*/
 
-export async function watchModel({
+export async function watchUserModel({
   modelName,
   accessToken,
 }: {

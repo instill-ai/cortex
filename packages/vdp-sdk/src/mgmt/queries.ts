@@ -85,12 +85,12 @@ export async function listApiTokensQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const tokens: ApiToken[] = [];
 
-    const queryString = getQueryString(
-      "/tokens",
+    const queryString = getQueryString({
+      baseURL: "/tokens",
       pageSize,
       nextPageToken,
-      null
-    );
+      filter: null,
+    });
 
     const { data } = await client.get<ListApiTokensResponse>(queryString);
 

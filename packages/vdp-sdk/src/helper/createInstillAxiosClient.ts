@@ -1,10 +1,10 @@
-import { env } from "./utility";
 import axios from "axios";
+import { env } from "./config";
 import { Nullable } from "../types";
 
 export function createInstillAxiosClient(
   accessToken: Nullable<string>,
-  apiGatewayType: "base" | "model" | "vdp"
+  product: "base" | "model" | "vdp"
 ) {
   const headers = accessToken
     ? {
@@ -18,28 +18,19 @@ export function createInstillAxiosClient(
       }
     : {};
 
-  let baseURL: Nullable<string> = null;
-
-  if (apiGatewayType === "base") {
-    baseURL = `${
-      process.env.NEXT_SERVER_BASE_API_GATEWAY_URL ??
-      env("NEXT_PUBLIC_BASE_API_GATEWAY_URL")
-    }/${env("NEXT_PUBLIC_API_VERSION")}`;
-  } else if (apiGatewayType === "model") {
-    baseURL = `${
-      process.env.NEXT_SERVER_MODEL_API_GATEWAY_URL ??
-      env("NEXT_PUBLIC_MODEL_API_GATEWAY_URL")
-    }/${env("NEXT_PUBLIC_API_VERSION")}`;
-  } else if (apiGatewayType === "vdp") {
-    baseURL = `${
-      process.env.NEXT_SERVER_VDP_API_GATEWAY_URL ??
-      env("NEXT_PUBLIC_VDP_API_GATEWAY_URL")
-    }/${env("NEXT_PUBLIC_API_VERSION")}`;
+  if (
+    !process.env.NEXT_SERVER_API_GATEWAY_URL &&
+    !env("NEXT_PUBLIC_API_GATEWAY_URL")
+  ) {
+    throw new Error(
+      "NEXT_SERVER_API_GATEWAY_URL or NEXT_PUBLIC_API_GATEWAY_URL is not defined"
+    );
   }
 
-  if (!baseURL) {
-    throw new Error("Base URL is not defined");
-  }
+  let baseURL: Nullable<string> = `${
+    process.env.NEXT_SERVER_API_GATEWAY_URL ??
+    env("NEXT_PUBLIC_API_GATEWAY_URL")
+  }/${product}/${env("NEXT_PUBLIC_API_VERSION")}`;
 
   return axios.create({
     baseURL,
