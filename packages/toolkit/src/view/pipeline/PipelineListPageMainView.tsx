@@ -70,7 +70,7 @@ export const PipelineListPageMainView = (
             });
             setPipelineId(randomName);
             setPipelineName(`${user.data.name}/pipelines/${randomName}`);
-            router.push(`/pipelines/${randomName}`);
+            router.push(`/${user.data.id}/pipelines/${randomName}`);
             updatePipelineIsNew(() => true);
           }}
         >
