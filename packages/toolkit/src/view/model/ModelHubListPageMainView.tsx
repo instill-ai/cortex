@@ -1,7 +1,12 @@
 import dynamic from "next/dynamic";
 import { Button, Icons } from "@instill-ai/design-system";
 
-import { GeneralPageProp, useModels, useWatchUserModels } from "../../lib";
+import {
+  GeneralPageProp,
+  useModels,
+  useUser,
+  useWatchUserModels,
+} from "../../lib";
 
 const ModelsTable = dynamic(
   () => import("./ModelsTable").then((mod) => mod.ModelsTable),
@@ -19,12 +24,17 @@ export const ModelHubListPageMainView = (
    * Query resource data
    * -----------------------------------------------------------------------*/
 
-  const models = useModels({
+  const user = useUser({
+    accessToken,
     enabled: enableQuery,
+  });
+  const models = useModels({
+    enabled: enableQuery && user.isSuccess,
     accessToken,
   });
   const modelsWatchState = useWatchUserModels({
-    modelNames: models.isSuccess ? models.data.map((p) => p.name) : [],
+    modelNames:
+      user.isSuccess && models.isSuccess ? models.data.map((p) => p.name) : [],
     enabled: enableQuery && models.isSuccess && models.data.length > 0,
     accessToken,
   });
@@ -44,7 +54,10 @@ export const ModelHubListPageMainView = (
           className="gap-x-2"
           variant="primary"
           size="lg"
-          onClick={() => router.push("/model-hub/create")}
+          onClick={() => {
+            if (!user.isSuccess) return;
+            router.push(`/${user.data.id}/model-hub/create`);
+          }}
         >
           <Icons.Plus className="h-5 w-5 stroke-semantic-bg-primary" />
           Add Model
