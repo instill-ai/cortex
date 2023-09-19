@@ -1,4 +1,4 @@
-import { Nullable } from "@instill-ai/toolkit";
+import { Nullable } from "../types";
 import { createInstillAxiosClient, getQueryString } from "../helper";
 import {
   Connector,

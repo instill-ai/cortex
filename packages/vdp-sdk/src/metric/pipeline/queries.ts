@@ -1,4 +1,4 @@
-import { Nullable } from "@instill-ai/toolkit";
+import { Nullable } from "../../../type";
 import { createInstillAxiosClient, getQueryString } from "../../helper";
 import {
   PipelineTriggerRecord,

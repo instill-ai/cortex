@@ -5,7 +5,7 @@ import type {
   ModelDefinition,
   ModelWatchState,
 } from "./types";
-import type { Nullable } from "@instill-ai/toolkit";
+import type { Nullable } from "./type";
 
 /* -------------------------------------------------------------------------
  * Model Definition

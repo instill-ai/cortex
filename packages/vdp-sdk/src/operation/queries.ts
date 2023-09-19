@@ -1,6 +1,6 @@
 import { Operation } from "./types";
 import { createInstillAxiosClient } from "../helper";
-import { Nullable } from "@instill-ai/toolkit";
+import { Nullable } from "../types";
 
 export type GetModelOperationResponse = {
   operation: Operation;

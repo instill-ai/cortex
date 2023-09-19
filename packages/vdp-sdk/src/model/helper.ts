@@ -1,4 +1,4 @@
-import { Nullable } from "@instill-ai/toolkit";
+import { Nullable } from "../types";
 import { watchModel } from "./queries";
 import { ModelHubPreset } from "./types";
 

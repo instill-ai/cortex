@@ -17,3 +17,5 @@ export type Violation = {
 };
 
 export type ResourceState = ModelState | PipelineState | ConnectorState;
+
+export type Nullable<T> = T | null;
