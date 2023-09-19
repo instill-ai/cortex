@@ -9,13 +9,13 @@ import {
 export type ListPipelineTriggerRecordsResponse = {
   pipeline_trigger_records: PipelineTriggerRecord[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export type ListTriggeredPipelinesResponse = {
   pipeline_trigger_table_records: TriggeredPipeline[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export type ListPipelinesChartResponse = {
@@ -37,16 +37,15 @@ export async function listPipelineTriggerRecordsQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const triggers: PipelineTriggerRecord[] = [];
 
-    const queryString = getQueryString(
-      `/metrics/vdp/pipeline/triggers`,
+    const queryString = getQueryString({
+      baseURL: `/metrics/vdp/pipeline/triggers`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
-    const { data } = await client.get<ListPipelineTriggerRecordsResponse>(
-      queryString
-    );
+    const { data } =
+      await client.get<ListPipelineTriggerRecordsResponse>(queryString);
 
     triggers.push(...data.pipeline_trigger_records);
 
@@ -82,16 +81,15 @@ export async function listTriggeredPipelineQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const pipelines: TriggeredPipeline[] = [];
 
-    const queryString = getQueryString(
-      `/metrics/vdp/pipeline/tables`,
+    const queryString = getQueryString({
+      baseURL: `/metrics/vdp/pipeline/tables`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
-    const { data } = await client.get<ListTriggeredPipelinesResponse>(
-      queryString
-    );
+    const { data } =
+      await client.get<ListTriggeredPipelinesResponse>(queryString);
 
     pipelines.push(...data.pipeline_trigger_table_records);
 
@@ -127,12 +125,12 @@ export async function listTriggeredPipelineChartQuery({
     const client = createInstillAxiosClient(accessToken, "base");
     const pipelinesChart: PipelinesChart[] = [];
 
-    const queryString = getQueryString(
-      `/metrics/vdp/pipeline/charts`,
+    const queryString = getQueryString({
+      baseURL: `/metrics/vdp/pipeline/charts`,
       pageSize,
       nextPageToken,
-      filter
-    );
+      filter,
+    });
 
     const { data } = await client.get<ListPipelinesChartResponse>(queryString);
     pipelinesChart.push(...data.pipeline_trigger_chart_records);

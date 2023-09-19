@@ -1,12 +1,11 @@
-import { Operation } from "../operation";
 import { createInstillAxiosClient } from "../helper";
 import { Nullable } from "../../type";
 
-export type DeployModelResponse = {
-  operation: Operation;
+export type DeployUserModelResponse = {
+  model_id: string;
 };
 
-export async function deployModelAction({
+export async function deployUserModelAction({
   modelName,
   accessToken,
 }: {
@@ -16,20 +15,20 @@ export async function deployModelAction({
   try {
     const client = createInstillAxiosClient(accessToken, "model");
 
-    const { data } = await client.post<DeployModelResponse>(
+    const { data } = await client.post<DeployUserModelResponse>(
       `/${modelName}/deploy`
     );
-    return Promise.resolve(data.operation);
+    return Promise.resolve(data.model_id);
   } catch (err) {
     return Promise.reject(err);
   }
 }
 
-export type UnDeployModelResponse = {
-  operation: Operation;
+export type UndeployUserModelResponse = {
+  model_id: string;
 };
 
-export async function unDeployModeleAction({
+export async function undeployUserModeleAction({
   modelName,
   accessToken,
 }: {
@@ -39,10 +38,10 @@ export async function unDeployModeleAction({
   try {
     const client = createInstillAxiosClient(accessToken, "model");
 
-    const { data } = await client.post<UnDeployModelResponse>(
+    const { data } = await client.post<UndeployUserModelResponse>(
       `/${modelName}/undeploy`
     );
-    return Promise.resolve(data.operation);
+    return Promise.resolve(data.model_id);
   } catch (err) {
     return Promise.reject(err);
   }

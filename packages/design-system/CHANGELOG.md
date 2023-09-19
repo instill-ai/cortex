@@ -1,5 +1,19 @@
 # @instill-ai/design-system
 
+## [0.49.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.49.0...@instill-ai/design-system-v0.49.1) (2023-09-17)
+
+
+### Bug Fixes
+
+* fix popover style ([#858](https://github.com/instill-ai/design-system/issues/858)) ([8180b68](https://github.com/instill-ai/design-system/commit/8180b68397734526bbb9638253e71c13bcd53cb5))
+
+## [0.49.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.48.0...@instill-ai/design-system-v0.49.0) (2023-09-13)
+
+
+### Features
+
+* component centric revamp ([#849](https://github.com/instill-ai/design-system/issues/849)) ([ec5925c](https://github.com/instill-ai/design-system/commit/ec5925c80a8a94376cebe24a1bdb22ba888e271b))
+
 ## [0.48.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.47.4...@instill-ai/design-system-v0.48.0) (2023-09-09)
 
 

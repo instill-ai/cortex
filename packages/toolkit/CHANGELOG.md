@@ -1,5 +1,38 @@
 # Changelog
 
+## [0.67.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.67.1...@instill-ai/toolkit-v0.67.2) (2023-09-14)
+
+
+### Bug Fixes
+
+* fix Blockchainform validation ([#856](https://github.com/instill-ai/design-system/issues/856)) ([b2e7d78](https://github.com/instill-ai/design-system/commit/b2e7d78db1b99fec49172ddc262f1321b701cd94))
+
+## [0.67.1](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.67.0...@instill-ai/toolkit-v0.67.1) (2023-09-13)
+
+
+### Bug Fixes
+
+* fix snippet typo ([#854](https://github.com/instill-ai/design-system/issues/854)) ([5948e39](https://github.com/instill-ai/design-system/commit/5948e39297d16794fc8ce5a8c71448448539b979))
+
+## [0.67.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.66.0...@instill-ai/toolkit-v0.67.0) (2023-09-13)
+
+
+### Features
+
+* support object and object_array ([#851](https://github.com/instill-ai/design-system/issues/851)) ([50fa8a6](https://github.com/instill-ai/design-system/commit/50fa8a6078412bc7f46036098a587228464f3d13))
+
+
+### Bug Fixes
+
+* fix data connector issue ([#853](https://github.com/instill-ai/design-system/issues/853)) ([2124dd7](https://github.com/instill-ai/design-system/commit/2124dd780f4c15642d34e15d822b2317568c74ff))
+
+## [0.66.0](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.2...@instill-ai/toolkit-v0.66.0) (2023-09-13)
+
+
+### Features
+
+* component centric revamp ([#849](https://github.com/instill-ai/design-system/issues/849)) ([ec5925c](https://github.com/instill-ai/design-system/commit/ec5925c80a8a94376cebe24a1bdb22ba888e271b))
+
 ## [0.65.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.65.1...@instill-ai/toolkit-v0.65.2) (2023-08-23)
 
 

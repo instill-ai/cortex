@@ -1,8 +1,5 @@
 import * as React from "react";
-import {
-  BasicSingleSelect,
-  SingleSelectOption,
-} from "@instill-ai/design-system";
+import { Select, SingleSelectOption } from "@instill-ai/design-system";
 import {
   dot,
   getConditionFormPath,
@@ -144,9 +141,11 @@ export const OneOfConditionSection = ({
   }, [selectedConditionMap, formTree.path, conditionOptions, formIsDirty]);
 
   const onConditionChange = React.useCallback(
-    (option: Nullable<SingleSelectOption>) => {
+    (value: string) => {
+      const option = conditionOptions.find((e) => e.value === value) ?? null;
+
       if (option) {
-        const selectedCondition = formTree.conditions[option.label] ?? null;
+        const selectedCondition = formTree.conditions[option.label];
         setSelectedConditionOption(option);
 
         const targetConstField = selectedCondition.properties.find(
@@ -206,6 +205,7 @@ export const OneOfConditionSection = ({
       conditionPath,
       formTree.conditions,
       setFormIsDirty,
+      conditionOptions,
     ]
   );
 
@@ -213,18 +213,38 @@ export const OneOfConditionSection = ({
     <div className="flex w-full flex-col border border-instillGrey50 p-5">
       <div className="mb-5 flex w-full flex-row gap-x-5">
         <h3 className="my-auto text-black text-instill-h3">{formTree.title}</h3>
-        <div className="flex-1">
-          <BasicSingleSelect
-            id={formTree.path}
+        <div className="flex flex-1 flex-col space-y-2">
+          <label className="text-semantic-fg-primary product-body-text-2-regular">
+            {formTree.title ?? null}
+          </label>
+          <Select.Root
+            onValueChange={onConditionChange}
+            value={selectedConditionOption?.value}
             disabled={disableAll}
-            label={formTree.title ?? null}
-            error={
-              errors ? (conditionPath ? errors[conditionPath] : null) : null
-            }
-            value={selectedConditionOption}
-            options={conditionOptions}
-            onChange={onConditionChange}
-          />
+          >
+            <Select.Trigger className="w-full !rounded-none">
+              <Select.Value />
+            </Select.Trigger>
+            <Select.Content>
+              {conditionOptions.map((option) => (
+                <Select.Item
+                  className="text-semantic-fg-primary product-body-text-2-regular group-hover:text-semantic-bg-primary data-[highlighted]:text-semantic-bg-primary"
+                  key={option.value}
+                  value={option.value}
+                >
+                  <p className="my-auto">{option.label}</p>
+                </Select.Item>
+              ))}
+            </Select.Content>
+          </Select.Root>
+          <p className="product-body-text-3-regular text-[#1D243380]">
+            {formTree.description ?? ""}
+          </p>
+          {errors ? (
+            <p className="product-body-text-3-regular text-semantic-error-default">
+              {conditionPath ? errors[conditionPath] : null}
+            </p>
+          ) : null}
         </div>
       </div>
       {selectedConditionOption

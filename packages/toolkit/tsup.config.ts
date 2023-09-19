@@ -9,6 +9,11 @@ export default defineConfig({
     ".js": "jsx",
   },
   esbuildOptions(options) {
-    options.external = ["react", "react-dom"];
+    options.external = [
+      "react",
+      "react-dom",
+      "react-markdown",
+      "remark-frontmatter",
+    ];
   },
 });

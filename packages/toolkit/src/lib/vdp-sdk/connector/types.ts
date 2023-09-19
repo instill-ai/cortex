@@ -1,53 +1,49 @@
 /* eslint-disable  @typescript-eslint/no-explicit-any */
 
 import { Pipeline } from "../pipeline";
+import { Spec } from "../types";
 
-export type ConnectorState =
+export type ConnectorResourceState =
   | "STATE_CONNECTED"
   | "STATE_DISCONNECTED"
   | "STATE_ERROR"
   | "STATE_UNSPECIFIED";
 
-export type ConnectorVisibility =
+export type ConnectorResourceVisibility =
   | "VISIBILITY_UNSPECIFIED"
   | "VISIBILITY_PRIVATE"
   | "VISIBILITY_PUBLIC";
 
-export type ConnectorType =
+export type ConnectorResourceType =
   | "CONNECTOR_TYPE_UNSPECIFIED"
   | "CONNECTOR_TYPE_OPERATOR"
   | "CONNECTOR_TYPE_DATA"
   | "CONNECTOR_TYPE_AI"
   | "CONNECTOR_TYPE_BLOCKCHAIN";
 
-export type Connector = {
+export type ConnectorResource = {
   name: string;
   uid: string;
   id: string;
   connector_definition: null;
   connector_definition_name: string;
-  connector_type: ConnectorType;
+  type: ConnectorResourceType;
   task: string;
   description: string;
   configuration: Record<string, any> | Record<string, never>;
-  state: ConnectorState;
+  state: ConnectorResourceState;
   tombstone: boolean;
   user: string;
   create_time: string;
   update_time: string;
-  visibility: ConnectorVisibility;
+  visibility: ConnectorResourceVisibility;
 };
 
-export type ConnectorWithDefinition = Omit<
-  Connector,
-  "connector_definition" | "configuration"
+export type ConnectorResourceWithDefinition = Omit<
+  ConnectorResource,
+  "connector_definition"
 > & {
   connector_definition: ConnectorDefinition;
-  configuration: Record<string, any> | Record<string, never>;
-};
-
-export type ConnectorWithPipelines = ConnectorWithDefinition & {
-  pipelines: Pipeline[];
 };
 
 export type ConnectorDefinition = {
@@ -58,11 +54,8 @@ export type ConnectorDefinition = {
   documentation_url: string;
   icon: string;
   icon_url: string;
-  connector_type: ConnectorType;
-  spec: {
-    documentation_url: string;
-    connection_specification: Record<string, any>;
-  };
+  connector_type: ConnectorResourceType;
+  spec: Spec;
   tombstone: boolean;
   public: boolean;
   custom: boolean;
@@ -70,8 +63,15 @@ export type ConnectorDefinition = {
   vendor_attributes: Record<string, any>;
 };
 
-export type ConnectorWatchState = {
-  state: ConnectorState;
+export type ConnectorResourceWatchState = {
+  state: ConnectorResourceState;
 };
 
-export type ConnectorsWatchState = Record<string, ConnectorWatchState>;
+export type ConnectorResourcesWatchState = Record<
+  string,
+  ConnectorResourceWatchState
+>;
+
+export type ConnectorResourceWithWatchState = {
+  watchState: ConnectorResourceState;
+} & ConnectorResourceWithDefinition;

@@ -12,7 +12,7 @@ export const useAirbyteFormTree = (
     }
 
     const formTree = transformAirbyteSchemaToAirbyteFormTree(
-      definition.spec.connection_specification
+      definition.spec.resource_specification
     );
 
     return formTree;

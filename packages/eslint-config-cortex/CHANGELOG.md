@@ -1,5 +1,12 @@
 # eslint-config-cortex
 
+## [0.5.0](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.4.1...@instill-ai/eslint-config-cortex-v0.5.0) (2023-09-13)
+
+
+### Features
+
+* component centric revamp ([#849](https://github.com/instill-ai/design-system/issues/849)) ([ec5925c](https://github.com/instill-ai/design-system/commit/ec5925c80a8a94376cebe24a1bdb22ba888e271b))
+
 ## [0.4.1](https://github.com/instill-ai/design-system/compare/@instill-ai/eslint-config-cortex-v0.4.0...@instill-ai/eslint-config-cortex-v0.4.1) (2023-07-19)
 
 

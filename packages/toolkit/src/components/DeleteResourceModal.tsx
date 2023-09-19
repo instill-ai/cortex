@@ -7,7 +7,7 @@ import {
 } from "@instill-ai/design-system";
 import {
   useModalStore,
-  type ConnectorWithDefinition,
+  type ConnectorResourceWithDefinition,
   type Model,
   type Pipeline,
   type Nullable,
@@ -15,7 +15,7 @@ import {
 } from "../lib";
 
 export type DeleteResourceModalProps = {
-  resource: Nullable<ConnectorWithDefinition | Pipeline | Model>;
+  resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>;
   handleDeleteResource: () => void;
 };
 
@@ -45,19 +45,19 @@ export const DeleteResourceModal = ({
     let description: string;
 
     if ("connector_definition" in resource) {
-      if (resource.connector_type === "CONNECTOR_TYPE_OPERATOR") {
+      if (resource.type === "CONNECTOR_TYPE_OPERATOR") {
         title = "Delete This Operator";
         description =
           "This action cannot be undone. This will permanently delete the operator.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_DATA") {
+      } else if (resource.type === "CONNECTOR_TYPE_DATA") {
         title = "Delete This Data";
         description =
           "This action cannot be undone. This will permanently delete the data.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_AI") {
+      } else if (resource.type === "CONNECTOR_TYPE_AI") {
         title = "Delete This AI";
         description =
           "This action cannot be undone. This will permanently delete the AI.";
-      } else if (resource.connector_type === "CONNECTOR_TYPE_BLOCKCHAIN") {
+      } else if (resource.type === "CONNECTOR_TYPE_BLOCKCHAIN") {
         title = "Delete This Blockchain";
         description =
           "This action cannot be undone. This will permanently delete the blockchain.";

@@ -1,11 +1,11 @@
-import { PipelineMode, PipelineState } from "../../pipeline";
+import { PipelineMode, PipelineReleaseState } from "../../pipeline";
 
 export type PipelineTriggerCount = {
   pipeline_id: string;
   pipeline_uid: string;
   pipeline_completed: number;
   pipeline_errored: number;
-  watchState: PipelineState;
+  watchState: PipelineReleaseState;
   counts: Count[];
 };
 
@@ -14,18 +14,18 @@ export type TriggeredPipeline = {
   pipeline_uid: string;
   trigger_count_completed: string;
   trigger_count_errored: string;
-  watchState?: PipelineState;
+  watchState?: PipelineReleaseState;
 };
 
 export type PipelinesChart = {
   pipeline_id: string;
   pipeline_uid: string;
   trigger_mode: "MODE_SYNC" | "MODE_ASYNC";
-  status: PipelineState;
+  status: PipelineReleaseState;
   time_buckets: string[];
   trigger_counts: number[] | string[];
   compute_time_duration: number[] | string[];
-  watchState?: PipelineState;
+  watchState?: PipelineReleaseState;
 };
 
 export type PipelineTriggerStatus =

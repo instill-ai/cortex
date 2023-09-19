@@ -1,7 +1,6 @@
 import { SingleSelectOption } from "@instill-ai/design-system";
-import { PipelineTriggersStatusSummary } from "../vdp-sdk";
 
-export const timeLineOptions: SingleSelectOption[] = [
+const timeLineOptions: SingleSelectOption[] = [
   {
     label: "Today",
     value: "24h",
@@ -20,7 +19,7 @@ export const timeLineOptions: SingleSelectOption[] = [
   },
 ];
 
-export const modeOptions: SingleSelectOption[] = [
+const modeOptions: SingleSelectOption[] = [
   {
     label: "ALL",
     value: "all",
@@ -35,7 +34,7 @@ export const modeOptions: SingleSelectOption[] = [
   },
 ];
 
-export const statusOptions: SingleSelectOption[] = [
+const statusOptions: SingleSelectOption[] = [
   {
     label: "ALL",
     value: "all",
@@ -54,28 +53,8 @@ export const statusOptions: SingleSelectOption[] = [
   },
 ];
 
-export const defaultSelectOption: SingleSelectOption = {
-  label: "ALL",
-  value: "all",
+export const dashboardOptions = {
+  timeLine: timeLineOptions,
+  mode: modeOptions,
+  status: statusOptions,
 };
-
-export const defaultTimeOption: SingleSelectOption = {
-  label: "Today",
-  value: "24h",
-};
-
-export const defaultPipelineTriggersStatusSummary: PipelineTriggersStatusSummary =
-  {
-    completed: {
-      statusType: "STATUS_COMPLETED",
-      amount: 0,
-      type: "pipeline",
-      delta: 0,
-    },
-    errored: {
-      statusType: "STATUS_ERRORED",
-      amount: 0,
-      type: "pipeline",
-      delta: 0,
-    },
-  };

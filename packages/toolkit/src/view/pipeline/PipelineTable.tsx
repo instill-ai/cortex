@@ -6,8 +6,8 @@ import {
   ModelsCell,
   TableError,
   SkeletonCell,
-  type TableHeadItem,
   TextCell,
+  type TableHeadItem,
 } from "../../components";
 import { Pipeline, getComponentsFromPipelineRecipe } from "../../lib";
 
@@ -60,17 +60,17 @@ export const PipelineTable = (props: PipelineTableProps) => {
 
   const sourceComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_OPERATOR",
+    connectorResourceType: "CONNECTOR_TYPE_OPERATOR",
   });
 
   const destinationComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_DATA",
+    connectorResourceType: "CONNECTOR_TYPE_DATA",
   });
 
   const aiComponent = getComponentsFromPipelineRecipe({
     recipe: pipeline.recipe,
-    connectorType: "CONNECTOR_TYPE_AI",
+    connectorResourceType: "CONNECTOR_TYPE_AI",
   });
 
   return (
@@ -90,11 +90,11 @@ export const PipelineTable = (props: PipelineTableProps) => {
             </>
           ) : (
             <>
-              {sourceComponent[0] ? (
+              {sourceComponent[0] && sourceComponent[0].resource ? (
                 <ConnectionTypeCell
                   width={null}
                   connectorDefinition={
-                    sourceComponent[0].resource_detail.connector_definition
+                    sourceComponent[0].resource.connector_definition
                   }
                   connectorName={sourceComponent[0].resource_name}
                   padding="py-2 pl-6"
@@ -103,11 +103,11 @@ export const PipelineTable = (props: PipelineTableProps) => {
                 <TextCell text="Not set" width={null} padding="py-2" />
               )}
               <ModelsCell models={aiComponent} width={null} padding="py-2" />
-              {destinationComponent[0] ? (
+              {destinationComponent[0] && destinationComponent[0].resource ? (
                 <ConnectionTypeCell
                   width={null}
                   connectorDefinition={
-                    destinationComponent[0].resource_detail.connector_definition
+                    destinationComponent[0].resource.connector_definition
                   }
                   connectorName={destinationComponent[0].resource_name}
                   padding="py-2 pr-6"
