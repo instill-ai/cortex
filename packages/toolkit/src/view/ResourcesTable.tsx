@@ -91,6 +91,8 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
       header: () => <div className="min-w-[650px] text-left">Pipelines</div>,
       cell: ({ row }) => {
         const definition = row.original.connector_definition;
+        const resourceNameFragments = row.original.name.split("/");
+        const resourceLink = `/${resourceNameFragments[1]}/resources/${resourceNameFragments[3]}`;
         return (
           <div className="flex flex-row gap-x-3">
             <div className="my-auto flex h-8 w-8 items-center justify-center rounded-full bg-semantic-bg-secondary">
