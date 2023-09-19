@@ -1,4 +1,4 @@
-import Elk, { ElkExtendedEdge, ElkNode } from "elkjs";
+import ELK, { ElkExtendedEdge, ElkNode } from "elkjs/lib/elk.bundled.js";
 import { Edge, Node, Position } from "reactflow";
 import { NodeData } from "../type";
 
@@ -8,7 +8,7 @@ const CONNECTOR_NODE_DIMENSION = {
   height: 305,
 };
 
-const elk = new Elk({
+const elk = new ELK({
   defaultLayoutOptions: {
     "elk.algorithm": "layered",
     "elk.direction": "RIGHT",
