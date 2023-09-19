@@ -5,7 +5,7 @@ import type {
   ModelDefinition,
   ModelWatchState,
 } from "./types";
-import type { Nullable } from "../../type";
+import type { Nullable } from "../types";
 
 /* -------------------------------------------------------------------------
  * Model Definition

@@ -1,4 +1,4 @@
-import { AirbyteFieldValues } from "../../airbytes";
+import { AirbyteFieldValues } from "@instill-ai/toolkit";
 import { Nullable } from "../types";
 import { createInstillAxiosClient } from "../helper";
 import { ConnectorResource } from "./types";
