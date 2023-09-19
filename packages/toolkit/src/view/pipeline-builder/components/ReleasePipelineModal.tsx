@@ -6,6 +6,7 @@ import {
   Icons,
   Input,
   Textarea,
+  Tooltip,
   useToast,
 } from "@instill-ai/design-system";
 import {
@@ -109,14 +110,31 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
 
   return (
     <Dialog.Root open={open} onOpenChange={(e) => onOpenChange(e)}>
-      <Dialog.Trigger asChild>
-        <Button
-          variant="primary"
-          size="lg"
-          disabled={pipelineRecipeIsDirty || pipelineIsNew}
-        >
-          Release
-        </Button>
+      <Dialog.Trigger asChild={true}>
+        <Tooltip.Provider>
+          <Tooltip.Root>
+            <Tooltip.Trigger asChild={true}>
+              <Button
+                variant="primary"
+                size="lg"
+                disabled={pipelineRecipeIsDirty || pipelineIsNew}
+              >
+                Release
+              </Button>
+            </Tooltip.Trigger>
+            <Tooltip.Portal>
+              <Tooltip.Content className="!px-3 !py-2 rounded-sm !product-body-text-4-semibold bg-semantic-bg-primary">
+                Please save the pipeline first
+                <Tooltip.Arrow
+                  className="fill-semantic-bg-primary"
+                  offset={10}
+                  width={18}
+                  height={12}
+                />
+              </Tooltip.Content>
+            </Tooltip.Portal>
+          </Tooltip.Root>
+        </Tooltip.Provider>
       </Dialog.Trigger>
       <Dialog.Content className="!max-w-[560px]">
         <div className="flex flex-col">

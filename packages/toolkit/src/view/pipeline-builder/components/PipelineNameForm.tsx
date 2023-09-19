@@ -192,7 +192,10 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   return (
     <div className="flex w-full pl-4">
       <div className="flex flex-row gap-x-3">
-        <Link className="flex flex-row gap-x-3" href="/pipelines">
+        <Link
+          className="flex flex-row gap-x-3"
+          href={`/${user.data?.id}/pipelines`}
+        >
           <Icons.ArrowLeft className="my-auto h-5 w-5 stroke-semantic-fg-secondary" />
           <p className="my-auto text-semantic-fg-secondary product-body-text-3-medium">
             Pipelines

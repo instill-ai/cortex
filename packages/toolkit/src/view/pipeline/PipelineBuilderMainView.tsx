@@ -121,9 +121,10 @@ export const PipelineBuilderMainView = (
 
   React.useEffect(() => {
     if (!pipelineIsNew && pipeline.isError) {
-      router.push("/pipelines");
+      if (user.isSuccess) {
+      }
     }
-  }, [pipeline.isError, pipelineIsNew, router]);
+  }, [pipeline.isError, pipelineIsNew, router, user.isSuccess, user.data]);
 
   /* -------------------------------------------------------------------------
    * Set initial pipeline node data if pipeline is new
