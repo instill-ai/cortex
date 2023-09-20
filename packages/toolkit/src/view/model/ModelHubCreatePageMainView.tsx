@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { PageTitle } from "../../components";
 import { GeneralPageProp } from "../../lib";
 import { CreateModelForm } from "./CreateModelForm";
@@ -10,6 +11,7 @@ export const ModelHubCreatePageMainView = (
   props: ModelHubCreatePageMainViewProps
 ) => {
   const { accessToken, enableQuery, router, disabledCreateModel } = props;
+  const { entity } = router.query;
 
   return (
     <div className="flex flex-col">
@@ -22,7 +24,7 @@ export const ModelHubCreatePageMainView = (
         width="w-full"
         onCreate={(initStore) => {
           initStore();
-          router.push("/model-hub");
+          router.push(`/${entity}/model-hub`);
         }}
         accessToken={accessToken}
         enabledQuery={enableQuery}
