@@ -1,5 +1,17 @@
 # @instill-ai/design-system
 
+## [0.50.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.49.1...@instill-ai/design-system-v0.50.0) (2023-09-20)
+
+
+### Features
+
+* **design-system:** add Tabs component ([#864](https://github.com/instill-ai/design-system/issues/864)) ([3180283](https://github.com/instill-ai/design-system/commit/318028392cbfc0358794ec9c7e2bb26577e9202c))
+
+
+### Bug Fixes
+
+* fix lint issue in the design-system ([#867](https://github.com/instill-ai/design-system/issues/867)) ([820de08](https://github.com/instill-ai/design-system/commit/820de08bacb464992b9057f6919352f88525893e))
+
 ## [0.49.1](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.49.0...@instill-ai/design-system-v0.49.1) (2023-09-17)
 
 
