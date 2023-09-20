@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.51.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.50.0...@instill-ai/design-system-v0.51.0) (2023-09-20)
+
+
+### Features
+
+* add copy06 icon and fix Tabs overflow issue ([#869](https://github.com/instill-ai/design-system/issues/869)) ([64ecf11](https://github.com/instill-ai/design-system/commit/64ecf11df830bdba6536e346023225d3c7763a0e))
+
 ## [0.50.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.49.1...@instill-ai/design-system-v0.50.0) (2023-09-20)
 
 
