@@ -8,7 +8,6 @@ import {
 
 import { ColumnDef } from "@tanstack/react-table";
 import { isAxiosError } from "axios";
-import Link from "next/link";
 import * as React from "react";
 import {
   ConnectorResourceWithDefinition,
@@ -18,13 +17,14 @@ import {
   formatDate,
   getInstillApiErrorMessage,
   useDeleteUserConnectorResource,
-} from "../lib";
+} from "../../lib";
 import {
   GeneralDeleteResourceModal,
   ImageWithFallback,
   SortIcon,
+  TableCell,
   TableError,
-} from "../components";
+} from "../../components";
 
 export type ResourcesTableProps = {
   connectorResources: ConnectorResourceWithDefinition[];
@@ -91,29 +91,27 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
       header: () => <div className="min-w-[650px] text-left">Pipelines</div>,
       cell: ({ row }) => {
         const definition = row.original.connector_definition;
+        const resourceNameFragments = row.original.name.split("/");
+        const resourceLink = `/${resourceNameFragments[1]}/resources/${resourceNameFragments[3]}`;
         return (
-          <div className="flex flex-row gap-x-3">
-            <div className="my-auto flex h-8 w-8 items-center justify-center rounded-full bg-semantic-bg-secondary">
-              <ImageWithFallback
-                src={`/icons/${definition.vendor}/${definition.icon}`}
-                width={16}
-                height={16}
-                alt={`${definition.title}-icon`}
-                fallbackImg={
-                  <Icons.Box className="h-8 w-8 stroke-semantic-fg-primary" />
-                }
-              />
-            </div>
-            <Link href={`/resources/${row.getValue("id")}`}>
-              <div className="group flex cursor-pointer flex-col">
-                <p className="text-semantic-fg-primary product-body-text-3-semibold group-hover:!underline">
-                  {row.getValue("id")}
-                </p>
-                <p className="text-[#475467] product-body-text-3-regular">
-                  {definition.id}
-                </p>
-              </div>
-            </Link>
+          <div className="text-left">
+            <TableCell
+              primaryLink={resourceLink}
+              primaryText={row.getValue("id")}
+              secondaryText={definition.id}
+              secondaryLink={null}
+              iconElement={
+                <ImageWithFallback
+                  src={`/icons/${definition.vendor}/${definition.icon}`}
+                  width={16}
+                  height={16}
+                  alt={`${definition.title}-icon`}
+                  fallbackImg={
+                    <Icons.Box className="h-8 w-8 stroke-semantic-fg-primary" />
+                  }
+                />
+              }
+            />
           </div>
         );
       },
