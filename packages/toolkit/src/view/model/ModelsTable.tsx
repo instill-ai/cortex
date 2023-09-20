@@ -33,10 +33,14 @@ export const ModelsTable = (props: ModelsTableProps) => {
         const { getIcon } = getModelDefinitionToolkit(
           row.original.model_definition
         );
+
+        const modelNameFragments = row.original.name.split("/");
+        const modelLink = `/${modelNameFragments[1]}/model-hub/${modelNameFragments[3]}`;
+
         return (
           <div className="text-left">
             <TableCell
-              primaryLink={`/model-hub/${row.getValue("id")}`}
+              primaryLink={modelLink}
               primaryText={row.getValue("id")}
               secondaryLink={null}
               secondaryText={row.original.model_definition}

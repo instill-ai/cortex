@@ -17,6 +17,7 @@ export const DashboardPipelinesTable = (
   props: DashboardPipelinesTableProps
 ) => {
   const router = useRouter();
+  const { entity } = router.query;
   const { days } = router.query;
   const { pipelineTriggerCounts, isError, isLoading } = props;
 
@@ -34,9 +35,9 @@ export const DashboardPipelinesTable = (
               className="h-5 w-5"
             />
             <Link
-              href={`/dashboard/pipeline/${row.getValue("pipeline_id")}${
-                days ? "?days=" + days : ""
-              }`}
+              href={`/${entity}/dashboard/pipeline/${row.getValue(
+                "pipeline_id"
+              )}${days ? "?days=" + days : ""}`}
               className="hover:underline"
             >
               {row.getValue("pipeline_id")}
