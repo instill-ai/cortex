@@ -19,22 +19,18 @@ export const ModelHubListPageMainView = (
   props: ModelHubListPageMainViewProps
 ) => {
   const { router, enableQuery, accessToken } = props;
+  const { entity } = router.query;
 
   /* -------------------------------------------------------------------------
    * Query resource data
    * -----------------------------------------------------------------------*/
 
-  const user = useUser({
-    accessToken,
-    enabled: enableQuery,
-  });
   const models = useModels({
-    enabled: enableQuery && user.isSuccess,
+    enabled: enableQuery,
     accessToken,
   });
   const modelsWatchState = useWatchUserModels({
-    modelNames:
-      user.isSuccess && models.isSuccess ? models.data.map((p) => p.name) : [],
+    modelNames: models.isSuccess ? models.data.map((p) => p.name) : [],
     enabled: enableQuery && models.isSuccess && models.data.length > 0,
     accessToken,
   });
@@ -55,8 +51,7 @@ export const ModelHubListPageMainView = (
           variant="primary"
           size="lg"
           onClick={() => {
-            if (!user.isSuccess) return;
-            router.push(`/${user.data.id}/model-hub/create`);
+            router.push(`/${entity}/model-hub/create`);
           }}
         >
           <Icons.Plus className="h-5 w-5 stroke-semantic-bg-primary" />

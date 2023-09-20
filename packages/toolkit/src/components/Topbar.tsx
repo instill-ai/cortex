@@ -1,6 +1,8 @@
 import cn from "clsx";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactElement } from "react";
+import { env } from "../lib";
 
 export type TopbarProps = {
   logo: ReactElement;
@@ -10,6 +12,9 @@ export type TopbarProps = {
 
 export const Topbar = (props: TopbarProps) => {
   const { children, className, logo } = props;
+  const router = useRouter();
+  const { entity } = router.query;
+
   return (
     <div
       className={cn(
@@ -17,7 +22,12 @@ export const Topbar = (props: TopbarProps) => {
         className
       )}
     >
-      <Link href="/pipelines" className="my-auto pr-8">
+      <Link
+        href={
+          entity ? `/${entity}/pipelines` : env("NEXT_PUBLIC_CONSOLE_BASE_URL")
+        }
+        className="my-auto pr-8"
+      >
         {logo}
       </Link>
       <div className="flex flex-1 flex-row">{children}</div>

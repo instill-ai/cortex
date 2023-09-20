@@ -24,7 +24,7 @@ export const ModelHubSettingPageMainView = (
   props: ModelHubSettingPageMainViewProps
 ) => {
   const { accessToken, enableQuery, router, modelReadme } = props;
-  const { id } = router.query;
+  const { id, entity } = router.query;
 
   /* -------------------------------------------------------------------------
    * Query resource data
@@ -92,7 +92,7 @@ export const ModelHubSettingPageMainView = (
           onConfigure={null}
           onDelete={(initStore) => {
             initStore();
-            router.push("/model-hub");
+            router.push(`/${entity}/model-hub`);
           }}
           accessToken={accessToken}
           width="w-full"
