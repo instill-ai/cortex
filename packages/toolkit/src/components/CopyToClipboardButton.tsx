@@ -1,21 +1,24 @@
 import * as React from "react";
+import cn from "clsx";
 import { Button, CopyIcon, Icons } from "@instill-ai/design-system";
 
 export type CopyToClipboardButtonProps = {
   text: string;
+  className?: string;
 };
 
 export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
+  const { className, text } = props;
   const [copied, setCopied] = React.useState(false);
 
   return (
     <Button
-      className="!px-2 !py-2 flex justify-center items-center"
+      className={cn("flex justify-center items-center", className)}
       variant="secondaryGrey"
       size="sm"
       type="button"
       onClick={async () => {
-        await navigator.clipboard.writeText(props.text);
+        await navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => {
           setCopied(false);
