@@ -4,7 +4,7 @@ import { GeneralPageProp, useUser, useUserConnectorResources } from "../../lib";
 import dynamic from "next/dynamic";
 
 const ResourcesTable = dynamic(
-  () => import("../ResourcesTable").then((mod) => mod.ResourcesTable),
+  () => import("./ResourcesTable").then((mod) => mod.ResourcesTable),
   { ssr: false }
 );
 
