@@ -31,6 +31,7 @@ export const PipelineListPageMainView = (
   props: PipelineListPageMainViewProps
 ) => {
   const { router, enableQuery, accessToken } = props;
+  const { entity } = router.query;
 
   const { setPipelineId, setPipelineName, updatePipelineIsNew } =
     usePipelineBuilderStore(selector, shallow);
@@ -70,7 +71,7 @@ export const PipelineListPageMainView = (
             });
             setPipelineId(randomName);
             setPipelineName(`${user.data.name}/pipelines/${randomName}`);
-            router.push(`/${user.data.id}/pipelines/${randomName}`);
+            router.push(`/${entity}/pipelines/${randomName}`);
             updatePipelineIsNew(() => true);
           }}
         >
