@@ -122,6 +122,7 @@ export const PipelineBuilderMainView = (
   React.useEffect(() => {
     if (!pipelineIsNew && pipeline.isError) {
       if (user.isSuccess) {
+        router.push(`/${user.data.id}/pipelines`);
       }
     }
   }, [pipeline.isError, pipelineIsNew, router, user.isSuccess, user.data]);

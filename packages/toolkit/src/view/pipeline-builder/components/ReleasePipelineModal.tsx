@@ -127,6 +127,9 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
                 This will make tooltip work even with a disabled button
                 https://www.radix-ui.com/primitives/docs/components/tooltip#displaying-a-tooltip-from-a-disabled-button
               */}
+              {/* 
+                eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+              */}
               <span className="flex" tabIndex={0}>
                 <Button
                   variant="primary"
