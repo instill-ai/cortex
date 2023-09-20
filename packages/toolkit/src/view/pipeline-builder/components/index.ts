@@ -9,4 +9,4 @@ export * from "./EndNode";
 export * from "./PipelineNameForm";
 export * from "./ReleasePipelineModal";
 export * from "./StartNode";
-export * from "./TriggerPipelineSnippetModal";
+export * from "./PipelineToolkitModal";

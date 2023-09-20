@@ -1,13 +1,11 @@
 import { Button, Dialog, Icons } from "@instill-ai/design-system";
 import { CodeBlock } from "../../../components";
 
-export type TriggerPipelineSnippetModalProps = {
+export type PipelineToolkitModalModalProps = {
   snippet: string;
 };
 
-export const TriggerPipelineSnippetModal = (
-  props: TriggerPipelineSnippetModalProps
-) => {
+export const PipelineToolkitModal = (props: PipelineToolkitModalModalProps) => {
   const { snippet } = props;
 
   return (
