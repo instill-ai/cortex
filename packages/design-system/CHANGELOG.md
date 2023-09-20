@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.52.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.51.0...@instill-ai/design-system-v0.52.0) (2023-09-20)
+
+
+### Features
+
+* **design-system:** add ScrollArea ([#871](https://github.com/instill-ai/design-system/issues/871)) ([50a324d](https://github.com/instill-ai/design-system/commit/50a324d5f481f0b20c265eeb80c7b8e4421e1e17))
+
 ## [0.51.0](https://github.com/instill-ai/design-system/compare/@instill-ai/design-system-v0.50.0...@instill-ai/design-system-v0.51.0) (2023-09-20)
 
 
