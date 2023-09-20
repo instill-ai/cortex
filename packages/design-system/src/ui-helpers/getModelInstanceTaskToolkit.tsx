@@ -72,7 +72,7 @@ export const getModelInstanceTaskToolkit = (task: string) => {
       };
     case "TASK_TEXT_EMBEDDINGS":
       return {
-        getIcon: (iconStyle: IconStyle) => {
+        getIcon: () => {
           return (
             <ComplicateIcons.TextEmbedding
               fillAreaColor="fill-semantic-fg-secondary"
@@ -109,7 +109,7 @@ export const getModelInstanceTaskToolkit = (task: string) => {
       };
     case "TASK_SPEECH_RECOGNITION":
       return {
-        getIcon: (iconStyle: IconStyle) => {
+        getIcon: () => {
           return (
             <Icons.SpeechRecognition className="my-auto h-5 w-5 stroke-semantic-fg-primary" />
           );

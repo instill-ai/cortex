@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import { Combobox } from "./Combobox";
 import { SingleSelectOption } from "../../ui";
 import { Icons } from "../Icons";
@@ -10,8 +10,6 @@ const meta: Meta<typeof Combobox> = {
 };
 
 export default meta;
-
-type Story = StoryObj<typeof Combobox>;
 
 const items: SingleSelectOption[] = [
   {
