@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta } from "@storybook/react";
 import { Command } from "./Command";
 import * as React from "react";
 import { Icons } from "../Icons";
@@ -8,8 +8,6 @@ const meta: Meta<typeof Command> = {
 };
 
 export default meta;
-
-type Story = StoryObj<typeof Command>;
 
 export function CommandDialogDemo() {
   const [open, setOpen] = React.useState(false);

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import cn from "clsx";
-import { Button } from "../Button";
 import { Command } from "../Command";
 import { Popover } from "../Popover";
 import { Icons } from "../Icons";

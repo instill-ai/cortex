@@ -18,9 +18,9 @@ export const Regular: Story = {
       </Tabs.List>
       <Tabs.Content value="snippet">
         <div className="w-full bg-semantic-bg-primary">
-          {`curl -X POST {vdp-pipeline-base-url}/v1alpha/{pipeline-name}/trigger \\
---header 'Content-Type: application/json' \\
---data \'{input-array}'
+          {`curl -X POST {vdp-pipeline-base-url}/v1alpha/{pipeline-name}/trigger 
+--header 'Content-Type: application/json' 
+--data '{input-array}'
 `}
         </div>
       </Tabs.Content>
