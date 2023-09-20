@@ -1,3 +1,4 @@
+import * as React from "react";
 import * as z from "zod";
 import {
   Button,
@@ -38,13 +39,12 @@ export const ReleasePipelineFormSchema = z.object({
 });
 
 export type ReleasePipelineModalProps = {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
   accessToken: Nullable<string>;
 };
 
 export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
-  const { open, onOpenChange, accessToken } = props;
+  const { accessToken } = props;
+  const [modalIsOpen, setModalIsOpen] = React.useState(false);
 
   const { toast } = useToast();
 
@@ -85,7 +85,7 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
             size: "small",
           });
 
-          onOpenChange(false);
+          setModalIsOpen(false);
         },
         onError: (error) => {
           if (isAxiosError(error)) {
@@ -109,22 +109,47 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
   }
 
   return (
-    <Dialog.Root open={open} onOpenChange={(e) => onOpenChange(e)}>
-      <Dialog.Trigger asChild={true}>
+    <Dialog.Root
+      open={modalIsOpen}
+      onOpenChange={(e) => {
+        form.reset({
+          id: "",
+          description: null,
+        });
+        setModalIsOpen(e);
+      }}
+    >
+      <Dialog.Trigger asChild>
         <Tooltip.Provider>
           <Tooltip.Root>
             <Tooltip.Trigger asChild={true}>
-              <Button
-                variant="primary"
-                size="lg"
-                disabled={pipelineRecipeIsDirty || pipelineIsNew}
-              >
-                Release
-              </Button>
+              {/* 
+                This will make tooltip work even with a disabled button
+                https://www.radix-ui.com/primitives/docs/components/tooltip#displaying-a-tooltip-from-a-disabled-button
+              */}
+              <span className="flex" tabIndex={0}>
+                <Button
+                  variant="primary"
+                  size="lg"
+                  disabled={pipelineRecipeIsDirty || pipelineIsNew}
+                  className={
+                    pipelineRecipeIsDirty || pipelineIsNew
+                      ? "pointer-events-none"
+                      : ""
+                  }
+                  onClick={() => {
+                    setModalIsOpen(true);
+                  }}
+                >
+                  Release
+                </Button>
+              </span>
             </Tooltip.Trigger>
             <Tooltip.Portal>
               <Tooltip.Content className="!px-3 !py-2 rounded-sm !product-body-text-4-semibold bg-semantic-bg-primary">
-                Please save the pipeline first
+                {pipelineRecipeIsDirty || pipelineIsNew
+                  ? "Please save the pipeline first"
+                  : "Release the pipeline"}
                 <Tooltip.Arrow
                   className="fill-semantic-bg-primary"
                   offset={10}
@@ -202,7 +227,7 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
                       id: "",
                       description: null,
                     });
-                    onOpenChange(false);
+                    setModalIsOpen(false);
                   }}
                   className="!flex-1"
                 >
