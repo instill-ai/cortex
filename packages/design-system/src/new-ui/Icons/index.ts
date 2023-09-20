@@ -12,6 +12,7 @@ import { Box } from "./Box";
 import { Check } from "./Check";
 import { Circle } from "./Circle";
 import { CodeBrowser } from "./CodeBrowser";
+import { Copy06 } from "./Copy06";
 import { CheckCircle } from "./CheckCircle";
 import { ChevronDown } from "./ChevronDown";
 import { ChevronDownDouble } from "./ChevronDownDouble";
@@ -83,6 +84,7 @@ export const Icons = {
   Chip02,
   Circle,
   CodeBrowser,
+  Copy06,
   Cube01,
   CubeOutline,
   Database01,
