@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Button, Dialog, Icons, Tabs } from "@instill-ai/design-system";
+import {
+  Button,
+  Dialog,
+  Icons,
+  ScrollArea,
+  Tabs,
+} from "@instill-ai/design-system";
 import { CodeBlock } from "../../../components";
 import { usePipelineBuilderStore } from "../usePipelineBuilderStore";
 import { constructPipelineRecipe } from "../lib";
@@ -49,30 +55,34 @@ export const PipelineToolkitModal = (props: PipelineToolkitModalModalProps) => {
             </Tabs.List>
             <div className="flex h-full w-full">
               <Tabs.Content value="snippet">
-                <CodeBlock
-                  codeString={snippet}
-                  wrapLongLines={true}
-                  language="bash"
-                  customStyle={{
-                    borderRadius: "0.5rem",
-                    fontSize: "10px",
-                    backgroundColor: "white",
-                    width: "100%",
-                  }}
-                />
+                <ScrollArea.Root className="h-full">
+                  <CodeBlock
+                    codeString={snippet}
+                    wrapLongLines={true}
+                    language="bash"
+                    className="min-h-[288px]"
+                    customStyle={{
+                      borderRadius: "0.5rem",
+                      fontSize: "10px",
+                      backgroundColor: "white",
+                      width: "100%",
+                    }}
+                  />
+                </ScrollArea.Root>
               </Tabs.Content>
               <Tabs.Content value="recipe">
-                <CodeBlock
-                  codeString={recipeString}
-                  wrapLongLines={true}
-                  language="bash"
-                  customStyle={{
-                    borderRadius: "0.5rem",
-                    fontSize: "10px",
-                    backgroundColor: "white",
-                    width: "100%",
-                  }}
-                />
+                <ScrollArea.Root className="h-full">
+                  <CodeBlock
+                    codeString={recipeString}
+                    wrapLongLines={true}
+                    language="javascript"
+                    customStyle={{
+                      fontSize: "10px",
+                      backgroundColor: "white",
+                      width: "100%",
+                    }}
+                  />
+                </ScrollArea.Root>
               </Tabs.Content>
             </div>
           </Tabs.Root>
