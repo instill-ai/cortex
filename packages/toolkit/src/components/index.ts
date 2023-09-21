@@ -1,4 +1,5 @@
 export * from "./Breadcrumb";
+export * from "./CopyToClipboardButton";
 export * from "./CodeBlock";
 export * from "./IconWithBackground";
 export * from "./TablePlaceholderBase";
