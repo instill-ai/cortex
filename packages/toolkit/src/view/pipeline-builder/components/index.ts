@@ -1,6 +1,5 @@
 export * from "./AddConnectorResourceDialog";
 export * from "./BottomBar";
-export * from "./CopyToClipboardButton";
 export * from "./ConnectorNode/ConnectorNode";
 export * from "./CustomEdge";
 export * from "./CustomHandle";
@@ -9,4 +8,4 @@ export * from "./EndNode";
 export * from "./PipelineNameForm";
 export * from "./ReleasePipelineModal";
 export * from "./StartNode";
-export * from "./TriggerPipelineSnippetModal";
+export * from "./PipelineToolkitModal";
