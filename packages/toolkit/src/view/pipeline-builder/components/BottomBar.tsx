@@ -2,7 +2,6 @@ import { Button, Icons, Popover } from "@instill-ai/design-system";
 import {
   Nullable,
   getHumanReadableStringFromTime,
-  useUser,
   useUserPipelineReleases,
 } from "../../../lib";
 import { usePipelineBuilderStore } from "../usePipelineBuilderStore";
@@ -15,19 +14,11 @@ export type BottomBarProps = {
 export const BottomBar = (props: BottomBarProps) => {
   const { enableQuery, accessToken } = props;
 
-  const pipelineId = usePipelineBuilderStore((state) => state.pipelineId);
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
+  const pipelineName = usePipelineBuilderStore((state) => state.pipelineName);
 
   const pipelineReleases = useUserPipelineReleases({
-    userName: user.isSuccess ? user.data.name : null,
-    pipelineName: user.isSuccess
-      ? `${user.data.name}/pipelines/${pipelineId}`
-      : null,
-    enabled: enableQuery && user.isSuccess,
+    pipelineName,
+    enabled: enableQuery,
     accessToken,
   });
 

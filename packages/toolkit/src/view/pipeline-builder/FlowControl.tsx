@@ -21,7 +21,7 @@ import { Node, Position, ReactFlowInstance } from "reactflow";
 import {
   AddConnectorResourceDialog,
   ReleasePipelineModal,
-  TriggerPipelineSnippetModal,
+  PipelineToolkitModal,
 } from "./components";
 import { triggerPipelineSnippets } from "./components/triggerPipelineSnippets";
 import {
@@ -186,7 +186,7 @@ export const FlowControl = (props: FlowControlProps) => {
       });
 
       setPipelineUid(res.pipeline.uid);
-
+      updatePipelineRecipeIsDirty(() => false);
       updatePipelineIsNew(() => false);
 
       toast({
@@ -527,7 +527,7 @@ export const FlowControl = (props: FlowControlProps) => {
         />
       </div>
       <div className="absolute bottom-8 right-8">
-        <TriggerPipelineSnippetModal snippet={codeSnippte} />
+        <PipelineToolkitModal snippet={codeSnippte} />
       </div>
     </>
   );
