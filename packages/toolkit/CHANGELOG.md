@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.67.3](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.67.2...@instill-ai/toolkit-v0.67.3) (2023-09-22)
+
+
+### Bug Fixes
+
+* **toolkit:** fix model-hub view didn't expose disabledCreateModel prop ([#874](https://github.com/instill-ai/cortex/issues/874)) ([e433fac](https://github.com/instill-ai/cortex/commit/e433facaf1c4ff263ace648fa7ddfc5282ae83df))
+
 ## [0.67.2](https://github.com/instill-ai/design-system/compare/@instill-ai/toolkit-v0.67.1...@instill-ai/toolkit-v0.67.2) (2023-09-14)
 
 
