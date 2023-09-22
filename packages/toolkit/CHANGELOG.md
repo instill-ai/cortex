@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.67.4](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.67.3...@instill-ai/toolkit-v0.67.4) (2023-09-22)
+
+
+### Bug Fixes
+
+* fix model name not included user name when create model ([#876](https://github.com/instill-ai/cortex/issues/876)) ([48f6d17](https://github.com/instill-ai/cortex/commit/48f6d17be3887d113136db388e5d118b36ae858c))
+
 ## [0.67.3](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.67.2...@instill-ai/toolkit-v0.67.3) (2023-09-22)
 
 
