@@ -22,13 +22,11 @@ export type AuthLoginActionPayload = {
 
 export async function authLoginAction({
   payload,
-  accessToken,
 }: {
   payload: AuthLoginActionPayload;
-  accessToken: Nullable<string>;
 }) {
   try {
-    const client = createInstillAxiosClient(accessToken, "base");
+    const client = createInstillAxiosClient(null, "base");
 
     await client.post("/auth/login", payload);
   } catch (err) {
