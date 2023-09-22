@@ -2,12 +2,14 @@ import { PageTitle } from "../../components";
 import { GeneralPageProp } from "../../lib";
 import { CreateModelForm } from "./CreateModelForm";
 
-export type ModelHubCreatePageMainViewProps = GeneralPageProp;
+export type ModelHubCreatePageMainViewProps = GeneralPageProp & {
+  disabledCreateModel: boolean;
+};
 
 export const ModelHubCreatePageMainView = (
   props: ModelHubCreatePageMainViewProps
 ) => {
-  const { accessToken, enableQuery, router } = props;
+  const { accessToken, enableQuery, router, disabledCreateModel } = props;
 
   return (
     <div className="flex flex-col">
@@ -24,7 +26,7 @@ export const ModelHubCreatePageMainView = (
         }}
         accessToken={accessToken}
         enabledQuery={enableQuery}
-        disabledCreateModel={true}
+        disabledCreateModel={disabledCreateModel}
       />
     </div>
   );
