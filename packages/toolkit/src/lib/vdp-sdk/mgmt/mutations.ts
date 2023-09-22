@@ -72,3 +72,28 @@ export async function deleteApiTokenMutation({
     return Promise.reject(err);
   }
 }
+
+/* -------------------------------------------------------------------------
+ * Auth
+ * -----------------------------------------------------------------------*/
+
+export type ChangePasswordPayload = {
+  old_password: string;
+  new_password: string;
+};
+
+export async function changePasswordMutation({
+  payload,
+  accessToken,
+}: {
+  payload: ChangePasswordPayload;
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "base");
+
+    await client.post("/auth/change_password", payload);
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
