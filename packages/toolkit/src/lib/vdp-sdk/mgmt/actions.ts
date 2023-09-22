@@ -20,6 +20,10 @@ export type AuthLoginActionPayload = {
   password: string;
 };
 
+export type AuthLoginActionResponse = {
+  access_token: string;
+};
+
 export async function authLoginAction({
   payload,
 }: {
@@ -28,7 +32,12 @@ export async function authLoginAction({
   try {
     const client = createInstillAxiosClient(null, "base");
 
-    await client.post("/auth/login", payload);
+    const { data } = await client.post<AuthLoginActionResponse>(
+      "/auth/login",
+      payload
+    );
+
+    return Promise.resolve(data.access_token);
   } catch (err) {
     return Promise.reject(err);
   }
