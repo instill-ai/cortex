@@ -14,6 +14,10 @@ export const useDeployUserModel = () => {
       accessToken: Nullable<string>;
     }) => {
       try {
+        if (!accessToken) {
+          return Promise.reject(new Error("accessToken not provided"));
+        }
+
         await deployUserModelAction({
           modelName,
           accessToken,

@@ -26,6 +26,10 @@ export const useModelDefinition = ({
   return useQuery(
     ["model-definitions", modelDefinitionName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!modelDefinitionName) {
         return Promise.reject(new Error("Model definition name not found"));
       }

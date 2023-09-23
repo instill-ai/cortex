@@ -19,11 +19,16 @@ export const useCreateUserPipeline = () => {
       payload: CreateUserPipelinePayload;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const pipeline = await createUserPipelineMutation({
         userName,
         payload,
         accessToken,
       });
+
       return Promise.resolve({ pipeline, userName });
     },
     {

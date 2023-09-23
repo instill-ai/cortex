@@ -13,7 +13,12 @@ export const useUpdateUserModel = () => {
       payload: UpdateUserModelPayload;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const model = await updateModelMutation({ payload, accessToken });
+
       return Promise.resolve({ model, accessToken });
     },
     {

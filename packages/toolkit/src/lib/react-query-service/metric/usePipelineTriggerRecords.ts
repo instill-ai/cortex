@@ -21,12 +21,17 @@ export const usePipelineTriggerRecords = ({
   return useQuery(
     ["metrics", "pipelines", "triggers", filter],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const triggers = await listPipelineTriggerRecordsQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
         filter,
       });
+
       return Promise.resolve(triggers);
     },
     {
