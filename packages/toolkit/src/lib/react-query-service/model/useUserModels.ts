@@ -27,6 +27,10 @@ export const useUserModels = ({
   return useQuery(
     ["models", userName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!userName) {
         return Promise.reject(new Error("userName not provided"));
       }
