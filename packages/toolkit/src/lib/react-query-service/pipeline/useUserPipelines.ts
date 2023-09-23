@@ -8,12 +8,17 @@ export async function fetchUserPipelines(
   accessToken: Nullable<string>
 ) {
   try {
+    if (!accessToken) {
+      return Promise.reject(new Error("accessToken not provided"));
+    }
+
     const pipelines = await listUserPipelinesQuery({
       userName,
       pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
       nextPageToken: null,
       accessToken,
     });
+
     return Promise.resolve(pipelines);
   } catch (err) {
     return Promise.reject(err);

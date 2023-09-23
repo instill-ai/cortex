@@ -26,6 +26,10 @@ export function useWatchUserModel({
   return useQuery(
     ["models", modelName, "watch"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!modelName) {
         return Promise.reject(new Error("Model name not provided"));
       }

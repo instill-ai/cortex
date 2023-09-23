@@ -30,6 +30,10 @@ export const useUserConnectorResource = ({
   return useQuery(
     ["connector-resources", connectorResourceName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!connectorResourceName) {
         return Promise.reject(new Error("connectorResourceName not provided"));
       }
@@ -38,14 +42,17 @@ export const useUserConnectorResource = ({
         connectorResourceName,
         accessToken,
       });
+
       const connectorDefinition = await getConnectorDefinitionQuery({
         connectorDefinitionName: connectorResource.connector_definition_name,
         accessToken,
       });
+
       const connectorResourceWithDefinition: ConnectorResourceWithDefinition = {
         ...connectorResource,
         connector_definition: connectorDefinition,
       };
+
       return Promise.resolve(connectorResourceWithDefinition);
     },
     {

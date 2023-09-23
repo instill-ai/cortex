@@ -19,11 +19,16 @@ export const useModels = ({
   return useQuery(
     ["models"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const models = await listModelsQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });
+
       return Promise.resolve(models);
     },
     {
