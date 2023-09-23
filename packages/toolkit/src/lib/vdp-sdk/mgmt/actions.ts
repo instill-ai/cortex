@@ -42,3 +42,16 @@ export async function authLoginAction({
     return Promise.reject(err);
   }
 }
+
+export async function authValidateTokenAction({
+  accessToken,
+}: {
+  accessToken: Nullable<string>;
+}) {
+  try {
+    const client = createInstillAxiosClient(accessToken, "base");
+    await client.post("/auth/validate_access_token");
+  } catch (err) {
+    return Promise.reject(err);
+  }
+}
