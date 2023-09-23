@@ -4,21 +4,33 @@ import {
   getHumanReadableStringFromTime,
   useUserPipelineReleases,
 } from "../../../lib";
-import { usePipelineBuilderStore } from "../usePipelineBuilderStore";
+import {
+  PipelineBuilderStore,
+  usePipelineBuilderStore,
+} from "../usePipelineBuilderStore";
+import { shallow } from "zustand/shallow";
 
 export type BottomBarProps = {
   enableQuery: boolean;
   accessToken: Nullable<string>;
 };
 
+const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
+  pipelineName: state.pipelineName,
+  pipelineIsNew: state.pipelineIsNew,
+});
+
 export const BottomBar = (props: BottomBarProps) => {
   const { enableQuery, accessToken } = props;
 
-  const pipelineName = usePipelineBuilderStore((state) => state.pipelineName);
+  const { pipelineIsNew, pipelineName } = usePipelineBuilderStore(
+    pipelineBuilderSelector,
+    shallow
+  );
 
   const pipelineReleases = useUserPipelineReleases({
     pipelineName,
-    enabled: enableQuery,
+    enabled: pipelineIsNew ? false : enableQuery,
     accessToken,
   });
 
