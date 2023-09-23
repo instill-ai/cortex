@@ -16,10 +16,15 @@ export const useUpdateUserPipeline = () => {
       payload: UpdateUserPipelinePayload;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const pipeline = await updateUserPipelineMutation({
         payload,
         accessToken,
       });
+
       return Promise.resolve({ pipeline });
     },
     {

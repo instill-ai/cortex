@@ -26,6 +26,10 @@ export function useWatchUserConnectorResource({
   return useQuery(
     ["connector-resources", connectorResourceName, "watch"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!connectorResourceName) {
         return Promise.reject(new Error("connectorResourceName not provided"));
       }

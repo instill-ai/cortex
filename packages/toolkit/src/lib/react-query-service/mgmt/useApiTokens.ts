@@ -19,11 +19,16 @@ export const useApiTokens = ({
   return useQuery(
     ["api-tokens"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const tokens = await listApiTokensQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });
+
       return Promise.resolve(tokens);
     },
     {

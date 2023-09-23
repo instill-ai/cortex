@@ -18,12 +18,17 @@ export const useTriggerUserPipelineRelease = () => {
       accessToken: Nullable<string>;
       returnTraces?: boolean;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const pipelineRelease = await triggerUserPipelineReleaseAction({
         pipelineReleaseName,
         payload,
         accessToken,
         returnTraces,
       });
+
       return Promise.resolve(pipelineRelease);
     }
   );

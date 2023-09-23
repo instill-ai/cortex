@@ -16,10 +16,15 @@ export const useDeleteUserPipelineRelease = () => {
       pipelineReleaseName: string;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       await deleteUserPipelineReleaseMutation({
         pipelineReleaseName,
         accessToken,
       });
+
       return Promise.resolve({ pipelineReleaseName, accessToken });
     },
     {

@@ -13,7 +13,12 @@ export const useDeleteModel = () => {
       modelName: string;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       await deleteUserModelMutation({ modelName, accessToken });
+
       return Promise.resolve({ modelName, accessToken });
     },
     {

@@ -13,6 +13,10 @@ export const useUndeployUserModel = () => {
       modelName: string;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       await undeployUserModeleAction({
         modelName,
         accessToken,
