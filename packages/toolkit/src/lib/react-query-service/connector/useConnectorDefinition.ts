@@ -32,6 +32,10 @@ export const useConnectorDefinition = ({
         );
       }
 
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const connectorDefinition = await getConnectorDefinitionQuery({
         connectorDefinitionName,
         accessToken,

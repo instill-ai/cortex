@@ -18,11 +18,16 @@ export const useCreateUserConnectorResource = () => {
       payload: CreateUserConnectorResourcePayload;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const connectorResource = await createUserConnectorResourceMutation({
         userName,
         payload,
         accessToken,
       });
+
       return Promise.resolve({ connectorResource, accessToken });
     },
     {

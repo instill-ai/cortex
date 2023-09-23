@@ -26,6 +26,10 @@ export const useUserModelReadme = ({
   return useQuery(
     ["models", modelName, "readme"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!modelName) {
         return Promise.reject(new Error("Modelname not provided"));
       }
