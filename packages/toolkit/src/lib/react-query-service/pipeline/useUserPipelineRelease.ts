@@ -26,6 +26,10 @@ export const useUserPipelineRelease = ({
   return useQuery(
     ["pipelineReleases", pipelineReleaseName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!pipelineReleaseName) {
         return Promise.reject(new Error("pipelineReleaseName not provided"));
       }
@@ -34,6 +38,7 @@ export const useUserPipelineRelease = ({
         pipelineReleaseName,
         accessToken,
       });
+
       return Promise.resolve(pipelineRelease);
     },
     {

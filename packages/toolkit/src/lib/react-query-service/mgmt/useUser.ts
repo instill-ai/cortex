@@ -18,7 +18,12 @@ export const useUser = ({
   return useQuery<User>(
     ["user"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const user = await getUserQuery({ accessToken });
+
       return Promise.resolve(user);
     },
     {

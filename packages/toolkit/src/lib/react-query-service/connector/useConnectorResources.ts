@@ -26,6 +26,10 @@ export const useConnectorResources = ({
   return useQuery(
     ["connector-resources", connectorResourceType],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const connectorResources = await listConnectorResourcesQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,

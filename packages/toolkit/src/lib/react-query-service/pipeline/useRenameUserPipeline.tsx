@@ -16,10 +16,15 @@ export const useRenameUserPipeline = () => {
       payload: RenameUserPipelinePayload;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const pipeline = await renameUserPipelineMutation({
         payload,
         accessToken,
       });
+
       return Promise.resolve({
         pipeline,
         accessToken,
