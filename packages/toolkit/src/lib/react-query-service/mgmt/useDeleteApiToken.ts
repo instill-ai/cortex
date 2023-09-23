@@ -12,6 +12,10 @@ export const useDeleteApiToken = () => {
       tokenName: string;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       await deleteApiTokenMutation({ tokenName, accessToken });
       return Promise.resolve(tokenName);
     },

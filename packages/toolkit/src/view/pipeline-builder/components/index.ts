@@ -1,6 +1,6 @@
 export * from "./AddConnectorResourceDialog";
 export * from "./BottomBar";
-export * from "./ConnectorNode/ConnectorNode";
+export * from "./ConnectorNode";
 export * from "./CustomEdge";
 export * from "./CustomHandle";
 export * from "./EmptyNode";

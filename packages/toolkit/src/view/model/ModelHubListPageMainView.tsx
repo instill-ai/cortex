@@ -1,12 +1,7 @@
 import dynamic from "next/dynamic";
 import { Button, Icons } from "@instill-ai/design-system";
 
-import {
-  GeneralPageProp,
-  useModels,
-  useUser,
-  useWatchUserModels,
-} from "../../lib";
+import { GeneralPageProp, useModels, useWatchUserModels } from "../../lib";
 
 const ModelsTable = dynamic(
   () => import("./ModelsTable").then((mod) => mod.ModelsTable),

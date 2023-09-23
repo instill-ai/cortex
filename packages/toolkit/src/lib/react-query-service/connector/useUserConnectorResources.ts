@@ -32,6 +32,10 @@ export const useUserConnectorResources = ({
   return useQuery(
     ["connector-resources", userName, connectorResourceType],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!userName) {
         return Promise.reject(new Error("userName not provided"));
       }
