@@ -16,10 +16,15 @@ export const useCreateApiToken = () => {
       payload: CreateApiTokenPayload;
       accessToken: Nullable<string>;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const token = await createApiTokenMutation({
         payload,
         accessToken,
       });
+
       return Promise.resolve({ token });
     },
     {

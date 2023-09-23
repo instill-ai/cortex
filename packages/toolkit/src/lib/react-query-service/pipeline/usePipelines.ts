@@ -32,7 +32,12 @@ export const usePipelines = ({
   return useQuery(
     ["pipelines"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const pipelines = await fetchPipelines(accessToken);
+
       return Promise.resolve(pipelines);
     },
     {

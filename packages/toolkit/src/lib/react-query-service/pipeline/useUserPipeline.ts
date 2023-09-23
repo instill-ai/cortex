@@ -26,13 +26,19 @@ export const useUserPipeline = ({
   return useQuery(
     ["pipelines", pipelineName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!pipelineName) {
         return Promise.reject(new Error("invalid pipeline name"));
       }
+
       const pipeline = await getUserPipelineQuery({
         pipelineName,
         accessToken,
       });
+
       return Promise.resolve(pipeline);
     },
     {

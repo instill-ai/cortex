@@ -19,11 +19,16 @@ export const useModelDefinitions = ({
   return useQuery(
     ["model-definitions"],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const definitions = await listModelDefinitionsQuery({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
       });
+
       return Promise.resolve(definitions);
     },
     {

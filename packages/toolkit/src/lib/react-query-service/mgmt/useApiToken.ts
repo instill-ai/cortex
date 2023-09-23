@@ -20,10 +20,15 @@ export const useApiToken = ({
   return useQuery(
     ["api-tokens", tokenName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const token = await getApiTokenQuery({
         tokenName,
         accessToken,
       });
+
       return Promise.resolve(token);
     },
     {
