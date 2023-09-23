@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import * as z from "zod";
 import { NodeProps, Position } from "reactflow";
@@ -34,6 +35,7 @@ import { ImageWithFallback } from "../../../../components";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
+  selectedConnectorNodeId: state.selectedConnectorNodeId,
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   nodes: state.nodes,
   updateNodes: state.updateNodes,
@@ -55,6 +57,7 @@ const UpdateNodeIdSchema = z.object({
 export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const {
     expandAllNodes,
+    selectedConnectorNodeId,
     updateSelectedConnectorNodeId,
     nodes,
     updateNodes,
@@ -300,7 +303,13 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
             }
           });
         }}
-        className="flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg"
+        className={cn(
+          "flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg",
+          {
+            "outline outline-2 outline-semantic-accent-default outline-offset-1":
+              id === selectedConnectorNodeId,
+          }
+        )}
       >
         <div className="mb-2 flex flex-row justify-between">
           <div className="flex flex-row gap-x-1">
