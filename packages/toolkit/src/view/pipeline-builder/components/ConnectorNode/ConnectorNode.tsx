@@ -308,7 +308,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           {
             "outline outline-2 outline-semantic-accent-default outline-offset-1":
               id === selectedConnectorNodeId,
-          }
+          },
+          testModeEnabled ? "w-[480px]" : "w-[340px]"
         )}
       >
         <div className="mb-2 flex flex-row justify-between">
@@ -403,7 +404,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   name="key"
                   render={({ field }) => {
                     return (
-                      <Form.Item className="w-[318px]">
+                      <Form.Item className="w-full">
                         <Form.Label className="!font-sans !text-base !font-semibold">
                           Key
                         </Form.Label>
@@ -429,7 +430,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   name="value"
                   render={({ field }) => {
                     return (
-                      <Form.Item className="w-[318px]">
+                      <Form.Item className="w-full">
                         <Form.Label className="!font-sans !text-base !font-semibold">
                           Value
                         </Form.Label>
@@ -452,7 +453,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
         ) : (
           <>
             {aiTaskNotSelected ? (
-              <div className="w-[232px] rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+              <div className="w-full rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
                 <p className="text-semantic-fg-primary product-body-text-3-regular">
                   Please select AI task for this connector
                 </p>
@@ -582,7 +583,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                     })}
                   </div>
                   <Button
-                    className="flex w-[232px]"
+                    className="flex w-full"
                     variant="primary"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -609,7 +610,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                             key={
                               property.title ? property.title : property.path
                             }
-                            className="w-[232px] rounded-[6px] bg-semantic-bg-primary p-2"
+                            className="w-full rounded-[6px] bg-semantic-bg-primary p-2"
                           >
                             <div className="flex flex-row gap-x-2">
                               <p className="my-auto text-semantic-fg-secondary product-body-text-4-semibold">

@@ -12,7 +12,6 @@ import {
   useCreateUserPipeline,
   useNavigationObserver,
   useUpdateUserPipeline,
-  useUser,
   useUserPipeline,
 } from "../../lib";
 import {
@@ -53,7 +52,7 @@ export const PipelineBuilderMainView = (
   props: PipelineBuilderMainViewProps
 ) => {
   const { accessToken, enableQuery, router } = props;
-  const { id } = router.query;
+  const { id, entity } = router.query;
   const [reactFlowInstance, setReactFlowInstance] =
     React.useState<Nullable<ReactFlowInstance>>(null);
   const reactFlowWrapper = React.useRef<HTMLDivElement>(null);
@@ -90,18 +89,9 @@ export const PipelineBuilderMainView = (
     router,
   });
 
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
-
   const pipeline = useUserPipeline({
-    enabled: enableQuery && !!id && !pipelineIsNew && user.isSuccess,
-    pipelineName: user.isSuccess
-      ? id
-        ? `${user.data.name}/pipelines/${id}`
-        : null
-      : null,
+    enabled: enableQuery && !!id && !pipelineIsNew,
+    pipelineName: id ? `users/${entity}/pipelines/${id}` : null,
     retry: false,
     accessToken,
   });
@@ -121,11 +111,9 @@ export const PipelineBuilderMainView = (
 
   React.useEffect(() => {
     if (!pipelineIsNew && pipeline.isError) {
-      if (user.isSuccess) {
-        router.push(`/${user.data.id}/pipelines`);
-      }
+      router.push(`/${entity}/pipelines`);
     }
-  }, [pipeline.isError, pipelineIsNew, router, user.isSuccess, user.data]);
+  }, [pipeline.isError, pipelineIsNew, router, entity]);
 
   /* -------------------------------------------------------------------------
    * Set initial pipeline node data if pipeline is new
@@ -323,17 +311,13 @@ export const PipelineBuilderMainView = (
           confirmNavigation();
         }}
         onSave={async () => {
-          if (!user.isSuccess) {
-            return;
-          }
-
           if (!pipelineId) {
             return;
           }
 
           if (!pipelineIsNew) {
             const payload: UpdateUserPipelinePayload = {
-              name: `${user.data.name}/pipelines/${pipelineId}`,
+              name: `users/${entity}/pipelines/${pipelineId}`,
               recipe: constructPipelineRecipe(nodes),
             };
 
@@ -378,7 +362,7 @@ export const PipelineBuilderMainView = (
 
           try {
             await createPipeline.mutateAsync({
-              userName: user.data.name,
+              userName: `users/${entity}`,
               payload,
               accessToken,
             });
