@@ -7,7 +7,7 @@ import {
   uniqueNamesGenerator,
 } from "unique-names-generator";
 
-import { GeneralPageProp, useUser, useUserPipelines } from "../../lib";
+import { GeneralPageProp, useUserPipelines } from "../../lib";
 import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
@@ -39,15 +39,9 @@ export const PipelineListPageMainView = (
   /* -------------------------------------------------------------------------
    * Query resource data
    * -----------------------------------------------------------------------*/
-
-  const user = useUser({
-    accessToken,
-    enabled: enableQuery,
-  });
-
   const pipelines = useUserPipelines({
-    userName: user.isSuccess ? user.data.name : null,
-    enabled: enableQuery && user.isSuccess,
+    userName: `users/${entity}`,
+    enabled: enableQuery,
     accessToken,
   });
 
@@ -63,14 +57,12 @@ export const PipelineListPageMainView = (
           variant="primary"
           size="lg"
           onClick={() => {
-            if (!user.isSuccess) return;
-
             const randomName = uniqueNamesGenerator({
               dictionaries: [adjectives, colors, animals],
               separator: "-",
             });
             setPipelineId(randomName);
-            setPipelineName(`${user.data.name}/pipelines/${randomName}`);
+            setPipelineName(`users/${entity}/pipelines/${randomName}`);
             router.push(`/${entity}/pipelines/${randomName}`);
             updatePipelineIsNew(() => true);
           }}

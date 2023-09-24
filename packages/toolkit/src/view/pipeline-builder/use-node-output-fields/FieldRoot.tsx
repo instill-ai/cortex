@@ -13,7 +13,7 @@ export const ConnectorNodeFieldRoot = ({
   return (
     <div
       key={key}
-      className="flex max-w-[246px] flex-row flex-wrap gap-2 rounded-[6px] bg-semantic-bg-primary p-2"
+      className="flex w-full flex-row flex-wrap gap-2 rounded-[6px] bg-semantic-bg-primary p-2"
     >
       <p className="text-semantic-fg-secondary product-body-text-4-semibold">
         {title}
@@ -33,7 +33,7 @@ export const EndNodeFieldRoot = ({
   children: React.ReactNode;
 }) => {
   return (
-    <div key={key} className="flex max-w-[246px] flex-col gap-y-2">
+    <div key={key} className="flex w-full flex-col gap-y-2">
       <p className="text-semantic-fg-primary product-body-text-3-semibold">
         {title}
       </p>
