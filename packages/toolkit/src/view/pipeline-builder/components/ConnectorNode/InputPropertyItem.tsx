@@ -20,7 +20,7 @@ export const InputPropertyItem = (props: {
   const { propertyPath, children } = props;
 
   return (
-    <div className="w-[232px] rounded-[6px] bg-semantic-bg-primary p-2">
+    <div className="w-full rounded-[6px] bg-semantic-bg-primary p-2">
       <div className="flex flex-row flex-wrap justify-between gap-x-2 gap-y-2">
         <p className="my-auto text-semantic-fg-secondary product-body-text-4-semibold">
           {propertyPath?.split(".").pop()}

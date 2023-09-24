@@ -13,7 +13,7 @@ export const ObjectsField = (props: ObjectsFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex w-full flex-col flex-wrap gap-2 max-w-[246px]">
+        <div className="flex w-full flex-col flex-wrap gap-2">
           {objects?.map((object) => (
             <div
               key={`${title}-${JSON.stringify(object)}-field`}
@@ -29,7 +29,7 @@ export const ObjectsField = (props: ObjectsFieldProps) => {
 
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
-      <div className="flex w-full flex-col flex-wrap gap-2 max-w-[246px]">
+      <div className="flex w-full flex-col flex-wrap gap-2">
         {objects?.map((object) => (
           <div
             key={`${title}-${JSON.stringify(object)}-field`}

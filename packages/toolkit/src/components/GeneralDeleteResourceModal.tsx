@@ -91,7 +91,7 @@ export const GeneralDeleteResourceModal = (
 
   React.useEffect(() => {
     setConfirmationCode(null);
-  }, [open]);
+  }, []);
 
   const handleCodeChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {

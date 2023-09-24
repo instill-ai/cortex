@@ -13,7 +13,7 @@ export const ObjectField = (props: ObjectFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex max-w-[246px]">
+        <div className="flex w-full">
           <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
             {JSON.stringify(object, null, 2)}
           </div>
@@ -24,7 +24,7 @@ export const ObjectField = (props: ObjectFieldProps) => {
 
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
-      <div className="flex max-w-[246px]">
+      <div className="flex w-full">
         <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
           {JSON.stringify(object, null, 2)}
         </div>

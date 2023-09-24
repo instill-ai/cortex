@@ -12,10 +12,9 @@ import {
   applyEdgeChanges,
   applyNodeChanges,
 } from "reactflow";
-import { subscribeWithSelector } from "zustand/middleware";
+import { subscribeWithSelector, devtools } from "zustand/middleware";
 
 import { NodeData } from "./type";
-import { devtools } from "zustand/middleware";
 import { OpenAPIV3 } from "openapi-types";
 import { Nullable, TriggerUserPipelineResponse } from "../../lib";
 
