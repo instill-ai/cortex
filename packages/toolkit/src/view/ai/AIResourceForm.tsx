@@ -20,12 +20,12 @@ import {
   getInstillApiErrorMessage,
   useCreateUserConnectorResource,
   useUpdateUserConnectorResource,
-  useUser,
 } from "../../lib";
 import {
   recursiveReplaceNullAndEmptyStringWithUndefined,
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
+import { useRouter } from "next/router";
 
 export const AIResourceFormSchema = z
   .object({
@@ -96,10 +96,11 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
     enableBackButton,
     accessToken,
     onSelectConnectorResource,
-    enableQuery,
   } = props;
 
   const { toast } = useToast();
+  const router = useRouter();
+  const { entity } = router.query;
 
   const form = useForm<z.infer<typeof AIResourceFormSchema>>({
     resolver: zodResolver(AIResourceFormSchema),
@@ -122,17 +123,10 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
     }
   }, [aiResource, reset]);
 
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
-
   const createAI = useCreateUserConnectorResource();
   const updateAI = useUpdateUserConnectorResource();
 
   function onSubmit(data: z.infer<typeof AIResourceFormSchema>) {
-    if (!user.isSuccess) return;
-
     if (!aiResource) {
       const payload = {
         id: data.id,
@@ -144,7 +138,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
       };
 
       createAI.mutate(
-        { payload, userName: user.data.name, accessToken },
+        { payload, userName: `users/${entity}`, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
             if (onSelectConnectorResource) {

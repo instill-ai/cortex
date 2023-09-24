@@ -20,13 +20,13 @@ import {
   getInstillApiErrorMessage,
   useCreateUserConnectorResource,
   useUpdateUserConnectorResource,
-  useUser,
 } from "../../lib";
 
 import {
   recursiveReplaceNullAndEmptyStringWithUndefined,
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
+import { useRouter } from "next/router";
 
 export const BlockchainResourceFormSchema = z
   .object({
@@ -80,7 +80,6 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
     onSelectConnectorResource,
     accessToken,
     enableBackButton,
-    enableQuery,
   } = props;
 
   const form = useForm<z.infer<typeof BlockchainResourceFormSchema>>({
@@ -93,18 +92,13 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
   });
 
   const { toast } = useToast();
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
+  const router = useRouter();
+  const { entity } = router.query;
 
   const createBlockchain = useCreateUserConnectorResource();
   const updateBlockchain = useUpdateUserConnectorResource();
 
   function onSubmit(data: z.infer<typeof BlockchainResourceFormSchema>) {
-    if (!user.isSuccess) return;
-
     if (!blockchainResource) {
       const payload = {
         id: data.id,
@@ -116,7 +110,7 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
       };
 
       createBlockchain.mutate(
-        { payload, userName: user.data.name, accessToken },
+        { payload, userName: `users/${entity}`, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
             if (onSelectConnectorResource) {
