@@ -19,7 +19,6 @@ import {
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useRenameUserPipeline,
-  useUser,
 } from "../../../lib";
 import { constructPipelineRecipe } from "../lib";
 
@@ -45,16 +44,11 @@ export const UpdatePipelineIdSchema = z.object({
 });
 
 export const PipelineNameForm = (props: PipelineNameFormProps) => {
-  const { accessToken, enableQuery } = props;
+  const { accessToken } = props;
   const router = useRouter();
   const { entity } = router.query;
 
   const { toast } = useToast();
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
 
   const pipelineNameRef = React.useRef<HTMLInputElement>(null);
 
@@ -97,7 +91,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   const renameUserPipeline = useRenameUserPipeline();
 
   async function handleRenamePipeline(newId: string) {
-    if (!pipelineId || !user.isSuccess) {
+    if (!pipelineId) {
       return;
     }
 
@@ -109,7 +103,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
 
       try {
         const res = await createUserPipeline.mutateAsync({
-          userName: user.data.name,
+          userName: `users/${entity}`,
           payload,
           accessToken,
         });
@@ -149,7 +143,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     }
 
     const payload: RenameUserPipelinePayload = {
-      name: `${user.data.name}/pipelines/${pipelineId}`,
+      name: `users/${entity}/pipelines/${pipelineId}`,
       new_pipeline_id: newId,
     };
 
@@ -170,7 +164,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
       });
 
       setPipelineId(newId);
-      setPipelineName(`${user.data.name}/pipelines/${newId}`);
+      setPipelineName(`users/${entity}/pipelines/${newId}`);
     } catch (error) {
       if (isAxiosError(error)) {
         toast({

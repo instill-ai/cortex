@@ -1,5 +1,5 @@
 import { PageTitle } from "../../components";
-import { GeneralPageProp, useUser, useUserConnectorResource } from "../../lib";
+import { GeneralPageProp, useUserConnectorResource } from "../../lib";
 import { AIResourceForm } from "../ai";
 import { BlockchainResourceForm } from "../blockchain";
 import { DataResourceForm } from "../data";
@@ -10,18 +10,11 @@ export const ResourceSettingPageMainView = (
   props: ResourceSettingPageMainViewProps
 ) => {
   const { accessToken, enableQuery, router } = props;
-  const { id } = router.query;
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken: accessToken,
-  });
+  const { id, entity } = router.query;
 
   const userConnectorResource = useUserConnectorResource({
-    connectorResourceName: user.isSuccess
-      ? `users/${user.data.id}/connector-resources/${id?.toString()}`
-      : null,
-    enabled: enableQuery && user.isSuccess && !!id,
+    connectorResourceName: `users/${entity}/connector-resources/${id?.toString()}`,
+    enabled: enableQuery && !!id,
     accessToken: accessToken,
   });
 

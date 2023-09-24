@@ -35,9 +35,9 @@ import {
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useUpdateUserPipeline,
-  useUser,
 } from "../../lib";
 import { StartNodeData } from "./type";
+import { useRouter } from "next/router";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
@@ -92,13 +92,10 @@ export const FlowControl = (props: FlowControlProps) => {
     updateTestModeEnabled,
     updateSelectedConnectorNodeId,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const router = useRouter();
+  const { entity } = router.query;
 
   const { toast } = useToast();
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
 
   const createUserPipeline = useCreateUserPipeline();
   const updateUserPipeline = useUpdateUserPipeline();
@@ -106,10 +103,6 @@ export const FlowControl = (props: FlowControlProps) => {
   const [isSaving, setIsSaving] = React.useState(false);
 
   async function handleSavePipeline() {
-    if (!user.isSuccess) {
-      return;
-    }
-
     if (!pipelineId) {
       return;
     }
@@ -118,7 +111,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
     if (!pipelineIsNew) {
       const payload: UpdateUserPipelinePayload = {
-        name: `${user.data.name}/pipelines/${pipelineId}`,
+        name: `users/${entity}/pipelines/${pipelineId}`,
         description: pipelineDescription ?? undefined,
         recipe: constructPipelineRecipe(nodes),
       };
@@ -180,7 +173,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
     try {
       const res = await createUserPipeline.mutateAsync({
-        userName: user.data.name,
+        userName: `users/${entity}`,
         payload,
         accessToken,
       });
@@ -215,8 +208,6 @@ export const FlowControl = (props: FlowControlProps) => {
   }
 
   const codeSnippte = React.useMemo(() => {
-    if (!user.isSuccess) return "";
-
     const input: GeneralRecord = {};
 
     const startNode = nodes.find(
@@ -293,14 +284,11 @@ export const FlowControl = (props: FlowControlProps) => {
 
     snippet = snippet
       .replace(/\{vdp-pipeline-base-url\}/g, env("NEXT_PUBLIC_API_GATEWAY_URL"))
-      .replace(
-        /\{pipeline-name\}/g,
-        `${user.data.name}/pipelines/${pipelineId}`
-      )
+      .replace(/\{pipeline-name\}/g, `users/${entity}/pipelines/${pipelineId}`)
       .replace(/\{input-array\}/g, inputsString);
 
     return snippet;
-  }, [nodes, user.data, user.isSuccess, pipelineId, appEnv]);
+  }, [nodes, pipelineId, appEnv, entity]);
 
   return (
     <>

@@ -9,11 +9,11 @@ import {
   ConnectorResourceWithDefinition,
   Nullable,
   useConnectorDefinitions,
-  useUser,
   useUserConnectorResources,
 } from "../../../lib";
 import { AIResourceForm } from "../../ai";
 import { ImageWithFallback } from "../../../components";
+import { useRouter } from "next/router";
 
 type AddConnectorResourceDialogBaseProps = {
   open: boolean;
@@ -56,13 +56,11 @@ export const AddConnectorResourceDialog = (
   const [newConnectorType, setNewConnectorType] =
     React.useState<Nullable<ConnectorResourceType>>(null);
 
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
+  const router = useRouter();
+  const { entity } = router.query;
 
   const allConnectorResources = useUserConnectorResources({
-    userName: user.isSuccess ? user.data.name : null,
+    userName: `users/${entity}`,
     connectorResourceType: "all",
     enabled: enableQuery && type === "inPipeline",
     accessToken,
