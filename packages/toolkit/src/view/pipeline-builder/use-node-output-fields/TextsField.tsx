@@ -17,7 +17,7 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="flex max-w-[246px] flex-row justify-between gap-x-2"
+            className="flex w-full flex-row justify-between gap-x-2"
           >
             <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
               {text}
@@ -37,7 +37,7 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="flex max-w-[246px] flex-row justify-between gap-x-2"
+            className="flex w-full flex-row justify-between gap-x-2"
           >
             <div className="flex flex-1 break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
               {text}

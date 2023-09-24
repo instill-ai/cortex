@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AddConnectorResourceDialog } from "../pipeline-builder";
-import { GeneralPageProp, useUser, useUserConnectorResources } from "../../lib";
+import { GeneralPageProp, useUserConnectorResources } from "../../lib";
 import dynamic from "next/dynamic";
 
 const ResourcesTable = dynamic(
@@ -8,12 +8,13 @@ const ResourcesTable = dynamic(
   { ssr: false }
 );
 
-export type ResourceListPageMainViewProps = Omit<GeneralPageProp, "router">;
+export type ResourceListPageMainViewProps = GeneralPageProp;
 
 export const ResourceListPageMainView = (
   props: ResourceListPageMainViewProps
 ) => {
-  const { enableQuery, accessToken } = props;
+  const { enableQuery, accessToken, router } = props;
+  const { entity } = router.query;
   const [addConnectorDialogIsOpen, seteAddConnectorDialogIsOpen] =
     React.useState(false);
 
@@ -21,14 +22,9 @@ export const ResourceListPageMainView = (
    * Query resource data
    * -----------------------------------------------------------------------*/
 
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
-
   const userConnectorResources = useUserConnectorResources({
-    userName: user.isSuccess ? user.data.name : null,
-    enabled: enableQuery && user.isSuccess,
+    userName: `users/${entity}`,
+    enabled: enableQuery,
     connectorResourceType: "all",
     accessToken,
   });
