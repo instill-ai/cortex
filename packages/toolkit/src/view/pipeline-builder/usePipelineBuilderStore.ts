@@ -16,7 +16,22 @@ import { subscribeWithSelector, devtools } from "zustand/middleware";
 
 import { NodeData } from "./type";
 import { OpenAPIV3 } from "openapi-types";
-import { Nullable, TriggerUserPipelineResponse } from "../../lib";
+import {
+  ConnectorDefinition,
+  ConnectorResourceType,
+  ConnectorResourceWithDefinition,
+  Nullable,
+  TriggerUserPipelineResponse,
+} from "../../lib";
+
+export type PipelineBuilderCreateResourceDialogState = {
+  open: boolean;
+  connectorType: Nullable<ConnectorResourceType>;
+  connectorDefinition: Nullable<ConnectorDefinition>;
+  onCreated: Nullable<
+    (connectorResource: ConnectorResourceWithDefinition) => void
+  >;
+};
 
 export type PipelineBuilderState = {
   pipelineUid: Nullable<string>;
@@ -37,6 +52,7 @@ export type PipelineBuilderState = {
   testModeTriggerResponse: Nullable<TriggerUserPipelineResponse>;
   pipelineOpenAPISchema: Nullable<OpenAPIV3.Document>;
   accessToken: Nullable<string>;
+  createResourceDialogState: PipelineBuilderCreateResourceDialogState;
 };
 
 export type PipelineBuilderAction = {
@@ -66,11 +82,15 @@ export type PipelineBuilderAction = {
       prev: Nullable<TriggerUserPipelineResponse>
     ) => Nullable<TriggerUserPipelineResponse>
   ) => void;
-
   updatePipelineOpenAPISchema: (
     fn: (prev: Nullable<OpenAPIV3.Document>) => Nullable<OpenAPIV3.Document>
   ) => void;
   updateAccessToken: (fn: (prev: Nullable<string>) => Nullable<string>) => void;
+  updateCreateResourceDialogState: (
+    fn: (
+      prev: PipelineBuilderCreateResourceDialogState
+    ) => PipelineBuilderCreateResourceDialogState
+  ) => void;
 };
 
 export type PipelineBuilderStore = PipelineBuilderState & PipelineBuilderAction;
@@ -94,6 +114,12 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
   testModeTriggerResponse: null,
   pipelineOpenAPISchema: null,
   accessToken: null,
+  createResourceDialogState: {
+    open: false,
+    connectorType: null,
+    connectorDefinition: null,
+    onCreated: null,
+  },
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
@@ -246,6 +272,17 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
           return {
             ...state,
             accessToken: fn(state.accessToken),
+          };
+        }),
+      updateCreateResourceDialogState: (
+        fn: (
+          prev: PipelineBuilderCreateResourceDialogState
+        ) => PipelineBuilderCreateResourceDialogState
+      ) =>
+        set((state) => {
+          return {
+            ...state,
+            createResourceDialogState: fn(state.createResourceDialogState),
           };
         }),
     }))

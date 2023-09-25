@@ -15,6 +15,7 @@ import {
   EmptyNode,
   EndNode,
   StartNode,
+  CreateResourceDialog,
 } from "./components";
 import { FlowControl } from "./FlowControl";
 import {
@@ -179,6 +180,10 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
         accessToken={accessToken}
         enableQuery={enableQuery}
         appEnv={appEnv}
+      />
+      <CreateResourceDialog
+        accessToken={accessToken}
+        enableQuery={enableQuery}
       />
     </div>
   );

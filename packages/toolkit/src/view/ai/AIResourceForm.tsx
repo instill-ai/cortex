@@ -73,9 +73,7 @@ export type AIResourceFormProps = {
   aiResource: Nullable<ConnectorResourceWithDefinition>;
   aiDefinition: ConnectorDefinition;
   accessToken: Nullable<string>;
-  onSelectConnectorResource?: (
-    connectorResource: ConnectorResourceWithDefinition
-  ) => void;
+  onSubmit?: (connectorResource: ConnectorResourceWithDefinition) => void;
   enableQuery: boolean;
 } & BackButtonProps;
 
@@ -95,7 +93,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
     aiDefinition,
     enableBackButton,
     accessToken,
-    onSelectConnectorResource,
+    onSubmit,
   } = props;
 
   const { toast } = useToast();
@@ -126,7 +124,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
   const createAI = useCreateUserConnectorResource();
   const updateAI = useUpdateUserConnectorResource();
 
-  function onSubmit(data: z.infer<typeof AIResourceFormSchema>) {
+  function handleCreateAI(data: z.infer<typeof AIResourceFormSchema>) {
     if (!aiResource) {
       const payload = {
         id: data.id,
@@ -141,8 +139,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
         { payload, userName: `users/${entity}`, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
-            if (onSelectConnectorResource) {
-              onSelectConnectorResource({
+            if (onSubmit) {
+              onSubmit({
                 ...connectorResource,
                 connector_definition: aiDefinition,
               });
@@ -193,8 +191,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
       { payload, accessToken },
       {
         onSuccess: ({ connectorResource }) => {
-          if (onSelectConnectorResource) {
-            onSelectConnectorResource({
+          if (onSubmit) {
+            onSubmit({
               ...connectorResource,
               connector_definition: aiDefinition,
             });
@@ -229,7 +227,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
 
   return (
     <Form.Root {...form}>
-      <form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="w-full" onSubmit={form.handleSubmit(handleCreateAI)}>
         <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}
