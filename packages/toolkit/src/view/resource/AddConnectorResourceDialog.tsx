@@ -1,70 +1,35 @@
 import * as React from "react";
 import { Button, Dialog, Icons } from "@instill-ai/design-system";
 
-import { BlockchainResourceForm } from "../../blockchain/BlockchainResourceForm";
-import { DataResourceForm } from "../../data";
+import { BlockchainResourceForm } from "../blockchain";
+import { DataResourceForm } from "../data";
 import {
   ConnectorDefinition,
   ConnectorResourceType,
-  ConnectorResourceWithDefinition,
   Nullable,
   useConnectorDefinitions,
-  useUserConnectorResources,
-} from "../../../lib";
-import { AIResourceForm } from "../../ai";
-import { ImageWithFallback } from "../../../components";
-import { useRouter } from "next/router";
+} from "../../lib";
+import { AIResourceForm } from "../ai";
+import { ImageWithFallback } from "../../components";
 
-type AddConnectorResourceDialogBaseProps = {
+export type AddConnectorResourceDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   trigger?: React.ReactElement;
   accessToken: Nullable<string>;
-  onSelectConnectorResource: (
-    connectorResource: ConnectorResourceWithDefinition
-  ) => void;
+  onSubmit: () => void;
   enableQuery: boolean;
 };
-
-type AddConnectorResourceDialogAdditionalProps =
-  | {
-      type: "inPipeline";
-    }
-  | {
-      type: "inResource";
-    };
-
-export type AddConnectorResourceDialogProps =
-  AddConnectorResourceDialogBaseProps &
-    AddConnectorResourceDialogAdditionalProps;
 
 export const AddConnectorResourceDialog = (
   props: AddConnectorResourceDialogProps
 ) => {
-  const {
-    open,
-    onOpenChange,
-    trigger,
-    type,
-    accessToken,
-    onSelectConnectorResource,
-    enableQuery,
-  } = props;
+  const { open, onOpenChange, trigger, accessToken, enableQuery } = props;
 
   const [newConnectorDefinition, setNewConnectorDefinition] =
     React.useState<Nullable<ConnectorDefinition>>(null);
   const [newConnectorType, setNewConnectorType] =
     React.useState<Nullable<ConnectorResourceType>>(null);
-
-  const router = useRouter();
-  const { entity } = router.query;
-
-  const allConnectorResources = useUserConnectorResources({
-    userName: `users/${entity}`,
-    connectorResourceType: "all",
-    enabled: enableQuery && type === "inPipeline",
-    accessToken,
-  });
 
   const aiDefinitions = useConnectorDefinitions({
     connectorResourceType: "CONNECTOR_TYPE_AI",
@@ -104,120 +69,16 @@ export const AddConnectorResourceDialog = (
         )}
       </Dialog.Trigger>
       <Dialog.Content className="flex max-h-[700px] !max-w-[1048px] flex-col overflow-y-auto">
-        {newConnectorType ? (
-          <div className="flex flex-col">
-            <div className="mb-5 flex flex-col ">
-              <div className="mb-4 flex h-12 w-12 rounded-[10px] border border-semantic-bg-line shadow-xxs">
-                <Icons.IntersectSquare className="m-auto h-6 w-6 stroke-semantic-fg-secondary" />
-              </div>
-              <p className="text-semantic-fg-primary product-body-text-1-semibold">
-                Add Resource
-              </p>
-              <p className="text-semantic-fg-disabled product-body-text-3-regular">
-                Setup your resource to build your pipeline.
-              </p>
-            </div>
-            {newConnectorType === "CONNECTOR_TYPE_AI" &&
-            newConnectorDefinition ? (
-              <AIResourceForm
-                aiDefinition={newConnectorDefinition}
-                aiResource={null}
-                onSelectConnectorResource={props.onSelectConnectorResource}
-                accessToken={accessToken}
-                enableBackButton={true}
-                onBack={() => {
-                  setNewConnectorDefinition(null);
-                  setNewConnectorType(null);
-                }}
-                enableQuery={enableQuery}
-              />
-            ) : null}
-            {newConnectorType === "CONNECTOR_TYPE_BLOCKCHAIN" &&
-            newConnectorDefinition ? (
-              <BlockchainResourceForm
-                blockchainDefinition={newConnectorDefinition}
-                blockchainResource={null}
-                onSelectConnectorResource={props.onSelectConnectorResource}
-                accessToken={accessToken}
-                enableBackButton={true}
-                onBack={() => {
-                  setNewConnectorDefinition(null);
-                  setNewConnectorType(null);
-                }}
-                enableQuery={enableQuery}
-              />
-            ) : null}
-            {newConnectorType === "CONNECTOR_TYPE_DATA" &&
-            newConnectorDefinition ? (
-              <DataResourceForm
-                dataDefinition={newConnectorDefinition}
-                dataResource={null}
-                onSelectConnectorResource={props.onSelectConnectorResource}
-                accessToken={accessToken}
-                enableBackButton={true}
-                onBack={() => {
-                  setNewConnectorDefinition(null);
-                  setNewConnectorType(null);
-                }}
-                enableQuery={enableQuery}
-              />
-            ) : null}
-          </div>
-        ) : (
+        {!newConnectorType ? (
           <>
-            {type === "inPipeline" ? (
-              <>
-                <Dialog.Header>
-                  <Dialog.Title className="mx-auto !product-headings-heading-3">
-                    Add a resource
-                  </Dialog.Title>
-                  <Dialog.Description className="mx-auto">
-                    Select a resource to add to your pipeline
-                  </Dialog.Description>
-                </Dialog.Header>
-                <div className="flex flex-col">
-                  <div className="mb-4 flex w-full bg-semantic-bg-base-bg py-2">
-                    <p className="mx-auto product-body-text-1-semibold">
-                      Existing Resource
-                    </p>
-                  </div>
-                  <div className="grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
-                    {allConnectorResources.isSuccess
-                      ? allConnectorResources.data.map((connectorResource) => (
-                          <AddConnectorResourceDialogItem
-                            key={connectorResource.id}
-                            onClick={() => {
-                              onSelectConnectorResource(connectorResource);
-                            }}
-                          >
-                            <ImageWithFallback
-                              src={`/icons/${connectorResource.connector_definition.vendor}/${connectorResource.connector_definition.icon}`}
-                              width={32}
-                              height={32}
-                              alt={`${connectorResource.connector_definition.title}-icon`}
-                              fallbackImg={
-                                <Icons.Box className="h-8 w-8 stroke-semantic-fg-primary" />
-                              }
-                            />
-                            <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
-                              {connectorResource.id}
-                            </p>
-                          </AddConnectorResourceDialogItem>
-                        ))
-                      : null}
-                  </div>
-                </div>
-              </>
-            ) : (
-              <Dialog.Header>
-                <Dialog.Title className="mx-auto !product-headings-heading-3">
-                  Add a resource
-                </Dialog.Title>
-                <Dialog.Description className="mx-auto">
-                  Select a resource definition to create new resource
-                </Dialog.Description>
-              </Dialog.Header>
-            )}
+            <Dialog.Header>
+              <Dialog.Title className="mx-auto !product-headings-heading-3">
+                Add a resource
+              </Dialog.Title>
+              <Dialog.Description className="mx-auto">
+                Select a resource definition to create new resource
+              </Dialog.Description>
+            </Dialog.Header>
             <div className="flex flex-col">
               <div className="mb-4 flex w-full bg-semantic-bg-base-bg py-2">
                 <p className="mx-auto product-body-text-1-semibold">
@@ -319,6 +180,65 @@ export const AddConnectorResourceDialog = (
               </div>
             </div>
           </>
+        ) : (
+          <div className="flex flex-col">
+            <div className="mb-5 flex flex-col ">
+              <div className="mb-4 flex h-12 w-12 rounded-[10px] border border-semantic-bg-line shadow-xxs">
+                <Icons.IntersectSquare className="m-auto h-6 w-6 stroke-semantic-fg-secondary" />
+              </div>
+              <p className="text-semantic-fg-primary product-body-text-1-semibold">
+                Add Resource
+              </p>
+              <p className="text-semantic-fg-disabled product-body-text-3-regular">
+                Setup your resource to build your pipeline.
+              </p>
+            </div>
+            {newConnectorType === "CONNECTOR_TYPE_AI" &&
+            newConnectorDefinition ? (
+              <AIResourceForm
+                aiDefinition={newConnectorDefinition}
+                aiResource={null}
+                onSubmit={props.onSubmit}
+                accessToken={accessToken}
+                enableBackButton={true}
+                onBack={() => {
+                  setNewConnectorDefinition(null);
+                  setNewConnectorType(null);
+                }}
+                enableQuery={enableQuery}
+              />
+            ) : null}
+            {newConnectorType === "CONNECTOR_TYPE_BLOCKCHAIN" &&
+            newConnectorDefinition ? (
+              <BlockchainResourceForm
+                blockchainDefinition={newConnectorDefinition}
+                blockchainResource={null}
+                onSubmit={props.onSubmit}
+                accessToken={accessToken}
+                enableBackButton={true}
+                onBack={() => {
+                  setNewConnectorDefinition(null);
+                  setNewConnectorType(null);
+                }}
+                enableQuery={enableQuery}
+              />
+            ) : null}
+            {newConnectorType === "CONNECTOR_TYPE_DATA" &&
+            newConnectorDefinition ? (
+              <DataResourceForm
+                dataDefinition={newConnectorDefinition}
+                dataResource={null}
+                onSubmit={props.onSubmit}
+                accessToken={accessToken}
+                enableBackButton={true}
+                onBack={() => {
+                  setNewConnectorDefinition(null);
+                  setNewConnectorType(null);
+                }}
+                enableQuery={enableQuery}
+              />
+            ) : null}
+          </div>
         )}
       </Dialog.Content>
     </Dialog.Root>

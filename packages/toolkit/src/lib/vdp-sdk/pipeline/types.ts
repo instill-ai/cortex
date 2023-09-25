@@ -119,7 +119,7 @@ export type PipelineEndComponent = {
 
 export type PipelineConnectorComponent = {
   id: string;
-  resource_name: string;
+  resource_name: Nullable<string>;
   resource: Nullable<ConnectorResource>;
   type: PipelineComponentType;
   definition_name: string;

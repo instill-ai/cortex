@@ -7,6 +7,7 @@ import {
   Form,
   Icons,
   Input,
+  LinkButton,
   Tag,
   Textarea,
   useToast,
@@ -32,6 +33,7 @@ import { InputPropertyItem } from "./InputPropertyItem";
 import { GeneralRecord, Nullable } from "../../../../lib";
 import { useConnectorTestModeOutputFields } from "../../use-node-output-fields";
 import { ImageWithFallback } from "../../../../components";
+import { CreateResourceDialog } from "../CreateResourceDialog";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
@@ -43,6 +45,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeEnabled: state.testModeEnabled,
   testModeTriggerResponse: state.testModeTriggerResponse,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
+  updateCreateResourceDialogState: state.updateCreateResourceDialogState,
 });
 
 export const DataConnectorInputSchema = z.object({
@@ -65,6 +68,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     testModeEnabled,
     testModeTriggerResponse,
     updatePipelineRecipeIsDirty,
+    updateCreateResourceDialogState,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -100,16 +104,28 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const [exapndOutputs, setExpandOutputs] = React.useState(false);
 
   let aiTaskNotSelected = false;
+  let resourceNotCreated = false;
 
-  const { inputSchema, outputSchema } = getConnectorInputOutputSchema(
-    data.component
-  );
+  const { inputSchema, outputSchema } = React.useMemo(() => {
+    if (
+      data.component.type === "COMPONENT_TYPE_CONNECTOR_AI" &&
+      !data.component.configuration.input.task
+    ) {
+      return { inputSchema: null, outputSchema: null };
+    }
+
+    return getConnectorInputOutputSchema(data.component);
+  }, [data.component]);
 
   if (
     data.component.type === "COMPONENT_TYPE_CONNECTOR_AI" &&
     !data.component.configuration.input.task
   ) {
     aiTaskNotSelected = true;
+  }
+
+  if (!data.component.resource_name) {
+    resourceNotCreated = true;
   }
 
   React.useEffect(() => {
@@ -291,18 +307,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   return (
     <>
       <div
-        onClick={() => {
-          updateSelectedConnectorNodeId((prev) => {
-            if (testModeEnabled) return null;
-            if (enableEdit) return null;
-
-            if (prev === id) {
-              return null;
-            } else {
-              return id;
-            }
-          });
-        }}
         className={cn(
           "flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg",
           {
@@ -452,14 +456,87 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           </Form.Root>
         ) : (
           <>
-            {aiTaskNotSelected ? (
+            {resourceNotCreated ? (
+              <div className="w-full mb-3 gap-y-2 rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+                <p className="text-semantic-fg-primary product-body-text-3-regular">
+                  Please create resource for this connector
+                </p>
+                <LinkButton
+                  className="gap-x-2"
+                  variant="primary"
+                  size="sm"
+                  onClick={() => {
+                    updateCreateResourceDialogState(() => ({
+                      open: true,
+                      connectorType:
+                        data.component.connector_definition?.type ?? null,
+                      connectorDefinition:
+                        data.component.connector_definition ?? null,
+                      onCreated: (connectorResource) => {
+                        const newNodes = nodes.map((node) => {
+                          if (
+                            node.data.nodeType === "connector" &&
+                            node.id === id
+                          ) {
+                            node.data = {
+                              ...node.data,
+                              component: {
+                                ...node.data.component,
+                                resource_name: connectorResource.name,
+                                resource: {
+                                  ...connectorResource,
+                                  connector_definition: null,
+                                },
+                              },
+                            };
+                          }
+                          return node;
+                        });
+
+                        updateNodes(() => newNodes);
+
+                        const allReferences: PipelineComponentReference[] = [];
+
+                        newNodes.forEach((node) => {
+                          if (node.data.component?.configuration) {
+                            allReferences.push(
+                              ...extractReferencesFromConfiguration(
+                                node.data.component?.configuration,
+                                node.id
+                              )
+                            );
+                          }
+                        });
+
+                        const newEdges = composeEdgesFromReferences(
+                          allReferences,
+                          newNodes
+                        );
+                        updatePipelineRecipeIsDirty(() => true);
+                        updateEdges(() => newEdges);
+
+                        updateCreateResourceDialogState(() => ({
+                          open: false,
+                          connectorType: null,
+                          connectorDefinition: null,
+                          onCreated: null,
+                        }));
+                      },
+                    }));
+                  }}
+                >
+                  Create resource
+                </LinkButton>
+              </div>
+            ) : null}
+            {aiTaskNotSelected && !resourceNotCreated ? (
               <div className="w-full rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
                 <p className="text-semantic-fg-primary product-body-text-3-regular">
                   Please select AI task for this connector
                 </p>
               </div>
             ) : null}
-            {aiTaskNotSelected ? null : (
+            {aiTaskNotSelected || resourceNotCreated ? null : (
               <div className="mb-1 product-body-text-4-medium">input</div>
             )}
             {inputProperties.length > 0 ? (
@@ -596,7 +673,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 </div>
               )
             ) : null}
-            {aiTaskNotSelected ? null : (
+            {aiTaskNotSelected || resourceNotCreated ? null : (
               <div className="mb-1 product-body-text-4-medium">output</div>
             )}
             {outputProperties.length > 0 ? (
