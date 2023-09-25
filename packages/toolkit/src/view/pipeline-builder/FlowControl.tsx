@@ -391,7 +391,7 @@ export const FlowControl = (props: FlowControlProps) => {
               : edges;
 
             let nodePrefix: Nullable<string> = null;
-            let nodeIndex: number = 0;
+            let nodeIndex = 0;
             let configuration: Nullable<GeneralRecord> = null;
 
             switch (resource.type) {
