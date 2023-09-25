@@ -40,7 +40,7 @@ export type PipelineNameFormProps = {
 };
 
 export const UpdatePipelineIdSchema = z.object({
-  pipelineId: z.string().min(1, { message: "Pipeline ID is required" }),
+  pipelineId: z.string().nullable().optional(),
 });
 
 export const PipelineNameForm = (props: PipelineNameFormProps) => {
@@ -73,7 +73,6 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     pipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
-  // Disable edit on the topbar
   React.useEffect(() => {
     form.reset({
       pipelineId: router.asPath.split("/")[2],
@@ -213,6 +212,14 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                       autoComplete="off"
                       onBlur={() => {
                         form.handleSubmit(async (data) => {
+                          if (!data.pipelineId || data.pipelineId === "") {
+                            form.reset({
+                              pipelineId:
+                                pipelineId ?? router.asPath.split("/")[2],
+                            });
+                            return;
+                          }
+
                           if (data.pipelineId && isDirty) {
                             await handleRenamePipeline(data.pipelineId);
                           }
@@ -225,6 +232,14 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                           e.preventDefault();
                           e.stopPropagation();
                           form.handleSubmit(async (data) => {
+                            if (!data.pipelineId || data.pipelineId === "") {
+                              form.reset({
+                                pipelineId:
+                                  pipelineId ?? router.asPath.split("/")[2],
+                              });
+                              return;
+                            }
+
                             if (data.pipelineId && isDirty) {
                               await handleRenamePipeline(data.pipelineId);
                             }
