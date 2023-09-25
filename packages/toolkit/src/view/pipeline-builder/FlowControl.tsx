@@ -56,6 +56,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   testModeEnabled: state.testModeEnabled,
   updateTestModeEnabled: state.updateTestModeEnabled,
+  isLatestVersion: state.isLatestVersion,
 });
 
 export type FlowControlProps = {
@@ -91,6 +92,7 @@ export const FlowControl = (props: FlowControlProps) => {
     testModeEnabled,
     updateTestModeEnabled,
     updateSelectedConnectorNodeId,
+    isLatestVersion,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
   const router = useRouter();
   const { entity } = router.query;
@@ -131,7 +133,7 @@ export const FlowControl = (props: FlowControlProps) => {
         updatePipelineRecipeIsDirty(() => false);
 
         const { nodes, edges } = createInitialGraphData({
-          pipeline: res.pipeline,
+          recipe: res.pipeline.recipe,
         });
 
         createGraphLayout(nodes, edges)
@@ -290,6 +292,18 @@ export const FlowControl = (props: FlowControlProps) => {
     return snippet;
   }, [nodes, pipelineId, appEnv, entity]);
 
+  const canSave = React.useMemo(() => {
+    if (!pipelineRecipeIsDirty) {
+      return false;
+    }
+
+    if (!isLatestVersion) {
+      return false;
+    }
+
+    return true;
+  }, [pipelineIsNew, isLatestVersion, pipelineRecipeIsDirty]);
+
   return (
     <>
       <div className="absolute right-8 top-8 flex flex-row-reverse gap-x-4">
@@ -300,7 +314,7 @@ export const FlowControl = (props: FlowControlProps) => {
           variant="secondaryGrey"
           size="lg"
           type="button"
-          disabled={pipelineRecipeIsDirty ? false : true}
+          disabled={canSave ? false : true}
         >
           Save
           {isSaving ? (
@@ -351,6 +365,7 @@ export const FlowControl = (props: FlowControlProps) => {
           className="gap-x-2"
           variant="secondaryGrey"
           size="lg"
+          disabled={pipelineIsNew ? true : false}
         >
           {testModeEnabled ? (
             "Stop"
@@ -557,6 +572,7 @@ export const FlowControl = (props: FlowControlProps) => {
                 console.log(err);
               });
           }}
+          disabled={isLatestVersion ? false : true}
         />
       </div>
       <div className="absolute bottom-8 right-8">

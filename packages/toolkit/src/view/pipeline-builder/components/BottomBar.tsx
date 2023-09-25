@@ -9,6 +9,7 @@ import {
   usePipelineBuilderStore,
 } from "../usePipelineBuilderStore";
 import { shallow } from "zustand/shallow";
+import { createGraphLayout, createInitialGraphData } from "../lib";
 
 export type BottomBarProps = {
   enableQuery: boolean;
@@ -18,15 +19,23 @@ export type BottomBarProps = {
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineName: state.pipelineName,
   pipelineIsNew: state.pipelineIsNew,
+  updateIsLatestVersion: state.updateIsLatestVersion,
+  updateCurrentVersion: state.updateCurrentVersion,
+  updateNodes: state.updateNodes,
+  updateEdges: state.updateEdges,
 });
 
 export const BottomBar = (props: BottomBarProps) => {
   const { enableQuery, accessToken } = props;
 
-  const { pipelineIsNew, pipelineName } = usePipelineBuilderStore(
-    pipelineBuilderSelector,
-    shallow
-  );
+  const {
+    pipelineIsNew,
+    pipelineName,
+    updateIsLatestVersion,
+    updateCurrentVersion,
+    updateNodes,
+    updateEdges,
+  } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const pipelineReleases = useUserPipelineReleases({
     pipelineName,
@@ -60,8 +69,34 @@ export const BottomBar = (props: BottomBarProps) => {
           <div className="flex flex-col gap-y-4">
             {pipelineReleases.isSuccess ? (
               pipelineReleases.data.length > 0 ? (
-                pipelineReleases.data.map((release) => (
-                  <div key={release.id} className="flex flex-col">
+                pipelineReleases.data.map((release, idx) => (
+                  <Button
+                    key={release.id}
+                    className="!flex-col w-full"
+                    variant="tertiaryGrey"
+                    onClick={() => {
+                      if (idx !== 0) {
+                        updateIsLatestVersion(() => false);
+                      } else {
+                        updateIsLatestVersion(() => true);
+                      }
+
+                      updateCurrentVersion(() => release.id);
+
+                      const { nodes, edges } = createInitialGraphData({
+                        recipe: release.recipe,
+                      });
+
+                      createGraphLayout(nodes, edges)
+                        .then((graphData) => {
+                          updateNodes(() => graphData.nodes);
+                          updateEdges(() => graphData.edges);
+                        })
+                        .catch((err) => {
+                          console.log(err);
+                        });
+                    }}
+                  >
                     <p className="mb-2 product-body-text-3-medium text-semantic-fg-primary">
                       {release.id}
                     </p>
@@ -71,7 +106,7 @@ export const BottomBar = (props: BottomBarProps) => {
                         Date.now()
                       )}
                     </p>
-                  </div>
+                  </Button>
                 ))
               ) : (
                 <div className="product-body-text-4-medium text-semantic-fg-disabled">

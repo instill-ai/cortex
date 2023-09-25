@@ -10,19 +10,20 @@ import {
   Pipeline,
   PipelineConnectorComponent,
   PipelineEndComponent,
+  PipelineRecipe,
   PipelineStartComponent,
 } from "../../../lib";
 
 export type CreateInitialGraphDataProps = {
-  pipeline: Pipeline;
+  recipe: PipelineRecipe;
 };
 
 export function createInitialGraphData(props: CreateInitialGraphDataProps) {
-  const { pipeline } = props;
+  const { recipe } = props;
 
   const nodes: Node<NodeData>[] = [];
 
-  for (const component of pipeline.recipe.components) {
+  for (const component of recipe.components) {
     if (component.id === "start") {
       nodes.push({
         id: component.id,
