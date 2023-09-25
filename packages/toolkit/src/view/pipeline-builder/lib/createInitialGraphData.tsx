@@ -35,6 +35,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             configuration: recursiveTransformToString(component.configuration),
             operator_definition: (component as PipelineStartComponent)
               .operator_definition,
+            resource_name: "",
           },
         },
         position: { x: 0, y: 0 },
@@ -55,6 +56,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             configuration: recursiveTransformToString(component.configuration),
             operator_definition: (component as PipelineEndComponent)
               .operator_definition,
+            resource_name: "",
           },
         },
         position: { x: 0, y: 0 },

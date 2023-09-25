@@ -1,5 +1,5 @@
 import * as React from "react";
-import { AddConnectorResourceDialog } from "../pipeline-builder";
+import { AddConnectorResourceDialog } from "./AddConnectorResourceDialog";
 import { GeneralPageProp, useUserConnectorResources } from "../../lib";
 import dynamic from "next/dynamic";
 
@@ -15,7 +15,7 @@ export const ResourceListPageMainView = (
 ) => {
   const { enableQuery, accessToken, router } = props;
   const { entity } = router.query;
-  const [addConnectorDialogIsOpen, seteAddConnectorDialogIsOpen] =
+  const [addConnectorDialogIsOpen, setAddConnectorDialogIsOpen] =
     React.useState(false);
 
   /* -------------------------------------------------------------------------
@@ -38,11 +38,10 @@ export const ResourceListPageMainView = (
       <div className="mb-8 flex">
         <AddConnectorResourceDialog
           open={addConnectorDialogIsOpen}
-          onOpenChange={(open) => seteAddConnectorDialogIsOpen(open)}
+          onOpenChange={(open) => setAddConnectorDialogIsOpen(open)}
           accessToken={accessToken}
-          type="inResource"
-          onSelectConnectorResource={() => {
-            seteAddConnectorDialogIsOpen(false);
+          onSubmit={() => {
+            setAddConnectorDialogIsOpen(false);
           }}
           enableQuery={enableQuery}
         />
