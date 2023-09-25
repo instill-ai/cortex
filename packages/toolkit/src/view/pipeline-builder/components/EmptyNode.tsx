@@ -17,7 +17,7 @@ export const EmptyNode = ({ id }: NodeProps<NodeData>) => {
       >
         <div className="my-auto flex flex-row gap-x-2 px-2 py-1.5">
           <p className="text-semantic-accent-default product-button-button-3">
-            Add AI Connector
+            Add Connector
           </p>
           <Icons.Plus className="h-3 w-3 stroke-semantic-accent-default" />
         </div>
