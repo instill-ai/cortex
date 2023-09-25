@@ -42,6 +42,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeTriggerResponse: state.testModeTriggerResponse,
   pipelineOpenAPISchema: state.pipelineOpenAPISchema,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
+  isLatestVersion: state.isLatestVersion,
 });
 
 export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
@@ -57,6 +58,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
     testModeTriggerResponse,
     pipelineOpenAPISchema,
     updatePipelineRecipeIsDirty,
+    isLatestVersion,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const form = useForm<z.infer<typeof CreateEndOperatorInputSchema>>({
@@ -300,19 +302,21 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
                       <div className="my-auto font-sans text-base font-semibold text-semantic-fg-primary">
                         {key}
                       </div>
-                      <div className="my-auto flex flex-row gap-x-4">
-                        <button
-                          onClick={() => {
-                            onEditField(key);
-                            setPrevFieldKey(key);
-                          }}
-                        >
-                          <Icons.Edit03 className="h-6 w-6 stroke-semantic-accent-on-bg" />
-                        </button>
-                        <button onClick={() => onDeleteField(key)}>
-                          <Icons.Trash01 className="h-6 w-6 stroke-semantic-error-on-bg" />
-                        </button>
-                      </div>
+                      {isLatestVersion ? (
+                        <div className="my-auto flex flex-row gap-x-4">
+                          <button
+                            onClick={() => {
+                              onEditField(key);
+                              setPrevFieldKey(key);
+                            }}
+                          >
+                            <Icons.Edit03 className="h-6 w-6 stroke-semantic-accent-on-bg" />
+                          </button>
+                          <button onClick={() => onDeleteField(key)}>
+                            <Icons.Trash01 className="h-6 w-6 stroke-semantic-error-on-bg" />
+                          </button>
+                        </div>
+                      ) : null}
                     </div>
                     <div>
                       {reference?.type === "singleCurlyBrace" ? (
@@ -344,6 +348,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
               className="flex w-[232px]"
               variant="primary"
               onClick={() => setEnableEdit(!enableEdit)}
+              disabled={isLatestVersion ? false : true}
             >
               Add Field
               <Icons.Plus className="my-auto h-5 w-5 stroke-semantic-bg-primary " />

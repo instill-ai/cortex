@@ -224,7 +224,7 @@ export const PipelineBuilderMainView = (
     setPipelineDescription(pipeline.data.description);
 
     const initialGraphData = createInitialGraphData({
-      pipeline: pipeline.data,
+      recipe: pipeline.data.recipe,
     });
 
     createGraphLayout(initialGraphData.nodes, initialGraphData.edges)

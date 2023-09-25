@@ -20,13 +20,21 @@ export type SelectConnectorResourceDialogProps = {
     resource: ConnectorResourceWithDefinition | ConnectorDefinition
   ) => void;
   enableQuery: boolean;
+  disabled: boolean;
 };
 
 export const SelectConnectorResourceDialog = (
   props: SelectConnectorResourceDialogProps
 ) => {
-  const { open, onOpenChange, trigger, accessToken, onSelect, enableQuery } =
-    props;
+  const {
+    open,
+    onOpenChange,
+    trigger,
+    accessToken,
+    onSelect,
+    enableQuery,
+    disabled,
+  } = props;
 
   const router = useRouter();
   const { entity } = router.query;
@@ -67,14 +75,18 @@ export const SelectConnectorResourceDialog = (
         {trigger ? (
           trigger
         ) : (
-          <Button className="gap-x-2" variant="primary" size="lg">
+          <Button
+            disabled={disabled}
+            className="gap-x-2"
+            variant="primary"
+            size="lg"
+          >
             <Icons.Plus className="h-4 w-4 stroke-semantic-bg-primary" />
             Add resource
           </Button>
         )}
       </Dialog.Trigger>
       <Dialog.Content className="flex max-h-[700px] !max-w-[1048px] flex-col overflow-y-auto">
-        (
         <>
           <Dialog.Header>
             <Dialog.Title className="mx-auto !product-headings-heading-3">
