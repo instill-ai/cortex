@@ -54,7 +54,7 @@ export type ConnectorDefinition = {
   documentation_url: string;
   icon: string;
   icon_url: string;
-  connector_type: ConnectorResourceType;
+  type: ConnectorResourceType;
   spec: Spec;
   tombstone: boolean;
   public: boolean;

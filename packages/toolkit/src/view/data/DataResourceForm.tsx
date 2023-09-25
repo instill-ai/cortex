@@ -39,9 +39,7 @@ export type DataResourceFormProps = {
   dataDefinition: ConnectorDefinition;
   accessToken: Nullable<string>;
   disabledAll?: boolean;
-  onSelectConnectorResource?: (
-    connectorResource: ConnectorResourceWithDefinition
-  ) => void;
+  onSubmit?: (connectorResource: ConnectorResourceWithDefinition) => void;
   enableQuery: boolean;
 } & BackButtonProps;
 
@@ -59,7 +57,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
     disabledAll,
     dataResource,
     dataDefinition,
-    onSelectConnectorResource,
+    onSubmit,
     accessToken,
     enableBackButton,
   } = props;
@@ -140,7 +138,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
   const createData = useCreateUserConnectorResource();
   const updateData = useUpdateUserConnectorResource();
 
-  const onSubmit = React.useCallback(async () => {
+  const handleCreateData = React.useCallback(async () => {
     if (!fieldValues || !formYup) {
       return;
     }
@@ -208,8 +206,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
         { userName: `users/${entity}`, payload, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
-            if (onSelectConnectorResource) {
-              onSelectConnectorResource({
+            if (onSubmit) {
+              onSubmit({
                 ...connectorResource,
                 connector_definition: dataDefinition,
               });
@@ -259,8 +257,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
       { payload, accessToken },
       {
         onSuccess: ({ connectorResource }) => {
-          if (onSelectConnectorResource) {
-            onSelectConnectorResource({
+          if (onSubmit) {
+            onSubmit({
               ...connectorResource,
               connector_definition: dataDefinition,
             });
@@ -296,7 +294,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
     fieldValues,
     dataDefinition,
     accessToken,
-    onSelectConnectorResource,
+    onSubmit,
     toast,
     dataResource,
     updateData,
@@ -354,7 +352,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
           disabled={disabledAll ? disabledAll : false}
           size="lg"
           className={cn(enableBackButton ? "!w-full !flex-1" : "ml-auto")}
-          onClick={() => onSubmit()}
+          onClick={() => handleCreateData()}
           type="button"
         >
           Save
