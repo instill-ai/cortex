@@ -32,6 +32,9 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   onConnect: state.onConnect,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   testModeEnabled: state.testModeEnabled,
+  isLatestVersion: state.isLatestVersion,
+  updateIsLatestVersion: state.updateIsLatestVersion,
+  updateCurrentVersion: state.updateCurrentVersion,
 });
 
 export type FlowProps = {
@@ -71,11 +74,33 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
     onEdgesChange,
     updatePipelineRecipeIsDirty,
     testModeEnabled,
+    isLatestVersion,
+    updateIsLatestVersion,
+    updateCurrentVersion,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   return (
-    <div className="relative flex-1">
-      <div className="relative h-full w-full flex-1">
+    <div className="relative flex flex-col flex-1">
+      {isLatestVersion ? null : (
+        <div className="flex flex-col bg-semantic-bg-base-bg w-full h-8">
+          <p className="product-body-text-4-medium text-semantic-fg-secondary m-auto">
+            <span>You are viewing a past version of this pipeline.</span>
+            {` `}
+            <span
+              className="hover:!underline text-semantic-accent-default cursor-pointer"
+              onClick={() => {
+                updateCurrentVersion(() => "latest");
+                updateIsLatestVersion(() => true);
+              }}
+            >
+              Click Here
+            </span>
+            {` `}
+            <span> for the latest version.</span>
+          </p>
+        </div>
+      )}
+      <div className="relative h-full w-full flex flex-1">
         <div
           ref={ref}
           className={cn(
@@ -174,13 +199,13 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
             </div>
           </div>
         ) : null}
+        <FlowControl
+          reactFlowInstance={reactFlowInstance}
+          accessToken={accessToken}
+          enableQuery={enableQuery}
+          appEnv={appEnv}
+        />
       </div>
-      <FlowControl
-        reactFlowInstance={reactFlowInstance}
-        accessToken={accessToken}
-        enableQuery={enableQuery}
-        appEnv={appEnv}
-      />
       <CreateResourceDialog
         accessToken={accessToken}
         enableQuery={enableQuery}
