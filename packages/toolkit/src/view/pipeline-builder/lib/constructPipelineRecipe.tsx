@@ -46,7 +46,9 @@ export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
 
     components.push({
       id: node.id,
-      resource_name: node.data.component.resource_name,
+
+      // Backend accept resource_name with empty string
+      resource_name: node.data.component.resource_name ?? "",
       configuration: {
         ...parsedIntConfiguration,
         input: {
