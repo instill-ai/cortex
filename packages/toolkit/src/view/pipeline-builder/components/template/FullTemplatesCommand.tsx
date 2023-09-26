@@ -60,10 +60,11 @@ export const FullTemplatesCommand = ({
                 height="82.989"
                 transform={
                   isHoverOnTrigger
-                    ? "rotate(-45 -57.0756 119.693) translate(0, -20)"
+                    ? "rotate(-57.0756 119.693) translate(0, -20)"
                     : "rotate(-45 -57.0756 119.693)"
                 }
                 fill="#E02E3D"
+                className="transition-transform"
               />
               <rect
                 x="-3.75391"
@@ -76,6 +77,7 @@ export const FullTemplatesCommand = ({
                     : "rotate(-45 -3.75391 173.014)"
                 }
                 fill="#6E35DE"
+                className="transition-transform"
               />
             </g>
           </g>
@@ -106,12 +108,12 @@ export const FullTemplatesCommand = ({
       </button>
       <Command.Dialog open={open} onOpenChange={setOpen}>
         <Command.Input placeholder="Search Template..." />
-        <Command.List className="!max-w-none">
+        <Command.List className="!max-w-none w-[750px]">
           <Command.Empty>No results found.</Command.Empty>
           {Object.keys(templatesByCategory).map((category) => (
             <>
               <Command.Group className="!w-full" heading={category}>
-                <div className="grid grid-cols-2 w-full gap-y-4 gap-x-6">
+                <div className="grid grid-cols-3 w-full gap-y-4 gap-x-6">
                   {templatesByCategory[category].map((template) => (
                     <Command.Item
                       onSelect={() => {
