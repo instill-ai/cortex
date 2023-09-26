@@ -395,7 +395,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   size="sm"
                   className="!px-0 !py-0"
                   onClick={() => {
-                    let nodeIndex =
+                    const nodeIndex =
                       nodes.filter(
                         (node) =>
                           node.data.component?.type === data.component.type
@@ -423,7 +423,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                     }
                     const nodeID = `${nodePrefix}_${nodeIndex}`;
 
-                    let newNodes: Node<NodeData>[] = [
+                    const newNodes: Node<NodeData>[] = [
                       ...nodes,
                       {
                         id: nodeID,
