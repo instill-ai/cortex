@@ -120,6 +120,7 @@ export const FullTemplatesCommand = ({
                 <div className="grid grid-cols-3 w-full gap-y-4 gap-x-6">
                   {templatesByCategory[category].map((template) => (
                     <Command.Item
+                      key={template.id}
                       onSelect={() => {
                         onSelectTemplate(template);
                       }}
