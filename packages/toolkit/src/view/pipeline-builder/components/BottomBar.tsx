@@ -85,9 +85,9 @@ export const BottomBar = (props: BottomBarProps) => {
 
                       updateCurrentVersion(() => release.id);
 
-                      const { nodes, edges } = createInitialGraphData({
-                        recipe: release.recipe,
-                      });
+                      const { nodes, edges } = createInitialGraphData(
+                        release.recipe
+                      );
 
                       createGraphLayout(nodes, edges)
                         .then((graphData) => {

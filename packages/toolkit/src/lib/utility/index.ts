@@ -6,6 +6,7 @@ export * from "./getComponentFromPipelineRecipe";
 export * from "./groupBy";
 export * from "./determineModelState";
 export * from "./cookie";
+export * from "./generateRandomReadableName";
 export * from "./getCanvasTextWidth";
 export * from "./chunk";
 export * from "./removeObjKey";

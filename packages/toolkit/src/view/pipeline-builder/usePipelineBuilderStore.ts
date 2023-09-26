@@ -55,6 +55,7 @@ export type PipelineBuilderState = {
   createResourceDialogState: PipelineBuilderCreateResourceDialogState;
   isLatestVersion: boolean;
   currentVersion: string;
+  initializedByTemplate: boolean;
 };
 
 export type PipelineBuilderAction = {
@@ -95,6 +96,7 @@ export type PipelineBuilderAction = {
   ) => void;
   updateIsLatestVersion: (fn: (prev: boolean) => boolean) => void;
   updateCurrentVersion: (fn: (prev: string) => string) => void;
+  updateInitializedByTemplate: (fn: (prev: boolean) => boolean) => void;
 };
 
 export type PipelineBuilderStore = PipelineBuilderState & PipelineBuilderAction;
@@ -126,6 +128,7 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
   },
   isLatestVersion: true,
   currentVersion: "latest",
+  initializedByTemplate: false,
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
@@ -303,6 +306,13 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
           return {
             ...state,
             currentVersion: fn(state.currentVersion),
+          };
+        }),
+      updateInitializedByTemplate: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            initializedByTemplate: fn(state.initializedByTemplate),
           };
         }),
     }))

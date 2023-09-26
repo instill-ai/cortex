@@ -156,7 +156,12 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
               updateSelectedConnectorNodeId(() => null);
             }}
             onInit={setReactFlowInstance}
-            fitView
+            fitView={true}
+            fitViewOptions={{
+              includeHiddenNodes: true,
+              maxZoom: 0.8,
+              padding: 20,
+            }}
             nodeTypes={nodeTypes}
             edgeTypes={edgeTypes}
             proOptions={{ hideAttribution: true }}
