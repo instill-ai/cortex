@@ -6,7 +6,7 @@ import { Icons, Logo, Tag } from "@instill-ai/design-system";
 
 export type TemplateCardProps = {
   className?: string;
-  onClick: () => void;
+  onClick?: () => void;
   template: PipelineTemplate;
 };
 
@@ -16,7 +16,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
   return (
     <div
       className={cn(
-        "flex relative group flex-col gap-y-2 cursor-pointer rounded-[4px] bg-semantic-bg-primary hover:bg-semantic-accent-bg hover:border-semantic-accent-default border border-semantic-bg-line px-2 py-1",
+        "flex relative group hover:opacity-50 flex-col gap-y-2 cursor-pointer rounded-[4px] bg-semantic-bg-primary hover:bg-semantic-accent-bg hover:border-semantic-accent-default border border-semantic-bg-line px-2 py-1",
         className
       )}
       onClick={onClick}
