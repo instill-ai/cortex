@@ -132,9 +132,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
         updatePipelineRecipeIsDirty(() => false);
 
-        const { nodes, edges } = createInitialGraphData({
-          recipe: res.pipeline.recipe,
-        });
+        const { nodes, edges } = createInitialGraphData(res.pipeline.recipe);
 
         createGraphLayout(nodes, edges)
           .then((graphData) => {
@@ -302,7 +300,7 @@ export const FlowControl = (props: FlowControlProps) => {
     }
 
     return true;
-  }, [pipelineIsNew, isLatestVersion, pipelineRecipeIsDirty]);
+  }, [isLatestVersion, pipelineRecipeIsDirty]);
 
   return (
     <>
