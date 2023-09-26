@@ -1,7 +1,7 @@
 import cn from "clsx";
 import * as React from "react";
 import * as z from "zod";
-import { NodeProps, Position } from "reactflow";
+import { Node, NodeProps, Position } from "reactflow";
 import {
   Button,
   Form,
@@ -16,7 +16,11 @@ import { shallow } from "zustand/shallow";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ConnectorNodeData, PipelineComponentReference } from "../../type";
+import {
+  ConnectorNodeData,
+  NodeData,
+  PipelineComponentReference,
+} from "../../type";
 import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
@@ -28,12 +32,12 @@ import {
   getConnectorInputOutputSchema,
   extractPipelineComponentReferenceFromString,
   composeEdgesFromReferences,
+  createGraphLayout,
 } from "../../lib";
 import { InputPropertyItem } from "./InputPropertyItem";
 import { GeneralRecord, Nullable } from "../../../../lib";
 import { useConnectorTestModeOutputFields } from "../../use-node-output-fields";
 import { ImageWithFallback } from "../../../../components";
-import { CreateResourceDialog } from "../CreateResourceDialog";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
@@ -318,77 +322,118 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           testModeEnabled ? "w-[480px]" : "w-[340px]"
         )}
       >
-        <div className="mb-3 flex flex-row justify-between">
-          <div className="flex flex-row">
-            <div className="flex flex-row gap-x-1 mr-auto">
-              <ImageWithFallback
-                src={`/icons/${data.component?.connector_definition?.vendor}/${data.component?.connector_definition?.icon}`}
-                width={16}
-                height={16}
-                alt={`${data.component?.connector_definition?.title}-icon`}
-                fallbackImg={
-                  <Icons.Box className="my-auto h-4 w-4 stroke-semantic-fg-primary" />
-                }
-              />
-              <Form.Root {...updateNodeIdForm}>
-                <form className="my-auto flex">
-                  <Form.Field
-                    control={updateNodeIdForm.control}
-                    name="nodeId"
-                    render={({ field }) => {
-                      return (
-                        <input
-                          {...field}
-                          className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
-                          ref={connectorNameEditInputRef}
-                          value={field.value}
-                          type="text"
-                          autoComplete="off"
-                          disabled={testModeEnabled}
-                          onBlur={() => {
+        <div className="mb-3 flex flex-row w-full">
+          <div className="flex flex-row gap-x-1 mr-auto">
+            <ImageWithFallback
+              src={`/icons/${data.component?.connector_definition?.vendor}/${data.component?.connector_definition?.icon}`}
+              width={16}
+              height={16}
+              alt={`${data.component?.connector_definition?.title}-icon`}
+              fallbackImg={
+                <Icons.Box className="my-auto h-4 w-4 stroke-semantic-fg-primary" />
+              }
+            />
+            <Form.Root {...updateNodeIdForm}>
+              <form className="my-auto flex">
+                <Form.Field
+                  control={updateNodeIdForm.control}
+                  name="nodeId"
+                  render={({ field }) => {
+                    return (
+                      <input
+                        {...field}
+                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
+                        ref={connectorNameEditInputRef}
+                        value={field.value}
+                        type="text"
+                        autoComplete="off"
+                        disabled={testModeEnabled}
+                        onBlur={() => {
+                          updateNodeIdForm.handleSubmit((data) => {
+                            if (data.nodeId) {
+                              handleRenameNode(data.nodeId);
+                            }
+                          })();
+                        }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                        onKeyDown={(e) => {
+                          // Disable enter key to prevent default form submit behavior
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            e.stopPropagation();
                             updateNodeIdForm.handleSubmit((data) => {
                               if (data.nodeId) {
                                 handleRenameNode(data.nodeId);
                               }
                             })();
-                          }}
-                          onClick={(e) => {
-                            e.stopPropagation();
-                          }}
-                          onKeyDown={(e) => {
-                            // Disable enter key to prevent default form submit behavior
-                            if (e.key === "Enter") {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              updateNodeIdForm.handleSubmit((data) => {
-                                if (data.nodeId) {
-                                  handleRenameNode(data.nodeId);
-                                }
-                              })();
-                            }
-                          }}
-                        />
-                      );
-                    }}
-                  />
-                </form>
-              </Form.Root>
-            </div>
-            {isLatestVersion ? (
-              <div className="flex flex-row gap-x-3">
-                <button
-                  onClick={() => {
-                    updateSelectedConnectorNodeId(() => id);
+                          }
+                        }}
+                      />
+                    );
                   }}
-                >
-                  <Icons.Gear01 className="w-4 h-4 stroke-semantic-fg-secondary" />
-                </button>
-                <button></button>
-                <button
+                />
+              </form>
+            </Form.Root>
+          </div>
+          {isLatestVersion ? (
+            <div className="flex flex-row gap-x-3">
+              <Button
+                onClick={() => {
+                  updateSelectedConnectorNodeId(() => id);
+                }}
+                variant="tertiaryGrey"
+                size="sm"
+                className="!px-0 !py-0"
+              >
+                <Icons.Gear01 className="w-4 h-4 stroke-semantic-fg-secondary" />
+              </Button>
+              {data.component.resource_name ? (
+                <Button
+                  variant="tertiaryGrey"
+                  size="sm"
+                  className="!px-0 !py-0"
                   onClick={() => {
-                    const newNodes = nodes.filter((node) => node.id !== id);
+                    let nodeIndex =
+                      nodes.filter(
+                        (node) =>
+                          node.data.component?.type === data.component.type
+                      ).length + 1;
 
-                    updateNodes(() => newNodes);
+                    let nodePrefix: Nullable<string> = null;
+
+                    switch (data.component.connector_definition?.type) {
+                      case "CONNECTOR_TYPE_AI": {
+                        nodePrefix = "ai";
+                        break;
+                      }
+                      case "CONNECTOR_TYPE_BLOCKCHAIN": {
+                        nodePrefix = "blockchain";
+                        break;
+                      }
+                      case "CONNECTOR_TYPE_DATA": {
+                        nodePrefix = "data";
+                        break;
+                      }
+                      case "CONNECTOR_TYPE_OPERATOR": {
+                        nodePrefix = "operator";
+                        break;
+                      }
+                    }
+                    const nodeID = `${nodePrefix}_${nodeIndex}`;
+
+                    let newNodes: Node<NodeData>[] = [
+                      ...nodes,
+                      {
+                        id: nodeID,
+                        type: "connectorNode",
+                        sourcePosition: Position.Left,
+                        targetPosition: Position.Right,
+                        position: { x: 0, y: 0 },
+                        data,
+                      },
+                    ];
 
                     const allReferences: PipelineComponentReference[] = [];
 
@@ -407,16 +452,58 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                       allReferences,
                       newNodes
                     );
+
                     updatePipelineRecipeIsDirty(() => true);
-                    updateEdges(() => newEdges);
+
+                    createGraphLayout(newNodes, newEdges)
+                      .then((graphData) => {
+                        updateNodes(() => graphData.nodes);
+                        updateEdges(() => graphData.edges);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
                   }}
                 >
-                  <Icons.X className="w-4 h-4 stroke-semantic-fg-secondary" />
-                </button>
-              </div>
-            ) : null}
-          </div>
-          <button
+                  <Icons.Copy07 className="w-4 h-4 stroke-semantic-fg-secondary" />
+                </Button>
+              ) : null}
+              <Button
+                variant="tertiaryGrey"
+                size="sm"
+                className="!px-0 !py-0"
+                onClick={() => {
+                  const newNodes = nodes.filter((node) => node.id !== id);
+
+                  const allReferences: PipelineComponentReference[] = [];
+
+                  newNodes.forEach((node) => {
+                    if (node.data.component?.configuration) {
+                      allReferences.push(
+                        ...extractReferencesFromConfiguration(
+                          node.data.component?.configuration,
+                          node.id
+                        )
+                      );
+                    }
+                  });
+
+                  const newEdges = composeEdgesFromReferences(
+                    allReferences,
+                    newNodes
+                  );
+
+                  updatePipelineRecipeIsDirty(() => true);
+
+                  updateNodes(() => newNodes);
+                  updateEdges(() => newEdges);
+                }}
+              >
+                <Icons.X className="w-4 h-4 stroke-semantic-fg-secondary" />
+              </Button>
+            </div>
+          ) : null}
+          {/* <button
             onClick={(e) => {
               e.stopPropagation();
               connectorNameEditInputRef.current?.focus();
@@ -424,7 +511,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
             type="button"
           >
             <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-secondary" />
-          </button>
+          </button> */}
         </div>
         {enableEdit ? (
           <Form.Root {...dataConnectorInputForm}>
