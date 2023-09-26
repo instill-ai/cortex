@@ -46,7 +46,7 @@ const DialogContent = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        "fixed z-50 grid w-full gap-4 rounded bg-semantic-bg-primary p-6 shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:max-w-lg sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0",
+        "fixed z-50 grid w-full gap-4 rounded bg-semantic-bg-primary p-6 shadow-lg animate-in data-[state=open]:fade-in-90 data-[state=open]:slide-in-from-bottom-10 sm:max-w-lg sm:zoom-in-90 data-[state=open]:sm:slide-in-from-bottom-0 lg:max-w-4xl",
         className
       )}
       {...props}
@@ -64,9 +64,9 @@ const DialogClose = React.forwardRef<
   <DialogPrimitive.Close
     {...props}
     ref={ref}
-    className="absolute right-4 top-4 rounded opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-semantic-accent-hover focus:ring-2 focus:ring-offset-2 disabled:pointer-events-none"
+    className="absolute right-4 top-4 rounded opacity-70 transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-semantic-accent-hover focus:ring-offset-2 disabled:pointer-events-none"
   >
-    <Icons.X className="w-5 h-5 stroke-semantic-fg-primary" />
+    <Icons.X className="h-5 w-5 stroke-semantic-fg-primary" />
     <span className="sr-only">Close</span>
   </DialogPrimitive.Close>
 ));
@@ -113,7 +113,7 @@ const DialogDescription = React.forwardRef<
   <DialogPrimitive.Description
     ref={ref}
     className={cn(
-      "product-body-text-2-regular text-semantic-fg-secondary",
+      "text-semantic-fg-secondary product-body-text-2-regular",
       className
     )}
     {...props}
