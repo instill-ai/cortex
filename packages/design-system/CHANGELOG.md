@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.53.2](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.1...@instill-ai/design-system-v0.53.2) (2023-09-26)
+
+
+### Miscellaneous
+
+* **design-system:** increase the limit of DialogContent ([#895](https://github.com/instill-ai/cortex/issues/895)) ([b1f33a6](https://github.com/instill-ai/cortex/commit/b1f33a69300f802a9f2a61611aa3f2fa6238ccf6))
+
 ## [0.53.1](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.0...@instill-ai/design-system-v0.53.1) (2023-09-26)
 
 
