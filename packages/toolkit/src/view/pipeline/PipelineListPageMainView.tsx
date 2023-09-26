@@ -1,18 +1,18 @@
 import { Button, Icons } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
-import {
-  adjectives,
-  animals,
-  colors,
-  uniqueNamesGenerator,
-} from "unique-names-generator";
 
-import { GeneralPageProp, useUserPipelines } from "../../lib";
+import {
+  GeneralPageProp,
+  generateRandomReadableName,
+  useConnectorDefinitions,
+  useUserPipelines,
+} from "../../lib";
 import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
 } from "../pipeline-builder";
 import dynamic from "next/dynamic";
+import { StaffPickTemplates } from "../pipeline-builder/components/template";
 
 const PipelinesTable = dynamic(
   () => import("./PipelinesTable").then((mod) => mod.PipelinesTable),
@@ -45,6 +45,12 @@ export const PipelineListPageMainView = (
     accessToken,
   });
 
+  const connectorDefinitions = useConnectorDefinitions({
+    connectorResourceType: "all",
+    enabled: enableQuery,
+    accessToken,
+  });
+
   /* -------------------------------------------------------------------------
    * Render
    * -----------------------------------------------------------------------*/
@@ -57,10 +63,7 @@ export const PipelineListPageMainView = (
           variant="primary"
           size="lg"
           onClick={() => {
-            const randomName = uniqueNamesGenerator({
-              dictionaries: [adjectives, colors, animals],
-              separator: "-",
-            });
+            const randomName = generateRandomReadableName();
             setPipelineId(randomName);
             setPipelineName(`users/${entity}/pipelines/${randomName}`);
             router.push(`/${entity}/pipelines/${randomName}`);
@@ -71,10 +74,16 @@ export const PipelineListPageMainView = (
           Add Pipeline
         </Button>
       </div>
+      <StaffPickTemplates
+        connectorDefinitions={
+          connectorDefinitions.isSuccess ? connectorDefinitions.data : null
+        }
+        className="mb-6"
+      />
       <PipelinesTable
         pipelines={pipelines.data ? pipelines.data : []}
         isError={pipelines.isError}
-        isLoading={pipelines.isLoading}
+        isLoading={pipelines.isLoading || connectorDefinitions.isLoading}
         accessToken={accessToken}
       />
     </div>

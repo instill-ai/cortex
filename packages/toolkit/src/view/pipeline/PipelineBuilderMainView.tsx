@@ -32,6 +32,7 @@ import { isAxiosError } from "axios";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
+  edges: state.edges,
   pipelineId: state.pipelineId,
   setPipelineId: state.setPipelineId,
   setPipelineUid: state.setPipelineUid,
@@ -44,6 +45,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   selectedConnectorNodeId: state.selectedConnectorNodeId,
   updatePipelineOpenAPISchema: state.updatePipelineOpenAPISchema,
   updateAccessToken: state.updateAccessToken,
+  initializedByTemplate: state.initializedByTemplate,
 });
 
 export type PipelineBuilderMainViewProps = GeneralPageProp;
@@ -59,6 +61,7 @@ export const PipelineBuilderMainView = (
 
   const {
     nodes,
+    edges,
     pipelineId,
     setPipelineId,
     setPipelineUid,
@@ -71,6 +74,7 @@ export const PipelineBuilderMainView = (
     selectedConnectorNodeId,
     updatePipelineOpenAPISchema,
     updateAccessToken,
+    initializedByTemplate,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const [warnUnsaveChangesModalIsOpen, setWarnUnsaveChangesModalIsOpen] =
@@ -127,74 +131,82 @@ export const PipelineBuilderMainView = (
 
     // If the pipeline is new, we need to give it initial data
     if (pipelineIsNew) {
-      const initialEmptyNodeId = uuidv4();
+      let newNodes: Node<NodeData>[] = [];
+      let newEdges: Edge[] = [];
 
-      const nodes: Node<NodeData>[] = [
-        {
-          id: "start",
-          type: "startNode",
-          data: {
-            nodeType: "start",
-            component: {
-              id: "start",
-              type: "COMPONENT_TYPE_OPERATOR",
-              configuration: { metadata: {} },
-              resource_name: "",
-              resource: null,
-              definition_name: "operator-definitions/start-operator",
-              operator_definition: null,
-            },
-          },
-          position: { x: 0, y: 0 },
-        },
-        {
-          id: initialEmptyNodeId,
-          type: "emptyNode",
-          data: {
-            nodeType: "empty",
-            component: null,
-          },
-          position: { x: 0, y: 0 },
-        },
-        {
-          id: "end",
-          type: "endNode",
-          data: {
-            nodeType: "end",
-            component: {
-              id: "end",
-              type: "COMPONENT_TYPE_OPERATOR",
-              configuration: {
-                metadata: {},
-                input: {},
+      if (initializedByTemplate) {
+        newNodes = nodes;
+        newEdges = edges;
+      } else {
+        const initialEmptyNodeId = uuidv4();
+
+        newNodes = [
+          {
+            id: "start",
+            type: "startNode",
+            data: {
+              nodeType: "start",
+              component: {
+                id: "start",
+                type: "COMPONENT_TYPE_OPERATOR",
+                configuration: { metadata: {} },
+                resource_name: null,
+                resource: null,
+                definition_name: "operator-definitions/start-operator",
+                operator_definition: null,
               },
-              resource_name: "",
-              resource: null,
-              definition_name: "operator-definitions/end-operator",
-              operator_definition: null,
             },
+            position: { x: 0, y: 0 },
           },
-          position: { x: 0, y: 0 },
-        },
-      ];
+          {
+            id: initialEmptyNodeId,
+            type: "emptyNode",
+            data: {
+              nodeType: "empty",
+              component: null,
+            },
+            position: { x: 0, y: 0 },
+          },
+          {
+            id: "end",
+            type: "endNode",
+            data: {
+              nodeType: "end",
+              component: {
+                id: "end",
+                type: "COMPONENT_TYPE_OPERATOR",
+                configuration: {
+                  metadata: {},
+                  input: {},
+                },
+                resource_name: null,
+                resource: null,
+                definition_name: "operator-definitions/end-operator",
+                operator_definition: null,
+              },
+            },
+            position: { x: 0, y: 0 },
+          },
+        ];
+        newEdges = [
+          {
+            id: "start-empty",
+            type: "customEdge",
+            source: "start",
+            target: initialEmptyNodeId,
+          },
+          {
+            id: "empty-end",
+            type: "customEdge",
+            source: initialEmptyNodeId,
+            target: "end",
+          },
+        ];
+      }
 
-      const edges: Edge[] = [
-        {
-          id: "start-empty",
-          type: "customEdge",
-          source: "start",
-          target: initialEmptyNodeId,
-        },
-        {
-          id: "empty-end",
-          type: "customEdge",
-          source: initialEmptyNodeId,
-          target: "end",
-        },
-      ];
-
-      createGraphLayout(nodes, edges)
+      createGraphLayout(newNodes, newEdges)
         .then((graphData) => {
+          console.log(graphData, newNodes, newEdges);
           updateNodes(() => graphData.nodes);
           updateEdges(() => graphData.edges);
           setGraphIsInitialized(true);
@@ -223,12 +235,11 @@ export const PipelineBuilderMainView = (
     setPipelineName(pipeline.data.name);
     setPipelineDescription(pipeline.data.description);
 
-    const initialGraphData = createInitialGraphData({
-      recipe: pipeline.data.recipe,
-    });
+    const initialGraphData = createInitialGraphData(pipeline.data.recipe);
 
     createGraphLayout(initialGraphData.nodes, initialGraphData.edges)
       .then((graphData) => {
+        console.log(graphData, initialGraphData.nodes, initialGraphData.edges);
         updateNodes(() => graphData.nodes);
         updateEdges(() => graphData.edges);
         setGraphIsInitialized(true);
@@ -249,6 +260,9 @@ export const PipelineBuilderMainView = (
     id,
     setPipelineName,
     graphIsInitialized,
+    nodes,
+    edges,
+    initializedByTemplate,
   ]);
 
   /* -------------------------------------------------------------------------

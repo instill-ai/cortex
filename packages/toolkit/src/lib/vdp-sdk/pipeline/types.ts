@@ -99,7 +99,7 @@ export type PipelineTriggerMetadata = {
 
 export type PipelineStartComponent = {
   id: "start";
-  resource_name: string;
+  resource_name: Nullable<string>;
   resource: Nullable<ConnectorResource>;
   type: PipelineComponentType;
   definition_name: string;
@@ -109,7 +109,7 @@ export type PipelineStartComponent = {
 
 export type PipelineEndComponent = {
   id: "end";
-  resource_name: string;
+  resource_name: Nullable<string>;
   resource: Nullable<ConnectorResource>;
   type: PipelineComponentType;
   definition_name: string;
