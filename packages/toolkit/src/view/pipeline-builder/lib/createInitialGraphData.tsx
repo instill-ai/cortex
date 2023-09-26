@@ -7,20 +7,13 @@ import {
 } from ".";
 import { composeEdgesFromReferences } from "./composeEdgesFromReferences";
 import {
-  Pipeline,
   PipelineConnectorComponent,
   PipelineEndComponent,
   PipelineRecipe,
   PipelineStartComponent,
 } from "../../../lib";
 
-export type CreateInitialGraphDataProps = {
-  recipe: PipelineRecipe;
-};
-
-export function createInitialGraphData(props: CreateInitialGraphDataProps) {
-  const { recipe } = props;
-
+export function createInitialGraphData(recipe: PipelineRecipe) {
   const nodes: Node<NodeData>[] = [];
 
   for (const component of recipe.components) {
@@ -36,7 +29,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             configuration: recursiveTransformToString(component.configuration),
             operator_definition: (component as PipelineStartComponent)
               .operator_definition,
-            resource_name: "",
+            resource_name: null,
           },
         },
         position: { x: 0, y: 0 },
@@ -57,7 +50,7 @@ export function createInitialGraphData(props: CreateInitialGraphDataProps) {
             configuration: recursiveTransformToString(component.configuration),
             operator_definition: (component as PipelineEndComponent)
               .operator_definition,
-            resource_name: "",
+            resource_name: null,
           },
         },
         position: { x: 0, y: 0 },

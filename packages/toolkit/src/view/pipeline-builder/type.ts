@@ -4,6 +4,7 @@ import {
   Nullable,
   PipelineConnectorComponent,
   PipelineEndComponent,
+  PipelineRecipe,
   PipelineStartComponent,
 } from "../../lib";
 
@@ -57,3 +58,13 @@ export type SingleCurlyBraceReference = {
   referenceValue: ReferenceValueSet;
   nodeId: Nullable<string>;
 };
+
+export type PipelineTemplate = {
+  id: string;
+  category: string;
+  description: string;
+  recipe: PipelineRecipe;
+  author: string;
+};
+
+export type PipelineTemplatesByCategory = Record<string, PipelineTemplate[]>;
