@@ -7,20 +7,13 @@ import {
 } from ".";
 import { composeEdgesFromReferences } from "./composeEdgesFromReferences";
 import {
-  Pipeline,
   PipelineConnectorComponent,
   PipelineEndComponent,
   PipelineRecipe,
   PipelineStartComponent,
 } from "../../../lib";
 
-export type CreateInitialGraphDataProps = {
-  recipe: PipelineRecipe;
-};
-
-export function createInitialGraphData(props: CreateInitialGraphDataProps) {
-  const { recipe } = props;
-
+export function createInitialGraphData(recipe: PipelineRecipe) {
   const nodes: Node<NodeData>[] = [];
 
   for (const component of recipe.components) {
