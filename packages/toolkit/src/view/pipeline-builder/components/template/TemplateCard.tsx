@@ -33,7 +33,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
           <div
             key={component.id}
             className={cn(
-              "rounded-full flex justify-center items-center bg-semantic-bg-primary border border-semantic-bg-line flex-shrink-0 max-w-[24px] max-h-[24px] w-6 h-6",
+              "rounded-full flex justify-center items-center bg-semantic-bg-primary border border-semantic-bg-line shadow-xxs flex-shrink-0 max-w-[24px] max-h-[24px] w-6 h-6",
               idx !== 0 ? "-translate-x-2" : ""
             )}
           >

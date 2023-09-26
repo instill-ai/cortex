@@ -60,7 +60,7 @@ export const FullTemplatesCommand = ({
                 height="82.989"
                 transform={
                   isHoverOnTrigger
-                    ? "rotate(-57.0756 119.693) translate(0, -20)"
+                    ? "rotate(-45 -57.0756 119.693) translate(0, -20)"
                     : "rotate(-45 -57.0756 119.693)"
                 }
                 fill="#E02E3D"
@@ -99,14 +99,18 @@ export const FullTemplatesCommand = ({
             </clipPath>
           </defs>
         </svg>
-        <div className="flex flex-row py-[9px] px-3 absolute right-0 bottom-0 transition-transform group-hover:-translate-y-5">
+        <div className="flex flex-row py-[9px] px-3 gap-x-2 absolute right-0 bottom-0 transition-transform group-hover:-translate-y-5">
           <p className="product-button-button-2 text-semantic-bg-primary">
             All Templates
           </p>
           <Icons.ArrowNarrowRight className="w-[14px] h-[14px] stroke-semantic-bg-primary" />
         </div>
       </button>
-      <Command.Dialog open={open} onOpenChange={setOpen}>
+      <Command.Dialog
+        dialogContentClassName="!w-[750px]"
+        open={open}
+        onOpenChange={setOpen}
+      >
         <Command.Input placeholder="Search Template..." />
         <Command.List className="!max-w-none w-[750px]">
           <Command.Empty>No results found.</Command.Empty>
