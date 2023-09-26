@@ -35,6 +35,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   isLatestVersion: state.isLatestVersion,
   updateIsLatestVersion: state.updateIsLatestVersion,
   updateCurrentVersion: state.updateCurrentVersion,
+  updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
 });
 
 export type FlowProps = {
@@ -77,17 +78,20 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
     isLatestVersion,
     updateIsLatestVersion,
     updateCurrentVersion,
+    updateSelectedConnectorNodeId,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   return (
     <div className="relative flex flex-col flex-1">
       {isLatestVersion ? null : (
         <div className="flex flex-col bg-semantic-bg-base-bg w-full h-8">
-          <p className="product-body-text-4-medium text-semantic-fg-secondary m-auto">
-            <span>You are viewing a past version of this pipeline.</span>
+          <p className="m-auto">
+            <span className="product-body-text-4-medium text-semantic-fg-secondary ">
+              You are viewing a past version of this pipeline.
+            </span>
             {` `}
             <span
-              className="hover:!underline text-semantic-accent-default cursor-pointer"
+              className="hover:!underline text-semantic-accent-default cursor-pointer product-body-text-4-medium"
               onClick={() => {
                 updateCurrentVersion(() => "latest");
                 updateIsLatestVersion(() => true);
@@ -96,7 +100,9 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
               Click Here
             </span>
             {` `}
-            <span> for the latest version.</span>
+            <span className="product-body-text-4-medium text-semantic-fg-secondary">
+              for the latest version.
+            </span>
           </p>
         </div>
       )}
@@ -145,6 +151,9 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
             }}
             onEdgesChange={(changes) => {
               onEdgesChange(changes);
+            }}
+            onPaneClick={() => {
+              updateSelectedConnectorNodeId(() => null);
             }}
             onInit={setReactFlowInstance}
             fitView
