@@ -18,6 +18,7 @@ import {
   generateRandomReadableName,
 } from "../../../../lib";
 import { useRouter } from "next/router";
+import { FullTemplatesCommand } from "./FullTemplatesCommand";
 
 const selector = (state: PipelineBuilderStore) => ({
   setPipelineId: state.setPipelineId,
@@ -309,6 +310,10 @@ export const StaffPickTemplates = ({
                   className="w-[215px]"
                 />
               ))}
+        <FullTemplatesCommand
+          templatesByCategory={templatesByCategory}
+          onSelectTemplate={onSelectTemplate}
+        />
       </div>
     </div>
   );
