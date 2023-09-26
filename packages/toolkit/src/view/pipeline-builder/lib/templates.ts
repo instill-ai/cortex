@@ -12,7 +12,7 @@ export const templates: PipelineTemplate[] = [
       components: [
         {
           id: "start",
-          resource_name: "",
+          resource_name: null,
           resource: null,
           configuration: {
             metadata: {
@@ -28,7 +28,7 @@ export const templates: PipelineTemplate[] = [
         },
         {
           id: "end",
-          resource_name: "",
+          resource_name: null,
           resource: null,
           configuration: {
             input: {
@@ -46,7 +46,7 @@ export const templates: PipelineTemplate[] = [
         },
         {
           id: "ai_1",
-          resource_name: "",
+          resource_name: null,
           resource: null,
           configuration: {
             input: {
@@ -96,7 +96,7 @@ export const templates: PipelineTemplate[] = [
       components: [
         {
           id: "start",
-          resource_name: "",
+          resource_name: null,
           resource: null,
           configuration: {
             metadata: {
@@ -112,7 +112,7 @@ export const templates: PipelineTemplate[] = [
         },
         {
           id: "end",
-          resource_name: "",
+          resource_name: null,
           resource: null,
           configuration: {
             input: {
@@ -130,7 +130,7 @@ export const templates: PipelineTemplate[] = [
         },
         {
           id: "ai_1",
-          resource_name: "users/admin/connector-resources/hello-world",
+          resource_name: null,
           resource: null,
           configuration: {
             input: {
@@ -167,7 +167,7 @@ export const templates: PipelineTemplate[] = [
         },
         {
           id: "ai_2",
-          resource_name: "users/admin/connector-resources/hello-world",
+          resource_name: null,
           resource: null,
           configuration: {
             input: {
@@ -216,7 +216,7 @@ export const templates: PipelineTemplate[] = [
       components: [
         {
           id: "start",
-          resource_name: "",
+          resource_name: null,
           resource: null,
           configuration: {
             metadata: {
@@ -233,7 +233,7 @@ export const templates: PipelineTemplate[] = [
         {
           id: "end",
           resource: null,
-          resource_name: "",
+          resource_name: null,
           configuration: {
             input: {
               result: "{ ai_1.output.texts }",
@@ -251,7 +251,7 @@ export const templates: PipelineTemplate[] = [
         {
           id: "ai_1",
           resource: null,
-          resource_name: "users/admin/connector-resources/openai-dev",
+          resource_name: null,
           configuration: {
             input: {
               model: "gpt-4",

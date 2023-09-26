@@ -29,7 +29,7 @@ export function createInitialGraphData(recipe: PipelineRecipe) {
             configuration: recursiveTransformToString(component.configuration),
             operator_definition: (component as PipelineStartComponent)
               .operator_definition,
-            resource_name: "",
+            resource_name: null,
           },
         },
         position: { x: 0, y: 0 },
@@ -50,7 +50,7 @@ export function createInitialGraphData(recipe: PipelineRecipe) {
             configuration: recursiveTransformToString(component.configuration),
             operator_definition: (component as PipelineEndComponent)
               .operator_definition,
-            resource_name: "",
+            resource_name: null,
           },
         },
         position: { x: 0, y: 0 },
