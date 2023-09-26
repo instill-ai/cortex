@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.53.1](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.0...@instill-ai/design-system-v0.53.1) (2023-09-26)
+
+
+### Bug Fixes
+
+* **design-system:** fix command style ([#893](https://github.com/instill-ai/cortex/issues/893)) ([3e9c92b](https://github.com/instill-ai/cortex/commit/3e9c92bddade3702c22f10d9e93b94c42f464735))
+
 ## [0.53.0](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.52.0...@instill-ai/design-system-v0.53.0) (2023-09-25)
 
 
