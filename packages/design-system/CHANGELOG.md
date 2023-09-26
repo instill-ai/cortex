@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.53.3](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.2...@instill-ai/design-system-v0.53.3) (2023-09-26)
+
+
+### Miscellaneous
+
+* **design-system:** expose additional classname in CommandDialog ([#897](https://github.com/instill-ai/cortex/issues/897)) ([5f96632](https://github.com/instill-ai/cortex/commit/5f9663229d6da1d7c9283fc9a39a6c5e78f0e0ba))
+
 ## [0.53.2](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.1...@instill-ai/design-system-v0.53.2) (2023-09-26)
 
 
