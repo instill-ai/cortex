@@ -23,6 +23,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateCurrentVersion: state.updateCurrentVersion,
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
+  currentVersion: state.currentVersion,
 });
 
 export const BottomBar = (props: BottomBarProps) => {
@@ -35,6 +36,7 @@ export const BottomBar = (props: BottomBarProps) => {
     updateCurrentVersion,
     updateNodes,
     updateEdges,
+    currentVersion,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const pipelineReleases = useUserPipelineReleases({
@@ -72,7 +74,7 @@ export const BottomBar = (props: BottomBarProps) => {
                 pipelineReleases.data.map((release, idx) => (
                   <Button
                     key={release.id}
-                    className="!flex-col w-full"
+                    className="w-full"
                     variant="tertiaryGrey"
                     onClick={() => {
                       if (idx !== 0) {
@@ -97,15 +99,17 @@ export const BottomBar = (props: BottomBarProps) => {
                         });
                     }}
                   >
-                    <p className="mb-2 product-body-text-3-medium text-semantic-fg-primary">
-                      {release.id}
-                    </p>
-                    <p className="product-body-text-4-medium text-semantic-fg-disabled">
-                      {getHumanReadableStringFromTime(
-                        release.create_time,
-                        Date.now()
-                      )}
-                    </p>
+                    <div className="flex flex-col w-full">
+                      <p className="mb-2 product-body-text-3-medium w-full text-left text-semantic-fg-primary">
+                        {release.id}
+                      </p>
+                      <p className="product-body-text-4-medium w-full text-left text-semantic-fg-disabled">
+                        {getHumanReadableStringFromTime(
+                          release.create_time,
+                          Date.now()
+                        )}
+                      </p>
+                    </div>
                   </Button>
                 ))
               ) : (
@@ -117,8 +121,8 @@ export const BottomBar = (props: BottomBarProps) => {
           </div>
         </Popover.Content>
       </Popover.Root>
-      <div className="flex-1 text-center product-body-text-4-medium text-semantic-fg-secondary">
-        Pipeline
+      <div className="flex-1 my-auto text-center product-body-text-4-medium text-semantic-fg-secondary">
+        Pipeline {`(${currentVersion})`}
       </div>
 
       {/* 
