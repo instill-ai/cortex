@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import { Button, Dialog, Icons } from "@instill-ai/design-system";
 
@@ -81,7 +82,14 @@ export const SelectConnectorResourceDialog = (
             variant="primary"
             size="lg"
           >
-            <Icons.Plus className="h-4 w-4 stroke-semantic-bg-primary" />
+            <Icons.Plus
+              className={cn(
+                "h-4 w-4",
+                disabled
+                  ? "stroke-semantic-fg-secondary"
+                  : "stroke-semantic-bg-primary"
+              )}
+            />
             Add resource
           </Button>
         )}
