@@ -633,8 +633,15 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                   onClick={() => setEnableEdit(!enableEdit)}
                   disabled={isLatestVersion ? false : true}
                 >
-                  Add Field
-                  <Icons.Plus className="my-auto h-5 w-5 stroke-semantic-bg-primary " />
+                  <p className="my-auto">Add Field</p>
+                  <Icons.Plus
+                    className={cn(
+                      "my-auto h-4 w-4 stroke-semantic-bg-primary",
+                      isLatestVersion
+                        ? "stroke-semantic-bg-primary"
+                        : "stroke-semantic-fg-secondary"
+                    )}
+                  />
                 </Button>
               </div>
             )}
