@@ -1,7 +1,7 @@
 import cn from "clsx";
 import * as React from "react";
 import { shallow } from "zustand/shallow";
-import { PipelineTemplatesByCategory } from "../../type";
+import { PipelineTemplate, PipelineTemplatesByCategory } from "../../type";
 import { templates } from "../../lib/templates";
 import { Button, useToast } from "@instill-ai/design-system";
 import { TemplateCard } from "./TemplateCard";
@@ -54,7 +54,7 @@ export const StaffPickTemplates = ({
   } = usePipelineBuilderStore(selector, shallow);
 
   const templatesByCategory = React.useMemo(() => {
-    let result: PipelineTemplatesByCategory = {};
+    const result: PipelineTemplatesByCategory = {};
 
     for (const template of templates) {
       if (!result[template.category]) {
@@ -66,6 +66,60 @@ export const StaffPickTemplates = ({
 
     return result;
   }, []);
+
+  function onSelectTemplate(template: PipelineTemplate) {
+    if (!connectorDefinitions) return;
+
+    const newComponents: PipelineComponent[] = [];
+
+    for (const component of template.recipe.components) {
+      if (
+        component.type === "COMPONENT_TYPE_OPERATOR" ||
+        component.type === "COMPONENT_TYPE_UNSPECIFIED"
+      ) {
+        newComponents.push(component);
+        continue;
+      }
+
+      const targetDefinition = connectorDefinitions.find(
+        (definition) => definition.name === component.definition_name
+      );
+
+      if (!targetDefinition) {
+        toast({
+          title: "Something went wrong when initialize pipeline by template",
+          description: "Please contact Instill AI support",
+          variant: "alert-error",
+          size: "large",
+        });
+        break;
+      }
+
+      newComponents.push({
+        ...component,
+        connector_definition: targetDefinition,
+      });
+    }
+
+    const recipeWithCompletwConnectorDefinition: PipelineRecipe = {
+      ...template.recipe,
+      components: newComponents,
+    };
+
+    const initialGraphData = createInitialGraphData(
+      recipeWithCompletwConnectorDefinition
+    );
+
+    const randomName = generateRandomReadableName();
+    setPipelineId(randomName);
+    setPipelineName(`users/${entity}/pipelines/${randomName}`);
+    updatePipelineRecipeIsDirty(() => true);
+    updateNodes(() => initialGraphData.nodes);
+    updateEdges(() => initialGraphData.edges);
+    updateInitializedByTemplate(() => true);
+    updatePipelineIsNew(() => true);
+    router.push(`/${entity}/pipelines/${randomName}`);
+  }
 
   return (
     <div
@@ -219,6 +273,7 @@ export const StaffPickTemplates = ({
           </Button>
           {Object.keys(templatesByCategory).map((category) => (
             <Button
+              key={category}
               onClick={() => {
                 setSelectedCategory(category);
               }}
@@ -234,61 +289,10 @@ export const StaffPickTemplates = ({
         {selectedCategory === "All"
           ? templates.slice(0, 3).map((template) => (
               <TemplateCard
+                key={template.id}
                 template={template}
                 onClick={() => {
-                  if (!connectorDefinitions) return;
-
-                  let newComponents: PipelineComponent[] = [];
-
-                  for (const component of template.recipe.components) {
-                    if (
-                      component.type === "COMPONENT_TYPE_OPERATOR" ||
-                      component.type === "COMPONENT_TYPE_UNSPECIFIED"
-                    ) {
-                      newComponents.push(component);
-                      continue;
-                    }
-
-                    const targetDefinition = connectorDefinitions.find(
-                      (definition) =>
-                        definition.name === component.definition_name
-                    );
-
-                    if (!targetDefinition) {
-                      toast({
-                        title:
-                          "Something went wrong when initialize pipeline by template",
-                        description: "Please contact Instill AI support",
-                        variant: "alert-error",
-                        size: "large",
-                      });
-                      break;
-                    }
-
-                    newComponents.push({
-                      ...component,
-                      connector_definition: targetDefinition,
-                    });
-                  }
-
-                  let recipeWithCompletwConnectorDefinition: PipelineRecipe = {
-                    ...template.recipe,
-                    components: newComponents,
-                  };
-
-                  const initialGraphData = createInitialGraphData(
-                    recipeWithCompletwConnectorDefinition
-                  );
-
-                  const randomName = generateRandomReadableName();
-                  setPipelineId(randomName);
-                  setPipelineName(`users/${entity}/pipelines/${randomName}`);
-                  updatePipelineRecipeIsDirty(() => true);
-                  updateNodes(() => initialGraphData.nodes);
-                  updateEdges(() => initialGraphData.edges);
-                  updateInitializedByTemplate(() => true);
-                  updatePipelineIsNew(() => true);
-                  router.push(`/${entity}/pipelines/${randomName}`);
+                  onSelectTemplate(template);
                 }}
                 className="w-[215px]"
               />
@@ -297,8 +301,11 @@ export const StaffPickTemplates = ({
               .slice(0, 3)
               .map((template) => (
                 <TemplateCard
+                  key={template.id}
                   template={template}
-                  onClick={() => {}}
+                  onClick={() => {
+                    onSelectTemplate(template);
+                  }}
                   className="w-[215px]"
                 />
               ))}

@@ -300,7 +300,7 @@ export const FlowControl = (props: FlowControlProps) => {
     }
 
     return true;
-  }, [pipelineIsNew, isLatestVersion, pipelineRecipeIsDirty]);
+  }, [isLatestVersion, pipelineRecipeIsDirty]);
 
   return (
     <>

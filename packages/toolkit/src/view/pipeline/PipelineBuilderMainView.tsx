@@ -9,7 +9,6 @@ import {
   Nullable,
   UpdateUserPipelinePayload,
   getInstillApiErrorMessage,
-  useConnectorDefinitions,
   useCreateUserPipeline,
   useNavigationObserver,
   useUpdateUserPipeline,
@@ -261,6 +260,9 @@ export const PipelineBuilderMainView = (
     id,
     setPipelineName,
     graphIsInitialized,
+    nodes,
+    edges,
+    initializedByTemplate,
   ]);
 
   /* -------------------------------------------------------------------------
