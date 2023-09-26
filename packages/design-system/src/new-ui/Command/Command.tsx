@@ -23,11 +23,26 @@ const CommandRoot = React.forwardRef<
 ));
 CommandRoot.displayName = CommandPrimitive.displayName;
 
-const CommandDialog = ({ children, ...props }: DialogProps) => {
+const CommandDialog = ({
+  children,
+  dialogContentClassName,
+  commandRootClassName,
+  ...props
+}: DialogProps & {
+  dialogContentClassName?: string;
+  commandRootClassName?: string;
+}) => {
   return (
     <Dialog.Root {...props}>
-      <Dialog.Content className="overflow-hidden !p-0">
-        <CommandRoot className="[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+      <Dialog.Content
+        className={cn("overflow-hidden !p-0", dialogContentClassName)}
+      >
+        <CommandRoot
+          className={cn(
+            "[&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-12 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5",
+            commandRootClassName
+          )}
+        >
           {children}
         </CommandRoot>
         <Dialog.Close />
