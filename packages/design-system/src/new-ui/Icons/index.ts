@@ -37,6 +37,8 @@ import { FilterLines } from "./FilterLines";
 import { Gear01 } from "./Gear01";
 import { HelpCircle } from "./HelpCircle";
 import { IntersectSquare } from "./IntersectSquare";
+import { Lock03 } from "./Lock03";
+import { LockUnlocked03 } from "./LockUnlocked03";
 import { InfoCircle } from "./InfoCircle";
 import { Image01 } from "./Image01";
 import { Logout01 } from "./Logout01";
@@ -98,6 +100,8 @@ export const Icons = {
   Gear01,
   HelpCircle,
   IntersectSquare,
+  Lock03,
+  LockUnlocked03,
   InfoCircle,
   Image01,
   Logout01,
