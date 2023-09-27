@@ -38,6 +38,7 @@ import {
 } from "../../lib";
 import { StartNodeData } from "./type";
 import { useRouter } from "next/router";
+import { SharePipelineDialog } from "./components/SharePipelineDialog";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
@@ -373,6 +374,10 @@ export const FlowControl = (props: FlowControlProps) => {
             </>
           )}
         </Button>
+        <SharePipelineDialog
+          accessToken={accessToken}
+          enableQuery={enableQuery}
+        />
       </div>
       <div className="absolute left-8 top-8 flex flex-row gap-x-4">
         <SelectConnectorResourceDialog
