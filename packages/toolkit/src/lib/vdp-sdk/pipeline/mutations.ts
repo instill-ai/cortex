@@ -5,6 +5,7 @@ import {
   RawPipelineRecipe,
   PipelineRelease,
   PipelinePermission,
+  PermissionRole,
 } from "./types";
 
 export type CreateUserPipelinePayload = {
@@ -43,7 +44,16 @@ export type UpdateUserPipelinePayload = {
   name: string;
   description?: string;
   recipe?: RawPipelineRecipe;
-  permission?: PipelinePermission;
+  permission?: RawPipelinePermission;
+};
+
+export type RawPipelinePermission = {
+  users: PipelinePermission["users"];
+  share_code: Nullable<{
+    user: string;
+    enabled: boolean;
+    role: PermissionRole;
+  }>;
 };
 
 export type UpdateUserPipelineResponse = {

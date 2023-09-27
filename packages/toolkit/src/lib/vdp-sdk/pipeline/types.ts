@@ -76,7 +76,7 @@ export type OperatorDefinition = {
 
 export type PipelinePermission = {
   users: PermissionUsers;
-  share_code: PermissionShareCode;
+  share_code: Nullable<PermissionShareCode>;
 };
 
 export type PermissionUsers = Record<
