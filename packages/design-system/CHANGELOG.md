@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.54.0](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.3...@instill-ai/design-system-v0.54.0) (2023-09-27)
+
+
+### Features
+
+* **design-system:** add lock related icons ([#900](https://github.com/instill-ai/cortex/issues/900)) ([c2b8e51](https://github.com/instill-ai/cortex/commit/c2b8e51f50a03c6653a91240a5e4665f86eec8ae))
+
 ## [0.53.3](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.53.2...@instill-ai/design-system-v0.53.3) (2023-09-26)
 
 
