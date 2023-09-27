@@ -57,6 +57,7 @@ export type Pipeline = {
   recipe: PipelineRecipe;
   openapi_schema: OpenAPIV3.Document;
   owner: string;
+  permission: PipelinePermission;
 };
 
 export type OperatorDefinition = {
@@ -72,6 +73,28 @@ export type OperatorDefinition = {
   custom: boolean;
   icon_url: string;
 };
+
+export type PipelinePermission = {
+  users: PermissionUsers;
+  share_code: PermissionShareCode;
+};
+
+export type PermissionUsers = Record<
+  string,
+  {
+    enabled: boolean;
+    role: PermissionRole;
+  }
+>;
+
+export type PermissionShareCode = {
+  user: string;
+  code: string;
+  enabled: boolean;
+  role: PermissionRole;
+};
+
+export type PermissionRole = "ROLE_UNSPECIFIED" | "ROLE_VIEWER";
 
 export type PipelineRelease = {
   name: string;

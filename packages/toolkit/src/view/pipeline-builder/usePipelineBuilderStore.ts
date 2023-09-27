@@ -21,6 +21,7 @@ import {
   ConnectorResourceType,
   ConnectorResourceWithDefinition,
   Nullable,
+  PipelinePermission,
   TriggerUserPipelineResponse,
 } from "../../lib";
 
