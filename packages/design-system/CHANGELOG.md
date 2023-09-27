@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.55.1](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.0...@instill-ai/design-system-v0.55.1) (2023-09-27)
+
+
+### Bug Fixes
+
+* **design-system:** expose the classname of Dialog.Close ([#906](https://github.com/instill-ai/cortex/issues/906)) ([5fcf358](https://github.com/instill-ai/cortex/commit/5fcf358fb365c7fb77f512225b5271bc62bea0e5))
+
 ## [0.55.0](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.54.0...@instill-ai/design-system-v0.55.0) (2023-09-27)
 
 
