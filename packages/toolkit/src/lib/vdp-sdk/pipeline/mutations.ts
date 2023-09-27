@@ -1,6 +1,11 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Pipeline, RawPipelineRecipe, PipelineRelease } from "./types";
+import {
+  Pipeline,
+  RawPipelineRecipe,
+  PipelineRelease,
+  PipelinePermission,
+} from "./types";
 
 export type CreateUserPipelinePayload = {
   id: string;
@@ -37,7 +42,8 @@ export async function createUserPipelineMutation({
 export type UpdateUserPipelinePayload = {
   name: string;
   description?: string;
-  recipe: RawPipelineRecipe;
+  recipe?: RawPipelineRecipe;
+  permission?: PipelinePermission;
 };
 
 export type UpdateUserPipelineResponse = {
