@@ -1,10 +1,12 @@
-import * as Tabs from "@radix-ui/react-tabs";
 import { ReactNode, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Nullable } from "../../lib";
+import { Tabs } from "@instill-ai/design-system";
+import { LoadingSpin } from "../../components";
 
 export type SettingsPageViewProps = {
   tabs: SettingTab[];
+  enableQuery: boolean;
 };
 
 export type SettingTab = {
@@ -14,7 +16,7 @@ export type SettingTab = {
 };
 
 export const SettingsPageView = (props: SettingsPageViewProps) => {
-  const { tabs } = props;
+  const { tabs, enableQuery } = props;
   const router = useRouter();
 
   const [selectedTab, setSelectedTab] = useState<Nullable<string>>(null);
@@ -31,7 +33,7 @@ export const SettingsPageView = (props: SettingsPageViewProps) => {
     );
   }, [router.query, tabs, selectedTab]);
 
-  return (
+  return enableQuery ? (
     <Tabs.Root
       value={selectedTab || undefined}
       onValueChange={(value) => setSelectedTab(value)}
@@ -53,5 +55,7 @@ export const SettingsPageView = (props: SettingsPageViewProps) => {
         </Tabs.Content>
       ))}
     </Tabs.Root>
+  ) : (
+    <LoadingSpin className="!text-black" />
   );
 };

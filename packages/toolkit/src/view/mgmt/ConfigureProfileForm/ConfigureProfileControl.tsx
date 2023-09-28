@@ -14,7 +14,9 @@ import {
   checkUserIdExist,
   useUser,
   type ConfigureProfileFormState,
+  getInstillApiErrorMessage,
 } from "../../../lib";
+import { isAxiosError } from "axios";
 
 export type ConfigureProfileControlProps = {
   accessToken: Nullable<string>;
@@ -100,6 +102,23 @@ export const ConfigureProfileControl = (
               message: "Succeed.",
             }));
             if (onConfigure) onConfigure();
+          },
+          onError: (error) => {
+            if (isAxiosError(error)) {
+              setMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: getInstillApiErrorMessage(error),
+                message: "Something went wrong when update your profile",
+              }));
+            } else {
+              setMessageBoxState(() => ({
+                activate: true,
+                status: "error",
+                description: "",
+                message: "Something went wrong when update your profile",
+              }));
+            }
           },
         }
       );

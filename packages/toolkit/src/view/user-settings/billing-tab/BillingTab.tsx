@@ -133,20 +133,22 @@ export const BillingTab = () => {
       title="Billing"
       description="Manage your billing and payment details."
     >
-      <BillingCard
-        status="open_alpha"
-        productName="Starter Plan"
-        daysLeft={null}
-        price={0}
-        featureList={[
-          "Access to all our state-of-the-art pre-trained models",
-          "Unlimited API requests",
-          "Free compute resource during open alpha",
-          "Basic Discord and email support",
-        ]}
-        isLoadingPortalLink={false}
-        redirectToCustomerPortal={null}
-      />
+      <div className="flex w-full max-w-[720px]">
+        <BillingCard
+          status="open_alpha"
+          productName="Starter Plan"
+          daysLeft={null}
+          price={0}
+          featureList={[
+            "Access to all our state-of-the-art pre-trained models",
+            "Unlimited API requests",
+            "Free compute resource during open alpha",
+            "Basic Discord and email support",
+          ]}
+          isLoadingPortalLink={false}
+          redirectToCustomerPortal={null}
+        />
+      </div>
     </TabBase>
   );
 };
