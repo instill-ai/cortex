@@ -21,7 +21,6 @@ import {
   ConnectorResourceType,
   ConnectorResourceWithDefinition,
   Nullable,
-  PipelinePermission,
   TriggerUserPipelineResponse,
 } from "../../lib";
 
@@ -56,7 +55,8 @@ export type PipelineBuilderState = {
   createResourceDialogState: PipelineBuilderCreateResourceDialogState;
   isLatestVersion: boolean;
   currentVersion: string;
-  initializedByTemplate: boolean;
+  initializedByTemplateOrClone: boolean;
+  isOwner: boolean;
 };
 
 export type PipelineBuilderAction = {
@@ -97,7 +97,8 @@ export type PipelineBuilderAction = {
   ) => void;
   updateIsLatestVersion: (fn: (prev: boolean) => boolean) => void;
   updateCurrentVersion: (fn: (prev: string) => string) => void;
-  updateInitializedByTemplate: (fn: (prev: boolean) => boolean) => void;
+  updateInitializedByTemplateOrClone: (fn: (prev: boolean) => boolean) => void;
+  updateIsOwner: (fn: (prev: boolean) => boolean) => void;
 };
 
 export type PipelineBuilderStore = PipelineBuilderState & PipelineBuilderAction;
@@ -129,7 +130,8 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
   },
   isLatestVersion: true,
   currentVersion: "latest",
-  initializedByTemplate: false,
+  initializedByTemplateOrClone: false,
+  isOwner: false,
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
@@ -153,9 +155,7 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
         set((state) => {
           return { ...state, pipelineDescription };
         }),
-      updateRightPanelIsOpenRightPanelIsOpen: (
-        fn: (prev: boolean) => boolean
-      ) =>
+      updateRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
         set((state) => {
           return { ...state, rightPanelIsOpen: fn(state.rightPanelIsOpen) };
         }),
@@ -210,13 +210,6 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
           return {
             ...state,
             isSavingPipeline: fn(state.isSavingPipeline),
-          };
-        }),
-      updateRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
-        set((state) => {
-          return {
-            ...state,
-            rightPanelIsOpen: fn(state.rightPanelIsOpen),
           };
         }),
       updateSelectedConnectorNodeId: (
@@ -309,11 +302,20 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
             currentVersion: fn(state.currentVersion),
           };
         }),
-      updateInitializedByTemplate: (fn: (prev: boolean) => boolean) =>
+      updateInitializedByTemplateOrClone: (fn: (prev: boolean) => boolean) =>
         set((state) => {
           return {
             ...state,
-            initializedByTemplate: fn(state.initializedByTemplate),
+            initializedByTemplateOrClone: fn(
+              state.initializedByTemplateOrClone
+            ),
+          };
+        }),
+      updateIsOwner: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            isOwner: fn(state.isOwner),
           };
         }),
     }))

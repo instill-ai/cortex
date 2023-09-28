@@ -25,7 +25,7 @@ const selector = (state: PipelineBuilderStore) => ({
   setPipelineName: state.setPipelineName,
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
-  updateInitializedByTemplate: state.updateInitializedByTemplate,
+  updateInitializedByTemplateOrClone: state.updateInitializedByTemplateOrClone,
   updatePipelineIsNew: state.updatePipelineIsNew,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
@@ -49,7 +49,7 @@ export const StaffPickTemplates = ({
     setPipelineName,
     updateNodes,
     updateEdges,
-    updateInitializedByTemplate,
+    updateInitializedByTemplateOrClone,
     updatePipelineIsNew,
     updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(selector, shallow);
@@ -102,13 +102,13 @@ export const StaffPickTemplates = ({
       });
     }
 
-    const recipeWithCompletwConnectorDefinition: PipelineRecipe = {
+    const recipeWithCompleteConnectorDefinition: PipelineRecipe = {
       ...template.recipe,
       components: newComponents,
     };
 
     const initialGraphData = createInitialGraphData(
-      recipeWithCompletwConnectorDefinition
+      recipeWithCompleteConnectorDefinition
     );
 
     const randomName = generateRandomReadableName();
@@ -117,7 +117,7 @@ export const StaffPickTemplates = ({
     updatePipelineRecipeIsDirty(() => true);
     updateNodes(() => initialGraphData.nodes);
     updateEdges(() => initialGraphData.edges);
-    updateInitializedByTemplate(() => true);
+    updateInitializedByTemplateOrClone(() => true);
     updatePipelineIsNew(() => true);
     router.push(`/${entity}/pipelines/${randomName}`);
   }
