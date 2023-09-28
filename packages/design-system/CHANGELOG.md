@@ -1,5 +1,13 @@
 # @instill-ai/design-system
 
+## [0.55.2](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.1...@instill-ai/design-system-v0.55.2) (2023-09-28)
+
+
+### Miscellaneous
+
+* add icons ([#909](https://github.com/instill-ai/cortex/issues/909)) ([087dd7f](https://github.com/instill-ai/cortex/commit/087dd7f5e894f1e6ade386b04f84a458809a15e1))
+* remove the initial style of Tabs ([#913](https://github.com/instill-ai/cortex/issues/913)) ([ce78c44](https://github.com/instill-ai/cortex/commit/ce78c4404a1d3a97764ea539ac88afabb61014e8))
+
 ## [0.55.1](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.0...@instill-ai/design-system-v0.55.1) (2023-09-27)
 
 
