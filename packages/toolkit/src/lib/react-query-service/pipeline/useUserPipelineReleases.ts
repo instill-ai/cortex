@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { ListUserPipelineReleasesQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 import { env } from "../../utility";
+import { useRouter } from "next/router";
 
 export const useUserPipelineReleases = ({
   pipelineName,
@@ -18,6 +19,7 @@ export const useUserPipelineReleases = ({
    */
   retry?: false | number;
 }) => {
+  const router = useRouter();
   let enableQuery = false;
 
   if (pipelineName && enabled) {
@@ -43,6 +45,7 @@ export const useUserPipelineReleases = ({
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
+        shareCode: router.query.view?.toString(),
       });
 
       return Promise.resolve(pipelineReleases);

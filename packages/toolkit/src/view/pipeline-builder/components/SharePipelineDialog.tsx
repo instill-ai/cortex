@@ -1,3 +1,4 @@
+import cn from "clsx";
 import {
   Button,
   Dialog,
@@ -160,7 +161,7 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
                     };
 
                     try {
-                      updatePipeline.mutateAsync({
+                      await updatePipeline.mutateAsync({
                         payload,
                         accessToken,
                       });
@@ -188,7 +189,14 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
                   }}
                   disabled={!pipeline.isSuccess}
                 />
-                {isUpdatingUsersPermission ? <LoadingSpin /> : null}
+                <div>
+                  <LoadingSpin
+                    className={cn(
+                      "!text-black",
+                      isUpdatingUsersPermission ? "" : "hidden"
+                    )}
+                  />
+                </div>
               </div>
             </div>
             {!pipelineIsPublic ? (
@@ -238,7 +246,7 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
                       };
 
                       try {
-                        updatePipeline.mutateAsync({
+                        await updatePipeline.mutateAsync({
                           payload,
                           accessToken,
                         });
@@ -266,13 +274,20 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
                     }}
                     disabled={!pipeline.isSuccess}
                   />
-                  {isUpdatingShareCodePermission ? <LoadingSpin /> : null}
+                  <div>
+                    <LoadingSpin
+                      className={cn(
+                        "!text-black",
+                        isUpdatingShareCodePermission ? "" : "hidden"
+                      )}
+                    />
+                  </div>
                 </div>
               </div>
             ) : null}
             <div className="flex flex-row justify-between">
               <div className="flex flex-row gap-x-3">
-                {pipelineIsPublic ? (
+                {pipelineIsPublic || enableShareCode ? (
                   <Icons.LockUnlocked03 className="my-auto w-6 h-6 stroke-semantic-fg-secondary" />
                 ) : (
                   <Icons.Lock03 className="my-auto w-6 h-6 stroke-semantic-fg-secondary" />
@@ -320,7 +335,7 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
             </div>
           </div>
         </div>
-        <Dialog.Close />
+        <Dialog.Close className="!right-6 !top-3" />
       </Dialog.Content>
     </Dialog.Root>
   );

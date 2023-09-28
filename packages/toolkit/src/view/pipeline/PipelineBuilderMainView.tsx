@@ -12,6 +12,7 @@ import {
   useCreateUserPipeline,
   useNavigationObserver,
   useUpdateUserPipeline,
+  useUser,
   useUserPipeline,
 } from "../../lib";
 import {
@@ -45,7 +46,9 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   selectedConnectorNodeId: state.selectedConnectorNodeId,
   updatePipelineOpenAPISchema: state.updatePipelineOpenAPISchema,
   updateAccessToken: state.updateAccessToken,
-  initializedByTemplate: state.initializedByTemplate,
+  initializedByTemplateOrClone: state.initializedByTemplateOrClone,
+  isOwner: state.isOwner,
+  updateIsOwner: state.updateIsOwner,
 });
 
 export type PipelineBuilderMainViewProps = GeneralPageProp;
@@ -74,7 +77,9 @@ export const PipelineBuilderMainView = (
     selectedConnectorNodeId,
     updatePipelineOpenAPISchema,
     updateAccessToken,
-    initializedByTemplate,
+    initializedByTemplateOrClone,
+    isOwner,
+    updateIsOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const [warnUnsaveChangesModalIsOpen, setWarnUnsaveChangesModalIsOpen] =
@@ -93,11 +98,17 @@ export const PipelineBuilderMainView = (
     router,
   });
 
-  const pipeline = useUserPipeline({
-    enabled: enableQuery && !!id && !pipelineIsNew,
-    pipelineName: id ? `users/${entity}/pipelines/${id}` : null,
-    retry: false,
+  const user = useUser({
+    enabled: enableQuery,
     accessToken,
+    retry: false,
+  });
+
+  const pipeline = useUserPipeline({
+    enabled: enableQuery && user.isSuccess && !!id && !pipelineIsNew,
+    pipelineName: id ? `users/${entity}/pipelines/${id}` : null,
+    accessToken,
+    retry: false,
   });
 
   React.useEffect(() => {
@@ -127,14 +138,16 @@ export const PipelineBuilderMainView = (
   const [graphIsInitialized, setGraphIsInitialized] = React.useState(false);
 
   React.useEffect(() => {
-    if (graphIsInitialized) return;
+    if (graphIsInitialized || !user.isSuccess) return;
 
     // If the pipeline is new, we need to give it initial data
     if (pipelineIsNew) {
       let newNodes: Node<NodeData>[] = [];
       let newEdges: Edge[] = [];
 
-      if (initializedByTemplate) {
+      updateIsOwner(() => true);
+
+      if (initializedByTemplateOrClone) {
         newNodes = nodes;
         newEdges = edges;
       } else {
@@ -206,7 +219,6 @@ export const PipelineBuilderMainView = (
 
       createGraphLayout(newNodes, newEdges)
         .then((graphData) => {
-          console.log(graphData, newNodes, newEdges);
           updateNodes(() => graphData.nodes);
           updateEdges(() => graphData.edges);
           setGraphIsInitialized(true);
@@ -227,6 +239,13 @@ export const PipelineBuilderMainView = (
       return;
     }
 
+    // Check whether current user is the owner of the pipeline
+    if (pipeline.data.user !== user.data.name) {
+      updateIsOwner(() => false);
+    } else {
+      updateIsOwner(() => true);
+    }
+
     // If the pipeline is not new and we have the pipeline data, we need to
     // set the pipeline id and update the graph
 
@@ -239,7 +258,6 @@ export const PipelineBuilderMainView = (
 
     createGraphLayout(initialGraphData.nodes, initialGraphData.edges)
       .then((graphData) => {
-        console.log(graphData, initialGraphData.nodes, initialGraphData.edges);
         updateNodes(() => graphData.nodes);
         updateEdges(() => graphData.edges);
         setGraphIsInitialized(true);
@@ -262,7 +280,7 @@ export const PipelineBuilderMainView = (
     graphIsInitialized,
     nodes,
     edges,
-    initializedByTemplate,
+    initializedByTemplateOrClone,
   ]);
 
   /* -------------------------------------------------------------------------

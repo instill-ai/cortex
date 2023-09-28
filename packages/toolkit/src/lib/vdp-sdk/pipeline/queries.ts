@@ -104,15 +104,26 @@ export type GetUserPipelineResponse = {
 export async function getUserPipelineQuery({
   pipelineName,
   accessToken,
+  shareCode,
 }: {
   pipelineName: string;
   accessToken: Nullable<string>;
+  shareCode?: string;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetUserPipelineResponse>(
-      `/${pipelineName}?view=VIEW_FULL`
+      `/${pipelineName}?view=VIEW_FULL`,
+      {
+        headers: {
+          "instill-share-code": shareCode,
+          "Access-Control-Allow-Headers": shareCode
+            ? "instill-share-code"
+            : undefined,
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     return Promise.resolve(data.pipeline);
@@ -136,11 +147,13 @@ export async function ListUserPipelineReleasesQuery({
   pageSize,
   nextPageToken,
   accessToken,
+  shareCode,
 }: {
   pipelineName: string;
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
+  shareCode?: string;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
@@ -153,8 +166,18 @@ export async function ListUserPipelineReleasesQuery({
       filter: null,
     });
 
-    const { data } =
-      await client.get<ListPipelineReleasesResponse>(queryString);
+    const { data } = await client.get<ListPipelineReleasesResponse>(
+      queryString,
+      {
+        headers: {
+          "instill-share-code": shareCode,
+          "Access-Control-Allow-Headers": shareCode
+            ? "instill-share-code"
+            : undefined,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     releases.push(...data.releases);
 
@@ -165,6 +188,7 @@ export async function ListUserPipelineReleasesQuery({
           pageSize,
           nextPageToken: data.next_page_token,
           accessToken,
+          shareCode,
         }))
       );
     }

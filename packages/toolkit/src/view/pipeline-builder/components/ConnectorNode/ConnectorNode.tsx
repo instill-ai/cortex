@@ -51,6 +51,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   updateCreateResourceDialogState: state.updateCreateResourceDialogState,
   isLatestVersion: state.isLatestVersion,
+  isOwner: state.isOwner,
 });
 
 export const DataConnectorInputSchema = z.object({
@@ -75,6 +76,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     updatePipelineRecipeIsDirty,
     updateCreateResourceDialogState,
     isLatestVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -377,7 +379,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               </form>
             </Form.Root>
           </div>
-          {isLatestVersion ? (
+          {isLatestVersion && isOwner ? (
             <div className="flex flex-row gap-x-3">
               <Button
                 onClick={() => {
