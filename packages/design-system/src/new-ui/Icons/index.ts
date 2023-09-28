@@ -28,7 +28,6 @@ import { Chip01 } from "./Chip01";
 import { Chip02 } from "./Chip02";
 import { Cube01 } from "./Cube01";
 import { CubeOutline } from "./CubeOutline";
-import { Dot } from "./Dot";
 import { Database01 } from "./Database01";
 import { DownloadCloud01 } from "./DownloadCloud01";
 import { Edit03 } from "./Edit03";
@@ -97,7 +96,6 @@ export const Icons = {
   CubeOutline,
   Database01,
   DownloadCloud01,
-  Dot,
   Edit03,
   Edit05,
   File04,
