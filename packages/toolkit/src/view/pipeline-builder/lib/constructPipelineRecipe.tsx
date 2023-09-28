@@ -4,7 +4,10 @@ import { recursiveParseToNum } from "./recursiveParseToNum";
 import { RawPipelineComponent } from "../../../lib";
 import { recursiveReplaceNullAndEmptyStringWithUndefined } from "./recursiveReplaceNullAndEmptyStringWithUndefined";
 
-export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
+export function constructPipelineRecipe(
+  nodes: Node<NodeData>[],
+  removeResourceName?: boolean
+) {
   const components: RawPipelineComponent[] = [];
 
   for (const node of nodes) {
@@ -48,7 +51,9 @@ export function constructPipelineRecipe(nodes: Node<NodeData>[]) {
       id: node.id,
 
       // Backend accept resource_name with empty string
-      resource_name: node.data.component.resource_name ?? "",
+      resource_name: removeResourceName
+        ? ""
+        : node.data.component.resource_name ?? "",
       configuration: {
         ...parsedIntConfiguration,
         input: {

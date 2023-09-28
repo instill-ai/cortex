@@ -47,7 +47,6 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updatePipelineOpenAPISchema: state.updatePipelineOpenAPISchema,
   updateAccessToken: state.updateAccessToken,
   initializedByTemplateOrClone: state.initializedByTemplateOrClone,
-  isOwner: state.isOwner,
   updateIsOwner: state.updateIsOwner,
 });
 
@@ -78,7 +77,6 @@ export const PipelineBuilderMainView = (
     updatePipelineOpenAPISchema,
     updateAccessToken,
     initializedByTemplateOrClone,
-    isOwner,
     updateIsOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -281,6 +279,9 @@ export const PipelineBuilderMainView = (
     nodes,
     edges,
     initializedByTemplateOrClone,
+    updateIsOwner,
+    user.data?.name,
+    user.isSuccess,
   ]);
 
   /* -------------------------------------------------------------------------

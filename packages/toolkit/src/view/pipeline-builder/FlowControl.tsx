@@ -33,9 +33,11 @@ import {
   PipelineConnectorComponent,
   UpdateUserPipelinePayload,
   env,
+  generateRandomReadableName,
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useUpdateUserPipeline,
+  useUser,
 } from "../../lib";
 import { StartNodeData } from "./type";
 import { useRouter } from "next/router";
@@ -103,6 +105,11 @@ export const FlowControl = (props: FlowControlProps) => {
   const { entity } = router.query;
 
   const { toast } = useToast();
+
+  const user = useUser({
+    enabled: enableQuery,
+    accessToken,
+  });
 
   const createUserPipeline = useCreateUserPipeline();
   const updateUserPipeline = useUpdateUserPipeline();
@@ -371,14 +378,58 @@ export const FlowControl = (props: FlowControlProps) => {
         ) : (
           <>
             <Button
-              onClick={() => {
-                const newComponents: PipelineComponent[] = [];
+              onClick={async () => {
+                if (!user.isSuccess) return;
+
+                setIsCloning(true);
+
+                const payload: CreateUserPipelinePayload = {
+                  id: generateRandomReadableName(),
+                  recipe: constructPipelineRecipe(nodes, true),
+                };
+
+                try {
+                  await createUserPipeline.mutateAsync({
+                    payload,
+                    accessToken,
+                    userName: user.data.name,
+                  });
+
+                  setIsCloning(false);
+
+                  await router.push(`/${user.data.id}/pipelines/${payload.id}`);
+
+                  router.reload();
+
+                  toast({
+                    title: "Successfully cloned the pipeline",
+                    variant: "alert-success",
+                    size: "small",
+                  });
+                } catch (error) {
+                  setIsCloning(false);
+                  if (isAxiosError(error)) {
+                    toast({
+                      title: "Something went wrong when clone the pipeline",
+                      description: getInstillApiErrorMessage(error),
+                      variant: "alert-error",
+                      size: "large",
+                    });
+                  } else {
+                    toast({
+                      title: "Something went wrong when clone the pipeline",
+                      variant: "alert-error",
+                      size: "large",
+                    });
+                  }
+                }
               }}
               className="!gap-x-2"
               variant="primary"
               size="lg"
             >
-              {isCloning ? <LoadingSpin className="!text-black" /> : "Clone"}
+              Clone
+              <LoadingSpin className={isCloning ? "" : "hidden"} />
             </Button>
           </>
         )}
