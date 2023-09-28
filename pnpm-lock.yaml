@@ -570,6 +570,9 @@ importers:
       simple-oauth2:
         specifier: ^5.0.0
         version: 5.0.0
+      stripe:
+        specifier: ^13.7.0
+        version: 13.7.0
       tailwindcss:
         specifier: ^3.3.2
         version: 3.3.2
@@ -16814,6 +16817,14 @@ packages:
     resolution: {integrity: sha512-QZTsipNpa2Ppr6v1AmJHESqJ3Uz247MUS0OjrnnZjFAvEoWqxuyFuXn2xLgMtRnijJShAa1HL0gtJyUs7u7n3Q==}
     dependencies:
       acorn: 8.9.0
+    dev: true
+
+  /stripe@13.7.0:
+    resolution: {integrity: sha512-0cbUNl5aDwt5rIZeE/WgyTxZN/PtwyeA5KcVJrHj260tjN4IOo2BZikN+dxhKoeBfI4aSRAd3E5vHRKmjjaSbA==}
+    engines: {node: '>=12.*'}
+    dependencies:
+      '@types/node': 18.14.1
+      qs: 6.11.2
     dev: true
 
   /style-dictionary@3.8.0:

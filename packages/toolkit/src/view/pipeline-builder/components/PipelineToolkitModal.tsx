@@ -14,6 +14,11 @@ export type PipelineToolkitModalModalProps = {
   snippet: string;
 };
 
+const tabTriggerStyle =
+  "rounded-t-sm border border-semantic-bg-line bg-semantic-bg-base-bg px-3 py-1.5 text-[#1D2433] text-opacity-80 product-body-text-3-semibold data-[state=active]:bg-semantic-bg-primary data-[state=active]:text-opacity-100";
+const tabContentStyle =
+  "h-full w-full rounded-sm border border-semantic-bg-line bg-semantic-accent-bg p-2";
+
 export const PipelineToolkitModal = (props: PipelineToolkitModalModalProps) => {
   const { snippet } = props;
 
@@ -50,11 +55,15 @@ export const PipelineToolkitModal = (props: PipelineToolkitModalModalProps) => {
           </div>
           <Tabs.Root defaultValue="snippet" className="h-[300px] w-[512px]">
             <Tabs.List className="flex w-full flex-row gap-x-0.5 px-2">
-              <Tabs.Trigger value="snippet">Trigger Snippet</Tabs.Trigger>
-              <Tabs.Trigger value="recipe">Recipe</Tabs.Trigger>
+              <Tabs.Trigger className={tabTriggerStyle} value="snippet">
+                Trigger Snippet
+              </Tabs.Trigger>
+              <Tabs.Trigger className={tabTriggerStyle} value="recipe">
+                Recipe
+              </Tabs.Trigger>
             </Tabs.List>
             <div className="flex h-full w-full">
-              <Tabs.Content value="snippet">
+              <Tabs.Content className={tabContentStyle} value="snippet">
                 <ScrollArea.Root className="h-full">
                   <CodeBlock
                     codeString={snippet}
@@ -70,7 +79,7 @@ export const PipelineToolkitModal = (props: PipelineToolkitModalModalProps) => {
                   />
                 </ScrollArea.Root>
               </Tabs.Content>
-              <Tabs.Content value="recipe">
+              <Tabs.Content className={tabContentStyle} value="recipe">
                 <ScrollArea.Root className="h-full">
                   <CodeBlock
                     codeString={recipeString}
