@@ -53,12 +53,14 @@ import { Recording02 } from "./Recording02";
 import { Save01 } from "./Save01";
 import { Sliders01 } from "./Sliders01";
 import { SpeechRecognition } from "./SpeechRecognition";
+import { Speaker01 } from "./Speaker01";
 import { Stop } from "./Stop";
 import { SearchSm } from "./SearchSm";
 import { Tag01 } from "./Tag01";
 import { Trash01 } from "./Trash01";
 import { Type02 } from "./Type02";
 import { Upload01 } from "./Upload01";
+import { VideoRecorder } from "./VideoRecorder";
 import { X } from "./X";
 
 export const Icons = {
@@ -117,11 +119,13 @@ export const Icons = {
   Save01,
   SpeechRecognition,
   Sliders01,
+  Speaker01,
   Stop,
   SearchSm,
   Tag01,
   Trash01,
   Type02,
   Upload01,
+  VideoRecorder,
   X,
 };
