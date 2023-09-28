@@ -24,6 +24,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   currentVersion: state.currentVersion,
+  isOwner: state.isOwner,
 });
 
 export const BottomBar = (props: BottomBarProps) => {
@@ -37,6 +38,7 @@ export const BottomBar = (props: BottomBarProps) => {
     updateNodes,
     updateEdges,
     currentVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const pipelineReleases = useUserPipelineReleases({
@@ -54,6 +56,7 @@ export const BottomBar = (props: BottomBarProps) => {
             size="sm"
             variant="tertiaryColour"
             type="button"
+            disabled={!isOwner}
           >
             <Icons.Tag01 className="w-3 h-3 stroke-semantic-accent-default" />
             Releases

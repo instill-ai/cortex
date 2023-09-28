@@ -56,6 +56,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   accessToken: state.accessToken,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   isLatestVersion: state.isLatestVersion,
+  isOwner: state.isOwner,
 });
 
 export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
@@ -77,6 +78,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
     accessToken,
     updatePipelineRecipeIsDirty,
     isLatestVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -593,7 +595,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                           <div className="my-auto font-sans text-base font-semibold text-semantic-fg-primary">
                             {key}
                           </div>
-                          {isLatestVersion ? (
+                          {isLatestVersion && isOwner ? (
                             <div className="my-auto flex flex-row gap-x-4">
                               <button
                                 onClick={() => {
@@ -631,7 +633,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
                   className="flex w-full flex-1"
                   variant="primary"
                   onClick={() => setEnableEdit(!enableEdit)}
-                  disabled={isLatestVersion ? false : true}
+                  disabled={isOwner ? (isLatestVersion ? false : true) : true}
                 >
                   <p className="my-auto">Add Field</p>
                   <Icons.Plus

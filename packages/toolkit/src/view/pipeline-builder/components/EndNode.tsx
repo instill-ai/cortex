@@ -44,6 +44,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineOpenAPISchema: state.pipelineOpenAPISchema,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   isLatestVersion: state.isLatestVersion,
+  isOwner: state.isOwner,
 });
 
 export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
@@ -60,6 +61,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
     pipelineOpenAPISchema,
     updatePipelineRecipeIsDirty,
     isLatestVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const form = useForm<z.infer<typeof CreateEndOperatorInputSchema>>({
@@ -303,7 +305,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
                       <div className="my-auto font-sans text-base font-semibold text-semantic-fg-primary">
                         {key}
                       </div>
-                      {isLatestVersion ? (
+                      {isLatestVersion && isOwner ? (
                         <div className="my-auto flex flex-row gap-x-4">
                           <button
                             onClick={() => {
@@ -349,7 +351,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
               className="flex w-[232px]"
               variant="primary"
               onClick={() => setEnableEdit(!enableEdit)}
-              disabled={isLatestVersion ? false : true}
+              disabled={isOwner ? (isLatestVersion ? false : true) : true}
             >
               <p className="my-auto">Add Field</p>
               <Icons.Plus
