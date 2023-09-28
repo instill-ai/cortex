@@ -400,8 +400,13 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Fill your OpenAI API key. To find your keys, visit your
-                    OpenAI&apos;s API Keys page.
+                    {aiDefinition.name === "connector-definitions/ai-openai"
+                      ? "Fill your OpenAI API key. To find your keys, visit your OpenAI's API Keys page."
+                      : null}
+                    {aiDefinition.name ===
+                    "connector-definitions/ai-stability-ai"
+                      ? "Fill your Stability AI API key. To find your keys, visit - https://platform.stability.ai/account/keys"
+                      : null}
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
