@@ -19,6 +19,7 @@ import {
 import { useRouter } from "next/router";
 import { isAxiosError } from "axios";
 import { LoadingSpin } from "../../../components";
+import { usePipelineBuilderStore } from "../usePipelineBuilderStore";
 
 export type SharePipelineDialogProps = {
   accessToken: Nullable<string>;
@@ -36,12 +37,14 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
   const [isUpdatingShareCodePermission, setIsUpdatingShareCodePermission] =
     React.useState(false);
 
+  const pipelineIsNew = usePipelineBuilderStore((state) => state.pipelineIsNew);
+
   const { toast } = useToast();
 
   const pipeline = useUserPipeline({
     pipelineName: `users/${entity}/pipelines/${id}`,
     accessToken,
-    enabled: enableQuery,
+    enabled: enableQuery && !pipelineIsNew,
   });
 
   const updatePipeline = useUpdateUserPipeline();

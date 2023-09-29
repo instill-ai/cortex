@@ -32,6 +32,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeEnabled: state.testModeEnabled,
   updatePipelineIsNew: state.updatePipelineIsNew,
   pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export type PipelineNameFormProps = {
@@ -71,11 +72,12 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     nodes,
     updatePipelineIsNew,
     pipelineRecipeIsDirty,
+    updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   React.useEffect(() => {
     form.reset({
-      pipelineId: router.asPath.split("/")[2],
+      pipelineId: router.asPath.split("/")[3],
     });
   }, [router.isReady, router.asPath, form]);
 
@@ -107,14 +109,17 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
           accessToken,
         });
 
-        await router.push(`/${entity}/pipelines/${newId}`, undefined, {
-          shallow: true,
-        });
+        // We should change all the state before pushing to the new route
 
         setPipelineId(newId);
         setPipelineUid(res.pipeline.uid);
         setPipelineName(res.pipeline.name);
         updatePipelineIsNew(() => false);
+        updatePipelineRecipeIsDirty(() => false);
+
+        await router.push(`/${entity}/pipelines/${newId}`, undefined, {
+          shallow: true,
+        });
 
         toast({
           title: "Successfully saved the pipeline",
