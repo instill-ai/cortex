@@ -12,6 +12,7 @@ import { Box } from "./Box";
 import { Check } from "./Check";
 import { Circle } from "./Circle";
 import { CodeBrowser } from "./CodeBrowser";
+import { CodeSnippet02 } from "./CodeSnippet02";
 import { Copy06 } from "./Copy06";
 import { Copy07 } from "./Copy07";
 import { CheckCircle } from "./CheckCircle";
@@ -33,6 +34,7 @@ import { DownloadCloud01 } from "./DownloadCloud01";
 import { Edit03 } from "./Edit03";
 import { Edit05 } from "./Edit05";
 import { File04 } from "./File04";
+import { File05 } from "./File05";
 import { FilterLines } from "./FilterLines";
 import { Gear01 } from "./Gear01";
 import { HelpCircle } from "./HelpCircle";
@@ -45,6 +47,7 @@ import { Image01 } from "./Image01";
 import { Logout01 } from "./Logout01";
 import { Model } from "./Model";
 import { Menu01 } from "./Menu01";
+import { Mail01 } from "./Mail01";
 import { Pipeline } from "./Pipeline";
 import { Plus } from "./Plus";
 import { Play } from "./Play";
@@ -90,6 +93,7 @@ export const Icons = {
   Chip02,
   Circle,
   CodeBrowser,
+  CodeSnippet02,
   Copy06,
   Copy07,
   Cube01,
@@ -99,6 +103,7 @@ export const Icons = {
   Edit03,
   Edit05,
   File04,
+  File05,
   FilterLines,
   Gear01,
   HelpCircle,
@@ -111,6 +116,7 @@ export const Icons = {
   Logout01,
   Model,
   Menu01,
+  Mail01,
   Pipeline,
   Play,
   Plus,

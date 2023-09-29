@@ -14,6 +14,8 @@ const buttonVariants = cva(
           "bg-semantic-error-default text-semantic-fg-on-default hover:bg-semantic-error-hover active:bg-semantic-error-pressed focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-semantic-error-hover disabled:bg-semantic-bg-secondary disabled:text-semantic-fg-disabled",
         secondaryColour:
           "bg-semantic-accent-bg text-semantic-accent-hover hover:bg-semantic-accent-bg-alt active:bg-[#BED3FE] focus-visible:ring-2 focus-visible:ring-offset-1 hover:text-accent-pressed focus-visible:ring-[#91B5FD] disabled:bg-semantic-bg-secondary disabled:text-semantic-fg-disabled",
+        secondarySuccess:
+          "bg-semantic-success-bg text-semantic-success-default hover:bg-semantic-success-bg-alt active:bg-[#8df2ba] focus-visible:ring-2 focus-visible:ring-offset-1 hover:text-success-pressed focus-visible:ring-[#91B5FD] disabled:bg-semantic-bg-secondary disabled:text-semantic-fg-disabled",
         secondaryGrey:
           "bg-semantic-bg-primary text-semantic-fg-primary border border-semantic-bg-line hover:bg-semantic-bg-secondary hover:border-semantic-bg-secondary-secondary active:bg-semantic-bg-line focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:border-semantic-bg-secondary-secondary focus-visible:ring-semantic-bg-secondary-secondary disabled:bg-semantic-bg-secondary disabled:text-semantic-fg-disabled",
         tertiaryGrey:
