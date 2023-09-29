@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.55.3](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.2...@instill-ai/design-system-v0.55.3) (2023-09-29)
+
+
+### Miscellaneous
+
+* **design-system:** add icons and update button success ([#918](https://github.com/instill-ai/cortex/issues/918)) ([492553c](https://github.com/instill-ai/cortex/commit/492553c76c536bf29c8f9352f04e3fa450770ad4))
+
 ## [0.55.2](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.1...@instill-ai/design-system-v0.55.2) (2023-09-28)
 
 
