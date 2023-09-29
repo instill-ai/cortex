@@ -132,7 +132,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
                   Delete
                 </div>
               </Dialog.Trigger>
-              <Dialog.Content>
+              <Dialog.Content className="!w-[512px]">
                 <GeneralDeleteResourceModal
                   resource={row.original}
                   handleDeleteResource={handleDeletePipeline}
