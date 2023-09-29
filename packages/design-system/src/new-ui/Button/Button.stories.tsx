@@ -34,6 +34,13 @@ export const SecondaryColour: Story = {
     </Button>
   ),
 };
+export const SecondarySuccess: Story = {
+  render: () => (
+    <Button variant="secondarySuccess" size="lg">
+      I am a button
+    </Button>
+  ),
+};
 
 export const Danger: Story = {
   render: () => (
