@@ -156,7 +156,7 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
                   Delete
                 </div>
               </Dialog.Trigger>
-              <Dialog.Content>
+              <Dialog.Content className="!w-[512px]">
                 <GeneralDeleteResourceModal
                   resource={row.original}
                   handleDeleteResource={handleDeleteUserConnectorResource}
