@@ -27,13 +27,11 @@ import {
 import { triggerPipelineSnippets } from "./components/triggerPipelineSnippets";
 import {
   ConnectorDefinition,
-  ConnectorResource,
   ConnectorResourceWithDefinition,
   CreateUserPipelinePayload,
   GeneralRecord,
   InstillAppEnv,
   Nullable,
-  PipelineComponent,
   PipelineConnectorComponent,
   UpdateUserPipelinePayload,
   env,
@@ -524,7 +522,7 @@ export const FlowControl = (props: FlowControlProps) => {
             >
               Save
               {isSaving ? (
-                <LoadingSpin />
+                <LoadingSpin className="!text-black" />
               ) : (
                 <Icons.Save01 className="h-5 w-5 stroke-semantic-fg-primary" />
               )}
@@ -541,7 +539,7 @@ export const FlowControl = (props: FlowControlProps) => {
                   return;
                 }
 
-                if (!testModeEnabled) {
+                if (pipelineRecipeIsDirty) {
                   await handleSavePipeline();
                 }
 

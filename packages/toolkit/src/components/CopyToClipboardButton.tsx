@@ -28,7 +28,7 @@ export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
       {copied ? (
         <Icons.Check className="w-4 h-4 stroke-semantic-fg-primary" />
       ) : (
-        <CopyIcon width="w-4" height="h-4" color="fill-semantic-fg-primary" />
+        <Icons.Copy06 className="w-4 h-4 stroke-semantic-fg-primary" />
       )}
     </Button>
   );

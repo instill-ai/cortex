@@ -389,6 +389,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 variant="tertiaryGrey"
                 size="sm"
                 className="!px-0 !py-0"
+                disabled={testModeEnabled}
               >
                 <Icons.Gear01 className="w-4 h-4 stroke-semantic-fg-secondary" />
               </Button>
@@ -397,6 +398,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   variant="tertiaryGrey"
                   size="sm"
                   className="!px-0 !py-0"
+                  disabled={testModeEnabled}
                   onClick={(e) => {
                     e.stopPropagation();
                     const nodeIndex =
@@ -476,6 +478,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 variant="tertiaryGrey"
                 size="sm"
                 className="!px-0 !py-0"
+                disabled={testModeEnabled}
                 onClick={(e) => {
                   e.stopPropagation();
                   const newNodes = nodes.filter((node) => node.id !== id);

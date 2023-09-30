@@ -72,7 +72,7 @@ export const CreateResourceDialog = (props: CreateResourceDialogProps) => {
       <Dialog.Content className="flex max-h-[700px] !max-w-[1048px] flex-col overflow-y-auto">
         <div className="flex flex-col">
           <div className="mb-5 flex flex-col ">
-            <div className="mb-4 flex h-12 w-12 rounded-[10px] border border-semantic-bg-line shadow-xxs">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-[10px] border border-semantic-bg-line shadow-xxs">
               <ImageWithFallback
                 src={`/icons/${connectorDefinition?.vendor}/${connectorDefinition?.icon}`}
                 width={32}
