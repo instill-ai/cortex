@@ -54,6 +54,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
 
   const {
     nodes,
+    edges,
     updateNodes,
     updateEdges,
     testModeEnabled,
@@ -173,6 +174,10 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
     pipelineOpenAPISchema,
     testModeTriggerResponse ? testModeTriggerResponse.outputs : []
   );
+
+  const hasTargetEdges = React.useMemo(() => {
+    return edges.some((edge) => edge.target === id);
+  }, [edges]);
 
   return (
     <>
@@ -366,7 +371,12 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
           </div>
         )}
       </div>
-      <CustomHandle type="target" position={Position.Left} id={id} />
+      <CustomHandle
+        className={hasTargetEdges ? "" : "!opacity-0"}
+        type="target"
+        position={Position.Left}
+        id={id}
+      />
     </>
   );
 };

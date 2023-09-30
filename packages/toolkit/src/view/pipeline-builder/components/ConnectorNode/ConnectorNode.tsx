@@ -44,6 +44,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   selectedConnectorNodeId: state.selectedConnectorNodeId,
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   nodes: state.nodes,
+  edges: state.edges,
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   testModeEnabled: state.testModeEnabled,
@@ -69,6 +70,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     selectedConnectorNodeId,
     updateSelectedConnectorNodeId,
     nodes,
+    edges,
     updateNodes,
     updateEdges,
     testModeEnabled,
@@ -311,6 +313,14 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     data.component,
     testModeTriggerResponse?.metadata?.traces ?? null
   );
+
+  const hasTargetEdges = React.useMemo(() => {
+    return edges.some((edge) => edge.target === id);
+  }, [edges]);
+
+  const hasSourceEdges = React.useMemo(() => {
+    return edges.some((edge) => edge.source === id);
+  }, [edges]);
 
   return (
     <>
@@ -872,8 +882,18 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           </>
         )}
       </div>
-      <CustomHandle type="target" position={Position.Left} id={id} />
-      <CustomHandle type="source" position={Position.Right} id={id} />
+      <CustomHandle
+        className={hasTargetEdges ? "" : "!opacity-0"}
+        type="target"
+        position={Position.Left}
+        id={id}
+      />
+      <CustomHandle
+        className={hasSourceEdges ? "" : "!opacity-0"}
+        type="source"
+        position={Position.Right}
+        id={id}
+      />
     </>
   );
 };
