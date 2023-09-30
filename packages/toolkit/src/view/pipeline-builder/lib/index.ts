@@ -16,4 +16,5 @@ export * from "./recursiveRemoveUndefinedAndNullFromArray";
 export * from "./recursiveReplaceNullAndEmptyStringWithUndefined";
 export * from "./recursiveTransformToString";
 export * from "./recursiveReplaceTargetValue";
+export * from "./useSortedReleases";
 export * from "./validateIntillUpstreamTypes";

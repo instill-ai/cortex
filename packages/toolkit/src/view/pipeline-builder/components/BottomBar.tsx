@@ -1,3 +1,5 @@
+import * as React from "react";
+import * as semver from "semver";
 import { Button, Icons, Popover } from "@instill-ai/design-system";
 import {
   Nullable,
@@ -9,7 +11,11 @@ import {
   usePipelineBuilderStore,
 } from "../usePipelineBuilderStore";
 import { shallow } from "zustand/shallow";
-import { createGraphLayout, createInitialGraphData } from "../lib";
+import {
+  createGraphLayout,
+  createInitialGraphData,
+  useSortedReleases,
+} from "../lib";
 
 export type BottomBarProps = {
   enableQuery: boolean;
@@ -19,11 +25,12 @@ export type BottomBarProps = {
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineName: state.pipelineName,
   pipelineIsNew: state.pipelineIsNew,
+  isLatestVersion: state.isLatestVersion,
   updateIsLatestVersion: state.updateIsLatestVersion,
-  updateCurrentVersion: state.updateCurrentVersion,
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   currentVersion: state.currentVersion,
+  updateCurrentVersion: state.updateCurrentVersion,
   isOwner: state.isOwner,
 });
 
@@ -33,18 +40,19 @@ export const BottomBar = (props: BottomBarProps) => {
   const {
     pipelineIsNew,
     pipelineName,
+    isLatestVersion,
     updateIsLatestVersion,
-    updateCurrentVersion,
     updateNodes,
     updateEdges,
     currentVersion,
+    updateCurrentVersion,
     isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
-  const pipelineReleases = useUserPipelineReleases({
+  const sortedReleases = useSortedReleases({
     pipelineName,
-    enabled: pipelineIsNew ? false : enableQuery,
     accessToken,
+    enableQuery: pipelineIsNew ? false : enableQuery,
   });
 
   return (
@@ -72,60 +80,69 @@ export const BottomBar = (props: BottomBarProps) => {
             Releases
           </p>
           <div className="flex flex-col gap-y-4">
-            {pipelineReleases.isSuccess ? (
-              pipelineReleases.data.length > 0 ? (
-                pipelineReleases.data.map((release, idx) => (
-                  <Button
-                    key={release.id}
-                    className="w-full"
-                    variant="tertiaryGrey"
-                    onClick={() => {
-                      if (idx !== 0) {
-                        updateIsLatestVersion(() => false);
-                      } else {
-                        updateIsLatestVersion(() => true);
-                      }
+            {sortedReleases.length > 0 ? (
+              sortedReleases.map((release, idx) => (
+                <Button
+                  key={release.id}
+                  className="w-full"
+                  variant="tertiaryGrey"
+                  onClick={() => {
+                    if (idx !== 0) {
+                      updateIsLatestVersion(() => false);
+                    } else {
+                      updateIsLatestVersion(() => true);
+                    }
 
-                      updateCurrentVersion(() => release.id);
+                    if (release.id === sortedReleases[0].id) {
+                      updateIsLatestVersion(() => true);
+                    }
 
-                      const { nodes, edges } = createInitialGraphData(
-                        release.recipe
-                      );
+                    updateCurrentVersion(() => release.id);
 
-                      createGraphLayout(nodes, edges)
-                        .then((graphData) => {
-                          updateNodes(() => graphData.nodes);
-                          updateEdges(() => graphData.edges);
-                        })
-                        .catch((err) => {
-                          console.log(err);
-                        });
-                    }}
-                  >
-                    <div className="flex flex-col w-full">
-                      <p className="mb-2 product-body-text-3-medium w-full text-left text-semantic-fg-primary">
-                        {release.id}
-                      </p>
-                      <p className="product-body-text-4-medium w-full text-left text-semantic-fg-disabled">
-                        {getHumanReadableStringFromTime(
-                          release.create_time,
-                          Date.now()
-                        )}
-                      </p>
-                    </div>
-                  </Button>
-                ))
-              ) : (
-                <div className="product-body-text-4-medium text-semantic-fg-disabled">
-                  This pipeline has no released versions.
-                </div>
-              )
-            ) : null}
+                    const { nodes, edges } = createInitialGraphData(
+                      release.recipe
+                    );
+
+                    createGraphLayout(nodes, edges)
+                      .then((graphData) => {
+                        updateNodes(() => graphData.nodes);
+                        updateEdges(() => graphData.edges);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  <div className="flex flex-col w-full">
+                    <p className="mb-2 product-body-text-3-medium w-full text-left text-semantic-fg-primary">
+                      {release.id}
+                    </p>
+                    <p className="product-body-text-4-medium w-full text-left text-semantic-fg-disabled">
+                      {getHumanReadableStringFromTime(
+                        release.create_time,
+                        Date.now()
+                      )}
+                    </p>
+                  </div>
+                </Button>
+              ))
+            ) : (
+              <div className="product-body-text-4-medium text-semantic-fg-disabled">
+                This pipeline has no released versions.
+              </div>
+            )}
           </div>
         </Popover.Content>
       </Popover.Root>
-      <div className="flex-1 my-auto text-center product-body-text-4-medium text-semantic-fg-secondary">
-        Pipeline {`(${currentVersion})`}
+      <div className="flex-1 flex flex-row gap-x-2 my-auto justify-center">
+        <p className="product-body-text-4-medium text-semantic-fg-secondary">
+          Pipeline {currentVersion ? `(${currentVersion})` : null}
+        </p>
+        {isLatestVersion ? (
+          <p className="product-body-text-4-medium text-semantic-accent-default">
+            latest
+          </p>
+        ) : null}
       </div>
 
       {/* 
