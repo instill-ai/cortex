@@ -15,6 +15,7 @@ import {
   EmptyNode,
   EndNode,
   StartNode,
+  BackToLatestVersionTopBar,
 } from "./components";
 import { FlowControl } from "./FlowControl";
 import {
@@ -31,9 +32,6 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   onConnect: state.onConnect,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
   testModeEnabled: state.testModeEnabled,
-  isLatestVersion: state.isLatestVersion,
-  updateIsLatestVersion: state.updateIsLatestVersion,
-  updateCurrentVersion: state.updateCurrentVersion,
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
 });
 
@@ -74,37 +72,15 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
     onEdgesChange,
     updatePipelineRecipeIsDirty,
     testModeEnabled,
-    isLatestVersion,
-    updateIsLatestVersion,
-    updateCurrentVersion,
     updateSelectedConnectorNodeId,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   return (
     <div className="relative flex flex-col flex-1">
-      {isLatestVersion ? null : (
-        <div className="flex flex-col bg-semantic-bg-base-bg w-full h-8">
-          <p className="m-auto">
-            <span className="product-body-text-4-medium text-semantic-fg-secondary ">
-              You are viewing a past version of this pipeline.
-            </span>
-            {` `}
-            <span
-              className="hover:!underline text-semantic-accent-default cursor-pointer product-body-text-4-medium"
-              onClick={() => {
-                updateCurrentVersion(() => "latest");
-                updateIsLatestVersion(() => true);
-              }}
-            >
-              Click Here
-            </span>
-            {` `}
-            <span className="product-body-text-4-medium text-semantic-fg-secondary">
-              for the latest version.
-            </span>
-          </p>
-        </div>
-      )}
+      <BackToLatestVersionTopBar
+        enableQuery={enableQuery}
+        accessToken={accessToken}
+      />
       <div className="relative h-full w-full flex flex-1">
         <div
           ref={ref}
