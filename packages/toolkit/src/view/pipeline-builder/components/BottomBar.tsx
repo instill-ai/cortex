@@ -1,5 +1,3 @@
-import * as React from "react";
-import * as semver from "semver";
 import { Button, Icons, Popover } from "@instill-ai/design-system";
 import { Nullable, getHumanReadableStringFromTime } from "../../../lib";
 import {
@@ -27,7 +25,6 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateEdges: state.updateEdges,
   currentVersion: state.currentVersion,
   updateCurrentVersion: state.updateCurrentVersion,
-  isOwner: state.isOwner,
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
 });
 
@@ -43,7 +40,6 @@ export const BottomBar = (props: BottomBarProps) => {
     updateEdges,
     currentVersion,
     updateCurrentVersion,
-    isOwner,
     updateSelectedConnectorNodeId,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -62,7 +58,6 @@ export const BottomBar = (props: BottomBarProps) => {
             size="sm"
             variant="tertiaryColour"
             type="button"
-            disabled={!isOwner}
           >
             <Icons.Tag01 className="w-3 h-3 stroke-semantic-accent-default" />
             Releases
