@@ -46,14 +46,19 @@ export const CreateResourceDialog = (props: CreateResourceDialogProps) => {
   });
 
   const filteredConnectors = React.useMemo(() => {
-    if (!existedConnectors.isSuccess) {
+    if (!existedConnectors.isSuccess || !connectorDefinition) {
       return [];
     }
 
     return existedConnectors.data.filter(
-      (connector) => connector.connector_definition.type === connectorType
+      (connector) =>
+        connector.connector_definition.id === connectorDefinition.id
     );
-  }, [existedConnectors.data, existedConnectors.isSuccess, connectorType]);
+  }, [
+    existedConnectors.data,
+    existedConnectors.isSuccess,
+    connectorDefinition,
+  ]);
 
   return (
     <Dialog.Root

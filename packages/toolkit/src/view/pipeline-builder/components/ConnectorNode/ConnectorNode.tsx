@@ -683,6 +683,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                           });
                         });
 
+                        updatePipelineRecipeIsDirty(() => true);
+
                         updateCreateResourceDialogState(() => ({
                           open: false,
                           connectorType: null,
