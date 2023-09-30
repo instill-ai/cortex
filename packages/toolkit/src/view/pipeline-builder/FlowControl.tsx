@@ -22,9 +22,13 @@ import {
   ReleasePipelineModal,
   PipelineToolkitModal,
   SelectConnectorResourceDialog,
+  CreateResourceDialog,
 } from "./components";
 import { triggerPipelineSnippets } from "./components/triggerPipelineSnippets";
 import {
+  ConnectorDefinition,
+  ConnectorResource,
+  ConnectorResourceWithDefinition,
   CreateUserPipelinePayload,
   GeneralRecord,
   InstillAppEnv,
@@ -315,6 +319,195 @@ export const FlowControl = (props: FlowControlProps) => {
     return true;
   }, [isLatestVersion, pipelineRecipeIsDirty]);
 
+  function constructNode(
+    resource: ConnectorResourceWithDefinition | ConnectorDefinition
+  ) {
+    if (!reactFlowInstance) return;
+
+    const viewport = reactFlowInstance.getViewport();
+    let componentType: Nullable<PipelineConnectorComponent["type"]> = null;
+
+    // Remove the empty node and edges that connect to empty node if it exists
+    const emptyNode = nodes.find((e) => e.data.nodeType === "empty");
+
+    const newNodes = emptyNode
+      ? nodes.filter((e) => e.data.nodeType !== "empty")
+      : nodes;
+
+    const newEdges = emptyNode
+      ? edges.filter((e) => {
+          if (e.source === emptyNode.id || e.target === emptyNode.id) {
+            return false;
+          }
+          return true;
+        })
+      : edges;
+
+    let nodePrefix: Nullable<string> = null;
+    let nodeIndex = 0;
+    let configuration: Nullable<GeneralRecord> = null;
+
+    switch (resource.type) {
+      case "CONNECTOR_TYPE_AI": {
+        nodePrefix = "ai";
+        nodeIndex =
+          nodes.filter(
+            (e) => e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_AI"
+          ).length + 1;
+        configuration =
+          "configuration" in resource
+            ? getAiConnectorDefaultConfiguration(
+                resource.connector_definition_name
+              )
+            : getAiConnectorDefaultConfiguration(resource.name);
+        componentType = "COMPONENT_TYPE_CONNECTOR_AI";
+        break;
+      }
+      case "CONNECTOR_TYPE_BLOCKCHAIN": {
+        nodePrefix = "blockchain";
+        nodeIndex =
+          nodes.filter(
+            (e) =>
+              e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN"
+          ).length + 1;
+        configuration =
+          "configuration" in resource
+            ? getBlockchainConnectorDefaultConfiguration(
+                resource.connector_definition_name
+              )
+            : getBlockchainConnectorDefaultConfiguration(resource.name);
+        componentType = "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN";
+        break;
+      }
+      case "CONNECTOR_TYPE_DATA": {
+        nodePrefix = "data";
+        nodeIndex =
+          nodes.filter(
+            (e) => e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_DATA"
+          ).length + 1;
+        configuration = {
+          input: {},
+        };
+        componentType = "COMPONENT_TYPE_CONNECTOR_DATA";
+        break;
+      }
+
+      case "CONNECTOR_TYPE_OPERATOR": {
+        nodePrefix = "operator";
+        nodeIndex =
+          nodes.filter(
+            (e) => e.data.component?.type === "COMPONENT_TYPE_OPERATOR"
+          ).length + 1;
+        configuration = {};
+        componentType = "COMPONENT_TYPE_OPERATOR";
+        break;
+      }
+    }
+
+    const nodeID = `${nodePrefix}_${nodeIndex}`;
+
+    if (!componentType) {
+      throw new Error("Component type is not defined");
+    }
+
+    if ("configuration" in resource) {
+      newNodes.push({
+        id: nodeID,
+        type: "connectorNode",
+        sourcePosition: Position.Left,
+        targetPosition: Position.Right,
+        data: {
+          nodeType: "connector",
+          component: {
+            id: nodeID,
+            resource_name: resource.name,
+            resource: {
+              ...resource,
+              connector_definition: null,
+            },
+            definition_name: resource.connector_definition.name,
+            configuration: configuration ? configuration : {},
+            type: componentType,
+            connector_definition: resource.connector_definition,
+          },
+        },
+        position: reactFlowInstance.project({
+          x: viewport.x,
+          y: viewport.y,
+        }),
+      });
+
+      newEdges.push(
+        ...[
+          {
+            id: uuidv4(),
+            source: "start",
+            target: nodeID,
+            type: "customEdge",
+          },
+          {
+            id: uuidv4(),
+            source: nodeID,
+            target: "end",
+            type: "customEdge",
+          },
+        ]
+      );
+    } else {
+      newNodes.push({
+        id: nodeID,
+        type: "connectorNode",
+        sourcePosition: Position.Left,
+        targetPosition: Position.Right,
+        data: {
+          nodeType: "connector",
+          component: {
+            id: nodeID,
+            resource_name: null,
+            resource: null,
+            definition_name: resource.name,
+            type: componentType,
+            connector_definition: resource,
+            configuration: configuration ? configuration : {},
+          },
+        },
+        position: reactFlowInstance.project({
+          x: viewport.x,
+          y: viewport.y,
+        }),
+      });
+
+      newEdges.push(
+        ...[
+          {
+            id: uuidv4(),
+            source: "start",
+            target: nodeID,
+            type: "customEdge",
+          },
+          {
+            id: uuidv4(),
+            source: nodeID,
+            target: "end",
+            type: "customEdge",
+          },
+        ]
+      );
+    }
+
+    updatePipelineRecipeIsDirty(() => true);
+
+    createGraphLayout(newNodes, newEdges)
+      .then((graphData) => {
+        updateNodes(() => graphData.nodes);
+        updateEdges(() => graphData.edges);
+        updateSelectResourceDialogIsOpen(() => false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <>
       <div className="absolute right-8 top-8 flex flex-row-reverse gap-x-4">
@@ -444,201 +637,7 @@ export const FlowControl = (props: FlowControlProps) => {
             }
             accessToken={accessToken}
             onSelect={(resource) => {
-              if (!reactFlowInstance) return;
-
-              const viewport = reactFlowInstance.getViewport();
-              let componentType: Nullable<PipelineConnectorComponent["type"]> =
-                null;
-
-              // Remove the empty node and edges that connect to empty node if it exists
-              const emptyNode = nodes.find((e) => e.data.nodeType === "empty");
-
-              const newNodes = emptyNode
-                ? nodes.filter((e) => e.data.nodeType !== "empty")
-                : nodes;
-
-              const newEdges = emptyNode
-                ? edges.filter((e) => {
-                    if (
-                      e.source === emptyNode.id ||
-                      e.target === emptyNode.id
-                    ) {
-                      return false;
-                    }
-                    return true;
-                  })
-                : edges;
-
-              let nodePrefix: Nullable<string> = null;
-              let nodeIndex = 0;
-              let configuration: Nullable<GeneralRecord> = null;
-
-              switch (resource.type) {
-                case "CONNECTOR_TYPE_AI": {
-                  nodePrefix = "ai";
-                  nodeIndex =
-                    nodes.filter(
-                      (e) =>
-                        e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_AI"
-                    ).length + 1;
-                  configuration =
-                    "configuration" in resource
-                      ? getAiConnectorDefaultConfiguration(
-                          resource.connector_definition_name
-                        )
-                      : getAiConnectorDefaultConfiguration(resource.name);
-                  componentType = "COMPONENT_TYPE_CONNECTOR_AI";
-                  break;
-                }
-                case "CONNECTOR_TYPE_BLOCKCHAIN": {
-                  nodePrefix = "blockchain";
-                  nodeIndex =
-                    nodes.filter(
-                      (e) =>
-                        e.data.component?.type ===
-                        "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN"
-                    ).length + 1;
-                  configuration =
-                    "configuration" in resource
-                      ? getBlockchainConnectorDefaultConfiguration(
-                          resource.connector_definition_name
-                        )
-                      : getBlockchainConnectorDefaultConfiguration(
-                          resource.name
-                        );
-                  componentType = "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN";
-                  break;
-                }
-                case "CONNECTOR_TYPE_DATA": {
-                  nodePrefix = "data";
-                  nodeIndex =
-                    nodes.filter(
-                      (e) =>
-                        e.data.component?.type ===
-                        "COMPONENT_TYPE_CONNECTOR_DATA"
-                    ).length + 1;
-                  configuration = {
-                    input: {},
-                  };
-                  componentType = "COMPONENT_TYPE_CONNECTOR_DATA";
-                  break;
-                }
-
-                case "CONNECTOR_TYPE_OPERATOR": {
-                  nodePrefix = "operator";
-                  nodeIndex =
-                    nodes.filter(
-                      (e) =>
-                        e.data.component?.type === "COMPONENT_TYPE_OPERATOR"
-                    ).length + 1;
-                  configuration = {};
-                  componentType = "COMPONENT_TYPE_OPERATOR";
-                  break;
-                }
-              }
-
-              const nodeID = `${nodePrefix}_${nodeIndex}`;
-
-              if (!componentType) {
-                throw new Error("Component type is not defined");
-              }
-
-              if ("configuration" in resource) {
-                newNodes.push({
-                  id: nodeID,
-                  type: "connectorNode",
-                  sourcePosition: Position.Left,
-                  targetPosition: Position.Right,
-                  data: {
-                    nodeType: "connector",
-                    component: {
-                      id: nodeID,
-                      resource_name: resource.name,
-                      resource: {
-                        ...resource,
-                        connector_definition: null,
-                      },
-                      definition_name: resource.connector_definition.name,
-                      configuration: configuration ? configuration : {},
-                      type: componentType,
-                      connector_definition: resource.connector_definition,
-                    },
-                  },
-                  position: reactFlowInstance.project({
-                    x: viewport.x,
-                    y: viewport.y,
-                  }),
-                });
-
-                newEdges.push(
-                  ...[
-                    {
-                      id: uuidv4(),
-                      source: "start",
-                      target: nodeID,
-                      type: "customEdge",
-                    },
-                    {
-                      id: uuidv4(),
-                      source: nodeID,
-                      target: "end",
-                      type: "customEdge",
-                    },
-                  ]
-                );
-              } else {
-                newNodes.push({
-                  id: nodeID,
-                  type: "connectorNode",
-                  sourcePosition: Position.Left,
-                  targetPosition: Position.Right,
-                  data: {
-                    nodeType: "connector",
-                    component: {
-                      id: nodeID,
-                      resource_name: null,
-                      resource: null,
-                      definition_name: resource.name,
-                      type: componentType,
-                      connector_definition: resource,
-                      configuration: configuration ? configuration : {},
-                    },
-                  },
-                  position: reactFlowInstance.project({
-                    x: viewport.x,
-                    y: viewport.y,
-                  }),
-                });
-
-                newEdges.push(
-                  ...[
-                    {
-                      id: uuidv4(),
-                      source: "start",
-                      target: nodeID,
-                      type: "customEdge",
-                    },
-                    {
-                      id: uuidv4(),
-                      source: nodeID,
-                      target: "end",
-                      type: "customEdge",
-                    },
-                  ]
-                );
-              }
-
-              updatePipelineRecipeIsDirty(() => true);
-
-              createGraphLayout(newNodes, newEdges)
-                .then((graphData) => {
-                  updateNodes(() => graphData.nodes);
-                  updateEdges(() => graphData.edges);
-                  updateSelectResourceDialogIsOpen(() => false);
-                })
-                .catch((err) => {
-                  console.log(err);
-                });
+              constructNode(resource);
             }}
             disabled={isLatestVersion ? false : true}
           />
@@ -647,6 +646,10 @@ export const FlowControl = (props: FlowControlProps) => {
       <div className="absolute bottom-8 right-8">
         <PipelineToolkitModal snippet={codeSnippte} />
       </div>
+      <CreateResourceDialog
+        accessToken={accessToken}
+        enableQuery={enableQuery}
+      />
     </>
   );
 };

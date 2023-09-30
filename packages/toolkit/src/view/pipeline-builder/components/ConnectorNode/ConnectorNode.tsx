@@ -654,6 +654,34 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                           connectorType: null,
                           connectorDefinition: null,
                           onCreated: null,
+                          onSelectedExistingResource: null,
+                        }));
+                      },
+                      onSelectedExistingResource: (connectorResource) => {
+                        updateNodes((prev) => {
+                          return prev.map((node) => {
+                            if (
+                              node.data.nodeType === "connector" &&
+                              node.id === id
+                            ) {
+                              node.data = {
+                                ...node.data,
+                                component: {
+                                  ...node.data.component,
+                                  resource_name: connectorResource.name,
+                                },
+                              };
+                            }
+                            return node;
+                          });
+                        });
+
+                        updateCreateResourceDialogState(() => ({
+                          open: false,
+                          connectorType: null,
+                          connectorDefinition: null,
+                          onCreated: null,
+                          onSelectedExistingResource: null,
                         }));
                       },
                     }));
