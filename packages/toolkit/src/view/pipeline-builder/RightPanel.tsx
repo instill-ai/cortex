@@ -77,10 +77,12 @@ export const RightPanel = () => {
         </div>
         <Separator orientation="horizontal" />
       </div>
+
       {/* 
         We use this additional pb to cope with Browser eaten up parent's padding when it is
         scrollable.
       */}
+
       <div className="flex w-full pb-10">
         {selectedConnectorNode &&
         selectedConnectorNode.data.nodeType === "connector" &&

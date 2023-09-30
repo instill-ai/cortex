@@ -900,6 +900,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   selectedConnectorNodeId: state.selectedConnectorNodeId,
+  updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
@@ -911,6 +912,7 @@ export const AIForm = (props: AIFormProps) => {
     updateNodes,
     updateEdges,
     selectedConnectorNodeId,
+    updateSelectedConnectorNodeId,
     updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -973,7 +975,7 @@ export const AIForm = (props: AIFormProps) => {
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
 
     updateEdges(() => newEdges);
-
+    updateSelectedConnectorNodeId(() => null);
     updatePipelineRecipeIsDirty(() => true);
   }
 
