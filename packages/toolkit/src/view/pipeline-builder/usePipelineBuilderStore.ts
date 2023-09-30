@@ -31,6 +31,9 @@ export type PipelineBuilderCreateResourceDialogState = {
   onCreated: Nullable<
     (connectorResource: ConnectorResourceWithDefinition) => void
   >;
+  onSelectedExistingResource: Nullable<
+    (connectorResource: ConnectorResourceWithDefinition) => void
+  >;
 };
 
 export type PipelineBuilderState = {
@@ -127,6 +130,7 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
     connectorType: null,
     connectorDefinition: null,
     onCreated: null,
+    onSelectedExistingResource: null,
   },
   isLatestVersion: true,
   currentVersion: "latest",

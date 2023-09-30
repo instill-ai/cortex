@@ -11,6 +11,7 @@ import {
 } from "../../../lib";
 import { ImageWithFallback } from "../../../components";
 import { useRouter } from "next/router";
+import { SelectConnectorResourceDialogItem } from "./SelectConnectorResourceDialogItem";
 
 export type SelectConnectorResourceDialogProps = {
   open: boolean;
@@ -113,7 +114,7 @@ export const SelectConnectorResourceDialog = (
             <div className="grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
               {allConnectorResources.isSuccess
                 ? allConnectorResources.data.map((connectorResource) => (
-                    <AddConnectorResourceDialogItem
+                    <SelectConnectorResourceDialogItem
                       key={connectorResource.id}
                       onClick={() => {
                         onSelect(connectorResource);
@@ -131,7 +132,7 @@ export const SelectConnectorResourceDialog = (
                       <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
                         {connectorResource.id}
                       </p>
-                    </AddConnectorResourceDialogItem>
+                    </SelectConnectorResourceDialogItem>
                   ))
                 : null}
             </div>
@@ -155,7 +156,7 @@ export const SelectConnectorResourceDialog = (
                         "connector-definitions/ai-hugging-face"
                     )
                     .map((definition) => (
-                      <AddConnectorResourceDialogItem
+                      <SelectConnectorResourceDialogItem
                         key={definition.id}
                         onClick={() => {
                           onSelect(definition);
@@ -173,7 +174,7 @@ export const SelectConnectorResourceDialog = (
                         <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
                           {definition.title}
                         </p>
-                      </AddConnectorResourceDialogItem>
+                      </SelectConnectorResourceDialogItem>
                     ))
                 : null}
             </div>
@@ -183,7 +184,7 @@ export const SelectConnectorResourceDialog = (
             <div className="mb-4 grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-3 lg:grid-cols-5">
               {blockchainDefinitions.isSuccess
                 ? blockchainDefinitions.data.map((definition) => (
-                    <AddConnectorResourceDialogItem
+                    <SelectConnectorResourceDialogItem
                       key={definition.id}
                       onClick={() => {
                         onSelect(definition);
@@ -201,7 +202,7 @@ export const SelectConnectorResourceDialog = (
                       <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
                         {definition.title}
                       </p>
-                    </AddConnectorResourceDialogItem>
+                    </SelectConnectorResourceDialogItem>
                   ))
                 : null}
             </div>
@@ -211,7 +212,7 @@ export const SelectConnectorResourceDialog = (
             <div className="mb-4 grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
               {dataDefinitions.isSuccess
                 ? dataDefinitions.data.map((definition) => (
-                    <AddConnectorResourceDialogItem
+                    <SelectConnectorResourceDialogItem
                       key={definition.id}
                       onClick={() => {
                         onSelect(definition);
@@ -229,7 +230,7 @@ export const SelectConnectorResourceDialog = (
                       <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
                         {definition.title}
                       </p>
-                    </AddConnectorResourceDialogItem>
+                    </SelectConnectorResourceDialogItem>
                   ))
                 : null}
             </div>
@@ -237,29 +238,5 @@ export const SelectConnectorResourceDialog = (
         </>
       </Dialog.Content>
     </Dialog.Root>
-  );
-};
-
-const AddConnectorResourceDialogItem = (
-  props: {
-    children: React.ReactNode;
-  } & React.ButtonHTMLAttributes<HTMLButtonElement>
-) => {
-  const { children, onClick, ...passThrough } = props;
-  return (
-    <button
-      className="flex w-[228px] cursor-pointer flex-row space-x-2 rounded border border-semantic-bg-line p-2 hover:bg-semantic-accent-bg"
-      onClick={(e) => {
-        if (onClick) {
-          onClick(e);
-        }
-      }}
-      {...passThrough}
-    >
-      <div className="my-auto flex flex-1 flex-row space-x-2">{children}</div>
-      <div className="my-auto flex h-8 w-8 items-center justify-center">
-        <Icons.Plus className="h-4 w-4 stroke-semantic-fg-secondary" />
-      </div>
-    </button>
   );
 };

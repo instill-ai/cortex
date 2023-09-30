@@ -1,5 +1,10 @@
+import * as React from "react";
 import { Dialog, Icons } from "@instill-ai/design-system";
-import { Nullable } from "../../../lib";
+import {
+  ConnectorResourceWithDefinition,
+  Nullable,
+  useUserConnectorResources,
+} from "../../../lib";
 import { AIResourceForm } from "../../ai";
 import { BlockchainResourceForm } from "../../blockchain";
 import { DataResourceForm } from "../../data";
@@ -8,6 +13,9 @@ import {
   usePipelineBuilderStore,
 } from "../usePipelineBuilderStore";
 import { shallow } from "zustand/shallow";
+import { useRouter } from "next/router";
+import { SelectConnectorResourceDialogItem } from "./SelectConnectorResourceDialogItem";
+import { ImageWithFallback } from "../../../components";
 
 export type CreateResourceDialogProps = {
   accessToken: Nullable<string>;
@@ -22,9 +30,34 @@ const selector = (state: PipelineBuilderStore) => ({
 export const CreateResourceDialog = (props: CreateResourceDialogProps) => {
   const { accessToken, enableQuery } = props;
   const {
-    state: { open, connectorDefinition, connectorType, onCreated },
+    state: {
+      open,
+      connectorDefinition,
+      connectorType,
+      onCreated,
+      onSelectedExistingResource,
+    },
     updateState,
   } = usePipelineBuilderStore(selector, shallow);
+  const router = useRouter();
+  const { entity } = router.query;
+
+  const existedConnectors = useUserConnectorResources({
+    userName: `users/${entity}`,
+    connectorResourceType: connectorType ?? "all",
+    accessToken,
+    enabled: enableQuery,
+  });
+
+  const filteredConnectors = React.useMemo(() => {
+    if (!existedConnectors.isSuccess) {
+      return [];
+    }
+
+    return existedConnectors.data.filter(
+      (connector) => connector.connector_definition.type === connectorType
+    );
+  }, [existedConnectors.data, existedConnectors.isSuccess]);
 
   return (
     <Dialog.Root
@@ -40,7 +73,15 @@ export const CreateResourceDialog = (props: CreateResourceDialogProps) => {
         <div className="flex flex-col">
           <div className="mb-5 flex flex-col ">
             <div className="mb-4 flex h-12 w-12 rounded-[10px] border border-semantic-bg-line shadow-xxs">
-              <Icons.IntersectSquare className="m-auto h-6 w-6 stroke-semantic-fg-secondary" />
+              <ImageWithFallback
+                src={`/icons/${connectorDefinition?.vendor}/${connectorDefinition?.icon}`}
+                width={32}
+                height={32}
+                alt={`${connectorDefinition?.title}-icon`}
+                fallbackImg={
+                  <Icons.IntersectSquare className="h-6 w-6 stroke-semantic-fg-primary" />
+                }
+              />
             </div>
             <p className="text-semantic-fg-primary product-body-text-1-semibold">
               Add Resource
@@ -49,61 +90,103 @@ export const CreateResourceDialog = (props: CreateResourceDialogProps) => {
               Setup your resource to build your pipeline.
             </p>
           </div>
-          {connectorType === "CONNECTOR_TYPE_AI" && connectorDefinition ? (
-            <AIResourceForm
-              aiDefinition={connectorDefinition}
-              aiResource={null}
-              accessToken={accessToken}
-              onSubmit={onCreated ? onCreated : undefined}
-              enableBackButton={true}
-              onBack={() => {
-                updateState(() => ({
-                  open: false,
-                  connectorType: null,
-                  connectorDefinition: null,
-                  onCreated: null,
-                }));
-              }}
-              enableQuery={enableQuery}
-            />
-          ) : null}
-          {connectorType === "CONNECTOR_TYPE_BLOCKCHAIN" &&
-          connectorDefinition ? (
-            <BlockchainResourceForm
-              blockchainDefinition={connectorDefinition}
-              blockchainResource={null}
-              accessToken={accessToken}
-              enableBackButton={true}
-              onSubmit={onCreated ? onCreated : undefined}
-              onBack={() => {
-                updateState(() => ({
-                  open: false,
-                  connectorType: null,
-                  connectorDefinition: null,
-                  onCreated: null,
-                }));
-              }}
-              enableQuery={enableQuery}
-            />
-          ) : null}
-          {connectorType === "CONNECTOR_TYPE_DATA" && connectorDefinition ? (
-            <DataResourceForm
-              dataDefinition={connectorDefinition}
-              dataResource={null}
-              accessToken={accessToken}
-              enableBackButton={true}
-              onSubmit={onCreated ? onCreated : undefined}
-              onBack={() => {
-                updateState(() => ({
-                  open: false,
-                  connectorType: null,
-                  connectorDefinition: null,
-                  onCreated: null,
-                }));
-              }}
-              enableQuery={enableQuery}
-            />
-          ) : null}
+
+          <div className="mb-4 flex flex-col">
+            <div className="mb-4 flex w-full bg-semantic-bg-base-bg py-2">
+              <p className="mx-auto product-body-text-1-semibold">
+                Existing Resource
+              </p>
+            </div>
+            <div className="grid w-full grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-3 lg:grid-cols-4">
+              {filteredConnectors.map((connectorResource) => (
+                <SelectConnectorResourceDialogItem
+                  key={connectorResource.id}
+                  onClick={() => {
+                    if (!onSelectedExistingResource) return;
+                    onSelectedExistingResource(connectorResource);
+                  }}
+                >
+                  <ImageWithFallback
+                    src={`/icons/${connectorResource.connector_definition.vendor}/${connectorResource.connector_definition.icon}`}
+                    width={32}
+                    height={32}
+                    alt={`${connectorResource.connector_definition.title}-icon`}
+                    fallbackImg={
+                      <Icons.Box className="h-8 w-8 stroke-semantic-fg-primary" />
+                    }
+                  />
+                  <p className="my-auto text-left text-semantic-fg-primary product-headings-heading-5">
+                    {connectorResource.id}
+                  </p>
+                </SelectConnectorResourceDialogItem>
+              ))}
+            </div>
+          </div>
+          <div className="flex flex-col">
+            <div className="mb-4 flex w-full bg-semantic-bg-base-bg py-2">
+              <p className="mx-auto product-body-text-1-semibold">
+                Create new resource
+              </p>
+            </div>
+            {connectorType === "CONNECTOR_TYPE_AI" && connectorDefinition ? (
+              <AIResourceForm
+                aiDefinition={connectorDefinition}
+                aiResource={null}
+                accessToken={accessToken}
+                onSubmit={onCreated ? onCreated : undefined}
+                enableBackButton={true}
+                onBack={() => {
+                  updateState(() => ({
+                    open: false,
+                    connectorType: null,
+                    connectorDefinition: null,
+                    onCreated: null,
+                    onSelectedExistingResource: null,
+                  }));
+                }}
+                enableQuery={enableQuery}
+              />
+            ) : null}
+            {connectorType === "CONNECTOR_TYPE_BLOCKCHAIN" &&
+            connectorDefinition ? (
+              <BlockchainResourceForm
+                blockchainDefinition={connectorDefinition}
+                blockchainResource={null}
+                accessToken={accessToken}
+                enableBackButton={true}
+                onSubmit={onCreated ? onCreated : undefined}
+                onBack={() => {
+                  updateState(() => ({
+                    open: false,
+                    connectorType: null,
+                    connectorDefinition: null,
+                    onCreated: null,
+                    onSelectedExistingResource: null,
+                  }));
+                }}
+                enableQuery={enableQuery}
+              />
+            ) : null}
+            {connectorType === "CONNECTOR_TYPE_DATA" && connectorDefinition ? (
+              <DataResourceForm
+                dataDefinition={connectorDefinition}
+                dataResource={null}
+                accessToken={accessToken}
+                enableBackButton={true}
+                onSubmit={onCreated ? onCreated : undefined}
+                onBack={() => {
+                  updateState(() => ({
+                    open: false,
+                    connectorType: null,
+                    connectorDefinition: null,
+                    onCreated: null,
+                    onSelectedExistingResource: null,
+                  }));
+                }}
+                enableQuery={enableQuery}
+              />
+            ) : null}
+          </div>
         </div>
       </Dialog.Content>
     </Dialog.Root>
