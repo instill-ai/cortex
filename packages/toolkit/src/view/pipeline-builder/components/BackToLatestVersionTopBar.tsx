@@ -4,7 +4,11 @@ import {
   usePipelineBuilderStore,
 } from "../usePipelineBuilderStore";
 import { Nullable } from "../../../lib";
-import { useSortedReleases } from "../lib";
+import {
+  createGraphLayout,
+  createInitialGraphData,
+  useSortedReleases,
+} from "../lib";
 
 const selector = (state: PipelineBuilderStore) => ({
   pipelineName: state.pipelineName,
@@ -12,6 +16,8 @@ const selector = (state: PipelineBuilderStore) => ({
   isLatestVersion: state.isLatestVersion,
   updateIsLatestVersion: state.updateIsLatestVersion,
   updateCurrentVersion: state.updateCurrentVersion,
+  updateNodes: state.updateNodes,
+  updateEdges: state.updateEdges,
 });
 
 export type BackToLatestVersionTopBarProps = {
@@ -29,6 +35,8 @@ export const BackToLatestVersionTopBar = (
     isLatestVersion,
     updateCurrentVersion,
     updateIsLatestVersion,
+    updateNodes,
+    updateEdges,
   } = usePipelineBuilderStore(selector, shallow);
 
   const sortedReleases = useSortedReleases({
@@ -49,8 +57,25 @@ export const BackToLatestVersionTopBar = (
             <span
               className="hover:!underline text-semantic-accent-default cursor-pointer product-body-text-4-medium"
               onClick={() => {
-                updateCurrentVersion(() => sortedReleases[0]?.id);
+                if (sortedReleases.length === 0) {
+                  return;
+                }
+
+                updateCurrentVersion(() => sortedReleases[0].id);
                 updateIsLatestVersion(() => true);
+
+                const { nodes, edges } = createInitialGraphData(
+                  sortedReleases[0].recipe
+                );
+
+                createGraphLayout(nodes, edges)
+                  .then((graphData) => {
+                    updateNodes(() => graphData.nodes);
+                    updateEdges(() => graphData.edges);
+                  })
+                  .catch((err) => {
+                    console.log(err);
+                  });
               }}
             >
               Click Here
