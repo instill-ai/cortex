@@ -14,12 +14,15 @@ export const TextField = (props: TextFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex w-full flex-row justify-between gap-x-2">
-          <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
+        <div className="flex p-2 relative w-full rounded-sm border border-semantic-bg-line flex-row justify-between gap-x-2">
+          <pre className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
             {text}
-          </div>
+          </pre>
           {text ? (
-            <CopyToClipboardButton className="!px-1 !py-1" text={text} />
+            <CopyToClipboardButton
+              className="!absolute !right-2 !top-2 !px-1 !py-1"
+              text={text}
+            />
           ) : null}
         </div>
       </ConnectorNodeFieldRoot>
@@ -28,12 +31,15 @@ export const TextField = (props: TextFieldProps) => {
 
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
-      <div className="flex w-full flex-row justify-between gap-x-2">
-        <div className="flex flex-1 break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
+      <div className="flex p-2 relative w-full rounded-sm border border-semantic-bg-line flex-row justify-between gap-x-2">
+        <pre className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
           {text}
-        </div>
+        </pre>
         {text ? (
-          <CopyToClipboardButton className="!px-1 !py-1" text={text} />
+          <CopyToClipboardButton
+            className="!absolute !right-2 !top-2 !px-1 !py-1"
+            text={text}
+          />
         ) : null}
       </div>
     </EndNodeFieldRoot>

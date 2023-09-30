@@ -14,9 +14,9 @@ export const ObjectField = (props: ObjectFieldProps) => {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
         <div className="flex w-full">
-          <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
+          <pre className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
             {JSON.stringify(object, null, 2)}
-          </div>
+          </pre>
         </div>
       </ConnectorNodeFieldRoot>
     );
@@ -25,9 +25,9 @@ export const ObjectField = (props: ObjectFieldProps) => {
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
       <div className="flex w-full">
-        <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
+        <pre className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
           {JSON.stringify(object, null, 2)}
-        </div>
+        </pre>
       </div>
     </EndNodeFieldRoot>
   );
