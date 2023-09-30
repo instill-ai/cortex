@@ -344,7 +344,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                     return (
                       <input
                         {...field}
-                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
+                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:!ring-1 focus:!ring-semantic-accent-default"
                         ref={connectorNameEditInputRef}
                         value={field.value}
                         type="text"

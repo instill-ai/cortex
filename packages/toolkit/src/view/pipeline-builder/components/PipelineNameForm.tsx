@@ -211,7 +211,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                     <input
                       {...field}
                       ref={pipelineNameRef}
-                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:outline-none focus:ring-0"
+                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:!ring-1 focus:!ring-semantic-accent-default"
                       value={field.value ?? "Untitled Pipeline"}
                       type="text"
                       autoComplete="off"
