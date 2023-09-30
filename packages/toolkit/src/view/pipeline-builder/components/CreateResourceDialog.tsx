@@ -1,10 +1,6 @@
 import * as React from "react";
 import { Dialog, Icons } from "@instill-ai/design-system";
-import {
-  ConnectorResourceWithDefinition,
-  Nullable,
-  useUserConnectorResources,
-} from "../../../lib";
+import { Nullable, useUserConnectorResources } from "../../../lib";
 import { AIResourceForm } from "../../ai";
 import { BlockchainResourceForm } from "../../blockchain";
 import { DataResourceForm } from "../../data";
