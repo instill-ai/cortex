@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.68.0](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.67.4...@instill-ai/toolkit-v0.68.0) (2023-09-30)
+
+
+### Features
+
+* release 0.68 ([#932](https://github.com/instill-ai/cortex/issues/932)) ([5516b63](https://github.com/instill-ai/cortex/commit/5516b63e172bd0c672700f7448b4bb9b725f8432))
+
 ## [0.67.4](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.67.3...@instill-ai/toolkit-v0.67.4) (2023-09-22)
 
 
