@@ -18,12 +18,14 @@ import { ModelConfigurationFields } from "./ModelConfigurationFields";
 
 export type ModelHubSettingPageMainViewProps = GeneralPageProp & {
   modelReadme: ReactElement;
+  modelNamespace: string;
 };
 
 export const ModelHubSettingPageMainView = (
   props: ModelHubSettingPageMainViewProps
 ) => {
-  const { accessToken, enableQuery, router, modelReadme } = props;
+  const { accessToken, enableQuery, router, modelReadme, modelNamespace } =
+    props;
   const { id, entity } = router.query;
 
   /* -------------------------------------------------------------------------
@@ -31,13 +33,13 @@ export const ModelHubSettingPageMainView = (
    * -----------------------------------------------------------------------*/
 
   const model = useUserModel({
-    modelName: id ? `users/instill-ai/models/${id.toString()}` : null,
+    modelName: id ? `users/${modelNamespace}/models/${id.toString()}` : null,
     enabled: enableQuery,
     accessToken,
   });
 
   const modelWatchState = useWatchUserModel({
-    modelName: id ? `users/instill-ai/models/${id.toString()}` : null,
+    modelName: id ? `users/${modelNamespace}/models/${id.toString()}` : null,
     enabled: enableQuery,
     accessToken,
   });
