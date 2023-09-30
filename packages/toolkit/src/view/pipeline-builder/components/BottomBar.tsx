@@ -1,11 +1,7 @@
 import * as React from "react";
 import * as semver from "semver";
 import { Button, Icons, Popover } from "@instill-ai/design-system";
-import {
-  Nullable,
-  getHumanReadableStringFromTime,
-  useUserPipelineReleases,
-} from "../../../lib";
+import { Nullable, getHumanReadableStringFromTime } from "../../../lib";
 import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
@@ -32,6 +28,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   currentVersion: state.currentVersion,
   updateCurrentVersion: state.updateCurrentVersion,
   isOwner: state.isOwner,
+  updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
 });
 
 export const BottomBar = (props: BottomBarProps) => {
@@ -47,6 +44,7 @@ export const BottomBar = (props: BottomBarProps) => {
     currentVersion,
     updateCurrentVersion,
     isOwner,
+    updateSelectedConnectorNodeId,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const sortedReleases = useSortedReleases({
@@ -95,6 +93,8 @@ export const BottomBar = (props: BottomBarProps) => {
 
                     if (release.id === sortedReleases[0].id) {
                       updateIsLatestVersion(() => true);
+                    } else {
+                      updateSelectedConnectorNodeId(() => null);
                     }
 
                     updateCurrentVersion(() => release.id);

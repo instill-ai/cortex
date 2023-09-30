@@ -382,7 +382,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           {isLatestVersion && isOwner ? (
             <div className="flex flex-row gap-x-3">
               <Button
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   updateSelectedConnectorNodeId(() => id);
                 }}
                 variant="tertiaryGrey"
@@ -396,7 +397,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   variant="tertiaryGrey"
                   size="sm"
                   className="!px-0 !py-0"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.stopPropagation();
                     const nodeIndex =
                       nodes.filter(
                         (node) =>
@@ -474,7 +476,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 variant="tertiaryGrey"
                 size="sm"
                 className="!px-0 !py-0"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
                   const newNodes = nodes.filter((node) => node.id !== id);
 
                   const allReferences: PipelineComponentReference[] = [];
@@ -505,15 +508,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               </Button>
             </div>
           ) : null}
-          {/* <button
-            onClick={(e) => {
-              e.stopPropagation();
-              connectorNameEditInputRef.current?.focus();
-            }}
-            type="button"
-          >
-            <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-secondary" />
-          </button> */}
         </div>
         {enableEdit ? (
           <Form.Root {...dataConnectorInputForm}>
