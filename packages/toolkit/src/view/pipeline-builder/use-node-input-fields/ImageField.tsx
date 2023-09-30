@@ -26,7 +26,7 @@ export const ImageField = (props: {
             </Form.Label>
             <Form.Control>
               <label
-                htmlFor={`start-operator-${fieldKey}`}
+                htmlFor={`op-start-${fieldKey}`}
                 className="flex h-[150px] w-full cursor-pointer flex-col rounded bg-semantic-bg-base-bg"
               >
                 {imageFileUrl ? (
@@ -45,7 +45,7 @@ export const ImageField = (props: {
                 )}
                 <Input.Root className="hidden">
                   <Input.Core
-                    id={`start-operator-${fieldKey}`}
+                    id={`op-start-${fieldKey}`}
                     type="file"
                     accept="images/*"
                     onChange={async (e) => {

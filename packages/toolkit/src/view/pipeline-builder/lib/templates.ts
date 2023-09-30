@@ -24,7 +24,7 @@ export const templates: PipelineTemplate[] = [
           },
           connector_definition: null,
           type: "COMPONENT_TYPE_OPERATOR",
-          definition_name: "operator-definitions/start-operator",
+          definition_name: "operator-definitions/op-start",
         },
         {
           id: "end",
@@ -42,7 +42,7 @@ export const templates: PipelineTemplate[] = [
           },
           connector_definition: null,
           type: "COMPONENT_TYPE_OPERATOR",
-          definition_name: "operator-definitions/end-operator",
+          definition_name: "operator-definitions/op-end",
         },
         {
           id: "ai_1",
@@ -108,7 +108,7 @@ export const templates: PipelineTemplate[] = [
           },
           type: "COMPONENT_TYPE_OPERATOR",
           operator_definition: null,
-          definition_name: "operator-definitions/start-operator",
+          definition_name: "operator-definitions/op-start",
         },
         {
           id: "end",
@@ -126,7 +126,7 @@ export const templates: PipelineTemplate[] = [
           },
           type: "COMPONENT_TYPE_OPERATOR",
           operator_definition: null,
-          definition_name: "operator-definitions/end-operator",
+          definition_name: "operator-definitions/op-end",
         },
         {
           id: "ai_1",
@@ -228,7 +228,7 @@ export const templates: PipelineTemplate[] = [
           },
           type: "COMPONENT_TYPE_OPERATOR",
           operator_definition: null,
-          definition_name: "operator-definitions/start-operator",
+          definition_name: "operator-definitions/op-start",
         },
         {
           id: "end",
@@ -246,7 +246,7 @@ export const templates: PipelineTemplate[] = [
           },
           type: "COMPONENT_TYPE_OPERATOR",
           operator_definition: null,
-          definition_name: "operator-definitions/end-operator",
+          definition_name: "operator-definitions/op-end",
         },
         {
           id: "ai_1",

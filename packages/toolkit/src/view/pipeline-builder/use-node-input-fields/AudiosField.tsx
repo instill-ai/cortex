@@ -25,7 +25,7 @@ export const AudiosField = (props: {
                 {title}
               </Form.Label>
               <label
-                htmlFor={`start-operator-${fieldKey}`}
+                htmlFor={`op-start-${fieldKey}`}
                 className="my-auto cursor-pointer text-center capitalize text-semantic-accent-default !underline product-button-button-3"
               >
                 upload files
@@ -46,7 +46,7 @@ export const AudiosField = (props: {
             <Form.Control>
               <Input.Root className="hidden">
                 <Input.Core
-                  id={`start-operator-${fieldKey}`}
+                  id={`op-start-${fieldKey}`}
                   type="file"
                   accept="audio/*"
                   // DesignToken-AlphaValueIssue:

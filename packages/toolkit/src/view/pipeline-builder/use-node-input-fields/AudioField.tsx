@@ -25,7 +25,7 @@ export const AudioField = (props: {
                 {title}
               </Form.Label>
               <label
-                htmlFor={`start-operator-${fieldKey}`}
+                htmlFor={`op-start-${fieldKey}`}
                 className="cursor-pointer capitalize text-semantic-accent-default !underline product-button-button-3"
               >
                 upload file
@@ -37,7 +37,7 @@ export const AudioField = (props: {
             <Form.Control>
               <Input.Root className="hidden">
                 <Input.Core
-                  id={`start-operator-${fieldKey}`}
+                  id={`op-start-${fieldKey}`}
                   type="file"
                   accept="audio/*"
                   onChange={async (e) => {
