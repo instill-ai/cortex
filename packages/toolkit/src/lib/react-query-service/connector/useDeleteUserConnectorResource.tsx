@@ -17,6 +17,10 @@ export const useDeleteUserConnectorResource = () => {
       accessToken: Nullable<string>;
       connectorResourceName: string;
     }) => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       const connectorResource =
         queryClient.getQueryData<ConnectorResourceWithDefinition>([
           "connector-resources",

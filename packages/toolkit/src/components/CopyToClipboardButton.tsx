@@ -1,21 +1,24 @@
 import * as React from "react";
-import { Button, CopyIcon, Icons } from "@instill-ai/design-system";
+import cn from "clsx";
+import { Button, Icons } from "@instill-ai/design-system";
 
 export type CopyToClipboardButtonProps = {
   text: string;
+  className?: string;
 };
 
 export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
+  const { className, text } = props;
   const [copied, setCopied] = React.useState(false);
 
   return (
     <Button
-      className="!px-2 !py-2 flex justify-center items-center"
+      className={cn("flex justify-center items-center", className)}
       variant="secondaryGrey"
       size="sm"
       type="button"
       onClick={async () => {
-        await navigator.clipboard.writeText(props.text);
+        await navigator.clipboard.writeText(text);
         setCopied(true);
         setTimeout(() => {
           setCopied(false);
@@ -25,7 +28,7 @@ export const CopyToClipboardButton = (props: CopyToClipboardButtonProps) => {
       {copied ? (
         <Icons.Check className="w-4 h-4 stroke-semantic-fg-primary" />
       ) : (
-        <CopyIcon width="w-4" height="h-4" color="fill-semantic-fg-primary" />
+        <Icons.Copy06 className="w-4 h-4 stroke-semantic-fg-primary" />
       )}
     </Button>
   );

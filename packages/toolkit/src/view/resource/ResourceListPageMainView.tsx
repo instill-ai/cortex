@@ -1,34 +1,30 @@
 import * as React from "react";
-import { AddConnectorResourceDialog } from "../pipeline-builder";
-import { GeneralPageProp, useUser, useUserConnectorResources } from "../../lib";
+import { AddConnectorResourceDialog } from "./AddConnectorResourceDialog";
+import { GeneralPageProp, useUserConnectorResources } from "../../lib";
 import dynamic from "next/dynamic";
 
 const ResourcesTable = dynamic(
-  () => import("../ResourcesTable").then((mod) => mod.ResourcesTable),
+  () => import("./ResourcesTable").then((mod) => mod.ResourcesTable),
   { ssr: false }
 );
 
-export type ResourceListPageMainViewProps = Omit<GeneralPageProp, "router">;
+export type ResourceListPageMainViewProps = GeneralPageProp;
 
 export const ResourceListPageMainView = (
   props: ResourceListPageMainViewProps
 ) => {
-  const { enableQuery, accessToken } = props;
-  const [addConnectorDialogIsOpen, seteAddConnectorDialogIsOpen] =
+  const { enableQuery, accessToken, router } = props;
+  const { entity } = router.query;
+  const [addConnectorDialogIsOpen, setAddConnectorDialogIsOpen] =
     React.useState(false);
 
   /* -------------------------------------------------------------------------
    * Query resource data
    * -----------------------------------------------------------------------*/
 
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
-
   const userConnectorResources = useUserConnectorResources({
-    userName: user.isSuccess ? user.data.name : null,
-    enabled: enableQuery && user.isSuccess,
+    userName: `users/${entity}`,
+    enabled: enableQuery,
     connectorResourceType: "all",
     accessToken,
   });
@@ -42,11 +38,10 @@ export const ResourceListPageMainView = (
       <div className="mb-8 flex">
         <AddConnectorResourceDialog
           open={addConnectorDialogIsOpen}
-          onOpenChange={(open) => seteAddConnectorDialogIsOpen(open)}
+          onOpenChange={(open) => setAddConnectorDialogIsOpen(open)}
           accessToken={accessToken}
-          type="inResource"
-          onSelectConnectorResource={() => {
-            seteAddConnectorDialogIsOpen(false);
+          onSubmit={() => {
+            setAddConnectorDialogIsOpen(false);
           }}
           enableQuery={enableQuery}
         />

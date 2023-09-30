@@ -14,7 +14,7 @@ export const ImagesField = (props: ImagesFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex max-w-[246px] flex-wrap">
+        <div className="flex w-full flex-wrap">
           {images?.slice(0, 5).map((image) => {
             if (!image) return <></>;
 
@@ -36,7 +36,7 @@ export const ImagesField = (props: ImagesFieldProps) => {
 
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
-      <div className="flex max-w-[246px] flex-wrap">
+      <div className="flex w-full flex-wrap">
         {images?.slice(0, 5).map((image) => {
           if (!image) return <></>;
 

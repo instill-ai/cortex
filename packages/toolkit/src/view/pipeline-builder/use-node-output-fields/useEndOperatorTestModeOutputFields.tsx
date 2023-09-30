@@ -84,13 +84,13 @@ export function useEndOperatorTestModeOutputFields(
         }
         case "object": {
           fields.push(
-            <ObjectField nodeType="connector" title={title} object={value} />
+            <ObjectField nodeType="end" title={title} object={value} />
           );
           break;
         }
         case "object_array": {
           fields.push(
-            <ObjectsField nodeType="connector" title={title} objects={value} />
+            <ObjectsField nodeType="end" title={title} objects={value} />
           );
           break;
         }

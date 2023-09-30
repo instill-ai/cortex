@@ -1,19 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  ListUserPipelineReleasesQuery,
-  getUserPipelineReleaseQuery,
-} from "../../vdp-sdk";
+import { ListUserPipelineReleasesQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
 import { env } from "../../utility";
+import { useRouter } from "next/router";
 
 export const useUserPipelineReleases = ({
-  userName,
   pipelineName,
   enabled,
   accessToken,
   retry,
 }: {
-  userName: Nullable<string>;
   pipelineName: Nullable<string>;
   enabled: boolean;
   accessToken: Nullable<string>;
@@ -23,17 +19,21 @@ export const useUserPipelineReleases = ({
    */
   retry?: false | number;
 }) => {
+  const router = useRouter();
   let enableQuery = false;
 
-  if (userName && pipelineName && enabled) {
+  if (pipelineName && enabled) {
     enableQuery = true;
   }
+
+  const pipelineNameFragment = pipelineName ? pipelineName.split("/") : [];
+  const userName = `${pipelineNameFragment[0]}/${pipelineNameFragment[1]}`;
 
   return useQuery(
     ["pipelineReleases", userName],
     async () => {
-      if (!userName) {
-        return Promise.reject(new Error("userName not provided"));
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
       }
 
       if (!pipelineName) {
@@ -41,12 +41,13 @@ export const useUserPipelineReleases = ({
       }
 
       const pipelineReleases = await ListUserPipelineReleasesQuery({
-        userName,
         pipelineName,
         pageSize: env("NEXT_PUBLIC_QUERY_PAGE_SIZE"),
         nextPageToken: null,
         accessToken,
+        shareCode: router.query.view?.toString(),
       });
+
       return Promise.resolve(pipelineReleases);
     },
     {

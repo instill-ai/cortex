@@ -57,6 +57,7 @@ export type Pipeline = {
   recipe: PipelineRecipe;
   openapi_schema: OpenAPIV3.Document;
   owner: string;
+  permission: PipelinePermission;
 };
 
 export type OperatorDefinition = {
@@ -72,6 +73,28 @@ export type OperatorDefinition = {
   custom: boolean;
   icon_url: string;
 };
+
+export type PipelinePermission = {
+  users: PermissionUsers;
+  share_code: Nullable<PermissionShareCode>;
+};
+
+export type PermissionUsers = Record<
+  string,
+  {
+    enabled: boolean;
+    role: PermissionRole;
+  }
+>;
+
+export type PermissionShareCode = {
+  user: string;
+  code: string;
+  enabled: boolean;
+  role: PermissionRole;
+};
+
+export type PermissionRole = "ROLE_UNSPECIFIED" | "ROLE_VIEWER";
 
 export type PipelineRelease = {
   name: string;
@@ -99,7 +122,7 @@ export type PipelineTriggerMetadata = {
 
 export type PipelineStartComponent = {
   id: "start";
-  resource_name: string;
+  resource_name: Nullable<string>;
   resource: Nullable<ConnectorResource>;
   type: PipelineComponentType;
   definition_name: string;
@@ -109,7 +132,7 @@ export type PipelineStartComponent = {
 
 export type PipelineEndComponent = {
   id: "end";
-  resource_name: string;
+  resource_name: Nullable<string>;
   resource: Nullable<ConnectorResource>;
   type: PipelineComponentType;
   definition_name: string;
@@ -119,7 +142,7 @@ export type PipelineEndComponent = {
 
 export type PipelineConnectorComponent = {
   id: string;
-  resource_name: string;
+  resource_name: Nullable<string>;
   resource: Nullable<ConnectorResource>;
   type: PipelineComponentType;
   definition_name: string;

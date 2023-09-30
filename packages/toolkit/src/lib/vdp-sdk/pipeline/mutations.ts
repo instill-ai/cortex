@@ -1,6 +1,12 @@
 import { Nullable } from "../../type";
 import { createInstillAxiosClient } from "../helper";
-import { Pipeline, RawPipelineRecipe, PipelineRelease } from "./types";
+import {
+  Pipeline,
+  RawPipelineRecipe,
+  PipelineRelease,
+  PipelinePermission,
+  PermissionRole,
+} from "./types";
 
 export type CreateUserPipelinePayload = {
   id: string;
@@ -37,7 +43,17 @@ export async function createUserPipelineMutation({
 export type UpdateUserPipelinePayload = {
   name: string;
   description?: string;
-  recipe: RawPipelineRecipe;
+  recipe?: RawPipelineRecipe;
+  permission?: RawPipelinePermission;
+};
+
+export type RawPipelinePermission = {
+  users: PipelinePermission["users"];
+  share_code: Nullable<{
+    user: string;
+    enabled: boolean;
+    role: PermissionRole;
+  }>;
 };
 
 export type UpdateUserPipelineResponse = {
@@ -125,12 +141,10 @@ export type CreateUserPipelineReleaseResponse = {
 };
 
 export async function createUserPipelineReleaseMutation({
-  userName,
   pipelineName,
   payload,
   accessToken,
 }: {
-  userName: string;
   pipelineName: string;
   payload: CreateUserPipelineReleasePayload;
   accessToken: Nullable<string>;
@@ -139,7 +153,7 @@ export async function createUserPipelineReleaseMutation({
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.post<CreateUserPipelineReleaseResponse>(
-      `${userName}/${pipelineName}/releases`,
+      `${pipelineName}/releases`,
       payload
     );
 

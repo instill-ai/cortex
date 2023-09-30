@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
@@ -42,6 +43,8 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeTriggerResponse: state.testModeTriggerResponse,
   pipelineOpenAPISchema: state.pipelineOpenAPISchema,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
+  isLatestVersion: state.isLatestVersion,
+  isOwner: state.isOwner,
 });
 
 export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
@@ -51,12 +54,15 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
 
   const {
     nodes,
+    edges,
     updateNodes,
     updateEdges,
     testModeEnabled,
     testModeTriggerResponse,
     pipelineOpenAPISchema,
     updatePipelineRecipeIsDirty,
+    isLatestVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const form = useForm<z.infer<typeof CreateEndOperatorInputSchema>>({
@@ -168,6 +174,10 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
     pipelineOpenAPISchema,
     testModeTriggerResponse ? testModeTriggerResponse.outputs : []
   );
+
+  const hasTargetEdges = React.useMemo(() => {
+    return edges.some((edge) => edge.target === id);
+  }, [edges]);
 
   return (
     <>
@@ -300,19 +310,21 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
                       <div className="my-auto font-sans text-base font-semibold text-semantic-fg-primary">
                         {key}
                       </div>
-                      <div className="my-auto flex flex-row gap-x-4">
-                        <button
-                          onClick={() => {
-                            onEditField(key);
-                            setPrevFieldKey(key);
-                          }}
-                        >
-                          <Icons.Edit03 className="h-6 w-6 stroke-semantic-accent-on-bg" />
-                        </button>
-                        <button onClick={() => onDeleteField(key)}>
-                          <Icons.Trash01 className="h-6 w-6 stroke-semantic-error-on-bg" />
-                        </button>
-                      </div>
+                      {isLatestVersion && isOwner ? (
+                        <div className="my-auto flex flex-row gap-x-4">
+                          <button
+                            onClick={() => {
+                              onEditField(key);
+                              setPrevFieldKey(key);
+                            }}
+                          >
+                            <Icons.Edit03 className="h-6 w-6 stroke-semantic-accent-on-bg" />
+                          </button>
+                          <button onClick={() => onDeleteField(key)}>
+                            <Icons.Trash01 className="h-6 w-6 stroke-semantic-error-on-bg" />
+                          </button>
+                        </div>
+                      ) : null}
                     </div>
                     <div>
                       {reference?.type === "singleCurlyBrace" ? (
@@ -344,14 +356,27 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
               className="flex w-[232px]"
               variant="primary"
               onClick={() => setEnableEdit(!enableEdit)}
+              disabled={isOwner ? (isLatestVersion ? false : true) : true}
             >
-              Add Field
-              <Icons.Plus className="my-auto h-5 w-5 stroke-semantic-bg-primary " />
+              <p className="my-auto">Add Field</p>
+              <Icons.Plus
+                className={cn(
+                  "my-auto h-4 w-4",
+                  isLatestVersion
+                    ? "stroke-semantic-bg-primary"
+                    : "stroke-semantic-fg-secondary"
+                )}
+              />
             </Button>
           </div>
         )}
       </div>
-      <CustomHandle type="target" position={Position.Left} id={id} />
+      <CustomHandle
+        className={hasTargetEdges ? "" : "!opacity-0"}
+        type="target"
+        position={Position.Left}
+        id={id}
+      />
     </>
   );
 };

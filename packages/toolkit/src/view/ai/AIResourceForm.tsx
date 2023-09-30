@@ -20,12 +20,12 @@ import {
   getInstillApiErrorMessage,
   useCreateUserConnectorResource,
   useUpdateUserConnectorResource,
-  useUser,
 } from "../../lib";
 import {
   recursiveReplaceNullAndEmptyStringWithUndefined,
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
+import { useRouter } from "next/router";
 
 export const AIResourceFormSchema = z
   .object({
@@ -73,9 +73,7 @@ export type AIResourceFormProps = {
   aiResource: Nullable<ConnectorResourceWithDefinition>;
   aiDefinition: ConnectorDefinition;
   accessToken: Nullable<string>;
-  onSelectConnectorResource?: (
-    connectorResource: ConnectorResourceWithDefinition
-  ) => void;
+  onSubmit?: (connectorResource: ConnectorResourceWithDefinition) => void;
   enableQuery: boolean;
 } & BackButtonProps;
 
@@ -95,11 +93,12 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
     aiDefinition,
     enableBackButton,
     accessToken,
-    onSelectConnectorResource,
-    enableQuery,
+    onSubmit,
   } = props;
 
   const { toast } = useToast();
+  const router = useRouter();
+  const { entity } = router.query;
 
   const form = useForm<z.infer<typeof AIResourceFormSchema>>({
     resolver: zodResolver(AIResourceFormSchema),
@@ -122,17 +121,10 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
     }
   }, [aiResource, reset]);
 
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
-
   const createAI = useCreateUserConnectorResource();
   const updateAI = useUpdateUserConnectorResource();
 
-  function onSubmit(data: z.infer<typeof AIResourceFormSchema>) {
-    if (!user.isSuccess) return;
-
+  function handleCreateAI(data: z.infer<typeof AIResourceFormSchema>) {
     if (!aiResource) {
       const payload = {
         id: data.id,
@@ -144,11 +136,11 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
       };
 
       createAI.mutate(
-        { payload, userName: user.data.name, accessToken },
+        { payload, userName: `users/${entity}`, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
-            if (onSelectConnectorResource) {
-              onSelectConnectorResource({
+            if (onSubmit) {
+              onSubmit({
                 ...connectorResource,
                 connector_definition: aiDefinition,
               });
@@ -199,8 +191,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
       { payload, accessToken },
       {
         onSuccess: ({ connectorResource }) => {
-          if (onSelectConnectorResource) {
-            onSelectConnectorResource({
+          if (onSubmit) {
+            onSubmit({
               ...connectorResource,
               connector_definition: aiDefinition,
             });
@@ -235,7 +227,7 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
 
   return (
     <Form.Root {...form}>
-      <form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="w-full" onSubmit={form.handleSubmit(handleCreateAI)}>
         <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}
@@ -408,8 +400,13 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Fill your OpenAI API key. To find your keys, visit your
-                    OpenAI&apos;s API Keys page.
+                    {aiDefinition.name === "connector-definitions/ai-openai"
+                      ? "Fill your OpenAI API key. To find your keys, visit your OpenAI's API Keys page."
+                      : null}
+                    {aiDefinition.name ===
+                    "connector-definitions/ai-stability-ai"
+                      ? "Fill your Stability AI API key. To find your keys, visit - https://platform.stability.ai/account/keys"
+                      : null}
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>

@@ -13,14 +13,14 @@ export const ObjectsField = (props: ObjectsFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex w-full flex-col flex-wrap gap-2 max-w-[246px]">
+        <div className="flex w-full flex-col flex-wrap gap-2">
           {objects?.map((object) => (
-            <div
+            <pre
               key={`${title}-${JSON.stringify(object)}-field`}
-              className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
+              className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
             >
               {JSON.stringify(object, null, 2)}
-            </div>
+            </pre>
           ))}
         </div>
       </ConnectorNodeFieldRoot>
@@ -29,14 +29,14 @@ export const ObjectsField = (props: ObjectsFieldProps) => {
 
   return (
     <EndNodeFieldRoot title={title} key={`${title}-field`}>
-      <div className="flex w-full flex-col flex-wrap gap-2 max-w-[246px]">
+      <div className="flex w-full flex-col gap-2">
         {objects?.map((object) => (
-          <div
+          <pre
             key={`${title}-${JSON.stringify(object)}-field`}
-            className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
+            className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
           >
             {JSON.stringify(object, null, 2)}
-          </div>
+          </pre>
         ))}
       </div>
     </EndNodeFieldRoot>

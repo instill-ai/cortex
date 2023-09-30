@@ -1,5 +1,5 @@
 import { Nullable } from "../../../lib";
-import { CopyToClipboardButton } from "../components";
+import { CopyToClipboardButton } from "../../../components";
 import { ConnectorNodeFieldRoot, EndNodeFieldRoot } from "./FieldRoot";
 
 export type TextsFieldProps = {
@@ -17,12 +17,17 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="flex max-w-[246px] flex-row justify-between gap-x-2"
+            className="flex w-full p-2 relative border rounded-sm border-semantic-bg-line flex-row justify-between gap-x-2"
           >
-            <div className="break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
+            <pre className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
               {text}
-            </div>
-            {text ? <CopyToClipboardButton text={text} /> : null}
+            </pre>
+            {text ? (
+              <CopyToClipboardButton
+                className="!absolute !right-2 !top-2 !px-1 !py-1"
+                text={text}
+              />
+            ) : null}
           </div>
         ))}
       </div>
@@ -35,12 +40,17 @@ export const TextsField = (props: TextsFieldProps) => {
         {texts?.map((text) => (
           <div
             key={`${title}-${text}-field`}
-            className="flex max-w-[246px] flex-row justify-between gap-x-2"
+            className="flex w-full p-2 border border-semantic-bg-line rounded-sm relative flex-row justify-between gap-x-2"
           >
-            <div className="flex flex-1 break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
+            <pre className="whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular">
               {text}
-            </div>
-            {text ? <CopyToClipboardButton text={text} /> : null}
+            </pre>
+            {text ? (
+              <CopyToClipboardButton
+                className="!absolute !right-2 !top-2 !px-1 !py-1"
+                text={text}
+              />
+            ) : null}
           </div>
         ))}
       </div>

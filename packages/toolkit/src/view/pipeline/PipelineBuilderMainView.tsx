@@ -16,6 +16,7 @@ import {
   useUserPipeline,
 } from "../../lib";
 import {
+  BottomBar,
   Flow,
   NodeData,
   PipelineBuilderStore,
@@ -32,6 +33,7 @@ import { isAxiosError } from "axios";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
+  edges: state.edges,
   pipelineId: state.pipelineId,
   setPipelineId: state.setPipelineId,
   setPipelineUid: state.setPipelineUid,
@@ -44,6 +46,8 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   selectedConnectorNodeId: state.selectedConnectorNodeId,
   updatePipelineOpenAPISchema: state.updatePipelineOpenAPISchema,
   updateAccessToken: state.updateAccessToken,
+  initializedByTemplateOrClone: state.initializedByTemplateOrClone,
+  updateIsOwner: state.updateIsOwner,
 });
 
 export type PipelineBuilderMainViewProps = GeneralPageProp;
@@ -52,13 +56,14 @@ export const PipelineBuilderMainView = (
   props: PipelineBuilderMainViewProps
 ) => {
   const { accessToken, enableQuery, router } = props;
-  const { id } = router.query;
+  const { id, entity } = router.query;
   const [reactFlowInstance, setReactFlowInstance] =
     React.useState<Nullable<ReactFlowInstance>>(null);
   const reactFlowWrapper = React.useRef<HTMLDivElement>(null);
 
   const {
     nodes,
+    edges,
     pipelineId,
     setPipelineId,
     setPipelineUid,
@@ -71,6 +76,8 @@ export const PipelineBuilderMainView = (
     selectedConnectorNodeId,
     updatePipelineOpenAPISchema,
     updateAccessToken,
+    initializedByTemplateOrClone,
+    updateIsOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const [warnUnsaveChangesModalIsOpen, setWarnUnsaveChangesModalIsOpen] =
@@ -92,17 +99,14 @@ export const PipelineBuilderMainView = (
   const user = useUser({
     enabled: enableQuery,
     accessToken,
+    retry: false,
   });
 
   const pipeline = useUserPipeline({
-    enabled: enableQuery && !!id && !pipelineIsNew && user.isSuccess,
-    pipelineName: user.isSuccess
-      ? id
-        ? `${user.data.name}/pipelines/${id}`
-        : null
-      : null,
-    retry: false,
+    enabled: enableQuery && user.isSuccess && !!id && !pipelineIsNew,
+    pipelineName: id ? `users/${entity}/pipelines/${id}` : null,
     accessToken,
+    retry: false,
   });
 
   React.useEffect(() => {
@@ -120,9 +124,9 @@ export const PipelineBuilderMainView = (
 
   React.useEffect(() => {
     if (!pipelineIsNew && pipeline.isError) {
-      router.push("/pipelines");
+      router.push(`/${entity}/pipelines`);
     }
-  }, [pipeline.isError, pipelineIsNew, router]);
+  }, [pipeline.isError, pipelineIsNew, router, entity]);
 
   /* -------------------------------------------------------------------------
    * Set initial pipeline node data if pipeline is new
@@ -132,77 +136,86 @@ export const PipelineBuilderMainView = (
   const [graphIsInitialized, setGraphIsInitialized] = React.useState(false);
 
   React.useEffect(() => {
-    if (graphIsInitialized) return;
+    if (graphIsInitialized || !user.isSuccess) return;
 
     // If the pipeline is new, we need to give it initial data
     if (pipelineIsNew) {
-      const initialEmptyNodeId = uuidv4();
+      let newNodes: Node<NodeData>[] = [];
+      let newEdges: Edge[] = [];
 
-      const nodes: Node<NodeData>[] = [
-        {
-          id: "start",
-          type: "startNode",
-          data: {
-            nodeType: "start",
-            component: {
-              id: "start",
-              type: "COMPONENT_TYPE_OPERATOR",
-              configuration: { metadata: {} },
-              resource_name: "",
-              resource: null,
-              definition_name: "operator-definitions/start-operator",
-              operator_definition: null,
-            },
-          },
-          position: { x: 0, y: 0 },
-        },
-        {
-          id: initialEmptyNodeId,
-          type: "emptyNode",
-          data: {
-            nodeType: "empty",
-            component: null,
-          },
-          position: { x: 0, y: 0 },
-        },
-        {
-          id: "end",
-          type: "endNode",
-          data: {
-            nodeType: "end",
-            component: {
-              id: "end",
-              type: "COMPONENT_TYPE_OPERATOR",
-              configuration: {
-                metadata: {},
-                input: {},
+      updateIsOwner(() => true);
+
+      if (initializedByTemplateOrClone) {
+        newNodes = nodes;
+        newEdges = edges;
+      } else {
+        const initialEmptyNodeId = uuidv4();
+
+        newNodes = [
+          {
+            id: "start",
+            type: "startNode",
+            data: {
+              nodeType: "start",
+              component: {
+                id: "start",
+                type: "COMPONENT_TYPE_OPERATOR",
+                configuration: { metadata: {} },
+                resource_name: null,
+                resource: null,
+                definition_name: "operator-definitions/op-start",
+                operator_definition: null,
               },
-              resource_name: "",
-              resource: null,
-              definition_name: "operator-definitions/end-operator",
-              operator_definition: null,
             },
+            position: { x: 0, y: 0 },
           },
-          position: { x: 0, y: 0 },
-        },
-      ];
+          {
+            id: initialEmptyNodeId,
+            type: "emptyNode",
+            data: {
+              nodeType: "empty",
+              component: null,
+            },
+            position: { x: 0, y: 0 },
+          },
+          {
+            id: "end",
+            type: "endNode",
+            data: {
+              nodeType: "end",
+              component: {
+                id: "end",
+                type: "COMPONENT_TYPE_OPERATOR",
+                configuration: {
+                  metadata: {},
+                  input: {},
+                },
+                resource_name: null,
+                resource: null,
+                definition_name: "operator-definitions/op-end",
+                operator_definition: null,
+              },
+            },
+            position: { x: 0, y: 0 },
+          },
+        ];
+        newEdges = [
+          {
+            id: "start-empty",
+            type: "customEdge",
+            source: "start",
+            target: initialEmptyNodeId,
+          },
+          {
+            id: "empty-end",
+            type: "customEdge",
+            source: initialEmptyNodeId,
+            target: "end",
+          },
+        ];
+      }
 
-      const edges: Edge[] = [
-        {
-          id: "start-empty",
-          type: "customEdge",
-          source: "start",
-          target: initialEmptyNodeId,
-        },
-        {
-          id: "empty-end",
-          type: "customEdge",
-          source: initialEmptyNodeId,
-          target: "end",
-        },
-      ];
-
-      createGraphLayout(nodes, edges)
+      createGraphLayout(newNodes, newEdges)
         .then((graphData) => {
           updateNodes(() => graphData.nodes);
           updateEdges(() => graphData.edges);
@@ -224,6 +237,13 @@ export const PipelineBuilderMainView = (
       return;
     }
 
+    // Check whether current user is the owner of the pipeline
+    if (pipeline.data.user !== user.data.name) {
+      updateIsOwner(() => false);
+    } else {
+      updateIsOwner(() => true);
+    }
+
     // If the pipeline is not new and we have the pipeline data, we need to
     // set the pipeline id and update the graph
 
@@ -232,9 +252,7 @@ export const PipelineBuilderMainView = (
     setPipelineName(pipeline.data.name);
     setPipelineDescription(pipeline.data.description);
 
-    const initialGraphData = createInitialGraphData({
-      pipeline: pipeline.data,
-    });
+    const initialGraphData = createInitialGraphData(pipeline.data.recipe);
 
     createGraphLayout(initialGraphData.nodes, initialGraphData.edges)
       .then((graphData) => {
@@ -258,6 +276,12 @@ export const PipelineBuilderMainView = (
     id,
     setPipelineName,
     graphIsInitialized,
+    nodes,
+    edges,
+    initializedByTemplateOrClone,
+    updateIsOwner,
+    user.data?.name,
+    user.isSuccess,
   ]);
 
   /* -------------------------------------------------------------------------
@@ -265,7 +289,7 @@ export const PipelineBuilderMainView = (
    * -----------------------------------------------------------------------*/
 
   return (
-    <>
+    <div className="flex flex-col w-full">
       <style jsx>
         {`
           .pipeline-builder {
@@ -275,7 +299,12 @@ export const PipelineBuilderMainView = (
           }
         `}
       </style>
-      <div className="pipeline-builder flex h-[calc(100vh-var(--topbar-height))] w-full flex-row overflow-x-hidden bg-semantic-bg-base-bg">
+
+      {/* 
+        Pipeline builder main canvas
+      */}
+
+      <div className="pipeline-builder flex h-[calc(100vh-var(--topbar-height)-var(--pipeline-builder-bottom-bar-height))] w-full flex-row overflow-x-hidden bg-semantic-bg-base-bg">
         <Flow
           ref={reactFlowWrapper}
           reactFlowInstance={reactFlowInstance}
@@ -294,6 +323,19 @@ export const PipelineBuilderMainView = (
           <RightPanel />
         </div>
       </div>
+
+      {/* 
+        Pipeline builder bottom bar
+      */}
+
+      <div className="h-[var(--pipeline-builder-bottom-bar-height)]">
+        <BottomBar enableQuery={enableQuery} accessToken={accessToken} />
+      </div>
+
+      {/* 
+        Warn unsaved changes modal
+      */}
+
       <WarnUnsavedChangesModal
         open={warnUnsaveChangesModalIsOpen}
         setOpen={setWarnUnsaveChangesModalIsOpen}
@@ -302,17 +344,13 @@ export const PipelineBuilderMainView = (
           confirmNavigation();
         }}
         onSave={async () => {
-          if (!user.isSuccess) {
-            return;
-          }
-
           if (!pipelineId) {
             return;
           }
 
           if (!pipelineIsNew) {
             const payload: UpdateUserPipelinePayload = {
-              name: `${user.data.name}/pipelines/${pipelineId}`,
+              name: `users/${entity}/pipelines/${pipelineId}`,
               recipe: constructPipelineRecipe(nodes),
             };
 
@@ -357,7 +395,7 @@ export const PipelineBuilderMainView = (
 
           try {
             await createPipeline.mutateAsync({
-              userName: user.data.name,
+              userName: `users/${entity}`,
               payload,
               accessToken,
             });
@@ -385,6 +423,6 @@ export const PipelineBuilderMainView = (
           }
         }}
       />
-    </>
+    </div>
   );
 };

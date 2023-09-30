@@ -1,18 +1,18 @@
 import { Button, Icons } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
-import {
-  adjectives,
-  animals,
-  colors,
-  uniqueNamesGenerator,
-} from "unique-names-generator";
 
-import { GeneralPageProp, useUser, useUserPipelines } from "../../lib";
+import {
+  GeneralPageProp,
+  generateRandomReadableName,
+  useConnectorDefinitions,
+  useUserPipelines,
+} from "../../lib";
 import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
 } from "../pipeline-builder";
 import dynamic from "next/dynamic";
+import { StaffPickTemplates } from "../pipeline-builder/components/template";
 
 const PipelinesTable = dynamic(
   () => import("./PipelinesTable").then((mod) => mod.PipelinesTable),
@@ -31,6 +31,7 @@ export const PipelineListPageMainView = (
   props: PipelineListPageMainViewProps
 ) => {
   const { router, enableQuery, accessToken } = props;
+  const { entity } = router.query;
 
   const { setPipelineId, setPipelineName, updatePipelineIsNew } =
     usePipelineBuilderStore(selector, shallow);
@@ -38,15 +39,15 @@ export const PipelineListPageMainView = (
   /* -------------------------------------------------------------------------
    * Query resource data
    * -----------------------------------------------------------------------*/
-
-  const user = useUser({
-    accessToken,
+  const pipelines = useUserPipelines({
+    userName: `users/${entity}`,
     enabled: enableQuery,
+    accessToken,
   });
 
-  const pipelines = useUserPipelines({
-    userName: user.isSuccess ? user.data.name : null,
-    enabled: enableQuery && user.isSuccess,
+  const connectorDefinitions = useConnectorDefinitions({
+    connectorResourceType: "all",
+    enabled: enableQuery,
     accessToken,
   });
 
@@ -62,15 +63,10 @@ export const PipelineListPageMainView = (
           variant="primary"
           size="lg"
           onClick={() => {
-            if (!user.isSuccess) return;
-
-            const randomName = uniqueNamesGenerator({
-              dictionaries: [adjectives, colors, animals],
-              separator: "-",
-            });
+            const randomName = generateRandomReadableName();
             setPipelineId(randomName);
-            setPipelineName(`${user.data.name}/pipelines/${randomName}`);
-            router.push(`/pipelines/${randomName}`);
+            setPipelineName(`users/${entity}/pipelines/${randomName}`);
+            router.push(`/${entity}/pipelines/${randomName}`);
             updatePipelineIsNew(() => true);
           }}
         >
@@ -78,10 +74,16 @@ export const PipelineListPageMainView = (
           Add Pipeline
         </Button>
       </div>
+      <StaffPickTemplates
+        connectorDefinitions={
+          connectorDefinitions.isSuccess ? connectorDefinitions.data : null
+        }
+        className="mb-6"
+      />
       <PipelinesTable
         pipelines={pipelines.data ? pipelines.data : []}
         isError={pipelines.isError}
-        isLoading={pipelines.isLoading}
+        isLoading={pipelines.isLoading || connectorDefinitions.isLoading}
         accessToken={accessToken}
       />
     </div>

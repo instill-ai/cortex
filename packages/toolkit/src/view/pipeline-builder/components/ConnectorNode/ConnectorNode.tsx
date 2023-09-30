@@ -1,11 +1,13 @@
+import cn from "clsx";
 import * as React from "react";
 import * as z from "zod";
-import { NodeProps, Position } from "reactflow";
+import { Node, NodeProps, Position } from "reactflow";
 import {
   Button,
   Form,
   Icons,
   Input,
+  LinkButton,
   Tag,
   Textarea,
   useToast,
@@ -14,7 +16,11 @@ import { shallow } from "zustand/shallow";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { ConnectorNodeData, PipelineComponentReference } from "../../type";
+import {
+  ConnectorNodeData,
+  NodeData,
+  PipelineComponentReference,
+} from "../../type";
 import {
   PipelineBuilderStore,
   usePipelineBuilderStore,
@@ -26,6 +32,7 @@ import {
   getConnectorInputOutputSchema,
   extractPipelineComponentReferenceFromString,
   composeEdgesFromReferences,
+  createGraphLayout,
 } from "../../lib";
 import { InputPropertyItem } from "./InputPropertyItem";
 import { GeneralRecord, Nullable } from "../../../../lib";
@@ -34,13 +41,18 @@ import { ImageWithFallback } from "../../../../components";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
+  selectedConnectorNodeId: state.selectedConnectorNodeId,
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   nodes: state.nodes,
+  edges: state.edges,
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   testModeEnabled: state.testModeEnabled,
   testModeTriggerResponse: state.testModeTriggerResponse,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
+  updateCreateResourceDialogState: state.updateCreateResourceDialogState,
+  isLatestVersion: state.isLatestVersion,
+  isOwner: state.isOwner,
 });
 
 export const DataConnectorInputSchema = z.object({
@@ -55,13 +67,18 @@ const UpdateNodeIdSchema = z.object({
 export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const {
     expandAllNodes,
+    selectedConnectorNodeId,
     updateSelectedConnectorNodeId,
     nodes,
+    edges,
     updateNodes,
     updateEdges,
     testModeEnabled,
     testModeTriggerResponse,
     updatePipelineRecipeIsDirty,
+    updateCreateResourceDialogState,
+    isLatestVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   const { toast } = useToast();
@@ -97,16 +114,28 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const [exapndOutputs, setExpandOutputs] = React.useState(false);
 
   let aiTaskNotSelected = false;
+  let resourceNotCreated = false;
 
-  const { inputSchema, outputSchema } = getConnectorInputOutputSchema(
-    data.component
-  );
+  const { inputSchema, outputSchema } = React.useMemo(() => {
+    if (
+      data.component.type === "COMPONENT_TYPE_CONNECTOR_AI" &&
+      !data.component.configuration.input.task
+    ) {
+      return { inputSchema: null, outputSchema: null };
+    }
+
+    return getConnectorInputOutputSchema(data.component);
+  }, [data.component]);
 
   if (
     data.component.type === "COMPONENT_TYPE_CONNECTOR_AI" &&
     !data.component.configuration.input.task
   ) {
     aiTaskNotSelected = true;
+  }
+
+  if (!data.component.resource_name) {
+    resourceNotCreated = true;
   }
 
   React.useEffect(() => {
@@ -285,25 +314,28 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     testModeTriggerResponse?.metadata?.traces ?? null
   );
 
+  const hasTargetEdges = React.useMemo(() => {
+    return edges.some((edge) => edge.target === id);
+  }, [edges]);
+
+  const hasSourceEdges = React.useMemo(() => {
+    return edges.some((edge) => edge.source === id);
+  }, [edges]);
+
   return (
     <>
       <div
-        onClick={() => {
-          updateSelectedConnectorNodeId((prev) => {
-            if (testModeEnabled) return null;
-            if (enableEdit) return null;
-
-            if (prev === id) {
-              return null;
-            } else {
-              return id;
-            }
-          });
-        }}
-        className="flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg"
+        className={cn(
+          "flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg",
+          {
+            "outline outline-2 outline-semantic-accent-default outline-offset-1":
+              id === selectedConnectorNodeId,
+          },
+          testModeEnabled ? "w-[480px]" : "w-[340px]"
+        )}
       >
-        <div className="mb-2 flex flex-row justify-between">
-          <div className="flex flex-row gap-x-1">
+        <div className="mb-3 flex flex-row w-full">
+          <div className="flex flex-row gap-x-1 mr-auto">
             <ImageWithFallback
               src={`/icons/${data.component?.connector_definition?.vendor}/${data.component?.connector_definition?.icon}`}
               width={16}
@@ -322,7 +354,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                     return (
                       <input
                         {...field}
-                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:outline-none focus:ring-0"
+                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:!ring-1 focus:!ring-semantic-accent-default"
                         ref={connectorNameEditInputRef}
                         value={field.value}
                         type="text"
@@ -357,15 +389,138 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               </form>
             </Form.Root>
           </div>
-          <button
-            onClick={(e) => {
-              e.stopPropagation();
-              connectorNameEditInputRef.current?.focus();
-            }}
-            type="button"
-          >
-            <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-secondary" />
-          </button>
+          {isLatestVersion && isOwner ? (
+            <div className="flex flex-row gap-x-3">
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  updateSelectedConnectorNodeId(() => id);
+                }}
+                variant="tertiaryGrey"
+                size="sm"
+                className="!px-0 !py-0"
+                disabled={testModeEnabled}
+              >
+                <Icons.Gear01 className="w-4 h-4 stroke-semantic-fg-secondary" />
+              </Button>
+              {data.component.resource_name ? (
+                <Button
+                  variant="tertiaryGrey"
+                  size="sm"
+                  className="!px-0 !py-0"
+                  disabled={testModeEnabled}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const nodeIndex =
+                      nodes.filter(
+                        (node) =>
+                          node.data.component?.type === data.component.type
+                      ).length + 1;
+
+                    let nodePrefix: Nullable<string> = null;
+
+                    switch (data.component.connector_definition?.type) {
+                      case "CONNECTOR_TYPE_AI": {
+                        nodePrefix = "ai";
+                        break;
+                      }
+                      case "CONNECTOR_TYPE_BLOCKCHAIN": {
+                        nodePrefix = "blockchain";
+                        break;
+                      }
+                      case "CONNECTOR_TYPE_DATA": {
+                        nodePrefix = "data";
+                        break;
+                      }
+                      case "CONNECTOR_TYPE_OPERATOR": {
+                        nodePrefix = "operator";
+                        break;
+                      }
+                    }
+                    const nodeID = `${nodePrefix}_${nodeIndex}`;
+
+                    const newNodes: Node<NodeData>[] = [
+                      ...nodes,
+                      {
+                        id: nodeID,
+                        type: "connectorNode",
+                        sourcePosition: Position.Left,
+                        targetPosition: Position.Right,
+                        position: { x: 0, y: 0 },
+                        data,
+                      },
+                    ];
+
+                    const allReferences: PipelineComponentReference[] = [];
+
+                    newNodes.forEach((node) => {
+                      if (node.data.component?.configuration) {
+                        allReferences.push(
+                          ...extractReferencesFromConfiguration(
+                            node.data.component?.configuration,
+                            node.id
+                          )
+                        );
+                      }
+                    });
+
+                    const newEdges = composeEdgesFromReferences(
+                      allReferences,
+                      newNodes
+                    );
+
+                    updatePipelineRecipeIsDirty(() => true);
+
+                    createGraphLayout(newNodes, newEdges)
+                      .then((graphData) => {
+                        updateNodes(() => graphData.nodes);
+                        updateEdges(() => graphData.edges);
+                      })
+                      .catch((err) => {
+                        console.log(err);
+                      });
+                  }}
+                >
+                  <Icons.Copy07 className="w-4 h-4 stroke-semantic-fg-secondary" />
+                </Button>
+              ) : null}
+              <Button
+                variant="tertiaryGrey"
+                size="sm"
+                className="!px-0 !py-0"
+                disabled={testModeEnabled}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const newNodes = nodes.filter((node) => node.id !== id);
+
+                  const allReferences: PipelineComponentReference[] = [];
+
+                  newNodes.forEach((node) => {
+                    if (node.data.component?.configuration) {
+                      allReferences.push(
+                        ...extractReferencesFromConfiguration(
+                          node.data.component?.configuration,
+                          node.id
+                        )
+                      );
+                    }
+                  });
+
+                  const newEdges = composeEdgesFromReferences(
+                    allReferences,
+                    newNodes
+                  );
+
+                  updatePipelineRecipeIsDirty(() => true);
+
+                  updateNodes(() => newNodes);
+                  updateEdges(() => newEdges);
+                }}
+              >
+                <Icons.X className="w-4 h-4 stroke-semantic-fg-secondary" />
+              </Button>
+            </div>
+          ) : null}
         </div>
         {enableEdit ? (
           <Form.Root {...dataConnectorInputForm}>
@@ -394,7 +549,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   name="key"
                   render={({ field }) => {
                     return (
-                      <Form.Item className="w-[318px]">
+                      <Form.Item className="w-full">
                         <Form.Label className="!font-sans !text-base !font-semibold">
                           Key
                         </Form.Label>
@@ -420,7 +575,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   name="value"
                   render={({ field }) => {
                     return (
-                      <Form.Item className="w-[318px]">
+                      <Form.Item className="w-full">
                         <Form.Label className="!font-sans !text-base !font-semibold">
                           Value
                         </Form.Label>
@@ -442,14 +597,115 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           </Form.Root>
         ) : (
           <>
-            {aiTaskNotSelected ? (
-              <div className="w-[232px] rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+            {resourceNotCreated ? (
+              <div className="w-full mb-3 gap-y-2 rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+                <p className="text-semantic-fg-primary product-body-text-3-regular">
+                  Please create resource for this connector
+                </p>
+                <LinkButton
+                  className="gap-x-2"
+                  variant="primary"
+                  size="sm"
+                  onClick={() => {
+                    updateCreateResourceDialogState(() => ({
+                      open: true,
+                      connectorType:
+                        data.component.connector_definition?.type ?? null,
+                      connectorDefinition:
+                        data.component.connector_definition ?? null,
+                      onCreated: (connectorResource) => {
+                        const newNodes = nodes.map((node) => {
+                          if (
+                            node.data.nodeType === "connector" &&
+                            node.id === id
+                          ) {
+                            node.data = {
+                              ...node.data,
+                              component: {
+                                ...node.data.component,
+                                resource_name: connectorResource.name,
+                                resource: {
+                                  ...connectorResource,
+                                  connector_definition: null,
+                                },
+                              },
+                            };
+                          }
+                          return node;
+                        });
+
+                        updateNodes(() => newNodes);
+
+                        const allReferences: PipelineComponentReference[] = [];
+
+                        newNodes.forEach((node) => {
+                          if (node.data.component?.configuration) {
+                            allReferences.push(
+                              ...extractReferencesFromConfiguration(
+                                node.data.component?.configuration,
+                                node.id
+                              )
+                            );
+                          }
+                        });
+
+                        const newEdges = composeEdgesFromReferences(
+                          allReferences,
+                          newNodes
+                        );
+                        updatePipelineRecipeIsDirty(() => true);
+                        updateEdges(() => newEdges);
+
+                        updateCreateResourceDialogState(() => ({
+                          open: false,
+                          connectorType: null,
+                          connectorDefinition: null,
+                          onCreated: null,
+                          onSelectedExistingResource: null,
+                        }));
+                      },
+                      onSelectedExistingResource: (connectorResource) => {
+                        updateNodes((prev) => {
+                          return prev.map((node) => {
+                            if (
+                              node.data.nodeType === "connector" &&
+                              node.id === id
+                            ) {
+                              node.data = {
+                                ...node.data,
+                                component: {
+                                  ...node.data.component,
+                                  resource_name: connectorResource.name,
+                                },
+                              };
+                            }
+                            return node;
+                          });
+                        });
+
+                        updateCreateResourceDialogState(() => ({
+                          open: false,
+                          connectorType: null,
+                          connectorDefinition: null,
+                          onCreated: null,
+                          onSelectedExistingResource: null,
+                        }));
+                      },
+                    }));
+                  }}
+                >
+                  Create resource
+                </LinkButton>
+              </div>
+            ) : null}
+            {aiTaskNotSelected && !resourceNotCreated ? (
+              <div className="w-full rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
                 <p className="text-semantic-fg-primary product-body-text-3-regular">
                   Please select AI task for this connector
                 </p>
               </div>
             ) : null}
-            {aiTaskNotSelected ? null : (
+            {aiTaskNotSelected || resourceNotCreated ? null : (
               <div className="mb-1 product-body-text-4-medium">input</div>
             )}
             {inputProperties.length > 0 ? (
@@ -573,7 +829,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                     })}
                   </div>
                   <Button
-                    className="flex w-[232px]"
+                    className="flex w-full"
                     variant="primary"
                     onClick={(e) => {
                       e.stopPropagation();
@@ -586,7 +842,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 </div>
               )
             ) : null}
-            {aiTaskNotSelected ? null : (
+            {aiTaskNotSelected || resourceNotCreated ? null : (
               <div className="mb-1 product-body-text-4-medium">output</div>
             )}
             {outputProperties.length > 0 ? (
@@ -600,7 +856,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                             key={
                               property.title ? property.title : property.path
                             }
-                            className="w-[232px] rounded-[6px] bg-semantic-bg-primary p-2"
+                            className="w-full rounded-[6px] bg-semantic-bg-primary p-2"
                           >
                             <div className="flex flex-row gap-x-2">
                               <p className="my-auto text-semantic-fg-secondary product-body-text-4-semibold">
@@ -626,8 +882,18 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           </>
         )}
       </div>
-      <CustomHandle type="target" position={Position.Left} id={id} />
-      <CustomHandle type="source" position={Position.Right} id={id} />
+      <CustomHandle
+        className={hasTargetEdges ? "" : "!opacity-0"}
+        type="target"
+        position={Position.Left}
+        id={id}
+      />
+      <CustomHandle
+        className={hasSourceEdges ? "" : "!opacity-0"}
+        type="source"
+        position={Position.Right}
+        id={id}
+      />
     </>
   );
 };

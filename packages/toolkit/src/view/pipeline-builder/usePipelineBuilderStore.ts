@@ -12,12 +12,29 @@ import {
   applyEdgeChanges,
   applyNodeChanges,
 } from "reactflow";
-import { subscribeWithSelector } from "zustand/middleware";
+import { subscribeWithSelector, devtools } from "zustand/middleware";
 
 import { NodeData } from "./type";
-import { devtools } from "zustand/middleware";
 import { OpenAPIV3 } from "openapi-types";
-import { Nullable, TriggerUserPipelineResponse } from "../../lib";
+import {
+  ConnectorDefinition,
+  ConnectorResourceType,
+  ConnectorResourceWithDefinition,
+  Nullable,
+  TriggerUserPipelineResponse,
+} from "../../lib";
+
+export type PipelineBuilderCreateResourceDialogState = {
+  open: boolean;
+  connectorType: Nullable<ConnectorResourceType>;
+  connectorDefinition: Nullable<ConnectorDefinition>;
+  onCreated: Nullable<
+    (connectorResource: ConnectorResourceWithDefinition) => void
+  >;
+  onSelectedExistingResource: Nullable<
+    (connectorResource: ConnectorResourceWithDefinition) => void
+  >;
+};
 
 export type PipelineBuilderState = {
   pipelineUid: Nullable<string>;
@@ -38,6 +55,11 @@ export type PipelineBuilderState = {
   testModeTriggerResponse: Nullable<TriggerUserPipelineResponse>;
   pipelineOpenAPISchema: Nullable<OpenAPIV3.Document>;
   accessToken: Nullable<string>;
+  createResourceDialogState: PipelineBuilderCreateResourceDialogState;
+  isLatestVersion: boolean;
+  currentVersion: Nullable<string>;
+  initializedByTemplateOrClone: boolean;
+  isOwner: boolean;
 };
 
 export type PipelineBuilderAction = {
@@ -67,11 +89,21 @@ export type PipelineBuilderAction = {
       prev: Nullable<TriggerUserPipelineResponse>
     ) => Nullable<TriggerUserPipelineResponse>
   ) => void;
-
   updatePipelineOpenAPISchema: (
     fn: (prev: Nullable<OpenAPIV3.Document>) => Nullable<OpenAPIV3.Document>
   ) => void;
   updateAccessToken: (fn: (prev: Nullable<string>) => Nullable<string>) => void;
+  updateCreateResourceDialogState: (
+    fn: (
+      prev: PipelineBuilderCreateResourceDialogState
+    ) => PipelineBuilderCreateResourceDialogState
+  ) => void;
+  updateIsLatestVersion: (fn: (prev: boolean) => boolean) => void;
+  updateCurrentVersion: (
+    fn: (prev: Nullable<string>) => Nullable<string>
+  ) => void;
+  updateInitializedByTemplateOrClone: (fn: (prev: boolean) => boolean) => void;
+  updateIsOwner: (fn: (prev: boolean) => boolean) => void;
 };
 
 export type PipelineBuilderStore = PipelineBuilderState & PipelineBuilderAction;
@@ -95,6 +127,17 @@ export const pipelineBuilderInitialState: PipelineBuilderState = {
   testModeTriggerResponse: null,
   pipelineOpenAPISchema: null,
   accessToken: null,
+  createResourceDialogState: {
+    open: false,
+    connectorType: null,
+    connectorDefinition: null,
+    onCreated: null,
+    onSelectedExistingResource: null,
+  },
+  isLatestVersion: true,
+  currentVersion: null,
+  initializedByTemplateOrClone: false,
+  isOwner: false,
 };
 
 export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
@@ -118,9 +161,7 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
         set((state) => {
           return { ...state, pipelineDescription };
         }),
-      updateRightPanelIsOpenRightPanelIsOpen: (
-        fn: (prev: boolean) => boolean
-      ) =>
+      updateRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
         set((state) => {
           return { ...state, rightPanelIsOpen: fn(state.rightPanelIsOpen) };
         }),
@@ -175,13 +216,6 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
           return {
             ...state,
             isSavingPipeline: fn(state.isSavingPipeline),
-          };
-        }),
-      updateRightPanelIsOpen: (fn: (prev: boolean) => boolean) =>
-        set((state) => {
-          return {
-            ...state,
-            rightPanelIsOpen: fn(state.rightPanelIsOpen),
           };
         }),
       updateSelectedConnectorNodeId: (
@@ -247,6 +281,49 @@ export const usePipelineBuilderStore = create<PipelineBuilderStore>()(
           return {
             ...state,
             accessToken: fn(state.accessToken),
+          };
+        }),
+      updateCreateResourceDialogState: (
+        fn: (
+          prev: PipelineBuilderCreateResourceDialogState
+        ) => PipelineBuilderCreateResourceDialogState
+      ) =>
+        set((state) => {
+          return {
+            ...state,
+            createResourceDialogState: fn(state.createResourceDialogState),
+          };
+        }),
+      updateIsLatestVersion: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            isLatestVersion: fn(state.isLatestVersion),
+          };
+        }),
+      updateCurrentVersion: (
+        fn: (prev: Nullable<string>) => Nullable<string>
+      ) =>
+        set((state) => {
+          return {
+            ...state,
+            currentVersion: fn(state.currentVersion),
+          };
+        }),
+      updateInitializedByTemplateOrClone: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            initializedByTemplateOrClone: fn(
+              state.initializedByTemplateOrClone
+            ),
+          };
+        }),
+      updateIsOwner: (fn: (prev: boolean) => boolean) =>
+        set((state) => {
+          return {
+            ...state,
+            isOwner: fn(state.isOwner),
           };
         }),
     }))

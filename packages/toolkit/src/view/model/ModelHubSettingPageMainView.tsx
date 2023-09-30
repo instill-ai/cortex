@@ -18,26 +18,35 @@ import { ModelConfigurationFields } from "./ModelConfigurationFields";
 
 export type ModelHubSettingPageMainViewProps = GeneralPageProp & {
   modelReadme: ReactElement;
+  modelNamespace: string;
+  disabledConfigureModel: boolean;
 };
 
 export const ModelHubSettingPageMainView = (
   props: ModelHubSettingPageMainViewProps
 ) => {
-  const { accessToken, enableQuery, router, modelReadme } = props;
-  const { id } = router.query;
+  const {
+    accessToken,
+    enableQuery,
+    router,
+    modelReadme,
+    modelNamespace,
+    disabledConfigureModel,
+  } = props;
+  const { id, entity } = router.query;
 
   /* -------------------------------------------------------------------------
    * Query resource data
    * -----------------------------------------------------------------------*/
 
   const model = useUserModel({
-    modelName: id ? `users/instill-ai/models/${id.toString()}` : null,
+    modelName: id ? `users/${modelNamespace}/models/${id.toString()}` : null,
     enabled: enableQuery,
     accessToken,
   });
 
   const modelWatchState = useWatchUserModel({
-    modelName: id ? `users/instill-ai/models/${id.toString()}` : null,
+    modelName: id ? `users/${modelNamespace}/models/${id.toString()}` : null,
     enabled: enableQuery,
     accessToken,
   });
@@ -83,7 +92,7 @@ export const ModelHubSettingPageMainView = (
         switchOff={unDeployModel}
         marginBottom="mb-10"
         accessToken={accessToken}
-        disabled={true}
+        disabled={disabledConfigureModel}
       />
       {model.isSuccess && model.data ? (
         <ConfigureModelForm
@@ -92,12 +101,12 @@ export const ModelHubSettingPageMainView = (
           onConfigure={null}
           onDelete={(initStore) => {
             initStore();
-            router.push("/model-hub");
+            router.push(`/${entity}/model-hub`);
           }}
           accessToken={accessToken}
           width="w-full"
-          disabledConfigure={true}
-          disabledDelete={true}
+          disabledConfigure={disabledConfigureModel}
+          disabledDelete={disabledConfigureModel}
         />
       ) : (
         <div className="mb-[60px] h-[120px] w-full animate-pulse bg-instillGrey15 lg:h-[320px]"></div>

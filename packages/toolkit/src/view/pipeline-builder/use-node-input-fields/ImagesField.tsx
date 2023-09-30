@@ -28,7 +28,7 @@ export const ImagesField = (props: {
             </Form.Label>
             <Form.Control>
               <label
-                htmlFor={`start-operator-${fieldKey}`}
+                htmlFor={`op-start-${fieldKey}`}
                 className="flex min-h-[110px] w-full cursor-pointer flex-col rounded bg-semantic-bg-base-bg"
               >
                 {imageFileURLs ? (
@@ -58,7 +58,7 @@ export const ImagesField = (props: {
                 )}
                 <Input.Root className="hidden">
                   <Input.Core
-                    id={`start-operator-${fieldKey}`}
+                    id={`op-start-${fieldKey}`}
                     type="file"
                     accept="images/*"
                     multiple={true}

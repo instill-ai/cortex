@@ -178,6 +178,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   selectedConnectorNodeId: state.selectedConnectorNodeId,
+  updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
@@ -189,6 +190,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
     updateNodes,
     updateEdges,
     selectedConnectorNodeId,
+    updateSelectedConnectorNodeId,
     updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -251,7 +253,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
 
     updateEdges(() => newEdges);
-
+    updateSelectedConnectorNodeId(() => null);
     updatePipelineRecipeIsDirty(() => true);
   }
 

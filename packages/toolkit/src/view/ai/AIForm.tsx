@@ -48,7 +48,8 @@ const AISchema = z
     // TASK_TEXT_GENERATION
     // TASK_TEXT_TO_IMAGE
 
-    model_name: z.string().nullable().optional(),
+    model_id: z.string().nullable().optional(),
+    model_namespace: z.string().nullable().optional(),
 
     // TASK_CLASSIFICATION
     // TASK_INSTANCE_SEGMENTATION
@@ -134,23 +135,44 @@ const AISchema = z
       state.connector_definition_name ===
       "connector-definitions/ai-instill-model"
     ) {
-      if (!state.model_name) {
+      if (!state.model_id) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Model ID is required",
-          path: ["model_name"],
+          path: ["model_id"],
         });
       } else {
         const result = validateIntillUpstreamTypes({
           type: "reference_and_string",
-          value: state.model_name,
+          value: state.model_id,
         });
 
         if (!result.isValid) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: result.error,
-            path: ["model_name"],
+            path: ["model_id"],
+          });
+        }
+      }
+
+      if (!state.model_namespace) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: "Model namespace is required",
+          path: ["model_namespace"],
+        });
+      } else {
+        const result = validateIntillUpstreamTypes({
+          type: "reference_and_string",
+          value: state.model_namespace,
+        });
+
+        if (!result.isValid) {
+          ctx.addIssue({
+            code: z.ZodIssueCode.custom,
+            message: result.error,
+            path: ["model_namespace"],
           });
         }
       }
@@ -878,6 +900,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateNodes: state.updateNodes,
   updateEdges: state.updateEdges,
   selectedConnectorNodeId: state.selectedConnectorNodeId,
+  updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
@@ -889,6 +912,7 @@ export const AIForm = (props: AIFormProps) => {
     updateNodes,
     updateEdges,
     selectedConnectorNodeId,
+    updateSelectedConnectorNodeId,
     updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
@@ -951,7 +975,7 @@ export const AIForm = (props: AIFormProps) => {
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
 
     updateEdges(() => newEdges);
-
+    updateSelectedConnectorNodeId(() => null);
     updatePipelineRecipeIsDirty(() => true);
   }
 
@@ -1170,7 +1194,7 @@ export const AIForm = (props: AIFormProps) => {
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
-                  <Form.Label>image_base64</Form.Label>
+                  <Form.Label>image_base64 *</Form.Label>
                   <Form.Control>
                     <Input.Root>
                       <Input.Core
@@ -1192,7 +1216,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="model_name"
+            name="model_namespace"
             render={({ field }) => {
               return (
                 <Form.Item
@@ -1203,7 +1227,7 @@ export const AIForm = (props: AIFormProps) => {
                       : "hidden"
                   }
                 >
-                  <Form.Label>Model Name</Form.Label>
+                  <Form.Label>Model Namespace *</Form.Label>
                   <Form.Control>
                     <Input.Root>
                       <Input.Core
@@ -1215,11 +1239,48 @@ export const AIForm = (props: AIFormProps) => {
                       />
                     </Input.Root>
                   </Form.Control>
+                  <Form.Description>
+                    ID of the Instill Model&apos;s model to be used.
+                  </Form.Description>
                   <Form.Message />
                 </Form.Item>
               );
             }}
           />
+          <Form.Field
+            control={form.control}
+            name="model_id"
+            render={({ field }) => {
+              return (
+                <Form.Item
+                  className={
+                    connectorDefinitionName ===
+                    "connector-definitions/ai-instill-model"
+                      ? ""
+                      : "hidden"
+                  }
+                >
+                  <Form.Label>Model ID *</Form.Label>
+                  <Form.Control>
+                    <Input.Root>
+                      <Input.Core
+                        {...field}
+                        type="text"
+                        value={field.value ?? ""}
+                        autoComplete="off"
+                        disabled={disabledAll}
+                      />
+                    </Input.Root>
+                  </Form.Control>
+                  <Form.Description>
+                    Namespace of the Instill Model&apos;s model to be used.
+                  </Form.Description>
+                  <Form.Message />
+                </Form.Item>
+              );
+            }}
+          />
+
           <Form.Field
             control={form.control}
             name="prompt"

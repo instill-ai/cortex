@@ -19,11 +19,15 @@ import {
 import { Node, Position, ReactFlowInstance } from "reactflow";
 
 import {
-  AddConnectorResourceDialog,
-  TriggerPipelineSnippetModal,
+  ReleasePipelineModal,
+  PipelineToolkitModal,
+  SelectConnectorResourceDialog,
+  CreateResourceDialog,
 } from "./components";
 import { triggerPipelineSnippets } from "./components/triggerPipelineSnippets";
 import {
+  ConnectorDefinition,
+  ConnectorResourceWithDefinition,
   CreateUserPipelinePayload,
   GeneralRecord,
   InstillAppEnv,
@@ -31,12 +35,16 @@ import {
   PipelineConnectorComponent,
   UpdateUserPipelinePayload,
   env,
+  generateRandomReadableName,
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useUpdateUserPipeline,
   useUser,
 } from "../../lib";
 import { StartNodeData } from "./type";
+import { useRouter } from "next/router";
+import { SharePipelineDialog } from "./components/SharePipelineDialog";
+import { LoadingSpin } from "../../components";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
@@ -55,6 +63,8 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateSelectedConnectorNodeId: state.updateSelectedConnectorNodeId,
   testModeEnabled: state.testModeEnabled,
   updateTestModeEnabled: state.updateTestModeEnabled,
+  isLatestVersion: state.isLatestVersion,
+  isOwner: state.isOwner,
 });
 
 export type FlowControlProps = {
@@ -90,7 +100,11 @@ export const FlowControl = (props: FlowControlProps) => {
     testModeEnabled,
     updateTestModeEnabled,
     updateSelectedConnectorNodeId,
+    isLatestVersion,
+    isOwner,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
+  const router = useRouter();
+  const { entity } = router.query;
 
   const { toast } = useToast();
 
@@ -103,12 +117,9 @@ export const FlowControl = (props: FlowControlProps) => {
   const updateUserPipeline = useUpdateUserPipeline();
 
   const [isSaving, setIsSaving] = React.useState(false);
+  const [isCloning, setIsCloning] = React.useState(false);
 
   async function handleSavePipeline() {
-    if (!user.isSuccess) {
-      return;
-    }
-
     if (!pipelineId) {
       return;
     }
@@ -117,7 +128,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
     if (!pipelineIsNew) {
       const payload: UpdateUserPipelinePayload = {
-        name: `${user.data.name}/pipelines/${pipelineId}`,
+        name: `users/${entity}/pipelines/${pipelineId}`,
         description: pipelineDescription ?? undefined,
         recipe: constructPipelineRecipe(nodes),
       };
@@ -136,9 +147,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
         updatePipelineRecipeIsDirty(() => false);
 
-        const { nodes, edges } = createInitialGraphData({
-          pipeline: res.pipeline,
-        });
+        const { nodes, edges } = createInitialGraphData(res.pipeline.recipe);
 
         createGraphLayout(nodes, edges)
           .then((graphData) => {
@@ -179,13 +188,13 @@ export const FlowControl = (props: FlowControlProps) => {
 
     try {
       const res = await createUserPipeline.mutateAsync({
-        userName: user.data.name,
+        userName: `users/${entity}`,
         payload,
         accessToken,
       });
 
       setPipelineUid(res.pipeline.uid);
-
+      updatePipelineRecipeIsDirty(() => false);
       updatePipelineIsNew(() => false);
 
       toast({
@@ -214,8 +223,6 @@ export const FlowControl = (props: FlowControlProps) => {
   }
 
   const codeSnippte = React.useMemo(() => {
-    if (!user.isSuccess) return "";
-
     const input: GeneralRecord = {};
 
     const startNode = nodes.find(
@@ -292,241 +299,355 @@ export const FlowControl = (props: FlowControlProps) => {
 
     snippet = snippet
       .replace(/\{vdp-pipeline-base-url\}/g, env("NEXT_PUBLIC_API_GATEWAY_URL"))
-      .replace(
-        /\{pipeline-name\}/g,
-        `${user.data.name}/pipelines/${pipelineId}`
-      )
+      .replace(/\{pipeline-name\}/g, `users/${entity}/pipelines/${pipelineId}`)
       .replace(/\{input-array\}/g, inputsString);
 
     return snippet;
-  }, [nodes, user.data, user.isSuccess, pipelineId, appEnv]);
+  }, [nodes, pipelineId, appEnv, entity]);
+
+  const canSave = React.useMemo(() => {
+    if (!pipelineRecipeIsDirty) {
+      return false;
+    }
+
+    if (!isLatestVersion) {
+      return false;
+    }
+
+    return true;
+  }, [isLatestVersion, pipelineRecipeIsDirty]);
+
+  function constructNode(
+    resource: ConnectorResourceWithDefinition | ConnectorDefinition
+  ) {
+    if (!reactFlowInstance) return;
+
+    const viewport = reactFlowInstance.getViewport();
+    let componentType: Nullable<PipelineConnectorComponent["type"]> = null;
+
+    // Remove the empty node and edges that connect to empty node if it exists
+    const emptyNode = nodes.find((e) => e.data.nodeType === "empty");
+
+    const newNodes = emptyNode
+      ? nodes.filter((e) => e.data.nodeType !== "empty")
+      : nodes;
+
+    const newEdges = emptyNode
+      ? edges.filter((e) => {
+          if (e.source === emptyNode.id || e.target === emptyNode.id) {
+            return false;
+          }
+          return true;
+        })
+      : edges;
+
+    let nodePrefix: Nullable<string> = null;
+    let nodeIndex = 0;
+    let configuration: Nullable<GeneralRecord> = null;
+
+    switch (resource.type) {
+      case "CONNECTOR_TYPE_AI": {
+        nodePrefix = "ai";
+        nodeIndex =
+          nodes.filter(
+            (e) => e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_AI"
+          ).length + 1;
+        configuration =
+          "configuration" in resource
+            ? getAiConnectorDefaultConfiguration(
+                resource.connector_definition_name
+              )
+            : getAiConnectorDefaultConfiguration(resource.name);
+        componentType = "COMPONENT_TYPE_CONNECTOR_AI";
+        break;
+      }
+      case "CONNECTOR_TYPE_BLOCKCHAIN": {
+        nodePrefix = "blockchain";
+        nodeIndex =
+          nodes.filter(
+            (e) =>
+              e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN"
+          ).length + 1;
+        configuration =
+          "configuration" in resource
+            ? getBlockchainConnectorDefaultConfiguration(
+                resource.connector_definition_name
+              )
+            : getBlockchainConnectorDefaultConfiguration(resource.name);
+        componentType = "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN";
+        break;
+      }
+      case "CONNECTOR_TYPE_DATA": {
+        nodePrefix = "data";
+        nodeIndex =
+          nodes.filter(
+            (e) => e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_DATA"
+          ).length + 1;
+        configuration = {
+          input: {},
+        };
+        componentType = "COMPONENT_TYPE_CONNECTOR_DATA";
+        break;
+      }
+
+      case "CONNECTOR_TYPE_OPERATOR": {
+        nodePrefix = "operator";
+        nodeIndex =
+          nodes.filter(
+            (e) => e.data.component?.type === "COMPONENT_TYPE_OPERATOR"
+          ).length + 1;
+        configuration = {};
+        componentType = "COMPONENT_TYPE_OPERATOR";
+        break;
+      }
+    }
+
+    const nodeID = `${nodePrefix}_${nodeIndex}`;
+
+    if (!componentType) {
+      throw new Error("Component type is not defined");
+    }
+
+    if ("configuration" in resource) {
+      newNodes.push({
+        id: nodeID,
+        type: "connectorNode",
+        sourcePosition: Position.Left,
+        targetPosition: Position.Right,
+        data: {
+          nodeType: "connector",
+          component: {
+            id: nodeID,
+            resource_name: resource.name,
+            resource: {
+              ...resource,
+              connector_definition: null,
+            },
+            definition_name: resource.connector_definition.name,
+            configuration: configuration ? configuration : {},
+            type: componentType,
+            connector_definition: resource.connector_definition,
+          },
+        },
+        position: reactFlowInstance.project({
+          x: viewport.x,
+          y: viewport.y,
+        }),
+      });
+
+      newEdges.push(
+        ...[
+          {
+            id: uuidv4(),
+            source: "start",
+            target: nodeID,
+            type: "customEdge",
+          },
+          {
+            id: uuidv4(),
+            source: nodeID,
+            target: "end",
+            type: "customEdge",
+          },
+        ]
+      );
+    } else {
+      newNodes.push({
+        id: nodeID,
+        type: "connectorNode",
+        sourcePosition: Position.Left,
+        targetPosition: Position.Right,
+        data: {
+          nodeType: "connector",
+          component: {
+            id: nodeID,
+            resource_name: null,
+            resource: null,
+            definition_name: resource.name,
+            type: componentType,
+            connector_definition: resource,
+            configuration: configuration ? configuration : {},
+          },
+        },
+        position: reactFlowInstance.project({
+          x: viewport.x,
+          y: viewport.y,
+        }),
+      });
+
+      newEdges.push(
+        ...[
+          {
+            id: uuidv4(),
+            source: "start",
+            target: nodeID,
+            type: "customEdge",
+          },
+          {
+            id: uuidv4(),
+            source: nodeID,
+            target: "end",
+            type: "customEdge",
+          },
+        ]
+      );
+    }
+
+    updatePipelineRecipeIsDirty(() => true);
+
+    createGraphLayout(newNodes, newEdges)
+      .then((graphData) => {
+        updateNodes(() => graphData.nodes);
+        updateEdges(() => graphData.edges);
+        updateSelectResourceDialogIsOpen(() => false);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 
   return (
     <>
       <div className="absolute right-8 top-8 flex flex-row-reverse gap-x-4">
-        <Button
-          onClick={handleSavePipeline}
-          className="gap-x-2"
-          variant="secondaryGrey"
-          size="lg"
-          type="button"
-          disabled={pipelineRecipeIsDirty ? false : true}
-        >
-          Save
-          {isSaving ? (
-            <svg
-              className="m-auto h-4 w-4 animate-spin text-semantic-fg-secondary"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
+        {isOwner ? (
+          <>
+            <ReleasePipelineModal accessToken={accessToken} />
+            <Button
+              onClick={handleSavePipeline}
+              className="gap-x-2"
+              variant="secondaryGrey"
+              size="lg"
+              type="button"
+              disabled={canSave ? false : true}
             >
-              <circle
-                className="opacity-25"
-                cx="12"
-                cy="12"
-                r="10"
-                stroke="currentColor"
-                strokeWidth="4"
-              ></circle>
-              <path
-                className="opacity-75"
-                fill="currentColor"
-                d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-              />
-            </svg>
-          ) : (
-            <Icons.Save01 className="h-5 w-5 stroke-semantic-fg-primary" />
-          )}
-        </Button>
-        <Button
-          onClick={async () => {
-            if (pipelineIsNew) {
-              toast({
-                title: "Pipeline is not saved",
-                description: "Please save the pipeline before testing it.",
-                variant: "alert-error",
-                size: "large",
-              });
-              return;
-            }
+              Save
+              {isSaving ? (
+                <LoadingSpin className="!text-black" />
+              ) : (
+                <Icons.Save01 className="h-5 w-5 stroke-semantic-fg-primary" />
+              )}
+            </Button>
+            <Button
+              onClick={async () => {
+                if (pipelineIsNew) {
+                  toast({
+                    title: "Pipeline is not saved",
+                    description: "Please save the pipeline before testing it.",
+                    variant: "alert-error",
+                    size: "large",
+                  });
+                  return;
+                }
 
-            if (!testModeEnabled) {
-              await handleSavePipeline();
-            }
+                if (pipelineRecipeIsDirty) {
+                  await handleSavePipeline();
+                }
 
-            updateTestModeEnabled((prev) => !prev);
-            updateSelectedConnectorNodeId(() => null);
-            updateSelectResourceDialogIsOpen(() => false);
-          }}
-          className="gap-x-2"
-          variant="secondaryGrey"
-          size="lg"
-        >
-          {testModeEnabled ? (
-            "Stop"
-          ) : (
-            <>
-              Test <Icons.Play className="h-5 w-5 stroke-semantic-fg-primary" />
-            </>
-          )}
-        </Button>
+                updateTestModeEnabled((prev) => !prev);
+                updateSelectedConnectorNodeId(() => null);
+                updateSelectResourceDialogIsOpen(() => false);
+              }}
+              className="gap-x-2"
+              variant="secondaryGrey"
+              size="lg"
+              disabled={pipelineIsNew ? true : false}
+            >
+              {testModeEnabled ? (
+                "Stop"
+              ) : (
+                <>
+                  Test
+                  <Icons.Play className="h-5 w-5 stroke-semantic-fg-primary" />
+                </>
+              )}
+            </Button>
+            <SharePipelineDialog
+              accessToken={accessToken}
+              enableQuery={enableQuery}
+            />
+          </>
+        ) : (
+          <>
+            <Button
+              onClick={async () => {
+                if (!user.isSuccess) return;
+
+                setIsCloning(true);
+
+                const payload: CreateUserPipelinePayload = {
+                  id: generateRandomReadableName(),
+                  recipe: constructPipelineRecipe(nodes, true),
+                };
+
+                try {
+                  await createUserPipeline.mutateAsync({
+                    payload,
+                    accessToken,
+                    userName: user.data.name,
+                  });
+
+                  setIsCloning(false);
+
+                  await router.push(`/${user.data.id}/pipelines/${payload.id}`);
+
+                  router.reload();
+
+                  toast({
+                    title: "Successfully cloned the pipeline",
+                    variant: "alert-success",
+                    size: "small",
+                  });
+                } catch (error) {
+                  setIsCloning(false);
+                  if (isAxiosError(error)) {
+                    toast({
+                      title: "Something went wrong when clone the pipeline",
+                      description: getInstillApiErrorMessage(error),
+                      variant: "alert-error",
+                      size: "large",
+                    });
+                  } else {
+                    toast({
+                      title: "Something went wrong when clone the pipeline",
+                      variant: "alert-error",
+                      size: "large",
+                    });
+                  }
+                }
+              }}
+              className="!gap-x-2"
+              variant="primary"
+              size="lg"
+            >
+              Clone
+              <LoadingSpin className={isCloning ? "" : "hidden"} />
+            </Button>
+          </>
+        )}
       </div>
       <div className="absolute left-8 top-8 flex flex-row gap-x-4">
-        <AddConnectorResourceDialog
-          enableQuery={enableQuery}
-          open={selectResourceDialogIsOpen}
-          onOpenChange={(open) => updateSelectResourceDialogIsOpen(() => open)}
-          accessToken={accessToken}
-          type="inPipeline"
-          onSelectConnectorResource={(connectorResource) => {
-            if (!reactFlowInstance) return;
-
-            let nodePrefix: Nullable<string> = null;
-            let nodeIndex = 0;
-
-            switch (connectorResource.type) {
-              case "CONNECTOR_TYPE_AI": {
-                nodePrefix = "ai";
-                nodeIndex =
-                  nodes.filter(
-                    (e) =>
-                      e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_AI"
-                  ).length + 1;
-
-                break;
-              }
-              case "CONNECTOR_TYPE_BLOCKCHAIN": {
-                nodePrefix = "blockchain";
-                nodeIndex =
-                  nodes.filter(
-                    (e) =>
-                      e.data.component?.type ===
-                      "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN"
-                  ).length + 1;
-                break;
-              }
-              case "CONNECTOR_TYPE_DATA": {
-                nodePrefix = "data";
-                nodeIndex =
-                  nodes.filter(
-                    (e) =>
-                      e.data.component?.type === "COMPONENT_TYPE_CONNECTOR_DATA"
-                  ).length + 1;
-                break;
-              }
+        {isOwner ? (
+          <SelectConnectorResourceDialog
+            enableQuery={enableQuery}
+            open={selectResourceDialogIsOpen}
+            onOpenChange={(open) =>
+              updateSelectResourceDialogIsOpen(() => open)
             }
-
-            const viewport = reactFlowInstance.getViewport();
-
-            const nodeId = `${nodePrefix}_${nodeIndex}`;
-
-            let componentType: Nullable<PipelineConnectorComponent["type"]> =
-              null;
-
-            let configuration: Nullable<GeneralRecord> = null;
-
-            // Remove the empty node and edges that connect to empty node if it exists
-            const emptyNode = nodes.find((e) => e.data.nodeType === "empty");
-
-            const newNodes = emptyNode
-              ? nodes.filter((e) => e.data.nodeType !== "empty")
-              : nodes;
-
-            const newEdges = emptyNode
-              ? edges.filter((e) => {
-                  if (e.source === emptyNode.id || e.target === emptyNode.id) {
-                    return false;
-                  }
-                  return true;
-                })
-              : edges;
-
-            switch (connectorResource.type) {
-              case "CONNECTOR_TYPE_AI":
-                componentType = "COMPONENT_TYPE_CONNECTOR_AI";
-                configuration = getAiConnectorDefaultConfiguration(
-                  connectorResource.connector_definition_name
-                );
-                break;
-              case "CONNECTOR_TYPE_BLOCKCHAIN":
-                componentType = "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN";
-                configuration = getBlockchainConnectorDefaultConfiguration(
-                  connectorResource.connector_definition_name
-                );
-                break;
-              case "CONNECTOR_TYPE_DATA":
-                componentType = "COMPONENT_TYPE_CONNECTOR_DATA";
-                configuration = {
-                  input: {},
-                };
-                break;
-              case "CONNECTOR_TYPE_OPERATOR":
-                componentType = "COMPONENT_TYPE_OPERATOR";
-                break;
-            }
-
-            if (!componentType) return;
-
-            newNodes.push({
-              id: nodeId,
-              type: "connectorNode",
-              sourcePosition: Position.Left,
-              targetPosition: Position.Right,
-              data: {
-                nodeType: "connector",
-                component: {
-                  id: nodeId,
-                  resource_name: connectorResource.name,
-                  resource: {
-                    ...connectorResource,
-                    connector_definition: null,
-                  },
-                  definition_name: connectorResource.connector_definition.name,
-                  configuration: configuration ? configuration : {},
-                  type: componentType,
-                  connector_definition: connectorResource.connector_definition,
-                },
-              },
-              position: reactFlowInstance.project({
-                x: viewport.x,
-                y: viewport.y,
-              }),
-            });
-
-            newEdges.push(
-              ...[
-                {
-                  id: uuidv4(),
-                  source: "start",
-                  target: nodeId,
-                  type: "customEdge",
-                },
-                {
-                  id: uuidv4(),
-                  source: nodeId,
-                  target: "end",
-                  type: "customEdge",
-                },
-              ]
-            );
-
-            updatePipelineRecipeIsDirty(() => true);
-
-            createGraphLayout(newNodes, newEdges)
-              .then((graphData) => {
-                updateNodes(() => graphData.nodes);
-                updateEdges(() => graphData.edges);
-                updateSelectResourceDialogIsOpen(() => false);
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }}
-        />
+            accessToken={accessToken}
+            onSelect={(resource) => {
+              constructNode(resource);
+            }}
+            disabled={isLatestVersion ? false : true}
+          />
+        ) : null}
       </div>
       <div className="absolute bottom-8 right-8">
-        <TriggerPipelineSnippetModal snippet={codeSnippte} />
+        <PipelineToolkitModal snippet={codeSnippte} />
       </div>
+      <CreateResourceDialog
+        accessToken={accessToken}
+        enableQuery={enableQuery}
+      />
     </>
   );
 };

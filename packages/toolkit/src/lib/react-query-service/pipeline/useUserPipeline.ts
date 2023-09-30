@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useQuery } from "@tanstack/react-query";
 import { getUserPipelineQuery } from "../../vdp-sdk";
 import type { Nullable } from "../../type";
@@ -17,6 +18,7 @@ export const useUserPipeline = ({
    */
   retry?: false | number;
 }) => {
+  const router = useRouter();
   let enableQuery = false;
 
   if (pipelineName && enabled) {
@@ -26,13 +28,20 @@ export const useUserPipeline = ({
   return useQuery(
     ["pipelines", pipelineName],
     async () => {
+      if (!accessToken) {
+        return Promise.reject(new Error("accessToken not provided"));
+      }
+
       if (!pipelineName) {
         return Promise.reject(new Error("invalid pipeline name"));
       }
+
       const pipeline = await getUserPipelineQuery({
         pipelineName,
         accessToken,
+        shareCode: router.query.view?.toString(),
       });
+
       return Promise.resolve(pipeline);
     },
     {

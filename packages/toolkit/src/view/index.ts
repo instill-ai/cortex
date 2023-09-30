@@ -8,4 +8,4 @@ export * from "./model";
 export * from "./pipeline";
 export * from "./pipeline-builder";
 export * from "./resource";
-export * from "./ResourcesTable";
+export * from "./user-settings";

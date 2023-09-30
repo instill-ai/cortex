@@ -5,7 +5,7 @@ import { Pipeline, PipelineRelease, PipelineReleaseWatchState } from "./types";
 export type ListPipelinesResponse = {
   pipelines: Pipeline[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listPipelinesQuery({
@@ -51,7 +51,7 @@ export async function listPipelinesQuery({
 export type ListUserPipelinesResponse = {
   pipelines: Pipeline[];
   next_page_token: string;
-  total_size: string;
+  total_size: number;
 };
 
 export async function listUserPipelinesQuery({
@@ -104,15 +104,26 @@ export type GetUserPipelineResponse = {
 export async function getUserPipelineQuery({
   pipelineName,
   accessToken,
+  shareCode,
 }: {
   pipelineName: string;
   accessToken: Nullable<string>;
+  shareCode?: string;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
 
     const { data } = await client.get<GetUserPipelineResponse>(
-      `/${pipelineName}?view=VIEW_FULL`
+      `/${pipelineName}?view=VIEW_FULL`,
+      {
+        headers: {
+          "instill-share-code": shareCode,
+          "Access-Control-Allow-Headers": shareCode
+            ? "instill-share-code"
+            : undefined,
+          "Content-Type": "application/json",
+        },
+      }
     );
 
     return Promise.resolve(data.pipeline);
@@ -125,47 +136,64 @@ export async function getUserPipelineQuery({
  * Pipeline Release
  * -----------------------------------------------------------------------*/
 
+export type ListPipelineReleasesResponse = {
+  releases: PipelineRelease[];
+  next_page_token: string;
+  total_size: number;
+};
+
 export async function ListUserPipelineReleasesQuery({
-  userName,
   pipelineName,
   pageSize,
   nextPageToken,
   accessToken,
+  shareCode,
 }: {
-  userName: string;
   pipelineName: string;
   pageSize: Nullable<number>;
   nextPageToken: Nullable<string>;
   accessToken: Nullable<string>;
+  shareCode?: string;
 }) {
   try {
     const client = createInstillAxiosClient(accessToken, "vdp");
-    const pipelines: Pipeline[] = [];
+    const releases: PipelineRelease[] = [];
 
     const queryString = getQueryString({
-      baseURL: `${userName}/${pipelineName}/release?view=VIEW_FULL`,
+      baseURL: `/${pipelineName}/releases?view=VIEW_FULL`,
       pageSize,
       nextPageToken,
       filter: null,
     });
 
-    const { data } = await client.get<ListPipelinesResponse>(queryString);
+    const { data } = await client.get<ListPipelineReleasesResponse>(
+      queryString,
+      {
+        headers: {
+          "instill-share-code": shareCode,
+          "Access-Control-Allow-Headers": shareCode
+            ? "instill-share-code"
+            : undefined,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
-    pipelines.push(...data.pipelines);
+    releases.push(...data.releases);
 
     if (data.next_page_token) {
-      pipelines.push(
+      releases.push(
         ...(await ListUserPipelineReleasesQuery({
-          userName,
           pipelineName,
           pageSize,
           nextPageToken: data.next_page_token,
           accessToken,
+          shareCode,
         }))
       );
     }
 
-    return Promise.resolve(pipelines);
+    return Promise.resolve(releases);
   } catch (err) {
     return Promise.reject(err);
   }

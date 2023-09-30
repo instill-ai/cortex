@@ -20,13 +20,13 @@ import {
   getInstillApiErrorMessage,
   useCreateUserConnectorResource,
   useUpdateUserConnectorResource,
-  useUser,
 } from "../../lib";
 
 import {
   recursiveReplaceNullAndEmptyStringWithUndefined,
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
+import { useRouter } from "next/router";
 
 export const BlockchainResourceFormSchema = z
   .object({
@@ -57,9 +57,7 @@ export type BlockchainResourceFormProps = {
   blockchainResource: Nullable<ConnectorResourceWithDefinition>;
   blockchainDefinition: ConnectorDefinition;
   accessToken: Nullable<string>;
-  onSelectConnectorResource?: (
-    connectorResource: ConnectorResourceWithDefinition
-  ) => void;
+  onSubmit?: (connectorResource: ConnectorResourceWithDefinition) => void;
   enableQuery: boolean;
 } & BackButtonProps;
 
@@ -77,10 +75,9 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
     disabledAll,
     blockchainResource,
     blockchainDefinition,
-    onSelectConnectorResource,
+    onSubmit,
     accessToken,
     enableBackButton,
-    enableQuery,
   } = props;
 
   const form = useForm<z.infer<typeof BlockchainResourceFormSchema>>({
@@ -93,18 +90,15 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
   });
 
   const { toast } = useToast();
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
+  const router = useRouter();
+  const { entity } = router.query;
 
   const createBlockchain = useCreateUserConnectorResource();
   const updateBlockchain = useUpdateUserConnectorResource();
 
-  function onSubmit(data: z.infer<typeof BlockchainResourceFormSchema>) {
-    if (!user.isSuccess) return;
-
+  function handleCreateBlockchain(
+    data: z.infer<typeof BlockchainResourceFormSchema>
+  ) {
     if (!blockchainResource) {
       const payload = {
         id: data.id,
@@ -116,11 +110,11 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
       };
 
       createBlockchain.mutate(
-        { payload, userName: user.data.name, accessToken },
+        { payload, userName: `users/${entity}`, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
-            if (onSelectConnectorResource) {
-              onSelectConnectorResource({
+            if (onSubmit) {
+              onSubmit({
                 ...connectorResource,
                 connector_definition: blockchainDefinition,
               });
@@ -172,8 +166,8 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
       { payload, accessToken },
       {
         onSuccess: ({ connectorResource }) => {
-          if (onSelectConnectorResource) {
-            onSelectConnectorResource({
+          if (onSubmit) {
+            onSubmit({
               ...connectorResource,
               connector_definition: blockchainDefinition,
             });
@@ -208,7 +202,10 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
 
   return (
     <Form.Root {...form}>
-      <form className="w-full" onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className="w-full"
+        onSubmit={form.handleSubmit(handleCreateBlockchain)}
+      >
         <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}

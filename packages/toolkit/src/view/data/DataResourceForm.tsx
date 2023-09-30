@@ -25,7 +25,6 @@ import {
   useBuildAirbyteYup,
   useCreateUserConnectorResource,
   useUpdateUserConnectorResource,
-  useUser,
   validateResourceId,
 } from "../../lib";
 import {
@@ -33,15 +32,14 @@ import {
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
 import { AirbyteDestinationFields } from "../airbyte";
+import { useRouter } from "next/router";
 
 export type DataResourceFormProps = {
   dataResource: Nullable<ConnectorResourceWithDefinition>;
   dataDefinition: ConnectorDefinition;
   accessToken: Nullable<string>;
   disabledAll?: boolean;
-  onSelectConnectorResource?: (
-    connectorResource: ConnectorResourceWithDefinition
-  ) => void;
+  onSubmit?: (connectorResource: ConnectorResourceWithDefinition) => void;
   enableQuery: boolean;
 } & BackButtonProps;
 
@@ -59,18 +57,14 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
     disabledAll,
     dataResource,
     dataDefinition,
-    onSelectConnectorResource,
+    onSubmit,
     accessToken,
     enableBackButton,
-    enableQuery,
   } = props;
 
   const { toast } = useToast();
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
+  const router = useRouter();
+  const { entity } = router.query;
 
   const [airbyteFormIsDirty, setAirbyteFormIsDirty] = React.useState(false);
 
@@ -144,8 +138,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
   const createData = useCreateUserConnectorResource();
   const updateData = useUpdateUserConnectorResource();
 
-  const onSubmit = React.useCallback(async () => {
-    if (!fieldValues || !formYup || !user.isSuccess) {
+  const handleCreateData = React.useCallback(async () => {
+    if (!fieldValues || !formYup) {
       return;
     }
 
@@ -209,11 +203,11 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
       };
 
       createData.mutate(
-        { userName: user.data.name, payload, accessToken },
+        { userName: `users/${entity}`, payload, accessToken },
         {
           onSuccess: ({ connectorResource }) => {
-            if (onSelectConnectorResource) {
-              onSelectConnectorResource({
+            if (onSubmit) {
+              onSubmit({
                 ...connectorResource,
                 connector_definition: dataDefinition,
               });
@@ -263,8 +257,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
       { payload, accessToken },
       {
         onSuccess: ({ connectorResource }) => {
-          if (onSelectConnectorResource) {
-            onSelectConnectorResource({
+          if (onSubmit) {
+            onSubmit({
               ...connectorResource,
               connector_definition: dataDefinition,
             });
@@ -300,12 +294,11 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
     fieldValues,
     dataDefinition,
     accessToken,
-    onSelectConnectorResource,
+    onSubmit,
     toast,
-    user.isSuccess,
-    user.data?.name,
     dataResource,
     updateData,
+    entity,
   ]);
 
   return (
@@ -359,7 +352,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
           disabled={disabledAll ? disabledAll : false}
           size="lg"
           className={cn(enableBackButton ? "!w-full !flex-1" : "ml-auto")}
-          onClick={() => onSubmit()}
+          onClick={() => handleCreateData()}
           type="button"
         >
           Save

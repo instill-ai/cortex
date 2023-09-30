@@ -19,7 +19,6 @@ import {
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useRenameUserPipeline,
-  useUser,
 } from "../../../lib";
 import { constructPipelineRecipe } from "../lib";
 
@@ -33,6 +32,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   testModeEnabled: state.testModeEnabled,
   updatePipelineIsNew: state.updatePipelineIsNew,
   pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
+  updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
 });
 
 export type PipelineNameFormProps = {
@@ -41,19 +41,15 @@ export type PipelineNameFormProps = {
 };
 
 export const UpdatePipelineIdSchema = z.object({
-  pipelineId: z.string().min(1, { message: "Pipeline ID is required" }),
+  pipelineId: z.string().nullable().optional(),
 });
 
 export const PipelineNameForm = (props: PipelineNameFormProps) => {
-  const { accessToken, enableQuery } = props;
+  const { accessToken } = props;
   const router = useRouter();
+  const { entity } = router.query;
 
   const { toast } = useToast();
-
-  const user = useUser({
-    enabled: enableQuery,
-    accessToken,
-  });
 
   const pipelineNameRef = React.useRef<HTMLInputElement>(null);
 
@@ -76,12 +72,12 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     nodes,
     updatePipelineIsNew,
     pipelineRecipeIsDirty,
+    updatePipelineRecipeIsDirty,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
-  // Disable edit on the topbar
   React.useEffect(() => {
     form.reset({
-      pipelineId: router.asPath.split("/")[2],
+      pipelineId: router.asPath.split("/")[3],
     });
   }, [router.isReady, router.asPath, form]);
 
@@ -96,7 +92,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   const renameUserPipeline = useRenameUserPipeline();
 
   async function handleRenamePipeline(newId: string) {
-    if (!pipelineId || !user.isSuccess) {
+    if (!pipelineId) {
       return;
     }
 
@@ -108,19 +104,22 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
 
       try {
         const res = await createUserPipeline.mutateAsync({
-          userName: user.data.name,
+          userName: `users/${entity}`,
           payload,
           accessToken,
         });
 
-        await router.push(`/pipelines/${newId}`, undefined, {
-          shallow: true,
-        });
+        // We should change all the state before pushing to the new route
 
         setPipelineId(newId);
         setPipelineUid(res.pipeline.uid);
         setPipelineName(res.pipeline.name);
         updatePipelineIsNew(() => false);
+        updatePipelineRecipeIsDirty(() => false);
+
+        await router.push(`/${entity}/pipelines/${newId}`, undefined, {
+          shallow: true,
+        });
 
         toast({
           title: "Successfully saved the pipeline",
@@ -148,7 +147,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     }
 
     const payload: RenameUserPipelinePayload = {
-      name: `${user.data.name}/pipelines/${pipelineId}`,
+      name: `users/${entity}/pipelines/${pipelineId}`,
       new_pipeline_id: newId,
     };
 
@@ -158,7 +157,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
         accessToken,
       });
 
-      await router.push(`/pipelines/${newId}`, undefined, {
+      await router.push(`/${entity}/pipelines/${newId}`, undefined, {
         shallow: true,
       });
 
@@ -169,7 +168,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
       });
 
       setPipelineId(newId);
-      setPipelineName(`${user.data.name}/pipelines/${newId}`);
+      setPipelineName(`users/${entity}/pipelines/${newId}`);
     } catch (error) {
       if (isAxiosError(error)) {
         toast({
@@ -192,7 +191,7 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   return (
     <div className="flex w-full pl-4">
       <div className="flex flex-row gap-x-3">
-        <Link className="flex flex-row gap-x-3" href="/pipelines">
+        <Link className="flex flex-row gap-x-3" href={`/${entity}/pipelines`}>
           <Icons.ArrowLeft className="my-auto h-5 w-5 stroke-semantic-fg-secondary" />
           <p className="my-auto text-semantic-fg-secondary product-body-text-3-medium">
             Pipelines
@@ -212,12 +211,20 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                     <input
                       {...field}
                       ref={pipelineNameRef}
-                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:outline-none focus:ring-0"
+                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:!ring-1 focus:!ring-semantic-accent-default"
                       value={field.value ?? "Untitled Pipeline"}
                       type="text"
                       autoComplete="off"
                       onBlur={() => {
                         form.handleSubmit(async (data) => {
+                          if (!data.pipelineId || data.pipelineId === "") {
+                            form.reset({
+                              pipelineId:
+                                pipelineId ?? router.asPath.split("/")[2],
+                            });
+                            return;
+                          }
+
                           if (data.pipelineId && isDirty) {
                             await handleRenamePipeline(data.pipelineId);
                           }
@@ -230,6 +237,14 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                           e.preventDefault();
                           e.stopPropagation();
                           form.handleSubmit(async (data) => {
+                            if (!data.pipelineId || data.pipelineId === "") {
+                              form.reset({
+                                pipelineId:
+                                  pipelineId ?? router.asPath.split("/")[2],
+                              });
+                              return;
+                            }
+
                             if (data.pipelineId && isDirty) {
                               await handleRenamePipeline(data.pipelineId);
                             }
