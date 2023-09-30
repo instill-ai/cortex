@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.68.1](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.68.0...@instill-ai/toolkit-v0.68.1) (2023-09-30)
+
+
+### Bug Fixes
+
+* fix user can not filter their existing resource when create resource directly on pipeline builder ([#934](https://github.com/instill-ai/cortex/issues/934)) ([8c32921](https://github.com/instill-ai/cortex/commit/8c32921ee66c2c2a7729f571a8f2477f6cfb5924))
+
 ## [0.68.0](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.67.4...@instill-ai/toolkit-v0.68.0) (2023-09-30)
 
 
