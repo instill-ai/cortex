@@ -1,5 +1,4 @@
 import { Nullable, useApiTokens } from "../../../lib";
-import { TabBase } from "../TabBase";
 import { APITokenTable } from "./APITokenTable";
 import { CreateAPITokenDialog } from "./CreateAPITokenDialog";
 

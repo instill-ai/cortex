@@ -57,7 +57,7 @@ export const CreateResourceDialog = (props: CreateResourceDialogProps) => {
     return existedConnectors.data.filter(
       (connector) => connector.connector_definition.type === connectorType
     );
-  }, [existedConnectors.data, existedConnectors.isSuccess]);
+  }, [existedConnectors.data, existedConnectors.isSuccess, connectorType]);
 
   return (
     <Dialog.Root

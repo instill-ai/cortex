@@ -43,7 +43,7 @@ export const DeleteAPITokenDialog = (props: DeleteAPITokenDialogProps) => {
 
   const deleteAPIToken = useDeleteApiToken();
 
-  const handleDeleteApiToken = (data: z.infer<typeof DeleteTokenSchema>) => {
+  const handleDeleteApiToken = () => {
     if (!accessToken) return;
     setIsLoading(true);
     deleteAPIToken.mutate(

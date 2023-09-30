@@ -2,7 +2,7 @@ import cn from "clsx";
 import { PipelineTemplate } from "../../type";
 import { ImageWithFallback } from "../../../../components";
 import { PipelineConnectorComponent } from "../../../../lib";
-import { Icons, Logo, Tag } from "@instill-ai/design-system";
+import { Icons, Tag } from "@instill-ai/design-system";
 
 export type TemplateCardProps = {
   className?: string;
@@ -16,7 +16,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
   return (
     <div
       className={cn(
-        "flex relative group hover:opacity-50 flex-col gap-y-2 cursor-pointer rounded-[4px] bg-semantic-bg-primary hover:bg-semantic-accent-bg hover:border-semantic-accent-default border border-semantic-bg-line px-2 py-1",
+        "flex relative group hover:opacity-50 flex-col gap-y-3 cursor-pointer rounded-[4px] bg-semantic-bg-primary hover:bg-semantic-accent-bg hover:border-semantic-accent-default border border-semantic-bg-line px-2 py-3",
         className
       )}
       onClick={onClick}
@@ -57,12 +57,12 @@ export const TemplateCard = (props: TemplateCardProps) => {
           {template.description}
         </p>
       </div>
-      <div className="flex flex-row gap-x-2">
+      {/* <div className="flex flex-row gap-x-2">
         <Logo variant="colourLogomark" width={20} />
         <p className="my-auto product-body-text-4-medium text-semantic-fg-disabled">
           Instill AI
         </p>
-      </div>
+      </div> */}
       <div className="hidden group-hover:flex absolute z-10 inset-0 justify-center items-center">
         <Tag variant="darkBlue" size="lg">
           use template
