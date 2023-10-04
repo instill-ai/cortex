@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.68.2](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.68.1...@instill-ai/toolkit-v0.68.2) (2023-10-04)
+
+
+### Bug Fixes
+
+* **toolkit:** fix schema parsing error on Pinecone, Bigquery and GCS cause console to crash ([#936](https://github.com/instill-ai/cortex/issues/936)) ([e40fa26](https://github.com/instill-ai/cortex/commit/e40fa26afbe7e7cb3f343497d3a8cbc326a651ee))
+* **toolkit:** fix the wrong component configuration field description for instill model ([#938](https://github.com/instill-ai/cortex/issues/938)) ([5617dd4](https://github.com/instill-ai/cortex/commit/5617dd4b20fcf670cbf71f3bc72480e400ebf44a))
+
 ## [0.68.1](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.68.0...@instill-ai/toolkit-v0.68.1) (2023-09-30)
 
 
