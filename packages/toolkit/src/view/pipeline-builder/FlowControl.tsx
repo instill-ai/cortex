@@ -65,6 +65,7 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updateTestModeEnabled: state.updateTestModeEnabled,
   isLatestVersion: state.isLatestVersion,
   isOwner: state.isOwner,
+  updateTestModeTriggerResponse: state.updateTestModeTriggerResponse,
 });
 
 export type FlowControlProps = {
@@ -102,6 +103,7 @@ export const FlowControl = (props: FlowControlProps) => {
     updateSelectedConnectorNodeId,
     isLatestVersion,
     isOwner,
+    updateTestModeTriggerResponse,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
   const router = useRouter();
   const { entity } = router.query;
@@ -544,6 +546,7 @@ export const FlowControl = (props: FlowControlProps) => {
                 }
 
                 updateTestModeEnabled((prev) => !prev);
+                updateTestModeTriggerResponse(() => null);
                 updateSelectedConnectorNodeId(() => null);
                 updateSelectResourceDialogIsOpen(() => false);
               }}
