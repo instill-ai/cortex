@@ -1,5 +1,6 @@
 import { OpenAPIV3 } from "openapi-types";
 import { Nullable, PipelineConnectorComponent } from "../../../lib";
+import { JSONSchema7 } from "json-schema";
 
 export function getConnectorInputOutputSchema(
   component: PipelineConnectorComponent
@@ -16,27 +17,64 @@ export function getConnectorInputOutputSchema(
     case "COMPONENT_TYPE_CONNECTOR_DATA":
       // Because right now blockchain connector doesn't have complicate category, so backend use
       // "default" as its spec key
-      inputSchema = (
-        (
-          (
-            component?.connector_definition?.spec.openapi_specifications.default
-              .paths["/execute"]?.post
-              ?.requestBody as OpenAPIV3.RequestBodyObject
-          ).content["application/json"]?.schema as OpenAPIV3.SchemaObject
-        ).properties?.inputs as OpenAPIV3.ArraySchemaObject
-      ).items as OpenAPIV3.SchemaObject;
-      outputSchema = (
-        (
+
+      // If the component has task field in its component_configuration, it means it has complicate category
+      // The <default> category will be replaces with the task in the component_configuration
+
+      const hasTaskField = checkHasTaskField(
+        component.connector_definition.spec.component_specification
+      );
+
+      if (hasTaskField) {
+        if (component.configuration.input.task) {
+          inputSchema = (
+            (
+              (
+                component?.connector_definition?.spec.openapi_specifications[
+                  component.configuration.input.task
+                ].paths["/execute"]?.post
+                  ?.requestBody as OpenAPIV3.RequestBodyObject
+              ).content["application/json"]?.schema as OpenAPIV3.SchemaObject
+            ).properties?.inputs as OpenAPIV3.ArraySchemaObject
+          ).items as OpenAPIV3.SchemaObject;
+          outputSchema = (
+            (
+              (
+                (
+                  component?.connector_definition?.spec.openapi_specifications[
+                    component.configuration.input.task
+                  ].paths["/execute"]?.post?.responses[
+                    "200"
+                  ] as OpenAPIV3.ResponseObject
+                ).content as { [key: string]: OpenAPIV3.MediaTypeObject }
+              )["application/json"]?.schema as OpenAPIV3.SchemaObject
+            ).properties?.outputs as OpenAPIV3.ArraySchemaObject
+          ).items as OpenAPIV3.SchemaObject;
+        }
+      } else {
+        inputSchema = (
           (
             (
-              component?.connector_definition?.spec.openapi_specifications
-                .default.paths["/execute"]?.post?.responses[
-                "200"
-              ] as OpenAPIV3.ResponseObject
-            ).content as { [key: string]: OpenAPIV3.MediaTypeObject }
-          )["application/json"]?.schema as OpenAPIV3.SchemaObject
-        ).properties?.outputs as OpenAPIV3.ArraySchemaObject
-      ).items as OpenAPIV3.SchemaObject;
+              component.connector_definition.spec.openapi_specifications.default
+                .paths["/execute"]?.post
+                ?.requestBody as OpenAPIV3.RequestBodyObject
+            ).content["application/json"]?.schema as OpenAPIV3.SchemaObject
+          ).properties?.inputs as OpenAPIV3.ArraySchemaObject
+        ).items as OpenAPIV3.SchemaObject;
+        outputSchema = (
+          (
+            (
+              (
+                component.connector_definition?.spec.openapi_specifications
+                  .default.paths["/execute"]?.post?.responses[
+                  "200"
+                ] as OpenAPIV3.ResponseObject
+              ).content as { [key: string]: OpenAPIV3.MediaTypeObject }
+            )["application/json"]?.schema as OpenAPIV3.SchemaObject
+          ).properties?.outputs as OpenAPIV3.ArraySchemaObject
+        ).items as OpenAPIV3.SchemaObject;
+      }
+
       break;
 
     case "COMPONENT_TYPE_CONNECTOR_AI":
@@ -69,4 +107,17 @@ export function getConnectorInputOutputSchema(
   }
 
   return { outputSchema, inputSchema };
+}
+
+function checkHasTaskField(schema: JSONSchema7) {
+  const properties =
+    (schema.properties?.input as JSONSchema7)?.properties ?? null;
+
+  if (!properties) {
+    return false;
+  }
+
+  const propertyKeys = Object.keys(properties);
+
+  return propertyKeys.includes("task");
 }
