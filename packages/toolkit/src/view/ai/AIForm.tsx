@@ -1240,7 +1240,7 @@ export const AIForm = (props: AIFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    ID of the Instill Model&apos;s model to be used.
+                    Namespace of the Instill Model&apos;s model to be used.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -1273,7 +1273,7 @@ export const AIForm = (props: AIFormProps) => {
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    Namespace of the Instill Model&apos;s model to be used.
+                    ID of the Instill Model&apos;s model to be used.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
