@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.55.4](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.3...@instill-ai/design-system-v0.55.4) (2023-10-05)
+
+
+### Miscellaneous
+
+* **design-system:** add &lt;Label /&gt; component to design system ([#939](https://github.com/instill-ai/cortex/issues/939)) ([12c98cd](https://github.com/instill-ai/cortex/commit/12c98cd68cd8ae0f834913e36304510cbf0a3eac))
+
 ## [0.55.3](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.2...@instill-ai/design-system-v0.55.3) (2023-09-29)
 
 
