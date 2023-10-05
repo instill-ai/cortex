@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BasicTextField, Label, Input } from "@instill-ai/design-system";
+import { Label, Input } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
 import {
   useConfigureProfileFormStore,
@@ -37,7 +37,6 @@ export const FirstNameField = (props: FirstNameFieldProps) => {
       </div>
       <Input.Root>
         <Input.Core
-          className="!rounded"
           disabled={false}
           id="profile-firstname"
           type="text"
