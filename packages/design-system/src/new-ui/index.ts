@@ -9,6 +9,7 @@ export * from "./Dropdown";
 export * from "./Form";
 export * from "./Icons";
 export * from "./Input";
+export * from "./Label";
 export * from "./LinkButton";
 export * from "./Logos";
 export * from "./Popover";
