@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.55.5](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.4...@instill-ai/design-system-v0.55.5) (2023-10-09)
+
+
+### Miscellaneous
+
+* **design-system:** add DotsVertical icon ([#941](https://github.com/instill-ai/cortex/issues/941)) ([242dee0](https://github.com/instill-ai/cortex/commit/242dee09b64d9040387efd14170fd3080a2069be))
+
 ## [0.55.4](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.3...@instill-ai/design-system-v0.55.4) (2023-10-05)
 
 
