@@ -1,6 +1,5 @@
-import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button, DataTable, Dialog, useToast } from "@instill-ai/design-system";
+import { Button, DataTable, useToast } from "@instill-ai/design-system";
 
 import { isAxiosError } from "axios";
 import {
@@ -16,11 +15,9 @@ import {
   type CreateUserPipelinePayload,
 } from "../../lib";
 import { SortIcon, TableCell, TableError } from "../../components";
-import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
-import { DropdownMenu } from "@instill-ai/design-system";
-import { Icons } from "@instill-ai/design-system";
-import { getRawPipelineRecipeFromPipelineRecipe } from "../pipeline-builder/lib/getRawPipelineRecipeFromPipelineRecipe";
+import { getRawPipelineRecipeFromPipelineRecipe } from "../pipeline-builder/lib";
+import { PipelineTableDropdownMenu } from "./PipelineTableMenu";
 
 export type PipelinesTableProps = {
   pipelines: Pipeline[];
@@ -34,7 +31,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
   const { pipelines, isError, isLoading, accessToken, enableQuery } = props;
 
   const { toast } = useToast();
-  const [isDeleting, setIsDeleting] = React.useState(false);
+
   const user = useUser({
     accessToken,
     enabled: enableQuery,
@@ -45,7 +42,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
     resource: Nullable<Pipeline | Model | ConnectorResourceWithDefinition>
   ): void {
     if (!resource) return;
-    setIsDeleting(true);
     deletePipeline.mutate(
       {
         pipelineName: resource.name,
@@ -53,7 +49,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       },
       {
         onSuccess: () => {
-          setIsDeleting(false);
           toast({
             title: "Pipeline deleted",
             variant: "alert-success",
@@ -61,7 +56,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
           });
         },
         onError: (error) => {
-          setIsDeleting(false);
           if (isAxiosError(error)) {
             toast({
               title: "Something went wrong when delete the pipeline",
@@ -87,7 +81,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
     if (!user.isSuccess) return;
 
     const payload: CreateUserPipelinePayload = {
-      id: `Copy of ${targetPipeline.id}`,
+      id: `copy-of-${targetPipeline.id}`,
       description: targetPipeline.description,
       recipe: getRawPipelineRecipeFromPipelineRecipe(targetPipeline.recipe),
     };
@@ -176,41 +170,11 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       header: () => <div className="max-w-[100px] text-center"></div>,
       cell: ({ row }) => {
         return (
-          <>
-            <div className="flex justify-center">
-              <DropdownMenu.Root>
-                <DropdownMenu.Trigger asChild>
-                  <Button variant="tertiaryGrey">
-                    <Icons.DotsVertical className="w-4 h-4 stroke-semantic-fg-primary" />
-                  </Button>
-                </DropdownMenu.Trigger>
-                <DropdownMenu.Content className="w-[129px]">
-                  <DropdownMenu.Item
-                    onClick={() => {
-                      handleDuplicatePipeline(row.original);
-                    }}
-                    className="!product-button-button-2"
-                  >
-                    Duplicate
-                  </DropdownMenu.Item>
-                  <Dialog.Root>
-                    <Dialog.Trigger asChild>
-                      <DropdownMenu.Item className="!product-button-button-2 !text-semantic-error-default">
-                        Delete
-                      </DropdownMenu.Item>
-                    </Dialog.Trigger>
-                    <Dialog.Content className="!w-[512px]">
-                      <GeneralDeleteResourceModal
-                        resource={row.original}
-                        handleDeleteResource={handleDeletePipeline}
-                        isDeleting={isDeleting}
-                      />
-                    </Dialog.Content>
-                  </Dialog.Root>
-                </DropdownMenu.Content>
-              </DropdownMenu.Root>
-            </div>
-          </>
+          <PipelineTableDropdownMenu
+            pipeline={row.original}
+            handleDeletePipeline={handleDeletePipeline}
+            handleDuplicatePipeline={handleDuplicatePipeline}
+          />
         );
       },
     },

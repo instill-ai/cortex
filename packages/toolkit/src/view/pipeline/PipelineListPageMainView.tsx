@@ -85,6 +85,7 @@ export const PipelineListPageMainView = (
         isError={pipelines.isError}
         isLoading={pipelines.isLoading || connectorDefinitions.isLoading}
         accessToken={accessToken}
+        enableQuery={enableQuery}
       />
     </div>
   );

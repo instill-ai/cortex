@@ -160,7 +160,6 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
                 <GeneralDeleteResourceModal
                   resource={row.original}
                   handleDeleteResource={handleDeleteUserConnectorResource}
-                  isDeleting={isDeleting}
                 />
               </Dialog.Content>
             </Dialog.Root>
