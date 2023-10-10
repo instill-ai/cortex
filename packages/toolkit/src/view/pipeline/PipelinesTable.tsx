@@ -6,28 +6,39 @@ import { isAxiosError } from "axios";
 import {
   formatDate,
   getInstillApiErrorMessage,
+  useCreateUserPipeline,
+  useUser,
   useDeleteUserPipeline,
   type Nullable,
   type Pipeline,
   type Model,
   type ConnectorResourceWithDefinition,
+  type CreateUserPipelinePayload,
 } from "../../lib";
 import { SortIcon, TableCell, TableError } from "../../components";
 import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
+import { DropdownMenu } from "@instill-ai/design-system";
+import { Icons } from "@instill-ai/design-system";
+import { getRawPipelineRecipeFromPipelineRecipe } from "../pipeline-builder/lib/getRawPipelineRecipeFromPipelineRecipe";
 
 export type PipelinesTableProps = {
   pipelines: Pipeline[];
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 export const PipelinesTable = (props: PipelinesTableProps) => {
-  const { pipelines, isError, isLoading, accessToken } = props;
+  const { pipelines, isError, isLoading, accessToken, enableQuery } = props;
 
   const { toast } = useToast();
   const [isDeleting, setIsDeleting] = React.useState(false);
+  const user = useUser({
+    accessToken,
+    enabled: enableQuery,
+  });
 
   const deletePipeline = useDeleteUserPipeline();
   function handleDeletePipeline(
@@ -63,6 +74,46 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
               title: "Something went wrong when delete the pipeline",
               variant: "alert-error",
               description: "Please try again later",
+              size: "large",
+            });
+          }
+        },
+      }
+    );
+  }
+
+  const createPipeline = useCreateUserPipeline();
+  function handleDuplicatePipeline(targetPipeline: Pipeline) {
+    if (!user.isSuccess) return;
+
+    const payload: CreateUserPipelinePayload = {
+      id: `Copy of ${targetPipeline.id}`,
+      description: targetPipeline.description,
+      recipe: getRawPipelineRecipeFromPipelineRecipe(targetPipeline.recipe),
+    };
+
+    createPipeline.mutate(
+      { userName: user.data.name, payload, accessToken },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Successfully saved the pipeline",
+            variant: "alert-success",
+            size: "small",
+          });
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            toast({
+              title: "Something went wrong when save the pipeline",
+              description: getInstillApiErrorMessage(error),
+              variant: "alert-error",
+              size: "large",
+            });
+          } else {
+            toast({
+              title: "Something went wrong when save the pipeline",
+              variant: "alert-error",
               size: "large",
             });
           }
@@ -125,22 +176,41 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       header: () => <div className="max-w-[100px] text-center"></div>,
       cell: ({ row }) => {
         return (
-          <div className="flex justify-center">
-            <Dialog.Root>
-              <Dialog.Trigger asChild>
-                <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-                  Delete
-                </div>
-              </Dialog.Trigger>
-              <Dialog.Content className="!w-[512px]">
-                <GeneralDeleteResourceModal
-                  resource={row.original}
-                  handleDeleteResource={handleDeletePipeline}
-                  isDeleting={isDeleting}
-                />
-              </Dialog.Content>
-            </Dialog.Root>
-          </div>
+          <>
+            <div className="flex justify-center">
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <Button variant="tertiaryGrey">
+                    <Icons.DotsVertical className="w-4 h-4 stroke-semantic-fg-primary" />
+                  </Button>
+                </DropdownMenu.Trigger>
+                <DropdownMenu.Content className="w-[129px]">
+                  <DropdownMenu.Item
+                    onClick={() => {
+                      handleDuplicatePipeline(row.original);
+                    }}
+                    className="!product-button-button-2"
+                  >
+                    Duplicate
+                  </DropdownMenu.Item>
+                  <Dialog.Root>
+                    <Dialog.Trigger asChild>
+                      <DropdownMenu.Item className="!product-button-button-2 !text-semantic-error-default">
+                        Delete
+                      </DropdownMenu.Item>
+                    </Dialog.Trigger>
+                    <Dialog.Content className="!w-[512px]">
+                      <GeneralDeleteResourceModal
+                        resource={row.original}
+                        handleDeleteResource={handleDeletePipeline}
+                        isDeleting={isDeleting}
+                      />
+                    </Dialog.Content>
+                  </Dialog.Root>
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>
+            </div>
+          </>
         );
       },
     },
@@ -192,7 +262,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       pageSize={6}
       searchPlaceholder={"Search Pipelines"}
       searchKey={"id"}
-      isLoading={isLoading}
+      isLoading={isLoading || !user.isSuccess}
       loadingRows={6}
       primaryText="Pipelines"
       secondaryText="Check your pipelines"
