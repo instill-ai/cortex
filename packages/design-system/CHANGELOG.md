@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.55.6](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.5...@instill-ai/design-system-v0.55.6) (2023-10-10)
+
+
+### Bug Fixes
+
+* **design-system:** fix DropdownMenu syntax and style not align with design doc ([#943](https://github.com/instill-ai/cortex/issues/943)) ([553f8f9](https://github.com/instill-ai/cortex/commit/553f8f9bba60d9ddafbd8663acbae01c0a13d7fc))
+
 ## [0.55.5](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.4...@instill-ai/design-system-v0.55.5) (2023-10-09)
 
 
