@@ -10,6 +10,7 @@ export * from "./getAudioTypeFromBase64";
 export * from "./getBlockchainConnectorDefaultConfiguration";
 export * from "./getConnectorInputOutputSchema";
 export * from "./getPropertiesFromOpenAPISchema";
+export * from "./getRawPipelineRecipeFromPipelineRecipe";
 export * from "./readFileToBinary";
 export * from "./recursiveParseToNum";
 export * from "./recursiveRemoveUndefinedAndNullFromArray";

@@ -1,40 +1,47 @@
-import * as React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import { Button, DataTable, Dialog, useToast } from "@instill-ai/design-system";
+import { Button, DataTable, useToast } from "@instill-ai/design-system";
 
 import { isAxiosError } from "axios";
 import {
   formatDate,
   getInstillApiErrorMessage,
+  useCreateUserPipeline,
+  useUser,
   useDeleteUserPipeline,
   type Nullable,
   type Pipeline,
   type Model,
   type ConnectorResourceWithDefinition,
+  type CreateUserPipelinePayload,
 } from "../../lib";
 import { SortIcon, TableCell, TableError } from "../../components";
-import { GeneralDeleteResourceModal } from "../../components/GeneralDeleteResourceModal";
 import { PipelineTablePlaceholder } from "./PipelineTablePlaceholder";
+import { getRawPipelineRecipeFromPipelineRecipe } from "../pipeline-builder/lib";
+import { PipelineTableDropdownMenu } from "./PipelineTableMenu";
 
 export type PipelinesTableProps = {
   pipelines: Pipeline[];
   isError: boolean;
   isLoading: boolean;
   accessToken: Nullable<string>;
+  enableQuery: boolean;
 };
 
 export const PipelinesTable = (props: PipelinesTableProps) => {
-  const { pipelines, isError, isLoading, accessToken } = props;
+  const { pipelines, isError, isLoading, accessToken, enableQuery } = props;
 
   const { toast } = useToast();
-  const [isDeleting, setIsDeleting] = React.useState(false);
+
+  const user = useUser({
+    accessToken,
+    enabled: enableQuery,
+  });
 
   const deletePipeline = useDeleteUserPipeline();
   function handleDeletePipeline(
     resource: Nullable<Pipeline | Model | ConnectorResourceWithDefinition>
   ): void {
     if (!resource) return;
-    setIsDeleting(true);
     deletePipeline.mutate(
       {
         pipelineName: resource.name,
@@ -42,7 +49,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       },
       {
         onSuccess: () => {
-          setIsDeleting(false);
           toast({
             title: "Pipeline deleted",
             variant: "alert-success",
@@ -50,7 +56,6 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
           });
         },
         onError: (error) => {
-          setIsDeleting(false);
           if (isAxiosError(error)) {
             toast({
               title: "Something went wrong when delete the pipeline",
@@ -63,6 +68,46 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
               title: "Something went wrong when delete the pipeline",
               variant: "alert-error",
               description: "Please try again later",
+              size: "large",
+            });
+          }
+        },
+      }
+    );
+  }
+
+  const createPipeline = useCreateUserPipeline();
+  function handleDuplicatePipeline(targetPipeline: Pipeline) {
+    if (!user.isSuccess) return;
+
+    const payload: CreateUserPipelinePayload = {
+      id: `copy-of-${targetPipeline.id}`,
+      description: targetPipeline.description,
+      recipe: getRawPipelineRecipeFromPipelineRecipe(targetPipeline.recipe),
+    };
+
+    createPipeline.mutate(
+      { userName: user.data.name, payload, accessToken },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Successfully saved the pipeline",
+            variant: "alert-success",
+            size: "small",
+          });
+        },
+        onError: (error) => {
+          if (isAxiosError(error)) {
+            toast({
+              title: "Something went wrong when save the pipeline",
+              description: getInstillApiErrorMessage(error),
+              variant: "alert-error",
+              size: "large",
+            });
+          } else {
+            toast({
+              title: "Something went wrong when save the pipeline",
+              variant: "alert-error",
               size: "large",
             });
           }
@@ -125,22 +170,11 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       header: () => <div className="max-w-[100px] text-center"></div>,
       cell: ({ row }) => {
         return (
-          <div className="flex justify-center">
-            <Dialog.Root>
-              <Dialog.Trigger asChild>
-                <div className="text-sm-semibold cursor-pointer truncate text-center text-semantic-error-default">
-                  Delete
-                </div>
-              </Dialog.Trigger>
-              <Dialog.Content className="!w-[512px]">
-                <GeneralDeleteResourceModal
-                  resource={row.original}
-                  handleDeleteResource={handleDeletePipeline}
-                  isDeleting={isDeleting}
-                />
-              </Dialog.Content>
-            </Dialog.Root>
-          </div>
+          <PipelineTableDropdownMenu
+            pipeline={row.original}
+            handleDeletePipeline={handleDeletePipeline}
+            handleDuplicatePipeline={handleDuplicatePipeline}
+          />
         );
       },
     },
@@ -192,7 +226,7 @@ export const PipelinesTable = (props: PipelinesTableProps) => {
       pageSize={6}
       searchPlaceholder={"Search Pipelines"}
       searchKey={"id"}
-      isLoading={isLoading}
+      isLoading={isLoading || !user.isSuccess}
       loadingRows={6}
       primaryText="Pipelines"
       secondaryText="Check your pipelines"

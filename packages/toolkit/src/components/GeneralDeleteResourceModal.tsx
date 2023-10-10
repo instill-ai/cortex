@@ -13,13 +13,14 @@ export type GenralDeleteResourceModalProps = {
   handleDeleteResource: (
     resource: Nullable<ConnectorResourceWithDefinition | Pipeline | Model>
   ) => void;
-  isDeleting: boolean;
 };
 
 export const GeneralDeleteResourceModal = (
   props: GenralDeleteResourceModalProps
 ) => {
-  const { resource, handleDeleteResource, isDeleting } = props;
+  const { resource, handleDeleteResource } = props;
+
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
   const modalDetails = React.useMemo<{
     title: string;
@@ -156,7 +157,16 @@ export const GeneralDeleteResourceModal = (
         <Button
           variant="danger"
           size="lg"
-          onClick={() => handleDeleteResource(resource)}
+          onClick={() => {
+            try {
+              setIsDeleting(true);
+              handleDeleteResource(resource);
+              setIsDeleting(false);
+            } catch (error) {
+              console.error(error);
+              setIsDeleting(false);
+            }
+          }}
           disabled={canDeleteResource ? false : true}
           className="flex-1 rounded px-4 py-3"
         >
