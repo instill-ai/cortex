@@ -126,7 +126,7 @@ export const FlowControl = (props: FlowControlProps) => {
 
     setIsSaving(true);
 
-    if (!pipelineIsNew) {
+    if (!pipelineIsNew && pipelineRecipeIsDirty) {
       const payload: UpdateUserPipelinePayload = {
         name: `users/${entity}/pipelines/${pipelineId}`,
         description: pipelineDescription ?? undefined,
@@ -149,15 +149,11 @@ export const FlowControl = (props: FlowControlProps) => {
 
         const { nodes, edges } = createInitialGraphData(res.pipeline.recipe);
 
-        createGraphLayout(nodes, edges)
-          .then((graphData) => {
-            updateNodes(() => graphData.nodes);
-            updateEdges(() => graphData.edges);
-            updateSelectResourceDialogIsOpen(() => false);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        const graph = await createGraphLayout(nodes, edges);
+
+        updateNodes(() => graph.nodes);
+        updateEdges(() => graph.edges);
+        updateSelectResourceDialogIsOpen(() => false);
       } catch (error) {
         if (isAxiosError(error)) {
           toast({
