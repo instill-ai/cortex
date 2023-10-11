@@ -1,7 +1,7 @@
 export * from "./BackToLatestVersionTopBar";
 export * from "./BottomBar";
 export * from "./CreateResourceDialog";
-export * from "./ConnectorNode";
+export * from "./connector-node";
 export * from "./CustomEdge";
 export * from "./CustomHandle";
 export * from "./EmptyNode";
@@ -9,5 +9,5 @@ export * from "./EndNode";
 export * from "./PipelineNameForm";
 export * from "./ReleasePipelineModal";
 export * from "./SelectConnectorResourceDialog";
-export * from "./StartNode";
+export * from "./start-node";
 export * from "./PipelineToolkitModal";
