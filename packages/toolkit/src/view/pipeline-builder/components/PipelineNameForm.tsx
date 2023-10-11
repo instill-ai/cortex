@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -19,8 +20,10 @@ import {
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useRenameUserPipeline,
+  useUpdateUserPipeline,
 } from "../../../lib";
 import { constructPipelineRecipe } from "../lib";
+import { AutoresizeInputWrapper } from "../../../components";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
@@ -206,36 +209,27 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
               control={form.control}
               name="pipelineId"
               render={({ field }) => {
+                const textStyle =
+                  "text-semantic-fg-primary product-body-text-3-semibold";
+
                 return (
                   <div className="flex flex-row gap-x-2">
-                    <input
-                      {...field}
-                      ref={pipelineNameRef}
-                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:!ring-1 focus:!ring-semantic-accent-default"
-                      value={field.value ?? "Untitled Pipeline"}
-                      type="text"
-                      autoComplete="off"
-                      onBlur={() => {
-                        form.handleSubmit(async (data) => {
-                          if (!data.pipelineId || data.pipelineId === "") {
-                            form.reset({
-                              pipelineId:
-                                pipelineId ?? router.asPath.split("/")[2],
-                            });
-                            return;
-                          }
-
-                          if (data.pipelineId && isDirty) {
-                            await handleRenamePipeline(data.pipelineId);
-                          }
-                        })();
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                      disabled={testModeEnabled}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          e.stopPropagation();
+                    <AutoresizeInputWrapper
+                      value={field.value ?? ""}
+                      className="max-w-[400px] h-9"
+                      placeholderClassname={cn("p-2", textStyle)}
+                    >
+                      <input
+                        {...field}
+                        ref={pipelineNameRef}
+                        className={cn(
+                          "!absolute !bottom-0 !left-0 !right-0 !top-0 bg-transparent p-2 focus:!ring-1 focus:!ring-semantic-accent-default",
+                          textStyle
+                        )}
+                        value={field.value ?? "Untitled Pipeline"}
+                        type="text"
+                        autoComplete="off"
+                        onBlur={() => {
                           form.handleSubmit(async (data) => {
                             if (!data.pipelineId || data.pipelineId === "") {
                               form.reset({
@@ -249,9 +243,31 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                               await handleRenamePipeline(data.pipelineId);
                             }
                           })();
-                        }
-                      }}
-                    />
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        disabled={testModeEnabled}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            form.handleSubmit(async (data) => {
+                              if (!data.pipelineId || data.pipelineId === "") {
+                                form.reset({
+                                  pipelineId:
+                                    pipelineId ?? router.asPath.split("/")[2],
+                                });
+                                return;
+                              }
+
+                              if (data.pipelineId && isDirty) {
+                                await handleRenamePipeline(data.pipelineId);
+                              }
+                            })();
+                          }
+                        }}
+                      />
+                    </AutoresizeInputWrapper>
+
                     <button
                       onClick={(e) => {
                         e.stopPropagation();

@@ -28,6 +28,7 @@ export const ImageWithFallback = ({
       onError={() => {
         setError(true);
       }}
+      className="flex-shrink-0"
     />
   );
 };
