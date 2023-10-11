@@ -17,12 +17,17 @@ import {
   CreateUserPipelinePayload,
   Nullable,
   RenameUserPipelinePayload,
+  UpdateUserPipelinePayload,
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useRenameUserPipeline,
   useUpdateUserPipeline,
 } from "../../../lib";
-import { constructPipelineRecipe } from "../lib";
+import {
+  constructPipelineRecipe,
+  createGraphLayout,
+  createInitialGraphData,
+} from "../lib";
 import { AutoresizeInputWrapper } from "../../../components";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
@@ -31,11 +36,14 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   setPipelineUid: state.setPipelineUid,
   setPipelineName: state.setPipelineName,
   nodes: state.nodes,
+  updateNodes: state.updateNodes,
+  updateEdges: state.updateEdges,
   pipelineIsNew: state.pipelineIsNew,
   testModeEnabled: state.testModeEnabled,
   updatePipelineIsNew: state.updatePipelineIsNew,
   pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
+  updateSelectResourceDialogIsOpen: state.updateSelectResourceDialogIsOpen,
 });
 
 export type PipelineNameFormProps = {
@@ -73,9 +81,12 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     pipelineIsNew,
     testModeEnabled,
     nodes,
+    updateNodes,
+    updateEdges,
     updatePipelineIsNew,
     pipelineRecipeIsDirty,
     updatePipelineRecipeIsDirty,
+    updateSelectResourceDialogIsOpen,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   React.useEffect(() => {
@@ -92,12 +103,15 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   }, [pipelineId, form]);
 
   const createUserPipeline = useCreateUserPipeline();
+  const updateUserPipeline = useUpdateUserPipeline();
   const renameUserPipeline = useRenameUserPipeline();
 
   async function handleRenamePipeline(newId: string) {
     if (!pipelineId) {
       return;
     }
+
+    // If pipeline is new, we dircetly create the pipeline
 
     if (pipelineIsNew) {
       const payload: CreateUserPipelinePayload = {
@@ -147,6 +161,48 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
       }
 
       return;
+    }
+
+    // If the pipeline recipe is dirty, we should update the pipeline recipe
+    // first then rename the pipeline
+
+    if (pipelineRecipeIsDirty) {
+      const payload: UpdateUserPipelinePayload = {
+        name: `users/${entity}/pipelines/${pipelineId}`,
+        recipe: constructPipelineRecipe(nodes),
+      };
+
+      try {
+        const res = await updateUserPipeline.mutateAsync({
+          payload,
+          accessToken,
+        });
+
+        updatePipelineRecipeIsDirty(() => false);
+
+        const { nodes, edges } = createInitialGraphData(res.pipeline.recipe);
+
+        const graph = await createGraphLayout(nodes, edges);
+
+        updateNodes(() => graph.nodes);
+        updateEdges(() => graph.edges);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          toast({
+            title: "Something went wrong when save the pipeline",
+            description: getInstillApiErrorMessage(error),
+            variant: "alert-error",
+            size: "large",
+          });
+        } else {
+          toast({
+            title: "Something went wrong when save the pipeline",
+            variant: "alert-error",
+            size: "large",
+          });
+        }
+        return;
+      }
     }
 
     const payload: RenameUserPipelinePayload = {
