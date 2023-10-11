@@ -9,5 +9,5 @@ export * from "./EndNode";
 export * from "./PipelineNameForm";
 export * from "./ReleasePipelineModal";
 export * from "./SelectConnectorResourceDialog";
-export * from "./StartNode";
+export * from "./start-node";
 export * from "./PipelineToolkitModal";
