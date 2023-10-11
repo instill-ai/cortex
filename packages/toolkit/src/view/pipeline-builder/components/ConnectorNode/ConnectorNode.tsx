@@ -37,7 +37,11 @@ import {
 import { InputPropertyItem } from "./InputPropertyItem";
 import { GeneralRecord, Nullable } from "../../../../lib";
 import { useConnectorTestModeOutputFields } from "../../use-node-output-fields";
-import { ImageWithFallback } from "../../../../components";
+import {
+  AutoresizeInputWrapper,
+  ImageWithFallback,
+} from "../../../../components";
+import { ConnectorNodeControlPanel } from "./ConnectorNodeControlPanel";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
@@ -61,7 +65,7 @@ export const DataConnectorInputSchema = z.object({
 });
 
 const UpdateNodeIdSchema = z.object({
-  nodeId: z.string().min(1, { message: "Title is required" }),
+  nodeId: z.string().nullable().optional(),
 });
 
 export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
@@ -84,7 +88,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const { toast } = useToast();
 
   const [enableEdit, setEnableEdit] = React.useState(false);
-  const connectorNameEditInputRef = React.useRef<HTMLInputElement>(null);
+  const connectorIDInputRef = React.useRef<HTMLInputElement>(null);
   const [prevFieldKey, setPrevFieldKey] =
     React.useState<Nullable<string>>(null);
 
@@ -185,6 +189,10 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
       return node;
     });
 
+    if (selectedConnectorNodeId === id) {
+      updateSelectedConnectorNodeId(() => newNodeId);
+    }
+
     updateNodes(() => newNodes);
 
     const allReferences: PipelineComponentReference[] = [];
@@ -203,8 +211,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     const newEdges = composeEdgesFromReferences(allReferences, newNodes);
 
     updateEdges(() => newEdges);
-
-    updateSelectedConnectorNodeId(() => newNodeId);
 
     toast({
       title: "Successfully update node's name",
@@ -322,6 +328,96 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     return edges.some((edge) => edge.source === id);
   }, [edges]);
 
+  function handleCopyNode() {
+    const nodeIndex =
+      nodes.filter((node) => node.data.component?.type === data.component.type)
+        .length + 1;
+
+    let nodePrefix: Nullable<string> = null;
+
+    switch (data.component.connector_definition?.type) {
+      case "CONNECTOR_TYPE_AI": {
+        nodePrefix = "ai";
+        break;
+      }
+      case "CONNECTOR_TYPE_BLOCKCHAIN": {
+        nodePrefix = "blockchain";
+        break;
+      }
+      case "CONNECTOR_TYPE_DATA": {
+        nodePrefix = "data";
+        break;
+      }
+      case "CONNECTOR_TYPE_OPERATOR": {
+        nodePrefix = "operator";
+        break;
+      }
+    }
+    const nodeID = `${nodePrefix}_${nodeIndex}`;
+
+    const newNodes: Node<NodeData>[] = [
+      ...nodes,
+      {
+        id: nodeID,
+        type: "connectorNode",
+        sourcePosition: Position.Left,
+        targetPosition: Position.Right,
+        position: { x: 0, y: 0 },
+        data,
+      },
+    ];
+
+    const allReferences: PipelineComponentReference[] = [];
+
+    newNodes.forEach((node) => {
+      if (node.data.component?.configuration) {
+        allReferences.push(
+          ...extractReferencesFromConfiguration(
+            node.data.component?.configuration,
+            node.id
+          )
+        );
+      }
+    });
+
+    const newEdges = composeEdgesFromReferences(allReferences, newNodes);
+
+    updatePipelineRecipeIsDirty(() => true);
+
+    createGraphLayout(newNodes, newEdges)
+      .then((graphData) => {
+        updateNodes(() => graphData.nodes);
+        updateEdges(() => graphData.edges);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  function handleDeleteNode() {
+    const newNodes = nodes.filter((node) => node.id !== id);
+
+    const allReferences: PipelineComponentReference[] = [];
+
+    newNodes.forEach((node) => {
+      if (node.data.component?.configuration) {
+        allReferences.push(
+          ...extractReferencesFromConfiguration(
+            node.data.component?.configuration,
+            node.id
+          )
+        );
+      }
+    });
+
+    const newEdges = composeEdgesFromReferences(allReferences, newNodes);
+
+    updatePipelineRecipeIsDirty(() => true);
+
+    updateNodes(() => newNodes);
+    updateEdges(() => newEdges);
+  }
+
   return (
     <>
       <div
@@ -351,175 +447,95 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   control={updateNodeIdForm.control}
                   name="nodeId"
                   render={({ field }) => {
+                    const textStyle =
+                      "text-semantic-fg-secondary product-body-text-4-medium";
+
                     return (
-                      <input
-                        {...field}
-                        className="flex flex-shrink bg-transparent p-1 text-semantic-fg-secondary product-body-text-4-medium focus:!ring-1 focus:!ring-semantic-accent-default"
-                        ref={connectorNameEditInputRef}
-                        value={field.value}
-                        type="text"
-                        autoComplete="off"
-                        disabled={testModeEnabled}
-                        onBlur={() => {
-                          updateNodeIdForm.handleSubmit((data) => {
-                            if (data.nodeId) {
-                              handleRenameNode(data.nodeId);
-                            }
-                          })();
-                        }}
-                        onClick={(e) => {
-                          e.stopPropagation();
-                        }}
-                        onKeyDown={(e) => {
-                          // Disable enter key to prevent default form submit behavior
-                          if (e.key === "Enter") {
-                            e.preventDefault();
-                            e.stopPropagation();
+                      <AutoresizeInputWrapper
+                        value={field.value ?? ""}
+                        className="max-w-[150px] min-w-[36px] h-8"
+                        placeholderClassname={cn(textStyle, "p-1")}
+                      >
+                        <input
+                          {...field}
+                          className={cn(
+                            "!absolute !bottom-0 !left-0 !right-0 !top-0 bg-transparent p-1 focus:!ring-1 focus:!ring-semantic-accent-default",
+                            textStyle
+                          )}
+                          ref={connectorIDInputRef}
+                          value={field.value ?? ""}
+                          type="text"
+                          autoComplete="off"
+                          disabled={testModeEnabled}
+                          onBlur={() => {
                             updateNodeIdForm.handleSubmit((data) => {
+                              if (!data.nodeId || data.nodeId === "") {
+                                updateNodeIdForm.reset({
+                                  nodeId: id,
+                                });
+                                return;
+                              }
+
                               if (data.nodeId) {
                                 handleRenameNode(data.nodeId);
                               }
                             })();
-                          }
-                        }}
-                      />
+                          }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                          }}
+                          onKeyDown={(e) => {
+                            // Disable enter key to prevent default form submit behavior
+                            if (e.key === "Enter") {
+                              e.preventDefault();
+                              e.stopPropagation();
+                              updateNodeIdForm.handleSubmit((data) => {
+                                if (!data.nodeId || data.nodeId === "") {
+                                  updateNodeIdForm.reset({
+                                    nodeId: id,
+                                  });
+                                  return;
+                                }
+
+                                if (data.nodeId) {
+                                  handleRenameNode(data.nodeId);
+                                }
+                              })();
+                            }
+                          }}
+                        />
+                      </AutoresizeInputWrapper>
                     );
                   }}
                 />
               </form>
             </Form.Root>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                connectorIDInputRef.current?.focus();
+              }}
+              type="button"
+            >
+              <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-primary" />
+            </button>
           </div>
           {isLatestVersion && isOwner ? (
-            <div className="flex flex-row gap-x-3">
-              <Button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  updateSelectedConnectorNodeId(() => id);
-                }}
-                variant="tertiaryGrey"
-                size="sm"
-                className="!px-0 !py-0"
-                disabled={testModeEnabled}
-              >
-                <Icons.Gear01 className="w-4 h-4 stroke-semantic-fg-secondary" />
-              </Button>
-              {data.component.resource_name ? (
-                <Button
-                  variant="tertiaryGrey"
-                  size="sm"
-                  className="!px-0 !py-0"
-                  disabled={testModeEnabled}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const nodeIndex =
-                      nodes.filter(
-                        (node) =>
-                          node.data.component?.type === data.component.type
-                      ).length + 1;
-
-                    let nodePrefix: Nullable<string> = null;
-
-                    switch (data.component.connector_definition?.type) {
-                      case "CONNECTOR_TYPE_AI": {
-                        nodePrefix = "ai";
-                        break;
-                      }
-                      case "CONNECTOR_TYPE_BLOCKCHAIN": {
-                        nodePrefix = "blockchain";
-                        break;
-                      }
-                      case "CONNECTOR_TYPE_DATA": {
-                        nodePrefix = "data";
-                        break;
-                      }
-                      case "CONNECTOR_TYPE_OPERATOR": {
-                        nodePrefix = "operator";
-                        break;
-                      }
-                    }
-                    const nodeID = `${nodePrefix}_${nodeIndex}`;
-
-                    const newNodes: Node<NodeData>[] = [
-                      ...nodes,
-                      {
-                        id: nodeID,
-                        type: "connectorNode",
-                        sourcePosition: Position.Left,
-                        targetPosition: Position.Right,
-                        position: { x: 0, y: 0 },
-                        data,
-                      },
-                    ];
-
-                    const allReferences: PipelineComponentReference[] = [];
-
-                    newNodes.forEach((node) => {
-                      if (node.data.component?.configuration) {
-                        allReferences.push(
-                          ...extractReferencesFromConfiguration(
-                            node.data.component?.configuration,
-                            node.id
-                          )
-                        );
-                      }
-                    });
-
-                    const newEdges = composeEdgesFromReferences(
-                      allReferences,
-                      newNodes
-                    );
-
-                    updatePipelineRecipeIsDirty(() => true);
-
-                    createGraphLayout(newNodes, newEdges)
-                      .then((graphData) => {
-                        updateNodes(() => graphData.nodes);
-                        updateEdges(() => graphData.edges);
-                      })
-                      .catch((err) => {
-                        console.log(err);
-                      });
-                  }}
-                >
-                  <Icons.Copy07 className="w-4 h-4 stroke-semantic-fg-secondary" />
-                </Button>
-              ) : null}
-              <Button
-                variant="tertiaryGrey"
-                size="sm"
-                className="!px-0 !py-0"
-                disabled={testModeEnabled}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  const newNodes = nodes.filter((node) => node.id !== id);
-
-                  const allReferences: PipelineComponentReference[] = [];
-
-                  newNodes.forEach((node) => {
-                    if (node.data.component?.configuration) {
-                      allReferences.push(
-                        ...extractReferencesFromConfiguration(
-                          node.data.component?.configuration,
-                          node.id
-                        )
-                      );
-                    }
-                  });
-
-                  const newEdges = composeEdgesFromReferences(
-                    allReferences,
-                    newNodes
-                  );
-
-                  updatePipelineRecipeIsDirty(() => true);
-
-                  updateNodes(() => newNodes);
-                  updateEdges(() => newEdges);
-                }}
-              >
-                <Icons.X className="w-4 h-4 stroke-semantic-fg-secondary" />
-              </Button>
-            </div>
+            <ConnectorNodeControlPanel
+              handleEditNode={() =>
+                updateSelectedConnectorNodeId((prev) => {
+                  if (prev === id) {
+                    return null;
+                  }
+                  return id;
+                })
+              }
+              handleCopyNode={handleCopyNode}
+              handleDeleteNode={handleDeleteNode}
+              nodeID={id}
+              resourceName={data.component.resource_name}
+              testModeEnabled={testModeEnabled}
+            />
           ) : null}
         </div>
         {enableEdit ? (

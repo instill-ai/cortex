@@ -1,3 +1,4 @@
+export * from "./AutoresizeInput";
 export * from "./Breadcrumb";
 export * from "./CopyToClipboardButton";
 export * from "./CodeBlock";
