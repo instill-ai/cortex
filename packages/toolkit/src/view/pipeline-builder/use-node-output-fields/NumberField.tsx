@@ -1,5 +1,5 @@
 import { Nullable } from "../../../lib";
-import { ConnectorNodeFieldRoot } from "./FieldRoot";
+import { ConnectorNodeFieldRoot, EndNodeFieldRoot } from "./FieldRoot";
 
 export type NumberFieldProps = {
   nodeType: "end" | "connector";
@@ -13,7 +13,7 @@ export const NumberField = (props: NumberFieldProps) => {
   if (nodeType === "connector") {
     return (
       <ConnectorNodeFieldRoot title={title} key={`${title}-field`}>
-        <div className="flex break-all text-semantic-fg-primary product-body-text-4-regular">
+        <div className="flex rounded-sm break-all text-semantic-fg-primary product-body-text-4-regular">
           {number}
         </div>
       </ConnectorNodeFieldRoot>
@@ -21,13 +21,10 @@ export const NumberField = (props: NumberFieldProps) => {
   }
 
   return (
-    <div key={`${title}-field`} className="flex w-full flex-col space-y-2">
-      <p className="text-semantic-fg-primary product-body-text-3-semibold">
-        {title}
-      </p>
-      <div className="flex max-w-[200px] break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
+    <EndNodeFieldRoot title={title} key={`${title}-field`}>
+      <div className="flex rounded-sm max-w-[200px] break-all border border-semantic-bg-line bg-semantic-bg-primary px-[9px] py-1.5 text-semantic-fg-primary product-body-text-4-regular">
         {number}
       </div>
-    </div>
+    </EndNodeFieldRoot>
   );
 };
