@@ -438,12 +438,11 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     <>
       <div
         className={cn(
-          "flex flex-col rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg",
+          "flex flex-col w-[340px] rounded-sm border-2 border-semantic-bg-primary bg-semantic-bg-base-bg px-3 py-2.5 shadow-md hover:shadow-lg",
           {
             "outline outline-2 outline-semantic-accent-default outline-offset-1":
               id === selectedConnectorNodeId,
-          },
-          testModeEnabled ? "w-[480px]" : "w-[340px]"
+          }
         )}
       >
         <div className="mb-3 flex flex-row w-full">
