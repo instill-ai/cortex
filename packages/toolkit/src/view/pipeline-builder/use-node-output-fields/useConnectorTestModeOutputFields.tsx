@@ -66,20 +66,16 @@ function getOutputFieldComponent({
   const fields: React.ReactElement[] = [];
 
   for (const property of properties) {
-    const title = property.title ? property.title : property.path ?? null;
+    const title = property.path ? property.path : property.title ?? null;
 
     let propertyValue: any = null;
 
     if (property.type === "array" && !property.instillFormat) {
-      const arrayFields = getOutputFieldComponent({
-        properties: property.items as InstillAIOpenAPIProperty[],
-        trace,
-      });
-
       fields.push(
-        <ArrayObjectField nodeType="connector" title={title}>
-          {arrayFields}
-        </ArrayObjectField>
+        ...getOutputFieldComponent({
+          properties: property.items as InstillAIOpenAPIProperty[],
+          trace,
+        })
       );
     }
 
