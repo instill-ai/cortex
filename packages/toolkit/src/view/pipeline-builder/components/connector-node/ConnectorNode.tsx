@@ -171,6 +171,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     return getPropertiesFromOpenAPISchema(inputSchema);
   }, [inputSchema]);
 
+  console.log(id, inputProperties);
+
   const collapsedInputProperties = React.useMemo(() => {
     if (exapndInputs) return inputProperties;
     return inputProperties.slice(0, 3);
@@ -266,6 +268,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               input: {
                 ...node.data.component.configuration.input,
                 data: {
+                  ...node.data.component.configuration.input.data,
                   [formData.key]: formData.value,
                 },
               },
@@ -609,7 +612,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                   </Button>
                 </div>
               </div>
-              <div className="flex flex-col space-y-3">
+              <div className="mb-3 flex flex-col space-y-3">
                 <Form.Field
                   control={dataConnectorInputForm.control}
                   name="key"
