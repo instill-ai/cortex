@@ -8,12 +8,12 @@ export const NumbersField = (props: {
   title: string;
 }) => {
   const [numberFieldsArray, setNumberFieldsArray] = React.useState<number[]>([
-    1, 1,
+    1,
   ]);
 
   const [numberFieldsValue, setNumberFieldsValue] = React.useState<
     (string | undefined)[]
-  >(["", ""]);
+  >([""]);
 
   const { form, fieldKey, title } = props;
   return (

@@ -128,7 +128,7 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
       <Dialog.Trigger asChild>
         <Tooltip.Provider>
           <Tooltip.Root>
-            <Tooltip.Trigger asChild={true}>
+            <Tooltip.Trigger asChild>
               {/* 
                 This will make tooltip work even with a disabled button
                 https://www.radix-ui.com/primitives/docs/components/tooltip#displaying-a-tooltip-from-a-disabled-button
@@ -162,8 +162,8 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
                 <Tooltip.Arrow
                   className="fill-semantic-bg-primary"
                   offset={10}
-                  width={18}
-                  height={12}
+                  width={9}
+                  height={6}
                 />
               </Tooltip.Content>
             </Tooltip.Portal>
