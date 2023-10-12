@@ -196,12 +196,18 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
                   variant="tertiaryGrey"
                   size="sm"
                   className="!px-2 !py-2"
+                  type="button"
                   onClick={() => {
                     setEnableEdit(!enableEdit);
-                    form.reset();
+                    setPrevFieldKey(null);
+                    form.reset({
+                      title: "",
+                      key: "",
+                      value: "",
+                    });
                   }}
                 >
-                  <Icons.ArrowLeft className="m-auto h-4 w-4 stroke-slate-500" />
+                  <Icons.ArrowLeft className="m-auto h-4 w-4 stroke-semantic-fg-secondary" />
                 </Button>
                 <div>
                   <Button variant="primary" type="submit" size="sm">
