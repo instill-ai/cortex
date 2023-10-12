@@ -26,12 +26,12 @@ export function getConnectorInputOutputSchema(
       );
 
       if (hasTaskField) {
-        if (component.configuration.input.task) {
+        if (component.configuration.task) {
           inputSchema = (
             (
               (
                 component?.connector_definition?.spec.openapi_specifications[
-                  component.configuration.input.task
+                  component.configuration.task
                 ].paths["/execute"]?.post
                   ?.requestBody as OpenAPIV3.RequestBodyObject
               ).content["application/json"]?.schema as OpenAPIV3.SchemaObject
@@ -42,7 +42,7 @@ export function getConnectorInputOutputSchema(
               (
                 (
                   component?.connector_definition?.spec.openapi_specifications[
-                    component.configuration.input.task
+                    component.configuration.task
                   ].paths["/execute"]?.post?.responses[
                     "200"
                   ] as OpenAPIV3.ResponseObject
@@ -78,12 +78,12 @@ export function getConnectorInputOutputSchema(
       break;
 
     case "COMPONENT_TYPE_CONNECTOR_AI":
-      if (component.configuration.input.task) {
+      if (component.configuration.task) {
         inputSchema = (
           (
             (
               component?.connector_definition?.spec.openapi_specifications[
-                component.configuration.input.task
+                component.configuration.task
               ].paths["/execute"]?.post
                 ?.requestBody as OpenAPIV3.RequestBodyObject
             ).content["application/json"]?.schema as OpenAPIV3.SchemaObject
@@ -94,7 +94,7 @@ export function getConnectorInputOutputSchema(
             (
               (
                 component?.connector_definition?.spec.openapi_specifications[
-                  component.configuration.input.task
+                  component.configuration.task
                 ].paths["/execute"]?.post?.responses[
                   "200"
                 ] as OpenAPIV3.ResponseObject
@@ -110,14 +110,15 @@ export function getConnectorInputOutputSchema(
 }
 
 function checkHasTaskField(schema: JSONSchema7) {
-  const properties =
-    (schema.properties?.input as JSONSchema7)?.properties ?? null;
+  const oneOf = schema.oneOf as JSONSchema7[];
 
-  if (!properties) {
+  if (!oneOf) {
     return false;
   }
 
-  const propertyKeys = Object.keys(properties);
+  const hasTaskField = oneOf.some((schema) => {
+    return schema.properties?.task;
+  });
 
-  return propertyKeys.includes("task");
+  return hasTaskField;
 }
