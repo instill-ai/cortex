@@ -30,9 +30,9 @@ export const DataResourceSchema = z
 
       // Pinecone - TASK_QUERY
       namespace: z.string().nullable().optional(),
-      topK: z.string().nullable().optional(),
-      includeValues: z.boolean().nullable().optional(),
-      includeMetadata: z.boolean().nullable().optional(),
+      top_k: z.string().nullable().optional(),
+      include_values: z.boolean().nullable().optional(),
+      include_metadata: z.boolean().nullable().optional(),
       vector: z.string().nullable().optional(),
 
       // Pinecone - TASK_UPSERT
@@ -44,23 +44,23 @@ export const DataResourceSchema = z
       state.connector_definition_name === "connector-definitions/data-pinecone"
     ) {
       if (state.task === "TASK_QUERY") {
-        if (!state.input.topK) {
+        if (!state.input.top_k) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
-            message: "topK is required",
-            path: ["input.topK"],
+            message: "top_k is required",
+            path: ["input.top_k"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.input.topK,
+            value: state.input.top_k,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["input.topK"],
+              path: ["input.top_k"],
             });
           }
         }
@@ -485,7 +485,7 @@ export const DataComponentForm = ({
           />
           <Form.Field
             control={form.control}
-            name="input.topK"
+            name="input.top_k"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -494,7 +494,7 @@ export const DataComponentForm = ({
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
-                  <Form.Label>topK *</Form.Label>
+                  <Form.Label>top_k *</Form.Label>
                   <Form.Control>
                     <Input.Root>
                       <Input.Core
@@ -514,7 +514,7 @@ export const DataComponentForm = ({
           />
           <Form.Field
             control={form.control}
-            name="input.includeValues"
+            name="input.include_values"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -523,7 +523,7 @@ export const DataComponentForm = ({
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
-                  <Form.Label>includeValues</Form.Label>
+                  <Form.Label>include_values</Form.Label>
                   <Form.Control>
                     <Switch
                       checked={field.value ?? false}
@@ -541,7 +541,7 @@ export const DataComponentForm = ({
           />
           <Form.Field
             control={form.control}
-            name="input.includeMetadata"
+            name="input.include_metadata"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -550,7 +550,7 @@ export const DataComponentForm = ({
 
               return (
                 <Form.Item className={display ? "" : "hidden"}>
-                  <Form.Label>includeMetadata</Form.Label>
+                  <Form.Label>include_metadata</Form.Label>
                   <Form.Control>
                     <Switch
                       checked={field.value ?? false}
