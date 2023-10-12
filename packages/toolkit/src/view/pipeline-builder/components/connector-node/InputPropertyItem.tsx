@@ -55,7 +55,7 @@ const InputPropertyValue = (props: {
 
   if (!reference || !reference.nodeId) {
     return propertyConfiguration ? (
-      <div className="min-h-[32px] min-w-[100px] break-all rounded-sm border border-semantic-bg-line px-2 py-1.5 product-body-text-3-regular">
+      <div className="min-h-[32px] min-w-[100px] break-all rounded-sm text-semantic-fg-secondary border border-semantic-bg-line px-2 py-1.5 product-body-text-3-regular">
         {propertyConfiguration}
       </div>
     ) : null;

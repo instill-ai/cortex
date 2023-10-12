@@ -155,7 +155,7 @@ export const DataResourceSchema = z
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "object_name is required",
-          path: ["object_name"],
+          path: ["input.object_name"],
         });
       } else {
         const result = validateIntillUpstreamTypes({
@@ -167,7 +167,7 @@ export const DataResourceSchema = z
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: result.error,
-            path: ["object_name"],
+            path: ["input.object_name"],
           });
         }
       }
@@ -176,7 +176,7 @@ export const DataResourceSchema = z
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "data is required",
-          path: ["data"],
+          path: ["input.data"],
         });
       } else {
         const result = validateIntillUpstreamTypes({
@@ -188,7 +188,7 @@ export const DataResourceSchema = z
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: result.error,
-            path: ["data"],
+            path: ["input.data"],
           });
         }
       }
@@ -230,10 +230,23 @@ export const DataComponentForm = ({
       ...configuration,
       connector_definition_name: connectorDefinitionName,
       input: configuration.input ? configuration.input : {},
+      task: configuration.task
+        ? configuration.task
+        : connectorDefinitionName === "connector-definitions/data-gcs"
+        ? "TASK_UPLOAD"
+        : "",
     },
   });
 
-  const { reset, watch } = form;
+  const {
+    reset,
+    watch,
+    formState: { errors },
+  } = form;
+
+  React.useEffect(() => {
+    console.log(errors);
+  }, [errors]);
 
   React.useEffect(() => {
     reset({
@@ -246,6 +259,8 @@ export const DataComponentForm = ({
   function onSubmit(data: z.infer<typeof DataResourceSchema>) {
     if (!selectedConnectorNodeId) return;
     const modifiedData = recursiveReplaceNullAndEmptyStringWithUndefined(data);
+
+    console.log(modifiedData);
 
     const newNodes = nodes.map((node) => {
       if (
@@ -268,8 +283,6 @@ export const DataComponentForm = ({
       }
       return node;
     });
-
-    console.log(newNodes);
 
     updateNodes(() => newNodes);
 
@@ -319,7 +332,7 @@ export const DataComponentForm = ({
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    The name of the object to be created
+                    The name of the object to be created.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>
@@ -348,7 +361,7 @@ export const DataComponentForm = ({
                     </Input.Root>
                   </Form.Control>
                   <Form.Description>
-                    The data to be saved in the object
+                    The data to be saved in the object.
                   </Form.Description>
                   <Form.Message />
                 </Form.Item>

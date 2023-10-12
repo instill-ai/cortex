@@ -896,7 +896,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                               key={
                                 property.title ? property.title : property.path
                               }
-                              className="w-full rounded-[6px] bg-semantic-bg-primary p-2"
+                              className="w-full rounded-[6px] bg-semantic-bg-primary"
                             >
                               <div className="flex flex-col gap-y-2">
                                 {items.map((item) => (

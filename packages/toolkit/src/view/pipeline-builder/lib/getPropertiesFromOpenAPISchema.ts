@@ -23,7 +23,8 @@ export function getPropertiesFromOpenAPISchema(
             ...properties,
             ...getPropertiesFromOpenAPISchema(
               value,
-              [...parentKeyList, key].join(".")
+              [...parentKeyList, key].join("."),
+              key
             ),
           ];
         }
@@ -37,10 +38,11 @@ export function getPropertiesFromOpenAPISchema(
         items: getPropertiesFromOpenAPISchema(
           schema.items as OpenAPIV3.SchemaObject,
           parentKey,
-          schema.title,
+          undefined,
           true
         ) as OpenAPIV3.ArraySchemaObject["items"],
         path: parentKey,
+        title: schema.title ? schema.title : title,
       },
     ];
   } else {
@@ -50,7 +52,7 @@ export function getPropertiesFromOpenAPISchema(
       properties.push({
         path: parentKey,
         ...schema,
-        title: title ? title : schema.title,
+        title: schema.title ? schema.title : title,
       });
     }
   }
