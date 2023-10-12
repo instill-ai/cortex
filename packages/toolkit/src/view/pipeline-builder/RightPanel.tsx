@@ -7,6 +7,7 @@ import { Button, Icons, Separator } from "@instill-ai/design-system";
 import { ImageWithFallback } from "../../components";
 import { AIForm } from "../ai";
 import { BlockchainForm } from "../blockchain";
+import { DataComponentForm } from "../data";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   nodes: state.nodes,
@@ -92,9 +93,7 @@ export const RightPanel = () => {
             connectorDefinitionName={
               selectedConnectorNode.data.component.definition_name
             }
-            configuration={
-              selectedConnectorNode.data.component.configuration.input
-            }
+            configuration={selectedConnectorNode.data.component.configuration}
           />
         ) : null}
         {selectedConnectorNode &&
@@ -102,10 +101,24 @@ export const RightPanel = () => {
         selectedConnectorNode.data.component.type ===
           "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN" ? (
           <BlockchainForm
-            configuration={
-              selectedConnectorNode.data.component.configuration.input
-            }
+            configuration={selectedConnectorNode.data.component.configuration}
           />
+        ) : null}
+        {selectedConnectorNode &&
+        selectedConnectorNode.data.nodeType === "connector" &&
+        selectedConnectorNode.data.component.type ===
+          "COMPONENT_TYPE_CONNECTOR_DATA" ? (
+          selectedConnectorNode.data.component.definition_name ===
+            "connector-definitions/data-pinecone" ||
+          selectedConnectorNode.data.component.definition_name ===
+            "connector-definitions/data-gcs" ? (
+            <DataComponentForm
+              connectorDefinitionName={
+                selectedConnectorNode.data.component.definition_name
+              }
+              configuration={selectedConnectorNode.data.component.configuration}
+            />
+          ) : null
         ) : null}
       </div>
     </div>

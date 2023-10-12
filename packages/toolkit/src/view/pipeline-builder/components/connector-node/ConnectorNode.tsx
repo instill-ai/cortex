@@ -8,7 +8,6 @@ import {
   Icons,
   Input,
   LinkButton,
-  Tag,
   Textarea,
   useToast,
 } from "@instill-ai/design-system";
@@ -118,12 +117,22 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   const [exapndOutputs, setExpandOutputs] = React.useState(false);
 
   let aiTaskNotSelected = false;
+  let dataTaskNotSelected = false;
   let resourceNotCreated = false;
 
   const { inputSchema, outputSchema } = React.useMemo(() => {
     if (
       data.component.type === "COMPONENT_TYPE_CONNECTOR_AI" &&
-      !data.component.configuration.input.task
+      !data.component.configuration.task
+    ) {
+      return { inputSchema: null, outputSchema: null };
+    }
+
+    if (
+      data.component.type === "COMPONENT_TYPE_CONNECTOR_DATA" &&
+      data.component.definition_name ===
+        "connector-definitions/data-pinecone" &&
+      !data.component.configuration.task
     ) {
       return { inputSchema: null, outputSchema: null };
     }
@@ -133,9 +142,17 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
   if (
     data.component.type === "COMPONENT_TYPE_CONNECTOR_AI" &&
-    !data.component.configuration.input.task
+    !data.component.configuration.task
   ) {
     aiTaskNotSelected = true;
+  }
+
+  if (
+    data.component.type === "COMPONENT_TYPE_CONNECTOR_DATA" &&
+    data.component.definition_name === "connector-definitions/data-pinecone" &&
+    !data.component.configuration.task
+  ) {
+    dataTaskNotSelected = true;
   }
 
   if (!data.component.resource_name) {
@@ -223,7 +240,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
   function onEditDataConnectorInput(key: string) {
     dataConnectorInputForm.reset({
-      value: data.component.configuration.input[key],
+      value: data.component.configuration.input.data[key],
       key: key,
     });
     setEnableEdit(true);
@@ -235,7 +252,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
     const newNodes = nodes.map((node) => {
       if (node.data.nodeType === "connector" && node.id === id) {
         if (prevFieldKey) {
-          delete node.data.component.configuration.input[prevFieldKey];
+          delete node.data.component.configuration.input.data[prevFieldKey];
         }
 
         node.data = {
@@ -246,7 +263,9 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               ...node.data.component.configuration,
               input: {
                 ...node.data.component.configuration.input,
-                [formData.key]: formData.value,
+                data: {
+                  [formData.key]: formData.value,
+                },
               },
             },
           },
@@ -286,11 +305,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
   function onDeleteDataConnectorInput(key: string) {
     const newNodes = nodes.map((node) => {
       if (node.data.nodeType === "connector" && node.id === id) {
-        delete node.data.component.configuration.input[key];
-
-        node.data = {
-          ...node.data,
-        };
+        delete node.data.component.configuration.input.data[key];
       }
       return node;
     });
@@ -546,13 +561,22 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               )}
             >
               <div className="mb-3 flex flex-row justify-between">
-                <Icons.ArrowLeft
-                  className="my-auto h-5 w-5 stroke-slate-500"
+                <Button
+                  variant="tertiaryGrey"
+                  size="sm"
+                  className="!px-2 !py-2"
+                  type="button"
                   onClick={() => {
+                    dataConnectorInputForm.reset({
+                      value: "",
+                      key: "",
+                    });
                     setEnableEdit(!enableEdit);
-                    dataConnectorInputForm.reset();
+                    setPrevFieldKey(null);
                   }}
-                />
+                >
+                  <Icons.ArrowLeft className="m-auto h-4 w-4 stroke-semantic-fg-secondary" />
+                </Button>
                 <div>
                   <Button variant="primary" type="submit" size="sm">
                     Save
@@ -723,7 +747,16 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 </p>
               </div>
             ) : null}
-            {aiTaskNotSelected || resourceNotCreated ? null : (
+            {dataTaskNotSelected && !resourceNotCreated ? (
+              <div className="w-full rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+                <p className="text-semantic-fg-primary product-body-text-3-regular">
+                  Please select Data task for this connector
+                </p>
+              </div>
+            ) : null}
+            {aiTaskNotSelected ||
+            dataTaskNotSelected ||
+            resourceNotCreated ? null : (
               <div className="mb-1 product-body-text-4-medium">input</div>
             )}
             {inputProperties.length > 0 ? (
@@ -762,7 +795,11 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 ) : null}
               </div>
             ) : null}
-            {data.component.type === "COMPONENT_TYPE_CONNECTOR_DATA" ? (
+            {data.component.type === "COMPONENT_TYPE_CONNECTOR_DATA" &&
+            data.component.definition_name !==
+              "connector-definitions/data-pinecone" &&
+            data.component.definition_name !==
+              "connector-definitions/data-gcs" ? (
               testModeEnabled ? (
                 <div className="mb-3 flex flex-col space-y-3">
                   {Object.entries(data.component.configuration.input).map(
@@ -781,86 +818,63 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               ) : (
                 <div className="mb-3 flex flex-col">
                   <div className="mb-3 flex flex-col space-y-4">
-                    {Object.entries(
-                      data.component.configuration.input as GeneralRecord
-                    ).map(([key, value]) => {
-                      const reference =
-                        extractPipelineComponentReferenceFromString({
-                          key,
-                          value: value.value,
-                          currentPath: [],
-                          nodeId: id,
-                        });
-
-                      return (
-                        <div key={key} className="flex flex-col">
-                          <div className="flex flex-row items-center justify-between">
-                            <div className="my-auto font-sans text-base font-semibold text-semantic-fg-primary">
-                              {key}
-                            </div>
-                            <div className="my-auto flex flex-row gap-x-4">
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  onEditDataConnectorInput(key);
-                                  setPrevFieldKey(key);
-                                }}
-                              >
-                                <Icons.Edit03 className="h-6 w-6 stroke-semantic-accent-on-bg" />
-                              </button>
-                              <button
-                                onClick={(e) => {
-                                  e.stopPropagation();
-                                  onDeleteDataConnectorInput(key);
-                                }}
-                              >
-                                <Icons.Trash01 className="h-6 w-6 stroke-semantic-error-on-bg" />
-                              </button>
-                            </div>
-                          </div>
-                          <div>
-                            {reference?.type === "singleCurlyBrace" ? (
-                              <Tag
-                                className="gap-x-1.5"
-                                variant="lightBlue"
-                                size="md"
-                              >
-                                {reference.referenceValue.withoutCurlyBraces}
-                              </Tag>
-                            ) : (
-                              reference?.referenceValues.map(
-                                (referenceValue) => (
-                                  <Tag
-                                    key={referenceValue.withCurlyBraces}
-                                    className="gap-x-1.5"
-                                    variant="lightBlue"
-                                    size="md"
+                    {data.component.configuration?.input?.data
+                      ? Object.entries(
+                          data.component.configuration.input
+                            .data as GeneralRecord
+                        ).map(([key, value]) => {
+                          return (
+                            <div key={key} className="flex flex-col">
+                              <div className="flex flex-row items-center justify-between">
+                                <div className="flex flex-col gap-y-1 my-auto">
+                                  <p className="my-auto product-body-text-3-semibold text-semantic-fg-primary">
+                                    {key}
+                                  </p>
+                                </div>
+                                <div className="my-auto flex flex-row gap-x-4">
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onEditDataConnectorInput(key);
+                                      setPrevFieldKey(key);
+                                    }}
                                   >
-                                    {referenceValue.withoutCurlyBraces}
-                                  </Tag>
-                                )
-                              )
-                            )}
-                          </div>
-                        </div>
-                      );
-                    })}
+                                    <Icons.Edit03 className="h-6 w-6 stroke-semantic-accent-on-bg" />
+                                  </button>
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      onDeleteDataConnectorInput(key);
+                                    }}
+                                  >
+                                    <Icons.Trash01 className="h-6 w-6 stroke-semantic-error-on-bg" />
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })
+                      : null}
                   </div>
-                  <Button
-                    className="flex w-full"
-                    variant="primary"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setEnableEdit(!enableEdit);
-                    }}
-                  >
-                    Add Field
-                    <Icons.Plus className="my-auto h-5 w-5 stroke-semantic-bg-primary " />
-                  </Button>
+                  {dataTaskNotSelected ? null : (
+                    <Button
+                      className="flex w-full"
+                      variant="primary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setEnableEdit(!enableEdit);
+                      }}
+                    >
+                      Add Field
+                      <Icons.Plus className="my-auto h-5 w-5 stroke-semantic-bg-primary " />
+                    </Button>
+                  )}
                 </div>
               )
             ) : null}
-            {aiTaskNotSelected || resourceNotCreated ? null : (
+            {aiTaskNotSelected ||
+            dataTaskNotSelected ||
+            resourceNotCreated ? null : (
               <div className="mb-1 product-body-text-4-medium">output</div>
             )}
             {outputProperties.length > 0 ? (

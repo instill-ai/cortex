@@ -37,105 +37,107 @@ const AISchema = z
     connector_definition_name: z.string(),
     task: z.string(),
 
-    // connector-definitions/ai-instill-model
+    input: z.object({
+      // connector-definitions/ai-instill-model
 
-    // TASK_CLASSIFICATION
-    // TASK_INSTANCE_SEGMENTATION
-    // TASK_KEYPOINT
-    // TASK_DETECTION
-    // TASK_OCR
-    // TASK_SEMANTIC_SEGMENTATION
-    // TASK_TEXT_GENERATION
-    // TASK_TEXT_TO_IMAGE
+      // TASK_CLASSIFICATION
+      // TASK_INSTANCE_SEGMENTATION
+      // TASK_KEYPOINT
+      // TASK_DETECTION
+      // TASK_OCR
+      // TASK_SEMANTIC_SEGMENTATION
+      // TASK_TEXT_GENERATION
+      // TASK_TEXT_TO_IMAGE
 
-    model_id: z.string().nullable().optional(),
-    model_namespace: z.string().nullable().optional(),
+      model_id: z.string().nullable().optional(),
+      model_namespace: z.string().nullable().optional(),
 
-    // TASK_CLASSIFICATION
-    // TASK_INSTANCE_SEGMENTATION
-    // TASK_KEYPOINT
-    // TASK_DETECTION
-    // TASK_OCR
-    // TASK_SEMANTIC_SEGMENTATION
-    image_base64: z.string().nullable().optional(),
+      // TASK_CLASSIFICATION
+      // TASK_INSTANCE_SEGMENTATION
+      // TASK_KEYPOINT
+      // TASK_DETECTION
+      // TASK_OCR
+      // TASK_SEMANTIC_SEGMENTATION
+      image_base64: z.string().nullable().optional(),
 
-    // TASK_TEXT_GENERATION
-    // model_name
-    prompt: z.string().nullable().optional(),
-    seed: z.string().nullable().optional(),
-    output_len: z.string().nullable().optional(),
-    bad_words_list: z.string().nullable().optional(),
-    stop_words_list: z.string().nullable().optional(),
-    top_k: z.string().nullable().optional(),
+      // TASK_TEXT_GENERATION
+      // model_name
+      prompt: z.string().nullable().optional(),
+      seed: z.string().nullable().optional(),
+      output_len: z.string().nullable().optional(),
+      bad_words_list: z.string().nullable().optional(),
+      stop_words_list: z.string().nullable().optional(),
+      top_k: z.string().nullable().optional(),
 
-    // TASK_TEXT_TO_IMAGE
-    // model_name
-    // prompt
-    cfg_scale: z.string().nullable().optional(),
-    steps: z.string().nullable().optional(),
-    samples: z.string().nullable().optional(),
-    // seed
+      // TASK_TEXT_TO_IMAGE
+      // model_name
+      // prompt
+      cfg_scale: z.string().nullable().optional(),
+      steps: z.string().nullable().optional(),
+      samples: z.string().nullable().optional(),
+      // seed
 
-    // connector-definitions/ai-openai
+      // connector-definitions/ai-openai
 
-    // TASK_TEXT_GENERATION
-    // prompt
-    model: z.string().nullable().optional(),
-    system_message: z.string().nullable().optional(),
-    temperature: z.string().nullable().optional(),
-    n: z.string().nullable().optional(),
-    max_tokens: z.string().nullable().optional(),
+      // TASK_TEXT_GENERATION
+      // prompt
+      model: z.string().nullable().optional(),
+      system_message: z.string().nullable().optional(),
+      temperature: z.string().nullable().optional(),
+      n: z.string().nullable().optional(),
+      max_tokens: z.string().nullable().optional(),
 
-    // TASK_TEXT_EMBEDDINGS
-    text: z.string().nullable().optional(),
-    // model
+      // TASK_TEXT_EMBEDDINGS
+      text: z.string().nullable().optional(),
+      // model
 
-    // TASK_SPEECH_RECOGNITION
-    audio: z.string().nullable().optional(),
-    // model
-    // temperature
-    language: z.string().nullable().optional(),
-    // prompt
+      // TASK_SPEECH_RECOGNITION
+      audio: z.string().nullable().optional(),
+      // model
+      // temperature
+      language: z.string().nullable().optional(),
+      // prompt
 
-    // connector-definitions/ai-stability-ai
+      // connector-definitions/ai-stability-ai
 
-    // TASK_TEXT_TO_IMAGE
-    prompts: z.string().nullable().optional(),
-    weights: z.string().nullable().optional(),
-    engine: z.string().nullable().optional(),
-    height: z.string().nullable().optional(),
-    width: z.string().nullable().optional(),
-    // cfg_scale
-    clip_guidance_preset: z.string().nullable().optional(),
-    sampler: z.string().nullable().optional(),
-    // samples
-    // seed
-    // steps
-    style_preset: z.string().nullable().optional(),
+      // TASK_TEXT_TO_IMAGE
+      prompts: z.string().nullable().optional(),
+      weights: z.string().nullable().optional(),
+      engine: z.string().nullable().optional(),
+      height: z.string().nullable().optional(),
+      width: z.string().nullable().optional(),
+      // cfg_scale
+      clip_guidance_preset: z.string().nullable().optional(),
+      sampler: z.string().nullable().optional(),
+      // samples
+      // seed
+      // steps
+      style_preset: z.string().nullable().optional(),
 
-    // TASK_IMAGE_TO_IMAGE
-    // prompts
-    // weights
-    init_image: z.string().nullable().optional(),
-    // engine
-    init_image_mode: z.string().nullable().optional(),
-    image_strength: z.string().nullable().optional(),
-    step_schedule_start: z.string().nullable().optional(),
-    step_schedule_end: z.string().nullable().optional(),
-    // cfg_scale
-    // clip_guidance_preset
-    // sampler
-    // samples
-    // seed
-    // steps
-    // style_preset
+      // TASK_IMAGE_TO_IMAGE
+      // prompts
+      // weights
+      init_image: z.string().nullable().optional(),
+      // engine
+      init_image_mode: z.string().nullable().optional(),
+      image_strength: z.string().nullable().optional(),
+      step_schedule_start: z.string().nullable().optional(),
+      step_schedule_end: z.string().nullable().optional(),
+      // cfg_scale
+      // clip_guidance_preset
+      // sampler
+      // samples
+      // seed
+      // steps
+      // style_preset
+    }),
   })
   .superRefine((state, ctx) => {
     if (
       state.connector_definition_name ===
       "connector-definitions/ai-instill-model"
     ) {
-      if (!state.model_id) {
+      if (!state.input.model_id) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Model ID is required",
@@ -144,35 +146,35 @@ const AISchema = z
       } else {
         const result = validateIntillUpstreamTypes({
           type: "reference_and_string",
-          value: state.model_id,
+          value: state.input.model_id,
         });
 
         if (!result.isValid) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: result.error,
-            path: ["model_id"],
+            path: ["input.model_id"],
           });
         }
       }
 
-      if (!state.model_namespace) {
+      if (!state.input.model_namespace) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: "Model namespace is required",
-          path: ["model_namespace"],
+          path: ["input.model_namespace"],
         });
       } else {
         const result = validateIntillUpstreamTypes({
           type: "reference_and_string",
-          value: state.model_namespace,
+          value: state.input.model_namespace,
         });
 
         if (!result.isValid) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: result.error,
-            path: ["model_namespace"],
+            path: ["input.model_namespace"],
           });
         }
       }
@@ -185,204 +187,204 @@ const AISchema = z
         state.task === "TASK_OCR" ||
         state.task === "TASK_SEMANTIC_SEGMENTATION"
       ) {
-        if (!state.image_base64) {
+        if (!state.input.image_base64) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "image_base64 is required",
-            path: ["image_base64"],
+            path: ["input.image_base64"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.image_base64,
+            value: state.input.image_base64,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["image_base64"],
+              path: ["input.image_base64"],
             });
           }
         }
       }
 
       if (state.task === "TASK_TEXT_GENERATION") {
-        if (!state.prompt) {
+        if (!state.input.prompt) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "prompt is required",
-            path: ["prompt"],
+            path: ["input.prompt"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.prompt,
+            value: state.input.prompt,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["prompt"],
+              path: ["input.prompt"],
             });
           }
         }
 
-        if (state.output_len) {
+        if (state.input.output_len) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.output_len,
+            value: state.input.output_len,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["output_len"],
+              path: ["input.output_len"],
             });
           }
         }
 
-        if (state.bad_words_list) {
+        if (state.input.bad_words_list) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.bad_words_list,
+            value: state.input.bad_words_list,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["bad_words_list"],
+              path: ["input.bad_words_list"],
             });
           }
         }
 
-        if (state.stop_words_list) {
+        if (state.input.stop_words_list) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.stop_words_list,
+            value: state.input.stop_words_list,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["stop_words_list"],
+              path: ["input.stop_words_list"],
             });
           }
         }
 
-        if (state.top_k) {
+        if (state.input.top_k) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.top_k,
+            value: state.input.top_k,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["top_k"],
+              path: ["input.top_k"],
             });
           }
         }
 
-        if (state.seed) {
+        if (state.input.seed) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.seed,
+            value: state.input.seed,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["seed"],
+              path: ["input.seed"],
             });
           }
         }
       }
 
       if (state.task === "TASK_TEXT_TO_IMAGE") {
-        if (!state.prompt) {
+        if (!state.input.prompt) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "prompt is required",
-            path: ["prompt"],
+            path: ["input.prompt"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.prompt,
+            value: state.input.prompt,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["prompt"],
+              path: ["input.prompt"],
             });
           }
         }
 
-        if (state.cfg_scale) {
+        if (state.input.cfg_scale) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.cfg_scale,
+            value: state.input.cfg_scale,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["cfg_scale"],
+              path: ["input.cfg_scale"],
             });
           }
         }
 
-        if (state.steps) {
+        if (state.input.steps) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.steps,
+            value: state.input.steps,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["steps"],
+              path: ["input.steps"],
             });
           }
         }
 
-        if (state.samples) {
+        if (state.input.samples) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.samples,
+            value: state.input.samples,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["samples"],
+              path: ["input.samples"],
             });
           }
         }
 
-        if (state.seed) {
+        if (state.input.seed) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.seed,
+            value: state.input.seed,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["samples"],
+              path: ["input.samples"],
             });
           }
         }
@@ -399,198 +401,198 @@ const AISchema = z
       }
 
       if (state.task === "TASK_TEXT_GENERATION") {
-        if (!state.prompt) {
+        if (!state.input.prompt) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "prompt is required",
-            path: ["prompt"],
+            path: ["input.prompt"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.prompt,
+            value: state.input.prompt,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["prompt"],
+              path: ["input.prompt"],
             });
           }
         }
 
-        if (!state.model) {
+        if (!state.input.model) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "model is required",
-            path: ["model"],
+            path: ["input.model"],
           });
         }
 
-        if (state.system_message) {
+        if (state.input.system_message) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.system_message,
+            value: state.input.system_message,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["system_message"],
+              path: ["input.system_message"],
             });
           }
         }
 
-        if (state.temperature) {
+        if (state.input.temperature) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.temperature,
+            value: state.input.temperature,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["temperature"],
+              path: ["input.temperature"],
             });
           }
         }
 
-        if (state.n) {
+        if (state.input.n) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.n,
+            value: state.input.n,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["n"],
+              path: ["input.n"],
             });
           }
         }
 
-        if (state.max_tokens) {
+        if (state.input.max_tokens) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.max_tokens,
+            value: state.input.max_tokens,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["max_tokens"],
+              path: ["input.max_tokens"],
             });
           }
         }
       }
 
       if (state.task === "TASK_TEXT_EMBEDDINGS") {
-        if (!state.text) {
+        if (!state.input.text) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "text is required",
-            path: ["text"],
+            path: ["input.text"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.text,
+            value: state.input.text,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["text"],
+              path: ["input.text"],
             });
           }
         }
 
-        if (!state.model) {
+        if (!state.input.model) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "model is required",
-            path: ["model"],
+            path: ["input.model"],
           });
         }
       }
 
       if (state.task === "TASK_SPEECH_RECOGNITION") {
-        if (!state.audio) {
+        if (!state.input.audio) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "audio is required",
-            path: ["audio"],
+            path: ["input.audio"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference",
-            value: state.audio,
+            value: state.input.audio,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["audio"],
+              path: ["input.audio"],
             });
           }
         }
 
-        if (!state.model) {
+        if (!state.input.model) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "model is required",
-            path: ["model"],
+            path: ["input.model"],
           });
         }
 
-        if (state.temperature) {
+        if (state.input.temperature) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.temperature,
+            value: state.input.temperature,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["temperature"],
+              path: ["input.temperature"],
             });
           }
         }
 
-        if (state.language) {
+        if (state.input.language) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.language,
+            value: state.input.language,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["language"],
+              path: ["input.language"],
             });
           }
         }
 
-        if (state.prompt) {
+        if (state.input.prompt) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_string",
-            value: state.prompt,
+            value: state.input.prompt,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["prompt"],
+              path: ["input.prompt"],
             });
           }
         }
@@ -610,278 +612,278 @@ const AISchema = z
       }
 
       if (state.task === "TASK_TEXT_TO_IMAGE") {
-        if (!state.prompts) {
+        if (!state.input.prompts) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "prompts is required",
-            path: ["prompts"],
+            path: ["input.prompts"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference",
-            value: state.prompts,
+            value: state.input.prompts,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["prompts"],
+              path: ["input.prompts"],
             });
           }
         }
 
-        if (state.weights) {
+        if (state.input.weights) {
           const result = validateIntillUpstreamTypes({
             type: "reference",
-            value: state.weights,
+            value: state.input.weights,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["weights"],
+              path: ["input.weights"],
             });
           }
         }
 
-        if (!state.engine) {
+        if (!state.input.engine) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "engine is required",
-            path: ["engine"],
+            path: ["input.engine"],
           });
         }
 
-        if (state.height) {
+        if (state.input.height) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.height,
+            value: state.input.height,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["height"],
+              path: ["input.height"],
             });
           }
         }
 
-        if (state.width) {
+        if (state.input.width) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.width,
+            value: state.input.width,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["width"],
+              path: ["input.width"],
             });
           }
         }
 
-        if (state.cfg_scale) {
+        if (state.input.cfg_scale) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.cfg_scale,
+            value: state.input.cfg_scale,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["cfg_scale"],
+              path: ["input.cfg_scale"],
             });
           }
         }
 
-        if (state.seed) {
+        if (state.input.seed) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.seed,
+            value: state.input.seed,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["seed"],
+              path: ["input.seed"],
             });
           }
         }
 
-        if (state.steps) {
+        if (state.input.steps) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.steps,
+            value: state.input.steps,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["steps"],
+              path: ["input.steps"],
             });
           }
         }
       }
 
       if (state.task === "TASK_IMAGE_TO_IMAGE") {
-        if (!state.prompts) {
+        if (!state.input.prompts) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "prompts is required",
-            path: ["prompts"],
+            path: ["input.prompts"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference",
-            value: state.prompts,
+            value: state.input.prompts,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["prompts"],
+              path: ["input.prompts"],
             });
           }
         }
 
-        if (!state.init_image) {
+        if (!state.input.init_image) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "init_image is required",
-            path: ["init_image"],
+            path: ["input.init_image"],
           });
         } else {
           const result = validateIntillUpstreamTypes({
             type: "reference",
-            value: state.init_image,
+            value: state.input.init_image,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["init_image"],
+              path: ["input.init_image"],
             });
           }
         }
 
-        if (!state.engine) {
+        if (!state.input.engine) {
           ctx.addIssue({
             code: z.ZodIssueCode.custom,
             message: "engine is required",
-            path: ["engine"],
+            path: ["input.engine"],
           });
         }
 
-        if (state.image_strength) {
+        if (state.input.image_strength) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.image_strength,
+            value: state.input.image_strength,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["image_strength"],
+              path: ["input.image_strength"],
             });
           }
         }
 
-        if (state.step_schedule_start) {
+        if (state.input.step_schedule_start) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.step_schedule_start,
+            value: state.input.step_schedule_start,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["step_schedule_start"],
+              path: ["input.step_schedule_start"],
             });
           }
         }
 
-        if (state.step_schedule_end) {
+        if (state.input.step_schedule_end) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.step_schedule_end,
+            value: state.input.step_schedule_end,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["step_schedule_end"],
+              path: ["input.step_schedule_end"],
             });
           }
         }
 
-        if (state.cfg_scale) {
+        if (state.input.cfg_scale) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.cfg_scale,
+            value: state.input.cfg_scale,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["cfg_scale"],
+              path: ["input.cfg_scale"],
             });
           }
         }
 
-        if (state.samples) {
+        if (state.input.samples) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.samples,
+            value: state.input.samples,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["samples"],
+              path: ["input.samples"],
             });
           }
         }
 
-        if (state.seed) {
+        if (state.input.seed) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.seed,
+            value: state.input.seed,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["seed"],
+              path: ["input.seed"],
             });
           }
         }
 
-        if (state.steps) {
+        if (state.input.steps) {
           const result = validateIntillUpstreamTypes({
             type: "reference_and_number",
-            value: state.steps,
+            value: state.input.steps,
           });
 
           if (!result.isValid) {
             ctx.addIssue({
               code: z.ZodIssueCode.custom,
               message: result.error,
-              path: ["steps"],
+              path: ["input.steps"],
             });
           }
         }
@@ -919,7 +921,9 @@ export const AIForm = (props: AIFormProps) => {
   const form = useForm<z.infer<typeof AISchema>>({
     resolver: zodResolver(AISchema),
     defaultValues: {
+      ...configuration,
       connector_definition_name: connectorDefinitionName,
+      input: configuration.input ? configuration.input : {},
     },
   });
 
@@ -928,6 +932,7 @@ export const AIForm = (props: AIFormProps) => {
   React.useEffect(() => {
     reset({
       ...configuration,
+      input: configuration.input ? configuration.input : {},
       connector_definition_name: connectorDefinitionName,
     });
   }, [configuration, connectorDefinitionName, reset]);
@@ -948,7 +953,8 @@ export const AIForm = (props: AIFormProps) => {
             component: {
               ...node.data.component,
               configuration: {
-                input: modifiedData,
+                ...modifiedData,
+                connector_definition_name: undefined,
               },
             },
           },
@@ -1184,7 +1190,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="image_base64"
+            name="input.image_base64"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -1216,7 +1222,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="model_namespace"
+            name="input.model_namespace"
             render={({ field }) => {
               return (
                 <Form.Item
@@ -1249,7 +1255,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="model_id"
+            name="input.model_id"
             render={({ field }) => {
               return (
                 <Form.Item
@@ -1283,7 +1289,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="prompt"
+            name="input.prompt"
             render={({ field }) => {
               let display = false;
               let description: Nullable<string> = null;
@@ -1331,7 +1337,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="output_len"
+            name="input.output_len"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -1359,7 +1365,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="bad_words_list"
+            name="input.bad_words_list"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -1387,7 +1393,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="stop_words_list"
+            name="input.stop_words_list"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -1415,7 +1421,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="top_k"
+            name="input.top_k"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -1443,7 +1449,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="seed"
+            name="input.seed"
             render={({ field }) => {
               let display = false;
               let description: Nullable<string> = null;
@@ -1486,7 +1492,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="cfg_scale"
+            name="input.cfg_scale"
             render={({ field }) => {
               let display = false;
               let description: Nullable<string> = null;
@@ -1534,7 +1540,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="steps"
+            name="input.steps"
             render={({ field }) => {
               let display = false;
               let description: Nullable<string> = null;
@@ -1573,7 +1579,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="samples"
+            name="input.samples"
             render={({ field }) => {
               let display = false;
               let description: Nullable<string> = null;
@@ -1619,7 +1625,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="model"
+            name="input.model"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1701,7 +1707,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="system_message"
+            name="input.system_message"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1732,7 +1738,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="temperature"
+            name="input.temperature"
             render={({ field }) => {
               let display = false;
 
@@ -1782,7 +1788,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="n"
+            name="input.n"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1813,7 +1819,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="max_tokens"
+            name="input.max_tokens"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1849,7 +1855,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="text"
+            name="input.text"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1878,7 +1884,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="audio"
+            name="input.audio"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1909,7 +1915,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="language"
+            name="input.language"
             render={({ field }) => {
               const display =
                 connectorDefinitionName === "connector-definitions/ai-openai" &&
@@ -1943,7 +1949,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="prompts"
+            name="input.prompts"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -1973,7 +1979,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="weights"
+            name="input.weights"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2003,7 +2009,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="engine"
+            name="input.engine"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2055,7 +2061,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="height"
+            name="input.height"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2086,7 +2092,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="width"
+            name="input.width"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2118,7 +2124,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="clip_guidance_preset"
+            name="input.clip_guidance_preset"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2163,7 +2169,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="sampler"
+            name="input.sampler"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2216,7 +2222,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="style_preset"
+            name="input.style_preset"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2277,7 +2283,7 @@ export const AIForm = (props: AIFormProps) => {
 
           <Form.Field
             control={form.control}
-            name="init_image"
+            name="input.init_image"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2309,7 +2315,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="init_image_mode"
+            name="input.init_image_mode"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2352,7 +2358,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="image_strength"
+            name="input.image_strength"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2392,7 +2398,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="step_schedule_start"
+            name="input.step_schedule_start"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
@@ -2429,7 +2435,7 @@ export const AIForm = (props: AIFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="step_schedule_end"
+            name="input.step_schedule_end"
             render={({ field }) => {
               const display =
                 connectorDefinitionName ===
