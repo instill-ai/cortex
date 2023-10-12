@@ -29,9 +29,9 @@ import {
   extractReferencesFromConfiguration,
   getPropertiesFromOpenAPISchema,
   getConnectorInputOutputSchema,
-  extractPipelineComponentReferenceFromString,
   composeEdgesFromReferences,
   createGraphLayout,
+  InstillAIOpenAPIProperty,
 } from "../../lib";
 import { InputPropertyItem } from "./InputPropertyItem";
 import { GeneralRecord, Nullable } from "../../../../lib";
@@ -41,6 +41,7 @@ import {
   ImageWithFallback,
 } from "../../../../components";
 import { ConnectorNodeControlPanel } from "./ConnectorNodeControlPanel";
+import { ResourceNameTag } from "./ResourceNameTag";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
@@ -741,14 +742,14 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               </div>
             ) : null}
             {aiTaskNotSelected && !resourceNotCreated ? (
-              <div className="w-full rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+              <div className="w-full mb-3 rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
                 <p className="text-semantic-fg-primary product-body-text-3-regular">
                   Please select AI task for this connector
                 </p>
               </div>
             ) : null}
             {dataTaskNotSelected && !resourceNotCreated ? (
-              <div className="w-full rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
+              <div className="w-full mb-3 rounded-sm border border-semantic-warning-default bg-semantic-warning-bg p-4">
                 <p className="text-semantic-fg-primary product-body-text-3-regular">
                   Please select Data task for this connector
                 </p>
@@ -878,11 +879,43 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               <div className="mb-1 product-body-text-4-medium">output</div>
             )}
             {outputProperties.length > 0 ? (
-              <div className="mb-1 flex flex-col">
+              <div className="mb-3 flex flex-col">
                 <div className="mb-1 flex flex-col gap-y-1">
                   {testModeEnabled
                     ? testModeOutputFields
                     : collapsedOutputProperties.map((property) => {
+                        if (
+                          property.type === "array" &&
+                          !property.instillFormat
+                        ) {
+                          const items =
+                            property.items as InstillAIOpenAPIProperty[];
+
+                          return (
+                            <div
+                              key={
+                                property.title ? property.title : property.path
+                              }
+                              className="w-full rounded-[6px] bg-semantic-bg-primary p-2"
+                            >
+                              <div className="flex flex-col gap-y-2">
+                                {items.map((item) => (
+                                  <div
+                                    key={item.title ? item.title : item.path}
+                                    className="w-full rounded-[6px] bg-semantic-bg-primary p-2"
+                                  >
+                                    <div className="flex flex-row gap-x-2">
+                                      <p className="my-auto text-semantic-fg-secondary product-body-text-4-semibold">
+                                        {item.path}
+                                      </p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          );
+                        }
+
                         return (
                           <div
                             key={
@@ -913,6 +946,9 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
             ) : null}
           </>
         )}
+        <div className="flex flex-row-reverse">
+          <ResourceNameTag resourceName={data.component.resource_name} />
+        </div>
       </div>
       <CustomHandle
         className={hasTargetEdges ? "" : "!opacity-0"}
