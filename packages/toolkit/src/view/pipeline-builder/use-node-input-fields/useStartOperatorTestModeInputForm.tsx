@@ -100,12 +100,15 @@ export function transformStartOperatorBodyToZod(
         zodSchema = zodSchema.setKey(key, z.boolean().nullable().optional());
         break;
       case "number":
-        zodSchema = zodSchema.setKey(key, z.string());
+        zodSchema = zodSchema.setKey(
+          key,
+          z.coerce.number().nullable().optional()
+        );
         break;
       case "number_array":
         zodSchema = zodSchema.setKey(
           key,
-          z.array(z.string().nullable().optional()).nullable().optional()
+          z.array(z.coerce.number().nullable().optional()).nullable().optional()
         );
         break;
       case "audio":

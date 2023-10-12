@@ -22,13 +22,13 @@ export const NumberField = (props: {
               <Input.Root>
                 <Input.Core
                   {...field}
-                  type="text"
+                  type="number"
                   value={field.value ?? ""}
                   autoComplete="off"
                   // AlphaValueIssue: We still have alpha value issue in
                   // out design-token, so we need to use the hex value
                   // here
-                  className="!text-[#1D2433] !text-opacity-80 !product-body-text-3-regular"
+                  className="!text-[#1D2433] !text-opacity-80 !product-body-text-3-regular appearance-none"
                 />
               </Input.Root>
             </Form.Control>

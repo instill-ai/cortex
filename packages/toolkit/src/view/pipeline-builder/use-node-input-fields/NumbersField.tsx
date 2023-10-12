@@ -56,10 +56,10 @@ export const NumbersField = (props: {
                   >
                     <Input.Root className="flex-1">
                       <Input.Core
-                        type="text"
+                        type="number"
                         value={numberFieldsValue[idx] ?? undefined}
                         autoComplete="off"
-                        className="text-semantic-fg-primary product-body-text-4-regular"
+                        className="text-semantic-fg-primary product-body-text-4-regular appearance-none"
                         onChange={(e) => {
                           const newNumberFieldsValue = [...numberFieldsValue];
                           newNumberFieldsValue[idx] = e.target.value;
