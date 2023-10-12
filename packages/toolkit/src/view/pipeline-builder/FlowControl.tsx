@@ -514,7 +514,7 @@ export const FlowControl = (props: FlowControlProps) => {
               variant="secondaryGrey"
               size="lg"
               type="button"
-              disabled={canSave ? false : true}
+              disabled={canSave ? isSaving : true}
             >
               Save
               {isSaving ? (
@@ -614,9 +614,9 @@ export const FlowControl = (props: FlowControlProps) => {
               className="!gap-x-2"
               variant="primary"
               size="lg"
+              disabled={isCloning}
             >
-              Clone
-              <LoadingSpin className={isCloning ? "" : "hidden"} />
+              {isCloning ? <LoadingSpin /> : "Clone"}
             </Button>
           </>
         )}
