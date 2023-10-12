@@ -1,5 +1,5 @@
 import cn from "clsx";
-import { EdgeProps, getBezierPath } from "reactflow";
+import { EdgeProps, getSmoothStepPath } from "reactflow";
 
 export const CustomEdge = ({
   id,
@@ -12,7 +12,7 @@ export const CustomEdge = ({
   style = {},
   markerEnd,
 }: EdgeProps) => {
-  const [edgePath] = getBezierPath({
+  const [edgePath] = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,
@@ -27,7 +27,6 @@ export const CustomEdge = ({
         id={id}
         style={style}
         className={cn("fill-none stroke-semantic-accent-default stroke-[4px]")}
-        strokeDasharray={12}
         d={edgePath}
         markerEnd={markerEnd}
       />

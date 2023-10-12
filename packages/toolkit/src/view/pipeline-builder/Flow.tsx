@@ -159,6 +159,7 @@ export const Flow = forwardRef<HTMLDivElement, FlowProps>((props, ref) => {
               gap={32}
               color="#D2D6DB"
               className="!bg-semantic-bg-alt-primary"
+              size={3}
             />
           </ReactFlow>
         </div>
