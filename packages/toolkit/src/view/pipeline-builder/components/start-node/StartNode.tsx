@@ -67,7 +67,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
     if (!pipelineName) return;
 
     const input = recursiveRemoveUndefinedAndNullFromArray(
-      recursiveReplaceNullAndEmptyStringWithUndefined(recursiveParseToNum(data))
+      recursiveReplaceNullAndEmptyStringWithUndefined(data)
     );
 
     setIsTriggering(true);
