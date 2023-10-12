@@ -1,12 +1,12 @@
 import { Tag, Tooltip } from "@instill-ai/design-system";
 import { Nullable } from "../../../../lib";
 
-export const ResourceNameTag = ({
-  resourceName,
+export const ResourceIDTag = ({
+  resourceID,
 }: {
-  resourceName: Nullable<string>;
+  resourceID: Nullable<string>;
 }) => {
-  const resourceID = resourceName ? resourceName.split("/")[3] : null;
+  // const resourceID = resourceName ? resourceName.split("/")[3] : null;
 
   return resourceID ? (
     <Tooltip.Provider>
@@ -28,7 +28,7 @@ export const ResourceNameTag = ({
           >
             <div className="flex flex-col gap-y-1 text-left">
               <p className="product-body-text-4-semibold bg-semantic-bg-primary">
-                resource name
+                resource ID
               </p>
               <p className="product-body-text-4-regular break-words text-semantic-fg-secondary">
                 {resourceID}

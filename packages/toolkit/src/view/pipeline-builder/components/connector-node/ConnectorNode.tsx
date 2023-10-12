@@ -9,6 +9,7 @@ import {
   Input,
   LinkButton,
   Textarea,
+  Tooltip,
   useToast,
 } from "@instill-ai/design-system";
 import { shallow } from "zustand/shallow";
@@ -41,7 +42,7 @@ import {
   ImageWithFallback,
 } from "../../../../components";
 import { ConnectorNodeControlPanel } from "./ConnectorNodeControlPanel";
-import { ResourceNameTag } from "./ResourceNameTag";
+import { ResourceIDTag } from "./ResourceIDTag";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   expandAllNodes: state.expandAllNodes,
@@ -525,15 +526,40 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                 />
               </form>
             </Form.Root>
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                connectorIDInputRef.current?.focus();
-              }}
-              type="button"
-            >
-              <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-primary" />
-            </button>
+            <Tooltip.Provider>
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  {/* 
+                eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+              */}
+                  <span className="flex" tabIndex={0}>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        connectorIDInputRef.current?.focus();
+                      }}
+                      type="button"
+                    >
+                      <Icons.Edit03 className="h-4 w-4 stroke-semantic-fg-primary" />
+                    </button>
+                  </span>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content
+                    side="top"
+                    className="!px-3 !py-2 rounded-sm !product-body-text-4-semibold bg-semantic-bg-primary"
+                  >
+                    Edit the component ID
+                    <Tooltip.Arrow
+                      className="fill-semantic-bg-primary"
+                      offset={10}
+                      width={9}
+                      height={6}
+                    />
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+            </Tooltip.Provider>
           </div>
           {isLatestVersion && isOwner ? (
             <ConnectorNodeControlPanel
@@ -946,7 +972,13 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
           </>
         )}
         <div className="flex flex-row-reverse">
-          <ResourceNameTag resourceName={data.component.resource_name} />
+          <ResourceIDTag
+            resourceID={
+              data.component.resource_name
+                ? data.component.resource_name.split("/")[3]
+                : null
+            }
+          />
         </div>
       </div>
       <CustomHandle
