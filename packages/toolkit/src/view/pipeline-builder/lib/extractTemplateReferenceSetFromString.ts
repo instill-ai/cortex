@@ -23,10 +23,10 @@ export function extractTemplateReferenceSetFromString(
   const singleCurlyBraceReferences: TemplateReference[] = [];
   let doubleCurlyBraceReferenceCount = 0;
   const doubleCurlyBraceReferences: TemplateReference[] = [];
-  let subsituteValue = value;
+  let subsituteValue = String(value);
 
   const doubleCurlyBracesRegex = /\{\{([^{}]+)\}\}/gm;
-  const doubleCurlyBracesMatchs = value.match(doubleCurlyBracesRegex);
+  const doubleCurlyBracesMatchs = String(value).match(doubleCurlyBracesRegex);
 
   if (doubleCurlyBracesMatchs) {
     for (const match of doubleCurlyBracesMatchs) {

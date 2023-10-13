@@ -342,11 +342,11 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
 
   const hasTargetEdges = React.useMemo(() => {
     return edges.some((edge) => edge.target === id);
-  }, [edges]);
+  }, [edges, id]);
 
   const hasSourceEdges = React.useMemo(() => {
     return edges.some((edge) => edge.source === id);
-  }, [edges]);
+  }, [edges, id]);
 
   function handleCopyNode() {
     const nodeIndex =
@@ -533,8 +533,8 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               <Tooltip.Root>
                 <Tooltip.Trigger asChild>
                   {/* 
-                eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-              */}
+                    eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+                  */}
                   <span className="flex" tabIndex={0}>
                     <button
                       onClick={(e) => {
@@ -576,7 +576,6 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               }
               handleCopyNode={handleCopyNode}
               handleDeleteNode={handleDeleteNode}
-              nodeID={id}
               resourceName={data.component.resource_name}
               testModeEnabled={testModeEnabled}
             />
@@ -831,18 +830,16 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
               "connector-definitions/data-gcs" ? (
               testModeEnabled ? (
                 <div className="mb-3 flex flex-col space-y-3">
-                  {Object.entries(data.component.configuration.input).map(
-                    ([key]) => {
-                      return (
-                        <div key={key} className="flex flex-col space-y-1">
-                          <p className="text-semantic-fg-primary product-body-text-3-semibold">
-                            {key}
-                          </p>
-                          <div className="min-h-[32px] rounded-sm bg-semantic-bg-primary px-2 py-1 text-semantic-fg-primary"></div>
-                        </div>
-                      );
-                    }
-                  )}
+                  {Object.entries(data.component.configuration).map(([key]) => {
+                    return (
+                      <div key={key} className="flex flex-col space-y-1">
+                        <p className="text-semantic-fg-primary product-body-text-3-semibold">
+                          {key}
+                        </p>
+                        <div className="min-h-[32px] rounded-sm bg-semantic-bg-primary px-2 py-1 text-semantic-fg-primary"></div>
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
                 <div className="mb-3 flex flex-col">
@@ -851,7 +848,7 @@ export const ConnectorNode = ({ data, id }: NodeProps<ConnectorNodeData>) => {
                       ? Object.entries(
                           data.component.configuration.input
                             .data as GeneralRecord
-                        ).map(([key, value]) => {
+                        ).map(([key]) => {
                           return (
                             <div key={key} className="flex flex-col">
                               <div className="flex flex-row items-center justify-between">

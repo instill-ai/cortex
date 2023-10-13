@@ -23,7 +23,8 @@ export function extractPipelineComponentReferenceFromString({
     const singleCurlyBracesRegex = /\{([^{}]+)\}/gm;
 
     // Each value can only have one single curly braces reference
-    const singleCurlyBracesMatchs = value.match(singleCurlyBracesRegex);
+    const singleCurlyBracesMatchs = String(value).match(singleCurlyBracesRegex);
+
     if (singleCurlyBracesMatchs) {
       return {
         path: newPath.join("."),

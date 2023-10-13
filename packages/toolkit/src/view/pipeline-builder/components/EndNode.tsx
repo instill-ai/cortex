@@ -177,7 +177,7 @@ export const EndNode = ({ data, id }: NodeProps<EndNodeData>) => {
 
   const hasTargetEdges = React.useMemo(() => {
     return edges.some((edge) => edge.target === id);
-  }, [edges]);
+  }, [edges, id]);
 
   return (
     <>

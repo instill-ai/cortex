@@ -43,7 +43,6 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   updatePipelineIsNew: state.updatePipelineIsNew,
   pipelineRecipeIsDirty: state.pipelineRecipeIsDirty,
   updatePipelineRecipeIsDirty: state.updatePipelineRecipeIsDirty,
-  updateSelectResourceDialogIsOpen: state.updateSelectResourceDialogIsOpen,
 });
 
 export type PipelineNameFormProps = {
@@ -86,7 +85,6 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     updatePipelineIsNew,
     pipelineRecipeIsDirty,
     updatePipelineRecipeIsDirty,
-    updateSelectResourceDialogIsOpen,
   } = usePipelineBuilderStore(pipelineBuilderSelector, shallow);
 
   React.useEffect(() => {
