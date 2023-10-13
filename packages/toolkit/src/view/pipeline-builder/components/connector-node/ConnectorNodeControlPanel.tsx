@@ -2,14 +2,12 @@ import { Button, Icons } from "@instill-ai/design-system";
 import { Nullable } from "../../../../lib";
 
 export const ConnectorNodeControlPanel = ({
-  nodeID,
   resourceName,
   handleDeleteNode,
   handleCopyNode,
   handleEditNode,
   testModeEnabled,
 }: {
-  nodeID: string;
   resourceName: Nullable<string>;
   handleDeleteNode: () => void;
   handleCopyNode: () => void;

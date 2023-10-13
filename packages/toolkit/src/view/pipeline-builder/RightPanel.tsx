@@ -4,7 +4,6 @@ import {
 } from "./usePipelineBuilderStore";
 import { shallow } from "zustand/shallow";
 import { Button, Icons, Separator } from "@instill-ai/design-system";
-import { ImageWithFallback } from "../../components";
 import { AIForm } from "../ai";
 import { BlockchainForm } from "../blockchain";
 import { DataComponentForm } from "../data";

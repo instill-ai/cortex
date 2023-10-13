@@ -22,7 +22,6 @@ import {
 } from "../lib";
 import { ObjectField } from "./ObjectField";
 import { ObjectsField } from "./ObjectsField";
-import { ArrayObjectField } from "./ArrayObjectField";
 
 export function useConnectorTestModeOutputFields(
   component: PipelineConnectorComponent,
@@ -42,8 +41,6 @@ export function useConnectorTestModeOutputFields(
     }
 
     const trace = traces ? traces[component.id] : null;
-
-    console.log(outputProperties);
 
     const fields = getOutputFieldComponent({
       properties: outputProperties,

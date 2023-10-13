@@ -31,8 +31,8 @@ export const DataResourceSchema = z
       // Pinecone - TASK_QUERY
       namespace: z.string().nullable().optional(),
       top_k: z.string().nullable().optional(),
-      include_values: z.boolean().nullable().optional(),
-      include_metadata: z.boolean().nullable().optional(),
+      include_values: z.coerce.boolean().nullable().optional(),
+      include_metadata: z.coerce.boolean().nullable().optional(),
       vector: z.string().nullable().optional(),
 
       // Pinecone - TASK_UPSERT
@@ -259,8 +259,6 @@ export const DataComponentForm = ({
   function onSubmit(data: z.infer<typeof DataResourceSchema>) {
     if (!selectedConnectorNodeId) return;
     const modifiedData = recursiveReplaceNullAndEmptyStringWithUndefined(data);
-
-    console.log(modifiedData);
 
     const newNodes = nodes.map((node) => {
       if (

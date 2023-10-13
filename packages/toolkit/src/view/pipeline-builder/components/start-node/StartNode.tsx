@@ -11,7 +11,6 @@ import {
   usePipelineBuilderStore,
 } from "../../usePipelineBuilderStore";
 import {
-  recursiveParseToNum,
   recursiveRemoveUndefinedAndNullFromArray,
   recursiveReplaceNullAndEmptyStringWithUndefined,
 } from "../../lib";
@@ -110,7 +109,7 @@ export const StartNode = ({ data, id }: NodeProps<StartNodeData>) => {
 
   const hasSourceEdges = React.useMemo(() => {
     return edges.some((edge) => edge.source === id);
-  }, [edges]);
+  }, [edges, id]);
 
   return (
     <React.Fragment>
