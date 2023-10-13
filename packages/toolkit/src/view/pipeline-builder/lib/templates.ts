@@ -307,6 +307,7 @@ export const templates: PipelineTemplate[] = [
               },
               images: "{ai_1.output.images}",
             },
+            task: "TASK_COMMIT",
           },
           type: "COMPONENT_TYPE_CONNECTOR_BLOCKCHAIN",
           definition_name: "connector-definitions/blockchain-numbers",
