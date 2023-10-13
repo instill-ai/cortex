@@ -1,5 +1,12 @@
 # @instill-ai/design-system
 
+## [0.55.7](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.6...@instill-ai/design-system-v0.55.7) (2023-10-13)
+
+
+### Miscellaneous
+
+* **design-system:** add story about how to build the autoresize input ([#947](https://github.com/instill-ai/cortex/issues/947)) ([c0c3e2d](https://github.com/instill-ai/cortex/commit/c0c3e2d788a9c9b424d35b015d1e418e1b4577ce))
+
 ## [0.55.6](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.5...@instill-ai/design-system-v0.55.6) (2023-10-10)
 
 

@@ -1,5 +1,31 @@
 # Changelog
 
+## [0.69.0](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.68.2...@instill-ai/toolkit-v0.69.0) (2023-10-13)
+
+
+### Features
+
+* **cortex:** user can duplicate the pipeline they owned ([#945](https://github.com/instill-ai/cortex/issues/945)) ([e8719d3](https://github.com/instill-ai/cortex/commit/e8719d33d7fb17b38fb46e9dd2c11da6b88a9bf7))
+* **pipeline-builder:** Make the array fields on start node start with only one field ([#959](https://github.com/instill-ai/cortex/issues/959)) ([e203cde](https://github.com/instill-ai/cortex/commit/e203cde35a9507d38428635f5e0babec8e064d45))
+* **pipeline-builder:** User can better differentiate the resource_name on right panel and the node_name on the node ([#953](https://github.com/instill-ai/cortex/issues/953)) ([4e21a13](https://github.com/instill-ai/cortex/commit/4e21a13973a2b622e4160a8e4bc41d106af65197))
+* **pipeline-builder:** User can have cleaner canvas by introducing smooth-edge edges ([#958](https://github.com/instill-ai/cortex/issues/958)) ([780ee01](https://github.com/instill-ai/cortex/commit/780ee01a0b3dab8a05a5dba3ce8a002a57b2962c))
+* **pipeline-builder:** user can have consistent node width between TEST_VIEW and BUILD_VIEW ([#957](https://github.com/instill-ai/cortex/issues/957)) ([82f2a04](https://github.com/instill-ai/cortex/commit/82f2a04eac5829b0c18ccc37ce60adf5e105f3dd))
+* **toolkit:** adapt the new component input structure ([#951](https://github.com/instill-ai/cortex/issues/951)) ([9dc5835](https://github.com/instill-ai/cortex/commit/9dc58355c7fd8587fcf1a79737a24ac1ff7e9c8c))
+* **toolkit:** user can better identify some nested output on connector nodes ([#954](https://github.com/instill-ai/cortex/issues/954)) ([f1c6b38](https://github.com/instill-ai/cortex/commit/f1c6b3832763f38e546c5b3490dba1c01c5664b9))
+* **toolkit:** User can better identify the process is still running when doing actions ([#952](https://github.com/instill-ai/cortex/issues/952)) ([4a1f433](https://github.com/instill-ai/cortex/commit/4a1f433fbd95e52271629f6ab7f1a429d75ee72d))
+* **toolkit:** User can have autoresize input when edit node and pipeline name ([#948](https://github.com/instill-ai/cortex/issues/948)) ([4d2bbc5](https://github.com/instill-ai/cortex/commit/4d2bbc5a70b73d620393ac667e3792f1b1ff5064))
+
+
+### Bug Fixes
+
+* **pipeline-builder:** fix a bug when create fields on the end operator will wrongly use the key from the previous edited field ([#956](https://github.com/instill-ai/cortex/issues/956)) ([a679fd6](https://github.com/instill-ai/cortex/commit/a679fd69bde36da82cb6085c6ba2bbc15765ed51))
+* **pipeline-builder:** fix data connector can't correctly display the free-form's value ([#962](https://github.com/instill-ai/cortex/issues/962)) ([5625723](https://github.com/instill-ai/cortex/commit/5625723e666edc9f9625b5d9688de539b0ac5cf0))
+* **pipeline-builder:** fix data connector can't have multiple free-form fields ([#960](https://github.com/instill-ai/cortex/issues/960)) ([64d48df](https://github.com/instill-ai/cortex/commit/64d48df9a132673b2c95b3974e03f9e4949a3449))
+* **toolkit:** fix a bug when trigger pipeline, we wrongly parsed string value to number ([#955](https://github.com/instill-ai/cortex/issues/955)) ([be87383](https://github.com/instill-ai/cortex/commit/be8738325d7cda4bdde2c85eb0d7ddeac87977b4))
+* **toolkit:** fix console doesn't correctly handle boolean value on pipeline builder ([#961](https://github.com/instill-ai/cortex/issues/961)) ([2e4159a](https://github.com/instill-ai/cortex/commit/2e4159a6057269ff8e170e27043598c60571d9a9))
+* **toolkit:** fix rename pipeline issue when there has unsaved changes ([#950](https://github.com/instill-ai/cortex/issues/950)) ([0fafdb3](https://github.com/instill-ai/cortex/commit/0fafdb3694a8dd1bc03ca3b479068522a535722c))
+* **toolkit:** fix start operator wrongly delete input when you edit without saving then creating a new field ([#949](https://github.com/instill-ai/cortex/issues/949)) ([b75cddc](https://github.com/instill-ai/cortex/commit/b75cddc191797a0e92900d904667a5b45833c0f8))
+
 ## [0.68.2](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.68.1...@instill-ai/toolkit-v0.68.2) (2023-10-04)
 
 
