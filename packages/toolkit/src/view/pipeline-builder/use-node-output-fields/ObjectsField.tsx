@@ -17,7 +17,7 @@ export const ObjectsField = (props: ObjectsFieldProps) => {
           {objects?.map((object) => (
             <pre
               key={`${title}-${JSON.stringify(object)}-field`}
-              className="min-h-[16px] whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
+              className="min-h-[16px] whitespace-pre-line max-w-[480px] break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
             >
               {JSON.stringify(object, null, 2)}
             </pre>
@@ -33,7 +33,7 @@ export const ObjectsField = (props: ObjectsFieldProps) => {
         {objects?.map((object) => (
           <pre
             key={`${title}-${JSON.stringify(object)}-field`}
-            className="min-h-[16px] whitespace-pre-line max-w-[480px] breal-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
+            className="min-h-[16px] whitespace-pre-line max-w-[480px] break-all flex flex-1 text-semantic-fg-primary product-body-text-4-regular"
           >
             {JSON.stringify(object, null, 2)}
           </pre>
