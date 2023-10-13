@@ -73,6 +73,7 @@ export const OutputProperties = ({
                     <div className="flex flex-col gap-y-2">
                       {items.map((item) => (
                         <OutputPropertyItem
+                          key={item.path ? item.path : item.title}
                           title={property.title ?? null}
                           path={property.path ?? null}
                         />
@@ -84,6 +85,7 @@ export const OutputProperties = ({
 
               return (
                 <OutputPropertyItem
+                  key={property.path ? property.path : property.title}
                   title={property.title ?? null}
                   path={property.path ?? null}
                 />

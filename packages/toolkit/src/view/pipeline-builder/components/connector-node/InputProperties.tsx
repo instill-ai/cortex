@@ -15,7 +15,6 @@ import { InputPropertyItem } from "./InputPropertyItem";
 
 const selector = (store: PipelineBuilderStore) => ({
   expandAllNodes: store.expandAllNodes,
-  testModeEnabled: store.testModeEnabled,
 });
 
 export const InputProperties = ({
@@ -27,10 +26,7 @@ export const InputProperties = ({
   inputSchema: Nullable<OpenAPIV3.SchemaObject>;
   traces: Nullable<Record<string, PipelineTrace>>;
 }) => {
-  const { expandAllNodes, testModeEnabled } = usePipelineBuilderStore(
-    selector,
-    shallow
-  );
+  const { expandAllNodes } = usePipelineBuilderStore(selector, shallow);
 
   const [exapndInputs, setExpandInputs] = React.useState(false);
 
