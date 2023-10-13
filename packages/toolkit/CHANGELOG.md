@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.69.1](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.69.0...@instill-ai/toolkit-v0.69.1) (2023-10-13)
+
+
+### Bug Fixes
+
+* **toolkit:** fix boolean issue ([#963](https://github.com/instill-ai/cortex/issues/963)) ([761b6a5](https://github.com/instill-ai/cortex/commit/761b6a5233ca21cda651dc92c041cdce87e370a7))
+
 ## [0.69.0](https://github.com/instill-ai/cortex/compare/@instill-ai/toolkit-v0.68.2...@instill-ai/toolkit-v0.69.0) (2023-10-13)
 
 
