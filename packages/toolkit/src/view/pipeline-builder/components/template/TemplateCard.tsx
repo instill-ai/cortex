@@ -14,7 +14,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
   const { className, onClick, template } = props;
 
   return (
-    <button
+    <div
       className={cn(
         "flex relative group hover:opacity-50 flex-col gap-y-3 cursor-pointer rounded-[4px] bg-semantic-bg-primary hover:bg-semantic-accent-bg hover:border-semantic-accent-default border border-semantic-bg-line px-2 py-3",
         className
@@ -68,6 +68,6 @@ export const TemplateCard = (props: TemplateCardProps) => {
           use template
         </Tag>
       </div>
-    </button>
+    </div>
   );
 };
