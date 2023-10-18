@@ -33,6 +33,7 @@ import {
 } from "../pipeline-builder";
 import { AirbyteDestinationFields } from "../airbyte";
 import { useRouter } from "next/router";
+import { LoadingSpin } from "../../components";
 
 export type DataResourceFormProps = {
   dataResource: Nullable<ConnectorResourceWithDefinition>;
@@ -65,6 +66,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
   const { toast } = useToast();
   const router = useRouter();
   const { entity } = router.query;
+
+  const [isSaving, setIsSaving] = React.useState(false);
 
   const [airbyteFormIsDirty, setAirbyteFormIsDirty] = React.useState(false);
 
@@ -139,7 +142,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
   const updateData = useUpdateUserConnectorResource();
 
   const handleCreateData = React.useCallback(async () => {
-    if (!fieldValues || !formYup) {
+    if (!fieldValues || !formYup || isSaving) {
       return;
     }
 
@@ -194,6 +197,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
 
     setFieldErrors(null);
 
+    setIsSaving(true);
+
     if (!dataResource) {
       const payload: CreateUserConnectorResourcePayload = {
         id: fieldValues.id as string,
@@ -218,6 +223,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
               variant: "alert-success",
               size: "small",
             });
+
+            setIsSaving(false);
           },
           onError: (error) => {
             if (isAxiosError(error)) {
@@ -235,6 +242,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
                 description: "Please try again later",
               });
             }
+
+            setIsSaving(false);
           },
         }
       );
@@ -268,6 +277,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
             variant: "alert-success",
             size: "small",
           });
+
+          setIsSaving(false);
         },
         onError: (error) => {
           if (isAxiosError(error)) {
@@ -285,6 +296,8 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
               description: "Please try again later",
             });
           }
+
+          setIsSaving(false);
         },
       }
     );
@@ -299,6 +312,7 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
     dataResource,
     updateData,
     entity,
+    isSaving,
   ]);
 
   return (
@@ -348,14 +362,14 @@ export const DataResourceForm = (props: DataResourceFormProps) => {
           </Button>
         ) : null}
         <Button
-          variant="secondaryColour"
-          disabled={disabledAll ? disabledAll : false}
+          variant="primary"
+          disabled={disabledAll ? disabledAll : isSaving}
           size="lg"
           className={cn(enableBackButton ? "!w-full !flex-1" : "ml-auto")}
           onClick={() => handleCreateData()}
           type="button"
         >
-          Save
+          {isSaving ? <LoadingSpin /> : "Save"}
         </Button>
       </div>
     </FormRoot>

@@ -35,7 +35,6 @@ export type ResourcesTableProps = {
 
 export const ResourcesTable = (props: ResourcesTableProps) => {
   const { connectorResources, isError, isLoading, accessToken } = props;
-  const [isDeleting, setIsDeleting] = React.useState(false);
   const { toast } = useToast();
 
   const deleteUserConnectorResource = useDeleteUserConnectorResource();
@@ -47,8 +46,6 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
       return;
     }
 
-    setIsDeleting(true);
-
     deleteUserConnectorResource.mutate(
       {
         connectorResourceName: resource.name,
@@ -56,7 +53,6 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
       },
       {
         onSuccess: () => {
-          setIsDeleting(false);
           toast({
             title: "Successfully delete resource",
             variant: "alert-success",
@@ -64,7 +60,6 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
           });
         },
         onError: (error) => {
-          setIsDeleting(false);
           if (isAxiosError(error)) {
             toast({
               title: "Something went wrong when delete the resource",
@@ -160,7 +155,6 @@ export const ResourcesTable = (props: ResourcesTableProps) => {
                 <GeneralDeleteResourceModal
                   resource={row.original}
                   handleDeleteResource={handleDeleteUserConnectorResource}
-                  isDeleting={isDeleting}
                 />
               </Dialog.Content>
             </Dialog.Root>

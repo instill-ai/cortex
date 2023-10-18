@@ -19,29 +19,31 @@ import { PipelineComponentReference } from "../pipeline-builder";
 
 export const BlockchainFormSchema = z
   .object({
-    images: z.string().nullable().optional(),
-    asset_creator: z.string().nullable().optional(),
-    abstract: z.string().nullable().optional(),
-    custom: z
-      .object({
-        digital_source_type: z.string().nullable().optional(),
-        mining_preference: z.string().nullable().optional(),
-        generated_through: z.string().nullable().optional(),
-        generated_by: z.string().nullable().optional(),
-        creator_wallet: z.string().nullable().optional(),
-        license: z
-          .object({
-            name: z.string().nullable().optional(),
-            document: z.string().nullable().optional(),
-          })
-          .optional()
-          .nullable(),
-      })
-      .nullable()
-      .optional(),
+    input: z.object({
+      images: z.string().nullable().optional(),
+      asset_creator: z.string().nullable().optional(),
+      abstract: z.string().nullable().optional(),
+      custom: z
+        .object({
+          digital_source_type: z.string().nullable().optional(),
+          mining_preference: z.string().nullable().optional(),
+          generated_through: z.string().nullable().optional(),
+          generated_by: z.string().nullable().optional(),
+          creator_wallet: z.string().nullable().optional(),
+          license: z
+            .object({
+              name: z.string().nullable().optional(),
+              document: z.string().nullable().optional(),
+            })
+            .optional()
+            .nullable(),
+        })
+        .nullable()
+        .optional(),
+    }),
   })
   .superRefine((state, ctx) => {
-    if (!state.images) {
+    if (!state.input.images) {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "images is required",
@@ -50,119 +52,119 @@ export const BlockchainFormSchema = z
     } else {
       const result = validateIntillUpstreamTypes({
         type: "reference",
-        value: state.images,
+        value: state.input.images,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["images"],
+          path: ["input.images"],
         });
       }
     }
 
-    if (state.asset_creator) {
+    if (state.input.asset_creator) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.asset_creator,
+        value: state.input.asset_creator,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["asset_creator"],
+          path: ["input.asset_creator"],
         });
       }
     }
 
-    if (state.abstract) {
+    if (state.input.abstract) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.abstract,
+        value: state.input.abstract,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["abstract"],
+          path: ["input.abstract"],
         });
       }
     }
 
-    if (state.custom?.generated_through) {
+    if (state.input.custom?.generated_through) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.custom?.generated_through,
+        value: state.input.custom?.generated_through,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["custom.generated_through"],
+          path: ["input.custom.generated_through"],
         });
       }
     }
 
-    if (state.custom?.generated_by) {
+    if (state.input.custom?.generated_by) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.custom?.generated_by,
+        value: state.input.custom?.generated_by,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["custom.generated_by"],
+          path: ["input.custom.generated_by"],
         });
       }
     }
 
-    if (state.custom?.creator_wallet) {
+    if (state.input.custom?.creator_wallet) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.custom?.creator_wallet,
+        value: state.input.custom?.creator_wallet,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["custom.creator_wallet"],
+          path: ["input.custom.creator_wallet"],
         });
       }
     }
 
-    if (state.custom?.license?.name) {
+    if (state.input.custom?.license?.name) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.custom?.license?.name,
+        value: state.input.custom?.license?.name,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["custom.license.name"],
+          path: ["input.custom.license.name"],
         });
       }
     }
 
-    if (state.custom?.license?.document) {
+    if (state.input.custom?.license?.document) {
       const result = validateIntillUpstreamTypes({
         type: "reference_and_string",
-        value: state.custom?.license?.document,
+        value: state.input.custom?.license?.document,
       });
 
       if (!result.isValid) {
         ctx.addIssue({
           code: z.ZodIssueCode.custom,
           message: result.error,
-          path: ["custom.license.document"],
+          path: ["input.custom.license.document"],
         });
       }
     }
@@ -198,10 +200,12 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
     resolver: zodResolver(BlockchainFormSchema),
     defaultValues: {
       ...configuration,
-      images: undefined,
-      custom: {
-        digital_source_type: "trainedAlgorithmicMedia",
-        mining_preference: "notAllowed",
+      input: {
+        images: undefined,
+        custom: {
+          digital_source_type: "trainedAlgorithmicMedia",
+          mining_preference: "notAllowed",
+        },
       },
     },
   });
@@ -209,7 +213,10 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
   const { reset } = form;
 
   useEffect(() => {
-    reset(configuration);
+    reset({
+      ...configuration,
+      input: configuration.input ? configuration.input : {},
+    });
   }, [configuration, reset]);
 
   function onSubmit(data: z.infer<typeof BlockchainFormSchema>) {
@@ -225,7 +232,8 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             component: {
               ...node.data.component,
               configuration: {
-                input: data,
+                ...data,
+                task: "TASK_COMMIT",
               },
             },
           },
@@ -263,7 +271,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
         <div className="mb-10 flex flex-col space-y-5">
           <Form.Field
             control={form.control}
-            name="images"
+            name="input.images"
             render={({ field }) => {
               return (
                 <Form.Item>
@@ -289,7 +297,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="asset_creator"
+            name="input.asset_creator"
             render={({ field }) => {
               return (
                 <Form.Item>
@@ -315,7 +323,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
           />
           <Form.Field
             control={form.control}
-            name="abstract"
+            name="input.abstract"
             render={({ field }) => {
               return (
                 <Form.Item>
@@ -345,7 +353,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             </p>
             <Form.Field
               control={form.control}
-              name="custom.digital_source_type"
+              name="input.custom.digital_source_type"
               render={({ field }) => {
                 return (
                   <Form.Item>
@@ -409,7 +417,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             />
             <Form.Field
               control={form.control}
-              name="custom.mining_preference"
+              name="input.custom.mining_preference"
               render={({ field }) => {
                 return (
                   <Form.Item>
@@ -492,7 +500,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             />
             <Form.Field
               control={form.control}
-              name="custom.generated_through"
+              name="input.custom.generated_through"
               render={({ field }) => {
                 return (
                   <Form.Item>
@@ -518,7 +526,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             />
             <Form.Field
               control={form.control}
-              name="custom.generated_by"
+              name="input.custom.generated_by"
               render={({ field }) => {
                 return (
                   <Form.Item>
@@ -544,7 +552,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
             />
             <Form.Field
               control={form.control}
-              name="custom.creator_wallet"
+              name="input.custom.creator_wallet"
               render={({ field }) => {
                 return (
                   <Form.Item>
@@ -574,7 +582,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
               </p>
               <Form.Field
                 control={form.control}
-                name="custom.license.name"
+                name="input.custom.license.name"
                 render={({ field }) => {
                   return (
                     <Form.Item>
@@ -600,7 +608,7 @@ export const BlockchainForm = (props: BlockchainFormProps) => {
               />
               <Form.Field
                 control={form.control}
-                name="custom.license.document"
+                name="input.custom.license.document"
                 render={({ field }) => {
                   return (
                     <Form.Item>

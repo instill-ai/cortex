@@ -26,6 +26,7 @@ import {
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
 import { useRouter } from "next/router";
+import { LoadingSpin } from "../../components";
 
 export const AIResourceFormSchema = z
   .object({
@@ -100,6 +101,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
   const router = useRouter();
   const { entity } = router.query;
 
+  const [isSaving, setIsSaving] = React.useState(false);
+
   const form = useForm<z.infer<typeof AIResourceFormSchema>>({
     resolver: zodResolver(AIResourceFormSchema),
     defaultValues: aiResource
@@ -125,6 +128,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
   const updateAI = useUpdateUserConnectorResource();
 
   function handleCreateAI(data: z.infer<typeof AIResourceFormSchema>) {
+    setIsSaving(true);
+
     if (!aiResource) {
       const payload = {
         id: data.id,
@@ -151,6 +156,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
               variant: "alert-success",
               size: "small",
             });
+
+            setIsSaving(false);
           },
           onError: (error) => {
             if (isAxiosError(error)) {
@@ -168,6 +175,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
                 description: "Please try again later",
               });
             }
+
+            setIsSaving(false);
           },
         }
       );
@@ -203,6 +212,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
             variant: "alert-success",
             size: "small",
           });
+
+          setIsSaving(false);
         },
         onError: (error) => {
           if (isAxiosError(error)) {
@@ -220,6 +231,8 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
               description: "Please try again later",
             });
           }
+
+          setIsSaving(false);
         },
       }
     );
@@ -463,8 +476,9 @@ export const AIResourceForm = (props: AIResourceFormProps) => {
             variant="primary"
             size="lg"
             className={cn(enableBackButton ? "!w-full !flex-1" : "ml-auto")}
+            disabled={isSaving}
           >
-            Save
+            {isSaving ? <LoadingSpin /> : "Save"}
           </Button>
         </div>
       </form>

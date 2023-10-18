@@ -1,9 +1,10 @@
 import * as React from "react";
 import { Button, Dialog, Icons } from "@instill-ai/design-system";
+import { LoadingSpin } from "./LoadingSpin";
 
 export type WarnUnsavedChangesModalProps = {
   onCancel: () => void;
-  onSave: () => void;
+  onSave: () => Promise<void>;
   onDiscard: () => void;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,6 +17,8 @@ export const WarnUnsavedChangesModal = ({
   open,
   setOpen,
 }: WarnUnsavedChangesModalProps) => {
+  const [isSaving, setIsSaving] = React.useState(false);
+
   return (
     <Dialog.Root open={open} onOpenChange={(open) => setOpen(open)}>
       <Dialog.Content className="!w-[400px]">
@@ -54,14 +57,23 @@ export const WarnUnsavedChangesModal = ({
               Don&apos;t Save
             </Button>
             <Button
-              onClick={() => {
-                onSave();
+              onClick={async () => {
+                if (isSaving) return;
+
+                setIsSaving(true);
+                try {
+                  await onSave();
+                  setOpen(false);
+                } catch (e) {
+                  setIsSaving(false);
+                }
               }}
               variant="primary"
               size="lg"
               className="!flex-1 !px-2.5"
+              disabled={isSaving}
             >
-              Save
+              {isSaving ? <LoadingSpin /> : "Save"}
             </Button>
           </div>
         </div>

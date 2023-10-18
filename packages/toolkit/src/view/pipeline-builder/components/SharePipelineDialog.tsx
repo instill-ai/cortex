@@ -132,8 +132,8 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
                         <Tooltip.Arrow
                           className="fill-semantic-bg-primary"
                           offset={10}
-                          width={18}
-                          height={12}
+                          width={9}
+                          height={6}
                         />
                       </Tooltip.Content>
                     </Tooltip.Portal>
@@ -218,8 +218,8 @@ export const SharePipelineDialog = (props: SharePipelineDialogProps) => {
                           <Tooltip.Arrow
                             className="fill-semantic-bg-primary"
                             offset={10}
-                            width={18}
-                            height={12}
+                            width={9}
+                            height={6}
                           />
                         </Tooltip.Content>
                       </Tooltip.Portal>

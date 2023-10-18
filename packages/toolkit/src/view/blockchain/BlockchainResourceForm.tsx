@@ -27,6 +27,7 @@ import {
   recursiveReplaceTargetValue,
 } from "../pipeline-builder";
 import { useRouter } from "next/router";
+import { LoadingSpin } from "../../components";
 
 export const BlockchainResourceFormSchema = z
   .object({
@@ -80,6 +81,8 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
     enableBackButton,
   } = props;
 
+  const [isSaving, setIsSaving] = React.useState(false);
+
   const form = useForm<z.infer<typeof BlockchainResourceFormSchema>>({
     resolver: zodResolver(BlockchainResourceFormSchema),
     defaultValues: blockchainResource
@@ -99,6 +102,10 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
   function handleCreateBlockchain(
     data: z.infer<typeof BlockchainResourceFormSchema>
   ) {
+    if (isSaving) return;
+
+    setIsSaving(true);
+
     if (!blockchainResource) {
       const payload = {
         id: data.id,
@@ -125,6 +132,8 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
               variant: "alert-success",
               size: "small",
             });
+
+            setIsSaving(false);
           },
           onError: (error) => {
             if (isAxiosError(error)) {
@@ -144,6 +153,8 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
                 description: "Please try again later",
               });
             }
+
+            setIsSaving(false);
           },
         }
       );
@@ -178,6 +189,8 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
             variant: "alert-success",
             size: "small",
           });
+
+          setIsSaving(false);
         },
         onError: (error) => {
           if (isAxiosError(error)) {
@@ -195,6 +208,8 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
               description: "Please try again later",
             });
           }
+
+          setIsSaving(false);
         },
       }
     );
@@ -309,8 +324,9 @@ export const BlockchainResourceForm = (props: BlockchainResourceFormProps) => {
             variant="primary"
             size="lg"
             className={cn(enableBackButton ? "!w-full !flex-1" : "ml-auto")}
+            disabled={isSaving}
           >
-            Save
+            {isSaving ? <LoadingSpin /> : "Save"}
           </Button>
         </div>
       </form>

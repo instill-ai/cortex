@@ -25,6 +25,7 @@ import {
 } from "../../../lib";
 import { constructPipelineRecipe } from "../lib";
 import { isAxiosError } from "axios";
+import { LoadingSpin } from "../../../components";
 
 const selector = (state: PipelineBuilderStore) => ({
   pipelineName: state.pipelineName,
@@ -45,6 +46,7 @@ export type ReleasePipelineModalProps = {
 export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
   const { accessToken } = props;
   const [modalIsOpen, setModalIsOpen] = React.useState(false);
+  const [isReleasing, setIsReleasing] = React.useState(false);
 
   const { toast } = useToast();
 
@@ -58,7 +60,9 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
   const releasePipelineVersion = useCreateUserPipelineRelease();
 
   function onSubmit(formData: z.infer<typeof ReleasePipelineFormSchema>) {
-    if (!pipelineName) return;
+    if (!pipelineName || isReleasing) return;
+
+    setIsReleasing(true);
 
     const payload: CreateUserPipelineReleasePayload = {
       id: formData.id,
@@ -86,6 +90,7 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
           });
 
           setModalIsOpen(false);
+          setIsReleasing(false);
         },
         onError: (error) => {
           if (isAxiosError(error)) {
@@ -103,6 +108,7 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
               description: "Please try again later",
             });
           }
+          setIsReleasing(false);
         },
       }
     );
@@ -122,7 +128,7 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
       <Dialog.Trigger asChild>
         <Tooltip.Provider>
           <Tooltip.Root>
-            <Tooltip.Trigger asChild={true}>
+            <Tooltip.Trigger asChild>
               {/* 
                 This will make tooltip work even with a disabled button
                 https://www.radix-ui.com/primitives/docs/components/tooltip#displaying-a-tooltip-from-a-disabled-button
@@ -156,8 +162,8 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
                 <Tooltip.Arrow
                   className="fill-semantic-bg-primary"
                   offset={10}
-                  width={18}
-                  height={12}
+                  width={9}
+                  height={6}
                 />
               </Tooltip.Content>
             </Tooltip.Portal>
@@ -241,8 +247,9 @@ export const ReleasePipelineModal = (props: ReleasePipelineModalProps) => {
                   variant="primary"
                   size="lg"
                   className="!flex-1"
+                  disabled={isReleasing}
                 >
-                  Release
+                  {isReleasing ? <LoadingSpin /> : "Release"}
                 </Button>
               </div>
             </form>

@@ -1,5 +1,33 @@
 # @instill-ai/design-system
 
+## [0.55.7](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.6...@instill-ai/design-system-v0.55.7) (2023-10-13)
+
+
+### Miscellaneous
+
+* **design-system:** add story about how to build the autoresize input ([#947](https://github.com/instill-ai/cortex/issues/947)) ([c0c3e2d](https://github.com/instill-ai/cortex/commit/c0c3e2d788a9c9b424d35b015d1e418e1b4577ce))
+
+## [0.55.6](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.5...@instill-ai/design-system-v0.55.6) (2023-10-10)
+
+
+### Bug Fixes
+
+* **design-system:** fix DropdownMenu syntax and style not align with design doc ([#943](https://github.com/instill-ai/cortex/issues/943)) ([553f8f9](https://github.com/instill-ai/cortex/commit/553f8f9bba60d9ddafbd8663acbae01c0a13d7fc))
+
+## [0.55.5](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.4...@instill-ai/design-system-v0.55.5) (2023-10-09)
+
+
+### Miscellaneous
+
+* **design-system:** add DotsVertical icon ([#941](https://github.com/instill-ai/cortex/issues/941)) ([242dee0](https://github.com/instill-ai/cortex/commit/242dee09b64d9040387efd14170fd3080a2069be))
+
+## [0.55.4](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.3...@instill-ai/design-system-v0.55.4) (2023-10-05)
+
+
+### Miscellaneous
+
+* **design-system:** add &lt;Label /&gt; component to design system ([#939](https://github.com/instill-ai/cortex/issues/939)) ([12c98cd](https://github.com/instill-ai/cortex/commit/12c98cd68cd8ae0f834913e36304510cbf0a3eac))
+
 ## [0.55.3](https://github.com/instill-ai/cortex/compare/@instill-ai/design-system-v0.55.2...@instill-ai/design-system-v0.55.3) (2023-09-29)
 
 

@@ -85,7 +85,7 @@ export const SelectConnectorResourceDialog = (
           >
             <Icons.Plus
               className={cn(
-                "h-4 w-4",
+                "h-5 w-5",
                 disabled
                   ? "stroke-semantic-fg-secondary"
                   : "stroke-semantic-bg-primary"

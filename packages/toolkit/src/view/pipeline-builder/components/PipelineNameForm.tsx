@@ -1,3 +1,4 @@
+import cn from "clsx";
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,11 +17,18 @@ import {
   CreateUserPipelinePayload,
   Nullable,
   RenameUserPipelinePayload,
+  UpdateUserPipelinePayload,
   getInstillApiErrorMessage,
   useCreateUserPipeline,
   useRenameUserPipeline,
+  useUpdateUserPipeline,
 } from "../../../lib";
-import { constructPipelineRecipe } from "../lib";
+import {
+  constructPipelineRecipe,
+  createGraphLayout,
+  createInitialGraphData,
+} from "../lib";
+import { AutoresizeInputWrapper } from "../../../components";
 
 const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   pipelineId: state.pipelineId,
@@ -28,6 +36,8 @@ const pipelineBuilderSelector = (state: PipelineBuilderStore) => ({
   setPipelineUid: state.setPipelineUid,
   setPipelineName: state.setPipelineName,
   nodes: state.nodes,
+  updateNodes: state.updateNodes,
+  updateEdges: state.updateEdges,
   pipelineIsNew: state.pipelineIsNew,
   testModeEnabled: state.testModeEnabled,
   updatePipelineIsNew: state.updatePipelineIsNew,
@@ -70,6 +80,8 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
     pipelineIsNew,
     testModeEnabled,
     nodes,
+    updateNodes,
+    updateEdges,
     updatePipelineIsNew,
     pipelineRecipeIsDirty,
     updatePipelineRecipeIsDirty,
@@ -89,12 +101,15 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
   }, [pipelineId, form]);
 
   const createUserPipeline = useCreateUserPipeline();
+  const updateUserPipeline = useUpdateUserPipeline();
   const renameUserPipeline = useRenameUserPipeline();
 
   async function handleRenamePipeline(newId: string) {
     if (!pipelineId) {
       return;
     }
+
+    // If pipeline is new, we dircetly create the pipeline
 
     if (pipelineIsNew) {
       const payload: CreateUserPipelinePayload = {
@@ -144,6 +159,48 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
       }
 
       return;
+    }
+
+    // If the pipeline recipe is dirty, we should update the pipeline recipe
+    // first then rename the pipeline
+
+    if (pipelineRecipeIsDirty) {
+      const payload: UpdateUserPipelinePayload = {
+        name: `users/${entity}/pipelines/${pipelineId}`,
+        recipe: constructPipelineRecipe(nodes),
+      };
+
+      try {
+        const res = await updateUserPipeline.mutateAsync({
+          payload,
+          accessToken,
+        });
+
+        updatePipelineRecipeIsDirty(() => false);
+
+        const { nodes, edges } = createInitialGraphData(res.pipeline.recipe);
+
+        const graph = await createGraphLayout(nodes, edges);
+
+        updateNodes(() => graph.nodes);
+        updateEdges(() => graph.edges);
+      } catch (error) {
+        if (isAxiosError(error)) {
+          toast({
+            title: "Something went wrong when save the pipeline",
+            description: getInstillApiErrorMessage(error),
+            variant: "alert-error",
+            size: "large",
+          });
+        } else {
+          toast({
+            title: "Something went wrong when save the pipeline",
+            variant: "alert-error",
+            size: "large",
+          });
+        }
+        return;
+      }
     }
 
     const payload: RenameUserPipelinePayload = {
@@ -206,36 +263,27 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
               control={form.control}
               name="pipelineId"
               render={({ field }) => {
+                const textStyle =
+                  "text-semantic-fg-primary product-body-text-3-semibold";
+
                 return (
                   <div className="flex flex-row gap-x-2">
-                    <input
-                      {...field}
-                      ref={pipelineNameRef}
-                      className="max-w-[360px] flex-shrink bg-transparent py-2 text-semantic-fg-primary product-body-text-3-semibold focus:!ring-1 focus:!ring-semantic-accent-default"
-                      value={field.value ?? "Untitled Pipeline"}
-                      type="text"
-                      autoComplete="off"
-                      onBlur={() => {
-                        form.handleSubmit(async (data) => {
-                          if (!data.pipelineId || data.pipelineId === "") {
-                            form.reset({
-                              pipelineId:
-                                pipelineId ?? router.asPath.split("/")[2],
-                            });
-                            return;
-                          }
-
-                          if (data.pipelineId && isDirty) {
-                            await handleRenamePipeline(data.pipelineId);
-                          }
-                        })();
-                      }}
-                      onClick={(e) => e.stopPropagation()}
-                      disabled={testModeEnabled}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter") {
-                          e.preventDefault();
-                          e.stopPropagation();
+                    <AutoresizeInputWrapper
+                      value={field.value ?? ""}
+                      className="max-w-[400px] h-9"
+                      placeholderClassname={cn("p-2", textStyle)}
+                    >
+                      <input
+                        {...field}
+                        ref={pipelineNameRef}
+                        className={cn(
+                          "!absolute !bottom-0 !left-0 !right-0 !top-0 bg-transparent p-2 focus:!ring-1 focus:!ring-semantic-accent-default",
+                          textStyle
+                        )}
+                        value={field.value ?? "Untitled Pipeline"}
+                        type="text"
+                        autoComplete="off"
+                        onBlur={() => {
                           form.handleSubmit(async (data) => {
                             if (!data.pipelineId || data.pipelineId === "") {
                               form.reset({
@@ -249,9 +297,31 @@ export const PipelineNameForm = (props: PipelineNameFormProps) => {
                               await handleRenamePipeline(data.pipelineId);
                             }
                           })();
-                        }
-                      }}
-                    />
+                        }}
+                        onClick={(e) => e.stopPropagation()}
+                        disabled={testModeEnabled}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            form.handleSubmit(async (data) => {
+                              if (!data.pipelineId || data.pipelineId === "") {
+                                form.reset({
+                                  pipelineId:
+                                    pipelineId ?? router.asPath.split("/")[2],
+                                });
+                                return;
+                              }
+
+                              if (data.pipelineId && isDirty) {
+                                await handleRenamePipeline(data.pipelineId);
+                              }
+                            })();
+                          }
+                        }}
+                      />
+                    </AutoresizeInputWrapper>
+
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
